@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+
 :root{--bg:#F6F7F9;--card:#fff;--ink:#1F2F52;--text:#1E2633;--muted:#667085;--line:#E3E7EE;--blue:#24497F;--soft:#EAF0F8;--soft2:#F3F6FB;--point:#A8432B;--warm:#FFF6EE;--warm-line:#F1D9C4;--ok:#2E6B55;color-scheme:light}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -189,6 +190,55 @@ footer a{color:#fff}
   .tiles{grid-template-columns:repeat(3,1fr)}
   .flow button{font-size:11.5px}
 }
+
+/* --- 추가: 서식 탭, 결재란, 체크 표기, 기관 정보 --- */
+.ftabs{display:flex;gap:4px;margin:8px 0 2px}
+.ftabs button{flex:1;border:1px solid var(--line);background:var(--soft2);border-radius:8px;padding:6px 4px;font-size:12.5px;font-weight:600;color:var(--muted)}
+.ftabs button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.tiles{grid-template-columns:repeat(3,1fr)}
+.tile.feat{background:#EEF5EF;border-color:#CFE3D3}.tile.feat svg{color:var(--ok)}
+.orgcard{margin-top:10px;display:flex;align-items:center;gap:12px;border:1.5px solid var(--ok);border-radius:12px;padding:11px 14px;background:#F3FAF5;width:100%;text-align:left}
+.orgcard svg{color:var(--ok)}
+.orgcard b{display:block;font-size:14px;color:#1F4E3A}
+.orgcard span{font-size:12px;color:var(--muted)}
+.orgcard em{margin-left:auto;font-style:normal;font-size:12.5px;font-weight:700;color:#fff;background:var(--ok);border-radius:999px;padding:5px 12px;white-space:nowrap}
+.doc{padding:26px 22px 22px}
+.dhead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.dhead h4{margin:16px 0 0;flex:1;text-align:center}
+.dorg{font-size:11.5px;color:#555;margin-bottom:6px}
+table.appr{width:auto!important;border-collapse:collapse;font-size:11.5px;flex:none}
+table.appr th,table.appr td{border:1px solid #333;text-align:center;padding:2px 6px;min-width:44px;background:#fff;width:auto}
+table.appr th.v{writing-mode:vertical-rl;letter-spacing:.3em;padding:4px 2px;min-width:0;background:#F1F3F6}
+table.appr td{height:40px}
+.doc tr.sec th{background:#E4E9F1;text-align:left;font-weight:700;color:#1F2F52}
+.doc th.k{width:17%}
+.doc .ck{white-space:normal;line-height:1.9}
+.doc .ck span{margin-right:10px;white-space:nowrap}
+.doc .cmt{font-size:11.5px;color:#666;margin:6px 0 2px}
+.doc .ttl{font-size:12px;color:#444;text-align:center;margin:-8px 0 12px}
+.gm{text-align:center;font-size:20px;font-weight:700;letter-spacing:.06em;margin:4px 0 14px;border-bottom:2px solid #111;padding-bottom:10px}
+.gfoot{margin-top:18px;border-top:2px solid #111;padding-top:8px;font-size:11.5px;line-height:1.8}
+.gsend{text-align:center;font-size:18px;font-weight:700;letter-spacing:.2em;margin:22px 0 6px}
+.gbody{font-size:13px;line-height:1.9;margin-top:10px;white-space:pre-wrap}
+.modal{position:fixed;inset:0;background:rgba(20,28,45,.45);display:grid;place-items:center;padding:16px;z-index:80}
+.mbox{background:#fff;border-radius:18px;width:min(620px,100%);max-height:92vh;overflow:auto;padding:22px 22px 18px}
+.mbox h3{font-size:18px;color:var(--ink)}
+.mbox p{font-size:13px;color:var(--muted);margin:4px 0 10px}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
+.mgrid label{font-size:12.5px;font-weight:700;color:var(--ink);margin-top:8px;display:block}
+.mgrid .full{grid-column:1/-1}
+.mact{display:flex;gap:8px;margin-top:16px}
+.mact .btn{flex:1;padding:11px}
+.month{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.mcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.mcard h4{font-size:14.5px;color:var(--ink);margin-bottom:6px}
+.mcard ul{padding-left:16px;font-size:13px;line-height:1.75}
+.mcard .acts{margin-top:10px}
+.mpick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.mpick button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font-size:12.5px}
+.mpick button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.q .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:760px){.month,.mgrid{grid-template-columns:1fr}.dhead{flex-direction:column-reverse;align-items:flex-end}.dhead h4{text-align:center;width:100%;margin-top:4px}}
 </style>
 </head>
 <body>
@@ -203,10 +253,10 @@ footer a{color:#fff}
 <div id="v-home">
   <section class="hero">
     <div class="hero-t">
-      <div class="org"><svg class="i" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg>전북 시군가족센터 종사자 · 2026.11.19 AI 실무 워크숍</div>
+      <div class="org"><svg class="i" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg><span id="h-org">전북 시군가족센터 종사자</span> · 2026.11.19 AI 실무 워크숍</div>
       <h1>혼자 끌어안지 않는 업무 파트너, <em>AI 업무 서랍</em></h1>
-      <p>상담일지·보고서는 서식으로, 화나는 안내문은 단단한 존댓말로, 지친 날엔 마음 쉼터로.</p>
-      <label class="search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="찾을 업무를 입력하세요 (예: 상담일지, 결과보고, 다국어)"></label>
+      <p>상담·사례관리 기록은 서식으로, 가족 프로그램은 기획부터 홍보까지, 지친 날엔 마음 쉼터로.</p>
+      <label class="search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="찾을 업무를 입력하세요 (예: 상담일지, 결과보고, 프로그램 기획)"></label>
     </div>
     <div class="hero-art" aria-hidden="true">
       <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#DCE7F5"/><stop offset="1" stop-color="#C9D9EE"/></linearGradient></defs><rect width="400" height="220" fill="url(#g1)"/><circle cx="320" cy="40" r="26" fill="#F6E3C8"/><path d="M0 170 Q100 130 200 165 T400 150 V220 H0Z" fill="#B9CCE6"/><path d="M0 190 Q120 160 240 192 T400 182 V220 H0Z" fill="#A3BCDD"/><g transform="translate(150 70)"><path d="M0 60 L55 18 L110 60 V120 H0Z" fill="#fff"/><path d="M-8 64 L55 12 L118 64" fill="none" stroke="#1F2F52" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="42" y="78" width="26" height="42" rx="3" fill="#24497F"/><rect x="14" y="70" width="18" height="16" rx="2" fill="#F6E3C8"/><rect x="78" y="70" width="18" height="16" rx="2" fill="#F6E3C8"/></g><g fill="#1F2F52"><circle cx="96" cy="128" r="9"/><rect x="87" y="139" width="18" height="34" rx="9"/><circle cx="118" cy="140" r="7"/><rect x="111" y="149" width="14" height="24" rx="7" fill="#A8432B"/><circle cx="300" cy="126" r="9"/><rect x="291" y="137" width="18" height="36" rx="9" fill="#24497F"/></g></svg>
@@ -216,11 +266,13 @@ footer a{color:#fff}
   <section class="dash">
     <div class="panel p1">
       <div class="ph"><h2>서식 자료실</h2><small>질문에 답하면 서식 완성</small></div>
+      <div class="ftabs" id="ftabs"></div>
       <ul class="flist" id="flist"></ul>
     </div>
     <div class="panel p2">
       <div class="ph"><h2>업무 바로가기</h2></div>
       <div class="tiles" id="tiles"></div>
+      <button type="button" class="orgcard" id="org-open"><svg class="i" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><div><b>우리 기관 정보 등록</b><span id="org-state">한 번 넣으면 모든 서식에 자동으로</span></div><em>등록하기</em></button>
       <button type="button" class="wide" data-go="meet"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><div><b>회의 녹음 → 회의록·공문</b><span>전사본을 넣으면 회의록과 공문 초안</span></div><em>시작</em></button>
     </div>
     <div class="panel p3">
@@ -241,7 +293,7 @@ footer a{color:#fff}
   </section>
 </div>
 
-<!-- ===== 서식 작성 화면 ===== -->
+<!-- ===== 서식 작성 ===== -->
 <div id="v-form" hidden>
   <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2 id="f-title">서식</h2><button type="button" class="b-how" id="f-howbtn">사용법</button><span class="sp"></span>
     <div class="vacts"><button type="button" class="btn soft" id="f-ai">AI로 다듬기</button><button type="button" class="btn" id="f-copy">복사</button><button type="button" class="btn fill" id="f-word">워드 받기</button></div></div>
@@ -249,7 +301,7 @@ footer a{color:#fff}
   <div class="how" id="f-how" hidden></div>
   <div class="split">
     <section class="in"><h3>쉬운 입력</h3><p class="sub">질문에 답만 하면 오른쪽 서식이 자동으로 채워져요.</p><div id="f-qs"></div></section>
-    <section class="pv"><div class="pvt"><span>미리보기</span><span id="f-date"></span></div><div class="doc" id="f-doc"></div></section>
+    <section class="pv"><div class="pvt"><span>미리보기</span><span id="f-src"></span></div><div class="doc" id="f-doc"></div></section>
   </div>
 </div>
 
@@ -258,8 +310,16 @@ footer a{color:#fff}
   <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2>사업별 연간 업무</h2></div>
   <p class="vnote">사업을 고르고 단계를 누르면 예시와 바로 쓰는 프롬프트가 나와요. 예시는 모두 가상 "가온시 가족센터"예요.</p>
   <div class="biz" id="biz"></div>
-  <p class="sub" id="biz-intro" style="font-size:13px;color:var(--muted);margin-bottom:10px"></p>
+  <p id="biz-intro" style="font-size:13px;color:var(--muted);margin-bottom:10px"></p>
   <div id="biz-body"></div>
+</div>
+
+<!-- ===== 이달의 추천 ===== -->
+<div id="v-month" hidden>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2 id="mo-title">이달의 추천</h2></div>
+  <p class="vnote">[지침] 표시는 「2026 가족사업안내」에 있는 일정이고, 나머지는 정솔의 추천이에요. 소속 시군구 안내와 꼭 대조하세요.</p>
+  <div class="mpick" id="mo-pick"></div>
+  <div class="month" id="mo-body"></div>
 </div>
 
 <!-- ===== 빡침 순화기 ===== -->
@@ -303,7 +363,7 @@ footer a{color:#fff}
     <select class="f" id="h-want"><option>그냥 들어 주고 공감해 주기</option><option>지금 할 수 있는 작은 회복 방법</option><option>내일 업무를 가볍게 정리하기</option><option>오늘의 나에게 짧은 편지</option></select>
     <p class="warn">내담자 이름이나 사연은 빼고 "오늘 내 마음" 위주로 적어 주세요.</p>
     <div class="acts"><button type="button" class="btn fill" id="h-gpt">위로받기 (ChatGPT)</button><button type="button" class="btn" id="h-copy">프롬프트 복사</button></div>
-    <div class="help"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가거나 위험한 생각이 들면 사람에게 꼭 말해 주세요. 자살예방 상담전화 <a href="tel:109">109</a> · 정신건강 위기상담 <a href="tel:15770199">1577-0199</a> (24시간)</div>
+    <div class="help"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가거나 위험한 생각이 들면 사람에게 꼭 말해 주세요. 자살예방 상담전화 <a href="tel:109">109</a> · 정신건강 위기상담 <a href="tel:15770199">1577-0199</a></div>
   </div>
 </div>
 
@@ -318,124 +378,232 @@ footer a{color:#fff}
     </div>
     <label class="l" for="m-in">안내할 내용</label>
     <div class="mic-row"><button type="button" class="mic" data-for="m-in"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>눌러서 말하기</span></button><span class="mic-st" id="st-m-in"></span></div>
-    <textarea class="f" id="m-in" placeholder="예) 11월 22일 토요일 오전 10시, 가족사랑의 날 행사. 장소는 센터 2층. 아이와 함께 오세요."></textarea>
+    <textarea class="f" id="m-in" placeholder="예) 11월 22일 토요일 오전 10시, 가족 놀이 프로그램. 장소는 센터 2층. 아이와 함께 오세요."></textarea>
     <div class="acts"><button type="button" class="btn fill" id="m-gpt">ChatGPT에서 만들기</button><button type="button" class="btn" id="m-copy">프롬프트 복사</button></div>
     <p class="warn" style="color:var(--muted)">번역 결과의 날짜·금액·장소는 통번역 담당자가 한 번 더 확인해요.</p>
   </div>
 </div>
 
-<!-- ===== 간단 프롬프트 도구 (보호자 문자 / 홍보 / 회의 / 기본기) ===== -->
+<!-- ===== 간단 도구 ===== -->
 <div id="v-simple" hidden>
   <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2 id="s-title"></h2></div>
   <div class="tool"><p class="sub" id="s-sub"></p><div id="s-body"></div>
-    <div class="acts" id="s-acts"><button type="button" class="btn fill" id="s-gpt">ChatGPT에서 열기</button><button type="button" class="btn" id="s-copy">프롬프트 복사</button></div></div>
+    <div class="acts" id="s-acts"><button type="button" class="btn fill" id="s-gpt">ChatGPT에서 열기</button><button type="button" class="btn" id="s-copy">프롬프트 복사</button><button type="button" class="btn" id="s-next" hidden></button></div></div>
 </div>
 
 </main>
+
+<!-- 기관 정보 등록 -->
+<div class="modal" id="org-modal" hidden>
+  <div class="mbox" role="dialog" aria-modal="true" aria-labelledby="org-h">
+    <h3 id="org-h">우리 기관 정보</h3>
+    <p>한 번만 저장하면 모든 서식의 기관명·발신명의·주소·전화·작성자 칸에 자동으로 들어가요. 나중에 넣어도 돼요.</p>
+    <div class="mgrid">
+      <div><label for="o-name">기관명</label><input class="f" id="o-name" placeholder="예: 가온시 가족센터"></div>
+      <div><label for="o-head">발신명의 <small>(기관명 넣으면 자동)</small></label><input class="f" id="o-head" placeholder="예: 가온시 가족센터장"></div>
+      <div><label for="o-team">부서·팀</label><input class="f" id="o-team" placeholder="예: 가족지원팀"></div>
+      <div><label for="o-staff">작성자 (직위·이름)</label><input class="f" id="o-staff" placeholder="예: 사례관리사 ○○○"></div>
+      <div class="full"><label for="o-addr">주소</label><input class="f" id="o-addr" placeholder="예: 전북특별자치도 ○○시 ○○로 00"></div>
+      <div><label for="o-tel">전화</label><input class="f" id="o-tel" placeholder="예: 063-000-0000"></div>
+      <div><label for="o-fax">팩스 (선택)</label><input class="f" id="o-fax" placeholder="예: 063-000-0001"></div>
+      <div class="full"><label for="o-mail">전자우편 (선택)</label><input class="f" id="o-mail" placeholder="예: family@OO.kr"></div>
+    </div>
+    <p style="margin-top:12px">이 정보는 이 기기 브라우저에만 저장되고 어디에도 보내지 않아요. 폰과 PC에서 각각 한 번씩 넣어 주세요.</p>
+    <div class="mact"><button type="button" class="btn fill" id="o-save">저장하기</button><button type="button" class="btn" id="o-later">나중에</button></div>
+  </div>
+</div>
+
 <footer><div class="wrap"><b>가족센터 AI 업무 서랍</b> · 입력한 내용은 이 기기 안에서만 쓰이고 저장·전송되지 않아요. AI가 만든 글은 초안이에요. 사실·날짜·숫자는 꼭 직접 확인하세요.<br>제작·운영 <b>두배로 · 생성형 AI 전문강사 이서정</b> · <a href="../">dubaero.github.io</a></div></footer>
 <div class="toast" id="toast"></div>
 
 <script>
 /* =================== 내용: 강의마다 이 부분만 바꿔요 =================== */
-var ORG='가온시 가족센터';
+var DEMO='가온시 가족센터';
+var YEAR=new Date().getFullYear();
 var NOFAKE='자료에 없는 숫자·날짜·이름은 지어내지 말고 [확인 필요]로 남겨.';
+var APPR=['담당','팀장','센터장'];
+var CATS=[['상담','상담·사례관리'],['사업','사업·보고'],['행정','행정·회의']];
+var HOW1=['내방','전화','가정방문','온라인'];
+
 var FORMS=[
- {id:'crisis',name:'상담일지 (위기가족)',sub:'온가족보듬·사례관리',title:'상 담 일 지',
-  note:'꼭 지켜요 · 이름은 ○○님으로, 진단명·주민번호·주소는 적지 마세요. 관찰 사실 / 당사자 진술 / 담당자 판단을 나눠 적어요.',
-  how:['누구와, 어떻게, 왜 상담했는지 고르세요.','메모 칸은 짧게 적거나 마이크로 말해도 돼요.','[AI로 다듬기]를 누르면 문장을 보고서체로 정리해 줘요. 결과는 꼭 확인 후 기관 양식에 옮기세요.'],
-  qs:[{k:'who',q:'누구와 상담했나요?',t:'one',o:['당사자 본인','보호자','가족 함께']},
-      {k:'how',q:'어떻게 상담했나요?',t:'one',o:['대면','전화','가정 방문','문자·카톡']},
-      {k:'why',q:'왜 상담했나요?',t:'one',o:['신규 의뢰','정기 상담','위기 발생','타 기관 연계']},
-      {k:'topic',q:'어떤 이야기를 했나요?',t:'many',o:['가족 갈등','경제적 어려움','양육','건강','주거','정서 어려움','학대 의심','서비스 연계']},
-      {k:'fact',q:'관찰한 사실',t:'text',ph:'예) 방문 시 집안 정리가 되어 있지 않았고, 아동은 등교하지 않은 상태였음',mic:1},
-      {k:'say',q:'당사자가 한 말',t:'text',ph:'예) "요즘 잠을 못 자요. 아이 아빠와 연락이 안 돼요."',mic:1},
-      {k:'judge',q:'담당자 판단',t:'text',ph:'예) 양육 부담과 정서적 소진이 커 보여 정서 지원 연계 검토 필요',mic:1},
-      {k:'act',q:'조치한 것',t:'many',o:['정보 제공','사례회의 상정','기관 연계','긴급 지원 검토','다음 상담 예약']},
-      {k:'next',q:'다음 상담 예정일',t:'date'}],
-  rows:[['상담 대상','who'],['상담 방법','how'],['상담 계기','why'],['주요 내용','topic'],['관찰 사실','fact'],['당사자 진술','say'],['담당자 판단','judge'],['조치 사항','act'],['다음 상담','next']]},
- {id:'multi',name:'상담일지 (다문화가족)',sub:'결혼이민자·자녀',title:'상 담 일 지',
+ /* ---------- 상담·사례관리 ---------- */
+ {id:'counsel',cat:'상담',name:'상담일지',sub:'개별·가족 상담 기록',title:'상 담 일 지',src:'교육용 유사 서식',appr:APPR,foot:'sign',
+  note:'꼭 지켜요 · 대상은 가명(이용자A)으로, 진단명·주민번호·주소는 적지 마세요. 관찰 사실 / 당사자 진술 / 담당자 판단을 나눠 적어요.',
+  how:['방법·유형은 고르기만 하면 서식에 ■ 표시로 들어가요.','메모 칸은 짧게 적거나 [눌러서 말하기]로 말해도 돼요.','[AI로 다듬기]로 문장을 정리하고, [워드 받기]로 결재란까지 있는 서식을 받아요.'],
+  qs:[{k:'when',q:'상담 일시',t:'line',ph:'예) 2026. 11. 19.(목) 14:00'},
+      {k:'how',q:'상담 방법',t:'one',o:HOW1},
+      {k:'who',q:'대상 (가명)',t:'line',ph:'예) 이용자A (30대, 한부모)'},
+      {k:'type',q:'상담 유형',t:'many',o:['가족관계','양육','경제','다문화 적응','기타']},
+      {k:'interp',q:'통역 여부',t:'one',o:['없음','있음']},
+      {k:'lang',q:'통역 언어 (있을 때만)',t:'line',ph:'예) 베트남어'},
+      {k:'main',q:'주 호소',t:'text',ph:'예) 자녀 등교 거부로 양육 스트레스가 큼',mic:1},
+      {k:'fact',q:'관찰 사실 (보고 들은 그대로)',t:'text',ph:'예) 상담 중 여러 번 눈물을 보였고, 휴대폰 알림을 자주 확인함',mic:1},
+      {k:'say',q:'당사자 진술 (본인이 한 말)',t:'text',ph:'예) "아이가 아침마다 학교 안 간다고 울어요. 저도 지쳤어요."',mic:1},
+      {k:'judge',q:'담당자 판단 (전문적 해석)',t:'text',ph:'예) 양육 부담과 정서적 소진이 커 보여 부모교육과 정서 지원 연계 검토 필요',mic:1},
+      {k:'act',q:'개입 내용',t:'text',mic:1},{k:'link',q:'연계 자원',t:'line',ph:'예) 학교 상담교사, 가족상담 프로그램'},
+      {k:'plan',q:'향후 계획',t:'text'},
+      {k:'crisis',q:'위기 여부',t:'one',o:['해당 없음','의심(위기사례 상담보고서 작성)']},
+      {k:'next',q:'다음 상담 예정',t:'line',ph:'예) 11. 26.(목) 14:00 내방'}],
+  layout:[{p:[['상담 일시','when'],['상담 방법','how']]},{p:[['상담자','@staff'],['대상(가명)','who']]},{r:['상담 유형','type']},{r:['통역 여부','interp','lang']},
+   {sec:'상담 내용',cmt:'※ 관찰 사실(보고 들은 그대로), 당사자 진술(본인이 한 말), 담당자 판단(전문적 해석)을 섞지 않고 나눠 적습니다.'},
+   {r:['주 호소','main']},{r:['관찰 사실','fact']},{r:['당사자 진술','say']},{r:['담당자 판단','judge']},
+   {sec:'개입 및 계획'},{r:['개입 내용','act']},{r:['연계 자원','link']},{r:['향후 계획','plan']},{r:['위기 여부','crisis']},{r:['다음 상담 예정','next']}]},
+
+ {id:'crisis',cat:'상담',name:'위기사례 상담보고서',sub:'위기 인지 → 즉시 보고',title:'위기사례 상담 보고서',src:'교육용 유사 서식',appr:APPR,foot:'sign',
+  note:'꼭 지켜요 · 위험도 "상"이면 서식보다 상급자 보고와 안전 조치가 먼저예요. 신고 의무는 기관 지침과 관련 법령에 따라 판단해요.',
+  how:['위기 유형과 위험도를 고르세요.','조치 내용은 한 줄에 하나씩 "일시 / 조치 / 연계·보고 기관 / 담당"으로 적으면 표로 들어가요.','AI로 다듬은 뒤 반드시 상급자가 검토해요.'],
+  qs:[{k:'rep',q:'보고 일시',t:'line',ph:'예) 2026. 11. 19. 16:30'},{k:'who',q:'사례 (가명)',t:'line',ph:'예) 가족A'},
+      {k:'how',q:'위기 인지 경위',t:'line',ph:'예) 정기 가정방문 중 확인'},
+      {k:'type',q:'위기 유형',t:'many',o:['경제·생계','주거','가정폭력 의심','아동 방임·학대 의심','자살·자해 위험','정신건강','기타']},
+      {k:'fact',q:'현재 상황 · 관찰 사실',t:'text',mic:1},{k:'say',q:'현재 상황 · 당사자 진술',t:'text',mic:1},
+      {k:'risk',q:'위험도',t:'one',o:['상(즉시 개입)','중(1주 내 개입)','하(모니터링)']},
+      {k:'basis',q:'판단 근거',t:'text'},
+      {k:'acts',q:'조치 내용 (한 줄에 하나: 일시 / 조치 / 연계·보고 기관 / 담당)',t:'text',ph:'11.19 16:40 / 상급자 보고 / 센터 / 담당자\n11.19 17:00 / 긴급 지원 검토 / 시군구 / 팀장'},
+      {k:'report',q:'신고 의무 확인',t:'one',o:['해당 없음','해당(기관 지침과 관련 법령에 따라 신고)']},
+      {k:'boss',q:'상급자 보고 (대상·시각)',t:'line',ph:'예) 팀장 · 16:40'},
+      {k:'short',q:'단기 계획 (1주)',t:'text'},{k:'mid',q:'중기 계획 (1개월)',t:'text'},{k:'mon',q:'모니터링 방법',t:'line'}],
+  layout:[{p:[['보고 일시','rep'],['작성자','@staff']]},{p:[['사례(가명)','who'],['위기 인지 경위','how']]},
+   {sec:'위기 유형'},{r:['유형','type']},
+   {sec:'현재 상황'},{r:['관찰 사실','fact']},{r:['당사자 진술','say']},
+   {sec:'위험도 평가'},{r:['위험도','risk']},{r:['판단 근거','basis']},
+   {sec:'조치 내용'},{t:{k:'acts',cols:['일시','조치 내용','연계·보고 기관','담당'],min:2}},{r:['신고 의무 확인','report']},{r:['상급자 보고','boss']},
+   {sec:'향후 계획'},{r:['단기(1주)','short']},{r:['중기(1개월)','mid']},{r:['모니터링 방법','mon']}]},
+
+ {id:'multi',cat:'상담',name:'다문화가족 상담일지',sub:'통역·문해 수준 포함',title:'상 담 일 지 (다문화가족)',src:'교육용 유사 서식 · 문해 수준 항목은 1권 서식9 참고',appr:APPR,foot:'sign',
   note:'꼭 지켜요 · 체류·국적 관련 세부 정보, 외국인등록번호는 적지 마세요. 통역이 있었다면 함께 적어요.',
-  how:['대상과 소통 방법을 고르세요.','이야기한 주제를 여러 개 고를 수 있어요.','메모는 짧게, [AI로 다듬기]로 문장을 정리하세요.'],
-  qs:[{k:'who',q:'누구와 상담했나요?',t:'one',o:['결혼이민자','배우자','자녀','가족 함께']},
-      {k:'lang',q:'어떻게 소통했나요?',t:'one',o:['한국어','통역 동석','통번역 앱','모국어 직원']},
-      {k:'topic',q:'어떤 이야기를 했나요?',t:'many',o:['한국어·생활 적응','자녀 양육·교육','부부·가족 관계','행정·제도 안내','취업·교육','경제','고립·정서']},
-      {k:'memo',q:'상담 메모',t:'text',ph:'예) 자녀 어린이집 상담 일정 안내를 이해하기 어려워함. 한국어 수업 시간과 겹쳐 고민 중',mic:1},
-      {k:'act',q:'조치한 것',t:'many',o:['정보 제공','통번역 연계','프로그램 안내','기관 연계','다음 상담 예약']},
-      {k:'next',q:'다음 상담 예정일',t:'date'}],
-  rows:[['상담 대상','who'],['소통 방법','lang'],['주요 내용','topic'],['상담 내용','memo'],['조치 사항','act'],['다음 상담','next']]},
- {id:'case',name:'사례회의록',sub:'통합사례회의·내부 회의',title:'사 례 회 의 록',
-  note:'꼭 지켜요 · 사례는 "가족 A"처럼 바꿔 적어요. 참석자는 이름 대신 직무로.',
-  how:['참석자는 직무로 적어요.','논의와 결정을 나눠 적으면 담당·기한이 정리돼요.'],
-  qs:[{k:'kind',q:'회의 종류',t:'one',o:['내부 사례회의','통합사례회의','슈퍼비전']},
-      {k:'who',q:'참석 (직무)',t:'line',ph:'예) 사례관리사 2, 팀장, 협력기관 담당자 1'},
-      {k:'case',q:'사례 개요',t:'text',ph:'예) 가족 A, 한부모 위기가족, 경제·양육 어려움'},
-      {k:'talk',q:'논의 내용',t:'text',ph:'말하듯 적거나 녹음 전사본을 붙여 넣어요',mic:1},
-      {k:'dec',q:'결정 사항',t:'text',ph:'예) 긴급 생계지원 신청, 아동 돌봄 서비스 연계'},
-      {k:'todo',q:'담당·기한',t:'line',ph:'예) 사례관리사 B · 11/25까지 연계 의뢰'}],
-  rows:[['회의 종류','kind'],['참석','who'],['사례 개요','case'],['논의 내용','talk'],['결정 사항','dec'],['담당·기한','todo']]},
- {id:'gongmun',name:'공문',sub:'협조 요청·안내',title:ORG,
-  note:'꼭 지켜요 · 관련 근거(지침·문서번호)는 실제 문서에서 확인해 넣어요.',
-  how:['수신과 제목을 먼저 적어요.','핵심 내용만 짧게 적으면 [AI로 다듬기]가 공문체로 바꿔 줘요.'],
-  qs:[{k:'to',q:'수신',t:'line',ph:'예) 수신자 참조 (관내 어린이집)'},
-      {k:'subj',q:'제목',t:'line',ph:'예) 가족사랑의 날 프로그램 홍보 협조 요청'},
-      {k:'base',q:'관련 근거',t:'line',ph:'예) 「2026 가족사업안내」 [확인 필요: 쪽]'},
-      {k:'body',q:'핵심 내용',t:'text',ph:'예) 11월 셋째 주 가족 프로그램 안내문 게시와 가정통신문 배부를 부탁',mic:1},
-      {k:'att',q:'붙임',t:'line',ph:'예) 안내문 1부.  끝.'}],
-  rows:[['수신','to'],['제목','subj'],['관련','base'],['내용','body'],['붙임','att']]},
- {id:'meeting',name:'회의록',sub:'업무·운영 회의',title:'회 의 록',
-  note:'녹음 전사본이 있으면 [논의 내용]에 붙여 넣으세요.',
-  how:['일시·참석을 적고, 논의 내용은 말하듯 적어요.','결정과 할 일을 나눠 적어요.'],
-  qs:[{k:'when',q:'일시·장소',t:'line',ph:'예) 11.20(목) 14:00 센터 회의실'},
-      {k:'who',q:'참석',t:'line',ph:'예) 센터장, 가족지원팀 3, 다문화지원팀 2'},
-      {k:'agenda',q:'안건',t:'line',ph:'예) 가족사랑의 날 준비'},
-      {k:'talk',q:'논의 내용',t:'text',ph:'녹음 전사본을 붙여 넣어도 돼요',mic:1},
-      {k:'dec',q:'결정 사항',t:'text'},{k:'todo',q:'할 일 (담당·기한)',t:'text'}],
-  rows:[['일시·장소','when'],['참석','who'],['안건','agenda'],['논의 내용','talk'],['결정 사항','dec'],['할 일','todo']]},
- {id:'prog',name:'프로그램 일지',sub:'회기별 운영 기록',title:'프 로 그 램 일 지',
+  how:['대상·소통 방법·문해 수준을 고르세요.','이야기한 주제는 여러 개 고를 수 있어요.','쉬운 한국어 안내문이 필요하면 [다국어 안내]로 이어 가세요.'],
+  qs:[{k:'when',q:'상담 일시',t:'line'},{k:'how',q:'상담 방법',t:'one',o:HOW1},
+      {k:'who',q:'대상',t:'one',o:['결혼이민자','배우자','자녀','가족 함께']},{k:'whoN',q:'대상 (가명)',t:'line',ph:'예) 이용자B (출신국 기재 시 기관 지침 확인)'},
+      {k:'lang',q:'소통 방법',t:'one',o:['한국어','통역 동석','통번역 앱','모국어 직원']},
+      {k:'lit',q:'한국어 이해 수준',t:'one',o:['충분히 전달·이해 가능','쉬운 문장으로 기본 소통 가능','쉬운 단어만 전달·이해 가능','거의 안 됨','전혀 안 됨']},
+      {k:'topic',q:'주요 주제',t:'many',o:['한국어·생활 적응','자녀 양육·교육','부부·가족 관계','행정·제도 안내','취업·교육','경제','고립·정서']},
+      {k:'memo',q:'상담 내용',t:'text',mic:1},{k:'act',q:'조치',t:'many',o:['정보 제공','통번역 연계','프로그램 안내','기관 연계','다음 상담 예약']},
+      {k:'plan',q:'향후 계획',t:'text'}],
+  layout:[{p:[['상담 일시','when'],['상담 방법','how']]},{p:[['상담자','@staff'],['대상(가명)','whoN']]},{r:['대상 구분','who']},{r:['소통 방법','lang']},{r:['한국어 이해 수준','lit']},
+   {sec:'상담 내용'},{r:['주요 주제','topic']},{r:['상담 내용','memo']},
+   {sec:'조치 및 계획'},{r:['조치','act']},{r:['향후 계획','plan']}]},
+
+ {id:'process',cat:'상담',name:'사례관리과정 기록지',sub:'온가족보듬 · 공식 서식12',title:'사례관리과정 기록지',src:'2026 가족사업안내 1권 서식12',appr:null,foot:'none',
+  note:'공식 서식 12 항목 그대로예요. 한 번에 한 줄(1회 접촉)씩 기록해요.',
+  how:['등록번호와 대상자(가명)를 적어요.','과정·접촉 대상·방법은 고르기만 하면 돼요.'],
+  qs:[{k:'no',q:'등록번호',t:'line'},{k:'who',q:'대상자 (가명)',t:'line'},{k:'date',q:'날짜',t:'line',ph:'예) 11.19'},
+      {k:'need',q:'주요 욕구',t:'line',ph:'예) 양육·정서 지원'},{k:'step',q:'사례관리 과정',t:'one',o:['초기상담','사정','계획','개입','점검','종결']},
+      {k:'tgt',q:'접촉 대상',t:'one',o:['본인','가족','관련 기관']},{k:'cont',q:'개입 내용',t:'text',mic:1},
+      {k:'meth',q:'접촉 방법',t:'one',o:['내방','전화','가정방문','문자·온라인']},{k:'next',q:'추후 계획',t:'line'}],
+  layout:[{p:[['등록번호','no'],['대상자','who']]},{t:{cols:['날짜','주요 욕구','사례관리 과정','접촉 대상','개입 내용','접촉 방법','추후 계획'],keys:['date','need','step','tgt','cont','meth','next'],plain:1}}]},
+
+ {id:'casemeet',cat:'상담',name:'사례회의록',sub:'공식 서식13',title:'사 례 회 의 록',src:'2026 가족사업안내 1권 서식13',appr:APPR,foot:'sign',
+  note:'참석자는 이름 대신 직무로, 대상자는 가명으로 적어요.',
+  how:['회의 목적과 일시·장소를 적어요.','회의 내용은 말하듯 적거나 녹음 전사본을 붙여 넣어요.'],
+  qs:[{k:'goal',q:'회의 목적',t:'line'},{k:'when',q:'회의 일시',t:'line'},{k:'where',q:'회의 장소',t:'line'},
+      {k:'att',q:'참석자 (직무)',t:'line',ph:'예) 사례관리사 2, 팀장, 협력기관 담당자 1'},{k:'mgr',q:'사례 담당자',t:'line'},
+      {k:'who',q:'대상자 (가명)',t:'line'},{k:'no',q:'등록번호',t:'line'},{k:'cont',q:'회의 내용',t:'text',mic:1},{k:'res',q:'회의 결과',t:'text'}],
+  layout:[{r:['회의 목적','goal']},{p:[['회의 일시','when'],['회의 장소','where']]},{p:[['참 석 자','att'],['사례 담당자','mgr']]},{p:[['대 상 자','who'],['등록번호','no']]},{r:['회의 내용','cont']},{r:['회의 결과','res']}]},
+
+ /* ---------- 사업·보고 ---------- */
+ {id:'plan',cat:'사업',name:'사업계획서',sub:'공식 서식2 · 핵심 항목',title:'@YEAR년도 @ORG 사업계획서',src:'2026 가족사업안내 1권 서식2 (핵심 항목 발췌)',appr:APPR,foot:'date',
+  note:'제출 일정은 「2026 가족사업안내」 기준으로 꼭 확인하세요. 예산 사용계획은 공식 서식의 비목표에 따로 작성해요.',
+  how:['세부 추진계획은 한 줄에 하나씩 "프로그램명 / 예상인원 / 추진 시기 / 비고".','평가방법도 한 줄에 하나씩 "성과지표명 / 평가도구 / 목표치".','[AI로 다듬기]가 빈 항목을 질문으로 알려 줘요.'],
+  qs:[{k:'term',q:'운영기간',t:'line',ph:'예) 2027. 1. 1. ~ 12. 31.'},{k:'mode',q:'운영방식',t:'one',o:['직영','위탁']},
+      {k:'base',q:'추진근거',t:'line',ph:'예) 「건강가정기본법」, 「다문화가족지원법」 [확인 필요]'},
+      {k:'area',q:'지역적 특성',t:'text',ph:'가족유형별 현황, 지리적 특성 (통계는 출처와 함께)'},
+      {k:'goal',q:'사업목적 및 운영 방향',t:'text',mic:1},{k:'prev',q:'전년도 사업 실적 및 성과',t:'text'},{k:'fix',q:'전년도 미흡·보완과제와 개선방안',t:'text'},
+      {k:'how',q:'사업내용 및 방법',t:'text',mic:1},
+      {k:'sched',q:'세부 추진계획 (프로그램명 / 예상인원 / 추진 시기 / 비고)',t:'text',ph:'함께 크는 토요일 / 15가족 / 4~11월 월 2회 / 공동육아나눔터'},
+      {k:'eval',q:'평가방법 (성과지표명 / 평가도구 / 목표치)',t:'text',ph:'부모 양육효능감 / 사전·사후 척도 / 10% 향상'},
+      {k:'pr',q:'홍보계획',t:'text'},{k:'safe',q:'안전사고 예방 및 긴급대응 계획',t:'text'},{k:'eff',q:'기대효과',t:'text'}],
+  layout:[{sec:'Ⅰ. 개요'},{p:[['운영기관','@org'],['운영방식','mode']]},{r:['운영기간','term']},{r:['추진근거','base']},{r:['지역적 특성','area']},{r:['사업목적 및 운영 방향','goal']},
+   {sec:'1. 전년도 사업추진'},{r:['실적 및 성과','prev']},{r:['환류 및 개선방안','fix']},
+   {sec:'2. 세부사업 추진계획'},{r:['사업내용 및 방법','how']},{t:{k:'sched',cols:['프로그램명','예상인원','추진 시기','비고'],min:2}},{t:{k:'eval',cols:['성과지표명','평가도구','목표치'],min:1,cap:'평가방법'}},
+   {sec:'3. 홍보 · 안전 · 기대효과'},{r:['홍보계획','pr']},{r:['안전사고 예방 및 긴급대응','safe']},{r:['기대효과','eff']}]},
+
+ {id:'result',cat:'사업',name:'사업결과보고서',sub:'공식 서식3 · 핵심 항목',title:'@YEAR년도 @ORG 사업결과 보고',src:'2026 가족사업안내 1권 서식3 (핵심 항목 발췌)',appr:APPR,foot:'date',
+  note:'실인원과 연인원을 헷갈리지 않게! 숫자는 실적표에 있는 것만 쓰고, 계획과 실적이 다르면 비고에 사유를 적어요.',
+  how:['추진실적은 한 줄에 하나씩 "프로그램명 / 내용 / 계획 / 실적 / 만족도 / 비고".','자체평가는 잘된 점·부진한 점·발전 방안으로 나눠 적어요.'],
+  qs:[{k:'term',q:'사업기간',t:'line'},{k:'money',q:'사업비 총액',t:'line',ph:'예) 3,000천원 (국비 ○%, 시도비 ○%, 시군구비 ○%)'},
+      {k:'goal',q:'사업목적',t:'text'},{k:'cont',q:'사업내용',t:'text',mic:1},{k:'perf',q:'사업실적 (요약)',t:'line',ph:'예) 14회기, 실인원 28가족, 연인원 182명'},
+      {k:'out',q:'사업성과',t:'text'},{k:'loop',q:'환류계획',t:'text'},
+      {k:'rows',q:'영역별 추진실적 (프로그램명 / 내용 / 계획 / 실적 / 만족도 / 비고)',t:'text',ph:'함께 크는 토요일 / 영유아 가족 놀이 / 16회 / 14회 / 4.5 / 폭염·장마로 2회 취소'},
+      {k:'good',q:'자체평가 · 잘된 점',t:'text'},{k:'bad',q:'자체평가 · 부진한 점·애로사항',t:'text'},{k:'next',q:'자체평가 · 발전 방안',t:'text'}],
+  layout:[{sec:'1. 사업개요'},{p:[['센 터 명','@org'],['사업기간','term']]},{r:['사업비 총','money']},{r:['사업목적','goal']},{r:['사업내용','cont']},{r:['사업실적','perf']},{r:['사업성과','out']},{r:['환류계획','loop']},
+   {sec:'3. 사업 영역별 추진실적'},{t:{k:'rows',cols:['프로그램명','내용','계획','실적','만족도','비고'],min:2}},
+   {cmt:'※ 비고: 사업계획과 추진실적의 차이가 있을 경우 그 부진사유 등 기재'},
+   {sec:'5. 자체평가'},{r:['잘된 점','good']},{r:['부진한 점','bad']},{r:['발전 방안','next']}]},
+
+ {id:'propose',cat:'사업',name:'프로그램 제안서',sub:'공모 신청용',title:'프로그램 제안서',src:'교육용 유사 서식',appr:null,foot:'apply',
+  note:'공모 지침의 목차가 따로 있으면 그 순서를 따르세요. [프로그램 기획]에서 고른 아이디어를 여기로 이어 쓸 수 있어요.',
+  how:['목표·회기·예산은 한 줄에 하나씩, 칸은 " / "로 나눠요.','예산 금액은 실제 견적으로 확인해요.'],
+  qs:[{k:'cap',q:'기관 역량 (유사 사업 경험)',t:'text'},{k:'name',q:'프로그램명',t:'line'},{k:'tgt',q:'대상·인원',t:'line'},{k:'term',q:'운영 기간·회기',t:'line'},{k:'place',q:'장소',t:'line'},
+      {k:'need',q:'지역·대상 현황',t:'text'},{k:'fit',q:'공모 취지와의 연관성',t:'text'},
+      {k:'goals',q:'목표 (목표 / 측정지표 / 목표치)',t:'text',ph:'아버지 양육 참여 증가 / 참여 횟수 / 회기당 5명 이상'},
+      {k:'sess',q:'회기별 운영 (회기 / 주제 / 주요 활동 / 준비물)',t:'text',ph:'1 / 만나서 반가워 / 가족 소개 놀이 / 이름표'},
+      {k:'bud',q:'예산 (비목 / 산출 근거 / 금액)',t:'text',ph:'강사비 / 4회 × 200,000원 / 800,000'},
+      {k:'eff',q:'기대 효과',t:'text'},{k:'evalm',q:'평가 방법',t:'text'}],
+  layout:[{sec:'1. 제안 기관'},{p:[['기관명','@org'],['담당자·연락처','@staffTel']]},{r:['기관 역량','cap']},
+   {sec:'2. 프로그램 개요'},{p:[['프로그램명','name'],['대상·인원','tgt']]},{p:[['운영 기간·회기','term'],['장소','place']]},
+   {sec:'3. 제안 배경 및 필요성'},{r:['지역·대상 현황','need']},{r:['공모 취지와의 연관성','fit']},
+   {sec:'4. 목표'},{t:{k:'goals',cols:['목표','측정지표','목표치'],min:2}},
+   {sec:'5. 회기별 운영 내용'},{t:{k:'sess',cols:['회기','주제','주요 활동','준비물'],min:3}},
+   {sec:'6. 예산'},{t:{k:'bud',cols:['비목','산출 근거','금액(원)'],min:2,sum:2}},
+   {sec:'7. 기대 효과 및 평가 방법'},{r:['기대 효과','eff']},{r:['평가 방법','evalm']}]},
+
+ {id:'journal',cat:'사업',name:'프로그램 일지',sub:'회기별 운영 기록',title:'프 로 그 램 일 지',src:'교육용 유사 서식',appr:APPR,foot:'sign',
   note:'참여자는 이름 대신 "가족 A"로. 인원은 가족·성인·아동을 나눠 적어요.',
   how:['사업과 프로그램명을 고르고 적어요.','잘된 점과 다음 준비를 적으면 결과보고서에 그대로 쓸 수 있어요.'],
   qs:[{k:'biz',q:'사업',t:'one',o:['공동육아나눔터','언어발달지원','온가족보듬','다문화 자녀지원','가족관계','기타']},
-      {k:'name',q:'프로그램명·회기',t:'line',ph:'예) 아빠랑 놀이터 3회기'},
-      {k:'when',q:'일시',t:'line',ph:'예) 11.15(토) 10:00~12:00'},
-      {k:'num',q:'참여 인원',t:'line',ph:'예) 6가족 (성인 7, 아동 9)'},
-      {k:'what',q:'활동 내용',t:'text',mic:1},{k:'good',q:'잘된 점',t:'text'},{k:'next',q:'다음 준비·개선',t:'text'}],
-  rows:[['사업','biz'],['프로그램','name'],['일시','when'],['참여 인원','num'],['활동 내용','what'],['잘된 점','good'],['다음 준비','next']]},
- {id:'plan',name:'사업계획서',sub:'연간·프로그램 계획',title:'사 업 계 획 서',
-  note:'예산·목표 인원은 실제 숫자만. 모르면 비워 두면 [확인 필요]로 남아요.',
-  how:['사업과 목적을 고르고 적어요.','[AI로 다듬기]를 누르면 지침 순서에 맞춘 계획서 초안을 써 줘요.'],
-  qs:[{k:'biz',q:'사업',t:'one',o:['공동육아나눔터','언어발달지원','온가족보듬','다문화 자녀지원','가족관계','기타']},
-      {k:'goal',q:'목적',t:'text'},{k:'who',q:'대상·목표 인원',t:'line'},
-      {k:'what',q:'주요 내용',t:'text',mic:1},{k:'sch',q:'추진 일정',t:'line',ph:'예) 1~2월 모집 / 3~11월 운영 / 12월 평가'},
-      {k:'money',q:'예산 항목',t:'line'}],
-  rows:[['사업','biz'],['목적','goal'],['대상','who'],['주요 내용','what'],['추진 일정','sch'],['예산','money']]},
- {id:'result',name:'결과보고서',sub:'실적·성과 정리',title:'결 과 보 고 서',
-  note:'실인원과 연인원을 헷갈리지 않게! 숫자는 실적표에 있는 것만 써요.',
-  how:['실적 숫자를 적어요. 실인원 ≤ 연인원인지 확인해요.','성과와 개선을 나눠 적어요.'],
-  qs:[{k:'biz',q:'사업',t:'one',o:['공동육아나눔터','언어발달지원','온가족보듬','다문화 자녀지원','가족관계','기타']},
-      {k:'term',q:'운영 기간',t:'line'},{k:'num',q:'실적 (회기·실인원·연인원)',t:'line',ph:'예) 8회기, 실인원 110명, 연인원 170명'},
-      {k:'good',q:'성과',t:'text',mic:1},{k:'hard',q:'어려웠던 점',t:'text'},{k:'better',q:'개선 방안',t:'text'}],
-  rows:[['사업','biz'],['운영 기간','term'],['추진 실적','num'],['성과','good'],['어려웠던 점','hard'],['개선 방안','better']]},
- {id:'budget',name:'예산·정산 점검',sub:'엑셀 오류 찾기',title:'예 산 점 검 표',
-  note:'예산표를 붙여 넣으면 AI가 합계·잔액·중복·증빙을 점검해요. 실제 회계 원자료와 꼭 대조하세요.',
+      {k:'name',q:'프로그램명·회기',t:'line',ph:'예) 함께 크는 토요일 3회기'},{k:'when',q:'일시·장소',t:'line'},
+      {k:'num',q:'참여 인원',t:'line',ph:'예) 6가족 (성인 7, 아동 9)'},{k:'what',q:'활동 내용',t:'text',mic:1},
+      {k:'good',q:'잘된 점',t:'text'},{k:'next',q:'다음 준비·개선',t:'text'}],
+  layout:[{r:['사업','biz']},{p:[['프로그램','name'],['일시·장소','when']]},{p:[['참여 인원','num'],['작성자','@staff']]},{r:['활동 내용','what']},{r:['잘된 점','good']},{r:['다음 준비·개선','next']}]},
+
+ {id:'budget',cat:'사업',name:'예산·정산 점검',sub:'엑셀 오류 찾기',title:'예 산 점 검 요 청',src:'점검용 요청서',appr:null,foot:'none',
+  note:'예산표를 붙여 넣고 [AI로 다듬기]를 누르면 AI가 합계·잔액·중복·증빙을 점검해요. 실제 회계 원자료와 꼭 대조하세요.',
   how:['엑셀에서 표를 복사해 붙여 넣어요.','점검할 항목을 고르고 [AI로 다듬기]를 눌러요.'],
-  qs:[{k:'chk',q:'무엇을 점검할까요?',t:'many',o:['합계 불일치','집행액·잔액 불일치','중복 기입','증빙 확인 필요','비목 오류']},
-      {k:'table',q:'예산표 붙여 넣기',t:'text',ph:'엑셀 표를 복사해 붙여 넣기'}],
-  rows:[['점검 항목','chk'],['예산표','table']]}
+  qs:[{k:'chk',q:'무엇을 점검할까요?',t:'many',o:['합계 불일치','집행액·잔액 불일치','중복 기입','증빙 확인 필요','비목 오류']},{k:'table',q:'예산표 붙여 넣기',t:'text',ph:'엑셀 표를 복사해 붙여 넣기'}],
+  layout:[{r:['점검 항목','chk']},{r:['예산표','table']}]},
+
+ /* ---------- 행정·회의 ---------- */
+ {id:'gongmun',cat:'행정',name:'공문 (기안문)',sub:'협조 요청·안내',kind:'gongmun',title:'',src:'교육용 유사 서식',appr:null,
+  note:'관련 근거(지침·문서번호)는 실제 문서에서 확인해 넣어요. 기관 정보를 등록하면 머리·발신명의·주소가 자동으로 들어가요.',
+  how:['수신·제목을 적고 본문 칸을 채워요.','[AI로 다듬기]가 공문체로 정리해 줘요.'],
+  qs:[{k:'to',q:'수신',t:'line',ph:'예) 가온시청 가족정책과장'},{k:'via',q:'(경유)',t:'line'},{k:'subj',q:'제목',t:'line',ph:'예) 가족 프로그램 장소 사용 및 홍보 협조 요청'},
+      {k:'rel',q:'1. 관련',t:'line',ph:'예) 「2026 가족사업안내」 [확인 필요: 쪽]'},{k:'purp',q:'2. 본문 (목적)',t:'text',mic:1},
+      {k:'d1',q:'가. 일시',t:'line'},{k:'d2',q:'나. 장소',t:'line'},{k:'d3',q:'다. 대상',t:'line'},{k:'d4',q:'라. 요청 사항',t:'text'},
+      {k:'att',q:'붙임',t:'line',ph:'예) 운영계획서 1부'},{k:'no',q:'시행 번호·일자',t:'line',ph:'예) 가족센터-○○○ (2026. 11. 19.)'}]},
+
+ {id:'meeting',cat:'행정',name:'회의록',sub:'업무·운영 회의',title:'회 의 록',src:'교육용 유사 서식',appr:APPR,foot:'sign',
+  note:'녹음 전사본이 있으면 [논의 내용]에 붙여 넣으세요. 결정 사항은 한 줄에 "결정 내용 / 담당(역할) / 기한".',
+  how:['회의명·일시·참석을 적어요.','결정 사항은 표로 들어가요.'],
+  qs:[{k:'name',q:'회의명',t:'line'},{k:'when',q:'일시',t:'line'},{k:'where',q:'장소',t:'line'},{k:'att',q:'참석자 (역할)',t:'line'},
+      {k:'ag',q:'안건',t:'text',ph:'안건 1: 가족 행사 준비\n안건 2: 홍보 일정'},{k:'talk',q:'논의 내용',t:'text',mic:1},
+      {k:'dec',q:'결정 사항 (결정 내용 / 담당 / 기한)',t:'text',ph:'안내문 발송 / 홍보 담당 / 11.25'},{k:'open',q:'미결 사항',t:'text'},{k:'nextm',q:'다음 회의 일정',t:'line'}],
+  layout:[{p:[['회의명','name'],['일시','when']]},{p:[['장소','where'],['작성자','@staff']]},{r:['참석자(역할)','att']},
+   {sec:'안건'},{r:['안건','ag']},{sec:'논의 내용'},{r:['논의 내용','talk']},
+   {sec:'결정 사항'},{t:{k:'dec',cols:['결정 내용','담당(역할)','기한'],min:2}},
+   {sec:'미결 사항 및 다음 회의'},{r:['미결 사항','open']},{r:['다음 회의 일정','nextm']}]}
 ];
+
 var TILES=[
  {go:'biz',ic:'grid',t:'사업별 업무',s:'연간 단계별 프롬프트'},
- {go:'vent',ic:'fire',t:'빡침 순화기',s:'말로 털어놓고 존댓말로',hot:1},
+ {go:'plan',ic:'bulb',t:'프로그램 기획',s:'가족 프로그램 아이디어',f:1},
+ {go:'event',ic:'flag',t:'가족 행사·체험',s:'나들이·캠프·축제'},
+ {go:'msg',ic:'mail',t:'문자·소통',s:'보호자·강사·기관'},
+ {go:'promo',ic:'mega',t:'홍보·안내',s:'모집·카드뉴스·블로그'},
  {go:'multi',ic:'globe',t:'다국어 안내',s:'쉬운 한국어+모국어'},
- {go:'parent',ic:'mail',t:'보호자 문자',s:'일정·불참·감사'},
- {go:'promo',ic:'mega',t:'홍보·안내',s:'모집·카드뉴스'},
- {go:'heart',ic:'heart',t:'마음 쉼터',s:'지친 날 위로받기',hot:1}
+ {go:'vent',ic:'fire',t:'빡침 순화기',s:'말로 털어놓고 존댓말로',hot:1},
+ {go:'heart',ic:'heart',t:'마음 쉼터',s:'지친 날 위로받기',hot:1},
+ {go:'month',ic:'cal',t:'이달의 추천',s:'',f:1}
 ];
 var ICONS={grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
  fire:'<path d="M12 21c-4 0-7-2.7-7-6.5 0-3 2-4.8 3.2-6.2.4 1.6 1.4 2.6 2.3 2.9C10.3 7.5 11.5 5 14 3c0 3 5 5 5 11.5 0 3.8-3 6.5-7 6.5z"/>',
  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
  mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
  mega:'<path d="M3 10v4h3l6 4V6L6 10H3z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/>',
- heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'};
+ heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+ bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/>',
+ flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+ cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'};
+
 var BIZ=[
  {name:'공동육아나눔터',ready:true,
   intro:'<b>가온시 가족센터 공동육아나눔터</b>의 1년을 따라가요. 지침은 「2026 가족사업안내」 제2권 Ⅵ장(공동육아나눔터 사업안내)이에요.',
@@ -462,16 +630,32 @@ var BIZ=[
  {name:'아이돌봄',ready:false}
 ];
 
+
+
+var AREAS=['가족관계','가족돌봄','가족생활','가족과 함께하는 지역공동체','다문화가족 특성화','공동육아나눔터'];
 var SIMPLE={
- parent:{t:'보호자 문자',s:'보호자·참여 가족에게 보낼 짧은 문자를 만들어요. 이름 대신 "보호자님"으로 나와요.',
-  f:[{k:'kind',l:'상황',o:['일정 안내','불참 확인','준비물 안내','서류 요청','감사 인사','변경 안내']},{k:'memo',l:'전할 내용',ph:'예) 11/22(토) 10시 가족사랑의 날, 센터 2층, 실내화 지참'}],
-  p:function(v){return '너는 가족센터 담당자야. 아래 상황으로 보호자에게 보낼 문자를 써 줘.\n- 상황: '+v.kind+'\n- 따뜻하고 분명하게, 5줄 이내\n- 버전 2개: 기본 / 더 짧게\n- 결혼이민자 가족도 이해하기 쉬운 쉬운 한국어로\n- '+NOFAKE+'\n\n[전할 내용]\n'+v.memo;}},
- promo:{t:'홍보·안내',s:'프로그램 모집 문구, 카드뉴스 구성, 블로그 초안을 한 번에 만들어요.',
-  f:[{k:'biz',l:'사업',o:['공동육아나눔터','언어발달지원','온가족보듬','다문화 자녀지원','가족관계','행사']},{k:'out',l:'만들 것',o:['문자·카톡 모집 문구','카드뉴스 4장 구성','블로그 초안','세 가지 모두']},{k:'memo',l:'행사 정보',ph:'예) 아빠랑 놀이터, 12월 매주 토 10시, 5~7세 자녀와 아빠, 선착순 10가족'}],
+ plan:{t:'프로그램 기획',s:'가족센터는 가족 프로그램이 많죠. 영역·대상·시기만 고르면 아이디어 3개와 회기 계획, 성과지표까지 뽑아 줘요. 영역은 결과보고서 영역(가족관계·가족돌봄·가족생활·지역공동체)에 맞췄어요.',
+  f:[{k:'area',l:'사업 영역',o:AREAS},{k:'tgt',l:'대상',o:['영유아 자녀 가족','초등 자녀 가족','청소년 자녀 가족','아버지와 자녀','다문화가족','한부모·조손가족','부부','지역 주민']},
+     {k:'when',l:'시기',o:['봄','여름','가을','겨울','연중']},{k:'size',l:'규모',o:['1회 행사','4회기','8회기','연중 정기']},
+     {k:'memo',l:'우리 센터 상황 (예산·장소·지난 반응)',ph:'예) 예산 300만원, 센터 2층 프로그램실, 작년 아버지 참여가 적었음'}],
+  next:{label:'제안서 서식으로 이어 쓰기 →',form:'propose'},
+  p:function(v){return '너는 가족센터 프로그램 기획 도우미야. 아래 조건으로 가족 프로그램을 기획해 줘.\n- 사업 영역: '+v.area+'\n- 대상: '+v.tgt+'\n- 시기: '+v.when+'\n- 규모: '+v.size+'\n1) 아이디어 3개를 표로 (프로그램명 / 핵심 활동 / 기대 변화 / 준비 난이도)\n2) 가장 추천하는 1개의 회기별 계획 (회기 / 주제 / 주요 활동 / 준비물)\n3) 성과지표 2개 (지표 / 측정 도구 / 목표치)\n4) 안전 유의점과 우천·불참 대안\n5) 모집 문구 3줄\n- 참여 가족의 다양성(다문화·한부모·맞벌이)을 배려해\n- '+NOFAKE+'\n\n[우리 센터 상황]\n'+(v.memo||'(없음)');}},
+ event:{t:'가족 행사·체험',s:'가족 나들이, 캠프, 기념일 행사, 지역 축제 부스까지 운영계획과 안전계획을 한 번에 만들어요.',
+  f:[{k:'kind',l:'행사 종류',o:['가족 나들이·체험','기념일 행사','1박 2일 캠프','지역 축제 부스','가족 봉사활동','비대면 가족 활동']},
+     {k:'when',l:'시기',o:['봄','여름','가을','겨울']},{k:'tgt',l:'대상',o:['영유아 가족','초등 가족','아버지와 자녀','다문화가족','전체 가족']},
+     {k:'memo',l:'행사 정보',ph:'예) 11월 셋째 주 토요일, 근교 숲 체험장, 20가족, 버스 1대'}],
+  p:function(v){return '너는 가족센터 행사 담당자를 돕는 도우미야. 아래 행사의 운영계획을 만들어 줘.\n- 종류: '+v.kind+' / 시기: '+v.when+' / 대상: '+v.tgt+'\n1) 시간대별 진행표 (시간 / 활동 / 담당 / 준비물)\n2) 역할 분담표 (직원·자원봉사자)\n3) 안전사고 예방 및 긴급대응 계획 (사전 점검, 보험, 응급 연락 체계, 우천 대안)\n4) 참가 안내문 (쉬운 한국어)\n5) 끝나고 쓸 만족도 문항 5개\n- '+NOFAKE+'\n\n[행사 정보]\n'+v.memo;}},
+ msg:{t:'문자·소통',s:'보호자·참여 가족, 강사·자원봉사자, 협력 기관에 보낼 짧은 문자를 만들어요. 이름 대신 "보호자님"으로 나와요.',
+  f:[{k:'to',l:'받는 사람',o:['이용자·보호자','강사·자원봉사자','협력 기관']},{k:'kind',l:'상황',o:['일정 안내','불참 확인','준비물 안내','서류 요청','감사 인사','변경·취소 안내','후원·협력 감사']},
+     {k:'memo',l:'전할 내용',ph:'예) 11/22(토) 10시 가족 놀이, 센터 2층, 실내화 지참'}],
+  p:function(v){return '너는 가족센터 담당자야. '+v.to+'에게 보낼 문자를 써 줘.\n- 상황: '+v.kind+'\n- 따뜻하고 분명하게, 5줄 이내\n- 버전 2개: 기본 / 더 짧게\n- 결혼이민자 가족도 이해하기 쉬운 쉬운 한국어로\n- '+NOFAKE+'\n\n[전할 내용]\n'+v.memo;}},
+ promo:{t:'홍보·안내',s:'프로그램 모집 문구, 카드뉴스 구성, 블로그 초안을 만들어요.',
+  f:[{k:'biz',l:'사업',o:['공동육아나눔터','언어발달지원','온가족보듬','다문화 자녀지원','가족관계','행사']},{k:'out',l:'만들 것',o:['문자·카톡 모집 문구','카드뉴스 4장 구성','블로그 초안','세 가지 모두']},
+     {k:'memo',l:'행사 정보',ph:'예) 아빠랑 놀이터, 12월 매주 토 10시, 5~7세 자녀와 아빠, 선착순 10가족'}],
   p:function(v){return '너는 가족센터 홍보 담당자야. 아래 [행사 정보]로 '+v.out+'를 만들어 줘.\n- 사업: '+v.biz+'\n- 과장 없이 따뜻하고 분명하게, 대상·일시·장소·신청 방법을 빠짐없이\n- 카드뉴스는 장마다 제목+본문 2줄+이미지 아이디어\n- '+NOFAKE+'\n\n[행사 정보]\n'+v.memo;}},
  meet:{t:'회의 녹음 → 회의록·공문',s:'클로바노트나 Gemini로 받아 적은 전사본을 붙여 넣으면 회의록과 후속 공문 초안을 만들어요.',
   f:[{k:'memo',l:'회의 전사본',ph:'녹음 전사본을 붙여 넣으세요 (이름은 직무로 바꿔 주세요)'}],
-  p:function(v){return '아래 [회의 전사본]으로 두 가지를 만들어 줘.\n1) 회의록: 일시 / 참석(직무) / 안건 / 논의 / 결정 사항 / 할 일(담당·기한)\n2) 결정 사항에 따른 협조 요청 공문 초안 (수신 / 제목 / 관련 / 내용 / 붙임)\n- 전사가 불명확한 부분은 [불명확]으로 표시\n- '+NOFAKE+'\n\n[회의 전사본]\n'+v.memo;}},
+  p:function(v){return '아래 [회의 전사본]으로 두 가지를 만들어 줘.\n1) 회의록: 회의명 / 일시 / 장소 / 참석자(역할) / 안건 / 논의 내용 / 결정 사항(결정 내용·담당·기한) / 미결 사항 / 다음 회의\n2) 결정 사항에 따른 협조 요청 공문 초안 (수신 / 제목 / 1. 관련 / 2. 본문 가~라 / 붙임)\n- 발언하지 않은 내용은 넣지 말고, 전사가 불명확한 부분은 [불명확]으로 표시\n- '+NOFAKE+'\n\n[회의 전사본]\n'+v.memo;}},
  base:{t:'업무 서랍 이용 안내',s:'AI를 쓰기 전 꼭 알아 둘 세 가지예요. 문구를 복사해 쓰세요.',f:[],p:null}
 };
 var BASE=[
@@ -479,6 +663,22 @@ var BASE=[
  {t:'가족센터용 맞춤설정',p:'나는 가족센터 ○○사업 담당자야.\n- 공공기관 문서에 맞게 쉽고 분명한 말로 답해 줘.\n- 자료에 없는 숫자·날짜·법령은 지어내지 말고 [확인 필요]로 표시해 줘.\n- 결혼이민자 대상 안내는 쉬운 한국어로 쓰고, 요청하면 모국어 원문을 함께 보여 줘.\n- 개인정보가 들어 있으면 먼저 지우라고 알려 줘.'},
  {t:'할루시네이션 방지 한 줄',p:'첨부한 자료에서만 답해 줘. 자료에 없으면 "자료에서 확인할 수 없음"이라고 쓰고, 근거가 된 쪽이나 문장을 함께 알려 줘.'}
 ];
+/* 이달의 추천: 일정은 「2026 가족사업안내」에서 확인한 것만, 프로그램은 아이디어 */
+var EVERY=['[지침] 전월 예산집행실적 제출 (매월 10일까지)','[지침] 월간 실적 입력 (가족지원통합정보시스템)'];
+var MONTH={
+ 1:{job:['[지침] 사업계획서 제출 (1월 5일까지, 센터 → 시군구)','[지침] 전년도 실적·정산 보고 (1월 말까지)','새해 프로그램 회원 모집'],prog:['새해 가족 목표 세우기','겨울방학 가족 놀이','부부 대화 교실'],promo:'새해 첫 가족 프로그램 모집'},
+ 2:{job:['상반기 프로그램 강사·장소 섭외','회원등록·개인정보 동의서 정비'],prog:['명절 가족 소통 프로그램','새 학기 준비 부모교육','공동육아나눔터 품앗이 모집'],promo:'봄학기 품앗이 가족 모집'},
+ 3:{job:['상반기 프로그램 개강','사전 척도·사전 설문 실시'],prog:['새 학기 적응 부모교육','아버지와 함께하는 주말','결혼이민자 한국 생활 길잡이'],promo:'새 학기 부모교육 안내'},
+ 4:{job:['1분기 실적 점검','야외 활동 안전 점검'],prog:['봄 가족 숲 체험','가족 텃밭 가꾸기','다문화 가족 봄나들이'],promo:'봄나들이 참가 가족 모집'},
+ 5:{job:['가정의 달 행사 운영','행사 사진·초상권 동의 확인'],prog:['가정의 달 가족 축제','가족 사진관','3대가 함께하는 하루'],promo:'가정의 달 행사 카드뉴스'},
+ 6:{job:['상반기 결과 중간 점검','하반기 계획 조정'],prog:['아빠랑 주말 놀이터','가족 요리 교실','부부 소통 데이트'],promo:'하반기 프로그램 미리 알림'},
+ 7:{job:['여름 활동 폭염·우천 대안 마련','상반기 만족도 집계'],prog:['여름 물놀이 안전 교실','방학 가족 독서','다문화 자녀 방학 캠프'],promo:'여름방학 가족 프로그램 모집'},
+ 8:{job:['하반기 공모·제안서 준비','하반기 프로그램 홍보'],prog:['가족 1박 2일 캠프','가족 영화의 밤','다문화 가족 문화 교류'],promo:'가족 캠프 참가 안내'},
+ 9:{job:['3분기 실적 점검','명절 전후 위기가정 모니터링'],prog:['명절 가족 문화 나눔','다문화 명절 음식 나눔','가족 운동회'],promo:'명절 나눔 행사 안내'},
+ 10:{job:['지역 축제·부스 운영','사후 척도 준비'],prog:['가을 가족 체험','가족 축제 부스','조부모와 손자녀 하루'],promo:'가을 가족 체험 모집'},
+ 11:{job:['사후 척도·만족도조사','결과보고 자료 모으기 (사진·실적)'],prog:['김장·감사 나눔','가족 감사 편지 쓰기','부모 자기돌봄 교실'],promo:'감사 나눔 행사 안내'},
+ 12:{job:['연간 결과보고서 작성','정산 준비 (증빙 점검)','다음 해 사업계획 초안'],prog:['송년 가족의 밤','한 해 가족 사진전','겨울방학 가족 놀이'],promo:'송년 행사·내년 프로그램 안내'}
+};
 
 /* =================== 틀: 모든 기관 방이 같이 써요 =================== */
 function $(s){return document.querySelector(s);}
@@ -488,36 +688,61 @@ var toastT;function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('
 function copy(txt,m){(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){toast(m||'복사했어요. AI 창에 붙여 넣으세요.');},function(){var a=document.createElement('textarea');a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast(m||'복사했어요.');}catch(e){toast('길게 눌러 직접 복사해 주세요.');}a.remove();});}
 function openGPT(p){var w=window.open('https://chatgpt.com/?q='+encodeURIComponent(p),'_blank');if(w)w.opener=null;}
 function svg(k){return '<svg class="i" viewBox="0 0 24 24">'+ICONS[k]+'</svg>';}
-var today=new Date();var TODAY=today.getFullYear()+'. '+(today.getMonth()+1)+'. '+today.getDate()+'.';
+var NOW=new Date();var TODAY=NOW.getFullYear()+'. '+(NOW.getMonth()+1)+'. '+NOW.getDate()+'.';
+var CURM=NOW.getMonth()+1;
+
+/* 기관 정보 (이 기기에만 저장) */
+var OKEY='dubaero_family_org',ORG={};
+try{ORG=JSON.parse(localStorage.getItem(OKEY)||'{}')||{};}catch(e){ORG={};}
+function O(){var n=ORG.name||'';return{name:n||'○○가족센터',head:ORG.head||(n?n+'장':'○○가족센터장'),team:ORG.team||'',staff:ORG.staff||'',addr:ORG.addr||'',tel:ORG.tel||'',fax:ORG.fax||'',mail:ORG.mail||'',set:!!n};}
+function orgUI(){var o=O();$('#org-state').textContent=o.set?o.name+(o.staff?' · '+o.staff:'')+' (수정하려면 누르기)':'한 번 넣으면 모든 서식에 자동으로';$('#h-org').textContent=o.set?o.name:'전북 시군가족센터 종사자';}
+var OF=['name','head','team','staff','addr','tel','fax','mail'];
+function openOrg(){OF.forEach(function(k){$('#o-'+k).value=ORG[k]||'';});$('#org-modal').hidden=false;}
+function closeOrg(){$('#org-modal').hidden=true;try{localStorage.setItem(OKEY+'_seen','1');}catch(e){}}
+$('#o-name').addEventListener('input',function(){var h=$('#o-head');if(!h.dataset.touched)h.value=this.value?this.value+'장':'';});
+$('#o-head').addEventListener('input',function(){this.dataset.touched=1;});
+$('#o-save').onclick=function(){OF.forEach(function(k){ORG[k]=$('#o-'+k).value.trim();});try{localStorage.setItem(OKEY,JSON.stringify(ORG));}catch(e){}closeOrg();orgUI();if(CF)renderDoc();toast('기관 정보를 저장했어요.');};
+$('#o-later').onclick=closeOrg;$('#org-open').onclick=openOrg;
+$('#org-modal').addEventListener('click',function(e){if(e.target===this)closeOrg();});
+orgUI();
 
 /* 화면 전환 */
-var VIEWS=['home','form','biz','vent','heart','multi','simple'];
+var VIEWS=['home','form','biz','month','vent','heart','multi','simple'];
 function show(v){VIEWS.forEach(function(k){$('#v-'+k).hidden=(k!==v);});window.scrollTo(0,0);}
 function go(key){
   if(FORMS.some(function(f){return f.id===key;}))return openForm(key);
   if(key==='biz'){renderBiz();return show('biz');}
+  if(key==='month'){renderMonth(CURM);return show('month');}
   if(['vent','heart','multi'].indexOf(key)>-1)return show(key);
   if(SIMPLE[key])return openSimple(key);
 }
-document.addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(g){go(g.dataset.go);location.hash=g.dataset.go;}if(e.target.closest('[data-home]')){show('home');history.replaceState(null,'',location.pathname);}});
+document.addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(g){location.hash=g.dataset.go;go(g.dataset.go);}if(e.target.closest('[data-home]')){show('home');history.replaceState(null,'',location.pathname);}});
 window.addEventListener('hashchange',function(){var h=location.hash.slice(1);if(!h)show('home');});
 
-/* 첫 화면 */
-FORMS.forEach(function(f,i){var li=el('li',null,'<span class="n">'+(i+1)+'</span><span class="t">'+esc(f.name)+'<small>'+esc(f.sub)+'</small></span>');
-  var m=el('span','mini');var h=el('button','b-how','사용법');h.type='button';h.onclick=function(){openForm(f.id,true);};
-  var g=el('button','b-go','✎ 작성');g.type='button';g.onclick=function(){openForm(f.id);location.hash=f.id;};
-  m.appendChild(h);m.appendChild(g);li.appendChild(m);li.dataset.k=f.name+f.sub;$('#flist').appendChild(li);});
-TILES.forEach(function(t){var b=el('button','tile'+(t.hot?' hot':''),svg(t.ic)+'<b>'+esc(t.t)+'</b><span>'+esc(t.s)+'</span>');b.type='button';b.dataset.go=t.go;b.dataset.k=t.t+t.s;$('#tiles').appendChild(b);});
-$('#q').addEventListener('input',function(){var v=this.value.trim();document.querySelectorAll('#flist li,#tiles .tile').forEach(function(n){n.style.opacity=(!v||n.dataset.k.indexOf(v)>-1)?1:.25;});});
+/* 첫 화면: 서식 자료실 (탭) */
+var curCat='상담';
+function renderList(){
+  var ft=$('#ftabs');ft.innerHTML='';CATS.forEach(function(c){var b=el('button',c[0]===curCat?'on':'',esc(c[1]));b.type='button';b.onclick=function(){curCat=c[0];renderList();};ft.appendChild(b);});
+  var ul=$('#flist');ul.innerHTML='';var n=0;
+  FORMS.forEach(function(f){if(f.cat!==curCat)return;n++;var li=el('li',null,'<span class="n">'+n+'</span><span class="t">'+esc(f.name)+'<small>'+esc(f.sub)+'</small></span>');
+    var m=el('span','mini');var h=el('button','b-how','사용법');h.type='button';h.onclick=function(){openForm(f.id,true);};
+    var g=el('button','b-go','✎ 작성');g.type='button';g.onclick=function(){location.hash=f.id;openForm(f.id);};
+    m.appendChild(h);m.appendChild(g);li.appendChild(m);ul.appendChild(li);});
+}
+renderList();
+TILES.forEach(function(t){var s=t.go==='month'?CURM+'월 일정·프로그램':t.s;var b=el('button','tile'+(t.hot?' hot':'')+(t.f?' feat':''),svg(t.ic)+'<b>'+esc(t.t)+'</b><span>'+esc(s)+'</span>');b.type='button';b.dataset.go=t.go;b.dataset.k=t.t+t.s;$('#tiles').appendChild(b);});
+$('#q').addEventListener('input',function(){var v=this.value.trim();document.querySelectorAll('#tiles .tile').forEach(function(n){n.style.opacity=(!v||n.dataset.k.indexOf(v)>-1)?1:.25;});
+  if(v){var f=FORMS.find(function(x){return (x.name+x.sub).indexOf(v)>-1;});if(f&&f.cat!==curCat){curCat=f.cat;renderList();}}
+  document.querySelectorAll('#flist li').forEach(function(n){n.style.opacity=(!v||n.textContent.indexOf(v)>-1)?1:.25;});});
 $('#q').addEventListener('keydown',function(e){if(e.key!=='Enter')return;var v=this.value.trim();if(!v)return;
   var f=FORMS.find(function(x){return (x.name+x.sub).indexOf(v)>-1;});if(f)return openForm(f.id);
   var t=TILES.find(function(x){return (x.t+x.s).indexOf(v)>-1;});if(t)return go(t.go);toast('딱 맞는 서랍이 없어요. 다른 말로 찾아보세요.');});
 
-/* 서식 엔진 */
+/* ===== 서식 엔진 ===== */
 var CF=null,VAL={};
 function openForm(id,howOpen){
   CF=FORMS.find(function(f){return f.id===id;});VAL={};
-  $('#f-title').textContent=CF.name;$('#f-note').textContent=CF.note;
+  $('#f-title').textContent=CF.name;$('#f-note').textContent=CF.note;$('#f-src').textContent=CF.src;
   $('#f-how').innerHTML='<b>사용법</b><ol>'+CF.how.map(function(h){return '<li>'+esc(h)+'</li>';}).join('')+'</ol>';$('#f-how').hidden=!howOpen;
   var box=$('#f-qs');box.innerHTML='';
   CF.qs.forEach(function(q,i){var d=el('div','q');d.appendChild(el('div','ql','<i>'+(i+1)+'</i>'+esc(q.q)+(q.t==='many'?' <small>(여러 개 골라도 돼요)</small>':'')));
@@ -526,24 +751,75 @@ function openForm(id,howOpen){
         else{var a=VAL[q.k]||[];var k=a.indexOf(x);if(k>-1)a.splice(k,1);else a.push(x);VAL[q.k]=a;b.classList.toggle('on',k<0);}
         renderDoc();};o.appendChild(b);});d.appendChild(o);}
     else{var id2='fq-'+q.k;if(q.mic)d.appendChild(micRow(id2));
-      var inp=q.t==='text'?el('textarea','f'):el('input','f');if(q.t==='date')inp.type='date';inp.id=id2;inp.placeholder=q.ph||'';inp.oninput=function(){VAL[q.k]=inp.value;renderDoc();};d.appendChild(inp);}
+      var inp=q.t==='text'?el('textarea','f'):el('input','f');inp.id=id2;inp.placeholder=q.ph||'';inp.oninput=function(){VAL[q.k]=inp.value;renderDoc();};d.appendChild(inp);}
     box.appendChild(d);});
   bindMics(box);renderDoc();show('form');
 }
-function valText(k){var v=VAL[k];if(Array.isArray(v))return v.join(', ');return v||'';}
-function renderDoc(){
-  var h='<h4>'+esc(CF.title)+'</h4><table>';
-  if(CF.id.indexOf('crisis')===0||CF.id==='multi')h+='<tr><th>상담 일시</th><td>'+TODAY+'</td></tr>';
-  CF.rows.forEach(function(r){var v=valText(r[1]);h+='<tr><th>'+esc(r[0])+'</th><td'+(v?'':' class="e"')+'>'+(v?esc(v).replace(/\n/g,'<br>'):'( )')+'</td></tr>';});
-  h+='</table><p class="sign">'+TODAY+'<br>작성자 ____________ (서명)</p>';
-  $('#f-doc').innerHTML=h;$('#f-date').textContent='가상 '+ORG+' 양식';
+function Q(k){return CF.qs.find(function(q){return q.k===k;});}
+function special(k){var o=O();return {'@staff':o.staff,'@org':o.set?o.name:'','@staffTel':[o.staff,o.tel].filter(Boolean).join(' · ')}[k]||'';}
+function cell(k,suf){
+  if(k.charAt(0)==='@'){var s=special(k);return s?esc(s):'';}
+  var q=Q(k),v=VAL[k];
+  if(q&&(q.t==='one'||q.t==='many')){var sel=Array.isArray(v)?v:(v?[v]:[]);
+    var h='<div class="ck">'+q.o.map(function(x){return '<span>'+(sel.indexOf(x)>-1?'■':'□')+' '+esc(x)+'</span>';}).join('')+'</div>';
+    if(suf&&VAL[suf])h+='<div>(언어: '+esc(VAL[suf])+')</div>';return h;}
+  return v?esc(v).replace(/\n/g,'<br>'):'';
 }
-function docText(){return CF.name+'\n'+CF.rows.map(function(r){return '- '+r[0]+': '+(valText(r[1])||'( )');}).join('\n');}
+function td(h,span){return '<td'+(span?' colspan="'+span+'"':'')+'>'+(h||'')+'</td>';}
+function lines(k){return String(VAL[k]||'').split('\n').map(function(s){return s.trim();}).filter(Boolean).map(function(s){return s.split('/').map(function(c){return c.trim();});});}
+function apprHTML(a){if(!a)return '';return '<table class="appr"><tr><th class="v" rowspan="2">결재</th>'+a.map(function(x){return '<th>'+esc(x)+'</th>';}).join('')+'</tr><tr>'+a.map(function(){return '<td></td>';}).join('')+'</tr></table>';}
+function titleOf(){var o=O();return CF.title.replace('@YEAR',YEAR).replace('@ORG',o.name);}
+function renderDoc(){
+  var o=O(),h='';
+  if(CF.kind==='gongmun'){h=gongmunHTML();}
+  else{
+    h+='<div class="dhead"><div style="flex:1"><div class="dorg">'+esc(o.name)+(o.team?' · '+esc(o.team):'')+'</div><h4>'+esc(titleOf())+'</h4></div>'+apprHTML(CF.appr)+'</div>';
+    h+='<table>';
+    CF.layout.forEach(function(L){
+      if(L.sec)h+='<tr class="sec"><th colspan="4">'+esc(L.sec)+'</th></tr>'+(L.cmt?'<tr><td colspan="4" style="font-size:11.5px;color:#555">'+esc(L.cmt)+'</td></tr>':'');
+      else if(L.cmt)h+='<tr><td colspan="4" style="font-size:11.5px;color:#555">'+esc(L.cmt)+'</td></tr>';
+      else if(L.p)h+='<tr><th class="k">'+esc(L.p[0][0])+'</th>'+td(cell(L.p[0][1]))+'<th class="k">'+esc(L.p[1][0])+'</th>'+td(cell(L.p[1][1]))+'</tr>';
+      else if(L.r)h+='<tr><th class="k">'+esc(L.r[0])+'</th>'+td(cell(L.r[1],L.r[2]),3)+'</tr>';
+      else if(L.t){var T=L.t,rows;
+        if(T.keys)rows=[T.keys.map(function(k){var v=VAL[k];return esc(Array.isArray(v)?v.join(', '):(v||'')).replace(/\n/g,'<br>');})];
+        else{rows=lines(T.k).map(function(r){return T.cols.map(function(c,i){return esc(r[i]||'');});});}
+        while(rows.length<(T.min||1))rows.push(T.cols.map(function(){return '';}));
+        var inner='<table style="width:100%;border-collapse:collapse">'+(T.cap?'<tr><th colspan="'+T.cols.length+'" style="text-align:left">'+esc(T.cap)+'</th></tr>':'')+'<tr>'+T.cols.map(function(c){return '<th style="width:auto">'+esc(c)+'</th>';}).join('')+'</tr>'+
+          rows.map(function(r){return '<tr>'+r.map(function(c){return '<td style="height:26px">'+c+'</td>';}).join('')+'</tr>';}).join('');
+        if(T.sum!=null){var s=0,ok=false;lines(T.k).forEach(function(r){var n=parseInt(String(r[T.sum]||'').replace(/[^\d]/g,''),10);if(!isNaN(n)){s+=n;ok=true;}});inner+='<tr><th colspan="'+T.sum+'">합계</th><td>'+(ok?s.toLocaleString('ko-KR'):'')+'</td>'+(T.cols.length>T.sum+1?'<td colspan="'+(T.cols.length-T.sum-1)+'"></td>':'')+'</tr>';}
+        inner+='</table>';
+        h+='<tr><td colspan="4" style="padding:0;border:0">'+inner+'</td></tr>';}
+    });
+    h+='</table>';
+    if(CF.foot==='sign')h+='<p class="sign">'+TODAY+'<br>작성자 '+(o.staff?esc(o.staff):'____________')+' (서명)</p>';
+    else if(CF.foot==='date')h+='<p class="sign">'+TODAY+'<br>'+esc(o.head)+'</p>';
+    else if(CF.foot==='apply')h+='<p class="sign">위와 같이 프로그램을 제안합니다.<br>'+TODAY+'<br>'+esc(o.head)+' (직인)</p>';
+  }
+  $('#f-doc').innerHTML=h;
+}
+function gongmunHTML(){
+  var o=O(),v=function(k){return VAL[k]?esc(VAL[k]).replace(/\n/g,'<br>'):'';};
+  var body='1. 관련: '+(v('rel')||'')+'\n2. '+(v('purp')||'')+'\n   가. 일시: '+v('d1')+'\n   나. 장소: '+v('d2')+'\n   다. 대상: '+v('d3')+'\n   라. 요청 사항: '+v('d4')+'\n\n붙임  '+(v('att')||'○○ 1부')+'.  끝.';
+  return '<div class="gm">'+esc(o.name)+'</div>'+
+   '<table><tr><th class="k">수신</th>'+td(v('to'),3)+'</tr><tr><th class="k">(경유)</th>'+td(v('via'),3)+'</tr><tr><th class="k">제목</th>'+td('<b>'+v('subj')+'</b>',3)+'</tr></table>'+
+   '<div class="gbody">'+body+'</div>'+
+   '<div class="gsend">'+esc(o.head)+'</div>'+
+   '<div class="gfoot"><table style="font-size:11.5px"><tr><th>기안자</th><td>'+esc(o.staff||'')+'</td><th>검토자</th><td>팀장</td><th>결재권자</th><td>'+'센터장'+'</td></tr></table>'+
+   '시행 '+v('no')+'<br>'+[o.addr,o.tel&&'전화 '+o.tel,o.fax&&'팩스 '+o.fax,o.mail].filter(Boolean).map(esc).join(' / ')+'</div>';
+}
+function docText(){
+  if(CF.kind==='gongmun'){return '[공문] 수신: '+(VAL.to||'')+'\n제목: '+(VAL.subj||'')+'\n1. 관련: '+(VAL.rel||'')+'\n2. '+(VAL.purp||'')+'\n가. 일시: '+(VAL.d1||'')+'\n나. 장소: '+(VAL.d2||'')+'\n다. 대상: '+(VAL.d3||'')+'\n라. 요청 사항: '+(VAL.d4||'')+'\n붙임: '+(VAL.att||'');}
+  return '['+CF.name+'] ('+CF.src+')\n'+CF.qs.map(function(q){var v=VAL[q.k];v=Array.isArray(v)?v.join(', '):(v||'');return '- '+q.q+': '+(v||'( )');}).join('\n');
+}
 $('#f-howbtn').onclick=function(){$('#f-how').hidden=!$('#f-how').hidden;};
 $('#f-copy').onclick=function(){copy(docText(),'서식 내용을 복사했어요.');};
-$('#f-ai').onclick=function(){var p='너는 가족센터 문서 도우미야. 아래 ['+CF.name+'] 초안을 공공기관 문서체(개조식)로 다듬어 줘.\n- 항목 순서와 이름은 그대로 두고, 빈칸 ( )은 [확인 필요]로 남겨.\n- '+(CF.id==='crisis'?'관찰 사실 / 당사자 진술 / 담당자 판단을 섞지 말고 구분해.\n- ':'')+NOFAKE+'\n- 이름·연락처가 보이면 ○○님으로 바꿔.\n- 끝에 내가 더 확인할 것 3가지를 적어 줘.\n\n'+docText();openGPT(p);};
-$('#f-word').onclick=function(){var html='<html><head><meta charset="utf-8"><style>body{font-family:"맑은 고딕";}table{border-collapse:collapse;width:100%}th,td{border:1px solid #000;padding:6px;font-size:10.5pt}th{background:#eee;width:24%}h4{text-align:center;font-size:16pt}.sign{text-align:right}</style></head><body>'+$('#f-doc').innerHTML+'</body></html>';
-  var b=new Blob(['﻿'+html],{type:'application/msword'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=CF.name.replace(/[^\w가-힣]+/g,'_')+'.doc';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);toast('워드 파일을 받았어요. 기관 양식에 옮겨 쓰세요.');};
+$('#f-ai').onclick=function(){var p;
+  if(CF.id==='budget')p='너는 가족센터 회계 점검 도우미야. 아래 예산표를 점검해 줘.\n- 점검 항목: '+((VAL.chk||[]).join(', ')||'합계, 잔액, 중복, 증빙, 비목')+'\n- 문제마다: 위치(행·열) / 이유 / 확인할 원자료 / 수정안\n- 계산 과정을 보여 주고, 확실하지 않으면 [확인 필요]\n\n[예산표]\n'+(VAL.table||'(붙여 넣기)');
+  else p='너는 가족센터 문서 도우미야. 아래 ['+CF.name+'] 초안을 '+CF.src+' 항목 순서 그대로 공공기관 문서체(개조식)로 다듬어 줘.\n- 항목 이름과 순서는 바꾸지 마. 빈칸 ( )은 [확인 필요]로 남겨.\n- '+(CF.cat==='상담'?'관찰 사실 / 당사자 진술 / 담당자 판단을 섞지 말고 구분해. 진단하거나 단정하지 마.\n- ':'')+NOFAKE+'\n- 이름·연락처가 보이면 가명(이용자A)으로 바꿔.\n- 끝에 내가 더 확인할 것 3가지를 적어 줘.\n\n'+docText();
+  openGPT(p);};
+$('#f-word').onclick=function(){var css='body{font-family:"맑은 고딕",sans-serif;font-size:10.5pt}table{border-collapse:collapse;width:100%}th,td{border:1px solid #000;padding:5px 6px;vertical-align:top}th{background:#eee}h4{text-align:center;font-size:16pt;margin:6pt 0}.dhead{width:100%}.appr{width:auto;float:right;margin-bottom:6pt}.appr td{height:36pt;width:48pt}.sign{text-align:right}.gm{text-align:center;font-size:16pt;font-weight:bold;border-bottom:2px solid #000}.gsend{text-align:center;font-size:15pt;font-weight:bold;letter-spacing:6pt;margin:16pt 0}.gbody{white-space:pre-wrap;line-height:1.8}.dorg{font-size:9pt;color:#555}.sec th{background:#dde3ec;text-align:left}';
+  var html='<html><head><meta charset="utf-8"><style>'+css+'</style></head><body>'+$('#f-doc').innerHTML.replace(/■/g,'■').replace(/□/g,'□')+'</body></html>';
+  var b=new Blob(['﻿'+html],{type:'application/msword'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(O().set?O().name+'_':'')+CF.name.replace(/[^\w가-힣]+/g,'_')+'.doc';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);toast('워드 파일을 받았어요. 기관 양식에 옮겨 쓰세요.');};
 
 /* 사업별 업무 */
 var curBiz=0,curStep=0;
@@ -557,6 +833,19 @@ function renderBiz(){
   var g=el('div','ba');g.style.marginTop='0';g.appendChild(el('div','box','<h4>예시 결과 <span class="tag">가상</span></h4><pre>'+esc(S.ex)+'</pre>'));g.appendChild(el('div','box','<h4>바로 쓰는 프롬프트</h4><pre>'+esc(S.prompt)+'</pre>'));st.appendChild(g);
   var a=el('div','acts');var b1=el('button','btn fill','ChatGPT에서 열기');b1.type='button';b1.onclick=function(){openGPT(S.prompt);};var b2=el('button','btn','프롬프트 복사');b2.type='button';b2.onclick=function(){copy(S.prompt);};a.appendChild(b1);a.appendChild(b2);st.appendChild(a);
   st.appendChild(el('p','where','지침 위치: <b>'+esc(S.where)+'</b> · 「2026 가족사업안내」 원문과 꼭 대조하세요.'));body.appendChild(st);
+}
+
+/* 이달의 추천 */
+function renderMonth(m){
+  $('#mo-title').textContent=m+'월의 추천';
+  var pk=$('#mo-pick');pk.innerHTML='';for(var i=1;i<=12;i++){(function(i){var b=el('button',i===m?'on':'',i+'월');b.type='button';b.onclick=function(){renderMonth(i);};pk.appendChild(b);})(i);}
+  var M=MONTH[m],box=$('#mo-body');box.innerHTML='';
+  var c1=el('div','mcard','<h4>이달의 업무 체크</h4><ul>'+M.job.concat(EVERY).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>');
+  var c2=el('div','mcard','<h4>추천 가족 프로그램</h4><ul>'+M.prog.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>');
+  var a2=el('div','acts');var b2=el('button','btn fill','이 달로 프로그램 기획');b2.type='button';b2.onclick=function(){openSimple('plan',{when:['겨울','겨울','봄','봄','봄','여름','여름','여름','가을','가을','가을','겨울'][m-1],memo:m+'월 추천: '+M.prog.join(', ')});};a2.appendChild(b2);c2.appendChild(a2);
+  var c3=el('div','mcard','<h4>이달의 홍보</h4><ul><li>'+esc(M.promo)+'</li><li>카드뉴스 4장 + 문자 3줄로 함께 만들기</li></ul>');
+  var a3=el('div','acts');var b3=el('button','btn','홍보 문구 만들기');b3.type='button';b3.onclick=function(){openSimple('promo',{memo:M.promo+' ('+m+'월)'});};a3.appendChild(b3);c3.appendChild(a3);
+  box.appendChild(c1);box.appendChild(c2);box.appendChild(c3);
 }
 
 /* 빡침 순화기 */
@@ -584,14 +873,15 @@ $('#m-gpt').onclick=function(){var p=multiP();if(p)openGPT(p);};$('#m-copy').onc
 
 /* 간단 도구 */
 var CS=null,SV={};
-function openSimple(k){CS=SIMPLE[k];SV={};$('#s-title').textContent=CS.t;$('#s-sub').textContent=CS.s;var b=$('#s-body');b.innerHTML='';
+function openSimple(k,pre){CS=SIMPLE[k];SV={};pre=pre||{};$('#s-title').textContent=CS.t;$('#s-sub').textContent=CS.s;var b=$('#s-body');b.innerHTML='';
+  var nx=$('#s-next');nx.hidden=!CS.next;if(CS.next){nx.textContent=CS.next.label;nx.onclick=function(){location.hash=CS.next.form;openForm(CS.next.form);};}
   if(k==='base'){BASE.forEach(function(x){var d=el('div','box','<h4>'+esc(x.t)+'</h4><pre>'+esc(x.p)+'</pre>');d.style.marginBottom='10px';var c=el('button','btn','문구 복사');c.type='button';c.style.marginTop='8px';c.onclick=function(){copy(x.p,'복사했어요.');};d.appendChild(c);b.appendChild(d);});$('#s-acts').hidden=true;return show('simple');}
   $('#s-acts').hidden=false;
   CS.f.forEach(function(f){b.appendChild(el('label','l',esc(f.l)));
-    if(f.o){SV[f.k]=f.o[0];var o=el('div','opts');f.o.forEach(function(x,i){var bt=el('button',i===0?'on':'',esc(x));bt.type='button';bt.onclick=function(){SV[f.k]=x;o.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});};o.appendChild(bt);});b.appendChild(o);}
-    else{var id='s-'+f.k;b.appendChild(micRow(id));var t=el('textarea','f');t.id=id;t.placeholder=f.ph||'';t.oninput=function(){SV[f.k]=t.value;};b.appendChild(t);}});
+    if(f.o){var init=(pre[f.k]&&f.o.indexOf(pre[f.k])>-1)?pre[f.k]:f.o[0];SV[f.k]=init;var o=el('div','opts');f.o.forEach(function(x){var bt=el('button',x===init?'on':'',esc(x));bt.type='button';bt.onclick=function(){SV[f.k]=x;o.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});};o.appendChild(bt);});b.appendChild(o);}
+    else{var id='s-'+f.k;b.appendChild(micRow(id));var t=el('textarea','f');t.id=id;t.placeholder=f.ph||'';if(pre[f.k]){t.value=pre[f.k];SV[f.k]=pre[f.k];}t.oninput=function(){SV[f.k]=t.value;};b.appendChild(t);}});
   b.appendChild(el('p','warn','이름, 전화번호, 상담 사연은 빼고 적어 주세요.'));bindMics(b);show('simple');}
-function simpleP(){var memo=(SV.memo||'').trim();if(!memo){toast('내용을 먼저 적어 주세요.');return null;}return CS.p(SV);}
+function simpleP(){var memo=(SV.memo||'').trim();if(!memo&&CS!==SIMPLE.plan){toast('내용을 먼저 적어 주세요.');return null;}return CS.p(SV);}
 $('#s-gpt').onclick=function(){var p=simpleP();if(p)openGPT(p);};$('#s-copy').onclick=function(){var p=simpleP();if(p)copy(p);};
 
 /* 마이크 받아쓰기 */
@@ -610,8 +900,10 @@ function bindMics(root){root.querySelectorAll('.mic').forEach(function(btn){if(b
 });});}
 bindMics(document);
 
-/* 주소로 바로 열기 (#crisis, #vent 등) */
-(function(){var h=location.hash.slice(1);if(h)go(h);})();
+/* 처음 오면 기관 정보 묻기 (한 번만) + 주소로 바로 열기 */
+(function(){var seen=false;try{seen=!!localStorage.getItem(OKEY+'_seen');}catch(e){seen=true;}
+  var h=location.hash.slice(1);if(h)go(h);else if(!seen&&!O().set)openOrg();})();
+
 </script>
 </body>
 </html>
