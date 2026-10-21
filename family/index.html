@@ -2,132 +2,193 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>가족센터 강의 자료실 | 두배로</title>
+<title>가족센터 AI 업무 서랍 | 두배로</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Gamja+Flower&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#FAF9F8;--paper:#F3EFEA;--card:#fff;--ink:#1F2F52;--text:#172033;--muted:#667085;--line:#E6E0D8;--blue:#24497F;--blue-soft:#E8EEF7;--point:#A8432B;--ok:#2E6B55;color-scheme:light}
+:root{--bg:#F6F7F9;--card:#fff;--ink:#1F2F52;--text:#1E2633;--muted:#667085;--line:#E3E7EE;--blue:#24497F;--soft:#EAF0F8;--soft2:#F3F6FB;--point:#A8432B;--warm:#FFF6EE;--warm-line:#F1D9C4;--ok:#2E6B55;color-scheme:light}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans KR",system-ui,sans-serif;font-size:14px;line-height:1.65;word-break:keep-all}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans KR",system-ui,sans-serif;font-size:14px;line-height:1.6;word-break:keep-all}
 @media (min-width:641px){html{zoom:.9}}
 a{color:inherit}
-.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-button{font:inherit;cursor:pointer}
+button{font:inherit;cursor:pointer;color:inherit}
+[hidden]{display:none!important}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
 
 /* 상단 */
-.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
+.top{background:#fff;border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:52px}
 .back{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none}
 .back:hover{color:var(--point)}
-.draft{font-size:12px;font-weight:700;color:var(--blue);border:1px solid var(--blue);border-radius:999px;padding:2px 10px}
+.draft{font-size:11.5px;font-weight:700;color:var(--blue);border:1px solid var(--blue);border-radius:999px;padding:1px 10px}
 
-/* 머리 */
-.head{padding:28px 0 18px}
-.head small{display:block;font-size:12.5px;font-weight:700;color:var(--blue);letter-spacing:.04em}
-.head h1{font-size:clamp(21px,2.6vw,28px);color:var(--ink);line-height:1.35;margin:4px 0 6px}
-.head p{color:var(--muted);font-size:13.5px}
-.msg{margin-top:14px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:12px 16px;font-size:13.5px;color:var(--ink)}
-.msg b{color:var(--blue)}
+/* 히어로 */
+.hero{margin:18px 0 16px;border-radius:18px;background:linear-gradient(120deg,#EAF0F8 0%,#F4F7FB 55%,#E6EEF8 100%);display:grid;grid-template-columns:1.5fr 1fr;overflow:hidden;border:1px solid var(--line)}
+.hero-t{padding:26px 30px 26px}
+.org{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:var(--blue)}
+.hero h1{font-size:clamp(22px,2.8vw,30px);color:var(--ink);line-height:1.35;margin:10px 0 4px;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero p{font-size:13.5px;color:var(--muted)}
+.search{margin-top:18px;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #CFD8E6;border-radius:12px;padding:12px 14px;max-width:560px}
+.search input{border:0;outline:0;font:inherit;font-size:14.5px;flex:1;min-width:0;background:none;color:var(--text)}
+.search svg{color:var(--muted)}
+.hero-art{position:relative;min-height:190px}
+.hero-art svg{position:absolute;inset:0;width:100%;height:100%}
 
-/* 큰 탭 */
-.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-top:6px;overflow-x:auto}
-.tabs button{border:0;background:none;padding:10px 14px;font-size:14.5px;font-weight:600;color:var(--muted);border-bottom:2.5px solid transparent;white-space:nowrap}
-.tabs button.on{color:var(--ink);border-color:var(--ink)}
-.panel{padding:20px 0 48px}
-.panel[hidden]{display:none}
+/* 대시보드 */
+.dash{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px;align-items:start;margin-bottom:28px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px}
+.ph{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:2px solid var(--ink);margin-bottom:6px}
+.ph h2{font-size:16.5px;color:var(--ink)}
+.ph small{font-size:12px;color:var(--muted)}
+.flist li{list-style:none;display:grid;grid-template-columns:22px 1fr auto;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)}
+.flist li:last-child{border-bottom:0}
+.flist .n{font-size:12px;color:var(--muted);text-align:center}
+.flist .t{font-size:14px;font-weight:600;color:var(--text)}
+.flist .t small{display:block;font-size:11.5px;font-weight:400;color:var(--muted)}
+.mini{display:flex;gap:6px}
+.b-how{border:1px solid var(--warm-line);background:var(--warm);color:var(--point);border-radius:6px;padding:3px 9px;font-size:12px;font-weight:700}
+.b-go{border:0;background:var(--ink);color:#fff;border-radius:6px;padding:4px 11px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:4px}
+.b-go:hover{background:var(--blue)}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.tile{border:1px solid var(--line);background:var(--soft2);border-radius:12px;padding:12px 6px 10px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:104px}
+.tile:hover{border-color:var(--blue);background:#fff}
+.tile svg{width:24px;height:24px;color:var(--blue)}
+.tile b{font-size:13.5px;color:var(--ink)}
+.tile span{font-size:11px;color:var(--muted);line-height:1.35}
+.tile.hot{background:var(--warm);border-color:var(--warm-line)}
+.tile.hot svg{color:var(--point)}
+.wide{margin-top:10px;display:flex;align-items:center;gap:12px;border:1.5px solid var(--ink);border-radius:12px;padding:12px 14px;background:#fff;width:100%;text-align:left}
+.wide svg{color:var(--ink)}
+.wide b{display:block;font-size:14px;color:var(--ink)}
+.wide span{font-size:12px;color:var(--muted)}
+.wide em{margin-left:auto;font-style:normal;font-size:12.5px;font-weight:700;color:#fff;background:var(--ink);border-radius:999px;padding:5px 12px;white-space:nowrap}
+.grp{font-size:12px;font-weight:700;color:var(--blue);background:var(--soft);border-radius:6px;padding:5px 10px;margin:10px 0 4px}
+.links a,.links div{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 4px;border-bottom:1px solid var(--line);text-decoration:none;font-size:13.5px}
+.links a b,.links div b{color:var(--text);font-weight:600}
+.links span{font-size:12px;color:var(--muted)}
+.links a:hover b{color:var(--blue)}
+.tel{font-weight:700;color:var(--ink)!important;font-size:13px!important}
+.guide{margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:var(--soft2)}
+.guide button{border:0;background:none;font-weight:700;color:var(--blue);font-size:14px}
+.guide p{font-size:12px;color:var(--muted);margin-top:2px}
 
-/* 사업 버튼 */
-.biz{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+/* 화면(뷰) */
+.vbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 10px}
+.vback{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 14px;font-size:14px;font-weight:600;color:var(--ink)}
+.vbar h2{font-size:20px;color:var(--ink)}
+.vbar .sp{flex:1}
+.vacts{display:flex;gap:6px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:600}
+.btn:hover{border-color:var(--ink)}
+.btn.fill{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.fill:hover{background:var(--blue)}
+.btn.soft{background:var(--soft);border-color:#CFDBEC;color:var(--blue)}
+.vnote{font-size:12.5px;color:var(--ok);font-weight:600;margin-bottom:10px}
+.how{background:var(--warm);border:1px solid var(--warm-line);border-radius:12px;padding:12px 16px;margin-bottom:12px;font-size:13px;color:#5b3a2c}
+.how ol{padding-left:18px}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;margin-bottom:32px}
+@media (min-width:761px){.pv{position:sticky;top:12px}}
+.in,.pv{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.in h3{font-size:16px;color:var(--ink)}
+.in .sub{font-size:12.5px;color:var(--muted);margin-bottom:6px}
+.q{padding:12px 0;border-bottom:1px dashed var(--line)}
+.q:last-child{border-bottom:0}
+.ql{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.ql i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;display:grid;place-items:center;flex:none}
+.ql small{font-weight:400;color:var(--muted);font-size:12px}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px 6px 10px;font-size:13px;display:inline-flex;align-items:center;gap:6px}
+.opts button::before{content:"";width:13px;height:13px;border-radius:50%;border:1.5px solid #B6C0CF}
+.opts button.on{border-color:var(--ink);background:var(--soft);color:var(--ink);font-weight:600}
+.opts button.on::before{border-color:var(--ink);background:var(--ink);box-shadow:inset 0 0 0 2px #fff}
+input.f,textarea.f,select.f{width:100%;font:inherit;font-size:14px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:var(--soft2);color:var(--text)}
+textarea.f{min-height:84px;resize:vertical}
+.mic-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.mic{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;padding:5px 12px 5px 9px;font-size:12.5px;font-weight:700}
+.mic.rec{background:var(--point);border-color:var(--point);color:#fff;animation:pulse 1.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(168,67,43,.45)}70%{box-shadow:0 0 0 10px rgba(168,67,43,0)}100%{box-shadow:0 0 0 0 rgba(168,67,43,0)}}
+@media (prefers-reduced-motion:reduce){.mic.rec{animation:none}}
+.mic-st{font-size:12px;color:var(--muted)}
+.warn{font-size:12.5px;color:var(--point);margin-top:8px}
+
+/* 미리보기 서식 */
+.doc{border:1px solid var(--line);border-radius:10px;padding:22px 20px;background:#fff}
+.doc h4{text-align:center;font-size:19px;color:#111;margin-bottom:14px;letter-spacing:.1em}
+.doc table{width:100%;border-collapse:collapse;font-size:13px}
+.doc th,.doc td{border:1px solid #333;padding:7px 9px;vertical-align:top;text-align:left}
+.doc th{background:#F1F3F6;width:24%;font-weight:600;text-align:center;vertical-align:middle}
+.doc td.e{color:#9AA3B2}
+.doc .sign{text-align:right;margin-top:14px;font-size:13px}
+.pvt{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12.5px;color:var(--muted)}
+
+/* 일반 도구 카드 */
+.tool{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px}
+.tool h3{font-size:17px;color:var(--ink)}
+.tool .sub{font-size:13px;color:var(--muted);margin:2px 0 12px}
+.formula{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.formula span{background:var(--soft);color:var(--ink);border-radius:6px;padding:3px 10px;font-size:12.5px;font-weight:600}
+.formula em{font-style:normal;color:var(--muted);align-self:center}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label.l{display:block;font-size:13px;font-weight:700;color:var(--ink);margin:12px 0 6px}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.box{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--soft2)}
+.box h4{font-size:12.5px;margin-bottom:6px;color:var(--blue)}
+.box pre{white-space:pre-wrap;font-family:inherit;font-size:13px;line-height:1.7}
+.box h4.bad{color:var(--point)}.box h4.good{color:var(--ok)}
+.gauge{background:var(--soft2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:6px}
+.gauge input{width:100%;accent-color:#A8432B}
+.gauge b{font-size:13px;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 12px;font-size:12.5px}
+.chips button:hover{border-color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--point);border:1px solid var(--warm-line);border-radius:4px;padding:0 6px;margin-left:6px;vertical-align:2px}
+
+/* 사업별 */
+.biz{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 .biz button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 15px;font-size:13.5px;color:var(--ink);font-weight:500}
 .biz button.on{background:var(--ink);border-color:var(--ink);color:#fff}
 .biz button i{font-style:normal;font-size:11px;color:var(--muted);margin-left:4px}
-.biz button.on i{color:#C9D3E6}
-.biz-intro{font-size:13.5px;color:var(--muted);margin-bottom:14px}
-.biz-intro b{color:var(--ink)}
-
-/* 연간 흐름 */
-.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-bottom:16px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
-.flow button{border:0;background:#fff;padding:10px 6px;text-align:center;font-size:13px;color:var(--muted);border-right:1px solid var(--line);position:relative}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-bottom:14px}
+.flow button{border:0;border-right:1px solid var(--line);background:#fff;padding:9px 4px;font-size:13px;color:var(--muted)}
 .flow button:last-child{border-right:0}
-.flow button b{display:block;font-size:11px;color:var(--blue);font-weight:700}
-.flow button.on{background:var(--blue-soft);color:var(--ink);font-weight:700}
-.step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-.step h3{font-size:17px;color:var(--ink);margin-bottom:2px}
+.flow button b{display:block;font-size:11px;color:var(--blue)}
+.flow button.on{background:var(--soft);color:var(--ink);font-weight:700}
+.step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:32px}
+.step h3{font-size:17px;color:var(--ink)}
 .step .when{font-size:12.5px;color:var(--muted);margin-bottom:12px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.box{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--bg)}
-.box h4{font-size:12.5px;color:var(--blue);margin-bottom:6px}
-.box pre{white-space:pre-wrap;font-family:inherit;font-size:13px;line-height:1.7;color:var(--text)}
-.box.ex pre{color:#333}
-.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--point);border:1px solid #E7C8BE;border-radius:4px;padding:0 6px;margin-left:6px;vertical-align:1px}
-.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.btn{border:1px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600}
-.btn.fill{background:var(--ink);color:#fff}
-.btn:hover{border-color:var(--point)}
-.btn.fill:hover{background:#2C4170}
-.note{font-size:12.5px;color:var(--muted);margin-top:10px}
-.where{font-size:12.5px;color:var(--muted);margin-top:8px}
-.where b{color:var(--ink);font-weight:600}
-.empty{background:#fff;border:1px dashed var(--line);border-radius:14px;padding:28px;text-align:center;color:var(--muted)}
+.where{font-size:12.5px;color:var(--muted);margin-top:10px}
+.empty{background:#fff;border:1px dashed var(--line);border-radius:14px;padding:28px;text-align:center;color:var(--muted);margin-bottom:32px}
 
-/* 현장 도구 */
-.tool{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px}
-.tool h3{font-size:17px;color:var(--ink)}
-.tool .sub{font-size:13px;color:var(--muted);margin:2px 0 14px}
-.formula{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
-.formula span{background:var(--blue-soft);color:var(--ink);border-radius:6px;padding:4px 10px;font-size:12.5px;font-weight:600}
-.formula em{font-style:normal;color:var(--muted);align-self:center}
-label.l{display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin:10px 0 6px}
-textarea,select{width:100%;font:inherit;font-size:14px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);color:var(--text)}
-textarea{min-height:90px;resize:vertical}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font-size:12.5px;color:var(--ink)}
-.chips button:hover{border-color:var(--ink)}
-.warn{font-size:12.5px;color:var(--point);margin-top:8px}
-.ba{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.ba .box h4.bad{color:var(--point)}
-.ba .box h4.good{color:var(--ok)}
+/* 마음 쉼터 */
+.heart{background:linear-gradient(135deg,#FFF8F1,#F6F1FA);border:1px solid #EADFD3}
+.moods{display:flex;flex-wrap:wrap;gap:6px}
+.moods button{border:1px solid #E5D9CC;background:#fff;border-radius:999px;padding:6px 13px;font-size:13px}
+.moods button.on{background:#5B4A6B;border-color:#5B4A6B;color:#fff}
+.help{margin-top:14px;background:#fff;border:1px solid #E5D9CC;border-radius:12px;padding:12px 14px;font-size:13px}
+.help b{color:var(--ink)}
+.help a{font-weight:700;color:var(--point);text-decoration:none}
 
-/* 기본기 */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.c{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column}
-.c h3{font-size:15.5px;color:var(--ink);margin-bottom:4px}
-.c p{font-size:13px;color:var(--muted);flex:1}
-.c .acts{margin-top:10px}
-.list{display:grid;gap:10px}
-.li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.li b{color:var(--ink);font-size:14.5px}
-.li span{display:block;font-size:12.5px;color:var(--muted)}
-.soon{font-size:12px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}
-
-.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:50}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:60}
 .toast.on{opacity:1}
-footer{border-top:1px solid var(--line);padding:18px 0 28px;font-size:12px;color:var(--muted)}
+footer{background:#1F2F52;color:#C9D3E6;font-size:12px;padding:16px 0 22px;margin-top:10px}
+footer b{color:#fff}
+footer a{color:#fff}
 
+@media (max-width:980px){.dash{grid-template-columns:1fr 1fr}.dash .p3{grid-column:1/-1}}
 @media (max-width:760px){
-  .grid2,.ba,.row{grid-template-columns:1fr}
-  .cards{grid-template-columns:1fr}
-  .flow{grid-template-columns:repeat(5,minmax(0,1fr))}
-  .flow button{font-size:11.5px;padding:8px 2px}
-  .step,.tool{padding:16px}
+  .hero{grid-template-columns:1fr}.hero-art{display:none}.hero-t{padding:20px}
+  .dash,.split,.row,.ba{grid-template-columns:1fr}
+  .tiles{grid-template-columns:repeat(3,1fr)}
+  .flow button{font-size:11.5px}
 }
-
-.vent .gauge{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:12px}
-.vent .gauge .l{margin-top:0}
-.vent input[type=range]{width:100%;accent-color:#A8432B}
-.lv-txt{font-size:13px;color:var(--ink);font-weight:600;margin-top:2px}
-.vstep{display:grid;grid-template-columns:28px 1fr;gap:10px;margin-top:6px}
-.vstep>b{width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;display:grid;place-items:center;margin-top:12px}
-.mic-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.mic{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;padding:8px 16px 8px 12px;font-size:13.5px;font-weight:700}
-.mic.rec{background:#A8432B;border-color:#A8432B;color:#fff;animation:pulse 1.2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(168,67,43,.45)}70%{box-shadow:0 0 0 12px rgba(168,67,43,0)}100%{box-shadow:0 0 0 0 rgba(168,67,43,0)}}
-.mic-st{font-size:12.5px;color:var(--muted)}
-@media (prefers-reduced-motion:reduce){.mic.rec{animation:none}}
 </style>
 </head>
 <body>
@@ -137,112 +198,244 @@ footer{border-top:1px solid var(--line);padding:18px 0 28px;font-size:12px;color
 </div></header>
 
 <main class="wrap">
-  <section class="head">
-    <small>강의 자료실 · 2026.11.19 전북 시군가족센터 종사자 AI 실무 워크숍</small>
-    <h1>가족센터 AI 업무 서랍</h1>
-    <p>강의에서 본 장면을 내 업무로 직접 해 보는 곳이에요. 사업을 고르고, 연간 업무 단계를 누르면 예시와 바로 쓰는 프롬프트가 나와요.</p>
-    <div class="msg"><b>먼저 지켜 주세요.</b> 실제 상담 내용, 이름, 연락처, 체류 정보는 AI에 넣지 마세요. 예시는 모두 <b>가상 "가온시 가족센터"</b> 자료예요. 자료에 없는 숫자는 AI가 <b>[확인 필요]</b>로 남기게 했어요.</div>
-  </section>
 
-  <nav class="tabs" role="tablist">
-    <button type="button" class="on" data-p="biz">사업별 업무</button>
-    <button type="button" data-p="tool">현장 도구</button>
-    <button type="button" data-p="base">AI 기본기</button>
-    <button type="button" data-p="files">강의 자료</button>
-  </nav>
-
-  <!-- 사업별 업무 -->
-  <section class="panel" id="p-biz">
-    <div class="biz" id="biz"></div>
-    <p class="biz-intro" id="biz-intro"></p>
-    <div id="biz-body"></div>
-  </section>
-
-  <!-- 현장 도구 -->
-  <section class="panel" id="p-tool" hidden>
-    <div class="tool vent">
-      <h3>빡침 순화기 <span class="tag">단호한 존댓말 변환기</span></h3>
-      <p class="sub">화날 땐 치는 것보다 말하는 게 빠르죠. 마이크를 누르고 있었던 일을 그대로 털어놓으세요. 감정은 정솔이 걸러 내고, 꼭 전할 말은 단단하게 남겨 드려요.</p>
-      <div class="formula"><span>① 사실</span><em>→</em><span>② 기준</span><em>→</em><span>③ 할 수 있는 것</span><em>→</em><span>④ 다음 행동·기한</span></div>
-
-      <div class="gauge">
-        <label class="l" for="t-lv">지금 빡침 지수</label>
-        <input type="range" id="t-lv" min="1" max="5" value="3">
-        <div class="lv-txt" id="t-lv-txt"></div>
-      </div>
-
-      <div class="vstep"><b>1</b><div>
-        <label class="l" for="t-in">무슨 일이 있었나요? (말로 털어놓기)</label>
-        <div class="mic-row"><button type="button" class="mic" data-for="t-in" aria-label="말로 입력"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>눌러서 말하기</span></button><span class="mic-st" id="st-t-in"></span></div>
-        <textarea id="t-in" placeholder="예) 프로그램 당일인데 세 가족이 연락도 없이 안 왔어요. 대기하던 가족은 못 들어왔고 강사님도 기다리다 가셨어요. 진짜 너무 화나요."></textarea>
-      </div></div>
-
-      <div class="vstep"><b>2</b><div>
-        <label class="l" for="t-must">그래도 꼭 전해야 할 것은?</label>
-        <div class="mic-row"><button type="button" class="mic" data-for="t-must" aria-label="말로 입력"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>눌러서 말하기</span></button><span class="mic-st" id="st-t-must"></span></div>
-        <textarea id="t-must" placeholder="예) 다음부터 못 오면 하루 전까지 꼭 연락해 달라. 두 번 연락 없이 빠지면 다음 회차 신청이 어렵다."></textarea>
-      </div></div>
-
-      <div class="vstep"><b>3</b><div>
-        <div class="row">
-          <div><label class="l" for="t-who">누구에게 보내나요?</label>
-            <select id="t-who"><option>이용자·보호자</option><option>동료·다른 팀</option><option>협력 기관·강사</option><option>상위 기관·지자체</option></select></div>
-          <div><label class="l" for="t-how">어디로 보내나요?</label>
-            <select id="t-how"><option>문자·카톡 (짧게)</option><option>단체 안내문</option><option>공문·메일 (격식 있게)</option><option>세 가지 모두</option></select></div>
-        </div>
-      </div></div>
-
-      <div class="chips" id="t-ex" aria-label="예시 넣기"></div>
-      <p class="warn">이름, 전화번호, 상담 사연은 빼고 말해 주세요. 받아쓰기 결과는 칸에서 고칠 수 있어요.</p>
-      <div class="acts">
-        <button type="button" class="btn fill" id="t-gpt">ChatGPT에서 순화하기</button>
-        <button type="button" class="btn" id="t-copy">프롬프트 복사 (Gemini 등)</button>
-      </div>
-      <div class="ba">
-        <div class="box"><h4 class="bad">털어놓은 말</h4><pre>몇 번을 말해요. 신청은 선착순이라고 공지에 다 써 있잖아요. 이제 와서 자리 만들어 달라고 하시면 저희도 방법이 없어요.</pre></div>
-        <div class="box"><h4 class="good">순화된 안내 (예시)</h4><pre>신청하신 프로그램은 공지에 안내드린 대로 선착순으로 마감되었습니다. 기준상 추가 자리는 마련하기 어려운 점 양해 부탁드립니다. 대신 대기자 명단에 올려 두고, 취소가 생기면 바로 연락드리겠습니다. 다음 회차 모집은 ○월 ○일에 시작하니 그때 먼저 안내드릴게요.</pre></div>
-      </div>
+<!-- ===== 첫 화면 ===== -->
+<div id="v-home">
+  <section class="hero">
+    <div class="hero-t">
+      <div class="org"><svg class="i" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg>전북 시군가족센터 종사자 · 2026.11.19 AI 실무 워크숍</div>
+      <h1>혼자 끌어안지 않는 업무 파트너, <em>AI 업무 서랍</em></h1>
+      <p>상담일지·보고서는 서식으로, 화나는 안내문은 단단한 존댓말로, 지친 날엔 마음 쉼터로.</p>
+      <label class="search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="찾을 업무를 입력하세요 (예: 상담일지, 결과보고, 다국어)"></label>
     </div>
-
-    <div class="tool">
-      <h3>다국어 안내 도우미</h3>
-      <p class="sub">결혼이민자 가족에게 보낼 일상 안내를 쉬운 한국어와 모국어로 함께 만들어요. 상담 내용이 아닌 일정·신청 안내에만 써 주세요.</p>
-      <div class="row">
-        <div><label class="l" for="m-lang">언어</label>
-          <select id="m-lang"><option>베트남어</option><option>중국어</option><option>필리핀어(타갈로그어)</option><option>몽골어</option><option>캄보디아어</option><option>영어</option></select></div>
-        <div><label class="l" for="m-kind">안내 종류</label>
-          <select id="m-kind"><option>프로그램 모집 안내</option><option>일정 변경 안내</option><option>준비물 안내</option><option>신청 서류 안내</option></select></div>
-      </div>
-      <label class="l" for="m-in">안내할 내용</label>
-      <textarea id="m-in" placeholder="예) 11월 22일 토요일 오전 10시, 가족사랑의 날 행사. 장소는 센터 2층. 아이와 함께 오세요."></textarea>
-      <div class="acts">
-        <button type="button" class="btn fill" id="m-gpt">ChatGPT에서 만들기</button>
-        <button type="button" class="btn" id="m-copy">프롬프트 복사</button>
-      </div>
-      <p class="note">번역 결과의 날짜·금액·장소는 반드시 통번역 담당자가 한 번 더 확인해요.</p>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#DCE7F5"/><stop offset="1" stop-color="#C9D9EE"/></linearGradient></defs><rect width="400" height="220" fill="url(#g1)"/><circle cx="320" cy="40" r="26" fill="#F6E3C8"/><path d="M0 170 Q100 130 200 165 T400 150 V220 H0Z" fill="#B9CCE6"/><path d="M0 190 Q120 160 240 192 T400 182 V220 H0Z" fill="#A3BCDD"/><g transform="translate(150 70)"><path d="M0 60 L55 18 L110 60 V120 H0Z" fill="#fff"/><path d="M-8 64 L55 12 L118 64" fill="none" stroke="#1F2F52" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="42" y="78" width="26" height="42" rx="3" fill="#24497F"/><rect x="14" y="70" width="18" height="16" rx="2" fill="#F6E3C8"/><rect x="78" y="70" width="18" height="16" rx="2" fill="#F6E3C8"/></g><g fill="#1F2F52"><circle cx="96" cy="128" r="9"/><rect x="87" y="139" width="18" height="34" rx="9"/><circle cx="118" cy="140" r="7"/><rect x="111" y="149" width="14" height="24" rx="7" fill="#A8432B"/><circle cx="300" cy="126" r="9"/><rect x="291" y="137" width="18" height="36" rx="9" fill="#24497F"/></g></svg>
     </div>
   </section>
 
-  <!-- AI 기본기 -->
-  <section class="panel" id="p-base" hidden>
-    <div class="cards" id="base"></div>
-  </section>
-
-  <!-- 강의 자료 -->
-  <section class="panel" id="p-files" hidden>
-    <div class="list">
-      <div class="li"><div><b>강의 장표 (PDF)</b><span>11.19 강의 후 올려 드려요</span></div><em class="soon">준비 중</em></div>
-      <div class="li"><div><b>업무 서랍 만들기 교안</b><span>ChatGPT 프로젝트로 나만의 서랍 만드는 순서</span></div><em class="soon">준비 중</em></div>
-      <div class="li"><div><b>나에게 보내는 노래 "수고했어, 나의 하루"</b><span>강의 마무리 곡과 만드는 방법</span></div><em class="soon">준비 중</em></div>
+  <section class="dash">
+    <div class="panel p1">
+      <div class="ph"><h2>서식 자료실</h2><small>질문에 답하면 서식 완성</small></div>
+      <ul class="flist" id="flist"></ul>
+    </div>
+    <div class="panel p2">
+      <div class="ph"><h2>업무 바로가기</h2></div>
+      <div class="tiles" id="tiles"></div>
+      <button type="button" class="wide" data-go="meet"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><div><b>회의 녹음 → 회의록·공문</b><span>전사본을 넣으면 회의록과 공문 초안</span></div><em>시작</em></button>
+    </div>
+    <div class="panel p3">
+      <div class="ph"><h2>관련 기관 바로가기</h2></div>
+      <div class="grp">전북특별자치도 가족센터</div>
+      <div class="links">
+        <a href="https://jeonbuk.familynet.or.kr/center/lay1/program/S295T315C320/center_info/member.do" target="_blank" rel="noopener"><b>조직·업무</b><span>팀별 담당 업무 ↗</span></a>
+        <a href="https://jeonbuk.familynet.or.kr/center/lay1/bbs/S295T311C314/B/8/view.do?article_seq=253022" target="_blank" rel="noopener"><b>종사자 교육</b><span>온가족보듬 보고서 교육 ↗</span></a>
+      </div>
+      <div class="grp">상담·위기 연결</div>
+      <div class="links">
+        <a href="https://www.mogef.go.kr/cc/dcc/cc_dcc_f001.do" target="_blank" rel="noopener"><b>다누리콜센터</b><span class="tel">1577-1366</span></a>
+        <div><b>자살예방 상담전화</b><span class="tel">109</span></div>
+        <div><b>정신건강 위기상담</b><span class="tel">1577-0199</span></div>
+      </div>
+      <div class="guide"><button type="button" data-go="base">업무 서랍 이용 안내 ›</button><p>입력 금지선 · 맞춤설정 · 할루시네이션 방지</p></div>
     </div>
   </section>
+</div>
+
+<!-- ===== 서식 작성 화면 ===== -->
+<div id="v-form" hidden>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2 id="f-title">서식</h2><button type="button" class="b-how" id="f-howbtn">사용법</button><span class="sp"></span>
+    <div class="vacts"><button type="button" class="btn soft" id="f-ai">AI로 다듬기</button><button type="button" class="btn" id="f-copy">복사</button><button type="button" class="btn fill" id="f-word">워드 받기</button></div></div>
+  <p class="vnote" id="f-note"></p>
+  <div class="how" id="f-how" hidden></div>
+  <div class="split">
+    <section class="in"><h3>쉬운 입력</h3><p class="sub">질문에 답만 하면 오른쪽 서식이 자동으로 채워져요.</p><div id="f-qs"></div></section>
+    <section class="pv"><div class="pvt"><span>미리보기</span><span id="f-date"></span></div><div class="doc" id="f-doc"></div></section>
+  </div>
+</div>
+
+<!-- ===== 사업별 업무 ===== -->
+<div id="v-biz" hidden>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2>사업별 연간 업무</h2></div>
+  <p class="vnote">사업을 고르고 단계를 누르면 예시와 바로 쓰는 프롬프트가 나와요. 예시는 모두 가상 "가온시 가족센터"예요.</p>
+  <div class="biz" id="biz"></div>
+  <p class="sub" id="biz-intro" style="font-size:13px;color:var(--muted);margin-bottom:10px"></p>
+  <div id="biz-body"></div>
+</div>
+
+<!-- ===== 빡침 순화기 ===== -->
+<div id="v-vent" hidden>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2>빡침 순화기</h2><span class="tag">단호한 존댓말 변환기</span></div>
+  <div class="tool">
+    <p class="sub">화날 땐 치는 것보다 말하는 게 빠르죠. 있었던 일을 그대로 털어놓으면, 감정은 걸러 내고 꼭 전할 말은 단단하게 남겨요.</p>
+    <div class="formula"><span>① 사실</span><em>→</em><span>② 기준</span><em>→</em><span>③ 할 수 있는 것</span><em>→</em><span>④ 다음 행동·기한</span></div>
+    <div class="gauge"><b>지금 빡침 지수</b><input type="range" id="t-lv" min="1" max="5" value="3"><div id="t-lv-txt" style="font-size:13px;font-weight:600;color:var(--ink)"></div></div>
+    <label class="l" for="t-in">1. 무슨 일이 있었나요? (말로 털어놓기)</label>
+    <div class="mic-row"><button type="button" class="mic" data-for="t-in"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>눌러서 말하기</span></button><span class="mic-st" id="st-t-in"></span></div>
+    <textarea class="f" id="t-in" placeholder="예) 프로그램 당일인데 세 가족이 연락도 없이 안 왔어요. 대기 가족은 못 들어왔고 강사님도 기다리다 가셨어요."></textarea>
+    <label class="l" for="t-must">2. 그래도 꼭 전해야 할 것은?</label>
+    <div class="mic-row"><button type="button" class="mic" data-for="t-must"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>눌러서 말하기</span></button><span class="mic-st" id="st-t-must"></span></div>
+    <textarea class="f" id="t-must" placeholder="예) 못 오면 하루 전까지 꼭 연락해 달라. 두 번 연락 없이 빠지면 다음 회차 신청이 어렵다."></textarea>
+    <div class="row">
+      <div><label class="l" for="t-who">3. 누구에게?</label><select class="f" id="t-who"><option>이용자·보호자</option><option>동료·다른 팀</option><option>협력 기관·강사</option><option>상위 기관·지자체</option></select></div>
+      <div><label class="l" for="t-how">어디로?</label><select class="f" id="t-how"><option>문자·카톡 (짧게)</option><option>단체 안내문</option><option>공문·메일 (격식 있게)</option><option>세 가지 모두</option></select></div>
+    </div>
+    <div class="chips" id="t-ex"></div>
+    <p class="warn">이름, 전화번호, 상담 사연은 빼고 말해 주세요.</p>
+    <div class="acts"><button type="button" class="btn fill" id="t-gpt">ChatGPT에서 순화하기</button><button type="button" class="btn" id="t-copy">프롬프트 복사 (Gemini 등)</button></div>
+    <div class="ba">
+      <div class="box"><h4 class="bad">털어놓은 말</h4><pre>몇 번을 말해요. 신청은 선착순이라고 공지에 다 써 있잖아요. 이제 와서 자리 만들어 달라고 하시면 저희도 방법이 없어요.</pre></div>
+      <div class="box"><h4 class="good">순화된 안내 (예시)</h4><pre>신청하신 프로그램은 공지에 안내드린 대로 선착순으로 마감되었습니다. 기준상 추가 자리는 마련하기 어려운 점 양해 부탁드립니다. 대신 대기자 명단에 올려 두고, 취소가 생기면 바로 연락드리겠습니다. 다음 회차 모집은 ○월 ○일에 시작하니 그때 먼저 안내드릴게요.</pre></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 마음 쉼터 ===== -->
+<div id="v-heart" hidden>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2>마음 쉼터</h2><span class="tag">마음챙김 위로기</span></div>
+  <div class="tool heart">
+    <p class="sub">오늘 힘들었던 일을 말로 털어놓아 보세요. 들어 주고, 잠깐 숨 돌릴 방법을 함께 찾아 드려요. 누구에게 보내는 글이 아니라 나를 위한 시간이에요.</p>
+    <label class="l">지금 마음에 가까운 것은?</label>
+    <div class="moods" id="h-mood"></div>
+    <label class="l" for="h-in">오늘 있었던 일</label>
+    <div class="mic-row"><button type="button" class="mic" data-for="h-in"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>눌러서 말하기</span></button><span class="mic-st" id="st-h-in"></span></div>
+    <textarea class="f" id="h-in" placeholder="예) 오늘 위기가정 방문하고 와서 마음이 무거워요. 보고서는 밀려 있고, 잘하고 있는 건지 모르겠어요."></textarea>
+    <label class="l" for="h-want">어떤 위로가 필요해요?</label>
+    <select class="f" id="h-want"><option>그냥 들어 주고 공감해 주기</option><option>지금 할 수 있는 작은 회복 방법</option><option>내일 업무를 가볍게 정리하기</option><option>오늘의 나에게 짧은 편지</option></select>
+    <p class="warn">내담자 이름이나 사연은 빼고 "오늘 내 마음" 위주로 적어 주세요.</p>
+    <div class="acts"><button type="button" class="btn fill" id="h-gpt">위로받기 (ChatGPT)</button><button type="button" class="btn" id="h-copy">프롬프트 복사</button></div>
+    <div class="help"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가거나 위험한 생각이 들면 사람에게 꼭 말해 주세요. 자살예방 상담전화 <a href="tel:109">109</a> · 정신건강 위기상담 <a href="tel:15770199">1577-0199</a> (24시간)</div>
+  </div>
+</div>
+
+<!-- ===== 다국어 안내 ===== -->
+<div id="v-multi" hidden>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2>다국어 안내</h2></div>
+  <div class="tool">
+    <p class="sub">결혼이민자 가족에게 보낼 일정·신청 안내를 쉬운 한국어와 모국어로 함께 만들어요. 상담 내용에는 쓰지 마세요.</p>
+    <div class="row">
+      <div><label class="l" for="m-lang">언어</label><select class="f" id="m-lang"><option>베트남어</option><option>중국어</option><option>필리핀어(타갈로그어)</option><option>몽골어</option><option>캄보디아어</option><option>영어</option></select></div>
+      <div><label class="l" for="m-kind">안내 종류</label><select class="f" id="m-kind"><option>프로그램 모집 안내</option><option>일정 변경 안내</option><option>준비물 안내</option><option>신청 서류 안내</option></select></div>
+    </div>
+    <label class="l" for="m-in">안내할 내용</label>
+    <div class="mic-row"><button type="button" class="mic" data-for="m-in"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>눌러서 말하기</span></button><span class="mic-st" id="st-m-in"></span></div>
+    <textarea class="f" id="m-in" placeholder="예) 11월 22일 토요일 오전 10시, 가족사랑의 날 행사. 장소는 센터 2층. 아이와 함께 오세요."></textarea>
+    <div class="acts"><button type="button" class="btn fill" id="m-gpt">ChatGPT에서 만들기</button><button type="button" class="btn" id="m-copy">프롬프트 복사</button></div>
+    <p class="warn" style="color:var(--muted)">번역 결과의 날짜·금액·장소는 통번역 담당자가 한 번 더 확인해요.</p>
+  </div>
+</div>
+
+<!-- ===== 간단 프롬프트 도구 (보호자 문자 / 홍보 / 회의 / 기본기) ===== -->
+<div id="v-simple" hidden>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2 id="s-title"></h2></div>
+  <div class="tool"><p class="sub" id="s-sub"></p><div id="s-body"></div>
+    <div class="acts" id="s-acts"><button type="button" class="btn fill" id="s-gpt">ChatGPT에서 열기</button><button type="button" class="btn" id="s-copy">프롬프트 복사</button></div></div>
+</div>
+
 </main>
-
-<footer><div class="wrap">두배로 · 생성형 AI 전문강사 이서정 · 이 페이지의 예시는 모두 교육용 가상 자료입니다.</div></footer>
+<footer><div class="wrap"><b>가족센터 AI 업무 서랍</b> · 입력한 내용은 이 기기 안에서만 쓰이고 저장·전송되지 않아요. AI가 만든 글은 초안이에요. 사실·날짜·숫자는 꼭 직접 확인하세요.<br>제작·운영 <b>두배로 · 생성형 AI 전문강사 이서정</b> · <a href="../">dubaero.github.io</a></div></footer>
 <div class="toast" id="toast"></div>
 
 <script>
-/* ===== 내용 (강의마다 이 부분만 바꿔 넣으면 새 방이 됩니다) ===== */
+/* =================== 내용: 강의마다 이 부분만 바꿔요 =================== */
+var ORG='가온시 가족센터';
+var NOFAKE='자료에 없는 숫자·날짜·이름은 지어내지 말고 [확인 필요]로 남겨.';
+var FORMS=[
+ {id:'crisis',name:'상담일지 (위기가족)',sub:'온가족보듬·사례관리',title:'상 담 일 지',
+  note:'꼭 지켜요 · 이름은 ○○님으로, 진단명·주민번호·주소는 적지 마세요. 관찰 사실 / 당사자 진술 / 담당자 판단을 나눠 적어요.',
+  how:['누구와, 어떻게, 왜 상담했는지 고르세요.','메모 칸은 짧게 적거나 마이크로 말해도 돼요.','[AI로 다듬기]를 누르면 문장을 보고서체로 정리해 줘요. 결과는 꼭 확인 후 기관 양식에 옮기세요.'],
+  qs:[{k:'who',q:'누구와 상담했나요?',t:'one',o:['당사자 본인','보호자','가족 함께']},
+      {k:'how',q:'어떻게 상담했나요?',t:'one',o:['대면','전화','가정 방문','문자·카톡']},
+      {k:'why',q:'왜 상담했나요?',t:'one',o:['신규 의뢰','정기 상담','위기 발생','타 기관 연계']},
+      {k:'topic',q:'어떤 이야기를 했나요?',t:'many',o:['가족 갈등','경제적 어려움','양육','건강','주거','정서 어려움','학대 의심','서비스 연계']},
+      {k:'fact',q:'관찰한 사실',t:'text',ph:'예) 방문 시 집안 정리가 되어 있지 않았고, 아동은 등교하지 않은 상태였음',mic:1},
+      {k:'say',q:'당사자가 한 말',t:'text',ph:'예) "요즘 잠을 못 자요. 아이 아빠와 연락이 안 돼요."',mic:1},
+      {k:'judge',q:'담당자 판단',t:'text',ph:'예) 양육 부담과 정서적 소진이 커 보여 정서 지원 연계 검토 필요',mic:1},
+      {k:'act',q:'조치한 것',t:'many',o:['정보 제공','사례회의 상정','기관 연계','긴급 지원 검토','다음 상담 예약']},
+      {k:'next',q:'다음 상담 예정일',t:'date'}],
+  rows:[['상담 대상','who'],['상담 방법','how'],['상담 계기','why'],['주요 내용','topic'],['관찰 사실','fact'],['당사자 진술','say'],['담당자 판단','judge'],['조치 사항','act'],['다음 상담','next']]},
+ {id:'multi',name:'상담일지 (다문화가족)',sub:'결혼이민자·자녀',title:'상 담 일 지',
+  note:'꼭 지켜요 · 체류·국적 관련 세부 정보, 외국인등록번호는 적지 마세요. 통역이 있었다면 함께 적어요.',
+  how:['대상과 소통 방법을 고르세요.','이야기한 주제를 여러 개 고를 수 있어요.','메모는 짧게, [AI로 다듬기]로 문장을 정리하세요.'],
+  qs:[{k:'who',q:'누구와 상담했나요?',t:'one',o:['결혼이민자','배우자','자녀','가족 함께']},
+      {k:'lang',q:'어떻게 소통했나요?',t:'one',o:['한국어','통역 동석','통번역 앱','모국어 직원']},
+      {k:'topic',q:'어떤 이야기를 했나요?',t:'many',o:['한국어·생활 적응','자녀 양육·교육','부부·가족 관계','행정·제도 안내','취업·교육','경제','고립·정서']},
+      {k:'memo',q:'상담 메모',t:'text',ph:'예) 자녀 어린이집 상담 일정 안내를 이해하기 어려워함. 한국어 수업 시간과 겹쳐 고민 중',mic:1},
+      {k:'act',q:'조치한 것',t:'many',o:['정보 제공','통번역 연계','프로그램 안내','기관 연계','다음 상담 예약']},
+      {k:'next',q:'다음 상담 예정일',t:'date'}],
+  rows:[['상담 대상','who'],['소통 방법','lang'],['주요 내용','topic'],['상담 내용','memo'],['조치 사항','act'],['다음 상담','next']]},
+ {id:'case',name:'사례회의록',sub:'통합사례회의·내부 회의',title:'사 례 회 의 록',
+  note:'꼭 지켜요 · 사례는 "가족 A"처럼 바꿔 적어요. 참석자는 이름 대신 직무로.',
+  how:['참석자는 직무로 적어요.','논의와 결정을 나눠 적으면 담당·기한이 정리돼요.'],
+  qs:[{k:'kind',q:'회의 종류',t:'one',o:['내부 사례회의','통합사례회의','슈퍼비전']},
+      {k:'who',q:'참석 (직무)',t:'line',ph:'예) 사례관리사 2, 팀장, 협력기관 담당자 1'},
+      {k:'case',q:'사례 개요',t:'text',ph:'예) 가족 A, 한부모 위기가족, 경제·양육 어려움'},
+      {k:'talk',q:'논의 내용',t:'text',ph:'말하듯 적거나 녹음 전사본을 붙여 넣어요',mic:1},
+      {k:'dec',q:'결정 사항',t:'text',ph:'예) 긴급 생계지원 신청, 아동 돌봄 서비스 연계'},
+      {k:'todo',q:'담당·기한',t:'line',ph:'예) 사례관리사 B · 11/25까지 연계 의뢰'}],
+  rows:[['회의 종류','kind'],['참석','who'],['사례 개요','case'],['논의 내용','talk'],['결정 사항','dec'],['담당·기한','todo']]},
+ {id:'gongmun',name:'공문',sub:'협조 요청·안내',title:ORG,
+  note:'꼭 지켜요 · 관련 근거(지침·문서번호)는 실제 문서에서 확인해 넣어요.',
+  how:['수신과 제목을 먼저 적어요.','핵심 내용만 짧게 적으면 [AI로 다듬기]가 공문체로 바꿔 줘요.'],
+  qs:[{k:'to',q:'수신',t:'line',ph:'예) 수신자 참조 (관내 어린이집)'},
+      {k:'subj',q:'제목',t:'line',ph:'예) 가족사랑의 날 프로그램 홍보 협조 요청'},
+      {k:'base',q:'관련 근거',t:'line',ph:'예) 「2026 가족사업안내」 [확인 필요: 쪽]'},
+      {k:'body',q:'핵심 내용',t:'text',ph:'예) 11월 셋째 주 가족 프로그램 안내문 게시와 가정통신문 배부를 부탁',mic:1},
+      {k:'att',q:'붙임',t:'line',ph:'예) 안내문 1부.  끝.'}],
+  rows:[['수신','to'],['제목','subj'],['관련','base'],['내용','body'],['붙임','att']]},
+ {id:'meeting',name:'회의록',sub:'업무·운영 회의',title:'회 의 록',
+  note:'녹음 전사본이 있으면 [논의 내용]에 붙여 넣으세요.',
+  how:['일시·참석을 적고, 논의 내용은 말하듯 적어요.','결정과 할 일을 나눠 적어요.'],
+  qs:[{k:'when',q:'일시·장소',t:'line',ph:'예) 11.20(목) 14:00 센터 회의실'},
+      {k:'who',q:'참석',t:'line',ph:'예) 센터장, 가족지원팀 3, 다문화지원팀 2'},
+      {k:'agenda',q:'안건',t:'line',ph:'예) 가족사랑의 날 준비'},
+      {k:'talk',q:'논의 내용',t:'text',ph:'녹음 전사본을 붙여 넣어도 돼요',mic:1},
+      {k:'dec',q:'결정 사항',t:'text'},{k:'todo',q:'할 일 (담당·기한)',t:'text'}],
+  rows:[['일시·장소','when'],['참석','who'],['안건','agenda'],['논의 내용','talk'],['결정 사항','dec'],['할 일','todo']]},
+ {id:'prog',name:'프로그램 일지',sub:'회기별 운영 기록',title:'프 로 그 램 일 지',
+  note:'참여자는 이름 대신 "가족 A"로. 인원은 가족·성인·아동을 나눠 적어요.',
+  how:['사업과 프로그램명을 고르고 적어요.','잘된 점과 다음 준비를 적으면 결과보고서에 그대로 쓸 수 있어요.'],
+  qs:[{k:'biz',q:'사업',t:'one',o:['공동육아나눔터','언어발달지원','온가족보듬','다문화 자녀지원','가족관계','기타']},
+      {k:'name',q:'프로그램명·회기',t:'line',ph:'예) 아빠랑 놀이터 3회기'},
+      {k:'when',q:'일시',t:'line',ph:'예) 11.15(토) 10:00~12:00'},
+      {k:'num',q:'참여 인원',t:'line',ph:'예) 6가족 (성인 7, 아동 9)'},
+      {k:'what',q:'활동 내용',t:'text',mic:1},{k:'good',q:'잘된 점',t:'text'},{k:'next',q:'다음 준비·개선',t:'text'}],
+  rows:[['사업','biz'],['프로그램','name'],['일시','when'],['참여 인원','num'],['활동 내용','what'],['잘된 점','good'],['다음 준비','next']]},
+ {id:'plan',name:'사업계획서',sub:'연간·프로그램 계획',title:'사 업 계 획 서',
+  note:'예산·목표 인원은 실제 숫자만. 모르면 비워 두면 [확인 필요]로 남아요.',
+  how:['사업과 목적을 고르고 적어요.','[AI로 다듬기]를 누르면 지침 순서에 맞춘 계획서 초안을 써 줘요.'],
+  qs:[{k:'biz',q:'사업',t:'one',o:['공동육아나눔터','언어발달지원','온가족보듬','다문화 자녀지원','가족관계','기타']},
+      {k:'goal',q:'목적',t:'text'},{k:'who',q:'대상·목표 인원',t:'line'},
+      {k:'what',q:'주요 내용',t:'text',mic:1},{k:'sch',q:'추진 일정',t:'line',ph:'예) 1~2월 모집 / 3~11월 운영 / 12월 평가'},
+      {k:'money',q:'예산 항목',t:'line'}],
+  rows:[['사업','biz'],['목적','goal'],['대상','who'],['주요 내용','what'],['추진 일정','sch'],['예산','money']]},
+ {id:'result',name:'결과보고서',sub:'실적·성과 정리',title:'결 과 보 고 서',
+  note:'실인원과 연인원을 헷갈리지 않게! 숫자는 실적표에 있는 것만 써요.',
+  how:['실적 숫자를 적어요. 실인원 ≤ 연인원인지 확인해요.','성과와 개선을 나눠 적어요.'],
+  qs:[{k:'biz',q:'사업',t:'one',o:['공동육아나눔터','언어발달지원','온가족보듬','다문화 자녀지원','가족관계','기타']},
+      {k:'term',q:'운영 기간',t:'line'},{k:'num',q:'실적 (회기·실인원·연인원)',t:'line',ph:'예) 8회기, 실인원 110명, 연인원 170명'},
+      {k:'good',q:'성과',t:'text',mic:1},{k:'hard',q:'어려웠던 점',t:'text'},{k:'better',q:'개선 방안',t:'text'}],
+  rows:[['사업','biz'],['운영 기간','term'],['추진 실적','num'],['성과','good'],['어려웠던 점','hard'],['개선 방안','better']]},
+ {id:'budget',name:'예산·정산 점검',sub:'엑셀 오류 찾기',title:'예 산 점 검 표',
+  note:'예산표를 붙여 넣으면 AI가 합계·잔액·중복·증빙을 점검해요. 실제 회계 원자료와 꼭 대조하세요.',
+  how:['엑셀에서 표를 복사해 붙여 넣어요.','점검할 항목을 고르고 [AI로 다듬기]를 눌러요.'],
+  qs:[{k:'chk',q:'무엇을 점검할까요?',t:'many',o:['합계 불일치','집행액·잔액 불일치','중복 기입','증빙 확인 필요','비목 오류']},
+      {k:'table',q:'예산표 붙여 넣기',t:'text',ph:'엑셀 표를 복사해 붙여 넣기'}],
+  rows:[['점검 항목','chk'],['예산표','table']]}
+];
+var TILES=[
+ {go:'biz',ic:'grid',t:'사업별 업무',s:'연간 단계별 프롬프트'},
+ {go:'vent',ic:'fire',t:'빡침 순화기',s:'말로 털어놓고 존댓말로',hot:1},
+ {go:'multi',ic:'globe',t:'다국어 안내',s:'쉬운 한국어+모국어'},
+ {go:'parent',ic:'mail',t:'보호자 문자',s:'일정·불참·감사'},
+ {go:'promo',ic:'mega',t:'홍보·안내',s:'모집·카드뉴스'},
+ {go:'heart',ic:'heart',t:'마음 쉼터',s:'지친 날 위로받기',hot:1}
+];
+var ICONS={grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+ fire:'<path d="M12 21c-4 0-7-2.7-7-6.5 0-3 2-4.8 3.2-6.2.4 1.6 1.4 2.6 2.3 2.9C10.3 7.5 11.5 5 14 3c0 3 5 5 5 11.5 0 3.8-3 6.5-7 6.5z"/>',
+ globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+ mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+ mega:'<path d="M3 10v4h3l6 4V6L6 10H3z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/>',
+ heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'};
 var BIZ=[
  {name:'공동육아나눔터',ready:true,
   intro:'<b>가온시 가족센터 공동육아나눔터</b>의 1년을 따라가요. 지침은 「2026 가족사업안내」 제2권 Ⅵ장(공동육아나눔터 사업안내)이에요.',
@@ -268,95 +461,157 @@ var BIZ=[
  {name:'다문화 자녀지원',ready:false},
  {name:'아이돌봄',ready:false}
 ];
+
+var SIMPLE={
+ parent:{t:'보호자 문자',s:'보호자·참여 가족에게 보낼 짧은 문자를 만들어요. 이름 대신 "보호자님"으로 나와요.',
+  f:[{k:'kind',l:'상황',o:['일정 안내','불참 확인','준비물 안내','서류 요청','감사 인사','변경 안내']},{k:'memo',l:'전할 내용',ph:'예) 11/22(토) 10시 가족사랑의 날, 센터 2층, 실내화 지참'}],
+  p:function(v){return '너는 가족센터 담당자야. 아래 상황으로 보호자에게 보낼 문자를 써 줘.\n- 상황: '+v.kind+'\n- 따뜻하고 분명하게, 5줄 이내\n- 버전 2개: 기본 / 더 짧게\n- 결혼이민자 가족도 이해하기 쉬운 쉬운 한국어로\n- '+NOFAKE+'\n\n[전할 내용]\n'+v.memo;}},
+ promo:{t:'홍보·안내',s:'프로그램 모집 문구, 카드뉴스 구성, 블로그 초안을 한 번에 만들어요.',
+  f:[{k:'biz',l:'사업',o:['공동육아나눔터','언어발달지원','온가족보듬','다문화 자녀지원','가족관계','행사']},{k:'out',l:'만들 것',o:['문자·카톡 모집 문구','카드뉴스 4장 구성','블로그 초안','세 가지 모두']},{k:'memo',l:'행사 정보',ph:'예) 아빠랑 놀이터, 12월 매주 토 10시, 5~7세 자녀와 아빠, 선착순 10가족'}],
+  p:function(v){return '너는 가족센터 홍보 담당자야. 아래 [행사 정보]로 '+v.out+'를 만들어 줘.\n- 사업: '+v.biz+'\n- 과장 없이 따뜻하고 분명하게, 대상·일시·장소·신청 방법을 빠짐없이\n- 카드뉴스는 장마다 제목+본문 2줄+이미지 아이디어\n- '+NOFAKE+'\n\n[행사 정보]\n'+v.memo;}},
+ meet:{t:'회의 녹음 → 회의록·공문',s:'클로바노트나 Gemini로 받아 적은 전사본을 붙여 넣으면 회의록과 후속 공문 초안을 만들어요.',
+  f:[{k:'memo',l:'회의 전사본',ph:'녹음 전사본을 붙여 넣으세요 (이름은 직무로 바꿔 주세요)'}],
+  p:function(v){return '아래 [회의 전사본]으로 두 가지를 만들어 줘.\n1) 회의록: 일시 / 참석(직무) / 안건 / 논의 / 결정 사항 / 할 일(담당·기한)\n2) 결정 사항에 따른 협조 요청 공문 초안 (수신 / 제목 / 관련 / 내용 / 붙임)\n- 전사가 불명확한 부분은 [불명확]으로 표시\n- '+NOFAKE+'\n\n[회의 전사본]\n'+v.memo;}},
+ base:{t:'업무 서랍 이용 안내',s:'AI를 쓰기 전 꼭 알아 둘 세 가지예요. 문구를 복사해 쓰세요.',f:[],p:null}
+};
 var BASE=[
- {t:'가족센터용 맞춤설정',d:'ChatGPT·Gemini에 한 번 넣어 두면 모든 답이 가족센터 업무에 맞춰져요.',
-  p:'나는 가족센터 ○○사업 담당자야.\n- 공공기관 문서에 맞게 쉽고 분명한 말로 답해 줘.\n- 자료에 없는 숫자·날짜·법령은 지어내지 말고 [확인 필요]로 표시해 줘.\n- 결혼이민자 대상 안내는 쉬운 한국어로 쓰고, 요청하면 모국어 원문을 함께 보여 줘.\n- 개인정보가 들어 있으면 먼저 지우라고 알려 줘.'},
- {t:'할루시네이션 방지 한 줄',d:'AI가 그럴듯하게 지어내는 것을 막는 문장이에요. 요청 끝에 붙이세요.',
-  p:'첨부한 자료에서만 답해 줘. 자료에 없으면 "자료에서 확인할 수 없음"이라고 쓰고, 근거가 된 쪽이나 문장을 함께 알려 줘.'},
- {t:'입력 금지선',d:'AI에 넣기 전에 이것만 확인하세요.',
-  p:'[AI에 넣지 않는 것]\n- 이름, 주민번호, 전화번호, 주소\n- 실제 상담 내용, 사례관리 기록\n- 체류·국적 정보, 건강 정보\n- 미공개 회계 자료\n→ 꼭 필요하면 "가족 A", "○○동"처럼 바꾼 뒤 넣기'}
+ {t:'입력 금지선',p:'[AI에 넣지 않는 것]\n- 이름, 주민번호, 전화번호, 주소\n- 실제 상담 내용, 사례관리 기록\n- 체류·국적 정보, 건강 정보\n- 미공개 회계 자료\n→ 꼭 필요하면 "가족 A", "○○동"처럼 바꾼 뒤 넣기'},
+ {t:'가족센터용 맞춤설정',p:'나는 가족센터 ○○사업 담당자야.\n- 공공기관 문서에 맞게 쉽고 분명한 말로 답해 줘.\n- 자료에 없는 숫자·날짜·법령은 지어내지 말고 [확인 필요]로 표시해 줘.\n- 결혼이민자 대상 안내는 쉬운 한국어로 쓰고, 요청하면 모국어 원문을 함께 보여 줘.\n- 개인정보가 들어 있으면 먼저 지우라고 알려 줘.'},
+ {t:'할루시네이션 방지 한 줄',p:'첨부한 자료에서만 답해 줘. 자료에 없으면 "자료에서 확인할 수 없음"이라고 쓰고, 근거가 된 쪽이나 문장을 함께 알려 줘.'}
 ];
 
-/* ===== 틀 (모든 기관 방이 같이 씁니다) ===== */
+/* =================== 틀: 모든 기관 방이 같이 써요 =================== */
 function $(s){return document.querySelector(s);}
 function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
-var toastT;function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('on');},1800);}
-function copy(txt,m){(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){toast(m||'복사했어요. AI 창에 붙여 넣으세요.');},function(){var a=document.createElement('textarea');a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast(m||'복사했어요.');}catch(e){toast('복사가 안 되면 길게 눌러 직접 복사해 주세요.');}a.remove();});}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+var toastT;function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('on');},1900);}
+function copy(txt,m){(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){toast(m||'복사했어요. AI 창에 붙여 넣으세요.');},function(){var a=document.createElement('textarea');a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast(m||'복사했어요.');}catch(e){toast('길게 눌러 직접 복사해 주세요.');}a.remove();});}
 function openGPT(p){var w=window.open('https://chatgpt.com/?q='+encodeURIComponent(p),'_blank');if(w)w.opener=null;}
+function svg(k){return '<svg class="i" viewBox="0 0 24 24">'+ICONS[k]+'</svg>';}
+var today=new Date();var TODAY=today.getFullYear()+'. '+(today.getMonth()+1)+'. '+today.getDate()+'.';
 
-/* 큰 탭 */
-document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){
-  document.querySelectorAll('.tabs button').forEach(function(x){x.classList.toggle('on',x===b);});
-  ['biz','tool','base','files'].forEach(function(k){$('#p-'+k).hidden=(k!==b.dataset.p);});
-});});
+/* 화면 전환 */
+var VIEWS=['home','form','biz','vent','heart','multi','simple'];
+function show(v){VIEWS.forEach(function(k){$('#v-'+k).hidden=(k!==v);});window.scrollTo(0,0);}
+function go(key){
+  if(FORMS.some(function(f){return f.id===key;}))return openForm(key);
+  if(key==='biz'){renderBiz();return show('biz');}
+  if(['vent','heart','multi'].indexOf(key)>-1)return show(key);
+  if(SIMPLE[key])return openSimple(key);
+}
+document.addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(g){go(g.dataset.go);location.hash=g.dataset.go;}if(e.target.closest('[data-home]')){show('home');history.replaceState(null,'',location.pathname);}});
+window.addEventListener('hashchange',function(){var h=location.hash.slice(1);if(!h)show('home');});
+
+/* 첫 화면 */
+FORMS.forEach(function(f,i){var li=el('li',null,'<span class="n">'+(i+1)+'</span><span class="t">'+esc(f.name)+'<small>'+esc(f.sub)+'</small></span>');
+  var m=el('span','mini');var h=el('button','b-how','사용법');h.type='button';h.onclick=function(){openForm(f.id,true);};
+  var g=el('button','b-go','✎ 작성');g.type='button';g.onclick=function(){openForm(f.id);location.hash=f.id;};
+  m.appendChild(h);m.appendChild(g);li.appendChild(m);li.dataset.k=f.name+f.sub;$('#flist').appendChild(li);});
+TILES.forEach(function(t){var b=el('button','tile'+(t.hot?' hot':''),svg(t.ic)+'<b>'+esc(t.t)+'</b><span>'+esc(t.s)+'</span>');b.type='button';b.dataset.go=t.go;b.dataset.k=t.t+t.s;$('#tiles').appendChild(b);});
+$('#q').addEventListener('input',function(){var v=this.value.trim();document.querySelectorAll('#flist li,#tiles .tile').forEach(function(n){n.style.opacity=(!v||n.dataset.k.indexOf(v)>-1)?1:.25;});});
+$('#q').addEventListener('keydown',function(e){if(e.key!=='Enter')return;var v=this.value.trim();if(!v)return;
+  var f=FORMS.find(function(x){return (x.name+x.sub).indexOf(v)>-1;});if(f)return openForm(f.id);
+  var t=TILES.find(function(x){return (x.t+x.s).indexOf(v)>-1;});if(t)return go(t.go);toast('딱 맞는 서랍이 없어요. 다른 말로 찾아보세요.');});
+
+/* 서식 엔진 */
+var CF=null,VAL={};
+function openForm(id,howOpen){
+  CF=FORMS.find(function(f){return f.id===id;});VAL={};
+  $('#f-title').textContent=CF.name;$('#f-note').textContent=CF.note;
+  $('#f-how').innerHTML='<b>사용법</b><ol>'+CF.how.map(function(h){return '<li>'+esc(h)+'</li>';}).join('')+'</ol>';$('#f-how').hidden=!howOpen;
+  var box=$('#f-qs');box.innerHTML='';
+  CF.qs.forEach(function(q,i){var d=el('div','q');d.appendChild(el('div','ql','<i>'+(i+1)+'</i>'+esc(q.q)+(q.t==='many'?' <small>(여러 개 골라도 돼요)</small>':'')));
+    if(q.t==='one'||q.t==='many'){var o=el('div','opts');q.o.forEach(function(x){var b=el('button',null,esc(x));b.type='button';b.onclick=function(){
+        if(q.t==='one'){VAL[q.k]=(VAL[q.k]===x?'':x);o.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y.textContent===VAL[q.k]);});}
+        else{var a=VAL[q.k]||[];var k=a.indexOf(x);if(k>-1)a.splice(k,1);else a.push(x);VAL[q.k]=a;b.classList.toggle('on',k<0);}
+        renderDoc();};o.appendChild(b);});d.appendChild(o);}
+    else{var id2='fq-'+q.k;if(q.mic)d.appendChild(micRow(id2));
+      var inp=q.t==='text'?el('textarea','f'):el('input','f');if(q.t==='date')inp.type='date';inp.id=id2;inp.placeholder=q.ph||'';inp.oninput=function(){VAL[q.k]=inp.value;renderDoc();};d.appendChild(inp);}
+    box.appendChild(d);});
+  bindMics(box);renderDoc();show('form');
+}
+function valText(k){var v=VAL[k];if(Array.isArray(v))return v.join(', ');return v||'';}
+function renderDoc(){
+  var h='<h4>'+esc(CF.title)+'</h4><table>';
+  if(CF.id.indexOf('crisis')===0||CF.id==='multi')h+='<tr><th>상담 일시</th><td>'+TODAY+'</td></tr>';
+  CF.rows.forEach(function(r){var v=valText(r[1]);h+='<tr><th>'+esc(r[0])+'</th><td'+(v?'':' class="e"')+'>'+(v?esc(v).replace(/\n/g,'<br>'):'( )')+'</td></tr>';});
+  h+='</table><p class="sign">'+TODAY+'<br>작성자 ____________ (서명)</p>';
+  $('#f-doc').innerHTML=h;$('#f-date').textContent='가상 '+ORG+' 양식';
+}
+function docText(){return CF.name+'\n'+CF.rows.map(function(r){return '- '+r[0]+': '+(valText(r[1])||'( )');}).join('\n');}
+$('#f-howbtn').onclick=function(){$('#f-how').hidden=!$('#f-how').hidden;};
+$('#f-copy').onclick=function(){copy(docText(),'서식 내용을 복사했어요.');};
+$('#f-ai').onclick=function(){var p='너는 가족센터 문서 도우미야. 아래 ['+CF.name+'] 초안을 공공기관 문서체(개조식)로 다듬어 줘.\n- 항목 순서와 이름은 그대로 두고, 빈칸 ( )은 [확인 필요]로 남겨.\n- '+(CF.id==='crisis'?'관찰 사실 / 당사자 진술 / 담당자 판단을 섞지 말고 구분해.\n- ':'')+NOFAKE+'\n- 이름·연락처가 보이면 ○○님으로 바꿔.\n- 끝에 내가 더 확인할 것 3가지를 적어 줘.\n\n'+docText();openGPT(p);};
+$('#f-word').onclick=function(){var html='<html><head><meta charset="utf-8"><style>body{font-family:"맑은 고딕";}table{border-collapse:collapse;width:100%}th,td{border:1px solid #000;padding:6px;font-size:10.5pt}th{background:#eee;width:24%}h4{text-align:center;font-size:16pt}.sign{text-align:right}</style></head><body>'+$('#f-doc').innerHTML+'</body></html>';
+  var b=new Blob(['﻿'+html],{type:'application/msword'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=CF.name.replace(/[^\w가-힣]+/g,'_')+'.doc';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);toast('워드 파일을 받았어요. 기관 양식에 옮겨 쓰세요.');};
 
 /* 사업별 업무 */
 var curBiz=0,curStep=0;
 function renderBiz(){
   var wrap=$('#biz');wrap.innerHTML='';
   BIZ.forEach(function(B,i){var b=el('button',i===curBiz?'on':'',esc(B.name)+(B.ready?'':'<i>준비 중</i>'));b.type='button';b.onclick=function(){curBiz=i;curStep=0;renderBiz();};wrap.appendChild(b);});
-  var B=BIZ[curBiz],body=$('#biz-body');body.innerHTML='';
-  $('#biz-intro').innerHTML=B.ready?B.intro:'';
-  if(!B.ready){body.appendChild(el('div','empty','<b>'+esc(B.name)+'</b> 서랍은 준비 중이에요.<br>강의 후 수강생 의견을 받아 채워 넣을게요.'));return;}
-  var flow=el('div','flow');
-  B.steps.forEach(function(S,i){var b=el('button',i===curStep?'on':'','<b>'+(i+1)+'</b>'+esc(S.k));b.type='button';b.onclick=function(){curStep=i;renderBiz();};flow.appendChild(b);});
-  body.appendChild(flow);
-  var S=B.steps[curStep],st=el('div','step');
-  st.appendChild(el('h3',null,esc(S.k)+' 단계'));
-  st.appendChild(el('p','when',esc(S.when)));
-  var g=el('div','grid2');
-  g.appendChild(el('div','box ex','<h4>예시 결과 <span class="tag">가상</span></h4><pre>'+esc(S.ex)+'</pre>'));
-  g.appendChild(el('div','box','<h4>바로 쓰는 프롬프트</h4><pre>'+esc(S.prompt)+'</pre>'));
-  st.appendChild(g);
-  var a=el('div','acts');
-  var b1=el('button','btn fill','ChatGPT에서 열기');b1.type='button';b1.onclick=function(){openGPT(S.prompt);};
-  var b2=el('button','btn','프롬프트 복사');b2.type='button';b2.onclick=function(){copy(S.prompt);};
-  a.appendChild(b1);a.appendChild(b2);st.appendChild(a);
-  st.appendChild(el('p','where','지침 위치: <b>'+esc(S.where)+'</b> · 「2026 가족사업안내」 원문과 꼭 대조하세요.'));
-  body.appendChild(st);
+  var B=BIZ[curBiz],body=$('#biz-body');body.innerHTML='';$('#biz-intro').innerHTML=B.ready?B.intro:'';
+  if(!B.ready){body.appendChild(el('div','empty','<b>'+esc(B.name)+'</b> 서랍은 준비 중이에요. 강의 후 수강생 의견을 받아 채워 넣을게요.'));return;}
+  var flow=el('div','flow');B.steps.forEach(function(S,i){var b=el('button',i===curStep?'on':'','<b>'+(i+1)+'</b>'+esc(S.k));b.type='button';b.onclick=function(){curStep=i;renderBiz();};flow.appendChild(b);});body.appendChild(flow);
+  var S=B.steps[curStep],st=el('div','step');st.appendChild(el('h3',null,esc(S.k)+' 단계'));st.appendChild(el('p','when',esc(S.when)));
+  var g=el('div','ba');g.style.marginTop='0';g.appendChild(el('div','box','<h4>예시 결과 <span class="tag">가상</span></h4><pre>'+esc(S.ex)+'</pre>'));g.appendChild(el('div','box','<h4>바로 쓰는 프롬프트</h4><pre>'+esc(S.prompt)+'</pre>'));st.appendChild(g);
+  var a=el('div','acts');var b1=el('button','btn fill','ChatGPT에서 열기');b1.type='button';b1.onclick=function(){openGPT(S.prompt);};var b2=el('button','btn','프롬프트 복사');b2.type='button';b2.onclick=function(){copy(S.prompt);};a.appendChild(b1);a.appendChild(b2);st.appendChild(a);
+  st.appendChild(el('p','where','지침 위치: <b>'+esc(S.where)+'</b> · 「2026 가족사업안내」 원문과 꼭 대조하세요.'));body.appendChild(st);
 }
-renderBiz();
 
 /* 빡침 순화기 */
-var ex=$('#t-ex');
 var LV=['','살짝 서운해요 → 부드럽게','좀 화나요 → 부드럽지만 분명하게','많이 화나요 → 정중하지만 단호하게','폭발 직전 → 선을 확실하게, 그래도 존댓말','이미 폭발 → 원칙과 조치를 분명히, 감정은 0'];
-function lvTxt(){$('#t-lv-txt').textContent=$('#t-lv').value+'단계 · '+LV[$('#t-lv').value];}
-$('#t-lv').addEventListener('input',lvTxt);lvTxt();
-var TOOL_EX2=[
- ['프로그램 당일인데 세 가족이 연락도 없이 안 왔어요. 대기 가족은 못 들어왔고 강사님도 기다리다 가셨어요. 진짜 화나요.','못 오면 하루 전까지 꼭 연락해 달라. 두 번 연락 없이 빠지면 다음 회차 신청이 어렵다.'],
+function lvTxt(){$('#t-lv-txt').textContent=$('#t-lv').value+'단계 · '+LV[$('#t-lv').value];}$('#t-lv').addEventListener('input',lvTxt);lvTxt();
+[['프로그램 당일인데 세 가족이 연락도 없이 안 왔어요. 대기 가족은 못 들어왔고 강사님도 기다리다 가셨어요.','못 오면 하루 전까지 꼭 연락해 달라. 두 번 연락 없이 빠지면 다음 회차 신청이 어렵다.'],
  ['협력 기관이 마감 어제였는데 실적 자료를 아직도 안 보냈어요. 우리 결과보고가 다 밀려요.','이번 주 금요일 오후 3시까지 꼭 보내 달라. 늦으면 보고서에 해당 기관 실적이 빠질 수 있다.'],
- ['회의에서 정한 일정을 또 바꾸자고 하세요. 안내문은 이미 다 나갔어요.','이미 참여 가족에게 안내가 나가서 일정 변경은 어렵다. 꼭 바꿔야 하면 그 이유와 재안내 방법을 같이 정하자.']];
-TOOL_EX2.forEach(function(t,i){var b=el('button',null,'예시 '+(i+1));b.type='button';b.onclick=function(){$('#t-in').value=t[0];$('#t-must').value=t[1];};ex.appendChild(b);});
-function toolPrompt(){var v=$('#t-in').value.trim(),m=$('#t-must').value.trim();if(!v&&!m){toast('무슨 일이 있었는지 먼저 말해 주세요.');return null;}
-  return '너는 가족센터 종사자를 돕는 "빡침 순화기"야. 먼저 한 줄로만 짧게 공감해 주고, 바로 안내 문장을 만들어 줘.\n- 받는 사람: '+$('#t-who').value+'\n- 보낼 곳: '+$('#t-how').value+'\n- 빡침 지수: '+$('#t-lv').value+'/5 ('+LV[$('#t-lv').value]+'). 지수가 높을수록 감정은 더 빼고, 원칙과 다음 조치는 더 분명하게.\n- 순서: ① 사실 → ② 기준(규정·약속) → ③ 우리가 할 수 있는 것 → ④ 다음 행동과 기한\n- 비꼬기, 탓하기, 과한 사과는 넣지 마. 상대를 존중하되 선은 분명하게.\n- [꼭 전할 것]은 빠짐없이, 약해지지 않게 넣어.\n- 원래 말에 없는 날짜·규정·숫자는 [확인 필요]로 남겨.\n- 이름·연락처가 있으면 "보호자님"처럼 바꿔.\n\n[있었던 일 (화난 그대로)]\n'+(v||'(없음)')+'\n\n[그래도 꼭 전할 것]\n'+(m||'(있었던 일에서 찾아 줘)');}
-$('#t-gpt').onclick=function(){var p=toolPrompt();if(p)openGPT(p);};
-$('#t-copy').onclick=function(){var p=toolPrompt();if(p)copy(p);};
+ ['회의에서 정한 일정을 또 바꾸자고 하세요. 안내문은 이미 다 나갔어요.','이미 참여 가족에게 안내가 나가서 일정 변경은 어렵다. 꼭 바꿔야 하면 이유와 재안내 방법을 같이 정하자.']
+].forEach(function(t,i){var b=el('button',null,'예시 '+(i+1));b.type='button';b.onclick=function(){$('#t-in').value=t[0];$('#t-must').value=t[1];};$('#t-ex').appendChild(b);});
+function ventP(){var v=$('#t-in').value.trim(),m=$('#t-must').value.trim();if(!v&&!m){toast('무슨 일이 있었는지 먼저 말해 주세요.');return null;}
+  return '너는 가족센터 종사자를 돕는 "빡침 순화기"야. 먼저 한 줄로만 짧게 공감해 주고, 바로 안내 문장을 만들어 줘.\n- 받는 사람: '+$('#t-who').value+'\n- 보낼 곳: '+$('#t-how').value+'\n- 빡침 지수: '+$('#t-lv').value+'/5 ('+LV[$('#t-lv').value]+'). 지수가 높을수록 감정은 더 빼고 원칙과 다음 조치는 더 분명하게.\n- 순서: ① 사실 → ② 기준(규정·약속) → ③ 우리가 할 수 있는 것 → ④ 다음 행동과 기한\n- 비꼬기, 탓하기, 과한 사과는 넣지 마. 상대를 존중하되 선은 분명하게.\n- [꼭 전할 것]은 빠짐없이, 약해지지 않게.\n- '+NOFAKE+'\n\n[있었던 일]\n'+(v||'(없음)')+'\n\n[그래도 꼭 전할 것]\n'+(m||'(있었던 일에서 찾아 줘)');}
+$('#t-gpt').onclick=function(){var p=ventP();if(p)openGPT(p);};$('#t-copy').onclick=function(){var p=ventP();if(p)copy(p);};
 
-/* 마이크 받아쓰기 (크롬·엣지·안드로이드, 아이폰 사파리 일부) */
+/* 마음 쉼터 */
+var MOODS=['지쳤어요','속상해요','마음이 무거워요','억울해요','불안해요','허무해요','그래도 괜찮아요'],mood='';
+MOODS.forEach(function(m){var b=el('button',null,esc(m));b.type='button';b.onclick=function(){mood=(mood===m?'':m);document.querySelectorAll('#h-mood button').forEach(function(x){x.classList.toggle('on',x.textContent===mood);});};$('#h-mood').appendChild(b);});
+function heartP(){var v=$('#h-in').value.trim();if(!v&&!mood){toast('지금 마음을 하나 골라 주거나 오늘 있었던 일을 말해 주세요.');return null;}
+  return '너는 가족센터에서 일하는 사회복지 종사자의 마음을 들어 주는 "마음 쉼터"야. 판단하거나 가르치지 말고 따뜻하게 들어 줘.\n- 지금 마음: '+(mood||'(고르지 않음)')+'\n- 원하는 것: '+$('#h-want').value+'\n- 순서: ① 내 마음을 있는 그대로 알아주는 말 2~3문장 → ② 이런 일이 힘든 게 당연한 이유 → ③ 지금 3분 안에 할 수 있는 마음챙김(호흡·감각 알아차리기 등) 1가지 → ④ 오늘의 나에게 건네는 한 문장\n- 진단하거나 병명을 말하지 마. 업무 해결책을 서둘러 주지 마.\n- 혹시 위험한 생각이 보이면 109(자살예방 상담전화), 1577-0199(정신건강 위기상담)를 먼저 안내하고, 믿을 수 있는 사람에게 말하도록 권해.\n\n[오늘 있었던 일]\n'+(v||'(말하지 않음)');}
+$('#h-gpt').onclick=function(){var p=heartP();if(p)openGPT(p);};$('#h-copy').onclick=function(){var p=heartP();if(p)copy(p);};
+
+/* 다국어 */
+function multiP(){var v=$('#m-in').value.trim();if(!v){toast('안내할 내용을 먼저 적어 주세요.');return null;}
+  return '너는 가족센터의 다국어 안내 도우미야. 아래 [안내 내용]으로 '+$('#m-kind').value+'를 만들어 줘.\n1) 쉬운 한국어 (짧은 문장, 어려운 한자어 없이)\n2) '+$('#m-lang').value+' 번역\n3) 날짜·시간·장소·준비물은 두 언어 모두 맨 위에 따로 정리\n- '+NOFAKE+'\n\n[안내 내용]\n'+v;}
+$('#m-gpt').onclick=function(){var p=multiP();if(p)openGPT(p);};$('#m-copy').onclick=function(){var p=multiP();if(p)copy(p);};
+
+/* 간단 도구 */
+var CS=null,SV={};
+function openSimple(k){CS=SIMPLE[k];SV={};$('#s-title').textContent=CS.t;$('#s-sub').textContent=CS.s;var b=$('#s-body');b.innerHTML='';
+  if(k==='base'){BASE.forEach(function(x){var d=el('div','box','<h4>'+esc(x.t)+'</h4><pre>'+esc(x.p)+'</pre>');d.style.marginBottom='10px';var c=el('button','btn','문구 복사');c.type='button';c.style.marginTop='8px';c.onclick=function(){copy(x.p,'복사했어요.');};d.appendChild(c);b.appendChild(d);});$('#s-acts').hidden=true;return show('simple');}
+  $('#s-acts').hidden=false;
+  CS.f.forEach(function(f){b.appendChild(el('label','l',esc(f.l)));
+    if(f.o){SV[f.k]=f.o[0];var o=el('div','opts');f.o.forEach(function(x,i){var bt=el('button',i===0?'on':'',esc(x));bt.type='button';bt.onclick=function(){SV[f.k]=x;o.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});};o.appendChild(bt);});b.appendChild(o);}
+    else{var id='s-'+f.k;b.appendChild(micRow(id));var t=el('textarea','f');t.id=id;t.placeholder=f.ph||'';t.oninput=function(){SV[f.k]=t.value;};b.appendChild(t);}});
+  b.appendChild(el('p','warn','이름, 전화번호, 상담 사연은 빼고 적어 주세요.'));bindMics(b);show('simple');}
+function simpleP(){var memo=(SV.memo||'').trim();if(!memo){toast('내용을 먼저 적어 주세요.');return null;}return CS.p(SV);}
+$('#s-gpt').onclick=function(){var p=simpleP();if(p)openGPT(p);};$('#s-copy').onclick=function(){var p=simpleP();if(p)copy(p);};
+
+/* 마이크 받아쓰기 */
+function micRow(id){return el('div','mic-row','<button type="button" class="mic" data-for="'+id+'"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>눌러서 말하기</span></button><span class="mic-st" id="st-'+id+'"></span>');}
 var SR=window.SpeechRecognition||window.webkitSpeechRecognition,rec=null,recBtn=null;
-document.querySelectorAll('.mic').forEach(function(btn){btn.addEventListener('click',function(){
-  var id=btn.dataset.for,ta=$('#'+id),st=$('#st-'+id);
+function bindMics(root){root.querySelectorAll('.mic').forEach(function(btn){if(btn._b)return;btn._b=1;btn.addEventListener('click',function(){
+  var id=btn.dataset.for,ta=document.getElementById(id),st=document.getElementById('st-'+id);
   if(!SR){st.textContent='이 브라우저는 받아쓰기가 안 돼요. 휴대폰 키보드의 마이크 버튼을 써 주세요.';ta.focus();return;}
-  if(rec&&recBtn===btn){rec.stop();return;}
-  if(rec)rec.stop();
-  rec=new SR();rec.lang='ko-KR';rec.interimResults=true;rec.continuous=true;recBtn=btn;
-  var base=ta.value?ta.value.replace(/\s*$/,' '):'';
-  rec.onresult=function(e){var t='';for(var i=0;i<e.results.length;i++)t+=e.results[i][0].transcript;ta.value=base+t;};
+  if(rec&&recBtn===btn){rec.stop();return;}if(rec)rec.stop();
+  rec=new SR();rec.lang='ko-KR';rec.interimResults=true;rec.continuous=true;recBtn=btn;var base=ta.value?ta.value.replace(/\s*$/,' '):'';
+  rec.onresult=function(e){var t='';for(var i=0;i<e.results.length;i++)t+=e.results[i][0].transcript;ta.value=base+t;ta.dispatchEvent(new Event('input'));};
   rec.onstart=function(){btn.classList.add('rec');btn.querySelector('span').textContent='듣는 중… 다 말하면 누르기';st.textContent='';};
   rec.onerror=function(e){st.textContent=e.error==='not-allowed'?'마이크 권한을 허용해 주세요.':'잘 안 들렸어요. 다시 눌러 주세요.';};
   rec.onend=function(){btn.classList.remove('rec');btn.querySelector('span').textContent='눌러서 말하기';if(recBtn===btn){rec=null;recBtn=null;}};
   try{rec.start();}catch(err){st.textContent='다시 눌러 주세요.';}
-});});
+});});}
+bindMics(document);
 
-/* 다국어 안내 */
-function mPrompt(){var v=$('#m-in').value.trim();if(!v){toast('안내할 내용을 먼저 적어 주세요.');return null;}
-  return '너는 가족센터의 다국어 안내 도우미야. 아래 [안내 내용]으로 '+$('#m-kind').value+'를 만들어 줘.\n1) 쉬운 한국어 (짧은 문장, 어려운 한자어 없이)\n2) '+$('#m-lang').value+' 번역\n3) 날짜·시간·장소·준비물은 두 언어 모두 맨 위에 따로 정리\n- 내용에 없는 정보는 [확인 필요]로 남기고 지어내지 마\n\n[안내 내용]\n'+v;}
-$('#m-gpt').onclick=function(){var p=mPrompt();if(p)openGPT(p);};
-$('#m-copy').onclick=function(){var p=mPrompt();if(p)copy(p);};
-
-/* 기본기 */
-BASE.forEach(function(B){var c=el('div','c','<h3>'+esc(B.t)+'</h3><p>'+esc(B.d)+'</p>');var a=el('div','acts');var b=el('button','btn','문구 복사');b.type='button';b.onclick=function(){copy(B.p,'복사했어요.');};a.appendChild(b);c.appendChild(a);$('#base').appendChild(c);});
+/* 주소로 바로 열기 (#crisis, #vent 등) */
+(function(){var h=location.hash.slice(1);if(h)go(h);})();
 </script>
 </body>
 </html>
