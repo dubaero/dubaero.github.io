@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>가족센터 강의 자료실 | 두배로</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Gamja+Flower&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAF9F8;--paper:#F3EFEA;--card:#fff;--ink:#1F2F52;--text:#172033;--muted:#667085;--line:#E6E0D8;--blue:#24497F;--blue-soft:#E8EEF7;--point:#A8432B;--ok:#2E6B55;color-scheme:light}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans KR",system-ui,sans-serif;font-size:14px;line-height:1.65;word-break:keep-all}
+@media (min-width:641px){html{zoom:.9}}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+button{font:inherit;cursor:pointer}
+
+/* 상단 */
+.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
+.back{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none}
+.back:hover{color:var(--point)}
+.draft{font-size:12px;font-weight:700;color:var(--blue);border:1px solid var(--blue);border-radius:999px;padding:2px 10px}
+
+/* 머리 */
+.head{padding:28px 0 18px}
+.head small{display:block;font-size:12.5px;font-weight:700;color:var(--blue);letter-spacing:.04em}
+.head h1{font-size:clamp(21px,2.6vw,28px);color:var(--ink);line-height:1.35;margin:4px 0 6px}
+.head p{color:var(--muted);font-size:13.5px}
+.msg{margin-top:14px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:12px 16px;font-size:13.5px;color:var(--ink)}
+.msg b{color:var(--blue)}
+
+/* 큰 탭 */
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-top:6px;overflow-x:auto}
+.tabs button{border:0;background:none;padding:10px 14px;font-size:14.5px;font-weight:600;color:var(--muted);border-bottom:2.5px solid transparent;white-space:nowrap}
+.tabs button.on{color:var(--ink);border-color:var(--ink)}
+.panel{padding:20px 0 48px}
+.panel[hidden]{display:none}
+
+/* 사업 버튼 */
+.biz{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.biz button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 15px;font-size:13.5px;color:var(--ink);font-weight:500}
+.biz button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.biz button i{font-style:normal;font-size:11px;color:var(--muted);margin-left:4px}
+.biz button.on i{color:#C9D3E6}
+.biz-intro{font-size:13.5px;color:var(--muted);margin-bottom:14px}
+.biz-intro b{color:var(--ink)}
+
+/* 연간 흐름 */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-bottom:16px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.flow button{border:0;background:#fff;padding:10px 6px;text-align:center;font-size:13px;color:var(--muted);border-right:1px solid var(--line);position:relative}
+.flow button:last-child{border-right:0}
+.flow button b{display:block;font-size:11px;color:var(--blue);font-weight:700}
+.flow button.on{background:var(--blue-soft);color:var(--ink);font-weight:700}
+.step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.step h3{font-size:17px;color:var(--ink);margin-bottom:2px}
+.step .when{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--bg)}
+.box h4{font-size:12.5px;color:var(--blue);margin-bottom:6px}
+.box pre{white-space:pre-wrap;font-family:inherit;font-size:13px;line-height:1.7;color:var(--text)}
+.box.ex pre{color:#333}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--point);border:1px solid #E7C8BE;border-radius:4px;padding:0 6px;margin-left:6px;vertical-align:1px}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn{border:1px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600}
+.btn.fill{background:var(--ink);color:#fff}
+.btn:hover{border-color:var(--point)}
+.btn.fill:hover{background:#2C4170}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px}
+.where{font-size:12.5px;color:var(--muted);margin-top:8px}
+.where b{color:var(--ink);font-weight:600}
+.empty{background:#fff;border:1px dashed var(--line);border-radius:14px;padding:28px;text-align:center;color:var(--muted)}
+
+/* 현장 도구 */
+.tool{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.tool h3{font-size:17px;color:var(--ink)}
+.tool .sub{font-size:13px;color:var(--muted);margin:2px 0 14px}
+.formula{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.formula span{background:var(--blue-soft);color:var(--ink);border-radius:6px;padding:4px 10px;font-size:12.5px;font-weight:600}
+.formula em{font-style:normal;color:var(--muted);align-self:center}
+label.l{display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin:10px 0 6px}
+textarea,select{width:100%;font:inherit;font-size:14px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);color:var(--text)}
+textarea{min-height:90px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font-size:12.5px;color:var(--ink)}
+.chips button:hover{border-color:var(--ink)}
+.warn{font-size:12.5px;color:var(--point);margin-top:8px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.ba .box h4.bad{color:var(--point)}
+.ba .box h4.good{color:var(--ok)}
+
+/* 기본기 */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.c{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column}
+.c h3{font-size:15.5px;color:var(--ink);margin-bottom:4px}
+.c p{font-size:13px;color:var(--muted);flex:1}
+.c .acts{margin-top:10px}
+.list{display:grid;gap:10px}
+.li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.li b{color:var(--ink);font-size:14.5px}
+.li span{display:block;font-size:12.5px;color:var(--muted)}
+.soon{font-size:12px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}
+
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:50}
+.toast.on{opacity:1}
+footer{border-top:1px solid var(--line);padding:18px 0 28px;font-size:12px;color:var(--muted)}
+
+@media (max-width:760px){
+  .grid2,.ba,.row{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .flow{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .flow button{font-size:11.5px;padding:8px 2px}
+  .step,.tool{padding:16px}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="back" href="../">← 이서정 강사 홈페이지</a>
+  <span class="draft">시안</span>
+</div></header>
+
+<main class="wrap">
+  <section class="head">
+    <small>강의 자료실 · 2026.11.19 전북 시군가족센터 종사자 AI 실무 워크숍</small>
+    <h1>가족센터 AI 업무 서랍</h1>
+    <p>강의에서 본 장면을 내 업무로 직접 해 보는 곳이에요. 사업을 고르고, 연간 업무 단계를 누르면 예시와 바로 쓰는 프롬프트가 나와요.</p>
+    <div class="msg"><b>먼저 지켜 주세요.</b> 실제 상담 내용, 이름, 연락처, 체류 정보는 AI에 넣지 마세요. 예시는 모두 <b>가상 "가온시 가족센터"</b> 자료예요. 자료에 없는 숫자는 AI가 <b>[확인 필요]</b>로 남기게 했어요.</div>
+  </section>
+
+  <nav class="tabs" role="tablist">
+    <button type="button" class="on" data-p="biz">사업별 업무</button>
+    <button type="button" data-p="tool">현장 도구</button>
+    <button type="button" data-p="base">AI 기본기</button>
+    <button type="button" data-p="files">강의 자료</button>
+  </nav>
+
+  <!-- 사업별 업무 -->
+  <section class="panel" id="p-biz">
+    <div class="biz" id="biz"></div>
+    <p class="biz-intro" id="biz-intro"></p>
+    <div id="biz-body"></div>
+  </section>
+
+  <!-- 현장 도구 -->
+  <section class="panel" id="p-tool" hidden>
+    <div class="tool">
+      <h3>단호한 존댓말 변환기 <span class="tag">일명 빡침 번역기</span></h3>
+      <p class="sub">화가 난 그대로 적어도 괜찮아요. 감정은 빼고, 꼭 전해야 할 내용은 분명하게 남긴 공손한 문장으로 바꿔 줘요.</p>
+      <div class="formula"><span>① 사실</span><em>→</em><span>② 기준</span><em>→</em><span>③ 할 수 있는 것</span><em>→</em><span>④ 다음 행동·기한</span></div>
+      <div class="row">
+        <div><label class="l" for="t-who">누구에게 보내나요?</label>
+          <select id="t-who"><option>이용자·보호자</option><option>동료·다른 팀</option><option>협력 기관·강사</option><option>상위 기관·지자체</option></select></div>
+        <div><label class="l" for="t-how">어떤 말투로?</label>
+          <select id="t-how"><option>부드럽지만 분명하게</option><option>단호하게 (선을 분명히)</option><option>아주 정중하게 (공문 느낌)</option></select></div>
+      </div>
+      <label class="l" for="t-in">하고 싶은 말 (화난 그대로)</label>
+      <textarea id="t-in" placeholder="예) 마감 어제였는데 자료를 아직도 안 보내면 저희 결과보고는 어떻게 하라는 거예요?"></textarea>
+      <div class="chips" id="t-ex" aria-label="예시 넣기"></div>
+      <p class="warn">이름, 전화번호, 상담 사연은 빼고 적어 주세요.</p>
+      <div class="acts">
+        <button type="button" class="btn fill" id="t-gpt">ChatGPT에서 바꾸기</button>
+        <button type="button" class="btn" id="t-copy">프롬프트 복사 (Gemini 등)</button>
+      </div>
+      <div class="ba">
+        <div class="box"><h4 class="bad">바꾸기 전</h4><pre>몇 번을 말해요. 프로그램 신청은 선착순이라고 공지에 다 써 있잖아요. 이제 와서 자리 만들어 달라고 하시면 저희도 방법이 없어요.</pre></div>
+        <div class="box"><h4 class="good">바꾼 뒤 (예시)</h4><pre>신청하신 프로그램은 공지에 안내드린 대로 선착순으로 마감되었습니다. 기준상 추가 자리는 마련하기 어려운 점 양해 부탁드립니다. 대신 대기자 명단에 올려 두고, 취소가 생기면 바로 연락드리겠습니다. 다음 회차 모집은 ○월 ○일에 시작하니 그때 먼저 안내드릴게요.</pre></div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <h3>다국어 안내 도우미</h3>
+      <p class="sub">결혼이민자 가족에게 보낼 일상 안내를 쉬운 한국어와 모국어로 함께 만들어요. 상담 내용이 아닌 일정·신청 안내에만 써 주세요.</p>
+      <div class="row">
+        <div><label class="l" for="m-lang">언어</label>
+          <select id="m-lang"><option>베트남어</option><option>중국어</option><option>필리핀어(타갈로그어)</option><option>몽골어</option><option>캄보디아어</option><option>영어</option></select></div>
+        <div><label class="l" for="m-kind">안내 종류</label>
+          <select id="m-kind"><option>프로그램 모집 안내</option><option>일정 변경 안내</option><option>준비물 안내</option><option>신청 서류 안내</option></select></div>
+      </div>
+      <label class="l" for="m-in">안내할 내용</label>
+      <textarea id="m-in" placeholder="예) 11월 22일 토요일 오전 10시, 가족사랑의 날 행사. 장소는 센터 2층. 아이와 함께 오세요."></textarea>
+      <div class="acts">
+        <button type="button" class="btn fill" id="m-gpt">ChatGPT에서 만들기</button>
+        <button type="button" class="btn" id="m-copy">프롬프트 복사</button>
+      </div>
+      <p class="note">번역 결과의 날짜·금액·장소는 반드시 통번역 담당자가 한 번 더 확인해요.</p>
+    </div>
+  </section>
+
+  <!-- AI 기본기 -->
+  <section class="panel" id="p-base" hidden>
+    <div class="cards" id="base"></div>
+  </section>
+
+  <!-- 강의 자료 -->
+  <section class="panel" id="p-files" hidden>
+    <div class="list">
+      <div class="li"><div><b>강의 장표 (PDF)</b><span>11.19 강의 후 올려 드려요</span></div><em class="soon">준비 중</em></div>
+      <div class="li"><div><b>업무 서랍 만들기 교안</b><span>ChatGPT 프로젝트로 나만의 서랍 만드는 순서</span></div><em class="soon">준비 중</em></div>
+      <div class="li"><div><b>나에게 보내는 노래 "수고했어, 나의 하루"</b><span>강의 마무리 곡과 만드는 방법</span></div><em class="soon">준비 중</em></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">두배로 · 생성형 AI 전문강사 이서정 · 이 페이지의 예시는 모두 교육용 가상 자료입니다.</div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== 내용 (강의마다 이 부분만 바꿔 넣으면 새 방이 됩니다) ===== */
+var BIZ=[
+ {name:'공동육아나눔터',ready:true,
+  intro:'<b>가온시 가족센터 공동육아나눔터</b>의 1년을 따라가요. 지침은 「2026 가족사업안내」 제2권 Ⅵ장(공동육아나눔터 사업안내)이에요.',
+  steps:[
+   {k:'계획',when:'연초 · 사업계획서',where:'지침 Ⅵ장 3. 사업 준비 및 계획 (8쪽~)',
+    ex:'[가상] 2027 가온시 공동육아나눔터 운영계획(초안)\n1. 목적: 이웃 간 돌봄 품앗이로 양육 부담 완화\n2. 대상: 관내 영유아·초등 자녀 가족 [확인 필요: 목표 가족 수]\n3. 주요 내용: 돌봄 품앗이 그룹 운영, 가족 프로그램, 장난감·도서 나눔\n4. 추진 일정: 1~2월 모집 / 3~11월 운영 / 12월 평가',
+    prompt:'너는 가족센터 공동육아나눔터 담당자를 돕는 사업계획 도우미야.\n아래 [작년 결과]와 [올해 방향]을 바탕으로 내년도 운영계획서 초안을 써 줘.\n- 순서: 목적 / 대상 / 주요 내용 / 추진 일정(월별) / 예산 항목 / 기대 효과\n- 공공기관 문서체, 개조식으로\n- 자료에 없는 숫자·날짜는 지어내지 말고 [확인 필요]로 남겨\n- 마지막에 내가 더 알려 줘야 할 정보를 질문 3개로 정리해\n\n[작년 결과]\n(여기에 붙여 넣기)\n\n[올해 방향]\n(여기에 붙여 넣기)'},
+   {k:'홍보',when:'1~2월 · 모집 안내',where:'지침 Ⅵ장 4. 사업 실행 (16쪽~)',
+    ex:'[가상] 우리 아이 같이 키워요! 공동육아나눔터 품앗이 가족 모집\n· 누가: 가온시에 사는 영유아·초등 자녀 가족\n· 언제: 2월 10일(월)까지 신청\n· 무엇을: 함께 놀이하고, 돌봄을 나누는 이웃 모임\n· 신청: 센터 전화 또는 방문 [확인 필요: 연락처]',
+    prompt:'너는 가족센터 홍보 담당자야. 아래 [행사 정보]로 모집 안내문을 만들어 줘.\n1) 문자·카톡용 5줄 이내\n2) 카드뉴스 4장 구성 (장마다 제목 + 본문 2줄)\n3) 결혼이민자도 읽기 쉬운 쉬운 한국어 버전\n- 정보에 없는 날짜·장소·연락처는 [확인 필요]로 남겨\n- 과장된 표현 없이 따뜻하고 분명하게\n\n[행사 정보]\n(여기에 붙여 넣기)'},
+   {k:'운영',when:'3~11월 · 운영 기록',where:'지침 Ⅵ장 4. 사업 실행 (16쪽~)',
+    ex:'[가상] 품앗이 활동일지 (3월 2주차)\n· 활동: 봄 소풍 놀이, 참여 6가족(성인 7, 아동 9)\n· 잘된 점: 아빠 참여 2가족, 다음 활동 자발적 기획\n· 다음 준비: 우천 대비 실내 놀이 목록',
+    prompt:'아래 [활동 메모]를 공동육아나눔터 활동일지 형식으로 정리해 줘.\n항목: 일시 / 활동명 / 참여 인원(가족·성인·아동) / 활동 내용 / 잘된 점 / 다음 준비\n- 메모에 없는 인원·날짜는 [확인 필요]\n- 개인 이름은 쓰지 말고 "가족 A, 가족 B"로\n\n[활동 메모]\n(녹음 전사본이나 손메모를 붙여 넣기)'},
+   {k:'실적',when:'매월 · 실적 점검',where:'지침 Ⅵ장 6. 실적 관리 (32쪽~)',
+    ex:'[가상] 점검 결과\n· 실인원 합계 110명, 연인원 합계 170명\n· 기관 D: 만족도 응답 수가 비어 있어 평균을 확정할 수 없음 → [확인 필요]\n· 실인원이 연인원보다 큰 칸 없음 (정상)',
+    prompt:'너는 가족센터 실적 점검 도우미야. 아래 [실적표]를 점검해 줘.\n1) 실인원과 연인원이 뒤바뀌거나, 실인원이 연인원보다 큰 칸\n2) 비어 있는 칸, 합계가 맞지 않는 칸\n3) 각 문제마다: 위치 / 이유 / 확인할 원자료\n- 계산 과정을 보여 주고, 확실하지 않으면 [확인 필요]로 표시해\n\n[실적표]\n(엑셀 표를 붙여 넣거나 파일 첨부)'},
+   {k:'보고',when:'연말 · 결과보고·정산',where:'지침 Ⅵ장 5. 사업 예산 (29쪽~), 6. 실적 관리 (32쪽~)',
+    ex:'[가상] 결과보고 요약 문장\n가온시 공동육아나눔터는 총 8회기를 운영해 연인원 170명이 참여했다. 기관별 실인원 합계는 110명이나, 기관 간 중복 정보가 없어 전체 중복 제거 인원은 확인이 필요하다. 만족도는 응답 기초자료 보완 후 확정한다.',
+    prompt:'아래 [실적표]와 [운영 메모]로 결과보고서 1쪽 초안을 써 줘.\n순서: 사업 개요 / 추진 실적(표) / 성과 / 어려웠던 점 / 개선 방안\n- 숫자는 실적표에 있는 것만 쓰고, 계산했다면 계산식을 괄호로\n- 실제 운영 사실과 개선 제안을 섞지 말고 구분해\n- 근거가 없는 성과 표현은 쓰지 마\n\n[실적표]\n(붙여 넣기)\n\n[운영 메모]\n(붙여 넣기)'}
+  ]},
+ {name:'언어발달지원',ready:false},
+ {name:'온가족보듬',ready:false},
+ {name:'다문화 자녀지원',ready:false},
+ {name:'아이돌봄',ready:false}
+];
+var BASE=[
+ {t:'가족센터용 맞춤설정',d:'ChatGPT·Gemini에 한 번 넣어 두면 모든 답이 가족센터 업무에 맞춰져요.',
+  p:'나는 가족센터 ○○사업 담당자야.\n- 공공기관 문서에 맞게 쉽고 분명한 말로 답해 줘.\n- 자료에 없는 숫자·날짜·법령은 지어내지 말고 [확인 필요]로 표시해 줘.\n- 결혼이민자 대상 안내는 쉬운 한국어로 쓰고, 요청하면 모국어 원문을 함께 보여 줘.\n- 개인정보가 들어 있으면 먼저 지우라고 알려 줘.'},
+ {t:'할루시네이션 방지 한 줄',d:'AI가 그럴듯하게 지어내는 것을 막는 문장이에요. 요청 끝에 붙이세요.',
+  p:'첨부한 자료에서만 답해 줘. 자료에 없으면 "자료에서 확인할 수 없음"이라고 쓰고, 근거가 된 쪽이나 문장을 함께 알려 줘.'},
+ {t:'입력 금지선',d:'AI에 넣기 전에 이것만 확인하세요.',
+  p:'[AI에 넣지 않는 것]\n- 이름, 주민번호, 전화번호, 주소\n- 실제 상담 내용, 사례관리 기록\n- 체류·국적 정보, 건강 정보\n- 미공개 회계 자료\n→ 꼭 필요하면 "가족 A", "○○동"처럼 바꾼 뒤 넣기'}
+];
+var TOOL_EX=['마감 어제였는데 자료를 아직도 안 보내면 결과보고는 어떻게 하라는 거예요?','프로그램 당일에 연락도 없이 안 오시면 다른 가족이 기회를 잃어요.','회의 때 정한 걸 왜 또 바꾸세요? 저희는 이미 안내문 다 돌렸어요.'];
+
+/* ===== 틀 (모든 기관 방이 같이 씁니다) ===== */
+function $(s){return document.querySelector(s);}
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+var toastT;function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('on');},1800);}
+function copy(txt,m){(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){toast(m||'복사했어요. AI 창에 붙여 넣으세요.');},function(){var a=document.createElement('textarea');a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast(m||'복사했어요.');}catch(e){toast('복사가 안 되면 길게 눌러 직접 복사해 주세요.');}a.remove();});}
+function openGPT(p){var w=window.open('https://chatgpt.com/?q='+encodeURIComponent(p),'_blank');if(w)w.opener=null;}
+
+/* 큰 탭 */
+document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('.tabs button').forEach(function(x){x.classList.toggle('on',x===b);});
+  ['biz','tool','base','files'].forEach(function(k){$('#p-'+k).hidden=(k!==b.dataset.p);});
+});});
+
+/* 사업별 업무 */
+var curBiz=0,curStep=0;
+function renderBiz(){
+  var wrap=$('#biz');wrap.innerHTML='';
+  BIZ.forEach(function(B,i){var b=el('button',i===curBiz?'on':'',esc(B.name)+(B.ready?'':'<i>준비 중</i>'));b.type='button';b.onclick=function(){curBiz=i;curStep=0;renderBiz();};wrap.appendChild(b);});
+  var B=BIZ[curBiz],body=$('#biz-body');body.innerHTML='';
+  $('#biz-intro').innerHTML=B.ready?B.intro:'';
+  if(!B.ready){body.appendChild(el('div','empty','<b>'+esc(B.name)+'</b> 서랍은 준비 중이에요.<br>강의 후 수강생 의견을 받아 채워 넣을게요.'));return;}
+  var flow=el('div','flow');
+  B.steps.forEach(function(S,i){var b=el('button',i===curStep?'on':'','<b>'+(i+1)+'</b>'+esc(S.k));b.type='button';b.onclick=function(){curStep=i;renderBiz();};flow.appendChild(b);});
+  body.appendChild(flow);
+  var S=B.steps[curStep],st=el('div','step');
+  st.appendChild(el('h3',null,esc(S.k)+' 단계'));
+  st.appendChild(el('p','when',esc(S.when)));
+  var g=el('div','grid2');
+  g.appendChild(el('div','box ex','<h4>예시 결과 <span class="tag">가상</span></h4><pre>'+esc(S.ex)+'</pre>'));
+  g.appendChild(el('div','box','<h4>바로 쓰는 프롬프트</h4><pre>'+esc(S.prompt)+'</pre>'));
+  st.appendChild(g);
+  var a=el('div','acts');
+  var b1=el('button','btn fill','ChatGPT에서 열기');b1.type='button';b1.onclick=function(){openGPT(S.prompt);};
+  var b2=el('button','btn','프롬프트 복사');b2.type='button';b2.onclick=function(){copy(S.prompt);};
+  a.appendChild(b1);a.appendChild(b2);st.appendChild(a);
+  st.appendChild(el('p','where','지침 위치: <b>'+esc(S.where)+'</b> · 「2026 가족사업안내」 원문과 꼭 대조하세요.'));
+  body.appendChild(st);
+}
+renderBiz();
+
+/* 단호한 존댓말 변환기 */
+var ex=$('#t-ex');TOOL_EX.forEach(function(t,i){var b=el('button',null,'예시 '+(i+1));b.type='button';b.onclick=function(){$('#t-in').value=t;};ex.appendChild(b);});
+function toolPrompt(){var v=$('#t-in').value.trim();if(!v){toast('하고 싶은 말을 먼저 적어 주세요.');return null;}
+  return '너는 가족센터 종사자의 말을 다듬는 "단호한 존댓말 변환기"야.\n아래 [원래 말]에서 화난 감정은 빼되, 꼭 전해야 할 요구와 선은 그대로 남겨서 '+$('#t-who').value+'에게 보낼 문장으로 바꿔 줘.\n- 말투: '+$('#t-how').value+'\n- 순서: ① 사실 → ② 기준(규정·약속) → ③ 우리가 할 수 있는 것 → ④ 다음 행동과 기한\n- 비꼬기, 탓하기, 과한 사과는 넣지 마\n- 결과는 3가지 버전(문자용 짧게 / 카톡용 / 공문·메일용)으로\n- 원래 말에 없는 날짜·규정은 [확인 필요]로 남겨\n\n[원래 말]\n'+v;}
+$('#t-gpt').onclick=function(){var p=toolPrompt();if(p)openGPT(p);};
+$('#t-copy').onclick=function(){var p=toolPrompt();if(p)copy(p);};
+
+/* 다국어 안내 */
+function mPrompt(){var v=$('#m-in').value.trim();if(!v){toast('안내할 내용을 먼저 적어 주세요.');return null;}
+  return '너는 가족센터의 다국어 안내 도우미야. 아래 [안내 내용]으로 '+$('#m-kind').value+'를 만들어 줘.\n1) 쉬운 한국어 (짧은 문장, 어려운 한자어 없이)\n2) '+$('#m-lang').value+' 번역\n3) 날짜·시간·장소·준비물은 두 언어 모두 맨 위에 따로 정리\n- 내용에 없는 정보는 [확인 필요]로 남기고 지어내지 마\n\n[안내 내용]\n'+v;}
+$('#m-gpt').onclick=function(){var p=mPrompt();if(p)openGPT(p);};
+$('#m-copy').onclick=function(){var p=mPrompt();if(p)copy(p);};
+
+/* 기본기 */
+BASE.forEach(function(B){var c=el('div','c','<h3>'+esc(B.t)+'</h3><p>'+esc(B.d)+'</p>');var a=el('div','acts');var b=el('button','btn','문구 복사');b.type='button';b.onclick=function(){copy(B.p,'복사했어요.');};a.appendChild(b);c.appendChild(a);$('#base').appendChild(c);});
+</script>
+</body>
+</html>
