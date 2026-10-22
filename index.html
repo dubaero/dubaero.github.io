@@ -702,6 +702,12 @@ body{padding-bottom:0!important}
 #rooms .room-grid{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:10px!important}
 @media (max-width:1100px){#rooms .room-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @media (max-width:640px){#rooms .room-grid{grid-template-columns:1fr 1fr!important}}
+.lsearch{margin-left:auto;display:flex;align-items:center;gap:8px;border:1px solid #24497F;border-radius:999px;padding:5px 14px;background:var(--card);color:#24497F;min-width:0}
+.lsearch input{border:0;outline:0;background:transparent;font:inherit;font-size:14.5px;color:var(--ink);width:170px;min-width:0}
+.lsearch:focus-within{box-shadow:0 0 0 3px rgba(36,73,127,.18)}
+.lec-head .lcount{margin-left:0!important}
+.lrow.lempty{display:block!important;padding:22px 16px!important;text-align:center;color:var(--muted);font-size:14.5px}
+@media (max-width:640px){.lsearch{margin-left:0;flex-basis:100%;order:3}.lsearch input{width:100%;font-size:16px}.lec-head .lcount{margin-left:auto!important;order:4}}
 .slide-ph.ph-new{background:linear-gradient(135deg,#1F2F52,#24497F)!important;color:#fff!important;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;text-align:center;padding:8px}
 .slide-ph.ph-new b{color:#fff!important;font-size:13.5px;line-height:1.35}
 .slide-ph.ph-new small{font-size:11.5px;font-weight:700;color:#C9D3E6;letter-spacing:.04em}
@@ -762,7 +768,7 @@ body{font-size:15.5px!important}.ti{font-size:15.5px!important}.ti small{font-si
       <p>강의를 누르면 그 강의의 자료와 업무 도구로 들어갑니다.</p>
     </div>
     <div class="room-grid" id="room-cards"></div>
-    <div class="lec-head" id="all-lectures"><h3>전체 출강 목록</h3><div class="ltabs" id="lec-tabs" role="tablist"><button type="button" class="on" data-f="all">전체</button><button type="button" data-f="예정">예정</button><button type="button" data-f="진행 중">진행 중</button><button type="button" data-f="완료">완료</button></div><span class="lcount" id="lec-count"></span></div>
+    <div class="lec-head" id="all-lectures"><h3>전체 출강 목록</h3><div class="ltabs" id="lec-tabs" role="tablist"><button type="button" class="on" data-f="all">전체</button><button type="button" data-f="예정">예정</button><button type="button" data-f="진행 중">진행 중</button><button type="button" data-f="완료">완료</button></div><label class="lsearch"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="lec-q" placeholder="기관명으로 찾기" aria-label="기관명 또는 교육명으로 출강 기록 찾기" autocomplete="off"></label><span class="lcount" id="lec-count"></span></div>
     <div class="lrows" id="lec-list">
       <div class="lrow lhd" aria-hidden="true"><span>날짜</span><span>상태</span><span>기관</span><span>교육</span><span></span></div>
     </div>
@@ -1070,9 +1076,11 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   function renderList(){
     Array.prototype.slice.call(list.querySelectorAll('.lrow:not(.lhd)')).forEach(function(n){n.remove();});
     var pg=document.getElementById('lec-pages'); if(pg)pg.remove();
-    var rows=LECTURES.filter(function(L){return filter==='all'||L.st===filter;});
+    var q=(document.getElementById('lec-q').value||'').replace(/\s+/g,'').toLowerCase();
+    var rows=LECTURES.filter(function(L){return (filter==='all'||L.st===filter)&&(!q||(L.org+L.edu).replace(/\s+/g,'').toLowerCase().indexOf(q)>-1);});
     var pages=Math.max(1,Math.ceil(rows.length/LIMIT)); if(page>=pages)page=pages-1;
-    count.textContent='총 '+rows.length+'개 강의';
+    count.textContent=q?('찾은 강의 '+rows.length+'개'):('총 '+rows.length+'개 강의');
+    if(!rows.length){var em=el('div','lrow lempty','찾는 기관이 없어요. 기관명을 짧게 넣어 보세요. (예: 가족센터)');list.appendChild(em);}
     rows.slice(page*LIMIT,(page+1)*LIMIT).forEach(function(L){
       var r=el('div','lrow');
       r.appendChild(el('span','ld',L.date));
@@ -1090,6 +1098,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
       list.after(nav);
     }
   }
+  document.getElementById('lec-q').addEventListener('input',function(){page=0;renderList();});
   document.querySelectorAll('#lec-tabs button').forEach(function(b){
     b.addEventListener('click',function(){document.querySelectorAll('#lec-tabs button').forEach(function(x){x.classList.toggle('on',x===b);});filter=b.getAttribute('data-f');page=0;renderList();});
   });
