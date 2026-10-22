@@ -234,9 +234,6 @@ footer b{color:#fff;font-family:"Gowun Batang",serif;font-size:17px}
 button.c-item{width:100%;background:none;border:0;border-bottom:1px solid var(--line);font:inherit;color:inherit;text-align:left;cursor:pointer}
 .c-item .copy{font-size:13.5px;color:var(--point);border:1px solid var(--point);border-radius:999px;padding:3px 12px;flex:none}
 .c-item span{user-select:text}
-.c-kakao{cursor:default}
-.c-qr{width:96px;height:96px;flex:none;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px}
-@media (max-width:640px){.c-qr{width:84px;height:84px}}
 .hint{font-size:14px;color:var(--muted);margin-top:10px;text-align:center}
 :focus-visible{outline:2px solid var(--point);outline-offset:3px}
 .toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:15px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
@@ -741,6 +738,7 @@ body{padding-bottom:0!important}
 @media (prefers-reduced-motion:reduce){.qr-ov:not([hidden]) .qr-hand{animation:none}}
 @media (max-width:640px){.qr-card{padding:14px;border-radius:18px}.qr-stage{width:calc(100vw - 60px)}}
 .qr-x{position:absolute;z-index:3;top:6px;right:10px;border:0;background:none;font-size:32px;line-height:1;color:#5A6478;cursor:pointer;padding:6px}
+.c-qr{width:84px!important;height:84px!important;flex:none;border:1px solid var(--line);border-radius:8px;padding:3px;background:#fff}
 .lsearch{margin-left:auto;display:flex;align-items:center;gap:8px;border:1px solid #24497F;border-radius:999px;padding:5px 14px;background:var(--card);color:#24497F;min-width:0}
 .lsearch input{border:0;outline:0;background:transparent;font:inherit;font-size:14.5px;color:var(--ink);width:170px;min-width:0}
 .lsearch:focus-within{box-shadow:0 0 0 3px rgba(36,73,127,.18)}
@@ -992,7 +990,7 @@ body{font-size:15.5px!important}.ti{font-size:15.5px!important}.ti small{font-si
         <!-- ✏️ 이메일·전화번호를 실제 정보로 바꾸세요 -->
         <div class="c-list">
           <button class="c-item" type="button" data-copy="dltjwjd59@gmail.com"><div><small>EMAIL</small><span>dltjwjd59@gmail.com</span></div><span class="copy">복사</span></button>
-          <div class="c-item c-kakao"><div><small>KAKAOTALK</small><span>QR을 찍어 친구 추가</span></div><img class="c-qr" src="img/kakao-qr.png" alt="이서정 강사 카카오톡 QR 코드" width="96" height="96" loading="lazy"></div>
+          <a class="c-item c-kakao" href="https://qr.kakao.com/talk/189u6AiGTSywH7IBW5d3eTYSn0I-" target="_blank" rel="noopener"><div><small>KAKAOTALK</small><span>QR을 찍거나 눌러서 카톡 문의</span></div><img class="c-qr" src="img/kakao-qr.png" alt="카카오톡 문의 QR 코드" width="240" height="240" loading="lazy"></a>
           <a class="c-item" href="https://doaitoday.com" target="_blank" rel="noopener"><div><small>HOMEPAGE</small><span>doaitoday.com</span></div><span class="arr">→</span></a>
           <a class="c-item" href="https://blog.naver.com/ricewitch" target="_blank" rel="noopener"><div><small>BLOG</small><span>네이버 블로그 · 강의 후기</span></div><span class="arr">→</span></a>
           <a class="c-item" href="https://www.instagram.com/jeong260622/" target="_blank" rel="noopener"><div><small>INSTAGRAM</small><span>@jeong260622</span></div><span class="arr">→</span></a>
