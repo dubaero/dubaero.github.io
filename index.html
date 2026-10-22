@@ -234,6 +234,9 @@ footer b{color:#fff;font-family:"Gowun Batang",serif;font-size:17px}
 button.c-item{width:100%;background:none;border:0;border-bottom:1px solid var(--line);font:inherit;color:inherit;text-align:left;cursor:pointer}
 .c-item .copy{font-size:13.5px;color:var(--point);border:1px solid var(--point);border-radius:999px;padding:3px 12px;flex:none}
 .c-item span{user-select:text}
+.c-kakao{cursor:default}
+.c-qr{width:96px;height:96px;flex:none;background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px}
+@media (max-width:640px){.c-qr{width:84px;height:84px}}
 .hint{font-size:14px;color:var(--muted);margin-top:10px;text-align:center}
 :focus-visible{outline:2px solid var(--point);outline-offset:3px}
 .toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:15px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
@@ -989,7 +992,7 @@ body{font-size:15.5px!important}.ti{font-size:15.5px!important}.ti small{font-si
         <!-- ✏️ 이메일·전화번호를 실제 정보로 바꾸세요 -->
         <div class="c-list">
           <button class="c-item" type="button" data-copy="dltjwjd59@gmail.com"><div><small>EMAIL</small><span>dltjwjd59@gmail.com</span></div><span class="copy">복사</span></button>
-          <button class="c-item" type="button" data-copy="li8093"><div><small>KAKAOTALK ID</small><span>li8093</span></div><span class="copy">복사</span></button>
+          <div class="c-item c-kakao"><div><small>KAKAOTALK</small><span>QR을 찍어 친구 추가</span></div><img class="c-qr" src="img/kakao-qr.png" alt="이서정 강사 카카오톡 QR 코드" width="96" height="96" loading="lazy"></div>
           <a class="c-item" href="https://doaitoday.com" target="_blank" rel="noopener"><div><small>HOMEPAGE</small><span>doaitoday.com</span></div><span class="arr">→</span></a>
           <a class="c-item" href="https://blog.naver.com/ricewitch" target="_blank" rel="noopener"><div><small>BLOG</small><span>네이버 블로그 · 강의 후기</span></div><span class="arr">→</span></a>
           <a class="c-item" href="https://www.instagram.com/jeong260622/" target="_blank" rel="noopener"><div><small>INSTAGRAM</small><span>@jeong260622</span></div><span class="arr">→</span></a>
