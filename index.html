@@ -455,7 +455,7 @@ body{font-size:14px!important}
 .pen-note{font-family:"Gamja Flower","Nanum Pen Script",cursive;font-size:19px;line-height:1.45;color:#2b2f3a;transform:rotate(-3deg);white-space:nowrap}
 .pn-line{display:block;margin-top:6px}
 
-.h-row{display:flex;align-items:center;gap:26px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+.h-row{display:flex;align-items:center;gap:26px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
 .h-ct{list-style:none;display:grid;gap:6px}
 .h-ct li{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink)}
 .h-ct li svg{color:#1F2F52;flex:none}
@@ -1052,7 +1052,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   ];
   function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
   var cards=document.getElementById('room-cards');
-  LECTURES.filter(function(L){return L.st!=='예정';}).slice(0,5).concat(LECTURES.filter(function(L){return L.card;})).forEach(function(L){
+  LECTURES.filter(function(L){return L.card;}).concat(LECTURES.filter(function(L){return L.st!=='예정';}).slice(0,5)).forEach(function(L){
     var a=el('button','room');a.type='button';a.setAttribute('aria-label',L.org+' 강의 자료실 열기');
     a.addEventListener('click',function(){openGate(L);});
     var sl=el('div','room-slide');
