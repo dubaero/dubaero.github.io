@@ -707,6 +707,12 @@ body{padding-bottom:0!important}
 .lec-head{margin-top:48px!important;margin-bottom:12px!important}
 .lrow:not(.lhd){padding-top:8px!important;padding-bottom:8px!important}
 #rooms .room-info .room-date{font-weight:500!important;font-size:12px!important;color:#8A2E1A!important}
+.wc-chips{max-width:none!important}
+.wc-chips{gap:7px!important}.wc-chips button{flex:1 1 auto;padding:7px 10px!important}
+.wc-chips button.etc{background:#FFF6DC!important;border:1.5px solid #E2B33C!important;border-style:solid!important;color:#7A5A0E!important}
+.wc-chips button.etc:hover{background:#FCEBBE!important}
+.wc-cloud{background:linear-gradient(135deg,#EEF3FA 0%,#FDF6E6 100%)!important;border:1.5px solid #D6E0EF}
+@media (min-width:641px){.lrow{grid-template-columns:140px 96px 260px 1fr 110px!important}.lrow.lhd span:nth-child(2){text-align:center}.lrow .ls{justify-self:center;width:58px}.lrow .lo,.lrow.lhd span:nth-child(3){padding-left:6px}}
 .lsearch{margin-left:auto;display:flex;align-items:center;gap:8px;border:1px solid #24497F;border-radius:999px;padding:5px 14px;background:var(--card);color:#24497F;min-width:0}
 .lsearch input{border:0;outline:0;background:transparent;font:inherit;font-size:14.5px;color:var(--ink);width:170px;min-width:0}
 .lsearch:focus-within{box-shadow:0 0 0 3px rgba(36,73,127,.18)}
@@ -803,7 +809,7 @@ body{font-size:15.5px!important}.ti{font-size:15.5px!important}.ti small{font-si
       <p>AI에게 맡기고 싶은 일을 골라 주세요. 많이 선택한 단어일수록 크게 보입니다.</p>
     </div>
     <div class="wc-box">
-            <div class="wc-chips" id="wc-chips"><button type="button" data-w="보고서">보고서</button><button type="button" data-w="공문서">공문서</button><button type="button" data-w="사업계획서">사업계획서</button><button type="button" data-w="회의록">회의록</button><button type="button" data-w="상담 기록">상담 기록</button><button type="button" data-w="안내문">안내문</button><button type="button" data-w="홍보 문구">홍보 문구</button><button type="button" data-w="카드뉴스">카드뉴스</button><button type="button" data-w="인포그래픽">인포그래픽</button><button type="button" data-w="블로그 자동화">블로그 자동화</button><button type="button" data-w="엑셀 정리">엑셀 정리</button><button type="button" data-w="예산·정산">예산·정산</button><button type="button" data-w="녹음→회의록">녹음→회의록</button><button type="button" data-w="발표 자료(PPT)">발표 자료(PPT)</button><button type="button" class="etc" id="wc-etc">기타 (직접 입력)</button></div>
+            <div class="wc-chips" id="wc-chips"><button type="button" data-w="보고서">보고서</button><button type="button" data-w="공문서">공문서</button><button type="button" data-w="사업계획서">사업계획서</button><button type="button" data-w="회의록">회의록</button><button type="button" data-w="상담 기록">상담 기록</button><button type="button" data-w="안내문">안내문</button><button type="button" data-w="홍보 문구">홍보 문구</button><button type="button" data-w="카드뉴스">카드뉴스</button><button type="button" data-w="인포그래픽">인포그래픽</button><button type="button" data-w="블로그">블로그</button><button type="button" data-w="엑셀 정리">엑셀 정리</button><button type="button" data-w="예산·정산">예산·정산</button><button type="button" data-w="녹음→회의록">녹음→회의록</button><button type="button" data-w="PPT">PPT</button><button type="button" data-w="이미지">이미지</button><button type="button" data-w="영상 편집">영상 편집</button><button type="button" data-w="번역">번역</button><button type="button" data-w="이메일">이메일</button><button type="button" data-w="자료 조사">자료 조사</button><button type="button" data-w="요약">요약</button><button type="button" data-w="일정">일정</button><button type="button" data-w="아이디어">아이디어</button><button type="button" class="etc" id="wc-etc">기타 (직접 입력)</button></div>
       <form class="wc-form" id="wc-form" autocomplete="off" hidden>
         <label for="wc-input" class="sr">단어 입력</label>
         <input id="wc-input" maxlength="12" placeholder="배우고 싶은 업무를 적어 주세요">
