@@ -1170,7 +1170,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   renderOrgs();
   renderList();
   /* 출강 목록: 구글 시트(웹에 게시)에서 읽어 오기. 못 읽으면 위 LECTURES 그대로 */
-  var SHEET_CSV=['https://docs.google.com/spreadsheets/d/1u0XEhfloSHBLsKpQYmSEvfIRagJB5Ci5hvYOCxc8Kiw/gviz/tq?tqx=out:csv','https://docs.google.com/spreadsheets/d/e/2PACX-1vRVPKseBiPo-tTQZneZZ_d7ljCCF4gHwLCzvNygNbjGLn91H3u4FHIdxYxERN2GxuYBL1oJ-K0QVCon/pub?output=csv'];
+  var SHEET_CSV=['https://docs.google.com/spreadsheets/d/e/2PACX-1vRVPKseBiPo-tTQZneZZ_d7ljCCF4gHwLCzvNygNbjGLn91H3u4FHIdxYxERN2GxuYBL1oJ-K0QVCon/pub?output=csv'];
   function parseCSV(t){var rows=[],row=[],f='',q=false;for(var i=0;i<t.length;i++){var c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}else if(c==='"')q=true;else if(c===','){row.push(f);f='';}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f='';}else f+=c;}if(f!==''||row.length){row.push(f);rows.push(row);}return rows;}
   function applySheet(t){var r=parseCSV(t);if(r.length<2)return false;var h=r[0].map(function(x){return x.trim();});var iD=h.indexOf('날짜'),iS=h.indexOf('상태'),iO=h.indexOf('기관'),iE=h.indexOf('교육');if(iD<0||iS<0||iO<0||iE<0)return false;
     var old=LECTURES.slice(),out=[];r.slice(1).forEach(function(c){var d=(c[iD]||'').trim(),o=(c[iO]||'').trim();if(!d||!o)return;var L={date:d,st:(c[iS]||'').trim()||'예정',org:o,edu:(c[iE]||'').trim(),link:''};
