@@ -1100,6 +1100,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   ];
   function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
   var cards=document.getElementById('room-cards');
+  function renderCards(){cards.innerHTML='';
   LECTURES.filter(function(L){return L.card;}).concat(LECTURES.filter(function(L){return L.st!=='예정';}).slice(0,5)).forEach(function(L){
     var a=el('button','room');a.type='button';a.setAttribute('aria-label',L.org+' 강의 자료실 열기');
     a.addEventListener('click',function(){openGate(L);});
@@ -1110,7 +1111,8 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     var info=el('div','room-info');info.appendChild(el('span','room-date',L.date));info.appendChild(el('span','room-org',L.org));
     a.appendChild(info);
     cards.appendChild(a);
-  });
+  });}
+  renderCards();
   var list=document.getElementById('lec-list'),count=document.getElementById('lec-count'),filter='all',expanded=false,LIMIT=10,page=0;
   function renderList(){
     Array.prototype.slice.call(list.querySelectorAll('.lrow:not(.lhd)')).forEach(function(n){n.remove();});
@@ -1164,8 +1166,17 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     }).catch(function(){gMsg.textContent='이 화면에서는 확인할 수 없어요. 강의 때 받은 QR로 들어와 주세요.';});
   });
   var hl=document.getElementById('career-lec');
-  if(hl){var seen={},names=[];LECTURES.forEach(function(L){var n=L.org.replace(/\s*\(.*?\)\s*/g,'').trim();n=({'근로복지공단':'근로복지공단 인재개발원','한국환경공단':'한국환경공단 인재개발원','현대로템':'현대로템 기술교육원','현대로템 창원공장 기술교육원':'현대로템 기술교육원','서울시교육청':'서울시교육청 교육연수원'})[n]||n;if(!seen[n]){seen[n]=1;names.push(n);}});names.forEach(function(n,i){hl.appendChild(el('span',null,n));});}
+  function renderOrgs(){if(!hl)return;hl.innerHTML='';var seen={},names=[];LECTURES.forEach(function(L){var n=L.org.replace(/\s*\(.*?\)\s*/g,'').trim();n=({'근로복지공단':'근로복지공단 인재개발원','한국환경공단':'한국환경공단 인재개발원','현대로템':'현대로템 기술교육원','현대로템 창원공장 기술교육원':'현대로템 기술교육원','서울시교육청':'서울시교육청 교육연수원'})[n]||n;if(!seen[n]){seen[n]=1;names.push(n);}});names.forEach(function(n,i){hl.appendChild(el('span',null,n));});}
+  renderOrgs();
   renderList();
+  /* 출강 목록: 구글 시트(웹에 게시)에서 읽어 오기. 못 읽으면 위 LECTURES 그대로 */
+  var SHEET_CSV=['https://docs.google.com/spreadsheets/d/1u0XEhfloSHBLsKpQYmSEvfIRagJB5Ci5hvYOCxc8Kiw/gviz/tq?tqx=out:csv','https://docs.google.com/spreadsheets/d/e/2PACX-1vRVPKseBiPo-tTQZneZZ_d7ljCCF4gHwLCzvNygNbjGLn91H3u4FHIdxYxERN2GxuYBL1oJ-K0QVCon/pub?output=csv'];
+  function parseCSV(t){var rows=[],row=[],f='',q=false;for(var i=0;i<t.length;i++){var c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}else if(c==='"')q=true;else if(c===','){row.push(f);f='';}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f='';}else f+=c;}if(f!==''||row.length){row.push(f);rows.push(row);}return rows;}
+  function applySheet(t){var r=parseCSV(t);if(r.length<2)return false;var h=r[0].map(function(x){return x.trim();});var iD=h.indexOf('날짜'),iS=h.indexOf('상태'),iO=h.indexOf('기관'),iE=h.indexOf('교육');if(iD<0||iS<0||iO<0||iE<0)return false;
+    var old=LECTURES.slice(),out=[];r.slice(1).forEach(function(c){var d=(c[iD]||'').trim(),o=(c[iO]||'').trim();if(!d||!o)return;var L={date:d,st:(c[iS]||'').trim()||'예정',org:o,edu:(c[iE]||'').trim(),link:''};
+      var m=old.filter(function(x){return x.org===o&&x.date===d;})[0];if(m){['img','code','link','card','title'].forEach(function(k){if(m[k])L[k]=m[k];});}out.push(L);});
+    if(!out.length)return false;LECTURES.length=0;Array.prototype.push.apply(LECTURES,out);renderCards();renderOrgs();renderList();return true;}
+  (function tryNext(i){if(i>=SHEET_CSV.length||!window.fetch)return;fetch(SHEET_CSV[i],{cache:'no-store'}).then(function(res){if(!res.ok)throw 0;return res.text();}).then(function(t){if(!applySheet(t))tryNext(i+1);}).catch(function(){tryNext(i+1);});})(0);
 })();
 
   (function(){var ov=document.getElementById('qr-ov');if(!ov)return;
