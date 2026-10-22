@@ -714,6 +714,14 @@ body{padding-bottom:0!important}
 .wc-cloud{background:linear-gradient(135deg,#EEF3FA 0%,#FDF6E6 100%)!important;border:1.5px solid #D6E0EF}
 @media (min-width:641px){.lrow{grid-template-columns:140px 96px 260px 1fr 110px!important}.lrow.lhd span:nth-child(2){text-align:center}.lrow .ls{justify-self:center;width:48px;padding:1px 0!important;border-radius:5px}.lrow .lo,.lrow.lhd span:nth-child(3){padding-left:6px}}
 .about-body p{font-size:15px!important;line-height:1.75!important}
+.qr-open{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:14px;font-weight:700;color:#fff!important;background:#24497F;border:0;border-radius:999px;padding:6px 14px;cursor:pointer;white-space:nowrap}
+.qr-open:hover{background:#1F2F52}
+.qr-ov{position:fixed;inset:0;z-index:200;background:rgba(20,33,61,.82);display:grid;place-items:center;padding:16px}
+.qr-ov[hidden]{display:none!important}
+.qr-card{position:relative;background:#fff;border-radius:24px;padding:22px;max-width:100%;max-height:100%}
+.qr-card img{display:block;width:auto;height:auto;max-width:min(calc(100vw - 80px),1000px);max-height:calc(100vh - 90px)}
+@media (max-width:640px){.qr-card{padding:14px;border-radius:18px}.qr-card img{max-width:calc(100vw - 60px)}}
+.qr-x{position:absolute;top:8px;right:12px;border:0;background:none;font-size:32px;line-height:1;color:#5A6478;cursor:pointer;padding:6px}
 .lsearch{margin-left:auto;display:flex;align-items:center;gap:8px;border:1px solid #24497F;border-radius:999px;padding:5px 14px;background:var(--card);color:#24497F;min-width:0}
 .lsearch input{border:0;outline:0;background:transparent;font:inherit;font-size:14.5px;color:var(--ink);width:170px;min-width:0}
 .lsearch:focus-within{box-shadow:0 0 0 3px rgba(36,73,127,.18)}
@@ -740,6 +748,7 @@ body{font-size:15.5px!important}.ti{font-size:15.5px!important}.ti small{font-si
       <a href="#career">강사 프로필</a>
       <a href="#all-lectures">출강 기록</a>
       <a href="#contact">강의 문의</a>
+      <button type="button" class="qr-open" id="qr-open" aria-label="홈페이지 QR 크게 보기"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg>QR로 들어오기</button>
     </nav>
   </div>
 </header>
@@ -788,6 +797,7 @@ body{font-size:15.5px!important}.ti{font-size:15.5px!important}.ti small{font-si
 </section>
 
 
+<div class="qr-ov" id="qr-ov" hidden><div class="qr-card" role="dialog" aria-modal="true" aria-label="홈페이지 QR"><button type="button" class="qr-x" id="qr-x" aria-label="닫기">×</button><img src="img/qr-dubaero.png" alt="한 번 찍으면 두 배로! 이서정 강사 홈페이지 QR 코드" width="1566" height="1366"></div></div>
 <div class="gate" id="gate" hidden>
   <div class="gate-box" role="dialog" aria-modal="true" aria-labelledby="gate-title">
     <button type="button" class="gate-x" id="gate-x" aria-label="닫기">×</button>
@@ -1140,6 +1150,12 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   if(hl){var seen={},names=[];LECTURES.forEach(function(L){var n=L.org.replace(/\s*\(.*?\)\s*/g,'').trim();n=({'근로복지공단':'근로복지공단 인재개발원','한국환경공단':'한국환경공단 인재개발원','현대로템':'현대로템 기술교육원','현대로템 창원공장 기술교육원':'현대로템 기술교육원','서울시교육청':'서울시교육청 교육연수원'})[n]||n;if(!seen[n]){seen[n]=1;names.push(n);}});names.forEach(function(n,i){hl.appendChild(el('span',null,n));});}
   renderList();
 })();
+
+  (function(){var ov=document.getElementById('qr-ov');if(!ov)return;
+  function op(){ov.hidden=false;}function cl(){ov.hidden=true;if(location.hash==='#qr')history.replaceState(null,'',location.pathname);}
+  document.getElementById('qr-open').addEventListener('click',op);document.getElementById('qr-x').addEventListener('click',cl);
+  ov.addEventListener('click',function(e){if(e.target===ov)cl();});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ov.hidden)cl();});
+  if(location.hash==='#qr')op();})();
 </script>
 
 
