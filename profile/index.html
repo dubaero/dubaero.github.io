@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>강사 소개 | 두배로 이서정</title>
+<meta name="description" content="생성형 AI 전문강사 이서정(두배로)의 강의 모토, 강사 경력, 현장 경력, 자격 사항, 출강 기관을 한 페이지에 정리했습니다.">
+<link rel="canonical" href="https://dubaero.github.io/profile/">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="두배로">
+<meta property="og:url" content="https://dubaero.github.io/profile/">
+<meta property="og:title" content="강사 소개 | 두배로 이서정">
+<meta property="og:description" content="하면 된다, 될 때까지 한다. 어려운 AI는 쉽게, 일상과 업무의 성장을 함께 돕는 맞춤형 AI 가이드 이서정입니다.">
+<meta property="og:image" content="https://dubaero.github.io/img/og.jpg?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF9F8; --paper:#F3EFEA; --card:#FFFFFF;
+  --ink:#172033; --muted:#5F6878; --line:#E6E0D8;
+  --point:#B5543C; --point-soft:#F6E7E1; --navy:#24497F;
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR",system-ui,sans-serif;font-size:16.5px;line-height:1.75;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3{text-wrap:balance}
+p,li{text-wrap:pretty}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.serif{font-family:"Gowun Batang",serif}
+
+/* 상단 */
+.top{position:sticky;top:0;z-index:20;background:rgba(250,249,248,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font-family:"Gowun Batang",serif;font-weight:700;font-size:20px;white-space:nowrap}
+.logo em{font-style:normal;color:var(--point)}
+.nav{display:flex;gap:22px;font-size:15px;color:var(--muted);align-items:center}
+.nav a:hover{color:var(--ink)}
+.nav .cta{background:var(--ink);color:#fff;padding:7px 16px;border-radius:999px}
+
+/* 첫 화면 */
+.hero{padding:64px 0 40px;overflow-x:clip}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:14.5px;font-weight:600;color:var(--point);letter-spacing:.02em}
+.eyebrow::before{content:"";width:28px;height:1.5px;background:var(--point)}
+.name{font-family:"Gowun Batang",serif;font-size:46px;line-height:1.25;margin:14px 0 6px}
+.name small{display:block;font-family:"IBM Plex Sans KR",sans-serif;font-size:17px;font-weight:500;color:var(--muted);margin-top:6px}
+.motto{margin:30px 0 22px;padding:26px 30px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--point);border-radius:0 var(--r,18px) var(--r,18px) 0}
+.motto small{display:block;font-size:13.5px;font-weight:600;color:var(--muted);letter-spacing:.08em;margin-bottom:6px}
+.motto p{font-family:"Gowun Batang",serif;font-size:30px;font-weight:700;line-height:1.4}
+.intro{font-size:18px;color:#2C3547}
+.intro b{color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tags span{font-size:14px;padding:5px 13px;border-radius:999px;background:var(--paper);color:#3B4558}
+.photo{position:relative;justify-self:center;width:100%;max-width:360px}
+.photo::before{content:"";position:absolute;inset:8% 0 0 4%;background:var(--point-soft);border-radius:200px 200px 24px 24px;z-index:0}
+.photo img{position:relative;z-index:1;width:100%;height:auto;mix-blend-mode:multiply;-webkit-mask-image:linear-gradient(#000 84%,transparent);mask-image:linear-gradient(#000 84%,transparent)}
+
+/* 요약 수치 대신 핵심 3줄 */
+.hero .wrap.kw{display:block;margin-top:36px}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.key{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px}
+.key b{display:block;font-size:17px;margin-bottom:4px}
+.key span{font-size:15px;color:var(--muted)}
+
+/* 섹션 공통 */
+.sec{padding:72px 0}
+.sec.alt{background:var(--paper)}
+.sec-head{margin-bottom:34px}
+.sec-head .no{font-size:13.5px;font-weight:700;color:var(--point);letter-spacing:.12em}
+.sec-head h2{font-family:"Gowun Batang",serif;font-size:32px;line-height:1.3;margin-top:6px}
+.sec-head p{color:var(--muted);margin-top:8px}
+
+/* 이야기 */
+.story{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.story blockquote{font-family:"Gowun Batang",serif;font-size:24px;line-height:1.6;font-weight:700}
+.story blockquote em{font-style:normal;color:var(--point)}
+.story p+p{margin-top:14px}
+
+/* 타임라인 */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px 30px 26px}
+.box h3{display:flex;align-items:center;gap:10px;font-size:19px;margin-bottom:18px}
+.box h3::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--point)}
+.tl{list-style:none;position:relative}
+.tl>li{position:relative;padding:0 0 22px 22px;border-left:2px solid var(--line)}
+.tl>li:last-child{padding-bottom:0;border-left-color:transparent}
+.tl>li::before{content:"";position:absolute;left:-6px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--card);border:2px solid var(--navy)}
+.tl time{display:block;font-size:13.5px;font-weight:600;color:var(--navy)}
+.tl b{display:block;font-size:17px;line-height:1.5}
+.tl .org{font-size:14.5px;color:var(--muted)}
+.tl ul{margin-top:8px;padding-left:18px;font-size:15px;color:#384256}
+.tl ul li{margin:3px 0}
+.tl ul li.hl{color:var(--ink);font-weight:600}
+
+/* 자격 · 학력 */
+.chips{display:flex;flex-wrap:wrap;gap:9px;list-style:none}
+.chips li{font-size:15px;padding:7px 14px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
+.chips li.ai{background:#EAF0F8;border-color:#CFDBEC;color:#1F3B66;font-weight:600}
+.edu{margin-top:22px;padding-top:18px;border-top:1px dashed var(--line);font-size:15.5px}
+.edu small{display:block;font-size:13.5px;font-weight:600;color:var(--muted)}
+
+/* 분야 */
+.fields{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.field{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+.field .n{font-family:"Gowun Batang",serif;font-size:22px;font-weight:700;color:var(--point)}
+.field b{display:block;font-size:17.5px;margin:4px 0 6px}
+.field p{font-size:15px;color:var(--muted)}
+
+/* 출강 기관 */
+.orgs-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.orgs-top .cnt{font-size:15px;color:var(--muted)}
+.orgs-top .cnt b{font-size:22px;color:var(--ink);font-family:"Gowun Batang",serif}
+.orgs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.orgs span{display:flex;align-items:center;min-height:56px;padding:10px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px;font-size:15px;font-weight:500;line-height:1.4;min-width:0;overflow-wrap:anywhere;word-break:normal}
+.orgs-more{margin-top:18px;font-size:15px}
+.orgs-more a{color:var(--navy);font-weight:600;border-bottom:1px solid currentColor}
+
+/* 문의 */
+.cta-box{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:24px;padding:36px 40px}
+.cta-box h2{font-family:"Gowun Batang",serif;font-size:26px;line-height:1.4}
+.cta-box p{color:#C9D0DC;font-size:15.5px;margin-top:4px}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:11px 20px;border-radius:999px;font-size:15px;font-weight:600;border:1px solid rgba(255,255,255,.4)}
+.btn.fill{background:#fff;color:var(--ink);border-color:#fff}
+footer{padding:36px 0 48px;font-size:14px;color:var(--muted);text-align:center}
+
+@media (max-width:860px){
+  .hero .wrap,.story,.two{grid-template-columns:1fr}
+  .photo{max-width:260px;order:-1}
+  .keys,.fields{grid-template-columns:1fr}
+  .orgs{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .nav a:not(.cta){display:none}
+  .hero{padding:36px 0 24px}
+  .name{font-size:36px}
+  .motto{padding:20px 22px}
+  .motto p{font-size:25px}
+  .intro{font-size:16.5px}
+  .sec{padding:52px 0}
+  .sec-head h2{font-size:26px}
+  .box{padding:24px 20px}
+  .story blockquote{font-size:21px}
+  .orgs span{font-size:14.5px;min-height:52px;padding:9px 12px}
+  .cta-box{padding:28px 22px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="../">두배로 <em>이서정</em></a>
+    <nav class="nav">
+      <a href="#career">경력</a>
+      <a href="#cert">자격</a>
+      <a href="#orgs">출강 기관</a>
+      <a class="cta" href="../#contact">강의 문의</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">강사 소개</span>
+      <h1 class="name">이서정<small>생성형 AI 전문강사 · 두배로 · 오늘두AI연구소</small></h1>
+      <div class="motto">
+        <small>강의 모토</small>
+        <p>하면 된다,<br>될 때까지 한다.</p>
+      </div>
+      <p class="intro">어려운 AI는 쉽게, <b>일상과 업무의 성장을 함께 돕는 맞춤형 AI 가이드</b> 이서정입니다.</p>
+      <div class="tags"><span>생성형 AI 실무</span><span>업무 문서 자동화</span><span>AI 이미지 · 카드뉴스</span><span>창원 · 마산 기반 전국 출강</span></div>
+    </div>
+    <div class="photo"><img src="../img/profile.jpg" alt="이서정 강사 프로필 사진" width="476" height="707"></div>
+  </div>
+  <div class="wrap kw">
+    <div class="keys">
+      <div class="key"><b>쉬운 말로 설명합니다</b><span>전문용어는 일상의 말로 풀어, 처음 배우는 분도 끝까지 따라옵니다.</span></div>
+      <div class="key"><b>바로 쓰는 실습 중심</b><span>수업이 끝나면 내 업무에 바로 쓸 결과물이 손에 남습니다.</span></div>
+      <div class="key"><b>기획·운영을 아는 강사</b><span>직업훈련교육을 기획·운영해 본 경험으로 기관의 목적에 맞춰 설계합니다.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">STORY</span><h2>초보의 마음을 아는 강사</h2></div>
+    <div class="story">
+      <blockquote>스스로를 길치·기계치·디지털치라 부르던 사람이 <em>AI 강사</em>가 되었습니다.</blockquote>
+      <div>
+        <p>그래서 처음 AI 앞에서 막막한 마음을 누구보다 잘 압니다. 2018년부터 2026년까지 직업상담사로 일하며 사람마다 다른 출발선과 필요를 살펴 왔고, 3년간 신기술 AI 직업훈련교육을 직접 기획·운영했습니다.</p>
+        <p>지금은 그 경험을 바탕으로 <b>한 사람 한 사람의 수준과 업무에 맞춘 AI 교육</b>을 합니다. 목표는 하나, AI를 쉽게 배우고 나답게 활용하도록 돕는 것입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="career">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">CAREER</span><h2>강사 경력과 현장 경력</h2></div>
+    <div class="two">
+      <div class="box">
+        <h3>강사 경력</h3>
+        <ol class="tl">
+          <li><time>2026.03 ~ 현재</time><b>한국디지털융합교육협회 강사</b>
+            <ul><li>생성형 AI 활용 실무 역량강화교육</li><li>AI 활용 이미지 및 콘텐츠 생성 교육</li><li>훈련기관·기업 맞춤형 생성형 AI 실습교육</li></ul></li>
+          <li><time>2025.06 ~ 현재</time><b>한국디지털미디어협회 강사</b>
+            <ul><li>업무·홍보·교육자료 제작을 위한 생성형 AI 활용 교육</li></ul></li>
+          <li><time>현재</time><b>오늘두AI연구소 생성형 AI 전문강사</b><span class="org">오늘두AI 특공대 리더</span></li>
+        </ol>
+      </div>
+      <div class="box">
+        <h3>현장 경력</h3>
+        <ol class="tl">
+          <li><time>2018 ~ 2026</time><b>직업상담사</b><span class="org">여성인력개발센터</span>
+            <ul>
+              <li class="hl">신기술 AI 직업훈련교육 3년간 기획·운영</li>
+              <li class="hl">교육 수료생의 AI 강사 활동 및 공모전 2년 연속 수상</li>
+              <li>AI 콘텐츠 디자인·마케팅 직업훈련 교육과정 기획·운영</li>
+              <li>직업훈련생 대상 정보화·AI 기초교육과 실무형 콘텐츠 제작교육</li>
+              <li>이력서·자기소개서·면접지도 등 취업역량 강화 맞춤형 컨설팅</li>
+              <li>경력단절 예방·경력복귀 지원 프로그램 및 취업특강 운영</li>
+              <li>기업교육·조직문화 인식개선 교육 및 유관기관 협력사업 관리</li>
+            </ul></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="cert">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">LICENSE</span><h2>자격 사항</h2></div>
+    <div class="box">
+      <ul class="chips">
+        <li class="ai">AI콘텐츠 강사</li><li class="ai">AI 콘텐츠활용전문가</li>
+        <li>직업능력개발훈련교사</li><li>NCS 확인강사</li>
+        <li>사회복지사 1급</li><li>직업상담사 2급</li><li>평생교육사 2급</li><li>청소년지도사 2급</li>
+        <li>컴퓨터활용능력 2급</li><li>전산회계 1급</li>
+      </ul>
+      <p class="edu"><small>학력</small>서울사이버대학교 상담심리학 · 사회복지학</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">FIELD</span><h2>강의 분야</h2><p>단독 특강부터 여러 회차 과정까지, 대상과 목적에 맞춰 구성합니다.</p></div>
+    <div class="fields">
+      <div class="field"><span class="n">01</span><b>생성형 AI 실무 활용</b><p>챗GPT·제미나이·클로드로 문서 작성, 요약, 기획안 초안 등 반복 업무 줄이기</p></div>
+      <div class="field"><span class="n">02</span><b>AI 콘텐츠 제작</b><p>홍보용 카드뉴스, 이미지·영상·음악을 AI로 기획부터 완성까지</p></div>
+      <div class="field"><span class="n">03</span><b>대상 맞춤 과정</b><p>기관·기업·공공기관 종사자, 구직자, 시니어 등 수준별 맞춤 설계</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="orgs">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">CLIENTS</span><h2>출강 기관</h2></div>
+    <div class="orgs-top"><p class="cnt">함께한 기관 <b id="org-n">-</b>곳</p><p class="cnt">출강 기록은 자동으로 갱신됩니다</p></div>
+    <div class="orgs" id="org-list"></div>
+    <p class="orgs-more"><a href="../#all-lectures">날짜별 전체 출강 기록 보기 →</a></p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="cta-box">
+      <div><h2>우리 기관에 맞는 AI 교육이 필요하신가요?</h2><p>교육 대상·인원·일정·목적을 알려주시면 맞춤 구성안을 보내드립니다.</p></div>
+      <div class="btns"><a class="btn fill" href="../#contact">강의 문의하기</a><a class="btn" href="https://blog.naver.com/ricewitch" target="_blank" rel="noopener">강의 후기 블로그</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>© 두배로 이서정 · dltjwjd59@gmail.com · <a href="../">홈으로</a></footer>
+
+<script>
+(function(){
+  /* 홈페이지 출강 목록과 같은 구글 시트에서 기관명을 읽어 옵니다. 못 읽으면 아래 기본 목록을 보여 줍니다. */
+  var FALLBACK=['신장유장애인자립생활지원센터','마산여성인력개발센터','전북특별자치도 가족센터','마산여성새로일하기센터','경북대학교 (대구테크노파크)','한국장애인공동생활가정협회','대한안마사협회','계명문화대학교','오늘두AI 무료특강','근로복지공단 인재개발원','한국환경공단','현대로템','부산 시니어 교육','사천시 여성정책아카데미','궁능유적본부','화곡6동 주민센터','서울시교육청','밀양시 농어촌사업팀','서울시교육청 교육연수원'];
+  var SHEET='https://docs.google.com/spreadsheets/d/e/2PACX-1vRVPKseBiPo-tTQZneZZ_d7ljCCF4gHwLCzvNygNbjGLn91H3u4FHIdxYxERN2GxuYBL1oJ-K0QVCon/pub?output=csv';
+  var ALIAS={'근로복지공단':'근로복지공단 인재개발원','한국환경공단':'한국환경공단 인재개발원','현대로템':'현대로템 기술교육원','현대로템 창원공장 기술교육원':'현대로템 기술교육원','서울시교육청':'서울시교육청 교육연수원'};
+  var list=document.getElementById('org-list'),cnt=document.getElementById('org-n');
+  function render(orgs){var seen={},names=[];orgs.forEach(function(o){var n=o.replace(/\s*\(.*?\)\s*/g,'').trim();n=ALIAS[n]||n;if(n&&!seen[n]){seen[n]=1;names.push(n);}});
+    list.innerHTML='';names.forEach(function(n){var s=document.createElement('span');s.textContent=n;list.appendChild(s);});cnt.textContent=names.length;}
+  function parseCSV(t){var rows=[],row=[],f='',q=false;for(var i=0;i<t.length;i++){var c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}else if(c==='"')q=true;else if(c===','){row.push(f);f='';}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f='';}else f+=c;}if(f!==''||row.length){row.push(f);rows.push(row);}return rows;}
+  render(FALLBACK);
+  if(!window.fetch)return;
+  fetch(SHEET,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.text();}).then(function(t){var r=parseCSV(t);if(r.length<2)return;var h=r[0].map(function(x){return x.trim();}),iO=h.indexOf('기관');if(iO<0)return;
+    var o=r.slice(1).map(function(c){return (c[iO]||'').trim();}).filter(Boolean);if(o.length)render(o);}).catch(function(){});
+})();
+</script>
+</body>
+</html>
