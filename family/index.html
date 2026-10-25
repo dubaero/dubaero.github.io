@@ -246,6 +246,7 @@ table.appr td{height:40px}
 .mstep h3{display:flex;align-items:center}.mcol{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--soft2)}.mcol h4{font-size:14.5px;color:var(--ink)}.mcol h4 small{font-weight:400;color:var(--muted);font-size:12px;margin-left:4px}
 #v-meet .recgrid{grid-template-columns:repeat(3,1fr);margin-top:8px}.chk{padding-left:20px;font-size:13px;line-height:1.8;margin-top:8px}.chk li::marker{content:'☐  '}
 @media (max-width:760px){#v-meet .recgrid{grid-template-columns:1fr}}
+.btn.exb{background:#FFF4EC;border-color:var(--warm-line);color:var(--point)}
 .srcsw{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:12px 0 4px;padding:10px 12px;background:var(--warm);border:1px solid var(--warm-line);border-radius:12px}
 .srcsw span{font-size:13px;font-weight:700;color:var(--point);margin-right:4px}
 .srcsw button{border:1.5px solid var(--warm-line);background:#fff;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--ink)}
@@ -350,11 +351,11 @@ a.b-how{text-decoration:none;display:inline-block}
 <!-- ===== 서식 작성 ===== -->
 <div id="v-form" hidden>
   <div class="vbar"><button type="button" class="vback" data-home>← 업무 비서함</button><h2 id="f-title">서식</h2><button type="button" class="b-how" id="f-howbtn">사용법</button><span class="sp"></span>
-    <div class="vacts"><button type="button" class="btn soft" id="f-ai">AI로 다듬기</button><button type="button" class="btn" id="f-copy">복사</button><button type="button" class="btn fill" id="f-word">워드 받기</button></div></div>
+    <div class="vacts"><button type="button" class="btn exb" id="f-ex">예시 채우기</button><button type="button" class="btn" id="f-clear">지우기</button><button type="button" class="btn soft" id="f-ai">AI로 다듬기</button><button type="button" class="btn" id="f-copy">복사</button><button type="button" class="btn fill" id="f-word">워드 받기</button></div></div>
   <p class="vnote" id="f-note"></p>
   <div class="how" id="f-how" hidden></div>
   <div class="split">
-    <section class="in"><h3>쉬운 입력</h3><p class="sub">질문에 답만 하면 오른쪽 서식이 자동으로 채워져요.</p><div id="f-qs"></div></section>
+    <section class="in"><h3>쉬운 입력</h3><p class="sub">질문에 답만 하면 오른쪽 서식이 자동으로 채워져요. 처음이면 위의 <b>[예시 채우기]</b>를 눌러 어떻게 쓰는지 먼저 보세요. (예시는 모두 가상 "가온시 가족센터")</p><div id="f-qs"></div></section>
     <section class="pv"><div class="pvt"><span>미리보기</span><span id="f-src"></span></div><div class="doc" id="f-doc"></div></section>
   </div>
 
@@ -378,6 +379,7 @@ a.b-how{text-decoration:none;display:inline-block}
           <button type="button" class="btn" id="aig-claude">Claude 열기</button>
           <button type="button" class="btn" id="aig-gem">제미나이 열기</button>
           <button type="button" class="btn" id="aig-nlm">노트북LM 열기</button>
+          <button type="button" class="btn exb" id="aig-ex">예시 메모 넣어 보기</button>
         </div>
         <h4><i>4</i>이렇게 나오면 성공</h4><ul class="ok" id="aig-ok"></ul>
         <h4><i>5</i>자주 하는 실수</h4><ul class="miss" id="aig-miss"></ul>
@@ -564,6 +566,7 @@ a.b-how{text-decoration:none;display:inline-block}
     <p class="rnote">Claude와 무료 ChatGPT는 녹음 파일을 글로 바꾸지 못해요. 위 세 곳 중 하나에서 전사본을 만들어 오세요. (2026년 10월 확인 기준)</p></div>
   <div class="tool mstep"><h3><span class="rn">3</span>전사본 붙여넣고 확인하기</h3>
     <textarea class="f" id="mt-in" style="min-height:160px" placeholder="2단계에서 복사한 전사본을 여기에 붙여 넣으세요."></textarea>
+    <div class="chips"><button type="button" id="mt-ex">예시 전사본 넣어 보기 (가상)</button></div>
     <ul class="chk"><li>사람 이름은 <b>역할(팀장, 담당자 1)</b>로 바꿨나요?</li><li>날짜·금액·인원 숫자가 맞나요?</li><li><b>[불명확]</b> 표시된 곳은 내가 기억대로 고쳤나요?</li></ul></div>
   <div class="tool mstep"><h3><span class="rn">4</span>회의록·공문 만들기</h3>
     <label class="l">무엇을 만들까요?</label>
@@ -817,7 +820,7 @@ var FORMS=[
 
 var TILES=[
  {go:'biz',ic:'grid',t:'사업별 업무',s:'연간 단계별 프롬프트'},
- {go:'plan',ic:'bulb',t:'프로그램 기획',s:'가족 프로그램 아이디어',f:1},
+ {go:'idea',ic:'bulb',t:'프로그램 기획',s:'가족 프로그램 아이디어',f:1},
  {go:'event',ic:'flag',t:'가족 행사·체험',s:'나들이·캠프·축제'},
  {go:'msg',ic:'mail',t:'문자·소통',s:'보호자·강사·기관'},
  {go:'promo',ic:'mega',t:'홍보·안내',s:'모집·카드뉴스·블로그'},
@@ -872,7 +875,7 @@ var BIZ=[
 
 var AREAS=['가족관계','가족돌봄','가족생활','가족과 함께하는 지역공동체','다문화가족 특성화','공동육아나눔터'];
 var SIMPLE={
- plan:{t:'프로그램 기획',s:'가족센터는 가족 프로그램이 많죠. 영역·대상·시기만 고르면 아이디어 3개와 회기 계획, 성과지표까지 뽑아 줘요. 영역은 결과보고서 영역(가족관계·가족돌봄·가족생활·지역공동체)에 맞췄어요.',
+ idea:{t:'프로그램 기획',s:'가족센터는 가족 프로그램이 많죠. 영역·대상·시기만 고르면 아이디어 3개와 회기 계획, 성과지표까지 뽑아 줘요. 영역은 결과보고서 영역(가족관계·가족돌봄·가족생활·지역공동체)에 맞췄어요.',
   f:[{k:'area',l:'사업 영역',o:AREAS},{k:'tgt',l:'대상',o:['영유아 자녀 가족','초등 자녀 가족','청소년 자녀 가족','아버지와 자녀','다문화가족','한부모·조손가족','부부','지역 주민']},
      {k:'when',l:'시기',o:['봄','여름','가을','겨울','연중']},{k:'size',l:'규모',o:['1회 행사','4회기','8회기','연중 정기']},
      {k:'memo',l:'우리 센터 상황 (예산·장소·지난 반응)',ph:'예) 예산 300만원, 센터 2층 프로그램실, 작년 아버지 참여가 적었음'}],
@@ -995,7 +998,7 @@ function openForm(id,howOpen){
     else{var id2='fq-'+q.k;if(q.mic)d.appendChild(micRow(id2));
       var inp=q.t==='text'?el('textarea','f'):el('input','f');inp.id=id2;inp.placeholder=q.ph||'';inp.oninput=function(){VAL[q.k]=inp.value;renderDoc();};d.appendChild(inp);}
     box.appendChild(d);});
-  bindMics(box);renderDoc();AMODE='memo';renderAI();show('form');
+  bindMics(box);renderDoc();AMODE='memo';AEX=false;renderAI();show('form');
 }
 function Q(k){return CF.qs.find(function(q){return q.k===k;});}
 function special(k){var o=O();return {'@staff':o.staff,'@org':o.set?o.name:'','@staffTel':[o.staff,o.tel].filter(Boolean).join(' · ')}[k]||'';}
@@ -1095,7 +1098,7 @@ function renderMonth(m){
   var M=MONTH[m],box=$('#mo-body');box.innerHTML='';
   var c1=el('div','mcard','<h4>이달의 업무 체크</h4><ul>'+M.job.concat(EVERY).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>');
   var c2=el('div','mcard','<h4>추천 가족 프로그램</h4><ul>'+M.prog.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>');
-  var a2=el('div','acts');var b2=el('button','btn fill','이 달로 프로그램 기획');b2.type='button';b2.onclick=function(){openSimple('plan',{when:['겨울','겨울','봄','봄','봄','여름','여름','여름','가을','가을','가을','겨울'][m-1],memo:m+'월 추천: '+M.prog.join(', ')});};a2.appendChild(b2);c2.appendChild(a2);
+  var a2=el('div','acts');var b2=el('button','btn fill','이 달로 프로그램 기획');b2.type='button';b2.onclick=function(){openSimple('idea',{when:['겨울','겨울','봄','봄','봄','여름','여름','여름','가을','가을','가을','겨울'][m-1],memo:m+'월 추천: '+M.prog.join(', ')});};a2.appendChild(b2);c2.appendChild(a2);
   var c3=el('div','mcard','<h4>이달의 홍보</h4><ul><li>'+esc(M.promo)+'</li><li>카드뉴스 4장 + 문자 3줄로 함께 만들기</li></ul>');
   var a3=el('div','acts');var b3=el('button','btn','홍보 문구 만들기');b3.type='button';b3.onclick=function(){openSimple('promo',{memo:M.promo+' ('+m+'월)'});};a3.appendChild(b3);c3.appendChild(a3);
   box.appendChild(c1);box.appendChild(c2);box.appendChild(c3);
@@ -1132,7 +1135,8 @@ function openSimple(k,pre){CS=SIMPLE[k];SV={};pre=pre||{};$('#s-title').textCont
   $('#s-acts').hidden=false;
   CS.f.forEach(function(f){b.appendChild(el('label','l',esc(f.l)));
     if(f.o){var init=(pre[f.k]&&f.o.indexOf(pre[f.k])>-1)?pre[f.k]:f.o[0];SV[f.k]=init;var o=el('div','opts');f.o.forEach(function(x){var bt=el('button',x===init?'on':'',esc(x));bt.type='button';bt.onclick=function(){SV[f.k]=x;o.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});};o.appendChild(bt);});b.appendChild(o);}
-    else{var id='s-'+f.k;b.appendChild(micRow(id));var t=el('textarea','f');t.id=id;t.placeholder=f.ph||'';if(pre[f.k]){t.value=pre[f.k];SV[f.k]=pre[f.k];}t.oninput=function(){SV[f.k]=t.value;};b.appendChild(t);}});
+    else{var id='s-'+f.k;b.appendChild(micRow(id));var t=el('textarea','f');t.id=id;t.placeholder=f.ph||'';if(pre[f.k]){t.value=pre[f.k];SV[f.k]=pre[f.k];}t.oninput=function(){SV[f.k]=t.value;};b.appendChild(t);
+      if(f.ex){var ch=el('div','chips');f.ex.forEach(function(x,i){var bt=el('button',null,'예시 '+(i+1)+' 넣기');bt.type='button';bt.onclick=function(){t.value=x;SV[f.k]=x;};ch.appendChild(bt);});b.appendChild(ch);}}});
   b.appendChild(el('p','warn','이름, 전화번호, 상담 사연은 빼고 적어 주세요.'));bindMics(b);show('simple');}
 function simpleP(){var memo=(SV.memo||'').trim();if(!memo&&!CS.free){toast('내용을 먼저 적어 주세요.');return null;}return CS.p(SV);}
 $('#s-gpt').onclick=function(){var p=simpleP();if(p)openGPT(p);};$('#s-copy').onclick=function(){var p=simpleP();if(p)copy(p);};
@@ -1162,7 +1166,7 @@ function surveyHTML(){var o=O(),items=SURV.concat(lines('add').map(function(r){r
   '<table style="margin-top:10px"><tr><th class="k">성 별</th><td>□ 남 □ 여</td><th class="k">연 령</th><td>만 (   )세</td></tr><tr><th class="k">혼인여부</th><td colspan="3">□ 미혼 □ 기혼 (자녀수 ____ 명)</td></tr><tr><th class="k">다른 프로그램 참여경험</th><td colspan="3">□ 있다 □ 없다</td></tr>'+
   '<tr><th class="k">도움이 되었던 점</th><td colspan="3" style="height:44px"></td></tr><tr><th class="k">개선해야 할 점</th><td colspan="3" style="height:44px"></td></tr><tr><th class="k">원하는 교육/상담 내용</th><td colspan="3" style="height:44px"></td></tr><tr><th class="k">이용가능한 시간대</th><td colspan="3"></td></tr></table>'+
   '<p class="sign" style="text-align:center">끝까지 답변해 주셔서 진심으로 감사드립니다.</p>';return h;}
-SIMPLE.plan.free=1;
+SIMPLE.idea.free=1;
 
 /* ===================== 비서함 추가 기능 (2026.10.25) ===================== */
 
@@ -1238,17 +1242,18 @@ function renderAI(){
   $('#aig-src').hidden=CF.id==='satis';
   $('#aig-need').innerHTML=aiNeed(AMODE).map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
   $('#aig-step').innerHTML=aiSteps(AMODE).map(function(x){return '<li>'+x+'</li>';}).join('');
-  $('#aig-p').innerHTML=markP(aiP(AMODE));
+  $('#aig-p').innerHTML=markP(exify(aiP(AMODE)));
+  $('#aig-ex').textContent=AEX?'예시 메모 빼기':'예시 메모 넣어 보기';$('#aig-ex').hidden=!EXM[CF.id]||AMODE==='none';
   $('#aig-ok').innerHTML=aiOk(AMODE).map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
   $('#aig-miss').innerHTML=aiMiss(AMODE).map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
   $('#aig-rec').hidden=AMODE!=='rec';
 }
 function openAt(url,p,name){copy(p,'프롬프트를 복사했어요. '+name+' 입력창에 붙여 넣으세요.');setTimeout(function(){var w=window.open(url,'_blank');if(w)w.opener=null;},350);}
-$('#aig-copy').onclick=function(){copy(aiP(AMODE));};
-$('#aig-gpt').onclick=function(){openGPT(aiP(AMODE));};
-$('#aig-claude').onclick=function(){openAt('https://claude.ai/new',aiP(AMODE),'Claude');};
-$('#aig-gem').onclick=function(){openAt('https://gemini.google.com/app',aiP(AMODE),'제미나이');};
-$('#aig-nlm').onclick=function(){openAt('https://notebooklm.google.com/',aiP(AMODE),'노트북LM');};
+$('#aig-copy').onclick=function(){copy(exify(aiP(AMODE)));};
+$('#aig-gpt').onclick=function(){openGPT(exify(aiP(AMODE)));};
+$('#aig-claude').onclick=function(){openAt('https://claude.ai/new',exify(aiP(AMODE)),'Claude');};
+$('#aig-gem').onclick=function(){openAt('https://gemini.google.com/app',exify(aiP(AMODE)),'제미나이');};
+$('#aig-nlm').onclick=function(){openAt('https://notebooklm.google.com/',exify(aiP(AMODE)),'노트북LM');};
 
 /* --- 전체 서식 105 (2026 가족사업안내 1·2권 서식 목록) --- */
 var ALLF=[{"g": "A. 가족센터 운영", "b": "1권 Ⅱ장", "L": [["국고보조금 교부신청서", 157, 157, "A01.pdf"], ["사업계획서", 158, 163, "A02.pdf", "plan"], ["사업결과보고서", 164, 168, "A03.pdf", "result"], ["사업비 정산보고서", 169, 172, "A04.pdf"]]}, {"g": "A. 취약·위기가족지원 (온가족보듬)", "b": "1권 Ⅱ장", "L": [["대상자 추천서", 173, 173, "A201.pdf"], ["서비스 이용 신청서", 174, 174, "A202.pdf"], ["서비스 이용 동의서", 175, 175, "A203.pdf"], ["개인정보 수집·이용 및 제공 동의서", 176, 176, "A204.pdf"], ["종합정보 기록지", 177, 178, "A205.pdf"], ["욕구 및 강점 사정지", 179, 180, "A206.pdf", "needs"], ["서비스 계획서", 181, 181, "A207.pdf", "svcplan"], ["사례관리과정 기록지", 182, 182, "A208.pdf", "process"], ["사례회의록", 183, 183, "A209.pdf", "casemeet"], ["종결 기록지", 184, 184, "A210.pdf", "close"], ["(공통) 활동 신청서", 185, 185, "A211.pdf"], ["(공통) 면접 채점표", 186, 186, "A212.pdf"], ["양성교육 수료증(보듬매니저)", 187, 187, "A213.pdf"], ["명단", 188, 188, "A214.pdf"], ["(공통) 신분증", 189, 189, "A215.pdf"], ["(공통) 활동 서약서", 190, 190, "A216.pdf"], ["활동 계획서(지원인력)", 191, 191, "A217.pdf"], ["활동일지(지원인력)", 192, 192, "A218.pdf", "actlog"], ["(공통) 활동 확인서", 193, 193, "A219.pdf"], ["서비스 모니터링 기록표", 194, 194, "A220.pdf"], ["연계기관 및 사업 목록", 195, 195, "A221.pdf"], ["서비스 의뢰서", 196, 196, "A222.pdf", "refer"], ["척도1 자기효능감 척도", 197, 197, "A223.pdf"], ["척도2 가족기능 척도", 198, 199, "A224.pdf"], ["척도3 (위기) 위기성 진단 척도", 200, 204, "A225.pdf"], ["척도4 (위기) 외상후스트레스 진단 척도", 205, 206, "A226.pdf"], ["척도5 (위기) 사건충격 척도", 207, 208, "A227.pdf"], ["척도6 가족위기 유형별 위기수준·지원수요 측정도구", 209, 213, "A228.pdf"]]}, {"g": "B. 다문화가족지원센터", "b": "1권 Ⅲ장", "L": [["다문화가족지원센터 지정 신청서", 257, 257, "B01.pdf"], ["다문화가족지원센터 지정서", 258, 258, "B02.pdf"], ["국고보조금 교부신청서", 259, 259, "B03.pdf"], ["다문화가족지원센터 사업계획서", 260, 267, "B04.pdf"], ["다문화가족지원센터 사업결과보고서", 268, 280, "B05.pdf"]]}, {"g": "C. 건강가정지원센터", "b": "1권 Ⅳ장", "L": [["국고보조금 교부신청서", 325, 325, "C01.pdf"], ["건강가정지원센터 사업계획서", 326, 330, "C02.pdf"], ["건강가정지원센터 사업실적보고서", 331, 338, "C03.pdf"], ["건강가정지원센터 사업비 정산보고서", 339, 344, "C04.pdf"]]}, {"g": "D. 공통서식 및 척도", "b": "1권 Ⅴ장 부록", "L": [["표준근로계약서(안) 5종", 351, 358, "D01.pdf"], ["응시원서(안)", 359, 359, "D02.pdf"], ["개인정보 수집·이용 및 제공 동의서(안)", 360, 362, "D03.pdf"], ["회원등록 신청서", 363, 363, "D04.pdf"], ["프로그램 신청서", 364, 364, "D05.pdf", "apply"], ["만족도 조사(예시)", 365, 365, "D06.pdf", "satis"], ["시설안전점검보고서(예시)", 366, 366, "D07.pdf"], ["센터 지도·점검표", 367, 368, "D08.pdf"], ["척도1 가족관계위기징후 척도", 369, 369, "D09.pdf"], ["척도2 가족스트레스 척도(기혼자용/미혼자용)", 370, 374, "D10.pdf"]]}, {"g": "E. 공동육아나눔터", "b": "2권 Ⅵ장", "L": [["국고보조금 교부신청서", 37, 37, "E01.pdf"], ["사업계획서(사업수행기관)", 38, 40, "E02.pdf"], ["사업계획서(지자체)", 41, 41, "E03.pdf"], ["사업결과보고서(사업수행기관)", 42, 44, "E04.pdf"], ["사업결과보고서(지자체)", 45, 45, "E05.pdf"], ["사업정산보고서", 46, 46, "E06.pdf"], ["월별 실적 보고", 47, 47, "E07.pdf"], ["공동육아나눔터 사업 현황", 48, 48, "E08.pdf"], ["공동육아나눔터 이용대장", 49, 49, "E09.pdf"], ["돌봄품앗이 가입신청서", 50, 50, "E10.pdf"], ["돌봄품앗이 월별 계획서", 51, 51, "E11.pdf"], ["돌봄품앗이 활동일지", 52, 52, "E12.pdf", "poomasi"], ["만족도조사지(프로그램·교육 참가자용)", 53, 53, "E13.pdf"], ["개인정보 수집·이용 및 제공 동의서(품앗이 가입자)", 54, 54, "E14.pdf"], ["개인정보 수집·이용동의서(강사 등)", 55, 55, "E15.pdf"], ["주간 안전관리 점검표(사업수행기관)", 56, 56, "E16.pdf"], ["반기별 안전관리 점검표(지자체)", 57, 57, "E17.pdf"], ["이용자 관리카드(맞벌이가구 자녀돌봄시설)", 58, 58, "E18.pdf"], ["응급처치 및 귀가 동의서(맞벌이가구 자녀돌봄시설)", 59, 59, "E19.pdf"], ["운영 일일 현황(맞벌이가구 자녀돌봄시설)", 60, 60, "E20.pdf"], ["근로확인서(맞벌이가구 자녀돌봄시설)", 61, 61, "E21.pdf"]]}, {"g": "F. 다문화가족 방문교육", "b": "2권 Ⅶ장", "L": [["사회보장급여 신청(변경)서", 109, 112, "F01.pdf"], ["방문교육서비스 본인부담금 적용 사업 신청서", 113, 113, "F02.pdf"], ["방문교육서비스 환불계좌 신규(변경) 신청서", 114, 114, "F03.pdf"], ["방문교육서비스 대상자 이용 확인서", 115, 115, "F04.pdf"], ["방문교육서비스(한국어교육·부모교육·자녀생활) 확인서", 116, 116, "F05.pdf"]]}, {"g": "G. 결혼이민자 역량강화지원", "b": "2권 Ⅶ장", "L": [["사업계획서", 193, 194, "G01.pdf"], ["사업결과보고서", 195, 197, "G02.pdf"], ["수강 신청서", 198, 198, "G03.pdf"], ["개인정보 수집·이용 및 제공 동의서", 199, 200, "G04.pdf"], ["이수정지(서비스중지) 및 제적 관리대장", 201, 201, "G05.pdf"]]}, {"g": "H. 다문화가족 교류소통공간", "b": "2권 Ⅷ장", "L": [["연간사업계획서", 233, 235, "H01.pdf"], ["연간사업결과보고서", 236, 241, "H02.pdf"], ["프로그램 세부 계획서(예시)", 242, 245, "H03.pdf"], ["이용대장", 246, 246, "H04.pdf"], ["이용수칙(예시)", 247, 247, "H05.pdf"]]}, {"g": "I. 다문화 자녀 진로설계지원", "b": "2권 Ⅹ장", "L": [["사업계획서", 271, 273, "I01.pdf"], ["사업결과보고서", 274, 275, "I02.pdf"], ["사업실적(양식)", 276, 276, "I03.pdf"], ["상담과정 기록지", 277, 277, "I04.pdf", "careerlog"]]}, {"g": "J. 다문화 자녀 기초학습지원", "b": "2권 Ⅹ장", "L": [["사업계획서", 287, 289, "J01.pdf"], ["사업결과보고서", 290, 291, "J02.pdf"], ["사업실적(양식)", 292, 292, "J03.pdf"], ["학습관리 기록지", 293, 295, "J04.pdf", "learnlog"]]}, {"g": "K. 다문화가족 자녀 교육활동비", "b": "2권 Ⅹ장", "L": [["사업계획서", 307, 309, "K01.pdf"], ["사업결과보고서", 310, 311, "K02.pdf"], ["사업실적(양식)", 312, 312, "K03.pdf"]]}, {"g": "L. 결혼이민자 직업훈련교육", "b": "2권 Ⅺ장", "L": [["사업계획서(가족센터·다문화가족센터용)", 335, 340, "L01.pdf"], ["사업계획서(직업훈련기관용)", 341, 347, "L02.pdf"], ["사업결과보고서(가족센터·다문화가족센터용)", 348, 352, "L03.pdf"], ["사업결과보고서(직업훈련기관용)", 353, 355, "L04.pdf"], ["사업비 정산보고서", 356, 357, "L05.pdf"], ["만족도 조사", 358, 358, "L06.pdf"], ["결혼이민자 취업준비도 조사 설문지 (붙임1)", 359, 360, "L07.pdf"]]}];
@@ -1383,6 +1388,104 @@ BIZ[4]={name:'결혼이민자 지원',ready:true,
  ]};
 
 
+
+/* --- 예시 (모두 가상: 가온시 가족센터) --- */
+var EX={
+ needs:{who:'가족A (한부모, 초2 자녀)',no:'2026-보듬-031',date:'2026. 11. 19.',kind:'신규',
+  rows:'6 / "아이랑 말이 안 통해요" / 자녀와 하루 대화 10분 미만, 야간 근무로 저녁 시간 부족 / 강점: 관계 회복 의지 · 장애물: 야간 근무 / 부모-자녀 소통 개선 / 중 / 부모교육 연계\n8 / "숙제를 못 봐 줘요" / 초2 자녀 받아쓰기 점수 낮음, 학교 상담교사 연락 받음 / 강점: 학교 협조 · 장애물: 한국어 읽기 부담 / 기초학습 지원 / 중 / 보듬매니저 학습·정서지원 연계\n9 / "쉬는 날도 집안일만 해요" / 여가 활동 없음 / 강점: 산책 좋아함 · 장애물: 시간 부족 / 여가 기회 확대 / 하 / 가족 나들이 프로그램 안내',
+  str:'자녀와의 관계 회복 의지가 강함, 학교 담임과 연락이 잘 됨',obs:'야간 근무, 주변에 도움받을 가족 없음',
+  vision:'"아이랑 저녁 한 끼는 같이 먹으면서 이야기하고 싶어요."',
+  opin:'양육 부담과 시간 부족이 핵심 욕구로 보임. 부모교육과 학습·정서지원을 우선 연계하고 3개월 뒤 재사정 필요.'},
+ svcplan:{nth:'1',term:'2026. 11. 19. ~ 2027. 5. 18.',no:'2026-보듬-031',who:'가족A',date:'2026. 11. 20.',
+  i1:'양육 스트레스 호소 주 1회 이하',i2:'부모교육 8회 중 6회 이상 참여',i3:'스스로 지역 자원 1곳 이상 이용',
+  f1:'자녀와 주 3회 이상 10분 대화',f2:'주말 가족 활동 월 2회',f3:'가족기능 척도 사후 점수 향상',
+  rows:'가족관계 / 자녀와 주 3회 대화 / 본인·자녀 / 1 / 1주 이내 / 부모교육 / 가온시 가족센터 / 사례관리사 / 집단교육 / 8주 / 1\n자녀교육 / 받아쓰기 복습 습관 / 자녀 / 2 / 한달 이내 / 학습·정서지원 / 가온시 가족센터 / 보듬매니저 / 가정방문 / 6개월 / 2\n일상생활 / 가족 여가 시간 확보 / 본인·자녀 / 3 / 3개월 이내 / 가족 나들이 프로그램 / 가온시 가족센터 / 가족사업 담당 / 집단 프로그램 / 3개월 / 월 1'},
+ process:{no:'2026-보듬-031',who:'가족A',date:'11. 19.',need:'양육·학습 지원',step:'욕구 및 강점사정',tgt:'본인',
+  cont:'욕구 및 강점 사정지 함께 작성. 자녀와 대화 부족, 학습 지원 필요를 본인이 직접 말함.',meth:'내방',next:'11. 26. 서비스 계획 설명 및 동의'},
+ casemeet:{goal:'가족A 서비스 계획 확정',when:'2026. 11. 20. 14:00',where:'가온시 가족센터 2층 상담실',att:'사례관리사 2, 팀장, 보듬매니저 1',mgr:'사례관리사',who:'가족A',no:'2026-보듬-031',
+  cont:'사정 결과 공유: 가족관계(중), 자녀교육(중), 일상생활(하).\n보듬매니저 학습·정서지원 주 2회 가능 여부 논의 → 화·목 오후 가능.\n부모교육 12월 개강반 참여 권유하기로 함.',
+  res:'1) 부모교육 연계 — 사례관리사, 11. 27.까지\n2) 보듬매니저 파견 시작 — 팀장, 12. 2.부터\n3) 3개월 뒤 재사정 — 사례관리사, 2027. 2. 20.'},
+ actlog:{date:'2026. 12. 2.',when:'12. 2. (16:00 ~ 18:00)',man:'보듬매니저 ○○○',who:'가족A 자녀',crisis:'아니오',
+  cont:'16:00 받아쓰기 복습 (받침 있는 글자 10개)\n16:40 그림책 함께 읽기 20분\n17:10 숙제 확인, 내일 준비물 챙기기\n지난주보다 집중 시간이 10분 늘어남.',
+  opin:'칭찬에 반응이 좋음. 다음 회기에는 스스로 읽기 시간을 늘려 보겠음.'},
+ close:{who:'가족A',no:'2026-보듬-031',date:'2027. 5. 18.',type:'목표달성 후 종결',proc:'사후관리 실시',
+  svc:'부모교육 / 가온시 가족센터 / 8회 / 2026. 12.~2027. 2.\n학습·정서지원 / 보듬매니저 / 46회 / 2026. 12.~2027. 5.',
+  goal:'자녀와 주 3회 대화 / 주 4회로 늘어남 (부모 보고, 4월 상담)\n양육 스트레스 호소 주 1회 이하 / 월 1~2회로 줄어듦 (상담 기록)',
+  opin:'목표를 대부분 달성했고 본인이 지역 도서관 프로그램을 스스로 찾아 이용하기 시작함. 종결하고 사후관리로 전환.',
+  after:'1개월: 전화 확인 / 3개월: 내방 상담 / 6개월: 프로그램 연계 확인'},
+ refer:{kind:'신청',date:'2026. 11. 21.',dept:'가온시 가족센터 가족지원팀',mtel:'063-000-0000',rorg:'가온시 정신건강복지센터',rdate:'2026. 11. 21.',rman:'[확인 필요]',rtel:'[확인 필요]',
+  house:['모자가구'],need:'양육 스트레스로 인한 정서 지원 상담',prob:'야간 근무와 혼자 양육으로 지친 상태를 본인이 호소함.\n전문 정서 상담 연계를 원함.',svc:'개별 정서 상담',att:'서비스 이용 동의서 1부'},
+ plan:{owner:'가온시 가족센터 (위탁기관명: ○○복지재단)',mode:'위탁(사회복지법인)',term:'2027. 1. 1. ∼ 2027. 12. 31.',
+  area1:'한부모·조손가족 비율이 도내 평균보다 높음 [확인 필요: 통계 출처]. 농촌 지역이 넓어 이동 거리가 김.',
+  dir:'가족 누구나 가까이에서 이용하는 센터\n취약가족은 사례관리로 끝까지 함께',main:'가족관계: 부모교육, 아버지 참여 주말 프로그램\n가족돌봄: 공동육아나눔터 품앗이\n지역특화: 가족사랑의 날 운영계획 별도 첨부',
+  base:'「건강가정기본법」 제35조, 「다문화가족지원법」 제12조',goal:'가족관계 증진과 가족 돌봄 부담 완화',area2:'2026 가온시 가족실태조사 요약 [확인 필요]',
+  prev:'가족관계 / 부모교육 12회, 연인원 180명 / 양육효능감 사전·사후 향상 [확인 필요: 점수]\n가족돌봄 / 품앗이 6개 그룹 운영 / 참여 가족 재참여율 높음',
+  fix:'가족돌봄 / 맞벌이 가정 참여 저조 / 토요일 오전반 신설',
+  how:'가족관계: 부모교육 8회기 × 2기, 아버지-자녀 주말 놀이터 월 2회\n가족돌봄: 품앗이 8개 그룹, 월 1회 전체 모임',
+  sched:'가족관계 / 함께 크는 부모교육 / 30명 / 3~5월, 9~11월 / \n가족관계 / 아빠랑 주말 놀이터 / 15가족 / 4~11월 월 2회 / 토요일\n가족돌봄 / 돌봄품앗이 / 8그룹 / 연중 / 공동육아나눔터',
+  eval:'가족관계 / 부모 양육효능감 / 사전·사후 척도 / [확인 필요]\n가족돌봄 / 품앗이 만족도 / 공통 만족도 조사 / 4.0점 이상',
+  staffs:'팀장 / 사업 총괄 / \n사례관리사 / 온가족보듬 / \n가족사업 담당 / 부모교육·품앗이 / ',
+  pr:'센터 홈페이지·블로그, 읍면동 행정복지센터 게시, 어린이집 가정통신문',safe:'야외 활동 전 안전교육, 행사 보험 가입, 응급 연락망',
+  eff:'부모 양육효능감 향상\n맞벌이 가정 참여 확대',bud:'급여 / 4명 × 12월 / [확인 필요] / / / / / \n회의비 / 12회 × 50천원 / 600 / 300 / 150 / 150 / 0 / 0'},
+ result:{term:'2026. 1. 1. ~ 2026. 12. 31.',mt:'[확인 필요]',m1:'[확인 필요]',m2:'[확인 필요]',m3:'[확인 필요]',m4:'0 (0%)',
+  goal:'가족관계 증진과 가족 돌봄 부담 완화',cont:'부모교육, 아버지 참여 프로그램, 돌봄품앗이, 가족사랑의 날 운영',perf:'세부사업 12개, 연인원 1,240명 (실적표 기준)',out:'부모교육 참여자 양육효능감 사전·사후 향상 [확인 필요: 점수]',loop:'맞벌이 가정 참여 확대를 위해 토요일 오전반 신설',
+  tot:'사업수 / 12 / 4 / 3 / 3 / 2\n회기수 / 96 / 40 / 24 / 20 / 12\n참여인원 / 1,240 / 420 / 300 / 280 / 240\n만족도 / 4.5 / 4.6 / 4.4 / 4.5 / 4.6',
+  rows:'가족관계 / 함께 크는 부모교육 / 부모교육 8회기 × 2기 / 16회 / 16회 / 4.6 / \n가족관계 / 아빠랑 주말 놀이터 / 아버지-자녀 놀이 / 16회 / 14회 / 4.5 / 폭염·장마로 2회 취소',
+  opr:'아버지 참여 가족이 다음 회차를 스스로 기획하는 등 자발적 참여가 늘어남.',
+  kpi:'가족관계 / 부모 양육효능감 / 10% 향상 / [확인 필요] / [확인 필요]',kpitxt:'지역 신문 보도 1건 [확인 필요]',
+  good:'만족도 4.5점, 재참여 가족 증가',bad:'여름철 야외 프로그램 취소, 맞벌이 가정 참여 저조',next:'실내 대체 프로그램 마련, 토요일 오전반 신설',
+  proof:'1 / 보고서 / 2026 가족사랑의 날 결과집 / 1 / \n2 / 포스터 / 부모교육 모집 포스터 / 2 / \n3 / 홍보물 / 카드뉴스 / 4 / '},
+ poomasi:{name:'토요 숲놀이 품앗이',writer:'품앗이 대표 ○○○',when:'2026년 11월 21일 10시 ~ 12시',place:'가온시 숲 체험장',hh:'5',dual:'2',
+  cont:'가을 낙엽 놀이와 솔방울 만들기.\n부모 2명이 진행, 나머지 부모는 간식·사진 담당.\n다음 모임 장소와 담당을 함께 정함.',photo:'별첨 3매',eval:'날씨가 추워지면 실내 장소가 필요함 → 12월은 나눔터에서 진행 건의'},
+ careerlog:{no:'2026-진로-007',who:'청소년C (중2)',rows:'11. 12. / 진로: 요리에 관심, 직업체험 희망 / 11월 직업체험 연계\n11. 19. / 학교생활: 친구 관계 회복 중 / 12월 진로검사 후 종결 여부 판단\n12. 10. / 진로검사 결과 설명, 조리 관련 고교 정보 / 종결 (사후 모니터링 1회)'},
+ learnlog:{mgr:'기초학습 담당 ○○○',link:'2026. 3. 4.',age:'8',sex:'남',sch:'가온초 1학년',prel:'모',cls:['문해 영역'],grp:'문해 1반 · 2026. 3. 4.',inprog:'공동육아나눔터 놀이',etc:'',
+  cog:'받침 없는 글자는 읽으나 받침 있는 글자는 어려워함',non:'처음에는 수줍어했으나 또래와 놀이에서 적극적',
+  rows:'3월 / 받침 없는 글자 읽기 / 출석 8/8, 집중 15분\n4월 / 받침 있는 글자 / 출석 7/8, 스스로 읽기 시도\n5월 / 짧은 문장 읽기 / 출석 8/8, 발표 늘어남',
+  ccoun:'4. 15. / 학교에서 친구가 생김, 읽기가 재미있다고 함',pcoun:'4. 17. / 집에서 그림책 10분 읽기 안내',nplan:'6. 1. / 받아쓰기 연습 추가'},
+ apply:{items:'2026 가족사랑의 날 가족 피크닉\n아빠랑 주말 놀이터 (12월)'},
+ satis:{prog:'2026 가족사랑의 날 가족 피크닉',add:'다음에도 가족과 함께 참여하고 싶다.\n안내 문자가 이해하기 쉬웠다.'}
+};
+/* 다른 AI에 넣을 예시 메모 */
+var EXM={
+ needs:'11/19 초기 사정 메모 (가족A)\n- 엄마: "아이랑 말이 안 통해요. 저녁엔 일하러 가요"\n- 초2 아이 받아쓰기 점수 낮음, 담임 연락 옴\n- 쉬는 날도 집안일만 함, 산책은 좋아함\n- 본인 목표: 저녁 한 끼는 같이 먹으며 이야기',
+ svcplan:'11/20 사례회의 결과\n- 부모교육 12월반 연계 (1주 이내)\n- 보듬매니저 학습지원 화·목 (한달 이내 시작)\n- 가족 나들이 프로그램 안내 (3개월 이내)',
+ process:'11/19 내방. 욕구·강점 사정지 같이 씀. 대화 부족, 학습 지원 필요 본인이 말함. 다음: 11/26 계획 설명',
+ casemeet:'11/20 14시 상담실 사례회의 (사례관리사2, 팀장, 보듬매니저1)\n가족A 사정 결과 공유. 보듬매니저 화목 가능.\n부모교육 12월 권유. 3개월 뒤 재사정.',
+ actlog:'12/2 4시~6시 가족A 아이 학습지원\n받아쓰기 받침 10개, 그림책 20분, 숙제 확인\n집중 시간 10분 늘었음. 칭찬에 반응 좋음',
+ close:'5/18 종결 상담\n부모교육 8회 끝, 학습지원 46회\n대화 주 4회로 늘었다고 함. 스트레스 월 1~2회로 줄었다고 함\n도서관 프로그램 스스로 다님 → 종결, 사후관리',
+ refer:'11/21 가족A 정신건강복지센터 연계 원함\n야간 근무+혼자 양육으로 지침, 정서 상담 원함\n동의서 받음',
+ plan:'작년 결과: 부모교육 12회 연인원 180명, 품앗이 6그룹\n아쉬운 점: 맞벌이 참여 적음 → 토요일반\n올해: 부모교육 2기, 아빠 놀이터 월2회, 품앗이 8그룹',
+ result:'올해 실적: 사업 12개, 회기 96, 연인원 1,240명, 만족도 4.5\n아빠 놀이터 16회 계획 중 14회 (폭염·장마 2회 취소)\n성과물: 결과집 1, 포스터 2, 카드뉴스 4',
+ poomasi:'11/21 토 10~12시 숲체험장 품앗이 5가구(맞벌이 2)\n낙엽 놀이, 솔방울 만들기\n12월은 추우니 나눔터에서',
+ careerlog:'11/12 요리 관심, 직업체험 원함 → 11월 체험 연계\n11/19 친구 관계 좋아지는 중 → 12월 진로검사',
+ learnlog:'3월 받침 없는 글자, 출석 8/8\n4월 받침 있는 글자, 7/8, 스스로 읽기\n4/17 엄마 상담: 집에서 그림책 10분',
+ apply:'신청: 가족사랑의 날 피크닉, 아빠랑 주말 놀이터 12월',
+ satis:'응답 25명\n1번 문항: 매우 그렇다 15, 그렇다 8, 보통 2\n자유 의견: "아이가 너무 좋아했어요", "시간이 조금 짧았어요"'
+};
+function fillEx(){var E=EX[CF.id];if(!E)return;var n=0;
+  CF.qs.forEach(function(q){if(q.priv)return;var v=E[q.k];if(v==null||v==='')return;var cur=VAL[q.k];if(cur&&(!Array.isArray(cur)||cur.length))return;
+    VAL[q.k]=Array.isArray(v)?v.slice():v;n++;
+    if(q.t==='one'||q.t==='many'){var box=$('#f-qs').children[CF.qs.indexOf(q)];if(box)box.querySelectorAll('.opts button').forEach(function(b){var on=Array.isArray(VAL[q.k])?VAL[q.k].indexOf(b.textContent)>-1:VAL[q.k]===b.textContent;b.classList.toggle('on',on);});}
+    else{var inp=document.getElementById('fq-'+q.k);if(inp)inp.value=VAL[q.k];}});
+  renderDoc();toast(n?'예시를 빈칸에 넣었어요. 모두 가상 "가온시 가족센터" 예시예요.':'빈칸이 없어요. [예시 지우기]로 비운 뒤 다시 눌러 보세요.');}
+function clearForm(){openForm(CF.id);toast('입력한 내용을 모두 지웠어요.');}
+
+$('#f-ex').onclick=fillEx;$('#f-clear').onclick=clearForm;
+var AEX=false;
+$('#aig-ex').onclick=function(){AEX=!AEX;renderAI();toast(AEX?'예시 메모를 넣은 프롬프트예요. 실제로 쓸 땐 내 메모로 바꾸세요.':'예시 메모를 뺐어요.');};
+function exify(t){if(!AEX||!EXM[CF.id])return t;return t.replace('(여기에 메모를 붙여 넣거나, 손메모 사진을 첨부하세요)',EXM[CF.id]).replace('(엑셀 표나 응답을 붙여 넣기)',EXM[CF.id]);}
+/* 간단 도구 예시 */
+function setEx(k,arr){var f=(SIMPLE[k].f||[]).find(function(x){return !x.o;});if(f)f.ex=arr;}
+setEx('idea',['예산 300만원, 센터 2층 프로그램실(20명), 작년 아버지 참여가 적었음, 토요일 오전 선호','다문화가족이 많은 읍 지역, 차량 지원 필요, 통역 가능 직원 1명']);
+setEx('event',['11월 셋째 주 토요일 10~15시, 가온시 숲 체험장, 초등 자녀 가족 20가족, 버스 1대, 도시락 제공','12월 둘째 주 금요일 18~20시, 센터 강당, 송년 가족의 밤, 30가족, 다문화가족 포함']);
+setEx('msg',['11/22(토) 10시 가족 놀이 프로그램, 센터 2층, 실내화 지참, 주차 2시간 무료','지난주 연락 없이 불참하셔서 확인 연락드림, 다음 회차 12/6(토) 참여 여부 알려 주시기']);
+setEx('promo',['아빠랑 주말 놀이터, 12월 매주 토 10시, 5~7세 자녀와 아빠, 선착순 10가족, 무료, 센터 전화 신청','공동육아나눔터 품앗이 가족 모집, 2월 10일까지, 영유아·초등 가족, 함께 놀이하고 돌봄 나누기']);
+setEx('img',['11월 22일(토) 10시, 가온시 가족센터 앞마당, 초등 자녀 가족 20가족, 선착순 무료','12월 매주 토요일 10시, 센터 2층 놀이실, 5~7세 자녀와 아빠 10가족']);
+setEx('budget',['비목\t예산\t집행액\t잔액\n강사비\t1,200,000\t1,000,000\t200,000\n재료비\t800,000\t850,000\t-50,000\n간식비\t300,000\t300,000\t\n합계\t2,300,000\t2,150,000\t250,000']);
+/* 다국어·마음 쉼터 예시 */
+[['m-in',['11월 22일 토요일 오전 10시, 가족 놀이 프로그램. 장소는 센터 2층. 아이와 함께 오세요. 실내화를 가져오세요.','12월 6일 부모교육이 12월 13일로 바뀌었습니다. 시간과 장소는 같아요.']],
+ ['h-in',['오늘 위기가정 방문하고 와서 마음이 무거워요. 보고서는 밀려 있고, 잘하고 있는 건지 모르겠어요.','하루 종일 민원 전화를 받았더니 목소리도 안 나오고 지쳤어요.']]].forEach(function(x){var ta=document.getElementById(x[0]);if(!ta)return;var ch=el('div','chips');x[1].forEach(function(t,i){var b=el('button',null,'예시 '+(i+1)+' 넣기');b.type='button';b.onclick=function(){ta.value=t;ta.dispatchEvent(new Event('input'));};ch.appendChild(b);});ta.parentNode.insertBefore(ch,ta.nextSibling);});
+
 /* --- 회의 녹음 파일 → 회의록·공문 --- */
 var TP='첨부한 녹음 파일을 요약하지 말고 들리는 그대로 글로 옮겨 줘.\n- 말한 사람이 바뀌면 줄을 바꾸고 "말한 사람1:", "말한 사람2:"처럼 표시해.\n- 줄 앞에 시간(분:초)을 붙여 줘.\n- 잘 안 들린 부분은 지어내지 말고 [불명확]으로 표시해.\n- 이름이 나오면 역할(팀장, 담당자 등)로 바꿔 줘.\n- 다 옮긴 뒤 마지막에 "총 몇 분, 말한 사람 몇 명"만 한 줄로 알려 줘.';
 var MK='min';
@@ -1412,6 +1515,7 @@ $('#mt-gpt').onclick=function(){openGPT(meetP());};
 $('#mt-claude').onclick=function(){openAt('https://claude.ai/new',meetP(),'Claude');};
 $('#mt-gem2').onclick=function(){openAt('https://gemini.google.com/app',meetP(),'제미나이');};
 $('#mt-copy').onclick=function(){copy(meetP());};
+$('#mt-ex').onclick=function(){$('#mt-in').value='00:05 말한 사람1(팀장): 가족사랑의 날 행사 날짜부터 정하죠. 11월 22일 토요일 어때요?\n00:20 말한 사람2(담당자 1): 22일 좋습니다. 장소는 센터 앞마당으로 하고, 비 오면 강당으로 하겠습니다.\n00:41 말한 사람1(팀장): 모집은 20가족, 선착순으로. 안내문은 언제까지 나가요?\n00:55 말한 사람3(담당자 2): 11월 10일까지 문자랑 카드뉴스로 보내겠습니다.\n01:12 말한 사람1(팀장): 읍사무소에 장소 협조 공문도 보내 주세요. [불명확] 까지요.\n01:30 말한 사람2(담당자 1): 네, 공문은 제가 하겠습니다.';$('#mt-p').innerHTML=markP(meetP());toast('가상 전사본을 넣었어요. [불명확] 부분은 직접 고쳐 보세요.');};
 
 /* --- 녹음 → 글 화면 --- */
 function openRec(){show('rec');}
