@@ -378,7 +378,7 @@ a.b-how{text-decoration:none;display:inline-block}
           <button type="button" class="btn" id="aig-gpt">ChatGPT 열기</button>
           <button type="button" class="btn" id="aig-claude">Claude 열기</button>
           <button type="button" class="btn" id="aig-gem">제미나이 열기</button>
-          <button type="button" class="btn" id="aig-nlm">노트북LM 열기</button>
+          <button type="button" class="btn" id="aig-nlm">Gemini 노트북 열기</button>
           <button type="button" class="btn exb" id="aig-ex">예시 메모 넣어 보기</button>
         </div>
         <h4><i>4</i>이렇게 나오면 성공</h4><ul class="ok" id="aig-ok"></ul>
@@ -390,7 +390,7 @@ a.b-how{text-decoration:none;display:inline-block}
       <table class="rtab">
         <tr><th>내 상황</th><th>추천</th><th>이렇게 해요</th></tr>
         <tr><td>지금부터 회의·면담을 녹음할 수 있다</td><td><b>네이버 클로바노트</b><br><small>무료 월 300분, 말한 사람 구분</small></td><td>앱으로 녹음 → 글로 바뀌면 [텍스트 복사] → ChatGPT·Claude에 서식 첨부 + 프롬프트 + 붙여넣기</td></tr>
-        <tr><td>녹음 파일이 있고, 근거 확인이 중요하다 (회의록·사례회의록)</td><td><b>노트북LM</b><br><small>무료, 파일당 200MB</small></td><td>[소스 추가]로 서식 파일과 녹음 파일을 올림 → 받아쓴 글 확인 → 프롬프트 붙여넣기 → 답변의 출처 번호로 확인 → 복사해 서식에</td></tr>
+        <tr><td>녹음 파일이 있고, 근거 확인이 중요하다 (회의록·사례회의록)</td><td><b>Gemini 노트북</b><br><small>무료, 파일당 200MB</small></td><td>[소스 추가]로 서식 파일과 녹음 파일을 올림 → 받아쓴 글 확인 → 프롬프트 붙여넣기 → 답변의 출처 번호로 확인 → 복사해 서식에</td></tr>
         <tr><td>10분 이하 짧은 녹음, 빨리 끝내고 싶다</td><td><b>제미나이</b><br><small>무료는 10분 안팎</small></td><td>입력창 [+]로 서식 파일 + 녹음 파일 첨부 → 프롬프트 붙여넣기</td></tr>
         <tr><td>ChatGPT 유료를 쓴다 (긴 파일)</td><td><b>ChatGPT</b><br><small>유료만 녹음 첨부 가능</small></td><td>[ChatGPT 열기] → [+]로 서식 + 녹음 첨부 → 전송 → 워드로 받기</td></tr>
         <tr><td>Claude로 쓰고 싶다</td><td><b>Claude</b><br><small>녹음 파일 변환 기능 없음</small></td><td>위 앱에서 먼저 글로 바꾼 뒤 → Claude에 서식 첨부 + 프롬프트 + 받아쓴 글 붙여넣기</td></tr>
@@ -487,7 +487,7 @@ a.b-how{text-decoration:none;display:inline-block}
   <div class="tool">
     <h3>한눈에 비교 <small style="font-weight:400;color:var(--muted);font-size:12.5px">2026년 10월 확인 기준 · 앱 조건은 자주 바뀌어요</small></h3>
     <div class="tscroll"><table class="rtab">
-      <tr><th>구분</th><th>클로바노트</th><th>노트북LM</th><th>제미나이</th><th>ChatGPT</th><th>Claude</th></tr>
+      <tr><th>구분</th><th>클로바노트</th><th>Gemini 노트북<br><small style="font-weight:400">(구 NotebookLM)</small></th><th>제미나이</th><th>ChatGPT</th><th>Claude</th></tr>
       <tr><td>녹음 파일 → 글</td><td>무료 월 300분</td><td>무료 (파일당 200MB)</td><td>무료는 10분 안팎</td><td><b>유료만</b></td><td><b>안 됨</b></td></tr>
       <tr><td>한 번에</td><td>180분, 300MB</td><td>200MB</td><td>유료 한도 [확인 필요]</td><td>512MB (긴 파일은 나눠서)</td><td>—</td></tr>
       <tr><td>형식</td><td>m4a·mp3·aac·amr·wav</td><td>mp3·wav·m4a 등</td><td>mp3·m4a·wav</td><td>mp3·wav·m4a</td><td>—</td></tr>
@@ -500,14 +500,14 @@ a.b-how{text-decoration:none;display:inline-block}
       <ol class="rsteps"><li>휴대폰에 <b>네이버 클로바노트</b> 앱 설치 → 네이버 로그인</li><li>회의 시작 전 가운데 <b>[녹음]</b> → 참석 인원 선택 (말한 사람 구분용)</li><li>회의가 끝나면 <b>[녹음 종료]</b> → 1~3분 기다리면 글로 바뀌어요</li><li>'참석자 1, 2'를 이름 대신 <b>역할(팀장·담당자)</b>로 바꾸기</li><li><b>[공유] → 텍스트 복사</b> → 서식 화면의 [ChatGPT 열기]나 [Claude 열기]</li><li>서식 파일 첨부 → 프롬프트 붙여넣기 → 맨 아래 [받아쓴 글]에 붙여넣기 → 전송</li></ol>
       <p class="rok">성공: 서식 순서대로 나오고 녹음에 없던 내용은 [확인 필요]</p>
       <p class="rmiss">주의: '데이터 제공 동의'(600분)는 녹음이 서비스 개선에 쓰일 수 있다는 뜻 → <b>상담·사례 녹음엔 켜지 마세요</b></p></div>
-    <div class="tool"><h3><span class="rn">B</span>노트북LM <small>정확성이 중요할 때 (무료)</small></h3>
+    <div class="tool"><h3><span class="rn">B</span>Gemini 노트북 <small>구 NotebookLM · 정확성이 중요할 때 (무료)</small></h3>
       <ol class="rsteps"><li><b>notebooklm.google.com</b> → 구글 로그인 → <b>[새 노트북]</b></li><li><b>[소스 추가]</b> → 우리 서식 파일 (PDF·워드, 한글은 변환해서)</li><li>다시 <b>[소스 추가]</b> → 녹음 파일 → 글로 바뀔 때까지 기다리기</li><li>왼쪽 소스에서 녹음을 눌러 <b>받아쓴 글의 이름·날짜·숫자 확인</b></li><li>채팅창에 서식 화면의 프롬프트 붙여넣기 → 전송</li><li>답변의 <b>출처 번호</b>를 눌러 결정사항이 실제 녹음에 있는지 확인 → 복사해 우리 서식에</li></ol>
       <p class="rok">성공: 문장마다 출처 번호가 붙어 있고, 누르면 녹음 원문이 보여요</p>
       <p class="rmiss">주의: 구글 드라이브에 있는 녹음은 바로 못 가져와요 → 내 컴퓨터로 내려받아 올리기</p></div>
     <div class="tool"><h3><span class="rn">C</span>제미나이 <small>짧은 녹음 (10분 안팎)</small></h3>
       <ol class="rsteps"><li><b>gemini.google.com</b> 또는 제미나이 앱 → 로그인</li><li>입력창 <b>[+]</b> → 우리 서식 파일 첨부</li><li>다시 <b>[+]</b> → 녹음 파일 첨부</li><li>서식 화면에서 '녹음이 있어요' 프롬프트 복사 → 붙여넣기 → 전송</li><li>받아쓴 글 확인 후 "작성해 줘"</li></ol>
       <p class="rok">성공: 받아쓴 글이 먼저 나오고, 안 들린 곳은 [불명확]</p>
-      <p class="rmiss">주의: 길면 잘리거나 첨부가 안 돼요 → 클로바노트나 노트북LM으로</p></div>
+      <p class="rmiss">주의: 길면 잘리거나 첨부가 안 돼요 → 클로바노트나 Gemini 노트북으로</p></div>
     <div class="tool"><h3><span class="rn">D</span>ChatGPT <small>유료 사용자, 긴 녹음</small></h3>
       <ol class="rsteps"><li>서식 화면에서 <b>[ChatGPT 열기]</b> (프롬프트가 미리 들어가요)</li><li>입력창 <b>[+]</b> → 우리 서식 파일 + 녹음 파일 첨부</li><li>전송 → 받아쓴 글 확인 → "작성해 줘"</li><li>"워드 파일로 줘" → 받아서 우리 서식과 비교</li></ol>
       <p class="rok">성공: 서식과 같은 칸의 워드 파일이 나와요</p>
@@ -547,8 +547,8 @@ a.b-how{text-decoration:none;display:inline-block}
         <li>아래 <b>[전사 프롬프트 복사]</b> → 입력창에 붙여넣기 → 전송</li>
         <li>글이 나오면 답변 아래 <b>[복사]</b> 아이콘 (휴대폰은 답변을 길게 눌러 복사)</li>
         <li>3단계 칸에 붙여넣기</li></ol>
-        <p class="rmiss">길어서 안 올라가면 → 노트북LM으로</p></div>
-      <div class="mcol"><h4>노트북LM <small>긴 회의 (무료, 파일당 200MB)</small></h4><ol class="rsteps">
+        <p class="rmiss">길어서 안 올라가면 → Gemini 노트북으로</p></div>
+      <div class="mcol"><h4>Gemini 노트북 <small>긴 회의 (무료, 파일당 200MB)</small></h4><ol class="rsteps">
         <li><b>notebooklm.google.com</b> → <b>[새 노트북]</b></li>
         <li><b>[소스 추가]</b> → <b>파일 업로드</b> → 녹음 파일 선택 → 글로 바뀔 때까지 기다리기</li>
         <li>채팅창에 <b>[전사 프롬프트]</b> 붙여넣기 → 전송</li>
@@ -561,8 +561,8 @@ a.b-how{text-decoration:none;display:inline-block}
         <li><b>[공유] → 텍스트 복사</b> → 3단계 칸에 붙여넣기</li></ol>
         <p class="rmiss">'데이터 제공 동의'는 상담·사례 녹음에 켜지 마세요</p></div>
     </div>
-    <div class="box" style="margin-top:12px"><h4>전사 프롬프트 (제미나이·노트북LM에 녹음과 함께)</h4><pre id="mt-tp"></pre></div>
-    <div class="acts"><button type="button" class="btn fill" id="mt-tcopy">전사 프롬프트 복사</button><button type="button" class="btn" id="mt-gem">제미나이 열기</button><button type="button" class="btn" id="mt-nlm">노트북LM 열기</button><a class="btn" href="https://clovanote.naver.com/" target="_blank" rel="noopener" style="text-decoration:none">클로바노트 열기</a></div>
+    <div class="box" style="margin-top:12px"><h4>전사 프롬프트 (제미나이·Gemini 노트북에 녹음과 함께)</h4><pre id="mt-tp"></pre></div>
+    <div class="acts"><button type="button" class="btn fill" id="mt-tcopy">전사 프롬프트 복사</button><button type="button" class="btn" id="mt-gem">제미나이 열기</button><button type="button" class="btn" id="mt-nlm">Gemini 노트북 열기</button><a class="btn" href="https://clovanote.naver.com/" target="_blank" rel="noopener" style="text-decoration:none">클로바노트 열기</a></div>
     <p class="rnote">Claude와 무료 ChatGPT는 녹음 파일을 글로 바꾸지 못해요. 위 세 곳 중 하나에서 전사본을 만들어 오세요. (2026년 10월 확인 기준)</p></div>
   <div class="tool mstep"><h3><span class="rn">3</span>전사본 붙여넣고 확인하기</h3>
     <textarea class="f" id="mt-in" style="min-height:160px" placeholder="2단계에서 복사한 전사본을 여기에 붙여 넣으세요."></textarea>
@@ -903,7 +903,7 @@ var BASE=[
  {t:'가족센터용 맞춤설정',p:'나는 가족센터 ○○사업 담당자야.\n- 공공기관 문서에 맞게 쉽고 분명한 말로 답해 줘.\n- 자료에 없는 숫자·날짜·법령은 지어내지 말고 [확인 필요]로 표시해 줘.\n- 결혼이민자 대상 안내는 쉬운 한국어로 쓰고, 요청하면 모국어 원문을 함께 보여 줘.\n- 개인정보가 들어 있으면 먼저 지우라고 알려 줘.'},
  {t:'할루시네이션 방지 한 줄',p:'첨부한 자료에서만 답해 줘. 자료에 없으면 "자료에서 확인할 수 없음"이라고 쓰고, 근거가 된 쪽이나 문장을 함께 알려 줘.'},
  {t:'우리 기관 서식으로 채우게 하는 한 줄',p:'첨부 1은 우리 센터 서식이야. 항목 이름과 순서를 그대로 지켜서 채우고, 서식에 없는 항목은 새로 만들지 마. 자료에 없는 내용은 [확인 필요]로 남기고, 마지막에 서식과 같은 모양의 워드 파일로 줘.'},
- {t:'녹음은 어디서 글로?',p:'지금부터 녹음 → 네이버 클로바노트 (무료, 말한 사람 구분)\n녹음 파일 + 정확성 중요 → 노트북LM (무료, 출처 확인)\n10분 이하 짧은 녹음 → 제미나이\nChatGPT 유료 → 서식 + 녹음 함께 첨부\nClaude → 녹음 파일 변환 기능 없음, 다른 앱에서 글로 바꾼 뒤 붙여넣기\n※ 2026년 10월 확인 기준, 앱 조건은 바뀔 수 있어요'}
+ {t:'녹음은 어디서 글로?',p:'지금부터 녹음 → 네이버 클로바노트 (무료, 말한 사람 구분)\n녹음 파일 + 정확성 중요 → Gemini 노트북 (무료, 출처 확인)\n10분 이하 짧은 녹음 → 제미나이\nChatGPT 유료 → 서식 + 녹음 함께 첨부\nClaude → 녹음 파일 변환 기능 없음, 다른 앱에서 글로 바꾼 뒤 붙여넣기\n※ 2026년 10월 확인 기준, 앱 조건은 바뀔 수 있어요'}
 ];
 /* 이달의 추천: 일정은 「2026 가족사업안내」에서 확인한 것만, 프로그램은 아이디어 */
 var EVERY=['[지침] 전월 예산집행실적 제출 (매월 10일까지)','[지침] 월간 실적 입력 (가족지원통합정보시스템)'];
@@ -1204,7 +1204,7 @@ function aiP(mode){
   L.push('- 다 쓰면 '+(CHECKER[f.cat]||'센터장')+' 입장에서 빠진 항목, 근거 없는 표현, 내가 확인할 것을 3줄로 점검해 줘.');
   L.push('- 마지막에 첨부한 서식과 같은 모양의 워드(.docx) 파일로 받을 수 있게 만들어 줘.');
   if(mode==='memo')L.push('\n[메모]\n(여기에 메모를 붙여 넣거나, 손메모 사진을 첨부하세요)');
-  if(mode==='rec')L.push('\n[받아쓴 글 — 클로바노트·노트북LM에서 바꿨을 때만 붙여 넣기]\n');
+  if(mode==='rec')L.push('\n[받아쓴 글 — 클로바노트·Gemini 노트북에서 바꿨을 때만 붙여 넣기]\n');
   if(AFORM==='base')L.push('\n'+outline(f));
   return L.join('\n');
 }
@@ -1216,7 +1216,7 @@ function aiNeed(mode){if(CF.id==='satis')return ['응답을 모은 엑셀 파일
 function aiSteps(mode){
   if(mode==='rec')return ['아래 <b>녹음 갈림길</b>에서 내 상황에 맞는 앱을 골라요.',
     '<b>ChatGPT(유료)·제미나이(10분 이하)</b>: 입력창 [+]로 서식 파일과 녹음 파일을 함께 첨부 → [프롬프트 복사] → 붙여넣기 → 전송',
-    '<b>클로바노트·노트북LM</b>: 먼저 녹음을 글로 바꿔 복사 → ChatGPT나 Claude에 서식 첨부 → 프롬프트 붙여넣기 → 맨 아래 [받아쓴 글]에 붙여넣기 → 전송',
+    '<b>클로바노트·Gemini 노트북</b>: 먼저 녹음을 글로 바꿔 복사 → ChatGPT나 Claude에 서식 첨부 → 프롬프트 붙여넣기 → 맨 아래 [받아쓴 글]에 붙여넣기 → 전송',
     'AI가 보여 준 <b>받아쓴 글에서 이름·날짜·숫자를 먼저 확인</b>하고 틀린 곳을 고쳐 달라고 해요.',
     '"작성해 줘"라고 보내면 서식이 채워져요 → 워드 파일로 받아 우리 서식과 비교해요.'];
   if(mode==='none')return ['[ChatGPT 열기] 또는 [Claude 열기]를 눌러요.','입력창 왼쪽 [+] → 우리 서식 파일을 첨부해요.','[프롬프트 복사] → 붙여넣기 → 전송하면, 항목별로 준비할 것이 질문으로 나와요.','자료를 모은 뒤 위에서 <b>메모·글이 있어요</b>를 골라 다시 해요.'];
@@ -1253,7 +1253,7 @@ $('#aig-copy').onclick=function(){copy(exify(aiP(AMODE)));};
 $('#aig-gpt').onclick=function(){openGPT(exify(aiP(AMODE)));};
 $('#aig-claude').onclick=function(){openAt('https://claude.ai/new',exify(aiP(AMODE)),'Claude');};
 $('#aig-gem').onclick=function(){openAt('https://gemini.google.com/app',exify(aiP(AMODE)),'제미나이');};
-$('#aig-nlm').onclick=function(){openAt('https://notebooklm.google.com/',exify(aiP(AMODE)),'노트북LM');};
+$('#aig-nlm').onclick=function(){openAt('https://notebooklm.google.com/',exify(aiP(AMODE)),'Gemini 노트북');};
 
 /* --- 전체 서식 105 (2026 가족사업안내 1·2권 서식 목록) --- */
 var ALLF=[{"g": "A. 가족센터 운영", "b": "1권 Ⅱ장", "L": [["국고보조금 교부신청서", 157, 157, "A01.pdf"], ["사업계획서", 158, 163, "A02.pdf", "plan"], ["사업결과보고서", 164, 168, "A03.pdf", "result"], ["사업비 정산보고서", 169, 172, "A04.pdf"]]}, {"g": "A. 취약·위기가족지원 (온가족보듬)", "b": "1권 Ⅱ장", "L": [["대상자 추천서", 173, 173, "A201.pdf"], ["서비스 이용 신청서", 174, 174, "A202.pdf"], ["서비스 이용 동의서", 175, 175, "A203.pdf"], ["개인정보 수집·이용 및 제공 동의서", 176, 176, "A204.pdf"], ["종합정보 기록지", 177, 178, "A205.pdf"], ["욕구 및 강점 사정지", 179, 180, "A206.pdf", "needs"], ["서비스 계획서", 181, 181, "A207.pdf", "svcplan"], ["사례관리과정 기록지", 182, 182, "A208.pdf", "process"], ["사례회의록", 183, 183, "A209.pdf", "casemeet"], ["종결 기록지", 184, 184, "A210.pdf", "close"], ["(공통) 활동 신청서", 185, 185, "A211.pdf"], ["(공통) 면접 채점표", 186, 186, "A212.pdf"], ["양성교육 수료증(보듬매니저)", 187, 187, "A213.pdf"], ["명단", 188, 188, "A214.pdf"], ["(공통) 신분증", 189, 189, "A215.pdf"], ["(공통) 활동 서약서", 190, 190, "A216.pdf"], ["활동 계획서(지원인력)", 191, 191, "A217.pdf"], ["활동일지(지원인력)", 192, 192, "A218.pdf", "actlog"], ["(공통) 활동 확인서", 193, 193, "A219.pdf"], ["서비스 모니터링 기록표", 194, 194, "A220.pdf"], ["연계기관 및 사업 목록", 195, 195, "A221.pdf"], ["서비스 의뢰서", 196, 196, "A222.pdf", "refer"], ["척도1 자기효능감 척도", 197, 197, "A223.pdf"], ["척도2 가족기능 척도", 198, 199, "A224.pdf"], ["척도3 (위기) 위기성 진단 척도", 200, 204, "A225.pdf"], ["척도4 (위기) 외상후스트레스 진단 척도", 205, 206, "A226.pdf"], ["척도5 (위기) 사건충격 척도", 207, 208, "A227.pdf"], ["척도6 가족위기 유형별 위기수준·지원수요 측정도구", 209, 213, "A228.pdf"]]}, {"g": "B. 다문화가족지원센터", "b": "1권 Ⅲ장", "L": [["다문화가족지원센터 지정 신청서", 257, 257, "B01.pdf"], ["다문화가족지원센터 지정서", 258, 258, "B02.pdf"], ["국고보조금 교부신청서", 259, 259, "B03.pdf"], ["다문화가족지원센터 사업계획서", 260, 267, "B04.pdf"], ["다문화가족지원센터 사업결과보고서", 268, 280, "B05.pdf"]]}, {"g": "C. 건강가정지원센터", "b": "1권 Ⅳ장", "L": [["국고보조금 교부신청서", 325, 325, "C01.pdf"], ["건강가정지원센터 사업계획서", 326, 330, "C02.pdf"], ["건강가정지원센터 사업실적보고서", 331, 338, "C03.pdf"], ["건강가정지원센터 사업비 정산보고서", 339, 344, "C04.pdf"]]}, {"g": "D. 공통서식 및 척도", "b": "1권 Ⅴ장 부록", "L": [["표준근로계약서(안) 5종", 351, 358, "D01.pdf"], ["응시원서(안)", 359, 359, "D02.pdf"], ["개인정보 수집·이용 및 제공 동의서(안)", 360, 362, "D03.pdf"], ["회원등록 신청서", 363, 363, "D04.pdf"], ["프로그램 신청서", 364, 364, "D05.pdf", "apply"], ["만족도 조사(예시)", 365, 365, "D06.pdf", "satis"], ["시설안전점검보고서(예시)", 366, 366, "D07.pdf"], ["센터 지도·점검표", 367, 368, "D08.pdf"], ["척도1 가족관계위기징후 척도", 369, 369, "D09.pdf"], ["척도2 가족스트레스 척도(기혼자용/미혼자용)", 370, 374, "D10.pdf"]]}, {"g": "E. 공동육아나눔터", "b": "2권 Ⅵ장", "L": [["국고보조금 교부신청서", 37, 37, "E01.pdf"], ["사업계획서(사업수행기관)", 38, 40, "E02.pdf"], ["사업계획서(지자체)", 41, 41, "E03.pdf"], ["사업결과보고서(사업수행기관)", 42, 44, "E04.pdf"], ["사업결과보고서(지자체)", 45, 45, "E05.pdf"], ["사업정산보고서", 46, 46, "E06.pdf"], ["월별 실적 보고", 47, 47, "E07.pdf"], ["공동육아나눔터 사업 현황", 48, 48, "E08.pdf"], ["공동육아나눔터 이용대장", 49, 49, "E09.pdf"], ["돌봄품앗이 가입신청서", 50, 50, "E10.pdf"], ["돌봄품앗이 월별 계획서", 51, 51, "E11.pdf"], ["돌봄품앗이 활동일지", 52, 52, "E12.pdf", "poomasi"], ["만족도조사지(프로그램·교육 참가자용)", 53, 53, "E13.pdf"], ["개인정보 수집·이용 및 제공 동의서(품앗이 가입자)", 54, 54, "E14.pdf"], ["개인정보 수집·이용동의서(강사 등)", 55, 55, "E15.pdf"], ["주간 안전관리 점검표(사업수행기관)", 56, 56, "E16.pdf"], ["반기별 안전관리 점검표(지자체)", 57, 57, "E17.pdf"], ["이용자 관리카드(맞벌이가구 자녀돌봄시설)", 58, 58, "E18.pdf"], ["응급처치 및 귀가 동의서(맞벌이가구 자녀돌봄시설)", 59, 59, "E19.pdf"], ["운영 일일 현황(맞벌이가구 자녀돌봄시설)", 60, 60, "E20.pdf"], ["근로확인서(맞벌이가구 자녀돌봄시설)", 61, 61, "E21.pdf"]]}, {"g": "F. 다문화가족 방문교육", "b": "2권 Ⅶ장", "L": [["사회보장급여 신청(변경)서", 109, 112, "F01.pdf"], ["방문교육서비스 본인부담금 적용 사업 신청서", 113, 113, "F02.pdf"], ["방문교육서비스 환불계좌 신규(변경) 신청서", 114, 114, "F03.pdf"], ["방문교육서비스 대상자 이용 확인서", 115, 115, "F04.pdf"], ["방문교육서비스(한국어교육·부모교육·자녀생활) 확인서", 116, 116, "F05.pdf"]]}, {"g": "G. 결혼이민자 역량강화지원", "b": "2권 Ⅶ장", "L": [["사업계획서", 193, 194, "G01.pdf"], ["사업결과보고서", 195, 197, "G02.pdf"], ["수강 신청서", 198, 198, "G03.pdf"], ["개인정보 수집·이용 및 제공 동의서", 199, 200, "G04.pdf"], ["이수정지(서비스중지) 및 제적 관리대장", 201, 201, "G05.pdf"]]}, {"g": "H. 다문화가족 교류소통공간", "b": "2권 Ⅷ장", "L": [["연간사업계획서", 233, 235, "H01.pdf"], ["연간사업결과보고서", 236, 241, "H02.pdf"], ["프로그램 세부 계획서(예시)", 242, 245, "H03.pdf"], ["이용대장", 246, 246, "H04.pdf"], ["이용수칙(예시)", 247, 247, "H05.pdf"]]}, {"g": "I. 다문화 자녀 진로설계지원", "b": "2권 Ⅹ장", "L": [["사업계획서", 271, 273, "I01.pdf"], ["사업결과보고서", 274, 275, "I02.pdf"], ["사업실적(양식)", 276, 276, "I03.pdf"], ["상담과정 기록지", 277, 277, "I04.pdf", "careerlog"]]}, {"g": "J. 다문화 자녀 기초학습지원", "b": "2권 Ⅹ장", "L": [["사업계획서", 287, 289, "J01.pdf"], ["사업결과보고서", 290, 291, "J02.pdf"], ["사업실적(양식)", 292, 292, "J03.pdf"], ["학습관리 기록지", 293, 295, "J04.pdf", "learnlog"]]}, {"g": "K. 다문화가족 자녀 교육활동비", "b": "2권 Ⅹ장", "L": [["사업계획서", 307, 309, "K01.pdf"], ["사업결과보고서", 310, 311, "K02.pdf"], ["사업실적(양식)", 312, 312, "K03.pdf"]]}, {"g": "L. 결혼이민자 직업훈련교육", "b": "2권 Ⅺ장", "L": [["사업계획서(가족센터·다문화가족센터용)", 335, 340, "L01.pdf"], ["사업계획서(직업훈련기관용)", 341, 347, "L02.pdf"], ["사업결과보고서(가족센터·다문화가족센터용)", 348, 352, "L03.pdf"], ["사업결과보고서(직업훈련기관용)", 353, 355, "L04.pdf"], ["사업비 정산보고서", 356, 357, "L05.pdf"], ["만족도 조사", 358, 358, "L06.pdf"], ["결혼이민자 취업준비도 조사 설문지 (붙임1)", 359, 360, "L07.pdf"]]}];
@@ -1510,7 +1510,7 @@ function renderMeet(){
 $('#mt-in').addEventListener('input',function(){$('#mt-p').innerHTML=markP(meetP());});
 $('#mt-tcopy').onclick=function(){copy(TP,'전사 프롬프트를 복사했어요. 녹음 파일과 함께 붙여 넣으세요.');};
 $('#mt-gem').onclick=function(){openAt('https://gemini.google.com/app',TP,'제미나이');};
-$('#mt-nlm').onclick=function(){openAt('https://notebooklm.google.com/',TP,'노트북LM');};
+$('#mt-nlm').onclick=function(){openAt('https://notebooklm.google.com/',TP,'Gemini 노트북');};
 $('#mt-gpt').onclick=function(){openGPT(meetP());};
 $('#mt-claude').onclick=function(){openAt('https://claude.ai/new',meetP(),'Claude');};
 $('#mt-gem2').onclick=function(){openAt('https://gemini.google.com/app',meetP(),'제미나이');};
