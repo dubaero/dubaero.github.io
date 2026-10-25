@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>가족센터 AI 업무 서랍 | 두배로</title>
+<title>전북 가족센터 AI 업무 비서함 | 두배로</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 
-:root{--bg:#F6F7F9;--card:#fff;--ink:#1F2F52;--text:#1E2633;--muted:#667085;--line:#E3E7EE;--blue:#24497F;--soft:#EAF0F8;--soft2:#F3F6FB;--point:#A8432B;--warm:#FFF6EE;--warm-line:#F1D9C4;--ok:#2E6B55;color-scheme:light}
+:root{--bg:#FBF8F1;--card:#fff;--ink:#2F4F3A;--text:#2A2A26;--muted:#6B6B63;--line:#E8E2D6;--blue:#3E6B4A;--soft:#EEF4EC;--soft2:#F8F6F0;--point:#C2502A;--warm:#FFF4EC;--warm-line:#F3D6C4;--ok:#3E6B4A;color-scheme:light}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:"IBM Plex Sans KR",system-ui,sans-serif;font-size:14px;line-height:1.6;word-break:keep-all}
@@ -29,13 +29,13 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .draft{font-size:11.5px;font-weight:700;color:var(--blue);border:1px solid var(--blue);border-radius:999px;padding:1px 10px}
 
 /* 히어로 */
-.hero{margin:18px 0 16px;border-radius:18px;background:linear-gradient(120deg,#EAF0F8 0%,#F4F7FB 55%,#E6EEF8 100%);display:grid;grid-template-columns:1.5fr 1fr;overflow:hidden;border:1px solid var(--line)}
+.hero{margin:18px 0 16px;border-radius:18px;background:linear-gradient(120deg,#F1F6EC 0%,#FBF8F1 55%,#FCEEE5 100%);display:grid;grid-template-columns:1.5fr 1fr;overflow:hidden;border:1px solid var(--line)}
 .hero-t{padding:26px 30px 26px}
 .org{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:var(--blue)}
 .hero h1{font-size:clamp(22px,2.8vw,30px);color:var(--ink);line-height:1.35;margin:10px 0 4px;letter-spacing:-.01em}
 .hero h1 em{font-style:normal;color:var(--blue)}
 .hero p{font-size:13.5px;color:var(--muted)}
-.search{margin-top:18px;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #CFD8E6;border-radius:12px;padding:12px 14px;max-width:560px}
+.search{margin-top:18px;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #DAD3C4;border-radius:12px;padding:12px 14px;max-width:560px}
 .search input{border:0;outline:0;font:inherit;font-size:14.5px;flex:1;min-width:0;background:none;color:var(--text)}
 .search svg{color:var(--muted)}
 .hero-art{position:relative;min-height:190px}
@@ -75,6 +75,7 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .links span{font-size:12px;color:var(--muted)}
 .links a:hover b{color:var(--blue)}
 .tel{font-weight:700;color:var(--ink)!important;font-size:13px!important}
+.allbtn{margin-top:10px;width:100%;border:1.5px dashed var(--blue);background:var(--soft);color:var(--ink);border-radius:10px;padding:9px;font-size:13px;font-weight:700}
 .guide{margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:var(--soft2)}
 .guide button{border:0;background:none;font-weight:700;color:var(--blue);font-size:14px}
 .guide p{font-size:12px;color:var(--muted);margin-top:2px}
@@ -89,12 +90,12 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .btn:hover{border-color:var(--ink)}
 .btn.fill{background:var(--ink);border-color:var(--ink);color:#fff}
 .btn.fill:hover{background:var(--blue)}
-.btn.soft{background:var(--soft);border-color:#CFDBEC;color:var(--blue)}
+.btn.soft{background:var(--soft);border-color:#CFE0C9;color:var(--blue)}
 .vnote{font-size:12.5px;color:var(--ok);font-weight:600;margin-bottom:10px}
 .how{background:var(--warm);border:1px solid var(--warm-line);border-radius:12px;padding:12px 16px;margin-bottom:12px;font-size:13px;color:#5b3a2c}
 .how ol{padding-left:18px}
 
-.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;margin-bottom:32px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start;margin-bottom:32px}
 @media (min-width:761px){.pv{position:sticky;top:12px}}
 .in,.pv{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
 .in h3{font-size:16px;color:var(--ink)}
@@ -179,7 +180,7 @@ label.l{display:block;font-size:13px;font-weight:700;color:var(--ink);margin:12p
 
 .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:60}
 .toast.on{opacity:1}
-footer{background:#1F2F52;color:#C9D3E6;font-size:12px;padding:16px 0 22px;margin-top:10px}
+footer{background:#2F4F3A;color:#DCE6D6;font-size:12px;padding:16px 0 22px;margin-top:10px}
 footer b{color:#fff}
 footer a{color:#fff}
 
@@ -210,7 +211,7 @@ table.appr{width:auto!important;border-collapse:collapse;font-size:11.5px;flex:n
 table.appr th,table.appr td{border:1px solid #333;text-align:center;padding:2px 6px;min-width:44px;background:#fff;width:auto}
 table.appr th.v{writing-mode:vertical-rl;letter-spacing:.3em;padding:4px 2px;min-width:0;background:#F1F3F6}
 table.appr td{height:40px}
-.doc tr.sec th{background:#E4E9F1;text-align:left;font-weight:700;color:#1F2F52}
+.doc tr.sec th{background:#E6EEE2;text-align:left;font-weight:700;color:#2F4F3A}
 .doc th.k{width:17%}
 .doc .ck{white-space:normal;line-height:1.9}
 .doc .ck span{margin-right:10px;white-space:nowrap}
@@ -220,7 +221,7 @@ table.appr td{height:40px}
 .gfoot{margin-top:18px;border-top:2px solid #111;padding-top:8px;font-size:11.5px;line-height:1.8}
 .gsend{text-align:center;font-size:18px;font-weight:700;letter-spacing:.2em;margin:22px 0 6px}
 .gbody{font-size:13px;line-height:1.9;margin-top:10px;white-space:pre-wrap}
-.modal{position:fixed;inset:0;background:rgba(20,28,45,.45);display:grid;place-items:center;padding:16px;z-index:80}
+.modal{position:fixed;inset:0;background:rgba(30,40,30,.45);display:grid;place-items:center;padding:16px;z-index:80}
 .mbox{background:#fff;border-radius:18px;width:min(620px,100%);max-height:92vh;overflow:auto;padding:22px 22px 18px}
 .mbox h3{font-size:18px;color:var(--ink)}
 .mbox p{font-size:13px;color:var(--muted);margin:4px 0 10px}
@@ -239,12 +240,60 @@ table.appr td{height:40px}
 .mpick button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .q .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 @media (max-width:760px){.month,.mgrid{grid-template-columns:1fr}.dhead{flex-direction:column-reverse;align-items:flex-end}.dhead h4{text-align:center;width:100%;margin-top:4px}}
+
+/* --- 2026.10.25 추가: AI 작성 안내, 녹음 갈림길, 전체 서식 --- */
+.aig{background:#fff;border:1.5px solid var(--blue);border-radius:16px;padding:20px 22px;margin:-14px 0 32px}
+.aig-h h3{font-size:17px;color:var(--ink);margin-top:6px}
+.aig-h p{font-size:13px;color:var(--muted)}
+.aig-badge{display:inline-block;font-size:11.5px;font-weight:700;color:#fff;background:var(--point);border-radius:999px;padding:2px 10px}
+.aig-mode{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
+.aig-mode button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;font-size:13.5px;font-weight:600;color:var(--ink)}
+.aig-mode button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.aig-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:20px}
+.aig h4{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink);margin:14px 0 6px}
+.aig h4 i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;display:grid;place-items:center;flex:none}
+.aig h4 small{font-weight:400;color:var(--muted);font-size:12px}
+.aig ul,.aig ol{padding-left:20px;font-size:13.3px;line-height:1.75}
+.aig ul.ok li::marker{content:"✓  ";color:var(--ok);font-weight:700}
+.aig ul.miss li::marker{content:"!  ";color:var(--point);font-weight:700}
+.aig-p{white-space:pre-wrap;font-family:inherit;font-size:13px;line-height:1.7;background:var(--soft2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;max-height:430px;overflow:auto}
+.aig-p mark,.box pre mark{background:#FCE3D3;color:#7A2E14;padding:0 2px;border-radius:3px}
+.aig-acts .btn{padding:8px 12px}
+.navy-note{background:#EEF2F8;border:1px solid #CBD5E6;color:#24324F;border-radius:10px;padding:10px 13px;font-size:12.8px;margin-top:12px;line-height:1.65}
+.tscroll{overflow-x:auto}
+.rtab{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;min-width:560px}
+.rtab th,.rtab td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+.rtab th{background:var(--soft);color:var(--ink);font-weight:700}
+.rtab td small{color:var(--muted);font-size:11.5px}
+.rnote{font-size:12.5px;color:var(--muted);margin-top:8px}
+.linkbtn{border:0;background:none;color:var(--point);font-weight:700;font-size:12.5px;text-decoration:underline}
+.recgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.recgrid .tool{margin-bottom:0}
+.recgrid h3 small{font-weight:400;color:var(--muted);font-size:12.5px;margin-left:4px}
+.rn{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--point);color:#fff;font-size:13px;margin-right:8px;vertical-align:1px}
+.rsteps{padding-left:20px;font-size:13.3px;line-height:1.8;margin-top:8px}
+.rok{font-size:12.8px;color:var(--ok);font-weight:600;margin-top:8px}
+.rmiss{font-size:12.8px;color:var(--point);margin-top:4px}
+#v-rec>.tool{margin-top:0}
+#v-rec .recgrid{margin-bottom:14px}
+.allwrap{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px;align-items:start}
+.allg{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.allg h3{font-size:14.5px;color:var(--ink);padding-bottom:6px;border-bottom:2px solid var(--ink);margin-bottom:4px}
+.allg h3 small{font-weight:400;color:var(--muted);font-size:12px;margin-left:4px}
+.alll li{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)}
+.alll li:last-child{border-bottom:0}
+.alll .t{font-size:13.3px;font-weight:600}
+.alll .t small{display:block;font-weight:400;font-size:11.5px;color:var(--muted)}
+.alll .mini{flex-wrap:wrap;justify-content:flex-end}
+.doc table.sv{table-layout:fixed}.doc .sv td.c{text-align:center}.doc{overflow-x:auto}
+.doc .sv th{width:auto}
+@media (max-width:760px){.aig-grid,.recgrid,.allwrap{grid-template-columns:1fr}.aig{padding:16px}}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
   <a class="back" href="../">← 이서정 강사 홈페이지</a>
-  <span class="draft">시안</span>
+  <span class="draft">전북 시군가족센터 전용</span>
 </div></header>
 
 <main class="wrap">
@@ -254,12 +303,12 @@ table.appr td{height:40px}
   <section class="hero">
     <div class="hero-t">
       <div class="org"><svg class="i" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg><span id="h-org">전북 시군가족센터 종사자</span> · 2026.11.19 AI 실무 워크숍</div>
-      <h1>혼자 끌어안지 않는 업무 파트너, <em>AI 업무 서랍</em></h1>
-      <p>상담·사례관리 기록은 서식으로, 가족 프로그램은 기획부터 홍보까지, 지친 날엔 마음 쉼터로.</p>
+      <h1>혼자 끌어안지 않는 업무 파트너, <em>AI 업무 비서함</em></h1>
+      <p>상담·사례관리 기록은 서식으로, 가족 프로그램은 기획부터 홍보까지, 지친 날엔 마음 쉼터로.<br>우리 기관 서식을 첨부해 ChatGPT·Claude·제미나이로 채우는 방법까지 서식마다 알려 드려요.</p>
       <label class="search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="찾을 업무를 입력하세요 (예: 상담일지, 결과보고, 프로그램 기획)"></label>
     </div>
     <div class="hero-art" aria-hidden="true">
-      <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#DCE7F5"/><stop offset="1" stop-color="#C9D9EE"/></linearGradient></defs><rect width="400" height="220" fill="url(#g1)"/><circle cx="320" cy="40" r="26" fill="#F6E3C8"/><path d="M0 170 Q100 130 200 165 T400 150 V220 H0Z" fill="#B9CCE6"/><path d="M0 190 Q120 160 240 192 T400 182 V220 H0Z" fill="#A3BCDD"/><g transform="translate(150 70)"><path d="M0 60 L55 18 L110 60 V120 H0Z" fill="#fff"/><path d="M-8 64 L55 12 L118 64" fill="none" stroke="#1F2F52" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="42" y="78" width="26" height="42" rx="3" fill="#24497F"/><rect x="14" y="70" width="18" height="16" rx="2" fill="#F6E3C8"/><rect x="78" y="70" width="18" height="16" rx="2" fill="#F6E3C8"/></g><g fill="#1F2F52"><circle cx="96" cy="128" r="9"/><rect x="87" y="139" width="18" height="34" rx="9"/><circle cx="118" cy="140" r="7"/><rect x="111" y="149" width="14" height="24" rx="7" fill="#A8432B"/><circle cx="300" cy="126" r="9"/><rect x="291" y="137" width="18" height="36" rx="9" fill="#24497F"/></g></svg>
+      <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#E6F0DF"/><stop offset="1" stop-color="#F6E7DA"/></linearGradient></defs><rect width="400" height="220" fill="url(#g1)"/><circle cx="320" cy="40" r="26" fill="#F6E3C8"/><path d="M0 170 Q100 130 200 165 T400 150 V220 H0Z" fill="#CFE0C4"/><path d="M0 190 Q120 160 240 192 T400 182 V220 H0Z" fill="#B7D0A8"/><g transform="translate(150 70)"><path d="M0 60 L55 18 L110 60 V120 H0Z" fill="#fff"/><path d="M-8 64 L55 12 L118 64" fill="none" stroke="#2F4F3A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="42" y="78" width="26" height="42" rx="3" fill="#C2502A"/><rect x="14" y="70" width="18" height="16" rx="2" fill="#F6E3C8"/><rect x="78" y="70" width="18" height="16" rx="2" fill="#F6E3C8"/></g><g fill="#2F4F3A"><circle cx="96" cy="128" r="9"/><rect x="87" y="139" width="18" height="34" rx="9"/><circle cx="118" cy="140" r="7"/><rect x="111" y="149" width="14" height="24" rx="7" fill="#A8432B"/><circle cx="300" cy="126" r="9"/><rect x="291" y="137" width="18" height="36" rx="9" fill="#C2502A"/></g></svg>
     </div>
   </section>
 
@@ -268,6 +317,7 @@ table.appr td{height:40px}
       <div class="ph"><h2>서식 자료실</h2><small>질문에 답하면 서식 완성</small></div>
       <div class="ftabs" id="ftabs"></div>
       <ul class="flist" id="flist"></ul>
+      <button type="button" class="allbtn" data-go="all">2026 가족사업안내 서식 105개 전체 찾기 ›</button>
     </div>
     <div class="panel p2">
       <div class="ph"><h2>업무 바로가기</h2></div>
@@ -288,14 +338,14 @@ table.appr td{height:40px}
         <div><b>자살예방 상담전화</b><span class="tel">109</span></div>
         <div><b>정신건강 위기상담</b><span class="tel">1577-0199</span></div>
       </div>
-      <div class="guide"><button type="button" data-go="base">업무 서랍 이용 안내 ›</button><p>입력 금지선 · 맞춤설정 · 할루시네이션 방지</p></div>
+      <div class="guide"><button type="button" data-go="base">업무 비서함 이용 안내 ›</button><p>입력 금지선 · 맞춤설정 · 할루시네이션 방지</p></div>
     </div>
   </section>
 </div>
 
 <!-- ===== 서식 작성 ===== -->
 <div id="v-form" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2 id="f-title">서식</h2><button type="button" class="b-how" id="f-howbtn">사용법</button><span class="sp"></span>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 비서함</button><h2 id="f-title">서식</h2><button type="button" class="b-how" id="f-howbtn">사용법</button><span class="sp"></span>
     <div class="vacts"><button type="button" class="btn soft" id="f-ai">AI로 다듬기</button><button type="button" class="btn" id="f-copy">복사</button><button type="button" class="btn fill" id="f-word">워드 받기</button></div></div>
   <p class="vnote" id="f-note"></p>
   <div class="how" id="f-how" hidden></div>
@@ -303,11 +353,49 @@ table.appr td{height:40px}
     <section class="in"><h3>쉬운 입력</h3><p class="sub">질문에 답만 하면 오른쪽 서식이 자동으로 채워져요.</p><div id="f-qs"></div></section>
     <section class="pv"><div class="pvt"><span>미리보기</span><span id="f-src"></span></div><div class="doc" id="f-doc"></div></section>
   </div>
+
+  <section class="aig" id="f-aig">
+    <div class="aig-h"><span class="aig-badge">다른 AI에서</span><h3>우리 기관 「<span id="aig-name"></span>」 서식으로 작성하기</h3>
+      <p>센터마다 서식이 조금씩 달라요. 우리 센터 서식 파일을 첨부하면, AI가 그 칸 그대로 채워 줘요. 지금 가진 자료를 골라 보세요.</p></div>
+    <div class="aig-mode" id="aig-mode"></div>
+    <div class="aig-grid">
+      <div>
+        <h4><i>1</i>준비물</h4><ul id="aig-need"></ul>
+        <h4><i>2</i>순서</h4><ol id="aig-step"></ol>
+        <div class="navy-note">실제 상담 기록과 녹음은 <b>기관 지침에서 외부 AI 사용이 허용되는지 먼저</b> 확인하세요. 허용되지 않으면 가명으로 바꾼 메모만 쓰세요.</div>
+      </div>
+      <div>
+        <h4><i>3</i>예시 프롬프트 <small>주황색 칸은 내 상황에 맞게 바꿔요</small></h4>
+        <pre class="aig-p" id="aig-p"></pre>
+        <div class="acts aig-acts">
+          <button type="button" class="btn fill" id="aig-copy">프롬프트 복사</button>
+          <button type="button" class="btn" id="aig-gpt">ChatGPT 열기</button>
+          <button type="button" class="btn" id="aig-claude">Claude 열기</button>
+          <button type="button" class="btn" id="aig-gem">제미나이 열기</button>
+          <button type="button" class="btn" id="aig-nlm">노트북LM 열기</button>
+        </div>
+        <h4><i>4</i>이렇게 나오면 성공</h4><ul class="ok" id="aig-ok"></ul>
+        <h4><i>5</i>자주 하는 실수</h4><ul class="miss" id="aig-miss"></ul>
+      </div>
+    </div>
+    <div id="aig-rec" hidden>
+      <h4 style="margin-top:16px"><i>!</i>녹음 갈림길 — 내 상황에 맞는 곳으로</h4>
+      <table class="rtab">
+        <tr><th>내 상황</th><th>추천</th><th>이렇게 해요</th></tr>
+        <tr><td>지금부터 회의·면담을 녹음할 수 있다</td><td><b>네이버 클로바노트</b><br><small>무료 월 300분, 말한 사람 구분</small></td><td>앱으로 녹음 → 글로 바뀌면 [텍스트 복사] → ChatGPT·Claude에 서식 첨부 + 프롬프트 + 붙여넣기</td></tr>
+        <tr><td>녹음 파일이 있고, 근거 확인이 중요하다 (회의록·사례회의록)</td><td><b>노트북LM</b><br><small>무료, 파일당 200MB</small></td><td>[소스 추가]로 서식 파일과 녹음 파일을 올림 → 받아쓴 글 확인 → 프롬프트 붙여넣기 → 답변의 출처 번호로 확인 → 복사해 서식에</td></tr>
+        <tr><td>10분 이하 짧은 녹음, 빨리 끝내고 싶다</td><td><b>제미나이</b><br><small>무료는 10분 안팎</small></td><td>입력창 [+]로 서식 파일 + 녹음 파일 첨부 → 프롬프트 붙여넣기</td></tr>
+        <tr><td>ChatGPT 유료를 쓴다 (긴 파일)</td><td><b>ChatGPT</b><br><small>유료만 녹음 첨부 가능</small></td><td>[ChatGPT 열기] → [+]로 서식 + 녹음 첨부 → 전송 → 워드로 받기</td></tr>
+        <tr><td>Claude로 쓰고 싶다</td><td><b>Claude</b><br><small>녹음 파일 변환 기능 없음</small></td><td>위 앱에서 먼저 글로 바꾼 뒤 → Claude에 서식 첨부 + 프롬프트 + 받아쓴 글 붙여넣기</td></tr>
+      </table>
+      <p class="rnote">앱 조건(무료 시간 등)은 2026년 10월 확인 기준이에요. 자주 바뀌니 처음 쓸 때 한 번 확인하세요. <button type="button" class="linkbtn" data-go="rec">녹음 → 글 자세히 보기 ›</button></p>
+    </div>
+  </section>
 </div>
 
 <!-- ===== 사업별 업무 ===== -->
 <div id="v-biz" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2>사업별 연간 업무</h2></div>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 비서함</button><h2>사업별 연간 업무</h2></div>
   <p class="vnote">사업을 고르고 단계를 누르면 예시와 바로 쓰는 프롬프트가 나와요. 예시는 모두 가상 "가온시 가족센터"예요.</p>
   <div class="biz" id="biz"></div>
   <p id="biz-intro" style="font-size:13px;color:var(--muted);margin-bottom:10px"></p>
@@ -316,7 +404,7 @@ table.appr td{height:40px}
 
 <!-- ===== 이달의 추천 ===== -->
 <div id="v-month" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2 id="mo-title">이달의 추천</h2></div>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 비서함</button><h2 id="mo-title">이달의 추천</h2></div>
   <p class="vnote">[지침] 표시는 「2026 가족사업안내」에 있는 일정이고, 나머지는 정솔의 추천이에요. 소속 시군구 안내와 꼭 대조하세요.</p>
   <div class="mpick" id="mo-pick"></div>
   <div class="month" id="mo-body"></div>
@@ -324,7 +412,7 @@ table.appr td{height:40px}
 
 <!-- ===== 빡침 순화기 ===== -->
 <div id="v-vent" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2>빡침 순화기</h2><span class="tag">단호한 존댓말 변환기</span></div>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 비서함</button><h2>빡침 순화기</h2><span class="tag">단호한 존댓말 변환기</span></div>
   <div class="tool">
     <p class="sub">화날 땐 치는 것보다 말하는 게 빠르죠. 있었던 일을 그대로 털어놓으면, 감정은 걸러 내고 꼭 전할 말은 단단하게 남겨요.</p>
     <div class="formula"><span>① 사실</span><em>→</em><span>② 기준</span><em>→</em><span>③ 할 수 있는 것</span><em>→</em><span>④ 다음 행동·기한</span></div>
@@ -351,7 +439,7 @@ table.appr td{height:40px}
 
 <!-- ===== 마음 쉼터 ===== -->
 <div id="v-heart" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2>마음 쉼터</h2><span class="tag">마음챙김 위로기</span></div>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 비서함</button><h2>마음 쉼터</h2><span class="tag">마음챙김 위로기</span></div>
   <div class="tool heart">
     <p class="sub">오늘 힘들었던 일을 말로 털어놓아 보세요. 들어 주고, 잠깐 숨 돌릴 방법을 함께 찾아 드려요. 누구에게 보내는 글이 아니라 나를 위한 시간이에요.</p>
     <label class="l">지금 마음에 가까운 것은?</label>
@@ -369,7 +457,7 @@ table.appr td{height:40px}
 
 <!-- ===== 다국어 안내 ===== -->
 <div id="v-multi" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2>다국어 안내</h2></div>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 비서함</button><h2>다국어 안내</h2></div>
   <div class="tool">
     <p class="sub">결혼이민자 가족에게 보낼 일정·신청 안내를 쉬운 한국어와 모국어로 함께 만들어요. 상담 내용에는 쓰지 마세요.</p>
     <div class="row">
@@ -384,9 +472,56 @@ table.appr td{height:40px}
   </div>
 </div>
 
+
+<!-- ===== 녹음 → 글 ===== -->
+<div id="v-rec" hidden>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 비서함</button><h2>녹음 → 글 → 서식</h2><span class="tag">어디서 바꿀까?</span></div>
+  <p class="vnote">원칙: 받아쓰기와 서식 채우기는 나눠서! ① 녹음을 글로 → ② 이름·날짜·숫자를 사람이 확인 → ③ 서식에 채우기</p>
+  <div class="tool">
+    <h3>한눈에 비교 <small style="font-weight:400;color:var(--muted);font-size:12.5px">2026년 10월 확인 기준 · 앱 조건은 자주 바뀌어요</small></h3>
+    <div class="tscroll"><table class="rtab">
+      <tr><th>구분</th><th>클로바노트</th><th>노트북LM</th><th>제미나이</th><th>ChatGPT</th><th>Claude</th></tr>
+      <tr><td>녹음 파일 → 글</td><td>무료 월 300분</td><td>무료 (파일당 200MB)</td><td>무료는 10분 안팎</td><td><b>유료만</b></td><td><b>안 됨</b></td></tr>
+      <tr><td>한 번에</td><td>180분, 300MB</td><td>200MB</td><td>유료 한도 [확인 필요]</td><td>512MB (긴 파일은 나눠서)</td><td>—</td></tr>
+      <tr><td>형식</td><td>m4a·mp3·aac·amr·wav</td><td>mp3·wav·m4a 등</td><td>mp3·m4a·wav</td><td>mp3·wav·m4a</td><td>—</td></tr>
+      <tr><td>강점</td><td>한국어, 말한 사람 구분</td><td>올린 자료에서만 답함, 출처 확인</td><td>서식 채우기까지 한 번에</td><td>서식 채우기 + 워드 받기</td><td>받아쓴 글로 문서 다듬기</td></tr>
+      <tr><td>약점</td><td>서식 채우기는 다른 AI로</td><td>워드로 바로 받기 어려움</td><td>무료는 짧은 녹음만</td><td>무료 사용자는 못 씀</td><td>녹음 파일 못 올림</td></tr>
+    </table></div>
+  </div>
+  <div class="recgrid">
+    <div class="tool"><h3><span class="rn">A</span>클로바노트 <small>지금부터 녹음할 때</small></h3>
+      <ol class="rsteps"><li>휴대폰에 <b>네이버 클로바노트</b> 앱 설치 → 네이버 로그인</li><li>회의 시작 전 가운데 <b>[녹음]</b> → 참석 인원 선택 (말한 사람 구분용)</li><li>회의가 끝나면 <b>[녹음 종료]</b> → 1~3분 기다리면 글로 바뀌어요</li><li>'참석자 1, 2'를 이름 대신 <b>역할(팀장·담당자)</b>로 바꾸기</li><li><b>[공유] → 텍스트 복사</b> → 서식 화면의 [ChatGPT 열기]나 [Claude 열기]</li><li>서식 파일 첨부 → 프롬프트 붙여넣기 → 맨 아래 [받아쓴 글]에 붙여넣기 → 전송</li></ol>
+      <p class="rok">성공: 서식 순서대로 나오고 녹음에 없던 내용은 [확인 필요]</p>
+      <p class="rmiss">주의: '데이터 제공 동의'(600분)는 녹음이 서비스 개선에 쓰일 수 있다는 뜻 → <b>상담·사례 녹음엔 켜지 마세요</b></p></div>
+    <div class="tool"><h3><span class="rn">B</span>노트북LM <small>정확성이 중요할 때 (무료)</small></h3>
+      <ol class="rsteps"><li><b>notebooklm.google.com</b> → 구글 로그인 → <b>[새 노트북]</b></li><li><b>[소스 추가]</b> → 우리 서식 파일 (PDF·워드, 한글은 변환해서)</li><li>다시 <b>[소스 추가]</b> → 녹음 파일 → 글로 바뀔 때까지 기다리기</li><li>왼쪽 소스에서 녹음을 눌러 <b>받아쓴 글의 이름·날짜·숫자 확인</b></li><li>채팅창에 서식 화면의 프롬프트 붙여넣기 → 전송</li><li>답변의 <b>출처 번호</b>를 눌러 결정사항이 실제 녹음에 있는지 확인 → 복사해 우리 서식에</li></ol>
+      <p class="rok">성공: 문장마다 출처 번호가 붙어 있고, 누르면 녹음 원문이 보여요</p>
+      <p class="rmiss">주의: 구글 드라이브에 있는 녹음은 바로 못 가져와요 → 내 컴퓨터로 내려받아 올리기</p></div>
+    <div class="tool"><h3><span class="rn">C</span>제미나이 <small>짧은 녹음 (10분 안팎)</small></h3>
+      <ol class="rsteps"><li><b>gemini.google.com</b> 또는 제미나이 앱 → 로그인</li><li>입력창 <b>[+]</b> → 우리 서식 파일 첨부</li><li>다시 <b>[+]</b> → 녹음 파일 첨부</li><li>서식 화면에서 '녹음이 있어요' 프롬프트 복사 → 붙여넣기 → 전송</li><li>받아쓴 글 확인 후 "작성해 줘"</li></ol>
+      <p class="rok">성공: 받아쓴 글이 먼저 나오고, 안 들린 곳은 [불명확]</p>
+      <p class="rmiss">주의: 길면 잘리거나 첨부가 안 돼요 → 클로바노트나 노트북LM으로</p></div>
+    <div class="tool"><h3><span class="rn">D</span>ChatGPT <small>유료 사용자, 긴 녹음</small></h3>
+      <ol class="rsteps"><li>서식 화면에서 <b>[ChatGPT 열기]</b> (프롬프트가 미리 들어가요)</li><li>입력창 <b>[+]</b> → 우리 서식 파일 + 녹음 파일 첨부</li><li>전송 → 받아쓴 글 확인 → "작성해 줘"</li><li>"워드 파일로 줘" → 받아서 우리 서식과 비교</li></ol>
+      <p class="rok">성공: 서식과 같은 칸의 워드 파일이 나와요</p>
+      <p class="rmiss">주의: 무료 계정은 녹음 첨부가 안 돼요. 아주 긴 파일은 나눠서 올리세요</p></div>
+  </div>
+  <div class="tool"><h3>Claude를 쓰고 싶다면</h3><p class="sub" style="margin:0">Claude는 유료여도 녹음 파일을 글로 바꾸는 기능이 없어요. (마이크로 말하기와 녹음 파일 변환은 다른 기능이에요) <b>A·B로 먼저 글로 바꾼 뒤</b> Claude에 서식 첨부 + 프롬프트 + 받아쓴 글을 붙여 넣으세요.</p></div>
+  <div class="navy-note" style="margin-bottom:28px"><b>꼭 지켜요</b> · 녹음 전에 참석자에게 알리기 · 상담 녹음은 기관 지침에서 허용될 때만 · 받아쓴 글에서 실명은 역할이나 가명으로 바꾸고 AI에 넣기</div>
+</div>
+
+<!-- ===== 전체 서식 105 ===== -->
+<div id="v-all" hidden>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 비서함</button><h2>전체 서식 찾기</h2><span class="tag">2026 가족사업안내 1·2권</span></div>
+  <p class="vnote">쪽수는 책에 인쇄된 쪽 번호예요. ✎ 표시는 이 비서함에서 바로 채울 수 있고, 나머지는 [프롬프트 복사] 후 우리 서식 파일과 함께 AI에 붙여 넣으면 돼요.</p>
+  <label class="search" style="margin:0 0 6px;max-width:none"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="all-q" type="search" placeholder="서식 이름으로 찾기 (예: 계획서, 동의서, 척도)"></label>
+  <p id="all-n" style="font-size:12.5px;color:var(--muted);margin-bottom:10px"></p>
+  <div id="all-body" class="allwrap"></div>
+</div>
+
 <!-- ===== 간단 도구 ===== -->
 <div id="v-simple" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무 서랍</button><h2 id="s-title"></h2></div>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무 비서함</button><h2 id="s-title"></h2></div>
   <div class="tool"><p class="sub" id="s-sub"></p><div id="s-body"></div>
     <div class="acts" id="s-acts"><button type="button" class="btn fill" id="s-gpt">ChatGPT에서 열기</button><button type="button" class="btn" id="s-copy">프롬프트 복사</button><button type="button" class="btn" id="s-next" hidden></button></div></div>
 </div>
@@ -413,7 +548,7 @@ table.appr td{height:40px}
   </div>
 </div>
 
-<footer><div class="wrap"><b>가족센터 AI 업무 서랍</b> · 입력한 내용은 이 기기 안에서만 쓰이고 저장·전송되지 않아요. AI가 만든 글은 초안이에요. 사실·날짜·숫자는 꼭 직접 확인하세요.<br>제작·운영 <b>두배로 · 생성형 AI 전문강사 이서정</b> · <a href="../">dubaero.github.io</a></div></footer>
+<footer><div class="wrap"><b>가족센터 AI 업무 비서함</b> · 입력한 내용은 이 기기 안에서만 쓰이고 저장·전송되지 않아요. AI가 만든 글은 초안이에요. 사실·날짜·숫자는 꼭 직접 확인하세요.<br>제작·운영 <b>두배로 · 생성형 AI 전문강사 이서정</b> · <a href="../">dubaero.github.io</a></div></footer>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -422,7 +557,7 @@ var DEMO='가온시 가족센터';
 var YEAR=new Date().getFullYear();
 var NOFAKE='자료에 없는 숫자·날짜·이름은 지어내지 말고 [확인 필요]로 남겨.';
 var APPR=['담당','팀장','센터장'];
-var CATS=[['상담','상담·사례관리'],['사업','사업·보고'],['행정','행정·회의']];
+var CATS=[['상담','상담·사례관리'],['사업','사업·보고'],['자녀','나눔터·자녀'],['행정','행정·신청']];
 var HOW1=['내방','전화','가정방문','온라인'];
 
 var FORMS=[
@@ -580,7 +715,123 @@ var FORMS=[
   layout:[{p:[['회의명','name'],['일시','when']]},{p:[['장소','where'],['작성자','@staff']]},{r:['참석자(역할)','att']},
    {sec:'안건'},{r:['안건','ag']},{sec:'논의 내용'},{r:['논의 내용','talk']},
    {sec:'결정 사항'},{t:{k:'dec',cols:['결정 내용','담당(역할)','기한'],min:2}},
-   {sec:'미결 사항 및 다음 회의'},{r:['미결 사항','open']},{r:['다음 회의 일정','nextm']}]}
+   {sec:'미결 사항 및 다음 회의'},{r:['미결 사항','open']},{r:['다음 회의 일정','nextm']}]},
+
+ /* ---------- 온가족보듬 공식 서식 (1권) ---------- */
+ {id:'needs',cat:'상담',name:'욕구 및 강점 사정지',sub:'온가족보듬 · 공식 서식10',title:'욕구 및 강점 사정지',src:'2026 가족사업안내 1권 서식10 (179쪽)',appr:null,foot:'sign',
+  note:'대상자와 함께 작성해요. 13개 영역 중 해당하는 영역만 적고, "대상자 인식"과 "담당자 평가"를 섞지 않아요.',
+  how:['신규/재사정을 고르고 기본 정보를 적어요.','영역별 사정은 한 줄에 하나씩 "영역 / 대상자 인식 / 현 상황 / 강점·장애물 / 욕구평가 / 심각도 / 수행방법"으로 적으면 표로 들어가요.','강점·장애물·삶의 비전·종합의견을 적어요.'],
+  extra:'영역은 서식의 13개 영역(안전, 기초생활, 경제, 신체건강, 정신건강, 가족관계, 가족돌봄, 자녀교육, 일상생활, 사회적관계, 주거환경, 직업·고용, 기타) 이름 그대로 써. 심각도는 상·중·하로만.',
+  qs:[{k:'who',q:'대상자 (가명)',t:'line',ph:'예) 가족A'},{k:'no',q:'등록번호',t:'line'},{k:'date',q:'작성일자',t:'line',ph:'예) 2026. 11. 19.'},
+      {k:'kind',q:'사정 구분',t:'one',o:['신규','재사정']},{k:'nth',q:'재사정 차수 (재사정일 때만)',t:'line',ph:'예) 2차'},
+      {k:'rows',q:'영역별 사정 (영역 / 대상자 인식 / 현 상황 / 강점·장애물 / 욕구평가 / 심각도 / 수행방법)',t:'text',mic:1,ph:'6. 가족관계 / "아이랑 말이 안 통해요" / 자녀와 하루 대화 10분 미만 / 강점: 회복 의지, 장애물: 야간 근무 / 부모-자녀 소통 개선 / 중 / 부모교육 연계\n8. 자녀교육 / "숙제를 못 봐 줘요" / 초2 자녀 기초학습 지연 / 강점: 학교 협조, 장애물: 한국어 읽기 부담 / 기초학습 지원 / 중 / 기초학습지원 연계'},
+      {k:'str',q:'강점',t:'text'},{k:'obs',q:'장애물',t:'text'},
+      {k:'vision',q:'대상자의 삶의 비전 및 목표',t:'text',mic:1},{k:'opin',q:'담당자 종합의견',t:'text',mic:1}],
+  layout:[{p:[['대 상 자','who'],['등록번호','no']]},{p:[['담 당 자','@staff'],['작성일자','date']]},{p:[['사정 구분','kind'],['차 수','nth']]},
+   {sec:'영역별 사정',cmt:'영역: 1.안전 2.기초생활 3.경제 4.신체건강 5.정신건강 6.가족관계 7.가족돌봄 8.자녀교육 9.일상생활 10.사회적관계 11.주거환경 12.직업·고용 13.기타'},
+   {t:{k:'rows',cols:['영역','대상자 인식','현 상황','강점/장애물 사정','욕구평가','심각도','수행방법'],min:3}},
+   {sec:'강점 · 장애물 · 목표'},{p:[['강 점','str'],['장 애 물','obs']]},{r:['대상자의 삶의 비전 및 목표','vision']},{r:['담당자 종합의견','opin']}]},
+
+ {id:'svcplan',cat:'상담',name:'서비스 계획서',sub:'온가족보듬 · 공식 서식11',title:'서비스 계획서',src:'2026 가족사업안내 1권 서식11 (181쪽)',appr:null,foot:'sign',
+  note:'욕구 및 강점 사정지에서 나온 욕구로 세워요. 목표는 "주 3회", "10% 향상"처럼 확인할 수 있게 적어요.',
+  how:['수행 차수·기간과 기본 정보를 적어요.','성과목표는 개인·가족 차원 × 단기·중기·장기 칸에 들어가요.','개입 계획은 한 줄에 하나씩 "욕구 영역 / 개입목표 / 대상 / 우선순위 / 개입시기 / 서비스 내용 / 제공기관 / 담당자 / 수행방법 / 기간 / 횟수".'],
+  extra:'개입시기는 서식대로 "1주 이내 / 한달 이내 / 3개월 이내" 중 하나로 써. 목표는 측정할 수 있는 말로.',
+  qs:[{k:'nth',q:'수행 차수',t:'line',ph:'예) 1차'},{k:'term',q:'수행기간',t:'line',ph:'예) 2026. 11. 19. ~ 2027. 5. 18.'},{k:'no',q:'등록번호',t:'line'},{k:'who',q:'대상자 (가명)',t:'line'},{k:'date',q:'작성일',t:'line'},
+      {k:'i1',q:'개인차원 · 단기 성과목표 (3개월 이내)',t:'line',ph:'예) 양육 스트레스 호소 주 1회 이하'},{k:'i2',q:'개인차원 · 중기 (3~6개월)',t:'line'},{k:'i3',q:'개인차원 · 장기 (6개월~1년)',t:'line'},
+      {k:'f1',q:'가족차원 · 단기 성과목표 (3개월 이내)',t:'line',ph:'예) 자녀와 주 3회 대화'},{k:'f2',q:'가족차원 · 중기 (3~6개월)',t:'line'},{k:'f3',q:'가족차원 · 장기 (6개월~1년)',t:'line'},
+      {k:'rows',q:'욕구 영역별 개입 (욕구 영역 / 개입목표 / 대상 / 우선순위 / 개입시기 / 서비스 내용 / 제공기관 / 담당자 / 수행방법 / 기간 / 횟수)',t:'text',ph:'가족관계 / 자녀와 주 3회 대화 / 본인·자녀 / 1 / 1주 이내 / 부모교육 / 가온시 가족센터 / 사례관리사 / 집단교육 / 8주 / 주 1회'}],
+  layout:[{p:[['수행 차수','nth'],['수행기간','term']]},{p:[['등록번호','no'],['대 상 자','who']]},{p:[['담 당 자','@staff'],['작 성 일','date']]},
+   {sec:'차원별 성과 목표'},{t:{cols:['차원','단기(3개월 이내)','중기(3~6개월)','장기(6개월~1년)'],rk:[['개인차원','i1','i2','i3'],['가족차원','f1','f2','f3']]}},
+   {sec:'욕구 영역별 개입 계획'},{t:{k:'rows',cols:['욕구 영역','개입목표','대상','우선순위','개입시기','서비스 내용','제공기관','담당자','수행방법','기간','횟수(회·1주당)'],min:3}}]},
+
+ {id:'close',cat:'상담',name:'종결 기록지',sub:'온가족보듬 · 공식 서식14',title:'종결 기록지',src:'2026 가족사업안내 1권 서식14 (184쪽)',appr:APPR,foot:'sign',
+  note:'자기효능감·가족기능 척도(사전·사후)를 함께 첨부해요. 종결 뒤 1·3·6개월 사후관리 계획을 적어요.',
+  how:['종결 유형과 처리 방법을 골라요.','제공된 서비스는 한 줄에 하나씩 "서비스 / 지원기관 / 횟수 / 기간".','성과목표는 한 줄에 하나씩 "성과목표 / 달성내용".'],
+  prep:'자기효능감·가족기능 척도 사전·사후 점수 (점수만, 이름 없이)',
+  extra:'달성내용은 척도 점수나 관찰 기록처럼 근거가 있는 것만 쓰고, 근거를 괄호로 밝혀.',
+  qs:[{k:'who',q:'대상자 (가명)',t:'line'},{k:'no',q:'등록번호',t:'line'},{k:'date',q:'작성일',t:'line'},
+      {k:'type',q:'종결 유형',t:'one',o:['목표달성 후 종결','중도탈락']},{k:'why',q:'중도탈락 사유 (해당할 때만)',t:'one',o:['이사','서비스거부','서비스자격변동','연락두절','기타']},
+      {k:'proc',q:'종결 처리',t:'one',o:['사후관리 실시','타기관 의뢰','접촉불가','기타']},{k:'ref',q:'의뢰기관/담당자 (타기관 의뢰일 때)',t:'line'},
+      {k:'svc',q:'사례요약 · 제공된 서비스 (서비스 / 지원기관 / 횟수 / 기간)',t:'text',ph:'부모교육 / 가온시 가족센터 / 8회 / 2026. 5.~7.\n학습·정서지원 / 보듬매니저 / 24회 / 2026. 4.~10.'},
+      {k:'goal',q:'성과목표 달성내용 (성과목표 / 달성내용)',t:'text',ph:'자녀와 주 3회 대화 / 주 4회로 늘어남 (부모 보고, 10월 상담)'},
+      {k:'opin',q:'담당자 의견',t:'text',mic:1},{k:'after',q:'사후관리 계획',t:'text',ph:'1개월: 전화 확인 / 3개월: 내방 상담 / 6개월: 프로그램 연계 확인'}],
+  layout:[{p:[['대 상 자','who'],['등록번호','no']]},{p:[['담 당 자','@staff'],['작 성 일','date']]},
+   {r:['종결유형','type']},{r:['중도탈락 사유','why']},{r:['종결처리','proc']},{r:['의뢰기관/담당자','ref']},
+   {sec:'사례요약'},{t:{k:'svc',cols:['제공된 서비스','지원기관','서비스 제공횟수','서비스 기간'],min:2}},
+   {sec:'성과목표'},{t:{k:'goal',cols:['성과목표','달성내용'],min:2}},
+   {r:['담당자 의견','opin']},{r:['사후관리 계획','after']},{cmt:'※ 자기효능감, 가족기능 척도 첨부(사전, 사후)'}]},
+
+ {id:'actlog',cat:'상담',name:'활동일지 (지원인력)',sub:'보듬매니저 · 공식 서식22',title:'(지원인력) 활동일지',src:'2026 가족사업안내 1권 서식22 (192쪽)',appr:null,foot:'sign',
+  note:'서비스 전후로 작성해 기관에 내고, 끝난 뒤 대상 가정에 활동 내용을 알려요. 전화번호 칸은 서식에만 들어가고 AI 요청문에는 빠져요.',
+  how:['활동일·시간과 활동인을 적어요.','대상자는 가명으로 적어요.','활동 내용은 [눌러서 말하기]로 말해도 돼요.'],
+  extra:'활동 내용은 시간 순서로 "무엇을 / 아동·가족의 반응 / 특이사항"으로 정리해.',
+  qs:[{k:'date',q:'작성일',t:'line'},{k:'when',q:'활동일/시간',t:'line',ph:'예) 11. 19. (16:00 ~ 18:00)'},{k:'man',q:'활동인',t:'line',ph:'예) 보듬매니저 ○○○'},
+      {k:'who',q:'대상자 (가명)',t:'line'},{k:'tel',q:'대상자 전화번호 (서식에만 들어가요)',t:'line',priv:1},{k:'crisis',q:'위기여부',t:'one',o:['예','아니오']},
+      {k:'cont',q:'활동내용',t:'text',mic:1,ph:'예) 초2 자녀 받아쓰기 복습 40분, 독서 20분. 집중 시간이 지난주보다 길어짐.'},{k:'opin',q:'활동인 의견',t:'text',mic:1}],
+  layout:[{r:['작 성 일','date']},{p:[['활동일/시간','when'],['활 동 인','man']]},{p:[['대 상 자','who'],['전화번호','tel']]},{r:['위기여부','crisis']},{r:['활동내용','cont']},{r:['활동인 의견','opin']}]},
+
+ {id:'refer',cat:'상담',name:'서비스 의뢰서',sub:'타 기관 연계 · 공식 서식26',title:'서비스 의뢰서',src:'2026 가족사업안내 1권 서식26 (196쪽)',appr:null,foot:'none',
+  note:'대상자 성명·연락처·주소는 서식에만 들어가고 AI 요청문에는 빠져요. 보내기 전 개인정보 제3자 제공 동의를 꼭 확인해요.',
+  how:['신청/변경을 고르고 의뢰기관 정보를 적어요.','가구유형은 여러 개 골라도 돼요.','주 의뢰 문제와 의뢰 서비스를 구체적으로 적어요.'],
+  extra:'주 의뢰 문제는 받는 기관 담당자가 바로 이해하게 3줄 이내 사실 위주로.',
+  qs:[{k:'kind',q:'구분',t:'one',o:['신청','변경']},{k:'date',q:'작성 일자',t:'line'},{k:'dept',q:'소속',t:'line',ph:'예) 가온시 가족센터 가족지원팀'},{k:'mtel',q:'담당자 연락처',t:'line'},
+      {k:'rorg',q:'의뢰기관 (받는 곳)',t:'line'},{k:'rdate',q:'의뢰날짜',t:'line'},{k:'rman',q:'의뢰기관 담당자',t:'line'},{k:'rtel',q:'의뢰기관 연락처',t:'line'},
+      {k:'name',q:'대상자 성명 (서식에만)',t:'line',priv:1},{k:'tel',q:'대상자 전화번호 (서식에만)',t:'line',priv:1},{k:'addr',q:'대상자 주소 (서식에만)',t:'line',priv:1},
+      {k:'house',q:'가구유형',t:'many',o:['1인가구','모자가구','부자가구','다문화가구','조부모+손자녀가구','미혼모부자가구','청소년부모가구','부부+자녀가구','부부중심가구','기타']},
+      {k:'need',q:'대상자 요구서비스',t:'text'},{k:'prob',q:'주 의뢰 문제',t:'text',mic:1},{k:'svc',q:'의뢰 서비스',t:'text'},{k:'att',q:'첨부내용',t:'line',ph:'예) 서비스 이용 동의서 1부'}],
+  layout:[{r:['구 분','kind']},{p:[['작성 일자','date'],['담 당 자','@staff']]},{p:[['소 속','dept'],['연 락 처','mtel']]},
+   {sec:'의뢰기관'},{p:[['의뢰기관','rorg'],['의뢰날짜','rdate']]},{p:[['의뢰기관 담당자','rman'],['연 락 처','rtel']]},
+   {sec:'서비스 대상자'},{p:[['성 명','name'],['전화번호','tel']]},{r:['주 소','addr']},{r:['가구유형','house']},{r:['대상자 요구서비스','need']},
+   {sec:'의뢰 내용'},{p:[['주 의뢰 문제','prob'],['의뢰 서비스','svc']]},{r:['첨부내용','att']}]},
+
+ /* ---------- 나눔터·자녀 (2권) ---------- */
+ {id:'poomasi',cat:'자녀',name:'돌봄품앗이 활동일지',sub:'공동육아나눔터 · 2권 서식10',title:'돌봄품앗이 활동일지',src:'2026 가족사업안내 2권 서식10 (52쪽)',appr:null,foot:'sign',
+  note:'공식 서식은 참석자 실명을 모두 적게 되어 있어요. 실명 칸은 서식에만 들어가고 AI 요청문에는 빠져요. 사진은 따로 붙여요.',
+  how:['품앗이 이름과 모임 일시·장소를 적어요.','참석 가구 수와 그중 맞벌이 가구 수를 적어요.','활동내용은 말로 해도 돼요.'],
+  extra:'참석자는 "가족A, 가족B"로만 쓰고, 맞벌이 가구 수를 따로 밝혀.',
+  qs:[{k:'name',q:'품앗이 명',t:'line',ph:'예) 토요 숲놀이 품앗이'},{k:'when',q:'모임일시',t:'line',ph:'예) 2026. 11. 21. 10시 ~ 12시'},{k:'place',q:'모임장소',t:'line'},
+      {k:'par',q:'참석자 · 부모 실명 (서식에만)',t:'line',priv:1},{k:'kid',q:'참석자 · 자녀 실명 (서식에만)',t:'line',priv:1},
+      {k:'hh',q:'전체 가구 수',t:'line',ph:'예) 5'},{k:'dual',q:'그중 맞벌이 가구 수',t:'line',ph:'예) 2'},
+      {k:'cont',q:'활동내용',t:'text',mic:1},{k:'photo',q:'활동사진',t:'line',ph:'예) 별첨 3매'},{k:'eval',q:'평가 및 건의사항',t:'text'}],
+  layout:[{p:[['품앗이 명','name'],['작 성 자','@staff']]},{r:['모임일시','when']},{r:['모임장소','place']},
+   {sec:'참 석 자'},{r:['부모 (실명)','par']},{r:['자녀 (실명)','kid']},{p:[['전체 가구','hh'],['맞벌이 가구','dual']]},
+   {r:['활동내용','cont']},{r:['활동사진','photo']},{r:['평가 및 건의사항','eval']}]},
+
+ {id:'careerlog',cat:'자녀',name:'상담과정 기록지',sub:'다문화 자녀 진로설계 · 2권 서식4',title:'상담과정 기록지',src:'2026 가족사업안내 2권 진로설계지원 서식4 (277쪽)',appr:null,foot:'none',
+  note:'내담자별로 한 장씩 쌓아 가는 기록이에요. 종결이면 향후계획 칸에 "종결"을 꼭 적어요.',
+  how:['등록번호와 대상자(가명)를 적어요.','상담은 한 줄에 하나씩 "날짜 / 주요 상담내용 / 향후계획".'],
+  extra:'주요 상담내용은 학교생활·가정·진로 중 무엇을 다뤘는지 먼저 쓰고, 향후계획에 종결 여부를 밝혀.',
+  qs:[{k:'no',q:'등록번호',t:'line'},{k:'who',q:'대상자 (가명)',t:'line',ph:'예) 청소년C (중2)'},
+      {k:'rows',q:'상담 기록 (날짜 / 주요 상담내용 / 향후계획)',t:'text',mic:1,ph:'11.12 / 진로: 요리 관심, 직업체험 희망 / 11월 직업체험 연계\n11.19 / 학교생활: 친구 관계 회복 중 / 12월 진로검사 후 종결 여부 판단'}],
+  layout:[{p:[['등록번호','no'],['대 상 자','who']]},{t:{k:'rows',cols:['날짜','주요 상담내용','향후계획 (종결여부 등 명시)'],min:4}}]},
+
+ {id:'learnlog',cat:'자녀',name:'학습관리 기록지',sub:'다문화 자녀 기초학습 · 2권 서식4',title:'학습관리 기록지',src:'2026 가족사업안내 2권 기초학습지원 서식4 (293쪽)',appr:null,foot:'none',
+  note:'공식 서식의 주소·보호자 연락처 칸은 원본 서식에 직접 적어 주세요. 이 화면은 학습 기록 부분을 도와줘요.',
+  how:['대상 아동(가명)과 수업 현황을 골라요.','초기 상담결과는 학습적 측면과 비학습적 측면을 나눠 적어요.','월별 기록은 한 줄에 하나씩 "월 / 주요 학습 내용 / 학습 태도".'],
+  extra:'학습 태도는 출석률과 수업 태도처럼 관찰한 사실로 쓰고, 아이를 평가하는 말(게으르다 등)은 쓰지 마.',
+  qs:[{k:'link',q:'연계일자',t:'line'},{k:'who',q:'아동 (가명)',t:'line',ph:'예) 아동D'},{k:'age',q:'나이',t:'line'},{k:'sex',q:'성별',t:'one',o:['남','여']},{k:'sch',q:'학교/학년 (또는 어린이집·유치원)',t:'line'},
+      {k:'cls',q:'수업현황',t:'many',o:['문해 영역','수리 영역','기타']},{k:'grp',q:'그룹명·시작일',t:'line',ph:'예) 문해 1반 · 2026. 3. 4.'},
+      {k:'inprog',q:'연계 현황 · 센터 내 프로그램',t:'line'},{k:'etc',q:'연계 현황 · 기타',t:'line'},
+      {k:'cog',q:'초기 상담결과 · 학습적 측면 (인지)',t:'text',mic:1},{k:'non',q:'초기 상담결과 · 비학습적 측면 (정서, 환경)',t:'text',mic:1},
+      {k:'rows',q:'학습 진행 정도 (월 / 주요 학습 내용 / 학습 태도)',t:'text',ph:'3월 / 받침 없는 글자 읽기 / 출석 8/8, 집중 15분\n4월 / 받침 있는 글자 / 출석 7/8, 스스로 읽기 시도'}],
+  layout:[{p:[['담 당 자','@staff'],['연계일자','link']]},{p:[['아동 (가명)','who'],['나 이','age']]},{p:[['성 별','sex'],['학교/학년','sch']]},
+   {sec:'수업 및 연계'},{r:['수업현황','cls']},{r:['그룹명·시작일','grp']},{p:[['센터 내 프로그램','inprog'],['기 타','etc']]},
+   {sec:'초기 상담결과'},{r:['학습적 측면 (인지)','cog']},{r:['비학습적 측면 (정서, 환경)','non']},
+   {sec:'학습 진행 정도'},{t:{k:'rows',cols:['구분','주요 학습 내용','학습 태도(출석율, 수업 태도 등)'],min:3}}]},
+
+ /* ---------- 행정·신청 (1권 부록 공통서식) ---------- */
+ {id:'apply',cat:'행정',name:'프로그램 신청서',sub:'공통 서식5',title:'프로그램 신청서',src:'2026 가족사업안내 1권 부록 공통서식5 (364쪽)',appr:null,foot:'prog',
+  note:'신청인 성명은 서식에만 들어가요. 회원등록 신청서와 개인정보 동의서는 따로 받아요.',
+  how:['신청할 프로그램·서비스를 한 줄에 하나씩 (최대 5개) 적어요.','신청인 성명을 적고 워드로 받아 출력해요.'],
+  qs:[{k:'items',q:'신청 프로그램·서비스 (한 줄에 하나, 최대 5개)',t:'text',ph:'가족사랑의 날 가족 피크닉\n아버지-자녀 주말 놀이터'},{k:'name',q:'신청인 성명 (서식에만)',t:'line',priv:1}],
+  layout:[{t:{k:'items',cols:['프로그램 신청'],min:5,num:1}}]},
+
+ {id:'satis',cat:'행정',name:'만족도 조사지',sub:'공통 서식6 (예시)',kind:'survey',title:'만족도 조사',src:'2026 가족사업안내 1권 부록 공통서식6 (365쪽)',appr:null,
+  note:'공통 서식의 7문항을 그대로 쓰고, 프로그램에 맞는 문항을 덧붙일 수 있어요. 결과를 모으면 [AI로 다듬기] 대신 아래 "응답 정리" 프롬프트를 쓰세요.',
+  how:['프로그램 이름을 적어요.','더 묻고 싶은 문항이 있으면 한 줄에 하나씩 적어요.','워드로 받아 출력하거나 구글 설문에 옮겨요.'],
+  extra:'응답을 정리할 때는 문항별 응답 수와 비율을 표로, 자유 의견은 원문 그대로 묶어서. 응답에 없는 의견은 만들지 마. 합계·비율은 계산식을 보여 줘.',
+  qs:[{k:'prog',q:'프로그램·상담 이름',t:'line',ph:'예) 2026 가족사랑의 날 가족 피크닉'},{k:'add',q:'추가 문항 (한 줄에 하나)',t:'text',ph:'예) 다음에도 가족과 함께 참여하고 싶다.'}]}
+
 ];
 
 var TILES=[
@@ -592,6 +843,8 @@ var TILES=[
  {go:'multi',ic:'globe',t:'다국어 안내',s:'쉬운 한국어+모국어'},
  {go:'vent',ic:'fire',t:'빡침 순화기',s:'말로 털어놓고 존댓말로',hot:1},
  {go:'heart',ic:'heart',t:'마음 쉼터',s:'지친 날 위로받기',hot:1},
+ {go:'img',ic:'image',t:'홍보 이미지',s:'계절 맞춤 시안 3개',f:1},
+ {go:'rec',ic:'mic',t:'녹음 → 글',s:'어디서 바꿀까?'},
  {go:'month',ic:'cal',t:'이달의 추천',s:'',f:1}
 ];
 var ICONS={grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
@@ -602,7 +855,9 @@ var ICONS={grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y
  heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
  bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/>',
  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
- cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'};
+ cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+ image:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/>',
+ mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>'};
 
 var BIZ=[
  {name:'공동육아나눔터',ready:true,
@@ -627,7 +882,7 @@ var BIZ=[
  {name:'언어발달지원',ready:false},
  {name:'온가족보듬',ready:false},
  {name:'다문화 자녀지원',ready:false},
- {name:'아이돌봄',ready:false}
+ {name:'결혼이민자 지원',ready:false}
 ];
 
 
@@ -656,12 +911,14 @@ var SIMPLE={
  meet:{t:'회의 녹음 → 회의록·공문',s:'클로바노트나 Gemini로 받아 적은 전사본을 붙여 넣으면 회의록과 후속 공문 초안을 만들어요.',
   f:[{k:'memo',l:'회의 전사본',ph:'녹음 전사본을 붙여 넣으세요 (이름은 직무로 바꿔 주세요)'}],
   p:function(v){return '아래 [회의 전사본]으로 두 가지를 만들어 줘.\n1) 회의록: 회의명 / 일시 / 장소 / 참석자(역할) / 안건 / 논의 내용 / 결정 사항(결정 내용·담당·기한) / 미결 사항 / 다음 회의\n2) 결정 사항에 따른 협조 요청 공문 초안 (수신 / 제목 / 1. 관련 / 2. 본문 가~라 / 붙임)\n- 발언하지 않은 내용은 넣지 말고, 전사가 불명확한 부분은 [불명확]으로 표시\n- '+NOFAKE+'\n\n[회의 전사본]\n'+v.memo;}},
- base:{t:'업무 서랍 이용 안내',s:'AI를 쓰기 전 꼭 알아 둘 세 가지예요. 문구를 복사해 쓰세요.',f:[],p:null}
+ base:{t:'업무 비서함 이용 안내',s:'AI를 쓰기 전 꼭 알아 둘 세 가지예요. 문구를 복사해 쓰세요.',f:[],p:null}
 };
 var BASE=[
  {t:'입력 금지선',p:'[AI에 넣지 않는 것]\n- 이름, 주민번호, 전화번호, 주소\n- 실제 상담 내용, 사례관리 기록\n- 체류·국적 정보, 건강 정보\n- 미공개 회계 자료\n→ 꼭 필요하면 "가족 A", "○○동"처럼 바꾼 뒤 넣기'},
  {t:'가족센터용 맞춤설정',p:'나는 가족센터 ○○사업 담당자야.\n- 공공기관 문서에 맞게 쉽고 분명한 말로 답해 줘.\n- 자료에 없는 숫자·날짜·법령은 지어내지 말고 [확인 필요]로 표시해 줘.\n- 결혼이민자 대상 안내는 쉬운 한국어로 쓰고, 요청하면 모국어 원문을 함께 보여 줘.\n- 개인정보가 들어 있으면 먼저 지우라고 알려 줘.'},
- {t:'할루시네이션 방지 한 줄',p:'첨부한 자료에서만 답해 줘. 자료에 없으면 "자료에서 확인할 수 없음"이라고 쓰고, 근거가 된 쪽이나 문장을 함께 알려 줘.'}
+ {t:'할루시네이션 방지 한 줄',p:'첨부한 자료에서만 답해 줘. 자료에 없으면 "자료에서 확인할 수 없음"이라고 쓰고, 근거가 된 쪽이나 문장을 함께 알려 줘.'},
+ {t:'우리 기관 서식으로 채우게 하는 한 줄',p:'첨부 1은 우리 센터 서식이야. 항목 이름과 순서를 그대로 지켜서 채우고, 서식에 없는 항목은 새로 만들지 마. 자료에 없는 내용은 [확인 필요]로 남기고, 마지막에 서식과 같은 모양의 워드 파일로 줘.'},
+ {t:'녹음은 어디서 글로?',p:'지금부터 녹음 → 네이버 클로바노트 (무료, 말한 사람 구분)\n녹음 파일 + 정확성 중요 → 노트북LM (무료, 출처 확인)\n10분 이하 짧은 녹음 → 제미나이\nChatGPT 유료 → 서식 + 녹음 함께 첨부\nClaude → 녹음 파일 변환 기능 없음, 다른 앱에서 글로 바꾼 뒤 붙여넣기\n※ 2026년 10월 확인 기준, 앱 조건은 바뀔 수 있어요'}
 ];
 /* 이달의 추천: 일정은 「2026 가족사업안내」에서 확인한 것만, 프로그램은 아이디어 */
 var EVERY=['[지침] 전월 예산집행실적 제출 (매월 10일까지)','[지침] 월간 실적 입력 (가족지원통합정보시스템)'];
@@ -707,13 +964,15 @@ $('#org-modal').addEventListener('click',function(e){if(e.target===this)closeOrg
 orgUI();
 
 /* 화면 전환 */
-var VIEWS=['home','form','biz','month','vent','heart','multi','simple'];
+var VIEWS=['home','form','biz','month','vent','heart','multi','simple','rec','all'];
 function show(v){VIEWS.forEach(function(k){$('#v-'+k).hidden=(k!==v);});window.scrollTo(0,0);}
 function go(key){
   if(FORMS.some(function(f){return f.id===key;}))return openForm(key);
   if(key==='biz'){renderBiz();return show('biz');}
   if(key==='month'){renderMonth(CURM);return show('month');}
-  if(['vent','heart','multi'].indexOf(key)>-1)return show(key);
+  if(['vent','heart','multi','rec'].indexOf(key)>-1)return show(key);
+  if(key==='all'){renderAll($('#all-q').value);return show('all');}
+  if(key==='img')return openSimple('img',{season:SEASON_NOW});
   if(SIMPLE[key])return openSimple(key);
 }
 document.addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(g){location.hash=g.dataset.go;go(g.dataset.go);}if(e.target.closest('[data-home]')){show('home');history.replaceState(null,'',location.pathname);}});
@@ -736,7 +995,7 @@ $('#q').addEventListener('input',function(){var v=this.value.trim();document.que
   document.querySelectorAll('#flist li').forEach(function(n){n.style.opacity=(!v||n.textContent.indexOf(v)>-1)?1:.25;});});
 $('#q').addEventListener('keydown',function(e){if(e.key!=='Enter')return;var v=this.value.trim();if(!v)return;
   var f=FORMS.find(function(x){return (x.name+x.sub).indexOf(v)>-1;});if(f)return openForm(f.id);
-  var t=TILES.find(function(x){return (x.t+x.s).indexOf(v)>-1;});if(t)return go(t.go);toast('딱 맞는 서랍이 없어요. 다른 말로 찾아보세요.');});
+  var t=TILES.find(function(x){return (x.t+x.s).indexOf(v)>-1;});if(t)return go(t.go);toast('딱 맞는 업무가 없어요. 다른 말로 찾아보세요.');});
 
 /* ===== 서식 엔진 ===== */
 var CF=null,VAL={};
@@ -753,7 +1012,7 @@ function openForm(id,howOpen){
     else{var id2='fq-'+q.k;if(q.mic)d.appendChild(micRow(id2));
       var inp=q.t==='text'?el('textarea','f'):el('input','f');inp.id=id2;inp.placeholder=q.ph||'';inp.oninput=function(){VAL[q.k]=inp.value;renderDoc();};d.appendChild(inp);}
     box.appendChild(d);});
-  bindMics(box);renderDoc();show('form');
+  bindMics(box);renderDoc();AMODE='memo';renderAI();show('form');
 }
 function Q(k){return CF.qs.find(function(q){return q.k===k;});}
 function special(k){var o=O();return {'@staff':o.staff,'@org':o.set?o.name:'','@staffTel':[o.staff,o.tel].filter(Boolean).join(' · ')}[k]||'';}
@@ -772,6 +1031,7 @@ function titleOf(){var o=O();return CF.title.replace('@YEAR',YEAR).replace('@ORG
 function renderDoc(){
   var o=O(),h='';
   if(CF.kind==='gongmun'){h=gongmunHTML();}
+  else if(CF.kind==='survey'){h=surveyHTML();}
   else{
     h+='<div class="dhead"><div style="flex:1"><div class="dorg">'+esc(o.name)+(o.team?' · '+esc(o.team):'')+'</div><h4>'+esc(titleOf())+'</h4></div>'+apprHTML(CF.appr)+'</div>';
     h+='<table>';
@@ -782,8 +1042,10 @@ function renderDoc(){
       else if(L.r)h+='<tr><th class="k">'+esc(L.r[0])+'</th>'+td(cell(L.r[1],L.r[2]),3)+'</tr>';
       else if(L.t){var T=L.t,rows;
         if(T.keys)rows=[T.keys.map(function(k){var v=VAL[k];return esc(Array.isArray(v)?v.join(', '):(v||'')).replace(/\n/g,'<br>');})];
+        else if(T.rk)rows=T.rk.map(function(r){return ['<b>'+esc(r[0])+'</b>'].concat(r.slice(1).map(function(k){return esc(VAL[k]||'');}));});
         else{rows=lines(T.k).map(function(r){return T.cols.map(function(c,i){return esc(r[i]||'');});});}
         while(rows.length<(T.min||1))rows.push(T.cols.map(function(){return '';}));
+        if(T.num)rows=rows.map(function(r,i){return [(i+1)+'. '+r[0]];});
         var inner='<table style="width:100%;border-collapse:collapse">'+(T.cap?'<tr><th colspan="'+T.cols.length+'" style="text-align:left">'+esc(T.cap)+'</th></tr>':'')+'<tr>'+T.cols.map(function(c){return '<th style="width:auto">'+esc(c)+'</th>';}).join('')+'</tr>'+
           rows.map(function(r){return '<tr>'+r.map(function(c){return '<td style="height:26px">'+c+'</td>';}).join('')+'</tr>';}).join('');
         if(T.sum!=null){var s=0,ok=false;lines(T.k).forEach(function(r){var n=parseInt(String(r[T.sum]||'').replace(/[^\d]/g,''),10);if(!isNaN(n)){s+=n;ok=true;}});inner+='<tr><th colspan="'+T.sum+'">합계</th><td>'+(ok?s.toLocaleString('ko-KR'):'')+'</td>'+(T.cols.length>T.sum+1?'<td colspan="'+(T.cols.length-T.sum-1)+'"></td>':'')+'</tr>';}
@@ -793,6 +1055,7 @@ function renderDoc(){
     h+='</table>';
     if(CF.foot==='sign')h+='<p class="sign">'+TODAY+'<br>작성자 '+(o.staff?esc(o.staff):'____________')+' (서명)</p>';
     else if(CF.foot==='date')h+='<p class="sign">'+TODAY+'<br>'+esc(o.head)+'</p>';
+    else if(CF.foot==='prog')h+='<p class="sign" style="text-align:center">위와 같이 프로그램 또는 서비스를 신청합니다.<br>'+TODAY+'<br>신청인 : '+(VAL.name?esc(VAL.name):'____________')+' (서명)<br><b>'+esc(o.head)+'</b></p>';
     else if(CF.foot==='apply')h+='<p class="sign">위와 같이 프로그램을 제안합니다.<br>'+TODAY+'<br>'+esc(o.head)+' (직인)</p>';
   }
   $('#f-doc').innerHTML=h;
@@ -809,12 +1072,15 @@ function gongmunHTML(){
 }
 function docText(){
   if(CF.kind==='gongmun'){return '[공문] 수신: '+(VAL.to||'')+'\n제목: '+(VAL.subj||'')+'\n1. 관련: '+(VAL.rel||'')+'\n2. '+(VAL.purp||'')+'\n가. 일시: '+(VAL.d1||'')+'\n나. 장소: '+(VAL.d2||'')+'\n다. 대상: '+(VAL.d3||'')+'\n라. 요청 사항: '+(VAL.d4||'')+'\n붙임: '+(VAL.att||'');}
-  return '['+CF.name+'] ('+CF.src+')\n'+CF.qs.map(function(q){var v=VAL[q.k];v=Array.isArray(v)?v.join(', '):(v||'');return '- '+q.q+': '+(v||'( )');}).join('\n');
+  if(CF.kind==='survey')return '[만족도 조사] '+(VAL.prog||'')+'\n'+SURV.concat(lines('add').map(function(r){return r[0];})).map(function(x,i){return (i+1)+'. '+x;}).join('\n');
+  return '['+CF.name+'] ('+CF.src+')\n'+CF.qs.filter(function(q){return !q.priv;}).map(function(q){var v=VAL[q.k];v=Array.isArray(v)?v.join(', '):(v||'');return '- '+q.q+': '+(v||'( )');}).join('\n');
 }
 $('#f-howbtn').onclick=function(){$('#f-how').hidden=!$('#f-how').hidden;};
 $('#f-copy').onclick=function(){copy(docText(),'서식 내용을 복사했어요.');};
+function satisP(){return '너는 가족센터 만족도 조사 담당자야. 아래 문항으로 받은 [응답]을 정리해 줘.\n1) 문항별 응답 수와 비율 표 (매우 그렇지 않다~매우 그렇다), 계산식을 함께\n2) 문항별 평균(5점 만점)\n3) 자유 의견은 원문 그대로 "도움이 된 점 / 개선할 점 / 원하는 내용"으로 묶기 — 응답에 없는 의견은 만들지 마\n4) 결과보고서에 쓸 요약 3문장 (숫자는 표에서만)\n\n[문항]\n'+docText()+'\n\n[응답]\n(엑셀 표나 응답을 붙여 넣기)';}
 $('#f-ai').onclick=function(){var p;
-  if(CF.id==='budget')p='너는 가족센터 회계 점검 도우미야. 아래 예산표를 점검해 줘.\n- 점검 항목: '+((VAL.chk||[]).join(', ')||'합계, 잔액, 중복, 증빙, 비목')+'\n- 문제마다: 위치(행·열) / 이유 / 확인할 원자료 / 수정안\n- 계산 과정을 보여 주고, 확실하지 않으면 [확인 필요]\n\n[예산표]\n'+(VAL.table||'(붙여 넣기)');
+  if(CF.id==='satis')p=satisP();
+  else if(CF.id==='budget')p='너는 가족센터 회계 점검 도우미야. 아래 예산표를 점검해 줘.\n- 점검 항목: '+((VAL.chk||[]).join(', ')||'합계, 잔액, 중복, 증빙, 비목')+'\n- 문제마다: 위치(행·열) / 이유 / 확인할 원자료 / 수정안\n- 계산 과정을 보여 주고, 확실하지 않으면 [확인 필요]\n\n[예산표]\n'+(VAL.table||'(붙여 넣기)');
   else p='너는 가족센터 문서 도우미야. 아래 ['+CF.name+'] 초안을 '+CF.src+' 항목 순서 그대로 공공기관 문서체(개조식)로 다듬어 줘.\n- 항목 이름과 순서는 바꾸지 마. 빈칸 ( )은 [확인 필요]로 남겨.\n- '+(CF.cat==='상담'?'관찰 사실 / 당사자 진술 / 담당자 판단을 섞지 말고 구분해. 진단하거나 단정하지 마.\n- ':'')+NOFAKE+'\n- 이름·연락처가 보이면 가명(이용자A)으로 바꿔.\n- 끝에 내가 더 확인할 것 3가지를 적어 줘.\n\n'+docText();
   openGPT(p);};
 $('#f-word').onclick=function(){var css='body{font-family:"맑은 고딕",sans-serif;font-size:10.5pt}table{border-collapse:collapse;width:100%}th,td{border:1px solid #000;padding:5px 6px;vertical-align:top}th{background:#eee}h4{text-align:center;font-size:16pt;margin:6pt 0}.dhead{width:100%}.appr{width:auto;float:right;margin-bottom:6pt}.appr td{height:36pt;width:48pt}.sign{text-align:right}.gm{text-align:center;font-size:16pt;font-weight:bold;border-bottom:2px solid #000}.gsend{text-align:center;font-size:15pt;font-weight:bold;letter-spacing:6pt;margin:16pt 0}.gbody{white-space:pre-wrap;line-height:1.8}.dorg{font-size:9pt;color:#555}.sec th{background:#dde3ec;text-align:left}';
@@ -827,7 +1093,7 @@ function renderBiz(){
   var wrap=$('#biz');wrap.innerHTML='';
   BIZ.forEach(function(B,i){var b=el('button',i===curBiz?'on':'',esc(B.name)+(B.ready?'':'<i>준비 중</i>'));b.type='button';b.onclick=function(){curBiz=i;curStep=0;renderBiz();};wrap.appendChild(b);});
   var B=BIZ[curBiz],body=$('#biz-body');body.innerHTML='';$('#biz-intro').innerHTML=B.ready?B.intro:'';
-  if(!B.ready){body.appendChild(el('div','empty','<b>'+esc(B.name)+'</b> 서랍은 준비 중이에요. 강의 후 수강생 의견을 받아 채워 넣을게요.'));return;}
+  if(!B.ready){body.appendChild(el('div','empty','<b>'+esc(B.name)+'</b> 업무는 준비 중이에요. 강의 후 수강생 의견을 받아 채워 넣을게요.'));return;}
   var flow=el('div','flow');B.steps.forEach(function(S,i){var b=el('button',i===curStep?'on':'','<b>'+(i+1)+'</b>'+esc(S.k));b.type='button';b.onclick=function(){curStep=i;renderBiz();};flow.appendChild(b);});body.appendChild(flow);
   var S=B.steps[curStep],st=el('div','step');st.appendChild(el('h3',null,esc(S.k)+' 단계'));st.appendChild(el('p','when',esc(S.when)));
   var g=el('div','ba');g.style.marginTop='0';g.appendChild(el('div','box','<h4>예시 결과 <span class="tag">가상</span></h4><pre>'+esc(S.ex)+'</pre>'));g.appendChild(el('div','box','<h4>바로 쓰는 프롬프트</h4><pre>'+esc(S.prompt)+'</pre>'));st.appendChild(g);
@@ -881,7 +1147,7 @@ function openSimple(k,pre){CS=SIMPLE[k];SV={};pre=pre||{};$('#s-title').textCont
     if(f.o){var init=(pre[f.k]&&f.o.indexOf(pre[f.k])>-1)?pre[f.k]:f.o[0];SV[f.k]=init;var o=el('div','opts');f.o.forEach(function(x){var bt=el('button',x===init?'on':'',esc(x));bt.type='button';bt.onclick=function(){SV[f.k]=x;o.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});};o.appendChild(bt);});b.appendChild(o);}
     else{var id='s-'+f.k;b.appendChild(micRow(id));var t=el('textarea','f');t.id=id;t.placeholder=f.ph||'';if(pre[f.k]){t.value=pre[f.k];SV[f.k]=pre[f.k];}t.oninput=function(){SV[f.k]=t.value;};b.appendChild(t);}});
   b.appendChild(el('p','warn','이름, 전화번호, 상담 사연은 빼고 적어 주세요.'));bindMics(b);show('simple');}
-function simpleP(){var memo=(SV.memo||'').trim();if(!memo&&CS!==SIMPLE.plan){toast('내용을 먼저 적어 주세요.');return null;}return CS.p(SV);}
+function simpleP(){var memo=(SV.memo||'').trim();if(!memo&&!CS.free){toast('내용을 먼저 적어 주세요.');return null;}return CS.p(SV);}
 $('#s-gpt').onclick=function(){var p=simpleP();if(p)openGPT(p);};$('#s-copy').onclick=function(){var p=simpleP();if(p)copy(p);};
 
 /* 마이크 받아쓰기 */
@@ -899,6 +1165,232 @@ function bindMics(root){root.querySelectorAll('.mic').forEach(function(btn){if(b
   try{rec.start();}catch(err){st.textContent='다시 눌러 주세요.';}
 });});}
 bindMics(document);
+
+var SURV=['프로그램/상담 내용은 내 가족의 실제 생활에 도움이 되었다.','강사(진행자)/상담자는 프로그램/상담을 잘 진행하였다.','프로그램/상담 진행환경은 만족스러웠다.','프로그램/상담 진행시간은 참여하기에 적절하였다.','프로그램/상담 진행과정은 전반적으로 만족스러웠다.','기회가 된다면, 다른 프로그램에 또 참여하고 싶다.','다른 사람들에게 본 프로그램/상담 이용을 권하고 싶다.'];
+function surveyHTML(){var o=O(),items=SURV.concat(lines('add').map(function(r){return r[0];}));
+  var h='<div class="dorg">'+esc(o.name)+'</div><h4>만 족 도 조 사</h4>'+(VAL.prog?'<p class="ttl">'+esc(VAL.prog)+'</p>':'')+
+  '<p style="font-size:12.5px;line-height:1.7;margin-bottom:10px">그동안 프로그램/상담에 참여해 주신 여러분께 진심으로 감사드립니다. 여러분의 의견을 조사하여 더 나은 프로그램으로 발전시키기 위해 몇 가지 질문을 하오니 바쁘시더라도 성의껏 답해주시기를 부탁드립니다.</p>'+
+  '<table class="sv"><tr><th style="width:45%">문 항</th><th>매우 그렇지 않다</th><th>그렇지 않다</th><th>보통이다</th><th>그렇다</th><th>매우 그렇다</th></tr>'+
+  items.map(function(x,i){return '<tr><td>'+(i+1)+'. '+esc(x)+'</td><td class="c">□</td><td class="c">□</td><td class="c">□</td><td class="c">□</td><td class="c">□</td></tr>';}).join('')+'</table>'+
+  '<table style="margin-top:10px"><tr><th class="k">성 별</th><td>□ 남 □ 여</td><th class="k">연 령</th><td>만 (   )세</td></tr><tr><th class="k">혼인여부</th><td colspan="3">□ 미혼 □ 기혼 (자녀수 ____ 명)</td></tr><tr><th class="k">다른 프로그램 참여경험</th><td colspan="3">□ 있다 □ 없다</td></tr>'+
+  '<tr><th class="k">도움이 되었던 점</th><td colspan="3" style="height:44px"></td></tr><tr><th class="k">개선해야 할 점</th><td colspan="3" style="height:44px"></td></tr><tr><th class="k">원하는 교육/상담 내용</th><td colspan="3" style="height:44px"></td></tr><tr><th class="k">이용가능한 시간대</th><td colspan="3"></td></tr></table>'+
+  '<p class="sign" style="text-align:center">끝까지 답변해 주셔서 진심으로 감사드립니다.</p>';return h;}
+SIMPLE.plan.free=1;
+
+/* ===================== 비서함 추가 기능 (2026.10.25) ===================== */
+
+/* --- 다른 AI에서 '우리 기관 서식'으로 작성하기 --- */
+var CHECKER={'상담':'센터장(결재권자)','사업':'사업 평가위원','자녀':'사업 담당 팀장','행정':'센터장'};
+var RECW={meeting:'회의',casemeet:'사례회의',counsel:'상담 (기관 지침상 녹음·업로드가 허용된 경우만)',multi:'상담 (통역 포함, 기관 지침상 허용된 경우만)',crisis:'위기 상황 구두 보고',process:'상담·통화 후 음성 메모',journal:'프로그램 진행',actlog:'활동 후 음성 메모',poomasi:'품앗이 모임',careerlog:'진로 상담 후 음성 메모',close:'종결 상담 후 음성 메모',needs:'사정 면담 후 음성 메모'};
+var AMODE='memo';
+function aiP(mode){
+  var f=CF,L=[];if(f.id==='satis')return satisP();
+  L.push('너는 가족센터에서 '+(f.cat==='상담'?'사례관리':'사업 운영')+'를 10년 넘게 한 선배 실무자야.');
+  L.push('첨부 1은 우리 센터의 ['+f.name+'] 서식이야. 서식 파일을 못 읽으면 「'+f.src+'」 항목 순서를 기준으로 해.');
+  if(mode==='rec'){
+    L.push('첨부 2는 ['+(RECW[f.id]||'현장 음성 메모')+'] 녹음 파일이야. 다른 앱에서 이미 글로 바꿨다면 맨 아래에 붙여 넣을게.');
+    L.push('1) 먼저 녹음을 글로만 옮겨서 보여 줘. 말한 사람이 바뀌면 줄을 바꾸고, 잘 안 들린 부분은 지어내지 말고 [불명확]으로 표시해.');
+    L.push('2) 내가 받아쓴 글을 확인하고 "작성해 줘"라고 하면, 그때 첨부 1 서식을 채워 줘.');
+  }else if(mode==='memo'){
+    L.push('맨 아래 [메모]는 내가 현장에서 적은 내용이야. 손글씨 사진을 첨부했다면 글자를 읽어서 쓰고, 읽기 어려운 글자는 [판독 불가]로 표시해.');
+  }else{
+    L.push('아직 자료가 없어. 바로 쓰지 말고, 서식 항목마다 내가 무엇을 준비하면 되는지 질문 목록으로 먼저 알려 줘.');
+  }
+  L.push('- 첨부 1 서식의 항목 이름과 순서를 그대로 지켜. 서식에 없는 항목은 새로 만들지 마.');
+  L.push('- 사람은 [이용자A], [가족A]처럼 가명으로 쓰고, 실명·전화번호·주소·주민번호·체류 정보는 쓰지 마.');
+  if(f.cat==='상담')L.push('- 관찰한 사실 / 당사자가 한 말 / 담당자 판단을 섞지 말고 나눠 써. 진단하거나 단정하지 마.');
+  L.push('- 자료에 없는 날짜·숫자·결정·담당자는 지어내지 말고 [확인 필요]로 표시해.');
+  if(f.extra)L.push('- '+f.extra);
+  L.push('- 다 쓰면 '+(CHECKER[f.cat]||'센터장')+' 입장에서 빠진 항목, 근거 없는 표현, 내가 확인할 것을 3줄로 점검해 줘.');
+  L.push('- 마지막에 첨부한 서식과 같은 모양의 워드(.docx) 파일로 받을 수 있게 만들어 줘.');
+  if(mode==='memo')L.push('\n[메모]\n(여기에 메모를 붙여 넣거나, 손메모 사진을 첨부하세요)');
+  if(mode==='rec')L.push('\n[받아쓴 글 — 클로바노트·노트북LM에서 바꿨을 때만 붙여 넣기]\n');
+  return L.join('\n');
+}
+function aiNeed(mode){if(CF.id==='satis')return ['응답을 모은 엑셀 파일 (또는 응답지를 찍은 사진)','이 화면에서 만든 문항 (프롬프트에 자동으로 들어가요)','이름·연락처 칸이 있으면 지운 자료'];var f=CF,a=['우리 센터 「'+f.name+'」 서식 파일 — 한글(.hwp)이면 [다른 이름으로 저장 → PDF 또는 워드]로 바꿔 두기'];
+  if(mode==='memo')a.push('현장 메모 (글로 쓴 메모 또는 손메모 사진)');
+  if(mode==='rec')a.push('녹음 파일 (m4a·mp3·wav) — 휴대폰 기본 녹음 앱 파일이면 돼요');
+  if(f.prep)a.push(f.prep);
+  a.push('실명·연락처·주소를 지운 자료 (가명: 이용자A, 가족A)');return a;}
+function aiSteps(mode){
+  if(mode==='rec')return ['아래 <b>녹음 갈림길</b>에서 내 상황에 맞는 앱을 골라요.',
+    '<b>ChatGPT(유료)·제미나이(10분 이하)</b>: 입력창 [+]로 서식 파일과 녹음 파일을 함께 첨부 → [프롬프트 복사] → 붙여넣기 → 전송',
+    '<b>클로바노트·노트북LM</b>: 먼저 녹음을 글로 바꿔 복사 → ChatGPT나 Claude에 서식 첨부 → 프롬프트 붙여넣기 → 맨 아래 [받아쓴 글]에 붙여넣기 → 전송',
+    'AI가 보여 준 <b>받아쓴 글에서 이름·날짜·숫자를 먼저 확인</b>하고 틀린 곳을 고쳐 달라고 해요.',
+    '"작성해 줘"라고 보내면 서식이 채워져요 → 워드 파일로 받아 우리 서식과 비교해요.'];
+  if(mode==='none')return ['[ChatGPT 열기] 또는 [Claude 열기]를 눌러요.','입력창 왼쪽 [+] → 우리 서식 파일을 첨부해요.','[프롬프트 복사] → 붙여넣기 → 전송하면, 항목별로 준비할 것이 질문으로 나와요.','자료를 모은 뒤 위에서 <b>메모·글이 있어요</b>를 골라 다시 해요.'];
+  return ['[ChatGPT 열기]를 누르면 프롬프트가 미리 채워진 채로 열려요. (Claude·제미나이는 [열기] 후 붙여넣기)',
+    '입력창 왼쪽 <b>[+] (클립)</b> → 우리 서식 파일을 첨부해요.',
+    '프롬프트 맨 아래 <b>[메모]</b> 자리에 메모를 붙여 넣거나, 손메모 사진을 함께 첨부해요.',
+    '전송 → 결과에서 <b>[확인 필요]</b> 표시를 먼저 찾아 채워요.',
+    '워드 파일로 받아 우리 서식과 칸이 맞는지 보고, 결재 올리기 전에 날짜·숫자를 원자료와 대조해요.'];}
+function aiOk(mode){var a=['서식 항목 이름과 순서가 그대로 나왔다','사람은 가명(이용자A·가족A)으로 나왔다','자료에 없는 내용은 [확인 필요]로 표시됐다','맨 끝에 '+(CHECKER[CF.cat]||'센터장')+' 입장 점검 3줄이 붙었다'];if(mode==='rec')a.unshift('받아쓴 글이 먼저 나오고, 안 들린 곳은 [불명확]으로 표시됐다');return a;}
+function aiMiss(mode){var a=['서식을 첨부하지 않고 "써 줘"만 하면 AI가 자기 마음대로 만든 양식으로 써요.','한글(.hwp) 파일은 못 읽는 앱이 많아요 → PDF나 워드로 바꿔서 첨부해요.'];
+  if(mode==='rec')a.push('받아쓴 글을 확인하지 않고 바로 서식을 채우면, 잘못 들은 말이 그대로 기록에 남아요.');
+  if(CF.cat==='상담')a.push('실제 상담 녹음·메모는 기관 지침에서 외부 AI 사용이 허용되는지 먼저 확인해요.');return a;}
+var FIXM=/^(확인 필요|불명확|판독 불가|이용자A|가족A|메모|자료|청소년C|받아쓴 글.*|행사 정보.*|1단계.*|2단계.*)$/;
+function markP(t){return esc(t).replace(/\[([^\]\n]{1,40})\]/g,function(m,x){return FIXM.test(x)?m:'<mark>['+x+']</mark>';});}
+function renderAI(){
+  if(!CF||CF.id==='budget'){$('#f-aig').hidden=true;return;}$('#f-aig').hidden=false;
+  var hasRec=!!RECW[CF.id];var modes=CF.id==='satis'?[['memo','응답이 모였어요']]:[['memo','메모·글이 있어요']].concat(hasRec?[['rec','녹음이 있어요']]:[]).concat([['none','아직 자료가 없어요']]);if(CF.id==='satis')AMODE='memo';
+  if(AMODE==='rec'&&!hasRec)AMODE='memo';
+  var mb=$('#aig-mode');mb.innerHTML='';modes.forEach(function(m){var b=el('button',m[0]===AMODE?'on':'',esc(m[1]));b.type='button';b.onclick=function(){AMODE=m[0];renderAI();};mb.appendChild(b);});
+  $('#aig-name').textContent=CF.name;
+  $('#aig-need').innerHTML=aiNeed(AMODE).map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
+  $('#aig-step').innerHTML=aiSteps(AMODE).map(function(x){return '<li>'+x+'</li>';}).join('');
+  $('#aig-p').innerHTML=markP(aiP(AMODE));
+  $('#aig-ok').innerHTML=aiOk(AMODE).map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
+  $('#aig-miss').innerHTML=aiMiss(AMODE).map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
+  $('#aig-rec').hidden=AMODE!=='rec';
+}
+function openAt(url,p,name){copy(p,'프롬프트를 복사했어요. '+name+' 입력창에 붙여 넣으세요.');setTimeout(function(){var w=window.open(url,'_blank');if(w)w.opener=null;},350);}
+$('#aig-copy').onclick=function(){copy(aiP(AMODE));};
+$('#aig-gpt').onclick=function(){openGPT(aiP(AMODE));};
+$('#aig-claude').onclick=function(){openAt('https://claude.ai/new',aiP(AMODE),'Claude');};
+$('#aig-gem').onclick=function(){openAt('https://gemini.google.com/app',aiP(AMODE),'제미나이');};
+$('#aig-nlm').onclick=function(){openAt('https://notebooklm.google.com/',aiP(AMODE),'노트북LM');};
+
+/* --- 전체 서식 105 (2026 가족사업안내 1·2권 서식 목록) --- */
+var ALLF=[
+ {g:'A. 가족센터 운영',b:'1권 Ⅱ장',L:[['국고보조금 교부신청서',157],['사업계획서',158,'plan'],['사업결과보고서',164,'result'],['사업비 정산보고서',169]]},
+ {g:'A. 취약·위기가족지원 (온가족보듬)',b:'1권 Ⅱ장',L:[['대상자 추천서',173],['서비스 이용 신청서',174],['서비스 이용 동의서',175],['개인정보 수집·이용 및 제공 동의서',176],['종합정보 기록지',177],['욕구 및 강점 사정지',179,'needs'],['서비스 계획서',181,'svcplan'],['사례관리과정 기록지',182,'process'],['사례회의록',183,'casemeet'],['종결 기록지',184,'close'],['(공통) 활동 신청서',185],['(공통) 면접 채점표',186],['양성교육 수료증(보듬매니저)',187],['명단',188],['(공통) 신분증',189],['(공통) 활동 서약서',190],['활동 계획서(지원인력)',191],['활동일지(지원인력)',192,'actlog'],['(공통) 활동 확인서',193],['서비스 모니터링 기록표',194],['연계기관 및 사업 목록',195],['서비스 의뢰서',196,'refer'],['척도1 자기효능감 척도',197],['척도2 가족기능 척도',198],['척도3 (위기) 위기성 진단 척도',200],['척도4 (위기) 외상후스트레스 진단 척도',205],['척도5 (위기) 사건충격 척도',207],['척도6 가족위기 유형별 위기수준·지원수요 측정도구',209]]},
+ {g:'B. 다문화가족지원센터',b:'1권 Ⅲ장',L:[['다문화가족지원센터 지정 신청서',257],['다문화가족지원센터 지정서',258],['국고보조금 교부신청서',259],['다문화가족지원센터 사업계획서',260],['다문화가족지원센터 사업결과보고서',268]]},
+ {g:'C. 건강가정지원센터',b:'1권 Ⅳ장',L:[['국고보조금 교부신청서',325],['건강가정지원센터 사업계획서',326],['건강가정지원센터 사업실적보고서',331],['건강가정지원센터 사업비 정산보고서',339]]},
+ {g:'D. 공통서식 및 척도',b:'1권 Ⅴ장 부록',L:[['표준근로계약서(안) 5종',351],['응시원서(안)',359],['개인정보 수집·이용 및 제공 동의서(안)',360],['회원등록 신청서',363],['프로그램 신청서',364,'apply'],['만족도 조사(예시)',365,'satis'],['시설안전점검보고서(예시)',366],['센터 지도·점검표',367],['척도1 가족관계위기징후 척도',369],['척도2 가족스트레스 척도(기혼자용/미혼자용)',370]]},
+ {g:'E. 공동육아나눔터',b:'2권 Ⅵ장',L:[['국고보조금 교부신청서',37],['사업계획서(사업수행기관)',38],['사업계획서(지자체)',41],['사업결과보고서(사업수행기관)',42],['사업결과보고서(지자체)',45],['사업정산보고서',46],['월별 실적 보고',47],['공동육아나눔터 사업 현황',48],['공동육아나눔터 이용대장',49],['돌봄품앗이 가입신청서',50],['돌봄품앗이 월별 계획서',51],['돌봄품앗이 활동일지',52,'poomasi'],['만족도조사지(프로그램·교육 참가자용)',53],['개인정보 수집·이용 및 제공 동의서(품앗이 가입자)',54],['개인정보 수집·이용동의서(강사 등)',55],['주간 안전관리 점검표(사업수행기관)',56],['반기별 안전관리 점검표(지자체)',57],['이용자 관리카드(맞벌이가구 자녀돌봄시설)',58],['응급처치 및 귀가 동의서(맞벌이가구 자녀돌봄시설)',59],['운영 일일 현황(맞벌이가구 자녀돌봄시설)',60],['근로확인서(맞벌이가구 자녀돌봄시설)',61]]},
+ {g:'F. 다문화가족 방문교육',b:'2권 Ⅶ장',L:[['사회보장급여 신청(변경)서',109],['방문교육서비스 본인부담금 적용 사업 신청서',113],['방문교육서비스 환불계좌 신규(변경) 신청서',114],['방문교육서비스 대상자 이용 확인서',115],['방문교육서비스(한국어교육·부모교육·자녀생활) 확인서',116]]},
+ {g:'G. 결혼이민자 역량강화지원',b:'2권 Ⅶ장',L:[['사업계획서',193],['사업결과보고서',195],['수강 신청서',198],['개인정보 수집·이용 및 제공 동의서',199],['이수정지(서비스중지) 및 제적 관리대장',201]]},
+ {g:'H. 다문화가족 교류소통공간',b:'2권 Ⅷ장',L:[['연간사업계획서',233],['연간사업결과보고서',236],['프로그램 세부 계획서(예시)',242],['이용대장',246],['이용수칙(예시)',247]]},
+ {g:'I. 다문화 자녀 진로설계지원',b:'2권 Ⅹ장',L:[['사업계획서',271],['사업결과보고서',274],['사업실적(양식)',276],['상담과정 기록지',277,'careerlog']]},
+ {g:'J. 다문화 자녀 기초학습지원',b:'2권 Ⅹ장',L:[['사업계획서',287],['사업결과보고서',290],['사업실적(양식)',292],['학습관리 기록지',293,'learnlog']]},
+ {g:'K. 다문화가족 자녀 교육활동비',b:'2권 Ⅹ장',L:[['사업계획서',307],['사업결과보고서',310],['사업실적(양식)',312]]},
+ {g:'L. 결혼이민자 직업훈련교육',b:'2권 Ⅺ장',L:[['사업계획서(가족센터·다문화가족센터용)',335],['사업계획서(직업훈련기관용)',341],['사업결과보고서(가족센터·다문화가족센터용)',348],['사업결과보고서(직업훈련기관용)',353],['사업비 정산보고서',356],['만족도 조사',358],['결혼이민자 취업준비도 조사 설문지 (붙임1)',359]]}
+];
+function genP(name,where){
+  var chk=/계획서|결과보고|실적|정산/.test(name)?'사업 평가위원':(/척도|조사|설문/.test(name)?'통계를 검토하는 팀장':'센터장(결재권자)');
+  return '너는 가족센터 업무를 10년 넘게 한 선배 실무자야.\n첨부 1은 우리 센터의 ['+name+'] 서식이야. (「2026 가족사업안내」 '+where+')\n'+
+   '맨 아래 [자료]로 이 서식을 채워 줘.\n'+
+   '- 첨부 1 서식의 항목 이름과 순서를 그대로 지켜. 서식에 없는 항목은 새로 만들지 마.\n'+
+   '- 사람은 [이용자A], [가족A]처럼 가명으로 쓰고, 실명·전화번호·주소·주민번호는 쓰지 마.\n'+
+   '- 자료에 없는 날짜·숫자·인원·금액은 지어내지 말고 [확인 필요]로 표시해.\n'+
+   (/척도/.test(name)?'- 척도 문항과 점수 기준은 바꾸지 마. 점수 합계는 계산식을 보여 줘.\n':'')+
+   (/계획서|결과보고|실적|정산/.test(name)?'- 지금은 바로 쓰지 말고 자료 분석 → 부족한 정보 질문까지만 해 줘. 내가 "작성해 줘"라고 하면 그때 서식에 맞춰 써 줘.\n':'')+
+   '- 다 쓰면 '+chk+' 입장에서 빠진 항목과 확인할 것을 3줄로 점검해 줘.\n'+
+   '- 마지막에 첨부한 서식과 같은 모양의 워드(.docx) 파일로 받을 수 있게 해 줘.\n\n[자료]\n(메모·전년도 자료·실적표를 붙여 넣거나 파일로 첨부하세요)';}
+function renderAll(q){
+  q=(q||'').trim();var box=$('#all-body');box.innerHTML='';var n=0;
+  ALLF.forEach(function(G){var items=G.L.filter(function(x){return !q||(G.g+x[0]).indexOf(q)>-1;});if(!items.length)return;
+    var sec=el('div','allg');sec.appendChild(el('h3',null,esc(G.g)+' <small>'+esc(G.b)+'</small>'));var ul=el('ul','alll');
+    items.forEach(function(x){n++;var where=G.b.replace(/ .*/,'')+' '+x[1]+'쪽';var li=el('li',null,'<span class="t">'+esc(x[0])+'<small>'+esc(where)+'</small></span>');
+      var m=el('span','mini');
+      if(x[2]){var g=el('button','b-go','✎ 바로 채우기');g.type='button';g.onclick=function(){location.hash=x[2];openForm(x[2]);};m.appendChild(g);}
+      var c=el('button','b-how','프롬프트 복사');c.type='button';c.onclick=function(){copy(genP(x[0],where),'['+x[0]+'] 프롬프트를 복사했어요. 서식 파일과 함께 AI에 붙여 넣으세요.');};m.appendChild(c);
+      var o=el('button','b-how','ChatGPT');o.type='button';o.onclick=function(){openGPT(genP(x[0],where));};m.appendChild(o);
+      li.appendChild(m);ul.appendChild(li);});
+    sec.appendChild(ul);box.appendChild(sec);});
+  $('#all-n').textContent=q?('찾은 서식 '+n+'개'):'모두 105개 서식 (척도 포함)';
+  if(!n)box.appendChild(el('div','empty','찾는 서식이 없어요. 다른 말로 찾아보세요.'));
+}
+$('#all-q').addEventListener('input',function(){renderAll(this.value);});
+
+/* --- 홍보 이미지: 계절 자동 + 시안 3개 먼저 --- */
+var SEASON={'봄':{m:'3~5월',mot:'벚꽃, 개나리, 새싹, 소풍 돗자리, 나비',col:'연분홍, 연두, 크림'},'여름':{m:'6~8월',mot:'물놀이, 수박, 큰 나무 그늘, 밀짚모자, 매미',col:'하늘색, 민트, 흰색'},'가을':{m:'9~11월',mot:'낙엽, 단풍길, 감·밤, 억새, 노을',col:'주황, 갈색, 코랄, 머스터드'},'겨울':{m:'12~2월',mot:'눈, 목도리, 따뜻한 차, 성탄 불빛, 털장갑',col:'아이보리, 딥그린, 빨강'}};
+var SEASON_NOW=['겨울','겨울','봄','봄','봄','여름','여름','여름','가을','가을','가을','겨울'][CURM-1];
+SIMPLE.img={t:'홍보 이미지 시안',free:1,s:'오늘 날짜로 계절이 자동으로 골라져요. AI가 먼저 디자인 시안 3개를 표로 제안하고, 번호를 고르면 그때 그림을 만들어요.',
+  f:[{k:'season',l:'계절 (오늘 기준 자동)',o:['봄','여름','가을','겨울']},
+     {k:'biz',l:'홍보할 사업·프로그램',o:['가족사랑의 날','공동육아나눔터','아버지 참여 프로그램','다문화가족 프로그램','부모교육','가족상담·온가족보듬','가족 캠프·나들이','자원봉사·지역공동체']},
+     {k:'tgt',l:'대상',o:['영유아 자녀 가족','초등 자녀 가족','청소년 자녀 가족','아버지와 자녀','결혼이민자 가족','한부모·조손가족','지역 주민 누구나']},
+     {k:'goal',l:'목적',o:['참여자 모집','행사 안내','결과 공유·후기','감사 인사']},
+     {k:'size',l:'크기',o:['세로 포스터 (3:4)','정사각 카드뉴스 (1:1)','가로 배너 (16:9)','문자·SNS 세로 (9:16)']},
+     {k:'memo',l:'행사 정보 (그림 안에 글자로 넣지 않고, 나중에 편집할 내용)',ph:'예) 11월 22일(토) 10시, 가온시 가족센터 앞마당, 초등 자녀 가족 20가족, 선착순'}],
+  p:function(v){var S=SEASON[v.season]||SEASON[SEASON_NOW];
+   return '[1단계 — 시안 제안만]\n너는 가족센터 홍보 디자이너야. 아래 조건으로 홍보 이미지를 기획할 거야.\n- 시기: ['+v.season+', '+CURM+'월]\n- 홍보할 사업: ['+v.biz+']\n- 대상: ['+v.tgt+']\n- 목적: ['+v.goal+']\n- 크기: ['+v.size+']\n'+
+   '그림을 바로 만들지 말고, 서로 다른 디자인 시안 3개를 표로 제안해 줘.\n- 표 칸: 시안 이름 / 장면(누가·어디서·무엇을) / 계절 소재 / 색 / 분위기 / 이 대상에게 맞는 이유\n'+
+   '- 계절 소재 힌트: '+S.mot+'\n- 색 힌트: '+S.col+'\n- 세 시안은 장면과 구도가 서로 확실히 달라야 해.\n- 가족 구성은 다양하게(한부모·조부모·다문화 가족 포함), 얼굴은 실제 인물처럼 보이지 않게.\n'+
+   '내가 번호를 고르면 그때 그림을 만들어 줘.\n\n'+
+   '[2단계 — 번호를 고른 뒤 이렇게 보내기]\n[2]번 시안으로 만들어 줘. '+v.size+', 따뜻한 수채화풍.\n그림 안에는 글자를 넣지 마. 제목·날짜·신청 방법이 들어갈 빈 공간을 위쪽에 넉넉히 남겨 줘.\n\n'+
+   '[행사 정보 — 그림이 아니라 나중에 글자로 넣을 내용]\n'+(v.memo||'(없음)');}};
+
+/* --- 사업별 업무: 나머지 사업 채우기 --- */
+BIZ[1]={name:'언어발달지원',ready:true,
+ intro:'<b>다문화가족 자녀 언어발달지원</b>의 흐름이에요. 지침은 「2026 가족사업안내」 제2권 Ⅶ장 3(127쪽~). 12세 이하(초등 재학 중이면 초과 가능) 아동, 센터·외부기관 수업이 원칙이고 가정방문은 안 돼요.',
+ steps:[
+  {k:'모집',when:'연중 · 대상 아동 모집',where:'2권 Ⅶ장 3. 대상자 선정·관리 (131쪽~)',
+   ex:'[가상] 우리 아이 말이 쑥쑥! 언어발달교실 아동 모집\n· 누가: 12세 이하 다문화가족 자녀 (초등 재학 중이면 신청 가능)\n· 어디서: 센터 언어발달교실 (가정방문 없음)\n· 수업: 주 2회 40분 (맞벌이 가정은 상담 후 조정)\n· 신청: 센터 방문 [확인 필요: 연락처]',
+   prompt:'너는 가족센터 언어발달지원사업 담당자야. 아래 [모집 정보]로 결혼이민자 부모에게 보낼 모집 안내를 만들어 줘.\n1) 쉬운 한국어 문자 5줄\n2) [베트남어] 번역 (날짜·장소·준비 서류는 맨 위에 따로)\n- 대상은 12세 이하(초등 재학 중이면 초과 가능), 수업은 센터나 외부기관에서만 한다는 점을 빠뜨리지 마.\n- 정보에 없는 날짜·연락처는 [확인 필요]로 남겨.\n\n[모집 정보]\n(붙여 넣기)'},
+  {k:'평가',when:'초기평가 · 1~4회기',where:'2권 Ⅶ장 3. 언어평가 (133쪽~)',
+   ex:'[가상] 초기평가 요약 (아동A, 만 5세)\n· 실시 검사: REVT 수용, 언어발달체크리스트, 대화 및 상호작용 평가 (필수검사)\n· 결과 수치는 검사지 원본 기준 [확인 필요]\n· 관찰: 짧은 문장으로 요구 표현, 질문에 단답',
+   prompt:'아래 [평가 메모]를 초기 언어평가 요약지로 정리해 줘.\n항목: 아동(가명) / 평가일 / 실시 검사 / 결과(검사지 수치 그대로) / 관찰 내용 / 교육 필요 영역 / 부모 상담 시 전할 말\n- 검사 점수·백분위는 메모에 있는 숫자만 쓰고, 없으면 [확인 필요]\n- 언어장애로 진단하는 표현은 쓰지 마. 필요하면 "전문기관 연계 검토"로 써.\n\n[평가 메모]\n(붙여 넣기)'},
+  {k:'교육',when:'주 2회 · 40분 수업',where:'2권 Ⅶ장 3. 언어교육 (134쪽~)',
+   ex:'[가상] 장단기 계획 (아동A)\n· 장기(6개월): 일상 상황에서 3어절 문장으로 요구 표현\n· 단기(1개월): 그림 보고 동작어 10개 말하기\n· 수업: 개별 주 2회 40분',
+   prompt:'너는 다문화 언어발달지도사를 돕는 도우미야. 아래 [평가 요약]으로 장단기 계획서를 만들어 줘.\n1) 장기 목표(6개월) 1~2개 / 단기 목표(1개월) 3개 — 측정할 수 있는 말로\n2) 회기별 활동 4회분 (회기 / 목표 / 활동 / 교구)\n3) 가정에서 부모가 할 수 있는 놀이 2가지 (쉬운 한국어)\n- '+NOFAKE+'\n\n[평가 요약]\n(붙여 넣기)'},
+  {k:'부모상담',when:'수시 · 부모상담·교육',where:'2권 Ⅶ장 3. 부모상담 및 교육 (135쪽)',
+   ex:'[가상] 부모상담 안내 문자\n어머님, 안녕하세요. 이번 달 아동A의 수업 내용과 집에서 해 볼 놀이를 알려 드리려고 해요. 11월 26일(수) 오후 4시에 10분 정도 상담 가능하실까요?',
+   prompt:'아래 [수업 메모]로 결혼이민자 부모에게 보낼 상담 안내 문자와 가정 놀이 안내를 만들어 줘.\n- 쉬운 한국어, 5줄 이내, 아이의 좋아진 점을 먼저\n- 집에서 10분 할 수 있는 놀이 2가지\n- 원하면 [중국어] 번역도 함께\n- '+NOFAKE+'\n\n[수업 메모]\n(붙여 넣기)'},
+  {k:'평가·보고',when:'진전·종료·사후 평가, 연말 보고',where:'2권 Ⅶ장 3. 진전·종료·사후평가 (134쪽), 사후상담 (135쪽)',
+   ex:'[가상] 진전평가 요약\n· 교육 6개월 후 진전평가 실시 (초기 검사와 다른 도구 사용 가능)\n· 종료 후 6개월 이내 사후상담 2회 이상 → 사후상담일지 보관',
+   prompt:'아래 [초기평가 요약]과 [진전평가 메모]를 비교해서 진전평가 보고 문장을 써 줘.\n순서: 평가 개요 / 영역별 변화(초기 → 진전) / 다음 6개월 목표 / 종료 여부 판단에 필요한 정보\n- 숫자는 두 자료에 있는 것만, 변화는 "늘었다/줄었다"로 근거와 함께\n- '+NOFAKE+'\n\n[초기평가 요약]\n(붙여 넣기)\n\n[진전평가 메모]\n(붙여 넣기)'}
+ ]};
+BIZ[2]={name:'온가족보듬',ready:true,
+ intro:'<b>취약·위기가족지원(온가족보듬) 사례관리 10단계</b>를 다섯 묶음으로 따라가요. 지침은 「2026 가족사업안내」 제1권 Ⅱ장(126쪽~), 서식은 173~196쪽. 서식 자료실의 [욕구 및 강점 사정지·서비스 계획서·사례관리과정 기록지·사례회의록·종결 기록지·활동일지·서비스 의뢰서]로 바로 이어져요.',
+ steps:[
+  {k:'발굴·초기상담',when:'① 발굴 → ② 초기상담 → ③ 등록',where:'1권 Ⅱ장 사례관리 서비스 지원과정 (130쪽)',
+   ex:'[가상] 초기상담 요약\n· 의뢰: 가온시 ○○동 행정복지센터 (한부모 가족A)\n· 주 호소: 자녀 등교 거부, 야간 근무로 돌봄 공백\n· 사전 척도: 자기효능감(척도1)·가족기능(척도2) 실시 → 점수 [확인 필요]\n· 다음: 사례회의에서 대상자 선정 논의',
+   prompt:'너는 가족센터 사례관리사를 돕는 도우미야. 아래 [초기상담 메모]를 초기상담 요약으로 정리해 줘.\n항목: 의뢰 경로 / 가족 구성(가명) / 주 호소 / 관찰 사실 / 당사자 진술 / 담당자 판단 / 사전 척도 실시 여부 / 사례회의에서 논의할 점\n- 관찰 사실·진술·판단을 섞지 마. 진단하거나 단정하지 마.\n- 실명·연락처·주소는 쓰지 말고 가명으로.\n- '+NOFAKE+'\n\n[초기상담 메모]\n(붙여 넣기)'},
+  {k:'사정·계획',when:'④ 욕구·강점 사정 → ⑤ 서비스 계획',where:'1권 서식10 욕구 및 강점 사정지 (179쪽), 서식11 서비스 계획서 (181쪽)',
+   ex:'[가상] 사정 → 계획 연결\n· 6.가족관계(중): 자녀와 대화 부족 → 단기: 주 3회 대화 / 부모교육 8회\n· 8.자녀교육(중): 기초학습 지연 → 보듬매니저 학습·정서지원 주 2회',
+   prompt:'첨부 1은 우리 센터 욕구 및 강점 사정지야. 이걸로 서비스 계획서 초안을 만들어 줘.\n1) 개인·가족 차원 성과목표 (단기 3개월 / 중기 3~6개월 / 장기 6개월~1년) — 측정 가능한 말로\n2) 욕구 영역별 개입 표 (욕구 영역 / 개입목표 / 대상 / 우선순위 / 개입시기 / 서비스 내용 / 제공기관 / 담당자 / 수행방법 / 기간 / 횟수)\n- 사정지에 없는 욕구는 만들지 마. 우선순위는 심각도 순으로.\n- 마지막에 사례회의에서 확인할 것 3가지.'},
+  {k:'서비스 제공',when:'⑥ 서비스 제공 · 보듬매니저 파견',where:'1권 Ⅱ장 사업지원인력 (142~144쪽), 서식21~23',
+   ex:'[가상] 보듬매니저 활동일지 정리\n· 11.19 16:00~18:00 학습·정서지원 (초2 자녀)\n· 받아쓰기 복습 40분, 독서 20분 → 집중 시간 늘어남\n· 위기여부: 아니오',
+   prompt:'아래 [활동 메모]를 (지원인력) 활동일지 서식 항목으로 정리해 줘.\n항목: 활동일/시간 / 활동인 / 대상자(가명) / 위기여부 / 활동내용 / 활동인 의견\n- 활동내용은 시간 순서로 "무엇을 / 아동·가족의 반응 / 특이사항"\n- 전화번호·실명은 쓰지 마.\n- '+NOFAKE+'\n\n[활동 메모]\n(말로 남긴 메모를 붙여 넣기)'},
+  {k:'점검·평가',when:'⑦ 6개월 내 재사정 → ⑧ 평가',where:'1권 Ⅱ장 서비스 점검·평가 (131쪽), 서식24 모니터링 기록표',
+   ex:'[가상] 6개월 점검\n· 계획 대비: 부모교육 8회 중 7회 참여\n· 변화: 자녀와 대화 주 4회 (부모 보고)\n· 사후 척도: 자기효능감·가족기능 재측정 [확인 필요]',
+   prompt:'아래 [서비스 계획서]와 [6개월 기록]을 비교해서 점검 보고를 써 줘.\n순서: 계획 대비 진행 / 목표별 달성 정도(근거) / 환경·욕구 변화 / 계획 수정이 필요한 부분 / 종결 또는 연장 판단 근거\n- 근거 없는 성과 표현은 쓰지 마. 척도 점수는 자료에 있는 것만.\n- 평가위원 입장에서 마지막에 점검 3줄.\n\n[서비스 계획서]\n(붙여 넣기)\n\n[6개월 기록]\n(붙여 넣기)'},
+  {k:'종결·사후',when:'⑨ 종결 → ⑩ 사후관리 1·3·6개월',where:'1권 서식14 종결 기록지 (184쪽), 사후관리 (132쪽)',
+   ex:'[가상] 종결 요약\n· 종결유형: 목표달성 후 종결 / 처리: 사후관리 실시\n· 사후관리: 1개월 전화, 3개월 내방 상담, 6개월 프로그램 연계 확인',
+   prompt:'첨부한 우리 센터 종결 기록지 서식에 맞춰 아래 [사례 기록]으로 종결 기록지를 써 줘.\n- 종결유형·종결처리는 서식의 보기 중에서만 골라.\n- 성과목표 달성내용은 근거(척도·관찰)를 괄호로.\n- 사후관리 계획은 1·3·6개월로.\n- '+NOFAKE+'\n\n[사례 기록]\n(붙여 넣기)'}
+ ]};
+BIZ[3]={name:'다문화 자녀지원',ready:true,
+ intro:'<b>다문화 자녀 지원 3총사</b>: 기초학습(취학 전·초등) → 진로설계(7~24세) → 교육활동비(7~18세). 지침은 「2026 가족사업안내」 제2권 Ⅹ장(260~300쪽).',
+ steps:[
+  {k:'계획',when:'연초 · 사업계획서 (서식1)',where:'2권 Ⅹ장 각 사업 서식1 (271·287·307쪽)',
+   ex:'[가상] 2027 기초학습지원 계획 (요약)\n· 대상: 미취학·초등 다문화 아동 [확인 필요: 목표 인원]\n· 운영: 1회기(6개월) 3~10명, 월·수·금 기초 한글 / 화·목 기초 산수\n· 연계: 관내 어린이집·유치원 홍보',
+   prompt:'첨부 1은 [기초학습지원] 사업계획서 서식이고, 첨부 2는 작년 결과보고서야.\n바로 쓰지 말고 ① 작년 계획 대비 실적·미달 원인 분석 → ② 올해 바꿀 점 제안 → ③ 내가 채워야 할 정보 질문까지만 해 줘.\n내가 "작성해 줘"라고 하면 서식 항목 순서 그대로 써 줘.\n- '+NOFAKE},
+  {k:'모집',when:'수시 · 대상자 발굴',where:'2권 Ⅹ장 추진 절차 ② 홍보 및 대상자 발굴',
+   ex:'[가상] 진로설계 상담 안내\n· 대상: 7~24세 다문화 아동·청소년 (학교 밖 청소년 포함)\n· 내용: 학교생활·진로 고민 1:1 상담, 진로설계 연 4회 이상\n· 우선: 기초수급·중위소득 52% 이하, 한부모·조손·다자녀, 중도입국자녀',
+   prompt:'너는 가족센터 홍보 담당자야. [진로설계지원] 청소년 모집 안내를 두 가지로 만들어 줘.\n1) 청소년에게 직접 보내는 카톡 문구 (반말 아닌 친근한 존댓말, 4줄)\n2) 학교·청소년기관에 보내는 협조 안내문 (공문체, 5줄)\n- 대상 연령과 우선 선정 기준을 빠뜨리지 마.\n- 정보에 없는 연락처·일정은 [확인 필요].'},
+  {k:'운영기록',when:'회기마다 · 기록지',where:'진로설계 서식4 상담과정 기록지 (277쪽), 기초학습 서식4 학습관리 기록지 (293쪽)',
+   ex:'[가상] 상담과정 기록\n· 11.12 / 진로: 요리 관심, 직업체험 희망 / 11월 직업체험 연계\n· 11.19 / 학교생활: 친구 관계 회복 중 / 12월 진로검사 후 종결 여부 판단',
+   prompt:'아래 [상담 메모]를 상담과정 기록지 형식으로 정리해 줘.\n칸: 날짜 / 주요 상담내용 / 향후계획(종결여부 등 명시)\n- 학교생활·가정·진로 중 무엇을 다뤘는지 먼저\n- 청소년 이름은 쓰지 말고 [청소년C]로\n- '+NOFAKE+'\n\n[상담 메모]\n(붙여 넣기)'},
+  {k:'실적',when:'매월 · 사업실적(양식)',where:'각 사업 서식3 사업실적(양식) (276·292·312쪽)',
+   ex:'[가상] 교육활동비 일정\n· 6월 신청접수·대상 결정 → 8월 카드포인트 선지급 → ~11월 사용 → 12월 정산\n· 초등 연 40만원, 중등 50만원, 고등 60만원',
+   prompt:'아래 [월별 실적표]를 점검해 줘.\n1) 실인원·연인원이 뒤바뀌었거나 합계가 안 맞는 칸\n2) 교육활동비는 학령별 지급액(초등 40만·중등 50만·고등 60만)과 인원이 맞는지\n3) 문제마다 위치 / 이유 / 확인할 원자료\n- 계산 과정을 보여 주고, 확실하지 않으면 [확인 필요]\n\n[월별 실적표]\n(붙여 넣기)'},
+  {k:'보고',when:'연말 · 결과보고 (서식2)',where:'각 사업 서식2 사업결과보고서 (274·290·310쪽)',
+   ex:'[가상] 결과보고 요약 문장\n기초학습지원은 2개 그룹을 운영했으며, 학습관리 기록지 기준 출석률과 받침 글자 읽기 향상을 확인했다. 수치는 실적표와 대조 후 확정한다.',
+   prompt:'첨부한 결과보고서 서식에 맞춰 아래 [실적표]와 [학습·상담 기록 요약]으로 결과보고 초안을 써 줘.\n순서: 사업 개요 / 추진 실적(표) / 성과(근거와 함께) / 어려웠던 점 / 개선 방안\n- 숫자는 실적표에 있는 것만, 계산했다면 계산식을 괄호로\n- 마지막에 평가위원 입장에서 점검 3줄\n\n[실적표]\n(붙여 넣기)\n\n[학습·상담 기록 요약]\n(붙여 넣기)'}
+ ]};
+BIZ[4]={name:'결혼이민자 지원',ready:true,
+ intro:'<b>결혼이민자 역량강화(실용 한국어 7개 과정)</b>와 <b>직업훈련교육(사전교육 → 직업훈련 → 사후관리 6개월)</b>을 함께 봐요. 지침은 「2026 가족사업안내」 제2권 Ⅶ장 6(172쪽~), Ⅺ장(315쪽~).',
+ steps:[
+  {k:'계획',when:'1월 · 사업계획서',where:'2권 Ⅶ장 6 서식1 (193쪽), Ⅺ장 서식1 (335쪽)',
+   ex:'[가상] 2027 역량강화 과정 구성\n· 자녀학습지도를 위한 한국어 / 취업을 위한 한국어 / 토픽 읽기 (각 12차시)\n· 연간 200시간 이상 [확인 필요: 과정별 시간]',
+   prompt:'첨부 1은 결혼이민자 역량강화지원 사업계획서 서식이고, 첨부 2는 작년 수강생 만족도 결과야.\n7개 과정(자녀학습지도·지역문화·중도입국자녀·취업·토픽 읽기·듣기·쓰기) 중 우리 지역에 맞는 과정을 추천하고 이유를 표로 정리해 줘.\n바로 쓰지 말고 추천 → 내가 고르기 → "작성해 줘" 순서로.\n- 연간 최소 200시간, 과정별 12차시 기준을 지켜.\n- '+NOFAKE},
+  {k:'모집',when:'2~3월 · 수강생 모집',where:'2권 Ⅶ장 6 서식3 수강 신청서 (198쪽)',
+   ex:'[가상] 취업을 위한 한국어 수강생 모집\n· 대상: 중급 정도 한국어가 가능한 결혼이민자\n· 12차시 · 주 2회 · 센터 교육실\n· 같은 과정은 다시 들을 수 없어요',
+   prompt:'아래 [과정 정보]로 결혼이민자 수강생 모집 안내를 만들어 줘.\n1) 쉬운 한국어 안내문 (일시·장소·대상·신청 방법을 맨 위에)\n2) [캄보디아어] 번역\n3) 카톡용 3줄\n- 같은 센터의 같은 과정은 중복 수강이 안 된다는 점을 넣어.\n- '+NOFAKE+'\n\n[과정 정보]\n(붙여 넣기)'},
+  {k:'직업훈련',when:'사전교육 30~60시간 → 훈련 60~120시간',where:'2권 Ⅺ장 3. 운영 (320~323쪽), 붙임1 취업준비도 설문 (359쪽)',
+   ex:'[가상] 사전교육 설계\n· 취업준비도 설문 결과: 컴퓨터 기초 필요 9명, 직장 문화 이해 필요 12명\n· 구성: 직무 한국어 20h + 컴퓨터 20h + 직장문화·견학 10h = 50h\n· 한 과정 최소 15명 모집 후 설계 (2026 변경)',
+   prompt:'너는 결혼이민자 직업훈련 담당자야. 아래 [취업준비도 설문 결과]로 사전교육 과정을 설계해 줘.\n1) 과정 구성표 (영역 / 시간 / 내용 / 강사) — 합계 30~60시간\n2) 연계할 직업훈련 과정 후보 3개와 이유 (지역 일자리 기준)\n3) 사후관리 6개월 계획\n- 한 과정 최소 15명, 하루 2시간 이상 기준을 지켜.\n- 설문에 없는 수치는 [확인 필요].\n\n[취업준비도 설문 결과]\n(붙여 넣기)'},
+  {k:'관리',when:'교육 중 · 출결·이수 관리',where:'2권 Ⅶ장 6 서식5 이수정지·제적 관리대장 (201쪽)',
+   ex:'[가상] 출결 안내 문자\n안녕하세요. 지난주 두 번 결석하셔서 연락드려요. 다음 수업은 11월 25일(화) 오전 10시예요. 오기 어려우면 미리 알려 주세요.',
+   prompt:'아래 [출결 메모]로 결석한 수강생에게 보낼 쉬운 한국어 문자를 만들어 줘.\n- 탓하지 말고 다음 수업 일시를 분명하게, 4줄 이내\n- 원하면 [베트남어]로도\n- 이름은 쓰지 말고 "수강생님"\n\n[출결 메모]\n(붙여 넣기)'},
+  {k:'보고',when:'과정 종료 1개월 내 · 결과보고',where:'2권 Ⅺ장 서식3·4 결과보고서 (348·353쪽), 서식6 만족도 (358쪽)',
+   ex:'[가상] 결과보고 요약\n· 사전교육 수료 [확인 필요]명 → 직업훈련 연계 [확인 필요]명 → 취업 [확인 필요]명\n· 훈련기관은 과정 종료 1개월 안에 출석부 사본·현장 사진 포함 결과보고서 제출',
+   prompt:'첨부한 결과보고서 서식(가족센터용)에 맞춰 아래 [실적]과 [만족도 응답]으로 초안을 써 줘.\n순서: 사업 개요 / 단계별 인원(모집 → 사전교육 수료 → 훈련 연계 → 취업) / 성과 / 미달성 사유 / 개선 방안\n- 인원 수는 자료에 있는 것만. 단계별 비율은 계산식과 함께.\n- 마지막에 평가위원 입장 점검 3줄\n\n[실적]\n(붙여 넣기)\n\n[만족도 응답]\n(붙여 넣기)'}
+ ]};
+
+/* --- 녹음 → 글 화면 --- */
+function openRec(){show('rec');}
 
 /* 처음 오면 기관 정보 묻기 (한 번만) + 주소로 바로 열기 */
 (function(){var seen=false;try{seen=!!localStorage.getItem(OKEY+'_seen');}catch(e){seen=true;}
