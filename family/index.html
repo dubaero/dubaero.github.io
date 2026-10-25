@@ -267,6 +267,23 @@ table.appr td{height:40px}
 .batt{margin-top:10px;padding:10px 14px;background:#F3FAF5;border:1px solid #CFE3D6;border-radius:12px}
 .batt h4{font-size:13.5px;margin:0 0 4px;color:#1F4E3A}
 .batt ol{margin:0;padding-left:20px;font-size:13.5px;line-height:1.6}
+.sgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;align-items:start}
+.sright{position:sticky;top:76px;display:flex;flex-direction:column;gap:10px}
+.sp-h{display:flex;align-items:center;gap:6px}.sp-h h4{flex:1;font-size:14.5px;margin:0}.sp-h h4 small{font-weight:500;color:var(--muted);font-size:12px}
+.btn.mini{padding:5px 12px;font-size:12.5px}
+#s-pv{max-height:420px;overflow:auto;margin:0}
+.sugs h4,.satt h4{font-size:14px;margin:0 0 6px}.sugs h4 small{font-size:11.5px;color:var(--muted);font-weight:500}
+.sugc{border:1.5px solid var(--warm-line);background:var(--warm);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.sugc b{display:block;font-size:14px;color:var(--point)}.sugc span{display:block;font-size:13px;line-height:1.55;white-space:pre-line}
+.satt{background:#F3FAF5;border:1px solid #CFE3D6;border-radius:12px;padding:10px 12px}.satt ol{margin:0;padding-left:20px;font-size:13px;line-height:1.6}
+.comf{margin:10px 0 4px}.comf:empty{display:none}
+.comf{background:#FFF6EF;border:1.5px solid #F2D2BE;border-radius:14px;padding:14px 16px}
+.comf h4{font-size:15px;margin:0 0 6px;color:var(--point)}.comf p{font-size:14.5px;line-height:1.7;margin:2px 0}.comf p.rest{margin-top:8px;font-size:13.5px;color:#1F4E3A;font-weight:600}
+.aig-grid.one{grid-template-columns:1fr!important}
+.aig-more{margin-top:10px;border:1px solid var(--line);border-radius:12px;padding:8px 14px;background:#fff}
+.aig-more summary{cursor:pointer;font-size:13.5px;font-weight:700;color:var(--ink)}
+#f-aig{margin:12px 0 16px}
+@media (max-width:820px){.sgrid{grid-template-columns:1fr}.sright{position:static}}
 .pdfbtn{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:5px 12px;text-decoration:none;background:#fff}
 a.b-how{text-decoration:none;display:inline-block}
 .aig{background:#fff;border:1.5px solid var(--blue);border-radius:16px;padding:20px 22px;margin:-14px 0 32px}
@@ -600,8 +617,11 @@ a.b-how{text-decoration:none;display:inline-block}
 <!-- ===== 간단 도구 ===== -->
 <div id="v-simple" hidden>
   <div class="vbar"><button type="button" class="vback" data-home>← 업무 비서함</button><h2 id="s-title"></h2></div>
-  <div class="tool"><p class="sub" id="s-sub"></p><div id="s-body"></div>
-    <div class="acts" id="s-acts"><button type="button" class="btn fill" id="s-gpt">ChatGPT에서 열기</button><button type="button" class="btn" id="s-copy">프롬프트 복사</button><button type="button" class="btn" id="s-next" hidden></button></div></div>
+  <div class="tool"><p class="sub" id="s-sub"></p>
+    <div class="sgrid"><div id="s-body"></div>
+      <div class="sright" id="s-right"><div class="sp-h"><h4>예시 프롬프트 <small>고른 대로 바로 바뀌어요 · 주황색 칸은 내 상황으로</small></h4><button type="button" class="btn mini" id="s-cp">복사</button><button type="button" class="btn mini" id="s-gpt2">ChatGPT</button></div>
+        <pre class="aig-p" id="s-pv"></pre><div class="sugs" id="s-sug"></div><div class="satt" id="s-att"></div></div></div>
+    <div class="acts" id="s-acts"><button type="button" class="btn fill" id="s-gpt" hidden>ChatGPT에서 열기</button><button type="button" class="btn" id="s-copy" hidden>프롬프트 복사</button><button type="button" class="btn" id="s-next" hidden></button></div></div>
 </div>
 
 </main>
@@ -1216,6 +1236,8 @@ var BIZSTEP={
   '2단계 질문: 서식 항목별로 내가 더 줘야 할 정보(미달 사유, 대표 사례 등)를 질문 10개 이내로.',
   '3단계 작성: 내가 "작성해"라고 하면 서식의 항목 이름과 순서 그대로 써. 세부사업마다 정량 성과(숫자·계산식) / 정성 성과 / 만족도 결과 인용 / 미달 사유와 개선방안, 예산 집행률을 넣어.',
   '4단계 점검: 평가위원 입장에서 달성률 논리·예산 근거·근거 없는 성과 표현 중 감점될 곳 3가지와 고친 문장을 표로.']};
+var ATTC={'상담':[['form','우리 센터 「@N」 서식 (올해 양식)',1],['memo','가명으로 정리한 상담 메모 또는 손메모 사진'],['prev','이전 기록 요약 (있으면, 가명)']],'자녀':[['form','우리 센터 「@N」 서식 (올해 양식)',1],['memo','활동·학습 메모 또는 손메모 사진'],['att','출석·참여 기록 (있으면)']],'행정':[['form','우리 센터 「@N」 서식 (올해 양식)',1],['info','프로그램 안내문·운영계획 (일시·장소·대상)']]};
+FORMS.forEach(function(f){if(!ATT[f.id]&&ATTC[f.cat]&&f.id!=='satis')ATT[f.id]=ATTC[f.cat].map(function(x){return [x[0],x[1].replace('@N',f.name),x[2]];});});
 function attList(f){var A=ATT[f.id]||[];return A.filter(function(x){return !AOFF[f.id+x[0]];}).map(function(x){var nm=x[1];if(x[0]==='form'&&AFORM==='base')nm='「2026 가족사업안내」 '+f.src.replace(/^2026 가족사업안내 /,'')+' 기본 서식 PDF';var fn=AFILE[f.id+x[0]];return nm+(fn?' — 파일: '+fn:'');});}
 function bizP(mode){
   var f=CF,L=[],A=attList(f),proj=ALOC==='proj';
@@ -1263,9 +1285,10 @@ function outline(f){var L=['[기본 서식 항목 — 「2026 가족사업안내
   return L.join('\n');}
 function Q2(f,k){return (f.qs||[]).find(function(q){return q.k===k;});}
 function aiP(mode){
-  var f=CF,L=[];if(f.id==='satis')return satisP();if(ATT[f.id])return bizP(mode);
+  var f=CF,L=[];if(f.id==='satis')return satisP();if(BIZSTEP[f.id])return bizP(mode);
   L.push('너는 가족센터에서 '+(f.cat==='상담'?'사례관리를':'사업 운영을')+' 10년 넘게 한 선배 실무자야.');
-  if(AFORM==='mine')L.push('첨부 1은 우리 센터의 ['+f.name+'] 서식이야.');
+  if(AFORM==='mine')L.push('첨부 1은 우리 센터의 올해 ['+f.name+'] 서식이야. 반드시 이 서식의 항목 이름·순서·표 모양 그대로 작성해.');
+  var AL=attList(f);if(AL.length>1&&mode!=='rec'){L.push('[첨부 자료]');AL.forEach(function(x,i){L.push('첨부 '+(i+1)+': '+x);});}
   else L.push('우리 센터 서식이 따로 없어서, 「2026 가족사업안내」 '+f.src.replace(/^2026 가족사업안내 /,'')+'의 ['+f.name+'] 기본 서식을 첨부 1로 올렸어. 첨부를 못 읽으면 맨 아래 [기본 서식 항목]을 그대로 써.');
   if(mode==='rec'){
     L.push('첨부 2는 ['+(RECW[f.id]||'현장 음성 메모')+'] 녹음 파일이야. 다른 앱에서 이미 글로 바꿨다면 맨 아래에 붙여 넣을게.');
@@ -1619,6 +1642,78 @@ function openRec(){show('rec');}
 (function(){var seen=false;try{seen=!!localStorage.getItem(OKEY+'_seen');}catch(e){seen=true;}
   var h=location.hash.slice(1);if(h)go(h);else if(!seen&&!O().set)openOrg();})();
 
+
+/* ===== 2026-10-25 개편: 프롬프트를 바로 옆에, 제안 1안·2안, 첨부 자료 목록 ===== */
+(function(){
+var TIP={'영유아 자녀 가족':'1시간 이내, 낮잠 시간(13~15시) 피하기','영유아 가족':'1시간 이내, 낮잠 시간(13~15시) 피하기','초등 자녀 가족':'미션·보물찾기처럼 아이가 주도하는 방식','초등 가족':'미션·보물찾기처럼 아이가 주도하는 방식','청소년 자녀 가족':'청소년이 역할을 맡는 방식(사진·진행)','아버지와 자녀':'토요일 오전, 아버지가 주도하는 활동 1개 이상','다문화가족':'쉬운 한국어 안내, 통역 지원, 모국 문화 코너','한부모·조손가족':'비용 부담 없이, 조부모도 함께할 수 있는 강도','부부':'저녁 시간, 아이 돌봄 동시 운영','지역 주민':'누구나 들러 5분 안에 참여하는 방식','전체 가족':'연령대별 코너를 나눠 운영','결혼이민자 가족':'쉬운 한국어 안내, 통역 지원','지역 주민 누구나':'누구나 들러 5분 안에 참여하는 방식'};
+var EVT={'가족 나들이·체험':{'봄':['봄꽃 따라 가족 숲길 걷기','텃밭 모종 심기 체험'],'여름':['숲속 곤충·식물 관찰 탐험','저녁 별 관찰과 가족 이야기'],'가을':['가족 고구마 캐기·밤 줍기','낙엽 보물찾기 숲 체험'],'겨울':['실내 가족 캠핑(텐트·보드게임)','눈썰매·겨울 놀이 체험']},
+ '기념일 행사':{'봄':['가정의 달 가족사진 찍는 날','어버이날 감사 편지·꽃 만들기'],'여름':['여름방학 가족 영화의 밤','가족 물총 놀이 축제'],'가을':['추석 송편 빚기·전통놀이','가족사랑의 날 보드게임 대회'],'겨울':['송년 가족의 밤(한 해 사진 슬라이드)','가족 쿠키·카드 만들기']},
+ '1박 2일 캠프':{'봄':['봄 숲 체험 가족 캠프','가족 별자리 글램핑'],'여름':['바닷가 가족 캠프','여름 과학 탐험 캠프'],'가을':['농촌 들녘 체험 캠프','가족 역사 탐방 캠프'],'겨울':['수련원 실내 가족 캠프','가족 소원 연 만들기 캠프']},
+ '지역 축제 부스':{'봄':['가족 나무 손도장 만들기','페이스페인팅·풍선 부스'],'여름':['가족 부채 꾸미기','과일화채 나눔 체험'],'가을':['가족 소원 등 만들기','다문화 전통놀이 체험'],'겨울':['가족 키링·장식 만들기','따뜻한 차 나눔 가족 사진관']},
+ '가족 봉사활동':{'봄':['동네 꽃 심기 가족 봉사','공원 줍깅(쓰레기 줍기 걷기)'],'여름':['어르신께 부채 만들어 드리기','동물 보호소 가족 봉사'],'가을':['김장 나눔 가족 봉사','동네 벽화 그리기'],'겨울':['방한용품 나눔 꾸러미 만들기','어르신께 손편지·핫팩 전달']},
+ '비대면 가족 활동':{'봄':['꾸러미 배송: 가족 화분 키우기','온라인 가족 요리 챌린지'],'여름':['가족 여름 미션 빙고(사진 인증)','집에서 하는 과학 실험 키트'],'가을':['가족 독서 릴레이(온라인 인증)','가을 가족 사진 공모전'],'겨울':['가족 연말 영상 편지','집콕 보드게임 키트 배송']}};
+var IDEA={'가족관계':['가족 대화 카드 놀이 교실','부모-자녀 함께 쓰는 감사 일기'],'가족돌봄':['이웃과 나누는 품앗이 놀이 모임','맞벌이 가정 토요 돌봄 놀이터'],'가족생활':['가족 경제 교실(용돈·가계부)','가족 정리수납·생활 습관 만들기'],'가족과 함께하는 지역공동체':['우리 동네 가족 지도 만들기','가족 플로깅(걷기+쓰레기 줍기)'],'다문화가족 특성화':['엄마 나라 그림책 함께 읽기','다문화가족 자녀 이중언어 놀이'],'공동육아나눔터':['품앗이 계절 놀이 교실','장난감 수리·나눔 장터']};
+var MSGX={'일정 안내':['안녕하세요, 가온시 가족센터입니다. [날짜·시간] [프로그램명]이 [장소]에서 열립니다. 준비물: [준비물]. 문의 [전화]','보호자님, 내일 [시간] [프로그램명] 잊지 않으셨지요? [장소]에서 기다릴게요.'],
+ '불참 확인':['보호자님, 오늘 [프로그램명]에 오시지 않아 연락드려요. 다음 회차 [날짜] 참여 여부를 알려 주세요.','지난 회차에 못 오셔서 걱정했어요. 다음 [날짜]에 함께하실 수 있는지 답장 주세요.'],
+ '준비물 안내':['[날짜] [프로그램명] 준비물 안내: [준비물]. 없으시면 센터에서 빌려 드려요.','내일 활동은 야외라 편한 신발과 물을 꼭 챙겨 주세요.'],
+ '서류 요청':['[서류명] 제출을 부탁드려요. [기한]까지 센터 방문 또는 사진으로 보내 주시면 돼요.','서류 한 가지가 빠져 있어 연락드려요: [서류명]. [기한]까지 부탁드립니다.'],
+ '감사 인사':['오늘 함께해 주셔서 고맙습니다. 아이들 웃음 덕분에 센터가 따뜻했어요.','[프로그램명]을 끝까지 함께해 주셔서 감사합니다. 다음에도 기다릴게요.'],
+ '변경·취소 안내':['[날짜] [프로그램명]이 [사유]로 [새 날짜]로 바뀌었습니다. 불편을 드려 죄송합니다.','안전을 위해 [날짜] 야외 활동은 실내 [장소]에서 진행합니다.'],
+ '후원·협력 감사':['[기관명]의 도움으로 [사업명]을 잘 마쳤습니다. 깊이 감사드립니다.','보내 주신 [물품]은 [대상] 가족에게 잘 전달했습니다. 고맙습니다.']};
+var ATTS={idea:['우리 센터 프로그램 기획서(제안서) 서식','올해 프로그램 일지·참여 기록 요약','만족도·수요조사 결과'],
+ event:['우리 센터 행사 운영계획서 서식','안전사고 예방·긴급대응 계획 서식(있으면)','작년 같은 행사 결과(있으면)'],
+ promo:['센터 홍보 규칙(말투·문의처)','지난 게시글이나 카드뉴스 1~2개(이 모양을 따라 쓰게)','사업 안내문 또는 운영계획서'],
+ budget:['예산총괄·집행내역 엑셀','정산보고서 서식','운영지침의 예산 집행 기준'],
+ img:['센터 로고(그림 안에 넣지 않고 나중에 얹기)']};
+var PROMO={'문자·카톡 모집 문구':function(v){return '너는 가온시 가족센터 홍보 담당자야. 아래 [행사 정보]로 '+v.biz+' 모집 문자를 써 줘.\n- 5줄 이내, 밝고 친절한 존댓말\n- 대상 · 일시 · 장소 · 신청 방법을 빠짐없이, 글머리 기호로\n- 문의처는 맨 아래 한 줄\n- 버전 2개: 기본 / 결혼이민자도 읽기 쉬운 쉬운 한국어\n- '+NOFAKE;},
+ '카드뉴스 4장 구성':function(v){return '너는 가온시 가족센터 홍보 담당자야. 아래 [행사 정보]로 '+v.biz+' 카드뉴스 4장을 만들어 줘.\n표로 정리: 장 | 큰 제목(12자 이내) | 본문(2줄, 한 줄 20자 이내) | 그림 설명\n- 1장: 눈길 끄는 질문형 제목 + 대상\n- 2장: 무엇을 하나요(활동 2~3가지)\n- 3장: 언제 · 어디서 · 누가(인원)\n- 4장: 신청 방법 · 마감 · 문의처\n- 그림 설명은 글자 없는 수채화 장면으로, 가족 구성은 다양하게\n- 과장 표현(최고·완벽) 없이\n- '+NOFAKE;},
+ '블로그 초안':function(v){return '너는 가온시 가족센터 블로그 담당자야. 아래 [행사 정보]로 '+v.biz+' 블로그 글 초안을 써 줘.\n- 제목 3안 (25자 이내, 검색될 단어 포함)\n- 본문 순서: 인사 2줄 → 이런 가족께 추천해요 → 활동 소개 → 일시·장소·대상·신청 방법(글머리 기호) → 마무리 인사 → 문의처\n- 800~1,000자, 문단마다 2~3줄, 친근한 존댓말\n- 사진이 들어갈 자리를 [사진: 설명]으로 표시\n- 해시태그 5개\n- '+NOFAKE;},
+ '세 가지 모두':function(v){return PROMO['문자·카톡 모집 문구'](v)+'\n\n그다음 같은 정보로:\n'+PROMO['카드뉴스 4장 구성'](v).split('\n').slice(1).join('\n')+'\n\n마지막으로:\n'+PROMO['블로그 초안'](v).split('\n').slice(1).join('\n');}};
+SIMPLE.promo.p=function(v){return (PROMO[v.out]||PROMO['카드뉴스 4장 구성'])(v)+'\n\n[행사 정보]\n'+v.memo;};
+function sugFor(k,v){var t=TIP[v.tgt]||'';
+  if(k==='event'){var a=((EVT[v.kind]||{})[v.when])||[];return a.map(function(x,i){return {h:(i+1)+'안 · '+x,d:'대상 '+v.tgt+(t?' → '+t:'')+'. '+v.when+' 운영.'};});}
+  if(k==='idea'){var a=IDEA[v.area]||[];return a.map(function(x,i){return {h:(i+1)+'안 · '+x,d:v.tgt+' 대상 · '+v.when+' · '+v.size+(t?' → '+t:'')};});}
+  if(k==='msg'){var a=MSGX[v.kind]||[];return a.map(function(x,i){return {h:(i+1)+'안',d:x};});}
+  if(k==='promo'){var b=v.biz;if(v.out==='블로그 초안')return [{h:'1안 · 제목',d:'우리 동네 '+b+', 이렇게 함께해요'},{h:'2안 · 제목',d:'아이와 보내는 주말, '+b+'에서 찾았어요'}];
+    if(v.out==='문자·카톡 모집 문구')return [{h:'1안',d:'['+b+'] 참여 가족을 모집해요!\n· 대상: [대상]\n· 일시: [날짜·시간]\n· 장소: [장소]\n· 신청: [방법] / 문의 [전화]'},{h:'2안 (쉬운 한국어)',d:b+'에 오세요.\n언제: [날짜]\n어디: [장소]\n신청: [전화]'}];
+    return [{h:'1안 · 질문형',d:'1장 “주말에 뭐 하지?” / 2장 '+b+'에서 함께 놀아요 / 3장 언제·어디서 / 4장 지금 신청하세요'},{h:'2안 · 이야기형',d:'1장 우리 가족의 작은 변화 / 2장 '+b+' 이런 활동 / 3장 일정 안내 / 4장 신청·문의'}];}
+  if(k==='img'){var S=SEASON[v.season]||SEASON[SEASON_NOW];var m=(S.mot||'').split(',').map(function(x){return x.trim();});return [{h:'1안 · '+(m[0]||v.season)+' 풍경',d:v.tgt+'이(가) '+(m[0]||'')+' 사이에서 웃는 장면, 색: '+S.col},{h:'2안 · '+(m[2]||m[1]||v.season)+' 클로즈업',d:'손을 맞잡은 가족과 '+(m[2]||m[1]||'')+', 위쪽에 글자 넣을 여백'}];}
+  return [];}
+function curP(){var v={};for(var x in SV)v[x]=SV[x];if(!(v.memo||'').trim()){var f=(CS.f||[]).find(function(y){return !y.o;});v.memo='('+(f?f.l:'내용')+'을 여기에 적어 주세요)';}var p=CS.p(v);
+  var A=ATTS[CS._k];if(A&&A.length)p+='\n\n[함께 첨부할 자료]\n'+A.map(function(x,i){return '첨부 '+(i+1)+': '+x;}).join('\n')+'\n- 첨부한 서식이 있으면 반드시 그 서식의 항목 이름과 순서 그대로 써 줘.';return p;}
+function refreshS(){if(!CS||!CS.p)return;$('#s-pv').innerHTML=markP(curP());var sg=sugFor(CS._k,SV),box=$('#s-sug');box.innerHTML='';
+  if(sg.length){box.appendChild(el('h4',null,'이런 건 어떠세요? <small>예시</small>'));sg.forEach(function(s){box.appendChild(el('div','sugc','<b>'+esc(s.h)+'</b><span>'+esc(s.d)+'</span>'));});}
+  var A=ATTS[CS._k],ab=$('#s-att');ab.innerHTML=A?'<h4>필요한 서식·자료</h4><ol>'+A.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol>':'';ab.hidden=!A;}
+var _old=openSimple;
+openSimple=function(k,pre){_old(k,pre);CS._k=k;if(k==='base'){$('#s-right').hidden=true;return;}$('#s-right').hidden=false;
+  var b=$('#s-body');b.querySelectorAll('.opts button').forEach(function(bt){bt.addEventListener('click',function(){setTimeout(refreshS,0);});});
+  b.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',refreshS);});b.querySelectorAll('.chips button').forEach(function(bt){bt.addEventListener('click',function(){setTimeout(refreshS,0);});});
+  refreshS();};
+$('#s-cp').onclick=function(){copy(curP());};
+$('#s-gpt2').onclick=function(){openGPT(curP());};
+
+/* 마음 쉼터: 고르면 바로 위로 문구 */
+var COMF={'지쳤어요':['오늘 하루, 정말 많은 사람의 마음을 받아 주셨어요.','지친 건 그만큼 애썼다는 뜻이에요. 게으른 게 아니에요.','오늘 못 한 일은 내일의 나에게 맡겨도 괜찮아요.','쉼 하나: 의자에 등을 기대고 어깨를 귀까지 올렸다가 툭 떨어뜨려 보세요. 세 번.'],
+ '속상해요':['속상한 마음이 드는 건 그 일을 소중히 여겼기 때문이에요.','내 마음이 다친 걸 알아차린 것만으로도 충분히 잘하고 있어요.','오늘은 내 편이 되어 주세요.','쉼 하나: 따뜻한 물 한 잔을 천천히, 온도를 느끼며 마셔 보세요.'],
+ '마음이 무거워요':['다른 가족의 무게를 함께 들어 주는 일은 원래 무거워요.','그 무게를 혼자 다 지지 않아도 돼요. 동료와 나눠도 괜찮아요.','오늘 당신이 있어서 누군가는 덜 외로웠어요.','쉼 하나: 4초 들이쉬고, 4초 멈추고, 6초 내쉬기를 세 번.'],
+ '억울해요':['억울한 마음은 내가 옳다고 믿은 것을 지키려 했다는 신호예요.','그 상황에서 최선을 다한 나를 먼저 인정해 주세요.','설명은 내일 차분할 때 해도 늦지 않아요. 필요하면 빡침 순화기를 쓰세요.','쉼 하나: 주먹을 꽉 쥐었다가 천천히 펴며 숨을 내쉬어 보세요.'],
+ '불안해요':['불안은 잘하고 싶은 마음의 다른 얼굴이에요.','지금 확실한 것 하나만 떠올려 보세요. 나는 지금 여기 있고, 숨 쉬고 있어요.','해야 할 일은 종이에 세 줄로 적으면 머릿속이 조금 가벼워져요.','쉼 하나: 보이는 것 5개, 들리는 것 3개를 천천히 찾아보세요.'],
+ '허무해요':['애쓴 만큼 결과가 바로 보이지 않을 때가 있어요.','변화는 늦게 오지만, 당신이 건넨 말은 이미 누군가에게 남아 있어요.','오늘 고마웠던 순간 하나만 떠올려 보세요.','쉼 하나: 창밖을 1분 동안 아무 생각 없이 바라보기.'],
+ '그래도 괜찮아요':['괜찮다고 말할 수 있는 오늘, 참 잘 버텼어요.','이 마음을 기억해 두었다가 힘든 날 꺼내 보세요.','오늘의 나에게 수고했다고 한마디 해 주세요.','쉼 하나: 좋아하는 노래 한 곡을 끝까지 들어 보세요.']};
+var hc=document.createElement('div');hc.id='h-comf';hc.className='comf';var hm=$('#h-mood');hm.parentNode.insertBefore(hc,hm.nextSibling);
+function showComf(m){if(!m){hc.innerHTML='';return;}var L=COMF[m]||[];hc.innerHTML='<h4>'+esc(m)+' — 지금 당신에게</h4>'+L.slice(0,3).map(function(x){return '<p>'+esc(x)+'</p>';}).join('')+'<p class="rest">'+esc(L[3]||'')+'</p>';}
+document.querySelectorAll('#h-mood button').forEach(function(b){b.addEventListener('click',function(){setTimeout(function(){showComf(mood);},0);});});
+
+/* 서식 작성: 프롬프트·첨부를 맨 위로, 사용법은 접기 */
+var aig=$('#f-aig'),sp=document.querySelector('#v-form .split');if(aig&&sp)sp.parentNode.insertBefore(aig,sp);
+var grid=aig.querySelector('.aig-grid');if(grid){var L=grid.children[0],R=grid.children[1];var d=document.createElement('details');d.className='aig-more';d.innerHTML='<summary>자세한 사용법 (준비물 · 순서 · 성공 기준 · 자주 하는 실수)</summary>';
+  d.appendChild(L);var ok=R.querySelectorAll('h4');ok.forEach(function(h){if(/성공|실수/.test(h.textContent)){var nx=h.nextElementSibling;d.appendChild(h);if(nx)d.appendChild(nx);}});grid.parentNode.insertBefore(d,grid.nextSibling);grid.classList.add('one');}
+['aig-claude','aig-gem','aig-nlm'].forEach(function(id){var x=document.getElementById(id);if(x)x.hidden=true;});
+var hd=aig.querySelector('.aig-h');if(hd){var hp=hd.querySelector('p');if(hp)hp.hidden=true;}
+var det=aig.querySelector('.aig-more'),anchor=hd?hd.nextSibling:aig.firstChild;['#aig-mode','.aig-grid','#aig-src','#aig-loc','#aig-att'].forEach(function(q){var n=aig.querySelector(q);if(n)aig.insertBefore(n,det||null);});
+aig.insertBefore(aig.querySelector('#aig-mode'),aig.querySelector('.aig-grid'));
+var ah=aig.querySelector('.aig-badge');if(ah)ah.textContent='프롬프트';
+})();
 </script>
 </body>
 </html>
