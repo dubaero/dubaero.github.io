@@ -299,7 +299,7 @@ a.b-how{text-decoration:none;display:inline-block}
 .doc table{table-layout:fixed}.doc td,.doc th{word-break:break-all;overflow-wrap:anywhere}.doc table table{font-size:11.5px}.doc table table th,.doc table table td{padding:5px 4px}.doc .sv td.c{text-align:center}.doc{overflow-x:auto}
 .doc .sv th{width:auto}
 @media (max-width:760px){.aig-grid,.recgrid,.allwrap{grid-template-columns:1fr}.aig{padding:16px}}
-.p3{display:flex;flex-direction:column}.p3 .guide{margin-top:auto}.p3 .orgcard,.p3 .wide{padding:10px 14px}
+.p1,.p3{display:flex;flex-direction:column}.p3 .guide,.p1 .allbtn{margin-top:auto}.p3 .orgcard,.p3 .wide{padding:10px 14px}
 </style>
 </head>
 <body>
@@ -616,7 +616,7 @@ var DEMO='가온시 가족센터';
 var YEAR=new Date().getFullYear();
 var NOFAKE='자료에 없는 숫자·날짜·이름은 지어내지 말고 [확인 필요]로 남겨.';
 var APPR=['담당','팀장','센터장'];
-var CATS=[['상담','상담·사례관리'],['사업','사업·보고'],['자녀','나눔터·자녀'],['행정','행정·신청']];
+var CATS=[['사업','사업·보고'],['상담','상담·사례관리'],['자녀','나눔터·자녀'],['행정','행정·신청']];
 var HOW1=['내방','전화','가정방문','온라인'];
 
 var FORMS=[
@@ -966,7 +966,7 @@ document.addEventListener('click',function(e){var g=e.target.closest('[data-go]'
 window.addEventListener('hashchange',function(){var h=location.hash.slice(1);if(!h)show('home');});
 
 /* 첫 화면: 서식 자료실 (탭) */
-var curCat='상담';
+var curCat='사업';
 function renderList(){
   var ft=$('#ftabs');ft.innerHTML='';CATS.forEach(function(c){var b=el('button',c[0]===curCat?'on':'',esc(c[1]));b.type='button';b.onclick=function(){curCat=c[0];renderList();};ft.appendChild(b);});
   var ul=$('#flist');ul.innerHTML='';var n=0;
@@ -974,7 +974,16 @@ function renderList(){
     var m=el('span','mini');var h=el('button','b-how','사용법');h.type='button';h.onclick=function(){openForm(f.id,true);};
     var g=el('button','b-go','✎ 작성');g.type='button';g.onclick=function(){location.hash=f.id;openForm(f.id);};
     m.appendChild(h);m.appendChild(g);li.appendChild(m);ul.appendChild(li);});
+  (LINKF[curCat]||[]).forEach(function(x){n++;var li=el('li',null,'<span class="n">'+n+'</span><span class="t">'+esc(x.label||x.name)+'<small>'+esc(x.sub)+'</small></span>');
+    var m=el('span','mini');var d=el('a','b-how','서식 PDF');d.href='forms/'+x.pdf;d.target='_blank';d.rel='noopener';
+    var c=el('button','b-go','프롬프트');c.type='button';c.onclick=function(){copy(genP(x.name,x.where,false),'['+x.name+'] 프롬프트를 복사했어요. 서식 PDF와 함께 AI에 붙여 넣으세요.');};
+    m.appendChild(d);m.appendChild(c);li.appendChild(m);ul.appendChild(li);});
 }
+var LINKF={'사업':[
+ {name:'사업비 정산보고서',sub:'가족센터 · 1권 169~172쪽',pdf:'A04.pdf',where:'1권 169~172쪽'},
+ {name:'공동육아나눔터 사업계획서',label:'나눔터 사업계획서',sub:'공동육아나눔터 · 2권 38~40쪽',pdf:'E02.pdf',where:'2권 38~40쪽'},
+ {name:'공동육아나눔터 사업결과보고서',label:'나눔터 결과보고서',sub:'공동육아나눔터 · 2권 42~44쪽',pdf:'E04.pdf',where:'2권 42~44쪽'},
+ {name:'공동육아나눔터 사업정산보고서',label:'나눔터 정산보고서',sub:'공동육아나눔터 · 2권 46쪽',pdf:'E06.pdf',where:'2권 46쪽'}]};
 renderList();
 TILES.forEach(function(t){var s=t.go==='month'?CURM+'월 일정·프로그램':t.s;var b=el('button','tile'+(t.hot?' hot':'')+(t.f?' feat':''),svg(t.ic)+'<b>'+esc(t.t)+'</b><span>'+esc(s)+'</span>');b.type='button';b.dataset.go=t.go;b.dataset.k=t.t+t.s;$('#tiles').appendChild(b);});
 $('#q').addEventListener('input',function(){var v=this.value.trim();document.querySelectorAll('#tiles .tile').forEach(function(n){n.style.opacity=(!v||n.dataset.k.indexOf(v)>-1)?1:.25;});
@@ -1185,13 +1194,16 @@ function outline(f){var L=['[기본 서식 항목 — 「2026 가족사업안내
 function Q2(f,k){return (f.qs||[]).find(function(q){return q.k===k;});}
 function aiP(mode){
   var f=CF,L=[];if(f.id==='satis')return satisP();
-  L.push('너는 가족센터에서 '+(f.cat==='상담'?'사례관리':'사업 운영')+'를 10년 넘게 한 선배 실무자야.');
+  L.push('너는 가족센터에서 '+(f.cat==='상담'?'사례관리를':'사업 운영을')+' 10년 넘게 한 선배 실무자야.');
   if(AFORM==='mine')L.push('첨부 1은 우리 센터의 ['+f.name+'] 서식이야.');
   else L.push('우리 센터 서식이 따로 없어서, 「2026 가족사업안내」 '+f.src.replace(/^2026 가족사업안내 /,'')+'의 ['+f.name+'] 기본 서식을 첨부 1로 올렸어. 첨부를 못 읽으면 맨 아래 [기본 서식 항목]을 그대로 써.');
   if(mode==='rec'){
     L.push('첨부 2는 ['+(RECW[f.id]||'현장 음성 메모')+'] 녹음 파일이야. 다른 앱에서 이미 글로 바꿨다면 맨 아래에 붙여 넣을게.');
     L.push('1) 먼저 녹음을 글로만 옮겨서 보여 줘. 말한 사람이 바뀌면 줄을 바꾸고, 잘 안 들린 부분은 지어내지 말고 [불명확]으로 표시해.');
     L.push('2) 내가 받아쓴 글을 확인하고 "작성해 줘"라고 하면, 그때 첨부 1 서식을 채워 줘.');
+  }else if(mode==='memo'&&f.cat==='사업'){
+    L.push('이 대화는 우리 센터 ['+f.name+'] 프로젝트 안에서 하는 거야. 프로젝트에 올려 둔 지침·서식·지난해 자료를 기준으로 써.');
+    L.push('맨 아래 [올해 자료]의 숫자·일정·실적은 그대로 옮기고, 첨부한 엑셀·PDF가 있으면 그 내용을 우선해.');
   }else if(mode==='memo'){
     L.push('맨 아래 [메모]는 내가 현장에서 적은 내용이야. 손글씨 사진을 첨부했다면 글자를 읽어서 쓰고, 읽기 어려운 글자는 [판독 불가]로 표시해.');
   }else{
@@ -1204,13 +1216,13 @@ function aiP(mode){
   if(f.extra)L.push('- '+f.extra);
   L.push('- 다 쓰면 '+(CHECKER[f.cat]||'센터장')+' 입장에서 빠진 항목, 근거 없는 표현, 내가 확인할 것을 3줄로 점검해 줘.');
   L.push('- 마지막에 첨부한 서식과 같은 모양의 워드(.docx) 파일로 받을 수 있게 만들어 줘.');
-  if(mode==='memo')L.push('\n[메모]\n(여기에 메모를 붙여 넣거나, 손메모 사진을 첨부하세요)');
+  if(mode==='memo')L.push(f.cat==='사업'?'\n[올해 자료]\n(올해 실적표·예산표·일정·참여 인원을 붙여 넣거나 엑셀·PDF로 첨부하세요)':'\n[메모]\n(여기에 메모를 붙여 넣거나, 손메모 사진을 첨부하세요)');
   if(mode==='rec')L.push('\n[받아쓴 글 — 클로바노트·Gemini 노트북에서 바꿨을 때만 붙여 넣기]\n');
   if(AFORM==='base')L.push('\n'+outline(f));
   return L.join('\n');
 }
 function aiNeed(mode){if(CF.id==='satis')return ['응답을 모은 엑셀 파일 (또는 응답지를 찍은 사진)','이 화면에서 만든 문항 (프롬프트에 자동으로 들어가요)','이름·연락처 칸이 있으면 지운 자료'];var f=CF,a=[AFORM==='mine'?'우리 센터 「'+f.name+'」 서식 파일 — 한글(.hwp)이면 [다른 이름으로 저장 → PDF 또는 워드]로 바꿔 두기':'위의 [지침 기본 서식 PDF 받기]로 받은 「'+f.name+'」 파일'];
-  if(mode==='memo')a.push('현장 메모 (글로 쓴 메모 또는 손메모 사진)');
+  if(mode==='memo')a.push(f.cat==='사업'?'올해 자료 (실적표·예산표·참여 인원 집계 — 엑셀·PDF 그대로 첨부 가능)':'현장 메모 (글로 쓴 메모 또는 손메모 사진)');
   if(mode==='rec')a.push('녹음 파일 (m4a·mp3·wav) — 휴대폰 기본 녹음 앱 파일이면 돼요');
   if(f.prep)a.push(f.prep);
   a.push('실명·연락처·주소를 지운 자료 (가명: 이용자A, 가족A)');return a;}
@@ -1220,10 +1232,10 @@ function aiSteps(mode){
     '<b>클로바노트·Gemini 노트북</b>: 먼저 녹음을 글로 바꿔 복사 → ChatGPT나 Claude에 서식 첨부 → 프롬프트 붙여넣기 → 맨 아래 [받아쓴 글]에 붙여넣기 → 전송',
     'AI가 보여 준 <b>받아쓴 글에서 이름·날짜·숫자를 먼저 확인</b>하고 틀린 곳을 고쳐 달라고 해요.',
     '"작성해 줘"라고 보내면 서식이 채워져요 → 워드 파일로 받아 우리 서식과 비교해요.'];
-  if(mode==='none')return ['[ChatGPT 열기] 또는 [Claude 열기]를 눌러요.','입력창 왼쪽 [+] → 우리 서식 파일을 첨부해요.','[프롬프트 복사] → 붙여넣기 → 전송하면, 항목별로 준비할 것이 질문으로 나와요.','자료를 모은 뒤 위에서 <b>메모·글이 있어요</b>를 골라 다시 해요.'];
+  if(mode==='none')return ['[ChatGPT 열기] 또는 [Claude 열기]를 눌러요.','입력창 왼쪽 [+] → 우리 서식 파일을 첨부해요.','[프롬프트 복사] → 붙여넣기 → 전송하면, 항목별로 준비할 것이 질문으로 나와요.','자료를 모은 뒤 위에서 <b>'+(CF.cat==='사업'?'자료가 있어요':'메모·글이 있어요')+'</b>를 골라 다시 해요.'];
   return ['[ChatGPT 열기]를 누르면 프롬프트가 미리 채워진 채로 열려요. (Claude·제미나이는 [열기] 후 붙여넣기)',
     '입력창 왼쪽 <b>[+] (클립)</b> → '+(AFORM==='mine'?'우리 센터 서식 파일':'받아 둔 지침 기본 서식 PDF')+'를 첨부해요.',
-    '프롬프트 맨 아래 <b>[메모]</b> 자리에 메모를 붙여 넣거나, 손메모 사진을 함께 첨부해요.',
+    (CF.cat==='사업'?'프롬프트 맨 아래 <b>[올해 자료]</b> 자리에 실적·예산·일정을 붙여 넣거나, 엑셀·PDF를 함께 첨부해요.':'프롬프트 맨 아래 <b>[메모]</b> 자리에 메모를 붙여 넣거나, 손메모 사진을 함께 첨부해요.'),
     '전송 → 결과에서 <b>[확인 필요]</b> 표시를 먼저 찾아 채워요.',
     '워드 파일로 받아 우리 서식과 칸이 맞는지 보고, 결재 올리기 전에 날짜·숫자를 원자료와 대조해요.'];}
 function aiOk(mode){var a=['서식 항목 이름과 순서가 그대로 나왔다','사람은 가명(이용자A·가족A)으로 나왔다','자료에 없는 내용은 [확인 필요]로 표시됐다','맨 끝에 '+(CHECKER[CF.cat]||'센터장')+' 입장 점검 3줄이 붙었다'];if(mode==='rec')a.unshift('받아쓴 글이 먼저 나오고, 안 들린 곳은 [불명확]으로 표시됐다');return a;}
@@ -1234,7 +1246,7 @@ var FIXM=/^(확인 필요|불명확|판독 불가|이용자A|가족A|메모|자�
 function markP(t){return esc(t).replace(/\[([^\]\n]{1,40})\]/g,function(m,x){return FIXM.test(x)?m:'<mark>['+x+']</mark>';});}
 function renderAI(){
   if(!CF||CF.id==='budget'){$('#f-aig').hidden=true;return;}$('#f-aig').hidden=false;
-  var hasRec=!!RECW[CF.id];var modes=CF.id==='satis'?[['memo','응답이 모였어요']]:[['memo','메모·글이 있어요']].concat(hasRec?[['rec','녹음이 있어요']]:[]).concat([['none','아직 자료가 없어요']]);if(CF.id==='satis')AMODE='memo';
+  var hasRec=!!RECW[CF.id];var modes=CF.id==='satis'?[['memo','응답이 모였어요']]:[['memo',CF.cat==='사업'?'자료가 있어요':'메모·글이 있어요']].concat(hasRec?[['rec','녹음이 있어요']]:[]).concat([['none','아직 자료가 없어요']]);if(CF.id==='satis')AMODE='memo';
   if(AMODE==='rec'&&!hasRec)AMODE='memo';
   var mb=$('#aig-mode');mb.innerHTML='';modes.forEach(function(m){var b=el('button',m[0]===AMODE?'on':'',esc(m[1]));b.type='button';b.onclick=function(){AMODE=m[0];renderAI();};mb.appendChild(b);});
   $('#aig-name').textContent=CF.name;
@@ -1244,7 +1256,7 @@ function renderAI(){
   $('#aig-need').innerHTML=aiNeed(AMODE).map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
   $('#aig-step').innerHTML=aiSteps(AMODE).map(function(x){return '<li>'+x+'</li>';}).join('');
   $('#aig-p').innerHTML=markP(exify(aiP(AMODE)));
-  $('#aig-ex').textContent=AEX?'예시 메모 빼기':'예시 메모 넣어 보기';$('#aig-ex').hidden=!EXM[CF.id]||AMODE==='none';
+  $('#aig-ex').textContent=AEX?(CF.cat==='사업'?'예시 자료 빼기':'예시 메모 빼기'):(CF.cat==='사업'?'예시 자료 넣어 보기':'예시 메모 넣어 보기');$('#aig-ex').hidden=!EXM[CF.id]||AMODE==='none';
   $('#aig-ok').innerHTML=aiOk(AMODE).map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
   $('#aig-miss').innerHTML=aiMiss(AMODE).map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
   $('#aig-rec').hidden=AMODE!=='rec';
@@ -1269,7 +1281,7 @@ function genP(name,where,mine){
    (/척도/.test(name)?'- 척도 문항과 점수 기준은 바꾸지 마. 점수 합계는 계산식을 보여 줘.\n':'')+
    (/계획서|결과보고|실적|정산/.test(name)?'- 지금은 바로 쓰지 말고 자료 분석 → 부족한 정보 질문까지만 해 줘. 내가 "작성해 줘"라고 하면 그때 서식에 맞춰 써 줘.\n':'')+
    '- 다 쓰면 '+chk+' 입장에서 빠진 항목과 확인할 것을 3줄로 점검해 줘.\n'+
-   '- 마지막에 첨부한 서식과 같은 모양의 워드(.docx) 파일로 받을 수 있게 해 줘.\n\n[자료]\n(메모·전년도 자료·실적표를 붙여 넣거나 파일로 첨부하세요)';}
+   '- 마지막에 첨부한 서식과 같은 모양의 워드(.docx) 파일로 받을 수 있게 해 줘.\n\n[자료]\n('+(/계획서|결과보고|실적|정산/.test(name)?'전년도 자료·실적표·예산표·집행 내역':'메모·관련 자료')+'를 붙여 넣거나 파일로 첨부하세요)';}
 var ALLMINE=false;
 function renderAll(q){
   var sw=$('#all-src');if(sw&&!sw._b){sw._b=1;sw.querySelectorAll('button').forEach(function(b){b.onclick=function(){ALLMINE=b.dataset.v==='1';sw.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===b);});};});}
@@ -1474,7 +1486,7 @@ function clearForm(){openForm(CF.id);toast('입력한 내용을 모두 지웠어
 $('#f-ex').onclick=fillEx;$('#f-clear').onclick=clearForm;
 var AEX=false;
 $('#aig-ex').onclick=function(){AEX=!AEX;renderAI();toast(AEX?'예시 메모를 넣은 프롬프트예요. 실제로 쓸 땐 내 메모로 바꾸세요.':'예시 메모를 뺐어요.');};
-function exify(t){if(!AEX||!EXM[CF.id])return t;return t.replace('(여기에 메모를 붙여 넣거나, 손메모 사진을 첨부하세요)',EXM[CF.id]).replace('(엑셀 표나 응답을 붙여 넣기)',EXM[CF.id]);}
+function exify(t){if(!AEX||!EXM[CF.id])return t;return t.replace('(여기에 메모를 붙여 넣거나, 손메모 사진을 첨부하세요)',EXM[CF.id]).replace('(올해 실적표·예산표·일정·참여 인원을 붙여 넣거나 엑셀·PDF로 첨부하세요)',EXM[CF.id]).replace('(엑셀 표나 응답을 붙여 넣기)',EXM[CF.id]);}
 /* 간단 도구 예시 */
 function setEx(k,arr){var f=(SIMPLE[k].f||[]).find(function(x){return !x.o;});if(f)f.ex=arr;}
 setEx('idea',['예산 300만원, 센터 2층 프로그램실(20명), 작년 아버지 참여가 적었음, 토요일 오전 선호','다문화가족이 많은 읍 지역, 차량 지원 필요, 통역 가능 직원 1명']);
