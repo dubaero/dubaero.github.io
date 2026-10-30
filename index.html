@@ -1209,12 +1209,12 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
 <style id="pf-link-plain">/* 강사 소개 전체 보기: 둥근 남색 배경 없애고 글자 링크로 */
 .pf-link{background:none!important;padding:0!important;border-radius:0!important;box-shadow:none!important;color:var(--ink)!important;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
 .pf-link:hover{opacity:.7}</style>
-<script id="fs-down">/* 출강 기록부터 바닥글까지 글자 작게: 컴퓨터 2px, 휴대폰 3px */
+<script id="fs-down">/* 출강 기록부터 바닥글까지 글자 작게: 컴퓨터 1px, 휴대폰 3px */
 (function(){
   var DOWN=2, SEL='#rooms,#wordcloud,#about,#career,#program,#process,#contact,footer', busy=false, t;
   function targets(){var a=[];document.querySelectorAll(SEL).forEach(function(r){a.push(r);r.querySelectorAll('*').forEach(function(e){if(!e.closest('#wc-cloud'))a.push(e);});});return a;}
   function run(){
-    if(busy)return;busy=true;DOWN=window.matchMedia('(max-width:640px)').matches?3:2;
+    if(busy)return;busy=true;DOWN=window.matchMedia('(max-width:640px)').matches?3:1;
     document.querySelectorAll('[data-fs]').forEach(function(e){e.style.removeProperty('font-size');e.removeAttribute('data-fs');});
     var els=targets(),sz=els.map(function(e){return parseFloat(getComputedStyle(e).fontSize)||0;});
     els.forEach(function(e,i){if(sz[i]>DOWN+8){e.style.setProperty('font-size',(sz[i]-DOWN)+'px','important');e.setAttribute('data-fs','');}});
