@@ -512,6 +512,56 @@
 .nr-qa summary{cursor:pointer;font-weight:800;color:#4a5c52;padding:8px 0}
 .nr-qa .qa{margin-top:8px}
 </style>
+<style>
+/* v12.6: 그림자 전부 제거 · 탭은 연한 파스텔 · 카드는 퍼스널컬러 */
+#app *,#app *:hover,#app *:active,.nav *,.nav *:hover,#app .panel,#app .gm{box-shadow:none!important}
+#app .panel{border:1px solid #e2e7e4!important}
+#fxHello,#fxHello *{box-shadow:none!important}
+#app>.panel:not(.gm),#app>.panel.gm,#app .panel:not(.x){border:1px solid #e2e7e4!important;box-shadow:none!important;border-radius:18px!important}
+/* 메뉴 탭: 탭마다 연한 파스텔 */
+.nav button.tab3d{background:var(--tb)!important;border:1px solid var(--tbd)!important;color:#3d4f46!important;transform:none!important}
+.nav button.tab3d:hover{transform:translateY(-1px)!important}
+.nav button.tab3d.active{background:var(--ta)!important;border:1.5px solid var(--tac)!important;color:#2c3b35!important}
+.nav button.tab3d.active:after{background:var(--tac)!important}
+/* 나를 이해하기 질문 탭: 연한 파스텔 */
+#app .qtab{border:1px solid #e3e8e5!important;color:#3d4f46!important}
+#app .qtab:nth-child(7n+1){background:#fdf3f5!important}#app .qtab:nth-child(7n+2){background:#f2f8f4!important}#app .qtab:nth-child(7n+3){background:#f4f5f7!important}#app .qtab:nth-child(7n+4){background:#fdf8ea!important}#app .qtab:nth-child(7n+5){background:#f2f6fc!important}#app .qtab:nth-child(7n+6){background:#f6f3fb!important}#app .qtab:nth-child(7n+7){background:#fdf4ee!important}
+#app .qtab.active{border:1.5px solid #9fbcab!important;filter:saturate(1.6) brightness(.98)}
+/* 강점과 경험: 질문마다 다른 연한 탭색으로 분리 */
+#app[data-page=strength] .panel>h3{margin:26px 0 10px;padding:11px 16px;border-radius:12px;font-size:17px;border:1px solid transparent}
+#app[data-page=strength] .panel>h3:nth-of-type(1){background:#fdf6ec;border-color:#f1e2c8;color:#6b4a1c}
+#app[data-page=strength] .panel>h3:nth-of-type(2){background:#f5f2fb;border-color:#e2daf0;color:#4b3b6e}
+#app[data-page=strength] .panel>h3:nth-of-type(3){background:#eff7f3;border-color:#d3e8dc;color:#285440}
+/* 직업 도감 탭·필터 */
+#app .dx-tab{border:1px solid #e3e8e5!important;background:#fff!important;color:#3d4f46!important}
+#app .dx-tab:nth-child(1).on{background:#fdf8e6!important;border-color:#eadfb0!important}
+#app .dx-tab:nth-child(2).on{background:#fdf1f4!important;border-color:#efd0d9!important}
+#app .dx-chip{border:1px solid #e3e8e5!important;background:#fff!important;color:#3d4f46!important}
+#app .dx-chip.on{background:#f1f6f3!important;border-color:#9fbcab!important;color:#285440!important}
+#app .dx-chip.c-sun.on{background:#fff4e8!important;border-color:#f1cfa3!important;color:#8a5414!important}
+#app .dx-chip.c-grow.on{background:#ecf8f1!important;border-color:#b9e0c9!important;color:#1f7f52!important}
+#app .dx-chip.c-cloud.on{background:#eef4fc!important;border-color:#c3d6ef!important;color:#2f5f9e!important}
+#app .dx-chip.c-rain.on{background:#f3f4f6!important;border-color:#d6d9de!important;color:#555d6a!important}
+/* 직업 카드: 퍼스널컬러(상태별 연한 바탕) */
+#app .dx-card,#app .dx-front,#app .dx-sheet{border-width:1.5px!important}
+#app .st-sun.dx-card,#app .dx-front.st-sun,#app .dx-sheet.st-sun{background:#fff7ee!important;border-color:#f3d6b3!important}
+#app .st-grow.dx-card,#app .dx-front.st-grow,#app .dx-sheet.st-grow{background:#f1faf5!important;border-color:#c4e5d2!important}
+#app .st-cloud.dx-card,#app .dx-front.st-cloud,#app .dx-sheet.st-cloud{background:#f1f6fd!important;border-color:#cbdcf1!important}
+#app .st-rain.dx-card,#app .dx-front.st-rain,#app .dx-sheet.st-rain{background:#f5f6f8!important;border-color:#dcdfe4!important}
+#app .dx-card:hover{transform:translateY(-2px)}
+#app .dx-art,#app .dx-art svg{border-radius:12px}
+#app .dx-back{border:1.5px solid #efd0d9!important}
+#app .dt-frame,#app .dt-rcard,#app .dt-icard,#app .dt-match,#app .dx-quiz{border-width:1.5px!important;border-color:#e2e7e4!important}
+/* 증명사진 칸 */
+.ph-box{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:#f7f9f8;border:1px solid #e2e7e4;border-radius:14px;padding:14px 16px;margin:0 0 16px}
+.ph-box .ph-img{width:90px;height:116px;border-radius:8px;border:1px solid #d5e2d9;background:#fff center/cover no-repeat;display:grid;place-items:center;color:#9aa5ad;font-size:12px;text-align:center;flex-shrink:0}
+.ph-box b{display:block;margin-bottom:4px}
+.ph-box .row{margin-top:8px}
+.pp-head{display:flex;gap:16px;align-items:center;border:1px solid #e2e7e4;border-radius:14px;padding:14px 16px;margin:0 0 14px;background:#fff}
+.pp-head img{width:84px;height:108px;object-fit:cover;border-radius:8px;border:1px solid #d5e2d9}
+.pp-head .pp-none{width:84px;height:108px;border-radius:8px;border:1px dashed #c9d6ce;display:grid;place-items:center;font-size:12px;color:#9aa5ad;text-align:center}
+</style>
+
 
 </head><body><div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 오늘두AI 연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 나의 오늘이<br>더 빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><div class="feature-bar"><button class="feature-card" onclick="nav('self')"><strong>나를 이해하기</strong><span>나의 강점과 성향을 발견해요 →</span></button><button class="feature-card" onclick="nav('card')"><strong>직업 탐색하기</strong><span>다양한 직종을 살펴봐요 →</span></button><button class="feature-card" onclick="nav('resume')"><strong>입사지원서 작성하기</strong><span>사진이 포함된 Word 문서 →</span></button><button class="feature-card" onclick="nav('interview')"><strong>면접연습실</strong><span>질문에 답하고 다시 연습 →</span></button></div><nav id="nav" class="nav"></nav><div id="app"></div><footer class="footer">오늘두AI 연구소 · 교육용 자기탐색 도구 · 정식 심리검사 또는 직업 적합성 판정이 아닙니다.<br>입력 내용과 사진은 외부 서버에 전송되지 않습니다. 이 버전은 브라우저에 자동 보관하지 않습니다. · v12</footer></div><script>
 const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1342,5 +1392,16 @@ init.notes=manualBind;
 const _render12=render;render=function(){_render12();decorateNav()};
 decorateNav();
 const _nav12=nav;nav=function(p){if(p===state.page){_nav12(p);return}playCurtain(p,()=>_nav12(p))};
+
+/* ===== v12.6: 증명사진 → 입사지원서·직업 여권 자동 반영 ===== */
+function phLoad(file,done){if(!file)return;if(!['image/jpeg','image/png'].includes(file.type)||file.size>5*1024*1024){showToast('JPG·PNG, 5MB 이하 사진을 사용해주세요.');return}const r=new FileReader();r.onload=()=>{state.photoData=r.result;state.photoType=file.type;state.photo=file.name;done&&done()};r.readAsDataURL(file)}
+function phBox(){const has=!!state.photoData;return `<div class="ph-box"><div class="ph-img" ${has?`style="background-image:url('${state.photoData}')"`:''}>${has?'':'증명사진<br>없음'}</div><div><b>증명사진</b><span class="muted">${has?'이 사진이 아래 입사지원서 미리보기와 워드 파일에 자동으로 들어가요.':'사진을 넣으면 입사지원서와 워드 파일에 자동으로 들어가요. (선택 사항)'}</span><div class="row"><label class="btn small ${has?'outline':''}" style="cursor:pointer">${has?'사진 바꾸기':'사진 넣기'}<input type="file" id="phIn" accept="image/png,image/jpeg" hidden></label>${has?'<button type="button" class="btn small outline" id="phDel">사진 빼기</button>':''}</div></div></div>`}
+function phBind(){const i=$('#phIn');if(i)i.onchange=e=>phLoad(e.target.files[0],()=>{render();showToast('증명사진을 입사지원서에 넣었어요.')});const d=$('#phDel');if(d)d.onclick=()=>{state.photoData=null;state.photo=null;state.photoType=null;render()}}
+const _vResume126=views.resume;views.resume=()=>{const h=_vResume126();const k=h.indexOf('<div class="banner">');return k>-1?h.slice(0,k)+phBox()+h.slice(k):phBox()+h};
+const _iResume126=init.resume;init.resume=()=>{_iResume126();phBind()};
+const _vNotes126=views.notes;views.notes=()=>{const h=_vNotes126(),nm=(state.name||'').trim();const head=`<div class="pp-head">${state.photoData?`<img src="${state.photoData}" alt="증명사진">`:'<div class="pp-none">사진<br>없음</div>'}<div><b style="font-size:18px">${E(nm||'이름 미입력')}</b><br><span class="muted">지원 직무: ${E(state.job||'-')}</span>${state.photoData?'':'<br><button type="button" class="btn small outline" onclick="nav(\'resume\')" style="margin-top:8px">입사지원서에서 사진 넣기</button>'}</div></div>`;const k=h.indexOf('<div class="two">');return k>-1?h.slice(0,k)+head+h.slice(k):head+h};
+const _render126=render;render=function(){_render126();const a=document.getElementById('app');if(a)a.dataset.page=state.page};
+(function(){const a=document.getElementById('app');if(a)a.dataset.page=state.page})();
+
 </script>
 </body></html>
