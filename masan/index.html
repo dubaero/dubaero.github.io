@@ -562,86 +562,85 @@
 .pp-head .pp-none{width:84px;height:108px;border-radius:8px;border:1px dashed #c9d6ce;display:grid;place-items:center;font-size:12px;color:#9aa5ad;text-align:center}
 </style>
 <style>
-/* v12.7 블라인드 입사지원서 공작소 */
-.rv-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:4px 0 14px}
-.rv-steps span{background:#f4f7f5;border:1px solid #e2e7e4;border-radius:10px;padding:9px 10px;font-size:13px;color:#3d4f46;line-height:1.4}
-.rv-steps b{display:block;font-size:11px;color:#315f4b;letter-spacing:.05em}
-.rv-info{background:#f2f6fc;border:1px solid #d6e2f2;border-radius:12px;padding:14px 16px;line-height:1.7;font-size:14.5px;color:#2c3b35}
-.rv-fmt{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.rv-fmt button{border:1px solid #cfd9d3;background:#fff;border-radius:20px;padding:7px 14px;font-weight:800;font-size:13px;color:#3d4f46;cursor:pointer}
-.rv-fmt button.on{background:#e8f1ec;border:1.5px solid #366a54;color:#285440}
-#app .rv-h{margin:26px 0 12px;padding:10px 14px;border-radius:10px;font-size:17px;background:#f5f2fb;border:1px solid #e2daf0;color:#3f3363}
-#app .rv-h:nth-of-type(2){background:#fdf6ec;border-color:#f1e2c8;color:#6b4a1c}
-#app .rv-h:nth-of-type(3){background:#eff7f3;border-color:#d3e8dc;color:#285440}
-.rv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 14px}
-.rv-jobsel{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 12px;background:#fafbfa;border:1px solid #e2e7e4;border-radius:12px;padding:12px 14px 2px}
-.rv-hint{font-size:13px;color:#5a6b62;margin:6px 2px 0}.rv-hint b{color:#285440}
-.rv-tip{background:#fffaf0;border:1px solid #f1e2c8;border-radius:10px;padding:10px 14px;font-size:13.5px;line-height:1.7;color:#4a3c22;margin-bottom:12px}
-.rv-block{border:1px solid #e2e7e4;border-radius:12px;padding:12px 14px;margin-bottom:12px;background:#fff}
-.rv-block h4{margin:0 0 8px;font-size:15px}.rv-block h4 small{font-weight:600;color:#7a877f;margin-left:6px;font-size:12px}
-.rv-rows{display:grid;gap:8px}
-.rv-row{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:8px}.rv-row label,.rv-row input{min-width:0;width:100%;box-sizing:border-box}
-.rv-row label{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:#6b7b72;font-weight:700}
-.rv-row input{border:1px solid #d5e2d9;border-radius:8px;padding:8px 10px;font-size:14px;min-width:0}
-.rv-row:not(:first-child) label span{display:none}
-.rv-q{border:1px solid #e2e7e4;border-radius:14px;padding:16px;margin-bottom:14px;background:#fff}
-.rv-qh{display:flex;gap:12px;align-items:flex-start}
-.rv-qn{flex-shrink:0;width:32px;height:32px;border-radius:9px;background:#ff8da1;color:#fff;font-weight:900;display:grid;place-items:center}
-.rv-qh h4{margin:2px 0 2px;font-size:17px}.rv-qh p{margin:0;color:#4a5c52}.rv-qh em{font-style:normal;color:#8a968f;font-size:13px}
-.rv-guide{background:#f4f7f5;border-radius:10px;padding:10px 14px;margin:12px 0}
-.rv-guide b{font-size:13px;color:#315f4b}.rv-guide ol{margin:6px 0 0;padding-left:4px;list-style:none;display:grid;gap:3px;font-size:14px;color:#2c3b35}
-.rv-qbtns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.rv-ex{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;margin-bottom:10px}
-.rv-ex-good{background:#f1faf5;border:1px solid #c4e5d2;border-radius:10px;padding:12px 14px}
-.rv-ex-bad{background:#f5f6f8;border:1px solid #dcdfe4;border-radius:10px;padding:12px 14px}
-.rv-ex b{font-size:13px}.rv-ex-good b{color:#1f7f52}.rv-ex-bad b{color:#8a5414}
-.rv-ex p{margin:6px 0 0;font-size:14px;line-height:1.75}
-.rv-q textarea{line-height:1.75;font-size:15px}
-.rv-count{margin:2px 0 0;text-align:right;font-size:12px;color:#7a877f}
-.rv-u{color:#2f5f9e;font-weight:700}
-.rv-b{color:#d9730d;font-weight:700;background:#fff3e2;border-radius:4px;padding:0 3px}
-.rv-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:#3d4f46;margin-bottom:12px}
-.rv-legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
-.lg-ink{background:#2c3b35}.lg-u{background:#2f5f9e}.lg-auto{background:#3f8f6a}.lg-b{background:#f0a23a}
-.rv-paper{max-width:820px;margin:0 auto;background:#fff;border:1px solid #d5e2d9;border-radius:6px;padding:34px 38px;color:#222}
-.rv-paper h2{text-align:center;letter-spacing:.5em;font-size:24px;margin:0 0 4px}
-.rv-sub{text-align:center;color:#5a6b62;font-size:13px;margin:0 0 18px}
-.rv-sec{margin-bottom:18px}
-.rv-sec h5{font-size:15px;color:#315f4b;border-bottom:2px solid #315f4b;padding-bottom:5px;margin:0 0 8px}
-.rv-id{display:flex;gap:12px;align-items:stretch}
-.rv-photo{width:96px;flex-shrink:0;border:1px solid #c9d6ce;display:grid;place-items:center;min-height:120px;font-size:12px}
+/* v12.8 입사지원서 공작소: 왼쪽 입력 · 오른쪽 실시간 서식 */
+.rv-info{background:#f7f9f8;border:1px solid #e2e7e4;border-radius:12px;padding:12px 16px;line-height:1.7;font-size:14px;color:#3d4f46;margin-bottom:16px}
+.rv-fmt{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.rv-fmt button{border:1px solid #d5e2d9;background:#fff;border-radius:20px;padding:6px 14px;font-weight:700;font-size:13px;color:#4a5c52;cursor:pointer}
+.rv-fmt button.on{background:#eef5f1;border-color:#5b8a73;color:#285440}
+.rv-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+.rv-side{position:sticky;top:10px;max-height:calc(100vh - 20px);overflow:auto;background:#f6f8f7;border:1px solid #e2e7e4;border-radius:14px;padding:12px}
+.rv-side-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:2px 4px 8px}.rv-side-h b{font-size:15px}.rv-side-h span{font-size:12px;color:#7a877f}
+#app .rv-h{margin:22px 0 10px;padding:0 0 6px;font-size:16.5px;border-bottom:1px solid #e2e7e4;color:#2c3b35;background:none}
+#app .rv-h:first-child{margin-top:0}
+.rv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}
+.rv-jobsel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 10px}
+.rv-hint{font-size:12.5px;color:#6b7b72;margin:0 2px}.rv-hint b{color:#285440}
+.rv-tip{font-size:13px;line-height:1.65;color:#5a6b62;margin:0 0 10px}
+.rv-block{margin-bottom:12px}
+.rv-block h4{margin:0 0 4px;font-size:14px;color:#3d4f46}
+.rv-rows{display:grid;gap:6px}
+.rv-row{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr)) 30px;gap:6px;align-items:center}
+.rv-rowh span{font-size:11.5px;color:#7a877f;font-weight:700;padding-left:2px}
+.rv-row input{border:1px solid #d5e2d9;border-radius:8px;padding:7px 9px;font-size:13.5px;min-width:0;width:100%;box-sizing:border-box;background:#fff}
+.rv-add,.rv-del{width:30px;height:32px;border-radius:8px;border:1px solid #d5e2d9;background:#fff;color:#366a54;font-size:18px;font-weight:700;cursor:pointer;line-height:1}
+.rv-add{background:#eef5f1;border-color:#b9d3c4}.rv-del{color:#9aa5ad;font-size:16px}
+.rv-q{border:1px solid #e2e7e4;border-radius:12px;padding:14px;margin-bottom:12px;background:#fff}
+.rv-qh{display:flex;gap:10px;align-items:flex-start}
+.rv-qn{flex-shrink:0;width:28px;height:28px;border-radius:8px;background:#f3a5b4;color:#fff;font-weight:900;display:grid;place-items:center;font-size:14px}
+.rv-qh h4{margin:1px 0 2px;font-size:16px}.rv-qh p{margin:0;color:#4a5c52;font-size:14px}.rv-qh em{font-style:normal;color:#8a968f;font-size:12.5px}
+.rv-guide{background:#f7f9f8;border-radius:10px;padding:9px 12px;margin:10px 0}
+.rv-guide b{font-size:12.5px;color:#315f4b}.rv-guide ol{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:2px;font-size:13.5px;color:#3d4f46}
+.rv-qbtns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.rv-ex{display:grid;gap:8px;margin-bottom:8px}
+.rv-ex-good{background:#fbfaf3;border:1px solid #ece6cc;border-radius:10px;padding:10px 12px}
+.rv-ex-bad{background:#f6f7f7;border:1px solid #e3e6e5;border-radius:10px;padding:10px 12px}
+.rv-ex b{font-size:12.5px;color:#4a5c52}.rv-ex p{margin:5px 0 0;font-size:13.5px;line-height:1.7;color:#3d4f46}
+.rv-q textarea{line-height:1.7;font-size:14.5px}
+.rv-count{margin:2px 0 0;text-align:right;font-size:12px;color:#8a968f}
+/* 색: 살짝만 다르게 */
+.rv-u{color:#3f6e8c}
+.rv-b{color:#8b7a52;background:#fbf7ea;border-bottom:1px dashed #d9cba2;border-radius:3px;padding:0 2px}
+.rv-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:#5a6b62;margin:0 4px 8px}
+.rv-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.lg-u{background:#3f6e8c}.lg-auto{background:#6f9884}.lg-b{background:#e6dab5}
+.rv-paper{background:#fff;border:1px solid #dfe5e1;border-radius:6px;padding:24px 22px;color:#222}
+.rv-paper h2{text-align:center;letter-spacing:.45em;font-size:21px;margin:0 0 4px}
+.rv-sub{text-align:center;color:#6b7b72;font-size:12.5px;margin:0 0 14px}
+.rv-sec{margin-bottom:14px}
+.rv-sec h5{font-size:14px;color:#315f4b;border-bottom:1.5px solid #6f9884;padding-bottom:4px;margin:0 0 6px}
+.rv-id{display:flex;gap:10px;align-items:stretch}
+.rv-photo{width:84px;flex-shrink:0;border:1px solid #d5e2d9;display:grid;place-items:center;min-height:108px;font-size:11.5px}
 .rv-photo img{width:100%;height:100%;object-fit:cover}
-.rv-t{width:100%;border-collapse:collapse;font-size:13.5px}
-.rv-t th,.rv-t td{border:1px solid #c9d6ce;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.5}
-.rv-t th{background:#eef4f0;font-weight:800;color:#2c3b35;white-space:nowrap}
-.rv-kv th{width:80px}
-.rv-empty{text-align:center!important;color:#8a968f}
-.rv-qbox{border:1px solid #c9d6ce;margin-bottom:12px}
-.rv-qt{display:flex;justify-content:space-between;gap:10px;background:#eef4f0;border-bottom:1px solid #c9d6ce;padding:8px 12px;font-size:14px}
-.rv-qt span{font-size:12px;color:#5a6b62;white-space:nowrap}
-.rv-qbox p{margin:10px 14px;line-height:1.85;font-size:14.5px}
-.rv-qbox p.rv-auto{color:#3f8f6a}
-.rv-note{font-size:12px;color:#7a877f;margin:6px 0 0}
-@media(max-width:720px){.rv-steps{grid-template-columns:1fr 1fr}.rv-grid,.rv-jobsel,.rv-ex{grid-template-columns:1fr}.rv-row{grid-template-columns:repeat(2,minmax(0,1fr))}.rv-row:not(:first-child) label span{display:block}.rv-row+.rv-row{border-top:1px dashed #e2e7e4;padding-top:8px}.rv-paper{padding:20px 14px}.rv-id{flex-direction:column}.rv-t{font-size:12.5px}.rv-t th,.rv-t td{padding:6px}}
-</style>
-<style>
-.rv-cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.rv-c{border:1px solid #e2e7e4;border-radius:12px;padding:14px;background:#fff}
-.rv-c h4{display:flex;gap:8px;align-items:center;margin:0 0 10px;font-size:15.5px}
-.rv-c h4 span{width:24px;height:24px;border-radius:7px;background:#ff8da1;color:#fff;font-size:12px;display:grid;place-items:center;flex-shrink:0}
-.rv-c b{font-size:12.5px}.rv-c p{margin:3px 0 0;font-size:14px;line-height:1.65}
-.rv-c-bad{background:#fdf1f1;border-radius:8px;padding:8px 10px}.rv-c-bad b{color:#b03a3a}.rv-c-bad p{color:#7a2b2b;text-decoration:line-through;text-decoration-color:#e3a0a0}
-.rv-c-why{padding:8px 10px}.rv-c-why b{color:#6b4a1c}
-.rv-c-fix{background:#f1faf5;border-radius:8px;padding:8px 10px}.rv-c-fix b{color:#1f7f52}
-.rv-chk{margin-top:16px;border:1px solid #d6e2f2;background:#f7faff;border-radius:12px;padding:14px 16px}
+.rv-t{width:100%;border-collapse:collapse;font-size:12.5px}
+.rv-t th,.rv-t td{border:1px solid #d5e2d9;padding:6px 8px;text-align:left;vertical-align:top;line-height:1.5}
+.rv-t th{background:#f3f6f4;font-weight:700;color:#3d4f46;white-space:nowrap}
+.rv-kv th{width:64px}
+.rv-empty{text-align:center!important}
+.rv-qbox{border:1px solid #d5e2d9;margin-bottom:10px}
+.rv-qt{display:flex;justify-content:space-between;gap:8px;background:#f3f6f4;border-bottom:1px solid #d5e2d9;padding:6px 10px;font-size:13px}
+.rv-qt span{font-size:11.5px;color:#6b7b72;white-space:nowrap}
+.rv-qbox p{margin:8px 12px;line-height:1.8;font-size:13px}
+.rv-qbox p.rv-auto{color:#557a68}
+.rv-note{font-size:11.5px;color:#8a968f;margin:6px 0 0}
+/* 주의점: 연한 회색·노랑 */
+.rv-cgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.rv-c{border:1px solid #e6e8e6;border-radius:12px;padding:12px 14px;background:#fff}
+.rv-c h4{display:flex;gap:8px;align-items:center;margin:0 0 8px;font-size:15px;color:#2c3b35}
+.rv-c h4 span{width:22px;height:22px;border-radius:6px;background:#eceeec;color:#5a6b62;font-size:12px;display:grid;place-items:center;flex-shrink:0}
+.rv-c b{font-size:12px;color:#6b7b72}.rv-c p{margin:3px 0 0;font-size:13.5px;line-height:1.65;color:#3d4f46}
+.rv-c-bad{background:#f6f7f6;border-radius:8px;padding:8px 10px}.rv-c-bad p{color:#7a827e;text-decoration:line-through;text-decoration-color:#c3c9c5}
+.rv-c-why{padding:8px 10px}
+.rv-c-fix{background:#fffbec;border-radius:8px;padding:8px 10px}.rv-c-fix b{color:#7a6a3a}
+.rv-chk{margin-top:14px;border:1px solid #e6e8e6;background:#fafbfa;border-radius:12px;padding:12px 14px}
 .rv-chk-h{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
-.rv-chk h4{margin:0 0 2px;font-size:16px}.rv-chk-h p{margin:0;font-size:13px;color:#5a6b62}
-.rv-chk-list{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}
-.rv-chk-list li{display:flex;gap:10px;background:#fff;border:1px solid #e2e7e4;border-radius:10px;padding:10px 12px}
-.rv-chk-list li>span{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#fff;flex-shrink:0}
-.rv-chk-list li.ok>span{background:#3f9a6a}.rv-chk-list li.no>span{background:#e08a2a}
-.rv-chk-list b{font-size:14px}.rv-chk-list p{margin:2px 0 0;font-size:13.5px;color:#4a5c52}
-@media(max-width:720px){.rv-cgrid{grid-template-columns:1fr}}
+.rv-chk h4{margin:0 0 2px;font-size:15px}.rv-chk-h p{margin:0;font-size:13px;color:#6b7b72}
+.rv-chk-list{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:6px}
+.rv-chk-list li{display:flex;gap:10px;background:#fff;border:1px solid #e6e8e6;border-radius:10px;padding:9px 12px}
+.rv-chk-list li>span{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:12px;flex-shrink:0}
+.rv-chk-list li.ok>span{background:#e6f2eb;color:#3f8f6a}.rv-chk-list li.no>span{background:#fbf3dc;color:#9a7a2a}
+.rv-chk-list b{font-size:13.5px}.rv-chk-list p{margin:2px 0 0;font-size:13px;color:#5a6b62}
+@media(max-width:980px){.rv-split{grid-template-columns:1fr}.rv-side{position:static;max-height:none}}
+@media(max-width:720px){.rv-grid,.rv-jobsel,.rv-cgrid{grid-template-columns:1fr}.rv-row{grid-template-columns:repeat(2,minmax(0,1fr)) 30px}.rv-rowh{display:none}.rv-row>input:nth-child(odd):last-of-type{grid-column:span 2}.rv-paper{padding:16px 12px}.rv-id{flex-direction:column}}
 </style>
 
 
@@ -1521,7 +1520,7 @@ const RQ=[
   '입사 후 3개월 안에 회사의 문서 양식과 업무 시스템을 익혀 기본 업무를 혼자 처리할 수 있도록 하겠습니다.\n\n1년 안에는 거래처 자료 관리를 책임지고 맡아, 누가 보아도 바로 찾을 수 있는 자료 체계를 만들겠습니다. 또한 AI 문서 도구를 꾸준히 배워 반복 업무 시간을 줄이는 방법을 동료들과 나누겠습니다.\n\n다시 시작한 만큼 약속을 지키는 성실함으로 오래 믿고 맡길 수 있는 직원이 되겠습니다.',
   '"열심히 배우고 회사에 꼭 필요한 사람이 되겠습니다." → 무엇을, 언제까지, 어떻게 하겠다는 계획이 없어요.']
 ];
-state.rv=state.rv||{fmt:'blind',cat:0,addr:'',edu:[[],[],[]],lic:[[],[],[]],car:[[],[],[]],exp:[[],[],[]],q:{motive:'',pros:'',career:'',plan:''},open:{}};
+state.rv=state.rv||{fmt:'blind',cat:0,addr:'',edu:[[]],lic:[[]],car:[[]],exp:[[]],q:{motive:'',pros:'',career:'',plan:''},open:{}};
 if(!RJ.some(c=>c[4].includes(state.job))&&!J.some(j=>j.name===state.job))state.job='일반사무원';
 const RJX=['10년 뒤 직업 도감 (100장)','도감의 핵심 업무','맡은 업무를 정확하게 해내는','기관의 업무 방식과 필요한 도구'];
 function rvCat(){const i=RJ.findIndex(c=>c[4].includes(state.job));if(i>-1)return RJ[i];const j=J.find(x=>x.name===state.job);if(j)return [RJX[0],j.skills.slice(0,2).join(', ')+' 같은 업무',j.name+'의 핵심 업무를 정확하게 해내는',j.skills[0]+' 등 현장에서 쓰는 도구',[]];return RJ[0]}
@@ -1542,32 +1541,32 @@ function rvFmt(t){return E(t).replace(/«([^»]*)»/g,'<span class="rv-u">$1</sp
 function rvParas(t,auto){return String(t).split(/\n\s*\n/).filter(p=>p.trim()).map(p=>`<p class="${auto?'rv-auto':''}">${rvFmt(p.trim()).replace(/\n/g,'<br>')}</p>`).join('')}
 const rvPlain=t=>String(t).replace(/[«»]/g,'');
 const rvLen=t=>rvPlain(t).length;
-function rvRows(key,cols,ph){const rv=state.rv;return `<div class="rv-rows">${rv[key].map((r,i)=>`<div class="rv-row" style="--n:${cols.length}">${cols.map((c,k)=>`<label><span>${c}</span><input data-rv="${key}" data-i="${i}" data-k="${k}" value="${E(r[k]||'')}" placeholder="${i===0?E(ph[k]):''}"></label>`).join('')}</div>`).join('')}</div>`}
+function rvRows(key,cols,ph){const rv=state.rv;if(!rv[key].length)rv[key].push([]);return `<div class="rv-rows"><div class="rv-row rv-rowh" style="--n:${cols.length}">${cols.map(c=>`<span>${c}</span>`).join('')}<i></i></div>${rv[key].map((r,i)=>`<div class="rv-row" style="--n:${cols.length}">${cols.map((c,k)=>`<input aria-label="${c}" data-rv="${key}" data-i="${i}" data-k="${k}" value="${E(r[k]||'')}" placeholder="${i===0?'예: '+E(ph[k]):''}">`).join('')}${i===rv[key].length-1&&rv[key].length<5?`<button type="button" class="rv-add" data-rvadd="${key}" title="한 줄 더 추가" aria-label="한 줄 더 추가">+</button>`:`<button type="button" class="rv-del" data-rvdel="${key}" data-i="${i}" title="이 줄 지우기" aria-label="이 줄 지우기">×</button>`}</div>`).join('')}</div>`}
 function rvJobSel(){const ci=rvCatIdx();const list=ci<RJ.length?RJ[ci][4]:J.map(j=>j.name);return `<div class="rv-jobsel"><label class="field"><span>① 직종 대분류</span><select id="rvCat">${RJ.map((c,i)=>`<option value="${i}" ${i===ci?'selected':''}>${c[0]}</option>`).join('')}<option value="${RJ.length}" ${ci===RJ.length?'selected':''}>${RJX[0]}</option></select></label><label class="field"><span>② 지원 직종</span><select id="rvJob">${list.map(n=>`<option ${n===state.job?'selected':''}>${E(n)}</option>`).join('')}</select></label><label class="field"><span>③ 목록에 없으면 직접 입력</span><input id="rvJobIn" placeholder="예: 학교 행정실무사" value=""></label></div><p class="rv-hint">고용24 직종 분류처럼 대분류를 먼저 고르면 아래 직종이 바뀌어요. 지금 선택: <b>${E(state.job)}</b></p>`}
 function rvQCard(q,n){const [id,title,ask,len,steps,good,bad]=q,v=state.rv.q[id],open=state.rv.open[id];return `<div class="rv-q" id="rvq-${id}"><div class="rv-qh"><span class="rv-qn">${n}</span><div><h4>${title}</h4><p>${ask} <em>(${len})</em></p></div></div>
  <div class="rv-guide"><b>이렇게 쓰면 돼요</b><ol>${steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>
  <div class="rv-qbtns"><button type="button" class="btn small" data-rvfill="${id}">내 답으로 초안 채우기</button><button type="button" class="btn small outline" data-rvex="${id}">${open?'예시 닫기':'잘 쓴 예시 보기'}</button></div>
  ${open?`<div class="rv-ex"><div class="rv-ex-good"><b>잘 쓴 예시</b>${rvParas(good)}</div><div class="rv-ex-bad"><b>아쉬운 예시</b><p>${E(bad)}</p></div></div>`:''}
- <label class="field"><span>내 답 (초안을 채운 뒤 <span class="rv-b">[주황색 괄호]</span> 부분을 내 이야기로 바꿔 쓰세요)</span><textarea data-rvq="${id}" rows="9" placeholder="위 버튼을 누르면 지금까지 고른 답과 강점으로 초안이 채워져요.">${E(rvPlain(v))}</textarea></label><p class="rv-count" data-rvc="${id}">${rvLen(v)}자</p></div>`}
-views.resume=()=>{const rv=state.rv,blind=rv.fmt==='blind';return `<section class="panel rv">${section('나의 입사지원서 공작소','블라인드 채용 입사지원서 서식을 그대로 따라 쓰며 완성해요. 고른 답과 강점으로 초안이 자동으로 채워져요.','블라인드 서식')}
- <div class="rv-steps"><span><b>STEP 1</b> 기본 정보·지원 직종</span><span><b>STEP 2</b> 교육·자격·경력·경험</span><span><b>STEP 3</b> 자기소개서 4문항</span><span><b>STEP 4</b> 미리보기 → 워드 저장</span></div>
- <div class="rv-info"><b>블라인드 채용이란?</b> 학교 이름, 나이, 가족, 사진처럼 일과 관계없는 정보는 빼고 <b>직무 능력과 경험</b>으로만 평가하는 방식이에요. 공공기관은 대부분 이 서식을 써요. 경력이 끊겼어도 교육·자격·봉사·모임 활동을 경험으로 쓸 수 있으니 걱정하지 마세요.
+ <label class="field"><span>내 답 (초안을 채운 뒤 <span class="rv-b">[괄호]</span> 부분을 내 이야기로 바꿔 쓰세요)</span><textarea data-rvq="${id}" rows="9" placeholder="위 버튼을 누르면 지금까지 고른 답과 강점으로 초안이 채워져요.">${E(rvPlain(v))}</textarea></label><p class="rv-count" data-rvc="${id}">${rvLen(v)}자</p></div>`}
+views.resume=()=>{const rv=state.rv,blind=rv.fmt==='blind';return `<section class="panel rv">${section('나의 입사지원서 공작소','왼쪽에 쓰거나 고르면 오른쪽 입사지원서가 바로 채워져요. 블라인드 채용 서식 그대로 따라 쓰면 돼요.','블라인드 서식')}
+ <div class="rv-info"><b>블라인드 채용이란?</b> 학교 이름·나이·가족·사진처럼 일과 관계없는 정보는 빼고 <b>직무 능력과 경험</b>으로만 평가하는 방식이에요. 경력이 끊겼어도 교육·자격·봉사·모임 활동을 경험으로 쓸 수 있어요.
   <div class="rv-fmt"><button type="button" class="${blind?'on':''}" data-rvfmt="blind">블라인드 서식 (사진 없음)</button><button type="button" class="${blind?'':'on'}" data-rvfmt="general">일반 기업 서식 (사진 포함)</button></div></div>
+ <div class="rv-split"><div class="rv-form">
  <h3 class="rv-h">STEP 1. 인적사항과 지원 직종</h3>
  ${blind?'':phBox()}
  <div class="rv-grid"><label class="field"><span>성명</span><input id="rvName" value="${E(state.name||'')}" placeholder="예: 김새일"></label><label class="field"><span>연락처</span><input id="rvContact" value="${E(state.contact||'')}" placeholder="예: 010-0000-0000"></label><label class="field"><span>이메일</span><input id="rvEmail" value="${E(state.email||'')}" placeholder="예: saeil@email.com"></label><label class="field"><span>거주지 (시·군·구까지만)</span><input id="rvAddr" value="${E(rv.addr||'')}" placeholder="예: 경남 창원시 마산합포구"></label></div>
  ${rvJobSel()}
  <h3 class="rv-h">STEP 2. 교육·자격·경력·경험</h3>
- <div class="rv-tip">✔ 지원 직무와 관련 있는 것부터 써요. ✔ 경력이 없으면 <b>경험사항</b>에 아르바이트·봉사·모임 임원·육아 중 활동을 써도 돼요. ✔ 기간은 "2024.03~2024.08"처럼 숫자로 써요.</div>
- <div class="rv-block"><h4>교육사항 <small>직무 관련 교육·훈련</small></h4>${rvRows('edu',['교육과정명','교육기관','기간·시간','주요 내용'],['AI 리터러시 실무 마스터','마산여성새로일하기센터','2026.11 / 12시간','AI로 문서 작성·자료 정리'])}</div>
+ <p class="rv-tip">지원 직무와 관련 있는 것부터 한 줄씩 써요. 더 있으면 <b>+</b>를 눌러 추가해요. 경력이 없으면 <b>경험사항</b>에 봉사·모임·아르바이트를 써도 돼요.</p>
+ <div class="rv-block"><h4>교육사항</h4>${rvRows('edu',['교육과정명','교육기관','기간·시간','주요 내용'],['AI 리터러시 실무','새일센터','2026.11 / 12시간','AI 문서 작성'])}</div>
  <div class="rv-block"><h4>자격사항</h4>${rvRows('lic',['자격증명','발급기관','취득일'],['컴퓨터활용능력 2급','대한상공회의소','2026.06'])}</div>
- <div class="rv-block"><h4>경력사항 <small>급여를 받고 일한 곳</small></h4>${rvRows('car',['근무처','근무 기간','담당 업무'],['○○무역 사무팀','2012.03~2017.02 (5년)','수출 서류 작성, 거래처 자료 관리'])}</div>
- <div class="rv-block"><h4>경험사항 <small>봉사·모임·아르바이트·프로젝트</small></h4>${rvRows('exp',['활동명','기간','주요 내용'],['아파트 입주자 모임 총무','2021.01~2023.12','월별 회계 정리, 공지문 작성'])}${state.experiences.some(x=>x&&x.trim())?`<button type="button" class="btn small outline" id="rvPull">강점과 경험에서 쓴 경험 불러오기</button>`:''}</div>
+ <div class="rv-block"><h4>경력사항</h4>${rvRows('car',['근무처','근무 기간','담당 업무'],['○○무역 사무팀','2012.03~2017.02','수출 서류·거래처 관리'])}</div>
+ <div class="rv-block"><h4>경험사항</h4>${rvRows('exp',['활동명','기간','주요 내용'],['입주자 모임 총무','2021~2023','월별 회계 정리·공지'])}${state.experiences.some(x=>x&&x.trim())?`<button type="button" class="btn small outline" id="rvPull" style="margin-top:8px">강점과 경험에서 쓴 경험 불러오기</button>`:''}</div>
  <h3 class="rv-h">STEP 3. 자기소개서 4문항</h3>
- <div class="rv-tip">각 문항마다 <b>"내 답으로 초안 채우기"</b>를 누르면 나를 이해하기·강점과 경험에서 고른 답으로 초안이 만들어져요. <span class="rv-u">파란 글씨</span>는 내가 고른 정보, <span class="rv-b">[주황색 괄호]</span>는 꼭 내 이야기로 바꿔야 하는 부분이에요.</div>
+ <p class="rv-tip"><b>"내 답으로 초안 채우기"</b>를 누르면 앞에서 고른 답과 강점으로 초안이 만들어져요. <span class="rv-b">[괄호]</span> 부분만 내 이야기로 바꿔 쓰면 돼요.</p>
  ${RQ.map((q,i)=>rvQCard(q,i+1)).join('')}
  <div class="row" style="margin-top:14px"><button type="button" class="btn" id="rvAll">4문항 모두 초안 채우기</button><button type="button" class="btn outline" id="rvDocx">워드(.docx)로 저장</button><button type="button" class="btn outline" onclick="nav('interview')">면접 연습 →</button></div>
- </section><section class="panel">${section('STEP 4. 입사지원서 미리보기','실제 블라인드 채용 입사지원서 모양으로 보여 드려요. 색깔로 내가 채울 부분을 바로 확인하세요.')}<div class="rv-legend"><span><i class="lg-ink"></i>내가 쓴 글</span><span><i class="lg-u"></i>내가 고른 정보</span><span><i class="lg-auto"></i>자동으로 채운 예시 (고쳐 쓰기)</span><span><i class="lg-b"></i>[ ] 꼭 직접 채울 곳</span></div><div id="resumePreview">${rvPreview()}</div></section>`};
+ </div><aside class="rv-side"><div class="rv-side-h"><b>입사지원서 미리보기</b><span>쓰는 대로 바로 채워져요</span></div><div class="rv-legend"><span><i class="lg-u"></i>내가 입력한 정보</span><span><i class="lg-auto"></i>자동 예시 (고쳐 쓰기)</span><span><i class="lg-b"></i>[ ] 내가 채울 곳</span></div><div id="resumePreview">${rvPreview()}</div></aside></div></section>`};
 function rvTbl(head,rows,emptyTxt){const filled=rows.filter(r=>r.some(x=>x&&String(x).trim()));return `<table class="rv-t"><thead><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${filled.length?filled.map(r=>`<tr>${head.map((h,i)=>`<td>${r[i]?E(r[i]):'<span class="rv-b">[ ]</span>'}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${head.length}" class="rv-empty"><span class="rv-b">[${emptyTxt}]</span></td></tr>`}</tbody></table>`}
 function rvPreview(){const rv=state.rv,blind=rv.fmt==='blind',v=(t,ph)=>t&&t.trim()?E(t):`<span class="rv-b">[${ph}]</span>`;
  return `<div class="rv-paper"><h2>입 사 지 원 서</h2><p class="rv-sub">${blind?'블라인드 채용 서식':'일반 기업 서식'} · 지원분야: <b>${E(state.job)}</b></p>
@@ -1587,14 +1586,17 @@ init.resume=()=>{const rv=state.rv;phBind();
  $('#rvJob').onchange=e=>{state.job=e.target.value;render()};
  const ji=$('#rvJobIn');ji.onchange=()=>{if(ji.value.trim()){state.job=ji.value.trim();render()}};
  document.querySelectorAll('[data-rvfmt]').forEach(b=>b.onclick=()=>{rv.fmt=b.dataset.rvfmt;render()});
+ const keep=()=>{const y=window.scrollY,sp=document.querySelector('.rv-side');const st=sp?sp.scrollTop:0;render();window.scrollTo(0,y);const n=document.querySelector('.rv-side');if(n)n.scrollTop=st};
+ document.querySelectorAll('[data-rvadd]').forEach(b=>b.onclick=()=>{rv[b.dataset.rvadd].push([]);keep()});
+ document.querySelectorAll('[data-rvdel]').forEach(b=>b.onclick=()=>{rv[b.dataset.rvdel].splice(+b.dataset.i,1);keep();rvSync()});
  document.querySelectorAll('[data-rv]').forEach(inp=>inp.oninput=()=>{rv[inp.dataset.rv][+inp.dataset.i][+inp.dataset.k]=inp.value;rvUpd()});
  document.querySelectorAll('[data-rvq]').forEach(t=>t.oninput=()=>{rv.q[t.dataset.rvq]=t.value;const c=document.querySelector(`[data-rvc="${t.dataset.rvq}"]`);if(c)c.textContent=rvLen(t.value)+'자';rvUpd()});
  const fill=id=>{rv.q[id]=rvPlain(rvDraft(id));const t=document.querySelector(`[data-rvq="${id}"]`);if(t){t.value=rv.q[id];const c=document.querySelector(`[data-rvc="${id}"]`);if(c)c.textContent=rvLen(t.value)+'자'}};
- document.querySelectorAll('[data-rvfill]').forEach(b=>b.onclick=()=>{const id=b.dataset.rvfill;if(rv.q[id]&&rv.q[id].trim()&&rv.armed!==id){rv.armed=id;showToast('이미 쓴 글이 있어요. 한 번 더 누르면 초안으로 바뀌어요.');return}rv.armed=null;fill(id);rvUpd();showToast('초안을 채웠어요. 주황색 [ ] 부분을 내 이야기로 바꿔 주세요.')});
+ document.querySelectorAll('[data-rvfill]').forEach(b=>b.onclick=()=>{const id=b.dataset.rvfill;if(rv.q[id]&&rv.q[id].trim()&&rv.armed!==id){rv.armed=id;showToast('이미 쓴 글이 있어요. 한 번 더 누르면 초안으로 바뀌어요.');return}rv.armed=null;fill(id);rvUpd();showToast('초안을 채웠어요. [ ] 괄호 부분을 내 이야기로 바꿔 주세요.')});
  document.querySelectorAll('[data-rvex]').forEach(b=>b.onclick=()=>{const id=b.dataset.rvex;rv.open[id]=!rv.open[id];const y=window.scrollY;render();window.scrollTo(0,y)});
  $('#rvAll').onclick=()=>{RQ.forEach(([id])=>{if(!(rv.q[id]&&rv.q[id].trim()))fill(id)});rvUpd();showToast('비어 있는 문항에 초안을 채웠어요. 미리보기에서 확인해 보세요.')};
  $('#rvDocx').onclick=async()=>{try{await rvDocx();showToast('워드 파일을 저장했어요. [ ] 부분을 꼭 채워 주세요.')}catch(err){showToast('다운로드 오류: '+err.message)}};
- const pull=$('#rvPull');if(pull)pull.onclick=()=>{const ex=state.experiences.filter(x=>x&&x.trim());ex.slice(0,3).forEach((t,i)=>{const r=rv.exp.find(r=>!r[0]);if(r){r[0]='직접 해 본 일 '+(i+1);r[2]=t.trim()}});const y=window.scrollY;render();window.scrollTo(0,y);showToast('경험사항에 불러왔어요. 활동명과 기간을 고쳐 주세요.')};
+ const pull=$('#rvPull');if(pull)pull.onclick=()=>{const ex=state.experiences.filter(x=>x&&x.trim());ex.slice(0,3).forEach((t,i)=>{let r=rv.exp.find(r=>!r[0]);if(!r&&rv.exp.length<5){r=[];rv.exp.push(r)}if(r){r[0]='직접 해 본 일 '+(i+1);r[2]=t.trim()}});const y=window.scrollY;render();window.scrollTo(0,y);showToast('경험사항에 불러왔어요. 활동명과 기간을 고쳐 주세요.')};
  rvSync()};
 function confirmSafe(m){try{return window.confirm(m)}catch(e){return true}}
 /* 워드 파일: 표 형식 블라인드 입사지원서 */
@@ -1612,7 +1614,7 @@ async function rvDocx(){const rv=state.rv,blind=rv.fmt==='blind';rvSync();let pd
  rvHead('4. 경력사항')+rvTable(['근무처','근무 기간','담당 업무'],fr(rv.car,3,'경력이 없으면 비워 두기'),[3000,2500,4200])+
  rvHead('5. 경험사항')+rvTable(['활동명','기간','주요 내용'],fr(rv.exp,3,'봉사·모임·아르바이트·교육 실습'),[3000,2500,4200])+
  rvHead('6. 자기소개서')+RQ.map(([id,title],i)=>{const t=rvPlain(rv.q[id]&&rv.q[id].trim()?rv.q[id]:rvDraft(id));return rvP(`${i+1}. ${title} (${t.length}자)`,{bold:1,sz:21,color:'315F4B',after:60})+t.split(/\n\s*\n/).map(p=>rvP(p.trim(),{after:120})).join('')}).join('')+
- rvP('※ 교육용 초안입니다. 주황색 [ ] 부분을 모두 내 이야기로 바꾸고, 회사가 정한 서식이 있으면 그 서식을 쓰세요.',{sz:17});
+ rvP('※ 교육용 초안입니다. [ ] 괄호 부분을 모두 내 이야기로 바꾸고, 회사가 정한 서식이 있으면 그 서식을 쓰세요.',{sz:17});
  const files=[['[Content_Types].xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>${img?`<Default Extension="${pe}" ContentType="${pt}"/>`:''}<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>`],['_rels/.rels',`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`],['word/_rels/document.xml.rels',`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>${img?`<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/photo.${pe}"/>`:''}</Relationships>`],['word/styles.xml',`<?xml version="1.0" encoding="UTF-8"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Malgun Gothic" w:hAnsi="Malgun Gothic" w:eastAsia="Malgun Gothic"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>`],['word/document.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><w:body>${body}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1000" w:right="1100" w:bottom="1000" w:left="1100"/></w:sectPr></w:body></w:document>`]];
  if(img)files.push([`word/media/photo.${pe}`,pd]);saveBlob(zipFiles(files),'입사지원서_'+(state.job.replace(/[^가-힣a-zA-Z0-9]/g,'')||'지원직무')+'.docx')}
 downloadDocx=rvDocx;
