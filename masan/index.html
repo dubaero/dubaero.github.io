@@ -660,6 +660,7 @@ mark.iv-hedge{background:none;color:#3f6e8c;font-weight:700;text-decoration:unde
 .iv-why li:before{content:counter(w);grid-row:span 2;width:22px;height:22px;border-radius:6px;background:#eceeec;color:#5a6b62;font-size:12px;font-weight:800;display:grid;place-items:center}
 .iv-why b{font-size:14px}.iv-why p{margin:0;font-size:13.5px;color:#4a5c52;line-height:1.6}
 </style>
+<style>.iv-line{list-style:none;margin:0;padding:0;display:grid;gap:4px}.iv-line li{display:flex;align-items:baseline;gap:8px;font-size:13.5px;line-height:1.55;padding:6px 10px;border:1px solid #e6e8e6;border-radius:8px;background:#fff}.iv-line li>span{flex-shrink:0;width:18px;height:18px;border-radius:50%;background:#fbf3dc;color:#9a7a2a;font-size:11px;font-weight:900;display:grid;place-items:center}.iv-line b{flex-shrink:0;white-space:nowrap}.iv-line em{font-style:normal;color:#5a6b62}.iv-good{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:2px 0 0;font-size:12.5px}.iv-good b{color:#3f8f6a;margin-right:2px}.iv-good span{color:#3f8f6a;background:#eef6f1;border-radius:12px;padding:2px 9px}.iv-allok{margin:0;color:#3f8f6a;font-size:13.5px}@media(max-width:720px){.iv-line li{flex-wrap:wrap}.iv-line b{white-space:normal}}</style>
 
 
 
@@ -1718,7 +1719,7 @@ function ivCheck(i,a){const t=a.trim(),out=[],add=(ok,title,detail)=>out.push([o
 feedback=function(a){const i=state.interviewIdx;if(!a||!a.trim())return '<p class="muted">먼저 마이크로 말하거나 답변을 입력해 주세요.</p>';const ck=ivCheck(i,a),bad=ck.filter(c=>!c[0]),model=ivModel(i,a),why=IV_WHY[i]||IV_WHY[0];
  return `<div class="iv-fb"><div class="iv-sum"><b>점검 결과</b><span>${ck.length-bad.length} / ${ck.length} 통과</span></div>
  <div class="iv-mine"><h4>내 답변 다시 보기</h4><p>${ivMark(a)}</p><div class="iv-key"><span><mark class="iv-fill">군말</mark></span><span><mark class="iv-neg">자신감 없는 표현</mark></span><span><mark class="iv-hedge">흐리는 말끝</mark></span></div></div>
- <h4 class="iv-h">이 부분을 고치면 좋아요</h4><ul class="rv-chk-list">${ck.map(([ok,t,d])=>`<li class="${ok?'ok':'no'}"><span>${ok?'✓':'!'}</span><div><b>${E(t)}</b><p>${E(d)}</p></div></li>`).join('')}</ul>
+ <h4 class="iv-h">이 부분을 고치면 좋아요</h4>${bad.length?`<ul class="iv-line">${bad.map(([ok,t,d])=>`<li><span>!</span><b>${E(t)}</b><em>${E(d)}</em></li>`).join('')}</ul>`:'<p class="iv-allok">모든 항목을 잘 지켰어요.</p>'}${ck.length>bad.length?`<p class="iv-good"><b>잘한 점</b>${ck.filter(c=>c[0]).map(c=>`<span>✓ ${E(c[1].replace(/\s*\(.*\)|\?$/g,''))}</span>`).join('')}</p>`:''}
  <h4 class="iv-h">이렇게 보완해서 답해 보세요</h4><div class="iv-model">${rvParas(model)}<p class="iv-time">말하는 시간 약 ${Math.round(rvPlain(model).replace(/\s/g,'').length/5)}초</p></div><div class="row"><button type="button" class="btn small" id="ivUse">이 예시를 "수정해서 다시 답하기"에 옮기기</button></div>
  <h4 class="iv-h">왜 이렇게 답하면 좋을까요?</h4><ol class="iv-why">${why.map(([t,d])=>`<li><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
  <p class="rv-note"><span class="rv-u">파란 글씨</span>는 앞에서 고른 내 정보, <span class="rv-b">[주황 괄호]</span>는 내 이야기로 바꿔 말할 부분이에요. 정해진 기준으로 점검하는 연습용이며 합격 여부를 판정하지 않아요.</p></div>`};
