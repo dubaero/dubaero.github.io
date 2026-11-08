@@ -39,7 +39,8 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .search input{border:0;outline:0;font:inherit;font-size:14.5px;flex:1;min-width:0;background:none;color:var(--text)}
 .search svg{color:var(--muted)}
 .hero-art{position:relative;min-height:190px}
-.hero-art svg{position:absolute;inset:0;width:100%;height:100%}
+.hero-art svg,.hero-art img{position:absolute;inset:0;width:100%;height:100%}.hero-art img{object-fit:cover;object-position:60% 60%}
+.hero-art img.hero-logo{inset:auto;top:10px;right:10px;width:auto;height:auto;max-width:110px;max-height:44px;object-fit:contain;background:rgba(255,255,255,.88);border-radius:10px;padding:5px 8px}
 
 /* 대시보드 */
 .dash{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px;align-items:stretch;margin-bottom:28px}
@@ -186,7 +187,7 @@ footer a{color:#fff}
 
 @media (max-width:980px){.dash{grid-template-columns:1fr 1fr}.dash .p3{grid-column:1/-1}}
 @media (max-width:760px){
-  .hero{grid-template-columns:1fr}.hero-art{display:none}.hero-t{padding:20px}
+  .hero{grid-template-columns:1fr}.hero-art{min-height:170px;order:-1}.hero-t{padding:20px}
   .dash,.split,.row,.ba{grid-template-columns:1fr}
   .tiles{grid-template-columns:repeat(3,1fr)}
   .flow button{font-size:11.5px}
@@ -407,6 +408,29 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
 .breath b{color:var(--ink);font-size:14px}.breath small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
 .five{background:#FFF6EF;border:1.5px solid #F2D2BE;border-radius:14px;padding:14px 16px;margin-top:12px}
 .five h4{margin:0 0 6px;color:var(--ink)}.five p{margin:3px 0;font-size:14px;line-height:1.65}.five .s5{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* 2026.11.08 */
+.ins .note{-webkit-user-select:none;user-select:none}
+.lv3 button{display:inline-flex;align-items:center;gap:6px;font-size:14px;padding:8px 14px}
+.lv3 .e{font-size:18px}
+.vsg{margin:2px 0 8px}.vsg-h{display:block;font-size:12px;font-weight:700;color:var(--muted);margin:6px 0 4px}
+.vsit button{font-size:12.5px;padding:5px 11px 5px 9px}
+.vemp p.v2 b{color:var(--point);margin-right:4px}
+.hk{margin:0;font-size:22px;color:var(--ink)}.hk-s{margin:2px 0 8px;font-size:15px;color:var(--point);font-weight:700}
+.hk-m{font-size:12.5px;color:var(--muted);margin:10px 0 4px}
+#h2-out p.rest{margin-top:8px;font-size:13.5px;color:#1F4E3A;font-weight:600}
+.post{margin-top:14px;border:1.5px dashed #E3B9A0;border-radius:14px;padding:14px 16px;background:#FFFBF6}
+.post>div:first-child b{display:block;font-size:16px;color:var(--ink)}.post>div:first-child span{font-size:13px;color:var(--muted)}
+.post .acts{margin-top:10px}
+.sugc{cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.sugc:hover{border-color:var(--point)}
+.sugc.on{border-color:var(--point);box-shadow:0 0 0 2px var(--point) inset;background:#fff}
+.sugc.on b::after{content:" ✓ 선택됨";font-size:12px}
+.sg-hint{font-size:12px;font-weight:400;color:var(--muted)}
+.sg-none{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 12px;font-size:12.5px}
+.sg-none.on{border-color:var(--ink);font-weight:700}
+.sg-add{color:var(--point);font-weight:700}
+#dw-bizsel{min-width:200px}
 </style>
 </head>
 <body>
@@ -426,9 +450,7 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
       <p>업무 서랍으로 보고서를, 홍보물 서랍으로 홍보를 따라 만들고, 지친 날엔 마음 쉼터와 빡침 번역기로.<br>탭을 누르고 복사해서 ChatGPT·제미나이에 붙여 넣기만 하면 돼요.</p>
       <label class="search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="찾을 업무를 입력하세요 (예: 상담일지, 결과보고, 프로그램 기획)"></label>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#E6F0DF"/><stop offset="1" stop-color="#F6E7DA"/></linearGradient></defs><rect width="400" height="220" fill="url(#g1)"/><circle cx="320" cy="40" r="26" fill="#F6E3C8"/><path d="M0 170 Q100 130 200 165 T400 150 V220 H0Z" fill="#CFE0C4"/><path d="M0 190 Q120 160 240 192 T400 182 V220 H0Z" fill="#B7D0A8"/><g transform="translate(150 70)"><path d="M0 60 L55 18 L110 60 V120 H0Z" fill="#fff"/><path d="M-8 64 L55 12 L118 64" fill="none" stroke="#2F4F3A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="42" y="78" width="26" height="42" rx="3" fill="#C2502A"/><rect x="14" y="70" width="18" height="16" rx="2" fill="#F6E3C8"/><rect x="78" y="70" width="18" height="16" rx="2" fill="#F6E3C8"/></g><g fill="#2F4F3A"><circle cx="96" cy="128" r="9"/><rect x="87" y="139" width="18" height="34" rx="9"/><circle cx="118" cy="140" r="7"/><rect x="111" y="149" width="14" height="24" rx="7" fill="#A8432B"/><circle cx="300" cy="126" r="9"/><rect x="291" y="137" width="18" height="36" rx="9" fill="#C2502A"/></g></svg>
-    </div>
+    <div class="hero-art"><img src="../img/hero-jeonbuk.webp" alt="전북의 한옥과 산, 지평선 들판 위에서 웃는 여러 가족과 상담·돌봄·다문화·교육을 나타내는 그림"><img class="hero-logo" src="../img/family-center-logo.png" alt="가족센터" onerror="this.remove()"></div>
   </section>
 
   <section class="main4" id="main4" aria-label="업무도우미 큰 메뉴"></section>
@@ -533,6 +555,7 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
 <!-- ===== 빡침 순화기 ===== -->
 <div id="v-vent" hidden>
   <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>빡침 번역기</h2><span class="tag">같이 빡치고, 숨 고르고, 순화까지</span></div>
+  <div class="old-tool" style="display:none" aria-hidden="true">
   <div class="tool">
     <p class="sub">말로 하거나 글로 털어놓으면 같이 빡쳐 주고, 웃기게 위로하고, 숨 한번 고른 뒤 순화된 안내 문자로 바꿔 드려요. 감정은 여기 두고, 꼭 전할 말은 단단하게.</p>
     <div class="sgrid">
@@ -563,11 +586,39 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
       </div>
     </div>
   </div>
+  </div>
+  <div class="tool" id="v2-tool">
+    <p class="sub">말로 하거나 글로 털어놓으면 같이 빡쳐 주고, 웃기게 위로하고, 숨 한번 고른 뒤 순화된 안내 문자로 바꿔 드려요.</p>
+    <div class="sgrid">
+      <div>
+        <label class="l">1. 지금 빡침 지수는?</label>
+        <div class="lvbtns lv3" id="v2-lv"></div>
+        <label class="l">2. 어떤 상황인가요? (누르면 바로 같이 빡쳐 줘요)</label>
+        <div id="v2-sit"></div>
+        <label class="l" for="v2-in">3. 무슨 일이 있었나요? (말이나 글로 털어놓기)</label>
+        <div class="mic-row"><button type="button" class="mic" data-for="v2-in"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>눌러서 말하기</span></button><span class="mic-st" id="st-v2-in"></span></div>
+        <textarea class="f" id="v2-in" placeholder="예) 준비물 안내를 세 번이나 했는데 또 빈손으로 왔어요."></textarea>
+        <div class="row">
+          <div><label class="l" for="v2-who">4. 순화 문자는 누구에게?</label><select class="f" id="v2-who"><option>이용자·보호자</option><option>동료·다른 팀</option><option>협력 기관·강사</option><option>상위 기관·지자체</option></select></div>
+          <div><label class="l" for="v2-how">어디로?</label><select class="f" id="v2-how"><option>문자·카톡 (짧게)</option><option>단체 안내문</option><option>공문·메일 (격식 있게)</option></select></div>
+        </div>
+        <p class="warn">이름, 전화번호, 상담 사연은 빼고 말해 주세요.</p>
+      </div>
+      <div class="sright">
+        <div class="flav" id="v2-flav"><button type="button" data-f="mild" class="on">순한 맛</button><button type="button" data-f="spicy">매운맛</button><span>강의 화면은 순한 맛, 혼자 쓸 땐 매운맛</span></div>
+        <div class="vemp" id="v2-emp"></div>
+        <div class="breath"><div class="bc" id="v2-bc"><span>준비</span></div><div><b>숨 고르고 보내기</b><small>4초 들이쉬고 · 4초 멈추고 · 6초 내쉬기, 세 번</small><button type="button" class="btn mini" id="v2-bgo" style="margin-top:6px">숨 고르기 시작</button></div></div>
+        <div class="vmsg"><div class="sp-h"><h4>순화된 안내 문자 <small>예시 · [ ] 칸은 내 상황으로</small></h4><button type="button" class="btn mini" id="v2-mcp">문자 복사</button></div><pre id="v2-msg"></pre></div>
+        <div class="formula"><span>① 사실</span><em>→</em><span>② 기준</span><em>→</em><span>③ 할 수 있는 것</span><em>→</em><span>④ 다음 행동·기한</span></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ===== 마음 쉼터 ===== -->
 <div id="v-heart" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음 쉼터</h2><span class="tag">마음챙김 위로기</span></div>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음 쉼터</h2><span class="tag">내 마음 지킴이 · 나에게 보내는 엽서</span></div>
+  <div class="old-tool" style="display:none" aria-hidden="true">
   <div class="tool heart">
     <p class="sub">오늘 힘들었던 일을 말이나 글로 털어놓아 보세요. 나만을 위한 마음챙김 5줄로 위로해 드려요. 누구에게 보내는 글이 아니라 나를 위한 시간이에요.</p>
     <label class="l">지금 마음에 가까운 것은?</label>
@@ -579,6 +630,24 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
     <select class="f" id="h-want"><option>그냥 들어 주고 공감해 주기</option><option>지금 할 수 있는 작은 회복 방법</option><option>내일 업무를 가볍게 정리하기</option><option>오늘의 나에게 짧은 편지</option></select>
     <p class="warn">내담자 이름이나 사연은 빼고 "오늘 내 마음" 위주로 적어 주세요.</p>
     <div class="acts"><button type="button" class="btn fill" id="h-gpt">위로받기 (ChatGPT)</button><button type="button" class="btn" id="h-copy">프롬프트 복사</button></div>
+    <div class="help"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가거나 위험한 생각이 들면 사람에게 꼭 말해 주세요. 자살예방 상담전화 <a href="tel:109">109</a> · 정신건강 위기상담 <a href="tel:15770199">1577-0199</a></div>
+  </div>
+  </div>
+  <div class="tool heart" id="h2-tool">
+    <h3 class="hk">내 마음 지킴이</h3>
+    <p class="hk-s">나답게, 지금도 충분히</p>
+    <p class="sub">오늘 있었던 일을 말이나 글로 털어놓으면, 바로 아래에 지금 내 마음에 맞는 위로가 떠요. 누구에게 보내는 글이 아니라 나를 위한 시간이에요.</p>
+    <div class="mic-row"><button type="button" class="mic" data-for="h2-in"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>눌러서 말하기</span></button><span class="mic-st" id="st-h2-in"></span></div>
+    <textarea class="f" id="h2-in" placeholder="오늘 있었던 일을 편하게 말하거나 적어 보세요."></textarea>
+    <p class="hk-m">말하기 어려우면 마음을 하나만 골라도 돼요</p>
+    <div class="moods" id="h2-mood"></div>
+    <p class="warn">내담자 이름이나 사연은 빼고 "오늘 내 마음" 위주로 적어 주세요.</p>
+    <div class="five" id="h2-out" hidden></div>
+    <div class="post">
+      <div><b>나에게 보내는 엽서</b><span>내 이야기로 위로 글을 받고, 우표가 붙은 감성 엽서 그림까지 ChatGPT가 만들어 줘요.</span></div>
+      <div class="acts"><button type="button" class="btn fill" id="h2-gpt">나에게 보내는 엽서 만들기 (ChatGPT)</button><button type="button" class="btn" id="h2-cp">프롬프트 복사</button></div>
+      <p class="s5">그림 만들기는 ChatGPT 로그인이 필요해요. 무료 계정은 하루에 만들 수 있는 그림 수가 적어서, 안 나오면 내일 다시 해 보세요.</p>
+    </div>
     <div class="help"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가거나 위험한 생각이 들면 사람에게 꼭 말해 주세요. 자살예방 상담전화 <a href="tel:109">109</a> · 정신건강 위기상담 <a href="tel:15770199">1577-0199</a></div>
   </div>
 </div>
@@ -2255,6 +2324,190 @@ function saveImg(){var cv=document.createElement('canvas'),W=1080;cv.width=W;cv.
   var a=document.createElement('a');a.download='마음챙김5줄.png';a.href=cv.toDataURL('image/png');a.click();}
 mk.onclick=make;
 })();
+
+/* ===== 2026.11.08 수정: 빡침 번역기 3단계 · 마음 지킴이 엽서 · 사업명 선택 · 서랍 진행 순서 · 제안 카드 선택 ===== */
+
+/* --- 업무·홍보물 서랍: 진행 순서, 검토자, 첫 프롬프트 --- */
+DW_COMMON.doc=[
+ '아래 진행 순서를 꼭 지켜.',
+ '① 소스에 넣은 자료를 먼저 모두 확인하고, 어떤 자료가 있는지와 그 자료로 무엇을 분석할 수 있는지 표로 정리해.',
+ '② 더 있으면 좋은 자료는 처음 한 번만 추천해. 특정 자료를 필수로 요구하지 말고, 없어도 계속 진행해.',
+ '③ 서식 첫 항목부터 확인이 필요한 것만 한 번에 최대 {q}개 번호를 붙여 질문해. 이때는 본문을 쓰지 말고 멈춰.',
+ '④ 내가 "초안 시작해"라고 하면 서식 항목을 하나씩 쓰고, 항목마다 내 확인을 받은 뒤 다음 항목으로 넘어가.',
+ '⑤ 모든 항목이 확정되면 서식 순서대로 하나로 합친 전체 초안을 보여 줘.',
+ '⑥ 그다음 {rv}의 입장에서 전체 초안을 다시 검토하고, 보완할 점을 브리핑해 줘.',
+ '⑦ 내가 확인하면 보완해서 최종본을 완성해.',
+ '우리 기관 서식이 있으면 항목명과 순서를 그대로 따르고, 없으면 {base}으로 써.',
+ '자료에 없는 인원·날짜·금액·실적은 만들지 말고 [확인 필요]로 둬.',
+ '이름·연락처·국적 등 개인을 알아볼 수 있는 정보는 쓰지 말고 OOO으로 써.'
+];
+DW_COMMON.pr=[
+ '아래 진행 순서를 꼭 지켜.',
+ '① 소스의 사업 안내문·사진·기존 홍보물을 먼저 확인하고, 어떤 자료가 있는지와 무엇에 쓸 수 있는지 표로 정리해.',
+ '② 더 있으면 좋은 자료는 처음 한 번만 추천해. 특정 자료를 필수로 요구하지 말고, 없어도 계속 진행해.',
+ '③ 꼭 필요한 것만 최대 2개 질문하고 멈춰. 아직 만들지 마.',
+ '④ 내가 "초안 시작해"라고 하면 문구와 배치를 담은 구성안과 계절·대상에 맞는 디자인 시안 2가지를 먼저 보여 주고, 내가 고르면 한 장(한 부분)씩 확인받으며 만들어.',
+ '⑤ 모두 확정되면 전체 완성본을 보여 줘.',
+ '⑥ 그다음 {rv}의 입장에서 다시 검토하고, 보완할 점을 브리핑해 줘.',
+ '⑦ 내가 확인하면 보완해서 최종본을 완성해.',
+ '일시·장소·대상·신청 방법은 자료 그대로 쓰고, 자료에 없으면 [확인 필요]로 둬.',
+ '아이 얼굴이 보이는 사진과 참여자 실명은 쓰지 마.',
+ '완성하면 안내문과 대조한 검수표(일시·장소·대상·신청 방법·문의처)를 함께 줘.'
+];
+(function(){var RV={plan:'사업계획 검토·예산승인 전문가',result:'가족센터 사업 평가전문위원',perf:'가족센터 사업 평가전문위원',oper:'결재하는 센터장(결재권자)',settle:'시·군·구 보조금 정산 담당 공무원',meet:'결재하는 센터장(결재권자)',case:'사례관리 슈퍼바이저'};
+  DW.forEach(function(d){if(RV[d.id])d.rv=RV[d.id];else if(d.g==='pr')d.rv='홍보물을 받아 보는 참여 가족과 홍보 디자인 전문가';});})();
+DW_NOTE.first='<b>시작 신호</b> 진행 순서는 지침에 다 들어 있어서 첫 대화는 짧게 시작해요. 사업명만 바꾸면 다른 사업에도 그대로 써요.';
+DW_NOTE.review='<b>역할</b> 다 쓴 문서는 결정하는 사람의 눈으로 다시 보게 해요. 이 서랍에서는 이 사람이 검토해요.';
+function dwF(s,d){var v=dwV();return String(s).replace(/\{(사업|대상|계절)\}/g,function(m,k){return v[k];}).replace('{rv}',d&&d.rv?String(d.rv).replace(/\{(사업|대상|계절)\}/g,function(m,k){return v[k];}):'결정하는 사람').replace('{base}',d&&d.base||'').replace('{q}',d&&d.q||5);}
+function dwFirst(d){var v=dwV(),chk=(d.src||[]).filter(function(s,i){return DWCHK[d.id+i];}).map(function(s){return s[0];});
+  var head=d.g==='doc'?'올해 '+v['사업']+' '+d.t+' 작업을 시작할게.':v['사업']+' '+d.t+' 작업을 시작할게. 대상은 '+v['대상']+', 계절은 '+v['계절']+'이야.';
+  var rest=['지침의 진행 순서대로 ①번부터 해 줘.'].concat(chk.length?['내가 소스에 넣은 자료: '+chk.join(', ')]:[]);
+  DWTXT.first=head+'\n'+rest.join('\n');
+  return '<div class="ins">'+row(hl(head),DW_NOTE.first)+row(rest.map(esc).join('<br>'))+'</div>';}
+function dwNext(d){var base=d.g==='doc'
+  ?[['초안 시작','초안 시작해. 서식 첫 항목부터 하나씩 써 줘.'],['다음 항목으로','좋아, 이 항목은 확정. 다음 항목으로 넘어가.'],['자료를 추가했을 때','방금 소스에 [자료 이름]을 추가했어. 이 자료를 반영해서 지금 항목을 다시 써 줘.'],['부분만 고치기','[항목 이름]에서 [고칠 점]만 고쳐 줘. 나머지는 그대로 둬.']]
+  :[['초안 시작','초안 시작해. 구성안과 디자인 시안 2가지부터 보여 줘.'],['시안 고르기','[1번 / 2번] 시안으로 한 장씩 만들어 줘.'],['문구 고치기','[몇 번째 장] 문구를 [더 짧게 / 더 따뜻하게] 고쳐 줘. 디자인은 그대로 둬.']];
+  var tail=d.g==='doc'?[['서식 파일로 받기','완성본을 첨부한 서식과 같은 모양의 워드(docx) 파일로 만들어 줘.']]:[['다른 홍보물로','같은 내용으로 [블로그 글 / 포스터 / 문자 안내]도 만들어 줘.']];
+  var L=base.concat(d.more||[]).concat(tail);
+  return '<div class="nx">'+L.map(function(x,i){DWTXT['n'+i]=dwF(x[1],d);return '<div class="it"><b>'+esc(x[0])+'</b><p>'+esc(dwF(x[1],d))+'</p>'+cpBtn('n'+i)+'</div>';}).join('')+'</div>';}
+function dwRev(d){var who=dwF(d.rv,d);
+  var rest=d.g==='doc'?'의 입장에서 전체 초안을 다시 검토해 줘. ① 지적받거나 감점될 부분 ② 근거가 약한 문장 ③ 보완 방향을 브리핑해 줘. 내가 확인하면 보완해서 최종본을 완성해 줘.'
+                      :'의 입장에서 이 홍보물을 다시 봐 줘. ① 3초 안에 무엇을 알 수 있는지 ② 헷갈리거나 빠진 정보 ③ 더 끌리게 고칠 점을 브리핑해 줘. 내가 확인하면 보완해서 완성해 줘.';
+  DWTXT.rev='이제 너는 '+who+rest;
+  return '<div class="ins">'+row('이제 너는 '+hl(who)+esc(rest),DW_NOTE.review)+'</div>';}
+
+/* --- 사업명 선택 (2026 가족사업안내 1·2권 기준) --- */
+(function(){
+var BL=[['가족센터 공통사업',['가족센터 기본사업','가족상담','부모교육','가족사랑의 날 프로그램','가족 체험·나들이 프로그램']],
+ ['취약·위기가족',['취약·위기가족지원 (온가족보듬)']],
+ ['돌봄',['공동육아나눔터']],
+ ['다문화가족',['다문화가족 방문교육','결혼이민자 역량강화지원','다문화가족 교류소통공간','다문화 자녀 언어발달지원','다문화 자녀 진로설계지원','다문화 자녀 기초학습지원','다문화가족 자녀 교육활동비','결혼이민자 직업훈련교육']]];
+var inp=$('#dw-biz'),lab=inp.parentNode,sel=document.createElement('select');sel.className='f1';sel.id='dw-bizsel';
+sel.innerHTML=BL.map(function(g){return '<optgroup label="'+esc(g[0])+'">'+g[1].map(function(n){return '<option>'+esc(n)+'</option>';}).join('')+'</optgroup>';}).join('')+'<option value="__">직접 입력</option>';
+lab.firstChild.textContent='사업명 ';lab.insertBefore(sel,inp);
+function sync(){var own=sel.value==='__';inp.hidden=!own;if(!own){inp.value=sel.value;inp.dispatchEvent(new Event('input'));}else{inp.value='';inp.placeholder='사업명을 직접 쓰세요';inp.focus();}}
+sel.value='공동육아나눔터';inp.hidden=true;sel.addEventListener('change',sync);
+var p=document.querySelector('#dw-in p');if(p)p.textContent='사업명은 2026 가족사업안내 기준 목록에서 고르고, 대상은 상황에 맞게 쓰세요. 바꾸면 아래 지침과 프롬프트가 모두 같이 바뀌어요.';
+})();
+
+/* --- "이런 건 어떠세요?" 카드: 누르면 프롬프트에 들어감 --- */
+(function(){
+var SEL='',busy=false,sug=$('#s-sug'),pv=$('#s-pv');
+function josa(s){return s.replace(/([가-힣])이\(가\)/g,function(m,c){var k=(c.charCodeAt(0)-0xAC00)%28;return c+(k?'이':'가');});}
+function cardText(c){return c.querySelector('b').textContent+' — '+c.querySelector('span').textContent;}
+function apply(){if(busy)return;busy=true;
+  var cards=[].slice.call(sug.querySelectorAll('.sugc'));
+  cards.forEach(function(c){var s=c.querySelector('span');if(s&&/이\(가\)/.test(s.textContent))s.textContent=josa(s.textContent);c.setAttribute('role','button');c.tabIndex=0;});
+  if(cards.length){if(!cards.some(function(c){return cardText(c)===SEL;}))SEL='';
+    cards.forEach(function(c){c.classList.toggle('on',cardText(c)===SEL);});
+    var h=sug.querySelector('h4');if(h&&!h.querySelector('.sg-hint'))h.insertAdjacentHTML('beforeend',' <span class="sg-hint">누르면 프롬프트에 들어가요</span>');
+    if(!sug.querySelector('.sg-none')){var n=el('button','sg-none'+(SEL?'':' on'),'안 고름');n.type='button';sug.appendChild(n);}else sug.querySelector('.sg-none').classList.toggle('on',!SEL);}
+  var old=pv.querySelector('.sg-add');if(old)old.remove();
+  if(SEL){var a=el('span','sg-add');a.textContent='\n\n[고른 안으로 만들어 줘] '+SEL.replace(/\n/g,' / ');pv.appendChild(a);}
+  var at=$('#s-att');if(at)at.querySelectorAll('li').forEach(function(li){if(/그림 안에 넣지 않고/.test(li.textContent))li.textContent='센터 로고: AI에게 그리게 하지 말고, 그림을 받은 뒤 캔바에서 진짜 로고 파일을 얹으세요.';});
+  busy=false;}
+sug.addEventListener('click',function(e){var c=e.target.closest('.sugc'),n=e.target.closest('.sg-none');if(!c&&!n)return;SEL=c&&cardText(c)!==SEL?cardText(c):'';apply();});
+sug.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('sugc')){e.preventDefault();e.target.click();}});
+new MutationObserver(function(){if(!busy)apply();}).observe(sug,{childList:true});
+new MutationObserver(function(){if(!busy&&!pv.querySelector('.sg-add')&&SEL)apply();}).observe(pv,{childList:true});
+$('#s-cp').onclick=function(){copy(pv.textContent);};
+$('#s-gpt2').onclick=function(){openGPT(pv.textContent);};
+})();
+
+/* --- 빡침 번역기 (3단계) --- */
+(function(){
+var LV3=[['화남','😤'],['폭발 직전','🔥'],['뚜껑 열림','💥']],L=1,FL='mild',cur=0,last={};
+var SITS=[
+ ['동료·직장',[
+  {n:'눈치 게임하는 동료',in:'일 나눌 때마다 다들 눈치만 보다가 결국 제가 다 떠안아요.',who:'동료·다른 팀',emp:'다들 눈 피할 때 혼자 손드는 그 기분, 진짜 억울하죠.',fact:'이번 [업무명] 분담 건으로 말씀드립니다.',rule:'지난번에도 제가 맡아서 이번에는 나눠서 진행하면 좋겠습니다.',ask:'[업무 A]는 제가, [업무 B]는 [이름]님이 맡아 주실 수 있을까요?',firm:'분담이 정해지지 않으면 일정에 맞추기 어렵습니다. 오늘 안에 정해 주세요.'},
+  {n:'못 들은 척하는 동료',in:'분명히 부탁했는데 못 들은 척하고 자리를 비워요.',who:'동료·다른 팀',emp:'분명히 말했는데 투명인간 된 기분, 진짜 열받죠.',fact:'[날짜]에 부탁드린 [업무명] 건 다시 확인차 연락드립니다.',rule:'이 일은 [기한]까지 마쳐야 다음 단계가 진행됩니다.',ask:'가능 여부만 오늘 안에 알려 주시겠어요?',firm:'답이 없으면 팀장님께 일정 조정을 요청하겠습니다.'},
+  {n:'회의 때마다 딴지',in:'회의 때마다 제 의견만 콕 집어 깎아내려요.',who:'동료·다른 팀',emp:'준비해 간 의견이 매번 깎이면 힘 빠지고 속상하죠.',fact:'오늘 회의에서 나온 [안건] 의견 정리해서 공유드립니다.',rule:'제 안은 [근거]를 바탕으로 했습니다.',ask:'보완할 점이 있으면 구체적으로 알려 주시면 반영하겠습니다.',firm:'의견은 근거를 중심으로 이야기 나눴으면 합니다.'},
+  {n:'마감 직전 떠넘기기',in:'마감 하루 전에 "이것도 해 줄 수 있죠?" 하고 넘겨요.',who:'동료·다른 팀',emp:'내 일도 산더미인데 마감 전날 폭탄 받으면 눈앞이 캄캄하죠.',fact:'요청하신 [업무명] 확인했습니다.',rule:'제 마감 업무가 있어 내일까지는 어렵습니다.',ask:'[날짜]까지면 가능합니다. 급하면 필요한 부분만 나눠 주세요.',firm:'다음부터는 최소 [며칠] 전에 요청해 주세요.'},
+  {n:'공은 가져가는 동료',in:'같이 한 일인데 보고할 땐 자기가 다 한 것처럼 말해요.',who:'동료·다른 팀',emp:'같이 땀 흘렸는데 내 이름만 쏙 빠지면 진짜 서운하죠.',fact:'[사업명] 결과 보고 관련해 역할 정리를 공유드립니다.',rule:'자료 수집과 [업무]는 제가 맡았습니다.',ask:'보고서 담당자 칸에 함께 기재해 주세요.',firm:'다음 보고부터는 역할을 나눠 적는 것으로 정했으면 합니다.'},
+  {n:'정한 일정 또 번복',in:'회의에서 정한 일정을 또 바꾸자고 해요. 안내문은 이미 다 나갔어요.',who:'동료·다른 팀',emp:'다 안내했는데 또 바뀐다니 허탈하죠.',fact:'[행사명] 일정을 다시 바꾸자는 말씀 들었습니다.',rule:'참여 가족에게 이미 안내문이 모두 나간 상태입니다.',ask:'꼭 바꿔야 하는 이유가 있다면 재안내 방법까지 함께 정해 주세요.',firm:'이번 일정은 그대로 진행하겠습니다.'}]],
+ ['참여자·이용자',[
+  {n:'준비물 안 챙겨 옴',in:'준비물 안내를 세 번이나 했는데 또 빈손으로 왔어요.',who:'이용자·보호자',emp:'세 번이나 말했는데 빈손이면 내 입이 아플 지경이죠.',fact:'다음 [프로그램명] 준비물 다시 안내드립니다.',rule:'준비물이 없으면 활동 참여가 어렵습니다.',ask:'[준비물]을 꼭 챙겨 와 주세요. 어려우면 전날까지 알려 주세요.',firm:'준비물이 없으면 그 회차는 참관만 가능합니다.'},
+  {n:'연락 없는 불참',in:'프로그램 당일인데 세 가족이 연락도 없이 안 왔어요.',who:'이용자·보호자',emp:'기다리던 강사님과 못 들어온 대기 가족까지 생각하면 정말 난감하죠.',fact:'오늘 [프로그램명]에 연락 없이 참석하지 않으셔서 연락드립니다.',rule:'정원이 정해져 있어 빈자리가 생기면 대기 가족이 참여하지 못합니다.',ask:'못 오실 때는 하루 전까지 꼭 알려 주세요.',firm:'연락 없이 두 번 빠지시면 다음 회차 신청이 어렵습니다.'},
+  {n:'매번 지각',in:'매번 30분씩 늦게 와서 프로그램 흐름이 다 끊겨요.',who:'이용자·보호자',emp:'겨우 분위기 잡아 놨는데 문 열리는 순간 다 무너지죠.',fact:'[프로그램명] 시작 시간 다시 안내드립니다.',rule:'늦게 들어오시면 이미 진행 중인 활동에 함께하기 어렵습니다.',ask:'[시간]까지 도착해 주세요.',firm:'[몇 분] 이후에는 다음 활동부터 참여하실 수 있습니다.'},
+  {n:'공지 질문 폭탄',in:'공지에 다 써 놨는데 같은 질문을 열 번째 받아요.',who:'이용자·보호자',emp:'열 번째 같은 답을 할 때 그 영혼 빠지는 느낌, 알아요.',fact:'[프로그램명] 자주 묻는 내용 한 번에 정리해 드립니다.',rule:'일시·장소·준비물은 공지에도 안내되어 있습니다.',ask:'궁금하실 때는 공지를 먼저 확인해 주세요.',firm:'개별 문의는 [시간]에 몰아서 답변드리겠습니다.'},
+  {n:'선착순 마감 항의',in:'선착순이라고 공지했는데 이제 와서 자리를 만들어 달래요.',who:'이용자·보호자',emp:'공지에 다 써 두었는데 또 설명해야 하니 지치죠.',fact:'신청하신 [프로그램명]은 공지대로 선착순 마감되었습니다.',rule:'기준상 추가 자리를 마련하기는 어렵습니다.',ask:'대기자 명단에 올려 두고, 취소가 생기면 바로 연락드리겠습니다.',firm:'다른 분들과의 형평 때문에 예외는 어렵습니다.'},
+  {n:'휴대폰만 보는 보호자',in:'프로그램 중에 보호자가 휴대폰만 보고 아이를 안 챙겨요.',who:'이용자·보호자',emp:'가족 프로그램인데 나 혼자 육아하는 기분, 진짜 허탈하죠.',fact:'[프로그램명]은 보호자와 아이가 함께하는 활동입니다.',rule:'활동 중에는 아이 안전을 위해 보호자분이 곁에 계셔야 합니다.',ask:'휴대폰은 잠시 넣어 두고 함께해 주세요.',firm:'다음 회차부터는 활동 시간에 휴대폰 사용을 자제해 주세요.'},
+  {n:'끝나자마자 사진 요청',in:'끝나자마자 우리 애 사진만 따로 다 보내 달래요.',who:'이용자·보호자',emp:'정리할 것도 많은데 사진 요청까지 몰리면 손이 열 개라도 모자라죠.',fact:'[프로그램명] 사진 관련 안내드립니다.',rule:'사진은 개인정보 보호를 위해 동의하신 분께만 정해진 방법으로 드립니다.',ask:'[날짜]에 [방법]으로 한꺼번에 보내 드릴게요.',firm:'개별 요청은 따로 받기 어렵습니다.'}]],
+ ['기관·상위',[
+  {n:'자료 제출 지연',in:'협력 기관이 마감이 지났는데 실적 자료를 아직도 안 보냈어요.',who:'협력 기관·강사',emp:'남의 일정 때문에 내 보고가 다 밀리니 답답하죠.',fact:'요청드린 [사업명] 실적 자료가 마감일이 지나 아직 도착하지 않았습니다.',rule:'저희 결과보고는 [기한]까지 제출해야 합니다.',ask:'[날짜] [시간]까지 꼭 보내 주세요.',firm:'기한이 지나면 해당 실적은 보고서에서 빠질 수 있습니다.'},
+  {n:'갑자기 오늘까지',in:'오늘 퇴근 전까지 실적 자료를 내라는 연락이 갑자기 왔어요.',who:'상위 기관·지자체',emp:'예고 없이 오늘까지라니, 내 하루 계획이 순식간에 증발했죠.',fact:'[자료명] 제출 요청 잘 받았습니다.',rule:'현재 진행 중인 [업무] 때문에 오늘 중 전체 자료는 어렵습니다.',ask:'오늘은 [핵심 항목]만 먼저 드리고, 나머지는 [날짜]까지 드려도 될까요?',firm:'정확한 자료를 위해 최소 [며칠]의 기간이 필요합니다.'},
+  {n:'강사 당일 펑크',in:'외부 강사님이 당일 아침에 못 온다고 연락이 왔어요.',who:'협력 기관·강사',emp:'참여 가족은 오고 있는데 강사님이 없다니, 심장이 쿵 내려앉죠.',fact:'오늘 [프로그램명] 강의가 당일 취소되어 연락드립니다.',rule:'당일 취소는 참여 가족에게 큰 불편이 됩니다.',ask:'대체 일정을 [날짜]까지 알려 주세요.',firm:'다음 계약부터는 취소 시 [며칠] 전 통보를 조건으로 넣겠습니다.'},
+  {n:'결재 서류 또 수정',in:'결재 올린 서류를 이유도 없이 또 고쳐 오래요.',who:'동료·다른 팀',emp:'고치고 또 고치고, 파일 이름이 최종_진짜최종_찐최종이 되는 그 기분이죠.',fact:'[문서명] 수정 요청 확인했습니다.',rule:'지난번 말씀하신 [내용]은 반영했습니다.',ask:'추가로 고칠 부분을 구체적으로 알려 주시면 한 번에 반영하겠습니다.',firm:'일정상 이번 수정을 마지막으로 진행하겠습니다.'}]]];
+var FLAT=[];SITS.forEach(function(g){g[1].forEach(function(s){FLAT.push(s);});});
+var CUSS={mild:[
+ ['아오, 이건 좀 열받죠! 😤 사람 속 긁기 대회 나가면 금메달 따겠네.','어휴, 듣기만 해도 한숨이 푹 나와요 😮‍💨 이건 화날 만해요.','이건 진짜 얄밉다! 😑 속으로 열 번은 참으셨겠다.','아니 왜 그래요 진짜! 😠 제가 다 서운하네.'],
+ ['아니 이게 말이 돼요?! 🔥 제가 대신 책상 한 번 쾅! 쳐 드릴게요.','머리에서 김 나는 소리가 여기까지 들려요 ♨️ 미치고 팔짝 뛰겠네!','이건 부처님도 돌아앉을 상황이에요 🙄 아오!','지금 속에서 화산이 부글부글하죠? 🌋 그 맘 완전 알아요.'],
+ ['와, 이건 진짜 선 넘었다! 💥 지구 반대편까지 화가 전달되겠어요.','화산 폭발 경보 발령! 🚨🌋 오늘 참은 거 기네스북감이에요.','뚜껑 열리는 소리 "뻥!" 들렸어요 🫖💨 이건 누구라도 열려요.','이 정도면 제가 대신 소리 질러 드릴게요. 으아아악! 😱']],
+ spicy:[
+ ['아 이거 은근 짜증나네! 😤 사람 긁는 재주 하나는 타고났네.','에이씨, 이건 좀 아니지! 😒 듣는 제가 다 짜증나요.','아 진짜 얄미워 죽겠네! 🙄 꿀밤 한 대 딱 놓고 싶은 맛.'],
+ ['와 진짜 개빡치네요! 🤬 이건 열받는 게 정상이에요.','이런 젠장! 🔥 듣는 제가 다 뒷목 잡았어요.','아 진짜 미쳤나 봐! 😡 사람 미치게 하는 데 재능 있네.'],
+ ['와 씨, 이건 진짜 선 넘었다! 💥 개빡침 지수 MAX, 삐— 소리 백 번 나와도 인정!','이런 망할! 🤬🔥 이건 뚜껑 안 열리면 사람 아니죠.','아 진짜 열받아서 미치겠네! 🌋 제가 대신 "에라이!" 백 번 외쳐 드릴게요.']]};
+var EMPG=['화가 나는 게 당연한 상황이에요. 지금 그 마음, 하나도 이상하지 않아요.','그 상황에서 여기까지 버틴 것만으로도 대단해요.','이건 당신이 예민한 게 아니라 상황이 진짜 이상한 거예요.'];
+var CHEER=['그 와중에 웃으며 응대한 당신, 오늘의 MVP예요 🏆 트로피는 퇴근 후 치킨으로! 🍗','오늘 참은 화를 모으면 보일러 한 달은 돌리겠어요 🔥 그만큼 대단했다는 거예요.','당신 멘탈, 국가대표급이에요 🥇 오늘은 금메달 따고 퇴근하세요.','화난 건 당신 잘못이 아니라 상황이 이상한 거예요. 당신은 오늘도 일 잘했어요 👍','이 화, 3분 뒤엔 반으로 줄어들어요. 대신 커피는 두 배로! ☕☕','이 정도 버틴 사람이면 센터 명예의 전당에 사진 걸어야 해요 🖼️✨','오늘 인내심 만렙 찍었습니다 🎮 레벨 업 축하해요!','지금 이 화는 일을 제대로 하고 싶은 마음에서 나온 거예요 💪 그 마음, 멋져요.'];
+var OPEN={'이용자·보호자':'안녕하세요, [센터명] 가족센터입니다.','동료·다른 팀':'[이름]님, 안녕하세요.','협력 기관·강사':'안녕하세요, [센터명] 가족센터 [담당자]입니다.','상위 기관·지자체':'안녕하세요, [센터명] 가족센터 [담당자]입니다.'};
+function pick(a,k){var c=a.filter(function(x){return x!==last[k];});var r=c[Math.floor(Math.random()*c.length)]||a[0];last[k]=r;return r;}
+var said={};
+function emp(fresh){var S=cur>=0?FLAT[cur]:null,key=FL+L;if(fresh||!said[key]||said.s!==cur){said[key]={a:pick(CUSS[FL][L],'a'),c:pick(CHEER,'c'),g:pick(EMPG,'g')};said.s=cur;}var x=said[key];
+  var e=S?S.emp:x.g;window._ventSay2=x.a+' '+e+' '+x.c;
+  $('#v2-emp').innerHTML='<h4>같이 빡쳐 주기 · '+LV3[L][1]+' '+LV3[L][0]+' · '+(FL==='spicy'?'매운맛':'순한 맛')+'</h4><p>'+esc(x.a)+'</p><p class="v2"><b>공감</b> '+esc(e)+'</p><p class="v2"><b>위로</b> '+esc(x.c)+'</p><div class="va"><button type="button" class="btn mini" id="v2-again">다른 말</button><button type="button" class="btn mini" id="v2-say">소리로 듣기</button></div>';}
+function msg(){var S=cur>=0?FLAT[cur]:null,who=$('#v2-who').value,how=$('#v2-how').value,out=[];
+  var op=OPEN[who];if(/단체/.test(how)&&who==='이용자·보호자')op='[프로그램명] 참여 가족 여러분께 안내드립니다.';
+  if(S){out.push(op,S.fact);if(L===0)out.push(S.ask,'늘 함께해 주셔서 감사합니다.');else if(L===1)out.push(S.rule,S.ask,'감사합니다.');else out.push(S.rule,S.ask,S.firm,'협조 부탁드립니다.');}
+  else out.push(op,'[있었던 일을 사실만 한 문장으로]',L>0?'[지켜야 할 기준이나 이유]':'[우리가 할 수 있는 것]','[부탁할 행동과 기한]',L===2?'[반복되면 어떻게 할지 분명하게]':'',L===2?'협조 부탁드립니다.':'감사합니다.');
+  var t=out.filter(Boolean).join('\n');if(/공문/.test(how))t='제목: [사업명] 관련 안내\n\n'+t;$('#v2-msg').textContent=t;}
+function all(fresh){emp(fresh);msg();}
+var lb=$('#v2-lv');LV3.forEach(function(v,i){var b=el('button',i===L?'on':'','<span class="e">'+v[1]+'</span>'+esc(v[0]));b.type='button';b.onclick=function(){L=i;lb.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});all(true);};lb.appendChild(b);});
+var sb=$('#v2-sit'),idx=0;SITS.forEach(function(g){var w=el('div','vsg','<span class="vsg-h">'+esc(g[0])+'</span>');var o=el('div','opts vsit');g[1].forEach(function(s){var i=idx++;var b=el('button',i===cur?'on':'',esc(s.n));b.type='button';b.title=s.in;b.onclick=function(){cur=i;sb.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});$('#v2-in').value=s.in;$('#v2-who').value=s.who;all(true);};o.appendChild(b);});w.appendChild(o);sb.appendChild(w);});
+var tmr;$('#v2-in').addEventListener('input',function(){var v=this.value.trim();var hit=FLAT.findIndex(function(s){return s.in===v;});if(hit<0&&cur>=0){cur=-1;sb.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});}clearTimeout(tmr);tmr=setTimeout(function(){all(true);},350);});
+['v2-who','v2-how'].forEach(function(id){$('#'+id).addEventListener('change',msg);});
+$('#v2-flav').addEventListener('click',function(e){var b=e.target.closest('[data-f]');if(!b)return;FL=b.dataset.f;this.querySelectorAll('[data-f]').forEach(function(x){x.classList.toggle('on',x===b);});all(true);});
+$('#v2-mcp').onclick=function(){copy($('#v2-msg').textContent,'안내 문자를 복사했어요. [ ] 칸을 채워서 보내세요.');};
+document.addEventListener('click',function(e){if(e.target.id==='v2-again')emp(true);
+  if(e.target.id==='v2-say'){if(!('speechSynthesis' in window)){toast('이 브라우저는 읽어 주기를 지원하지 않아요.');return;}speechSynthesis.cancel();var u=new SpeechSynthesisUtterance((window._ventSay2||'').replace(/[\u{1F000}-\u{1FFFF}☀-➿️‍]/gu,'').replace(/삐—/g,'삐'));u.lang='ko-KR';u.rate=1.05;speechSynthesis.speak(u);}});
+var run=false;$('#v2-bgo').onclick=function(){if(run)return;run=true;var c=$('#v2-bc'),s=c.querySelector('span'),ph=[['들이쉬기',4,1.55],['멈추기',4,1.55],['내쉬기',6,1]],i=0,n=0;
+  function nx(){if(n>=3){s.textContent='좋아요';c.style.transitionDuration='1s';c.style.transform='scale(1)';run=false;return;}var p=ph[i];c.style.transitionDuration=p[1]+'s';c.style.transform='scale('+p[2]+')';var t=p[1];s.textContent=p[0]+' '+t;var iv=setInterval(function(){t--;if(t>0)s.textContent=p[0]+' '+t;else clearInterval(iv);},1000);setTimeout(function(){i++;if(i>2){i=0;n++;}nx();},p[1]*1000);}nx();};
+bindMics($('#v2-tool'));
+sb.querySelector('button').click();
+})();
+
+/* --- 마음 쉼터: 내 마음 지킴이 + 나에게 보내는 엽서 --- */
+(function(){
+var C=[
+ {k:['방문','위기','사례','무거','학대','가정폭력','사연','울었','눈물'],h:'남의 무게를 함께 들고 온 날',L:['다른 가족의 아픈 이야기를 품고 온 날은 마음도 같이 무거워져요.','그 무게를 느낀다는 건, 당신이 그만큼 진심으로 곁에 있었다는 뜻이에요.','오늘 당신 덕분에 누군가는 덜 외로웠어요.','그 무게를 혼자 다 지지 않아도 돼요. 동료와 조금씩 나눠요.']},
+ {k:['보고서','서류','계획서','결과','정산','마감','실적','엑셀','공문','결재'],h:'서류에 파묻힌 날',L:['밀린 서류 앞에서 마음이 조급해지는 거, 정말 당연해요.','서류가 밀린 건 게을러서가 아니라 사람을 먼저 챙겼기 때문이에요.','오늘 한 줄이라도 썼다면, 그건 분명히 앞으로 간 거예요.','한 번에 다 하지 않아도 돼요. 제일 급한 것 하나만 골라요.']},
+ {k:['민원','항의','소리','따지','불만','욕','화를 내','화냈','막말'],h:'날 선 말을 들은 날',L:['날 선 말을 듣고도 끝까지 친절했던 당신, 정말 애썼어요.','그 말은 당신이라는 사람에 대한 평가가 아니에요.','상처받은 마음을 꾹 누르지 말고, 오늘은 나부터 달래 줘요.','당신의 친절은 약함이 아니라 단단함이에요.']},
+ {k:['동료','팀장','상사','선배','후배','눈치','갈등','센터장','뒷담'],h:'사람 사이에서 지친 날',L:['일보다 사람 사이가 더 힘든 날이 있어요.','관계가 어렵다고 해서 당신이 부족한 사람은 아니에요.','모두에게 좋은 사람이 되지 않아도 괜찮아요.','오늘은 내 편이 되어 주는 사람, 바로 나부터 해 봐요.']},
+ {k:['행사','프로그램','축제','준비','주말','야근','체험','나들이','모집'],h:'행사 준비로 달린 날',L:['보이지 않는 곳에서 준비한 시간이 행사를 만들어요.','참여 가족의 웃음 뒤에는 늘 당신의 땀이 있어요.','완벽하지 않아도, 오늘 해낸 만큼으로 충분히 좋은 행사예요.','끝나고 나면 꼭, 수고한 나에게도 박수 한 번.']},
+ {k:['잘하고','모르겠','부족','실수','자신','못하','틀렸','혼났','자책'],h:'나를 의심한 날',L:['잘하고 있는지 모르겠다는 마음은, 잘하고 싶은 마음에서 와요.','실수했다고 해서 당신의 노력까지 사라지지 않아요.','다른 사람과 비교하지 않아도 돼요. 당신은 당신의 속도로 충분해요.','지금도 충분히, 나답게 잘하고 있어요.']},
+ {k:['통역','언어','다문화','말이 안','못 알아','번역','외국'],h:'말이 잘 통하지 않았던 날',L:['말이 잘 안 통해도 끝까지 마음을 전하려 한 당신, 대단해요.','천천히, 쉽게 말해 주는 것도 큰 돌봄이에요.','오늘 건넨 표정과 손짓은 말보다 더 많이 전해졌을 거예요.','완벽한 소통보다 진심이 먼저 닿아요.']},
+ {k:['피곤','지쳐','지친','힘들','졸려','쉬고','아파','번아웃','지침'],h:'몸도 마음도 지친 날',L:['오늘 하루, 정말 많은 사람의 마음을 받아 주느라 지치셨죠.','지친 건 게을러서가 아니라 그만큼 애썼다는 증거예요.','오늘 못 한 일은 내일의 나에게 맡겨도 괜찮아요.','쉬는 것도 일의 일부예요. 오늘은 일찍 쉬어요.']}];
+var G={h:'오늘 하루를 버틴 나에게',L:['오늘 하루, 말로 다 못 할 만큼 애쓰셨어요.','누군가를 돌보는 일은 보이지 않아도 분명히 쌓이고 있어요.','완벽하지 않아도, 오늘 해낸 일만으로 충분해요.','당신은 생각보다 훨씬 잘하고 있어요.']};
+var END=['나답게, 지금도 충분히 잘하고 있어요.','오늘의 나, 참 수고했어. 지금 그대로 충분해.','내일의 나에게: 한 번에 하나씩, 그거면 충분해.','당신이 있어서 오늘 센터가 따뜻했어요.'];
+var REST=['쉼 하나: 4초 들이쉬고, 4초 멈추고, 6초 내쉬기를 세 번.','쉼 하나: 어깨를 귀까지 올렸다가 툭 떨어뜨리기, 세 번.','쉼 하나: 따뜻한 물 한 잔을 천천히, 온도를 느끼며 마시기.','쉼 하나: 창밖을 1분 동안 아무 생각 없이 바라보기.'];
+var MOOD={'지쳤어요':7,'속상해요':2,'마음이 무거워요':0,'억울해요':2,'불안해요':5,'허무해요':5,'사람 때문에 힘들어요':3};
+var mood='',seen={};
+function rnd(a,k){var c=a.filter(function(x){return x!==seen[k];});var r=c[Math.floor(Math.random()*c.length)]||a[0];seen[k]=r;return r;}
+function match(t){var best=-1,sc=0;C.forEach(function(c,i){var n=c.k.filter(function(w){return t.indexOf(w)>-1;}).length;if(n>sc){sc=n;best=i;}});return best;}
+var out=$('#h2-out'),inp=$('#h2-in');
+function show(){var t=inp.value.trim(),i=t?match(t):-1;if(i<0&&mood)i=MOOD[mood];if(!t&&!mood){out.hidden=true;return;}
+  var c=i>=0?C[i]:G,two=[c.L[0]].concat([rnd(c.L.slice(1),'m')]);var L=two.concat([rnd(c.L.slice(1).filter(function(x){return x!==two[1];}),'n'),rnd(END,'e'),rnd(REST,'r')]);
+  out.innerHTML='<h4>내 마음 지킴이 · '+esc(c.h)+'</h4>'+L.map(function(x,j){return '<p'+(j===4?' class="rest"':'')+'>'+esc(x)+'</p>';}).join('')+'<div class="va"><button type="button" class="btn mini" id="h2-again">다른 말 듣기</button><button type="button" class="btn mini" id="h2-copy">복사</button></div>';out.hidden=false;
+  $('#h2-again').onclick=show;$('#h2-copy').onclick=function(){copy(L.join('\n'),'위로 글을 복사했어요.');};}
+var tm;inp.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(show,500);});
+var mb=$('#h2-mood');Object.keys(MOOD).forEach(function(m){var b=el('button',null,esc(m));b.type='button';b.onclick=function(){mood=(mood===m?'':m);mb.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x.textContent===mood);});show();};mb.appendChild(b);});
+function postP(){var t=inp.value.trim()||(mood?'오늘 내 마음: '+mood:'');if(!t){toast('오늘 있었던 일을 먼저 말하거나 적어 주세요.');return null;}
+  return '나에게 보내는 엽서를 만들어 줘.\n\n[오늘 있었던 일]\n'+t+'\n\n1. 먼저 내 이야기에 공감하고, 나를 지키고 인정하고 응원하는 위로 글을 5줄로 써 줘. "나답게, 지금도 충분히 잘하고 있다"는 마음이 담기게.\n2. 그중 가장 마음에 닿는 문장을 엽서에 넣을 문구로 골라 줘. 2~3줄, 한 줄 15자 이내로 짧게.\n3. 그 문구로 엽서 이미지를 만들어 줘.\n- 감성 있는 빈티지 엽서: 크림색 종이 질감, 얇은 테두리, 오른쪽 위에 예쁜 우표와 둥근 소인(도장)\n- 배경: '+SEASON_NOW+' 계절과 내 마음에 어울리는 따뜻하고 예쁜 수채화 풍경\n- 문구는 손글씨 느낌, 받는 사람 "오늘의 나에게", 보내는 사람 "나로부터"\n- 한글은 틀리지 않게 정확히, 글자는 크고 또렷하게\n- 가로 3:2 엽서 비율\n- 사람 얼굴, 실제 이름, 개인정보는 넣지 마';}
+$('#h2-gpt').onclick=function(){var p=postP();if(p)openGPT(p);};
+$('#h2-cp').onclick=function(){var p=postP();if(p)copy(p);};
+bindMics($('#h2-tool'));
+})();
+
+if(!$('#v-drawer').hidden)dwRender();
 </script>
 </body>
 </html>
