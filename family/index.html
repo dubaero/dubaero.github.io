@@ -491,6 +491,7 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
 @keyframes rfleg{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
 .rf .rf-star{fill:#F7C873;stroke:#E0A43A;transform-box:fill-box;transform-origin:center;animation:rfstar 1.4s ease-in-out infinite}
 @keyframes rfstar{0%,100%{transform:scale(.8) rotate(0)}50%{transform:scale(1.2) rotate(20deg)}}
+#v2-emp p{margin:4px 0}#v2-emp p.v3{margin-top:10px;padding-top:8px;border-top:1px dashed #F2D2BE;color:#1F4E3A;font-weight:600}
 </style>
 </head>
 <body>
@@ -2514,9 +2515,29 @@ var CHEER=['그 와중에 웃으며 응대한 당신, 오늘의 MVP예요 🏆 �
 var OPEN={'이용자·보호자':'안녕하세요, [센터명] 가족센터입니다.','동료·다른 팀':'[이름]님, 안녕하세요.','협력 기관·강사':'안녕하세요, [센터명] 가족센터 [담당자]입니다.','상위 기관·지자체':'안녕하세요, [센터명] 가족센터 [담당자]입니다.'};
 function pick(a,k){var c=a.filter(function(x){return x!==last[k];});var r=c[Math.floor(Math.random()*c.length)]||a[0];last[k]=r;return r;}
 var said={};
-function emp(fresh){var S=cur>=0?FLAT[cur]:null,key=FL+L;if(fresh||!said[key]||said.s!==cur){said[key]={a:pick(CUSS[FL][L],'a'),c:pick(CHEER,'c'),g:pick(EMPG,'g')};said.s=cur;}var x=said[key];
-  var e=S?S.emp:x.g;window._ventSay2=x.a+' '+e+' '+x.c;
-  $('#v2-emp').innerHTML='<h4>같이 빡쳐 주기 · '+LV3[L][1]+' '+LV3[L][0]+' · '+(FL==='spicy'?'매운맛':'순한 맛')+'</h4><p>'+esc(x.a)+'</p><p class="v2"><b>공감</b> '+esc(e)+'</p><p class="v2"><b>위로</b> '+esc(x.c)+'</p><div class="va"><button type="button" class="btn mini" id="v2-again">다른 말</button><button type="button" class="btn mini" id="v2-say">소리로 듣기</button></div>';}
+var FUN={
+'눈치 게임하는 동료':['다들 눈치 게임 국가대표예요? 일 얘기만 나오면 갑자기 바닥에서 보물 찾기 시작하네.','"제가 할게요" 나올 때까지 버티는 그 침묵, 진짜 숨 막혀요.','결국 손든 사람만 바보 되는 구조, 이건 게임이 아니라 사기죠!'],
+'못 들은 척하는 동료':['분명히 말했는데 갑자기 귀에 블루투스 꺼진 척?','부탁만 하면 투명 망토 쓰고 사라지는 마법, 어디서 배웠대요.','일 얘기는 안 들리고 점심 메뉴는 기가 막히게 들리는 그 귀, 신기하네요.'],
+'회의 때마다 딴지':['준비는 1시간, 깎이는 데는 1초. 이건 너무하잖아요!','남의 의견에만 돋보기 들이대는 재주, 상 줘야 해요.','대안은 없고 딴지만 풍년이네요!'],
+'마감 직전 떠넘기기':['마감 전날 "이것도 해 줄 수 있죠?" 이거 완전 폭탄 돌리기잖아요.','웃으면서 넘기면 일이 가벼워지나요? 무게는 그대로거든요!','제 시간은 고무줄이 아니라고요. 안 늘어나요!'],
+'공은 가져가는 동료':['같이 땀 흘렸는데 보고할 땐 원맨쇼? 와, 연기대상감이네.','숟가락 얹는 기술 하나는 미슐랭 3스타급이에요.','제 이름은 어디 갔어요? 보고서에서 증발했나 봐요!'],
+'정한 일정 또 번복':['안내문 다 뿌렸는데 일정 변경이요? 그럼 전화는 누가 다 돌려요!','회의는 왜 한 거예요? 정한 게 30분 만에 없던 일 되는 마술쇼!','일정이 무슨 날씨예요? 수시로 바뀌게.'],
+'준비물 안 챙겨 옴':['세 번 말했는데 빈손이요? 제 목소리가 혹시 음소거였나요?','준비물 안내문을 투명 잉크로 썼나 싶네요.','"아 맞다!" 한마디에 제 준비가 다 날아가는 이 기분!'],
+'연락 없는 불참':['자리 비워 두고, 강사님 모시고, 대기 가족은 돌려보냈는데 노쇼라니!','문자 한 통이 그렇게 어려워요? 엄지손가락 하나면 되는데!','빈 의자 보고 있으면 제 속도 텅 비는 기분이에요.'],
+'매번 지각':['30분 지각이 매번이면 그건 지각이 아니라 본인 시간표죠!','겨우 분위기 잡았는데 문 열리는 순간 처음부터 다시 시작!','시계가 고장 난 건지, 마음이 고장 난 건지!'],
+'공지 질문 폭탄':['같은 질문 열 번째면 저 이제 녹음기 틀어도 되죠?','공지는 장식이 아닌데, 다들 그림으로 보시나 봐요.','이러다 꿈에서도 같은 답 하겠어요!'],
+'선착순 마감 항의':['선착순이라고 대문짝만하게 썼는데 "자리 하나만"이요?','자리를 뚝딱 만들 수 있으면 제가 마술사죠!','먼저 신청한 분들은 뭐가 돼요, 진짜!'],
+'휴대폰만 보는 보호자':['가족 프로그램인데 보호자분은 휴대폰이랑 가족 되셨네요.','아이는 제가 보고, 본인은 SNS 정주행?','여기는 키즈카페가 아니라고요!'],
+'끝나자마자 사진 요청':['끝나자마자 "우리 애 사진만 따로요" 저 사진관 아니에요!','정리도 못 했는데 사진 주문 접수 시작, 손이 열 개라도 모자라요.','개인정보 동의는 어디 가고 사진 독촉만 남았네요.'],
+'자료 제출 지연':['마감 지났는데 자료는 감감무소식, 저희 보고서가 인질 잡혔어요.','"곧 드릴게요"의 곧은 대체 언제예요? 다음 달?','남의 마감 때문에 제가 야근하는 이 구조!'],
+'갑자기 오늘까지':['오늘 퇴근 전까지요? 아침에 말해 주시지, 오후 4시에!','제 하루 계획은 방금 증발했습니다.','급한 건 알겠는데, 그 급함이 왜 다 저한테 오죠?'],
+'강사 당일 펑크':['참여 가족은 오고 있는데 강사님이 당일 아침 펑크라니, 심장 쿵!','이제 제가 강사도 하고 진행도 하는 원맨쇼 해야 하나요?','계약서에 "당일 취소 금지" 대문짝만하게 써 놓을 걸!'],
+'결재 서류 또 수정':['최종, 진짜최종, 찐최종... 파일 이름이 소설이 돼 가요.','이유도 없이 또 수정이요? 빨간 펜이 취미세요?','이번엔 뭐가 문제예요? 글씨체? 띄어쓰기? 기분?']};
+var FUNG=['아니 이 상황 누가 만든 거예요? 책임자 나와!','듣기만 해도 제 혈압이 같이 올라가네요.','이건 당신이 예민한 게 아니라 상황이 진짜 이상한 거예요.','여기까지 참은 것만으로도 인내심 국가대표예요.'];
+function two(a){var c=a.slice(),o=[];while(o.length<2&&c.length)o.push(c.splice(Math.floor(Math.random()*c.length),1)[0]);return o;}
+function emp(fresh){var S=cur>=0?FLAT[cur]:null,key=FL+L;if(fresh||!said[key]||said.s!==cur){said[key]={a:pick(CUSS[FL][L],'a'),c:pick(CHEER,'c'),f:two(S&&FUN[S.n]?FUN[S.n]:FUNG)};said.s=cur;}var x=said[key];
+  window._ventSay2=x.a+' '+x.f.join(' ')+' '+x.c;
+  $('#v2-emp').innerHTML='<h4>같이 빡쳐 주기 · '+LV3[L][1]+' '+LV3[L][0]+' · '+(FL==='spicy'?'매운맛':'순한 맛')+'</h4><p>'+esc(x.a)+'</p>'+x.f.map(function(t){return '<p>'+esc(t)+'</p>';}).join('')+'<p class="v3">'+esc(x.c)+'</p><div class="va"><button type="button" class="btn mini" id="v2-again">다른 말</button><button type="button" class="btn mini" id="v2-say">소리로 듣기</button></div>';}
 function msg(){var S=cur>=0?FLAT[cur]:null,who=$('#v2-who').value,how=$('#v2-how').value,out=[];
   var op=OPEN[who];if(/단체/.test(how)&&who==='이용자·보호자')op='[프로그램명] 참여 가족 여러분께 안내드립니다.';
   if(S){out.push(op,S.fact);if(L===0)out.push(S.ask,'늘 함께해 주셔서 감사합니다.');else if(L===1)out.push(S.rule,S.ask,'감사합니다.');else out.push(S.rule,S.ask,S.firm,'협조 부탁드립니다.');}
