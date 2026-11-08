@@ -492,6 +492,13 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
 .rf .rf-star{fill:#F7C873;stroke:#E0A43A;transform-box:fill-box;transform-origin:center;animation:rfstar 1.4s ease-in-out infinite}
 @keyframes rfstar{0%,100%{transform:scale(.8) rotate(0)}50%{transform:scale(1.2) rotate(20deg)}}
 #v2-emp p{margin:4px 0}#v2-emp p.v3{margin-top:10px;padding-top:8px;border-top:1px dashed #F2D2BE;color:#1F4E3A;font-weight:600}
+
+#v2-tool .breath{align-items:center}
+.bx-ch{width:110px;min-height:110px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:6px;overflow:visible}
+.bx-e{width:68px;height:68px;border-radius:50%;background:#E3F0DA;display:flex;align-items:center;justify-content:center;font-size:34px;line-height:1;transition:transform 4s ease-in-out}
+.bx-t{font-size:11.5px;font-weight:700;color:var(--ink);margin-top:14px;text-align:center;white-space:nowrap}
+.bx-r b{display:block;color:var(--ink);font-size:14.5px}.bx-r small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.5}
+.bx-r .va{margin-top:8px}
 </style>
 </head>
 <body>
@@ -875,7 +882,7 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
   </div>
 </div>
 
-<footer><div class="wrap"><b>가족센터 업무도우미</b> · 입력한 내용은 이 기기 안에서만 쓰이고 저장·전송되지 않아요. AI가 만든 글은 초안이에요. 사실·날짜·숫자는 꼭 직접 확인하세요.<br>제작·운영 <b>두배로 · 생성형 AI 전문강사 이서정</b> · <a href="../">dubaero.github.io</a></div></footer>
+<footer><div class="wrap"><b>가족센터 업무도우미</b> · 입력한 내용은 이 기기 안에서만 쓰이고 저장·전송되지 않아요. AI가 만든 글은 초안이에요. 사실·날짜·숫자는 꼭 직접 확인하세요.<br>제작·운영 <b>두배로 · 생성형 AI 전문강사 이서정</b> · <a href="https://dubaero.kr/">dubaero.kr</a></div></footer>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -2637,6 +2644,35 @@ bindMics($('#h2-tool'));
 if(!$('#v-drawer').hidden)dwRender();
 
 document.querySelectorAll('[data-go="vent"]').forEach(function(b){var i=b.querySelector('svg.i');if(i){var f=el('span','flame','🔥');f.setAttribute('aria-hidden','true');i.replaceWith(f);}});
+
+/* --- 빡침 번역기: 여러 가지 숨 고르기 --- */
+(function(){
+var BR=[
+ {e:'🫧',n:'기본 숨 고르기',d:'4초 들이쉬고 · 4초 멈추고 · 6초 내쉬기',p:[['코로 들이쉬기',4,1.5],['멈추기',4,1.5],['입으로 내쉬기',6,.8]]},
+ {e:'🎈',n:'풍선 불기 숨',d:'코로 4초 들이쉬고, 풍선 불듯 볼 빵빵하게 6초 후~',p:[['코로 들이쉬기',4,.8],['풍선 후~ 불기',6,1.8]]},
+ {e:'🕯️',n:'촛불 흔들기 숨',d:'촛불이 꺼지지 않게 아주 가늘고 길게 후~',p:[['코로 들이쉬기',4,1.2],['가늘게 후~',8,.9]]},
+ {e:'🌸',n:'꽃 향기·촛불 숨',d:'꽃 향기 맡듯 들이쉬고, 촛불 끄듯 내쉬기',p:[['꽃 향기 킁킁',4,1.4],['촛불 후~',5,.8]]},
+ {e:'🟩',n:'네모 숨 (박스 호흡)',d:'네모를 따라 4초씩 들이쉬고·멈추고·내쉬고·멈추기',p:[['들이쉬기',4,1.4],['멈추기',4,1.4],['내쉬기',4,.9],['멈추기',4,.9]]},
+ {e:'😮‍💨',n:'두 번 들이쉬고 한숨',d:'코로 두 번 짧게 들이쉬고, 입으로 길게 한숨 휴우~',p:[['코로 한 번',1,1.2],['한 번 더',1,1.5],['길게 휴우~',6,.8]]},
+ {e:'🐝',n:'꿀벌 숨',d:'입 다물고 "음~" 꿀벌 소리 내며 길게 내쉬기',p:[['코로 들이쉬기',4,1.3],['음~~~ 붕붕',7,.9]]},
+ {e:'🦁',n:'사자 숨',d:'들이쉬었다가 혀를 쭉 내밀고 "하~!" 사자처럼 (혼자 있을 때 추천)',p:[['코로 들이쉬기',4,1.3],['하~! 어흥',3,1.8],['쉬기',3,1]]},
+ {e:'🌊',n:'파도 숨',d:'파도가 밀려오듯 들이쉬고, 빠져나가듯 내쉬기',p:[['파도 밀려와요',5,1.5],['파도 빠져나가요',7,.8]]},
+ {e:'🧸',n:'배 위 곰돌이 숨',d:'배 위에 곰돌이를 올렸다고 생각하고 배로 천천히 올렸다 내리기',p:[['곰돌이 올라가요',4,1.4],['곰돌이 내려가요',6,.9]]},
+ {e:'🍃',n:'나뭇잎 날리기 숨',d:'손바닥 위 나뭇잎을 멀리 날려 보내듯 후~',p:[['들이쉬기',4,1.3],['멀리 후~',6,.8]]},
+ {e:'🍜',n:'라면 식히기 숨',d:'뜨거운 라면 식히듯 후후~ 짧게 세 번',p:[['들이쉬기',3,1.3],['후!',1,.9],['후!',1,.9],['후~',2,.8]]}];
+var box=document.querySelector('#v2-tool .breath');if(!box)return;
+box.innerHTML='<div class="bx-ch" id="bx-ch"><span class="bx-e" id="bx-e"></span><span class="bx-t" id="bx-t">준비</span></div><div class="bx-r"><b id="bx-n"></b><small id="bx-d"></small><div class="va"><button type="button" class="btn mini" id="bx-go">따라 하기 (3번)</button><button type="button" class="btn mini" id="bx-next">다른 숨 고르기 ›</button></div></div>';
+var cur=0,run=0;
+function set(i){cur=i;var b=BR[i];$('#bx-e').textContent=b.e;$('#bx-n').textContent=b.n;$('#bx-d').textContent=b.d;$('#bx-t').textContent='준비';$('#bx-e').style.transform='scale(1)';}
+function stop(){run++;}
+$('#bx-next').onclick=function(){stop();var n;do{n=Math.floor(Math.random()*BR.length);}while(n===cur&&BR.length>1);set(n);};
+$('#bx-go').onclick=function(){stop();var my=run,b=BR[cur],i=0,k=0,e=$('#bx-e'),t=$('#bx-t');
+  function nx(){if(my!==run)return;if(k>=3){t.textContent='잘했어요 👏';e.style.transitionDuration='1s';e.style.transform='scale(1)';return;}var p=b.p[i];e.style.transitionDuration=p[1]+'s';e.style.transform='scale('+p[2]+')';var left=p[1];t.textContent=p[0]+' '+left;
+    var iv=setInterval(function(){if(my!==run){clearInterval(iv);return;}left--;if(left>0)t.textContent=p[0]+' '+left;else clearInterval(iv);},1000);
+    setTimeout(function(){i++;if(i>=b.p.length){i=0;k++;}nx();},p[1]*1000);}
+  nx();};
+set(0);
+})();
 </script>
 </body>
 </html>
