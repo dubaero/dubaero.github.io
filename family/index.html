@@ -432,7 +432,8 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
 .sg-add{color:var(--point);font-weight:700}
 #dw-bizsel{min-width:200px}
 
-.hero{grid-template-columns:1.25fr 1fr}.hero-art.hero-side img{object-position:80% center}
+@media (min-width:761px){.hero{grid-template-columns:1.25fr 1fr}}.hero-art.hero-side{display:flex;align-items:center;justify-content:center;padding:14px 14px 14px 0;min-height:0}.hero-art.hero-side img{position:static;display:block;width:100%;height:auto;object-fit:contain;border-radius:12px}
+@media (max-width:760px){.hero-art.hero-side{padding:12px 12px 0}}
 #h2-out p.rest{display:inline-block;margin-top:10px;padding:6px 12px;border-radius:999px;background:#E6F1F8;color:#2E6A8E;font-weight:700}
 </style>
 </head>
