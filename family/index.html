@@ -434,7 +434,27 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
 
 @media (min-width:761px){.hero{grid-template-columns:1.25fr 1fr}}.hero-art.hero-side{display:flex;align-items:center;justify-content:center;padding:14px 14px 14px 0;min-height:0}.hero-art.hero-side img{position:static;display:block;width:100%;height:auto;object-fit:contain;border-radius:12px}
 @media (max-width:760px){.hero-art.hero-side{padding:12px 12px 0}}
-#h2-out p.rest{display:inline-block;margin-top:10px;padding:6px 12px;border-radius:999px;background:#E6F1F8;color:#2E6A8E;font-weight:700}
+#h2-out p.rest{display:inline-block;margin:0;padding:6px 12px;border-radius:999px;background:#E6F1F8;color:#2E6A8E;font-weight:700}
+
+.rest-row{display:flex;align-items:center;gap:10px;margin-top:10px}
+.rf{width:64px;height:64px;flex:none;fill:none;stroke:#2E6A8E;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;background:#E6F1F8;border-radius:50%;padding:2px}
+.rf circle,.rf rect{fill:#fff}
+.rf-sh{animation:rfsh 2.4s ease-in-out infinite}
+@keyframes rfsh{0%,15%{transform:translateY(0)}45%,60%{transform:translateY(-6px)}85%,100%{transform:translateY(0)}}
+.rf-cup{transform-origin:32px 24px;animation:rfcup 3s ease-in-out infinite}
+@keyframes rfcup{0%,20%{transform:rotate(40deg)}50%,70%{transform:rotate(-8deg)}100%{transform:rotate(40deg)}}
+.rf-cloud{animation:rfcl 5s ease-in-out infinite alternate}
+@keyframes rfcl{from{transform:translateX(0)}to{transform:translateX(6px)}}
+.rf .rf-b{fill:#BFE0F2;transform-origin:32px 31px;animation:rfb 6s ease-in-out infinite}
+@keyframes rfb{0%{transform:scale(.6)}35%,50%{transform:scale(1.25)}100%{transform:scale(.6)}}
+.rf-air{opacity:.6;animation:rfair 6s ease-in-out infinite}
+@keyframes rfair{0%,55%{opacity:0}75%{opacity:.8}100%{opacity:0}}
+[data-go="heart"] svg.i{color:#E5568C}
+[data-go="heart"] svg.i *{fill:#F7A6C4;stroke:#E5568C}
+.flame{display:inline-block;font-size:26px;line-height:1;transform-origin:50% 90%;animation:flame .9s ease-in-out infinite alternate}
+.tile .flame,.tiles .tile span.flame{font-size:24px;color:inherit}.main4 .m4 span.flame{font-size:30px;line-height:1}
+@keyframes flame{0%{transform:scale(1) rotate(-4deg)}50%{transform:scale(1.12,1.18) rotate(3deg)}100%{transform:scale(.96,1.05) rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){.rf *,.flame{animation:none!important}}
 </style>
 </head>
 <body>
@@ -2481,6 +2501,12 @@ bindMics($('#v2-tool'));
 sb.querySelector('button').click();
 })();
 
+
+function restFig(t){var head='<circle cx="32" cy="13" r="6"/>',legs='<path d="M32 40 L25 56 M32 40 L39 56"/>';
+  if(/어깨/.test(t))return '<svg class="rf" viewBox="0 0 64 64" aria-hidden="true">'+head+'<path d="M32 19 V40"/>'+legs+'<g class="rf-sh"><path d="M22 24 H42 M22 24 L20 38 M42 24 L44 38"/></g></svg>';
+  if(/물/.test(t))return '<svg class="rf" viewBox="0 0 64 64" aria-hidden="true">'+head+'<path d="M32 19 V40 M32 24 L22 36"/>'+legs+'<g class="rf-cup"><path d="M32 24 L42 30 L44 22"/><rect x="41" y="12" width="7" height="9" rx="1.5"/></g></svg>';
+  if(/창밖/.test(t))return '<svg class="rf" viewBox="0 0 64 64" aria-hidden="true"><rect x="38" y="6" width="22" height="22" rx="2"/><path d="M49 6 V28 M38 17 H60"/><g class="rf-cloud"><path d="M41 13 q2 -3 5 -1 q3 -1 4 2 h-9z"/></g><circle cx="18" cy="16" r="6"/><path d="M18 22 V42 M18 27 L10 36 M18 27 L26 34 M18 42 L12 58 M18 42 L24 58"/></svg>';
+  return '<svg class="rf" viewBox="0 0 64 64" aria-hidden="true">'+head+'<path d="M32 19 V40 M32 24 L23 37 M32 24 L41 37"/>'+legs+'<circle class="rf-b" cx="32" cy="31" r="5"/><path class="rf-air" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/></svg>';}
 /* --- 마음 쉼터: 내 마음 지킴이 + 나에게 보내는 엽서 --- */
 (function(){
 var C=[
@@ -2502,7 +2528,7 @@ function match(t){var best=-1,sc=0;C.forEach(function(c,i){var n=c.k.filter(func
 var out=$('#h2-out'),inp=$('#h2-in');
 function show(){var t=inp.value.trim(),i=t?match(t):-1;if(i<0&&mood)i=MOOD[mood];if(!t&&!mood){out.hidden=true;return;}
   var c=i>=0?C[i]:G,two=[c.L[0]].concat([rnd(c.L.slice(1),'m')]);var L=two.concat([rnd(c.L.slice(1).filter(function(x){return x!==two[1];}),'n'),rnd(END,'e'),rnd(REST,'r')]);
-  out.innerHTML='<h4>내 마음 지킴이 · '+esc(c.h)+'</h4>'+L.map(function(x,j){return '<p'+(j===4?' class="rest"':'')+'>'+esc(x)+'</p>';}).join('')+'<div class="va"><button type="button" class="btn mini" id="h2-again">다른 말 듣기</button><button type="button" class="btn mini" id="h2-copy">복사</button></div>';out.hidden=false;
+  out.innerHTML='<h4>내 마음 지킴이 · '+esc(c.h)+'</h4>'+L.map(function(x,j){return j===4?'<div class="rest-row">'+restFig(x)+'<p class="rest">'+esc(x)+'</p></div>':'<p>'+esc(x)+'</p>';}).join('')+'<div class="va"><button type="button" class="btn mini" id="h2-again">다른 말 듣기</button><button type="button" class="btn mini" id="h2-copy">복사</button></div>';out.hidden=false;
   $('#h2-again').onclick=show;$('#h2-copy').onclick=function(){copy(L.join('\n'),'위로 글을 복사했어요.');};}
 var tm;inp.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(show,500);});
 var mb=$('#h2-mood');Object.keys(MOOD).forEach(function(m){var b=el('button',null,esc(m));b.type='button';b.onclick=function(){mood=(mood===m?'':m);mb.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x.textContent===mood);});show();};mb.appendChild(b);});
@@ -2514,6 +2540,8 @@ bindMics($('#h2-tool'));
 })();
 
 if(!$('#v-drawer').hidden)dwRender();
+
+document.querySelectorAll('[data-go="vent"]').forEach(function(b){var i=b.querySelector('svg.i');if(i){var f=el('span','flame','🔥');f.setAttribute('aria-hidden','true');i.replaceWith(f);}});
 </script>
 </body>
 </html>
