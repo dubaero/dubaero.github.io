@@ -455,6 +455,42 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
 .tile .flame,.tiles .tile span.flame{font-size:24px;color:inherit}.main4 .m4 span.flame{font-size:30px;line-height:1}
 @keyframes flame{0%{transform:scale(1) rotate(-4deg)}50%{transform:scale(1.12,1.18) rotate(3deg)}100%{transform:scale(.96,1.05) rotate(-2deg)}}
 @media (prefers-reduced-motion:reduce){.rf *,.flame{animation:none!important}}
+
+.rest-row{flex-wrap:wrap}.rest-next{margin-left:2px}
+.rf text{font:700 8px sans-serif;fill:#D9534A;stroke:none}
+.rf .rf-mouth{fill:#2E6A8E;transform-box:fill-box;transform-origin:center;animation:rfm 1.6s ease-in-out infinite}
+@keyframes rfm{0%,20%{transform:scale(1)}50%,70%{transform:scale(1.9,2.6)}100%{transform:scale(1)}}
+.rf-mt{stroke:#7FB07A}
+.rf-bub{animation:rfbub 1.2s steps(2) infinite}
+@keyframes rfbub{0%{opacity:1}100%{opacity:.25}}
+.rf-scr{stroke-dasharray:90;animation:rfscr 3.2s linear infinite}
+@keyframes rfscr{0%{stroke-dashoffset:90;opacity:1}55%{stroke-dashoffset:0;opacity:1}75%{opacity:1}90%,100%{stroke-dashoffset:0;opacity:0}}
+.rf-pen{animation:rfpen 3.2s ease-in-out infinite}
+@keyframes rfpen{0%{transform:translate(-30px,-26px)}55%{transform:translate(-14px,-6px)}100%{transform:translate(-30px,-26px)}}
+.rf .rf-fist{transform-box:fill-box;transform-origin:center;animation:rffist 2s ease-in-out infinite}
+@keyframes rffist{0%,40%{transform:scale(.7);fill:#2E6A8E}55%,100%{transform:scale(1.15);fill:#fff}}
+.rf-up{transform-origin:32px 24px;animation:rfup 2.4s ease-in-out infinite}
+@keyframes rfup{0%,100%{transform:scaleY(-.6)}40%,60%{transform:scaleY(1)}}
+.rf-neck{transform-origin:32px 19px;animation:rfneck 3s ease-in-out infinite}
+@keyframes rfneck{0%,100%{transform:rotate(0)}25%{transform:rotate(18deg)}75%{transform:rotate(-18deg)}}
+.rf-hug{animation:rfhug .8s ease-in-out infinite alternate}
+@keyframes rfhug{from{transform:translateY(0)}to{transform:translateY(2px)}}
+.rf-palm{transform-origin:32px 24px;animation:rfpalm 3s ease-in-out infinite}
+@keyframes rfpalm{0%,20%{transform:translateY(8px) scaleY(.6)}45%,85%{transform:translateY(0) scaleY(1)}100%{transform:translateY(8px) scaleY(.6)}}
+.rf .rf-face{fill:#FFF3E8;transform-box:fill-box;transform-origin:center;animation:rfface 2.4s ease-in-out infinite}
+@keyframes rfface{0%,30%{transform:scale(.85,.8)}55%,100%{transform:scale(1)}}
+.rf-sm{animation:rfsm 2.4s ease-in-out infinite}
+@keyframes rfsm{0%,30%{transform:translateY(-3px) scaleY(-1);transform-box:fill-box;transform-origin:center}55%,100%{transform:none}}
+.rf-shk{animation:rfshk .25s linear infinite alternate}
+@keyframes rfshk{from{transform:translateX(-2px) rotate(-3deg)}to{transform:translateX(2px) rotate(3deg)}}
+.rf-note{animation:rfnote 1.6s ease-in-out infinite}
+@keyframes rfnote{0%{transform:translate(0,4px);opacity:0}30%{opacity:1}100%{transform:translate(4px,-4px);opacity:0}}
+.rf-walk{animation:rfwalk 3s ease-in-out infinite alternate}
+@keyframes rfwalk{from{transform:translateX(-8px)}to{transform:translateX(8px)}}
+.rf-l1,.rf-l2{transform-origin:30px 39px;animation:rfleg .5s ease-in-out infinite alternate}.rf-l2{animation-direction:alternate-reverse}
+@keyframes rfleg{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+.rf .rf-star{fill:#F7C873;stroke:#E0A43A;transform-box:fill-box;transform-origin:center;animation:rfstar 1.4s ease-in-out infinite}
+@keyframes rfstar{0%,100%{transform:scale(.8) rotate(0)}50%{transform:scale(1.2) rotate(20deg)}}
 </style>
 </head>
 <body>
@@ -2502,11 +2538,49 @@ sb.querySelector('button').click();
 })();
 
 
-function restFig(t){var head='<circle cx="32" cy="13" r="6"/>',legs='<path d="M32 40 L25 56 M32 40 L39 56"/>';
-  if(/어깨/.test(t))return '<svg class="rf" viewBox="0 0 64 64" aria-hidden="true">'+head+'<path d="M32 19 V40"/>'+legs+'<g class="rf-sh"><path d="M22 24 H42 M22 24 L20 38 M42 24 L44 38"/></g></svg>';
-  if(/물/.test(t))return '<svg class="rf" viewBox="0 0 64 64" aria-hidden="true">'+head+'<path d="M32 19 V40 M32 24 L22 36"/>'+legs+'<g class="rf-cup"><path d="M32 24 L42 30 L44 22"/><rect x="41" y="12" width="7" height="9" rx="1.5"/></g></svg>';
-  if(/창밖/.test(t))return '<svg class="rf" viewBox="0 0 64 64" aria-hidden="true"><rect x="38" y="6" width="22" height="22" rx="2"/><path d="M49 6 V28 M38 17 H60"/><g class="rf-cloud"><path d="M41 13 q2 -3 5 -1 q3 -1 4 2 h-9z"/></g><circle cx="18" cy="16" r="6"/><path d="M18 22 V42 M18 27 L10 36 M18 27 L26 34 M18 42 L12 58 M18 42 L24 58"/></svg>';
-  return '<svg class="rf" viewBox="0 0 64 64" aria-hidden="true">'+head+'<path d="M32 19 V40 M32 24 L23 37 M32 24 L41 37"/>'+legs+'<circle class="rf-b" cx="32" cy="31" r="5"/><path class="rf-air" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/></svg>';}
+var RESTX=[
+ ['breath','복식호흡: 배에 손을 얹고 코로 4초 들이마셔 배를 풍선처럼 부풀리고, 입으로 6초 후~ 내쉬기. 세 번.'],
+ ['shout','먼 산 보고 소리 지르듯 입을 최대한 크게 "아~" 벌리기. 소리는 내지 말고 입만! 세 번.'],
+ ['swear','소리 없이 입 모양으로만 시원하게 욕 세 번. 들키지 않게, 웃으면서.'],
+ ['write','이면지에 진심을 꾹꾹 담아 욕을 쓰고, 바로 북북 지우거나 찢어서 버리기. 쓰레기통에 골인!'],
+ ['shoulder','어깨를 귀까지 으쓱 올렸다가 툭 떨어뜨리기, 세 번.'],
+ ['fist','두 주먹을 5초 동안 꽉 쥐었다가 확 펴기. 손끝까지 힘이 빠지는 걸 느껴 보기, 세 번.'],
+ ['stretch','두 팔을 하늘로 쭉 뻗어 기지개 + 하품 크게 한 번.'],
+ ['neck','고개를 오른쪽, 왼쪽으로 천천히 기울이며 목 옆을 쭉 늘이기, 각 5초.'],
+ ['hug','두 팔을 X자로 가슴에 얹고 나비처럼 토닥토닥 열 번. "괜찮아, 잘하고 있어."'],
+ ['palm','두 손바닥을 싹싹 비벼 따뜻하게 만든 뒤 눈 위에 10초 올려 두기.'],
+ ['smile','얼굴을 쭈글쭈글 최대한 찡그렸다가 활짝 펴기, 세 번. 거울 보면 웃음 보장.'],
+ ['shake','강아지가 물 털듯 온몸을 탈탈 털기, 10초. 손목·발목까지!'],
+ ['hum','좋아하는 노래 한 소절 콧노래로 흥얼거리기. 신나는 노래면 더 좋아요.'],
+ ['walk','자리에서 일어나 복도 끝까지 천천히 걸어갔다 오기. 발바닥 느낌에만 집중.'],
+ ['window','창밖이나 먼 곳을 1분 동안 멍하니 바라보기. 눈도 마음도 쉬어요.'],
+ ['window','보이는 것 5개, 들리는 것 3개를 천천히 찾아보기.'],
+ ['water','따뜻한 물이나 차 한 잔을 천천히, 온도와 향을 느끼며 마시기.'],
+ ['praise','작게 소리 내어 나를 칭찬하기: "나 오늘 진짜 고생했다. 최고다!"'],
+ ['breath','한숨 크게 "휴우~" 세 번 쉬기. 한숨은 참지 말고 시원하게!'],
+ ['stretch','의자에 앉은 채로 두 다리를 쭉 펴서 발끝을 몸 쪽으로 당기기, 5초씩 세 번.']];
+var RTYPE={};RESTX.forEach(function(r){RTYPE['쉼 하나: '+r[1]]=r[0];});
+function restFig(t){var f=RTYPE[t]||(/어깨/.test(t)?'shoulder':/물|차/.test(t)?'water':/창밖|보이는/.test(t)?'window':'breath');
+ var H='<circle cx="32" cy="13" r="6"/>',B='<path d="M32 19 V40"/>',L='<path d="M32 40 L25 56 M32 40 L39 56"/>',A='<path d="M32 24 L23 37 M32 24 L41 37"/>';
+ var X={
+  breath:H+B+A+L+'<circle class="rf-b" cx="32" cy="31" r="5"/><path class="rf-air" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/>',
+  shoulder:H+B+L+'<g class="rf-sh"><path d="M22 24 H42 M22 24 L20 38 M42 24 L44 38"/></g>',
+  water:H+'<path d="M32 19 V40 M32 24 L22 36"/>'+L+'<g class="rf-cup"><path d="M32 24 L42 30 L44 22"/><rect x="41" y="12" width="7" height="9" rx="1.5"/></g>',
+  window:'<rect x="38" y="6" width="22" height="22" rx="2"/><path d="M49 6 V28 M38 17 H60"/><g class="rf-cloud"><path d="M41 13 q2 -3 5 -1 q3 -1 4 2 h-9z"/></g><circle cx="18" cy="16" r="6"/><path d="M18 22 V42 M18 27 L10 36 M18 27 L26 34 M18 42 L12 58 M18 42 L24 58"/>',
+  shout:'<path d="M2 40 L14 26 L24 36 L34 22 L46 40" class="rf-mt"/><circle cx="48" cy="20" r="7"/><ellipse class="rf-mouth" cx="48" cy="23" rx="2.5" ry="2"/><path d="M48 27 V46 M48 31 L40 38 M48 31 L56 38 M48 46 L43 60 M48 46 L53 60"/>',
+  swear:H+B+A+L+'<ellipse class="rf-mouth" cx="32" cy="15" rx="2" ry="1.4"/><g class="rf-bub"><rect x="40" y="2" width="22" height="13" rx="4"/><text x="51" y="12" text-anchor="middle">#@!</text></g>',
+  write:'<rect x="8" y="10" width="34" height="44" rx="3"/><path class="rf-scr" d="M14 22 q4 -6 8 0 t8 0 t8 0 M14 32 q4 -6 8 0 t8 0 t8 0 M14 42 q4 -6 8 0 t8 0"/><g class="rf-pen"><path d="M46 46 L58 22"/><path d="M45 49 L46 46 L48 47Z"/></g>',
+  fist:H+B+L+'<path d="M32 24 L22 30 M32 24 L42 30"/><circle class="rf-fist" cx="20" cy="31" r="3.4"/><circle class="rf-fist" cx="44" cy="31" r="3.4"/>',
+  stretch:H+B+L+'<g class="rf-up"><path d="M32 24 L24 8 M32 24 L40 8"/></g>',
+  neck:'<g class="rf-neck"><circle cx="32" cy="13" r="6"/></g>'+B+A+L,
+  hug:H+B+L+'<g class="rf-hug"><path d="M32 24 L40 30 L26 32 M32 24 L24 30 L38 32"/></g>',
+  palm:'<circle cx="32" cy="13" r="6"/><g class="rf-palm"><path d="M32 24 L24 20 L28 12 M32 24 L40 20 L36 12"/></g>'+B+L,
+  smile:'<circle class="rf-face" cx="32" cy="28" r="18"/><circle cx="25" cy="24" r="1.6"/><circle cx="39" cy="24" r="1.6"/><path class="rf-sm" d="M24 33 q8 7 16 0"/>',
+  shake:'<g class="rf-shk">'+H+B+L+'<path d="M32 24 L22 32 M32 24 L42 32"/></g><path class="rf-air" d="M10 22 l-4 -2 M10 30 h-5 M54 22 l4 -2 M54 30 h5"/>',
+  hum:H+B+A+L+'<g class="rf-note"><path d="M44 16 V6 L52 4 V14"/><circle cx="42" cy="16" r="2.2"/><circle cx="50" cy="14" r="2.2"/></g>',
+  walk:'<g class="rf-walk"><circle cx="30" cy="13" r="6"/><path d="M30 19 V39 M30 24 L22 33 M30 24 L38 31"/><path class="rf-l1" d="M30 39 L23 56"/><path class="rf-l2" d="M30 39 L38 55"/></g>',
+  praise:H+B+L+'<path d="M32 24 L24 34 M32 24 L42 18"/><path class="rf-star" d="M48 6 l2 4 4 1 -3 3 1 4 -4 -2 -4 2 1 -4 -3 -3 4 -1z"/>'};
+ return '<svg class="rf" viewBox="0 0 64 64" aria-hidden="true">'+(X[f]||X.breath)+'</svg>';}
 /* --- 마음 쉼터: 내 마음 지킴이 + 나에게 보내는 엽서 --- */
 (function(){
 var C=[
@@ -2520,7 +2594,7 @@ var C=[
  {k:['피곤','지쳐','지친','힘들','졸려','쉬고','아파','번아웃','지침'],h:'몸도 마음도 지친 날',L:['오늘 하루, 정말 많은 사람의 마음을 받아 주느라 지치셨죠.','지친 건 게을러서가 아니라 그만큼 애썼다는 증거예요.','오늘 못 한 일은 내일의 나에게 맡겨도 괜찮아요.','쉬는 것도 일의 일부예요. 오늘은 일찍 쉬어요.']}];
 var G={h:'오늘 하루를 버틴 나에게',L:['오늘 하루, 말로 다 못 할 만큼 애쓰셨어요.','누군가를 돌보는 일은 보이지 않아도 분명히 쌓이고 있어요.','완벽하지 않아도, 오늘 해낸 일만으로 충분해요.','당신은 생각보다 훨씬 잘하고 있어요.']};
 var END=['나답게, 지금도 충분히 잘하고 있어요.','오늘의 나, 참 수고했어. 지금 그대로 충분해.','내일의 나에게: 한 번에 하나씩, 그거면 충분해.','당신이 있어서 오늘 센터가 따뜻했어요.'];
-var REST=['쉼 하나: 4초 들이쉬고, 4초 멈추고, 6초 내쉬기를 세 번.','쉼 하나: 어깨를 귀까지 올렸다가 툭 떨어뜨리기, 세 번.','쉼 하나: 따뜻한 물 한 잔을 천천히, 온도를 느끼며 마시기.','쉼 하나: 창밖을 1분 동안 아무 생각 없이 바라보기.'];
+var REST=RESTX.map(function(r){return '쉼 하나: '+r[1];});
 var MOOD={'지쳤어요':7,'속상해요':2,'마음이 무거워요':0,'억울해요':2,'불안해요':5,'허무해요':5,'사람 때문에 힘들어요':3};
 var mood='',seen={};
 function rnd(a,k){var c=a.filter(function(x){return x!==seen[k];});var r=c[Math.floor(Math.random()*c.length)]||a[0];seen[k]=r;return r;}
@@ -2528,8 +2602,8 @@ function match(t){var best=-1,sc=0;C.forEach(function(c,i){var n=c.k.filter(func
 var out=$('#h2-out'),inp=$('#h2-in');
 function show(){var t=inp.value.trim(),i=t?match(t):-1;if(i<0&&mood)i=MOOD[mood];if(!t&&!mood){out.hidden=true;return;}
   var c=i>=0?C[i]:G,two=[c.L[0]].concat([rnd(c.L.slice(1),'m')]);var L=two.concat([rnd(c.L.slice(1).filter(function(x){return x!==two[1];}),'n'),rnd(END,'e'),rnd(REST,'r')]);
-  out.innerHTML='<h4>내 마음 지킴이 · '+esc(c.h)+'</h4>'+L.map(function(x,j){return j===4?'<div class="rest-row">'+restFig(x)+'<p class="rest">'+esc(x)+'</p></div>':'<p>'+esc(x)+'</p>';}).join('')+'<div class="va"><button type="button" class="btn mini" id="h2-again">다른 말 듣기</button><button type="button" class="btn mini" id="h2-copy">복사</button></div>';out.hidden=false;
-  $('#h2-again').onclick=show;$('#h2-copy').onclick=function(){copy(L.join('\n'),'위로 글을 복사했어요.');};}
+  out.innerHTML='<h4>내 마음 지킴이 · '+esc(c.h)+'</h4>'+L.map(function(x,j){return j===4?'<div class="rest-row" id="h2-rest">'+restFig(x)+'<p class="rest">'+esc(x)+'</p><button type="button" class="btn mini rest-next" id="h2-rnext">다른 쉼 해 보기 ›</button></div>':'<p>'+esc(x)+'</p>';}).join('')+'<div class="va"><button type="button" class="btn mini" id="h2-again">다른 말 듣기</button><button type="button" class="btn mini" id="h2-copy">복사</button></div>';out.hidden=false;
+  $('#h2-again').onclick=show;$('#h2-rnext').onclick=function(){var r=rnd(REST,'r');L[4]=r;var row=$('#h2-rest');row.querySelector('svg').outerHTML=restFig(r);row.querySelector('p').textContent=r;};$('#h2-copy').onclick=function(){copy(L.join('\n'),'위로 글을 복사했어요.');};}
 var tm;inp.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(show,500);});
 var mb=$('#h2-mood');Object.keys(MOOD).forEach(function(m){var b=el('button',null,esc(m));b.type='button';b.onclick=function(){mood=(mood===m?'':m);mb.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x.textContent===mood);});show();};mb.appendChild(b);});
 function postP(){var t=inp.value.trim()||(mood?'오늘 내 마음: '+mood:'');if(!t){toast('오늘 있었던 일을 먼저 말하거나 적어 주세요.');return null;}
