@@ -524,6 +524,22 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
 .bxf .bxair{opacity:0;transition:opacity .6s}
 .bxf[data-ph="in"] .bxb,.bxf[data-ph="hold"] .bxb{transform:scale(1.35)}
 .bxf[data-ph="in"] .bxup,.bxf[data-ph="hold"] .bxup,.bxf[data-ph="done"] .bxup{opacity:1}.bxf[data-ph="in"] .bxdn,.bxf[data-ph="hold"] .bxdn,.bxf[data-ph="done"] .bxdn{opacity:0}
+.bxf .fl{fill:#F6A54A;stroke:#E07B39;stroke-width:1.2}.bxf .p-fl{transition:transform var(--d,1s) ease-in-out}
+.bxf .p-bal{transform-box:view-box;transform-origin:39px 17px;transform:scale(.35);transition:transform var(--d,1s) ease-in-out}.bxf .p-bal ellipse{fill:#F7B6C2}
+.bxf[data-ph="out"] .p-bal{transform:scale(1.15)}
+.bxf[data-ph="out"] .p-fl{transform:translate(50px,39px) rotate(28deg)}.bxf .p-fl{transform:translate(50px,39px)}
+.bxf .p-flw circle{fill:#F7B6C2}.bxf .p-flw,.bxf .p-cdl{transition:opacity .6s}.bxf .p-cdl{opacity:0}.bxf[data-ph="out"] .p-cdl{opacity:1}.bxf[data-ph="out"] .p-flw{opacity:0}
+.bxf .p-box{stroke:#9CC7A0;stroke-dasharray:4 3}.bxf .p-dot{fill:#E07B39;stroke:none;transform:translate(8px,58px);transition:transform var(--d,1s) linear}
+.bxf[data-st="0"] .p-dot{transform:translate(8px,6px)}.bxf[data-st="1"] .p-dot{transform:translate(56px,6px)}.bxf[data-st="2"] .p-dot{transform:translate(56px,58px)}.bxf[data-st="3"] .p-dot{transform:translate(8px,58px)}
+.bxf .p-sh{transition:transform var(--d,1s) ease-out}.bxf[data-st="0"] .p-sh{transform:translateY(-2px)}.bxf[data-st="1"] .p-sh{transform:translateY(-4px)}
+.bxf .p-bee{transform:translate(40px,14px);transition:transform var(--d,1s) ease-in-out}.bxf .p-bee ellipse{fill:#F7D35C}.bxf .p-bee .wing{animation:bxw .25s linear infinite alternate}
+@keyframes bxw{from{opacity:1}to{opacity:.3}}.bxf[data-ph="out"] .p-bee{transform:translate(56px,6px)}
+.bxf .p-mane{transform-box:view-box;transform-origin:32px 12px;transform:scale(.6);opacity:0;transition:all .5s}.bxf .p-mane circle{fill:none;stroke:#E0A83A;stroke-width:3}
+.bxf[data-ph="out"] .p-mane{transform:scale(1);opacity:1}.bxf .p-mo{fill:#2E6A8E;transform-box:fill-box;transform-origin:center;transition:transform .4s}.bxf[data-ph="out"] .p-mo{transform:scale(1.6,2.2)}.bxf[data-ph="out"] .p-lion .bxup{opacity:1}.bxf[data-ph="out"] .p-lion .bxdn{opacity:0}
+.bxf .p-wave{stroke:#6FB3D6;transition:transform var(--d,1s) ease-in-out}.bxf[data-ph="in"] .p-wave{transform:translateY(-8px)}
+.bxf .p-bear{transition:transform var(--d,1s) ease-in-out}.bxf .p-bear circle{fill:#E8C49A}.bxf[data-ph="in"] .p-bear{transform:translateY(-6px)}
+.bxf .p-leaf path{fill:#9CCB7A}.bxf .p-leaf{transition:transform var(--d,1s) ease-out,opacity var(--d,1s)}.bxf[data-ph="out"] .p-leaf{transform:translate(14px,-14px) rotate(35deg);opacity:.25}
+.bxf .p-stm{transition:transform .8s,opacity .8s}.bxf[data-ph="out"] .p-stm{transform:translateX(6px);opacity:.2}
 .bxf[data-ph="out"] .bxair{opacity:.8}.bxf[data-ph="out"] .bxb{transform:scale(.6)}
 #v2-emp p.v3{border-top:0;margin-top:12px;padding:10px 14px;border-radius:12px;background:#E2F5EF;border:1px solid #A9DDCD;color:#11695A}
 
@@ -2902,6 +2918,26 @@ function postP2(t){var fi=($('#pc-front-in')||{}).value,front=(fi&&fi.trim())||P
   '7. 다 만들면 틀린 글자나 빠진 문장이 없는지 확인하고, 있으면 그 부분만 고쳐서 다시 만들어 줘.');
  return L.join('\n');}
 
+/* ===== 2026.11.09 수정 14: 숨 고르기마다 다른 졸라맨 동작 ===== */
+function bxPh(l){return /멈추|^쉬기$/.test(l)?'hold':/들이쉬|킁킁|밀려와|올라가|한 번/.test(l)?'in':'out';}
+function bxFig(n){
+ var H='<circle cx="32" cy="12" r="6"/>',B='<path d="M32 18 V40"/>',G='<path d="M32 40 L25 56 M32 40 L39 56"/>',BEL='<circle class="bxb" cx="32" cy="31" r="4.5"/>',
+  DN='<path class="bxdn" d="M32 24 L23 37 M32 24 L41 37"/>',UP='<path class="bxup" d="M32 24 L15 11 M32 24 L49 11"/>',AIR='<path class="bxair" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/>',
+  ARM='<path d="M32 24 L23 37 M32 24 L41 37"/>',FL='<path class="fl" d="M0 0 q-3 -5 0 -10 q3 5 0 10z"/>';
+ var X={
+ '풍선 불기 숨':H+B+G+'<path d="M32 24 L23 37 M32 24 L38 18"/><g class="p-bal"><path d="M41 16 q2 6 -1 10"/><ellipse cx="48" cy="9" rx="6" ry="7"/></g>',
+ '촛불 흔들기 숨':H+B+G+ARM+AIR+'<rect x="47" y="40" width="6" height="15" rx="1"/><g class="p-fl" transform="translate(50 39)">'+FL+'</g>',
+ '꽃 향기·촛불 숨':H+B+G+'<path d="M32 24 L23 37"/><g class="p-flw"><path d="M32 24 L38 18"/><circle cx="40" cy="14" r="2.4"/><circle cx="43" cy="12" r="2"/><circle cx="43" cy="16" r="2"/></g><g class="p-cdl"><path d="M32 24 L41 37"/><rect x="47" y="40" width="6" height="15" rx="1"/><g class="p-fl" transform="translate(50 39)">'+FL+'</g></g>'+AIR,
+ '네모 숨 (박스 호흡)':'<rect class="p-box" x="8" y="6" width="48" height="52" rx="3"/><g transform="translate(16 8) scale(.5)">'+H+B+G+DN+BEL+'</g><circle class="p-dot" cx="0" cy="0" r="3.4"/>',
+ '두 번 들이쉬고 한숨':H+B+G+BEL+'<g class="p-sh">'+DN.replace('bxdn','')+'</g>'+AIR,
+ '꿀벌 숨':H+B+G+ARM+'<g class="p-bee"><ellipse cx="0" cy="0" rx="3.4" ry="2.4"/><path class="wing" d="M-1 -2 q-2 -5 2 -4 M1 -2 q2 -5 -2 -4"/></g><path class="bxair" d="M40 14 q3 -2 6 0 t6 0"/>',
+ '사자 숨':'<g class="p-lion">'+'<g class="p-mane"><circle cx="32" cy="12" r="10" stroke-dasharray="3 2"/></g>'+H+'<ellipse class="p-mo" cx="32" cy="15" rx="1.6" ry="0.9"/>'+B+G+DN+UP+'</g>',
+ '파도 숨':H+B+G+DN+UP+'<path class="p-wave" d="M0 58 q8 -6 16 0 t16 0 t16 0 t16 0"/>',
+ '배 위 곰돌이 숨':'<circle cx="10" cy="44" r="6"/><path d="M16 44 H42 M42 44 L52 38 M42 44 L54 50 M22 44 L28 36"/><g class="p-bear"><circle cx="32" cy="36" r="5"/><circle cx="28.5" cy="31.5" r="1.8"/><circle cx="35.5" cy="31.5" r="1.8"/></g>',
+ '나뭇잎 날리기 숨':H+B+G+'<path d="M32 24 L23 37 M32 24 L44 26"/><g class="p-leaf"><path d="M44 24 q5 -6 10 -2 q-5 6 -10 2z"/></g>'+AIR,
+ '라면 식히기 숨':H+B+G+'<path d="M32 24 L24 32 M32 24 L40 32"/><path d="M20 32 H44 q-2 10 -12 10 q-10 0 -12 -10z"/><g class="p-stm"><path d="M27 28 q-2 -4 0 -7 M32 28 q-2 -4 0 -7 M37 28 q-2 -4 0 -7"/></g>'+AIR};
+ return X[n]||(H+B+BEL+G+DN+UP+AIR);}
+
 /* --- 사업명 선택 (2026 가족사업안내 1·2권 기준) --- */
 (function(){
 var BL=[['가족센터 공통사업',['가족센터 기본사업','가족상담','부모교육','가족사랑의 날 프로그램','가족 체험·나들이 프로그램']],
@@ -3155,11 +3191,11 @@ var BR=[
 var box=document.querySelector('#v2-tool .breath');if(!box)return;
 box.innerHTML='<div class="bx-ch" id="bx-ch"><span class="bx-e" id="bx-e"><svg class="bxf" id="bx-f" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="12" r="6"/><path d="M32 18 V40"/><circle class="bxb" cx="32" cy="31" r="4.5"/><path d="M32 40 L25 56 M32 40 L39 56"/><path class="bxdn" d="M32 24 L23 37 M32 24 L41 37"/><path class="bxup" d="M32 24 L15 11 M32 24 L49 11"/><path class="bxair" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/></svg></span><span class="bx-t" id="bx-t">준비</span></div><div class="bx-r"><b id="bx-n"></b><small id="bx-d"></small><div class="va"><button type="button" class="btn mini" id="bx-go">따라 하기 (3번)</button><button type="button" class="btn mini" id="bx-next">다른 숨 고르기 ›</button></div></div>';
 var cur=0,run=0;
-function set(i){cur=i;var b=BR[i];$('#bx-n').textContent=b.e+' '+b.n;$('#bx-f').setAttribute('data-ph','');$('#bx-d').textContent=b.d;$('#bx-t').textContent='준비';$('#bx-e').style.transform='scale(1)';}
+function set(i){cur=i;var b=BR[i];$('#bx-n').textContent=b.e+' '+b.n;var F=$('#bx-f');F.setAttribute('data-ph','');F.setAttribute('data-st','');F.innerHTML=bxFig(b.n);$('#bx-d').textContent=b.d;$('#bx-t').textContent='준비';$('#bx-e').style.transform='scale(1)';}
 function stop(){run++;}
 $('#bx-next').onclick=function(){stop();var n;do{n=Math.floor(Math.random()*BR.length);}while(n===cur&&BR.length>1);set(n);};
 $('#bx-go').onclick=function(){stop();var my=run,b=BR[cur],i=0,k=0,e=$('#bx-e'),t=$('#bx-t');
-  function nx(){if(my!==run)return;if(k>=3){$('#bx-f').setAttribute('data-ph','done');t.textContent='잘했어요 👏';e.style.transitionDuration='1s';e.style.transform='scale(1)';return;}var p=b.p[i];e.style.transitionDuration=p[1]+'s';e.style.transform='scale('+p[2]+')';var f=$('#bx-f');f.style.setProperty('--d',p[1]+'s');f.setAttribute('data-ph',/멈추|^쉬기$/.test(p[0])?'hold':p[2]>=1?'in':'out');var left=p[1];t.textContent=p[0]+' '+left;
+  function nx(){if(my!==run)return;if(k>=3){$('#bx-f').setAttribute('data-ph','done');t.textContent='잘했어요 👏';e.style.transitionDuration='1s';e.style.transform='scale(1)';return;}var p=b.p[i];e.style.transitionDuration=p[1]+'s';e.style.transform='scale('+p[2]+')';var f=$('#bx-f');f.style.setProperty('--d',p[1]+'s');f.setAttribute('data-ph',bxPh(p[0]));f.setAttribute('data-st',String(i));var left=p[1];t.textContent=p[0]+' '+left;
     var iv=setInterval(function(){if(my!==run){clearInterval(iv);return;}left--;if(left>0)t.textContent=p[0]+' '+left;else clearInterval(iv);},1000);
     setTimeout(function(){i++;if(i>=b.p.length){i=0;k++;}nx();},p[1]*1000);}
   nx();};
