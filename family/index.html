@@ -2754,6 +2754,22 @@ dwFirst=function(d){if(d.g!=='pr')return _dwFirst1109(d);
  DWTXT.first=head+'\n\n[기본정보 틀]\n'+form.join('\n')+'\n\n'+tail.join('\n');
  return '<div class="ins">'+row(hl(head),DW_NOTE.prForm)+row('<b>[기본정보 틀]</b><br>'+form.map(esc).join('<br>'))+row(tail.map(esc).join('<br>'))+'</div>';};
 
+/* ===== 2026.11.09 수정 8: 기본정보 틀 하나로 정리(강사 확정 항목), 빠진 정보 틀 중복 제거 ===== */
+(function(){
+ PR_FORM.length=0;['프로그램명: ','홍보 목적(참여자 모집·프로그램 안내·활동 후기): ','참여 대상·인원: ','행사 날짜·시간: ','장소: ','신청 방법(전화·QR·링크): ','모집 기간·마감(선착순 여부): ','문의 연락처: ','기관명: '].forEach(function(x){PR_FORM.push(x);});
+ var F1='① 기본정보: 첫 메시지에 [기본정보 틀]이 채워져 있으면 그대로 쓰고, 없으면 틀을 보여 주고 멈춰. 내가 콜론(:) 뒤에 채워 한 번에 보내게 해. 틀: '+PR_FORM.map(function(x){return x.replace(/: $/,'');}).join(' / ')+'. 소스 안내문에 있는 정보는 먼저 채우고, 받은 정보는 "프로그램 기본정보" 요약 상자로 보여 줘. 빈 칸이 있으면 기획안으로 넘어가지 말고 빈 칸만 같은 틀 모양으로 한 번 더 보여 주고 멈춰. "모름"이나 "비워 둬"라고 하면 빈 칸으로 진행해. 이 확인은 한 번만 해.';
+ if(DW_COMMON.pr)DW_COMMON.pr=DW_COMMON.pr.map(function(t){return /^① 기본정보/.test(t)?F1:t;});
+ var SEC=['## ② 기본정보 입력','모든 홍보물은 아래 [기본정보 틀]을 채워야 제대로 나온다. 첫 메시지에 틀이 채워져 있으면 다시 묻지 않는다. 없으면 틀을 보여 주고 멈춘다. 사용자는 틀을 복사해 콜론(:) 뒤에 채워 한 번에 보낸다.','','[기본정보 틀]'].concat(PR_FORM).concat(['',
+  '- 소스에 안내문이 있으면 거기서 먼저 채운다.','- 받은 정보는 "프로그램 기본정보" 요약 상자로 보여 준다.','- 빈 칸이 있으면 기획안으로 넘어가지 않는다. 빈 칸만 위 틀 모양 그대로 한 번 더 보여 주고 멈춘다.','- "모름" 또는 "비워 둬"라고 하면 그 칸은 빈 칸으로 진행한다. 이 확인은 한 번만 한다.','- 다 채워지면 바로 ③ 기획안으로 넘어간다.']).join('\n');
+ DW.forEach(function(d){
+  if(d.full)d.full=d.full.replace(/## ② 기본정보 입력[\s\S]*?이 질문은 한 번만 한다\./,SEC);
+  if(d.g==='pr'&&d.id!=='all'&&d.id!=='blog')d.ask='① 기본정보 틀이에요. 콜론(:) 뒤에 채워서 한 번에 보내 주세요. 모르는 칸은 비워 두세요.\n'+PR_FORM.join('\n');
+ });
+})();
+var _dwFirst1109b=dwFirst;
+dwFirst=function(d){var h=_dwFirst1109b(d);if(d.id!=='all')return h;
+ DWTXT.first=DWTXT.first.replace(/만들 홍보물\([^)]*\): \n/,'');var T1='빈 칸은 아직 모르는 거야. 지침 순서대로 빠진 정보만 한 번 확인하고 기획안을 보여 줘.',T2='지침 순서대로 ① 홍보물 선택부터 해 줘. 기본정보는 위 틀을 쓰고, 빈 칸만 한 번 확인해 줘.';DWTXT.first=DWTXT.first.replace(T1,T2);return h.replace(/만들 홍보물\([^)]*\): <br>/,'').replace(T1,T2);};
+
 /* --- 사업명 선택 (2026 가족사업안내 1·2권 기준) --- */
 (function(){
 var BL=[['가족센터 공통사업',['가족센터 기본사업','가족상담','부모교육','가족사랑의 날 프로그램','가족 체험·나들이 프로그램']],
