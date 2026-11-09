@@ -2897,11 +2897,11 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-pch]
 function pcStory(){var i=$('#h2-in');return i?i.value.trim():'';}
 setTimeout(pcRender,0);
 function postP2(t){var hard=PC_HARD.filter(function(x,i){return PCS.hard[i];}),mine=(($('#pc-hard-in')||{}).value||'').trim();if(mine)hard.push(mine);
- if(!hard.length&&!t){toast('요즘 힘든 마음을 하나 이상 골라 주세요.');return null;}
+
  var st=PC_STYLE[PCS.style],nm=(($('#pc-to')||{}).value||'').trim().replace(/\s+/g,''),pdate=(($('#pc-date')||{}).value||'').trim();
  if(/^[가-힣]{3}$/.test(nm))nm=nm.slice(1);else if(/^(남궁|황보|제갈|선우|독고|사공|서문)[가-힣]{2}$/.test(nm))nm=nm.slice(2);
  var L=['엽서에 불러 줄 내 이름: '+nm,'우표 소인 날짜: '+pdate,'(위 두 줄만 채워서 보내 주세요)','','---','그동안 나와 나눈 대화를 기억하는 친구로서, 나를 인정하고 위로하고 응원하는 선물 같은 엽서 그림을 만들어 줘.','','[요즘 나를 힘들게 하는 것]'];
- hard.forEach(function(x){L.push('- '+x);});
+ if(hard.length)hard.forEach(function(x){L.push('- '+x);});else L.push('- (고르지 않았어. 그동안 대화에서 요즘 내가 힘들어하던 것을 떠올려 줘)');
  if(t)L.push('','[오늘 내 마음]',t);
  L.push('','[그림 느낌] '+st[0]+' — '+st[1],'',
  '[이렇게 만들어 줘]',
