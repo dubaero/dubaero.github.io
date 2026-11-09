@@ -431,7 +431,7 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
 .post .acts{margin-top:10px}
 .pc{display:flex;flex-direction:column;gap:12px;margin-top:12px}
 .pc-g>b{display:block;font-size:13.5px;color:#8A4B2E;margin-bottom:6px}.pc-g>b small{font-weight:500;color:var(--muted);margin-left:4px}
-.pc-o{display:flex;flex-wrap:wrap;gap:6px}
+.pc-o{display:flex;flex-wrap:wrap;gap:6px}.pc-hg{margin-bottom:8px}.pc-gh{display:block;font-size:12.5px;font-weight:700;color:#A0522D;margin:2px 0 4px}
 .pc-o button{font:inherit;font-size:13px;padding:6px 12px;border-radius:999px;border:1.5px solid #EBC9B4;background:#fff;color:#6B3B22;cursor:pointer}
 .pc-o button.on{background:#F3A97F;border-color:#E07B39;color:#fff;font-weight:700}
 .pc-l{display:flex;flex-direction:column;gap:5px}
@@ -766,7 +766,7 @@ body{font-weight:500}
     <div class="post">
       <div><b>나에게 보내는 엽서</b><span>요즘 힘든 마음만 고르세요. 평소 쓰던 ChatGPT나 제미나이가 그동안 나눈 대화를 바탕으로, 나만 아는 이야기를 담아 인정·위로·응원의 선물 엽서를 만들어 줘요.</span></div>
       <div class="pc" id="pc">
-        <div class="pc-g"><b>① 요즘 나를 힘들게 하는 것 <small>여러 개 골라도 돼요</small></b><div class="pc-o" id="pc-hard"></div><input class="f1" id="pc-hard-in" placeholder="직접 쓰기 (예: 연말 정산 서류가 산더미예요)"></div>
+        <div class="pc-g"><b>① 요즘 나를 힘들게 하는 것 <small>여러 개 골라도 돼요</small></b><div id="pc-hard"></div><input class="f1" id="pc-hard-in" placeholder="직접 쓰기 (예: 연말 정산 서류가 산더미예요)"></div>
         <div class="pc-g"><b>② 그림 느낌 <small>제목·배경·손편지는 AI가 나를 기억해서 만들어요</small></b><div class="pc-o" id="pc-style"></div></div>
         <div class="pc-g pc-row"><label>엽서에 부를 내 이름·애칭<input class="f1" id="pc-to" placeholder="예: 이서정 → 서정아"></label><label>우표 소인에 찍을 날짜<input class="f1" id="pc-date" placeholder="예: 2026.11.19 (비우면 날짜 없이)"></label></div>
       </div>
@@ -2879,11 +2879,16 @@ var _dwInstr1109b=dwInstr;
 dwInstr=function(d){var h=_dwInstr1109b(d);if(!d.fullT&&!d.full)return h;return dwFullHtml(DWTXT.ins,d.fullT?DW_NOTE.one:DW_NOTE.full);};
 
 /* ===== 2026.11.09 수정 13: 나에게 보내는 엽서 — 문구 고르기·디자인 고르기·앞뒷면 선물 엽서 ===== */
-var PC_HARD=['일이 너무 많아요','애쓴 만큼 인정받지 못하는 느낌','사람 때문에 지쳤어요','잘하고 있는지 모르겠어요','제대로 쉬지 못했어요','마음이 허무해요','새로운 일이 부담돼요','몸이 많이 지쳤어요'];
+var PC_HG=[['직장·업무',['일이 너무 많아요','마감에 늘 쫓겨요','애쓴 만큼 인정받지 못해요','실수할까 봐 불안해요','새로운 일이 부담돼요','평가·실적 압박이 커요','민원·항의에 지쳤어요','내 일이 의미 있는지 모르겠어요','일자리가 불안해요','퇴근 후에도 일 생각뿐이에요']],
+ ['사람·관계',['동료와 사이가 어색해요','상사와 소통이 어려워요','혼자 다 떠안는 느낌이에요','마음을 털어놓을 사람이 없어요','거절을 못 해서 힘들어요','오해를 받아 속상해요']],
+ ['가정·자녀',['아이와 대화가 잘 안 돼요','사춘기 자녀와 자주 부딪혀요','일과 육아를 같이 하기 벅차요','아이에게 화내고 후회해요','배우자와 마음이 엇갈려요','부모님 돌봄이 걱정돼요','집안일이 끝이 없어요','집안 살림 걱정이 커요']],
+ ['나 자신·마음',['잘하고 있는지 모르겠어요','마음이 허무해요','자꾸 남과 비교하게 돼요','나를 위한 시간이 없어요','앞날이 막막해요','자신감이 떨어졌어요','괜히 눈물이 나요','새로 시작할 용기가 안 나요']],
+ ['몸·쉼',['몸이 많이 지쳤어요','잠을 잘 못 자요','제대로 쉬지 못했어요','아파도 쉴 수가 없어요']]];
+var PC_HARD=[];PC_HG.forEach(function(g){g[1].forEach(function(x){PC_HARD.push(x);});});
 var PC_STYLE=[['AI 추천','나를 아는 AI가 내 이야기에 가장 어울리는 그림 느낌으로'],['햇살 수채화 풍경','따뜻한 햇살, 꽃과 나무, 멀리 이어진 산책길이 있는 수채화 풍경'],['꽃잎 압화 빈티지','말린 꽃잎과 잎사귀를 눌러 붙인 듯한 빈티지 종이 엽서'],['동화 일러스트','작은 집과 귀여운 동물 친구들이 있는 아기자기한 동화책 그림'],['밤하늘 별빛','은은한 달빛과 반짝이는 별, 따뜻한 불빛이 켜진 작은 마을'],['창가의 따뜻한 차','창가에 놓인 따뜻한 차 한 잔과 책, 포근한 담요'],['바닷가 노을','잔잔한 바다와 분홍빛 노을, 모래 위 조개껍데기'],['계절 숲길 산책','계절 색이 가득한 숲길과 햇살이 비치는 오솔길']];
 var PCS={hard:{},style:0};
 function pcRender(){var h=$('#pc-hard'),st=$('#pc-style');if(!h)return;
- h.innerHTML=PC_HARD.map(function(x,i){return '<button type="button" data-pch="'+i+'"'+(PCS.hard[i]?' class="on"':'')+'>'+esc(x)+'</button>';}).join('');
+ var k=0;h.innerHTML=PC_HG.map(function(g){return '<div class="pc-hg"><span class="pc-gh">'+esc(g[0])+'</span><div class="pc-o">'+g[1].map(function(x){var i=k++;return '<button type="button" data-pch="'+i+'"'+(PCS.hard[i]?' class="on"':'')+'>'+esc(x)+'</button>';}).join('')+'</div></div>';}).join('');
  st.innerHTML=PC_STYLE.map(function(x,i){return '<button type="button" data-pcs="'+i+'" title="'+esc(x[1])+'"'+(PCS.style===i?' class="on"':'')+'>'+esc(x[0])+'</button>';}).join('');}
 document.addEventListener('click',function(e){var b=e.target.closest('[data-pch]');if(b){var i=+b.dataset.pch;if(PCS.hard[i])delete PCS.hard[i];else PCS.hard[i]=1;pcRender();}
  b=e.target.closest('[data-pcs]');if(b){PCS.style=+b.dataset.pcs;pcRender();}
