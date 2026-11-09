@@ -768,7 +768,7 @@ body{font-weight:500}
       <div class="pc" id="pc">
         <div class="pc-g"><b>① 요즘 나를 힘들게 하는 것 <small>여러 개 골라도 돼요</small></b><div id="pc-hard"></div><input class="f1" id="pc-hard-in" placeholder="직접 쓰기 (예: 연말 정산 서류가 산더미예요)"></div>
         <div class="pc-g"><b>② 그림 느낌 <small>제목·배경·손편지는 AI가 나를 기억해서 만들어요</small></b><div class="pc-o" id="pc-style"></div></div>
-        <div class="pc-g pc-row"><label>엽서에 부를 내 이름·애칭<input class="f1" id="pc-to" placeholder="예: 이서정 → 서정아"></label><label>우표 소인에 찍을 날짜<input class="f1" id="pc-date" placeholder="예: 2026.11.19 (비우면 날짜 없이)"></label></div>
+        <div class="pc-g pc-row"><label>엽서에 부를 내 이름·애칭<input class="f1" id="pc-to" placeholder="예: 이서정 → 서정아 (비우면 AI가 마지막에 물어봐요)"></label><label>우표 소인에 찍을 날짜<input class="f1" id="pc-date" placeholder="예: 2026.11.19 (비우면 AI가 마지막에 물어봐요)"></label></div>
       </div>
       <div class="acts"><button type="button" class="btn fill" id="h2-gpt">ChatGPT로 선물 엽서 받기</button><button type="button" class="btn" id="h2-gem">제미나이로 선물 엽서 받기</button><button type="button" class="btn" id="h2-cp">프롬프트 복사</button></div>
       <p class="s5">평소 쓰던 계정으로 로그인한 채로 여세요. AI가 나를 기억할수록 더 나다운 엽서가 나와요. 대화 기억이 없으면 AI가 3가지만 먼저 물어봐요.</p>
@@ -2897,25 +2897,25 @@ function pcStory(){var i=$('#h2-in');return i?i.value.trim():'';}
 setTimeout(pcRender,0);
 function postP2(t){var hard=PC_HARD.filter(function(x,i){return PCS.hard[i];}),mine=(($('#pc-hard-in')||{}).value||'').trim();if(mine)hard.push(mine);
  if(!hard.length&&!t){toast('요즘 힘든 마음을 하나 이상 골라 주세요.');return null;}
- var st=PC_STYLE[PCS.style],nm=(($('#pc-to')||{}).value||'').trim().replace(/\s+/g,''),pdate=(($('#pc-date')||{}).value||'').trim();if(/^[가-힣]{3}$/.test(nm))nm=nm.slice(1);else if(/^(남궁|황보|제갈|선우|독고|사공|서문)[가-힣]{2}$/.test(nm))nm=nm.slice(2);if(!nm)nm='나';var c=nm.charCodeAt(nm.length-1),call=nm==='나'?'나에게':(c>=0xAC00&&c<=0xD7A3?nm+((c-0xAC00)%28?'아':'야'):nm+'에게');
+ var st=PC_STYLE[PCS.style],nm=(($('#pc-to')||{}).value||'').trim().replace(/\s+/g,''),pdate=(($('#pc-date')||{}).value||'').trim();if(/^[가-힣]{3}$/.test(nm))nm=nm.slice(1);else if(/^(남궁|황보|제갈|선우|독고|사공|서문)[가-힣]{2}$/.test(nm))nm=nm.slice(2);var askN=!nm,askD=!pdate;var c=nm?nm.charCodeAt(nm.length-1):0,call=askN?'[이름]아/야':(c>=0xAC00&&c<=0xD7A3?nm+((c-0xAC00)%28?'아':'야'):nm+'에게');if(askN)nm='[이름]';
  var d=new Date(),date=d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0');
  var L=['그동안 나와 나눈 대화를 기억하는 친구로서, 나를 인정하고 위로하고 응원하는 선물 같은 엽서를 만들어 줘.',''];
  L.push('[요즘 나를 힘들게 하는 것]');hard.forEach(function(x){L.push('- '+x);});
  if(t)L.push('','[오늘 있었던 일]',t);
- L.push('','[엽서에 부를 이름] '+nm,'[그림 느낌] '+st[0]+' — '+st[1],'',
+ L.push('',askN?'[엽서에 부를 이름] 마지막에 물어봐 줘':'[엽서에 부를 이름] '+nm,'[그림 느낌] '+st[0]+' — '+st[1],'',
   '[만드는 순서]',
   '1. 지금까지 나와 나눈 대화와 기억해 둔 내용을 돌아보고, 내가 꾸준히 노력해 온 부분과 나의 강점, 대화 중에 말한 좋아하는 꽃·여행지·장소를 찾아 줘. 따로 정리해서 보여 주지 말고 바로 엽서에 담아 줘. 기억이 없으면 지어내지 말고 "요즘 애쓰고 있는 일, 나의 강점, 좋아하는 꽃이나 여행지" 3가지만 물어보고 멈춰.',
   '2. 앞면 제목: 나의 노력과 강점을 살려 나를 응원하는 문구를 15자 이내로 만들어 줘.',
   '3. 뒷면 손편지: [요즘 나를 힘들게 하는 것]을 알아주면서 나를 인정하고 위로하고 응원하는 5줄. 한 줄에 한 문장, 한 줄 25자 이내. 첫 줄 위에 "'+call+',"',
   '- 회사·기관 이름, 날짜, 숫자, 사람 이름 같은 구체적인 사실은 쓰지 마. 다른 사람이 봐도 민망하지 않게 "늦은 밤까지 애쓴 시간", "누군가를 돕고 싶은 마음"처럼 전체적인 노력과 마음으로 표현해.',
   '4. 앞면 배경: 손편지의 위로와 응원에 가장 잘 어울리는, 가장 아름다운 풍경으로 그려 줘. 꽃길, 바다, 숲, 호숫가, 노을, 별밤, 눈 내리는 마을처럼 장소·계절·시간대를 매번 다양하게. 대화에서 좋아한다고 말한 꽃이나 여행지가 있으면 그 풍경을 살려도 좋아. 나의 일과 일상을 상징하는 소품을 자연스럽게 하나둘 넣고, 사람은 작은 뒷모습만. 그림은 [그림 느낌]으로.',
-  '5. 엽서 이미지 한 장: 앞면과 뒷면이 위아래로 함께 보이게, 세로 2:3 비율.',
+  (askN||askD?'5. 이미지를 만들기 전에 마지막으로 '+(askN&&askD?'"엽서에 불러 줄 내 이름(성은 빼고)"과 "우표 소인에 찍을 날짜"를':askN?'"엽서에 불러 줄 내 이름(성은 빼고)"을':'"우표 소인에 찍을 날짜"를')+' 한 번에 물어보고 멈춰. 이름은 성을 빼고 받침이 있으면 "서정아", 없으면 "민수야"처럼 다정하게 불러 줘. 답을 받으면 바로 엽서를 만들어.\n':'')+'6. 엽서 이미지 한 장: 앞면과 뒷면이 위아래로 함께 보이게, 세로 2:3 비율.',
   '- 위쪽 앞면: 4번 배경 위에 2번 제목을 손글씨로 크게.',
-  '- 아래쪽 뒷면: 크림색 종이, 가운데 세로 구분선. 왼쪽에 3번 손편지를 손글씨로. 오른쪽 위에 앞면 배경과 어울리는 우표와 '+(pdate?'날짜 '+pdate+'가 찍힌 둥근 소인':'날짜 없는 둥근 소인')+', 오른쪽 아래 "받는 사람: '+nm+'".',
+  '- 아래쪽 뒷면: 크림색 종이, 가운데 세로 구분선. 왼쪽에 3번 손편지를 손글씨로. 오른쪽 위에 앞면 배경과 어울리는 우표와 '+(pdate?'날짜 '+pdate+'가 찍힌 둥근 소인':'내가 알려 준 날짜가 찍힌 둥근 소인')+', 오른쪽 아래 "받는 사람: '+nm+'".',
   '- 엽서는 리넨 천 위에 놓고, 작은 꽃과 리본 묶은 선물 상자를 곁들여 정말 선물 받은 느낌으로 아기자기하게.',
-  '6. 한글은 2·3번에서 쓴 문장 그대로, 크고 또렷하게. 다 만들면 틀린 글자나 빠진 줄이 없는지 확인하고, 있으면 그 부분만 고쳐서 다시 만들어 줘.',
+  '7. 한글은 2·3번에서 쓴 문장 그대로, 크고 또렷하게. 다 만들면 틀린 글자나 빠진 줄이 없는지 확인하고, 있으면 그 부분만 고쳐서 다시 만들어 줘.',
   '- 건강·가족사 같은 민감한 이야기는 엽서에 넣지 마.');
- return L.join('\n');}
+ var no=0;return L.join('\n').split('\n').map(function(x){return /^\d\. /.test(x)?(++no)+x.slice(1):x;}).join('\n');}
 /* ===== 2026.11.09 수정 14: 숨 고르기마다 다른 졸라맨 동작 ===== */
 function bxPh(l){return /멈추|^쉬기$/.test(l)?'hold':/들이쉬|킁킁|밀려와|올라가|한 번/.test(l)?'in':'out';}
 function bxFig(n){
