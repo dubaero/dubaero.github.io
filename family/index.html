@@ -764,15 +764,15 @@ body{font-weight:500}
     <p class="warn">내담자 이름이나 사연은 빼고 "오늘 내 마음" 위주로 적어 주세요.</p>
     <div class="five" id="h2-out" hidden></div>
     <div class="post">
-      <div><b>나에게 보내는 엽서</b><span>위로받고 싶은 문장을 고르면, 앞면 그림과 뒷면 손편지가 함께 있는 선물 같은 엽서를 ChatGPT가 만들어 줘요.</span></div>
+      <div><b>나에게 보내는 엽서</b><span>요즘 힘든 마음만 고르세요. 평소 쓰던 ChatGPT나 제미나이가 그동안 나눈 대화를 바탕으로, 나만 아는 이야기를 담아 인정·위로·응원의 선물 엽서를 만들어 줘요.</span></div>
       <div class="pc" id="pc">
-        <div class="pc-g"><b>① 앞면에 크게 넣을 문구 <small>하나 고르기</small></b><div class="pc-o" id="pc-front"></div><input class="f1" id="pc-front-in" placeholder="직접 쓰기 (15자 이내)"></div>
-        <div class="pc-g"><b>② 뒷면 위로·응원 글 <small>마음에 닿는 문장을 골라요 (4~6개 추천)</small></b><div class="pc-l" id="pc-back"></div><input class="f1" id="pc-back-in" placeholder="내가 듣고 싶은 말 직접 쓰기"></div>
-        <div class="pc-g"><b>③ 엽서 디자인</b><div class="pc-o" id="pc-style"></div></div>
-        <div class="pc-g pc-row"><label>받는 사람<input class="f1" id="pc-to" value="오늘의 나"></label><label>보내는 사람<input class="f1" id="pc-from" value="나로부터"></label></div>
+        <div class="pc-g"><b>① 요즘 나를 힘들게 하는 것 <small>여러 개 골라도 돼요</small></b><div class="pc-o" id="pc-hard"></div><input class="f1" id="pc-hard-in" placeholder="직접 쓰기 (예: 연말 정산 서류가 산더미예요)"></div>
+        <div class="pc-g"><b>② 엽서 분위기</b><div class="pc-o" id="pc-style"></div></div>
+        <div class="pc-g pc-row"><label>엽서에 부를 내 이름·애칭<input class="f1" id="pc-to" placeholder="예: 서정 (비우면 '나')"></label></div>
       </div>
-      <div class="acts"><button type="button" class="btn fill" id="h2-gpt">나에게 보내는 엽서 만들기 (ChatGPT)</button><button type="button" class="btn" id="h2-cp">프롬프트 복사</button></div>
-      <p class="s5">그림 만들기는 ChatGPT 로그인이 필요해요. 무료 계정은 하루에 만들 수 있는 그림 수가 적어서, 안 나오면 내일 다시 해 보세요.</p>
+      <div class="acts"><button type="button" class="btn fill" id="h2-gpt">ChatGPT로 선물 엽서 받기</button><button type="button" class="btn" id="h2-gem">제미나이로 선물 엽서 받기</button><button type="button" class="btn" id="h2-cp">프롬프트 복사</button></div>
+      <p class="s5">평소 쓰던 계정으로 로그인한 채로 여세요. AI가 나를 기억할수록 더 나다운 엽서가 나와요. 대화 기억이 없으면 AI가 3가지만 먼저 물어봐요.</p>
+      <p class="s5">무료 계정은 하루에 만들 수 있는 그림 수가 적어서, 안 나오면 내일 다시 해 보세요.</p>
     </div>
     <div class="help"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가거나 위험한 생각이 들면 사람에게 꼭 말해 주세요. 자살예방 상담전화 <a href="tel:109">109</a> · 정신건강 위기상담 <a href="tel:15770199">1577-0199</a></div>
   </div>
@@ -2879,45 +2879,36 @@ var _dwInstr1109b=dwInstr;
 dwInstr=function(d){var h=_dwInstr1109b(d);if(!d.fullT&&!d.full)return h;return dwFullHtml(DWTXT.ins,d.fullT?DW_NOTE.one:DW_NOTE.full);};
 
 /* ===== 2026.11.09 수정 13: 나에게 보내는 엽서 — 문구 고르기·디자인 고르기·앞뒷면 선물 엽서 ===== */
-var PC_FRONT=['오늘의 너를 믿어 봐','나답게 피어나는 중','지금 이대로도 충분해','오늘의 나를 사랑해','천천히 가도 괜찮아','오늘도 잘 버텼어','너는 충분히 빛나','쉬어 가도 괜찮아'];
-var PC_POOL=['오늘 하루도 정말 애썼어.','남을 돌보듯 내 마음도 다정히 챙겨 줘.','완벽하지 않아도 너는 충분히 좋은 사람이야.','천천히 가도 괜찮아. 나만의 속도면 충분해.','오늘 못 한 일은 내일의 나에게 맡겨도 돼.','쉬어 가도 괜찮아. 다시 걸을 힘이 생길 거야.','너는 충분히 잘해 왔고, 앞으로도 너답게 빛날 거야.','나는 나답게, 지금도 충분히 잘하고 있어.'];
-var PC_STYLE=[['햇살 수채화 풍경','따뜻한 햇살, 꽃과 나무, 멀리 이어진 산책길이 있는 수채화 풍경'],['꽃잎 압화 빈티지','말린 꽃잎과 잎사귀를 눌러 붙인 듯한 빈티지 종이 엽서'],['동화 일러스트','작은 집과 귀여운 동물 친구들이 있는 아기자기한 동화책 그림'],['밤하늘 별빛','은은한 달빛과 반짝이는 별, 따뜻한 불빛이 켜진 작은 마을'],['창가의 따뜻한 차','창가에 놓인 따뜻한 차 한 잔과 책, 포근한 담요가 있는 장면'],['바닷가 노을','잔잔한 바다와 분홍빛 노을, 모래 위 조개껍데기'],['계절 숲길 산책','계절 색이 가득한 숲길과 햇살이 비치는 오솔길'],['AI 추천','위로 글 내용과 오늘 마음에 가장 어울리는 장면을 AI가 골라 줘']];
-var PCS={front:0,style:0,back:{}};
-function pcLines(){var o=document.querySelectorAll('#h2-out > p');var L=[];o.forEach(function(p){var t=p.textContent.trim();if(t&&!/^쉼 하나/.test(t))L.push(t);});return L;}
-function pcRender(){var f=$('#pc-front'),st=$('#pc-style'),bk=$('#pc-back');if(!f)return;
- f.innerHTML=PC_FRONT.map(function(x,i){return '<button type="button" data-pcf="'+i+'"'+(PCS.front===i?' class="on"':'')+'>'+esc(x)+'</button>';}).join('');
- st.innerHTML=PC_STYLE.map(function(x,i){return '<button type="button" data-pcs="'+i+'" title="'+esc(x[1])+'"'+(PCS.style===i?' class="on"':'')+'>'+esc(x[0])+'</button>';}).join('');
- var mine=pcLines(),all=mine.concat(PC_POOL.filter(function(x){return mine.indexOf(x)<0;}));
- if(!PCS.init||PCS.src!==mine.join('|')){PCS.back={};(mine.length?mine:PC_POOL.slice(0,4)).forEach(function(x){PCS.back[x]=1;});PCS.src=mine.join('|');PCS.init=1;}
- bk.innerHTML=all.map(function(x){var on=!!PCS.back[x];return '<label'+(on?' class="on"':'')+'><input type="checkbox" data-pcb="'+esc(x)+'"'+(on?' checked':'')+'><span>'+esc(x)+'</span></label>';}).join('');}
-document.addEventListener('click',function(e){var b=e.target.closest('[data-pcf]');if(b){PCS.front=+b.dataset.pcf;var fi=$('#pc-front-in');if(fi)fi.value='';pcRender();}
- b=e.target.closest('[data-pcs]');if(b){PCS.style=+b.dataset.pcs;pcRender();}});
-document.addEventListener('change',function(e){var c=e.target.closest('[data-pcb]');if(c){if(c.checked)PCS.back[c.dataset.pcb]=1;else delete PCS.back[c.dataset.pcb];c.parentNode.classList.toggle('on',c.checked);}});
-(function(){var o=$('#h2-out');if(o&&window.MutationObserver)new MutationObserver(function(){pcRender();}).observe(o,{childList:true,subtree:true});setTimeout(pcRender,0);})();
-function postP2(t){var fi=($('#pc-front-in')||{}).value,front=(fi&&fi.trim())||PC_FRONT[PCS.front];
- var mine=($('#pc-back-in')||{}).value;mine=mine&&mine.trim();
- var all=pcLines().concat(PC_POOL),seen={},back=all.filter(function(x){if(seen[x]||!PCS.back[x])return false;seen[x]=1;return true;});if(mine)back.push(mine);
- if(!t&&!back.length){toast('뒷면에 넣을 위로 글을 하나 이상 골라 주세요.');return null;}
- var st=PC_STYLE[PCS.style],to=(($('#pc-to')||{}).value||'오늘의 나').trim(),from=(($('#pc-from')||{}).value||'나로부터').trim();
+var PC_HARD=['일이 너무 많아요','애쓴 만큼 인정받지 못하는 느낌','사람 때문에 지쳤어요','잘하고 있는지 모르겠어요','제대로 쉬지 못했어요','마음이 허무해요','새로운 일이 부담돼요','몸이 많이 지쳤어요'];
+var PC_STYLE=[['AI 추천','나를 아는 AI가 내 이야기에 가장 어울리는 장면으로'],['햇살 수채화 풍경','따뜻한 햇살, 꽃과 나무, 멀리 이어진 산책길이 있는 수채화 풍경'],['꽃잎 압화 빈티지','말린 꽃잎과 잎사귀를 눌러 붙인 듯한 빈티지 종이 엽서'],['동화 일러스트','작은 집과 귀여운 동물 친구들이 있는 아기자기한 동화책 그림'],['밤하늘 별빛','은은한 달빛과 반짝이는 별, 따뜻한 불빛이 켜진 작은 마을'],['창가의 따뜻한 차','창가에 놓인 따뜻한 차 한 잔과 책, 포근한 담요'],['바닷가 노을','잔잔한 바다와 분홍빛 노을, 모래 위 조개껍데기'],['계절 숲길 산책','계절 색이 가득한 숲길과 햇살이 비치는 오솔길']];
+var PCS={hard:{},style:0};
+function pcRender(){var h=$('#pc-hard'),st=$('#pc-style');if(!h)return;
+ h.innerHTML=PC_HARD.map(function(x,i){return '<button type="button" data-pch="'+i+'"'+(PCS.hard[i]?' class="on"':'')+'>'+esc(x)+'</button>';}).join('');
+ st.innerHTML=PC_STYLE.map(function(x,i){return '<button type="button" data-pcs="'+i+'" title="'+esc(x[1])+'"'+(PCS.style===i?' class="on"':'')+'>'+esc(x[0])+'</button>';}).join('');}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-pch]');if(b){var i=+b.dataset.pch;if(PCS.hard[i])delete PCS.hard[i];else PCS.hard[i]=1;pcRender();}
+ b=e.target.closest('[data-pcs]');if(b){PCS.style=+b.dataset.pcs;pcRender();}
+ if(e.target.id==='h2-gem'){var p=postP2(pcStory());if(p)openAt('https://gemini.google.com/app',p,'제미나이');}});
+function pcStory(){var i=$('#h2-in');return i?i.value.trim():'';}
+setTimeout(pcRender,0);
+function postP2(t){var hard=PC_HARD.filter(function(x,i){return PCS.hard[i];}),mine=(($('#pc-hard-in')||{}).value||'').trim();if(mine)hard.push(mine);
+ if(!hard.length&&!t){toast('요즘 힘든 마음을 하나 이상 골라 주세요.');return null;}
+ var st=PC_STYLE[PCS.style],nm=(($('#pc-to')||{}).value||'').trim()||'나';
  var d=new Date(),date=d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0');
- var L=['나에게 보내는 선물 같은 엽서를 만들어 줘.',''];
- if(t)L.push('[오늘 있었던 일]',t,'');
- L.push('[앞면 문구]',front,'','[뒷면 위로·응원 글]');
- if(back.length)back.forEach(function(x){L.push('- '+x);});else L.push('- 내 이야기에 공감하고 나를 인정하고 응원하는 위로 글 5줄을 먼저 써서 보여 줘.');
- L.push('','[받는 사람] '+to,'[보내는 사람] '+from,'[엽서 디자인] '+(PCS.style===PC_STYLE.length-1?st[1]:st[0]+' — '+st[1]),'[계절] '+SEASON_NOW,'[날짜] '+date,'',
-  '[만드는 방법]',
-  '1. 엽서 앞면과 뒷면이 위아래로 함께 보이는 이미지 한 장으로 만들어 줘. 세로 2:3 비율.',
-  '2. 위쪽 앞면: [엽서 디자인] 그림으로, [계절]과 위로 글의 마음에 어울리는 장면을 그려. 장면 위에 [앞면 문구]를 손글씨로 크게 써.',
-  '3. 아래쪽 뒷면: 크림색 종이에 가운데 세로 구분선을 그려.',
-  '- 왼쪽: 맨 위에 "'+to+'에게", 그 아래 [뒷면 위로·응원 글]을 한 줄에 한 문장씩 손글씨로, 맨 아래 "'+from+'"',
-  '- 오른쪽 위: 앞면 그림과 어울리는 작은 우표, 그 옆에 날짜 '+date+'가 찍힌 둥근 소인',
-  '- 오른쪽 아래: "받는 사람: '+to+'"',
-  '4. 엽서는 리넨 천 위에 놓고, 작은 꽃·리본 묶은 선물 상자를 곁들여 아기자기하게 꾸며 줘.',
-  '5. 위에 적은 한글 문장은 한 글자도 바꾸지 말고 그대로, 크고 또렷하게 써.',
-  '6. 사람은 작은 뒷모습이나 실루엣만, 다른 사람의 실명이나 개인정보는 넣지 마.',
-  '7. 다 만들면 틀린 글자나 빠진 문장이 없는지 확인하고, 있으면 그 부분만 고쳐서 다시 만들어 줘.');
+ var L=['그동안 나와 나눈 대화를 기억하는 친구로서, 나에게 선물 같은 엽서를 만들어 줘.',''];
+ L.push('[요즘 나를 힘들게 하는 것]');hard.forEach(function(x){L.push('- '+x);});
+ if(t)L.push('','[오늘 있었던 일]',t);
+ L.push('','[엽서에 부를 이름] '+nm,'[엽서 분위기] '+st[0]+' — '+st[1],'[계절] '+SEASON_NOW,'[날짜] '+date,'',
+  '[만드는 순서]',
+  '1. 지금까지 나와 나눈 대화와 기억해 둔 내용을 돌아보고, 내가 해 온 일·애쓴 순간·자주 고민한 것·소중히 여기는 것을 3~5가지 짧게 정리해서 먼저 보여 줘. 기억이 없으면 지어내지 말고 "요즘 하는 일, 최근 가장 애쓴 일, 좋아하는 장소나 물건" 3가지만 물어보고 멈춰.',
+  '2. 그 기억과 [요즘 나를 힘들게 하는 것]을 담아, 나를 인정하고 위로하고 응원하는 손편지 5줄을 써 줘. 실제로 있었던 일을 하나 이상 구체적으로 넣고, 없는 일은 만들지 마. 마지막 줄은 앞으로를 응원하는 말로.',
+  '3. 엽서 앞면에 크게 넣을 한 줄 문구(15자 이내)를 정해 줘.',
+  '4. 이 글로 엽서 이미지를 만들어 줘. 엽서 앞면과 뒷면이 위아래로 함께 보이는 한 장, 세로 2:3 비율.',
+  '- 위쪽 앞면: [엽서 분위기]로, [계절] 풍경 속에 나의 일과 일상을 상징하는 소품(내가 쓰는 도구, 자주 가는 곳의 분위기, 내가 좋아하는 것)을 자연스럽게 담아. 사람은 작은 뒷모습만. 장면 위에 3번 문구를 손글씨로 크게.',
+  '- 아래쪽 뒷면: 크림색 종이, 가운데 세로 구분선. 왼쪽에 "'+nm+'에게," 다음 2번 손편지 5줄을 손글씨로. 오른쪽 위에 나를 상징하는 그림의 우표와 날짜 '+date+'가 찍힌 둥근 소인, 오른쪽 아래 "받는 사람: '+nm+'".',
+  '- 엽서는 리넨 천 위에 놓고, 작은 꽃과 리본 묶은 선물 상자를 곁들여 정말 선물 받은 느낌으로 아기자기하게.',
+  '5. 한글은 2·3번에서 쓴 문장 그대로, 크고 또렷하게. 다 만들면 틀린 글자나 빠진 줄이 없는지 확인하고, 있으면 그 부분만 고쳐서 다시 만들어 줘.',
+  '- 건강·가족사 같은 민감한 이야기, 다른 사람의 실명은 엽서에 넣지 마.');
  return L.join('\n');}
-
 /* ===== 2026.11.09 수정 14: 숨 고르기마다 다른 졸라맨 동작 ===== */
 function bxPh(l){return /멈추|^쉬기$/.test(l)?'hold':/들이쉬|킁킁|밀려와|올라가|한 번/.test(l)?'in':'out';}
 function bxFig(n){
