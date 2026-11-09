@@ -431,7 +431,7 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
 .post .acts{margin-top:10px}
 .pc{display:flex;flex-direction:column;gap:12px;margin-top:12px}
 .pc-g>b{display:block;font-size:13.5px;color:#8A4B2E;margin-bottom:6px}.pc-g>b small{font-weight:500;color:var(--muted);margin-left:4px}
-.pc-o{display:flex;flex-wrap:wrap;gap:6px}.pc-hg{margin-bottom:8px}.pc-gh{display:block;font-size:12.5px;font-weight:700;color:#A0522D;margin:2px 0 4px}
+.pc-o{display:flex;flex-wrap:wrap;gap:6px}.pc-hg{margin-bottom:10px;padding:8px 10px;border-radius:12px}.pc-c0 .pc-gh{color:#2F6FA8}.pc-c0 .pc-o button{border-color:#9DBFE0;color:#2F6FA8;background:#E8F1FA}.pc-c0 .pc-o button.on{background:#2F6FA8;border-color:#2F6FA8;color:#fff}.pc-c1 .pc-gh{color:#7A4DB0}.pc-c1 .pc-o button{border-color:#C4ADE3;color:#7A4DB0;background:#F2ECFA}.pc-c1 .pc-o button.on{background:#7A4DB0;border-color:#7A4DB0;color:#fff}.pc-c2 .pc-gh{color:#C0507A}.pc-c2 .pc-o button{border-color:#EBAFC6;color:#C0507A;background:#FCEDF3}.pc-c2 .pc-o button.on{background:#C0507A;border-color:#C0507A;color:#fff}.pc-c3 .pc-gh{color:#2E8A6E}.pc-c3 .pc-o button{border-color:#9FD3C0;color:#2E8A6E;background:#E6F5EF}.pc-c3 .pc-o button.on{background:#2E8A6E;border-color:#2E8A6E;color:#fff}.pc-c4 .pc-gh{color:#B8862B}.pc-c4 .pc-o button{border-color:#E3C98E;color:#B8862B;background:#FBF3E2}.pc-c4 .pc-o button.on{background:#B8862B;border-color:#B8862B;color:#fff}.pc-gh{display:block;font-size:12.5px;font-weight:700;color:#A0522D;margin:2px 0 4px}
 .pc-o button{font:inherit;font-size:13px;padding:6px 12px;border-radius:999px;border:1.5px solid #EBC9B4;background:#fff;color:#6B3B22;cursor:pointer}
 .pc-o button.on{background:#F3A97F;border-color:#E07B39;color:#fff;font-weight:700}
 .pc-l{display:flex;flex-direction:column;gap:5px}
@@ -2888,7 +2888,7 @@ var PC_HARD=[];PC_HG.forEach(function(g){g[1].forEach(function(x){PC_HARD.push(x
 var PC_STYLE=[['AI 추천','나를 아는 AI가 내 이야기에 가장 어울리는 그림 느낌으로'],['햇살 수채화 풍경','따뜻한 햇살, 꽃과 나무, 멀리 이어진 산책길이 있는 수채화 풍경'],['꽃잎 압화 빈티지','말린 꽃잎과 잎사귀를 눌러 붙인 듯한 빈티지 종이 엽서'],['동화 일러스트','작은 집과 귀여운 동물 친구들이 있는 아기자기한 동화책 그림'],['밤하늘 별빛','은은한 달빛과 반짝이는 별, 따뜻한 불빛이 켜진 작은 마을'],['창가의 따뜻한 차','창가에 놓인 따뜻한 차 한 잔과 책, 포근한 담요'],['바닷가 노을','잔잔한 바다와 분홍빛 노을, 모래 위 조개껍데기'],['계절 숲길 산책','계절 색이 가득한 숲길과 햇살이 비치는 오솔길']];
 var PCS={hard:{},style:0};
 function pcRender(){var h=$('#pc-hard'),st=$('#pc-style');if(!h)return;
- var k=0;h.innerHTML=PC_HG.map(function(g){return '<div class="pc-hg"><span class="pc-gh">'+esc(g[0])+'</span><div class="pc-o">'+g[1].map(function(x){var i=k++;return '<button type="button" data-pch="'+i+'"'+(PCS.hard[i]?' class="on"':'')+'>'+esc(x)+'</button>';}).join('')+'</div></div>';}).join('');
+ var k=0;h.innerHTML=PC_HG.map(function(g,gi){return '<div class="pc-hg pc-c'+gi+'"><span class="pc-gh">'+esc(g[0])+'</span><div class="pc-o">'+g[1].map(function(x){var i=k++;return '<button type="button" data-pch="'+i+'"'+(PCS.hard[i]?' class="on"':'')+'>'+esc(x)+'</button>';}).join('')+'</div></div>';}).join('');
  st.innerHTML=PC_STYLE.map(function(x,i){return '<button type="button" data-pcs="'+i+'" title="'+esc(x[1])+'"'+(PCS.style===i?' class="on"':'')+'>'+esc(x[0])+'</button>';}).join('');}
 document.addEventListener('click',function(e){var b=e.target.closest('[data-pch]');if(b){var i=+b.dataset.pch;if(PCS.hard[i])delete PCS.hard[i];else PCS.hard[i]=1;pcRender();}
  b=e.target.closest('[data-pcs]');if(b){PCS.style=+b.dataset.pcs;pcRender();}
