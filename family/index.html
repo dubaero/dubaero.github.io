@@ -507,6 +507,14 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
 .bx-t{font-size:11.5px;font-weight:700;color:var(--ink);margin-top:14px;text-align:center;white-space:nowrap}
 .bx-r b{display:block;color:var(--ink);font-size:14.5px}.bx-r small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.5}
 .bx-r .va{margin-top:8px}
+.bx-e .bxf{width:56px;height:56px;fill:none;stroke:#2E6A8E;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.bxf circle{fill:#fff}.bxf .bxb{fill:#BFE0F2;transform-box:view-box;transform-origin:32px 31px;transform:scale(.7);transition:transform var(--d,1s) ease-in-out}
+.bxf .bxdn,.bxf .bxup{transition:opacity calc(var(--d,1s)*.6) ease-in-out}.bxf .bxup{opacity:0}
+.bxf .bxair{opacity:0;transition:opacity .6s}
+.bxf[data-ph="in"] .bxb,.bxf[data-ph="hold"] .bxb{transform:scale(1.35)}
+.bxf[data-ph="in"] .bxup,.bxf[data-ph="hold"] .bxup,.bxf[data-ph="done"] .bxup{opacity:1}.bxf[data-ph="in"] .bxdn,.bxf[data-ph="hold"] .bxdn,.bxf[data-ph="done"] .bxdn{opacity:0}
+.bxf[data-ph="out"] .bxair{opacity:.8}.bxf[data-ph="out"] .bxb{transform:scale(.6)}
+#v2-emp p.v3{border-top:0;margin-top:12px;padding:10px 14px;border-radius:12px;background:#E2F5EF;border:1px solid #A9DDCD;color:#11695A}
 
 /* 2026.11.09 글자 진하게 */
 :root{--text:#1C1C19;--muted:#3F3F39;--ink:#1F3A29}
@@ -2178,7 +2186,7 @@ var DW_NOTE={
 var DW=[
  {id:'plan',g:'doc',t:'사업계획서',when:'연초 · 공모 신청 · 내년도 계획',
   role:'가족센터 사업기획 경력 10년 이상, 지자체 평가를 여러 번 받아 본 사업기획 전문가',
-  ctx:'올해 {사업} 사업계획서를 {대상} 대상으로 쓰는 중',
+  ctx:'올해 {사업} 사업계획서를 써',
   base:'지침 기본 항목(사업개요·세부추진계획·추진 일정·예산)',q:5,
   rules:['목표치는 전년도 실적과 지역 여건에서 근거를 찾아 제안하고, [제안값]이라고 표시해.','예산은 승인액이 자료에 없으면 산출식(수량×단가×횟수)만 쓰고 금액은 [확인 필요]로 둬.','문체는 개조식 공문체(~함, ~임)로 써.'],
   src:[['우리 기관 올해 사업계획서 서식','항목과 순서를 그대로 맞춰 줘서 제출용에 가까워져요'],['올해 사업지침 (2026 가족사업안내 해당 장)','올해 바뀐 기준을 반영해요'],['평가지침·평가지표','평가에서 점수 받는 항목을 빠뜨리지 않아요'],['전년도 사업계획서','우리 센터 말투와 구성을 이어받아요'],['전년도 결과보고서·평가 결과','성과와 지적사항을 올해 계획에 반영해요'],['실적 집계·만족도 결과','목표치를 근거 있게 잡아요'],['지역 현황 자료 (인구·이용 가구 등)','왜 필요한 사업인지 설득력이 생겨요']],
@@ -2188,7 +2196,7 @@ var DW=[
   rv:'지자체 사업 평가위원'},
  {id:'result',g:'doc',t:'사업결과보고서',when:'프로그램·사업 종료 후',
   role:'{사업} 분야에서 사업 평가를 오래 해 온 평가 전문가',
-  ctx:'올해 {사업} 사업결과보고서를 쓰는 중이고, 참여 대상은 {대상}',
+  ctx:'올해 {사업} 사업결과보고서를 써',
   base:'지침 기본 항목(사업개요·추진 실적·성과·평가 및 개선)',q:5,
   rules:['계획 대비 실적은 표로 비교하고, 목표에 못 미친 항목은 원인과 개선 계획을 함께 써.','참여자 반응은 첨부한 만족도·소감에서만 가져와.','문체는 개조식 공문체(~함, ~임)로 써.'],
   src:[['우리 기관 결과보고서 서식','항목과 순서를 그대로 맞춰 줘요'],['올해 사업계획서','계획 대비 실적을 비교할 수 있어요'],['운영 기록 (일지·출석·회의록·녹음 전사본)','실제로 한 일을 근거로 써요'],['만족도 조사 집계','성과를 숫자로 보여 줘요'],['지출 내역 요약','예산 집행 칸을 정확히 채워요'],['사진 설명 메모','활동 내용을 생생하게 써요'],['전년도 결과보고서','작년과 비교한 변화가 나와요']],
@@ -2198,7 +2206,7 @@ var DW=[
   rv:'도 단위 사업 평가위원'},
  {id:'perf',g:'doc',t:'성과보고서',when:'반기·연간 성과 정리, 평가 대비',
   role:'사회복지 성과관리·성과지표 전문가',
-  ctx:'올해 {사업} 성과보고서를 쓰는 중이고, 참여 대상은 {대상}',
+  ctx:'올해 {사업} 성과보고서를 써',
   base:'지침 기본 항목(성과지표·목표·실적·달성률·정성 성과·향후 계획)',q:5,
   rules:['정량 성과는 지표·목표·실적·달성률 표로 정리하고, 달성률은 계산식을 함께 보여 줘서 검산할 수 있게 해.','정성 성과는 참여자의 변화(관계·역량·지역 연계) 중심으로 써.','문체는 개조식 공문체(~함, ~임)로 써.'],
   src:[['우리 기관 성과보고서 서식','항목과 순서를 그대로 맞춰 줘요'],['올해 성과지표·평가지표','무엇을 성과로 볼지 기준이 생겨요'],['실적 집계표 또는 결과보고서','달성률을 계산할 수 있어요'],['사전·사후 검사, 만족도 결과','변화를 숫자로 보여 줘요'],['참여 소감 (이름 뺀 것)','정성 성과를 생생하게 써요'],['전년도 성과보고서','작년 대비 변화가 나와요']],
@@ -2208,7 +2216,7 @@ var DW=[
   rv:'내년 예산을 정하는 지자체 예산 담당자'},
  {id:'oper',g:'doc',t:'운영보고서',when:'매월 · 분기',
   role:'가족센터 행정 실무 책임자',
-  ctx:'{사업}의 이번 달(분기) 운영보고서를 쓰는 중',
+  ctx:'{사업}의 이번 달(분기) 운영보고서를 써',
   base:'지침 기본 항목(운영 현황·실적·누적 실적·특이사항·다음 달 계획)',q:5,
   rules:['누적 실적은 지난 보고서의 누적에 이번 실적을 더해 계산하고, 계산식을 함께 보여 줘.','전월 대비 크게 늘거나 줄어든 항목은 표시하고 사유를 물어봐.'],
   src:[['우리 기관 운영보고서 서식','항목과 순서를 그대로 맞춰 줘요'],['이번 달(분기) 실적 집계','이번 실적을 정확히 채워요'],['지난달 운영보고서','누적 실적을 이어서 계산해요'],['월간 회의록','특이사항 칸을 채워요'],['다음 달 일정표','다음 달 계획 칸을 채워요']],
@@ -2218,7 +2226,7 @@ var DW=[
   rv:'결재하는 센터장'},
  {id:'settle',g:'doc',t:'예산·정산',when:'분기 점검 · 연말 정산',
   role:'보조금 정산 실무를 오래 해 온 회계 전문가',
-  ctx:'{사업} 예산 집행과 정산보고서를 점검하는 중',
+  ctx:'{사업} 예산 집행과 정산보고서를 점검해',
   base:'지침 기본 정산 서식(예산·집행·잔액·사유)',q:5,
   rules:['합계는 행과 열을 모두 다시 계산해서 맞지 않는 곳을 표로 표시해.','세목 허용 여부는 첨부한 지침 근거로만 판단하고, 근거가 없으면 [지침 확인 필요]로 둬.','금액은 자료 그대로 쓰고 반올림하지 마.'],
   src:[['우리 기관 정산보고서 서식','항목과 순서를 그대로 맞춰 줘요'],['승인 예산 (교부 결정 내용)','예산 대비 집행을 비교해요'],['지출 내역 엑셀','검산과 잔액 계산을 해요'],['세목별 집행 기준 (지침 발췌)','쓸 수 있는 돈인지 근거를 찾아요'],['전년도 정산보고서','작성 방식을 이어받아요']],
@@ -2228,7 +2236,7 @@ var DW=[
   rv:'지자체 정산 검토 담당 공무원'},
  {id:'meet',g:'doc',t:'회의록·공문',when:'회의 직후 · 협조 요청',
   role:'공공기관 문서 작성 실무 전문가',
-  ctx:'{사업} 관련 회의 내용을 회의록과 공문으로 정리하는 중',
+  ctx:'{사업} 관련 회의 내용을 회의록과 공문으로 정리해',
   base:'회의록은 안건·논의·결정사항·담당·기한, 공문은 제목·목적·일시·장소·대상·요청사항·붙임 순서',q:4,
   rules:['메모나 녹음에 없는 결정사항은 만들지 말고, 잘 안 들린 부분은 [불명확]으로 표시해.','공문의 근거 조항은 첨부 자료에 있을 때만 쓰고, 없으면 [확인 필요]로 둬.'],
   src:[['회의 메모 또는 녹음 전사본','회의 내용을 그대로 정리해요'],['우리 기관 회의록·공문 서식','항목과 순서를 맞춰 줘요'],['전에 보낸 공문 예시','우리 기관 문체를 따라 해요'],['관련 지침·근거 문서','근거 조항을 정확히 써요']],
@@ -2238,7 +2246,7 @@ var DW=[
   rv:'공문을 받는 기관 담당자',link:['meet','회의 녹음 → 회의록·공문 4단계 화면 열기 ›']},
  {id:'case',g:'doc',t:'사례관리',when:'상담 후 기록 · 사례회의 준비',
   role:'가족상담·사례관리 슈퍼바이저 경력 15년의 전문가',
-  ctx:'{사업} 사례를 가명 메모로 정리해 기록지 초안을 쓰는 중',
+  ctx:'{사업} 사례를 가명 메모로 정리해 기록지 초안을 써',
   base:'우리 기관 기록지 항목(상담과정·사례관리·사례회의록)',q:4,
   rules:['진단하거나 판단하지 말고, 관찰된 사실과 내담자가 한 말을 구분해서 써.','이름은 이용자A·가족A처럼 가명으로만 써.','다음 개입 계획은 제안으로 쓰고 결정은 내게 맡겨.'],
   src:[['우리 기관 기록지 서식 (빈 양식)','항목과 순서를 맞춰 줘요'],['가명으로 바꾼 상담 메모','기록지 초안을 써요'],['사례관리 지침 발췌','기록 기준을 지켜요']],
@@ -2248,7 +2256,7 @@ var DW=[
   rv:'사례회의 슈퍼바이저'},
  {id:'card',g:'pr',t:'카드뉴스',when:'모집 · 안내 · 후기 SNS',
   role:'공공기관·가족복지 SNS 홍보를 15년간 만든 홍보디자인 전문가',
-  ctx:'{사업} 카드뉴스를 {대상} 대상으로, {계절} 분위기로 만드는 중',
+  ctx:'{사업} 카드뉴스를 만들어',
   rules:['한 장에 문구는 2줄 이내로, 1:1 정사각형 카드를 한 장씩 따로 만들어.','다문화가족 대상이면 쉬운 한국어로 쓰고 언어 병기를 제안해.'],
   src:[['사업 안내문 또는 공문','일시·장소·신청 방법을 정확히 넣어요'],['센터 로고·대표 색상','우리 센터 느낌이 유지돼요'],['우리 센터 디자인 규칙 (역프롬프트로 만든 것)','매번 같은 톤으로 나와요'],['마음에 드는 기존 카드뉴스','원하는 분위기를 따라 해요'],['행사 사진 (얼굴 안 나온 것)','현장감이 살아나요']],
   no:'아이 얼굴이 보이는 사진, 참여자 실명·연락처는 넣지 마세요.',
@@ -2257,7 +2265,7 @@ var DW=[
   rv:'{대상}'},
  {id:'blog',g:'pr',t:'블로그·홈페이지 글',when:'사전 안내 · 사후 후기',
   role:'복지기관 홍보 콘텐츠를 오래 써 온 에디터',
-  ctx:'{사업} 블로그·홈페이지 글을 {대상}이 읽기 쉽게 쓰는 중',
+  ctx:'{사업} 블로그·홈페이지 글을 써',
   rules:['블로그는 친근한 이야기체, 홈페이지는 짧은 공지체로 써.','사진이 들어갈 자리는 [사진: 설명]으로 표시해.','첨부에 없는 참여자 반응과 숫자는 만들지 마. 글 끝에 사진 게시 동의 확인 메모를 남겨.'],
   src:[['공문·안내문 (사전 안내글)','일정과 신청 방법을 정확히 써요'],['결과보고서 요약 (사후 후기글)','실제 활동과 성과로 써요'],['사진 설명 메모','사진 자리를 정확히 표시해요'],['우리 센터 기존 게시글 2~3개','문체와 길이를 따라 해요']],
   no:'참여자 실명, 아이 얼굴 사진, 상담 사연은 넣지 마세요.',
@@ -2266,7 +2274,7 @@ var DW=[
   rv:'처음 센터를 찾아보는 지역 주민'},
  {id:'info',g:'pr',t:'인포그래픽',when:'실적 · 절차 한 장 정리',
   role:'공공 데이터 시각화 디자이너',
-  ctx:'{사업} 실적이나 절차를 {대상}이 한눈에 보도록 인포그래픽으로 만드는 중',
+  ctx:'{사업} 실적이나 절차를 한눈에 보이게 인포그래픽으로 만들어',
   rules:['핵심 숫자는 3~5개만, 숫자마다 어느 자료 몇 번째 칸에서 가져왔는지 검산표를 함께 줘.','세로형 한 장으로, 글자는 크게 적게 써.'],
   src:[['실적 집계표 (숫자 원자료)','숫자를 정확히 넣어요'],['결과보고서 요약','한 줄 메시지를 뽑아요'],['센터 로고·대표 색상','우리 센터 느낌이 유지돼요'],['참고하고 싶은 인포그래픽','원하는 구성을 따라 해요']],
   no:'개인별 자료 원본 → 집계표만 넣어요.',
@@ -2275,7 +2283,7 @@ var DW=[
   rv:'실적을 보고받는 지자체 담당자'},
  {id:'flyer',g:'pr',t:'전단지·포스터',when:'인쇄 · 게시판 · 엘리베이터',
   role:'인쇄 홍보물을 오래 편집해 온 편집 디자이너',
-  ctx:'{사업} 전단지·포스터를 {대상} 대상으로, {계절} 분위기로 만드는 중',
+  ctx:'{사업} 전단지·포스터를 만들어',
   rules:['먼저 큰 제목·부제·일시/장소/대상·신청 방법·하단 표기(주최·주관) 배치안을 보여 줘.','인쇄용이면 크기(A4·A3)에 맞게 여백을 넉넉히 둬.'],
   src:[['행사 안내문','내용을 정확히 넣어요'],['크기(A4·A3)와 인쇄 여부','인쇄용 배치로 맞춰요'],['주최·주관·후원 표기','하단 표기를 빠뜨리지 않아요'],['신청 QR·센터 로고','바로 신청하게 해요'],['우리 센터 디자인 규칙','같은 톤으로 나와요']],
   no:'참여자 실명, 아이 얼굴 사진은 넣지 마세요.',
@@ -2301,8 +2309,8 @@ function row(html,note){return '<div class="r'+(note?'':' solo')+'"><div>'+html+
 function cpBtn(id,label){return '<button type="button" class="btn mini" data-cp="'+id+'">'+(label||'복사')+'</button>';}
 var DWTXT={};
 function dwInstr(d){var role=dwF(d.role,d),ctx=dwF(d.ctx,d);var lines=(DW_COMMON[d.g]||[]).concat(d.rules||[]).map(function(x){return '- '+dwF(x,d);});
-  DWTXT.ins='너는 '+role+'야.\n지금 '+ctx+'이야.\n'+lines.join('\n');
-  return '<div class="ins">'+row('너는 '+hl(role)+'야.',DW_NOTE.role)+row('지금 '+hl(ctx)+'이야.',DW_NOTE.ctx)+row(lines.map(esc).join('<br>'))+'</div>';}
+  DWTXT.ins='너는 '+role+'야.\n'+ctx+'.\n'+lines.join('\n');
+  return '<div class="ins">'+row('너는 '+hl(role)+'야.',DW_NOTE.role)+row(hl(ctx)+'.',DW_NOTE.ctx)+row(lines.map(esc).join('<br>'))+'</div>';}
 function dwFirst(d){var v=dwV(),chk=(d.src||[]).filter(function(s,i){return DWCHK[d.id+i];}).map(function(s){return s[0];});
   var head=d.g==='doc'?'올해 '+v['사업']+' '+d.t+' 작업을 시작하려고 해.':v['사업']+' '+d.t+' 작업을 시작하려고 해. 대상은 '+v['대상']+', 계절은 '+v['계절']+'이야.';
   var rest=d.g==='doc'
@@ -2539,7 +2547,7 @@ DW_NOTE.first='<b>시작 신호</b> 진행 순서는 지침에 다 들어 있어
  });
  if(!DW.some(function(d){return d.id==='toon';}))DW.push({id:'toon',g:'pr',t:'웹툰·이모티콘',when:'활동 후기 · 안내 · 감사 인사',
   role:'가족 프로그램 캐릭터와 짧은 웹툰을 오래 만들어 온 일러스트 작가',
-  ctx:'{사업} 웹툰·이모티콘을 {대상} 대상으로, {계절} 분위기로 만드는 중',
+  ctx:'{사업} 웹툰·이모티콘을 만들어',
   rules:['웹툰은 4컷 또는 6컷, 컷마다 대사는 1~2줄로 짧게 써.','이모티콘은 같은 캐릭터로 표정·동작만 바꾸고, 글자는 짧은 인사말 하나만 넣어.','실존 인물이나 다른 회사 캐릭터를 닮게 그리지 마.'],
   src:[['프로그램 안내문 또는 활동 내용 메모','이야기 줄거리를 정확히 잡아요'],['마음에 드는 웹툰·이모티콘 (참고용)','원하는 화풍을 따라 해요'],['센터 대표 캐릭터 (있으면)','같은 캐릭터로 이어 가요']],
   no:'아이 실제 얼굴 사진, 참여자 실명은 넣지 마세요.',
@@ -2553,8 +2561,8 @@ DW_NOTE.first='<b>시작 신호</b> 진행 순서는 지침에 다 들어 있어
 function dwF(s,d){var v=dwV(),sub=function(t){return String(t).replace(/\{(사업|대상|계절)\}/g,function(m,k){return v[k];});};
   return sub(s).replace(/\{rv\}/g,d&&d.rv?sub(d.rv):'결정하는 사람').replace(/\{t\}/g,d&&d.t||'이').replace('{base}',d&&d.base||'').replace('{q}',d&&d.q||5);}
 function dwInstr(d){var role=dwF(d.role,d),ctx=dwF(d.ctx,d);var lines=(DW_COMMON[d.g]||[]).concat(d.rules||[]).map(function(x){return '- '+dwF(x,d);});
-  DWTXT.ins='너는 '+role+'야.\n지금 '+ctx+'이야.\n'+lines.join('\n')+(d.g==='pr'?'\n\n[화풍 목록 — 사업 의도·대상에 맞게 고르기]\n'+DW_STYLE.join('\n'):'');
-  return '<div class="ins">'+row('너는 '+hl(role)+'야.',DW_NOTE.role)+row('지금 '+hl(ctx)+'이야.',DW_NOTE.ctx)+row(lines.map(esc).join('<br>'))+(d.g==='pr'?row('<b>[화풍 목록 — 사업 의도·대상에 맞게 고르기]</b><br>'+DW_STYLE.map(esc).join('<br>'),DW_NOTE.style):'')+'</div>';}
+  DWTXT.ins='너는 '+role+'야.\n'+ctx+'.\n'+lines.join('\n')+(d.g==='pr'?'\n\n[화풍 목록 — 사업 의도·대상에 맞게 고르기]\n'+DW_STYLE.join('\n'):'');
+  return '<div class="ins">'+row('너는 '+hl(role)+'야.',DW_NOTE.role)+row(hl(ctx)+'.',DW_NOTE.ctx)+row(lines.map(esc).join('<br>'))+(d.g==='pr'?row('<b>[화풍 목록 — 사업 의도·대상에 맞게 고르기]</b><br>'+DW_STYLE.map(esc).join('<br>'),DW_NOTE.style):'')+'</div>';}
 function dwNext(d){var base=d.g==='doc'
   ?[['작성 시작','작성해 줘. 서식 첫 항목부터 하나씩 써 줘.'],['다음 항목으로','좋아, 이 항목은 확정. 다음 항목으로 넘어가.'],['자료를 추가했을 때','방금 소스에 [자료 이름]을 추가했어. 이 자료를 반영해서 지금 항목을 다시 써 줘.'],['부분만 고치기','[항목 이름]에서 [고칠 점]만 고쳐 줘. 나머지는 그대로 둬.']]
   :[['승인하고 제작','기획안 좋아. 이대로 제작해 줘. 한 장씩 만들고 끝나면 오탈자·정보·디자인을 검수해 줘.'],['화풍 바꾸기','[화풍 번호]번 스타일로 기획안을 다시 보여 줘.'],['문구 고치기','[몇 번째 장] 문구를 [더 짧게 / 더 따뜻하게] 고쳐 줘. 디자인은 그대로 둬.'],['참고 홍보물 반영','소스에 넣은 [참고 홍보물]의 화풍과 색감을 반영해서 기획안을 다시 보여 줘. 문구·로고는 가져오지 마.']];
@@ -2623,7 +2631,7 @@ DW_NOTE.full='<b>통합 지침</b> 이 지침 하나로 8가지 홍보물을 모
  var ASK1='① 기본정보를 알려 주세요. 알고 있는 것만 한 줄로 쓰면 돼요.\n사업 / 목적 / 프로그램명 / 핵심 내용(일정·대상·장소·인원·신청 방법·주요 활동) / 참여 대상\n\n예시: 가족행사 / 참여자 모집 / 아빠랑 함께 크리스마스 / 12월 21일, 아빠와 가족 20팀, 전화·온라인 신청 / 아버지와 자녀';
  DW.forEach(function(d){if(d.g==='pr'&&d.id!=='all')d.ask=d.id==='blog'?'① 기본정보를 알려 주세요. 알고 있는 것만 한 줄로 쓰면 돼요.\n사업 / 목적(사전 안내·사후 후기) / 프로그램명 / 핵심 내용 / 게시 위치(블로그·홈페이지)\n\n예시: 공동육아 / 사후 후기 / 가을 숲놀이 품앗이 / 11월 21일 숲체험장, 5가구 참여, 낙엽 놀이 / 블로그':ASK1;});
  if(!DW.some(function(d){return d.id==='all';}))DW.push({id:'all',g:'pr',t:'통합 홍보물',when:'무엇을 만들지 정하기 전 · 여러 홍보물을 한 프로젝트에서',
-  role:'가족센터 전문 홍보 기획자이자 홍보디자인 전문가',ctx:'가족센터 홍보물을 기획하고 만드는 중',full:DW_FULL_ALL,
+  role:'가족센터 전문 홍보 기획자이자 홍보디자인 전문가',ctx:'가족센터 홍보물을 기획하고 만들어',full:DW_FULL_ALL,
   src:[['사업 안내문·공문·운영계획','기본정보를 미리 채워요'],['디자인 스타일 예시 그림 8장','스타일을 그림으로 보여 주며 고르게 해요'],['마음에 드는 기존 홍보물','원하는 분위기를 참고해요'],['행사 사진 (얼굴 안 나온 것)','사진 홍보 이미지에 써요'],['센터 대표 색상','통일감이 생겨요 (로고는 캔바에서 넣기)']],
   no:'아이 얼굴이 보이는 사진, 참여자 실명·연락처는 넣지 마세요.',
   ask:'어떤 홍보물을 만들까요? 잘 모르겠다면 목적에 맞게 추천해 드려요.\n1. 카드뉴스  2. 포스터  3. 인포그래픽  4. 웹툰\n5. 이모티콘  6. 사진 홍보 이미지  7. 기타  8. 잘 모르겠어요',
@@ -2635,8 +2643,8 @@ function dwInstr(d){
   if(d.full){DWTXT.ins=d.full;return '<div class="ins">'+row(esc(d.full).replace(/\n/g,'<br>'),DW_NOTE.full)+'</div>';}
   var role=dwF(d.role,d),ctx=dwF(d.ctx,d),txt=d.id==='blog',com=txt?DW_COMMON.prText:DW_COMMON[d.g];
   var lines=(com||[]).concat(d.rules||[]).map(function(x){return '- '+dwF(x,d);}),img=d.g==='pr'&&!txt;
-  DWTXT.ins='너는 '+role+'야.\n지금 '+ctx+'이야.\n'+lines.join('\n')+(img?'\n\n[디자인 스타일]\n'+DW_STYLE.join('\n'):'');
-  return '<div class="ins">'+row('너는 '+hl(role)+'야.',DW_NOTE.role)+row('지금 '+hl(ctx)+'이야.',DW_NOTE.ctx)+row(lines.map(esc).join('<br>'))+(img?row('<b>[디자인 스타일]</b><br>'+DW_STYLE.map(esc).join('<br>'),DW_NOTE.style):'')+'</div>';}
+  DWTXT.ins='너는 '+role+'야.\n'+ctx+'.\n'+lines.join('\n')+(img?'\n\n[디자인 스타일]\n'+DW_STYLE.join('\n'):'');
+  return '<div class="ins">'+row('너는 '+hl(role)+'야.',DW_NOTE.role)+row(hl(ctx)+'.',DW_NOTE.ctx)+row(lines.map(esc).join('<br>'))+(img?row('<b>[디자인 스타일]</b><br>'+DW_STYLE.map(esc).join('<br>'),DW_NOTE.style):'')+'</div>';}
 function dwFirst(d){var v=dwV(),chk=(d.src||[]).filter(function(s,i){return DWCHK[d.id+i];}).map(function(s){return s[0];});
   var head=d.id==='all'?'홍보물을 만들고 싶어.':d.g==='doc'?'올해 '+v['사업']+' '+d.t+' 작업을 시작할게.':v['사업']+' '+d.t+' 작업을 시작할게. 대상은 '+v['대상']+', 계절은 '+v['계절']+'이야.';
   var rest=(d.id==='all'?['지침의 제작 순서대로 ① 홍보물 선택부터 해 줘.']:d.g==='doc'?['지침의 진행 순서대로 ① 자료 분석부터 해 줘. 본문은 내가 "작성해 줘"라고 하면 써 줘.']:['지침 순서대로 ① 기본정보부터 해 줘. 위에서 알려 준 정보는 다시 묻지 마.']).concat(chk.length?['내가 소스에 넣은 자료: '+chk.join(', ')]:[]);
@@ -2653,13 +2661,13 @@ PR_FLOW='[진행 순서 — 바로 만들지 마]\n- 부족한 정보는 한 번
 
 /* ===== 2026.11.09 수정 3: 문서 프로젝트 맥락 문장에서 '대상' 제거, 문서 화면에서는 대상 입력칸 숨김 ===== */
 (function(){
- var C={plan:'올해 가족센터 {사업} 사업계획서를, 전문가 입장에서 첨부한 자료를 검토·조사해서 작성 서식에 맞게 항목별로 작성하는 중',
-  result:'올해 가족센터 {사업} 결과보고서를, 전문가 입장에서 첨부한 자료를 검토·조사해서 작성 서식에 맞게 항목별로 작성하는 중',
-  perf:'올해 가족센터 {사업} 성과보고서를, 전문가 입장에서 첨부한 자료를 검토·조사해서 작성 서식에 맞게 항목별로 작성하는 중',
-  oper:'가족센터 {사업}의 이번 달(분기) 운영보고서를, 전문가 입장에서 첨부한 실적 자료를 검토·조사해서 서식에 맞게 작성하는 중',
-  settle:'가족센터 {사업}의 예산 집행과 정산보고서를, 전문가 입장에서 첨부한 집행 자료를 검토·조사해서 점검하는 중',
-  meet:'가족센터 {사업} 관련 회의 내용을, 전문가 입장에서 첨부한 메모·녹음 전사본을 검토해서 회의록과 공문으로 정리하는 중',
-  "case":'가족센터 {사업} 사례를, 전문가 입장에서 가명으로 정리한 메모를 검토해서 기록지 서식에 맞게 작성하는 중'};
+ var C={plan:'올해 가족센터 {사업} 사업계획서를, 전문가 입장에서 첨부한 자료를 검토·조사해서 작성 서식에 맞게 항목별로 작성해',
+  result:'올해 가족센터 {사업} 결과보고서를, 전문가 입장에서 첨부한 자료를 검토·조사해서 작성 서식에 맞게 항목별로 작성해',
+  perf:'올해 가족센터 {사업} 성과보고서를, 전문가 입장에서 첨부한 자료를 검토·조사해서 작성 서식에 맞게 항목별로 작성해',
+  oper:'가족센터 {사업}의 이번 달(분기) 운영보고서를, 전문가 입장에서 첨부한 실적 자료를 검토·조사해서 서식에 맞게 작성해',
+  settle:'가족센터 {사업}의 예산 집행과 정산보고서를, 전문가 입장에서 첨부한 집행 자료를 검토·조사해서 점검해',
+  meet:'가족센터 {사업} 관련 회의 내용을, 전문가 입장에서 첨부한 메모·녹음 전사본을 검토해서 회의록과 공문으로 정리해',
+  "case":'가족센터 {사업} 사례를, 전문가 입장에서 가명으로 정리한 메모를 검토해서 기록지 서식에 맞게 작성해'};
  DW.forEach(function(d){if(C[d.id])d.ctx=C[d.id];});
 })();
 var _dwRender1109=dwRender;
@@ -2813,7 +2821,7 @@ dwFirst=function(d){var h=_dwFirst1109c(d);if(d.id!=='blog')return h;DWTXT.first
 
 /* ===== 2026.11.09 수정 11: 홍보물 프로젝트에서도 '대상·계절' 문구 제거, 입력칸은 사업명만 ===== */
 (function(){
- var C={card:'{사업} 카드뉴스를 만드는 중',blog:'{사업} 블로그·홈페이지 글을 쓰는 중',info:'{사업} 인포그래픽을 만드는 중',flyer:'{사업} 전단지·포스터를 만드는 중',toon:'{사업} 웹툰·이모티콘을 만드는 중'};
+ var C={card:'{사업} 카드뉴스를 만들어',blog:'{사업} 블로그·홈페이지 글을 써',info:'{사업} 인포그래픽을 만들어',flyer:'{사업} 전단지·포스터를 만들어',toon:'{사업} 웹툰·이모티콘을 만들어'};
  DW.forEach(function(d){if(C[d.id])d.ctx=C[d.id];if(d.g==='pr'&&/\{대상\}/.test(d.rv||''))d.rv='홍보물을 받아 보는 참여 가족';});
 })();
 var _dwRender1109b=dwRender;
@@ -3089,13 +3097,13 @@ var BR=[
  {e:'🍃',n:'나뭇잎 날리기 숨',d:'손바닥 위 나뭇잎을 멀리 날려 보내듯 후~',p:[['들이쉬기',4,1.3],['멀리 후~',6,.8]]},
  {e:'🍜',n:'라면 식히기 숨',d:'뜨거운 라면 식히듯 후후~ 짧게 세 번',p:[['들이쉬기',3,1.3],['후!',1,.9],['후!',1,.9],['후~',2,.8]]}];
 var box=document.querySelector('#v2-tool .breath');if(!box)return;
-box.innerHTML='<div class="bx-ch" id="bx-ch"><span class="bx-e" id="bx-e"></span><span class="bx-t" id="bx-t">준비</span></div><div class="bx-r"><b id="bx-n"></b><small id="bx-d"></small><div class="va"><button type="button" class="btn mini" id="bx-go">따라 하기 (3번)</button><button type="button" class="btn mini" id="bx-next">다른 숨 고르기 ›</button></div></div>';
+box.innerHTML='<div class="bx-ch" id="bx-ch"><span class="bx-e" id="bx-e"><svg class="bxf" id="bx-f" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="12" r="6"/><path d="M32 18 V40"/><circle class="bxb" cx="32" cy="31" r="4.5"/><path d="M32 40 L25 56 M32 40 L39 56"/><path class="bxdn" d="M32 24 L23 37 M32 24 L41 37"/><path class="bxup" d="M32 24 L15 11 M32 24 L49 11"/><path class="bxair" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/></svg></span><span class="bx-t" id="bx-t">준비</span></div><div class="bx-r"><b id="bx-n"></b><small id="bx-d"></small><div class="va"><button type="button" class="btn mini" id="bx-go">따라 하기 (3번)</button><button type="button" class="btn mini" id="bx-next">다른 숨 고르기 ›</button></div></div>';
 var cur=0,run=0;
-function set(i){cur=i;var b=BR[i];$('#bx-e').textContent=b.e;$('#bx-n').textContent=b.n;$('#bx-d').textContent=b.d;$('#bx-t').textContent='준비';$('#bx-e').style.transform='scale(1)';}
+function set(i){cur=i;var b=BR[i];$('#bx-n').textContent=b.e+' '+b.n;$('#bx-f').setAttribute('data-ph','');$('#bx-d').textContent=b.d;$('#bx-t').textContent='준비';$('#bx-e').style.transform='scale(1)';}
 function stop(){run++;}
 $('#bx-next').onclick=function(){stop();var n;do{n=Math.floor(Math.random()*BR.length);}while(n===cur&&BR.length>1);set(n);};
 $('#bx-go').onclick=function(){stop();var my=run,b=BR[cur],i=0,k=0,e=$('#bx-e'),t=$('#bx-t');
-  function nx(){if(my!==run)return;if(k>=3){t.textContent='잘했어요 👏';e.style.transitionDuration='1s';e.style.transform='scale(1)';return;}var p=b.p[i];e.style.transitionDuration=p[1]+'s';e.style.transform='scale('+p[2]+')';var left=p[1];t.textContent=p[0]+' '+left;
+  function nx(){if(my!==run)return;if(k>=3){$('#bx-f').setAttribute('data-ph','done');t.textContent='잘했어요 👏';e.style.transitionDuration='1s';e.style.transform='scale(1)';return;}var p=b.p[i];e.style.transitionDuration=p[1]+'s';e.style.transform='scale('+p[2]+')';var f=$('#bx-f');f.style.setProperty('--d',p[1]+'s');f.setAttribute('data-ph',/멈추|^쉬기$/.test(p[0])?'hold':p[2]>=1?'in':'out');var left=p[1];t.textContent=p[0]+' '+left;
     var iv=setInterval(function(){if(my!==run){clearInterval(iv);return;}left--;if(left>0)t.textContent=p[0]+' '+left;else clearInterval(iv);},1000);
     setTimeout(function(){i++;if(i>=b.p.length){i=0;k++;}nx();},p[1]*1000);}
   nx();};
