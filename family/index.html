@@ -2729,6 +2729,31 @@ dwRevDoc=function(){var v=dwV(),biz=v['사업'];
  DW.forEach(function(d){if(d.full)d.full=fix(d.full);if(d.g==='pr'&&d.rules)d.rules=d.rules.map(fix);});
 })();
 
+/* ===== 2026.11.09 수정 7: 모든 홍보물은 기본정보 틀(항목: )을 첫 메시지에 채워서 시작 ===== */
+var PR_FORM=['프로그램명: ','홍보 목적(참여자 모집·프로그램 안내·활동 후기): ','참여 대상·인원: ','행사 날짜·시간: ','장소: ','주요 활동: ','신청 방법(전화·QR·링크): ','모집 기간·마감(선착순 여부): ','문의 연락처: ','주최·주관 기관명: '];
+var PR_FORM_BLOG=['프로그램명: ','글 종류(사전 안내·사후 후기): ','행사 날짜·시간: ','장소: ','참여 대상·인원: ','주요 활동·현장 분위기: ','신청 방법·문의 연락처(사전 안내일 때): ','주최·주관 기관명: ','게시 위치(블로그·홈페이지): '];
+(function(){
+ var F1='① 기본정보: 첫 메시지에 [기본정보 틀]이 채워져 있으면 그대로 쓰고, 없으면 아래 틀을 보여 주고 멈춰. 내가 콜론(:) 뒤에 채워 한 번에 보내게 해. 틀: '+PR_FORM.map(function(x){return x.replace(/: $/,'');}).join(' / ')+'. 소스 안내문에 있는 정보는 미리 채우고, 받은 정보는 "프로그램 기본정보" 요약 상자로 보여 줘. 빈 칸이 있으면 빠진 항목만 "항목: " 틀로 한 번 더 보여 주고 멈춰. "모름"이나 "비워 둬"라고 하면 빈 칸으로 진행해. 이 확인은 한 번만 해.';
+ var FB='① 기본정보: 첫 메시지에 [기본정보 틀]이 채워져 있으면 그대로 쓰고, 없으면 아래 틀을 보여 주고 멈춰. 내가 콜론(:) 뒤에 채워 한 번에 보내게 해. 틀: '+PR_FORM_BLOG.map(function(x){return x.replace(/: $/,'');}).join(' / ')+'. 소스 자료에 있는 정보는 미리 채우고, 빈 칸은 한 번만 확인해.';
+ if(DW_COMMON.pr)DW_COMMON.pr=DW_COMMON.pr.map(function(t){return /^① 기본정보/.test(t)?F1:t;});
+ if(DW_COMMON.prText)DW_COMMON.prText=DW_COMMON.prText.map(function(t){return /^① 기본정보/.test(t)?FB:t;});
+ var SEC=['## ② 기본정보 입력','모든 홍보물은 아래 [기본정보 틀]을 채워야 제대로 나온다. 첫 메시지에 틀이 채워져 있으면 그대로 쓰고, 없으면 틀을 보여 주고 멈춘다. 사용자는 틀을 복사해 콜론(:) 뒤에 채워 한 번에 보낸다.','',
+  '[기본정보 틀]','만들 홍보물: '].concat(PR_FORM).concat(['','소스에 안내문이 있으면 거기서 채우고, 받은 정보는 "프로그램 기본정보" 요약 상자로 보여 준다.']).join('\n');
+ DW.forEach(function(d){
+  if(d.full)d.full=d.full.replace(/## ② 기본정보 입력[\s\S]*?소스에 안내문이 있으면 거기서 채우고, 받은 정보는 "프로그램 기본정보" 요약 상자로 보여 준다\./,SEC);
+  if(d.g==='pr'&&d.id!=='all')d.ask='① 기본정보 틀이에요. 콜론(:) 뒤에 채워서 한 번에 보내 주세요. 모르는 칸은 비워 두세요.\n'+(d.id==='blog'?PR_FORM_BLOG:PR_FORM).join('\n');
+ });
+})();
+DW_NOTE.prForm='<b>기본정보 틀</b> 복사해서 ChatGPT 입력창에 붙인 뒤, 콜론(:) 뒤를 채워서 보내요. 모르는 칸은 비워 두면 AI가 한 번만 물어봐요. 이 정보가 있어야 날짜·장소·신청 방법이 빠지지 않아요.';
+var _dwFirst1109=dwFirst;
+dwFirst=function(d){if(d.g!=='pr')return _dwFirst1109(d);
+ var v=dwV(),chk=(d.src||[]).filter(function(s,i){return DWCHK[d.id+i];}).map(function(s){return s[0];});
+ var head=d.id==='all'?'홍보물을 만들고 싶어. 아래 기본정보를 채웠어.':v['사업']+' '+d.t+' 만들 거야. 아래 기본정보를 채웠어.';
+ var form=(d.id==='all'?['만들 홍보물(카드뉴스·포스터·인포그래픽·웹툰·이모티콘·사진 홍보·잘 모르겠음): ']:[]).concat(d.id==='blog'?PR_FORM_BLOG:PR_FORM);
+ var tail=['빈 칸은 아직 모르는 거야. 지침 순서대로 빠진 정보만 한 번 확인하고 기획안을 보여 줘.'].concat(chk.length?['내가 소스에 넣은 자료: '+chk.join(', ')]:[]);
+ DWTXT.first=head+'\n\n[기본정보 틀]\n'+form.join('\n')+'\n\n'+tail.join('\n');
+ return '<div class="ins">'+row(hl(head),DW_NOTE.prForm)+row('<b>[기본정보 틀]</b><br>'+form.map(esc).join('<br>'))+row(tail.map(esc).join('<br>'))+'</div>';};
+
 /* --- 사업명 선택 (2026 가족사업안내 1·2권 기준) --- */
 (function(){
 var BL=[['가족센터 공통사업',['가족센터 기본사업','가족상담','부모교육','가족사랑의 날 프로그램','가족 체험·나들이 프로그램']],
