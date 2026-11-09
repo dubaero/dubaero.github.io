@@ -772,7 +772,7 @@ body{font-weight:500}
         <div class="pc-g pc-row"><label>엽서에 부를 내 이름·애칭<input class="f1" id="pc-to" placeholder="예: 이서정 → 서정아 (ChatGPT에서 적어도 돼요)"></label><label>우표 소인에 찍을 날짜<input class="f1" id="pc-date" placeholder="예: 2026.11.19 (ChatGPT에서 적어도 돼요)"></label></div>
       </div>
       <div class="acts"><button type="button" class="btn fill" id="h2-gpt">ChatGPT로 선물 엽서 받기</button><button type="button" class="btn" id="h2-gem">제미나이로 선물 엽서 받기</button><button type="button" class="btn" id="h2-cp">프롬프트 복사</button></div>
-      <p class="s5">평소 쓰던 계정으로 로그인한 채로 여세요. 버튼을 누르면 프롬프트가 복사돼요. 입력창에 붙여 넣고 맨 위 "이름·날짜" 두 줄만 채워 보내면 바로 엽서가 와요. AI가 나를 기억할수록 더 나다운 엽서가 나와요.</p>
+      <p class="s5">평소 쓰던 계정으로 로그인한 채로 여세요. ChatGPT는 입력창에 프롬프트가 바로 들어가요. 맨 위 "이름·날짜" 두 줄만 채워 보내면 바로 엽서가 와요. 제미나이는 붙여 넣기만 하면 돼요. AI가 나를 기억할수록 더 나다운 엽서가 나와요.</p>
       <p class="s5">무료 계정은 하루에 만들 수 있는 그림 수가 적어서, 안 나오면 내일 다시 해 보세요.</p>
     </div>
     <div class="help"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가거나 위험한 생각이 들면 사람에게 꼭 말해 주세요. 자살예방 상담전화 <a href="tel:109">109</a> · 정신건강 위기상담 <a href="tel:15770199">1577-0199</a></div>
@@ -3161,7 +3161,7 @@ function show(){var t=inp.value.trim(),i=t?match(t):-1;if(i<0&&mood)i=MOOD[mood]
 var tm;inp.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(show,500);});
 var mb=$('#h2-mood');Object.keys(MOOD).forEach(function(m){var b=el('button',null,esc(m));b.type='button';b.onclick=function(){mood=(mood===m?'':m);mb.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x.textContent===mood);});show();};mb.appendChild(b);});
 function postP(){return postP2(inp.value.trim()||(mood?'오늘 내 마음: '+mood:''));}
-$('#h2-gpt').onclick=function(){var p=postP();if(p)openAt('https://chatgpt.com/',p,'ChatGPT');};
+$('#h2-gpt').onclick=function(){var p=postP();if(p){copy(p,'프롬프트를 넣었어요. ChatGPT 입력창 맨 위에 이름과 날짜만 적고 보내세요.');openGPT(p);}};
 $('#h2-cp').onclick=function(){var p=postP();if(p)copy(p);};
 bindMics($('#h2-tool'));
 })();
