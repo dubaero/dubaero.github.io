@@ -2805,6 +2805,18 @@ dwInstr=function(d){if(!d.fullT)return _dwInstr1109(d);var t=dwF(d.fullT,d);DWTX
 var _dwFirst1109c=dwFirst;
 dwFirst=function(d){var h=_dwFirst1109c(d);if(d.id!=='blog')return h;DWTXT.first=DWTXT.first.replace('기획안을 보여 줘','구성안을 보여 줘');return h.replace('기획안을 보여 줘','구성안을 보여 줘');};
 
+/* ===== 2026.11.09 수정 11: 홍보물 프로젝트에서도 '대상·계절' 문구 제거, 입력칸은 사업명만 ===== */
+(function(){
+ var C={card:'{사업} 카드뉴스를 만드는 중',blog:'{사업} 블로그·홈페이지 글을 쓰는 중',info:'{사업} 인포그래픽을 만드는 중',flyer:'{사업} 전단지·포스터를 만드는 중',toon:'{사업} 웹툰·이모티콘을 만드는 중'};
+ DW.forEach(function(d){if(C[d.id])d.ctx=C[d.id];if(d.g==='pr'&&/\{대상\}/.test(d.rv||''))d.rv='홍보물을 받아 보는 참여 가족';});
+})();
+var _dwRender1109b=dwRender;
+dwRender=function(){_dwRender1109b();['#dw-who','#dw-seas'].forEach(function(q){var w=$(q);if(w&&w.parentNode)w.parentNode.hidden=true;});
+ var p=$('#dw-in p');if(p)p.textContent='사업명을 고르면 아래 지침과 프롬프트에 같이 바뀌어 들어가요.';};
+var _dwIrev1109=dwIrev;
+dwIrev=function(){var h=_dwIrev1109(),v=dwV(),o='이 디자인 규칙으로 '+v['사업']+' '+v['대상']+' 대상 카드뉴스 표지 구성안을 먼저 보여 줘. '+v['계절']+' 분위기로.',n='이 디자인 규칙으로 '+v['사업']+' 카드뉴스 표지 구성안을 먼저 보여 줘.';
+ if(DWTXT.i2)DWTXT.i2=DWTXT.i2.replace(o,n);return h.split(esc(o)).join(esc(n));};
+
 /* --- 사업명 선택 (2026 가족사업안내 1·2권 기준) --- */
 (function(){
 var BL=[['가족센터 공통사업',['가족센터 기본사업','가족상담','부모교육','가족사랑의 날 프로그램','가족 체험·나들이 프로그램']],
