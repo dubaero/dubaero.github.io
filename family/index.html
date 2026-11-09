@@ -2369,7 +2369,7 @@ function dwDrawer(d){var proj=d.t+' 프로젝트';DWTXT.proj=proj;
   var h='<p class="dw-when"><b>'+esc(d.t)+' 프로젝트</b> · 언제 여나요? '+esc(d.when)+'</p>';
   h+=step(1,'프로젝트 만들기','<div class="ins">'+row('프로젝트 이름: <b>'+esc(proj)+'</b>')+'</div><ol><li>ChatGPT 왼쪽 메뉴에서 <b>프로젝트 → 새 프로젝트</b>를 누르세요.</li><li>이름 칸에 붙여 넣고 만드세요. 사업별로 나누고 싶으면 뒤에 사업명을 붙여요. (예: '+esc(proj)+' - '+esc(dwV()['사업'])+')</li><li>메모리 선택이 보이면 <b>프로젝트 전용</b>을 고르세요. 다른 대화와 섞이지 않아요.</li></ol>',cpBtn('proj','이름 복사'));
   h+=step(2,'지침 붙여 넣기','<p class="s">프로젝트 화면의 <b>지침</b> 칸에 붙여 넣으세요. 초록색이 이 지침의 핵심이에요.</p>'+dwInstr(d),cpBtn('ins','지침 복사'));
-  h+=step(3,'소스에 넣으면 좋은 자료','<p class="s">아래 자료는 <b>넣으면 더 좋아지는 것</b>이에요. 넣을지는 직접 고르세요. 넣은 자료에 ✓ 하면 다음 단계 첫 프롬프트에 자동으로 들어가요. 무료 계정은 프로젝트당 파일 5개까지라 위에서부터 중요한 순서로 적었어요.</p><table class="src">'+d.src.map(function(s,i){return '<tr><td><input type="checkbox" data-chk="'+d.id+i+'"'+(DWCHK[d.id+i]?' checked':'')+' aria-label="'+esc(s[0])+' 넣음"></td><td><b>'+esc(s[0])+'</b><br><span>'+esc(s[1])+'</span></td></tr>';}).join('')+'</table><p class="dw-no">넣지 마세요: '+esc(d.no)+'</p>'+(d.g==='doc'?'<button type="button" class="linkbtn" data-go="all">우리 센터 서식이 없으면: 2026 가족사업안내 서식 105개에서 찾기 ›</button>':''));
+  h+=step(3,'소스에 넣으면 좋은 자료','<p class="s">아래 자료는 <b>넣으면 더 좋아지는 것</b>이에요. 넣을지는 직접 고르세요.  무료 계정은 프로젝트당 파일 5개까지라 위에서부터 중요한 순서로 적었어요.</p><table class="src">'+d.src.map(function(s,i){return '<tr><td><input type="checkbox" data-chk="'+d.id+i+'"'+(DWCHK[d.id+i]?' checked':'')+' aria-label="'+esc(s[0])+' 넣음"></td><td><b>'+esc(s[0])+'</b><br><span>'+esc(s[1])+'</span></td></tr>';}).join('')+'</table><p class="dw-no">넣지 마세요: '+esc(d.no)+'</p>'+(d.g==='doc'?'<button type="button" class="linkbtn" data-go="all">우리 센터 서식이 없으면: 2026 가족사업안내 서식 105개에서 찾기 ›</button>':''));
   h+=step(4,'첫 대화 시작','<p class="s">프로젝트 안에서 <b>새 채팅</b>을 열고 붙여 넣으세요. 자료가 부족하면 AI가 먼저 알려 주고, 항목 하나씩 같이 완성해요.</p>'+dwFirst(d)+'<div class="ask">'+esc(d.ask)+'</div>',cpBtn('first','프롬프트 복사')+'<button type="button" class="btn mini" data-open="gpt">ChatGPT 열기</button>');
   h+=step(5,'이어 가기','<p class="s">AI 답을 보고 상황에 맞는 문장을 복사하세요. [ ] 칸은 내 상황으로 바꿔요.</p>'+dwNext(d));
   h+=step(6,'마무리 검토','<p class="s">다 썼으면 결정하는 사람의 눈으로 한 번 더 보게 하세요.</p>'+dwRev(d),cpBtn('rev','프롬프트 복사'));
@@ -2934,6 +2934,19 @@ function bxFig(n){
  '나뭇잎 날리기 숨':H+B+G+'<path d="M32 24 L23 37 M32 24 L44 26"/><g class="p-leaf"><path d="M44 24 q5 -6 10 -2 q-5 6 -10 2z"/></g>'+AIR,
  '라면 식히기 숨':H+B+G+'<path d="M32 24 L24 32 M32 24 L40 32"/><path d="M20 32 H44 q-2 10 -12 10 q-10 0 -12 -10z"/><g class="p-stm"><path d="M27 28 q-2 -4 0 -7 M32 28 q-2 -4 0 -7 M37 28 q-2 -4 0 -7"/></g>'+AIR};
  return X[n]||(H+B+BEL+G+DN+UP+AIR);}
+
+/* ===== 2026.11.09 수정 15: 모든 프로젝트 첫 대화 = 지침의 역할 + 지침 확인 + 소스 조사 + 부족한 것 묻고 작성 ===== */
+function dwRoleOf(d){var t=d.fullT?dwF(d.fullT,d):(d.full||'');var m=t.match(/너는 (.+?)다\./);var r=m?m[1]:dwF(d.role,d);var c=r.charCodeAt(r.length-1);return r+(c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28?'이야':'야');}
+DW_NOTE.first='<b>첫 대화</b> 지침과 같은 역할을 주고, 지침과 소스 자료를 먼저 확인하게 해요. 부족한 것만 물어본 뒤 작성해요. 소스에 무엇을 넣었든 이 프롬프트 그대로 쓰면 돼요.';
+var _dwFirst1109d=dwFirst;
+dwFirst=function(d){_dwFirst1109d(d);var v=dwV(),role='너는 '+dwRoleOf(d)+'.';
+ var task=d.g==='doc'?'올해 가족센터 '+v['사업']+' '+d.t+'를 작성할 거야.':d.id==='all'?'가족센터 홍보물을 만들 거야.':v['사업']+' '+d.t+'를 만들 거야.';
+ var TK={oper:'가족센터 '+v['사업']+'의 이번 달(분기) 운영보고서를 작성할 거야.',settle:'가족센터 '+v['사업']+'의 예산 집행과 정산보고서를 점검할 거야.',meet:'가족센터 '+v['사업']+' 관련 회의 내용을 회의록과 공문으로 정리할 거야.','case':'가족센터 '+v['사업']+' 사례 기록지를 작성할 거야.',blog:v['사업']+' 블로그·홈페이지 글을 쓸 거야.'};if(TK[d.id])task=TK[d.id];
+ task=task.replace(/([가-힣])를 (작성|만들)/,function(a,ch,vb){var c=ch.charCodeAt(0);return ch+((c-0xAC00)%28?'을':'를')+' '+vb;});
+ var body=['이 프로젝트 지침을 반드시 먼저 확인하고, 지침의 순서와 규칙을 그대로 따라 줘.','소스에 첨부된 참고 자료를 모두 조사해서 활용하고, 부족한 자료나 정보는 나에게 먼저 물어본 뒤 '+(d.g==='pr'&&d.id!=='blog'?'만들어 줘.':'작성해 줘.')];
+ var form=d.g==='pr'?(d.id==='blog'?PR_FORM_BLOG:PR_FORM):null;
+ DWTXT.first=role+'\n'+task+'\n'+body.join('\n')+(form?'\n\n[기본정보 틀]\n'+form.join('\n'):'');
+ return '<div class="ins">'+row(hl(role),DW_NOTE.role)+row(hl(task),DW_NOTE.first)+row(body.map(esc).join('<br>'))+(form?row('<b>[기본정보 틀]</b> 콜론(:) 뒤를 채워서 보내요<br>'+form.map(esc).join('<br>')):'')+'</div>';};
 
 /* --- 사업명 선택 (2026 가족사업안내 1·2권 기준) --- */
 (function(){
