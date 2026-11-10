@@ -593,7 +593,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       state.kind = 'hwpx';
       state.units = r.units.filter(function (u) { return u.text && u.text.trim(); });
       if (!state.units.length) {
-        msg('이 한글 파일에서 글자를 찾지 못했습니다. 암호가 걸れた 문서인지 확인해 주세요.', 'err');
+        msg('이 한글 파일에서 글자를 찾지 못했습니다. 암호가 걸린 문서인지 확인해 주세요.', 'err');
         return;
       }
       buildFindings();
@@ -668,23 +668,27 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
           });
         })(p);
       }
+      var usedOcr = false;
       return chain.then(function () {
         if (units.length) return units;
         // 글자가 하나도 없으면 스캔본으로 보고 글자 인식을 시도합니다.
+        usedOcr = true;
         return pdfOcrPages(doc, pages);
       }).then(function (result) {
         busy(false);
         state.kind = 'pdf';
         state.units = result;
         if (!result.length) {
-          msg('이 PDF에서는 글자를 찾지 못했습니다. 스캔한 그림 PDF라면 사진(.png .jpg)으로 저장해 넣어 주세요.', 'err');
+          msg('이 PDF에서는 글자를 읽지 못했습니다. 그림으로만 된 PDF라면 사진(.png .jpg)으로 저장해 넣어 주세요.', 'err');
           return;
         }
         buildFindings();
         setStep(2);
-        var note = 'PDF에서 글자를 뽑았습니다. 가린 결과는 .txt로 내려받습니다.';
+        var note = usedOcr
+          ? '그림으로 된 PDF에서 글자를 읽었습니다. 잘못 읽힌 글자가 있을 수 있으니 미리보기를 꼭 확인해 주세요. (내려받기는 .txt)'
+          : 'PDF에서 글자를 뽑았습니다. 가린 결과는 .txt로 내려받습니다.';
         if (doc.numPages > pages) note = pages + '쪽까지만 읽었습니다. ' + note;
-        msg(note);
+        msg(note, usedOcr ? 'work' : '');
       });
     }).catch(function (e) {
       busy(false);
@@ -723,7 +727,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
               var lines = text.split('\n');
               for (var k = 0; k < lines.length; k++) {
                 var t = normalizeExtracted(lines[k]).trim();
-                if (t) units.push({ label: p + '쪽', text: t, hint: '' });
+                // 글자를 거의 못 읽었을 때 나오는 기호만 있는 줄은 버립니다.
+                if (t && /[가-힣]/.test(t)) units.push({ label: p + '쪽', text: t, hint: '' });
               }
             });
           });
