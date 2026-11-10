@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <title>안심 필터 | 개인정보 가리기 · 두배로</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="상담일지·명단 파일 안의 주민등록번호, 전화번호, 이메일, 주소, 이름을 브라우저 안에서 가리고 같은 형식의 파일로 내려받는 무료 도구입니다. 파일은 서버로 전송되지 않습니다.">
+<meta name="description" content="상담일지·명단 파일(PDF·워드·엑셀·텍스트·웹문서·사진) 안의 주민등록번호, 전화번호, 이메일, 주소, 이름을 브라우저 안에서 가리고 파일로 내려받는 무료 도구입니다. 파일은 서버로 전송되지 않습니다.">
 <link rel="canonical" href="https://dubaero.kr/ansim-filter/">
 <meta property="og:title" content="안심 필터 | 개인정보 가리기 · 두배로">
-<meta property="og:description" content="파일 안의 개인정보를 내 브라우저 안에서 가리고 내려받는 도구. 파일은 어디로도 전송되지 않습니다.">
+<meta property="og:description" content="PDF·워드·엑셀 파일을 넣으면 개인정보를 내 브라우저 안에서 가려 내려받는 도구. 파일은 어디로도 전송되지 않습니다.">
 <meta property="og:url" content="https://dubaero.kr/ansim-filter/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -199,7 +199,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
   <section class="intro">
     <span class="eyebrow">업무 도구</span>
     <h1>안심 필터</h1>
-    <p class="lead">상담일지·명단 파일에 들어 있는 <b>개인정보를 가려서</b> 같은 형식의 파일로 다시 받습니다.</p>
+    <p class="lead">상담일지·명단 <b>파일을 넣으면 개인정보를 가려서</b> 같은 형식의 파일로 다시 받습니다. 복사해서 붙여넣지 않아도 됩니다.</p>
     <p class="safe">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
       <span><b>파일은 어디로도 전송되지 않습니다.</b> 서버 없이 이 화면(내 브라우저) 안에서만 처리하고, 내려받지 않으면 아무것도 남지 않습니다.</span>
@@ -215,13 +215,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
   <!-- 1단계 -->
   <section class="card" id="panel-1">
     <h2>1. 파일 넣기</h2>
-    <p class="sub">아래에 파일을 끌어다 놓거나 눌러서 고르세요.</p>
+    <p class="sub">아래에 파일을 끌어다 놓거나 눌러서 고르세요. PDF·워드·엑셀 그대로 넣으면 됩니다.</p>
 
     <div class="drop" id="drop" role="button" tabindex="0" aria-label="파일 고르기">
       <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 16V4m0 0 4 4m-4-4L8 8"/><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></svg>
       <b>파일을 끌어다 놓거나 눌러서 고르세요</b>
-      <span>텍스트 .txt .csv · 워드 .docx · 엑셀 .xlsx .xls · 이미지 .png .jpg</span>
-      <input type="file" id="file" accept=".txt,.csv,.docx,.xlsx,.xls,.png,.jpg,.jpeg,.webp" hidden>
+      <span>PDF .pdf · 워드 .docx · 엑셀 .xlsx .xls · 텍스트 .txt .csv · 웹문서 .html · 사진 .png .jpg</span>
+      <input type="file" id="file" accept=".txt,.csv,.tsv,.md,.html,.htm,.pdf,.docx,.xlsx,.xls,.xlsm,.png,.jpg,.jpeg,.webp,.bmp,.gif" hidden>
     </div>
     <p class="hint" id="loadmsg" aria-live="polite"></p>
 
@@ -232,12 +232,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     </details>
 
     <div class="limit">
-      <h3>지원하지 않는 파일과 그 이유</h3>
+      <h3>형식마다 받는 모습</h3>
       <ul>
-        <li><b>음성 파일(.mp3 .m4a .wav)</b> — 브라우저만으로는 서버 없이 음성을 글자로 바꿀 수 없어 지원하지 않습니다. 녹음 내용을 글로 옮겨 붙여넣어 주세요.</li>
-        <li><b>한글 파일(.hwp .hwpx)</b> — 브라우저에서는 한글 문서를 열 수 없습니다. 한글에서 <b>다른 이름으로 저장 → .docx</b>로 저장하거나, 내용을 복사해 붙여넣어 주세요.</li>
-        <li><b>PDF</b> — 지금은 지원하지 않습니다. 글자를 복사해 붙여넣어 주세요.</li>
-        <li><b>이미지 속 글자</b> — 사진에서는 글자만 읽어 와 새 텍스트 파일로 만들어 줍니다. 사진 자체의 글자를 지우지는 못합니다.</li>
+        <li><b>PDF .pdf</b> — 글자만 뽑아 가린 뒤 <b>.txt</b>로 내려받습니다. PDF의 원래 모양 그대로 되살리는 일은 브라우저만으로는 안전하게 할 수 없어 글자만 남겨 드립니다.</li>
+        <li><b>워드 .docx · 엑셀 .xlsx</b> — 서식 그대로, 글자만 바꿔서 같은 형식으로 내려받습니다.</li>
+        <li><b>사진 .png .jpg</b> — 사진 속 글자를 읽어(글자 인식) 가린 .txt로 내려받습니다. 사진 자체의 글자를 지우지는 못합니다.</li>
+        <li><b>한글 .hwp .hwpx</b> — 브라우저에서는 한글 문서를 열 수 없습니다. 한글에서 <b>다른 이름으로 저장 → .docx 또는 .pdf</b>로 저장하거나, 내용을 복사해 붙여넣어 주세요.</li>
+        <li><b>파워포인트 .pptx</b> — 아직 지원하지 않습니다. 슬라이드는 <b>PDF로 저장</b>해서 넣어 주세요.</li>
+        <li><b>음성 .mp3 .m4a .wav</b> — 브라우저만으로는 서버 없이 음성을 글자로 바꿀 수 없어 지원하지 않습니다. 녹음 내용을 글로 옮겨 붙여넣어 주세요.</li>
       </ul>
     </div>
   </section>
@@ -339,30 +341,77 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
   'use strict';
 
   var LIB = {
-    xlsx: 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js',
-    jszip: 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js',
-    tesseract: 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js'
+    xlsx: ['https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js',
+           'https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js'],
+    jszip: ['https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js',
+            'https://unpkg.com/jszip@3.10.1/dist/jszip.min.js'],
+    pdfjs: ['https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js',
+            'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js'],
+    tesseract: ['https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js',
+                'https://unpkg.com/tesseract.js@5.1.1/dist/tesseract.min.js']
   };
+  var PDF_WORKER = [
+    'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js',
+    'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js'
+  ];
   var loading = {};
+
+  /* 내려받기 도구를 붙입니다. 한 곳이 막히면 다른 곳에서 받아옵니다. */
+  function loadScript(url) {
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = url;
+      s.async = true;
+      var timer = setTimeout(function () { reject(new Error('시간 초과')); }, 20000);
+      s.onload = function () { clearTimeout(timer); resolve(); };
+      s.onerror = function () { clearTimeout(timer); reject(new Error('불러오지 못했습니다')); };
+      document.head.appendChild(s);
+    });
+  }
 
   function loadLib(name) {
     if (loading[name]) return loading[name];
-    loading[name] = new Promise(function (resolve, reject) {
-      var s = document.createElement('script');
-      s.src = LIB[name];
-      s.async = true;
-      s.onload = function () { resolve(); };
-      s.onerror = function () { reject(new Error('불러오지 못했습니다: ' + name)); };
-      document.head.appendChild(s);
+    var urls = LIB[name];
+    var p = Promise.reject(new Error('start'));
+    urls.forEach(function (u) {
+      p = p.catch(function () { return loadScript(u); });
     });
-    return loading[name];
+    var job = p.catch(function () {
+      loading[name] = null;
+      throw new Error('내려받지 못했습니다 (인터넷 연결을 확인해 주세요)');
+    });
+    loading[name] = job;
+    return job;
+  }
+
+  /* PDF 도구 준비 — 작업자(worker) 파일은 다른 사이트에 있어, 받아서 이 페이지 안의 것으로 만들어 넘깁니다. */
+  var pdfReady = null;
+  function setupPdf() {
+    if (pdfReady) return pdfReady;
+    pdfReady = loadLib('pdfjs').then(function () {
+      if (!window.pdfjsLib) throw new Error('PDF 도구를 찾지 못했습니다');
+      return fetch(PDF_WORKER[0]).then(function (r) {
+        if (!r.ok) throw new Error('worker');
+        return r.text();
+      }).then(function (code) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+          URL.createObjectURL(new Blob([code], { type: 'text/javascript' }));
+      }).catch(function () {
+        // 작업자를 만들지 못하면 이 화면 안에서 직접 처리합니다(조금 느립니다).
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '';
+      });
+    }).catch(function (e) {
+      pdfReady = null;
+      throw e;
+    });
+    return pdfReady;
   }
 
   var $ = function (id) { return document.getElementById(id); };
   var state = {
     step: 1, kind: '', fileName: '', ext: '', outName: '',
     buffer: null, wb: null, units: [], baseText: '', text: '', items: [],
-    thumbUrl: '', fromImage: false
+    htmlSrc: '', pdfDoc: null, thumbUrl: '', fromImage: false
   };
   var MAX_PREVIEW_LINES = 1200;
 
@@ -433,7 +482,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     var type = file.type || '';
     state.fileName = name; state.ext = ext;
     state.buffer = null; state.wb = null; state.units = []; state.items = [];
-    state.thumbUrl = ''; state.fromImage = false;
+    state.thumbUrl = ''; state.fromImage = false; state.htmlSrc = '';
+    if (state.pdfDoc) { try { state.pdfDoc.destroy(); } catch (e) { } state.pdfDoc = null; }
+
+    if (ext === 'pdf' || type === 'application/pdf') {
+      readPdf(file);
+      return;
+    }
+
+    if (ext === 'html' || ext === 'htm' || type === 'text/html') {
+      readHtml(file);
+      return;
+    }
 
     if (ext === 'txt' || ext === 'csv' || ext === 'md' || (type.indexOf('text/') === 0)) {
       msg('글자를 읽는 중…', 'work');
@@ -496,18 +556,195 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     }
 
     if (ext === 'hwp' || ext === 'hwpx') {
-      msg('한글 파일(.hwp)은 브라우저에서 열 수 없습니다. 한글에서 ‘다른 이름으로 저장 → .docx’로 저장하거나, 내용을 복사해 붙여넣어 주세요.', 'err');
+      msg('한글 파일(.hwp)은 브라우저에서 열 수 없습니다. 한글에서 ‘다른 이름으로 저장 → .docx 또는 .pdf’로 저장하거나, 내용을 복사해 붙여넣어 주세요.', 'err');
       return;
     }
     if (ext === 'mp3' || ext === 'm4a' || ext === 'wav' || ext === 'aac' || ext === 'ogg' || ext === 'flac' || type.indexOf('audio/') === 0) {
       msg('음성 파일은 서버 없이 브라우저에서 글자로 바꿀 수 없어 지원하지 않습니다. 녹음 내용을 글로 옮겨 붙여넣어 주세요.', 'err');
       return;
     }
-    if (ext === 'pdf') {
-      msg('PDF는 아직 지원하지 않습니다. 글자를 복사해 붙여넣기로 해주세요.', 'err');
+    if (ext === 'pptx' || ext === 'ppt' || ext === 'key' || ext === 'odp') {
+      msg('파워포인트 파일은 아직 지원하지 않습니다. 파워포인트에서 ‘PDF로 저장’한 뒤 그 PDF를 넣어 주세요.', 'err');
       return;
     }
-    msg('지원하지 않는 파일입니다. .txt .docx .xlsx .png .jpg 파일을 넣어 주세요.', 'err');
+    msg('지원하지 않는 파일입니다. .pdf .docx .xlsx .xls .txt .csv .html .png .jpg 파일을 넣어 주세요.', 'err');
+  }
+
+  /* ---------- PDF: pdf.js로 글자 뽑기 (서버 없이, 이 화면 안에서) ---------- */
+  var PDF_MAX_PAGES = 300;
+
+  /* PDF는 자모·줄바꿈이 섞여 나오므로, 가리기 전에 모양을 고르게 맞춥니다. */
+  function normalizeExtracted(s) {
+    return String(s)
+      .replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212]/g, '-')
+      .replace(/[\u00A0\u1680\u2000-\u200B\u202F\u205F\u3000]/g, ' ')
+      .replace(/\uFEFF/g, '')
+      .replace(/[ \t]+/g, ' ');
+  }
+
+  /* PDF 글자 조각들을 줄 단위로 합칩니다. (같은 높이의 조각은 한 줄) */
+  function pdfLines(items) {
+    var lines = [], cur = null, i, it;
+    for (i = 0; i < items.length; i++) {
+      it = items[i];
+      if (typeof it.str !== 'string') continue;
+      var y = (it.transform && it.transform.length >= 6) ? Math.round(it.transform[5]) : null;
+      if (cur && y !== null && cur.y !== null && Math.abs(y - cur.y) > 2) {
+        if (cur.s) lines.push(cur.s);
+        cur = null;
+      }
+      if (!cur) cur = { y: y, s: '' };
+      cur.s += it.str;
+      if (it.hasEOL) { if (cur.s) lines.push(cur.s); cur = null; }
+    }
+    if (cur && cur.s) lines.push(cur.s);
+    var out = [];
+    for (i = 0; i < lines.length; i++) {
+      var t = normalizeExtracted(lines[i]).trim();
+      if (t) out.push(t);
+    }
+    return out;
+  }
+
+  function readPdf(file) {
+    msg('PDF 파일을 읽는 중…', 'work');
+    busy(true, 'PDF 파일을 여는 중입니다', '글자를 페이지별로 뽑아냅니다.');
+    setupPdf().then(function () {
+      return file.arrayBuffer();
+    }).then(function (buf) {
+      return pdfjsLib.getDocument({ data: new Uint8Array(buf), isEvalSupported: false }).promise;
+    }).then(function (doc) {
+      state.pdfDoc = doc;
+      var pages = Math.min(doc.numPages, PDF_MAX_PAGES);
+      var units = [];
+      var chain = Promise.resolve();
+      for (var p = 1; p <= pages; p++) {
+        (function (p) {
+          chain = chain.then(function () {
+            $('busy-s').textContent = p + ' / ' + pages + '쪽 읽는 중…';
+            return doc.getPage(p).then(function (page) {
+              return page.getTextContent().then(function (tc) {
+                var lines = pdfLines(tc.items);
+                for (var k = 0; k < lines.length; k++) {
+                  units.push({ label: p + '쪽', text: lines[k], hint: '' });
+                }
+              });
+            });
+          });
+        })(p);
+      }
+      return chain.then(function () {
+        if (units.length) return units;
+        // 글자가 하나도 없으면 스캔본으로 보고 글자 인식을 시도합니다.
+        return pdfOcrPages(doc, pages);
+      }).then(function (result) {
+        busy(false);
+        state.kind = 'pdf';
+        state.units = result;
+        if (!result.length) {
+          msg('이 PDF에서는 글자를 찾지 못했습니다. 스캔한 그림 PDF라면 사진(.png .jpg)으로 저장해 넣어 주세요.', 'err');
+          return;
+        }
+        buildFindings();
+        setStep(2);
+        var note = 'PDF에서 글자를 뽑았습니다. 가린 결과는 .txt로 내려받습니다.';
+        if (doc.numPages > pages) note = pages + '쪽까지만 읽었습니다. ' + note;
+        msg(note);
+      });
+    }).catch(function (e) {
+      busy(false);
+      msg('PDF를 열지 못했습니다. 암호가 걸린 PDF이거나 손상된 파일일 수 있습니다. (' + (e && e.message ? e.message : 'error') + ')', 'err');
+    });
+  }
+
+  /* 글자가 없는 스캔 PDF — 쪽을 그림으로 그려 글자 인식을 시도합니다. (앞 3쪽까지) */
+  function pdfOcrPages(doc, pages) {
+    var n = Math.min(pages, 3), units = [], worker = null;
+    busy(true, '스캔한 PDF로 보입니다', '그림 속 글자를 읽는 중입니다. 처음 한 번은 조금 걸립니다.');
+    return loadLib('tesseract').then(function () {
+      return Tesseract.createWorker('kor+eng', 1, {
+        logger: function (m) {
+          if (m && m.progress) $('busy-s').textContent = '글자 인식 ' + Math.round(m.progress * 100) + '%';
+        }
+      });
+    }).then(function (w) {
+      worker = w;
+      var chain = Promise.resolve();
+      for (var p = 1; p <= n; p++) {
+        (function (p) {
+          chain = chain.then(function () {
+            return doc.getPage(p).then(function (page) {
+              var vp = page.getViewport({ scale: 2 });
+              var canvas = document.createElement('canvas');
+              canvas.width = Math.round(vp.width);
+              canvas.height = Math.round(vp.height);
+              return page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise.then(function () {
+                return canvas;
+              });
+            }).then(function (canvas) {
+              return worker.recognize(canvas);
+            }).then(function (ret) {
+              var text = (ret && ret.data && ret.data.text) || '';
+              var lines = text.split('\n');
+              for (var k = 0; k < lines.length; k++) {
+                var t = normalizeExtracted(lines[k]).trim();
+                if (t) units.push({ label: p + '쪽', text: t, hint: '' });
+              }
+            });
+          });
+        })(p);
+      }
+      return chain;
+    }).then(function () {
+      if (!worker) return units;
+      return worker.terminate().then(function () { return units; });
+    }).catch(function () { return units; });
+  }
+
+  /* ---------- HTML(웹문서): 화면에 보이는 글자만 뽑아 가리기 ---------- */
+  var HTML_BLOCKS = {
+    P: 1, DIV: 1, LI: 1, TR: 1, TD: 1, TH: 1, TABLE: 1, SECTION: 1, ARTICLE: 1,
+    HEADER: 1, FOOTER: 1, UL: 1, OL: 1, PRE: 1, BLOCKQUOTE: 1, H1: 1, H2: 1,
+    H3: 1, H4: 1, H5: 1, H6: 1, BR: 1, HR: 1
+  };
+
+  function htmlVisibleText(src) {
+    var doc = new DOMParser().parseFromString(src, 'text/html');
+    var out = '';
+    (function walk(node) {
+      for (var n = node.firstChild; n; n = n.nextSibling) {
+        if (n.nodeType === 3) { out += n.nodeValue; continue; }
+        if (n.nodeType !== 1) continue;
+        var tag = n.tagName;
+        if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT' || tag === 'TEMPLATE') continue;
+        if (tag === 'BR') { out += '\n'; continue; }
+        var block = !!HTML_BLOCKS[tag];
+        if (block) out += '\n';
+        walk(n);
+        if (block) out += '\n';
+      }
+    })(doc.body || doc.documentElement);
+    return out.replace(/[ \t\u00A0]+/g, ' ')
+      .split('\n')
+      .map(function (l) { return l.trim(); })
+      .filter(function (l, i, a) { return l || (i > 0 && a[i - 1]); })
+      .join('\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
+
+  function readHtml(file) {
+    msg('웹문서(HTML) 파일을 읽는 중…', 'work');
+    readTextFile(file).then(function (src) {
+      state.htmlSrc = src;
+      var text = htmlVisibleText(src);
+      if (!text.trim()) { msg('이 HTML 파일에서는 글자를 찾지 못했습니다.', 'err'); return; }
+      state.kind = 'html';
+      state.baseText = text;
+      buildFindings();
+      setStep(2);
+      msg('가린 결과는 원래 서식을 살려 .html로 내려받습니다.');
+    }).catch(function () { msg('HTML 파일을 읽지 못했습니다. 다른 파일로 해보세요.', 'err'); });
   }
 
   /* ---------- 이미지: 브라우저 안에서 글자 인식(OCR) ---------- */
@@ -551,7 +788,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 
   function buildFindings() {
     var texts = [];
-    if (state.kind === 'text') {
+    if (state.kind === 'text' || state.kind === 'html') {
       texts = [state.baseText];
     } else {
       texts = state.units.map(function (u) { return u.text; });
@@ -562,7 +799,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       for (var j = 0; j < found.length; j++) all.push(found[j]);
     }
     // 표(엑셀·워드)의 '이름' 열은 문맥이 없어 따로 챙깁니다.
-    if (state.kind !== 'text') {
+    if (state.kind !== 'text' && state.kind !== 'html') {
       var hinted = Ans.hintedFindings(state.units);
       for (var h = 0; h < hinted.length; h++) all.push(hinted[h]);
     }
@@ -573,9 +810,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     renderPreview();
   }
 
-  /* 글자 파일이면 원문에서 다시 계산합니다. (같은 가린 모양이 여러 곳에 쓰여도 어긋나지 않도록) */
+  /* 글자·웹문서는 원문에서 다시 계산합니다. (같은 가린 모양이 여러 곳에 쓰여도 어긋나지 않도록) */
   function refreshText() {
-    if (state.kind === 'text') state.text = Ans.apply(state.baseText, state.items);
+    if (state.kind === 'text' || state.kind === 'html') state.text = Ans.apply(state.baseText, state.items);
   }
 
   function renderChips() {
@@ -670,9 +907,26 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     if (!thumb.hidden) thumb.src = state.thumbUrl;
 
     var lines = [];
-    if (state.kind === 'text') {
+    if (state.kind === 'text' || state.kind === 'html') {
       lines = state.text.split('\n');
       note.textContent = '가린 결과입니다. 값을 더 고치려면 위 목록에서 고쳐 주세요.';
+    } else if (state.kind === 'pdf') {
+      var pm = maskedUnits();
+      var ptotal = Math.min(pm.length, MAX_PREVIEW_LINES);
+      var curPage = '';
+      for (var pi = 0; pi < ptotal; pi++) {
+        var plabel = state.units[pi].label;
+        if (plabel !== curPage) {
+          if (lines.length) lines.push('');
+          lines.push('─ ' + plabel + ' ─');
+          curPage = plabel;
+        }
+        lines.push(pm[pi]);
+      }
+      if (pm.length > MAX_PREVIEW_LINES) {
+        lines.push('… ' + (pm.length - MAX_PREVIEW_LINES) + '줄 더 있습니다.');
+      }
+      note.textContent = 'PDF에서 뽑은 글자를 가린 결과입니다. 내려받으면 .txt 파일이 됩니다.';
     } else {
       var masked = maskedUnits();
       var total = Math.min(masked.length, MAX_PREVIEW_LINES);
@@ -712,6 +966,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     state.kind = ''; state.fileName = ''; state.ext = '';
     state.buffer = null; state.wb = null; state.units = [];
     state.baseText = ''; state.text = ''; state.items = []; state.fromImage = false;
+    state.htmlSrc = '';
+    if (state.pdfDoc) { try { state.pdfDoc.destroy(); } catch (e) { } state.pdfDoc = null; }
     if (state.thumbUrl) { URL.revokeObjectURL(state.thumbUrl); state.thumbUrl = ''; }
     $('paste').value = ''; $('loadmsg').textContent = ''; $('dl-msg').textContent = '';
     $('thumb').hidden = true;
@@ -733,6 +989,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       var isCsv = state.ext === 'csv';
       name = base + '_안심필터.' + (isCsv ? 'csv' : 'txt');
       sub = isCsv ? '가린 CSV 파일입니다.' : '가린 텍스트 파일입니다.';
+    } else if (state.kind === 'html') {
+      name = base + '_안심필터.html';
+      sub = '가린 웹문서 파일입니다. 서식은 그대로 두고 글자만 바꿉니다.';
+    } else if (state.kind === 'pdf') {
+      name = base + '_안심필터.txt';
+      sub = 'PDF에서 뽑은 글자를 가려 텍스트 파일로 저장합니다. (PDF 원본 모양은 유지되지 않습니다)';
     } else if (state.kind === 'docx') {
       name = base + '_안심필터.docx';
       sub = '가린 워드 파일입니다. 서식은 그대로 두고 글자만 바꿉니다.';
@@ -783,6 +1045,21 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
         var type = state.ext === 'csv' ? 'text/csv;charset=utf-8' : 'text/plain;charset=utf-8';
         var body = state.ext === 'csv' ? '\uFEFF' + text : text;
         done(new Blob([body], { type: type }), state.outName);
+      } else if (state.kind === 'html') {
+        var htmlOut = Ans.apply(state.htmlSrc, state.items);
+        done(new Blob([htmlOut], { type: 'text/html;charset=utf-8' }), state.outName);
+      } else if (state.kind === 'pdf') {
+        var ptext = '', curPage = '';
+        for (var pi = 0; pi < state.units.length; pi++) {
+          var u = state.units[pi];
+          if (u.label !== curPage) {
+            if (curPage) ptext += '\n';
+            ptext += '[' + u.label + ']\n';
+            curPage = u.label;
+          }
+          ptext += Ans.apply(u.text, state.items) + '\n';
+        }
+        done(new Blob([ptext], { type: 'text/plain;charset=utf-8' }), state.outName);
       } else if (state.kind === 'docx') {
         busy(true, '워드 파일을 다시 만드는 중입니다', '가린 글자를 넣어 저장합니다.');
         Ans.docx.apply(state.buffer, state.items).then(function (blob) {
