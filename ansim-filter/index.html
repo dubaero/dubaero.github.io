@@ -218,7 +218,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
   <!-- 1단계 -->
   <section class="card" id="panel-1">
     <h2>1. 파일 넣기</h2>
-    <p class="sub">아래에 파일을 끌어다 놓거나 눌러서 고르세요. PDF·워드·엑셀 그대로 넣으면 됩니다.</p>
+    <p class="sub">아래에 파일을 끌어다 놓거나 눌러서 고르세요. 한글·PDF·워드·엑셀 그대로 넣으면 됩니다.</p>
 
     <div class="drop" id="drop" role="button" tabindex="0" aria-label="파일 고르기">
       <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 16V4m0 0 4 4m-4-4L8 8"/><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></svg>
@@ -427,8 +427,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
   }
   function msg(text, cls) {
     var el = $('loadmsg');
-    el.textContent = text || '';
     el.className = 'hint' + (cls ? ' ' + cls : '');
+    // 안내 상자는 굵은 글씨를 살리기 위해 HTML을 그대로 넣습니다. (우리 문장만 넣습니다)
+    if (cls === 'tip') el.innerHTML = text || '';
+    else el.textContent = text || '';
   }
   function setStep(n) {
     state.step = n;
