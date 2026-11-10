@@ -585,6 +585,136 @@
     return out;
   }
 
+  /* =========================================================
+     한글(.hwpx) — Contents/section*.xml 안의 <hp:t> 글자를 합쳐 찾고 나눠 닮습니다.
+     압축 구조가 .docx와 같아 같은 방식으로 처리합니다.
+     ========================================================= */
+  var H_NS = 'http://www.hancom.co.kr/hwpml/2011/paragraph';
+  var HWPX_PARTS = /^Contents\/section\d+\.xml$/;
+
+  function hwpxTextNodes(p) {
+    var ts = p.getElementsByTagNameNS(H_NS, 't'), out = [];
+    for (var i = 0; i < ts.length; i++) out.push(ts[i]);
+    return out;
+  }
+
+  function hwpxPlain(el) {
+    var ts = el.getElementsByTagNameNS(H_NS, 't'), s = '';
+    for (var i = 0; i < ts.length; i++) s += ts[i].textContent;
+    return s;
+  }
+
+  /* 한글 표에서 '이름' 열에 들어 있는 값을 모읍니다. */
+  function hwpxNameValues(doc) {
+    var out = {};
+    var tables = doc.getElementsByTagNameNS(H_NS, 'tbl');
+    for (var t = 0; t < tables.length; t++) {
+      var rows = tables[t].getElementsByTagNameNS(H_NS, 'tr');
+      if (rows.length < 2) continue;
+      var headCells = rows[0].getElementsByTagNameNS(H_NS, 'tc');
+      var cols = [], c, k, r;
+      for (c = 0; c < headCells.length; c++) {
+        var h = hwpxPlain(headCells[c]).replace(/\s/g, '');
+        if (NAME_HEADERS[h]) cols.push(c);
+      }
+      if (!cols.length) continue;
+      for (r = 1; r < rows.length; r++) {
+        var cells = rows[r].getElementsByTagNameNS(H_NS, 'tc');
+        for (k = 0; k < cols.length; k++) {
+          if (cols[k] >= cells.length) continue;
+          var v = hwpxPlain(cells[k]).trim();
+          if (isNameValue(v)) out[v] = 1;
+        }
+      }
+    }
+    return out;
+  }
+
+  /* hwpx → { units: [{label, text}], parts: {이름: XML문자열} } */
+  function hwpxRead(buffer) {
+    return JSZip.loadAsync(buffer).then(function (zip) {
+      var names = Object.keys(zip.files).filter(function (n) {
+        return HWPX_PARTS.test(n) && !zip.files[n].dir;
+      }).sort();
+      var units = [], parts = {}, chain = Promise.resolve();
+      names.forEach(function (name) {
+        chain = chain.then(function () {
+          return zip.file(name).async('string').then(function (xml) {
+            parts[name] = xml;
+            var doc = new DOMParser().parseFromString(xml, 'application/xml');
+            var nameVals = hwpxNameValues(doc);
+            var ps = doc.getElementsByTagNameNS(H_NS, 'p');
+            for (var i = 0; i < ps.length; i++) {
+              var s = hwpxPlain(ps[i]);
+              if (!s) continue;
+              units.push({
+                label: '본문',
+                text: s,
+                hint: nameVals[s.trim()] ? 'name' : ''
+              });
+            }
+          });
+        });
+      });
+      return chain.then(function () { return { units: units, parts: parts }; });
+    });
+  }
+
+  /* hwpx 원본 + 가리기 목록 → 새 hwpx 파일(Blob). 글자만 바뀌고 서식은 그대로입니다. */
+  function hwpxApply(buffer, items) {
+    return JSZip.loadAsync(buffer).then(function (zip) {
+      var names = Object.keys(zip.files).filter(function (n) {
+        return HWPX_PARTS.test(n) && !zip.files[n].dir;
+      });
+      var changed = 0, chain = Promise.resolve();
+      names.forEach(function (name) {
+        chain = chain.then(function () {
+          return zip.file(name).async('string').then(function (xml) {
+            var doc = new DOMParser().parseFromString(xml, 'application/xml');
+            if (doc.getElementsByTagName('parsererror').length) return;
+            var ps = doc.getElementsByTagNameNS(H_NS, 'p');
+            var dirty = false;
+            for (var i = 0; i < ps.length; i++) {
+              var ts = hwpxTextNodes(ps[i]);
+              if (!ts.length) continue;
+              var texts = [], j;
+              for (j = 0; j < ts.length; j++) texts.push(ts[j].textContent);
+              var next = maskParagraphRuns(texts, items);
+              for (j = 0; j < ts.length; j++) {
+                if (next[j] !== texts[j]) {
+                  ts[j].textContent = next[j];
+                  ts[j].setAttributeNS(XML_NS, 'xml:space', 'preserve');
+                  dirty = true;
+                }
+              }
+            }
+            if (dirty) {
+              changed++;
+              zip.file(name, new XMLSerializer().serializeToString(doc));
+            }
+          });
+        });
+      });
+      return chain.then(function () {
+        if (!changed) return null;
+        function make() {
+          return zip.generateAsync({
+            type: 'blob',
+            mimeType: 'application/hwp+zip',
+            compression: 'DEFLATE'
+          });
+        }
+        // mimetype은 압축하지 않고 첫 항목으로 두어야 한글에서 바로 열립니다.
+        var mime = zip.file('mimetype');
+        if (!mime) return make();
+        return mime.async('string').then(function (s) {
+          zip.file('mimetype', s, { compression: 'STORE' });
+          return make();
+        });
+      });
+    });
+  }
+
   function xlsxApply(wb, items) {
     var changed = 0;
     eachCell(wb, function (cell, sheet, addr) {
@@ -611,6 +741,7 @@
     hintedFindings: hintedFindings,
     csvNameValues: csvNameValues,
     docx: { read: docxRead, apply: docxApply },
+    hwpx: { read: hwpxRead, apply: hwpxApply },
     xlsx: { read: xlsxRead, apply: xlsxApply }
   };
 })(typeof window !== 'undefined' ? window : this);

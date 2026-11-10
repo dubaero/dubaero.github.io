@@ -73,6 +73,9 @@ img{display:block;max-width:100%}
 .hint{font-size:14.5px;color:var(--muted);margin-top:12px;min-height:1.4em}
 .hint.err{color:#A3352A}
 .hint.work{color:var(--point)}
+.hint.tip{color:var(--ink);background:var(--point-soft);border:1px solid #EFD9CF;border-radius:12px;padding:12px 14px;font-size:14.5px;line-height:1.65}
+.hint.tip b{color:#8E402C}
+.drop span b{color:var(--ink);font-weight:700}
 details.paste{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
 details.paste summary{cursor:pointer;font-size:15px;font-weight:600;color:var(--ink);list-style:none}
 details.paste summary::-webkit-details-marker{display:none}
@@ -220,8 +223,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     <div class="drop" id="drop" role="button" tabindex="0" aria-label="파일 고르기">
       <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 16V4m0 0 4 4m-4-4L8 8"/><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></svg>
       <b>파일을 끌어다 놓거나 눌러서 고르세요</b>
-      <span>PDF .pdf · 워드 .docx · 엑셀 .xlsx .xls · 텍스트 .txt .csv · 웹문서 .html · 사진 .png .jpg</span>
-      <input type="file" id="file" accept=".txt,.csv,.tsv,.md,.html,.htm,.pdf,.docx,.xlsx,.xls,.xlsm,.png,.jpg,.jpeg,.webp,.bmp,.gif" hidden>
+      <span><b>한글 .hwpx</b> · <b>PDF .pdf</b> · 엑셀 .xlsx .xls · 워드 .docx · 텍스트 .txt .csv · 웹문서 .html · 사진 .png .jpg</span>
+      <input type="file" id="file" accept=".hwpx,.hwp,.txt,.csv,.tsv,.md,.html,.htm,.pdf,.docx,.xlsx,.xls,.xlsm,.png,.jpg,.jpeg,.webp,.bmp,.gif" hidden>
     </div>
     <p class="hint" id="loadmsg" aria-live="polite"></p>
 
@@ -234,10 +237,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     <div class="limit">
       <h3>형식마다 받는 모습</h3>
       <ul>
+        <li><b>한글 .hwpx</b> — 서식·표 그대로, 글자만 바꿔서 <b>.hwpx</b>로 내려받습니다. 공공기관 문서는 이 형식으로 넣어 주세요.</li>
         <li><b>PDF .pdf</b> — 글자만 뽑아 가린 뒤 <b>.txt</b>로 내려받습니다. PDF의 원래 모양 그대로 되살리는 일은 브라우저만으로는 안전하게 할 수 없어 글자만 남겨 드립니다.</li>
-        <li><b>워드 .docx · 엑셀 .xlsx</b> — 서식 그대로, 글자만 바꿔서 같은 형식으로 내려받습니다.</li>
+        <li><b>엑셀 .xlsx · 워드 .docx</b> — 서식 그대로, 글자만 바꿔서 같은 형식으로 내려받습니다.</li>
+        <li><b>텍스트 .txt .csv · 웹문서 .html</b> — 글자 표는 '이름' 열까지 가리고, 웹문서는 서식 그대로 .html로 내려받습니다.</li>
         <li><b>사진 .png .jpg</b> — 사진 속 글자를 읽어(글자 인식) 가린 .txt로 내려받습니다. 사진 자체의 글자를 지우지는 못합니다.</li>
-        <li><b>한글 .hwp .hwpx</b> — 브라우저에서는 한글 문서를 열 수 없습니다. 한글에서 <b>다른 이름으로 저장 → .docx 또는 .pdf</b>로 저장하거나, 내용을 복사해 붙여넣어 주세요.</li>
+        <li><b>구형 한글 .hwp</b> — 브라우저가 이 형식을 열 수 없습니다. 한글에서 <b>다른 이름으로 저장 → .hwpx</b>(또는 .pdf)로 저장해 넣어 주세요. 서식 그대로 가려집니다.</li>
         <li><b>파워포인트 .pptx</b> — 아직 지원하지 않습니다. 슬라이드는 <b>PDF로 저장</b>해서 넣어 주세요.</li>
         <li><b>음성 .mp3 .m4a .wav</b> — 브라우저만으로는 서버 없이 음성을 글자로 바꿀 수 없어 지원하지 않습니다. 녹음 내용을 글로 옮겨 붙여넣어 주세요.</li>
       </ul>
@@ -555,8 +560,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       return;
     }
 
-    if (ext === 'hwp' || ext === 'hwpx') {
-      msg('한글 파일(.hwp)은 브라우저에서 열 수 없습니다. 한글에서 ‘다른 이름으로 저장 → .docx 또는 .pdf’로 저장하거나, 내용을 복사해 붙여넣어 주세요.', 'err');
+    if (ext === 'hwp') {
+      msg('한글 5.0(.hwp) 파일은 브라우저가 직접 열 수 없습니다. 한글에서 [다른 이름으로 저장] → <b>.hwpx</b>(한글 표준 문서) 또는 <b>.pdf</b>로 저장해서 넣어 주시면 서식 그대로 안전하게 가려집니다.', 'tip');
+      return;
+    }
+    if (ext === 'hwpx') {
+      readHwpx(file);
       return;
     }
     if (ext === 'mp3' || ext === 'm4a' || ext === 'wav' || ext === 'aac' || ext === 'ogg' || ext === 'flac' || type.indexOf('audio/') === 0) {
@@ -567,7 +576,33 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       msg('파워포인트 파일은 아직 지원하지 않습니다. 파워포인트에서 ‘PDF로 저장’한 뒤 그 PDF를 넣어 주세요.', 'err');
       return;
     }
-    msg('지원하지 않는 파일입니다. .pdf .docx .xlsx .xls .txt .csv .html .png .jpg 파일을 넣어 주세요.', 'err');
+    msg('지원하지 않는 파일입니다. .hwpx .pdf .docx .xlsx .xls .txt .csv .html .png .jpg 파일을 넣어 주세요.', 'err');
+  }
+
+  /* ---------- 한글(.hwpx): Contents/section*.xml의 글자를 가리기 ---------- */
+  function readHwpx(file) {
+    msg('한글(.hwpx) 파일을 읽는 중…', 'work');
+    busy(true, '한글 파일을 여는 중입니다', '서식은 그대로 두고 글자만 찾습니다.');
+    loadLib('jszip').then(function () {
+      return file.arrayBuffer();
+    }).then(function (buf) {
+      state.buffer = buf;
+      return Ans.hwpx.read(buf);
+    }).then(function (r) {
+      busy(false);
+      state.kind = 'hwpx';
+      state.units = r.units.filter(function (u) { return u.text && u.text.trim(); });
+      if (!state.units.length) {
+        msg('이 한글 파일에서 글자를 찾지 못했습니다. 암호가 걸れた 문서인지 확인해 주세요.', 'err');
+        return;
+      }
+      buildFindings();
+      setStep(2);
+      msg('');
+    }).catch(function (e) {
+      busy(false);
+      msg('한글 파일을 열지 못했습니다. 한글에서 .hwpx로 다시 저장해 보세요. (' + (e && e.message ? e.message : 'error') + ')', 'err');
+    });
   }
 
   /* ---------- PDF: pdf.js로 글자 뽑기 (서버 없이, 이 화면 안에서) ---------- */
@@ -1000,6 +1035,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     } else if (state.kind === 'pdf') {
       name = base + '_안심필터.txt';
       sub = 'PDF에서 뽑은 글자를 가려 텍스트 파일로 저장합니다. (PDF 원본 모양은 유지되지 않습니다)';
+    } else if (state.kind === 'hwpx') {
+      name = base + '_안심필터.hwpx';
+      sub = '가린 한글 파일입니다. 서식과 표는 그대로 두고 글자만 바꿉니다.';
     } else if (state.kind === 'docx') {
       name = base + '_안심필터.docx';
       sub = '가린 워드 파일입니다. 서식은 그대로 두고 글자만 바꿉니다.';
@@ -1066,6 +1104,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
           ptext += Ans.apply(u.text, state.items) + '\n';
         }
         done(new Blob([ptext], { type: 'text/plain;charset=utf-8' }), state.outName);
+      } else if (state.kind === 'hwpx') {
+        busy(true, '한글 파일을 다시 만드는 중입니다', '가린 글자를 넣어 저장합니다.');
+        Ans.hwpx.apply(state.buffer, state.items).then(function (blob) {
+          busy(false);
+          if (!blob) blob = new Blob([state.buffer], { type: 'application/hwp+zip' });
+          done(blob, state.outName);
+        }).catch(function (e) { busy(false); fail(e); });
       } else if (state.kind === 'docx') {
         busy(true, '워드 파일을 다시 만드는 중입니다', '가린 글자를 넣어 저장합니다.');
         Ans.docx.apply(state.buffer, state.items).then(function (blob) {
