@@ -340,7 +340,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
   </div>
 </div>
 
-<script src="ansim-core.js?v=20261110"></script>
+<script src="ansim-core.js?v=20261110b"></script>
 <script>
 (function () {
   'use strict';
@@ -601,6 +601,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       msg('');
     }).catch(function (e) {
       busy(false);
+      if (!Ans.hwpx) { busy(false); msg('화면을 새로 고쳐 주세요(새로고침). 예전 화면이 남아 있으면 한글 파일을 열 수 없습니다.', 'err'); return; }
       msg('한글 파일을 열지 못했습니다. 한글에서 .hwpx로 다시 저장해 보세요. (' + (e && e.message ? e.message : 'error') + ')', 'err');
     });
   }
