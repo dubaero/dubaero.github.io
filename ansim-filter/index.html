@@ -335,7 +335,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
   </div>
 </div>
 
-<script src="ansim-core.js"></script>
+<script src="ansim-core.js?v=20261110"></script>
 <script>
 (function () {
   'use strict';
@@ -804,7 +804,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       for (var h = 0; h < hinted.length; h++) all.push(hinted[h]);
     }
     // CSV(글자 표)도 '이름' 머리글 아래 값을 따로 챙깁니다.
-    if (state.kind === 'text' && (state.ext === 'csv' || state.ext === 'tsv')) {
+    if (state.kind === 'text' && (state.ext === 'csv' || state.ext === 'tsv') && Ans.csvNameValues) {
       var csvNames = Ans.csvNameValues(state.baseText);
       for (var c = 0; c < csvNames.length; c++) all.push(csvNames[c]);
     }
