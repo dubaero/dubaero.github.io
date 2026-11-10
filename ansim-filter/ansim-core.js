@@ -526,6 +526,65 @@
     return out;
   }
 
+  /* =========================================================
+     CSV(글자 표) — 머리글의 '이름' 칸 아래 값을 모읍니다.
+     글자로 다루므로 원문 그대로 가리고 그대로 내려받습니다.
+     ========================================================= */
+  function csvDelim(line) {
+    var c = (line.match(/,/g) || []).length;
+    var t = (line.match(/\t/g) || []).length;
+    var s = (line.match(/;/g) || []).length;
+    if (t > c && t >= s) return '\t';
+    if (s > c) return ';';
+    return ',';
+  }
+
+  function csvFields(line, d) {
+    var out = [], cur = '', q = false;
+    for (var i = 0; i < line.length; i++) {
+      var ch = line.charAt(i);
+      if (q) {
+        if (ch === '"') {
+          if (line.charAt(i + 1) === '"') { cur += '"'; i++; }
+          else q = false;
+        } else cur += ch;
+      } else if (ch === '"') q = true;
+      else if (ch === d) { out.push(cur); cur = ''; }
+      else cur += ch;
+    }
+    out.push(cur);
+    return out;
+  }
+
+  function csvNameValues(text) {
+    var out = [], lines = String(text || '').split(/\r\n|\n|\r/);
+    var d = ',', i, k, r;
+    for (i = 0; i < lines.length; i++) {
+      if (lines[i].trim()) { d = csvDelim(lines[i]); break; }
+    }
+    for (i = 0; i < lines.length; i++) {
+      var head = csvFields(lines[i], d), cols = [];
+      for (k = 0; k < head.length; k++) {
+        if (NAME_HEADERS[head[k].replace(/[\s"]/g, '')]) cols.push(k);
+      }
+      if (!cols.length) continue;
+      for (r = i + 1; r < lines.length; r++) {
+        var f = csvFields(lines[r], d);
+        for (k = 0; k < cols.length; k++) {
+          var v = (f[cols[k]] || '').trim();
+          if (!isNameValue(v)) continue;
+          out.push({
+            type: 'name', label: '이름',
+            original: v, replacement: maskName(v),
+            start: 0, end: 0
+          });
+        }
+      }
+      break;
+    }
+    return out;
+  }
+
   function xlsxApply(wb, items) {
     var changed = 0;
     eachCell(wb, function (cell, sheet, addr) {
@@ -550,6 +609,7 @@
     summarize: summarize,
     maskParagraphRuns: maskParagraphRuns,
     hintedFindings: hintedFindings,
+    csvNameValues: csvNameValues,
     docx: { read: docxRead, apply: docxApply },
     xlsx: { read: xlsxRead, apply: xlsxApply }
   };

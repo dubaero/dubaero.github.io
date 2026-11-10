@@ -495,7 +495,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       return;
     }
 
-    if (ext === 'txt' || ext === 'csv' || ext === 'md' || (type.indexOf('text/') === 0)) {
+    if (ext === 'txt' || ext === 'csv' || ext === 'tsv' || ext === 'md' || (type.indexOf('text/') === 0)) {
       msg('글자를 읽는 중…', 'work');
       readTextFile(file).then(function (text) {
         state.kind = 'text';
@@ -803,6 +803,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       var hinted = Ans.hintedFindings(state.units);
       for (var h = 0; h < hinted.length; h++) all.push(hinted[h]);
     }
+    // CSV(글자 표)도 '이름' 머리글 아래 값을 따로 챙깁니다.
+    if (state.kind === 'text' && (state.ext === 'csv' || state.ext === 'tsv')) {
+      var csvNames = Ans.csvNameValues(state.baseText);
+      for (var c = 0; c < csvNames.length; c++) all.push(csvNames[c]);
+    }
     state.items = Ans.unique(all);
     refreshText();
     renderChips();
@@ -986,8 +991,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     var base = baseName();
     var name, sub;
     if (state.kind === 'text') {
-      var isCsv = state.ext === 'csv';
-      name = base + '_안심필터.' + (isCsv ? 'csv' : 'txt');
+      var isCsv = state.ext === 'csv' || state.ext === 'tsv';
+      name = base + '_안심필터.' + (isCsv ? state.ext : 'txt');
       sub = isCsv ? '가린 CSV 파일입니다.' : '가린 텍스트 파일입니다.';
     } else if (state.kind === 'html') {
       name = base + '_안심필터.html';
@@ -1042,8 +1047,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
     try {
       if (state.kind === 'text') {
         var text = state.text;
-        var type = state.ext === 'csv' ? 'text/csv;charset=utf-8' : 'text/plain;charset=utf-8';
-        var body = state.ext === 'csv' ? '\uFEFF' + text : text;
+        var isCsvOut = state.ext === 'csv' || state.ext === 'tsv';
+        var type = isCsvOut ? 'text/csv;charset=utf-8' : 'text/plain;charset=utf-8';
+        var body = isCsvOut ? '\uFEFF' + text : text;
         done(new Blob([body], { type: type }), state.outName);
       } else if (state.kind === 'html') {
         var htmlOut = Ans.apply(state.htmlSrc, state.items);
