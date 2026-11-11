@@ -1058,7 +1058,13 @@ body.page-sub .wrap{padding:8px 14px 20px!important;max-width:1320px!important}
 .sr-flips .dx-desc{display:none!important}
 .sr-flips .dx-fr-act{gap:4px!important;margin:5px 2px 0!important}
 .sr-flips .dx-fr-act .btn{font-size:10px!important;padding:3px 6px!important;border-radius:8px!important;box-shadow:0 2px 0 #9cbca8!important;min-height:0!important;margin:0!important;flex:0 0 auto!important}
-.sr-flips .dx-front{overflow:hidden!important;justify-content:flex-start!important}
+
+.sr-flips .dx-front{display:flex!important;flex-direction:column!important;justify-content:flex-start!important;overflow:hidden!important}
+.sr-flips .dx-name{font-size:13.5px!important;font-weight:900!important;color:#1e352b!important;margin:4px 2px 1px!important;line-height:1.25!important;letter-spacing:-.2px!important}
+.sr-flips .dx-fr-act{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:3px!important;margin:auto 0 0!important;width:100%!important;padding-top:4px!important}
+.sr-flips .dx-fr-act .btn{font-size:9.5px!important;padding:2.5px 5px!important;border-radius:6px!important;min-height:22px!important;line-height:1.2!important;white-space:nowrap!important;flex:0 0 auto!important}
+.sr-flips .dx-fr-act .dx-badge{margin:0!important;font-size:9.5px!important;padding:2px 5px!important;border-width:1px!important;white-space:nowrap!important;line-height:1.2!important;flex:0 0 auto!important}
+
 .sr-picks{gap:5px!important;margin:0 0 7px!important}
 .sr-pick{padding:3px 8px!important;border-radius:9px!important;gap:4px!important}
 .sr-pick b{font-size:10px!important}
@@ -2062,7 +2068,7 @@ function sResultView(){if(!sReady())return `<section class="panel sr"><div class
  if(!state.selfRes.length)sPick();const dis=sAns('dislike');
  return `<section class="panel sr" id="selfRes"><div class="section-title"><div><h2>나와 통하는 직업 3가지</h2><p>흥미 ${sAns('interest').length}개 · 잘하는 것 ${sAns('good').length}개${dis.length?` · 패스 ${dis.length}개는 빼고`:''} 찾았어요. 카드를 눌러 뒤집어 보세요.</p></div><button type="button" class="btn small outline" id="srFlipAll">한꺼번에 뒤집기</button></div>
  <div class="sr-picks">${['interest','good','dislike'].map(id=>{const q=SQ.find(x=>x.id===id);const a=sAns(id);return a.length?`<div class="sr-pick p-${id}"><b>${q.tab}</b>${a.map(x=>`<span>${E(x)}</span>`).join('')}</div>`:''}).join('')}</div>
- <div class="dx-flips sr-flips">${state.selfRes.map((n,k)=>{const i=dIdx(n),j=J[i],rs=sReasons(n);return `<div class="dx-flip ${state.selfFlip[k]?'is-flipped':''}"><button type="button" class="dx-face dx-back" data-srflip="${k}" aria-label="직업 카드 ${k+1} 뒤집기"><span class="dx-back-q">${['①','②','③'][k]}</span><span class="dx-back-t">나와 통하는 직업</span><small>눌러서 뒤집기</small></button><div class="dx-face dx-front st-${j.w}"><span class="dx-art">${jobArt(j)}</span>${dBadge(j.w)}<b class="dx-name">${E(n)}</b><span class="dx-reason">${rs.map(r=>`<em>"${E(r)}"</em>`).join(' ')}${rs.length?' 답과 통해요':''}</span><span class="dx-desc">${E(j.does)}</span><span class="dx-fr-act"><button type="button" class="btn small" data-srgo="${i}">자세히 보기</button><button type="button" class="btn small outline" data-srswap="${k}">다른 후보</button></span></div></div>`}).join('')}</div>
+ <div class="dx-flips sr-flips">${state.selfRes.map((n,k)=>{const i=dIdx(n),j=J[i],rs=sReasons(n);return `<div class="dx-flip ${state.selfFlip[k]?'is-flipped':''}"><button type="button" class="dx-face dx-back" data-srflip="${k}" aria-label="직업 카드 ${k+1} 뒤집기"><span class="dx-back-q">${['①','②','③'][k]}</span><span class="dx-back-t">나와 통하는 직업</span><small>눌러서 뒤집기</small></button><div class="dx-face dx-front st-${j.w}"><span class="dx-art">${jobArt(j)}</span><b class="dx-name">${E(n)}</b><span class="dx-reason">${rs.map(r=>`<em>"${E(r)}"</em>`).join(' ')}${rs.length?' 답과 통해요':''}</span><span class="dx-desc">${E(j.does)}</span><span class="dx-fr-act"><button type="button" class="btn small" data-srgo="${i}">자세히 보기</button><button type="button" class="btn small outline" data-srswap="${k}">다른 후보</button>${dBadge(j.w)}</span></div></div>`}).join('')}</div>
  <p class="gm-note">고른 흥미·잘하는 것과 직업 특징을 맞춰 본 <b>재미로 보는 힌트</b>예요. 정식 적성검사가 아니에요. 더 많은 직업은 10년 뒤 직업 도감에서 볼 수 있어요.</p><div class="row"><button type="button" class="btn" onclick="nav('strength')">강점과 경험 정리하러 가기 →</button><button type="button" class="btn light" onclick="nav('card')">100장 직업 도감 보기</button></div></section>`}
 views.self=()=>{
   const isResult = state.selfTab >= SQ.length;
