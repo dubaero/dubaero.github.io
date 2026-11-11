@@ -1200,6 +1200,15 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   document.getElementById('gate-form').addEventListener('submit',function(e){
     e.preventDefault();var v=gIn.value.trim();if(!v||!cur)return;
     if(!cur.code||!cur.link){gMsg.textContent='아직 준비 중인 자료실이에요.';return;}
+    /* 소장님 마스터 비밀번호로도 영구 자동 인증 저장 */
+    if (v === 'seojeong' || v === 'dubaero') {
+      localStorage.setItem('dubaero_owner', '1');
+      var w = null;
+      try { w = window.open(cur.link, '_blank'); if (w) w.opener = null; } catch(err){}
+      if (w) { closeGate(); return; }
+      window.location.href = cur.link;
+      return;
+    }
     sha(v).then(function(h){
       if(h===cur.code){var w=null;try{w=window.open(cur.link,'_blank');if(w)w.opener=null;}catch(err){}
       if(w){gMsg.textContent='새 탭에서 강의 자료실을 열었어요.';return;}
