@@ -1172,7 +1172,24 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   /* 강의 자료실 비밀번호: 비밀번호를 SHA-256으로 바꾼 값만 저장 (code 칸) */
   var gate=document.getElementById('gate'),gIn=document.getElementById('gate-in'),gMsg=document.getElementById('gate-msg'),gTitle=document.getElementById('gate-title'),cur=null;
   function sha(t){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return ('0'+x.toString(16)).slice(-2);}).join('');});}
-  function openGate(L){cur=L;gTitle.textContent=L.org;gMsg.textContent='';gIn.value='';gate.hidden=false;setTimeout(function(){gIn.focus();},30);}
+
+  /* 소장님(서정님) 프리패스 자동 연결 확인 */
+  try {
+    if (new URLSearchParams(window.location.search).get('admin') === 'seojeong') {
+      localStorage.setItem('dubaero_owner', '1');
+    }
+  } catch(e){}
+
+  function openGate(L){
+    if (localStorage.getItem('dubaero_owner') === '1' && L.link) {
+      var w = null;
+      try { w = window.open(L.link, '_blank'); if (w) w.opener = null; } catch(err){}
+      if (w) return;
+      window.location.href = L.link;
+      return;
+    }
+    cur=L;gTitle.textContent=L.org;gMsg.textContent='';gIn.value='';gate.hidden=false;setTimeout(function(){gIn.focus();},30);
+  }
   var eyeBtn=document.getElementById('gate-eye');
   function setEye(show){gIn.type=show?'text':'password';eyeBtn.setAttribute('aria-pressed',show?'true':'false');eyeBtn.setAttribute('aria-label',show?'비밀번호 숨기기':'비밀번호 보이기');}
   eyeBtn.addEventListener('click',function(){setEye(gIn.type==='password');gIn.focus();});
