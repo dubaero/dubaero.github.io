@@ -1985,7 +1985,7 @@ const SQ=[
 ];
 qs.splice(0,qs.length,...SQ.map(q=>({id:q.id,title:q.title,options:q.options.map(o=>o[0])})));
 /* v14: 10문항 3지선다 개편 — 예전 답 중 지금 선택지에 없는 값은 정리 */
-SQ.forEach(q=>{const v=state.questions[q.id];if(v==null)return;const arr=(Array.isArray(v)?v:[v]).filter(a=>q.options.some(o=>o[0]===a));if(!arr.length)delete state.questions[q.id];else state.questions[q.id]=q.multi?arr:arr[arr.length-1]});
+window.v14Clean=function(){SQ.forEach(q=>{const v=state.questions[q.id];if(v==null)return;const arr=(Array.isArray(v)?v:[v]).filter(a=>q.options.some(o=>o[0]===a));if(!arr.length)delete state.questions[q.id];else state.questions[q.id]=q.multi?arr:arr[arr.length-1]})};v14Clean();
 state.selfRes=[];state.selfEx=[];state.selfFlip=[false,false,false];
 const sAns=id=>{const v=state.questions[id];return Array.isArray(v)?v:(v?[v]:[])};
 function sProfile(){const p={},neg=[];SQ.forEach(q=>{const w=q.multi?3:1;sAns(q.id).forEach(a=>{const o=q.options.find(x=>x[0]===a);if(!o)return;if(q.neg)neg.push(o[1]);else o[1].forEach(t=>p[t]=(p[t]||0)+w)})});return{p,neg}}
@@ -2469,6 +2469,8 @@ const _vIv=views.interview;views.interview=()=>_vIv().replace('정해진 질문�
  clearAll=function(){let ok=true;try{ok=window.confirm('현재 입력한 사진과 모든 기록을 지우시겠습니까? 이 작업은 되돌릴 수 없습니다.')}catch(e){ok=true}if(!ok)return;cleared=true;clearTimeout(tm);try{localStorage.removeItem(KEY)}catch(e){}window.removeEventListener('pagehide',save);window.removeEventListener('beforeunload',save);location.reload()};
  if(d){render();const y=d.y||0;requestAnimationFrame(()=>setTimeout(()=>window.scrollTo(0,y),60));setTimeout(()=>{try{showToast('작성하던 내용을 불러왔어요. 공용 컴퓨터라면 마친 뒤 "내 입력정보 지우기"를 눌러 주세요.')}catch(e){}},500)}
 })();
+/* v14: 불러온 예전 답 중 지금 10문항 선택지에 없는 값 정리 후 다시 그림 */
+try{if(typeof v14Clean==='function'){v14Clean();render()}}catch(e){}
 
 
 /* v13.2: 내 입력정보 지우기 잘 보이게 */
