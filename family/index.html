@@ -608,7 +608,11 @@ body{font-weight:500}
 .sw-lyrics-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;flex-wrap:wrap;border-bottom:1px dashed #BDDED1;padding-bottom:8px}
 .sw-lyrics-title{font-size:15px;font-weight:800;color:#13624E}
 .sw-lyrics-style{font-size:12px;font-weight:700;background:#E0F3EB;color:#185F4D;padding:2px 8px;border-radius:6px}
-.sw-lyrics-area{width:100%;box-sizing:border-box;min-height:220px;padding:12px;font-size:13.5px;line-height:1.7;color:#1C2E25;background:#fff;border:1.5px solid #CCD8D2;border-radius:10px;resize:vertical;font-family:inherit;white-space:pre-wrap}
+.sw-lyrics-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px}
+@media (max-width:580px){.sw-lyrics-cols{grid-template-columns:1fr;gap:8px}}
+.sw-lyrics-col{display:flex;flex-direction:column;gap:5px}
+.sw-col-tag{font-size:11.5px;font-weight:700;color:#185F4D;background:#EAF6F0;padding:2px 8px;border-radius:4px;width:fit-content}
+.sw-lyrics-area{width:100%;box-sizing:border-box;height:185px;min-height:165px;padding:10px 12px;font-size:13px;line-height:1.65;color:#1C2E25;background:#fff;border:1.5px solid #CCD8D2;border-radius:10px;resize:vertical;font-family:inherit;white-space:pre-wrap}
 .sw-lyrics-area:focus{outline:none;border-color:#185F4D;box-shadow:0 0 0 2px rgba(24,95,77,0.15)}
 
 /* 2026.11.09 화면 압축: 스크롤 줄이기 */
@@ -956,21 +960,29 @@ body{line-height:1.55}
       <!-- 스텝 5: 노래 가사 확인 및 수정 -->
       <div class="sw-pane" id="sw-p5">
         <div class="sw-q">5. 노래 가사를 확인해 주세요</div>
-        <div class="sw-desc">선택하신 대상과 주제에 맞춰 따뜻한 가사가 완성되었어요. 가사를 직접 고치실 수도 있어요.</div>
+        <div class="sw-desc">선택하신 대상과 주제에 맞춰 따뜻한 가사가 완성되었어요. 1절과 2절을 확인하고 [확인: 완성하기]를 누르세요.</div>
         <div class="sw-lyrics-card">
           <div class="sw-lyrics-head">
             <span class="sw-lyrics-title" id="sw-lyr-title">🎵 오늘도 수고했어, 내 동료야</span>
             <span class="sw-lyrics-style" id="sw-lyr-target">가족센터 종사자 (동료) 힐링</span>
+            <button type="button" class="btn mini" id="sw-lyrics-regen" style="margin-left:auto">↺ 다른 가사로 바꾸기</button>
           </div>
-          <textarea class="sw-lyrics-area" id="sw-lyrics-text" rows="12"></textarea>
-          <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
-            <button type="button" class="btn mini" id="sw-lyrics-regen">↺ 다른 가사로 바꾸기</button>
-            <span style="font-size:12px;color:#556B61">직접 단어나 문장을 수정하셔도 좋아요!</span>
+          <!-- 1절 후렴 / 2절 후렴 가로 2열 배치 -->
+          <div class="sw-lyrics-cols">
+            <div class="sw-lyrics-col">
+              <div class="sw-col-tag">1절 & 후렴</div>
+              <textarea class="sw-lyrics-area" id="sw-lyrics-p1" rows="7"></textarea>
+            </div>
+            <div class="sw-lyrics-col">
+              <div class="sw-col-tag">2절 & 후렴</div>
+              <textarea class="sw-lyrics-area" id="sw-lyrics-p2" rows="7"></textarea>
+            </div>
           </div>
+          <div style="font-size:12px;color:#556B61;margin-top:4px">직접 단어나 문장을 수정하셔도 좋아요!</div>
         </div>
         <div class="sw-nav-acts">
           <button type="button" class="btn mini sw-prev" data-to="4">‹ 이전: 제목 다시 고르기</button>
-          <button type="button" class="btn fill sw-next" data-to="6" style="margin-left:auto">가사 좋아요! 최종 완성본 보기 ›</button>
+          <button type="button" class="btn fill large sw-next" data-to="6" style="margin-left:auto;font-size:14.5px;padding:10px 20px">✔ 가사 확인 완료! 완성 프롬프트 보기 ›</button>
         </div>
       </div>
 
@@ -3202,7 +3214,8 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     who: '가족센터 종사자 (동료)',
     theme: '종사자 힐링과 응원 · 포근한 포크',
     title: '오늘도 수고했어, 내 동료야',
-    lyrics: '',
+    lyrics1: '',
+    lyrics2: '',
     lyricsVariant: 0,
     showRaw: false
   };
@@ -3217,26 +3230,31 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     var ti = SW.title || '오늘도 수고했어, 내 동료야';
     var v = variant || 0;
 
+    var p1 = '', p2 = '';
+
     if (/동료|종사자|힐링/.test(w) || /힐링|종사자/.test(t) || /동료/.test(ti)) {
       if (v % 2 === 1) {
-        return "[1절]\n서로의 서툰 하루를 가만히 토닥이며\n이곳에서 함께 나눈 수많은 이야기들\n지치고 버거운 날에도 곁을 지켜준\n당신의 따뜻한 미소가 참 고마워요\n\n[후렴]\n오늘도 참 애썼어, 나의 소중한 동료야\n우리가 함께 걷는 이 길이 참 눈부셔\n" + c + " 따뜻한 울타리 안에서\n내일도 우리 함께 웃으며 걸어가자\n\n[2절]\n마주 잡은 두 손에 온기를 나누고\n작은 고민도 함께 나누며 배운 마음\n혼자가 아니라는 그 든든한 약속이\n오늘 하루도 나를 다시 숨 쉬게 해\n\n[후렴]\n오늘도 참 애썼어, 나의 소중한 동료야\n우리가 함께 걷는 이 길이 참 눈부셔\n" + c + " 따뜻한 울타리 안에서\n내일도 우리 함께 웃으며 걸어가자";
+        p1 = "[1절]\n서로의 서툰 하루를 가만히 토닥이며\n이곳에서 함께 나눈 수많은 이야기들\n지치고 버거운 날에도 곁을 지켜준\n당신의 따뜻한 미소가 참 고마워요\n\n[후렴]\n오늘도 참 애썼어, 나의 소중한 동료야\n우리가 함께 걷는 이 길이 참 눈부셔\n" + c + " 따뜻한 울타리 안에서\n내일도 우리 함께 웃으며 걸어가자";
+        p2 = "[2절]\n마주 잡은 두 손에 온기를 나누고\n작은 고민도 함께 나누며 배운 마음\n혼자가 아니라는 그 든든한 약속이\n오늘 하루도 나를 다시 숨 쉬게 해\n\n[후렴]\n오늘도 참 애썼어, 나의 소중한 동료야\n우리가 함께 걷는 이 길이 참 눈부셔\n" + c + " 따뜻한 울타리 안에서\n내일도 우리 함께 웃으며 걸어가자";
+      } else {
+        p1 = "[1절]\n이른 아침 문을 열고 마주한 다정한 인사\n서로의 고단함을 누구보다 잘 아는 우리\n바쁜 하루 속에서도 서로를 챙겨주는\n따뜻한 눈빛 하나에 다시 힘을 내요\n\n[후렴]\n고마워요 나의 동료, 함께여서 든든해\n작은 마음 모여 피어나는 우리들의 이야기\n" + c + " 함께 웃는 오늘이\n세상 가장 빛나는 희망이 되어요";
+        p2 = "[2절]\n때로는 벅찬 짐에 어깨가 무거울 때면\n슬그머니 건네주는 따스한 차 한 잔\n우리가 함께 흘린 땀방울과 진심들이\n누군가의 마음에 따스한 빛이 되네요\n\n[후렴]\n고마워요 나의 동료, 함께여서 든든해\n작은 마음 모여 피어나는 우리들의 이야기\n" + c + " 함께 웃는 오늘이\n세상 가장 빛나는 희망이 되어요";
       }
-      return "[1절]\n이른 아침 문을 열고 마주한 다정한 인사\n서로의 고단함을 누구보다 잘 아는 우리\n바쁜 하루 속에서도 서로를 챙겨주는\n따뜻한 눈빛 하나에 다시 힘을 내요\n\n[후렴]\n고마워요 나의 동료, 함께여서 든든해\n작은 마음 모여 피어나는 우리들의 이야기\n" + c + " 함께 웃는 오늘이\n세상 가장 빛나는 희망이 되어요\n\n[2절]\n때로는 벅찬 짐에 어깨가 무거울 때면\n슬그머니 건네주는 따스한 차 한 잔\n우리가 함께 흘린 땀방울과 진심들이\n누군가의 마음에 따스한 빛이 되네요\n\n[후렴]\n고마워요 나의 동료, 함께여서 든든해\n작은 마음 모여 피어나는 우리들의 이야기\n" + c + " 함께 웃는 오늘이\n세상 가장 빛나는 희망이 되어요";
+    } else if (/부모|자녀|아이/.test(w) || /부모자녀/.test(t) || /햇살/.test(ti)) {
+      p1 = "[1절]\n작은 발걸음 맞춰 천천히 걸어갈 때\n내 손을 꼭 쥐며 환하게 웃던 너의 얼굴\n네가 자라나는 하루하루 모든 순간이\n나에게는 세상 가장 큰 선물이야\n\n[후렴]\n너의 미소가 나의 햇살이 되어\n어두운 세상도 환하게 밝혀주네\n" + c + " 사랑 가득한 품 안에서\n언제나 너의 든든한 나무가 되어줄게";
+      p2 = "[2절]\n때로는 서툴고 때로는 지칠 때도 있지만\n너를 바라보면 다시 샘솟는 용기\n너와 함께 꿈꾸며 만들어갈 내일들이\n더없이 소중하고 아름다워\n\n[후렴]\n너의 미소가 나의 햇살이 되어\n어두운 세상도 환하게 밝혀주네\n" + c + " 사랑 가득한 품 안에서\n언제나 너의 든든한 나무가 되어줄게";
+    } else if (/나 자신|쉼/.test(w) || /나 자신/.test(t)) {
+      p1 = "[1절]\n남들을 챙기느라 정작 잊고 살았던\n나 자신의 작고 소중했던 숨소리\n오늘만큼은 나를 위해 가만히 멈춰 서서\n따뜻한 차 한 잔의 여유를 건네보네\n\n[후렴]\n그동안 참 잘 버텼어, 내 소중한 마음아\n넘어져도 다시 일어선 네가 참 자랑스러워\n" + c + " 맑은 하늘 아래서\n오늘 하루는 온전히 나를 꼭 안아줄게";
+      p2 = "[2절]\n거울 속 내 눈을 가만히 바라보며\n수고했다고, 괜찮다고 다정하게 말해줘\n작은 쉼표 하나 찍고 다시 내일을 향해\n나다운 미소로 가볍게 걸어가자\n\n[후렴]\n그동안 참 잘 버텼어, 내 소중한 마음아\n넘어져도 다시 일어선 네가 참 자랑스러워\n" + c + " 맑은 하늘 아래서\n오늘 하루는 온전히 나를 꼭 안아줄게";
+    } else if (/다양한|주민|이웃|돌봄/.test(w) || /다양한|돌봄/.test(t) || /함께 걸어/.test(ti)) {
+      p1 = "[1절]\n저마다 살아온 모습과 말은 달라도\n우리가 나누는 미소의 온도는 같아\n서로의 다름을 다정하게 감싸 안을 때\n이곳은 더 크고 따뜻한 집이 돼\n\n[후렴]\n우리 함께 걸어요, 손에 손을 맞잡고\n편견 없는 눈빛으로 서로를 바라보며\n" + c + " 활짝 열린 문 너머로\n다양한 우리가 하나 되어 피어나네";
+      p2 = "[2절]\n혼자 걷는 길은 멀고 외로웠지만\n함께 걷는 이 길엔 웃음이 가득해\n네 곁에 내가 있고 내 곁에 네가 있어\n희망찬 내일로 한 걸음 더 나아가\n\n[후렴]\n우리 함께 걸어요, 손에 손을 맞잡고\n편견 없는 눈빛으로 서로를 바라보며\n" + c + " 활짝 열린 문 너머로\n다양한 우리가 하나 되어 피어나네";
+    } else {
+      p1 = "[1절]\n비바람 불어와 세상이 차가울 때도\n언제나 나를 반겨주는 따스한 그 불빛\n지친 하루 끝에 돌아갈 곳이 있다는 건\n세상 무엇과도 바꿀 수 없는 행복\n\n[후렴]\n우리 손잡고 함께 걸어가는 길\n기쁨도 슬픔도 함께 나눌 가족이라는 품\n" + c + " 피어나는 웃음꽃처럼\n서로를 안아주며 우리 영원히 함께해";
+      p2 = "[2절]\n마주 앉은 밥상에 피어나는 따뜻한 온기\n말하지 않아도 눈빛으로 통하는 마음\n함께 걸어온 시간들이 쌓여갈수록\n우리의 사랑은 더 깊고 포근해져\n\n[후렴]\n우리 손잡고 함께 걸어가는 길\n기쁨도 슬픔도 함께 나눌 가족이라는 품\n" + c + " 피어나는 웃음꽃처럼\n서로를 안아주며 우리 영원히 함께해";
     }
 
-    if (/부모|자녀|아이/.test(w) || /부모자녀/.test(t) || /햇살/.test(ti)) {
-      return "[1절]\n작은 발걸음 맞춰 천천히 걸어갈 때\n내 손을 꼭 쥐며 환하게 웃던 너의 얼굴\n네가 자라나는 하루하루 모든 순간이\n나에게는 세상 가장 큰 선물이야\n\n[후렴]\n너의 미소가 나의 햇살이 되어\n어두운 세상도 환하게 밝혀주네\n" + c + " 사랑 가득한 품 안에서\n언제나 너의 든든한 나무가 되어줄게\n\n[2절]\n때로는 서툴고 때로는 지칠 때도 있지만\n너를 바라보면 다시 샘솟는 용기\n너와 함께 꿈꾸며 만들어갈 내일들이\n더없이 소중하고 아름다워\n\n[후렴]\n너의 미소가 나의 햇살이 되어\n어두운 세상도 환하게 밝혀주네\n" + c + " 사랑 가득한 품 안에서\n언제나 너의 든든한 나무가 되어줄게";
-    }
-
-    if (/나 자신|쉼/.test(w) || /나 자신/.test(t)) {
-      return "[1절]\n남들을 챙기느라 정작 잊고 살았던\n나 자신의 작고 소중했던 숨소리\n오늘만큼은 나를 위해 가만히 멈춰 서서\n따뜻한 차 한 잔의 여유를 건네보네\n\n[후렴]\n그동안 참 잘 버텼어, 내 소중한 마음아\n넘어져도 다시 일어선 네가 참 자랑스러워\n" + c + " 맑은 하늘 아래서\n오늘 하루는 온전히 나를 꼭 안아줄게\n\n[2절]\n거울 속 내 눈을 가만히 바라보며\n수고했다고, 괜찮다고 다정하게 말해줘\n작은 쉼표 하나 찍고 다시 내일을 향해\n나다운 미소로 가볍게 걸어가자\n\n[후렴]\n그동안 참 잘 버텼어, 내 소중한 마음아\n넘어져도 다시 일어선 네가 참 자랑스러워\n" + c + " 맑은 하늘 아래서\n오늘 하루는 온전히 나를 꼭 안아줄게";
-    }
-
-    if (/다양한|주민|이웃|돌봄/.test(w) || /다양한|돌봄/.test(t) || /함께 걸어/.test(ti)) {
-      return "[1절]\n저마다 살아온 모습과 말은 달라도\n우리가 나누는 미소의 온도는 같아\n서로의 다름을 다정하게 감싸 안을 때\n이곳은 더 크고 따뜻한 집이 돼\n\n[후렴]\n우리 함께 걸어요, 손에 손을 맞잡고\n편견 없는 눈빛으로 서로를 바라보며\n" + c + " 활짝 열린 문 너머로\n다양한 우리가 하나 되어 피어나네\n\n[2절]\n혼자 걷는 길은 멀고 외로웠지만\n함께 걷는 이 길엔 웃음이 가득해\n네 곁에 내가 있고 내 곁에 네가 있어\n희망찬 내일로 한 걸음 더 나아가\n\n[후렴]\n우리 함께 걸어요, 손에 손을 맞잡고\n편견 없는 눈빛으로 서로를 바라보며\n" + c + " 활짝 열린 문 너머로\n다양한 우리가 하나 되어 피어나네";
-    }
-
-    return "[1절]\n비바람 불어와 세상이 차가울 때도\n언제나 나를 반겨주는 따스한 그 불빛\n지친 하루 끝에 돌아갈 곳이 있다는 건\n세상 무엇과도 바꿀 수 없는 행복\n\n[후렴]\n우리 손잡고 함께 걸어가는 길\n기쁨도 슬픔도 함께 나눌 가족이라는 품\n" + c + " 피어나는 웃음꽃처럼\n서로를 안아주며 우리 영원히 함께해\n\n[2절]\n마주 앉은 밥상에 피어나는 따뜻한 온기\n말하지 않아도 눈빛으로 통하는 마음\n함께 걸어온 시간들이 쌓여갈수록\n우리의 사랑은 더 깊고 포근해져\n\n[후렴]\n우리 손잡고 함께 걸어가는 길\n기쁨도 슬픔도 함께 나눌 가족이라는 품\n" + c + " 피어나는 웃음꽃처럼\n서로를 안아주며 우리 영원히 함께해";
+    return { p1: p1, p2: p2 };
   }
 
   function buildPrompt() {
@@ -3245,19 +3263,25 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     var w = SW.who || '가족센터 종사자 (동료)';
     var t = SW.theme || '종사자 힐링과 응원 · 포근한 포크';
     var ti = SW.title || '오늘도 수고했어, 내 동료야';
-    var lyr = (SW.lyrics || getDefaultLyrics(SW.lyricsVariant)).trim();
+    var lyr = ((SW.lyrics1 || '') + '\n\n' + (SW.lyrics2 || '')).trim();
 
     return "너는 전북특별자치도가족센터를 위한 전문 작곡가이자 따뜻한 그림책 앨범 표지 디자이너야.\n아래에 완성된 노래 가사와 정보를 바탕으로, 따뜻한 앨범 표지 이미지를 생성하고 음악을 바로 완성해 줘.\n\n[확정된 노래 정보]\n- 센터명: " + c + "\n- 작사자: " + a + "\n- 전할 대상: " + w + "\n- 노래 주제: " + t + "\n- 확정 노래 제목: " + ti + "\n\n[확정 가사]\n" + lyr + "\n\n[제작 지침]\n1. 위 가사와 전할 대상(" + w + ")의 마음에 가장 잘 어울리는 따뜻하고 사랑스러운 앨범 표지 이미지를 1장 즉시 생성해 줘.\n- 정사각형 1:1 비율, 따뜻하고 귀여운 고품질 그림책 일러스트\n- 크림색, 살구색, 연초록 등 눈이 편안하고 포근한 색감\n- 노래 제목(\"" + ti + "\")과 대상의 따뜻한 교감이 느껴지는 다정한 장면\n- 표지 상단 또는 중앙에 제목을 크게, 하단에 '" + c + " | 작사: " + a + "'을 정확한 한국어로 표기\n- 본인 사진이 있다면 특징을 살린 그림책 일러스트로 표현하고, 사진이 없다면 인물이나 배경을 사랑스러운 그림책풍으로 제작\n\n2. 위 가사와 분위기를 바탕으로 바로 들을 수 있는 음악을 완성해 줘. (제미나이 음악 만들기 활용)";
   }
 
   function render() {
-    if (!SW.lyrics) {
-      SW.lyrics = getDefaultLyrics(SW.lyricsVariant);
+    if (!SW.lyrics1 || !SW.lyrics2) {
+      var d = getDefaultLyrics(SW.lyricsVariant);
+      SW.lyrics1 = d.p1;
+      SW.lyrics2 = d.p2;
     }
 
-    var lyrArea = $('#sw-lyrics-text');
-    if (lyrArea && document.activeElement !== lyrArea) {
-      lyrArea.value = SW.lyrics;
+    var lyrArea1 = $('#sw-lyrics-p1');
+    if (lyrArea1 && document.activeElement !== lyrArea1) {
+      lyrArea1.value = SW.lyrics1;
+    }
+    var lyrArea2 = $('#sw-lyrics-p2');
+    if (lyrArea2 && document.activeElement !== lyrArea2) {
+      lyrArea2.value = SW.lyrics2;
     }
     var lyrTitle = $('#sw-lyr-title');
     if (lyrTitle) lyrTitle.textContent = '🎵 ' + (SW.title || '나만의 노래');
@@ -3276,7 +3300,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
         '<span class="sw-chip"><em>대상</em>' + esc(SW.who) + '</span>' +
         '<span class="sw-chip"><em>주제</em>' + esc(SW.theme.split('·')[0].trim()) + '</span>' +
         '<span class="sw-chip"><em>제목</em>' + esc(SW.title) + '</span>' +
-        '<span class="sw-chip"><em>가사</em>완성본 포함</span>';
+        '<span class="sw-chip"><em>가사</em>1·2절 포함</span>';
     }
 
     for (var i = 1; i <= 6; i++) {
@@ -3306,10 +3330,18 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
   if (cIn) cIn.addEventListener('input', function(){ SW.center = this.value.trim(); render(); });
   if (aIn) aIn.addEventListener('input', function(){ SW.author = this.value.trim(); render(); });
 
-  var lyrIn = $('#sw-lyrics-text');
-  if (lyrIn) {
-    lyrIn.addEventListener('input', function() {
-      SW.lyrics = this.value;
+  var lyrIn1 = $('#sw-lyrics-p1');
+  if (lyrIn1) {
+    lyrIn1.addEventListener('input', function() {
+      SW.lyrics1 = this.value;
+      var pv = $('#song-p');
+      if (pv && !SW.showRaw) pv.textContent = buildPrompt();
+    });
+  }
+  var lyrIn2 = $('#sw-lyrics-p2');
+  if (lyrIn2) {
+    lyrIn2.addEventListener('input', function() {
+      SW.lyrics2 = this.value;
       var pv = $('#song-p');
       if (pv && !SW.showRaw) pv.textContent = buildPrompt();
     });
@@ -3339,7 +3371,9 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
 
     if (e.target.id === 'sw-lyrics-regen') {
       SW.lyricsVariant = (SW.lyricsVariant || 0) + 1;
-      SW.lyrics = getDefaultLyrics(SW.lyricsVariant);
+      var d = getDefaultLyrics(SW.lyricsVariant);
+      SW.lyrics1 = d.p1;
+      SW.lyrics2 = d.p2;
       render();
       return;
     }
@@ -3355,17 +3389,23 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
 
       if (grid.id === 'sw-grid-who') {
         SW.who = val;
-        SW.lyrics = getDefaultLyrics(SW.lyricsVariant);
+        var d = getDefaultLyrics(SW.lyricsVariant);
+        SW.lyrics1 = d.p1;
+        SW.lyrics2 = d.p2;
         render();
         setTimeout(function(){ gotoStep(3); }, 220);
       } else if (grid.id === 'sw-grid-theme') {
         SW.theme = val;
-        SW.lyrics = getDefaultLyrics(SW.lyricsVariant);
+        var d = getDefaultLyrics(SW.lyricsVariant);
+        SW.lyrics1 = d.p1;
+        SW.lyrics2 = d.p2;
         render();
         setTimeout(function(){ gotoStep(4); }, 220);
       } else if (grid.id === 'sw-grid-title') {
         SW.title = val;
-        SW.lyrics = getDefaultLyrics(SW.lyricsVariant);
+        var d = getDefaultLyrics(SW.lyricsVariant);
+        SW.lyrics1 = d.p1;
+        SW.lyrics2 = d.p2;
         render();
         setTimeout(function(){ gotoStep(5); }, 220);
       }
@@ -3376,7 +3416,9 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
       var inp = $('#sw-who-custom');
       if (inp && inp.value.trim()) {
         SW.who = inp.value.trim();
-        SW.lyrics = getDefaultLyrics(SW.lyricsVariant);
+        var d = getDefaultLyrics(SW.lyricsVariant);
+        SW.lyrics1 = d.p1;
+        SW.lyrics2 = d.p2;
         render();
         gotoStep(3);
       }
@@ -3384,7 +3426,9 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
       var inp = $('#sw-theme-custom');
       if (inp && inp.value.trim()) {
         SW.theme = inp.value.trim();
-        SW.lyrics = getDefaultLyrics(SW.lyricsVariant);
+        var d = getDefaultLyrics(SW.lyricsVariant);
+        SW.lyrics1 = d.p1;
+        SW.lyrics2 = d.p2;
         render();
         gotoStep(4);
       }
@@ -3392,7 +3436,9 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
       var inp = $('#sw-title-custom');
       if (inp && inp.value.trim()) {
         SW.title = inp.value.trim();
-        SW.lyrics = getDefaultLyrics(SW.lyricsVariant);
+        var d = getDefaultLyrics(SW.lyricsVariant);
+        SW.lyrics1 = d.p1;
+        SW.lyrics2 = d.p2;
         render();
         gotoStep(5);
       }
