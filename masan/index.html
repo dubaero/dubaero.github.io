@@ -1227,7 +1227,7 @@ const strengths=['차분하게 정리하기','약속과 시간 지키기','새�
 const improvements=['낯선 일 시작이 어렵다','컴퓨터가 아직 익숙하지 않다','사람 앞에서 발표가 어렵다','일이 몰리면 당황한다','일을 거절하기 어렵다','처음 보는 사람과 대화가 어렵다'];
 const guide={'낯선 일 시작이 어렵다':'작은 단계로 업무를 나누고 첫 단계부터 연습해 보세요.','컴퓨터가 아직 익숙하지 않다':'파일 열기·저장하기와 문서 수정부터 반복 연습해 보세요.','사람 앞에서 발표가 어렵다':'30초 소개부터 말해보고 짧은 문장으로 연습해 보세요.','일이 몰리면 당황한다':'우선순위를 적고 한 번에 한 가지씩 완료해 보세요.','일을 거절하기 어렵다':'가능한 시간과 업무 범위를 구체적으로 알려주는 문장을 연습해 보세요.','처음 보는 사람과 대화가 어렵다':'인사·질문·답변을 짧게 미리 준비해 보세요.'};
 const qs=[{id:'interest',title:'어떤 활동을 할 때 시간이 잘 가나요?',options:['사람과 소통하고 돕는 일','숫자나 자료를 정리하는 일','손으로 직접 만들고 움직이는 일','아이디어를 생각하고 표현하는 일']},{id:'work',title:'새로운 일을 맡을 때 편한 방식은?',options:['먼저 설명을 듣고 순서를 정한다','직접 해보면서 하나씩 익힌다','다른 사람과 상의하며 진행한다','혼자 조사해 방법을 찾아본다']},{id:'relation',title:'함께 일할 때 가장 편안한 분위기는?',options:['서로 충분히 의견을 나누는 분위기','역할과 기준이 명확한 분위기','스스로 집중할 시간을 존중하는 분위기','새로운 시도를 응원해주는 분위기']},{id:'stress',title:'어려운 순간에 나에게 가장 도움이 되는 것은?',options:['잠시 쉬고 생각을 정리할 시간','해야 할 일을 작게 나눈 목록','믿을 만한 사람과 이야기하기','작은 일부터 다시 해보기']},{id:'priority',title:'일을 선택할 때 중요한 조건은?',options:['출퇴근과 근무시간','안정적인 업무와 명확한 절차','배울 수 있는 기회와 성장','동료와의 관계와 근무 분위기']}];
-const jobs=[{"name":"사무원","group":"경영·회계·사무","desc":"문서 작성, 자료 관리, 일정·업무 지원을 수행합니다.","skill":"문서 작성, 정보 관리, 업무 소통","check":"채용공고별 문서 프로그램·경력 요구 확인","keywords":["차분하게 정리하기","문서와 숫자 관리하기"],"theme":"office","image":"img/tam/t01.webp"},{"name":"총무사무원","group":"경영·회계·사무","desc":"비품·자산·사내 행사·계약 등 조직 운영 실무를 담당합니다.","skill":"문서관리, 구매·자산관리, 조직 소통","check":"총무 업무 범위와 사용 시스템 확인","keywords":["일정과 계획 세우기","꼼꼼히 확인하기"],"theme":"office","image":"img/tam/t02.webp"},{"name":"회계사무원","group":"경영·회계·사무","desc":"증빙자료, 전표, 비용 자료 등을 정리합니다.","skill":"회계 기초, 전산, 정확성","check":"회계 프로그램·자격 요구 확인","keywords":["문서와 숫자 관리하기","꼼꼼히 확인하기"],"theme":"office","image":"img/tam/t03.webp"},{"name":"인사사무원","group":"경영·회계·사무","desc":"채용·근태·인사자료 관리 등 인사업무를 수행합니다.","skill":"개인정보 보호, 문서·일정 관리","check":"관련 법규·개인정보·경력 요건 확인","keywords":["일정과 계획 세우기","문서와 숫자 관리하기"],"theme":"office","image":"img/tam/t04.webp"},{"name":"홍보사무원","group":"광고·홍보·마케팅","desc":"홍보자료 작성, 채널 운영, 행사 홍보 실무를 맡습니다.","skill":"글쓰기, 홍보 채널, 자료 정리","check":"기관별 직무명·콘텐츠 제작 요구 확인","keywords":["아이디어 내기","문서와 숫자 관리하기"],"theme":"media","image":"img/tam/t05.webp"},{"name":"마케팅 담당자","group":"광고·홍보·마케팅","desc":"고객과 시장을 조사하고 홍보·판매 촉진을 기획합니다.","skill":"시장 조사, 콘텐츠 기획, 데이터 이해","check":"실무 경력과 마케팅 도구 요구 확인","keywords":["아이디어 내기","새로운 일 배우기"],"theme":"media","image":"img/tam/t06.webp"},{"name":"디지털 콘텐츠 제작자","group":"광고·홍보·마케팅","desc":"이미지·영상·글 등 디지털 콘텐츠를 기획·제작합니다.","skill":"콘텐츠 제작, 저작권, 편집","check":"포트폴리오 및 사용 프로그램 확인","keywords":["아이디어 내기","새로운 일 배우기"],"theme":"media","image":"img/tam/t07.webp"},{"name":"고객상담원","group":"상담·고객지원","desc":"고객 문의를 듣고 안내·처리 내용을 기록합니다.","skill":"경청, 상황 설명, 기록","check":"전화 비중과 감정노동 환경 확인","keywords":["사람의 이야기 듣기","상황에 맞게 대응하기"],"theme":"service","image":"img/tam/t08.webp"},{"name":"매장판매원","group":"영업·판매","desc":"상품 설명·진열·판매·고객응대를 수행합니다.","skill":"고객 소통, 상품관리, POS 사용","check":"교대시간·근무환경·판매 경험 확인","keywords":["고객에게 설명하기","사람의 이야기 듣기"],"theme":"service","image":"img/tam/t09.webp"},{"name":"온라인 쇼핑몰 운영자","group":"영업·판매","desc":"상품 등록, 주문 관리, 고객 안내, 온라인 판매 업무를 수행합니다.","skill":"온라인 판매, 제품 정보, 고객 대응","check":"플랫폼 이용료·광고·정산 업무 확인","keywords":["아이디어 내기","문서와 숫자 관리하기"],"theme":"service","image":"img/tam/t10.webp"},{"name":"물류관리사무원","group":"물류·운송","desc":"입출고 일정·재고·배송 자료를 관리합니다.","skill":"재고관리, 전산 입력, 일정 조율","check":"현장 근무·물류 프로그램 사용 확인","keywords":["꼼꼼히 확인하기","차분하게 정리하기"],"theme":"industry","image":"img/tam/t11.webp"},{"name":"조리사","group":"음식서비스","desc":"식단과 조리법에 따라 음식을 만들고 위생을 관리합니다.","skill":"조리기술, 식품위생, 안전","check":"조리사 자격 및 업장별 필수 조건 확인","keywords":["손으로 만들고 정돈하기","꼼꼼히 확인하기"],"theme":"food","image":"img/tam/t12.webp"},{"name":"제과·제빵사","group":"음식·제과","desc":"반죽·발효·굽기 등 제과제빵을 수행합니다.","skill":"계량, 위생, 제조기술","check":"자격증 우대·근무시간·작업환경 확인","keywords":["손으로 만들고 정돈하기","꼼꼼히 확인하기"],"theme":"food","image":"img/tam/t13.webp"},{"name":"사회복지사","group":"사회복지","desc":"복지 서비스 계획·연계·기록 등 사회복지 업무를 수행합니다.","skill":"상담기초, 기록, 복지제도","check":"법정 자격요건 반드시 확인","keywords":["사람의 이야기 듣기","팀과 협력하기"],"theme":"care","image":"img/tam/t14.webp"},{"name":"요양보호사","group":"돌봄·보건","desc":"일상생활 지원과 돌봄 서비스를 제공합니다.","skill":"돌봄, 안전, 의사소통","check":"요양보호사 자격과 시설별 근무 조건 확인","keywords":["사람의 이야기 듣기","팀과 협력하기"],"theme":"care","image":"img/tam/t15.webp"},{"name":"보육교사","group":"교육·돌봄","desc":"영유아의 보육·발달 지원 및 보호자 소통을 수행합니다.","skill":"보육, 안전, 기록","check":"보육교사 자격 및 기관 채용 요건 확인","keywords":["팀과 협력하기","일정과 계획 세우기"],"theme":"care","image":"img/tam/t16.webp"},{"name":"생산관리 담당자","group":"제조·생산","desc":"생산 일정, 공정 현황, 자재와 품질을 관리합니다.","skill":"공정 이해, 일정·수량 관리","check":"경력·산업별 공정 지식 요구 확인","keywords":["일정과 계획 세우기","문서와 숫자 관리하기"],"theme":"industry","image":"img/tam/t17.webp"},{"name":"품질관리 담당자","group":"제조·생산","desc":"제품 검사를 기록하고 품질 기준을 점검합니다.","skill":"검사 기록, 품질 기준, 정확성","check":"산업별 품질검사 자격·경험 확인","keywords":["꼼꼼히 확인하기","문서와 숫자 관리하기"],"theme":"industry","image":"img/tam/t18.webp"},{"name":"행사기획자","group":"문화·행사","desc":"행사 일정, 프로그램, 협력업체와 현장을 기획·조정합니다.","skill":"기획, 소통, 일정관리","check":"현장·주말 근무 및 경력 확인","keywords":["일정과 계획 세우기","아이디어 내기"],"theme":"media","image":"img/tam/t19.webp"},{"name":"직업상담사","group":"교육·상담","desc":"구직자 상담과 구인정보 제공, 취업지원 업무를 수행합니다.","skill":"상담, 노동시장 정보, 기록","check":"자격증·기관별 채용 요건 확인","keywords":["사람의 이야기 듣기","고객에게 설명하기"],"theme":"care","image":"img/tam/t20.webp"},{"name":"카페 창업","group":"창업·자영업","desc":"매장 운영 아이디어, 상권, 원가, 고객 서비스를 계획합니다.","skill":"사업기획, 위생, 원가·매출 관리","check":"인허가·자금·상권 조사 필요","keywords":["아이디어 내기","손으로 만들고 정돈하기"],"theme":"startup","image":"img/tam/t21.webp"},{"name":"온라인 판매 창업","group":"창업·자영업","desc":"판매 아이템, 온라인 채널, 배송과 고객 관리를 계획합니다.","skill":"상품기획, 전자상거래, 정산","check":"사업자 등록·통신판매 관련 절차 확인","keywords":["아이디어 내기","문서와 숫자 관리하기"],"theme":"startup","image":"img/tam/t22.webp"},{"name":"공방 창업","group":"창업·자영업","desc":"제품 제작과 체험 프로그램, 판매 운영을 기획합니다.","skill":"제작기술, 고객 응대, 운영","check":"시설·안전·사업 비용 확인","keywords":["손으로 만들고 정돈하기","아이디어 내기"],"theme":"startup","image":"img/tam/t23.webp"}];
+let jobs=[];
 const interviewBase=[['자기소개','자신에 대해 30초 정도 소개해 주시겠어요?'],['지원동기','이 직무에 지원하려는 이유는 무엇인가요?'],['경험','직접 해본 일 가운데 이 업무에 도움이 될 경험을 말씀해 주세요.'],['업무 방식','처음 맡는 업무를 배워야 할 때 어떻게 하시겠어요?'],['협업','동료와 의견이 다를 때 어떻게 이야기하시겠어요?'],['보완','업무에서 어렵게 느끼는 부분과 보완 중인 방법을 알려주세요.'],['공백기','최근 준비한 일이나 다시 일하기 위해 노력한 점이 있나요?']];
 function avatarSvg(i=0){let tones=['#d9a987','#a97a61','#c89a78'];let shirts=['#6b8d78','#8d789d','#b5806f'];return `<svg viewBox="0 0 74 78" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="한국인 성인 탐험 캐릭터"><path d="M9 77C12 55 24 51 37 51S62 55 65 77" fill="${shirts[i]}"/><ellipse cx="37" cy="30" rx="23" ry="26" fill="#3a302d"/><ellipse cx="37" cy="34" rx="18" ry="21" fill="${tones[i]}"/><path d="M19 29Q17 7 37 8Q58 8 55 30Q48 18 39 20Q27 23 19 29" fill="#302827"/><circle cx="30" cy="34" r="1.6" fill="#34302f"/><circle cx="44" cy="34" r="1.6" fill="#34302f"/><path d="M32 44Q37 48 42 44" fill="none" stroke="#8b554d" stroke-width="1.6" stroke-linecap="round"/></svg>`}
 function showToast(txt){let d=document.createElement('div');d.className='toast';d.textContent=txt;document.body.appendChild(d);setTimeout(()=>d.remove(),2900)}
@@ -1239,7 +1239,7 @@ const views={
 home:()=>`<section class="panel">${section('오늘의 탐험 안내','다섯 가지 활동을 연결하면 나의 취업 준비 자료가 완성됩니다.','3시간 실습')}<div class="grid">${[['나를 이해하기','좋아하는 활동과 일하는 방식, 관계의 선호를 살펴봅니다.','self'],['강점과 경험 정리','실제로 한 일에서 강점과 보완할 점을 찾습니다.','strength'],['10년 뒤 직업 도감','늘어날·새로 뜨는·바뀌는·대체 중인 직업 100장을 보고 나와 닮은 직업을 찾아요.','card'],['직업 탐색하기','직업이 하는 일과 준비 조건을 비교합니다.','jobs'],['입사지원서 작성','원본 증명사진으로 실제 서식을 완성합니다.','resume'],['면접 연습','예상 질문에 답하고 기준별 피드백을 받습니다.','interview']].map(([a,b,p])=>`<div class="tile"><div class="accent"></div><h3>${a}</h3><p>${b}</p><button class="btn light small" onclick="nav('${p}')">시작하기 →</button></div>`).join('')}</div></section><section class="panel">${section('사진과 탐험 캐릭터','앞 강사님이 준비한 사진을 등록하되, 지원서에는 반드시 원본을 사용합니다.')}<div class="two"><div><label class="field"><span>증명사진 파일 선택 (선택 사항)</span><input type="file" id="photo" accept="image/png,image/jpeg"></label><p class="muted">사진은 이 브라우저의 작업 중 메모리에만 둡니다. 외부 AI로 전송하거나 얼굴을 자동 변환하지 않습니다.</p><div id="photoPreview"></div></div><div><p style="margin-top:0;font-weight:800">탐험 안내 캐릭터 선택 (기본 일러스트 · 사진 자동 변환 아님)</p><div class="row">${[0,1,2].map(i=>`<button class="character ${state.avatar===i?'on':''}" onclick="state.avatar=${i};render()"><span class="avatar">${avatarSvg(i)}</span><span class="character-name">${['서연','지윤','민서'][i]}</span></button>`).join('')}</div><p class="muted">한국인 성인 인물로 디자인한 기본 일러스트입니다. 본인의 얼굴사진을 변환하는 AI 기능은 포함되지 않습니다.</p></div></div></section>`,
 self:()=>`<section class="panel">${section('나를 이해하기','색상 탭을 눌러 질문을 바꾸고 하나씩 답해보세요.','교육용 자기탐색')}<div class="banner">정식 심리검사가 아닌 자기이해 활동입니다. 결과만으로 성격·적성을 판정하지 않습니다.</div><div class="qtabs">${qs.map((q,i)=>`<button class="qtab ${state.selfTab===i?'active':''}" data-selftab="${i}"><small>${state.questions[q.id]?'✓ 완료':'질문 '+(i+1)}</small>${['흥미','업무방식','관계','어려울 때','근무조건'][i]}</button>`).join('')}</div><div class="question-focus"><div class="eyebrow">질문 ${state.selfTab+1} / ${qs.length}</div><h3>${qs[state.selfTab].title}</h3><div class="choice-grid">${qs[state.selfTab].options.map(o=>`<button class="choice ${state.questions[qs[state.selfTab].id]===o?'on':''}" data-q="${qs[state.selfTab].id}" data-val="${E(o)}">${o}</button>`).join('')}</div><div class="row" style="margin-top:18px"><button class="btn outline" data-selfprev ${state.selfTab===0?'disabled':''}>이전 질문</button><button class="btn light" data-selfnext ${state.selfTab===qs.length-1?'disabled':''}>다음 질문</button><button class="btn" onclick="nav('strength')">강점 찾기로 이동 →</button></div></div></section><section class="panel">${section('나의 관계 사용설명서','내 답을 바탕으로 성격 유형 해설처럼 풀어 본 설명서예요. 재미로 읽어 보세요.')}<div id="selfResult">${selfResult()}</div></section>`,
 strength:()=>`<section class="panel stpage">${section('강점과 경험을 발견하기','선택한 강점이 실제 행동으로 드러난 경험을 적는 것이 중요합니다.','서류 작성 연결')}<h3 class="q3d"><span class="q3d-ic">💎</span>내가 잘한다고 느끼거나 잘할 수 있을 것 같은 활동을 골라보세요.</h3><div class="choice-grid flat">${strengths.map(s=>`<button class="choice ${state.strengths.includes(s)?'on':''}" data-strength="${E(s)}">${s}</button>`).join('')}</div><p class="muted">여러 개 선택할 수 있습니다. 선택은 역량 증명이 아니며, 아래 실제 경험과 연결해 확인합니다.</p><h3 class="q3d"><span class="q3d-ic">🌱</span>보완하고 싶은 부분도 선택할 수 있어요.</h3><div class="choice-grid flat">${improvements.map(s=>`<button class="choice ${state.improvements.includes(s)?'on':''}" data-improve="${E(s)}">${s}</button>`).join('')}</div><div class="result" id="improvementOutput">${improvementText()}</div><h3>내가 실제로 해본 일</h3><p class="muted">직장·아르바이트·자원봉사·모임·일상 중 자신이 편한 경험을 적어주세요. 이름·주민번호·개인 사정은 입력하지 않습니다.</p>${[0,1,2].map(i=>`<label class="field"><span>경험 · 내가 실제로 한 행동</span><textarea id="exp${i}" placeholder="예: 매장에서 상품 수량을 확인하고 부족한 물건을 채웠습니다.">${E(state.experiences[i])}</textarea></label>`).join('')}<button class="btn" onclick="nav('card')">10년 뒤 직업 도감 보러 가기 →</button></section>`,
-jobs:()=>`<section class="panel">${section('직업세계 탐색','직업을 단정적으로 추천하기보다, 내가 관심을 가질 만한 후보와 확인사항을 살펴봅니다.','공식 자료 확인')}<div class="banner">직종 후보는 NCS 대분류를 참고해 묶은 교육용 예시이며, 모든 직업의 정확한 NCS 세분류 코드와 1:1 매칭한 목록은 아닙니다. 창업은 직업이 아닌 진로 방식으로 별도 묶었습니다. 이 카드는 교육용 직무 소개입니다. 실시간 채용공고나 최신 지역 구인통계를 표시하지 않습니다. 실제 자격·모집·급여·마감은 공식 채용공고에서 반드시 다시 확인하세요.</div><div class="row"><input class="search" style="flex:1;min-width:210px" id="jobsearch" placeholder="직업명, 업무, 분야 검색" value=""><button class="btn light" onclick="window.open('https://www.work24.go.kr/','_blank','noopener')">고용24 채용정보 ↗</button></div><div class="selected-preferences"><b>나의 희망직종 (최대 3개)</b><p class="muted">직업 카드에서 ‘희망직종 추가’를 선택하세요. 지원서용 직무는 아래에서 별도로 정할 수 있습니다.</p><div id="preferredJobChips"></div></div><div id="job-theme" class="job-theme-banner" aria-live="polite"></div><div id="jobResults" class="jobgrid"></div><div class="result"><b>내가 선택한 지원 직무:</b> <span id="selectedjob">${E(state.job)}</span><div class="muted">직업 카드를 선택한 뒤, 실제 공고 원문을 보고 지원 자격과 업무 내용을 비교하세요.</div></div><div id="careerIntro"></div><div class="two"><label class="field"><span>채용공고에서 확인한 주요 업무·필수 조건 (개인정보 제외)</span><textarea id="jobpost" placeholder="예: 문서 정리, 기본 컴퓨터 활용, 주 5일 근무">${E(state.jobpost)}</textarea></label><div class="result"><h3>새롭게 변화하는 직업 탐색</h3><p class="muted">AI·디지털 기술로 업무가 변화하는 직업이 있습니다. '없어질 직업'이라고 단정하지 않고, 실제 업무가 어떻게 변하는지 공식 자료를 확인합니다.</p><a href="https://www.keis.or.kr/" target="_blank" rel="noopener">한국고용정보원 자료 확인 ↗</a><br><a href="https://www.work24.go.kr/" target="_blank" rel="noopener">고용24에서 직업·채용 정보 찾기 ↗</a></div></div><button class="btn" onclick="nav('resume')">입사지원서 작성하기 →</button></section>`,
+jobs:()=>`<section class="panel">${section('직업세계 탐색','직업을 단정적으로 추천하기보다, 내가 관심을 가질 만한 후보와 확인사항을 살펴봅니다.','공식 자료 확인')}<div class="banner">직종 후보는 NCS 대분류를 참고해 묶은 교육용 예시이며, 모든 직업의 정확한 NCS 세분류 코드와 1:1 매칭한 목록은 아닙니다. 창업은 직업이 아닌 진로 방식으로 별도 묶었습니다. 이 카드는 교육용 직무 소개입니다. 실시간 채용공고나 최신 지역 구인통계를 표시하지 않습니다. 실제 자격·모집·급여·마감은 공식 채용공고에서 반드시 다시 확인하세요.</div><div class="row"><input class="search" style="flex:1;min-width:210px" id="jobsearch" placeholder="직업명, 업무, 분야 검색 (예: 강사, 경리, 크리에이터)" value=""><button class="btn light" onclick="window.open('https://www.work24.go.kr/','_blank','noopener')">고용24 채용정보 ↗</button></div><div class="selected-preferences"><b>나의 희망직종 (최대 3개)</b><p class="muted">직업 카드에서 ‘희망직종 추가’를 선택하세요. 지원서용 직무는 아래에서 별도로 정할 수 있습니다.</p><div id="preferredJobChips"></div></div><div id="job-theme" class="job-theme-banner" aria-live="polite"></div><div id="jobResultsCount" style="margin:10px 0 4px;font-size:13px;font-weight:700;color:#356754;"></div><div id="jobResults" class="jobgrid"></div><div class="result"><b>내가 선택한 지원 직무:</b> <span id="selectedjob">${E(state.job)}</span><div class="muted">직업 카드를 선택한 뒤, 실제 공고 원문을 보고 지원 자격과 업무 내용을 비교하세요.</div></div><div id="careerIntro"></div><div class="two"><label class="field"><span>채용공고에서 확인한 주요 업무·필수 조건 (개인정보 제외)</span><textarea id="jobpost" placeholder="예: 문서 정리, 기본 컴퓨터 활용, 주 5일 근무">${E(state.jobpost)}</textarea></label><div class="result"><h3>새롭게 변화하는 직업 탐색</h3><p class="muted">AI·디지털 기술로 업무가 변화하는 직업이 있습니다. '없어질 직업'이라고 단정하지 않고, 실제 업무가 어떻게 변하는지 공식 자료를 확인합니다.</p><a href="https://www.keis.or.kr/" target="_blank" rel="noopener">한국고용정보원 자료 확인 ↗</a><br><a href="https://www.work24.go.kr/" target="_blank" rel="noopener">고용24에서 직업·채용 정보 찾기 ↗</a></div></div><button class="btn" onclick="nav('resume')">입사지원서 작성하기 →</button></section>`,
 resume:()=>`<section class="panel">${traitUI()}${section('나의 입사지원서 공작소','선택한 경험을 바탕으로 문장을 직접 완성하고, 워드파일로 내려받습니다.','편집 가능한 DOCX')}<div class="banner">실제 제출 전에는 기업 지정 서식을 우선하세요. 사진은 필요한 경우에만 사용합니다. 마음·관계 탐색 답변은 지원서에 자동으로 들어가지 않습니다.</div><div class="two"><div><label class="field"><span>성명</span><input id="name" placeholder="본인 이름"></label><label class="field"><span>연락처</span><input id="contact" placeholder="본인 연락처"></label><label class="field"><span>이메일</span><input id="email" placeholder="본인 이메일"></label><label class="field"><span>지원 직무</span><select id="jobSelect">${jobs.map(j=>`<option ${j.name===state.job?'selected':''}>${E(j.name)}</option>`).join('')}</select></label><label class="field"><span>실제 경력·활동 사항 (선택)</span><textarea id="history" placeholder="기관명·기간·업무는 본인이 확인한 사실만 작성"></textarea></label><label class="field"><span>교육 및 자격사항 (선택)</span><textarea id="education" placeholder="교육 이수 등 실제로 확인 가능한 정보"></textarea></label><label class="field"><span>자격증 (선택)</span><textarea id="cert" placeholder="실제로 취득한 자격만"></textarea></label><label class="field"><span>지원동기와 업무 연결 (선택)</span><textarea id="motivation" placeholder="어떤 이유로 관심이 생겼으며 실제로 기여할 수 있는 점은?"></textarea></label></div><div><div class="result"><b>자기소개서 문장 만드는 법</b><p class="muted">① 실제 상황 → ② 내가 한 행동 → ③ 확인 가능한 결과 → ④ 지원 업무와 연결</p><button class="btn light small" id="makeCover">선택한 경험으로 문장 틀 만들기</button><p class="notice">AI가 사실을 확인하거나 실제로 없던 경력·성과를 생성하지 않습니다. 직접 검수해 주세요.</p></div><label class="field"><span>자기소개서 문항 / 핵심 소개글 (직접 수정)</span><textarea id="cover" style="min-height:190px" placeholder="자신의 실제 경험을 작성해 주세요."></textarea></label><div class="row"><button class="btn" id="downloadDocx">워드(.docx) 다운로드</button><button class="btn outline" onclick="nav('interview')">면접 연습 →</button></div><p class="muted">내려받은 파일은 Microsoft Word 또는 DOCX 호환 편집기에서 열고 수정할 수 있습니다.</p></div></div></section><section class="panel">${section('입사지원서 미리보기','실제 지원할 때 필요한 항목만 남기고 수정하세요.')}<div id="resumePreview"></div></section>`,
 interview:()=>`<section class="panel">${section('나의 면접연습실','지원 직무에 맞춰 질문을 한 번에 하나씩 연습합니다.','모의면접')}<div class="banner">정해진 질문과 체크 기준을 사용하는 교육용 연습입니다. 이 버전에는 자유 대화형 AI 면접관이나 음성 평가 기능은 없습니다.</div><div class="itabs">${interviewBase.map((q,i)=>`<button class="itab ${i===state.interviewIdx?'active':''}" data-itab="${i}"><small>${state.interview[i]?.answer?'✓ 완료':'연습'}</small>${E(q[0])}</button>`).join('')}</div><div class="result"><span class="eyebrow">모의 면접 연습</span><h3>${interviewBase[state.interviewIdx][1]}</h3><p class="muted">지원 직무: ${E(state.job)} · ${interviewBase[state.interviewIdx][0]}</p></div><div class="voice-tools"><button type="button" class="btn voice-start" id="voiceStart" aria-label="마이크로 면접 답변 시작">🎙 마이크로 답변하기</button><button type="button" class="btn outline" id="voiceStop" disabled>■ 말하기 중지</button><span class="voice-status" id="voiceStatus" aria-live="polite">마이크 버튼을 누르고 한국어로 답변해 보세요.</span></div><p class="muted">음성 인식은 브라우저 지원 및 마이크 권한이 필요합니다. 음성 데이터가 브라우저 제공사의 인식 서비스로 처리될 수 있으므로 개인정보는 말하지 마세요. 지원되지 않으면 아래 칸에 직접 입력할 수 있습니다.</p><label class="field"><span>나의 답변</span><textarea id="interviewAnswer" style="min-height:130px" placeholder="직접 해본 일을 바탕으로 답변을 입력하세요.">${E(state.interview[state.interviewIdx]?.answer||'')}</textarea></label><div class="row"><button class="btn" id="feedbackBtn">답변 점검하기</button><button class="btn outline" id="prevQ" ${state.interviewIdx===0?'disabled':''}>이전 질문</button><button class="btn outline" id="nextQ" ${state.interviewIdx===interviewBase.length-1?'disabled':''}>다음 질문</button></div><div id="feedbackArea" class="result">답변을 입력하면 질문 관련성, 구체적 사례, 확인할 사실, 수정 방법에 대한 점검 질문이 나타납니다.</div><label class="field"><span>수정해서 다시 답하기</span><textarea id="interviewRevised" placeholder="피드백을 참고해 다시 써보세요.">${E(state.interview[state.interviewIdx]?.revised||'')}</textarea></label><button class="btn light" onclick="nav('notes')">나의 면접 기록 확인하기 →</button></section>`,
 notes:()=>`<section class="panel">${section('나의 직업 여권','탐험 과정에서 발견한 내용을 확인합니다.','나의 기록')}<div class="two"><div class="result"><h3>나의 선호와 관계 방식</h3>${selfResult()}</div><div class="result"><h3>나의 강점과 보완점</h3><p>${state.strengths.length?state.strengths.map(E).join(' · '):'아직 선택하지 않았습니다.'}</p><p class="muted">${state.improvements.map(a=>E(a)+' → '+E(guide[a])).join('<br>')}</p></div></div><div class="result"><h3>직업 탐색</h3><p>희망직종 3개 이내: <b>${state.preferredJobs.map(E).join(" · ")}</b></p><p>이번 지원서 직무: <b>${E(state.job)}</b></p><p class="muted">${E(state.jobpost||'공고 근거는 아직 입력되지 않았습니다.')}</p></div><div class="result"><h3>내가 직접 해본 경험</h3>${state.experiences.filter(Boolean).map((t)=>`<p>· ${E(t)}</p>`).join('')||'<p class="muted">아직 작성된 경험이 없습니다.</p>'}</div><div class="result"><h3>면접 연습 기록</h3>${state.interview.map((a,i)=>a?.answer?`<p><b>${E(interviewBase[i][1])}</b><br>${E(a.answer)}${a.revised?`<br><em>수정: ${E(a.revised)}</em>`:''}</p>`:'').join('')||'<p class="muted">아직 답변이 없습니다.</p>'}</div><div class="row"><button class="btn" onclick="downloadNotes()">개인 학습노트(.txt) 저장</button><button class="btn outline" onclick="nav('resume')">입사지원서 수정하기</button><button class="btn outline" onclick="clearAll()">내 입력정보 지우기</button></div></section>`};
@@ -1248,8 +1248,94 @@ function improvementText(){return state.improvements.map(k=>`<p><b>${E(k)}</b><b
 function careerColor(t){return ({office:'#31765f',promotion:'#8662a8',cooking:'#d1773e',startup:'#c26d63',care:'#7771aa',digital:'#436ca1',industry:'#587785'}[t]||'#397964')}
 function togglePreferred(name){let arr=state.preferredJobs;if(arr.includes(name)){if(arr.length===1){showToast('희망직종을 최소 1개 선택해 주세요.');return}state.preferredJobs=arr.filter(v=>v!==name);if(state.job===name)state.job=state.preferredJobs[0]}else{if(arr.length>=3){showToast('희망직종은 최대 3개까지 선택할 수 있습니다.');return}state.preferredJobs=[...arr,name]}jobCards($('#jobsearch')?.value||'')}
 function setPrimaryJob(name){if(!state.preferredJobs.includes(name)){if(state.preferredJobs.length>=3){showToast('희망직종은 최대 3개입니다. 기존 직종을 제외한 후 지정해 주세요.');return}state.preferredJobs=[...state.preferredJobs,name]}state.job=name;jobCards($('#jobsearch')?.value||'')}
-function jobCards(term=''){let sorted=[...jobs].sort((a,b)=>b.keywords.filter(k=>state.strengths.includes(k)).length-a.keywords.filter(k=>state.strengths.includes(k)).length);let found=sorted.filter(j=>(j.name+' '+j.group+' '+j.desc).includes(term));const selected=jobs.find(j=>j.name===state.job)||jobs[0];const th=themes[selected.theme]||['#eef5ef','#356754'];const banner=$('#job-theme');if(banner){banner.style.setProperty('--job-accent',th[1]);banner.style.setProperty('--job-tint',th[0]);banner.innerHTML='<strong>'+E(selected.group)+' · '+E(selected.name)+'</strong><br><span style="font-size:13px">'+E(selected.desc)+' · 실제 공고·자격조건을 확인해 주세요.</span>';}const pc=$('#preferredJobChips');if(pc)pc.innerHTML=state.preferredJobs.map(n=>`<span class="preference-pill">${E(n)} <button onclick="togglePreferred('${n}')" title="희망직종 제외">×</button></span>`).join('')+`<span class="muted">${state.preferredJobs.length}/3개 선택 · 지원서 직무: ${E(state.job)}</span>`;
-$('#jobResults').innerHTML=found.map((j,i)=>`<div class="job ${state.job===j.name?'selected':''}" style="--job-accent:${themes[j.theme]?.[1]||'#356754'};--job-tint:${themes[j.theme]?.[0]||'#eef5ef'}"><div class="scene" style="${j.image?`background:url(${j.image}) center/cover no-repeat !important`:''}"><span class="figurine">${avatarSvg(state.avatar)}</span></div><span class="jobbadge">${E(j.group)}</span><h3>${E(j.name)}</h3><p class="muted">${E(j.desc)}</p><p class="mini"><b>필요한 준비</b><br>${E(j.skill)}</p><p class="mini"><b>공고에서 확인할 점</b><br>${E(j.check)}</p>${state.strengths.some(k=>j.keywords.includes(k))?'<p class="mini" style="color:var(--green)">선택한 강점과 연결해볼 수 있는 직무</p>':''}<div class="job-pref-actions"><button class="${state.preferredJobs.includes(j.name)?'chosen':''}" onclick="togglePreferred('${j.name}')">${state.preferredJobs.includes(j.name)?'✓ 희망직종':'＋ 희망직종 추가'}</button><button onclick="setPrimaryJob('${j.name}')">${state.job===j.name?'● 지원서 직무':'지원서 직무 지정'}</button></div><button class="btn small ${state.job===j.name?'light':'outline'}" data-job="${E(j.name)}">${state.job===j.name?'선택됨 ✓':'이 직무 선택'}</button></div>`).join('')||'<p>일치하는 직업이 없습니다. 다른 검색어를 입력해보세요.</p>';if($('#careerIntro')){const jj=jobs.find(x=>x.name===state.job);if(jj)$('#careerIntro').innerHTML=`<div class="job-intro" style="--career-accent:${careerColor(jj.theme)}">${jj.image?`<img src="${jj.image}" alt="선택 직무 관련 사진">`:''}<div><strong>${E(jj.name)}</strong><p>${E(jj.desc)}</p><small>업무 역량: ${E(jj.skill)} · 실제 자격은 공고 원문 확인</small></div></div>`}document.querySelectorAll('[data-job]').forEach(b=>b.onclick=()=>{setPrimaryJob(b.dataset.job);$('#selectedjob').textContent=state.job;document.documentElement.style.setProperty('--career-accent',careerColor(jobs.find(x=>x.name===state.job)?.theme));jobCards($('#jobsearch').value);showToast('지원 직무를 선택했습니다.')})}
+const synMap = {
+  '경리': ['회계', '장부', '정산', '경리', '세무', '사무원', '급여'],
+  '강사': ['강사', '교육', '교원', '튜터', '코치', '지도사'],
+  '유튜버': ['크리에이터', '유튜버', '영상', '편집', '콘텐츠'],
+  '크리에이터': ['크리에이터', '유튜버', '콘텐츠', '기획자'],
+  '요양': ['요양', '간병', '돌봄', '생활지원사'],
+  '간호': ['간호', '조무사', '의료', '병원'],
+  '조리': ['조리', '급식', '식품', '반찬', '요리'],
+  '복지': ['복지사', '돌봄', '상담', '지원사']
+};
+
+function matchJob(j, term) {
+  if (!term) return true;
+  term = term.trim().toLowerCase();
+  const hay = (j.name + ' ' + j.group + ' ' + j.desc + ' ' + (j.skill || '') + ' ' + (j.check || '')).toLowerCase();
+  if (hay.includes(term)) return true;
+  for (const [k, v] of Object.entries(synMap)) {
+    if (term.includes(k) && v.some(syn => hay.includes(syn))) return true;
+  }
+  return false;
+}
+
+function jobCards(term=''){
+  term = (term || '').trim();
+  let sorted = [...jobs].sort((a,b)=>b.keywords.filter(k=>state.strengths.includes(k)).length-a.keywords.filter(k=>state.strengths.includes(k)).length);
+  let found = sorted.filter(j => matchJob(j, term));
+
+  const selected = jobs.find(j=>j.name===state.job) || jobs[0];
+  const th = themes[selected.theme] || ['#eef5ef','#356754'];
+  const banner = $('#job-theme');
+  if (banner) {
+    banner.style.setProperty('--job-accent', th[1]);
+    banner.style.setProperty('--job-tint', th[0]);
+    banner.innerHTML = '<strong>' + E(selected.group) + ' · ' + E(selected.name) + '</strong><br><span style="font-size:13px">' + E(selected.desc) + ' · 실제 공고·자격조건을 확인해 주세요.</span>';
+  }
+  const pc = $('#preferredJobChips');
+  if (pc) {
+    pc.innerHTML = state.preferredJobs.map(n=>`<span class="preference-pill">${E(n)} <button onclick="togglePreferred('${n}')" title="희망직종 제외">×</button></span>`).join('') + `<span class="muted">${state.preferredJobs.length}/3개 선택 · 지원서 직무: ${E(state.job)}</span>`;
+  }
+
+  const countEl = $('#jobResultsCount');
+  if (countEl) {
+    countEl.innerHTML = term 
+      ? `검색 결과: <b>${found.length}개</b> 직무 (전체 ${jobs.length}개 중)`
+      : `전체 <b>${jobs.length}개</b> 희망 직무 (원하는 카드를 선택해 희망직종이나 지원서 직무로 지정하세요)`;
+  }
+
+  $('#jobResults').innerHTML = found.map((j,i)=>`
+    <div class="job ${state.job===j.name?'selected':''}" style="--job-accent:${themes[j.theme]?.[1]||'#356754'};--job-tint:${themes[j.theme]?.[0]||'#eef5ef'}">
+      <div class="scene" style="${j.image?`background:url(${j.image}) center/cover no-repeat !important`:''}">
+        <span class="figurine">${avatarSvg(state.avatar)}</span>
+      </div>
+      <span class="jobbadge">${E(j.group)}</span>
+      <h3>${E(j.name)}</h3>
+      <p class="muted">${E(j.desc)}</p>
+      <p class="mini"><b>필요한 준비</b><br>${E(j.skill)}</p>
+      <p class="mini"><b>공고에서 확인할 점</b><br>${E(j.check)}</p>
+      ${state.strengths.some(k=>j.keywords.includes(k))?'<p class="mini" style="color:var(--green)">선택한 강점과 연결해볼 수 있는 직무</p>':''}
+      <div class="job-pref-actions">
+        <button class="${state.preferredJobs.includes(j.name)?'chosen':''}" onclick="togglePreferred('${j.name}')">${state.preferredJobs.includes(j.name)?'✓ 희망직종':'＋ 희망직종 추가'}</button>
+        <button onclick="setPrimaryJob('${j.name}')">${state.job===j.name?'● 지원서 직무':'지원서 직무 지정'}</button>
+      </div>
+      <button class="btn small ${state.job===j.name?'light':'outline'}" data-job="${E(j.name)}">${state.job===j.name?'선택됨 ✓':'이 직무 선택'}</button>
+    </div>
+  `).join('') || '<p style="padding:20px 0;color:#666;">일치하는 직업이 없습니다. 다른 검색어를 입력해보세요 (예: 강사, 경리, 상담, 조리, 복지 등).</p>';
+
+  if ($('#careerIntro')) {
+    const jj = jobs.find(x=>x.name===state.job);
+    if (jj) {
+      $('#careerIntro').innerHTML = `<div class="job-intro" style="--career-accent:${careerColor(jj.theme)}">
+        ${jj.image?`<img src="${jj.image}" alt="선택 직무 관련 사진">`:''}
+        <div>
+          <strong>${E(jj.name)}</strong>
+          <p>${E(jj.desc)}</p>
+          <small>업무 역량: ${E(jj.skill)} · 실제 자격은 공고 원문 확인</small>
+        </div>
+      </div>`;
+    }
+  }
+
+  document.querySelectorAll('[data-job]').forEach(b=>b.onclick=()=>{
+    setPrimaryJob(b.dataset.job);
+    $('#selectedjob').textContent = state.job;
+    document.documentElement.style.setProperty('--career-accent', careerColor(jobs.find(x=>x.name===state.job)?.theme));
+    jobCards($('#jobsearch')?.value || '');
+    showToast('지원 직무를 선택했습니다.');
+  });
+}
 const traitStrengthExamples=['꼼꼼하게 확인하기','약속과 시간 지키기','사람의 이야기를 경청하기','자료와 문서를 정리하기','새로운 업무를 배우기','협력하며 소통하기','아이디어를 구상하기','차분하게 문제 해결하기','손으로 직접 만들기','고객에게 친절하게 설명하기','상황에 맞게 대응하기','계획을 세우고 실천하기','꾸준하고 성실하게 일하기','실수를 발견하고 수정하기','긍정적으로 도전하기','변화에 유연하게 적응하기','기록을 남기고 관리하기','공감하며 배려하기','일의 우선순위를 정하기','끝까지 책임지고 마무리하기'];
 const traitSkillExamples=['문서 작성하기','컴퓨터로 자료 입력하기','엑셀·표 정리하기','일정 관리하기','SNS 게시글 작성하기','사진·영상 콘텐츠 만들기','행사·모임 준비하기','고객 응대하기','전화·안내 업무하기','상품 진열·재고 정리하기','조리·식재료 손질하기','청소·위생 관리하기','아이·어르신 돌보기','매출·영수증 정리하기','제품 포장·검수하기','사람들 사이 조정하기'];
 const traitLikeExamples=['사람과 대화하기','누군가를 돕는 일','숫자와 자료 정리','글쓰기·콘텐츠 제작','새로운 것 배우기','요리·음식 만들기','손으로 만드는 작업','사진 찍기·디자인','혼자 집중하는 시간','여럿이 협업하기','계획 세우고 실행하기','아이디어 내기','고객의 문제 해결','정리정돈하기','지역사회 활동하기','작은 사업 기획하기'];
@@ -1569,6 +1655,62 @@ const JIMG={"방문요양 요양보호사": "j001", "간호조무사": "j002", "
 /* 2026.11.08 정솔 Canva 그림 + 말풍선(카드 문구) */
 const CIMG={"단체급식 조리사": "c011", "식품 위생관리자": "c012", "밀키트·도시락 개발자": "c013", "디저트 공방 창업가": "c014", "건강 반찬가게 창업가": "c015", "푸드 스타일리스트": "c016", "로컬푸드 가공 창업가": "c017", "스마트팜 운영자": "c018", "1인 크리에이터·유튜버": "c019", "라이브커머스 셀러": "c020", "온라인 쇼핑몰 운영자": "c021", "SNS 마케터": "c022", "AI 활용 사무원": "c023", "AI 프롬프트 디자이너": "c024", "데이터 라벨러": "c025", "디지털 튜터": "c026", "UX 테스터": "c027", "정보보안 관리 보조": "c028", "데이터 분석 보조": "c029", "노코드 웹 제작자": "c030", "AI 이미지 디자이너": "c031", "1인 출판 작가": "c032", "디지털 장의사": "c033", "정리수납 전문가": "c034", "업사이클 공방 창업가": "c035", "물류센터 관리자": "c036", "배송 운영 매니저": "c037", "재생에너지 사무원": "c038", "환경교육 강사": "c039", "도시농업 관리사": "c040", "직업상담사": "c041", "AI 활용 강사": "c042", "고객경험 상담사": "c043", "평생교육사": "c044", "그림책 독서지도사": "c045", "청소년 진로 코치": "c046", "다문화 가족 코디네이터": "c047", "노후 설계 상담사": "c048", "지역 문화관광 해설사": "c049", "디지털 콘텐츠 기획자": "c050", "플랜테리어 전문가": "c051", "공방 클래스 강사": "c052", "프로젝트 매니저": "c053", "총무사무원": "c054", "계산원": "c055", "데이터 입력 사무원": "c056", "은행 창구 사무원": "c057", "텔레마케터": "c058", "우체국 창구 사무원": "c059", "회계·장부 사무원": "c060", "간병인": "c061", "노인맞춤돌봄 생활지원사": "c062", "통합돌봄 코디네이터": "c063", "병원 동행 매니저": "c064", "임상심리사": "c065", "언어재활사": "c066", "놀이·미술치료사": "c067", "아이돌보미": "c068", "영양사": "c069", "케어푸드 개발자": "c070", "치유농업사": "c071", "바리스타": "c072", "업무 자동화(RPA) 운영자": "c073", "AI 챗봇 기획자": "c074", "영상 편집자": "c075", "웹툰·이모티콘 작가": "c076", "AI 콘텐츠 검수자": "c077", "개인정보 보호 담당자": "c078", "오디오북 낭독가": "c079", "온라인 커뮤니티 매니저": "c080", "전기차 충전소 운영 관리자": "c081", "수소충전원": "c082", "ESG 담당자": "c083", "주택관리사": "c084", "방역·위생관리 전문가": "c085", "리커머스 검수원": "c086", "인사·노무 사무원": "c087", "심리상담사": "c088", "학습코칭 전문가": "c089", "한국어 교원": "c090", "중장년 전직지원 컨설턴트": "c091", "맞춤여행 플래너": "c092", "생활스포츠지도사": "c093", "문화예술교육사": "c094", "웨딩·이벤트 플래너": "c095", "번역가·통역가": "c096", "세무 사무원": "c097", "구매·조달 사무원": "c098", "안내·접수원": "c099", "비서": "c100", "방문요양 요양보호사": "c101", "간호조무사": "c102", "사회복지사": "c103", "장애인 활동지원사": "c104", "방과후 돌봄교사": "c105", "산후관리사": "c106", "실버 운동지도사": "c107", "치매예방 인지활동 강사": "c108", "의료 코디네이터": "c109", "반려동물 돌봄 전문가": "c110"};
 function cBub(t){const w=Math.min(204,t.length*11.5+22),x=214-w;return `<g><rect x="${x}" y="7" width="${w}" height="25" rx="12.5" fill="#fff" stroke="#2b2b2b" stroke-width="1.5"/><path d="M${x+22} 31 l-5 9 l13-9" fill="#fff" stroke="#2b2b2b" stroke-width="1.5" stroke-linejoin="round"/><rect x="${x+16}" y="29" width="16" height="3" fill="#fff"/><text x="${x+w/2}" y="24" text-anchor="middle" font-size="12" font-weight="400" fill="#222" font-family="Pretendard,'Noto Sans KR',sans-serif">${t}</text></g>`}
+
+/* ── 100장 도감(J) 기반 직업 탐색 전체 직무 생성 ── */
+function buildJobsFromJ() {
+  const catThemes = {
+    '사무·관리': 'office',
+    '디지털·AI': 'media',
+    '음식·농업': 'food',
+    '돌봄·건강': 'care',
+    '상담·교육': 'service',
+    '생활·환경': 'industry',
+    '문화·여가': 'startup'
+  };
+  const tagKeywords = {
+    tidy: ['차분하게 정리하기', '문서와 숫자 관리하기', '꼼꼼히 확인하기'],
+    plan: ['일정과 계획 세우기', '차분하게 정리하기'],
+    talk: ['사람의 이야기 듣기', '고객에게 설명하기'],
+    teach: ['고객에게 설명하기', '새로운 일 배우기'],
+    people: ['팀과 협력하기', '사람의 이야기 듣기'],
+    care: ['사람의 이야기 듣기', '상황에 맞게 대응하기'],
+    make: ['손으로 만들고 정돈하기', '아이디어 내기'],
+    idea: ['아이디어 내기', '새로운 일 배우기'],
+    digital: ['새로운 일 배우기', '문서와 숫자 관리하기'],
+    body: ['상황에 맞게 대응하기'],
+    number: ['문서와 숫자 관리하기', '꼼꼼히 확인하기']
+  };
+
+  const list = J.map(j => {
+    const kw = [...new Set((j.tags || []).flatMap(t => tagKeywords[t] || []))];
+    const img = CIMG[j.name] ? `img/jobs/${CIMG[j.name]}.webp` : (JIMG[j.name] ? `img/jobs/${JIMG[j.name]}.webp` : '');
+    return {
+      name: j.name,
+      group: j.cat,
+      desc: j.does,
+      skill: (j.skills || []).join(', ') || '실무 역량',
+      check: (j.pros && j.pros[0]) || '채용공고별 자격·경력 요건 확인',
+      keywords: kw.length ? kw : ['새로운 일 배우기', '꼼꼼히 확인하기'],
+      theme: catThemes[j.cat] || 'office',
+      image: img
+    };
+  });
+
+  if (!list.find(x => x.name === '사무원')) {
+    list.unshift({
+      name: '사무원',
+      group: '사무·관리',
+      desc: '문서 작성, 자료 관리, 일정·업무 지원을 수행합니다.',
+      skill: '문서 작성, 정보 관리, 업무 소통',
+      check: '채용공고별 문서 프로그램·경력 요구 확인',
+      keywords: ['차분하게 정리하기', '문서와 숫자 관리하기'],
+      theme: 'office',
+      image: 'img/tam/t01.webp'
+    });
+  }
+  return list;
+}
+jobs = buildJobsFromJ();
 function jobArt(j){if(CIMG[j.name])return `<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${j.name} 일하는 장면"><image href="img/jobs/${CIMG[j.name]}.webp" x="0" y="0" width="220" height="160" preserveAspectRatio="xMidYMid slice"/>${cBub(j.bub||'')}</svg>`;if(JIMG[j.name])return `<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${j.name} 일하는 장면"><image href="img/jobs/${JIMG[j.name]}.webp" x="0" y="0" width="220" height="160" preserveAspectRatio="xMidYMin slice"/></svg>`;const look=Object.assign({g:1},j.look);if(j.prop){look.prop=j.prop}const rain=j.w==='rain';return `<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${j.name} 일하는 장면"><rect width="220" height="160" fill="${j.bg}"/><rect y="126" width="220" height="34" fill="${j.fl}"/>${j.scene()}<g transform="translate(4 8)">${womanSvg(look)}</g>${(()=>{const t=j.bub,w=[...t].length*11.2+16;let [x,y]=j.bp||[104,4];if(x+w>215)x=215-w;return `<g transform="translate(${x} ${y})"><rect width="${w}" height="22" rx="11" fill="${rain?'#fff':'#fff3c9'}" stroke="${PI}" stroke-width="2"/><path d="M14 21l-4 8 10-7" fill="${rain?'#fff':'#fff3c9'}" stroke="${PI}" stroke-width="2" stroke-linejoin="round"/><text x="${w/2}" y="15.4" text-anchor="middle" font-size="11.4" font-weight="800" fill="${PI}" font-family="${PF}">${t}</text></g>`})()}</svg>`}
 
 
