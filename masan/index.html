@@ -1286,34 +1286,28 @@ body.page-sub .wrap{padding:8px 14px 20px!important;max-width:1320px!important}
   margin: 2px 2px 4px !important;
 }
 
-/* 2. 10년 뒤 직업 도감 100장 카드 (.dx-card): 가로 딱 6개 카드 배치 + 여유로운 간격 + 은은한 파스텔 배경 조율 */
+/* 2. 10년 뒤 직업 도감 100장 카드 (.dx-card): 가로 5개 시원한 카드 + 듬직한 세로 길이 + 어두운 작업복 밝기 보정 */
 #app .dx-grid {
   display: grid !important;
-  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
-  gap: 14px !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 16px !important;
 }
-@media (max-width: 1200px) {
-  #app .dx-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-    gap: 13px !important;
-  }
-}
-@media (max-width: 980px) {
+@media (max-width: 1100px) {
   #app .dx-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+}
+@media (max-width: 820px) {
+  #app .dx-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     gap: 12px !important;
   }
 }
-@media (max-width: 768px) {
-  #app .dx-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 10px !important;
-  }
-}
-@media (max-width: 520px) {
+@media (max-width: 540px) {
   #app .dx-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 8px !important;
+    gap: 10px !important;
   }
 }
 
@@ -1322,17 +1316,18 @@ body.page-sub .wrap{padding:8px 14px 20px!important;max-width:1320px!important}
   flex-direction: column !important;
   align-items: flex-start !important;
   text-align: left !important;
-  border-radius: 14px !important;
-  box-shadow: 0 2px 8px rgba(35, 60, 48, 0.07) !important;
-  padding: 8px 8px 11px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 3px 10px rgba(35, 60, 48, 0.08) !important;
+  padding: 10px 10px 14px !important;
+  min-height: 255px !important; /* 쪼그라들지 않는 듬직한 세로 카드 길이 */
   color: #263b35 !important;
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease !important;
   cursor: pointer !important;
 }
 #app .dx-card:hover,
 #app .dx-card:focus-visible {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 16px rgba(35, 60, 48, 0.15) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 20px rgba(35, 60, 48, 0.16) !important;
 }
 
 /* 은은하고 따뜻한 파스텔 배경색 (너무 하얗지 않고 카드마다 부드러운 개성 부여) */
@@ -1357,22 +1352,29 @@ body.page-sub .wrap{padding:8px 14px 20px!important;max-width:1320px!important}
   position: relative !important;
   display: block !important;
   width: 100% !important;
-  border-radius: 8px !important;
+  border-radius: 10px !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   overflow: hidden !important;
   background: #ffffff !important;
   aspect-ratio: 16 / 11 !important;
+  margin-bottom: 4px !important;
 }
 #app .dx-card .dx-art svg {
   display: block !important;
   width: 100% !important;
   height: 100% !important;
 }
+/* 어두운 작업복이나 진한 그림자 밝고 화사하게 보정 */
+#app .dx-card .dx-art image,
+#app .dx-card .dx-art img {
+  filter: brightness(1.08) contrast(0.96) saturate(0.96) !important;
+}
+
 #app .dx-card .dx-name {
-  font-size: 13px !important;
+  font-size: 15px !important;
   font-weight: 800 !important;
-  color: #1e3630 !important;
-  margin: 5px 1px 2px !important;
+  color: #1a332c !important;
+  margin: 6px 1px 3px !important;
   line-height: 1.3 !important;
   white-space: nowrap !important;
   overflow: hidden !important;
@@ -1380,25 +1382,25 @@ body.page-sub .wrap{padding:8px 14px 20px!important;max-width:1320px!important}
   width: 100% !important;
 }
 #app .dx-card .dx-desc {
-  font-size: 10.8px !important;
-  color: #556a5f !important;
-  line-height: 1.4 !important;
-  margin: 2px 1px 0 !important;
+  font-size: 11.8px !important;
+  color: #52675c !important;
+  line-height: 1.48 !important;
+  margin: 3px 1px 0 !important;
   display: -webkit-box !important;
-  -webkit-line-clamp: 2 !important;
+  -webkit-line-clamp: 3 !important; /* 3줄로 넉넉하게 읽기 쉬운 설명 */
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
 }
 
-/* 뱃지: 컴팩트 화이트 뱃지 */
+/* 뱃지: 선명하고 읽기 편한 뱃지 */
 #app .dx-card .dx-badge,
 #app .dx-badge {
   background: #ffffff !important;
   border: 1px solid !important;
-  border-radius: 5px !important;
-  font-size: 9px !important;
+  border-radius: 6px !important;
+  font-size: 10px !important;
   font-weight: 800 !important;
-  padding: 1.5px 6px !important;
+  padding: 2px 7px !important;
   margin: 4px 1px 0 !important;
   line-height: 1.25 !important;
 }
