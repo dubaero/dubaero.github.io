@@ -1710,7 +1710,6 @@ function buildJobsFromJ() {
   }
   return list;
 }
-jobs = buildJobsFromJ();
 function jobArt(j){if(CIMG[j.name])return `<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${j.name} 일하는 장면"><image href="img/jobs/${CIMG[j.name]}.webp" x="0" y="0" width="220" height="160" preserveAspectRatio="xMidYMid slice"/>${cBub(j.bub||'')}</svg>`;if(JIMG[j.name])return `<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${j.name} 일하는 장면"><image href="img/jobs/${JIMG[j.name]}.webp" x="0" y="0" width="220" height="160" preserveAspectRatio="xMidYMin slice"/></svg>`;const look=Object.assign({g:1},j.look);if(j.prop){look.prop=j.prop}const rain=j.w==='rain';return `<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${j.name} 일하는 장면"><rect width="220" height="160" fill="${j.bg}"/><rect y="126" width="220" height="34" fill="${j.fl}"/>${j.scene()}<g transform="translate(4 8)">${womanSvg(look)}</g>${(()=>{const t=j.bub,w=[...t].length*11.2+16;let [x,y]=j.bp||[104,4];if(x+w>215)x=215-w;return `<g transform="translate(${x} ${y})"><rect width="${w}" height="22" rx="11" fill="${rain?'#fff':'#fff3c9'}" stroke="${PI}" stroke-width="2"/><path d="M14 21l-4 8 10-7" fill="${rain?'#fff':'#fff3c9'}" stroke="${PI}" stroke-width="2" stroke-linejoin="round"/><text x="${w/2}" y="15.4" text-anchor="middle" font-size="11.4" font-weight="800" fill="${PI}" font-family="${PF}">${t}</text></g>`})()}</svg>`}
 
 
@@ -2053,6 +2052,7 @@ mk(['안내·접수원','사무·관리','rain','안내·접수원 다소 감소
 mk(['비서','사무·관리','rain','비서 다소 감소 전망, 연평균 -1.3% ('+SK2+'). AI 일정·문서 도구 확산','바쁜 대표의 시간 관리자','임원의 일정·회의·출장을 관리하고 문서와 전화, 손님 응대를 맡아요. AI 비서 도구가 많은 일을 대신하고 있어요.','눈치 빠르게 먼저 챙기고 비밀을 지키는 분',['사무 능력이 두루 쌓여요','다른 사무직으로 옮기기 좋아요'],['AI 일정·문서 도구로 자리가 줄어요','상사 일정에 맞춰야 해요'],['AI 일정 관리 도구','회의록 자동 정리','의전·응대 매너'],'대표님 커피 취향을 일 년 내내 기억하는 사람',['plan','tidy','people'],['shift'],L('bun','#2f2320','blazer','#c7cdd2',{inner:'#fff',earring:'#fff'}),'일정 정리했어요','#f1f2f4','#dcdfe3',()=>P.calendar(132,36)+Q.phone(186,62)])
 ];
 J.push(...J40);
+jobs = buildJobsFromJ();
 
 /* v13 상세 설명 40개 */
 DD('간병인','아픈 사람 곁을\n가족처럼 지키는 사람','간병인은 병원·요양병원에서 환자의 식사·이동·위생을 돕고 상태 변화를 간호 인력에게 알려요. 2025~2035 전망에서 요양보호사·간병인은 일자리가 늘어날 직업으로 꼽혔어요.','그냥 옆에 있어 주는 사람?','환자 안전을 지키고, 작은 변화도 놓치지 않고 의료진에게 전하는 돌봄 전문가예요.','종합병원, 요양병원, 재활병원, 간병 파견 업체, 개인 가정','24시간 상주, 주간·야간 교대, 단기 파견 등 형태가 다양해요','국가자격은 없지만 민간 간병 교육 이수나 요양보호사 자격이 있으면 일을 구하기 유리해요 (병원·업체별 요건 확인)','가족 간병 경험을 정리해 두고, 요양보호사 교육으로 기초를 다져 보세요','고용24, 지역 간병인 협회·파견 업체, 병원 공동간병 모집 공고를 확인해요',[['🏥','일자리를 구하기 쉬워요','고령화로 간병 수요가 꾸준히 늘고 있어 일을 찾기 수월한 편이에요.'],['🤲','가족 같은 보람','"덕분에 버텼어요"라는 말을 듣는 순간이 많아요.'],['📈','10년 뒤 더 필요한 일','요양보호사·간병인은 연평균 4.4% 증가 전망이에요.']]);
