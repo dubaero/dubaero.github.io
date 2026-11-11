@@ -1023,7 +1023,7 @@ body.page-sub .wrap{padding:8px 14px 20px!important;max-width:1320px!important}
 #app .choice-grid.flat .choice:hover{border-color:#b9cfc2!important;box-shadow:none!important;transform:none!important}
 #app .choice-grid.flat .choice.on{background:#eef7f1!important;border-color:#6f9c85!important;color:#1c4331!important;box-shadow:none!important;transform:none!important}
 #app .choice-grid.flat .choice.on:after{width:16px!important;height:16px!important;right:8px!important;font-size:10px!important;background:#6f9c85!important}
-#app .choice-grid.flat{gap:6px!important}
+#app .choice-grid.flat{gap:6px!important;grid-template-columns:repeat(4,minmax(0,1fr))!important}
 
 /* 결과 카드: 현재의 1/4 크기 · 한 화면에 */
 .panel.sr{padding:12px 16px!important}
@@ -1176,12 +1176,14 @@ body.page-sub .wrap{padding:8px 14px 20px!important;max-width:1320px!important}
 .dx-flips:not(.sr-flips) .dx-back-t{font-size:16px!important}
 
 @media(max-width:900px){
+  #app .choice-grid.flat{grid-template-columns:repeat(3,minmax(0,1fr))!important}
   .jobgrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
   .sr-flips{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;max-width:600px;margin-left:auto;margin-right:auto}
   .sr-flips .dx-flip{min-height:212px!important;max-width:none}
   .sr-flips .dx-art{height:84px}.sr-flips .dx-art svg{height:84px!important}
 }
 @media(max-width:600px){
+  #app .choice-grid.flat{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   #app .choice-grid.cg3{grid-template-columns:1fr!important}
   #app .choice-grid.cg3 .choice{min-height:44px!important}
   .jobgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
