@@ -1801,7 +1801,7 @@ function openSimple(k,pre){CS=SIMPLE[k];SV={};pre=pre||{};$('#s-title').textCont
   var nx=$('#s-next');nx.hidden=!CS.next;if(CS.next){nx.textContent=CS.next.label;nx.onclick=function(){location.hash=CS.next.form;openForm(CS.next.form);};}
   if(k==='base'){BASE.forEach(function(x){var d=el('div','box','<h4>'+esc(x.t)+'</h4><pre>'+esc(x.p)+'</pre>');d.style.marginBottom='10px';var c=el('button','btn','문구 복사');c.type='button';c.style.marginTop='8px';c.onclick=function(){copy(x.p,'복사했어요.');};d.appendChild(c);b.appendChild(d);});$('#s-acts').hidden=true;return show('simple');}
   $('#s-acts').hidden=false;
-  if(CS.render){CS.render(b,SV,pre,refreshS);b.appendChild(el('p','warn','이름, 전화번호, 상담 사연은 빼고 적어 주세요.'));bindMics(b);show('simple');return;}
+  if(CS.render){CS.render(b,SV,pre,function(){if(window.refreshS)window.refreshS();});b.appendChild(el('p','warn','이름, 전화번호, 상담 사연은 빼고 적어 주세요.'));bindMics(b);show('simple');return;}
   CS.f.forEach(function(f){b.appendChild(el('label','l',esc(f.l)));
     if(f.o){var init=(pre[f.k]&&f.o.indexOf(pre[f.k])>-1)?pre[f.k]:f.o[0];SV[f.k]=init;var o=el('div','opts');f.o.forEach(function(x){var bt=el('button',x===init?'on':'',esc(x));bt.type='button';bt.onclick=function(){SV[f.k]=x;o.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});};o.appendChild(bt);});b.appendChild(o);}
     else{var id='s-'+f.k;b.appendChild(micRow(id));var t=el('textarea','f');t.id=id;t.placeholder=f.ph||'';if(pre[f.k]){t.value=pre[f.k];SV[f.k]=pre[f.k];}t.oninput=function(){SV[f.k]=t.value;};b.appendChild(t);
@@ -2022,7 +2022,7 @@ $('#all-q').addEventListener('input',function(){renderAll(this.value);});
 var SEASON={'봄':{m:'3~5월',mot:'벚꽃, 개나리, 새싹, 소풍 돗자리, 나비',col:'연분홍, 연두, 크림'},'여름':{m:'6~8월',mot:'물놀이, 수박, 큰 나무 그늘, 밀짚모자, 매미',col:'하늘색, 민트, 흰색'},'가을':{m:'9~11월',mot:'낙엽, 단풍길, 감·밤, 억새, 노을',col:'주황, 갈색, 코랄, 머스터드'},'겨울':{m:'12~2월',mot:'눈, 목도리, 따뜻한 차, 성탄 불빛, 털장갑',col:'아이보리, 딥그린, 빨강'}};
 var SEASON_NOW=['겨울','겨울','봄','봄','봄','여름','여름','여름','가을','가을','가을','겨울'][CURM-1];
 SIMPLE.img={t:'홍보 이미지 시안',free:1,s:'카드뉴스, 인포그래픽, 전단지·포스터, 웹툰, 이모티콘, 가로 배너까지! 원하는 홍보물을 고르면 장수와 레이아웃에 맞는 전용 기획안과 AI 프롬프트가 바로 완성돼요.',
-  render:function(b,SV,pre,refreshS){
+  render:function(b,SV,pre,doRefresh){
     var types=['카드뉴스 (여러 장 넘김)','인포그래픽 (단계·절차 시각화)','전단지·포스터 (한 장에 핵심)','웹툰 만화 (스토리와 대사)','이모티콘 (캐릭터 감정 세트)','가로 배너·현수막 (16:9)'];
     var curType=pre.type||types[0];
     SV.type=curType;
@@ -2036,7 +2036,7 @@ SIMPLE.img={t:'홍보 이미지 시안',free:1,s:'카드뉴스, 인포그래픽,
         SV.type=x;
         typeBox.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});
         updateSub(x);
-        refreshS();
+        if(doRefresh)doRefresh();
       };
       typeBox.appendChild(bt);
     });
@@ -2077,7 +2077,7 @@ SIMPLE.img={t:'홍보 이미지 시안',free:1,s:'카드뉴스, 인포그래픽,
         sbt.onclick=function(){
           SV.sub=s;
           subBox.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===sbt);});
-          refreshS();
+          if(doRefresh)doRefresh();
         };
         subBox.appendChild(sbt);
       });
@@ -2095,7 +2095,7 @@ SIMPLE.img={t:'홍보 이미지 시안',free:1,s:'카드뉴스, 인포그래픽,
       bt.onclick=function(){
         SV.biz=x;
         bizBox.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});
-        refreshS();
+        if(doRefresh)doRefresh();
       };
       bizBox.appendChild(bt);
     });
@@ -2112,7 +2112,7 @@ SIMPLE.img={t:'홍보 이미지 시안',free:1,s:'카드뉴스, 인포그래픽,
       bt.onclick=function(){
         SV.tgt=x;
         tgtBox.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});
-        refreshS();
+        if(doRefresh)doRefresh();
       };
       tgtBox.appendChild(bt);
     });
@@ -2129,7 +2129,7 @@ SIMPLE.img={t:'홍보 이미지 시안',free:1,s:'카드뉴스, 인포그래픽,
       bt.onclick=function(){
         SV.style=x;
         styleBox.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});
-        refreshS();
+        if(doRefresh)doRefresh();
       };
       styleBox.appendChild(bt);
     });
@@ -2146,7 +2146,7 @@ SIMPLE.img={t:'홍보 이미지 시안',free:1,s:'카드뉴스, 인포그래픽,
       bt.onclick=function(){
         SV.season=x;
         seasonBox.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});
-        refreshS();
+        if(doRefresh)doRefresh();
       };
       seasonBox.appendChild(bt);
     });
@@ -2159,7 +2159,7 @@ SIMPLE.img={t:'홍보 이미지 시안',free:1,s:'카드뉴스, 인포그래픽,
     ta.id=id;
     ta.placeholder='예) 11월 22일(토) 10:00~12:00, 가온시 가족센터 2층 대강당, 초등 자녀 가족 15가족 선착순, 참가비 무료, 온라인 구글폼 및 전화 접수';
     if(pre.memo){ta.value=pre.memo;SV.memo=pre.memo;}
-    ta.oninput=function(){SV.memo=ta.value;refreshS();};
+    ta.oninput=function(){SV.memo=ta.value;if(doRefresh)doRefresh();};
     b.appendChild(ta);
 
     var ch=el('div','chips');
@@ -2167,7 +2167,7 @@ SIMPLE.img={t:'홍보 이미지 시안',free:1,s:'카드뉴스, 인포그래픽,
     exs.forEach(function(x,i){
       var cbt=el('button',null,'예시 '+(i+1)+' 넣기');
       cbt.type='button';
-      cbt.onclick=function(){ta.value=x;SV.memo=x;refreshS();};
+      cbt.onclick=function(){ta.value=x;SV.memo=x;if(doRefresh)doRefresh();};
       ch.appendChild(cbt);
     });
     b.appendChild(ch);
@@ -2678,6 +2678,7 @@ function curP(){var v={};for(var x in SV)v[x]=SV[x];if(!(v.memo||'').trim()){var
 function refreshS(){if(!CS||!CS.p)return;$('#s-pv').innerHTML=markP(curP());var sg=sugFor(CS._k,SV),box=$('#s-sug');box.innerHTML='';
   if(sg.length){box.appendChild(el('h4',null,'이런 건 어떠세요? <small>예시</small>'));sg.forEach(function(s){box.appendChild(el('div','sugc','<b>'+esc(s.h)+'</b><span>'+esc(s.d)+'</span>'));});}
   var A=ATTS[CS._k],ab=$('#s-att');ab.innerHTML=A?'<h4>필요한 서식·자료</h4><ol>'+A.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol>':'';ab.hidden=!A;}
+window.refreshS=refreshS;
 var _old=openSimple;
 openSimple=function(k,pre){_old(k,pre);CS._k=k;if(k==='base'){$('#s-right').hidden=true;return;}$('#s-right').hidden=false;
   var b=$('#s-body');b.querySelectorAll('.opts button').forEach(function(bt){bt.addEventListener('click',function(){setTimeout(refreshS,0);});});
