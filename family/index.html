@@ -1164,7 +1164,7 @@ body{line-height:1.55}
   <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2 id="s-title"></h2></div>
   <div class="tool"><p class="sub" id="s-sub"></p>
     <div class="sgrid"><div id="s-body"></div>
-      <div class="sright" id="s-right"><div class="sp-h"><h4>예시 프롬프트 <small>고른 대로 바로 바뀌어요 · 주황색 칸은 내 상황으로</small></h4><button type="button" class="btn mini" id="s-cp">복사</button><button type="button" class="btn mini" id="s-gpt2">ChatGPT</button></div>
+      <div class="sright" id="s-right"><div class="sp-h"><h4>예시 프롬프트 <small>고른 대로 바로 바뀌어요 · 주황색 칸은 내 상황으로</small></h4><button type="button" class="btn mini" id="s-cp">복사</button><button type="button" class="btn mini" id="s-gem2">제미나이 열기</button><button type="button" class="btn mini" id="s-gpt2">ChatGPT</button></div>
         <pre class="aig-p" id="s-pv"></pre><div class="sugs" id="s-sug"></div><div class="satt" id="s-att"></div></div></div>
     <div class="acts" id="s-acts"><button type="button" class="btn fill" id="s-gpt" hidden>ChatGPT에서 열기</button><button type="button" class="btn" id="s-copy" hidden>프롬프트 복사</button><button type="button" class="btn" id="s-next" hidden></button></div></div>
 </div>
@@ -1412,7 +1412,7 @@ var TILES=[
  {go:'multi',ic:'globe',t:'다국어 안내',s:'쉬운 한국어+모국어'},
  {go:'vent',ic:'fire',t:'빡침 번역기',s:'같이 빡치고 순화까지',hot:1},
  {go:'heart',ic:'heart',t:'마음 쉼터',s:'지친 날 위로받기',hot:1},
- {go:'img',ic:'image',t:'홍보 이미지',s:'계절 맞춤 시안 3개',f:1},
+ {go:'img',ic:'image',t:'홍보 이미지 시안',s:'카드뉴스·포스터·인포그래픽·웹툰',f:1},
  {go:'rec',ic:'mic',t:'녹음 → 글',s:'어디서 바꿀까?'},
  {go:'budget',ic:'sum',t:'예산·정산 점검',s:'엑셀 오류 찾기'},
  {go:'month',ic:'cal',t:'이달의 추천',s:'',f:1}
@@ -1545,7 +1545,7 @@ function go(key){
   if(['vent','heart','multi','rec','song'].indexOf(key)>-1)return show(key);
   if(key==='all'){renderAll($('#all-q').value);return show('all');}
   if(key==='meet'){renderMeet();return show('meet');}
-  if(key==='img')return openSimple('img',{season:SEASON_NOW});
+  if(key==='img')return openSimple('img',{season:SEASON_NOW,type:'카드뉴스 (여러 장 넘김)'});
   if(SIMPLE[key])return openSimple(key);
 }
 document.addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(g){location.hash=g.dataset.go;go(g.dataset.go);}if(e.target.closest('[data-home]')){show('home');history.replaceState(null,'',location.pathname);}});
@@ -1801,6 +1801,7 @@ function openSimple(k,pre){CS=SIMPLE[k];SV={};pre=pre||{};$('#s-title').textCont
   var nx=$('#s-next');nx.hidden=!CS.next;if(CS.next){nx.textContent=CS.next.label;nx.onclick=function(){location.hash=CS.next.form;openForm(CS.next.form);};}
   if(k==='base'){BASE.forEach(function(x){var d=el('div','box','<h4>'+esc(x.t)+'</h4><pre>'+esc(x.p)+'</pre>');d.style.marginBottom='10px';var c=el('button','btn','문구 복사');c.type='button';c.style.marginTop='8px';c.onclick=function(){copy(x.p,'복사했어요.');};d.appendChild(c);b.appendChild(d);});$('#s-acts').hidden=true;return show('simple');}
   $('#s-acts').hidden=false;
+  if(CS.render){CS.render(b,SV,pre,refreshS);b.appendChild(el('p','warn','이름, 전화번호, 상담 사연은 빼고 적어 주세요.'));bindMics(b);show('simple');return;}
   CS.f.forEach(function(f){b.appendChild(el('label','l',esc(f.l)));
     if(f.o){var init=(pre[f.k]&&f.o.indexOf(pre[f.k])>-1)?pre[f.k]:f.o[0];SV[f.k]=init;var o=el('div','opts');f.o.forEach(function(x){var bt=el('button',x===init?'on':'',esc(x));bt.type='button';bt.onclick=function(){SV[f.k]=x;o.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});};o.appendChild(bt);});b.appendChild(o);}
     else{var id='s-'+f.k;b.appendChild(micRow(id));var t=el('textarea','f');t.id=id;t.placeholder=f.ph||'';if(pre[f.k]){t.value=pre[f.k];SV[f.k]=pre[f.k];}t.oninput=function(){SV[f.k]=t.value;};b.appendChild(t);
@@ -2020,20 +2021,356 @@ $('#all-q').addEventListener('input',function(){renderAll(this.value);});
 /* --- 홍보 이미지: 계절 자동 + 시안 3개 먼저 --- */
 var SEASON={'봄':{m:'3~5월',mot:'벚꽃, 개나리, 새싹, 소풍 돗자리, 나비',col:'연분홍, 연두, 크림'},'여름':{m:'6~8월',mot:'물놀이, 수박, 큰 나무 그늘, 밀짚모자, 매미',col:'하늘색, 민트, 흰색'},'가을':{m:'9~11월',mot:'낙엽, 단풍길, 감·밤, 억새, 노을',col:'주황, 갈색, 코랄, 머스터드'},'겨울':{m:'12~2월',mot:'눈, 목도리, 따뜻한 차, 성탄 불빛, 털장갑',col:'아이보리, 딥그린, 빨강'}};
 var SEASON_NOW=['겨울','겨울','봄','봄','봄','여름','여름','여름','가을','가을','가을','겨울'][CURM-1];
-SIMPLE.img={t:'홍보 이미지 시안',free:1,s:'오늘 날짜로 계절이 자동으로 골라져요. AI가 먼저 디자인 시안 3개를 표로 제안하고, 번호를 고르면 그때 그림을 만들어요.',
-  f:[{k:'season',l:'계절 (오늘 기준 자동)',o:['봄','여름','가을','겨울']},
-     {k:'biz',l:'홍보할 사업·프로그램',o:['가족사랑의 날','공동육아나눔터','아버지 참여 프로그램','다문화가족 프로그램','부모교육','가족상담·온가족보듬','가족 캠프·나들이','자원봉사·지역공동체']},
-     {k:'tgt',l:'대상',o:['영유아 자녀 가족','초등 자녀 가족','청소년 자녀 가족','아버지와 자녀','결혼이민자 가족','한부모·조손가족','지역 주민 누구나']},
-     {k:'goal',l:'목적',o:['참여자 모집','행사 안내','결과 공유·후기','감사 인사']},
-     {k:'size',l:'크기',o:['세로 포스터 (3:4)','정사각 카드뉴스 (1:1)','가로 배너 (16:9)','문자·SNS 세로 (9:16)']},
-     {k:'memo',l:'행사 정보 (그림 안에 글자로 넣지 않고, 나중에 편집할 내용)',ph:'예) 11월 22일(토) 10시, 가온시 가족센터 앞마당, 초등 자녀 가족 20가족, 선착순'}],
-  p:function(v){var S=SEASON[v.season]||SEASON[SEASON_NOW];
-   return '[1단계 — 시안 제안만]\n너는 가족센터 홍보 디자이너야. 아래 조건으로 홍보 이미지를 기획할 거야.\n- 시기: ['+v.season+', '+CURM+'월]\n- 홍보할 사업: ['+v.biz+']\n- 대상: ['+v.tgt+']\n- 목적: ['+v.goal+']\n- 크기: ['+v.size+']\n'+
-   '그림을 바로 만들지 말고, 서로 다른 디자인 시안 3개를 표로 제안해 줘.\n- 표 칸: 시안 이름 / 장면(누가·어디서·무엇을) / 계절 소재 / 색 / 분위기 / 이 대상에게 맞는 이유\n'+
-   '- 계절 소재 힌트: '+S.mot+'\n- 색 힌트: '+S.col+'\n- 세 시안은 장면과 구도가 서로 확실히 달라야 해.\n- 가족 구성은 다양하게(한부모·조부모·다문화 가족 포함), 얼굴은 실제 인물처럼 보이지 않게.\n'+
-   '내가 번호를 고르면 그때 그림을 만들어 줘.\n\n'+
-   '[2단계 — 번호를 고른 뒤 이렇게 보내기]\n[2]번 시안으로 만들어 줘. '+v.size+', 따뜻한 수채화풍.\n그림 안에는 글자를 넣지 마. 제목·날짜·신청 방법이 들어갈 빈 공간을 위쪽에 넉넉히 남겨 줘.\n\n'+
-   '[행사 정보 — 그림이 아니라 나중에 글자로 넣을 내용]\n'+(v.memo||'(없음)');}};
+SIMPLE.img={t:'홍보 이미지 시안',free:1,s:'카드뉴스, 인포그래픽, 전단지·포스터, 웹툰, 이모티콘, 가로 배너까지! 원하는 홍보물을 고르면 장수와 레이아웃에 맞는 전용 기획안과 AI 프롬프트가 바로 완성돼요.',
+  render:function(b,SV,pre,refreshS){
+    var types=['카드뉴스 (여러 장 넘김)','인포그래픽 (단계·절차 시각화)','전단지·포스터 (한 장에 핵심)','웹툰 만화 (스토리와 대사)','이모티콘 (캐릭터 감정 세트)','가로 배너·현수막 (16:9)'];
+    var curType=pre.type||types[0];
+    SV.type=curType;
+
+    b.appendChild(el('label','l','홍보물 종류 선택'));
+    var typeBox=el('div','opts');
+    types.forEach(function(x){
+      var bt=el('button',x===curType?'on':'',esc(x));
+      bt.type='button';
+      bt.onclick=function(){
+        SV.type=x;
+        typeBox.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});
+        updateSub(x);
+        refreshS();
+      };
+      typeBox.appendChild(bt);
+    });
+    b.appendChild(typeBox);
+
+    var subLabel=el('label','l','카드뉴스 장수 선택');
+    b.appendChild(subLabel);
+    var subBox=el('div','opts');
+    b.appendChild(subBox);
+
+    function updateSub(t){
+      subBox.innerHTML='';
+      var subOpts=[];
+      if(t.indexOf('카드뉴스')>-1){
+        subLabel.textContent='카드뉴스 장수 및 구성';
+        subOpts=['4장 (핵심 요약)','5장 (추천 표준형)','6장 (스토리형)','8장 (상세 안내형)'];
+      }else if(t.indexOf('인포그래픽')>-1){
+        subLabel.textContent='인포그래픽 시각화 구조';
+        subOpts=['단계별 절차 안내 (1~4단계)','한눈에 보는 비교·혜택','사업 추진 체계도','숫자로 보는 주요 성과'];
+      }else if(t.indexOf('전단지')>-1||t.indexOf('포스터')>-1){
+        subLabel.textContent='포스터·전단지 판형';
+        subOpts=['A4 전단지 (세로)','A3 포스터 (세로)','모바일 전단 (문자/SNS 9:16)'];
+      }else if(t.indexOf('웹툰')>-1){
+        subLabel.textContent='웹툰 컷 수 및 형식';
+        subOpts=['4컷 인스타툰 (기승전결)','6컷 스토리툰'];
+      }else if(t.indexOf('이모티콘')>-1){
+        subLabel.textContent='이모티콘 세트 구성';
+        subOpts=['기본 감정 4종 (기쁨·응원·감사·사랑)','센터 실무 8종 (신청완료·상담중·수고했어 등)'];
+      }else{
+        subLabel.textContent='배너 용도 및 규격';
+        subOpts=['홈페이지 팝업·배너 (16:9)','카카오톡 채널 홍보 배너','실물 현수막 시안 (가로형)'];
+      }
+      var initSub=subOpts[0];
+      SV.sub=initSub;
+      subOpts.forEach(function(s){
+        var sbt=el('button',s===initSub?'on':'',esc(s));
+        sbt.type='button';
+        sbt.onclick=function(){
+          SV.sub=s;
+          subBox.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===sbt);});
+          refreshS();
+        };
+        subBox.appendChild(sbt);
+      });
+    }
+    updateSub(curType);
+
+    var bizOpts=['가족사랑의 날','공동육아나눔터','아버지 참여 프로그램','다문화가족 프로그램','부모교육','가족상담·온가족보듬','가족 캠프·나들이','자원봉사·지역공동체'];
+    var curBiz=pre.biz||bizOpts[0];
+    SV.biz=curBiz;
+    b.appendChild(el('label','l','홍보할 사업·프로그램'));
+    var bizBox=el('div','opts');
+    bizOpts.forEach(function(x){
+      var bt=el('button',x===curBiz?'on':'',esc(x));
+      bt.type='button';
+      bt.onclick=function(){
+        SV.biz=x;
+        bizBox.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});
+        refreshS();
+      };
+      bizBox.appendChild(bt);
+    });
+    b.appendChild(bizBox);
+
+    var tgtOpts=['영유아 자녀 가족','초등 자녀 가족','청소년 자녀 가족','아버지와 자녀','결혼이민자 가족','한부모·조손가족','지역 주민 누구나'];
+    var curTgt=pre.tgt||tgtOpts[1];
+    SV.tgt=curTgt;
+    b.appendChild(el('label','l','홍보 대상'));
+    var tgtBox=el('div','opts');
+    tgtOpts.forEach(function(x){
+      var bt=el('button',x===curTgt?'on':'',esc(x));
+      bt.type='button';
+      bt.onclick=function(){
+        SV.tgt=x;
+        tgtBox.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});
+        refreshS();
+      };
+      tgtBox.appendChild(bt);
+    });
+    b.appendChild(tgtBox);
+
+    var styleOpts=['따뜻한 그림책 일러스트','깔끔한 플랫/클린 디자인','화사하고 포근한 수채화','귀여운 3D 캐릭터','감성 라인 드로잉'];
+    var curStyle=pre.style||styleOpts[0];
+    SV.style=curStyle;
+    b.appendChild(el('label','l','디자인 분위기·스타일'));
+    var styleBox=el('div','opts');
+    styleOpts.forEach(function(x){
+      var bt=el('button',x===curStyle?'on':'',esc(x));
+      bt.type='button';
+      bt.onclick=function(){
+        SV.style=x;
+        styleBox.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});
+        refreshS();
+      };
+      styleBox.appendChild(bt);
+    });
+    b.appendChild(styleBox);
+
+    var seasonOpts=['봄','여름','가을','겨울'];
+    var curSeason=pre.season||SEASON_NOW;
+    SV.season=curSeason;
+    b.appendChild(el('label','l','계절 분위기 (오늘 기준 자동)'));
+    var seasonBox=el('div','opts');
+    seasonOpts.forEach(function(x){
+      var bt=el('button',x===curSeason?'on':'',esc(x));
+      bt.type='button';
+      bt.onclick=function(){
+        SV.season=x;
+        seasonBox.querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===bt);});
+        refreshS();
+      };
+      seasonBox.appendChild(bt);
+    });
+    b.appendChild(seasonBox);
+
+    b.appendChild(el('label','l','행사 정보 (일시, 장소, 신청방법 등 / 그림 위에 글자로 얹을 내용)'));
+    var id='s-memo';
+    b.appendChild(micRow(id));
+    var ta=el('textarea','f');
+    ta.id=id;
+    ta.placeholder='예) 11월 22일(토) 10:00~12:00, 가온시 가족센터 2층 대강당, 초등 자녀 가족 15가족 선착순, 참가비 무료, 온라인 구글폼 및 전화 접수';
+    if(pre.memo){ta.value=pre.memo;SV.memo=pre.memo;}
+    ta.oninput=function(){SV.memo=ta.value;refreshS();};
+    b.appendChild(ta);
+
+    var ch=el('div','chips');
+    var exs=['11월 22일(토) 10시, 가족센터 앞마당, 초등 자녀 20가족 선착순 무료','매주 토요일 10시, 센터 2층 놀이실, 5~7세 자녀와 아빠 10가족','온가족보듬사업 상시 상담 접수, 평일 09:00~18:00, 사전 예약 필수'];
+    exs.forEach(function(x,i){
+      var cbt=el('button',null,'예시 '+(i+1)+' 넣기');
+      cbt.type='button';
+      cbt.onclick=function(){ta.value=x;SV.memo=x;refreshS();};
+      ch.appendChild(cbt);
+    });
+    b.appendChild(ch);
+  },
+  p:function(v){
+    var type=v.type||'카드뉴스';
+    var sub=v.sub||'';
+    var biz=v.biz||'가족사랑의 날';
+    var tgt=v.tgt||'초등 자녀 가족';
+    var style=v.style||'따뜻한 그림책 일러스트';
+    var season=v.season||SEASON_NOW;
+    var S=SEASON[season]||SEASON[SEASON_NOW];
+    var memo=(v.memo||'').trim();
+    var c='전북특별자치도가족센터';
+
+    if(type.indexOf('카드뉴스')>-1){
+      var count=5;
+      if(sub.indexOf('4장')>-1)count=4;
+      else if(sub.indexOf('6장')>-1)count=6;
+      else if(sub.indexOf('8장')>-1)count=8;
+
+      var pDesc='';
+      if(count===4){
+        pDesc='[1장 — 표지 (시선 집중)]\n'+
+              '- 이미지 연출: '+tgt+'이(가) 환하게 웃으며 함께하는 다정한 장면, '+style+', '+season+' 색감('+S.col+')\n'+
+              '- 텍스트 카피: "이번 주말, '+tgt+' 맞춤 힐링! ['+biz+']"\n'+
+              '- 서브 카피: 우리 가족의 소중한 추억 만들기\n\n'+
+              '[2장 — 공감 & 필요성]\n'+
+              '- 이미지 연출: 바쁜 일상 속에서 서로를 바라보며 고민을 나누는 따뜻한 가족 일러스트\n'+
+              '- 텍스트 카피: "아이와 함께 특별한 시간을 보내고 싶을 때, ['+biz+']이(가) 찾아갑니다."\n\n'+
+              '[3장 — 프로그램 핵심 내용 & 일정]\n'+
+              '- 이미지 연출: 센터 활동실에서 재미있는 체험을 함께 즐기는 구체적인 활동 장면\n'+
+              '- 텍스트 카피: \n  · 일시 및 장소: [일시·장소 기재]\n  · 활동 내용: [체험 및 대화 프로그램 3가지]\n  · 참가비: 전액 무료 (재료 지원)\n\n'+
+              '[4장 — 신청 안내 & 마무리 (행동 유도)]\n'+
+              '- 이미지 연출: 따뜻한 센터 전경 일러스트와 캘린더/신청서 그래픽\n'+
+              '- 텍스트 카피: \n  · 모집 마감: [모집 마감일 기재]\n  · 신청 방법: 포스터 QR코드 스캔 및 전화 접수\n  · 문의처: '+c+' 담당자 직통';
+      }else if(count===5){
+        pDesc='[1장 — 표지 (시선 집중)]\n'+
+              '- 이미지 연출: '+tgt+'의 밝은 미소와 '+biz+'의 대표 활동 오브젝트, '+style+', '+season+' 계절감('+S.mot+')\n'+
+              '- 텍스트 카피: "우리 가족 힐링 프로젝트! ['+biz+']"\n'+
+              '- 서브 카피: '+tgt+' 누구나 환영해요!\n\n'+
+              '[2장 — 참여 대상 & 이런 분께 추천해요]\n'+
+              '- 이미지 연출: 부모와 아이가 눈을 맞추며 이야기 나누는 다정한 모습\n'+
+              '- 텍스트 카피:\n  · 아이와 특별한 추억을 만들고 싶은 가족\n  · 이웃 가족들과 소통하고 교류하고 싶은 분\n  · '+tgt+' 맞춤형 전문 프로그램을 찾고 계셨던 분\n\n'+
+              '[3장 — 어떤 활동을 함께하나요? (프로그램 안내)]\n'+
+              '- 이미지 연출: 부모와 아이가 함께 만들기를 하거나 게임을 즐기는 활기찬 장면\n'+
+              '- 텍스트 카피:\n  · 1회기: 마음 열기 및 친밀감 형성 놀이\n  · 2회기: 온 가족이 함께하는 창의 체험 활동\n  · 3회기: 소통과 공감을 위한 가족 대화법\n\n'+
+              '[4장 — 언제, 어디서 하나요? (일정 및 혜택)]\n'+
+              '- 이미지 연출: 쾌적한 가족센터 실습실과 선물/다과 그래픽\n'+
+              '- 텍스트 카피:\n  · 일시: [행사 일시 기재]\n  · 장소: '+c+' 교육장\n  · 참가비: 전액 무료 (재료비 지원)\n  · 모집 인원: '+tgt+' 선착순 15가정\n\n'+
+              '[5장 — 신청 방법 및 문의 (행동 유도)]\n'+
+              '- 이미지 연출: 스마트폰 QR 신청 화면과 다정하게 손을 흔드는 캐릭터 일러스트\n'+
+              '- 텍스트 카피:\n  · 모집 마감: [모집 마감일 기재]\n  · 신청 방법: 센터 홈페이지 접수 및 홍보지 QR코드 스캔\n  · 문의처: '+c+' 담당자 직통';
+      }else if(count===6){
+        pDesc='[1장 — 표지]: 매력적인 메인 질문형 타이틀과 '+style+'의 따뜻한 키비주얼\n'+
+              '[2장 — 문제 제기/공감]: "'+tgt+'이(가) 일상에서 자주 느끼는 고민과 필요성"\n'+
+              '[3장 — 해결책 제시]: "가족센터의 ['+biz+'] 프로그램이 특별한 이유 3가지"\n'+
+              '[4장 — 상세 활동 안내]: 회기별 체험 활동 및 전문 가족 코칭 커리큘럼 소개\n'+
+              '[5장 — 참여 혜택 및 일정]: 행사 일시, 장소, 재료비 전액 무료 지원, 모집 인원\n'+
+              '[6장 — 접수 및 문의]: 온라인 신청 링크, QR코드, 문의 전화번호, 센터 로고';
+      }else{
+        pDesc='[1장 — 표지]: 시선 집중 메인 타이틀 & '+season+' 감성의 '+style+' 키비주얼\n'+
+              '[2장 — 인트로]: 사업 기획 배경 및 '+tgt+'을(를) 위한 응원 메시지\n'+
+              '[3장 — 고민 공감]: 참여 가족들이 평소 느끼는 실질적인 니즈와 질문\n'+
+              '[4장 — 프로그램 소개]: '+biz+'의 핵심 목표와 운영 방식\n'+
+              '[5장 — 상세 커리큘럼]: 단계별 진행 프로그램 세부 안내\n'+
+              '[6장 — 참여자 생생 후기]: "작년에 참여했던 가족들의 감동 리뷰 요약"\n'+
+              '[7장 — 일정 및 장소 안내]: 일시, 장소, 모집 인원, 참가비(무료)\n'+
+              '[8장 — 접수 및 문의]: 온라인 신청 링크, QR코드, 문의처, '+c;
+      }
+
+      return '너는 가족센터 전문 홍보 기획자이자 카드뉴스 디자인 디렉터야.\n'+
+             '아래 조건에 맞춰 SNS(인스타그램, 블로그, 카카오 채널)에 게시할 '+count+'장 구성의 전문 카드뉴스 기획안과 AI 이미지 생성 프롬프트를 작성해 줘.\n\n'+
+             '[기본 정보]\n'+
+             '- 사업/프로그램명: '+biz+'\n'+
+             '- 홍보 대상: '+tgt+'\n'+
+             '- 디자인 스타일: '+style+' ('+season+' 감성: '+S.mot+', 주조색: '+S.col+')\n'+
+             '- 크기 규격: 1:1 정사각 (1080x1080px)\n'+
+             '- 카드뉴스 분량: 총 '+count+'장 ('+sub+')\n'+
+             '- 기관명: '+c+'\n'+
+             (memo?'- 행사 세부 정보: '+memo+'\n':'')+
+             '\n[작성 및 연출 규칙]\n'+
+             '1. 각 장별로 [카드뉴스 이미지 묘사 프롬프트(미드저니/DALL-E용 영문 및 국문)]와 [Canva 등에서 카드 위에 직접 얹을 텍스트 카피]를 분리해서 정리해 줘.\n'+
+             '2. 이미지에는 글자가 직접 찍혀 나오지 않도록 텍스트가 들어갈 넉넉한 여백(Negative Space)을 확보하도록 지시해 줘.\n'+
+             '3. 대상('+tgt+')의 공감을 이끌어내는 다정하고 직관적인 카피라이팅을 적용해 줘.\n\n'+
+             '[카드뉴스 장별 상세 구성]\n'+pDesc;
+
+    }else if(type.indexOf('인포그래픽')>-1){
+      return '너는 공공기관 및 가족센터 전문 정보 디자인(인포그래픽) 전문가야.\n'+
+             '복잡한 지원 사업이나 프로그램 절차를 주민들이 한눈에 1초 만에 이해할 수 있도록 구조화된 인포그래픽 기획안과 시각 디자인 지침을 작성해 줘.\n\n'+
+             '[기본 정보]\n'+
+             '- 사업/프로그램명: '+biz+'\n'+
+             '- 홍보 대상: '+tgt+'\n'+
+             '- 시각화 구조: '+(sub||'단계별 절차 안내 (1~4단계)')+'\n'+
+             '- 디자인 스타일: '+style+' (가독성이 높고 직관적인 인포그래픽 레이아웃)\n'+
+             '- 기관명: '+c+'\n'+
+             (memo?'- 행사 세부 정보: '+memo+'\n':'')+
+             '\n[인포그래픽 구성 지침]\n'+
+             '1. 상단(헤더): 대제목 "['+biz+'] 한눈에 쏙 이해하기" + ['+tgt+' 맞춤 안내] 뱃지\n'+
+             '2. 중단(본문 시각화 영역):\n'+
+             (sub.indexOf('단계별')>-1?
+               '   · STEP 1: 신청 접수 (온라인 폼 작성 및 필요 서류 확인)\n'+
+               '   · STEP 2: 대상자 선정 및 개별 안내 문자 발송\n'+
+               '   · STEP 3: 프로그램 참여 및 전문 활동 진행\n'+
+               '   · STEP 4: 사후 관리 및 가족 모임 연결\n'+
+               '   · 각 스텝마다 직관적인 픽토그램/아이콘 묘사와 핵심 키워드 3단 구성':
+               '   · 핵심 지원 내용과 혜택을 3~4개의 명확한 카드 섹션으로 분할\n'+
+               '   · 숫자와 키워드를 강조한 다이어그램 및 아이콘 시각화')+
+             '\n3. 하단(안내 및 문의): 신청 기간, 접수 방법(QR 코드 배치 영역), 문의처('+c+')\n'+
+             '4. AI 이미지 생성용 프롬프트: 미드저니/DALL-E에서 바탕 그래픽으로 쓸 수 있는 깔끔한 벡터/아이콘 인포그래픽 배경 템플릿 프롬프트 제공 (글자 제외, 정돈된 섹션 그리드).';
+
+    }else if(type.indexOf('전단지')>-1||type.indexOf('포스터')>-1){
+      return '너는 가족센터 전문 행사 포스터 및 홍보 전단지 디자이너야.\n'+
+             '게시판 부착용 포스터 및 주민 배포용 전단지에 최적화된 비주얼 연출 프롬프트와 카피 레이아웃을 작성해 줘.\n\n'+
+             '[기본 정보]\n'+
+             '- 행사/프로그램명: '+biz+'\n'+
+             '- 홍보 대상: '+tgt+'\n'+
+             '- 판형/형태: '+(sub||'A4 전단지 (세로)')+'\n'+
+             '- 디자인 스타일: '+style+' ('+season+' 감성: '+S.mot+', 어울리는 색상: '+S.col+')\n'+
+             '- 기관명: '+c+'\n'+
+             (memo?'- 행사 세부 정보: '+memo+'\n':'')+
+             '\n[포스터/전단지 레이아웃 및 프롬프트]\n'+
+             '1. 시각 비주얼 (AI 이미지 생성용):\n'+
+             '   - 장면 묘사: '+tgt+'이(가) 행복하게 어우러지는 따뜻하고 활기찬 모습\n'+
+             '   - 구도: 상단에는 큼직한 타이틀이 들어갈 넉넉한 하늘/여백 공간, 중앙에는 따뜻한 인물 일러스트, 하단에는 행사 정보 상자가 들어갈 안정적인 바탕\n'+
+             '   - 글자 배제: 그림 내부에 어설픈 한글 텍스트가 찍히지 않도록 영문 프롬프트에 "--no text, typography" 포함\n'+
+             '2. 텍스트 카피 레이아웃 (Canva 작업용):\n'+
+             '   - 메인 헤드라인: "함께라서 더 행복한 우리! ['+biz+']"\n'+
+             '   - 서브 카피: "'+tgt+'을(를) 위한 특별한 초대"\n'+
+             '   - 핵심 혜택 3가지: 무료 참가, 맞춤형 교육/체험, 소통의 장\n'+
+             '   - 행사 필수 정보 박스: 일시, 장소, 대상, 신청 방법, QR 코드 배치처, 문의 전화';
+
+    }else if(type.indexOf('웹툰')>-1){
+      return '너는 가족센터 홍보용 인스타 컷툰/웹툰 전문 스토리작가이자 콘티 작가야.\n'+
+             '주민들이 친근하게 스크롤하며 재미있게 읽고 자연스럽게 프로그램에 신청하고 싶어지는 웹툰 스토리보드와 그림 프롬프트를 작성해 줘.\n\n'+
+             '[기본 정보]\n'+
+             '- 사업/프로그램명: '+biz+'\n'+
+             '- 주인공/대상: '+tgt+' (일상의 고민을 가진 친근한 인물)\n'+
+             '- 컷 수: '+(sub||'4컷 인스타툰 (기승전결)')+'\n'+
+             '- 그림 스타일: '+style+' (따뜻하고 귀여운 웹툰/인스타툰 드로잉, 동글동글한 캐릭터)\n'+
+             '- 기관명: '+c+'\n'+
+             (memo?'- 행사 세부 정보: '+memo+'\n':'')+
+             '\n[웹툰 콘티 & 대사 구성]\n'+
+             '1컷 (도입/공감):\n'+
+             '- 장면: 주말에 집에서 아이들과 무엇을 해야 할지 고민하거나 피로를 느끼는 주인공\n'+
+             '- 대사/나레이션: "주말마다 아이랑 뭐 하지? 맨날 스마트폰만 보는 것 같아 걱정이야..."\n'+
+             '- 그림 연출: 귀여운 한숨을 쉬는 부모 캐릭터와 멍하니 있는 아이\n\n'+
+             '2컷 (발견/기대):\n'+
+             '- 장면: 스마트폰을 보다가 가족센터 홍보를 발견하고 눈이 번쩍 뜨이는 장면\n'+
+             '- 대사/나레이션: "어? 우리 동네 '+c+'에서 ['+biz+']을 한대! '+tgt+' 대상 무료 프로그램이네?!"\n'+
+             '- 그림 연출: 반짝이는 효과음과 스마트폰 화면 속 가족센터 포스터\n\n'+
+             '3컷 (경험/행복):\n'+
+             '- 장면: 센터에 가서 온 가족이 함께 즐겁게 활동하며 활짝 웃는 클라이맥스 장면\n'+
+             '- 대사/나레이션: "와! 부모도 힐링되고 아이도 너무 즐거워해요! 오길 정말 잘했다!"\n'+
+             '- 그림 연출: 두 손 모아 감동하는 부모와 신나게 뛰노는 아이들, 따뜻한 하트 배경\n\n'+
+             '4컷 (정보 안내/엔딩):\n'+
+             '- 장면: 캐릭터가 손을 흔들며 다정하게 참여를 권유하는 엔딩 컷\n'+
+             '- 대사/나레이션: "선착순 모집이래요! 이번 주말, 가족센터에서 만나요~"\n'+
+             '- 하단 안내 박스: ['+biz+'] 신청 기간 / 방법 / '+c+' 전화번호';
+
+    }else if(type.indexOf('이모티콘')>-1){
+      return '너는 가족센터 대표 캐릭터 및 SNS 소통용 이모티콘 기획 디자이너야.\n'+
+             tgt+'과(와) 카카오톡 채널, 문자, 밴드에서 친근하게 소통할 때 사용할 수 있는 귀여운 캐릭터 이모티콘 시안을 기획해 줘.\n\n'+
+             '[기본 정보]\n'+
+             '- 연계 사업/프로그램: '+biz+'\n'+
+             '- 타깃 대상: '+tgt+'\n'+
+             '- 세트 구성: '+(sub||'기본 감정 4종 (기쁨·응원·감사·사랑)')+'\n'+
+             '- 캐릭터 스타일: '+style+' (1:1 비율, 투명 배경 스티커형, 단순하고 귀여운 외곽선, 뚜렷한 이목구비)\n'+
+             '- 기관명: '+c+'\n\n'+
+             '[이모티콘 세트 상세 기획]\n'+
+             '1. 이모티콘 1: "응원해요!" (두 주먹 불끈 쥐고 밝게 웃는 응원 모션)\n'+
+             '2. 이모티콘 2: "감사합니다" (두 손을 모으고 수줍게 하트를 띄우는 감사 모션)\n'+
+             '3. 이모티콘 3: "신청 완료!" (도장을 쾅 찍거나 엄지손가락을 척 올리는 모션)\n'+
+             '4. 이모티콘 4: "오늘도 수고했어" (따뜻한 차 한 잔을 건네며 안아주는 힐링 모션)\n'+
+             (sub.indexOf('8종')>-1?
+               '5. 이모티콘 5: "함께해요!" (손을 맞잡고 방방 뛰는 모션)\n'+
+               '6. 이모티콘 6: "질문 있어요!" (손을 번쩍 들고 눈을 반짝이는 모션)\n'+
+               '7. 이모티콘 7: "반가워요!" (활짝 웃으며 손을 흔드는 환영 모션)\n'+
+               '8. 이모티콘 8: "가족 사랑 가득" (온 가족 캐릭터가 옹기종기 모여 있는 모션)\n':'')+
+             '\n[AI 이미지 생성 지침]\n'+
+             '- 미드저니/DALL-E용 영문 프롬프트: "Cute chibi mascot sticker character, expressive emotions, vector clean outlines, white border sticker style, isolated on clean background, high quality --no background clutter"';
+
+    }else{
+      return '너는 가족센터 홈페이지 및 온라인 채널 전문 디지털 배너 디자이너야.\n'+
+             '홈페이지 팝업창, 메인 슬라이드 배너(16:9), 카카오톡 채널 배너에 최적화된 시각 디자인 프롬프트와 카피를 작성해 줘.\n\n'+
+             '[기본 정보]\n'+
+             '- 사업/프로그램명: '+biz+'\n'+
+             '- 홍보 대상: '+tgt+'\n'+
+             '- 배너 규격: '+(sub||'홈페이지 팝업·배너 (16:9)')+'\n'+
+             '- 디자인 스타일: '+style+' ('+season+' 감성: '+S.mot+', 색상: '+S.col+')\n'+
+             '- 기관명: '+c+'\n'+
+             (memo?'- 행사 세부 정보: '+memo+'\n':'')+
+             '\n[가로 배너 디자인 지침]\n'+
+             '1. 레이아웃 구도:\n'+
+             '   - 좌측(60%): 큼직하고 시원한 메인 헤드라인 + 핵심 일정 + [지금 신청하기 >] CTA 버튼 영역\n'+
+             '   - 우측(40%): '+tgt+'의 따뜻한 교감을 담은 고품질 '+style+' 키비주얼 일러스트 배치\n'+
+             '2. 주요 텍스트 카피:\n'+
+             '   - 헤드라인: "['+biz+'] 지금 신청 접수 중!"\n'+
+             '   - 서브 카피: "'+tgt+'과(와) 함께하는 따뜻한 시간, '+c+'에서 만나요"\n'+
+             '   - 날짜/장소: [일시·장소 요약]\n'+
+             '3. AI 키비주얼 프롬프트: 우측 배치용 여백이 확보된 고품질 일러스트 생성 프롬프트';
+    }
+  }};
 
 SIMPLE.budget={t:'예산·정산 점검',s:'엑셀 예산표를 붙여 넣으면 AI가 합계·잔액·중복·증빙을 점검하는 요청문을 만들어요. 서식이 아니라 점검 도구예요. 실제 회계 원자료와 꼭 대조하세요.',
  f:[{k:'chk',l:'무엇을 점검할까요?',o:['전체 점검','합계 불일치','집행액·잔액 불일치','중복 기입','증빙 확인 필요','비목 오류']},{k:'memo',l:'예산표 붙여 넣기 (엑셀에서 복사)',ph:'엑셀 표를 복사해 붙여 넣거나, AI 창에 파일을 첨부하세요'}],
@@ -2297,7 +2634,44 @@ function sugFor(k,v){var t=TIP[v.tgt]||'';
   if(k==='promo'){var b=v.biz;if(v.out==='블로그 초안')return [{h:'1안 · 제목',d:'우리 동네 '+b+', 이렇게 함께해요'},{h:'2안 · 제목',d:'아이와 보내는 주말, '+b+'에서 찾았어요'},{h:'3안 · 제목',d:'참여 가족이 말하는 '+b+' 이야기'}];
     if(v.out==='문자·카톡 모집 문구')return [{h:'1안',d:'['+b+'] 참여 가족을 모집해요!\n· 대상: [대상]\n· 일시: [날짜·시간]\n· 장소: [장소]\n· 신청: [방법] / 문의 [전화]'},{h:'2안 (쉬운 한국어)',d:b+'에 오세요.\n언제: [날짜]\n어디: [장소]\n신청: [전화]'},{h:'3안 · 마감 강조',d:'['+b+'] 선착순 [인원] 가족, [마감일]에 마감해요!\n· 일시: [날짜·시간] · 장소: [장소]\n· 신청: [방법]'}];
     return [{h:'1안 · 질문형',d:'1장 “주말에 뭐 하지?” / 2장 '+b+'에서 함께 놀아요 / 3장 언제·어디서 / 4장 지금 신청하세요'},{h:'2안 · 이야기형',d:'1장 우리 가족의 작은 변화 / 2장 '+b+' 이런 활동 / 3장 일정 안내 / 4장 신청·문의'},{h:'3안 · 정보형',d:'1장 '+b+' 한눈에 보기 / 2장 이런 가족께 추천 / 3장 일정·장소·인원 / 4장 신청 방법 3단계'}];}
-  if(k==='img'){var S=SEASON[v.season]||SEASON[SEASON_NOW];var m=(S.mot||'').split(',').map(function(x){return x.trim();});return [{h:'1안 · '+(m[0]||v.season)+' 풍경',d:v.tgt+'이(가) '+(m[0]||'')+' 사이에서 웃는 장면, 색: '+S.col},{h:'2안 · '+(m[2]||m[1]||v.season)+' 클로즈업',d:'손을 맞잡은 가족과 '+(m[2]||m[1]||'')+', 위쪽에 글자 넣을 여백'},{h:'3안 · 활동 장면',d:v.tgt+'이(가) 함께 활동하는 모습을 위에서 내려다본 구도, '+(m[1]||m[0]||v.season)+' 소품, 아래쪽에 행사 정보 넣을 여백'}];}
+  if(k==='img'){
+    var S=SEASON[v.season]||SEASON[SEASON_NOW];
+    var m=(S.mot||'').split(',').map(function(x){return x.trim();});
+    var type=v.type||'카드뉴스';
+    if(type.indexOf('카드뉴스')>-1){
+      return [
+        {h:'표지 시안 · 질문형',d:'"이번 주말 아이와 뭐 하지?" 1:1 정사각, '+(v.tgt||'가족')+' 일러스트'},
+        {h:'내용 시안 · 핵심 3단계',d:'핵심 활동 3가지를 카드별로 나누어 가독성 극대화'},
+        {h:'마무리 시안 · 신청 QR',d:'신청 링크 및 센터 전화번호가 돋보이는 엔딩 카드'}
+      ];
+    }else if(type.indexOf('인포그래픽')>-1){
+      return [
+        {h:'1안 · 4단계 로드맵',d:'신청부터 참여, 사후 모임까지 한눈에 파악하는 플로우 차트'},
+        {h:'2안 · 핵심 혜택 비교표',d:'참여 가족이 얻는 실질적 변화와 지원 내역 3단 박스'}
+      ];
+    }else if(type.indexOf('웹툰')>-1){
+      return [
+        {h:'1안 · 4컷 인스타툰',d:'1컷(주말 고민) → 2컷(센터 발견) → 3컷(체험 감동) → 4컷(신청 안내)'},
+        {h:'2안 · 캐릭터 일상툰',d:'아이와 부모의 재미있는 대화로 풀어내는 참여 후기'}
+      ];
+    }else if(type.indexOf('이모티콘')>-1){
+      return [
+        {h:'1안 · 소통 기본 4종',d:'응원해요 / 감사해요 / 신청완료 / 오늘도 수고했어'},
+        {h:'2안 · 센터 실무 8종',d:'상담중 / 함께해요 / 출석인증 등 채널 맞춤 스티커'}
+      ];
+    }else if(type.indexOf('배너')>-1){
+      return [
+        {h:'1안 · 16:9 와이드',d:'좌측 60% 헤드라인·버튼 + 우측 40% 키비주얼'},
+        {h:'2안 · 카톡 채널용',d:'모바일 화면 상단에 맞춘 컴팩트 배너 시안'}
+      ];
+    }else{
+      return [
+        {h:'1안 · '+(m[0]||v.season)+' 포스터',d:v.tgt+'이(가) '+(m[0]||'')+' 사이에서 웃는 장면, 색: '+S.col},
+        {h:'2안 · 여백 확보형',d:'상단에 큼직한 타이틀과 하단에 접수처가 들어갈 공간 확보'},
+        {h:'3안 · 활동 장면 클로즈업',d:v.tgt+'이(가) 함께 활동하는 모습을 위에서 내려다본 구도'}
+      ];
+    }
+  }
   return [];}
 function curP(){var v={};for(var x in SV)v[x]=SV[x];if(!(v.memo||'').trim()){var f=(CS.f||[]).find(function(y){return !y.o;});v.memo='('+(f?f.l:'내용')+'을 여기에 적어 주세요)';}var p=CS.p(v);
   var A=ATTS[CS._k];if(A&&A.length)p+='\n\n[함께 첨부할 자료]\n'+A.map(function(x,i){return '첨부 '+(i+1)+': '+x;}).join('\n')+'\n- 첨부한 서식이 있으면 반드시 그 서식의 항목 이름과 순서 그대로 써 줘.';return p;}
@@ -2310,6 +2684,7 @@ openSimple=function(k,pre){_old(k,pre);CS._k=k;if(k==='base'){$('#s-right').hidd
   b.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',refreshS);});b.querySelectorAll('.chips button').forEach(function(bt){bt.addEventListener('click',function(){setTimeout(refreshS,0);});});
   refreshS();};
 $('#s-cp').onclick=function(){copy(curP());};
+var gemBtn=$('#s-gem2');if(gemBtn)gemBtn.onclick=function(){var p=curP();copy(p,'프롬프트를 복사했어요! 제미나이 창에 붙여 넣으세요.');window.open('https://gemini.google.com/app','_blank');};
 $('#s-gpt2').onclick=function(){openGPT(curP());};
 
 /* 마음 쉼터: 고르면 바로 위로 문구 */
