@@ -1229,6 +1229,56 @@ body.page-sub .wrap{padding:8px 14px 20px!important;max-width:1320px!important}
 }
 @media(max-width:720px){.dt2 .dt-title{white-space:normal!important;display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}}
 </style>
+<style id="v14-white-cards">
+/* ===== v14.1: 10년 뒤 직업 도감 카드 배경 전체 올화이트 통일 ===== */
+.dx-card, .dx-card.st-sun, .dx-card.st-grow, .dx-card.st-cloud, .dx-card.st-rain {
+  background: #ffffff !important;
+  box-shadow: 3px 3px 0 var(--ink) !important;
+  border: 2px solid var(--ink) !important;
+}
+.dx-card:hover, .dx-card:focus-visible {
+  transform: translate(-1px, -2px) !important;
+  box-shadow: 4px 4px 0 var(--ink) !important;
+}
+.dx-art {
+  background: #ffffff !important;
+}
+/* 뱃지 배경을 전부 깨끗한 하얀색으로 통일 (테두리와 텍스트 색상으로 식별) */
+.dx-badge {
+  background: #ffffff !important;
+}
+.b-sun {
+  background: #ffffff !important;
+  border-color: #d97706 !important;
+  color: #b45309 !important;
+}
+.b-grow {
+  background: #ffffff !important;
+  border-color: #16a34a !important;
+  color: #15803d !important;
+}
+.b-cloud {
+  background: #ffffff !important;
+  border-color: #2563eb !important;
+  color: #1d4ed8 !important;
+}
+.b-rain {
+  background: #ffffff !important;
+  border-color: #64748b !important;
+  color: #475569 !important;
+}
+/* 카드 뒤집기 뒷면도 핑크 줄무늬 대신 깨끗한 하얀색 */
+.dx-back, .dx-back.sk {
+  background: #ffffff !important;
+  box-shadow: 3px 3px 0 var(--ink) !important;
+  border: 2px solid var(--ink) !important;
+}
+.dx-front {
+  background: #ffffff !important;
+  box-shadow: 3px 3px 0 var(--ink) !important;
+  border: 2px solid var(--ink) !important;
+}
+</style>
 </head><body><div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 디지털 이음 연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 나의 오늘이<br>더 빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><div class="feature-bar"><button class="feature-card" onclick="nav('self')"><strong>나를 이해하기</strong><span>나의 강점과 성향을 발견해요 →</span></button><button class="feature-card" onclick="nav('card')"><strong>직업 탐색하기</strong><span>다양한 직종을 살펴봐요 →</span></button><button class="feature-card" onclick="nav('resume')"><strong>입사지원서 작성하기</strong><span>사진이 포함된 Word 문서 →</span></button><button class="feature-card" onclick="nav('interview')"><strong>면접연습실</strong><span>질문에 답하고 다시 연습 →</span></button></div><nav id="nav" class="nav"></nav><div id="app"></div><footer class="footer">디지털 이음 연구소 · 교육용 자기탐색 도구 · 정식 심리검사 또는 직업 적합성 판정이 아닙니다.<br>입력 내용과 사진은 외부 서버에 전송되지 않고, 이 컴퓨터의 브라우저에만 3일간 보관돼요. 공용 컴퓨터라면 마친 뒤 "내 입력정보 지우기"를 눌러 주세요. · v13</footer></div><script>
 const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const themes={"office": ["#eaf2ff", "#2f5e9c"], "media": ["#f2ebfc", "#7850a6"], "food": ["#fff1e5", "#b86b32"], "care": ["#e9f5f1", "#367d68"], "service": ["#fff4ec", "#a45e44"], "industry": ["#e9f1f5", "#456d83"], "startup": ["#ebf5e9", "#43744d"]};
@@ -1721,7 +1771,7 @@ function buildJobsFromJ() {
   }
   return list;
 }
-function jobArt(j){if(CIMG[j.name])return `<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${j.name} 일하는 장면"><image href="img/jobs/${CIMG[j.name]}.webp" x="0" y="0" width="220" height="160" preserveAspectRatio="xMidYMid slice"/>${cBub(j.bub||'')}</svg>`;if(JIMG[j.name])return `<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${j.name} 일하는 장면"><image href="img/jobs/${JIMG[j.name]}.webp" x="0" y="0" width="220" height="160" preserveAspectRatio="xMidYMin slice"/></svg>`;const look=Object.assign({g:1},j.look);if(j.prop){look.prop=j.prop}const rain=j.w==='rain';return `<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${j.name} 일하는 장면"><rect width="220" height="160" fill="${j.bg}"/><rect y="126" width="220" height="34" fill="${j.fl}"/>${j.scene()}<g transform="translate(4 8)">${womanSvg(look)}</g>${(()=>{const t=j.bub,w=[...t].length*11.2+16;let [x,y]=j.bp||[104,4];if(x+w>215)x=215-w;return `<g transform="translate(${x} ${y})"><rect width="${w}" height="22" rx="11" fill="${rain?'#fff':'#fff3c9'}" stroke="${PI}" stroke-width="2"/><path d="M14 21l-4 8 10-7" fill="${rain?'#fff':'#fff3c9'}" stroke="${PI}" stroke-width="2" stroke-linejoin="round"/><text x="${w/2}" y="15.4" text-anchor="middle" font-size="11.4" font-weight="800" fill="${PI}" font-family="${PF}">${t}</text></g>`})()}</svg>`}
+function jobArt(j){if(CIMG[j.name])return `<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${j.name} 일하는 장면"><image href="img/jobs/${CIMG[j.name]}.webp" x="0" y="0" width="220" height="160" preserveAspectRatio="xMidYMid slice"/>${cBub(j.bub||'')}</svg>`;if(JIMG[j.name])return `<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${j.name} 일하는 장면"><image href="img/jobs/${JIMG[j.name]}.webp" x="0" y="0" width="220" height="160" preserveAspectRatio="xMidYMin slice"/></svg>`;const look=Object.assign({g:1},j.look);if(j.prop){look.prop=j.prop}const rain=j.w==='rain';return `<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${j.name} 일하는 장면"><rect width="220" height="160" fill="#ffffff"/><rect y="126" width="220" height="34" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>${j.scene()}<g transform="translate(4 8)">${womanSvg(look)}</g>${(()=>{const t=j.bub,w=[...t].length*11.2+16;let [x,y]=j.bp||[104,4];if(x+w>215)x=215-w;return `<g transform="translate(${x} ${y})"><rect width="${w}" height="22" rx="11" fill="${rain?'#fff':'#fff3c9'}" stroke="${PI}" stroke-width="2"/><path d="M14 21l-4 8 10-7" fill="${rain?'#fff':'#fff3c9'}" stroke="${PI}" stroke-width="2" stroke-linejoin="round"/><text x="${w/2}" y="15.4" text-anchor="middle" font-size="11.4" font-weight="800" fill="${PI}" font-family="${PF}">${t}</text></g>`})()}</svg>`}
 
 
 /* ===== v10: 보완 문장 변신 ===== */
