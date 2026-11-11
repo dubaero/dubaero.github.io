@@ -879,9 +879,7 @@ body{line-height:1.55}
           <span class="sw-arrow">›</span>
           <span class="sw-step" data-step="4"><b>4</b> 노래 제목</span>
           <span class="sw-arrow">›</span>
-          <span class="sw-step" data-step="5"><b>5</b> 가사 확인</span>
-          <span class="sw-arrow">›</span>
-          <span class="sw-step" data-step="6"><b>6</b> 완성</span>
+          <span class="sw-step" data-step="5"><b>5</b> 완성 (가사 & 복사)</span>
         </div>
       </div>
 
@@ -959,10 +957,13 @@ body{line-height:1.55}
         </div>
       </div>
 
-      <!-- 스텝 5: 노래 가사 확인 및 수정 -->
+      <!-- 스텝 5: 노래 가사 확인 및 최종 완성 (원스톱) -->
       <div class="sw-pane" id="sw-p5">
-        <div class="sw-q">5. 노래 가사를 확인해 주세요</div>
-        <div class="sw-desc">선택하신 대상과 주제에 맞춰 따뜻한 가사가 완성되었어요. 1절과 2절을 확인하고 [확인: 완성하기]를 누르세요.</div>
+        <div class="sw-q">5. 가사 확인 & 완성 프롬프트 복사</div>
+        <div class="sw-desc">선택하신 대상과 주제에 맞춰 따뜻한 가사가 완성되었어요. 가사를 확인하고 바로 복사해 제미나이에서 음악을 완성하세요!</div>
+        
+        <div class="sw-chips" id="sw-chips" style="margin:8px 0 12px"></div>
+
         <div class="sw-lyrics-card">
           <div class="sw-lyrics-head">
             <span class="sw-lyrics-title" id="sw-lyr-title">🎵 오늘도 수고했어, 내 동료야</span>
@@ -983,23 +984,13 @@ body{line-height:1.55}
           </div>
           <div style="font-size:12px;color:#556B61;margin-top:6px">💡 글자를 마우스나 손가락으로 클릭해 직접 단어나 문장을 수정하실 수도 있어요!</div>
         </div>
-        <div class="sw-nav-acts">
-          <button type="button" class="btn mini sw-prev" data-to="4">‹ 이전: 제목 다시 고르기</button>
-          <button type="button" class="btn fill large sw-next" data-to="6" style="margin-left:auto;font-size:14.5px;padding:10px 20px">✔ 가사 확인 완료! 완성 프롬프트 보기 ›</button>
-        </div>
-      </div>
 
-      <!-- 스텝 6: 최종 완성 화면 -->
-      <div class="sw-pane" id="sw-p6">
-        <div class="sw-done-box">
-          <b>🎉 나만의 노래 프롬프트가 완성되었어요!</b>
-          <div style="font-size:13px;color:#2B4A3A;margin:4px 0 6px">코드블록 복사 없이, 제미나이에 바로 넣으면 따뜻한 표지 그림과 음악이 한 번에 완성돼요.</div>
-          <div class="sw-chips" id="sw-chips"></div>
-        </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
-          <button type="button" class="btn fill large" id="sw-act-cp">📋 가사 포함 완성 프롬프트 복사하기</button>
-          <button type="button" class="btn large" id="sw-act-gem">✨ 제미나이로 바로 열기</button>
-          <button type="button" class="btn mini sw-prev" data-to="1" style="margin-left:auto">↺ 처음부터 다시 고르기</button>
+        <!-- 가사 바로 밑에 배치된 원스톱 복사 및 제미나이 직행 버튼 -->
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px">
+          <button type="button" class="btn fill large" id="sw-act-cp" style="font-size:14.5px;padding:11px 22px">📋 가사 포함 완성 프롬프트 복사하기</button>
+          <button type="button" class="btn large" id="sw-act-gem" style="font-size:14px;padding:11px 20px">✨ 제미나이로 바로 열기</button>
+          <button type="button" class="btn mini sw-prev" data-to="4">‹ 제목 다시 고르기</button>
+          <button type="button" class="btn mini sw-prev" data-to="1" style="margin-left:auto">↺ 처음부터 다시</button>
         </div>
       </div>
     </div>
@@ -3306,7 +3297,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
         '<span class="sw-chip"><em>가사</em>1·2절 포함</span>';
     }
 
-    for (var i = 1; i <= 6; i++) {
+    for (var i = 1; i <= 5; i++) {
       var stepEl = document.querySelector('.sw-step[data-step="' + i + '"]');
       var paneEl = $('#sw-p' + i);
       if (stepEl) {
@@ -3325,7 +3316,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
       if (cIn && cIn.value.trim()) SW.center = cIn.value.trim();
       if (aIn && aIn.value.trim()) SW.author = aIn.value.trim();
     }
-    SW.step = Math.max(1, Math.min(6, n));
+    SW.step = Math.max(1, Math.min(5, n));
     render();
   }
 
