@@ -874,7 +874,6 @@ body{line-height:1.55}
           <span class="sw-step on" data-step="1"><b>1</b> 센터·작사</span>
           <span class="sw-arrow">›</span>
           <span class="sw-step" data-step="2"><b>2</b> 전할 대상</span>
-          
           <span class="sw-arrow">›</span>
           <span class="sw-step" data-step="4"><b>3</b> 노래 제목</span>
           <span class="sw-arrow">›</span>
@@ -913,26 +912,6 @@ body{line-height:1.55}
         </div>
         <div class="sw-nav-acts">
           <button type="button" class="btn mini sw-prev" data-to="1">‹ 이전</button>
-        </div>
-      </div>
-
-      <!-- 스텝 3: 어떤 노래를 만들까요? -->
-      <div class="sw-pane" id="sw-p3" style="display:none!important">
-        <div class="sw-q">3. 어떤 노래를 만들까요?</div>
-        <div class="sw-desc">주제와 음악 스타일 번호를 클릭하면 자동으로 다음 질문으로 넘어갑니다.</div>
-        <div class="sw-grid" id="sw-grid-theme">
-          <button type="button" class="sw-opt" data-val="가족사랑과 소통 · 따뜻하고 편안한 어쿠스틱 발라드"><span class="sw-num">1</span><b>가족사랑과 소통</b><small>따뜻하고 편안한 어쿠스틱 통기타 발라드</small></button>
-          <button type="button" class="sw-opt" data-val="부모자녀 공감과 미소 · 밝고 신나는 팝"><span class="sw-num">2</span><b>부모자녀 공감과 미소</b><small>아이와 함께 부르는 밝고 기분 좋은 멜로디</small></button>
-          <button type="button" class="sw-opt on" data-val="종사자 힐링과 응원 · 포근한 포크"><span class="sw-num">3</span><b>지친 하루를 토닥이는 힐링</b><small>따뜻한 차 한 잔 같은 잔잔한 위로의 포크송</small></button>
-          <button type="button" class="sw-opt" data-val="다양한 가족의 행복 · 벅찬 감동 발라드"><span class="sw-num">4</span><b>다양한 가족의 행복</b><small>편견 없이 서로를 안아주는 벅찬 감동의 노래</small></button>
-          <button type="button" class="sw-opt" data-val="돌봄과 나눔 · 활기찬 미디엄 템포"><span class="sw-num">5</span><b>돌봄과 나눔</b><small>희망차고 씩씩하게 걸어가는 경쾌한 응원가</small></button>
-        </div>
-        <div class="sw-custom-row">
-          <input type="text" class="f1" id="sw-theme-custom" placeholder="직접 입력 (예: 잔잔한 재즈풍 힐링송)">
-          <button type="button" class="btn mini" id="sw-theme-custom-btn">직접 입력 적용 ›</button>
-        </div>
-        <div class="sw-nav-acts">
-          <button type="button" class="btn mini sw-prev" data-to="2">‹ 이전</button>
         </div>
       </div>
 
@@ -1005,7 +984,7 @@ body{line-height:1.55}
         </ol>
         <h4 class="sg-h">음악 설정은 이렇게</h4>
         <table class="kv song-kv">
-          <tr><th>장르</th><td><b>맞춤(프롬프트 기반)</b>만 누르세요. 장르는 이미 대화의 질문 3에서 골랐어요. 팝·록 등을 다시 고르면 가사와 분위기가 어긋나요.</td></tr>
+          <tr><th>장르</th><td>제미나이 음악 만들기에서 <b>원하는 장르(발라드·팝·포크 등)</b>를 바로 고르세요. 고르기 어려우면 <b>맞춤(프롬프트 기반)</b>을 누르면 가사에 맞춰 알아서 만들어 줘요.</td></tr>
           <tr><th>길이</th><td>그대로 두세요. 한 곡이 보통 2분 30초~3분으로 나와요.</td></tr>
           <tr><th>보컬</th><td>그대로 두거나, 원하면 목소리 느낌만 바꿔요.</td></tr>
         </table>
@@ -3573,7 +3552,7 @@ dwFirst=function(d){_dwFirst1109d(d);var v=dwV(),role='너는 '+dwRoleOf(d)+'.';
  return '<div class="ins">'+row(hl(role),DW_NOTE.role)+row(hl(task),DW_NOTE.first)+row(body.map(esc).join('<br>'))+(form?row('<b>[기본정보 틀]</b> 콜론(:) 뒤를 채워서 보내요<br>'+form.map(esc).join('<br>')):'')+'</div>';};
 
 /* ===== 2026.11.10 나만의 노래 만들기 & 2026.11.11 클릭형 위저드 ===== */
-var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 작사가이자 앨범 표지 디자이너야.\n누구나 쉽고 재미있게 우리만의 노래를 만들도록 도와줘.\n[질문 규칙]\n질문은 총 4개, 한 번에 하나씩만 해.\n답변을 받으면 바로 다음 질문으로 넘어가.\n이미 답한 내용은 다시 묻지 마.\n질문 1. 센터명과 작사자 이름을 입력해 주세요.\n예: 행복가족센터 / 김행복\n질문 2. 누구에게 전할 노래인가요?\n① 센터 이용 가족 ② 부모와 자녀 ③ 부부와 가족 ④ 가족센터 종사자 ⑤ 지역주민 ⑥ 나 자신 ⑦ 기타\n질문 3. 어떤 노래를 만들까요?\n선택한 대상에 맞춰 가족사랑, 부모자녀 관계, 가족 소통, 다양한 가족의 행복, 돌봄, 가족 응원, 종사자 힐링 등 가족사업 주제와 음악 장르를 결합해 선택지 5개와 직접 입력 항목을 제시해.\n질문 4. 노래 제목을 골라 주세요.\n앞의 답변에 맞는 짧고 기억하기 좋은 한국어 제목 5개를 추천해.\n[4번째 답변 후 자동 제작]\n추가 질문 없이 다음 순서로 결과를 보여줘.\n1. 확정된 제목\n2. 코드블록 하나에 다음 내용을 모두 작성해.\n음악 스타일: 장르, 빠르기, 악기, 보컬 분위기\n제목: 확정된 제목\n[1절]\n[후렴]\n[2절]\n[후렴]\n쉬운 한국어로, 함께 부르기 좋은 반복 후렴을 만들어.\n센터명은 정확히 포함하고, 실제로 제공되지 않은 사업 경험이나 사연은 꾸미지 마.\n3. 앨범 표지 이미지 1장을 실제 생성해.\n- 정사각형 1:1, 따뜻하고 귀여운 고품질 그림책 일러스트\n- 크림색, 살구색, 연초록 등의 포근한 색감\n- 노래 제목과 가사에 맞는 장면과 소품\n- 제목은 크게, 아래에는 '센터명 | 작사: 이름'을 정확한 한국어로 표시\n- 본인 사진이 이미 첨부되어 있다면 그 사진을 참고해 얼굴과 헤어스타일의 특징을 살린 사랑스러운 일러스트로 표현\n- 사진이 없다면 사람이나 얼굴 없이 그림책풍으로 제작\n- 다른 사람이나 가족 이용자의 얼굴을 임의로 만들지 마\n- 제목 및 이름 오타를 확인하고 가능한 경우 수정해\n- 실제 이미지 생성 기능이 없으면 솔직하게 알려줘\n4. 마지막에는 다음을 안내해.\n\"위의 가사 코드블록을 복사한 뒤 제미나이의 + 버튼 → 음악 만들기를 선택하세요.\n복사한 내용을 붙여넣고 원하는 장르를 선택해 노래를 생성해 보세요.\n원하는 장르가 없다면 맞춤 또는 프롬프트 기반 입력에서 음악 스타일을 그대로 활용하세요.\"\n음악 파일은 직접 만들지 마.\n지금 질문 1부터 시작해.";
+var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 작사가이자 앨범 표지 디자이너야.\n누구나 쉽고 재미있게 우리만의 노래를 만들도록 도와줘.\n[질문 규칙]\n질문은 총 3개, 한 번에 하나씩만 해.\n답변을 받으면 바로 다음 질문으로 넘어가.\n이미 답한 내용은 다시 묻지 마.\n질문 1. 센터명과 작사자 이름을 입력해 주세요.\n예: 행복가족센터 / 김행복\n질문 2. 누구에게 전할 노래인가요?\n① 센터 이용 가족 ② 부모와 자녀 ③ 부부와 가족 ④ 가족센터 종사자 ⑤ 지역주민 ⑥ 나 자신 ⑦ 기타\\n질문 3. 노래 제목을 골라 주세요.\\n앞의 답변에 맞는 짧고 기억하기 좋은 한국어 제목 10개를 추천해. (음악 장르는 제미나이 음악 만들기에서 고르니 묻지 마.)\n[3번째 답변 후 자동 제작]\n추가 질문 없이 다음 순서로 결과를 보여줘.\n1. 확정된 제목\n2. 코드블록 하나에 다음 내용을 모두 작성해.\n음악 스타일: 장르, 빠르기, 악기, 보컬 분위기\n제목: 확정된 제목\n[1절]\n[후렴]\n[2절]\n[후렴]\n쉬운 한국어로, 함께 부르기 좋은 반복 후렴을 만들어.\n센터명은 정확히 포함하고, 실제로 제공되지 않은 사업 경험이나 사연은 꾸미지 마.\n3. 앨범 표지 이미지 1장을 실제 생성해.\n- 정사각형 1:1, 따뜻하고 귀여운 고품질 그림책 일러스트\n- 크림색, 살구색, 연초록 등의 포근한 색감\n- 노래 제목과 가사에 맞는 장면과 소품\n- 제목은 크게, 아래에는 '센터명 | 작사: 이름'을 정확한 한국어로 표시\n- 본인 사진이 이미 첨부되어 있다면 그 사진을 참고해 얼굴과 헤어스타일의 특징을 살린 사랑스러운 일러스트로 표현\n- 사진이 없다면 사람이나 얼굴 없이 그림책풍으로 제작\n- 다른 사람이나 가족 이용자의 얼굴을 임의로 만들지 마\n- 제목 및 이름 오타를 확인하고 가능한 경우 수정해\n- 실제 이미지 생성 기능이 없으면 솔직하게 알려줘\n4. 마지막에는 다음을 안내해.\n\"위의 가사 코드블록을 복사한 뒤 제미나이의 + 버튼 → 음악 만들기를 선택하세요.\n복사한 내용을 붙여넣고 원하는 장르를 선택해 노래를 생성해 보세요.\n원하는 장르가 없다면 맞춤 또는 프롬프트 기반 입력에서 음악 스타일을 그대로 활용하세요.\"\n음악 파일은 직접 만들지 마.\n지금 질문 1부터 시작해.";
 
 (function(){
   var SW = {
@@ -3626,6 +3605,21 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     return { p1: p1, p2: p2 };
   }
 
+  var FT = {
+    fam:['우리 함께 걸어요','가족이라는 따뜻한 품','한 걸음 더 행복하게','고마워요, 우리 가족','늦은 밤 켜 둔 불빛','밥상 위의 온기','우리 집 가장 따뜻한 자리','손잡고 가는 길','사랑한다는 말 대신','웃음꽃 피는 우리 집','함께라서 행복해','언제나 그 자리에'],
+    kid:['너의 미소가 나의 햇살','같이 자라는 우리','작은 손 꼭 잡고','너는 나의 힘','오늘도 사랑해','우리 아이 응원가','함께 크는 꿈나무','네가 웃으면 나도 웃어','엄마 아빠의 보물','처음 걸음마처럼','꿈을 꾸는 아이야','너라서 고마워'],
+    couple:['마주 보며 걷는 길','둘이라서 든든해','당신이 있어 다행이야','같은 편','서로의 쉼표','오래도록 함께','고맙다는 말','손잡고 함께','당신이라서','우리의 계절','다정한 하루','늘 곁에 있을게'],
+    staff:['오늘도 수고했어, 내 동료야','커피 한 잔의 힘','같이 하자는 그 말','우리가 있어 든든해','내일도 웃으며 만나','현장의 작은 영웅들','같은 자리, 같은 마음','서로를 토닥토닥','함께라면 할 수 있어','고마운 내 짝꿍','오늘도 문을 여는 우리','빛나는 땀방울'],
+    town:['우리 동네 이웃사촌','함께 사는 마을','골목길 인사','따뜻한 공동체','이웃이 있어 좋아','모두의 울타리','다 함께 웃는 날','정이 넘치는 우리 동네','손에 손을 잡고','나눔의 온도','서로 기대어','함께 피는 꽃'],
+    me:['수고했어, 나의 오늘','오늘은 쉬어 가도 돼','괜찮아, 잘하고 있어','쉼표 하나','거울 속 나에게','나답게, 천천히','따뜻한 차 한 잔','오늘의 나에게 박수를','다시 피는 꽃','나는 나를 믿어','토닥토닥 내 마음','충분히 잘했어'],
+    com:['다시 날아오를 시간','포기하지 마','할 수 있어, 우리','당신 덕분에','마음을 담아','새로운 문 앞에서','설레는 첫걸음','꿈은 지금부터']
+  };
+  function fKey(w){w=w||'';if(/종사자|동료/.test(w))return 'staff';if(/나 자신/.test(w))return 'me';if(/부모|자녀|아이/.test(w))return 'kid';if(/부부/.test(w))return 'couple';if(/주민|이웃/.test(w))return 'town';return 'fam';}
+  function titleList(){var pool=FT[fKey(SW.who)].concat(FT.com),o=[];while(pool.length&&o.length<12)o.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);return o;}
+  function rebuildTitles(){var g=$('#sw-grid-title');if(!g)return;var L=titleList();g.innerHTML=L.map(function(x,i){return '<button type="button" class="sw-opt'+(x===SW.title?' on':'')+'" data-val="'+esc(x)+'"><span class="sw-num">'+(i+1)+'</span><b>'+esc(x)+'</b><small>'+esc(SW.who||'')+'에게 어울리는 제목</small></button>';}).join('')+'<button type="button" class="sw-opt" id="sw-title-more" style="justify-content:center;align-items:center;border-style:dashed"><b>↻ 다른 제목 더 보기</b><small>누를 때마다 새 제목</small></button>';}
+  document.addEventListener('click',function(e){if(e.target.closest('#sw-title-more')){e.stopPropagation();rebuildTitles();}},true);
+  setTimeout(rebuildTitles,0);
+
   function buildPrompt() {
     var c = SW.center || '전북특별자치도가족센터';
     var a = SW.author || '이서정';
@@ -3655,7 +3649,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     var lyrTitle = $('#sw-lyr-title');
     if (lyrTitle) lyrTitle.textContent = '🎵 ' + (SW.title || '나만의 노래');
     var lyrTarget = $('#sw-lyr-target');
-    if (lyrTarget) lyrTarget.textContent = (SW.who || '소중한 사람') + ' · ' + (SW.theme ? SW.theme.split('·')[0].trim() : '가족 노래');
+    if (lyrTarget) lyrTarget.textContent = (SW.who || '소중한 사람');
 
     var pv = $('#song-p');
     if (pv) {
@@ -3756,7 +3750,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
       for (var j = 0; j < opts.length; j++) opts[j].classList.toggle('on', opts[j] === opt);
 
       if (grid.id === 'sw-grid-who') {
-        SW.who = val;
+        SW.who = val; rebuildTitles();
         var d = getDefaultLyrics(SW.lyricsVariant);
         SW.lyrics1 = d.p1;
         SW.lyrics2 = d.p2;
@@ -3783,7 +3777,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     if (e.target.id === 'sw-who-custom-btn') {
       var inp = $('#sw-who-custom');
       if (inp && inp.value.trim()) {
-        SW.who = inp.value.trim();
+        SW.who = inp.value.trim(); rebuildTitles();
         var d = getDefaultLyrics(SW.lyricsVariant);
         SW.lyrics1 = d.p1;
         SW.lyrics2 = d.p2;
