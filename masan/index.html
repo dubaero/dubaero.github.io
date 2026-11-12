@@ -1537,10 +1537,80 @@ body.page-sub .wrap{padding:8px 14px 20px!important;max-width:1320px!important}
 }
 
 </style>
-</head><body><div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 디지털 이음 연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 나의 오늘이<br>더 빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><div class="feature-bar"><button class="feature-card" onclick="nav('self')"><strong>나를 이해하기</strong><span>나의 강점과 성향을 발견해요 →</span></button><button class="feature-card" onclick="nav('card')"><strong>직업 탐색하기</strong><span>다양한 직종을 살펴봐요 →</span></button><button class="feature-card" onclick="nav('resume')"><strong>입사지원서 작성하기</strong><span>사진이 포함된 Word 문서 →</span></button><button class="feature-card" onclick="nav('interview')"><strong>면접연습실</strong><span>질문에 답하고 다시 연습 →</span></button></div><nav id="nav" class="nav"></nav><div id="app"></div><footer class="footer">디지털 이음 연구소 · 교육용 자기탐색 도구 · 정식 심리검사 또는 직업 적합성 판정이 아닙니다.<br>입력 내용과 사진은 외부 서버에 전송되지 않고, 이 컴퓨터의 브라우저에만 3일간 보관돼요. 공용 컴퓨터라면 마친 뒤 "내 입력정보 지우기"를 눌러 주세요. · v13</footer></div><script>
+
+<style>
+/* ===== v14.5: 프롬프트 디자인실 & 상단 메뉴 동일 크기/디자인 보장 ===== */
+.t-prompt { --tb:#fcf4fb; --tbd:#f0d8ec; --ts:#f2e0f0; --ta:#faeaf8; --tac:#ddb2d8; }
+.feature-bar { display:grid !important; grid-template-columns:repeat(5, 1fr) !important; gap:12px !important; margin:18px 0 !important; }
+.feature-card:nth-child(5) { background:#fffef8 !important; border:1.5px solid #ece4cb !important; }
+.nav { grid-template-columns:repeat(9, minmax(0, 1fr)) !important; }
+@media (max-width: 1080px) {
+  .feature-bar { grid-template-columns:repeat(3, 1fr) !important; }
+  .nav { grid-template-columns:repeat(5, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 720px) {
+  .feature-bar { grid-template-columns:repeat(2, 1fr) !important; }
+  .nav { grid-template-columns:repeat(3, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 480px) {
+  .feature-bar { grid-template-columns:1fr !important; }
+  .nav { grid-template-columns:repeat(3, minmax(0, 1fr)) !important; gap:5px !important; }
+}
+
+/* 프롬프트 디자인실 전용 서브 탭 */
+.ps-wrap { margin-top:4px; }
+.ps-subtabs { display:flex; gap:8px; margin:10px 0 18px; flex-wrap:wrap; border-bottom:1.5px solid #eef2ef; padding-bottom:12px; }
+.ps-tab { padding:9px 18px; border-radius:30px; border:1.5px solid #dce8e0; background:#fff; font-size:13.5px; font-weight:800; color:#3e5448; cursor:pointer; transition:.15s; display:inline-flex; align-items:center; gap:6px; }
+.ps-tab:hover { background:#f5f9f6; border-color:#a8c7b4; transform:translateY(-1px); }
+.ps-tab.active { background:#2f5f4b !important; border-color:#2f5f4b !important; color:#fff !important; box-shadow:0 3px 8px rgba(47,95,75,0.22) !important; }
+
+/* 6하원칙 선택기 그리드 */
+.ps-wh-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(310px, 1fr)); gap:12px; margin:14px 0; }
+.ps-wh-card { background:#fbfdfc; border:1px solid #dce8e0; border-radius:14px; padding:13px 15px; }
+.ps-wh-title { font-size:14px; font-weight:800; color:#1c4030; margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+.ps-wh-chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+.ps-wh-chip { background:#fff; border:1px solid #cfded4; border-radius:20px; padding:5px 11px; font-size:12px; color:#314c3e; cursor:pointer; font-weight:600; transition:.15s; }
+.ps-wh-chip:hover { border-color:#2f5f4b; color:#1c4030; }
+.ps-wh-chip.on { background:#e8f4ed; border-color:#2f5f4b; color:#1c4030; font-weight:800; box-shadow:0 0 0 1px #2f5f4b; }
+.ps-wh-in { width:100%; border:1px solid #cfded4; border-radius:8px; padding:7px 10px; font-size:12.5px; box-sizing:border-box; background:#fff; color:#1f332a; }
+
+/* 프롬프트 결과창 */
+.ps-res-box { background:#203127; color:#f0f5f2; border-radius:14px; padding:16px 18px; margin-top:16px; font-family:'Pretendard', sans-serif; }
+.ps-res-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; flex-wrap:wrap; gap:8px; }
+.ps-res-title { font-size:14px; font-weight:800; color:#a2ddbe; display:flex; align-items:center; gap:6px; }
+.ps-res-text { font-size:13px; line-height:1.7; white-space:pre-wrap; background:#16241c; padding:14px; border-radius:10px; border:1px solid #314438; max-height:260px; overflow-y:auto; word-break:break-word; }
+.ps-res-acts { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+
+/* 빡친 번역기 */
+.ps-vent-box { background:#fffaf8; border:1.5px solid #f2d7d1; border-radius:16px; padding:18px; margin-top:8px; }
+.ps-vent-res { background:#fff; border:1px solid #e8dbd7; border-radius:14px; padding:16px; margin-top:14px; }
+.ps-vent-badge { display:inline-block; font-size:12px; font-weight:800; padding:3px 9px; border-radius:20px; background:#ffede9; color:#c24b32; margin-bottom:8px; }
+
+/* 토닥토닥 마음챙김 */
+.ps-heart-box { background:#fcfaf5; border:1.5px solid #ede3d2; border-radius:16px; padding:18px; margin-top:8px; }
+.ps-heart-card { background:#fff; border:1px solid #e2d7c5; border-radius:14px; padding:18px 20px; margin-top:14px; box-shadow:0 3px 12px rgba(110,85,45,0.05); }
+.ps-heart-line { font-size:14px; line-height:1.8; color:#3d3326; margin:8px 0; }
+.ps-heart-line b { color:#2f5f4b; }
+
+/* 노래 만들기 */
+.ps-song-stepper { display:flex; gap:6px; margin-bottom:14px; overflow-x:auto; padding-bottom:4px; }
+.ps-song-step { flex:1; min-width:70px; text-align:center; padding:7px 4px; border-radius:8px; font-size:11.5px; font-weight:700; background:#f0f4f1; color:#5c7065; }
+.ps-song-step.active { background:#2f5f4b; color:#fff; }
+.ps-song-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin:12px 0; }
+.ps-song-opt { background:#fff; border:1.5px solid #dce8e0; border-radius:12px; padding:12px 14px; text-align:left; cursor:pointer; font-size:13px; font-weight:700; color:#233d31; transition:.15s; }
+.ps-song-opt:hover { border-color:#2f5f4b; transform:translateY(-1px); }
+.ps-song-opt.on { background:#e8f4ed; border-color:#2f5f4b; color:#174232; box-shadow:0 0 0 1px #2f5f4b; }
+.ps-lyrics-board { background:#fff; border:1.5px solid #dce8e0; border-radius:14px; padding:16px; margin:12px 0; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:640px) { .ps-lyrics-board { grid-template-columns:1fr; gap:10px; } }
+.ps-lyrics-col { background:#fbfdfc; border:1px solid #eef3f0; border-radius:10px; padding:12px; }
+.ps-lyrics-col h5 { margin:0 0 8px; font-size:13px; color:#2f5f4b; font-weight:800; }
+.ps-lyrics-text { width:100%; min-height:160px; border:none; background:transparent; font-size:13px; line-height:1.7; color:#213b2f; resize:vertical; font-family:inherit; }
+</style>
+
+</head><body><div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 디지털 이음 연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 나의 오늘이<br>더 빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><div class="feature-bar"><button class="feature-card" onclick="nav('self')"><strong>나를 이해하기</strong><span>나의 강점과 성향을 발견해요 →</span></button><button class="feature-card" onclick="nav('card')"><strong>직업 탐색하기</strong><span>다양한 직종을 살펴봐요 →</span></button><button class="feature-card" onclick="nav('resume')"><strong>입사지원서 작성하기</strong><span>사진이 포함된 Word 문서 →</span></button><button class="feature-card" onclick="nav('interview')"><strong>면접연습실</strong><span>질문에 답하고 다시 연습 →</span></button><button class="feature-card" onclick="nav('prompt')"><strong>프롬프트 디자인실</strong><span>6하원칙 공식과 마음챙김 →</span></button></div><nav id="nav" class="nav"></nav><div id="app"></div><footer class="footer">디지털 이음 연구소 · 교육용 자기탐색 도구 · 정식 심리검사 또는 직업 적합성 판정이 아닙니다.<br>입력 내용과 사진은 외부 서버에 전송되지 않고, 이 컴퓨터의 브라우저에만 3일간 보관돼요. 공용 컴퓨터라면 마친 뒤 "내 입력정보 지우기"를 눌러 주세요. · v13</footer></div><script>
 const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const themes={"office": ["#eaf2ff", "#2f5e9c"], "media": ["#f2ebfc", "#7850a6"], "food": ["#fff1e5", "#b86b32"], "care": ["#e9f5f1", "#367d68"], "service": ["#fff4ec", "#a45e44"], "industry": ["#e9f1f5", "#456d83"], "startup": ["#ebf5e9", "#43744d"]};
-const pages=[['home','시작하기'],['self','나를 이해하기'],['strength','강점과 경험'],['card','10년 뒤 직업 도감'],['jobs','직업 탐색'],['resume','입사지원서'],['interview','면접 연습'],['notes','나의 탐험 기록']];
+const pages=[['home','시작하기'],['self','나를 이해하기'],['strength','강점과 경험'],['card','10년 뒤 직업 도감'],['jobs','직업 탐색'],['resume','입사지원서'],['interview','면접 연습'],['prompt','프롬프트 디자인실'],['notes','나의 탐험 기록']];
 const state={page:'home',photo:null,photoData:null,photoType:null,avatar:0,selfTab:0,traitGood:[],traitImprove:[],traitSkills:[],traitLikes:[],traitCustomGood:'',traitCustomSkill:'',traitCustomLike:'',traitCustomWeak:'',traitReal:'',traitSampleOnly:true,preferredJobs:['사무원'],questions:{},strengths:[],improvements:[],experiences:['','',''],job:'사무원',name:'',contact:'',email:'',history:'',education:'',cert:'',motivation:'',cover:'',jobpost:'',interview:[],interviewIdx:0,notes:''};
 const strengths=['차분하게 정리하기','약속과 시간 지키기','새로운 일 배우기','사람의 이야기 듣기','고객에게 설명하기','꼼꼼히 확인하기','팀과 협력하기','상황에 맞게 대응하기','일정과 계획 세우기','손으로 만들고 정돈하기','문서와 숫자 관리하기','아이디어 내기'];
 const improvements=['약속과 시간·마감 지키기가 어렵다','문서 작성과 컴퓨터 작업이 어렵다','숫자 계산과 정산·돈 관리가 어렵다','낯선 일 시작할 때 망설여진다','사람 앞에서 말하거나 발표가 어렵다','일이 한꺼번에 몰리면 당황한다','부탁이나 일을 거절하기 어렵다','처음 보는 사람과 대화가 어렵다','새로운 스마트폰·디지털 도구가 서툴다','복잡한 계획 세우기와 정리가 어렵다','감정 쓰는 고객 응대가 부담스럽다','오래 서 있거나 체력 쓰는 일이 힘들다'];
@@ -1555,7 +1625,7 @@ function bindText(id,field){let el=document.getElementById(id);if(el){el.value=s
 function render(){stopVoiceInput();document.body.classList.toggle('page-sub', state.page !== 'home'); document.body.dataset.page = state.page; document.getElementById('nav').innerHTML=pages.map(([p,label])=>`<button class="${p==='card'?'nav-card ':''}${p===state.page?'active':''}" onclick="nav('${p}')">${label}</button>`).join('');document.getElementById('app').innerHTML=views[state.page]();init[state.page]?.()}
 function section(title,subtitle,badge=''){return `<div class="section-title"><div><h2>${title}</h2><p>${subtitle}</p></div>${badge?`<span class="tag">${badge}</span>`:''}</div>`}
 const views={
-home:()=>`<section class="panel">${section('오늘의 탐험 안내','다섯 가지 활동을 연결하면 나의 취업 준비 자료가 완성됩니다.','3시간 실습')}<div class="grid">${[['나를 이해하기','좋아하는 활동과 일하는 방식, 관계의 선호를 살펴봅니다.','self'],['강점과 경험 정리','실제로 한 일에서 강점과 보완할 점을 찾습니다.','strength'],['10년 뒤 직업 도감','늘어날·새로 뜨는·바뀌는·대체 중인 직업 100장을 보고 나와 닮은 직업을 찾아요.','card'],['직업 탐색하기','직업이 하는 일과 준비 조건을 비교합니다.','jobs'],['입사지원서 작성','원본 증명사진으로 실제 서식을 완성합니다.','resume'],['면접 연습','예상 질문에 답하고 기준별 피드백을 받습니다.','interview']].map(([a,b,p])=>`<div class="tile"><div class="accent"></div><h3>${a}</h3><p>${b}</p><button class="btn light small" onclick="nav('${p}')">시작하기 →</button></div>`).join('')}</div></section><section class="panel">${section('사진과 탐험 캐릭터','앞 강사님이 준비한 사진을 등록하되, 지원서에는 반드시 원본을 사용합니다.')}<div class="two"><div><label class="field"><span>증명사진 파일 선택 (선택 사항)</span><input type="file" id="photo" accept="image/png,image/jpeg"></label><p class="muted">사진은 이 브라우저의 작업 중 메모리에만 둡니다. 외부 AI로 전송하거나 얼굴을 자동 변환하지 않습니다.</p><div id="photoPreview"></div></div><div><p style="margin-top:0;font-weight:800">탐험 안내 캐릭터 선택 (기본 일러스트 · 사진 자동 변환 아님)</p><div class="row">${[0,1,2].map(i=>`<button class="character ${state.avatar===i?'on':''}" onclick="state.avatar=${i};render()"><span class="avatar">${avatarSvg(i)}</span><span class="character-name">${['서연','지윤','민서'][i]}</span></button>`).join('')}</div><p class="muted">한국인 성인 인물로 디자인한 기본 일러스트입니다. 본인의 얼굴사진을 변환하는 AI 기능은 포함되지 않습니다.</p></div></div></section>`,
+home:()=>`<section class="panel">${section('오늘의 탐험 안내','다섯 가지 활동을 연결하면 나의 취업 준비 자료가 완성됩니다.','3시간 실습')}<div class="grid">${[['나를 이해하기','좋아하는 활동과 일하는 방식, 관계의 선호를 살펴봅니다.','self'],['강점과 경험 정리','실제로 한 일에서 강점과 보완할 점을 찾습니다.','strength'],['10년 뒤 직업 도감','늘어날·새로 뜨는·바뀌는·대체 중인 직업 100장을 보고 나와 닮은 직업을 찾아요.','card'],['직업 탐색하기','직업이 하는 일과 준비 조건을 비교합니다.','jobs'],['입사지원서 작성','원본 증명사진으로 실제 서식을 완성합니다.','resume'],['면접 연습','예상 질문에 답하고 기준별 피드백을 받습니다.','interview'],['프롬프트 디자인실','6하 원칙 공식과 빡친 번역기, 토닥토닥 마음챙김을 체험해요.','prompt']].map(([a,b,p])=>`<div class="tile"><div class="accent"></div><h3>${a}</h3><p>${b}</p><button class="btn light small" onclick="nav('${p}')">시작하기 →</button></div>`).join('')}</div></section><section class="panel">${section('사진과 탐험 캐릭터','앞 강사님이 준비한 사진을 등록하되, 지원서에는 반드시 원본을 사용합니다.')}<div class="two"><div><label class="field"><span>증명사진 파일 선택 (선택 사항)</span><input type="file" id="photo" accept="image/png,image/jpeg"></label><p class="muted">사진은 이 브라우저의 작업 중 메모리에만 둡니다. 외부 AI로 전송하거나 얼굴을 자동 변환하지 않습니다.</p><div id="photoPreview"></div></div><div><p style="margin-top:0;font-weight:800">탐험 안내 캐릭터 선택 (기본 일러스트 · 사진 자동 변환 아님)</p><div class="row">${[0,1,2].map(i=>`<button class="character ${state.avatar===i?'on':''}" onclick="state.avatar=${i};render()"><span class="avatar">${avatarSvg(i)}</span><span class="character-name">${['서연','지윤','민서'][i]}</span></button>`).join('')}</div><p class="muted">한국인 성인 인물로 디자인한 기본 일러스트입니다. 본인의 얼굴사진을 변환하는 AI 기능은 포함되지 않습니다.</p></div></div></section>`,
 self:()=>`<section class="panel">${section('나를 이해하기','색상 탭을 눌러 질문을 바꾸고 하나씩 답해보세요.','교육용 자기탐색')}<div class="banner">정식 심리검사가 아닌 자기이해 활동입니다. 결과만으로 성격·적성을 판정하지 않습니다.</div><div class="qtabs">${qs.map((q,i)=>`<button class="qtab ${state.selfTab===i?'active':''}" data-selftab="${i}"><small>${state.questions[q.id]?'✓ 완료':'질문 '+(i+1)}</small>${['흥미','업무방식','관계','어려울 때','근무조건'][i]}</button>`).join('')}</div><div class="question-focus"><div class="eyebrow">질문 ${state.selfTab+1} / ${qs.length}</div><h3>${qs[state.selfTab].title}</h3><div class="choice-grid">${qs[state.selfTab].options.map(o=>`<button class="choice ${state.questions[qs[state.selfTab].id]===o?'on':''}" data-q="${qs[state.selfTab].id}" data-val="${E(o)}">${o}</button>`).join('')}</div><div class="row" style="margin-top:18px"><button class="btn outline" data-selfprev ${state.selfTab===0?'disabled':''}>이전 질문</button><button class="btn light" data-selfnext ${state.selfTab===qs.length-1?'disabled':''}>다음 질문</button><button class="btn" onclick="nav('strength')">강점 찾기로 이동 →</button></div></div></section><section class="panel">${section('나의 관계 사용설명서','내 답을 바탕으로 성격 유형 해설처럼 풀어 본 설명서예요. 재미로 읽어 보세요.')}<div id="selfResult">${selfResult()}</div></section>`,
 strength:()=>`<section class="panel stpage">${section('강점과 경험을 발견하기','선택한 강점이 실제 행동으로 드러난 경험을 적는 것이 중요합니다.','서류 작성 연결')}<h3 class="q3d"><span class="q3d-ic">💎</span>내가 잘한다고 느끼거나 잘할 수 있을 것 같은 활동을 3가지 골라보세요.</h3><div class="choice-grid flat">${strengths.map(s=>`<button class="choice ${state.strengths.includes(s)?'on':''}" data-strength="${E(s)}">${s}</button>`).join('')}</div><p class="muted">최대 3개까지 선택할 수 있어요. (${state.strengths.length}/3)</p><h3 class="q3d"><span class="q3d-ic">🌱</span>보완하고 싶은 부분도 3가지 골라보세요.</h3><div class="choice-grid flat">${improvements.map(s=>`<button class="choice ${state.improvements.includes(s)?'on':''}" data-improve="${E(s)}">${s}</button>`).join('')}</div><p class="muted">최대 3개까지 선택할 수 있어요. (${state.improvements.length}/3)</p><div class="result" id="improvementOutput">${improvementText()}</div><h3>내가 실제로 해본 일</h3><p class="muted">직장·아르바이트·자원봉사·모임·일상 중 자신이 편한 경험을 적어주세요. 이름·주민번호·개인 사정은 입력하지 않습니다.</p>${[0,1,2].map(i=>`<label class="field"><span>경험 · 내가 실제로 한 행동</span><textarea id="exp${i}" placeholder="예: 매장에서 상품 수량을 확인하고 부족한 물건을 채웠습니다.">${E(state.experiences[i])}</textarea></label>`).join('')}<button class="btn" onclick="nav('card')">10년 뒤 직업 도감 보러 가기 →</button></section>`,
 jobs:()=>`<section class="panel">${section('직업세계 탐색','직업을 단정적으로 추천하기보다, 내가 관심을 가질 만한 후보와 확인사항을 살펴봅니다.','공식 자료 확인')}<div class="banner">직종 후보는 NCS 대분류를 참고해 묶은 교육용 예시이며, 모든 직업의 정확한 NCS 세분류 코드와 1:1 매칭한 목록은 아닙니다. 창업은 직업이 아닌 진로 방식으로 별도 묶었습니다. 이 카드는 교육용 직무 소개입니다. 실시간 채용공고나 최신 지역 구인통계를 표시하지 않습니다. 실제 자격·모집·급여·마감은 공식 채용공고에서 반드시 다시 확인하세요.</div><div class="row"><input class="search" style="flex:1;min-width:210px" id="jobsearch" placeholder="직업명, 업무, 분야 검색 (예: 강사, 경리, 크리에이터)" value=""><button class="btn light" onclick="window.open('https://www.work24.go.kr/','_blank','noopener')">고용24 채용정보 ↗</button></div><div class="selected-preferences"><b>나의 희망직종 (최대 3개)</b><p class="muted">직업 카드에서 ‘희망직종 추가’를 선택하세요. 지원서용 직무는 아래에서 별도로 정할 수 있습니다.</p><div id="preferredJobChips"></div></div><div id="job-theme" class="job-theme-banner" aria-live="polite"></div><div id="jobResultsCount" style="margin:10px 0 4px;font-size:13px;font-weight:700;color:#356754;"></div><div id="jobResults" class="jobgrid"></div><div class="result"><b>내가 선택한 지원 직무:</b> <span id="selectedjob">${E(state.job)}</span><div class="muted">직업 카드를 선택한 뒤, 실제 공고 원문을 보고 지원 자격과 업무 내용을 비교하세요.</div></div><div id="careerIntro"></div><div class="two"><label class="field"><span>채용공고에서 확인한 주요 업무·필수 조건 (개인정보 제외)</span><textarea id="jobpost" placeholder="예: 문서 정리, 기본 컴퓨터 활용, 주 5일 근무">${E(state.jobpost)}</textarea></label><div class="result"><h3>새롭게 변화하는 직업 탐색</h3><p class="muted">AI·디지털 기술로 업무가 변화하는 직업이 있습니다. '없어질 직업'이라고 단정하지 않고, 실제 업무가 어떻게 변하는지 공식 자료를 확인합니다.</p><a href="https://www.keis.or.kr/" target="_blank" rel="noopener">한국고용정보원 자료 확인 ↗</a><br><a href="https://www.work24.go.kr/" target="_blank" rel="noopener">고용24에서 직업·채용 정보 찾기 ↗</a></div></div><button class="btn" onclick="nav('resume')">입사지원서 작성하기 →</button></section>`,
@@ -2140,10 +2210,10 @@ function gWrapTxt(ctx,text,x,y,maxW,lh){let line='',yy=y;for(const ch of String(
 <script>
 /* ===== v12: 3D 메뉴 꾸미기 · 질문과 답 · 내 사용설명서 ===== */
 function jo(w,a,b){const c=String(w).trim().slice(-1).charCodeAt(0);if(c<0xAC00||c>0xD7A3)return a+'('+b+')';return (c-0xAC00)%28?a:b}
-const TABICON={home:'🏡',self:'🪞',strength:'💎',card:'🗂️',jobs:'🔭',resume:'📝',interview:'🎤',notes:'📖'};
+const TABICON={home:'🏡',self:'🪞',strength:'💎',card:'🗂️',jobs:'🔭',resume:'📝',interview:'🎤',prompt:'🪄',notes:'📖'};
 function bust(look){return womanSvg(Object.assign({},look)).replace('viewBox="0 0 120 150"','viewBox="22 2 76 86"')}
 function decorateNav(){document.body.classList.toggle('page-sub', state.page !== 'home'); document.body.dataset.page = state.page; document.querySelectorAll('#nav button').forEach((b,i)=>{const [p,l]=pages[i];b.classList.add('tab3d','t-'+p);b.innerHTML=`<span class="ti" aria-hidden="true">${TABICON[p]||'⭐'}</span><span class="tl">${l}</span>`;b.setAttribute('aria-current',p===state.page?'page':'false')})}
-function decorateFeatures(){const looks=[L('perm','#5a3a2c','cardigan','#ffb3c1',{inner:'#fff',smile:1,open:1,earring:'#ffd25c'}),L('long','#4a3128','tee','#ffd25c',{hat:'beret',hatc:'#e8765c',wink:1,open:1}),L('bob','#2f2320','blazer','#6c8fd1',{glasses:1,earring:'#fff',open:1}),L('lowpony','#3d2a24','shirt','#c7b3d6',{hat:'headset',open:1})],tags=['STEP 1','HOT','WORD','PRACTICE'];document.querySelectorAll('.feature-bar .feature-card').forEach((c,i)=>{if(c.querySelector('.fc-av'))return;const st=c.querySelector('strong'),sp=c.querySelector('span');const wrap=document.createElement('span');wrap.className='fc-txt';wrap.append(st,sp);c.innerHTML=`<span class="fc-av" aria-hidden="true">${bust(looks[i])}</span>`;c.append(wrap);const t=document.createElement('span');t.className='fc-tag';t.textContent=tags[i];c.append(t)})}
+function decorateFeatures(){const looks=[L('perm','#5a3a2c','cardigan','#ffb3c1',{inner:'#fff',smile:1,open:1,earring:'#ffd25c'}),L('long','#4a3128','tee','#ffd25c',{hat:'beret',hatc:'#e8765c',wink:1,open:1}),L('bob','#2f2320','blazer','#6c8fd1',{glasses:1,earring:'#fff',open:1}),L('lowpony','#3d2a24','shirt','#c7b3d6',{hat:'headset',open:1})],looks.push(L('bob','#2f2320','shirt','#e8d2eb',{glasses:1,smile:1,open:1}));tags=['STEP 1','HOT','WORD','PRACTICE','NEW'];document.querySelectorAll('.feature-bar .feature-card').forEach((c,i)=>{if(c.querySelector('.fc-av'))return;const st=c.querySelector('strong'),sp=c.querySelector('span');const wrap=document.createElement('span');wrap.className='fc-txt';wrap.append(st,sp);c.innerHTML=`<span class="fc-av" aria-hidden="true">${bust(looks[i]||looks[0])}</span>`;c.append(wrap);const t=document.createElement('span');t.className='fc-tag';t.textContent=tags[i]||'NEW';c.append(t)})}
 selfResult=function(){return qs.map(q=>state.questions[q.id]?`<div class="qa"><div class="qa-q"><span>Q</span>${E(q.title)}</div><div class="qa-a"><span>A</span>${E(state.questions[q.id])}</div></div>`:'').join('')||'<p class="muted">나를 이해하기에서 질문을 고르면 여기에 Q와 A로 정리돼요.</p>'};
 document.addEventListener('click',e=>{const t=e.target.closest('.btn,.feature-card,.dx-card,.dx-opt,.dx-chip,.dx-tab,.trait-chip,.mn-job,.det-line');if(t){t.classList.remove('pop');void t.offsetWidth;t.classList.add('pop')}},true);
 /* 내 사용설명서 */
@@ -2424,7 +2494,7 @@ const _initResume=init.resume;init.resume=()=>{_initResume();detBind()};
 const _vNotes=views.notes;views.notes=()=>{const d=state.d,add=d.res.length||d.fav.length?`<div class="result"><h3>10년 뒤 직업 도감</h3>${d.res.length?`<p><b>나와 닮은 직업 카드:</b> ${d.res.map(E).join(' · ')}</p>`:''}${d.fav.length?`<p><b>관심 담은 직업:</b> ${d.fav.map(E).join(' · ')}</p>`:''}</div>`:'';return _vNotes().replace('<div class="result"><h3>직업 탐색</h3>',add+'<div class="result"><h3>직업 탐색</h3>')};
 </script><script>
 /* ===== v12.1: 클릭하면 반전! 화면 전환 커튼 ===== */
-const CURTAIN={home:['🏡','처음 화면으로','#5fae86',L('perm','#5a3a2c','cardigan','#c9ecdb',{inner:'#fff',smile:1,open:1})],self:['🪞','나를 이해하러 출발!','#e58ea2',L('perm','#5a3a2c','cardigan','#ffb3c1',{inner:'#fff',smile:1,open:1,earring:'#ffd25c'})],strength:['💎','숨은 강점 찾으러 출발!','#e09a52',L('lowpony','#3d2a24','apron','#ffd9b0',{apron:'#fff',wink:1,open:1})],card:['🗂️','10년 뒤 직업 도감 펼치기!','#d9a21b',L('long','#4a3128','tee','#ffd25c',{hat:'beret',hatc:'#e8765c',wink:1,open:1})],jobs:['🔭','직업 세계 탐색 출발!','#6c9ad6',L('bob','#2f2320','blazer','#9fd3ff',{glasses:1,open:1})],resume:['📝','입사지원서 공작소 오픈!','#e07b5a',L('bob','#2f2320','blazer','#6c8fd1',{glasses:1,earring:'#fff',open:1})],interview:['🎤','면접 연습실 입장!','#9a82c9',L('lowpony','#3d2a24','shirt','#c7b3d6',{hat:'headset',open:1})],notes:['📖','나의 탐험 기록 열기!','#6fae66',L('perm','#3d2a24','cardigan','#cfeccb',{inner:'#fff',smile:1,open:1})]};
+const CURTAIN={home:['🏡','처음 화면으로','#5fae86',L('perm','#5a3a2c','cardigan','#c9ecdb',{inner:'#fff',smile:1,open:1})],self:['🪞','나를 이해하러 출발!','#e58ea2',L('perm','#5a3a2c','cardigan','#ffb3c1',{inner:'#fff',smile:1,open:1,earring:'#ffd25c'})],strength:['💎','숨은 강점 찾으러 출발!','#e09a52',L('lowpony','#3d2a24','apron','#ffd9b0',{apron:'#fff',wink:1,open:1})],card:['🗂️','10년 뒤 직업 도감 펼치기!','#d9a21b',L('long','#4a3128','tee','#ffd25c',{hat:'beret',hatc:'#e8765c',wink:1,open:1})],jobs:['🔭','직업 세계 탐색 출발!','#6c9ad6',L('bob','#2f2320','blazer','#9fd3ff',{glasses:1,open:1})],resume:['📝','입사지원서 공작소 오픈!','#e07b5a',L('bob','#2f2320','blazer','#6c8fd1',{glasses:1,earring:'#fff',open:1})],interview:['🎤','면접 연습실 입장!','#9a82c9',L('lowpony','#3d2a24','shirt','#c7b3d6',{hat:'headset',open:1})],prompt:['🪄','프롬프트 디자인실 오픈!','#be83bf',L('bob','#2f2320','shirt','#e8d2eb',{glasses:1,smile:1,open:1})],notes:['📖','나의 탐험 기록 열기!','#6fae66',L('perm','#3d2a24','cardigan','#cfeccb',{inner:'#fff',smile:1,open:1})]};
 let helloTimer=null;
 function playCurtain(p,done){done();const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce)return;const c=CURTAIN[p];const app=document.getElementById('app');app.classList.remove('flipin');void app.offsetWidth;app.classList.add('flipin');if(!c)return;let el=document.getElementById('fxHello');if(!el){el=document.createElement('div');el.id='fxHello';el.setAttribute('aria-hidden','true');document.body.appendChild(el)}el.style.setProperty('--cc',c[2]);el.innerHTML=`<span class="hl-av">${bust(c[3])}</span><span class="hl-ic">${c[0]}</span><b>${c[1]}</b>`;el.classList.remove('show');void el.offsetWidth;el.classList.add('show');clearTimeout(helloTimer);helloTimer=setTimeout(()=>el.classList.remove('show'),1500)}
 
@@ -3009,6 +3079,745 @@ const _vIv=views.interview;views.interview=()=>_vIv().replace('정해진 질문�
 /* v14: 불러온 예전 답 중 지금 10문항 선택지에 없는 값 정리 후 다시 그림 */
 try{if(typeof v14Clean==='function'){v14Clean();render()}}catch(e){}
 
+
+
+/* ===== v14.5: 프롬프트 디자인실 (6하 원칙 공식실 · 빡친 번역기 · 토닥토닥 마음챙김 · 나만의 노래 만들기) ===== */
+(function(){
+  if(!state.ps){
+    state.ps = {
+      tab: 'formula',
+      who: '친절한 베테랑 사무원', whoIn: '',
+      when: '상사에게 긴급 메일 보낼 때', whenIn: '',
+      why: '오해 없이 정중하게 거절하려고', whyIn: '',
+      what: '정중한 거절 및 대안 제안 메일', whatIn: '',
+      how: '번호 매겨 3가지로 깔끔하게', howIn: '',
+      extra: '',
+      vIn: '', vMust: '', vWho: '직장 상사·선배', vLv: '2', vRes: null,
+      hMood: '지쳤어요', hIn: '', hRes: null,
+      sStep: 1, sAuthor: state.name || '이서정', sOrg: '디지털 이음 연구소',
+      sWho: '1', sWhoCustom: '', sTopic: '1', sTopicCustom: '',
+      sTitle: '오늘도 한 걸음 더', sTitleCustom: '',
+      sLyrics1: '', sLyrics2: ''
+    };
+  }
+
+  const WH_DATA = {
+    who: {
+      name: '1. 누가 (AI의 역할)',
+      opts: ['친절한 베테랑 사무원', '꼼꼼한 공문서·보고서 검수관', '센스 있는 마케팅 기획자', '다정하고 명쾌한 직업상담사', '친절한 고객 응대 전문가'],
+      ph: '원하는 AI 역할을 직접 적어도 돼요 (예: 20년 차 베테랑 사회복지사)'
+    },
+    when: {
+      name: '2. 언제·어디서 (상황과 배경)',
+      opts: ['상사에게 긴급 메일 보낼 때', '고객 불만 문의에 답할 때', '회의 전 5분 브리핑 준비할 때', '새 프로젝트 아이디어 짤 때', '공문서 서식 작성할 때'],
+      ph: '내가 처한 상황을 직접 적어도 돼요 (예: 오늘 오후 3시 팀 회의 준비 중)'
+    },
+    why: {
+      name: '3. 왜 (목적과 이유)',
+      opts: ['오해 없이 정중하게 거절하려고', '초보자도 1분 만에 이해하게 하려고', '핵심만 한눈에 깔끔히 보고하려고', '기한 내 승인받기 위해', '동료의 참여를 독려하려고'],
+      ph: '이 일을 하는 목적을 직접 적어도 돼요 (예: 상대방 기분 안 상하게 일정 변경)'
+    },
+    what: {
+      name: '4. 무엇을 (구체적 지시)',
+      opts: ['핵심 요약 3줄 작성', '정중한 거절 및 대안 제안 메일', '친절한 안내문 초안', '발표 대본 1분 스크립트', '문서 맞춤법과 어색한 문장 교정'],
+      ph: '시킬 작업을 구체적으로 적어도 돼요 (예: 행사 참여 독려 문자 3줄)'
+    },
+    how: {
+      name: '5. 어떻게 (답변 형식과 어조)',
+      opts: ['번호 매겨 3가지로 깔끔하게', '정중하고 단호한 직장인 어조로', '300자 이내 짧고 강렬하게', '표(테이블) 형식으로 한눈에', '쉬운 일상 언어로 친절하게'],
+      ph: '원하는 답변 모양을 적어도 돼요 (예: 인사말 포함, 친근한 말투로)'
+    }
+  };
+
+  function buildFormulaPrompt(){
+    const ps = state.ps;
+    const who = (ps.whoIn||'').trim() || ps.who || '친절한 베테랑 사무원';
+    const when = (ps.whenIn||'').trim() || ps.when || '업무 메일을 작성할 때';
+    const why = (ps.whyIn||'').trim() || ps.why || '오해 없이 깔끔하게 소통하기 위해';
+    const what = (ps.whatIn||'').trim() || ps.what || '안내문 초안 작성';
+    const how = (ps.howIn||'').trim() || ps.how || '번호 매겨 3가지로 깔끔하게';
+    const extra = (ps.extra||'').trim();
+
+    let p = `너는 "${who}" 역할을 맡은 유능한 AI 전문가야.\n\n[상황 및 맥락 (언제·어디서·왜)]\n- 상황: ${when}\n- 목적: ${why}\n\n[구체적 할 일 (무엇을)]\n- 지시: ${what}\n`;
+    if(extra) p += `- 추가 세부 조건: ${extra}\n`;
+    p += `\n[답변 형식 (어떻게)]\n- 출력 조건: ${how}\n- 바로 업무와 일상에 복사해서 쓸 수 있도록 군더더기 없이 실용적으로 작성해 줘.`;
+    return p;
+  }
+
+  const VENT_EX = [
+    {
+      title: '퇴근 직전 폭탄 업무',
+      story: '오후 5시 다 돼서 오늘까지 끝내라고 던져주면 나더러 야근하라는 소리냐고 진짜 장난하나',
+      must: '오늘 중은 불가능하고 내일 오전 11시까지 완성해서 보고하겠음'
+    },
+    {
+      title: '말 바꾼 상대방',
+      story: '분명히 지난주 회의 때 그렇게 하자고 해놓고 이제 와서 딴소리하면 어쩌라는 건데',
+      must: '지난 회의록 합의 내용 확인 부탁드리며 당초 합의대로 진행 필요함'
+    },
+    {
+      title: '일 미루는 동료',
+      story: '다 같이 하는 프로젝트인데 자기 파트는 손도 안 대고 슬쩍 발 빼는 거 너무 얌체 같다',
+      must: '각자 분담 영역 기한 내 제출해 주셔야 전체 일정 차질 없음'
+    },
+    {
+      title: '무리한 부탁 거절',
+      story: '업무 시간도 아닌데 개인적인 일까지 봐달라고 하면 거절도 못 하고 진짜 난감함',
+      must: '개인적인 업무는 지원하기 어려우며 공식 업무 절차를 통해 요청 바람'
+    }
+  ];
+
+  function runVent(){
+    const ps = state.ps;
+    const v = (ps.vIn||'').trim();
+    const m = (ps.vMust||'').trim();
+    if(!v && !m){
+      showToast('무슨 일이 있었는지 먼저 적어 주세요.');
+      return;
+    }
+    const lv = ps.vLv || '2';
+    const who = ps.vWho || '직장 상사·선배';
+
+    const empathies = {
+      '1': ['아오, 이건 진짜 서운할 만하죠! 사람 마음 몰라주기 대회 나가면 1등 하겠네요.', '살짝 열받는 거 100% 인정! 속으로 한숨 세 번은 푹 쉬셨겠어요.'],
+      '2': ['아니 진짜, 이건 화날 만하죠! 미치고 팔짝 뛰겠네요!', '듣는 저도 속에서 부글부글 뭐가 올라오네요. 오늘 잘 참으신 것만으로도 대단해요!'],
+      '3': ['와, 이건 진짜 선 넘었다! 머리에서 김 나는 소리가 여기까지 들려요.', '이 정도면 화산 폭발 경보 발령이에요. 인내심 국가대표 금메달감입니다!']
+    };
+    const emp = empathies[lv][Math.floor(Math.random()*empathies[lv].length)];
+
+    let refined = '';
+    if(who.includes('상사')){
+      refined = `팀장님, 요청해 주신 사항 확인했습니다.\n현재 진행 중인 우선순위 업무 일정상, 요청하신 내용을 당장 완료하기에는 다소 무리가 있습니다.\n${m ? m + ' 방향으로 준비하여 ' : ''}가장 신속하게 검토 후 기한 내 차질 없이 보고드리겠습니다.`;
+    } else if(who.includes('동료')){
+      refined = `선생님, 말씀해 주신 내용 잘 확인했습니다.\n원활한 프로젝트 진행을 위해 ${m ? m + ' 부분에 대한 상호 협조가 꼭 필요합니다.' : '각자 일정에 맞춰 진행 상황 공유 부탁드립니다.'}\n함께 일정 맞춰 진행하면 좋겠습니다.`;
+    } else if(who.includes('고객') || who.includes('거래처')){
+      refined = `안녕하십니까, 문의 주신 사항 안내해 드립니다.\n현재 관련 규정 및 절차상 즉시 처리는 어려우며, ${m ? m : '확인 가능한 범위 내에서 최선의 대안을 검토 중입니다.'}\n정확한 확인 후 순차적으로 안내해 드리겠습니다.`;
+    } else {
+      refined = `말씀해주신 상황 충분히 이해했습니다.\n다만 제 여건상 바로 수용하기는 어려운 점 양해 부탁드립니다.\n${m ? m : '서로 부담 없는 선에서 조율되었으면 합니다.'}`;
+    }
+
+    ps.vRes = { emp, refined };
+    render();
+  }
+
+  const HEART_F1 = {
+    '지쳤어요': '오늘 정말 많은 일과 사람의 마음을 받아 주느라 지치셨죠.',
+    '속상해요': '애쓴 만큼 알아주지 않아 속상하고 억울한 하루였네요.',
+    '불안해요': '할 일은 많고 잘하고 있는지 몰라 마음이 조마조마하셨죠.',
+    '허무해요': '열심히 달려왔는데 남는 게 없는 것 같아 허무한 날도 있어요.',
+    '자책감이 들어요': '실수 하나에 모든 노력을 묻어버리고 자책하지 마세요.',
+    '혼자 뒤처진 느낌': '남들의 속도와 비교하지 마세요. 당신은 당신의 속도로 충분합니다.',
+    '그래도 힘내고 싶어요': '지친 와중에도 다시 일어서려는 당신, 참 단단하고 아름다워요.'
+  };
+  const HEART_F2 = [
+    '당신이 기울인 노력과 정성은 보이지 않는 곳에서도 분명히 빛나고 있어요.',
+    '완벽하지 않아도 괜찮아요. 오늘 하루를 끝까지 버텨낸 것만으로도 충분합니다.',
+    '넘어지고 흔들린 자리에 더 깊은 뿌리가 내리고 있는 중이에요.',
+    '누구보다 자기 자신에게 가장 친절한 친구가 되어줄 시간입니다.'
+  ];
+  const HEART_F3 = [
+    '오늘 끝내지 못한 일은 내일의 나에게 맡겨두고, 지금은 짐을 내려놓으세요.',
+    '결과가 당신의 전부를 말해주지 않아요. 당신이라는 존재 자체가 귀합니다.',
+    '잠깐 쉬어가는 것은 멈추는 것이 아니라 더 멀리 나아가기 위한 쉼표예요.'
+  ];
+  const HEART_F4 = [
+    '지금 가슴에 조용히 손을 얹고, 깊게 세 번 숨을 들이쉬고 천천히 내쉬어 보세요.',
+    '따뜻한 물 한 잔 마시며, 수고한 내 어깨를 가볍게 토닥여 주세요.',
+    '잠시 창밖의 하늘을 바라보며 복잡한 생각의 스위치를 가만히 꺼 보세요.'
+  ];
+  const HEART_F5 = [
+    '내일의 나야, 천천히 가도 괜찮아. 나는 늘 나를 믿어.',
+    '오늘도 정말 잘 살았어. 내일은 오늘보다 더 다정하고 빛날 거야.',
+    '당신은 생각보다 훨씬 더 강하고 근사한 사람입니다.'
+  ];
+
+  function runHeart(){
+    const ps = state.ps;
+    const m = ps.hMood || '지쳤어요';
+    const lines = [
+      HEART_F1[m] || '오늘 하루도 말로 다 못 할 만큼 애쓰셨어요.',
+      HEART_F2[Math.floor(Math.random()*HEART_F2.length)],
+      HEART_F3[Math.floor(Math.random()*HEART_F3.length)],
+      HEART_F4[Math.floor(Math.random()*HEART_F4.length)],
+      HEART_F5[Math.floor(Math.random()*HEART_F5.length)]
+    ];
+    ps.hRes = lines;
+    render();
+  }
+
+  function downloadHeartImg(){
+    const ps = state.ps;
+    if(!ps.hRes) return;
+    const cv = document.createElement('canvas');
+    const W = 1080;
+    cv.width = W; cv.height = W;
+    const ctx = cv.getContext('2d');
+
+    ctx.fillStyle = '#faf7f0';
+    ctx.fillRect(0, 0, W, W);
+
+    ctx.fillStyle = '#e4f0e8';
+    ctx.fillRect(0, 0, W, 170);
+
+    ctx.fillStyle = '#224a38';
+    ctx.font = 'bold 44px sans-serif';
+    ctx.fillText('토닥토닥, 마음챙김', 80, 105);
+
+    ctx.fillStyle = '#4a755f';
+    ctx.font = '26px sans-serif';
+    ctx.fillText('오늘 하루를 버틴 나에게 건네는 5줄 위로', 480, 103);
+
+    ctx.fillStyle = '#2d3b33';
+    ctx.font = '34px sans-serif';
+    let y = 280;
+    ps.hRes.forEach((lineText, idx) => {
+      ctx.fillStyle = '#2f5f4b';
+      ctx.font = 'bold 28px sans-serif';
+      ctx.fillText(`0${idx+1}`, 80, y);
+
+      ctx.fillStyle = '#1f2e26';
+      ctx.font = '32px sans-serif';
+      let line = '', words = lineText.split(' ');
+      words.forEach(w => {
+        let test = line ? line + ' ' + w : w;
+        if(ctx.measureText(test).width > W - 230){
+          ctx.fillText(line, 140, y);
+          y += 48;
+          line = w;
+        } else {
+          line = test;
+        }
+      });
+      ctx.fillText(line, 140, y);
+      y += 82;
+    });
+
+    ctx.fillStyle = '#829188';
+    ctx.font = '24px sans-serif';
+    ctx.fillText('디지털 이음 연구소 · 토닥토닥 마음챙김', 80, W - 60);
+
+    const a = document.createElement('a');
+    a.download = '토닥토닥_마음챙김_엽서.png';
+    a.href = cv.toDataURL('image/png');
+    a.click();
+    showToast('따뜻한 마음챙김 엽서 이미지를 저장했어요!');
+  }
+
+  const SONG_LYRICS = {
+    '1': {
+      p1: `[1절]\n차가운 아침 바람 속을 걸으며\n수많은 생각들이 나를 흔들 때\n가만히 가슴에 손을 얹고 속삭여\n여기까지 걸어온 것만으로도 충분해\n\n[후렴]\n오늘도 한 걸음 더 나아가는 나에게\n괜찮아, 넘어져도 다시 빛날 테니까\n나를 믿는 그 마음 하나 품에 안고서\n나의 멋진 오늘을 살아가`,
+      p2: `[2절]\n어제의 실수에 마음 다치지 않기를\n내일의 걱정에 오늘을 놓치지 않기를\n조금 서툴러도 나의 속도로 걸어가면 돼\n빛나는 길은 늘 내 앞에 있으니까\n\n[후렴]\n오늘도 한 걸음 더 나아가는 나에게\n괜찮아, 넘어져도 다시 빛날 테니까\n나를 믿는 그 마음 하나 품에 안고서\n나의 멋진 오늘을 살아가`
+    },
+    '2': {
+      p1: `[1절]\n하루 종일 분주했던 발걸음 멈추고\n퇴근길 노을빛이 거리를 물들일 때\n오늘 하루도 버텨낸 내 어깨 위로\n수고했다고 바람이 인사를 건네네\n\n[후렴]\n수고했어, 참 많이 애썼어\n무거운 짐은 잠시 내려놓아도 돼\n따뜻한 밤이 너를 감싸 안아줄 거야\n내일은 더 좋은 날이 될 거야`,
+      p2: `[2절]\n복잡했던 일들도 지나간 시간 뒤로\n하나둘 흩어져 별빛이 되고\n따스한 밥 한 끼에 시름을 녹이며\n편안한 숨을 깊게 내쉬어 보네\n\n[후렴]\n수고했어, 참 많이 애썼어\n무거운 짐은 잠시 내려놓아도 돼\n따뜻한 밤이 너를 감싸 안아줄 거야\n내일은 더 좋은 날이 될 거야`
+    },
+    '3': {
+      p1: `[1절]\n언제나 묵묵히 내 곁을 지켜준\n그대의 따뜻한 눈빛을 기억해요\n힘겨운 날엔 말없이 손을 잡아주던\n그 다정한 온기가 나를 살게 하네요\n\n[후렴]\n고마워요, 함께여서 참 다행이에요\n그대가 건넨 작은 응원 하나가\n내 삶의 커다란 기적이 되었죠\n언제나 그대 곁에 내가 있을게요`,
+      p2: `[2절]\n계절이 바뀌고 세월이 흘러도\n변치 않는 우리들의 고마운 마음\n서로를 보듬으며 함께 걷는 이 길에\n언제나 따스한 햇살이 가득하기를\n\n[후렴]\n고마워요, 함께여서 참 다행이에요\n그대가 건넨 작은 응원 하나가\n내 삶의 커다란 기적이 되었죠\n언제나 그대 곁에 내가 있을게요`
+    },
+    '4': {
+      p1: `[1절]\n복잡한 머릿속은 훌훌 털어버려\n답답한 마음 따윈 창밖으로 날려버려\n볼륨을 높이고 신나게 발을 굴러봐\n우리의 오늘을 누구도 막을 순 없어!\n\n[후렴]\n달려봐, 세상 끝까지 원투쓰리!\n걱정은 저 멀리 던져버리고 외쳐봐\n신나게 웃는 거야, 내가 주인공이야\n눈부신 나의 날들을 향해 점프!`,
+      p2: `[2절]\n한숨은 날리고 두 손을 번쩍 들어\n거울 속 나를 보며 활짝 웃어보자고\n짜릿한 에너지 온몸에 가득 채우고\n멋진 리듬에 맞춰 한바탕 춤을 춰!\n\n[후렴]\n달려봐, 세상 끝까지 원투쓰리!\n걱정은 저 멀리 던져버리고 외쳐봐\n신나게 웃는 거야, 내가 주인공이야\n눈부신 나의 날들을 향해 점프!`
+    }
+  };
+
+  function buildSongPrompt(){
+    const ps = state.ps;
+    const author = (ps.sAuthor||'').trim() || (state.name||'').trim() || '이서정';
+    const org = (ps.sOrg||'').trim() || '디지털 이음 연구소';
+    const whoMap = {'1':'나 자신 (나를 위한 힐링송)', '2':'소중한 가족', '3':'직장 동료', '4':'친구', '5':'직장 상사·선배'};
+    const target = (ps.sWho==='6' && ps.sWhoCustom.trim()) ? ps.sWhoCustom.trim() : (whoMap[ps.sWho]||'나 자신');
+    const topicMap = {'1':'다시 시작하는 나를 위한 응원가', '2':'퇴근길 힐링 발라드', '3':'감사와 사랑의 포크송', '4':'스트레스 타파 팝'};
+    const topic = (ps.sTopic==='5' && ps.sTopicCustom.trim()) ? ps.sTopicCustom.trim() : (topicMap[ps.sTopic]||'나를 위한 응원가');
+    const title = (ps.sTitleCustom.trim()) || ps.sTitle || '오늘도 한 걸음 더';
+    const l1 = (ps.sLyrics1||'').trim() || (SONG_LYRICS[ps.sTopic]||SONG_LYRICS['1']).p1;
+    const l2 = (ps.sLyrics2||'').trim() || (SONG_LYRICS[ps.sTopic]||SONG_LYRICS['1']).p2;
+
+    return `너는 음악과 따뜻한 감성을 만드는 전문 작곡·작사가이자 비주얼 아티스트야. 아래 [확정된 노래 정보]와 [가사]를 바탕으로, Suno/Udio용 음악 완성 가이드와 가사에 가장 잘 맞는 따뜻한 앨범 표지 이미지를 생성해 줘.\n\n[확정된 노래 정보]\n- 곡 제목: ${title}\n- 작사자: ${author} (${org})\n- 전할 대상: ${target}\n- 음악 스타일/주제: ${topic}\n\n[노래 가사]\n${l1}\n\n${l2}\n\n[수행 지침]\n1. 위 가사를 가장 돋보이게 부를 수 있는 추천 보컬 톤과 악기 구성을 2~3줄로 안내해 줘.\n2. [앨범 표지 이미지 생성]:\n   - 대상(${target})의 마음을 따뜻하게 안아주는 포근한 수채화·그림책 일러스트 스타일 (1:1 비율).\n   - 동료면 함께 웃는 모습, 가족이면 다정한 품, 나 자신이면 창가에서 차 한 잔을 마시며 미소 짓는 힐링 장면 연출.\n   - 글자나 텍스트는 그림 안에 넣지 말고 오직 따뜻하고 사랑스러운 그림만 정밀하게 그려줘.`;
+  }
+
+  function promptView(){
+    const ps = state.ps;
+    const tab = ps.tab || 'formula';
+
+    return `<section class="panel ps-wrap">
+      ${section('AI 프롬프트 디자인실', '6하 원칙 공식으로 만드는 만능 프롬프트와 빡친 번역기, 토닥토닥 마음챙김 도구', '실생활·직무 응용')}
+
+      <div class="ps-subtabs">
+        <button type="button" class="ps-tab ${tab==='formula'?'active':''}" data-pstab="formula">📐 6하 원칙 공식실</button>
+        <button type="button" class="ps-tab ${tab==='vent'?'active':''}" data-pstab="vent">🔥 빡친 번역기</button>
+        <button type="button" class="ps-tab ${tab==='heart'?'active':''}" data-pstab="heart">💌 토닥토닥, 마음챙김</button>
+        <button type="button" class="ps-tab ${tab==='song'?'active':''}" data-pstab="song">🎵 나만의 노래 만들기</button>
+      </div>
+
+      <div id="psContent">
+        ${tab==='formula'?renderFormula():(tab==='vent'?renderVent():(tab==='heart'?renderHeart():renderSong()))}
+      </div>
+    </section>`;
+  }
+
+  function renderFormula(){
+    const ps = state.ps;
+    const p = buildFormulaPrompt();
+
+    return `<div class="banner">누가·언제·어디서·왜·무엇을·어떻게! 6하 원칙을 톡톡 고르면 AI가 찰떡같이 알아듣는 만능 프롬프트가 완성됩니다.</div>
+    <div class="ps-wh-grid">
+      ${['who','when','why','what','how'].map(k=>{
+        const d = WH_DATA[k];
+        const cur = ps[k];
+        const curIn = ps[k+'In']||'';
+        return `<div class="ps-wh-card">
+          <div class="ps-wh-title">${d.name}</div>
+          <div class="ps-wh-chips">
+            ${d.opts.map(o=>`<button type="button" class="ps-wh-chip ${cur===o&&!curIn?'on':''}" data-whk="${k}" data-who="${E(o)}">${E(o)}</button>`).join('')}
+          </div>
+          <input type="text" class="ps-wh-in" data-whin="${k}" placeholder="${E(d.ph)}" value="${E(curIn)}">
+        </div>`;
+      }).join('')}
+    </div>
+
+    <label class="field" style="margin-top:14px">
+      <span>내 상황 추가 입력 (선택 사항)</span>
+      <textarea id="psExtra" placeholder="예) 마감은 내일 오후 2시까지이고, 50대 성인 학습자 눈높이에 맞춰야 합니다." style="min-height:75px">${E(ps.extra)}</textarea>
+    </label>
+
+    <div class="ps-res-box">
+      <div class="ps-res-head">
+        <span class="ps-res-title">✨ 실시간 자동 조립된 완성 프롬프트</span>
+        <button type="button" class="btn mini outline" id="psResetFormula" style="color:#fff;border-color:#5c7a6b">↺ 기본값으로 리셋</button>
+      </div>
+      <div class="ps-res-text" id="psFormulaText">${E(p)}</div>
+      <div class="ps-res-acts">
+        <button type="button" class="btn small" id="psCopyFormula">📋 완성 프롬프트 복사하기</button>
+        <button type="button" class="btn small light" id="psGptFormula">✨ ChatGPT에서 열기 ↗</button>
+        <button type="button" class="btn small light" id="psGeminiFormula">✨ 제미나이에서 열기 ↗</button>
+      </div>
+    </div>`;
+  }
+
+  function renderVent(){
+    const ps = state.ps;
+    return `<div class="banner">직장과 일상에서 욱하거나 속상한 일, 참지 말고 털어놓으세요! 내 편이 되어 같이 화내주고, 감정은 쏙 뺀 품격 있는 단호한 프로 비즈니스어로 순화해 드립니다.</div>
+    <div class="ps-vent-box">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px">
+        <label style="font-weight:800;color:#2b3a32;font-size:14px">무슨 일이 있었나요? (속마음 솔직히 털어놓기)</label>
+        <div style="display:flex;gap:5px;flex-wrap:wrap">
+          ${VENT_EX.map((ex,i)=>`<button type="button" class="btn mini outline" data-vex="${i}" style="font-size:11.5px;padding:3px 8px">${ex.title}</button>`).join('')}
+        </div>
+      </div>
+      <textarea id="psVIn" placeholder="예) 오후 5시 다 돼서 오늘까지 끝내라고 던져주면 나더러 야근하라는 소리냐고 진짜 장난하나" style="width:100%;min-height:90px;box-sizing:border-box;border:1px solid #dfccc7;border-radius:10px;padding:10px;font-size:13px">${E(ps.vIn)}</textarea>
+
+      <div class="two" style="margin-top:10px">
+        <label class="field">
+          <span>그래도 꼭 전해야 할 핵심 사실·요구 (한 줄)</span>
+          <input type="text" id="psVMust" placeholder="예) 오늘 중은 불가하고 내일 오전 11시까지 드리겠음" value="${E(ps.vMust)}">
+        </label>
+        <div class="two">
+          <label class="field">
+            <span>받는 사람</span>
+            <select id="psVWho">
+              ${['직장 상사·선배','직장 동료','거래처·외부 담당자','까다로운 고객','가족·지인'].map(w=>`<option ${w===ps.vWho?'selected':''}>${w}</option>`).join('')}
+            </select>
+          </label>
+          <label class="field">
+            <span>빡침 지수</span>
+            <select id="psVLv">
+              <option value="1" ${ps.vLv==='1'?'selected':''}>1단계: 살짝 서운함 😤</option>
+              <option value="2" ${ps.vLv==='2'?'selected':''}>2단계: 부글부글 화남 🔥</option>
+              <option value="3" ${ps.vLv==='3'?'selected':''}>3단계: 뚜껑 열림 💥</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div style="margin-top:14px">
+        <button type="button" class="btn" id="psRunVent" style="background:#c24b32;border-color:#c24b32">🔥 속 시원하게 번역하기</button>
+      </div>
+
+      ${ps.vRes ? `
+        <div class="ps-vent-res">
+          <span class="ps-vent-badge">① 유쾌한 내 편 공감</span>
+          <p style="font-size:14px;line-height:1.7;color:#8f2a17;margin:4px 0 12px;font-weight:700">"${E(ps.vRes.emp)}"</p>
+          <div style="background:#f4f7f5;padding:8px 12px;border-radius:8px;font-size:12px;color:#355c4a;margin-bottom:12px">
+            🌬 <b>숨 고르기:</b> 4초 들이쉬고, 4초 멈추고, 6초 내쉬기 (3회 반복)
+          </div>
+          <span class="ps-vent-badge" style="background:#eaf4ed;color:#2f5f4b">② 품격 있는 프로 비즈니스어 번역 문장</span>
+          <div style="background:#f9fbf9;border:1px solid #dce8e0;border-radius:10px;padding:14px;font-size:13.5px;line-height:1.75;color:#1c3d2f;white-space:pre-wrap;font-weight:600" id="psVRefinedText">${E(ps.vRes.refined)}</div>
+          <div class="row" style="margin-top:12px">
+            <button type="button" class="btn small" id="psCopyVent">📋 순화된 문장 복사</button>
+            <button type="button" class="btn small light" id="psGptVent">✨ ChatGPT에서 더 다듬기 ↗</button>
+            <button type="button" class="btn small light" id="psGeminiVent">✨ 제미나이에서 열기 ↗</button>
+          </div>
+        </div>
+      ` : ''}
+    </div>`;
+  }
+
+  function renderHeart(){
+    const ps = state.ps;
+    const moods = ['지쳤어요', '속상해요', '불안해요', '허무해요', '자책감이 들어요', '혼자 뒤처진 느낌', '그래도 힘내고 싶어요'];
+    return `<div class="banner">오늘 하루도 참 애쓰셨어요. 남을 챙기느라 정작 나를 돌보지 못한 나에게, 따뜻한 위로와 응원의 한마디를 선물하세요.</div>
+    <div class="ps-heart-box">
+      <label style="font-weight:800;color:#2b3a32;font-size:14px;display:block;margin-bottom:8px">지금 내 마음에 가장 가까운 단어는?</label>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+        ${moods.map(m=>`<button type="button" class="choice ${ps.hMood===m?'on':''}" data-hmood="${m}" style="padding:6px 14px;border-radius:20px;font-size:12.5px">${m}</button>`).join('')}
+      </div>
+
+      <label class="field" style="margin-top:8px">
+        <span>오늘 나에게 해주고 싶은 말이나 있었던 일 (선택 사항)</span>
+        <textarea id="psHIn" placeholder="예) 오늘 면접 보느라 하루 종일 긴장했어요. 작은 일에도 자꾸 불안해져요." style="min-height:75px">${E(ps.hIn)}</textarea>
+      </label>
+
+      <div style="margin-top:12px">
+        <button type="button" class="btn" id="psRunHeart" style="background:#2f5f4b">💌 나만을 위한 5줄 위로 받기</button>
+      </div>
+
+      ${ps.hRes ? `
+        <div class="ps-heart-card" id="psHeartCard">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;border-bottom:1px dashed #e2d7c5;padding-bottom:8px">
+            <span style="font-weight:800;font-size:15px;color:#2f5f4b">💌 토닥토닥, 마음챙김 5줄 (${E(ps.hMood)})</span>
+            <span style="font-size:11.5px;color:#7a6d59">나만을 위한 따뜻한 위로</span>
+          </div>
+          ${ps.hRes.map((line,idx)=>`<p class="ps-heart-line"><b>0${idx+1}.</b> ${E(line)}</p>`).join('')}
+          <div class="row" style="margin-top:16px">
+            <button type="button" class="btn small" id="psCopyHeart">📋 5줄 편지 복사</button>
+            <button type="button" class="btn small light" id="psImgHeart">🖼️ 예쁜 응원 엽서 이미지 저장 (.png)</button>
+            <button type="button" class="btn small outline" id="psAgainHeart">↺ 다른 위로 받기</button>
+          </div>
+        </div>
+      ` : ''}
+    </div>`;
+  }
+
+  function renderSong(){
+    const ps = state.ps;
+    const step = ps.sStep || 1;
+    const whoOpts = [
+      ['1', '1. 나 자신', '나를 믿고 응원하는 힐링송'],
+      ['2', '2. 소중한 가족', '부모님·배우자·자녀'],
+      ['3', '3. 직장 동료', '함께 땀 흘리는 동료'],
+      ['4', '4. 친구', '언제나 내 편인 친구'],
+      ['5', '5. 직장 상사·선배', '감사와 존경을 담아'],
+      ['6', '6. 직접 입력', '내가 전하고 싶은 대상']
+    ];
+    const topicOpts = [
+      ['1', '1. 다시 시작하는 나를 위한 응원가', '용기와 희망을 주는 경쾌한 멜로디'],
+      ['2', '2. 지친 하루를 달래는 퇴근길 발라드', '따뜻한 위로와 편안한 쉼'],
+      ['3', '3. 고마운 마음을 전하는 포크송', '감사와 사랑의 다정한 선율'],
+      ['4', '4. 스트레스 타파 경쾌한 댄스·팝', '신나게 털어내는 밝은 에너지'],
+      ['5', '5. 직접 입력', '원하는 분위기나 주제']
+    ];
+    const titles = ['오늘도 한 걸음 더', '수고했어, 나의 오늘', '고마워요, 함께여서', '다시 뛰는 내 심장', '빛나는 내일을 향해'];
+
+    const curL = SONG_LYRICS[ps.sTopic] || SONG_LYRICS['1'];
+    const l1 = ps.sLyrics1 || curL.p1;
+    const l2 = ps.sLyrics2 || curL.p2;
+
+    return `<div class="banner">질문을 톡톡 고르면 가사와 음악 스타일, 그리고 가사에 딱 맞는 따뜻한 앨범 표지 프롬프트가 한 번에 완성됩니다.</div>
+    <div class="ps-song-stepper">
+      <div class="ps-song-step ${step===1?'active':''}">1 작사자·센터</div>
+      <div class="ps-song-step ${step===2?'active':''}">2 전할 대상</div>
+      <div class="ps-song-step ${step===3?'active':''}">3 노래 주제</div>
+      <div class="ps-song-step ${step===4?'active':''}">4 노래 제목</div>
+      <div class="ps-song-step ${step===5?'active':''}">5 완성 (가사&복사)</div>
+    </div>
+
+    ${step===1 ? `
+      <div class="ps-wh-card">
+        <h4 style="margin:0 0 10px;color:#1c3d2f">STEP 1. 센터명과 작사자 이름을 확인해 주세요</h4>
+        <div class="two">
+          <label class="field"><span>센터명 / 소속</span><input type="text" id="psSOrg" value="${E(ps.sOrg)}"></label>
+          <label class="field"><span>작사자 이름</span><input type="text" id="psSAuthor" value="${E(ps.sAuthor)}"></label>
+        </div>
+        <button type="button" class="btn" onclick="state.ps.sStep=2;render()">다음: 전할 대상 고르기 ›</button>
+      </div>
+    ` : ''}
+
+    ${step===2 ? `
+      <div class="ps-wh-card">
+        <h4 style="margin:0 0 10px;color:#1c3d2f">STEP 2. 누구에게 전할 노래인가요?</h4>
+        <div class="ps-song-grid">
+          ${whoOpts.map(([v,t,sub])=>`<button type="button" class="ps-song-opt ${ps.sWho===v?'on':''}" data-swho="${v}"><b>${t}</b><small style="display:block;margin-top:4px;color:#5f7368">${sub}</small></button>`).join('')}
+        </div>
+        ${ps.sWho==='6' ? `<input type="text" class="ps-wh-in" id="psSWhoCustom" placeholder="전할 대상을 직접 적어주세요 (예: 함께 공부한 새일센터 동기들)" value="${E(ps.sWhoCustom)}" style="margin-top:8px">` : ''}
+        <div class="row" style="margin-top:14px">
+          <button type="button" class="btn outline" onclick="state.ps.sStep=1;render()">‹ 이전</button>
+          <button type="button" class="btn" onclick="state.ps.sStep=3;render()">다음: 노래 주제 고르기 ›</button>
+        </div>
+      </div>
+    ` : ''}
+
+    ${step===3 ? `
+      <div class="ps-wh-card">
+        <h4 style="margin:0 0 10px;color:#1c3d2f">STEP 3. 어떤 노래를 만들까요?</h4>
+        <div class="ps-song-grid">
+          ${topicOpts.map(([v,t,sub])=>`<button type="button" class="ps-song-opt ${ps.sTopic===v?'on':''}" data-stopic="${v}"><b>${t}</b><small style="display:block;margin-top:4px;color:#5f7368">${sub}</small></button>`).join('')}
+        </div>
+        ${ps.sTopic==='5' ? `<input type="text" class="ps-wh-in" id="psSTopicCustom" placeholder="원하는 노래 주제를 직접 적어주세요 (예: 첫 출근길의 두근거림)" value="${E(ps.sTopicCustom)}" style="margin-top:8px">` : ''}
+        <div class="row" style="margin-top:14px">
+          <button type="button" class="btn outline" onclick="state.ps.sStep=2;render()">‹ 이전</button>
+          <button type="button" class="btn" onclick="state.ps.sStep=4;render()">다음: 노래 제목 고르기 ›</button>
+        </div>
+      </div>
+    ` : ''}
+
+    ${step===4 ? `
+      <div class="ps-wh-card">
+        <h4 style="margin:0 0 10px;color:#1c3d2f">STEP 4. 노래 제목을 골라보세요</h4>
+        <div class="ps-song-grid">
+          ${titles.map(t=>`<button type="button" class="ps-song-opt ${ps.sTitle===t&&!ps.sTitleCustom?'on':''}" data-stitle="${E(t)}"><b>🎵 ${t}</b></button>`).join('')}
+        </div>
+        <label class="field" style="margin-top:10px">
+          <span>내가 짓고 싶은 제목 (직접 입력)</span>
+          <input type="text" id="psSTitleCustom" placeholder="제목을 직접 지어보세요" value="${E(ps.sTitleCustom)}">
+        </label>
+        <div class="row" style="margin-top:14px">
+          <button type="button" class="btn outline" onclick="state.ps.sStep=3;render()">‹ 이전</button>
+          <button type="button" class="btn" onclick="state.ps.sStep=5;render()">가사 확인 및 완성본 보기 ›</button>
+        </div>
+      </div>
+    ` : ''}
+
+    ${step===5 ? `
+      <div class="ps-wh-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+          <h4 style="margin:0;color:#1c3d2f">STEP 5. 가사 확인 및 최종 완성본</h4>
+          <button type="button" class="btn mini outline" id="psSongRefreshLyrics">↺ 다른 추천 가사로 바꾸기</button>
+        </div>
+        <p class="muted" style="margin-bottom:8px">아래 가사를 클릭해 마음에 들게 단어나 문장을 직접 고칠 수 있어요.</p>
+
+        <div class="ps-lyrics-board">
+          <div class="ps-lyrics-col">
+            <h5>📖 1절 & 후렴</h5>
+            <textarea class="ps-lyrics-text" id="psSLyrics1">${E(l1)}</textarea>
+          </div>
+          <div class="ps-lyrics-col">
+            <h5>📖 2절 & 후렴</h5>
+            <textarea class="ps-lyrics-text" id="psSLyrics2">${E(l2)}</textarea>
+          </div>
+        </div>
+
+        <div class="ps-res-box">
+          <div class="ps-res-head">
+            <span class="ps-res-title">✨ 완성된 노래 & 앨범 표지 프롬프트</span>
+          </div>
+          <div class="ps-res-text" id="psSongPromptText">${E(buildSongPrompt())}</div>
+          <div class="ps-res-acts">
+            <button type="button" class="btn small" id="psCopySong">📋 가사 포함 완성 프롬프트 복사하기</button>
+            <button type="button" class="btn small light" id="psGeminiSong">✨ 제미나이로 바로 열기 ↗</button>
+            <button type="button" class="btn small light" id="psSunoSong">🎵 Suno AI 바로가기 ↗</button>
+            <button type="button" class="btn small outline" onclick="state.ps.sStep=1;render()" style="color:#fff;border-color:#5c7a6b">↺ 처음부터 다시</button>
+          </div>
+        </div>
+      </div>
+    ` : ''}
+    </div>`;
+  }
+
+  function promptBind(){
+    document.querySelectorAll('[data-pstab]').forEach(b=>b.onclick=()=>{
+      state.ps.tab = b.dataset.pstab;
+      render();
+    });
+
+    const ps = state.ps;
+    const tab = ps.tab || 'formula';
+
+    if(tab === 'formula'){
+      document.querySelectorAll('[data-whk]').forEach(b=>b.onclick=()=>{
+        const k = b.dataset.whk, val = b.dataset.who;
+        ps[k] = val;
+        ps[k+'In'] = '';
+        render();
+      });
+      document.querySelectorAll('[data-whin]').forEach(inp=>inp.oninput=e=>{
+        const k = e.target.dataset.whin;
+        ps[k+'In'] = e.target.value;
+        const txt = $('#psFormulaText');
+        if(txt) txt.textContent = buildFormulaPrompt();
+      });
+      const extra = $('#psExtra');
+      if(extra) extra.oninput=e=>{
+        ps.extra = e.target.value;
+        const txt = $('#psFormulaText');
+        if(txt) txt.textContent = buildFormulaPrompt();
+      };
+      const rst = $('#psResetFormula');
+      if(rst) rst.onclick=()=>{
+        ps.who='친절한 베테랑 사무원'; ps.whoIn='';
+        ps.when='상사에게 긴급 메일 보낼 때'; ps.whenIn='';
+        ps.why='오해 없이 정중하게 거절하려고'; ps.whyIn='';
+        ps.what='정중한 거절 및 대안 제안 메일'; ps.whatIn='';
+        ps.how='번호 매겨 3가지로 깔끔하게'; ps.howIn='';
+        ps.extra='';
+        render();
+        showToast('6하 원칙 공식을 기본값으로 리셋했어요.');
+      };
+      const cp = $('#psCopyFormula');
+      if(cp) cp.onclick=()=>{
+        const p = buildFormulaPrompt();
+        navigator.clipboard.writeText(p).then(()=>showToast('프롬프트를 복사했어요! ChatGPT나 제미나이에 붙여넣어 보세요.'));
+      };
+      const gpt = $('#psGptFormula');
+      if(gpt) gpt.onclick=()=>{
+        const p = buildFormulaPrompt();
+        navigator.clipboard.writeText(p).then(()=>{
+          showToast('프롬프트를 복사했어요. ChatGPT 창에 붙여넣으세요.');
+          window.open('https://chatgpt.com/','_blank','noopener');
+        });
+      };
+      const gem = $('#psGeminiFormula');
+      if(gem) gem.onclick=()=>{
+        const p = buildFormulaPrompt();
+        navigator.clipboard.writeText(p).then(()=>{
+          showToast('프롬프트를 복사했어요. 제미나이 창에 붙여넣으세요.');
+          window.open('https://gemini.google.com/app','_blank','noopener');
+        });
+      };
+    } else if(tab === 'vent'){
+      document.querySelectorAll('[data-vex]').forEach(b=>b.onclick=()=>{
+        const ex = VENT_EX[Number(b.dataset.vex)];
+        if(ex){
+          ps.vIn = ex.story;
+          ps.vMust = ex.must;
+          render();
+        }
+      });
+      const vin = $('#psVIn');
+      if(vin) vin.oninput=e=>{ ps.vIn = e.target.value; };
+      const vmust = $('#psVMust');
+      if(vmust) vmust.oninput=e=>{ ps.vMust = e.target.value; };
+      const vwho = $('#psVWho');
+      if(vwho) vwho.onchange=e=>{ ps.vWho = e.target.value; };
+      const vlv = $('#psVLv');
+      if(vlv) vlv.onchange=e=>{ ps.vLv = e.target.value; };
+      const runV = $('#psRunVent');
+      if(runV) runV.onclick=()=>runVent();
+
+      const cpV = $('#psCopyVent');
+      if(cpV) cpV.onclick=()=>{
+        if(ps.vRes?.refined){
+          navigator.clipboard.writeText(ps.vRes.refined).then(()=>showToast('순화된 비즈니스 문장을 복사했어요!'));
+        }
+      };
+      const gptV = $('#psGptVent');
+      if(gptV) gptV.onclick=()=>{
+        const p = `너는 "빡침 번역기"야. 직장/사회생활에서 생긴 갈등 상황을 우아하고 단호한 프로페셔널 비즈니스어로 순화해 줘.\n\n[있었던 일]\n${ps.vIn||'(없음)'}\n\n[꼭 전할 핵심 사실]\n${ps.vMust||'(없음)'}\n\n[조건]\n- 받는 사람: ${ps.vWho}\n- 감정은 빼고 원칙과 사실, 다음 조치 위주로 단호하고 공손하게 작성해 줘.`;
+        navigator.clipboard.writeText(p).then(()=>{
+          showToast('번역 요청 프롬프트를 복사했어요. ChatGPT 창에 붙여넣으세요.');
+          window.open('https://chatgpt.com/','_blank','noopener');
+        });
+      };
+      const gemV = $('#psGeminiVent');
+      if(gemV) gemV.onclick=()=>{
+        const p = `너는 "빡침 번역기"야. 직장/사회생활에서 생긴 갈등 상황을 우아하고 단호한 프로페셔널 비즈니스어로 순화해 줘.\n\n[있었던 일]\n${ps.vIn||'(없음)'}\n\n[꼭 전할 핵심 사실]\n${ps.vMust||'(없음)'}\n\n[조건]\n- 받는 사람: ${ps.vWho}\n- 감정은 빼고 원칙과 사실, 다음 조치 위주로 단호하고 공손하게 작성해 줘.`;
+        navigator.clipboard.writeText(p).then(()=>{
+          showToast('번역 요청 프롬프트를 복사했어요. 제미나이 창에 붙여넣으세요.');
+          window.open('https://gemini.google.com/app','_blank','noopener');
+        });
+      };
+    } else if(tab === 'heart'){
+      document.querySelectorAll('[data-hmood]').forEach(b=>b.onclick=()=>{
+        ps.hMood = b.dataset.hmood;
+        render();
+      });
+      const hin = $('#psHIn');
+      if(hin) hin.oninput=e=>{ ps.hIn = e.target.value; };
+      const runH = $('#psRunHeart');
+      if(runH) runH.onclick=()=>runHeart();
+
+      const cpH = $('#psCopyHeart');
+      if(cpH) cpH.onclick=()=>{
+        if(ps.hRes){
+          navigator.clipboard.writeText(ps.hRes.join('\n')).then(()=>showToast('마음챙김 5줄 편지를 복사했어요!'));
+        }
+      };
+      const imgH = $('#psImgHeart');
+      if(imgH) imgH.onclick=()=>downloadHeartImg();
+      const agnH = $('#psAgainHeart');
+      if(agnH) agnH.onclick=()=>runHeart();
+    } else if(tab === 'song'){
+      const sorg = $('#psSOrg');
+      if(sorg) sorg.oninput=e=>{ ps.sOrg = e.target.value; };
+      const saut = $('#psSAuthor');
+      if(saut) saut.oninput=e=>{ ps.sAuthor = e.target.value; };
+
+      document.querySelectorAll('[data-swho]').forEach(b=>b.onclick=()=>{
+        ps.sWho = b.dataset.swho;
+        render();
+      });
+      const swc = $('#psSWhoCustom');
+      if(swc) swc.oninput=e=>{ ps.sWhoCustom = e.target.value; };
+
+      document.querySelectorAll('[data-stopic]').forEach(b=>b.onclick=()=>{
+        ps.sTopic = b.dataset.stopic;
+        ps.sLyrics1 = ''; ps.sLyrics2 = '';
+        render();
+      });
+      const stc = $('#psSTopicCustom');
+      if(stc) stc.oninput=e=>{ ps.sTopicCustom = e.target.value; };
+
+      document.querySelectorAll('[data-stitle]').forEach(b=>b.onclick=()=>{
+        ps.sTitle = b.dataset.stitle;
+        ps.sTitleCustom = '';
+        render();
+      });
+      const sttc = $('#psSTitleCustom');
+      if(sttc) sttc.oninput=e=>{
+        ps.sTitleCustom = e.target.value;
+      };
+
+      const l1 = $('#psSLyrics1');
+      if(l1) l1.oninput=e=>{
+        ps.sLyrics1 = e.target.value;
+        const txt = $('#psSongPromptText');
+        if(txt) txt.textContent = buildSongPrompt();
+      };
+      const l2 = $('#psSLyrics2');
+      if(l2) l2.oninput=e=>{
+        ps.sLyrics2 = e.target.value;
+        const txt = $('#psSongPromptText');
+        if(txt) txt.textContent = buildSongPrompt();
+      };
+
+      const refL = $('#psSongRefreshLyrics');
+      if(refL) refL.onclick=()=>{
+        const keys = ['1','2','3','4'];
+        const rk = keys[Math.floor(Math.random()*keys.length)];
+        ps.sLyrics1 = SONG_LYRICS[rk].p1;
+        ps.sLyrics2 = SONG_LYRICS[rk].p2;
+        render();
+        showToast('새로운 추천 가사로 교체했어요.');
+      };
+
+      const cpS = $('#psCopySong');
+      if(cpS) cpS.onclick=()=>{
+        const p = buildSongPrompt();
+        navigator.clipboard.writeText(p).then(()=>showToast('가사 포함 완성 프롬프트를 복사했어요! 제미나이나 Suno에 넣어보세요.'));
+      };
+      const gemS = $('#psGeminiSong');
+      if(gemS) gemS.onclick=()=>{
+        const p = buildSongPrompt();
+        navigator.clipboard.writeText(p).then(()=>{
+          showToast('완성 프롬프트를 복사했어요. 제미나이 창에 붙여넣으세요.');
+          window.open('https://gemini.google.com/app','_blank','noopener');
+        });
+      };
+      const sunoS = $('#psSunoSong');
+      if(sunoS) sunoS.onclick=()=>{
+        const p = buildSongPrompt();
+        navigator.clipboard.writeText(p).then(()=>{
+          showToast('완성 프롬프트를 복사했어요. Suno 창으로 이동합니다.');
+          window.open('https://suno.com/','_blank','noopener');
+        });
+      };
+    }
+  }
+
+  views.prompt = promptView;
+  init.prompt = promptBind;
+})();
 
 /* v13.2: 내 입력정보 지우기 잘 보이게 */
 (function(){const b=document.createElement('button');b.type='button';b.id='fxClear';b.innerHTML='🗑 내 입력정보 지우기';b.title='이 컴퓨터에 저장된 내 이름·연락처·사진·답변을 모두 지워요';b.onclick=()=>clearAll();document.body.appendChild(b)})();
