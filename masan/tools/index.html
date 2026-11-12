@@ -856,7 +856,7 @@ main.wrap{padding-top:10px}
     <p class="sub">오늘 있었던 일을 말이나 글로 털어놓으면, 바로 아래에 지금 내 마음에 맞는 위로가 떠요. 누구에게 보내는 글이 아니라 나를 위한 시간이에요.</p>
     <div class="mic-row"><button type="button" class="mic" data-for="h2-in"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>눌러서 말하기</span></button><span class="mic-st" id="st-h2-in"></span></div>
     <textarea class="f" id="h2-in" placeholder="오늘 있었던 일을 편하게 말하거나 적어 보세요."></textarea>
-    <p class="hk-m">말하기 어려우면 마음을 하나만 골라도 돼요</p>
+    <p class="hk-m">말하기 어려우면 마음을 골라도 돼요 (3개까지)</p>
     <div class="moods" id="h2-mood"></div>
     <p class="warn">다른 사람 이름이나 개인정보는 빼고 "오늘 내 마음" 위주로 적어 주세요.</p>
     <div class="five" id="h2-out" hidden></div>
@@ -4034,30 +4034,25 @@ function restFig(t){var f=RTYPE[t]||(/어깨/.test(t)?'shoulder':/물|차/.test(
  return '<svg class="rf" viewBox="0 0 64 64" aria-hidden="true">'+(X[f]||X.breath)+'</svg>';}
 /* --- 마음 쉼터: 내 마음 지킴이 + 나에게 보내는 엽서 --- */
 (function(){
-var C=[
- {k:['방문','위기','사례','무거','학대','가정폭력','사연','울었','눈물'],h:'남의 무게를 함께 들고 온 날',L:['다른 가족의 아픈 이야기를 품고 온 날은 마음도 같이 무거워져요.','그 무게를 느낀다는 건, 당신이 그만큼 진심으로 곁에 있었다는 뜻이에요.','오늘 당신 덕분에 누군가는 덜 외로웠어요.','그 무게를 혼자 다 지지 않아도 돼요. 동료와 조금씩 나눠요.']},
- {k:['보고서','서류','계획서','결과','정산','마감','실적','엑셀','공문','결재'],h:'서류에 파묻힌 날',L:['밀린 서류 앞에서 마음이 조급해지는 거, 정말 당연해요.','서류가 밀린 건 게을러서가 아니라 사람을 먼저 챙겼기 때문이에요.','오늘 한 줄이라도 썼다면, 그건 분명히 앞으로 간 거예요.','한 번에 다 하지 않아도 돼요. 제일 급한 것 하나만 골라요.']},
- {k:['민원','항의','소리','따지','불만','욕','화를 내','화냈','막말'],h:'날 선 말을 들은 날',L:['날 선 말을 듣고도 끝까지 친절했던 당신, 정말 애썼어요.','그 말은 당신이라는 사람에 대한 평가가 아니에요.','상처받은 마음을 꾹 누르지 말고, 오늘은 나부터 달래 줘요.','당신의 친절은 약함이 아니라 단단함이에요.']},
- {k:['동료','팀장','상사','선배','후배','눈치','갈등','센터장','뒷담'],h:'사람 사이에서 지친 날',L:['일보다 사람 사이가 더 힘든 날이 있어요.','관계가 어렵다고 해서 당신이 부족한 사람은 아니에요.','모두에게 좋은 사람이 되지 않아도 괜찮아요.','오늘은 내 편이 되어 주는 사람, 바로 나부터 해 봐요.']},
- {k:['행사','프로그램','축제','준비','주말','야근','체험','나들이','모집'],h:'행사 준비로 달린 날',L:['보이지 않는 곳에서 준비한 시간이 행사를 만들어요.','참여 가족의 웃음 뒤에는 늘 당신의 땀이 있어요.','완벽하지 않아도, 오늘 해낸 만큼으로 충분히 좋은 행사예요.','끝나고 나면 꼭, 수고한 나에게도 박수 한 번.']},
- {k:['잘하고','모르겠','부족','실수','자신','못하','틀렸','혼났','자책'],h:'나를 의심한 날',L:['잘하고 있는지 모르겠다는 마음은, 잘하고 싶은 마음에서 와요.','실수했다고 해서 당신의 노력까지 사라지지 않아요.','다른 사람과 비교하지 않아도 돼요. 당신은 당신의 속도로 충분해요.','지금도 충분히, 나답게 잘하고 있어요.']},
- {k:['통역','언어','다문화','말이 안','못 알아','번역','외국'],h:'말이 잘 통하지 않았던 날',L:['말이 잘 안 통해도 끝까지 마음을 전하려 한 당신, 대단해요.','천천히, 쉽게 말해 주는 것도 큰 돌봄이에요.','오늘 건넨 표정과 손짓은 말보다 더 많이 전해졌을 거예요.','완벽한 소통보다 진심이 먼저 닿아요.']},
- {k:['피곤','지쳐','지친','힘들','졸려','쉬고','아파','번아웃','지침'],h:'몸도 마음도 지친 날',L:['오늘 하루, 정말 많은 사람의 마음을 받아 주느라 지치셨죠.','지친 건 게을러서가 아니라 그만큼 애썼다는 증거예요.','오늘 못 한 일은 내일의 나에게 맡겨도 괜찮아요.','쉬는 것도 일의 일부예요. 오늘은 일찍 쉬어요.']}];
+var C=[{"k": ["초조", "조급", "기다리", "연락", "결과", "시간이"], "h": "마음이 초조한 날", "L": ["기다리는 시간은 늘 실제보다 길게 느껴져요.", "초조한 건 그만큼 잘되고 싶은 마음이 크다는 뜻이에요.", "지금 할 수 있는 작은 일 하나만 하고, 나머지는 잠시 내려놔요.", "결과와 상관없이, 오늘 버틴 나는 이미 잘하고 있어요."]}, {"k": ["불안", "걱정", "겁", "무서", "두려", "떨려"], "h": "걱정이 많은 날", "L": ["걱정이 많다는 건 그만큼 책임감 있게 살고 있다는 뜻이에요.", "아직 일어나지 않은 일까지 미리 다 짊어지지 않아도 돼요.", "지금 이 순간, 숨 한 번 크게 쉬는 것부터 해 봐요.", "생각보다 나는 훨씬 잘 헤쳐 나갈 수 있는 사람이에요."]}, {"k": ["할 일", "많아", "바빠", "정신없", "집안일", "밀린", "끝이 없"], "h": "할 일이 산더미인 날", "L": ["해도 해도 끝이 없는 날, 정말 고생 많았어요.", "다 못 했다고 해서 오늘이 실패한 건 아니에요.", "제일 급한 것 하나만 하고, 나머지는 내일의 나에게 맡겨요.", "혼자 다 하지 않아도 돼요. 도와 달라고 말해도 괜찮아요."]}, {"k": ["가족", "엄마", "아빠", "아이", "남편", "아내", "부모", "미안"], "h": "가족 생각에 마음이 쓰인 날", "L": ["가족에게 미안한 마음은 그만큼 사랑한다는 뜻이에요.", "완벽한 가족은 없어요. 서로 맞춰 가는 중일 뿐이에요.", "오늘 건넨 따뜻한 말 한마디면 충분해요.", "가족을 챙기는 나도, 나에게 챙김받을 자격이 있어요."]}, {"k": ["외로", "서운", "혼자", "친구", "동료", "사람", "관계", "눈치"], "h": "사람 사이에서 서운한 날", "L": ["사람에게 서운한 날은 마음이 유난히 시려요.", "서운함을 느낀다는 건 그 관계를 소중히 여긴다는 뜻이에요.", "모두에게 좋은 사람이 되지 않아도 괜찮아요.", "오늘은 내가 나의 가장 든든한 편이 되어 줘요."]}, {"k": ["혼란", "복잡", "모르겠", "갈팡질팡", "생각이 많"], "h": "마음이 복잡한 날", "L": ["생각이 엉킨 날은 마음도 무거워져요.", "지금 당장 답을 찾지 않아도 괜찮아요.", "머릿속 생각을 종이에 적어 보면 조금 가벼워져요.", "천천히 하나씩 풀면, 길은 분명히 보여요."]}, {"k": ["자신", "비교", "부족", "실수", "못하", "자책", "속상"], "h": "나를 의심한 날", "L": ["잘하고 있는지 모르겠다는 마음은, 잘하고 싶은 마음에서 와요.", "실수했다고 해서 나의 노력까지 사라지지 않아요.", "남과 비교하지 않아도 돼요. 나는 나의 속도로 충분해요.", "지금도 충분히, 나답게 잘하고 있어요."]}, {"k": ["피곤", "지쳐", "지친", "힘들", "무거", "허무", "우울", "아파", "쉬고"], "h": "몸도 마음도 지친 날", "L": ["오늘 하루, 정말 많이 애쓰느라 지치셨죠.", "지친 건 게을러서가 아니라 그만큼 열심히 살았다는 증거예요.", "오늘 못 한 일은 내일의 나에게 맡겨도 괜찮아요.", "쉬는 것도 다시 걷기 위한 준비예요. 오늘은 일찍 쉬어요."]}, {"k": ["막막", "답답", "앞날", "미래", "길이 안"], "h": "앞이 잘 안 보이는 날", "L": ["앞이 안 보일 때는 한 걸음 앞만 보면 돼요.", "막막하다는 건 새 길 앞에 서 있다는 뜻이기도 해요.", "오늘 할 수 있는 아주 작은 일 하나가 길을 열어요.", "늦은 출발은 없어요. 지금 이 자리가 나의 출발선이에요."]}, {"k": ["화", "억울", "짜증", "열받", "분해", "어이없"], "h": "화나고 억울한 날", "L": ["화가 나는 건 내가 소중히 여기는 것이 건드려졌기 때문이에요.", "억울한 마음, 꾹 참느라 정말 애썼어요.", "화는 참기보다 안전하게 흘려보내는 게 좋아요. 숨부터 크게 쉬어요.", "오늘의 화는 오늘까지만. 내일의 나는 더 가벼울 거예요."]}, {"k": ["설레", "해보고", "도전", "시작", "기대", "배우"], "h": "다시 해 보고 싶은 날", "L": ["다시 해 보고 싶다는 마음, 그게 가장 큰 용기예요.", "설렘은 내가 아직 꿈꾸고 있다는 증거예요.", "완벽하게 준비되지 않아도 시작할 수 있어요.", "될 때까지 해 보는 나, 정말 멋져요."]}];
 var G={h:'오늘 하루를 버틴 나에게',L:['오늘 하루, 말로 다 못 할 만큼 애쓰셨어요.','다시 시작하려는 마음은 보이지 않아도 분명히 쌓이고 있어요.','완벽하지 않아도, 오늘 해낸 일만으로 충분해요.','당신은 생각보다 훨씬 잘하고 있어요.']};
 var END=['나답게, 지금도 충분히 잘하고 있어요.','오늘의 나, 참 수고했어. 지금 그대로 충분해.','내일의 나에게: 한 번에 하나씩, 그거면 충분해.','내일의 나에게: 될 때까지 해 보자. 나는 나를 믿어.'];
 var REST=RESTX.map(function(r){return '쉼 하나: '+r[1];});
 var MOOD={'지쳤어요':7,'속상해요':6,'마음이 무거워요':7,'불안해요':1,'앞날이 막막해요':8,'자신감이 떨어졌어요':6,'억울해요':9,'허무해요':7,'외로워요':4,'자꾸 비교돼요':6,'화가 나요':9,'서운해요':4,'초조해요':0,'우울해요':7,'답답해요':8,'겁이 나요':1,'가족에게 미안해요':3,'혼란스러워요':5,'설레요':10,'그래도 해 보고 싶어요':10};
-var mood='',seen={};
+var moods=[],seen={};
 function rnd(a,k){var c=a.filter(function(x){return x!==seen[k];});var r=c[Math.floor(Math.random()*c.length)]||a[0];seen[k]=r;return r;}
 function match(t){var best=-1,sc=0;C.forEach(function(c,i){var n=c.k.filter(function(w){return t.indexOf(w)>-1;}).length;if(n>sc){sc=n;best=i;}});return best;}
 var out=$('#h2-out'),inp=$('#h2-in');
-function show(){var t=inp.value.trim(),i=t?match(t):-1;if(i<0&&mood)i=MOOD[mood];if(!t&&!mood){out.hidden=true;return;}
-  var c=i>=0?C[i]:G,two=[c.L[0]].concat([rnd(c.L.slice(1),'m')]);var L=two.concat([rnd(c.L.slice(1).filter(function(x){return x!==two[1];}),'n'),rnd(END,'e'),rnd(REST,'r')]);
-  out.innerHTML='<h4>내 마음 지킴이 · '+esc(c.h)+'</h4>'+L.map(function(x,j){return j===4?'<div class="rest-row" id="h2-rest">'+restFig(x)+'<p class="rest">'+esc(x)+'</p><button type="button" class="btn mini rest-next" id="h2-rnext">다른 쉼 해 보기 ›</button></div>':'<p>'+esc(x)+'</p>';}).join('')+'<div class="va"><button type="button" class="btn mini" id="h2-again">다른 말 듣기</button><button type="button" class="btn mini" id="h2-copy">복사</button></div>';out.hidden=false;
-  $('#h2-again').onclick=show;$('#h2-rnext').onclick=function(){var r=rnd(REST,'r');L[4]=r;var row=$('#h2-rest');row.querySelector('svg').outerHTML=restFig(r);row.querySelector('p').textContent=r;};$('#h2-copy').onclick=function(){copy(L.join('\n'),'위로 글을 복사했어요.');};}
+function show(){var t=inp.value.trim(),i=t?match(t):-1;if(!t&&!moods.length){out.hidden=true;return;}
+  var cs=[];if(i>=0)cs.push(C[i]);moods.forEach(function(m){var c=C[MOOD[m]];if(c&&cs.indexOf(c)<0)cs.push(c)});cs=cs.slice(0,3);var L,c;
+  if(cs.length>1){c={h:cs.map(function(x){return x.h}).join(' · ')};L=cs.map(function(x,n){return n===0?x.L[0]:rnd(x.L.slice(1),'m'+n)}).concat([rnd(END,'e'),rnd(REST,'r')]);}
+  else{c=cs[0]||G;var two=[c.L[0]].concat([rnd(c.L.slice(1),'m')]);L=two.concat([rnd(c.L.slice(1).filter(function(x){return x!==two[1];}),'n'),rnd(END,'e'),rnd(REST,'r')]);}
+  var RI=L.length-1;
+  out.innerHTML='<h4>내 마음 지킴이 · '+esc(c.h)+'</h4>'+L.map(function(x,j){return j===RI?'<div class="rest-row" id="h2-rest">'+restFig(x)+'<p class="rest">'+esc(x)+'</p><button type="button" class="btn mini rest-next" id="h2-rnext">다른 쉼 해 보기 ›</button></div>':'<p>'+esc(x)+'</p>';}).join('')+'<div class="va"><button type="button" class="btn mini" id="h2-again">다른 말 듣기</button><button type="button" class="btn mini" id="h2-copy">복사</button></div>';out.hidden=false;
+  $('#h2-again').onclick=show;$('#h2-rnext').onclick=function(){var r=rnd(REST,'r');L[RI]=r;var row=$('#h2-rest');row.querySelector('svg').outerHTML=restFig(r);row.querySelector('p').textContent=r;};$('#h2-copy').onclick=function(){copy(L.join('\n'),'위로 글을 복사했어요.');};}
 var tm;inp.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(show,500);});
-var mb=$('#h2-mood');Object.keys(MOOD).forEach(function(m){var b=el('button',null,esc(m));b.type='button';b.onclick=function(){mood=(mood===m?'':m);mb.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x.textContent===mood);});show();};mb.appendChild(b);});
-function postP(){return postP2(inp.value.trim()||(mood?'오늘 내 마음: '+mood:''));}
+var mb=$('#h2-mood');Object.keys(MOOD).forEach(function(m){var b=el('button',null,esc(m));b.type='button';b.onclick=function(){var ix=moods.indexOf(m);if(ix>-1)moods.splice(ix,1);else{if(moods.length>=3)moods.shift();moods.push(m);}mb.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',moods.indexOf(x.textContent)>-1);});show();};mb.appendChild(b);});
+function postP(){return postP2(inp.value.trim()||(moods.length?'오늘 내 마음: '+moods.join(', '):''));}
 $('#h2-gpt').onclick=function(){var p=postP();if(p){copy(p,'프롬프트를 넣었어요. ChatGPT 입력창 맨 위에 이름과 날짜만 적고 보내세요.');openGPT(p);}};
 $('#h2-cp').onclick=function(){var p=postP();if(p)copy(p);};
 bindMics($('#h2-tool'));
