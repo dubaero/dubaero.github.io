@@ -855,7 +855,7 @@ main.wrap{padding-top:10px}
     <div class="post">
       <div><b>나를 응원하는 엽서</b><span>요즘 힘든 마음만 고르세요. 평소 쓰던 ChatGPT나 제미나이가 그동안 나눈 대화를 바탕으로, 나만 아는 이야기를 담아 인정·위로·응원의 선물 엽서를 만들어 줘요.</span></div>
       <div class="pc" id="pc">
-        <div class="pc-g"><b>① 요즘 나를 힘들게 하는 것 <small>여러 개 골라도 돼요</small></b><div id="pc-hard"></div><input class="f1" id="pc-hard-in" placeholder="직접 쓰기 (예: 연말 정산 서류가 산더미예요)"></div>
+        <div class="pc-g"><b>① 요즘 나를 힘들게 하는 것 <small>여러 개 골라도 돼요</small></b><div id="pc-hard"></div><input class="f1" id="pc-hard-in" placeholder="직접 쓰기 (예: 요즘 이유 없이 자꾸 지쳐요)"></div>
         <div class="pc-g"><b>② 그림 느낌 <small>제목·배경·손편지는 AI가 나를 기억해서 만들어요</small></b><div class="pc-o" id="pc-style"></div></div>
         <div class="pc-g pc-row"><label>엽서에 부를 내 이름·애칭<input class="f1" id="pc-to" placeholder="예: 이서정 → 서정아 (ChatGPT에서 적어도 돼요)"></label><label>우표 소인에 찍을 날짜<input class="f1" id="pc-date" placeholder="예: 2026.11.19 (ChatGPT에서 적어도 돼요)"></label></div>
       </div>
@@ -3506,7 +3506,7 @@ var _dwInstr1109b=dwInstr;
 dwInstr=function(d){var h=_dwInstr1109b(d);if(!d.fullT&&!d.full)return h;return dwFullHtml(DWTXT.ins,d.fullT?DW_NOTE.one:DW_NOTE.full);};
 
 /* ===== 2026.11.09 수정 13: 나에게 보내는 엽서 — 문구 고르기·디자인 고르기·앞뒷면 선물 엽서 ===== */
-var PC_HG=[["구직·취업",["서류에서 자꾸 떨어져요","면접이 두렵고 떨려요","연락 오는 곳이 없어요","나이가 걸림돌 같아요","경력 공백이 신경 쓰여요","어떤 일을 해야 할지 모르겠어요","자격증·공부가 버거워요","컴퓨터·AI가 어렵게 느껴져요","원하는 조건의 일자리가 없어요","첫 출근이 걱정돼요"]],["다시 시작",["오랜만에 사회로 나가려니 떨려요","예전 경력이 쓸모없게 느껴져요","배우는 속도가 느린 것 같아요","가족에게 미안한 마음이 커요","짧은 시간이라도 일하고 싶어요","내가 잘하는 게 뭔지 모르겠어요"]],["사람·관계",["마음을 털어놓을 사람이 없어요","거절을 못 해서 힘들어요","오해를 받아 속상해요","친구들과 멀어진 것 같아요","남의 눈치를 너무 봐요","새로운 사람 만나기가 어려워요"]],["가정·자녀",["아이와 대화가 잘 안 돼요","일과 육아를 같이 하기 벅차요","아이에게 화내고 후회해요","아이 공부·진로가 걱정돼요","좋은 부모인지 자신이 없어요","집안일이 끝이 없어요"]],["부부·가족",["배우자와 마음이 엇갈려요","집안일·육아 분담으로 다퉈요","부모님 돌봄이 걱정돼요","가족이 내 마음을 몰라줘요"]],["나 자신·마음",["잘하고 있는지 모르겠어요","자꾸 남과 비교하게 돼요","나를 위한 시간이 없어요","자신감이 떨어졌어요","괜히 눈물이 나요","새로 시작할 용기가 안 나요","하고 싶은 게 뭔지 모르겠어요"]],["몸·쉼",["몸이 많이 지쳤어요","잠을 잘 못 자요","제대로 쉬지 못했어요","늘 피곤하고 몸이 무거워요"]],["돈·생활",["생활비가 빠듯해요","아이 교육비가 부담돼요","집 문제(이사·전세)가 걱정돼요","노후 준비가 걱정돼요","나를 위해 쓰는 돈이 아까워요"]]];
+var PC_HG=[["이유 없이 지칠 때", ["이유 없이 지치고 힘들어요", "아무것도 하기 싫어요", "괜히 눈물이 나요", "마음이 텅 빈 것 같아요", "하루가 너무 길게 느껴져요", "나만 제자리인 것 같아요"]], ["동료·사람 관계", ["동료와 사이가 껄끄러워요", "말 한마디에 상처받았어요", "거절을 못 해서 힘들어요", "오해를 받아 속상해요", "남의 눈치를 너무 봐요", "마음을 털어놓을 사람이 없어요"]], ["가족 갈등", ["가족이 내 마음을 몰라줘요", "부모님과 자꾸 부딪혀요", "형제자매와 서운한 일이 있어요", "명절·집안 행사가 부담돼요", "부모님 돌봄이 걱정돼요"]], ["자녀와 갈등", ["아이와 대화가 잘 안 돼요", "아이에게 화내고 후회해요", "사춘기 아이와 자꾸 부딪혀요", "아이 공부·진로가 걱정돼요", "좋은 부모인지 자신이 없어요"]], ["부부", ["배우자와 마음이 엇갈려요", "집안일·육아 분담으로 다퉈요", "대화가 점점 줄었어요", "서운한 말이 마음에 남아요"]], ["나 자신·마음", ["잘하고 있는지 모르겠어요", "자꾸 남과 비교하게 돼요", "나를 위한 시간이 없어요", "자신감이 떨어졌어요", "하고 싶은 게 뭔지 모르겠어요"]], ["몸·쉼", ["몸이 많이 지쳤어요", "잠을 잘 못 자요", "제대로 쉬지 못했어요", "늘 피곤하고 몸이 무거워요"]], ["돈·생활", ["생활비가 빠듯해요", "집안일이 끝이 없어요", "해야 할 일이 너무 많아요", "혼자 다 챙기느라 벅차요"]]];
 var PC_HARD=[];PC_HG.forEach(function(g){g[1].forEach(function(x){PC_HARD.push(x);});});
 var PC_STYLE=[['AI 추천','나를 아는 AI가 내 이야기에 가장 어울리는 그림 느낌으로'],['햇살 수채화 풍경','따뜻한 햇살, 꽃과 나무, 멀리 이어진 산책길이 있는 수채화 풍경'],['꽃잎 압화 빈티지','말린 꽃잎과 잎사귀를 눌러 붙인 듯한 빈티지 종이 엽서'],['동화 일러스트','작은 집과 귀여운 동물 친구들이 있는 아기자기한 동화책 그림'],['밤하늘 별빛','은은한 달빛과 반짝이는 별, 따뜻한 불빛이 켜진 작은 마을'],['창가의 따뜻한 차','창가에 놓인 따뜻한 차 한 잔과 책, 포근한 담요'],['바닷가 노을','잔잔한 바다와 분홍빛 노을, 모래 위 조개껍데기'],['계절 숲길 산책','계절 색이 가득한 숲길과 햇살이 비치는 오솔길']];
 var PCS={hard:{},style:0};
@@ -4091,5 +4091,121 @@ window.addEventListener('hashchange',function(){var k=location.hash.slice(1);if(
 #h2-tool .hk{display:none}
 </style>
 <script>(function(){var t=document.getElementById('h2-tool');if(!t)return;t.querySelector('.htabs').addEventListener('click',function(e){var b=e.target.closest('[data-ht]');if(!b)return;t.classList.toggle('tab-a',b.dataset.ht==='a');t.classList.toggle('tab-b',b.dataset.ht==='b');t.querySelectorAll('.htabs button').forEach(function(x){x.classList.toggle('on',x===b)});window.scrollTo(0,0)});})();</script>
+<style id="dbr-masan2">
+/* 포인트 색 2가지(민트·노랑) + 중요한 것만 주황 바탕 */
+.vbar .tag{background:#fff8e6!important;border-color:#ecd99a!important;color:#7a5a12!important}
+.vemp{background:#fffaf0!important;border-color:#ecd99a!important}
+.vemp h4{color:#2f6b56!important}
+.vemp b{background:#fff1c9!important;color:#7a5200!important}
+#v2-again,.va .btn.mini{background:#fff8e6!important;border-color:#ecd99a!important;color:#6b5000!important}
+.aptabs{background:#eef6f1!important;border-color:#d5e7dc!important}
+.aptabs .ap-h{color:#2f6b56!important}
+.aptabs button{color:#2f6b56!important;border-color:#cfe3d7!important;background:#fff!important}
+.aptabs button.on{background:#2f6b56!important;color:#fff!important;border-color:#2f6b56!important}
+.vmsg .sp-h b,.vmsg h4 span,#v2-ap-name{color:#2f6b56!important}
+#h2-tool #pc .pc-o button,#h2-tool #pc #pc-style button{background:#fff8e6!important;border-color:#ecd99a!important;color:#6b5000!important}
+#h2-tool #pc .pc-o button.on,#h2-tool #pc #pc-style button.on{background:#c96a2b!important;border-color:#c96a2b!important;color:#fff!important}
+#pc-hard button:not([class*="pt"]){background:#fff8e6!important;border-color:#ecd99a!important;color:#5a4400!important}
+#pc-hard button.on:not([class*="pt"]){background:#c96a2b!important;border-color:#c96a2b!important;color:#fff!important}
+#h2-mood button.on{background:#c96a2b!important;border-color:#c96a2b!important;color:#fff!important}
+.five{background:#eef6f1!important}
+.wrap{max-width:none!important;padding-left:10px!important;padding-right:10px!important}
+</style>
+<!--FIT-->
+<style id="dbr-fit">
+@media (min-width:900px){
+ body.fitmode footer,body.fitmode .footer{display:none!important}
+ body.fitmode .vbar{margin:0 0 6px!important;min-height:0}
+ body.fitmode .vbar h2{font-size:20px}
+ body.fitmode main,body.fitmode .wrap{padding-bottom:0!important}
+ .fitbox{display:flex!important;flex-direction:column;overflow:hidden;padding-top:10px!important;padding-bottom:10px!important;margin:0!important}
+ .fitbox>p.sub{display:none!important}
+ .fitbox .fitgrid,.fitbox>.sgrid{flex:1;min-height:0;display:grid!important;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+ .fitbox .fitgrid>*,.fitbox>.sgrid>*{min-height:0;overflow:auto;scrollbar-width:thin}
+ /* 빡침 번역기 */
+ #v2-tool .row,#v2-tool .formula{display:none!important}
+ #v2-tool label.l{margin:6px 0 4px!important;font-size:13px}
+ #v2-tool .vsg{margin-bottom:2px}
+ #v2-tool textarea.f{min-height:64px!important;height:64px}
+ #v2-tool .sright{display:grid!important;grid-template-columns:1.25fr 1fr;gap:8px;align-content:start}
+ #v2-tool .sright>.flav,#v2-tool .sright>.aptabs,#v2-tool .sright>.vmsg{grid-column:1/-1}
+ #v2-tool .sright>*{margin:0!important}
+ #v2-tool .vemp{padding:10px 12px!important}
+ #v2-tool .breath{padding:10px!important;flex-direction:column;align-items:flex-start;gap:6px}
+ #v2-tool .breath .bx-ch{width:auto!important;height:auto!important}
+ #v2-tool .aptabs{padding:8px 10px!important}
+ #v2-tool .aptabs button{font-size:12px!important;padding:4px 9px!important;margin:2px!important}
+ #v2-tool .vmsg{padding:8px 12px!important}
+ #v2-tool .vmsg pre{font-size:13px!important;line-height:1.55!important;margin:4px 0 0!important}
+ /* 마음 쉼터 */
+ #h2-tool .hk-s,#h2-tool>.sub{display:none!important}
+ #h2-tool .htabs{margin-bottom:8px!important}
+ #h2-tool .hcols{flex:1;min-height:0;display:grid;grid-template-columns:1.1fr 1fr;gap:14px}
+ #h2-tool .hcols>*{min-height:0;overflow:auto}
+ #h2-tool.tab-b .hcols{display:none!important}
+ #h2-tool textarea.f{height:96px;min-height:96px}
+ #h2-tool .hph{border:1.5px dashed var(--line);border-radius:14px;padding:18px;color:#7a8c84;font-size:14px;line-height:1.6;text-align:center}
+ #h2-tool .five{margin-top:0!important}
+ #h2-tool.tab-b .post{flex:1;min-height:0;overflow:auto}
+ #h2-tool .help{margin-top:8px!important;padding:8px 12px!important;font-size:12.5px}
+ #h2-tool .post .s5{font-size:12px;margin:4px 0 0}
+ /* 노래 만들기 */
+ #v-song .tool.song .sw-desc,#v-song .tool.song .sw-title{display:none!important}
+ #v-song .sw-card{margin:0!important;padding:12px 14px!important}
+ #v-song .sw-top-bar{margin-bottom:8px!important}
+ #v-song .sw-grid{gap:8px!important}
+ #v-song .sw-opt{padding:8px 10px!important}
+ #v-song .sw-opt small{font-size:11px}
+ #v-song .sw-lyrics-board{max-height:none}
+ #v-song #sw-chips,#v-song .sw-lyrics-card>div:last-child:not(.sw-lyrics-board){display:none!important}
+ #v-song .sw-q{margin-bottom:6px!important}
+ #v-song #sw-grid-title,#v-song #sw-grid-who{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+ #v-song #sw-grid-title .sw-opt small{display:none}
+ #v-song .sw-opt .sw-num{display:none}
+ #v-song .sw-custom-row{margin-top:6px!important}
+ #v-song .sw-nav-acts{margin-top:6px!important}
+ #v-song .sw-lyrics-card{padding:8px 12px!important}
+ #v-song .sw-lyrics-head{padding-bottom:6px!important;margin-bottom:6px!important}
+ #v-song .sw-lyrics-board{padding:8px 10px!important;font-size:13px;line-height:1.55}
+ #v-song #sw-p5 .btn.large{padding:9px 14px!important;font-size:14px!important}
+ #v-song .songmini{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--soft,#eef6f1);font-size:13px;line-height:1.7}
+ #v-song .songmini b{color:var(--ink)}
+ #v-song .songmini ol{margin:2px 0 0;padding-left:18px}
+ #v-song .fitgrid>.sright{display:flex;flex-direction:column}
+ #v-song .fitgrid>.sright pre{flex:1;min-height:0;overflow:auto;margin:6px 0 0!important;max-height:none!important}
+}
+</style>
+<script>
+(function(){
+ function $q(s,r){return (r||document).querySelector(s)}
+ if(window.innerWidth<900)return;
+ /* 노래: 왼쪽 위저드 + 짧은 따라 하기 / 오른쪽 프롬프트 */
+ (function(){var t=$q('#v-song .tool.song');if(!t||t.querySelector('.fitgrid'))return;
+  var card=t.querySelector('.sw-card'),sg=t.querySelector('.sgrid'),right=sg&&sg.querySelector('.sright');if(!card||!right)return;
+  var g=document.createElement('div');g.className='fitgrid';var L=document.createElement('div');
+  L.appendChild(card);var m=document.createElement('div');m.className='songmini';
+  m.innerHTML='<b>따라 하기</b><ol><li>번호를 눌러 대상·제목 고르고 가사 확인</li><li><b>제미나이로 열기</b> → 입력창 [+] → 음악 만들기에 붙여 넣기</li><li>장르는 제미나이에서 바로 고르기 (어려우면 "맞춤")</li></ol>';
+  L.appendChild(m);g.appendChild(L);g.appendChild(right);sg.parentNode.insertBefore(g,sg);sg.remove();t.classList.add('fitbox-song');})();
+ /* 마음 지킴이: 왼쪽 입력 / 오른쪽 위로 */
+ (function(){var t=$q('#h2-tool');if(!t||t.querySelector('.hcols'))return;
+  var cols=document.createElement('div');cols.className='hcols';var L=document.createElement('div'),R=document.createElement('div');
+  ['.mic-row','#h2-in','.hk-m','#h2-mood','.warn'].forEach(function(s){var e=t.querySelector(':scope>'+s);if(e)L.appendChild(e)});
+  var ph=document.createElement('div');ph.className='hph';ph.innerHTML='왼쪽에 오늘 있었던 일을 적거나<br>마음을 하나 고르면<br>여기에 나를 위한 위로가 떠요.';
+  var out=t.querySelector('#h2-out');R.appendChild(ph);if(out)R.appendChild(out);var help=t.querySelector(':scope>.help');if(help)R.appendChild(help);
+  cols.appendChild(L);cols.appendChild(R);var post=t.querySelector(':scope>.post');t.insertBefore(cols,post);
+  if(out){new MutationObserver(function(){ph.style.display=out.hidden?'':'none'}).observe(out,{attributes:true});ph.style.display=out.hidden?'':'none'}})();
+ var IDS={vent:'#v2-tool',heart:'#h2-tool',song:'#v-song .tool.song'};
+ function fit(){var on=null;Object.keys(IDS).forEach(function(k){var v=document.getElementById('v-'+k);if(v&&!v.hidden)on=k});
+  document.body.classList.toggle('fitmode',!!on);
+  Object.keys(IDS).forEach(function(k){var e=$q(IDS[k]);if(e){e.classList.remove('fitbox');e.style.height=''}});
+  if(!on||window.innerWidth<900)return;var e=$q(IDS[on]);if(!e)return;e.classList.add('fitbox');
+  var r=e.getBoundingClientRect(),sc=r.height/e.offsetHeight||1;var h=(window.innerHeight-r.top-8)/sc;e.style.height=Math.max(380,h)+'px';window.scrollTo(0,0)}
+ window.dbrFit=fit;
+ document.addEventListener('click',function(){setTimeout(fit,30)});window.addEventListener('resize',fit);window.addEventListener('hashchange',function(){setTimeout(fit,60)});
+ ['heart','vent','song'].forEach(function(k){var v=document.getElementById('v-'+k);if(v)new MutationObserver(function(){setTimeout(fit,20)}).observe(v,{attributes:true,attributeFilter:['hidden']})});
+ setTimeout(fit,80);setTimeout(fit,400);
+})();
+</script>
+<!--/FIT-->
 </body>
 </html>

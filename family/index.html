@@ -819,7 +819,7 @@ body{line-height:1.55}
 
 <!-- ===== 마음 쉼터 ===== -->
 <div id="v-heart" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음 쉼터</h2><span class="tag">내 마음 지킴이 · 나에게 보내는 엽서</span></div>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음 쉼터</h2><span class="tag">내 마음 지킴이 · 나를 응원하는 엽서</span></div>
   <div class="old-tool" style="display:none" aria-hidden="true">
   <div class="tool heart">
     <p class="sub">오늘 힘들었던 일을 말이나 글로 털어놓아 보세요. 나만을 위한 마음챙김 5줄로 위로해 드려요. 누구에게 보내는 글이 아니라 나를 위한 시간이에요.</p>
@@ -835,7 +835,8 @@ body{line-height:1.55}
     <div class="help"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가거나 위험한 생각이 들면 사람에게 꼭 말해 주세요. 자살예방 상담전화 <a href="tel:109">109</a> · 정신건강 위기상담 <a href="tel:15770199">1577-0199</a></div>
   </div>
   </div>
-  <div class="tool heart" id="h2-tool">
+  <div class="tool heart tab-a" id="h2-tool">
+    <div class="htabs" role="tablist"><button type="button" class="on" data-ht="a" role="tab">내 마음 지킴이</button><button type="button" data-ht="b" role="tab">나를 응원하는 엽서</button></div>
     <h3 class="hk">내 마음 지킴이</h3>
     <p class="hk-s">나답게, 지금도 충분히</p>
     <p class="sub">오늘 있었던 일을 말이나 글로 털어놓으면, 바로 아래에 지금 내 마음에 맞는 위로가 떠요. 누구에게 보내는 글이 아니라 나를 위한 시간이에요.</p>
@@ -846,7 +847,7 @@ body{line-height:1.55}
     <p class="warn">내담자 이름이나 사연은 빼고 "오늘 내 마음" 위주로 적어 주세요.</p>
     <div class="five" id="h2-out" hidden></div>
     <div class="post">
-      <div><b>나에게 보내는 엽서</b><span>요즘 힘든 마음만 고르세요. 평소 쓰던 ChatGPT나 제미나이가 그동안 나눈 대화를 바탕으로, 나만 아는 이야기를 담아 인정·위로·응원의 선물 엽서를 만들어 줘요.</span></div>
+      <div><b>나를 응원하는 엽서</b><span>요즘 힘든 마음만 고르세요. 평소 쓰던 ChatGPT나 제미나이가 그동안 나눈 대화를 바탕으로, 나만 아는 이야기를 담아 인정·위로·응원의 선물 엽서를 만들어 줘요.</span></div>
       <div class="pc" id="pc">
         <div class="pc-g"><b>① 요즘 나를 힘들게 하는 것 <small>여러 개 골라도 돼요</small></b><div id="pc-hard"></div><input class="f1" id="pc-hard-in" placeholder="직접 쓰기 (예: 연말 정산 서류가 산더미예요)"></div>
         <div class="pc-g"><b>② 그림 느낌 <small>제목·배경·손편지는 AI가 나를 기억해서 만들어요</small></b><div class="pc-o" id="pc-style"></div></div>
@@ -4097,5 +4098,111 @@ $('#bx-go').onclick=function(){stop();var my=run,b=BR[cur],i=0,k=0,e=$('#bx-e'),
 set(0);
 })();
 </script>
+<style id="dbr-htabs">
+#h2-tool .htabs{display:flex;gap:6px;margin:0 0 12px;border-bottom:2px solid var(--line)}
+#h2-tool .htabs button{flex:1;border:0;background:transparent;padding:10px 8px 9px;font:inherit;font-weight:800;font-size:15px;color:#7a8c84;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+#h2-tool .htabs button.on{color:var(--blue);border-bottom-color:var(--point)}
+#h2-tool.tab-a .post{display:none!important}
+#h2-tool.tab-b>:not(.htabs):not(.post){display:none!important}
+#h2-tool.tab-b .post{margin-top:0;border-top:0;padding-top:0}
+#h2-tool .hk{display:none}
+</style>
+<script>(function(){var t=document.getElementById('h2-tool');if(!t)return;t.querySelector('.htabs').addEventListener('click',function(e){var b=e.target.closest('[data-ht]');if(!b)return;t.classList.toggle('tab-a',b.dataset.ht==='a');t.classList.toggle('tab-b',b.dataset.ht==='b');t.querySelectorAll('.htabs button').forEach(function(x){x.classList.toggle('on',x===b)});window.scrollTo(0,0)});})();</script>
+<!--FIT-->
+<style id="dbr-fit">
+@media (min-width:900px){
+ body.fitmode footer,body.fitmode .footer{display:none!important}
+ body.fitmode .vbar{margin:0 0 6px!important;min-height:0}
+ body.fitmode .vbar h2{font-size:20px}
+ body.fitmode main,body.fitmode .wrap{padding-bottom:0!important}
+ .fitbox{display:flex!important;flex-direction:column;overflow:hidden;padding-top:10px!important;padding-bottom:10px!important;margin:0!important}
+ .fitbox>p.sub{display:none!important}
+ .fitbox .fitgrid,.fitbox>.sgrid{flex:1;min-height:0;display:grid!important;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+ .fitbox .fitgrid>*,.fitbox>.sgrid>*{min-height:0;overflow:auto;scrollbar-width:thin}
+ /* 빡침 번역기 */
+ #v2-tool .row,#v2-tool .formula{display:none!important}
+ #v2-tool label.l{margin:6px 0 4px!important;font-size:13px}
+ #v2-tool .vsg{margin-bottom:2px}
+ #v2-tool textarea.f{min-height:64px!important;height:64px}
+ #v2-tool .sright{display:grid!important;grid-template-columns:1.25fr 1fr;gap:8px;align-content:start}
+ #v2-tool .sright>.flav,#v2-tool .sright>.aptabs,#v2-tool .sright>.vmsg{grid-column:1/-1}
+ #v2-tool .sright>*{margin:0!important}
+ #v2-tool .vemp{padding:10px 12px!important}
+ #v2-tool .breath{padding:10px!important;flex-direction:column;align-items:flex-start;gap:6px}
+ #v2-tool .breath .bx-ch{width:auto!important;height:auto!important}
+ #v2-tool .aptabs{padding:8px 10px!important}
+ #v2-tool .aptabs button{font-size:12px!important;padding:4px 9px!important;margin:2px!important}
+ #v2-tool .vmsg{padding:8px 12px!important}
+ #v2-tool .vmsg pre{font-size:13px!important;line-height:1.55!important;margin:4px 0 0!important}
+ /* 마음 쉼터 */
+ #h2-tool .hk-s,#h2-tool>.sub{display:none!important}
+ #h2-tool .htabs{margin-bottom:8px!important}
+ #h2-tool .hcols{flex:1;min-height:0;display:grid;grid-template-columns:1.1fr 1fr;gap:14px}
+ #h2-tool .hcols>*{min-height:0;overflow:auto}
+ #h2-tool.tab-b .hcols{display:none!important}
+ #h2-tool textarea.f{height:96px;min-height:96px}
+ #h2-tool .hph{border:1.5px dashed var(--line);border-radius:14px;padding:18px;color:#7a8c84;font-size:14px;line-height:1.6;text-align:center}
+ #h2-tool .five{margin-top:0!important}
+ #h2-tool.tab-b .post{flex:1;min-height:0;overflow:auto}
+ #h2-tool .help{margin-top:8px!important;padding:8px 12px!important;font-size:12.5px}
+ #h2-tool .post .s5{font-size:12px;margin:4px 0 0}
+ /* 노래 만들기 */
+ #v-song .tool.song .sw-desc,#v-song .tool.song .sw-title{display:none!important}
+ #v-song .sw-card{margin:0!important;padding:12px 14px!important}
+ #v-song .sw-top-bar{margin-bottom:8px!important}
+ #v-song .sw-grid{gap:8px!important}
+ #v-song .sw-opt{padding:8px 10px!important}
+ #v-song .sw-opt small{font-size:11px}
+ #v-song .sw-lyrics-board{max-height:none}
+ #v-song #sw-chips,#v-song .sw-lyrics-card>div:last-child:not(.sw-lyrics-board){display:none!important}
+ #v-song .sw-q{margin-bottom:6px!important}
+ #v-song #sw-grid-title,#v-song #sw-grid-who{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+ #v-song #sw-grid-title .sw-opt small{display:none}
+ #v-song .sw-opt .sw-num{display:none}
+ #v-song .sw-custom-row{margin-top:6px!important}
+ #v-song .sw-nav-acts{margin-top:6px!important}
+ #v-song .sw-lyrics-card{padding:8px 12px!important}
+ #v-song .sw-lyrics-head{padding-bottom:6px!important;margin-bottom:6px!important}
+ #v-song .sw-lyrics-board{padding:8px 10px!important;font-size:13px;line-height:1.55}
+ #v-song #sw-p5 .btn.large{padding:9px 14px!important;font-size:14px!important}
+ #v-song .songmini{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--soft,#eef6f1);font-size:13px;line-height:1.7}
+ #v-song .songmini b{color:var(--ink)}
+ #v-song .songmini ol{margin:2px 0 0;padding-left:18px}
+ #v-song .fitgrid>.sright{display:flex;flex-direction:column}
+ #v-song .fitgrid>.sright pre{flex:1;min-height:0;overflow:auto;margin:6px 0 0!important;max-height:none!important}
+}
+</style>
+<script>
+(function(){
+ function $q(s,r){return (r||document).querySelector(s)}
+ if(window.innerWidth<900)return;
+ /* 노래: 왼쪽 위저드 + 짧은 따라 하기 / 오른쪽 프롬프트 */
+ (function(){var t=$q('#v-song .tool.song');if(!t||t.querySelector('.fitgrid'))return;
+  var card=t.querySelector('.sw-card'),sg=t.querySelector('.sgrid'),right=sg&&sg.querySelector('.sright');if(!card||!right)return;
+  var g=document.createElement('div');g.className='fitgrid';var L=document.createElement('div');
+  L.appendChild(card);var m=document.createElement('div');m.className='songmini';
+  m.innerHTML='<b>따라 하기</b><ol><li>번호를 눌러 대상·제목 고르고 가사 확인</li><li><b>제미나이로 열기</b> → 입력창 [+] → 음악 만들기에 붙여 넣기</li><li>장르는 제미나이에서 바로 고르기 (어려우면 "맞춤")</li></ol>';
+  L.appendChild(m);g.appendChild(L);g.appendChild(right);sg.parentNode.insertBefore(g,sg);sg.remove();t.classList.add('fitbox-song');})();
+ /* 마음 지킴이: 왼쪽 입력 / 오른쪽 위로 */
+ (function(){var t=$q('#h2-tool');if(!t||t.querySelector('.hcols'))return;
+  var cols=document.createElement('div');cols.className='hcols';var L=document.createElement('div'),R=document.createElement('div');
+  ['.mic-row','#h2-in','.hk-m','#h2-mood','.warn'].forEach(function(s){var e=t.querySelector(':scope>'+s);if(e)L.appendChild(e)});
+  var ph=document.createElement('div');ph.className='hph';ph.innerHTML='왼쪽에 오늘 있었던 일을 적거나<br>마음을 하나 고르면<br>여기에 나를 위한 위로가 떠요.';
+  var out=t.querySelector('#h2-out');R.appendChild(ph);if(out)R.appendChild(out);var help=t.querySelector(':scope>.help');if(help)R.appendChild(help);
+  cols.appendChild(L);cols.appendChild(R);var post=t.querySelector(':scope>.post');t.insertBefore(cols,post);
+  if(out){new MutationObserver(function(){ph.style.display=out.hidden?'':'none'}).observe(out,{attributes:true});ph.style.display=out.hidden?'':'none'}})();
+ var IDS={vent:'#v2-tool',heart:'#h2-tool',song:'#v-song .tool.song'};
+ function fit(){var on=null;Object.keys(IDS).forEach(function(k){var v=document.getElementById('v-'+k);if(v&&!v.hidden)on=k});
+  document.body.classList.toggle('fitmode',!!on);
+  Object.keys(IDS).forEach(function(k){var e=$q(IDS[k]);if(e){e.classList.remove('fitbox');e.style.height=''}});
+  if(!on||window.innerWidth<900)return;var e=$q(IDS[on]);if(!e)return;e.classList.add('fitbox');
+  var r=e.getBoundingClientRect(),sc=r.height/e.offsetHeight||1;var h=(window.innerHeight-r.top-8)/sc;e.style.height=Math.max(380,h)+'px';window.scrollTo(0,0)}
+ window.dbrFit=fit;
+ document.addEventListener('click',function(){setTimeout(fit,30)});window.addEventListener('resize',fit);window.addEventListener('hashchange',function(){setTimeout(fit,60)});
+ ['heart','vent','song'].forEach(function(k){var v=document.getElementById('v-'+k);if(v)new MutationObserver(function(){setTimeout(fit,20)}).observe(v,{attributes:true,attributeFilter:['hidden']})});
+ setTimeout(fit,80);setTimeout(fit,400);
+})();
+</script>
+<!--/FIT-->
 </body>
 </html>
