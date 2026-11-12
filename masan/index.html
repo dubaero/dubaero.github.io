@@ -1874,7 +1874,15 @@ body:has(#app .jx) .wrap{padding-top:8px!important}
 #jx-p-g .pg-x:focus{border-style:solid;border-color:#2f6b56}
 #jx-p-g .pg-x:not(:placeholder-shown){background:#fff8e6;border-color:#ecd99a}
 </style>
-</head><body><div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 디지털이음연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 내일이<br>빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><nav id="nav" class="nav"></nav><div class="feature-bar">
+</head><body><!--FB--><style id="dbr-mtile">@media(max-width:899px){#app .tile .btn.light.small{display:none!important}#app .tile h3{word-break:keep-all;font-size:15px!important;line-height:1.35}#app .tile h3::after{content:" ›";color:#c96a2b}}</style><script>/* 2026.11.12 글자 1px 키우기(컴퓨터·휴대폰 공통) */
+(function(){if(window.__fb)return;window.__fb=1;
+ function walk(rules){for(var i=0;i<rules.length;i++){var r=rules[i];
+  if(r.cssRules&&!r.style)walk(r.cssRules);
+  else if(r.style){var f=r.style.getPropertyValue('font-size');var m=/^(\d+(?:\.\d+)?)px$/.exec((f||'').trim());if(m)r.style.setProperty('font-size',(+m[1]+1)+'px',r.style.getPropertyPriority('font-size'));if(r.cssRules&&r.cssRules.length)walk(r.cssRules)}}}
+ for(var s=0;s<document.styleSheets.length;s++){try{walk(document.styleSheets[s].cssRules)}catch(e){}}
+})();
+</script><!--/FB-->
+<div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 디지털이음연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 내일이<br>빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><nav id="nav" class="nav"></nav><div class="feature-bar">
   <button class="feature-card t-prompt" data-target="prompt" onclick="nav('prompt')"><span class="ti">🪄</span><span class="tl">프롬프트 디자인실</span></button>
   <button class="feature-card t-heart" data-target="heart" onclick="nav('heart')"><span class="ti">💗</span><span class="tl">토닥토닥 마음챙김</span></button>
   <button class="feature-card t-song" data-target="song" onclick="nav('song')"><span class="ti">🎼</span><span class="tl">나만의 노래 만들기</span></button>
@@ -5132,7 +5140,7 @@ function songBind(){var el=q('.jx'),l1=q('#jx-s-l1'),l2=q('#jx-s-l2');el.querySe
 views.prompt=promptView;init.prompt=promptBind;
 /* 2026.11.12 가족센터 도구 디자인 그대로(일반인용) iframe 연결 */
 function frameView(k){return function(){return '<div class="jx jx-frame"><iframe id="jx-ifr" src="/masan/tools/?v=1112b#'+k+'" title="'+({heart:'마음 쉼터',vent:'빡침 번역기',song:'나만의 노래 만들기'})[k]+'" style="width:100%;border:0;display:block;border-radius:14px;background:#f7f9f7"></iframe></div>'}}
-function frameFit(){var f=document.getElementById('jx-ifr');if(!f)return;var top=f.getBoundingClientRect().top+window.scrollY;f.style.height=Math.max(520,window.innerHeight-top-22)+'px'}
+function frameFit(){var f=document.getElementById('jx-ifr');if(!f)return;var top=f.getBoundingClientRect().top+window.scrollY;f.style.height=Math.max(520,window.innerHeight-top-26)+'px'}
 function frameBind(){frameFit();setTimeout(frameFit,60)}
 window.addEventListener('resize',frameFit);
 views.heart=frameView('heart');init.heart=frameBind;
