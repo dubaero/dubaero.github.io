@@ -788,3 +788,13 @@ body{font-size:15.5px!important}.ti{font-size:15.5px!important}.ti small{font-si
 #contact .hint{margin-top:8px}
 /* 홈 화면 전체 출강 목록 */
 #rooms .lec-head{margin-top:40px}
+/* 2026.11.12 출강 기록 배너 살짝 통통 */
+@keyframes dbr-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+#room-cards .room{animation:dbr-bob 2.6s ease-in-out infinite}
+#room-cards .room:nth-child(2){animation-delay:.35s}
+#room-cards .room:nth-child(3){animation-delay:.7s}
+#room-cards .room:nth-child(4){animation-delay:1.05s}
+#room-cards .room:nth-child(5){animation-delay:1.4s}
+#room-cards .room:nth-child(6){animation-delay:1.75s}
+#room-cards .room:hover{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){#room-cards .room{animation:none}}
