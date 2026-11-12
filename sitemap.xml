@@ -2,7 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dubaero.kr/</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-12</lastmod>
+  </url>
+  <url>
+    <loc>https://dubaero.kr/about/</loc>
+    <lastmod>2026-11-12</lastmod>
+  </url>
+  <url>
+    <loc>https://dubaero.kr/program/</loc>
+    <lastmod>2026-11-12</lastmod>
+  </url>
+  <url>
+    <loc>https://dubaero.kr/lectures/</loc>
+    <lastmod>2026-11-12</lastmod>
+  </url>
+  <url>
+    <loc>https://dubaero.kr/contact/</loc>
+    <lastmod>2026-11-12</lastmod>
   </url>
   <url>
     <loc>https://dubaero.kr/profile/</loc>

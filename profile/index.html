@@ -150,18 +150,27 @@ footer{padding:36px 0 48px;font-size:14px;color:var(--muted);text-align:center}
   .cta-box{padding:28px 22px}
 }
 </style>
+<link rel="stylesheet" href="/css/header.css?v=1">
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="logo" href="../">두배로 <em>이서정</em></a>
-    <nav class="nav">
-      <a href="#career">경력</a>
-      <a href="#cert">자격</a>
-      <a href="#orgs">출강 기관</a>
-      <a class="cta" href="../#contact">강의 문의</a>
+    <div class="topinfo" aria-label="강의 요약">
+      <a class="ti" href="/program/"><small>강의 분야</small>AI 활용 교육 · AI 콘텐츠 제작</a>
+      <a class="ti" href="/about/#orgs"><small>교육 대상</small>기업 · 공공기관 · 훈련기관</a>
+    </div>
+    <span class="top-vd" aria-hidden="true"></span>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="/">홈</a>
+      <a href="/about/">강사 소개</a>
+      <a href="/profile/" aria-current="page">강사 프로필</a>
+      <a href="/program/">강의 분야</a>
+      <a href="/lectures/">출강 기록</a>
+      <a href="/contact/">강의 문의</a>
+      <button type="button" class="qr-open" id="qr-open" aria-label="홈페이지 QR 크게 보기"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg>QR로 들어오기</button>
     </nav>
   </div>
+  <nav class="mnav" aria-label="모바일 메뉴"><a href="/">홈</a><a href="/about/">강사 소개</a><a href="/profile/" aria-current="page">강사 프로필</a><a href="/program/">강의 분야</a><a href="/lectures/">출강 기록</a><a href="/contact/">강의 문의</a></nav>
 </header>
 
 <main>
@@ -265,7 +274,7 @@ footer{padding:36px 0 48px;font-size:14px;color:var(--muted);text-align:center}
     <div class="sec-head"><span class="no">CLIENTS</span><h2>출강 기관</h2></div>
     <div class="orgs-top"><p class="cnt">함께한 기관 <b id="org-n">-</b>곳</p><p class="cnt">출강 기록은 자동으로 갱신됩니다</p></div>
     <div class="orgs" id="org-list"></div>
-    <p class="orgs-more"><a href="../#all-lectures">날짜별 전체 출강 기록 보기 →</a></p>
+    <p class="orgs-more"><a href="/lectures/">날짜별 전체 출강 기록 보기 →</a></p>
   </div>
 </section>
 
@@ -273,7 +282,7 @@ footer{padding:36px 0 48px;font-size:14px;color:var(--muted);text-align:center}
   <div class="wrap">
     <div class="cta-box">
       <div><h2>우리 기관에 맞는 AI 교육이 필요하신가요?</h2><p>교육 대상·인원·일정·목적을 알려주시면 맞춤 구성안을 보내드립니다.</p></div>
-      <div class="btns"><a class="btn fill" href="../#contact">강의 문의하기</a><a class="btn" href="https://blog.naver.com/ricewitch" target="_blank" rel="noopener">강의 후기 블로그</a></div>
+      <div class="btns"><a class="btn fill" href="/contact/">강의 문의하기</a><a class="btn" href="https://blog.naver.com/ricewitch" target="_blank" rel="noopener">강의 후기 블로그</a></div>
     </div>
   </div>
 </section>
@@ -297,5 +306,9 @@ footer{padding:36px 0 48px;font-size:14px;color:var(--muted);text-align:center}
     var o=r.slice(1).map(function(c){return (c[iO]||'').trim();}).filter(Boolean);if(o.length)render(o);}).catch(function(){});
 })();
 </script>
+<div class="qr-ov" id="qr-ov" hidden><div class="qr-card" role="dialog" aria-modal="true" aria-label="홈페이지 QR"><button type="button" class="qr-x" id="qr-x" aria-label="닫기">×</button><div class="qr-stage"><img class="qr-bgi" src="/img/qr-dubaero.png?v=4" alt="한 번 찍으면 두 배로! 이서정 강사 홈페이지 QR 코드" width="1176" height="1026"></div></div></div>
+<script>(function(){var ov=document.getElementById('qr-ov');if(!ov)return;function op(){ov.hidden=false;}function cl(){ov.hidden=true;}document.getElementById('qr-open').addEventListener('click',op);document.getElementById('qr-x').addEventListener('click',cl);ov.addEventListener('click',function(e){if(e.target===ov)cl();});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ov.hidden)cl();});})();</script>
+<script>
+;(function(){var n=document.querySelector('.mnav'),c=n&&n.querySelector('[aria-current]');if(c)n.scrollLeft=c.offsetLeft-16;})();</script>
 </body>
 </html>
