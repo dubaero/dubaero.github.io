@@ -1541,6 +1541,134 @@ body.page-sub .wrap{padding:8px 14px 20px!important;max-width:1320px!important}
 
 
 
+
+/* ===== v15.0: 홈 화면 초컴팩트 한눈에 보기 & 스크롤 제거 최적화 ===== */
+.hero {
+  padding: 10px 18px 12px !important;
+  margin-bottom: 6px !important;
+  border-radius: 14px !important;
+}
+.hero h1 {
+  font-size: 20px !important;
+  line-height: 1.25 !important;
+  margin: 3px 0 4px !important;
+}
+.hero p {
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+  margin: 2px 0 !important;
+}
+.hero p[style*="font-size:12px"] {
+  display: none !important; /* 중복 안내문 숨김 */
+}
+.hero .eyebrow {
+  font-size: 10.5px !important;
+  margin-bottom: 2px !important;
+}
+
+.wrap {
+  padding: 8px 16px 20px !important;
+}
+
+.panel {
+  padding: 9px 14px !important;
+  margin-bottom: 6px !important;
+  border-radius: 14px !important;
+}
+
+.section-title {
+  margin-bottom: 6px !important;
+}
+.section-title h2 {
+  font-size: 15.5px !important;
+  margin: 0 !important;
+}
+.section-title p {
+  font-size: 11px !important;
+  margin: 0 !important;
+}
+
+.grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+}
+
+.tile {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: 7px 10px 8px !important;
+  min-height: 58px !important;
+  border-radius: 10px !important;
+  border: 1.5px solid #d5e4dc !important;
+  background: #ffffff !important;
+  box-shadow: 0 2px 0 #c0d4c8 !important;
+}
+.tile .accent {
+  height: 2px !important;
+  margin-bottom: 4px !important;
+}
+.tile h3 {
+  font-size: 12.8px !important;
+  font-weight: 800 !important;
+  margin: 0 0 2px !important;
+  color: #1c3d2f !important;
+}
+.tile p {
+  font-size: 11px !important;
+  line-height: 1.3 !important;
+  color: #556c60 !important;
+  margin: 0 0 5px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 1 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+.tile .btn {
+  padding: 2.5px 8px !important;
+  font-size: 10.5px !important;
+  min-height: 22px !important;
+  border-radius: 6px !important;
+  align-self: flex-start !important;
+}
+
+/* 홈 두 번째 패널: 증명사진 & 캐릭터 컴팩트 한 줄 배치 */
+.panel:has(#photo) .two {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+.panel:has(#photo) .field {
+  margin-bottom: 2px !important;
+}
+.panel:has(#photo) input[type="file"] {
+  padding: 3px 6px !important;
+  font-size: 11px !important;
+}
+.panel:has(#photo) .muted {
+  font-size: 11px !important;
+  margin: 2px 0 0 !important;
+}
+.panel:has(#photo) .row {
+  gap: 6px !important;
+  margin-top: 2px !important;
+}
+.panel:has(#photo) .character {
+  padding: 4px 8px !important;
+  min-height: 38px !important;
+  gap: 4px !important;
+}
+.panel:has(#photo) .character .avatar {
+  width: 26px !important;
+  height: 28px !important;
+}
+.panel:has(#photo) .character-name {
+  font-size: 11.5px !important;
+}
+
 /* ===== v14.9: 상단 8개 연노랑 3D 탭 & 하단 8개 메뉴 탭 완벽 대칭 3D 레이아웃 ===== */
 .t-prompt { --tb:#f7f2fc; --tbd:#e2d4f2; --ts:#ebe0f8; --ta:#ede4f7; --tac:#bfa3e0; }
 .t-heart { --tb:#fdf2f5; --tbd:#f2d1da; --ts:#f7dfe5; --ta:#fae7ec; --tac:#e5aebb; }
@@ -1699,7 +1827,7 @@ body.page-sub .feature-bar { display: grid !important; }
 .ps-lyrics-text { width:100%; min-height:160px; border:none; background:transparent; font-size:13px; line-height:1.7; color:#213b2f; resize:vertical; font-family:inherit; }
 
 </style>
-</head><body><div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 디지털 이음 연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 나의 오늘이<br>더 빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><div class="feature-bar">
+</head><body><div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 디지털 이음 연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 나의 내일이<br>더 빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><div class="feature-bar">
   <button class="feature-card" data-target="self" onclick="nav('self')"><span class="ti">🪞</span><span class="tl">나를 이해하기</span></button>
   <button class="feature-card" data-target="card" onclick="nav('card')"><span class="ti">🔭</span><span class="tl">직업 탐색하기</span></button>
   <button class="feature-card" data-target="resume" onclick="nav('resume')"><span class="ti">📝</span><span class="tl">입사지원서 작성</span></button>
@@ -1726,7 +1854,7 @@ function bindText(id,field){let el=document.getElementById(id);if(el){el.value=s
 function render(){stopVoiceInput();if(!views[state.page])state.page='home';document.body.classList.toggle('page-sub', state.page !== 'home'); document.body.dataset.page = state.page; document.getElementById('nav').innerHTML=pages.map(([p,label])=>`<button class="${p==='card'?'nav-card ':''}${p===state.page?'active':''}" onclick="nav('${p}')">${label}</button>`).join('');document.getElementById('app').innerHTML=views[state.page]();init[state.page]?.();decorateFeatures()}
 function section(title,subtitle,badge=''){return `<div class="section-title"><div><h2>${title}</h2><p>${subtitle}</p></div>${badge?`<span class="tag">${badge}</span>`:''}</div>`}
 const views={
-home:()=>`<section class="panel">${section('오늘의 탐험 안내','다섯 가지 활동을 연결하면 나의 취업 준비 자료가 완성됩니다.','3시간 실습')}<div class="grid">${[['나를 이해하기','좋아하는 활동과 일하는 방식, 관계의 선호를 살펴봅니다.','self'],['강점과 경험 정리','실제로 한 일에서 강점과 보완할 점을 찾습니다.','strength'],['10년 뒤 직업 도감','늘어날·새로 뜨는·바뀌는·대체 중인 직업 100장을 보고 나와 닮은 직업을 찾아요.','card'],['직업 탐색하기','직업이 하는 일과 준비 조건을 비교합니다.','jobs'],['입사지원서 작성','원본 증명사진으로 실제 서식을 완성합니다.','resume'],['면접 연습','예상 질문에 답하고 기준별 피드백을 받습니다.','interview']].map(([a,b,p])=>`<div class="tile"><div class="accent"></div><h3>${a}</h3><p>${b}</p><button class="btn light small" onclick="nav('${p}')">시작하기 →</button></div>`).join('')}</div></section><section class="panel">${section('사진과 탐험 캐릭터','앞 강사님이 준비한 사진을 등록하되, 지원서에는 반드시 원본을 사용합니다.')}<div class="two"><div><label class="field"><span>증명사진 파일 선택 (선택 사항)</span><input type="file" id="photo" accept="image/png,image/jpeg"></label><p class="muted">사진은 이 브라우저의 작업 중 메모리에만 둡니다. 외부 AI로 전송하거나 얼굴을 자동 변환하지 않습니다.</p><div id="photoPreview"></div></div><div><p style="margin-top:0;font-weight:800">탐험 안내 캐릭터 선택 (기본 일러스트 · 사진 자동 변환 아님)</p><div class="row">${[0,1,2].map(i=>`<button class="character ${state.avatar===i?'on':''}" onclick="state.avatar=${i};render()"><span class="avatar">${avatarSvg(i)}</span><span class="character-name">${['서연','지윤','민서'][i]}</span></button>`).join('')}</div><p class="muted">한국인 성인 인물로 디자인한 기본 일러스트입니다. 본인의 얼굴사진을 변환하는 AI 기능은 포함되지 않습니다.</p></div></div></section>`,
+home:()=>`<section class="panel">${section('오늘의 탐험 안내','활동을 연결하면 나의 취업 준비 자료가 완성됩니다.','3시간 실습')}<div class="grid">${[['나를 이해하기','좋아하는 활동과 일하는 방식, 관계 선호 탐색','self'],['강점과 경험 정리','실제 한 일에서 강점과 보완할 점 발견','strength'],['10년 뒤 직업 도감','100장 카드로 나와 닮은 직업 찾기','card'],['직업 탐색하기','하는 일과 자격·준비 조건 비교','jobs'],['입사지원서 작성','증명사진과 함께 실제 서식 완성','resume'],['면접 연습','예상 질문 답변 및 실전 피드백','interview']].map(([a,b,p])=>`<div class="tile" style="cursor:pointer" onclick="nav('${p}')"><div class="accent"></div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><h3 style="margin:0">${a}</h3><span class="btn light small" style="padding:1.5px 6px;font-size:10.5px;min-height:20px">시작하기 →</span></div><p style="margin:0">${b}</p></div>`).join('')}</div></section><section class="panel" style="margin-bottom:0"><div style="display:grid;grid-template-columns:1fr 1.2fr;gap:12px;align-items:center"><div><label class="field" style="margin:0"><span>증명사진 등록 (선택 사항)</span><input type="file" id="photo" accept="image/png,image/jpeg" style="padding:2px 4px;font-size:11px"></label><p class="muted" style="margin:2px 0 0;font-size:10.5px">작업 메모리에만 보관돼요.</p><div id="photoPreview"></div></div><div><p style="margin:0 0 2px;font-weight:800;font-size:11.5px">탐험 안내 캐릭터 선택</p><div class="row" style="gap:6px">${[0,1,2].map(i=>`<button class="character ${state.avatar===i?'on':''}" style="padding:3px 8px;min-height:32px;gap:4px" onclick="state.avatar=${i};render()"><span class="avatar" style="width:24px;height:24px">${avatarSvg(i)}</span><span class="character-name" style="font-size:11px">${['서연','지윤','민서'][i]}</span></button>`).join('')}</div></div></div></section>`,
 self:()=>`<section class="panel">${section('나를 이해하기','색상 탭을 눌러 질문을 바꾸고 하나씩 답해보세요.','교육용 자기탐색')}<div class="banner">정식 심리검사가 아닌 자기이해 활동입니다. 결과만으로 성격·적성을 판정하지 않습니다.</div><div class="qtabs">${qs.map((q,i)=>`<button class="qtab ${state.selfTab===i?'active':''}" data-selftab="${i}"><small>${state.questions[q.id]?'✓ 완료':'질문 '+(i+1)}</small>${['흥미','업무방식','관계','어려울 때','근무조건'][i]}</button>`).join('')}</div><div class="question-focus"><div class="eyebrow">질문 ${state.selfTab+1} / ${qs.length}</div><h3>${qs[state.selfTab].title}</h3><div class="choice-grid">${qs[state.selfTab].options.map(o=>`<button class="choice ${state.questions[qs[state.selfTab].id]===o?'on':''}" data-q="${qs[state.selfTab].id}" data-val="${E(o)}">${o}</button>`).join('')}</div><div class="row" style="margin-top:18px"><button class="btn outline" data-selfprev ${state.selfTab===0?'disabled':''}>이전 질문</button><button class="btn light" data-selfnext ${state.selfTab===qs.length-1?'disabled':''}>다음 질문</button><button class="btn" onclick="nav('strength')">강점 찾기로 이동 →</button></div></div></section><section class="panel">${section('나의 관계 사용설명서','내 답을 바탕으로 성격 유형 해설처럼 풀어 본 설명서예요. 재미로 읽어 보세요.')}<div id="selfResult">${selfResult()}</div></section>`,
 strength:()=>`<section class="panel stpage">${section('강점과 경험을 발견하기','선택한 강점이 실제 행동으로 드러난 경험을 적는 것이 중요합니다.','서류 작성 연결')}<h3 class="q3d"><span class="q3d-ic">💎</span>내가 잘한다고 느끼거나 잘할 수 있을 것 같은 활동을 3가지 골라보세요.</h3><div class="choice-grid flat">${strengths.map(s=>`<button class="choice ${state.strengths.includes(s)?'on':''}" data-strength="${E(s)}">${s}</button>`).join('')}</div><p class="muted">최대 3개까지 선택할 수 있어요. (${state.strengths.length}/3)</p><h3 class="q3d"><span class="q3d-ic">🌱</span>보완하고 싶은 부분도 3가지 골라보세요.</h3><div class="choice-grid flat">${improvements.map(s=>`<button class="choice ${state.improvements.includes(s)?'on':''}" data-improve="${E(s)}">${s}</button>`).join('')}</div><p class="muted">최대 3개까지 선택할 수 있어요. (${state.improvements.length}/3)</p><div class="result" id="improvementOutput">${improvementText()}</div><h3>내가 실제로 해본 일</h3><p class="muted">직장·아르바이트·자원봉사·모임·일상 중 자신이 편한 경험을 적어주세요. 이름·주민번호·개인 사정은 입력하지 않습니다.</p>${[0,1,2].map(i=>`<label class="field"><span>경험 · 내가 실제로 한 행동</span><textarea id="exp${i}" placeholder="예: 매장에서 상품 수량을 확인하고 부족한 물건을 채웠습니다.">${E(state.experiences[i])}</textarea></label>`).join('')}<button class="btn" onclick="nav('card')">10년 뒤 직업 도감 보러 가기 →</button></section>`,
 jobs:()=>`<section class="panel">${section('직업세계 탐색','직업을 단정적으로 추천하기보다, 내가 관심을 가질 만한 후보와 확인사항을 살펴봅니다.','공식 자료 확인')}<div class="banner">직종 후보는 NCS 대분류를 참고해 묶은 교육용 예시이며, 모든 직업의 정확한 NCS 세분류 코드와 1:1 매칭한 목록은 아닙니다. 창업은 직업이 아닌 진로 방식으로 별도 묶었습니다. 이 카드는 교육용 직무 소개입니다. 실시간 채용공고나 최신 지역 구인통계를 표시하지 않습니다. 실제 자격·모집·급여·마감은 공식 채용공고에서 반드시 다시 확인하세요.</div><div class="row"><input class="search" style="flex:1;min-width:210px" id="jobsearch" placeholder="직업명, 업무, 분야 검색 (예: 강사, 경리, 크리에이터)" value=""><button class="btn light" onclick="window.open('https://www.work24.go.kr/','_blank','noopener')">고용24 채용정보 ↗</button></div><div class="selected-preferences"><b>나의 희망직종 (최대 3개)</b><p class="muted">직업 카드에서 ‘희망직종 추가’를 선택하세요. 지원서용 직무는 아래에서 별도로 정할 수 있습니다.</p><div id="preferredJobChips"></div></div><div id="job-theme" class="job-theme-banner" aria-live="polite"></div><div id="jobResultsCount" style="margin:10px 0 4px;font-size:13px;font-weight:700;color:#356754;"></div><div id="jobResults" class="jobgrid"></div><div class="result"><b>내가 선택한 지원 직무:</b> <span id="selectedjob">${E(state.job)}</span><div class="muted">직업 카드를 선택한 뒤, 실제 공고 원문을 보고 지원 자격과 업무 내용을 비교하세요.</div></div><div id="careerIntro"></div><div class="two"><label class="field"><span>채용공고에서 확인한 주요 업무·필수 조건 (개인정보 제외)</span><textarea id="jobpost" placeholder="예: 문서 정리, 기본 컴퓨터 활용, 주 5일 근무">${E(state.jobpost)}</textarea></label><div class="result"><h3>새롭게 변화하는 직업 탐색</h3><p class="muted">AI·디지털 기술로 업무가 변화하는 직업이 있습니다. '없어질 직업'이라고 단정하지 않고, 실제 업무가 어떻게 변하는지 공식 자료를 확인합니다.</p><a href="https://www.keis.or.kr/" target="_blank" rel="noopener">한국고용정보원 자료 확인 ↗</a><br><a href="https://www.work24.go.kr/" target="_blank" rel="noopener">고용24에서 직업·채용 정보 찾기 ↗</a></div></div><button class="btn" onclick="nav('resume')">입사지원서 작성하기 →</button></section>`,
@@ -3370,44 +3498,67 @@ const _vIv=views.interview;views.interview=()=>_vIv().replace('정해진 질문�
     };
   }
 
-  // --- B. 토닥토닥 마음챙김 (독립 뷰) ---
-  const HEART_F1 = {
-    '지쳤어요': '오늘 정말 많은 일과 사람의 마음을 받아 주느라 지치셨죠.',
-    '속상해요': '애쓴 만큼 알아주지 않아 속상하고 억울한 하루였네요.',
-    '불안해요': '할 일은 많고 잘하고 있는지 몰라 마음이 조마조마하셨죠.',
-    '허무해요': '열심히 달려왔는데 남는 게 없는 것 같아 허무한 날도 있어요.',
-    '자책감이 들어요': '실수 하나에 모든 노력을 묻어버리고 자책하지 마세요.',
-    '혼자 뒤처진 느낌': '남들의 속도와 비교하지 마세요. 당신은 당신의 속도로 충분합니다.',
-    '그래도 힘내고 싶어요': '지친 와중에도 다시 일어서려는 당신, 참 단단하고 아름다워요.'
-  };
-  const HEART_F2 = [
-    '당신이 기울인 노력과 정성은 보이지 않는 곳에서도 분명히 빛나고 있어요.',
-    '완벽하지 않아도 괜찮아요. 오늘 하루를 끝까지 버텨낸 것만으로도 충분합니다.',
-    '넘어지고 흔들린 자리에 더 깊은 뿌리가 내리고 있는 중이에요.',
-    '누구보다 자기 자신에게 가장 친절한 친구가 되어줄 시간입니다.'
+  // --- B. 토닥토닥 마음챙김 (20개 감정 단어 · 자동 즉시 생성 · ChatGPT/제미나이 엽서 직행) ---
+  const HEART_MOODS = [
+    { txt: '지쳤어요', ic: '😮‍💨', f1: '오늘 정말 많은 일과 사람의 무게를 견디느라 온몸이 방전되셨죠.', f2: '지친 건 나약해서가 아니라 그만큼 최선을 다해 버텨냈다는 가장 분명한 증거예요.' },
+    { txt: '속상해요', ic: '🥺', f1: '애쓴 만큼 알아주지 않고 서운한 마음에 가슴 한구석이 아릿하셨겠어요.', f2: '당신의 정성과 흘린 땀방울의 가치는 남들의 평가보다 훨씬 더 귀하고 빛나요.' },
+    { txt: '마음이 무거워요', ic: '🌧️', f1: '말 못 할 고민과 무거운 책임감이 가슴을 짓눌러 숨쉬기조차 버거우셨죠.', f2: '그 무거운 짐들을 오늘 밤만큼은 내려놓으세요. 혼자 다 짊어지지 않아도 돼요.' },
+    { txt: '허무해요', ic: '🍂', f1: '그토록 열심히 달려왔는데 손에 쥔 게 없는 것 같아 멍해지는 순간이 있어요.', f2: '보이지 않는 곳에서 흘린 시간은 결코 사라지지 않고 당신의 깊은 내공으로 쌓여 있어요.' },
+    { txt: '무기력해요', ic: '🥀', f1: '손가락 하나 까딱할 힘도 없고 세상 모든 일의 스위치가 꺼진 것만 같죠.', f2: '지금은 아무것도 하지 않아도 괜찮아요. 마른 화분에 물이 차오를 때까지 푹 쉬어가요.' },
+    { txt: '우울해요', ic: '💧', f1: '마음속에 차가운 비가 내리고 끝없는 바닥으로 가라앉는 기분이었겠어요.', f2: '그 슬픔을 억지로 밀어내지 마세요. 내리는 비 뒤엔 반드시 더 맑은 아침이 찾아와요.' },
+    { txt: '불안해요', ic: '⚡', f1: '앞날에 대한 걱정과 혹시 모를 실수 때문에 심장이 조마조마하셨죠.', f2: '아직 오지 않은 내일의 파도를 미리 걱정하지 마세요. 당신은 언제나 길을 찾아냈어요.' },
+    { txt: '답답해요', ic: '🫧', f1: '내 뜻대로 풀리지 않는 현실 앞에 꽉 막힌 벽을 마주한 것처럼 답답하셨죠.', f2: '잠시 숨을 깊게 고르고 한 걸음 뒤로 물러서 보세요. 엉킨 실타래도 천천히 풀려요.' },
+    { txt: '억울해요', ic: '😣', f1: '내 잘못도 아닌 일로 오해를 받거나 뒤집어써서 분하고 속이 상하셨겠어요.', f2: '진실은 시간이 지나면 반드시 드러나요. 당신의 곧고 당당한 양심을 스스로 꼭 믿어주세요.' },
+    { txt: '자책감이 들어요', ic: '💔', f1: '작은 실수 하나를 자꾸 곱씹으며 모든 탓을 나에게로 돌리고 계셨나요.', f2: '실수 한 번 했다고 당신의 모든 노력이 사라지지 않아요. 나 자신에게 먼저 너그러워져요.' },
+    { txt: '번아웃이 왔어요', ic: '🪫', f1: '그동안 열정을 다 태워버려 재만 남은 것처럼 마음의 불씨가 사그라들었군요.', f2: '불씨를 억지로 살리려 애쓰지 마세요. 따뜻한 온기가 마음속에 채워질 때까지 쉬어주세요.' },
+    { txt: '혼자인 것 같아요', ic: '🌾', f1: '주변에 사람은 많지만 내 속마음을 온전히 터놓을 한 사람이 없어 외로우셨죠.', f2: '세상 누구도 몰라줘도 오늘 하루를 성실히 버텨낸 당신의 모습은 결코 혼자가 아니에요.' },
+    { txt: '눈물이 날 것 같아요', ic: '😢', f1: '참고 또 참아왔던 서러움이 목 끝까지 차올라 금방이라도 터질 것만 같군요.', f2: '흘러나오는 눈물을 억지로 참지 마세요. 눈물은 마음의 먼지를 씻어내는 정화예요.' },
+    { txt: '화가 치밀어요', ic: '🔥', f1: '선 넘는 무례함과 불합리한 상황에 머리끝까지 열이 뻗쳐 속이 부글거리셨죠.', f2: '그 사람의 무례함 때문에 당신의 소중한 감정과 품격을 다치지 않게 조용히 숨을 내쉬어요.' },
+    { txt: '앞날이 막막해요', ic: '🌫️', f1: '어디로 발을 내딛어야 할지 짙은 안개 속을 걷는 것처럼 두렵고 막막하셨죠.', f2: '안개 속에서는 딱 한 발자국 앞만 보고 걸으면 돼요. 그 작은 한 걸음이 길을 열어줘요.' },
+    { txt: '자신감이 떨어졌어요', ic: '📉', f1: '남들은 다 잘 해내는 것 같은데 나만 한없이 작고 서툴게 느껴지셨나요.', f2: '당신에게는 당신만이 가진 고유한 온기와 강점이 있어요. 당신의 가치는 여전히 눈부셔요.' },
+    { txt: '자꾸 남과 비교돼요', ic: '👥', f1: '다른 사람들의 화려한 모습에 마음이 흔들리고 나만 뒤처진 것 같아 초조하셨죠.', f2: '인생은 남과의 속도경쟁이 아니라 나만의 계절을 피워내는 거예요. 당신의 꽃은 곧 피어나요.' },
+    { txt: '몸도 마음도 방전됐어요', ic: '🔋', f1: '어깨는 천근만근 무겁고 머릿속은 하얘져서 한숨 푹 자고만 싶은 상태이시군요.', f2: '오늘 해야 할 모든 일에 쉼표를 찍으세요. 몸을 누이고 편안히 쉬는 것이 지금 가장 중요해요.' },
+    { txt: '다 놓아버리고 싶어요', ic: '🎈', f1: '모든 책임과 의무에서 벗어나 어디론가 훌쩍 떠나 도망치고 싶은 심정이시죠.', f2: '그만큼 오래 혼자 버텨왔다는 신호예요. 잠시 손을 놓고 나만을 위한 시간을 가져도 괜찮아요.' },
+    { txt: '인정받지 못해 서운해요', ic: '💭', f1: '보이지 않는 곳에서 묵묵히 흘린 수많은 땀을 아무도 알아주지 않아 쓸쓸하셨군요.', f2: '누가 보든 안 보든 당신이 쌓아 올린 성실함은 가장 단단한 보석이 되어 당신을 지켜줄 거예요.' }
   ];
+
   const HEART_F3 = [
     '오늘 끝내지 못한 일은 내일의 나에게 맡겨두고, 지금은 짐을 내려놓으세요.',
     '결과가 당신의 전부를 말해주지 않아요. 당신이라는 존재 자체가 귀합니다.',
-    '잠깐 쉬어가는 것은 멈추는 것이 아니라 더 멀리 나아가기 위한 쉼표예요.'
+    '잠깐 쉬어가는 것은 멈추는 것이 아니라 더 멀리 나아가기 위한 쉼표예요.',
+    '넘어지고 흔들린 자리에 더 깊은 지혜와 뿌리가 내리고 있는 중이에요.'
   ];
   const HEART_F4 = [
     '지금 가슴에 조용히 손을 얹고, 깊게 세 번 숨을 들이쉬고 천천히 내쉬어 보세요.',
     '따뜻한 물 한 잔 마시며, 수고한 내 어깨를 가볍게 토닥여 주세요.',
-    '잠시 창밖의 하늘을 바라보며 복잡한 생각의 스위치를 가만히 꺼 보세요.'
+    '잠시 창밖의 하늘을 바라보며 복잡한 생각의 스위치를 가만히 꺼 보세요.',
+    '오늘 하루도 참 고생 많았다고, 나 자신에게 나지막이 속삭여 주세요.'
   ];
   const HEART_F5 = [
     '내일의 나야, 천천히 가도 괜찮아. 나는 늘 나를 믿어.',
     '오늘도 정말 잘 살았어. 내일은 오늘보다 더 다정하고 빛날 거야.',
-    '당신은 생각보다 훨씬 더 강하고 근사한 사람입니다.'
+    '당신은 생각보다 훨씬 더 강하고 근사한 사람입니다.',
+    '다시 시작하는 당신의 내일은 분명 오늘보다 더 눈부실 거예요.'
   ];
 
-  function runHeart(){
+  const PC_STYLES = [
+    ['햇살 수채화 풍경', '따뜻한 햇살, 꽃과 나무, 멀리 이어진 산책길이 있는 수채화 풍경'],
+    ['꽃잎 압화 빈티지', '말린 꽃잎과 잎사귀를 눌러 붙인 듯한 빈티지 종이 엽서'],
+    ['동화 일러스트', '작은 집과 귀여운 동물 친구들이 있는 아기자기한 동화책 그림'],
+    ['밤하늘 별빛', '은은한 달빛과 반짝이는 별, 따뜻한 불빛이 켜진 작은 마을'],
+    ['창가의 따뜻한 차', '창가에 놓인 따뜻한 차 한 잔과 책, 포근한 담요'],
+    ['바닷가 노을', '잔잔한 바다와 분홍빛 노을, 모래 위 조개껍데기'],
+    ['계절 숲길 산책', '계절 색이 가득한 숲길과 햇살이 비치는 오솔길']
+  ];
+
+  function runHeart(moodTxt){
     const h = state.heart;
-    const m = h.hMood || '지쳤어요';
+    if(moodTxt) h.hMood = moodTxt;
+    const mObj = HEART_MOODS.find(m=>m.txt === h.hMood) || HEART_MOODS[0];
+    h.hMood = mObj.txt;
     h.hRes = [
-      HEART_F1[m] || '오늘 하루도 말로 다 못 할 만큼 애쓰셨어요.',
-      HEART_F2[Math.floor(Math.random()*HEART_F2.length)],
+      mObj.f1,
+      mObj.f2,
       HEART_F3[Math.floor(Math.random()*HEART_F3.length)],
       HEART_F4[Math.floor(Math.random()*HEART_F4.length)],
       HEART_F5[Math.floor(Math.random()*HEART_F5.length)]
@@ -3415,123 +3566,222 @@ const _vIv=views.interview;views.interview=()=>_vIv().replace('정해진 질문�
     render();
   }
 
+  function buildPostcardPrompt(){
+    const h = state.heart;
+    const mood = h.hMood || '지쳤어요';
+    const mObj = HEART_MOODS.find(m=>m.txt === mood) || HEART_MOODS[0];
+    const name = (h.hName||'').trim() || (state.name||'').trim() || '나에게';
+    const stIdx = Number(h.hStyle || 0);
+    const style = PC_STYLES[stIdx] || PC_STYLES[0];
+    const story = (h.hText||'').trim();
+
+    return `너는 따뜻한 온기와 위로를 전하는 전문 힐링 엽서 아티스트야. 아래 [내 마음 상태]를 깊이 공감하고 위로하는 아름다운 선물 엽서 그림 한 장을 완성해 줘.
+
+[내 마음 상태]
+- 요즘 나를 힘들게 하는 감정: ${mObj.txt} (${mObj.f1})
+${story ? '- 내가 털어놓은 속마음: ' + story + '\n' : ''}- 엽서에 부를 이름/애칭: ${name}
+- 원하는 그림 분위기: ${style[0]} (${style[1]})
+
+[엽서 제작 요청 조건]
+1. 텍스트 설명이나 질문은 하지 말고, 바로 아름다운 세로 엽서 이미지(2:3 비율) 한 장을 선물처럼 완성해 줘.
+2. [엽서 앞면]: ${style[1]}을 배경으로 하고, 상단에 지친 나를 안아주는 다정한 한 줄 문장("괜찮아, 지금도 충분히 빛나고 있어")을 따뜻한 캘리그래피 손글씨 느낌으로 담아줘.
+3. [엽서 뒷면 손편지]: ${name}에게 전하는 다정하고 눈물겨운 5줄 손편지.
+   - 첫 줄: "${name}에게,"
+   - 2~4줄: 힘든 마음을 알아주고 깊이 인정하며 다독이는 진심 어린 위로
+   - 마지막 줄: "언제나 너를 믿고 응원해."
+   - 우측 상단엔 빈티지 우표와 따뜻한 소인을 넣어 진짜 엽서처럼 디자인해 줘.`;
+  }
+
   function downloadHeartImg(){
     const h = state.heart;
     if(!h.hRes) return;
     const cv = document.createElement('canvas');
-    const W = 1080;
-    cv.width = W; cv.height = W;
+    cv.width = 1080; cv.height = 1080;
     const ctx = cv.getContext('2d');
+    const grad = ctx.createLinearGradient(0, 0, 1080, 1080);
+    grad.addColorStop(0, '#fefbf8');
+    grad.addColorStop(1, '#fbeeef');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 1080, 1080);
 
-    ctx.fillStyle = '#faf7f0';
-    ctx.fillRect(0, 0, W, W);
+    ctx.strokeStyle = '#ecd6db';
+    ctx.lineWidth = 14;
+    ctx.strokeRect(36, 36, 1008, 1008);
+    ctx.strokeStyle = '#faeaee';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(48, 48, 984, 984);
 
-    ctx.fillStyle = '#fceef2';
-    ctx.fillRect(0, 0, W, 170);
+    ctx.fillStyle = '#b3475d';
+    ctx.font = 'bold 38px "Pretendard", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('💌 토닥토닥, 나를 응원하는 엽서', 540, 150);
 
-    ctx.fillStyle = '#83283b';
-    ctx.font = 'bold 44px sans-serif';
-    ctx.fillText('토닥토닥, 마음챙김', 80, 105);
+    ctx.fillStyle = '#8f6870';
+    ctx.font = '500 24px "Pretendard", sans-serif';
+    ctx.fillText('디지털 이음 연구소 · 마음 비타민', 540, 200);
 
-    ctx.fillStyle = '#a64f62';
-    ctx.font = '26px sans-serif';
-    ctx.fillText('오늘 하루를 버텨낸 나에게 건네는 5줄 위로', 480, 103);
+    ctx.strokeStyle = '#e6c8ce';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(340, 240);
+    ctx.lineTo(740, 240);
+    ctx.stroke();
 
-    ctx.fillStyle = '#2d3b33';
-    ctx.font = '34px sans-serif';
-    let y = 280;
-    h.hRes.forEach((lineText, idx) => {
-      ctx.fillStyle = '#c24b64';
-      ctx.font = 'bold 28px sans-serif';
-      ctx.fillText(`0${idx+1}`, 80, y);
-
-      ctx.fillStyle = '#1f2e26';
-      ctx.font = '32px sans-serif';
-      let line = '', words = lineText.split(' ');
-      words.forEach(w => {
-        let test = line ? line + ' ' + w : w;
-        if(ctx.measureText(test).width > W - 230){
-          ctx.fillText(line, 140, y);
-          y += 48;
-          line = w;
-        } else {
-          line = test;
-        }
-      });
-      ctx.fillText(line, 140, y);
-      y += 82;
+    ctx.fillStyle = '#2d2123';
+    ctx.font = '600 29px "Pretendard", sans-serif';
+    ctx.textAlign = 'left';
+    const lines = h.hRes;
+    const startY = 360;
+    const lineGap = 105;
+    lines.forEach((l, idx)=>{
+      ctx.fillStyle = '#b3475d';
+      ctx.fillText(`${idx+1}.`, 130, startY + (idx * lineGap));
+      ctx.fillStyle = '#2d2123';
+      ctx.fillText(l, 180, startY + (idx * lineGap));
     });
 
-    ctx.fillStyle = '#829188';
-    ctx.font = '24px sans-serif';
-    ctx.fillText('디지털 이음 연구소 · 토닥토닥 마음챙김', 80, W - 60);
+    ctx.fillStyle = '#a6828a';
+    ctx.font = '500 22px "Pretendard", sans-serif';
+    ctx.textAlign = 'center';
+    const today = new Date().toISOString().slice(0, 10).replace(/-/g, '.');
+    ctx.fillText(`${today} · 언제나 나를 믿고 사랑하는 나에게`, 540, 960);
 
     const a = document.createElement('a');
-    a.download = '토닥토닥_마음챙김_엽서.png';
+    a.download = `토닥토닥_마음챙김_${Date.now()}.png`;
     a.href = cv.toDataURL('image/png');
     a.click();
-    showToast('따뜻한 마음챙김 엽서 이미지를 저장했어요!');
+    showToast('따뜻한 응원 엽서 이미지(.png)를 저장했어요!');
   }
 
   function heartView(){
     const h = state.heart;
-    const moods = ['지쳤어요', '속상해요', '불안해요', '허무해요', '자책감이 들어요', '혼자 뒤처진 느낌', '그래도 힘내고 싶어요'];
+    if(!h.hMood) h.hMood = '지쳤어요';
+    if(!h.hRes){
+      const mObj = HEART_MOODS.find(m=>m.txt===h.hMood) || HEART_MOODS[0];
+      h.hRes = [mObj.f1, mObj.f2, HEART_F3[0], HEART_F4[0], HEART_F5[0]];
+    }
+
     return `<section class="panel">
-      ${section('토닥토닥, 마음챙김', '남을 챙기느라 정작 나를 돌보지 못한 나에게, 따뜻한 위로와 응원의 한마디를 선물하세요.', '마음 돌봄')}
-      <div class="banner">오늘 하루도 참 애쓰셨어요. 마음의 온도를 1도 올리는 다정한 위로를 받아보세요.</div>
+      ${section('토닥토닥, 마음챙김', '지금 내 마음에 가장 가까운 단어를 터치하면 나를 위한 5줄 위로 편지와 선물 엽서가 즉시 완성됩니다.', '감정 케어')}
+      <div class="banner">누구의 눈치도 볼 필요 없는 나만의 마음 쉼터예요. 마음에 드는 단어를 고르면 아래에 위로 글과 AI 엽서 프롬프트가 바로 생성됩니다.</div>
 
-      <div class="ps-heart-box">
-        <label style="font-weight:800;color:#2b3a32;font-size:14px;display:block;margin-bottom:8px">지금 내 마음에 가장 가까운 단어는?</label>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
-          ${moods.map(m=>`<button type="button" class="choice ${h.hMood===m?'on':''}" data-hmood="${m}" style="padding:6px 14px;border-radius:20px;font-size:12.5px">${m}</button>`).join('')}
+      <!-- 20개 감정 단어 선택 칩 (터치 즉시 자동 실시간 생성) -->
+      <div class="ps-builder-box" style="margin-bottom:12px">
+        <div style="font-weight:800;color:#1c3d2f;font-size:14px;margin-bottom:8px">🌱 지금 내 마음에 가장 가까운 단어를 골라보세요 (20가지 감정)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          ${HEART_MOODS.map(m=>`
+            <button type="button" class="btn small ${h.hMood===m.txt?'fill':''}" data-hmood="${m.txt}" style="border-radius:20px;font-size:12px;padding:5px 12px;${h.hMood===m.txt?'background:#b3475d;border-color:#b3475d;color:#fff':'background:#fff;border-color:#e2c9cf;color:#5a373f'}">
+              <span>${m.ic}</span> <b>${m.txt}</b>
+            </button>
+          `).join('')}
         </div>
-
-        <label class="field" style="margin-top:8px">
-          <span>오늘 나에게 해주고 싶은 말이나 있었던 일 (선택 사항)</span>
-          <textarea id="psHIn" placeholder="예) 오늘 면접 보느라 하루 종일 긴장했어요. 작은 일에도 자꾸 불안해져요." style="min-height:75px">${E(h.hIn)}</textarea>
-        </label>
 
         <div style="margin-top:12px">
-          <button type="button" class="btn" id="psRunHeart" style="background:#2f5f4b">💌 나만을 위한 5줄 위로 받기</button>
+          <label class="field">
+            <span>더 털어놓고 싶은 속마음이 있다면 자유롭게 적어보세요 (선택 사항)</span>
+            <input type="text" id="psHInp" placeholder="예: 오늘 하루 종일 눈치 보느라 온몸이 굳어 있었어요" value="${E(h.hText||'')}">
+          </label>
+        </div>
+      </div>
+
+      <!-- 실시간 자동 생성된 5줄 위로 편지 카드 -->
+      <div class="ps-heart-res" style="background:#fffafb;border:1.5px solid #f2d4dc;border-radius:14px;padding:16px;box-shadow:0 3px 0 #ecd1d9">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+          <div style="font-size:15px;font-weight:900;color:#8f2d43">💌 나를 위한 다정한 5줄 위로 편지 [${E(h.hMood)}]</div>
+          <div style="display:flex;gap:6px">
+            <button type="button" class="btn small light" id="psAgainHeart" style="font-size:11.5px;padding:4px 9px">↺ 다른 위로 듣기</button>
+            <button type="button" class="btn small" id="psCopyHeart" style="font-size:11.5px;padding:4px 9px">📋 5줄 복사</button>
+            <button type="button" class="btn small" id="psImgHeart" style="background:#b3475d;border-color:#b3475d;color:#fff;font-size:11.5px;padding:4px 9px">🖼️ 엽서 이미지 저장 (.png)</button>
+          </div>
+        </div>
+        <ol style="margin:0;padding-left:22px;line-height:1.85;color:#2c1f22;font-size:13.5px;font-weight:600">
+          ${(h.hRes||[]).map(l=>`<li style="margin:4px 0">${E(l)}</li>`).join('')}
+        </ol>
+      </div>
+
+      <!-- ChatGPT & 제미나이 선물 엽서 원스톱 연동 패널 -->
+      <div style="margin-top:12px;background:#f9fbf9;border:1.5px solid #dbe8e0;border-radius:14px;padding:16px">
+        <div style="font-size:14px;font-weight:800;color:#1e4334;margin-bottom:8px">🎨 AI에게 인정·위로·응원의 선물 엽서 그림 한 장 받기</div>
+        <p style="font-size:12px;color:#557264;margin:0 0 10px">평소 쓰던 ChatGPT나 제미나이가 나를 위해 세상에 단 하나뿐인 앞뒷면 힐링 엽서 그림을 선물해 줍니다.</p>
+
+        <div class="two" style="margin-bottom:10px">
+          <label class="field">
+            <span>엽서에 부를 내 이름/애칭</span>
+            <input type="text" id="psHName" placeholder="예: 서정아 / 나에게" value="${E(h.hName || state.name || '나에게')}">
+          </label>
+          <label class="field">
+            <span>엽서 그림 스타일</span>
+            <select id="psHStyle">
+              ${PC_STYLES.map((st,idx)=>`<option value="${idx}" ${Number(h.hStyle||0)===idx?'selected':''}>${st[0]} - ${st[1]}</option>`).join('')}
+            </select>
+          </label>
         </div>
 
-        ${h.hRes ? `
-          <div class="ps-heart-card" id="psHeartCard">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;border-bottom:1px dashed #e2d7c5;padding-bottom:8px">
-              <span style="font-weight:800;font-size:15px;color:#2f5f4b">💌 토닥토닥, 마음챙김 5줄 (${E(h.hMood)})</span>
-              <span style="font-size:11.5px;color:#7a6d59">나만을 위한 따뜻한 위로</span>
-            </div>
-            ${h.hRes.map((line,idx)=>`<p class="ps-heart-line"><b>0${idx+1}.</b> ${E(line)}</p>`).join('')}
-            <div class="row" style="margin-top:16px">
-              <button type="button" class="btn small" id="psCopyHeart">📋 5줄 편지 복사</button>
-              <button type="button" class="btn small light" id="psImgHeart">🖼️ 예쁜 응원 엽서 이미지 저장 (.png)</button>
-              <button type="button" class="btn small outline" id="psAgainHeart">↺ 다른 위로 받기</button>
-            </div>
-          </div>
-        ` : ''}
+        <div class="row">
+          <button type="button" class="btn" id="psGptPost" style="background:#225a46;border-color:#225a46">✨ ChatGPT로 선물 엽서 받기 ↗</button>
+          <button type="button" class="btn light" id="psGeminiPost">✨ 제미나이로 선물 엽서 받기 ↗</button>
+          <button type="button" class="btn outline" id="psCopyPost">📋 엽서 프롬프트 복사</button>
+        </div>
       </div>
     </section>`;
   }
 
   function heartBind(){
     const h = state.heart;
-    document.querySelectorAll('[data-hmood]').forEach(b=>b.onclick=()=>{
-      h.hMood = b.dataset.hmood;
-      render();
+    document.querySelectorAll('[data-hmood]').forEach(b=>{
+      b.onclick = ()=>{
+        const m = b.dataset.hmood;
+        runHeart(m);
+        showToast(`'${m}' 마음에 맞는 위로 글을 불러왔어요.`);
+      };
     });
-    const hin = $('#psHIn');
-    if(hin) hin.oninput=e=>{ h.hIn = e.target.value; };
-    const runH = $('#psRunHeart');
-    if(runH) runH.onclick=()=>runHeart();
 
-    const cpH = $('#psCopyHeart');
-    if(cpH) cpH.onclick=()=>{
-      if(h.hRes) navigator.clipboard.writeText(h.hRes.join('\n')).then(()=>showToast('마음챙김 5줄 편지를 복사했어요!'));
+    const inp = $('#psHInp');
+    if(inp){
+      inp.oninput = e=>{ h.hText = e.target.value; };
+    }
+    const nm = $('#psHName');
+    if(nm){
+      nm.oninput = e=>{ h.hName = e.target.value; };
+    }
+    const st = $('#psHStyle');
+    if(st){
+      st.onchange = e=>{ h.hStyle = e.target.value; };
+    }
+
+    const agn = $('#psAgainHeart');
+    if(agn) agn.onclick = ()=>runHeart();
+
+    const cp = $('#psCopyHeart');
+    if(cp) cp.onclick = ()=>{
+      if(h.hRes) navigator.clipboard.writeText(h.hRes.join('\n')).then(()=>showToast('5줄 위로 글을 복사했어요!'));
     };
-    const imgH = $('#psImgHeart');
-    if(imgH) imgH.onclick=()=>downloadHeartImg();
-    const agnH = $('#psAgainHeart');
-    if(agnH) agnH.onclick=()=>runHeart();
+
+    const img = $('#psImgHeart');
+    if(img) img.onclick = ()=>downloadHeartImg();
+
+    const gptP = $('#psGptPost');
+    if(gptP) gptP.onclick = ()=>{
+      const p = buildPostcardPrompt();
+      navigator.clipboard.writeText(p).then(()=>{
+        showToast('선물 엽서 프롬프트를 복사했어요. ChatGPT 창에 붙여넣으세요.');
+        window.open('https://chatgpt.com/', '_blank', 'noopener');
+      });
+    };
+
+    const gemP = $('#psGeminiPost');
+    if(gemP) gemP.onclick = ()=>{
+      const p = buildPostcardPrompt();
+      navigator.clipboard.writeText(p).then(()=>{
+        showToast('선물 엽서 프롬프트를 복사했어요. 제미나이 창에 붙여넣으세요.');
+        window.open('https://gemini.google.com/app', '_blank', 'noopener');
+      });
+    };
+
+    const cpP = $('#psCopyPost');
+    if(cpP) cpP.onclick = ()=>{
+      navigator.clipboard.writeText(buildPostcardPrompt()).then(()=>showToast('선물 엽서 프롬프트를 복사했어요!'));
+    };
   }
 
   // --- C. 나만의 노래 만들기 (독립 뷰) ---
