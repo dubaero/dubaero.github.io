@@ -1630,7 +1630,7 @@ function avatarSvg(i=0){let tones=['#d9a987','#a97a61','#c89a78'];let shirts=['#
 function showToast(txt){let d=document.createElement('div');d.className='toast';d.textContent=txt;document.body.appendChild(d);setTimeout(()=>d.remove(),2900)}
 function nav(p){state.page=p;render();window.scrollTo({top:0,behavior:'smooth'})}
 function bindText(id,field){let el=document.getElementById(id);if(el){el.value=state[field]||'';el.addEventListener('input',ev=>{state[field]=ev.target.value;if(field==='cover'||field==='name'||field==='contact'||field==='history')updatePreview()})}}
-function render(){stopVoiceInput();document.body.classList.toggle('page-sub', state.page !== 'home'); document.body.dataset.page = state.page; document.getElementById('nav').innerHTML=pages.map(([p,label])=>`<button class="${p==='card'?'nav-card ':''}${p===state.page?'active':''}" onclick="nav('${p}')">${label}</button>`).join('');document.getElementById('app').innerHTML=views[state.page]();init[state.page]?.()}
+function render(){stopVoiceInput();if(!views[state.page])state.page='home';document.body.classList.toggle('page-sub', state.page !== 'home'); document.body.dataset.page = state.page; document.getElementById('nav').innerHTML=pages.map(([p,label])=>`<button class="${p==='card'?'nav-card ':''}${p===state.page?'active':''}" onclick="nav('${p}')">${label}</button>`).join('');document.getElementById('app').innerHTML=views[state.page]();init[state.page]?.()}
 function section(title,subtitle,badge=''){return `<div class="section-title"><div><h2>${title}</h2><p>${subtitle}</p></div>${badge?`<span class="tag">${badge}</span>`:''}</div>`}
 const views={
 home:()=>`<section class="panel">${section('오늘의 탐험 안내','다섯 가지 활동을 연결하면 나의 취업 준비 자료가 완성됩니다.','3시간 실습')}<div class="grid">${[['나를 이해하기','좋아하는 활동과 일하는 방식, 관계의 선호를 살펴봅니다.','self'],['강점과 경험 정리','실제로 한 일에서 강점과 보완할 점을 찾습니다.','strength'],['10년 뒤 직업 도감','늘어날·새로 뜨는·바뀌는·대체 중인 직업 100장을 보고 나와 닮은 직업을 찾아요.','card'],['직업 탐색하기','직업이 하는 일과 준비 조건을 비교합니다.','jobs'],['입사지원서 작성','원본 증명사진으로 실제 서식을 완성합니다.','resume'],['면접 연습','예상 질문에 답하고 기준별 피드백을 받습니다.','interview'],['나의 직업 여권','탐험 과정에서 발견한 내용을 확인합니다.','notes'],['프롬프트 디자인실','역할·맥락·상황·목표·지시·형식 5대 만능 공식 가이드와 실시간 조립기','prompt'],['토닥토닥 마음챙김','지친 나에게 건네는 따뜻한 5줄 위로 편지와 엽서 이미지 저장','heart'],['나만의 노래 만들기','나 자신과 동료, 소중한 사람을 위한 5단계 힐링송과 앨범 표지','song'],['빡친 번역기','참지 말고 털어놓는 내 편 공감과 단호한 프로 비즈니스어 순화','vent']].map(([a,b,p])=>`<div class="tile"><div class="accent"></div><h3>${a}</h3><p>${b}</p><button class="btn light small" onclick="nav('${p}')">시작하기 →</button></div>`).join('')}</div></section><section class="panel">${section('사진과 탐험 캐릭터','앞 강사님이 준비한 사진을 등록하되, 지원서에는 반드시 원본을 사용합니다.')}<div class="two"><div><label class="field"><span>증명사진 파일 선택 (선택 사항)</span><input type="file" id="photo" accept="image/png,image/jpeg"></label><p class="muted">사진은 이 브라우저의 작업 중 메모리에만 둡니다. 외부 AI로 전송하거나 얼굴을 자동 변환하지 않습니다.</p><div id="photoPreview"></div></div><div><p style="margin-top:0;font-weight:800">탐험 안내 캐릭터 선택 (기본 일러스트 · 사진 자동 변환 아님)</p><div class="row">${[0,1,2].map(i=>`<button class="character ${state.avatar===i?'on':''}" onclick="state.avatar=${i};render()"><span class="avatar">${avatarSvg(i)}</span><span class="character-name">${['서연','지윤','민서'][i]}</span></button>`).join('')}</div><p class="muted">한국인 성인 인물로 디자인한 기본 일러스트입니다. 본인의 얼굴사진을 변환하는 AI 기능은 포함되지 않습니다.</p></div></div></section>`,
@@ -3069,26 +3069,6 @@ document.addEventListener('click',e=>{if(e.target&&e.target.id==='ivUse'){const 
 const _vIv=views.interview;views.interview=()=>_vIv().replace('정해진 질문과 체크 기준을 사용하는 교육용 연습입니다. 이 버전에는 자유 대화형 AI 면접관이나 음성 평가 기능은 없습니다.','마이크로 말하거나 글로 답한 뒤 <b>답변 점검하기</b>를 누르면, 고칠 점과 보완한 답변 예시, 그리고 왜 그렇게 답하면 좋은지 설명이 나와요.').replace('답변을 입력하면 질문 관련성, 구체적 사례, 확인할 사실, 수정 방법에 대한 점검 질문이 나타납니다.','답변을 말하거나 입력한 뒤 "답변 점검하기"를 누르면 여기에 결과가 나와요.');
 
 
-/* ===== v13.1: 작성 중 새로고침해도 그대로 (이 기기·이 브라우저에만 3일간 보관) ===== */
-(function(){const KEY='masan-tamheom-v13',TTL=3*24*3600*1000;
- const isObj=v=>v&&typeof v==='object'&&!Array.isArray(v);
- let cleared=false;function save(){if(cleared)return;try{const data={t:Date.now(),y:window.scrollY,s:state};let txt;try{txt=JSON.stringify(data);localStorage.setItem(KEY,txt)}catch(e){const s2=Object.assign({},state,{photoData:null,photo:null,photoType:null});localStorage.setItem(KEY,JSON.stringify({t:Date.now(),y:window.scrollY,s:s2}))}}catch(e){}}
- let tm=null;const later=()=>{clearTimeout(tm);tm=setTimeout(save,400)};
- function restore(){try{const raw=localStorage.getItem(KEY);if(!raw)return null;const d=JSON.parse(raw);if(!d||!d.s||Date.now()-d.t>TTL){localStorage.removeItem(KEY);return null}
-  Object.keys(d.s).forEach(k=>{if(isObj(state[k])&&isObj(d.s[k]))Object.assign(state[k],d.s[k]);else state[k]=d.s[k]});
-  if(state.d){state.d.modal=null}return d}catch(e){return null}}
- const d=restore();
- document.addEventListener('input',later,true);document.addEventListener('change',later,true);document.addEventListener('click',later,true);
- window.addEventListener('pagehide',save);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')save()});window.addEventListener('beforeunload',save);
- const _r=render;render=function(){_r();later()};
- clearAll=function(){let ok=true;try{ok=window.confirm('현재 입력한 사진과 모든 기록을 지우시겠습니까? 이 작업은 되돌릴 수 없습니다.')}catch(e){ok=true}if(!ok)return;cleared=true;clearTimeout(tm);try{localStorage.removeItem(KEY)}catch(e){}window.removeEventListener('pagehide',save);window.removeEventListener('beforeunload',save);location.reload()};
- if(d){render();const y=d.y||0;requestAnimationFrame(()=>setTimeout(()=>window.scrollTo(0,y),60));setTimeout(()=>{try{showToast('작성하던 내용을 불러왔어요. 공용 컴퓨터라면 마친 뒤 "내 입력정보 지우기"를 눌러 주세요.')}catch(e){}},500)}
-})();
-/* v14: 불러온 예전 답 중 지금 10문항 선택지에 없는 값 정리 후 다시 그림 */
-try{if(typeof v14Clean==='function'){v14Clean();render()}}catch(e){}
-
-
-
 /* ===== v14.5: 프롬프트 디자인실(한 페이지 공식판) · 토닥토닥 마음챙김 · 노래 만들기 · 빡친 번역기 독립 뷰 ===== */
 (function(){
   // 1. 상태 초기화
@@ -3872,6 +3852,28 @@ try{if(typeof v14Clean==='function'){v14Clean();render()}}catch(e){}
   views.vent = ventView;
   init.vent = ventBind;
 })();
+
+
+
+/* ===== v13.1: 작성 중 새로고침해도 그대로 (이 기기·이 브라우저에만 3일간 보관) ===== */
+(function(){const KEY='masan-tamheom-v13',TTL=3*24*3600*1000;
+ const isObj=v=>v&&typeof v==='object'&&!Array.isArray(v);
+ let cleared=false;function save(){if(cleared)return;try{const data={t:Date.now(),y:window.scrollY,s:state};let txt;try{txt=JSON.stringify(data);localStorage.setItem(KEY,txt)}catch(e){const s2=Object.assign({},state,{photoData:null,photo:null,photoType:null});localStorage.setItem(KEY,JSON.stringify({t:Date.now(),y:window.scrollY,s:s2}))}}catch(e){}}
+ let tm=null;const later=()=>{clearTimeout(tm);tm=setTimeout(save,400)};
+ function restore(){try{const raw=localStorage.getItem(KEY);if(!raw)return null;const d=JSON.parse(raw);if(!d||!d.s||Date.now()-d.t>TTL){localStorage.removeItem(KEY);return null}
+  Object.keys(d.s).forEach(k=>{if(isObj(state[k])&&isObj(d.s[k]))Object.assign(state[k],d.s[k]);else state[k]=d.s[k]});
+  if(state.d){state.d.modal=null}return d}catch(e){return null}}
+ const d=restore();
+ document.addEventListener('input',later,true);document.addEventListener('change',later,true);document.addEventListener('click',later,true);
+ window.addEventListener('pagehide',save);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')save()});window.addEventListener('beforeunload',save);
+ const _r=render;render=function(){_r();later()};
+ clearAll=function(){let ok=true;try{ok=window.confirm('현재 입력한 사진과 모든 기록을 지우시겠습니까? 이 작업은 되돌릴 수 없습니다.')}catch(e){ok=true}if(!ok)return;cleared=true;clearTimeout(tm);try{localStorage.removeItem(KEY)}catch(e){}window.removeEventListener('pagehide',save);window.removeEventListener('beforeunload',save);location.reload()};
+ if(d){render();const y=d.y||0;requestAnimationFrame(()=>setTimeout(()=>window.scrollTo(0,y),60));setTimeout(()=>{try{showToast('작성하던 내용을 불러왔어요. 공용 컴퓨터라면 마친 뒤 "내 입력정보 지우기"를 눌러 주세요.')}catch(e){}},500)}
+})();
+/* v14: 불러온 예전 답 중 지금 10문항 선택지에 없는 값 정리 후 다시 그림 */
+try{if(typeof v14Clean==='function'){v14Clean();render()}}catch(e){}
+
+
 
 /* v13.2: 내 입력정보 지우기 잘 보이게 */
 (function(){const b=document.createElement('button');b.type='button';b.id='fxClear';b.innerHTML='🗑 내 입력정보 지우기';b.title='이 컴퓨터에 저장된 내 이름·연락처·사진·답변을 모두 지워요';b.onclick=()=>clearAll();document.body.appendChild(b)})();
