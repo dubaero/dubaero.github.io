@@ -1541,7 +1541,7 @@ body.page-sub .wrap{padding:8px 14px 20px!important;max-width:1320px!important}
 
 
 
-/* ===== v14.8: 상단 8개 탭 & 하단 8개 메뉴 탭 완벽 대칭 레이아웃 ===== */
+/* ===== v14.9: 상단 8개 연노랑 3D 탭 & 하단 8개 메뉴 탭 완벽 대칭 3D 레이아웃 ===== */
 .t-prompt { --tb:#f7f2fc; --tbd:#e2d4f2; --ts:#ebe0f8; --ta:#ede4f7; --tac:#bfa3e0; }
 .t-heart { --tb:#fdf2f5; --tbd:#f2d1da; --ts:#f7dfe5; --ta:#fae7ec; --tac:#e5aebb; }
 .t-song { --tb:#fdf8e8; --tbd:#ebdcae; --ts:#f3e8c4; --ta:#faf0c8; --tac:#d8c37d; }
@@ -1550,65 +1550,78 @@ body.page-sub .wrap{padding:8px 14px 20px!important;max-width:1320px!important}
 body.page-sub .hero { display: none !important; }
 body.page-sub .feature-bar { display: grid !important; }
 
-/* 상단 8개 탭: 하단 8개 탭과 비슷한 크기·비율로 정돈 */
+/* 상단 8개 탭: 연한 노란 3D 탭 (하단 3D 탭과 완벽 동일한 크기·비율) */
 .feature-bar {
   display: grid !important;
   grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
   gap: 6px !important;
   margin: 10px 0 6px !important;
+  padding: 0 !important;
 }
 
 .feature-card {
+  position: relative !important;
   display: flex !important;
-  flex-direction: row !important;
+  flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  min-height: 48px !important;
-  padding: 8px 4px !important;
-  border-radius: 10px !important;
-  border: 1.5px solid #dce8e0 !important;
-  background: #ffffff !important;
+  gap: 2px !important;
+  min-height: 52px !important;
+  padding: 6px 3px 5px !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #ecd88a !important;
+  background: linear-gradient(180deg, #fffef2 0%, #fef7d8 100%) !important;
+  color: #382c16 !important;
+  box-shadow: 0 4px 0 #d9be5b, 0 5px 8px rgba(0,0,0,0.05), inset 0 1.5px 0 #ffffff !important;
   cursor: pointer !important;
-  transition: all .15s ease !important;
   text-align: center !important;
   white-space: nowrap !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02) !important;
+  transition: transform 0.1s cubic-bezier(0.2, 0.8, 0.4, 1), box-shadow 0.1s cubic-bezier(0.2, 0.8, 0.4, 1), background 0.15s !important;
 }
 
-.feature-card strong {
-  font-size: 12px !important;
+.feature-card .ti {
+  font-size: 18px !important;
+  line-height: 1 !important;
+  display: block !important;
+  margin: 0 auto 1px !important;
+  transition: transform 0.2s ease !important;
+}
+
+.feature-card .tl {
+  font-size: 11px !important;
   font-weight: 800 !important;
-  color: #264638 !important;
   letter-spacing: -0.4px !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+  line-height: 1.15 !important;
+  color: #382c16 !important;
+  text-align: center !important;
+  display: block !important;
 }
 
 .feature-card:hover {
-  transform: translateY(-1px) !important;
-  border-color: #2f5f4b !important;
-  background: #f6faf7 !important;
+  transform: translateY(-2px) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #fef5cc 100%) !important;
+  box-shadow: 0 6px 0 #d9be5b, 0 7px 12px rgba(0,0,0,0.08), inset 0 1.5px 0 #ffffff !important;
+}
+.feature-card:hover .ti {
+  transform: scale(1.15) !important;
+}
+
+.feature-card:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 #d9be5b, inset 0 2px 4px rgba(0,0,0,0.06) !important;
 }
 
 .feature-card.active {
-  border-color: #2f5f4b !important;
-  background: #e8f4ed !important;
-  box-shadow: 0 2px 7px rgba(47,95,75,0.18) !important;
+  background: linear-gradient(180deg, #fef4b8 0%, #fae682 100%) !important;
+  border-color: #bfa026 !important;
+  color: #241a04 !important;
+  box-shadow: 0 2px 0 #bfa026, inset 0 1.5px 3px rgba(0,0,0,0.08) !important;
+  transform: translateY(2px) !important;
 }
-.feature-card.active strong {
-  color: #163c29 !important;
+.feature-card.active .tl {
+  color: #241a04 !important;
   font-weight: 900 !important;
 }
-
-.feature-card.t-prompt { background: #fcf8fe !important; border-color: #eadbf3 !important; }
-.feature-card.t-heart { background: #fef8f9 !important; border-color: #f7dbe2 !important; }
-.feature-card.t-song { background: #fefdf8 !important; border-color: #f5eccb !important; }
-.feature-card.t-vent { background: #fef8f6 !important; border-color: #f8ded7 !important; }
-
-.feature-card.t-prompt:hover, .feature-card.t-prompt.active { background: #f3e5fa !important; border-color: #bfa3e0 !important; }
-.feature-card.t-heart:hover, .feature-card.t-heart.active { background: #fae4eb !important; border-color: #e5aebb !important; }
-.feature-card.t-song:hover, .feature-card.t-song.active { background: #faefc5 !important; border-color: #d8c37d !important; }
-.feature-card.t-vent:hover, .feature-card.t-vent.active { background: #fae2da !important; border-color: #e2aa99 !important; }
 
 /* 하단 8개 메뉴 탭 (나의 탐험 기록까지) */
 .nav {
@@ -1619,9 +1632,9 @@ body.page-sub .feature-bar { display: grid !important; }
 }
 
 .nav button.tab3d {
-  min-height: 48px !important;
-  padding: 6px 2px !important;
-  border-radius: 10px !important;
+  min-height: 52px !important;
+  padding: 6px 3px 5px !important;
+  border-radius: 12px !important;
 }
 
 @media (max-width: 1100px) {
@@ -1687,14 +1700,14 @@ body.page-sub .feature-bar { display: grid !important; }
 
 </style>
 </head><body><div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 디지털 이음 연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 나의 오늘이<br>더 빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><div class="feature-bar">
-  <button class="feature-card" data-target="self" onclick="nav('self')"><strong>나를 이해하기</strong></button>
-  <button class="feature-card" data-target="card" onclick="nav('card')"><strong>직업 탐색하기</strong></button>
-  <button class="feature-card" data-target="resume" onclick="nav('resume')"><strong>입사지원서 작성하기</strong></button>
-  <button class="feature-card" data-target="interview" onclick="nav('interview')"><strong>면접연습실</strong></button>
-  <button class="feature-card t-prompt" data-target="prompt" onclick="nav('prompt')"><strong>프롬프트 디자인실</strong></button>
-  <button class="feature-card t-heart" data-target="heart" onclick="nav('heart')"><strong>토닥토닥 마음챙김</strong></button>
-  <button class="feature-card t-song" data-target="song" onclick="nav('song')"><strong>나만의 노래 만들기</strong></button>
-  <button class="feature-card t-vent" data-target="vent" onclick="nav('vent')"><strong>빡친 번역기</strong></button>
+  <button class="feature-card" data-target="self" onclick="nav('self')"><span class="ti">🪞</span><span class="tl">나를 이해하기</span></button>
+  <button class="feature-card" data-target="card" onclick="nav('card')"><span class="ti">🔭</span><span class="tl">직업 탐색하기</span></button>
+  <button class="feature-card" data-target="resume" onclick="nav('resume')"><span class="ti">📝</span><span class="tl">입사지원서 작성</span></button>
+  <button class="feature-card" data-target="interview" onclick="nav('interview')"><span class="ti">🎤</span><span class="tl">면접연습실</span></button>
+  <button class="feature-card t-prompt" data-target="prompt" onclick="nav('prompt')"><span class="ti">🪄</span><span class="tl">프롬프트 디자인실</span></button>
+  <button class="feature-card t-heart" data-target="heart" onclick="nav('heart')"><span class="ti">💌</span><span class="tl">토닥토닥 마음챙김</span></button>
+  <button class="feature-card t-song" data-target="song" onclick="nav('song')"><span class="ti">🎵</span><span class="tl">나만의 노래 만들기</span></button>
+  <button class="feature-card t-vent" data-target="vent" onclick="nav('vent')"><span class="ti">🔥</span><span class="tl">빡친 번역기</span></button>
 </div><nav id="nav" class="nav"></nav><div id="app"></div><footer class="footer">디지털 이음 연구소 · 교육용 자기탐색 도구 · 정식 심리검사 또는 직업 적합성 판정이 아닙니다.<br>입력 내용과 사진은 외부 서버에 전송되지 않고, 이 컴퓨터의 브라우저에만 3일간 보관돼요. 공용 컴퓨터라면 마친 뒤 "내 입력정보 지우기"를 눌러 주세요. · v13</footer></div><script>
 const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const themes={"office": ["#eaf2ff", "#2f5e9c"], "media": ["#f2ebfc", "#7850a6"], "food": ["#fff1e5", "#b86b32"], "care": ["#e9f5f1", "#367d68"], "service": ["#fff4ec", "#a45e44"], "industry": ["#e9f1f5", "#456d83"], "startup": ["#ebf5e9", "#43744d"]};
