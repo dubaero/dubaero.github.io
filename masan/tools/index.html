@@ -4129,6 +4129,8 @@ window.addEventListener('hashchange',function(){var k=location.hash.slice(1);if(
 </style>
 <!--FIT-->
 <style id="dbr-fit">
+#v-song .tool.song>p.sub,#v-song .tool.song .sw-desc,#v-song .songmini{display:none!important}
+@media (max-width:899px){#h2-tool .hph{display:none}#v-song .fitgrid>*{margin-bottom:12px}#h2-tool .hcols>*{margin-bottom:10px}}
 @media (min-width:900px){
  body.fitmode footer,body.fitmode .footer{display:none!important}
  body.fitmode .vbar{margin:0 0 6px!important;min-height:0}
@@ -4200,12 +4202,11 @@ window.addEventListener('hashchange',function(){var k=location.hash.slice(1);if(
 <script>
 (function(){
  function $q(s,r){return (r||document).querySelector(s)}
- if(window.innerWidth<900)return;
  /* 노래: 왼쪽 위저드 + 짧은 따라 하기 / 오른쪽 프롬프트 */
  (function(){var t=$q('#v-song .tool.song');if(!t||t.querySelector('.fitgrid'))return;
   var card=t.querySelector('.sw-card'),sg=t.querySelector('.sgrid'),right=sg&&sg.querySelector('.sright');if(!card||!right)return;
   var g=document.createElement('div');g.className='fitgrid';var L=document.createElement('div');
-  L.appendChild(card);var m=document.createElement('div');m.className='songmini';
+  L.appendChild(card);var m=document.createElement('div');m.className='songmini';m.style.display='none';
   m.innerHTML='<b>따라 하기</b><ol><li>번호를 눌러 대상·제목 고르고 가사 확인</li><li><b>제미나이로 열기</b> → 입력창 [+] → 음악 만들기에 붙여 넣기</li><li>장르는 제미나이에서 바로 고르기 (어려우면 "맞춤")</li></ol>';
   L.appendChild(m);g.appendChild(L);g.appendChild(right);sg.parentNode.insertBefore(g,sg);sg.remove();t.classList.add('fitbox-song');})();
  /* 마음 지킴이: 왼쪽 입력 / 오른쪽 위로 */
