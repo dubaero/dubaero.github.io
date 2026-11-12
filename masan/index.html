@@ -4318,43 +4318,7 @@ try{if(typeof v14Clean==='function'){v14Clean();render()}}catch(e){}
 .jx .jx-sinfo span{padding:2px 9px;border-radius:999px;background:#fff;border:1px solid #bbd9cb;color:#1f3a29;font-weight:600}
 .jx .jx-sinfo em{font-style:normal;color:#185f4d;font-weight:900;margin-right:3px;text-decoration:underline}
 .jx .jx-pv.small{flex:0 0 auto;max-height:118px;font-size:12.5px}
-/* 졸라맨 */
-.jx-fig{flex:none;width:92px;height:104px;overflow:visible}
-.jx-fig *{stroke:#26332d;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;fill:none}
-.jx-fig .face *{stroke-width:2.4}
-.jx-fig .eye{fill:#26332d;stroke:none}
-.jx-fig .heart{fill:#e8603c;stroke:none}
-.jx-fig .spark{stroke:#f3b521;stroke-width:2.6}
-.jx-fig .steam{stroke:#9aa7a1;stroke-width:2.4}
-.jx-fig .lid{fill:#e8603c;stroke:#26332d;stroke-width:2.4}
-.jx-fig .belly{fill:#bfe3cf;stroke:#2f6b56;stroke-width:2.2;transform-box:fill-box;transform-origin:center}
-.jx-fig .cheek{fill:#f6b4a0;stroke:none;opacity:.8}
-.jx-fig .who{transform-box:view-box;transform-origin:50px 100px}
-.jx-fig.hug .armL{animation:jxTapL 1s ease-in-out infinite;transform-box:view-box;transform-origin:50px 42px}
-.jx-fig.hug .armR{animation:jxTapR 1s ease-in-out infinite;transform-box:view-box;transform-origin:50px 42px}
-.jx-fig.hug .heart{animation:jxFloat 2.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
-.jx-fig.cheer .who{animation:jxJump .8s ease-in-out infinite}
-.jx-fig.cheer .spark{animation:jxBlink .8s ease-in-out infinite}
-.jx-fig.sad .who{animation:jxSway 3s ease-in-out infinite}
-.jx-fig.angry .who{animation:jxShake .25s linear infinite}
-.jx-fig.boom .who{animation:jxStomp .5s ease-in-out infinite}
-.jx-fig .steam{animation:jxSteam 1s ease-out infinite;transform-box:fill-box;transform-origin:bottom}
-.jx-fig.pop .lid{animation:jxLid .9s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
-.jx-fig.calm .who{animation:jxSway 4s ease-in-out infinite}
-.jx-fig.in .belly{transform:scale(1.55);transition:transform 4s ease-in-out}
-.jx-fig.hold .belly{transform:scale(1.55)}
-.jx-fig.out .belly{transform:scale(.8);transition:transform 6s ease-in-out}
-@keyframes jxTapL{0%,100%{transform:rotate(0)}50%{transform:rotate(-7deg)}}
-@keyframes jxTapR{0%,100%{transform:rotate(0)}50%{transform:rotate(7deg)}}
-@keyframes jxFloat{0%{transform:translateY(4px) scale(.85);opacity:.5}50%{transform:translateY(-6px) scale(1.1);opacity:1}100%{transform:translateY(4px) scale(.85);opacity:.5}}
-@keyframes jxJump{0%,100%{transform:translateY(0)}45%{transform:translateY(-10px)}}
-@keyframes jxBlink{0%,100%{opacity:.2}50%{opacity:1}}
-@keyframes jxSway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
-@keyframes jxShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
-@keyframes jxStomp{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-8px) rotate(-4deg)}60%{transform:translateY(0) rotate(4deg)}}
-@keyframes jxSteam{0%{opacity:0;transform:translateY(4px) scaleY(.6)}40%{opacity:1}100%{opacity:0;transform:translateY(-8px) scaleY(1.1)}}
-@keyframes jxLid{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(-18deg)}}
-@media (prefers-reduced-motion:reduce){.jx-fig *{animation:none!important}}
+
 @media (max-width:900px){.jx-body{grid-template-columns:1fr}.jx.fit .jx-body{height:auto}.jx-col{overflow:visible}.jx .jx-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.jx .jx-lyr{grid-template-columns:1fr}.jx .jx-lyr>div+div{border-left:none;border-top:1px dashed #cfe0d5}.jx .jx-pv{max-height:none}}
 @media (max-width:560px){.jx .jx-row{grid-template-columns:1fr}.jx .jx-sg{grid-template-columns:1fr}.jx .jx-sg-h{padding-top:0}}
 /* 상단: 단계 줄 + 도구 줄 */
@@ -4366,17 +4330,15 @@ body:has(#app .jx) .footer{display:none!important}
 .jx .jx-grid button span{display:none}
 .jx .jx-grid button{padding:8px 9px}
 .jx .jx-l{margin:8px 0 5px}
-.jx-fig{width:80px;height:92px}
 @media (max-height:820px) and (min-width:901px){.jx .jx-chips button{font-size:12.5px;padding:4px 10px}.jx textarea.jx-ta{height:52px;min-height:48px}.jx .jx-five p{font-size:13.5px}.jx .jx-emp p{font-size:13.5px}}
 @media (max-height:860px) and (min-width:901px){
 body:has(#app .jx) .nav button,body:has(#app .jx) .feature-card{min-height:38px!important;padding:3px 3px!important}
 body:has(#app .jx) .nav button .nav-ico,body:has(#app .jx) .feature-card .ti{font-size:15px!important;line-height:1!important}
 body:has(#app .jx) .feature-bar{margin:6px 0 4px!important}
 body:has(#app .jx) .top{padding:8px 16px!important;margin-bottom:8px!important}
-.jx .jx-msg pre{font-size:13px;line-height:1.5}.jx .jx-hero{padding:9px 11px}.jx-fig{width:70px;height:80px}
+.jx .jx-msg pre{font-size:13px;line-height:1.5}.jx .jx-hero{padding:9px 11px}
 }
 
-#jx-h-out .jx-fig{width:96px;height:110px}
 
 /* 노래: 단계 자동 넘김 + 1절·2절 한 판(스크롤 하나) */
 .jx-col.flexcol{display:flex;flex-direction:column}
@@ -4404,6 +4366,103 @@ body:has(#app .jx) .top{padding:8px 16px!important;margin-bottom:8px!important}
 .jx .jx-lyr>div+div{border-left:none;padding-left:18px;box-shadow:inset 1px 0 0 #e0ece6}
 .jx .jx-lyr textarea{display:block;width:100%;overflow:hidden;min-height:0;height:auto;resize:none;flex:none}
 @media (max-width:900px){.jx .jx-lyr>div+div{padding-left:0;box-shadow:none;border-top:1px dashed #cfe0d5;margin-top:10px;padding-top:10px}}
+/* ===== 졸라맨 v3: 상황별 동작 ===== */
+.jx-fig{flex:none;width:96px;height:104px;overflow:visible}
+.jx-fig.big{width:150px;height:162px}
+.jx-fig *{stroke:#26332d;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.jx-fig .face *{stroke-width:2.4}
+.jx-fig .eye{fill:#26332d;stroke:none}
+.jx-fig .hand{fill:#26332d;stroke:none;transform-box:fill-box;transform-origin:center}
+.jx-fig .cheek{fill:#f6b4a0;stroke:none;opacity:.85}
+.jx-fig .heart{fill:#e8603c;stroke:none;transform-box:fill-box;transform-origin:center;animation:fgFloat 2.2s ease-in-out infinite}
+.jx-fig .h2{animation-delay:1.1s}
+.jx-fig .spark{stroke:#f3b521;stroke-width:2.8;animation:fgBlink .8s ease-in-out infinite}
+.jx-fig .steam{stroke:#9aa7a1;stroke-width:2.4;transform-box:fill-box;transform-origin:bottom;animation:fgSteam 1s ease-out infinite}
+.jx-fig .s2{animation-delay:.35s}.jx-fig .s3{animation-delay:.18s}
+.jx-fig .lid{fill:#e8603c;stroke-width:2.4;transform-box:fill-box;transform-origin:center;animation:fgLid .9s ease-in-out infinite}
+.jx-fig .bl{fill:#bfe3cf;stroke:#2f6b56;stroke-width:2.2;transform-box:fill-box;transform-origin:center}
+.jx-fig .txt,.jx-fig .note,.jx-fig .zz{fill:#2f6b56;stroke:none;font:800 13px sans-serif}
+.jx-fig .zz{fill:#5d6f66}
+.jx-fig .drop{fill:#7fb4e0;stroke:none;animation:fgDrop 1.4s ease-in infinite}
+.jx-fig .cloud path{fill:#d7dde2;stroke:#8a97a0;stroke-width:2}
+.jx-fig .rain path{stroke:#7fb4e0;stroke-width:2.2;animation:fgRain .9s linear infinite}
+.jx-fig .cup{fill:#f3c94b;stroke-width:2.2}
+.jx-fig .stm path{stroke:#9aa7a1;stroke-width:2;animation:fgSteam 1.4s ease-out infinite}
+.jx-fig .win{stroke:#9fbcab;stroke-width:2.2;fill:#eef6f1}
+.jx-fig .warm path{stroke:#f3b521;stroke-width:2.2;animation:fgBlink 1.6s ease-in-out infinite}
+.jx-fig .who{transform-box:view-box;transform-origin:60px 118px}
+.jx-fig .hd{transform-box:view-box;transform-origin:60px 39px}
+.jx-fig .aL,.jx-fig .aR{transform-box:view-box;transform-origin:60px 46px}
+.jx-fig .lL,.jx-fig .lR{transform-box:view-box;transform-origin:60px 84px}
+/* 숨 고르기: 4초 들이쉬기(배·팔 올라감) → 4초 멈춤 → 6초 내쉬기(배 줄어듦·입김) = 14초 */
+.jx-fig.p-breath .bl{animation:fgBelly 14s ease-in-out infinite}
+.jx-fig.p-breath .aL{animation:fgArmL 14s ease-in-out infinite}
+.jx-fig.p-breath .aR{animation:fgArmR 14s ease-in-out infinite}
+.jx-fig.p-breath .air-in{animation:fgIn 14s linear infinite}
+.jx-fig.p-breath .air-out{animation:fgOut 14s linear infinite}
+.jx-fig.p-breath .m-c{animation:fgMc 14s linear infinite}
+.jx-fig.p-breath .m-o{animation:fgOut 14s linear infinite}
+.jx-fig.p-breath.go .bl,.jx-fig.p-breath.go .aL,.jx-fig.p-breath.go .aR,.jx-fig.p-breath.go .air-in,.jx-fig.p-breath.go .air-out,.jx-fig.p-breath.go .m-c,.jx-fig.p-breath.go .m-o{animation-iteration-count:3}
+.jx-fig .air-in path{stroke:#2f6b56;stroke-width:2.4}.jx-fig .air-out path,.jx-fig .air-out2 path{stroke:#7fb4e0;stroke-width:2.4}
+@keyframes fgBelly{0%{transform:scale(1)}28.6%{transform:scale(2.5)}57%{transform:scale(2.5)}100%{transform:scale(1)}}
+@keyframes fgArmL{0%{transform:rotate(0)}28.6%,57%{transform:rotate(32deg)}100%{transform:rotate(0)}}
+@keyframes fgArmR{0%{transform:rotate(0)}28.6%,57%{transform:rotate(-32deg)}100%{transform:rotate(0)}}
+@keyframes fgIn{0%,26%{opacity:1}29%,100%{opacity:0}}
+@keyframes fgOut{0%,56%{opacity:0}58%,98%{opacity:1}100%{opacity:0}}
+@keyframes fgMc{0%,56%{opacity:1}58%,98%{opacity:0}100%{opacity:1}}
+.jx-fig.p-sigh .bl{animation:fgSigh 3s ease-in-out infinite}.jx-fig.p-sigh .air-out2{animation:fgBlink 3s ease-in-out infinite}
+@keyframes fgSigh{0%,100%{transform:scale(2.2)}60%{transform:scale(.9)}}
+.jx-fig.p-hug .aL{animation:fgTapL 1s ease-in-out infinite}.jx-fig.p-hug .aR{animation:fgTapR 1s ease-in-out infinite}
+@keyframes fgTapL{0%,100%{transform:rotate(0)}50%{transform:rotate(-8deg)}}@keyframes fgTapR{0%,100%{transform:rotate(0)}50%{transform:rotate(8deg)}}
+.jx-fig.p-cheer .aL{transform:rotate(150deg)}.jx-fig.p-cheer .aR{transform:rotate(-150deg)}.jx-fig.p-cheer .who{animation:fgJump .8s ease-in-out infinite}
+.jx-fig.p-shrug .aL,.jx-fig.p-shrug .aR,.jx-fig.p-shrug .hd{animation:fgShrug 2s ease-in-out infinite}
+@keyframes fgShrug{0%,100%{transform:translateY(0)}35%,65%{transform:translateY(-8px)}}
+.jx-fig.p-fist .aL{transform:rotate(60deg)}.jx-fig.p-fist .aR{transform:rotate(-60deg)}.jx-fig.p-fist .hand{animation:fgFist 2s ease-in-out infinite}
+@keyframes fgFist{0%,45%{transform:scale(1.7)}55%,100%{transform:scale(.6)}}
+.jx-fig.p-stretch .aL{animation:fgStL 3s ease-in-out infinite}.jx-fig.p-stretch .aR{animation:fgStR 3s ease-in-out infinite}.jx-fig.p-stretch .who{animation:fgTall 3s ease-in-out infinite}
+@keyframes fgStL{0%,100%{transform:rotate(0)}40%,70%{transform:rotate(155deg)}}@keyframes fgStR{0%,100%{transform:rotate(0)}40%,70%{transform:rotate(-155deg)}}
+@keyframes fgTall{0%,100%{transform:translateY(0)}40%,70%{transform:translateY(-5px)}}
+.jx-fig.p-neck .hd{animation:fgNeck 4s ease-in-out infinite}
+@keyframes fgNeck{0%,100%{transform:rotate(0)}25%{transform:rotate(-22deg)}75%{transform:rotate(22deg)}}
+.jx-fig.p-scrunch .hd{animation:fgScr 1.6s ease-in-out infinite;transform-origin:60px 26px}
+@keyframes fgScr{0%,100%{transform:scale(1.08)}50%{transform:scale(.82)}}
+.jx-fig.p-shake .who{animation:fgShake .18s linear infinite}.jx-fig.p-shake .aL{animation:fgFlapL .3s linear infinite}.jx-fig.p-shake .aR{animation:fgFlapR .3s linear infinite}
+@keyframes fgFlapL{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(25deg)}}@keyframes fgFlapR{0%,100%{transform:rotate(15deg)}50%{transform:rotate(-25deg)}}
+.jx-fig.p-walk .lL,.jx-fig.p-walk .aR{animation:fgSwA 1s ease-in-out infinite}.jx-fig.p-walk .lR,.jx-fig.p-walk .aL{animation:fgSwB 1s ease-in-out infinite}.jx-fig.p-walk .who{animation:fgBob .5s ease-in-out infinite}
+@keyframes fgSwA{0%,100%{transform:rotate(18deg)}50%{transform:rotate(-18deg)}}@keyframes fgSwB{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(18deg)}}
+@keyframes fgBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.jx-fig.p-tea .aR{animation:fgSip 3s ease-in-out infinite}
+@keyframes fgSip{0%,100%{transform:rotate(0)}50%{transform:rotate(-6deg)}}
+.jx-fig.p-hum .who{animation:fgSway 2s ease-in-out infinite}.jx-fig .note{animation:fgFloat 2s ease-in-out infinite}.jx-fig .n2{animation-delay:.7s}.jx-fig .n3{animation-delay:1.3s}
+.jx-fig.p-look .hd{animation:fgLook 4s ease-in-out infinite}
+@keyframes fgLook{0%,100%{transform:rotate(0)}50%{transform:rotate(8deg)}}
+.jx-fig.p-tired .hd{transform:rotate(22deg)}.jx-fig.p-tired .who{animation:fgSway 4s ease-in-out infinite}.jx-fig .zz{animation:fgFloat 2.4s ease-in-out infinite}.jx-fig .z2{animation-delay:1.2s}
+.jx-fig.p-anx .who{animation:fgShake .3s linear infinite}
+.jx-fig.p-sad .hd{transform:rotate(-12deg)}.jx-fig.p-sad .who{animation:fgSway 4s ease-in-out infinite}
+.jx-fig.p-angry1 .who{animation:fgShake .25s linear infinite}.jx-fig.p-angry2 .who,.jx-fig.p-angry3 .who{animation:fgStomp .5s ease-in-out infinite}
+.jx-fig.p-calm .who{animation:fgSway 4s ease-in-out infinite}
+@keyframes fgFloat{0%{transform:translateY(4px);opacity:.4}50%{transform:translateY(-6px);opacity:1}100%{transform:translateY(4px);opacity:.4}}
+@keyframes fgJump{0%,100%{transform:translateY(0)}45%{transform:translateY(-10px)}}
+@keyframes fgBlink{0%,100%{opacity:.2}50%{opacity:1}}
+@keyframes fgSway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes fgShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+@keyframes fgStomp{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-8px) rotate(-4deg)}60%{transform:translateY(0) rotate(4deg)}}
+@keyframes fgSteam{0%{opacity:0;transform:translateY(4px) scaleY(.6)}40%{opacity:1}100%{opacity:0;transform:translateY(-8px) scaleY(1.1)}}
+@keyframes fgLid{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(-18deg)}}
+@keyframes fgDrop{0%{transform:translateY(0);opacity:1}100%{transform:translateY(10px);opacity:0}}
+@keyframes fgRain{0%{transform:translateY(0);opacity:1}100%{transform:translateY(8px);opacity:0}}
+@media (prefers-reduced-motion:reduce){.jx-fig *{animation-duration:0s!important}}
+/* 따라 하기 상자 */
+.jx .jx-rest{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;background:#eef6f1;border:1.5px solid #cfe3d6}
+.jx .jx-rest .jx-five p{color:#1d5a40;font-weight:700}
+.jx .jx-phase{font-size:22px;font-weight:900;color:#2f6b56;margin:2px 0}
+.jx .jx-phase small{display:block;font-size:13px;font-weight:700;color:#5d6f66}
+.jx .jx-dots{display:flex;gap:5px;margin-top:4px}.jx .jx-dots i{width:10px;height:10px;border-radius:50%;background:#cfe3d6}.jx .jx-dots i.on{background:#2f6b56}
+
+.jx .jx-five p.jx-phase{font-size:26px;font-weight:900;color:#2f6b56;margin:0 0 2px;line-height:1.25}
+.jx .jx-five p.jx-phase small{display:block;font-size:13.5px;font-weight:700;color:#5d6f66;margin-top:2px}
+.jx-fig.big{width:124px;height:134px}
+.jx .jx-rest{padding:8px 12px}
 </style>
 <script>/* ===== 2026.11.12 v2 한 화면 도구 (일반 구직자용): 프롬프트 디자인실 · 토닥토닥 마음챙김 · 나만의 노래 만들기 · 빡침 번역기 ===== */
 (function(){
@@ -4439,17 +4498,40 @@ function shell(title,sub,tabs,left,right){return '<section class="panel jx"><div
 function after(){bindMic();fit();setTimeout(fit,60);try{window.scrollTo(0,0)}catch(e){}}
 
 /* ---------- 졸라맨 ---------- */
-function fig(mode,lv){
- var face={smile:'<path d="M45 26 Q50 30.5 55 26"/>',sad:'<path d="M45 28.5 Q50 24.5 55 28.5"/>',angry:'<path d="M45.5 28 L54.5 28"/><path d="M42 14.5 L47.5 17.5 M58 14.5 L52.5 17.5"/>',calm:'<path d="M45 26 Q50 29.5 55 26"/>',oh:'<circle cx="50" cy="27.5" r="2"/>'};
- var arms={hug:'<path class="armL" d="M50 42 L38 52 L59 50"/><path class="armR" d="M50 42 L62 52 L41 50"/>',cheer:'<path d="M50 42 L35 24"/><path d="M50 42 L65 24"/>',sad:'<path d="M50 42 L41 63"/><path d="M50 42 L59 63"/>',angry:'<path d="M50 42 L37 51 L45 59"/><path d="M50 42 L63 51 L55 59"/>',breath:'<path d="M50 42 L35 57"/><path d="M50 42 L65 57"/>',calm:'<path d="M50 42 L40 62"/><path d="M50 42 L60 62"/>'};
- var m=mode,fc={hug:'smile',cheer:'smile',sad:'sad',angry:'angry',breath:'oh',calm:'calm'}[m]||'smile';
- var ex='';
- if(m==='hug')ex='<path class="heart" d="M76 24 C69 18 70 11 76 15 C82 11 83 18 76 24Z"/><path class="heart" style="animation-delay:1.1s" d="M24 30 C19 26 20 21 24 24 C28 21 29 26 24 30Z"/>';
- if(m==='cheer')ex='<path class="spark" d="M27 17 l-5 -5 M24 26 l-7 0 M73 17 l5 -5 M76 26 l7 0"/>';
- if(m==='angry'){ex='<path class="steam" d="M41 7 q-3 -4 0 -8"/><path class="steam" style="animation-delay:.4s" d="M59 7 q3 -4 0 -8"/>';if(lv>=1)ex+='<path class="steam" style="animation-delay:.2s" d="M50 4 q-3 -4 0 -8"/>';if(lv>=2)ex+='<path class="lid" d="M39 13 Q50 3 61 13 Z"/>'}
- var belly=(m==='breath'||m==='calm')?'<circle class="belly" cx="50" cy="55" r="5"/>':'';
- var cls='jx-fig '+(m==='angry'?(lv>=2?'angry pop boom':lv>=1?'boom':'angry'):m);
- return '<svg class="'+cls+'" viewBox="0 0 100 110" aria-hidden="true"><g class="who"><circle cx="50" cy="22" r="11"/><g class="face"><circle class="eye" cx="45.5" cy="20" r="1.8"/><circle class="eye" cx="54.5" cy="20" r="1.8"/>'+face[fc]+(m==='hug'||m==='cheer'?'<circle class="cheek" cx="42" cy="25" r="2.2"/><circle class="cheek" cx="58" cy="25" r="2.2"/>':'')+'</g><path d="M50 33 V68"/>'+belly+arms[m]+'<path d="M50 68 L40 96 M50 68 L60 96"/></g>'+ex+'</svg>'}
+function fig(pose,lv,big){
+ var P=pose;if(P==='angry')P=lv>=2?'angry3':lv>=1?'angry2':'angry1';
+ var EY='<circle class="eye" cx="55" cy="24" r="1.9"/><circle class="eye" cx="65" cy="24" r="1.9"/>',EC='<path d="M52 24 h5 M63 24 h5"/>';
+ var M={smile:'<path d="M54.5 30 Q60 35 65.5 30"/>',sad:'<path d="M54.5 33 Q60 28.5 65.5 33"/>',flat:'<path d="M55 31.5 L65 31.5"/>',o:'<circle cx="60" cy="31.5" r="2.4"/>'};
+ var face=EY+M.smile,cheek=false;
+ var arms='<g class="aL"><path d="M60 46 L44 72"/><circle class="hand" cx="44" cy="72" r="2.6"/></g><g class="aR"><path d="M60 46 L76 72"/><circle class="hand" cx="76" cy="72" r="2.6"/></g>';
+ var ex='',belly='';
+ switch(P){
+ case 'breath':face=EY+'<g class="m-c">'+M.flat+'</g><g class="m-o">'+M.o+'</g>';belly='<circle class="bl" cx="60" cy="64" r="6"/>';ex='<g class="air-in"><path d="M86 20 L72 26"/><path d="M76 21 L72 26 L77 29"/><path d="M90 30 L76 30"/></g><g class="air-out"><path d="M66 33 q8 2 14 -1"/><path d="M66 36 q9 4 17 2"/><path d="M66 30 q7 -2 12 -6"/></g>';break;
+ case 'sigh':face=EC+M.o;belly='<circle class="bl" cx="60" cy="64" r="6"/>';ex='<g class="air-out2"><path d="M66 33 q8 2 14 -1"/><path d="M66 36 q9 4 17 2"/></g><text class="txt" x="84" y="22">휴~</text>';break;
+ case 'hug':cheek=true;arms='<g class="aL"><path d="M60 46 L46 58 L68 56"/></g><g class="aR"><path d="M60 46 L74 58 L52 56"/></g>';ex='<path class="heart" d="M92 26 C84 19 85 11 92 16 C99 11 100 19 92 26Z"/><path class="heart h2" d="M26 36 C21 32 22 26 26 29 C30 26 31 32 26 36Z"/>';break;
+ case 'cheer':cheek=true;ex='<path class="spark" d="M30 14 l-5 -5 M27 24 l-8 0 M90 14 l5 -5 M93 24 l8 0"/>';break;
+ case 'shrug':break;
+ case 'fist':break;
+ case 'stretch':face=EC+M.o;break;
+ case 'neck':face=EC+M.smile;break;
+ case 'eyes':face=EC+M.smile;arms='<g class="aL"><path d="M60 46 L46 42 L52 25"/><circle class="hand" cx="52" cy="25" r="3.4"/></g><g class="aR"><path d="M60 46 L74 42 L68 25"/><circle class="hand" cx="68" cy="25" r="3.4"/></g>';ex='<g class="warm"><path d="M44 16 l-4 -4 M76 16 l4 -4 M60 8 v-5"/></g>';break;
+ case 'scrunch':face='<path d="M52 22 l5 3 M68 22 l-5 3"/><path d="M54 31 Q60 34 66 31"/>';break;
+ case 'shake':face=EC+M.o;break;
+ case 'walk':break;
+ case 'tea':face=EC+M.smile;arms='<g class="aL"><path d="M60 46 L44 72"/><circle class="hand" cx="44" cy="72" r="2.6"/></g><g class="aR"><path d="M60 46 L78 56 L72 38"/></g>';ex='<rect class="cup" x="69" y="34" width="10" height="11" rx="2"/><g class="stm"><path d="M72 30 q-2 -4 0 -8"/><path d="M77 30 q2 -4 0 -8"/></g>';break;
+ case 'hum':face=EC+M.o;ex='<text class="note n1" x="80" y="24">♪</text><text class="note n2" x="90" y="38">♫</text><text class="note n3" x="26" y="30">♪</text>';break;
+ case 'look':face='<circle class="eye" cx="57" cy="24" r="1.9"/><circle class="eye" cx="67" cy="24" r="1.9"/>'+M.flat;ex='<rect class="win" x="88" y="14" width="24" height="28" rx="2"/><path class="win" d="M100 14 V42 M88 28 H112"/>';break;
+ case 'tired':face=EC+M.sad;ex='<text class="zz z1" x="78" y="16">z</text><text class="zz z2" x="86" y="8">Z</text>';break;
+ case 'anx':face=EY+'<path d="M54 32 q3 -2 6 0 q3 2 6 0"/>';ex='<path class="drop" d="M75 16 q4 6 0 9 q-4 -3 0 -9Z"/>';break;
+ case 'sad':face=EY+M.sad;ex='<g class="cloud"><path d="M42 6 q0 -7 8 -7 q3 -6 10 -3 q6 -4 11 2 q7 0 7 7 Z"/></g><g class="rain"><path d="M48 10 v5 M58 12 v5 M68 10 v5"/></g>';break;
+ case 'calm':face=EY+M.smile;belly='';break;
+ default:
+  if(P.indexOf('angry')===0){face=EY+M.flat+'<path d="M51 18 L57 21 M69 18 L63 21"/>';arms='<g class="aL"><path d="M60 46 L46 58 L54 68"/><circle class="hand" cx="54" cy="68" r="3"/></g><g class="aR"><path d="M60 46 L74 58 L66 68"/><circle class="hand" cx="66" cy="68" r="3"/></g>';ex='<path class="steam" d="M50 8 q-3 -4 0 -8"/><path class="steam s2" d="M70 8 q3 -4 0 -8"/>';if(P!=='angry1')ex+='<path class="steam s3" d="M60 5 q-3 -4 0 -8"/>';if(P==='angry3')ex+='<path class="lid" d="M47 17 Q60 5 73 17 Z"/>'}
+ }
+ if(cheek)face+='<circle class="cheek" cx="51" cy="29" r="2.4"/><circle class="cheek" cx="69" cy="29" r="2.4"/>';
+ return '<svg class="jx-fig p-'+P+(big?' big':'')+'" viewBox="0 0 120 130" aria-hidden="true"><g class="who"><g class="hd"><circle cx="60" cy="26" r="13"/><g class="face">'+face+'</g></g><path d="M60 39 V84"/>'+belly+arms+'<g class="lL"><path d="M60 84 L48 118"/></g><g class="lR"><path d="M60 84 L72 118"/></g></g>'+ex+'</svg>'}
+var MOODPOSE={'지쳤어요':'tired','속상해요':'sad','마음이 무거워요':'sad','불안해요':'anx','앞날이 막막해요':'look','자신감이 떨어졌어요':'sad','억울해요':'angry','허무해요':'tired','외로워요':'sad','자꾸 비교돼요':'look','화가 나요':'angry','서운해요':'sad','초조해요':'anx','우울해요':'sad','답답해요':'sigh','겁이 나요':'anx','가족에게 미안해요':'hug','혼란스러워요':'look','설레요':'cheer','그래도 해 보고 싶어요':'cheer'};
+function restPose(t){var R=[[/복식호흡/,'breath'],[/으쓱/,'shrug'],[/주먹/,'fist'],[/기지개/,'stretch'],[/고개|목 옆/,'neck'],[/나비/,'hug'],[/손바닥/,'eyes'],[/찡그/,'scrunch'],[/털기/,'shake'],[/콧노래/,'hum'],[/창밖|먼 곳|보이는 것/,'look'],[/물이나 차|차 한 잔/,'tea'],[/칭찬/,'cheer'],[/한숨/,'sigh'],[/걷기/,'walk']];for(var i=0;i<R.length;i++)if(R[i][0].test(t))return R[i][1];return 'calm'}
 
 /* ---------- 쉼 하나 ---------- */
 var REST=['복식호흡: 배에 손을 얹고 코로 4초 들이마셔 배를 풍선처럼 부풀리고, 입으로 6초 후~ 내쉬기. 세 번.','어깨를 귀까지 으쓱 올렸다가 툭 떨어뜨리기, 세 번.','두 주먹을 5초 동안 꽉 쥐었다가 확 펴기. 손끝까지 힘이 빠지는 걸 느껴 보기, 세 번.','두 팔을 하늘로 쭉 뻗어 기지개 + 하품 크게 한 번.','고개를 오른쪽, 왼쪽으로 천천히 기울이며 목 옆을 쭉 늘이기, 각 5초.','두 팔을 X자로 가슴에 얹고 나비처럼 토닥토닥 열 번. "괜찮아, 잘하고 있어."','두 손바닥을 싹싹 비벼 따뜻하게 만든 뒤 눈 위에 10초 올려 두기.','얼굴을 쭈글쭈글 최대한 찡그렸다가 활짝 펴기, 세 번. 거울 보면 웃음 보장.','강아지가 물 털듯 온몸을 탈탈 털기, 10초. 손목·발목까지!','좋아하는 노래 한 소절 콧노래로 흥얼거리기.','창밖이나 먼 곳을 1분 동안 멍하니 바라보기. 눈도 마음도 쉬어요.','보이는 것 5개, 들리는 것 3개를 천천히 찾아보기.','따뜻한 물이나 차 한 잔을 천천히, 온도와 향을 느끼며 마시기.','작게 소리 내어 나를 칭찬하기: "나 오늘 진짜 고생했다. 최고다!"','한숨 크게 "휴우~" 세 번 쉬기. 한숨은 참지 말고 시원하게!','동네 한 바퀴 천천히 걷기. 발바닥 느낌에만 집중.'];
@@ -4505,11 +4587,13 @@ var H=S.h;if(!H.tab)H.tab='keep';var cur5=[];
 function hMatch(t){var best=-1,sc=0;HC.forEach(function(c,i){var n=c.k.filter(function(w){return t.indexOf(w)>-1}).length;if(n>sc){sc=n;best=i}});return best}
 function hFive(){var t=(H.text||'').trim(),ci=t?hMatch(t):-1,c=ci>=0?HC[ci]:null,m=H.moods;if(!t&&!m.length)return null;
  var L=[];if(c)L.push(c.L[0]);m.forEach(function(x){if(L.length<3)L.push(MOODS[x])});if(L.length<2)L.push(c?rnd(c.L.slice(1)):rnd(CHEER));
- L.push(rnd(CHEER));L.push(rnd(HEND));L.push('쉼 하나: '+rnd(REST));
+ L.push(rnd(CHEER));L.push(rnd(HEND));
  return {title:c?c.h:(m.length?m.join(' · '):'오늘을 버틴 나에게'),L:L}}
+function hPose(){var m=H.moods;return m.length?(MOODPOSE[m[m.length-1]]||'hug'):'hug'}
+function hRest(t){var b=q('#jx-h-rest');if(!b)return;H.rest=t||H.rest||REST[0];b.innerHTML=fig(restPose(H.rest))+'<div class="jx-five"><h4 style="color:#1d5a40">쉼 하나 · 그림 보고 따라 해 보세요</h4><p>'+E(H.rest)+'</p><div class="jx-acts" style="margin-top:6px"><button type="button" class="jx-b mini" data-h="rest">다른 쉼 해 보기 ›</button></div></div>'}
 function hShow(){var box=q('#jx-h-out');if(!box)return;var r=hFive();
- if(!r){box.innerHTML=fig('sad')+'<div class="jx-five"><h4>💌 나를 위한 다정한 5줄</h4><p class="jx-empty">왼쪽에서 오늘 있었던 일을 털어놓거나<br>지금 내 마음을 골라 보세요. 여기에 바로 위로와 응원이 떠요.</p></div>';return}
- cur5=r.L;box.innerHTML=fig(H.moods.length>1||!H.moods.length?'cheer':'hug')+'<div class="jx-five"><h4>💌 나를 위한 위로와 응원 · '+E(r.title)+'</h4>'+r.L.map(function(x,i){var n=r.L.length;return '<p'+(i===n-3||i===n-2?' class="cheer"':i===n-1?' class="rest"':'')+'>'+E(x)+'</p>'}).join('')+'</div>'}
+ if(!r){box.innerHTML=fig('sad')+'<div class="jx-five"><h4>💌 나를 위한 위로와 응원</h4><p class="jx-empty">왼쪽에서 오늘 있었던 일을 털어놓거나<br>지금 내 마음을 골라 보세요. 여기에 바로 위로와 응원이 떠요.</p></div>';cur5=[];return}
+ cur5=r.L;var n=r.L.length;box.innerHTML=fig(hPose())+'<div class="jx-five"><h4>💌 나를 위한 위로와 응원 · '+E(r.title)+'</h4>'+r.L.map(function(x,i){return '<p'+(i>=n-2?' class="cheer"':'')+'>'+E(x)+'</p>'}).join('')+'</div>'}
 function pcTabs(){var tabs='',body='';PC_HG.forEach(function(g,gi){var cnt=0,ch='';g[1].forEach(function(x){var on=H.hard.indexOf(x)>-1;if(on)cnt++;ch+='<button type="button" data-pch="'+E(x)+'"'+(on?' class="on"':'')+'>'+E(x)+'</button>'});
  tabs+='<button type="button" data-pct="'+gi+'"'+(H.ptab===gi?' class="on"':'')+'>'+E(g[0])+(cnt?'<em>'+cnt+'</em>':'')+'</button>';if(H.ptab===gi)body='<div class="jx-chips warm">'+ch+'</div>'});
  return '<div class="jx-ptabs">'+tabs+'</div>'+body}
@@ -4532,7 +4616,7 @@ function heartView(){
  if(H.tab==='keep'){
   left='<span class="jx-l">오늘 있었던 일 <small>말이나 글로 털어놓기 · 나만 보는 곳이에요</small></span><div class="jx-tools">'+micBtn('jx-h-in')+'</div><textarea class="jx-ta" id="jx-h-in" placeholder="예) 서류를 다섯 군데 냈는데 한 곳도 연락이 없어요. 내가 너무 늦은 건 아닌지 걱정돼요.">'+E(H.text)+'</textarea>'+
   '<span class="jx-l">지금 내 마음 <small>최대 3개까지 골라요</small></span><div class="jx-chips" id="jx-h-mood">'+Object.keys(MOODS).map(function(m){return '<button type="button" data-mood="'+E(m)+'"'+(H.moods.indexOf(m)>-1?' class="on"':'')+'>'+E(m)+'</button>'}).join('')+'</div>';
-  right='<div class="jx-hero" id="jx-h-out"></div><div class="jx-acts"><button type="button" class="jx-b mini" data-h="again">다른 응원 듣기</button><button type="button" class="jx-b mini" data-h="rest">다른 쉼 해 보기</button><button type="button" class="jx-b mini" data-h="cp5">5줄 복사</button><button type="button" class="jx-b mini fill" data-ht="card">이 마음으로 엽서 받기 ›</button></div>'+
+  right='<div class="jx-hero" id="jx-h-out"></div><div class="jx-rest" id="jx-h-rest"></div><div class="jx-acts"><button type="button" class="jx-b mini" data-h="again">다른 응원 듣기</button><button type="button" class="jx-b mini" data-h="cp5">위로 복사</button><button type="button" class="jx-b mini fill" data-ht="card">이 마음으로 엽서 받기 ›</button></div>'+
   '<p class="jx-help" style="margin-top:auto"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가면 사람에게 꼭 말해 주세요. 자살예방 상담전화 <a href="tel:109">109</a> · 정신건강 위기상담 <a href="tel:15770199">1577-0199</a></p>';
  }else{
   left='<span class="jx-l">① 요즘 나를 힘들게 하는 것 <small>여러 개 골라도 돼요</small></span><div id="jx-pc-hard">'+pcTabs()+'</div><input class="jx-in" id="jx-pc-mine" style="margin-top:6px" placeholder="직접 쓰기 (예: 자격증 시험이 다음 주라 마음이 급해요)" value="'+E(H.mine)+'">'+
@@ -4546,7 +4630,7 @@ function heartView(){
  }
  return shell('토닥토닥 마음챙김','털어놓거나 마음을 고르면 바로 위로와 응원이 떠요.',tabs,left,right)}
 function heartBind(){var el=q('.jx');
- if(H.tab==='keep'){hShow();var ta=q('#jx-h-in'),tm;ta.addEventListener('input',function(){H.text=ta.value;clearTimeout(tm);tm=setTimeout(hShow,450)})}
+ if(H.tab==='keep'){hShow();hRest();var ta=q('#jx-h-in'),tm;ta.addEventListener('input',function(){H.text=ta.value;clearTimeout(tm);tm=setTimeout(hShow,450)})}
  else{var pv=q('#jx-pc-pv');var up=function(){pv.innerHTML=postH()};up();
   [['#jx-pc-mine','mine'],['#jx-pc-to','to'],['#jx-pc-date','date']].forEach(function(a){var i=q(a[0]);i.addEventListener('input',function(){H[a[1]]=i.value;up()})});el._up=up}
  el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
@@ -4557,9 +4641,9 @@ function heartBind(){var el=q('.jx');
   if(b.dataset.pch){var x=b.dataset.pch,j=H.hard.indexOf(x);if(j>-1)H.hard.splice(j,1);else H.hard.push(x);q('#jx-pc-hard').innerHTML=pcTabs();el._up();return}
   if(b.dataset.pcs!=null){H.style=+b.dataset.pcs;q('#jx-pc-style').querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===b)});el._up();return}
   var a=b.dataset.h;if(!a)return;
-  if(a==='again')hShow();
-  if(a==='rest'&&cur5.length){var li=cur5.length-1;cur5[li]='쉼 하나: '+rnd(REST,cur5[li].replace('쉼 하나: ',''));var ps=q('#jx-h-out').querySelectorAll('p');if(ps[li])ps[li].textContent=cur5[li]}
-  if(a==='cp5'&&cur5.length)cp(cur5.join('\n'),'위로 5줄을 복사했어요.');
+  if(a==='again'){hShow();hRest(rnd(REST,H.rest))}
+  if(a==='rest')hRest(rnd(REST,H.rest));
+  if(a==='cp5'&&cur5.length)cp(cur5.join('\n')+'\n쉼 하나: '+H.rest,'위로와 응원을 복사했어요.');
   if(a==='gpt'){var p=postP();cp(p,'프롬프트를 넣었어요. ChatGPT 입력창 맨 위에 이름과 날짜만 확인하고 보내세요.');gpt(p)}
   if(a==='gem')gem(postP());
   if(a==='cpp')cp(postP())});
@@ -4632,12 +4716,15 @@ function ventView(){var idx=0;
  '<div class="jx-row" style="margin-top:6px"><label><span class="jx-l" style="margin-top:0">4. 누구에게?</span><select class="jx-in" id="jx-v-who">'+WHO.map(function(w){return '<option'+(w===V.who?' selected':'')+'>'+w+'</option>'}).join('')+'</select></label><label><span class="jx-l" style="margin-top:0">어떻게?</span><select class="jx-in" id="jx-v-how">'+HOW.map(function(w){return '<option'+(w===V.how?' selected':'')+'>'+w+'</option>'}).join('')+'</select></label></div>'+
  '<span class="jx-l">5. 해결 방안 10가지 <small>눌러서 오른쪽 문자를 바꿔 보세요</small></span><div class="jx-ap" id="jx-v-ap"></div>';
  var right='<div class="jx-flav" id="jx-v-flav"><button type="button" data-fl="mild"'+(V.fl==='mild'?' class="on"':'')+'>순한 맛</button><button type="button" data-fl="spicy"'+(V.fl==='spicy'?' class="on"':'')+'>매운맛</button><span>여럿이 볼 땐 순한 맛</span><span style="margin-left:auto"></span><button type="button" class="jx-b mini" data-v="again">다른 말</button><button type="button" class="jx-b mini" data-v="say">소리로 듣기</button></div>'+
- '<div class="jx-hero" id="jx-v-emp"><div id="jx-v-fig"></div><div class="jx-five"><div class="jx-emp" id="jx-v-txt"></div><div class="jx-acts" style="margin-top:6px;align-items:center"><button type="button" class="jx-b mini fill" data-v="breath">숨 고르기 (4·4·6초 세 번)</button><button type="button" class="jx-b mini" data-v="rest">다른 숨 고르기 ›</button></div><p class="jx-bstat" id="jx-v-rest"></p></div></div>'+
+ '<div class="jx-hero" id="jx-v-emp"><div id="jx-v-fig"></div><div class="jx-five"><div class="jx-emp" id="jx-v-txt"></div></div></div>'+
+ '<div class="jx-rest" id="jx-v-br"><div id="jx-v-bfig">'+fig('breath')+'</div><div class="jx-five" id="jx-v-btxt"></div></div>'+
   '<div class="jx-msg"><div class="jx-msg-h"><h4>순화된 문자 · <span id="jx-v-aph"></span></h4><button type="button" class="jx-b mini" data-v="mcp">문자 복사</button></div><pre id="jx-v-msg"></pre></div>'+
  '<div class="jx-acts"><button type="button" class="jx-b fill" data-v="gpt">ChatGPT로 더 다듬기</button><button type="button" class="jx-b" data-v="gem">제미나이로 더 다듬기</button><span class="jx-note" style="align-self:center"><span class="o" style="background:#ffe7cf;color:#a24d12;font-weight:800;text-decoration:underline">[ ] 주황 칸</span>은 내 상황으로 바꿔요</span></div>';
  return shell('빡침 번역기','같이 빡쳐 주고, 숨 고르고, 순화된 문자로 바꿔 드려요.','',left,right)}
 var bRun=false;
-function ventBind(){said=null;bRun=false;vEmp(true);vMsg();var el=q('.jx');
+function vRest(t){var h=q('#jx-v-bfig'),bt=q('#jx-v-btxt');if(!h||bRun)return;if(t){V.rest=t;h.innerHTML=fig(restPose(t));bt.innerHTML='<h4 style="color:#1d5a40;margin:0 0 4px">다른 숨 고르기 · 그림 보고 따라 해 보세요</h4><p class="jx-note" style="font-size:13.5px;color:#22352d;font-weight:600">'+E(t)+'</p><div class="jx-acts" style="margin-top:6px"><button type="button" class="jx-b mini fill" data-v="breath">숨 고르기 (4·4·6초)</button><button type="button" class="jx-b mini" data-v="rest">다른 것 ›</button></div>';return}
+ h.innerHTML=fig('breath');bt.innerHTML='<h4 style="color:#1d5a40;margin:0 0 4px">숨 고르고 보내기</h4><p class="jx-note" style="font-size:13.5px;color:#22352d">졸라맨처럼 <b>코로 4초 들이쉬어 배를 부풀리고</b> · 4초 멈추고 · <b>입으로 6초 후~</b> 내쉬어요. 세 번.</p><div class="jx-acts" style="margin-top:6px"><button type="button" class="jx-b mini fill" data-v="breath">같이 숨 고르기 시작</button><button type="button" class="jx-b mini" data-v="rest">다른 숨 고르기 ›</button></div>'}
+function ventBind(){said=null;bRun=false;vRest();vEmp(true);vMsg();var el=q('.jx');
  var ta=q('#jx-v-in'),tm;ta.addEventListener('input',function(){V.text=ta.value;var hit=FLAT.findIndex(function(s){return s.in===V.text.trim()});if(hit<0&&V.cur>=0){V.cur=-1;q('#jx-v-sit').querySelectorAll('button').forEach(function(x){x.classList.remove('on')})}clearTimeout(tm);tm=setTimeout(function(){vEmp(true);vMsg()},350)});
  q('#jx-v-who').onchange=function(){V.who=this.value;vMsg()};q('#jx-v-how').onchange=function(){V.how=this.value;vMsg()};
  el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
@@ -4648,12 +4735,17 @@ function ventBind(){said=null;bRun=false;vEmp(true);vMsg();var el=q('.jx');
   var a=b.dataset.v;if(!a)return;
   if(a==='again'){vEmp(true);V.ap=(V.ap+1)%AP.length;vMsg()}
   if(a==='say'){if(!('speechSynthesis' in window)){T('이 브라우저는 읽어 주기를 지원하지 않아요.');return}speechSynthesis.cancel();var u=new SpeechSynthesisUtterance((window._jxSay||'').replace(/삐—/g,'삐'));u.lang='ko-KR';u.rate=1.05;speechSynthesis.speak(u)}
-  if(a==='rest'){var r=q('#jx-v-rest');r.textContent='쉼 하나: '+rnd(REST,r.textContent.replace('쉼 하나: ',''))}
+  if(a==='rest'){vRest(rnd(REST,V.rest));return}
   if(a==='mcp')cp(vText(),'문자를 복사했어요. [ ] 칸을 채워서 보내세요.');
   if(a==='gpt'){var p=vPrompt();cp(p,'프롬프트를 넣었어요.');gpt(p)}
   if(a==='gem')gem(vPrompt());
-  if(a==='breath'){if(bRun)return;bRun=true;var holder=q('#jx-v-fig'),st=q('#jx-v-rest');holder.innerHTML=fig('breath');var f=holder.querySelector('svg'),ph=[['들이쉬기','in',4],['멈추기','hold',4],['내쉬기','out',6]],i=0,n=0;
-   (function nx(){if(!document.body.contains(holder)){bRun=false;return}if(n>=3){holder.innerHTML=fig('calm');st.textContent='좋아요! 이제 차분하게 아래 문자를 보내 볼까요?';bRun=false;return}var p=ph[i];f.setAttribute('class','jx-fig breath '+p[1]);var t=p[2];st.textContent=(n+1)+'번째 · '+p[0]+' '+t;var iv=setInterval(function(){t--;if(t>0)st.textContent=(n+1)+'번째 · '+p[0]+' '+t;else clearInterval(iv)},1000);setTimeout(function(){i++;if(i>2){i=0;n++}nx()},p[2]*1000)})()}});
+  if(a==='breath'){if(bRun)return;bRun=true;var holder=q('#jx-v-bfig'),bt=q('#jx-v-btxt');holder.innerHTML=fig('breath',0,1);var f=holder.querySelector('svg');f.classList.add('go');try{q('#jx-v-br').scrollIntoView({block:'nearest',behavior:'smooth'})}catch(e){}
+   var ph=[['들이쉬기','코로 천천히, 배를 풍선처럼',4],['멈추기','배를 부풀린 채로 잠깐',4],['내쉬기','입으로 후~ 길게',6]],i=0,n=0;
+   (function nx(){if(!document.body.contains(holder)){bRun=false;return}
+    if(n>=3){holder.innerHTML=fig('calm');bt.innerHTML='<p class="jx-phase">잘했어요!<small>마음이 조금 가라앉았나요? 이제 차분하게 문자를 보내 볼까요?</small></p><div class="jx-acts"><button type="button" class="jx-b mini fill" data-v="breath">한 번 더</button><button type="button" class="jx-b mini" data-v="rest">다른 숨 고르기 ›</button></div>';bRun=false;return}
+    var p=ph[i],t=p[2];var dots='<div class="jx-dots">'+[0,1,2].map(function(k){return '<i'+(k<=n?' class="on"':'')+'></i>'}).join('')+'</div>';
+    function draw(){bt.innerHTML='<p class="jx-phase">'+p[0]+' '+t+'<small>'+p[1]+' · '+(n+1)+'번째 / 3번</small></p>'+dots}
+    draw();var iv=setInterval(function(){t--;if(t>0)draw();else clearInterval(iv)},1000);setTimeout(function(){i++;if(i>2){i=0;n++}nx()},p[2]*1000)})()}});
  after()}
 
 /* =====================================================================
@@ -4707,7 +4799,14 @@ function promptBind(){var pv=q('#jx-p-pv'),ta=q('#jx-p-in'),el=q('.jx');function
    D. 나만의 노래 만들기 : 이름 · 전할 대상 · 제목 → 1절|2절 가사 → 바로 가져가기
    ===================================================================== */
 var SWHO=[['나 자신','나를 믿고 응원하는 노래'],['소중한 가족','부모님·배우자·자녀'],['함께 일하는 동료','같이 땀 흘리는 사람'],['오랜 친구','언제나 내 편'],['함께 배우는 동기','같이 다시 시작하는 우리'],['직접 입력','내가 전하고 싶은 사람']];
-var STITLE=['오늘도 한 걸음 더','수고했어, 나의 오늘','다시 뛰는 내 심장','빛나는 내일을 향해','고마워요, 함께여서','직접 입력'];
+var STL=[['오늘도 한 걸음 더','수고했어, 나의 오늘','다시 뛰는 내 심장','늦은 출발은 없어','나는 나를 믿어','{N}, 이제 시작이야','될 때까지 해 볼래','나의 두 번째 봄','빛나는 내일을 향해','괜찮아, 잘하고 있어','거울 속 나에게','다시 피는 꽃'],
+ ['고마워요, 우리 가족','늦은 밤 켜 둔 불빛','당신이 있어 다시 걸어','우리 집 가장 따뜻한 자리','사랑한다는 말 대신','함께라서 행복해','엄마도 다시 꿈꿔','{N}의 가족에게','오늘 저녁은 내가 웃게 해 줄게','우리 집 응원단'],
+ ['함께 걷는 동료여','커피 한 잔의 힘','같이 하자는 그 말','우리가 있어 든든해','내일도 웃으며 만나','고마운 내 짝꿍','마감 앞의 우리','같은 자리, 같은 마음'],
+ ['언제나 내 편','오래된 사진 속 우리','고마운 내 친구야','너라면 잘할 거야','우리 같이 빛나자','연락이 뜸해도','철없던 그날처럼','{N}의 오랜 친구에게'],
+ ['다시 시작하는 우리','같은 교실, 같은 꿈','함께라면 할 수 있어','서툰 클릭의 기적','우리의 두 번째 출발','각자의 자리에서 빛나','쉬는 시간의 수다','될 때까지 함께'],
+ ['{W}에게','고마운 {W}','당신 덕분에','함께라서 다행이야','이 노래를 {W}에게','잊지 않을게','{W}, 고마워요','그날의 따뜻함']];
+function stFill(t){var n=((G.name||'').trim().replace(/\s+/g,''))||'나';if(/^[가-힣]{3}$/.test(n))n=n.slice(1);return t.split('{N}').join(n).split('{W}').join(gW())}
+function stPick(){var L=STL[G.who].slice(),o=[];while(L.length&&o.length<5){o.push(L.splice(Math.floor(Math.random()*L.length),1)[0])}G.topts=o.map(stFill);G.toptsFor=G.who}
 var LYR=[
  ['알람 소리에 눈을 뜨는 아침\n거울 속 나에게 살짝 웃어 봐\n늦었다고 말하던 어제는 안녕\n오늘부터 다시 시작이야\n\n{T}, 나를 믿어 볼래\n천천히 가도 괜찮아, 멈추지만 않으면 돼','서툰 손으로 적어 본 이력서\n한 줄 한 줄이 나의 이야기\n떨리는 마음도 나의 용기야\n문을 두드리는 나를 응원해\n\n{T}, 나를 믿어 볼래\n될 때까지 해 보는 거야, 내일은 더 빛날 테니까'],
  ['바쁜 아침 서로 챙기던 손길\n말하지 못한 고마움이 쌓였어\n늦은 밤 불 켜 둔 우리 집\n그 불빛이 나를 버티게 해\n\n{T}, 사랑하는 우리 가족\n당신이 있어 나는 다시 걸어','새로운 길 앞에 망설일 때\n"할 수 있어" 건네준 그 한마디\n이제는 내가 웃게 해 줄게\n조금 더 단단해진 모습으로\n\n{T}, 사랑하는 우리 가족\n함께라서 오늘도 행복해'],
@@ -4715,11 +4814,11 @@ var LYR=[
  ['오래된 사진 속 우리 둘\n철없이 웃던 그날의 우리\n연락이 뜸해도 변함없이\n언제나 내 편이던 너\n\n{T}, 고마운 내 친구야\n네가 있어 나는 외롭지 않아','새로운 길에 선 나에게\n"너라면 잘할 거야" 웃어 준 너\n그 말 하나로 다시 힘을 내\n이번엔 내가 너를 응원할게\n\n{T}, 고마운 내 친구야\n우리 같이 빛나는 내일로 가자'],
  ['처음 만난 교실 낯선 자리\n쭈뼛쭈뼛 건넨 첫인사\n모르는 건 서로 물어 가며\n하나씩 함께 배워 온 우리\n\n{T}, 다시 시작하는 우리\n같이 가서 더 멀리 갈 수 있어','서툰 클릭 한 번에도 웃고\n완성한 결과물에 박수 치던\n그 마음 그대로 간직하며\n각자의 자리에서 빛날 거야\n\n{T}, 다시 시작하는 우리\n될 때까지 해 보자, 함께라면 할 수 있어'],
  ['문득 떠오른 {W}의 얼굴\n고마운 마음 전하고 싶어서\n서툰 글씨로 적어 본 노래\n내 마음이 닿았으면 해\n\n{T}, {W}에게\n당신 덕분에 오늘도 힘을 내','힘들었던 날 곁에 있어 준\n그 따뜻함을 잊지 않을게\n이제는 내가 웃게 해 줄게\n더 단단해진 모습으로\n\n{T}, {W}에게\n함께라서 내일이 기대돼']];
-function sgDef(){return {step:1,name:'',who:0,whoC:'',ti:0,tiC:'',l1:'',l2:'',ed:false}}
+function sgDef(){return {step:1,name:'',who:0,whoC:'',title:'',tiC:'',topts:null,toptsFor:-1,l1:'',l2:'',ed:false}}
 if(!S.sg)S.sg=sgDef();
 var G=S.sg;if(!G.step)G.step=1;
 function gW(){return G.who===5?((G.whoC||'').trim()||'고마운 당신'):SWHO[G.who][0]}
-function gT(){return G.ti===5?((G.tiC||'').trim()||'나만의 노래'):STITLE[G.ti]}
+function gT(){if(G.title==='__c')return (G.tiC||'').trim()||'나만의 노래';return G.title||stFill(STL[G.who][0])}
 function gLyr(){if(G.ed)return [G.l1,G.l2];var L=LYR[G.who],w=gW(),t=gT();return L.map(function(x){return x.split('{T}').join(t).split('{W}').join(w)})}
 function sgPrompt(){var l=gLyr(),n=(G.name||'').trim();return '아래 가사로 노래를 만들어 줘.\n\n[노래 정보]\n- 제목: '+gT()+'\n- 작사: '+(n||'나')+'\n- 전할 대상: '+gW()+'\n\n[가사]\n[1절]\n'+l[0]+'\n\n[2절]\n'+l[1]+'\n\n[부탁]\n- 가사는 바꾸지 말고 그대로 불러 줘.\n- 장르와 분위기는 가사에 가장 잘 어울리게 골라 줘. (제미나이 화면에서 내가 직접 골라도 돼)\n- 앨범 표지는 '+gW()+'에게 전하는 마음이 느껴지는 따뜻한 그림으로, 그림 안에 글자는 넣지 마.'}
 function sgPH(){var n=(G.name||'').trim();return '아래 가사로 노래를 만들어 줘.\n\n<span class="k">[노래 정보]</span>\n- 제목: <span class="o">'+E(gT())+'</span>\n- 작사: <span class="o">'+E(n||'나')+'</span>\n- 전할 대상: <span class="o">'+E(gW())+'</span>\n\n<span class="k">[가사]</span> 위 1절·2절 그대로\n\n<span class="k">[부탁]</span>\n- <span class="g">가사는 바꾸지 말고 그대로</span> 불러 줘.\n- 장르와 분위기는 가사에 어울리게 (제미나이 화면에서 직접 골라도 돼)\n- 앨범 표지는 따뜻한 그림으로, <span class="g">그림 안에 글자는 넣지 마.</span>'}
@@ -4729,8 +4828,8 @@ function songView(){var st=G.step,body='';
  if(st===1)body='<h4 class="jx-q">STEP 1. 노래에 들어갈 내 이름을 적어 주세요</h4><input class="jx-in" id="jx-s-name" placeholder="예: 김민지 (작사가로 들어가요)" value="'+E(G.name)+'"><div class="jx-acts" style="margin-top:10px"><button type="button" class="jx-b fill" data-s="next">다음: 전할 대상 고르기 ›</button></div><p class="jx-note" style="margin-top:8px">이름 없이 넘어가도 돼요. 엔터를 눌러도 다음으로 넘어가요.</p>';
  if(st===2)body='<h4 class="jx-q">STEP 2. 누구에게 전할 노래인가요? <small>고르면 바로 다음으로 넘어가요</small></h4><div class="jx-opts">'+SWHO.map(function(w,i){return '<button type="button" data-sw="'+i+'"'+(G.who===i?' class="on"':'')+'><b>'+E(w[0])+'</b><span>'+E(w[1])+'</span></button>'}).join('')+'</div>'+
   (G.who===5?'<div class="jx-tools" style="margin-top:8px"><input class="jx-in" id="jx-s-whoc" placeholder="예: 함께 공부한 새일센터 동기들" value="'+E(G.whoC)+'" style="flex:1"><button type="button" class="jx-b fill" data-s="next">다음 ›</button></div>':'');
- if(st===3)body='<h4 class="jx-q">STEP 3. 노래 제목을 골라 주세요 <small>고르면 바로 가사가 완성돼요</small></h4><div class="jx-opts">'+STITLE.map(function(t,i){return '<button type="button" data-st="'+i+'"'+(G.ti===i?' class="on"':'')+'><b>'+E(t)+'</b></button>'}).join('')+'</div>'+
-  (G.ti===5?'<div class="jx-tools" style="margin-top:8px"><input class="jx-in" id="jx-s-tic" placeholder="제목을 적어 주세요" value="'+E(G.tiC)+'" style="flex:1"><button type="button" class="jx-b fill" data-s="next">완성 ›</button></div>':'');
+ if(st===3){if(!G.topts||G.toptsFor!==G.who)stPick();body='<h4 class="jx-q">STEP 3. 노래 제목을 골라 주세요 <small>'+E(gW())+'에게 어울리는 제목이에요 · 고르면 바로 가사 완성</small></h4><div class="jx-opts">'+G.topts.map(function(t,i){return '<button type="button" data-st="'+i+'"'+(G.title===t?' class="on"':'')+'><b>'+E(t)+'</b></button>'}).join('')+'<button type="button" data-st="c"'+(G.title==='__c'?' class="on"':'')+'><b>직접 입력</b><span>내가 정한 제목</span></button></div><div class="jx-acts" style="margin-top:8px"><button type="button" class="jx-b mini" data-s="more">다른 제목 보기 ↻</button></div>'+
+  (G.title==='__c'?'<div class="jx-tools" style="margin-top:8px"><input class="jx-in" id="jx-s-tic" placeholder="제목을 적어 주세요" value="'+E(G.tiC)+'" style="flex:1"><button type="button" class="jx-b fill" data-s="next">완성 ›</button></div>':'')}
  if(st===4)body='<div class="jx-done"><b>가사가 완성됐어요!</b><p>오른쪽에서 가사를 바로 고칠 수 있어요. 마음에 들면 <u>제미나이에서 노래 만들기</u>를 누르세요.</p><div class="jx-sinfo"><span><em>작사</em>'+E((G.name||'').trim()||'나')+'</span><span><em>전할 대상</em>'+E(gW())+'</span><span><em>제목</em>'+E(gT())+'</span></div></div><p class="jx-note" style="margin-top:10px">노래 장르·분위기(발라드, 경쾌한 팝 등)는 제미나이에서 노래를 만들 때 바로 고를 수 있어요. 바꾸고 싶은 단계는 위 번호를 누르면 돼요.</p>';
  var left=steps+'<div class="jx-stepbody">'+body+'</div><div class="jx-acts" style="margin-top:auto;padding-top:12px">'+(st>1?'<button type="button" class="jx-b mini" data-s="prev">‹ 이전</button>':'')+'<button type="button" class="jx-b mini warn" data-s="reset">처음부터 새로 만들기 ↻</button></div>';
  var l=gLyr();
@@ -4751,8 +4850,9 @@ function songBind(){var el=q('.jx'),l1=q('#jx-s-l1'),l2=q('#jx-s-l2');el.querySe
  [l1,l2].forEach(function(t){t.addEventListener('input',function(){G.ed=true;G.l1=l1.value;G.l2=l2.value;grow()})});
  el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
   if(b.dataset.sg){go(+b.dataset.sg);return}
-  if(b.dataset.sw!=null){var nw=+b.dataset.sw;if(G.ed&&nw!==G.who&&!confirm('직접 고친 가사가 새 가사로 바뀌어요. 바꿀까요?'))return;if(nw!==G.who)G.ed=false;G.who=nw;if(nw===5){render();return}go(3);return}
-  if(b.dataset.st!=null){var nt=+b.dataset.st,nwT=nt===5?((G.tiC||'').trim()||'나만의 노래'):STITLE[nt];if(G.ed){G.l1=G.l1.split(gT()).join(nwT);G.l2=G.l2.split(gT()).join(nwT)}G.ti=nt;if(nt===5){render();return}go(4);return}
+  if(b.dataset.sw!=null){var nw=+b.dataset.sw;if(G.ed&&nw!==G.who&&!confirm('직접 고친 가사가 새 가사로 바뀌어요. 바꿀까요?'))return;if(nw!==G.who){G.ed=false;G.title='';G.topts=null}G.who=nw;if(nw===5){render();return}go(3);return}
+  if(b.dataset.st!=null){var old=gT();if(b.dataset.st==='c'){G.title='__c';render();return}G.title=G.topts[+b.dataset.st];if(G.ed){G.l1=G.l1.split(old).join(gT());G.l2=G.l2.split(old).join(gT())}go(4);return}
+  if(b.dataset.s==='more'){stPick();render();return}
   var a=b.dataset.s;if(!a)return;
   if(a==='next'){go(G.step+1);return}
   if(a==='prev'){go(G.step-1);return}
