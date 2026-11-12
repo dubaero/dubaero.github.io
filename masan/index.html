@@ -5135,4 +5135,133 @@ views.song=frameView('song');init.song=frameBind;
 if(['prompt','heart','vent','song'].indexOf(state.page)>-1)render();
 })();
 </script>
+<!--ZT--><style id="dbr-zt">.ztabs{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 8px;padding:4px;background:#eef6f1;border-radius:12px}
+.ztabs button{font:inherit;font-size:12.5px;font-weight:700;padding:6px 11px;border-radius:9px;border:0;background:transparent;color:#4d6a5f;cursor:pointer;line-height:1.25}
+.ztabs button i{font-style:normal;display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:#d5e7dc;color:#2f6b56;font-size:10.5px;margin-right:4px}
+.ztabs button.done{color:#2f6b56}.ztabs button.done::after{content:" ✓";color:#2f6b56}
+.ztabs button.on{background:#fff;color:#1e3630;box-shadow:0 1px 4px #1e363022}
+.ztabs.zsub{background:#fff8e6}.ztabs.zsub button{font-size:11.5px;padding:4px 8px}.ztabs.zsub button.on{background:#c96a2b;color:#fff}.ztabs.zsub button.on i{background:#fff;color:#c96a2b}
+.zpane[hidden]{display:none!important}
+.znext{margin-top:10px;font:inherit;font-size:13px;font-weight:700;padding:8px 14px;border-radius:10px;border:1.5px solid #2f6b56;background:#fff;color:#2f6b56;cursor:pointer}
+.znext:hover{background:#2f6b56;color:#fff}
+.zcaut .rv-c{margin:0!important;max-width:none!important}
+.zcaut .rv-chk{margin-top:10px}
+@media(min-width:900px){
+ .rv-split{min-height:0}
+ .rv-form.zfit{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+ .rv-form.zfit .zpanes{flex:1;min-height:0;overflow:auto;padding-right:4px}
+ .rv-form.zfit>.row{margin-top:8px;flex:none}
+ .rv-split>.rv-side{max-height:100%;overflow:auto;position:static!important}
+ .rv-form.zfit .rv-q textarea{min-height:150px}
+ .zint .zcols{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:start}
+ .zint .zcol>*{margin-top:0!important;margin-bottom:10px!important}
+ .zint .itabs{gap:6px!important}.zint .itab{padding:6px 10px!important}
+ .zint .result{padding:12px 16px!important}
+ .zint .voice-tools{padding:10px 12px!important}
+ .zint .znote{font-size:11px!important;line-height:1.4}
+ .zint textarea{min-height:90px!important;height:90px}
+ .zint .section-title,.zint .banner{margin-bottom:8px!important}
+ .ztop{margin-bottom:10px}
+ .zpass{display:grid!important;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+ .zpass>.section-title,.zpass>.row{grid-column:1/-1}
+ .zpass>*{margin:0!important}
+ .zpass .result{padding:12px 16px!important}
+ .zpass .result h3{margin:0 0 6px!important;font-size:16px}
+ .zpass .pp-head{padding:12px!important}
+ .zman .mn-head{padding-bottom:8px!important}
+ .zman .mn-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
+ .zman .mn-box{padding:12px 14px!important;min-height:0!important}
+ .zman .mn-av{width:110px!important;height:auto!important}
+ .zst .zpanes{min-height:0}
+ .zst textarea{min-height:70px!important;height:70px}
+ .zst .q3d{margin-top:0!important}
+}
+
+body[data-page="resume"] .footer,body[data-page="interview"] .footer,body[data-page="notes"] .footer,body[data-page="strength"] .footer,body[data-page="resume"] footer,body[data-page="interview"] footer,body[data-page="notes"] footer,body[data-page="strength"] footer{display:none!important}
+@media(min-width:900px){
+ .rv .rv-info{padding:6px 12px!important;margin-bottom:8px!important}
+ .rv .rv-info .rv-fmt{margin-top:4px!important}
+ .rv-split{align-items:stretch!important;overflow:hidden}
+ .rv-form.zfit{height:100%;max-height:100%}
+ .rv .section-title{margin-bottom:6px!important}
+ .zpass .pp-head{padding:8px 12px!important}.zpass .pp-none,.zpass .pp-photo{width:70px!important;height:84px!important}
+ .zpass>.row .btn{padding:8px 14px!important;min-height:0!important}
+ .zman .mn-head{display:flex;gap:16px;align-items:center}.zman .mn-head h2,.zman .mn-head [class*="title"]{font-size:28px!important}
+ .zman .mn-box p,.zman .mn-box li{font-size:13px}
+}
+.voice-start{background:#2f6b56!important;border-color:#2f6b56!important;color:#fff!important}
+@media(min-width:900px){.zpass .result{min-height:0!important}.zpass .result p{margin:4px 0!important}.zpass .two{gap:10px!important}}
+
+.zhide{display:none!important}
+@media(min-width:900px){
+ .zman .mn-box{grid-column:auto!important;grid-row:auto!important}
+ .zman .mn-box h3,.zman .mn-box h4{font-size:15px!important;margin-bottom:4px!important}
+ .zman .mn-head{min-height:0!important;padding-top:0!important}
+ .zman .mn-head>div:last-child>*{margin-top:2px!important;margin-bottom:2px!important}
+ .zman .mn-av{width:90px!important}
+ .zman .mn-foot{margin-top:10px!important}
+}
+</style><script>/* ===== 2026.11.12 탭 정리: 입사지원서·면접·탐험기록·강점·도감 말풍선 ===== */
+(function(){
+var MEM=window.__zt||(window.__zt={}),busy=false,PREV={};
+function q(s,r){return (r||document).querySelector(s)}function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function mkTabs(host,before,items,key,opt){opt=opt||{};
+ var bar=document.createElement('div');bar.className='ztabs'+(opt.cls?' '+opt.cls:'');var panes=[];
+ var wrap=document.createElement('div');wrap.className='zpanes';
+ items.forEach(function(it,i){var b=document.createElement('button');b.type='button';b.innerHTML=(opt.num?'<i>'+(i+1)+'</i>':'')+it.label;b.dataset.zi=i;bar.appendChild(b);
+  var p=document.createElement('div');p.className='zpane';it.nodes.forEach(function(n){if(n)p.appendChild(n)});
+  if(opt.next&&i<items.length-1){var nx=document.createElement('button');nx.type='button';nx.className='znext';nx.textContent='다음: '+items[i+1].label.replace(/<[^>]+>/g,'')+' ›';nx.dataset.zgo=i+1;p.appendChild(nx)}
+  panes.push(p);wrap.appendChild(p)});
+ host.insertBefore(bar,before);host.insertBefore(wrap,before);
+ function go(i){i=Math.max(0,Math.min(items.length-1,i));MEM[key]=i;qa('button',bar).forEach(function(b,k){b.classList.toggle('on',k===i);b.classList.toggle('done',!!(opt.done&&opt.done(panes[k])))});panes.forEach(function(p,k){p.hidden=k!==i});if(opt.onGo)opt.onGo(i);wrap.scrollTop=0}
+ bar.addEventListener('click',function(e){var b=e.target.closest('[data-zi]');if(b)go(+b.dataset.zi)});
+ wrap.addEventListener('click',function(e){var b=e.target.closest('[data-zgo]');if(b)go(+b.dataset.zgo)});
+ if(opt.auto)wrap.addEventListener('change',function(e){var p=e.target.closest('.zpane'),i=panes.indexOf(p);if(i<0||i>=items.length-1)return;setTimeout(function(){if(opt.auto(p)&&!p.contains(document.activeElement))go(i+1);else if(opt.auto(p)&&e.target.tagName==='SELECT')go(i+1)},350)});
+ go(MEM[key]||0);return {go:go,panes:panes,bar:bar}}
+function filled(p,skip){var f=qa('input[type=text],input:not([type]),textarea,select',p).filter(function(x){return x.offsetParent!==null||true}).filter(function(x){return !(skip&&skip(x))});return f.length>0&&f.every(function(x){return String(x.value||'').trim()!==''})}
+
+/* 입사지원서 */
+function resume(){var form=q('.rv-form');if(!form||form.dataset.zt)return;form.dataset.zt=1;
+ var H=qa(':scope>h3.rv-h',form),tips=qa(':scope>p.rv-tip',form),blk=qa(':scope>.rv-block',form),row=q(':scope>.row',form);
+ H.forEach(function(h){h.style.display='none'});
+ var items=[{label:'인적사항·지원 직종',nodes:[q(':scope>.rv-grid',form),q(':scope>.rv-jobsel',form),q(':scope>.rv-hint',form)]}];
+ ['교육','자격','경력','경험'].forEach(function(n,i){items.push({label:n,nodes:(i===0&&tips[0]?[tips[0]]:[]).concat([blk[i]])})});
+ [['motive','지원동기'],['pros','성격 장단점'],['career','직무 경험'],['plan','입사 후 포부']].forEach(function(a,i){items.push({label:a[1],nodes:(i===0&&tips[1]?[tips[1]]:[]).concat([q('#rvq-'+a[0])])})});
+ var cs=q('#rvCaut');if(cs){var cards=qa('.rv-c',cs),chk=q('.rv-chk',cs);var box=document.createElement('div');box.className='zcaut';cs.style.display='none';
+  var inner=document.createElement('div');box.appendChild(inner);
+  mkTabs(inner,null,cards.map(function(c){var h=q('h4',c);var t=h?h.innerText.replace(/^\s*\d+\s*/,'').trim():'';return {label:t,nodes:[c]}}),'caut',{num:1,cls:'zsub'});
+  if(chk)box.appendChild(chk);items.push({label:'작성 시 주의점',nodes:[box]})}
+ mkTabs(form,row,items,'resume',{auto:function(p){return filled(p,function(x){return x.id==='rvJobIn'||x.closest('.zcaut')})},next:1,done:function(p){return filled(p,function(x){return x.id==='rvJobIn'})}});
+ form.classList.add('zfit')}
+/* 면접 연습 */
+function interview(){var it=q('#app .itabs');if(!it||it.closest('.zint'))return;var sec=it.parentNode;if(sec.dataset.zt)return;sec.dataset.zt=1;
+ var L=document.createElement('div'),R=document.createElement('div'),g=document.createElement('div');g.className='zcols';L.className='zcol';R.className='zcol';
+ var kids=Array.prototype.slice.call(sec.children);var fb=q('#feedbackArea',sec);var after=false;
+ var brow=null;kids.forEach(function(k){if(k.classList.contains('section-title')||k.classList.contains('banner'))return;if(k===fb)after=true;if(!after&&k.classList.contains('row')&&k.querySelector('#feedbackBtn')){brow=k;return}(after?R:L).appendChild(k)});if(brow)R.insertBefore(brow,R.firstChild);
+ var note=qa(':scope>p.muted',L)[0];if(note)note.classList.add('znote');
+ g.appendChild(L);g.appendChild(R);sec.appendChild(g);sec.classList.add('zint')}
+/* 탐험 기록 */
+function notes(){var man=q('#manual');if(!man)return;var pass=man.previousElementSibling;if(!pass||man.dataset.zt)return;man.dataset.zt=1;
+ pass.classList.add('zpass');man.classList.add('zman');
+ var bar=document.createElement('div');bar.className='ztabs ztop';bar.innerHTML='<button type="button" data-zn="0">나의 직업 여권</button><button type="button" data-zn="1">나의 사용설명서</button>';
+ pass.parentNode.insertBefore(bar,pass);
+ function go(i){MEM.notes=i;pass.classList.toggle('zhide',i!==0);man.classList.toggle('zhide',i!==1);qa('button',bar).forEach(function(b,k){b.classList.toggle('on',k===i)})}
+ bar.addEventListener('click',function(e){var b=e.target.closest('[data-zn]');if(b)go(+b.dataset.zn)});go(MEM.notes||0)}
+/* 강점과 경험 */
+function strength(){var sec=q('#app .stpage');if(!sec||sec.dataset.zt)return;sec.dataset.zt=1;
+ var kids=Array.prototype.slice.call(sec.children).filter(function(k){return !k.classList.contains('section-title')});
+ var h3s=kids.filter(function(k){return k.tagName==='H3'});if(h3s.length<3)return;
+ var g=[[],[],[]],gi=-1,tail=null;kids.forEach(function(k){if(k.tagName==='H3'){gi=Math.min(2,h3s.indexOf(k))}if(gi<0)return;if(k.tagName==='BUTTON'&&k.classList.contains('btn')&&gi===2){tail=k;return}g[gi].push(k)});
+ var T=mkTabs(sec,tail,[{label:'잘하는 활동 3가지',nodes:g[0]},{label:'보완하고 싶은 점',nodes:g[1]},{label:'내가 실제로 해본 일',nodes:g[2]}],'strength',{next:1,auto:function(p){return filled(p)},done:function(p){var m=p.innerText.match(/\((\d)\/3\)/);return m?m[1]==='3':filled(p)}});
+ [0,1].forEach(function(i){var m=T.panes[i].innerText.match(/\((\d)\/3\)/);var k='st'+i;if(m){if(m[1]==='3'&&PREV[k]&&PREV[k]!=='3'&&MEM.strength===i)setTimeout(function(){T.go(i+1)},500);PREV[k]=m[1]}});
+ sec.classList.add('zst')}
+/* 도감 말풍선: 하단 오른쪽, 작게 */
+function bubbles(){qa('#app g.cbub:not([data-zb])').forEach(function(g){g.setAttribute('data-zb',1);var r=q('rect',g);if(!r)return;var x=+r.getAttribute('x')+ +r.getAttribute('width'),y=+r.getAttribute('y')+ +r.getAttribute('height'),s=.68;g.setAttribute('transform','translate('+(214-x*s).toFixed(1)+' '+(156-y*s).toFixed(1)+') scale('+s+')')})}
+function run(){if(busy)return;busy=true;try{var p=(window.state&&state.page)||document.body.dataset.page;
+ if(p==='resume')resume();if(p==='interview')interview();if(p==='notes')notes();if(p==='strength')strength();if(p==='card')bubbles();fit()}catch(e){console.error(e)}busy=false}
+function fit(){var e=q('#app .rv-split');if(e&&window.innerWidth>=900){var r=e.getBoundingClientRect();var h=Math.max(420,window.innerHeight-r.top-window.scrollY-14);e.style.height=h+'px';var over=document.documentElement.scrollHeight-window.innerHeight;if(over>0)e.style.height=Math.max(380,h-over-2)+'px'}}
+var app=document.getElementById('app');if(app)new MutationObserver(function(){if(!busy)setTimeout(run,0)}).observe(app,{childList:true,subtree:true});
+window.addEventListener('resize',fit);setTimeout(run,50);
+})();
+</script><!--/ZT-->
 </body></html>
