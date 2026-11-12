@@ -1869,7 +1869,12 @@ body:has(#app .jx) .wrap{padding-top:8px!important}
 .fr-b{padding:2px 14px 10px 46px;font-size:13px;line-height:1.6;color:#33463f}
 .fr-b p{margin:2px 0}.fr-b ol{margin:4px 0 8px;padding-left:18px}
 </style>
-</head><body><div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 디지털이음연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 나의 내일이<br>더 빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><nav id="nav" class="nav"></nav><div class="feature-bar">
+<style id="dbr-pgx">
+#jx-p-g .pg-x{font:inherit;font-size:12px;padding:3px 10px;border-radius:999px;border:1.5px dashed #b9d3c4;background:#fff;color:#1e3630;width:150px;outline:none}
+#jx-p-g .pg-x:focus{border-style:solid;border-color:#2f6b56}
+#jx-p-g .pg-x:not(:placeholder-shown){background:#fff8e6;border-color:#ecd99a}
+</style>
+</head><body><div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 디지털이음연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 내일이<br>빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><nav id="nav" class="nav"></nav><div class="feature-bar">
   <button class="feature-card t-prompt" data-target="prompt" onclick="nav('prompt')"><span class="ti">🪄</span><span class="tl">프롬프트 디자인실</span></button>
   <button class="feature-card t-heart" data-target="heart" onclick="nav('heart')"><span class="ti">💗</span><span class="tl">토닥토닥 마음챙김</span></button>
   <button class="feature-card t-song" data-target="song" onclick="nav('song')"><span class="ti">🎼</span><span class="tl">나만의 노래 만들기</span></button>
@@ -4943,7 +4948,7 @@ const RECIPES = [
 return {PANTRY:PANTRY,COMMON:COMMON,norm:norm,RECIPES:RECIPES};})();
 
 function fHas(set,item,pantry){if(set.has(item))return true;if(pantry&&FRG.PANTRY.indexOf(item)>-1)return true;var ok=false;set.forEach(function(h){if(h.length>1&&(h.indexOf(item)>-1||item.indexOf(h)>-1))ok=true});return ok}
-function fList(){var sv=pSel(P.k),have=new Set(sv.b.map(function(i){return FRG.COMMON[i]})),type=['meal','snack','all'][sv.a],pantry=sv.c!==1;
+function fList(){var sv=pSel(P.k),have=new Set(sv.b.map(function(i){return FRG.COMMON[i]}));String(sv.xb||'').split(/[,，、\s]+/).map(function(x){return x.trim()}).filter(Boolean).forEach(function(x){have.add(FRG.norm(x))}),type=['meal','snack','all'][sv.a],pantry=sv.c!==1;
  if(!have.size)return {have:have,list:[]};
  var list=FRG.RECIPES.filter(function(r){return type==='all'||r.t===type}).map(function(r){
   var nh=r.need.filter(function(i){return fHas(have,i,pantry)}),oh=r.opt.filter(function(i){return fHas(have,i,pantry)}),miss=r.need.filter(function(i){return !fHas(have,i,pantry)}).concat(r.extra||[]);
@@ -5022,15 +5027,15 @@ var TASKS=[
      {l:'말투',k:'c',o:['쉽고 친근하게','정중하고 단정하게','유쾌하게']}],
   task:'고른 상황에 맞는 글을 길이별로 써 줘.',
   fmt:'짧은 문자 1개 + 단톡방용 1개 + 조금 긴 버전 1개',ph:'예) 다음 주 토요일 6시 우리 집 집들이예요'}];
-if(!S.p2)S.p2={k:0,sel:{},text:''};
-var P=S.p2;
-function pSel(i){if(!P.sel[i]){var o={};TASKS[i].g.forEach(function(g){o[g.k]=g.m?[]:0});P.sel[i]=o}return P.sel[i]}
-function pVal(g,v){return g.m?(v.length?v.map(function(x){return g.o[x]}).join(', '):'(고르지 않음)'):g.o[v]}
-function pParts(){var t=TASKS[P.k],sv=pSel(P.k);return {role:'너는 '+t.role+'야.',ctx:t.g.map(function(g){return '- '+g.l.replace(/ \(.*\)$/,'').replace(/\?$/,'')+': '+pVal(g,sv[g.k])}).join('\n'),task:t.task,mine:(P.text||'').trim(),ph:'['+t.ph+']',fmt:t.fmt,safe:t.safe||''}}
+if(!S.p3)S.p3={k:0,sel:{},text:''};
+var P=S.p3;
+function pSel(i){var o=P.sel[i],ok=!!o;if(ok)TASKS[i].g.forEach(function(g){if(g.m?!Array.isArray(o[g.k]):typeof o[g.k]!=='number')ok=false});if(!ok){o={};TASKS[i].g.forEach(function(g){o[g.k]=g.m?[]:0;o['x'+g.k]=''});P.sel[i]=o}return o}
+function pVal(g,v,x){x=(x||'').trim();if(g.m){var a=v.map(function(i){return g.o[i]});if(x)a.push(x);return a.length?a.join(', '):'(고르지 않음)'}return x?(v===-1?x:g.o[v]+' / 기타: '+x):g.o[v]}
+function pParts(){var t=TASKS[P.k],sv=pSel(P.k);return {role:'너는 '+t.role+'야.',ctx:t.g.map(function(g){return '- '+g.l.replace(/ \(.*\)$/,'').replace(/\?$/,'')+': '+pVal(g,sv[g.k],sv['x'+g.k])}).join('\n'),task:t.task,mine:(P.text||'').trim(),ph:'['+t.ph+']',fmt:t.fmt,safe:t.safe||''}}
 var RULES='- 내가 말하지 않은 사실은 지어내지 말고 [확인 필요]로 표시해.\n- 꼭 필요한 정보가 없으면 먼저 한두 가지만 물어봐.\n- 어려운 말 없이 쉬운 말로, 표로 한눈에 보이게.';
 function pText(){var x=pParts();return '[역할]\n'+x.role+'\n\n[내가 고른 것]\n'+x.ctx+'\n\n[할 일]\n'+x.task+'\n\n[더 알려 줄 것]\n'+(x.mine||'(없음)')+'\n\n[답변 형식]\n'+x.fmt+'\n\n[지킬 것]\n'+RULES+(x.safe?'\n'+x.safe:'')}
 function pHtml(){var x=pParts();return '<span class="k">[역할]</span>\n<span class="g">'+E(x.role)+'</span>\n\n<span class="k">[내가 고른 것]</span>\n<span class="g">'+E(x.ctx)+'</span>\n\n<span class="k">[할 일]</span>\n'+E(x.task)+'\n\n<span class="k">[더 알려 줄 것]</span>\n<span class="o">'+E(x.mine||x.ph)+'</span>\n\n<span class="k">[답변 형식]</span>\n'+E(x.fmt)+'\n\n<span class="k">[지킬 것]</span>\n'+E(RULES+(x.safe?'\n'+x.safe:''))}
-function pGroups(){var t=TASKS[P.k],sv=pSel(P.k);return t.g.map(function(g){return '<span class="jx-l">'+E(g.l)+(g.m?' <small>여러 개 골라도 돼요</small>':'')+'</span><div class="jx-chips'+(g.m?' warm':'')+'">'+g.o.map(function(o,i){var on=g.m?sv[g.k].indexOf(i)>-1:sv[g.k]===i;return '<button type="button" data-pg="'+g.k+'" data-pi="'+i+'"'+(on?' class="on"':'')+'>'+E(o)+'</button>'}).join('')+'</div>'}).join('')}
+function pGroups(){var t=TASKS[P.k],sv=pSel(P.k);return t.g.map(function(g){return '<span class="jx-l">'+E(g.l)+(g.m?' <small>여러 개 골라도 돼요</small>':'')+'</span><div class="jx-chips'+(g.m?' warm':'')+'">'+g.o.map(function(o,i){var on=g.m?sv[g.k].indexOf(i)>-1:sv[g.k]===i;return '<button type="button" data-pg="'+g.k+'" data-pi="'+i+'"'+(on?' class="on"':'')+'>'+E(o)+'</button>'}).join('')+'<input class="pg-x" data-px="'+g.k+'" value="'+E(sv['x'+g.k]||'')+'" placeholder="기타 (직접 입력)"></div>'}).join('')}
 function promptView(){
  var left='<span class="jx-l">무엇을 해 볼까요?</span><div class="jx-grid" id="jx-p-task">'+TASKS.map(function(t,i){return '<button type="button" data-pk="'+i+'"'+(P.k===i?' class="on"':'')+'><b>'+E(t.t)+'</b><span>'+E(t.s)+'</span></button>'}).join('')+'</div>'+
  '<div id="jx-p-g">'+pGroups()+'</div>'+
@@ -5041,6 +5046,7 @@ function promptView(){
  return shell('프롬프트 디자인실','일상에서 하고 싶은 것을 고르고 터치만 하면, 오른쪽에 AI가 찰떡같이 알아듣는 프롬프트가 완성돼요.','',left,right)}
 function promptBind(){var pv=q('#jx-p-pv'),ta=q('#jx-p-in'),el=q('.jx'),fl=q('#jx-fr');function up(){if(fl){fl.innerHTML=fHtml();return}if(pv)pv.innerHTML=pHtml()}up();
  if(ta)ta.addEventListener('input',function(){P.text=ta.value;up()});
+ el.addEventListener('input',function(e){var x=e.target.closest('[data-px]');if(!x)return;pSel(P.k)['x'+x.dataset.px]=x.value;up()});
  el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
   if(b.dataset.pk!=null){P.k=+b.dataset.pk;render();return}
   if(b.dataset.fo!=null){P.fopen=P.fopen===b.dataset.fo?null:b.dataset.fo;up();return}
@@ -5201,6 +5207,19 @@ body[data-page="resume"] .footer,body[data-page="interview"] .footer,body[data-p
  .zman .mn-av{width:90px!important}
  .zman .mn-foot{margin-top:10px!important}
 }
+
+.ztabs{align-items:center}
+.ztabs .zarr{color:#c96a2b;font-weight:900;font-size:15px;line-height:1;margin:0 -1px}
+.zfh{display:flex;flex-direction:column;gap:2px;margin-bottom:8px!important}.zfh b{font-size:15px;color:#1e3630}.zfh span{font-size:12px;color:#6b7a73}
+@media(min-width:900px){.zint #feedbackArea{min-height:220px;max-height:380px;overflow:auto;background:#fffaf0!important;border:1.5px solid #ecd99a!important}
+ .zint .zcols{grid-template-columns:1fr 1fr!important}}
+@media(min-width:900px){
+ .zint>.banner,.zint .znote{display:none!important}
+ .zint textarea{min-height:76px!important;height:76px}
+ .zint #feedbackArea{min-height:200px!important;max-height:300px!important}
+ .zint .zcol .row{margin-bottom:0!important}
+ .zint .result h3{margin:2px 0!important}
+}
 </style><script>/* ===== 2026.11.12 탭 정리: 입사지원서·면접·탐험기록·강점·도감 말풍선 ===== */
 (function(){
 var MEM=window.__zt||(window.__zt={}),busy=false,PREV={};
@@ -5208,7 +5227,7 @@ function q(s,r){return (r||document).querySelector(s)}function qa(s,r){return Ar
 function mkTabs(host,before,items,key,opt){opt=opt||{};
  var bar=document.createElement('div');bar.className='ztabs'+(opt.cls?' '+opt.cls:'');var panes=[];
  var wrap=document.createElement('div');wrap.className='zpanes';
- items.forEach(function(it,i){var b=document.createElement('button');b.type='button';b.innerHTML=(opt.num?'<i>'+(i+1)+'</i>':'')+it.label;b.dataset.zi=i;bar.appendChild(b);
+ items.forEach(function(it,i){if(i>0&&opt.arrow){var ar=document.createElement('span');ar.className='zarr';ar.textContent='›';bar.appendChild(ar)}var b=document.createElement('button');b.type='button';b.innerHTML=(opt.num?'<i>'+(i+1)+'</i>':'')+it.label;b.dataset.zi=i;bar.appendChild(b);
   var p=document.createElement('div');p.className='zpane';it.nodes.forEach(function(n){if(n)p.appendChild(n)});
   if(opt.next&&i<items.length-1){var nx=document.createElement('button');nx.type='button';nx.className='znext';nx.textContent='다음: '+items[i+1].label.replace(/<[^>]+>/g,'')+' ›';nx.dataset.zgo=i+1;p.appendChild(nx)}
   panes.push(p);wrap.appendChild(p)});
@@ -5231,19 +5250,19 @@ function resume(){var form=q('.rv-form');if(!form||form.dataset.zt)return;form.d
   var inner=document.createElement('div');box.appendChild(inner);
   mkTabs(inner,null,cards.map(function(c){var h=q('h4',c);var t=h?h.innerText.replace(/^\s*\d+\s*/,'').trim():'';return {label:t,nodes:[c]}}),'caut',{num:1,cls:'zsub'});
   if(chk)box.appendChild(chk);items.push({label:'작성 시 주의점',nodes:[box]})}
- mkTabs(form,row,items,'resume',{auto:function(p){return filled(p,function(x){return x.id==='rvJobIn'||x.closest('.zcaut')})},next:1,done:function(p){return filled(p,function(x){return x.id==='rvJobIn'})}});
+ mkTabs(form,row,items,'resume',{arrow:1,auto:function(p){return filled(p,function(x){return x.id==='rvJobIn'||x.closest('.zcaut')})},next:1,done:function(p){return filled(p,function(x){return x.id==='rvJobIn'})}});
  form.classList.add('zfit')}
 /* 면접 연습 */
 function interview(){var it=q('#app .itabs');if(!it||it.closest('.zint'))return;var sec=it.parentNode;if(sec.dataset.zt)return;sec.dataset.zt=1;
  var L=document.createElement('div'),R=document.createElement('div'),g=document.createElement('div');g.className='zcols';L.className='zcol';R.className='zcol';
  var kids=Array.prototype.slice.call(sec.children);var fb=q('#feedbackArea',sec);var after=false;
- var brow=null;kids.forEach(function(k){if(k.classList.contains('section-title')||k.classList.contains('banner'))return;if(k===fb)after=true;if(!after&&k.classList.contains('row')&&k.querySelector('#feedbackBtn')){brow=k;return}(after?R:L).appendChild(k)});if(brow)R.insertBefore(brow,R.firstChild);
+ var brow=null;kids.forEach(function(k){if(k.classList.contains('section-title')||k.classList.contains('banner'))return;if(k===fb)after=true;if(!after&&k.classList.contains('row')&&k.querySelector('#feedbackBtn')){brow=k;return}(after?R:L).appendChild(k)});if(brow){L.appendChild(brow);var lb=qa(':scope>button.btn.light',R)[0];if(lb){lb.style.marginLeft='auto';brow.appendChild(lb)}}var fh=document.createElement('div');fh.className='zfh';fh.innerHTML='<b>답변 피드백</b><span>왼쪽에서 답한 뒤 "답변 점검하기"를 누르면 바로 여기에 나와요.</span>';R.insertBefore(fh,R.firstChild);
  var note=qa(':scope>p.muted',L)[0];if(note)note.classList.add('znote');
  g.appendChild(L);g.appendChild(R);sec.appendChild(g);sec.classList.add('zint')}
 /* 탐험 기록 */
 function notes(){var man=q('#manual');if(!man)return;var pass=man.previousElementSibling;if(!pass||man.dataset.zt)return;man.dataset.zt=1;
  pass.classList.add('zpass');man.classList.add('zman');
- var bar=document.createElement('div');bar.className='ztabs ztop';bar.innerHTML='<button type="button" data-zn="0">나의 직업 여권</button><button type="button" data-zn="1">나의 사용설명서</button>';
+ var bar=document.createElement('div');bar.className='ztabs ztop';bar.innerHTML='<button type="button" data-zn="0">나의 직업 여권</button><span class="zarr">›</span><button type="button" data-zn="1">나의 사용설명서</button>';
  pass.parentNode.insertBefore(bar,pass);
  function go(i){MEM.notes=i;pass.classList.toggle('zhide',i!==0);man.classList.toggle('zhide',i!==1);qa('button',bar).forEach(function(b,k){b.classList.toggle('on',k===i)})}
  bar.addEventListener('click',function(e){var b=e.target.closest('[data-zn]');if(b)go(+b.dataset.zn)});go(MEM.notes||0)}
@@ -5252,7 +5271,7 @@ function strength(){var sec=q('#app .stpage');if(!sec||sec.dataset.zt)return;sec
  var kids=Array.prototype.slice.call(sec.children).filter(function(k){return !k.classList.contains('section-title')});
  var h3s=kids.filter(function(k){return k.tagName==='H3'});if(h3s.length<3)return;
  var g=[[],[],[]],gi=-1,tail=null;kids.forEach(function(k){if(k.tagName==='H3'){gi=Math.min(2,h3s.indexOf(k))}if(gi<0)return;if(k.tagName==='BUTTON'&&k.classList.contains('btn')&&gi===2){tail=k;return}g[gi].push(k)});
- var T=mkTabs(sec,tail,[{label:'잘하는 활동 3가지',nodes:g[0]},{label:'보완하고 싶은 점',nodes:g[1]},{label:'내가 실제로 해본 일',nodes:g[2]}],'strength',{next:1,auto:function(p){return filled(p)},done:function(p){var m=p.innerText.match(/\((\d)\/3\)/);return m?m[1]==='3':filled(p)}});
+ var T=mkTabs(sec,tail,[{label:'잘하는 활동 3가지',nodes:g[0]},{label:'보완하고 싶은 점',nodes:g[1]},{label:'내가 실제로 해본 일',nodes:g[2]}],'strength',{arrow:1,next:1,auto:function(p){return filled(p)},done:function(p){var m=p.innerText.match(/\((\d)\/3\)/);return m?m[1]==='3':filled(p)}});
  [0,1].forEach(function(i){var m=T.panes[i].innerText.match(/\((\d)\/3\)/);var k='st'+i;if(m){if(m[1]==='3'&&PREV[k]&&PREV[k]!=='3'&&MEM.strength===i)setTimeout(function(){T.go(i+1)},500);PREV[k]=m[1]}});
  sec.classList.add('zst')}
 /* 도감 말풍선: 하단 오른쪽, 작게 */
