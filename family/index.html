@@ -874,12 +874,11 @@ body{line-height:1.55}
           <span class="sw-step on" data-step="1"><b>1</b> 센터·작사</span>
           <span class="sw-arrow">›</span>
           <span class="sw-step" data-step="2"><b>2</b> 전할 대상</span>
+          
           <span class="sw-arrow">›</span>
-          <span class="sw-step" data-step="3"><b>3</b> 노래 주제</span>
+          <span class="sw-step" data-step="4"><b>3</b> 노래 제목</span>
           <span class="sw-arrow">›</span>
-          <span class="sw-step" data-step="4"><b>4</b> 노래 제목</span>
-          <span class="sw-arrow">›</span>
-          <span class="sw-step" data-step="5"><b>5</b> 완성 (가사 & 복사)</span>
+          <span class="sw-step" data-step="5"><b>4</b> 완성 (가사 & 복사)</span>
         </div>
       </div>
 
@@ -918,7 +917,7 @@ body{line-height:1.55}
       </div>
 
       <!-- 스텝 3: 어떤 노래를 만들까요? -->
-      <div class="sw-pane" id="sw-p3">
+      <div class="sw-pane" id="sw-p3" style="display:none!important">
         <div class="sw-q">3. 어떤 노래를 만들까요?</div>
         <div class="sw-desc">주제와 음악 스타일 번호를 클릭하면 자동으로 다음 질문으로 넘어갑니다.</div>
         <div class="sw-grid" id="sw-grid-theme">
@@ -939,7 +938,7 @@ body{line-height:1.55}
 
       <!-- 스텝 4: 노래 제목을 골라 주세요 -->
       <div class="sw-pane" id="sw-p4">
-        <div class="sw-q">4. 노래 제목을 골라 주세요</div>
+        <div class="sw-q">3. 노래 제목을 골라 주세요</div>
         <div class="sw-desc">마음에 드는 제목 번호를 클릭하면 가사 확인 단계로 넘어갑니다.</div>
         <div class="sw-grid" id="sw-grid-title">
           <button type="button" class="sw-opt" data-val="우리 함께 걸어요"><span class="sw-num">1</span><b>우리 함께 걸어요</b><small>서로의 손을 잡고 따뜻하게 동행하는 노래</small></button>
@@ -953,13 +952,13 @@ body{line-height:1.55}
           <button type="button" class="btn mini" id="sw-title-custom-btn">제목 적용하기 ›</button>
         </div>
         <div class="sw-nav-acts">
-          <button type="button" class="btn mini sw-prev" data-to="3">‹ 이전</button>
+          <button type="button" class="btn mini sw-prev" data-to="2">‹ 이전</button>
         </div>
       </div>
 
       <!-- 스텝 5: 노래 가사 확인 및 최종 완성 (원스톱) -->
       <div class="sw-pane" id="sw-p5">
-        <div class="sw-q">5. 가사 확인 & 완성 프롬프트 복사</div>
+        <div class="sw-q">4. 가사 확인 & 완성 프롬프트 복사</div>
         <div class="sw-desc">선택하신 대상과 주제에 맞춰 따뜻한 가사가 완성되었어요. 가사를 확인하고 바로 복사해 제미나이에서 음악을 완성하세요!</div>
         
         <div class="sw-chips" id="sw-chips" style="margin:8px 0 12px"></div>
@@ -1000,7 +999,7 @@ body{line-height:1.55}
       <div>
         <h4 class="sg-h">따라 하기 3단계 (초간단!)</h4>
         <ol class="song-steps">
-          <li>위에서 <b>질문 4개를 클릭하고 가사를 확인</b>한 뒤 <b>[가사 포함 완성 프롬프트 복사하기]</b>를 눌러요.</li>
+          <li>위에서 <b>질문 3개를 클릭하고 가사를 확인</b>한 뒤 <b>[가사 포함 완성 프롬프트 복사하기]</b>를 눌러요.</li>
           <li><b>[제미나이로 바로 열기]</b>를 눌러 제미나이 대화창(또는 입력창 [+] → 음악 만들기)에 붙여 넣어요.</li>
           <li>제미나이가 가사와 딱 맞는 <b>따뜻한 앨범 표지 그림</b>과 <b>음악</b>을 한 번에 바로 만들어 줘요! (코드블록을 다시 복사할 필요 없어요)</li>
         </ol>
@@ -3635,7 +3634,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     var ti = SW.title || '오늘도 수고했어, 내 동료야';
     var lyr = ((SW.lyrics1 || '') + '\n\n' + (SW.lyrics2 || '')).trim();
 
-    return "너는 전북특별자치도가족센터를 위한 전문 작곡가이자 따뜻한 그림책 앨범 표지 디자이너야.\n아래에 완성된 노래 가사와 정보를 바탕으로, 따뜻한 앨범 표지 이미지를 생성하고 음악을 바로 완성해 줘.\n\n[확정된 노래 정보]\n- 센터명: " + c + "\n- 작사자: " + a + "\n- 전할 대상: " + w + "\n- 노래 주제: " + t + "\n- 확정 노래 제목: " + ti + "\n\n[확정 가사]\n" + lyr + "\n\n[제작 지침]\n1. 위 가사와 전할 대상(" + w + ")의 마음에 가장 잘 어울리는 따뜻하고 사랑스러운 앨범 표지 이미지를 1장 즉시 생성해 줘.\n- 정사각형 1:1 비율, 따뜻하고 귀여운 고품질 그림책 일러스트\n- 크림색, 살구색, 연초록 등 눈이 편안하고 포근한 색감\n- 노래 제목(\"" + ti + "\")과 대상의 따뜻한 교감이 느껴지는 다정한 장면\n- 표지 상단 또는 중앙에 제목을 크게, 하단에 '" + c + " | 작사: " + a + "'을 정확한 한국어로 표기\n- 본인 사진이 있다면 특징을 살린 그림책 일러스트로 표현하고, 사진이 없다면 인물이나 배경을 사랑스러운 그림책풍으로 제작\n\n2. 위 가사와 분위기를 바탕으로 바로 들을 수 있는 음악을 완성해 줘. (제미나이 음악 만들기 활용)";
+    return "너는 전북특별자치도가족센터를 위한 전문 작곡가이자 따뜻한 그림책 앨범 표지 디자이너야.\n아래에 완성된 노래 가사와 정보를 바탕으로, 따뜻한 앨범 표지 이미지를 생성하고 음악을 바로 완성해 줘.\n\n[확정된 노래 정보]\n- 센터명: " + c + "\n- 작사자: " + a + "\n- 전할 대상: " + w + "\n- 확정 노래 제목: " + ti + "\n\n[확정 가사]\n" + lyr + "\n\n[제작 지침]\n1. 위 가사와 전할 대상(" + w + ")의 마음에 가장 잘 어울리는 따뜻하고 사랑스러운 앨범 표지 이미지를 1장 즉시 생성해 줘.\n- 정사각형 1:1 비율, 따뜻하고 귀여운 고품질 그림책 일러스트\n- 크림색, 살구색, 연초록 등 눈이 편안하고 포근한 색감\n- 노래 제목(\"" + ti + "\")과 대상의 따뜻한 교감이 느껴지는 다정한 장면\n- 표지 상단 또는 중앙에 제목을 크게, 하단에 '" + c + " | 작사: " + a + "'을 정확한 한국어로 표기\n- 본인 사진이 있다면 특징을 살린 그림책 일러스트로 표현하고, 사진이 없다면 인물이나 배경을 사랑스러운 그림책풍으로 제작\n\n2. 위 가사와 분위기를 바탕으로 바로 들을 수 있는 음악을 완성해 줘. (제미나이 음악 만들기 활용)";
   }
 
   function render() {
@@ -3668,7 +3667,6 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
       chips.innerHTML = '<span class="sw-chip"><em>센터</em>' + esc(SW.center) + '</span>' +
         '<span class="sw-chip"><em>작사</em>' + esc(SW.author) + '</span>' +
         '<span class="sw-chip"><em>대상</em>' + esc(SW.who) + '</span>' +
-        '<span class="sw-chip"><em>주제</em>' + esc(SW.theme.split('·')[0].trim()) + '</span>' +
         '<span class="sw-chip"><em>제목</em>' + esc(SW.title) + '</span>' +
         '<span class="sw-chip"><em>가사</em>1·2절 포함</span>';
     }
@@ -3763,7 +3761,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
         SW.lyrics1 = d.p1;
         SW.lyrics2 = d.p2;
         render();
-        setTimeout(function(){ gotoStep(3); }, 220);
+        setTimeout(function(){ gotoStep(4); }, 220);
       } else if (grid.id === 'sw-grid-theme') {
         SW.theme = val;
         var d = getDefaultLyrics(SW.lyricsVariant);
@@ -3790,7 +3788,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
         SW.lyrics1 = d.p1;
         SW.lyrics2 = d.p2;
         render();
-        gotoStep(3);
+        gotoStep(4);
       }
     } else if (e.target.id === 'sw-theme-custom-btn') {
       var inp = $('#sw-theme-custom');
