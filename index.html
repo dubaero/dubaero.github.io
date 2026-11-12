@@ -22,18 +22,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.css?v=1">
+<link rel="stylesheet" href="/css/site.css?v=2">
 </head>
 <body>
 <header class="top">
   <div class="wrap">
+    <a class="home-btn" href="/" aria-current="page" aria-label="홈으로 가기"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg><span>홈</span></a>
     <div class="topinfo" aria-label="강의 요약">
       <a class="ti" href="/program/"><small>강의 분야</small>AI 활용 교육 · AI 콘텐츠 제작</a>
       <a class="ti" href="/about/#orgs"><small>교육 대상</small>기업 · 공공기관 · 훈련기관</a>
     </div>
     <span class="top-vd" aria-hidden="true"></span>
     <nav class="nav" aria-label="주 메뉴">
-      <a href="/" aria-current="page">홈</a>
       <a href="/about/">강사 소개</a>
       <a href="/profile/">강사 프로필</a>
       <a href="/program/">강의 분야</a>
@@ -80,7 +80,10 @@
       <p>강의를 누르면 그 강의의 자료와 업무 도구로 들어갑니다.</p>
     </div>
     <div class="room-grid" id="room-cards"></div>
-    <a class="more-link" href="/lectures/">전체 출강 기록 보기 →</a>
+    <div class="lec-head" id="all-lectures"><h3>전체 출강 목록</h3><div class="ltabs" id="lec-tabs" role="tablist"><button type="button" class="on" data-f="all">전체</button><button type="button" data-f="예정">예정</button><button type="button" data-f="진행 중">진행 중</button><button type="button" data-f="완료">완료</button></div><label class="lsearch"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="lec-q" placeholder="기관명으로 찾기" aria-label="기관명 또는 교육명으로 출강 기록 찾기" autocomplete="off"></label><span class="lcount" id="lec-count"></span></div>
+    <div class="lrows" id="lec-list">
+      <div class="lrow lhd" aria-hidden="true"><span>날짜</span><span>상태</span><span>기관</span><span>교육</span><span></span></div>
+    </div>
   </div>
 </section>
 

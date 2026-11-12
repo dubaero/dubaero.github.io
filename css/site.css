@@ -766,3 +766,25 @@ body{font-size:15.5px!important}.ti{font-size:15.5px!important}.ti small{font-si
 }
 .page-top{padding-top:8px}
 .more-link{display:inline-block;margin-top:28px;font-weight:700;color:#24497F;text-decoration:underline;text-underline-offset:4px}
+
+/* 2026.11.12 홈 버튼 */
+.home-btn{display:inline-flex;align-items:center;gap:6px;flex:none;background:#24497F;color:#fff!important;font-weight:700;font-size:15px;line-height:1;padding:8px 15px 8px 12px;border-radius:999px;text-decoration:none;white-space:nowrap;box-shadow:0 4px 12px -6px rgba(36,73,127,.6)}
+.home-btn:hover{background:#1F2F52}
+.home-btn svg{flex:none}
+@media (max-width:640px){.home-btn{font-size:13.5px;padding:7px 11px 7px 9px}}
+
+/* 2026.11.12 강의 문의 간격 줄이기 */
+#contact.sec{padding:48px 0!important}
+#contact .sec-head,#contact .contact{max-width:900px;margin-left:auto;margin-right:auto}
+#contact .sec-head{margin-bottom:22px!important}
+#contact .contact{gap:16px}
+#contact .c-box{padding:22px 24px!important}
+#contact .c-box h3{margin-bottom:12px}
+#contact .checklist{gap:6px}
+#contact .checklist li{font-size:16px!important}
+#contact .c-item{padding:11px 0!important}
+#contact .c-item span{font-size:16px!important}
+#contact .c-box .btn{margin-top:16px}
+#contact .hint{margin-top:8px}
+/* 홈 화면 전체 출강 목록 */
+#rooms .lec-head{margin-top:40px}

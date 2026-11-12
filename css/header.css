@@ -67,3 +67,9 @@ a.ti:hover,a.ti:hover small,a.ti:hover small::after,.top .nav a:hover{color:#A84
 @media (max-width:980px) and (min-width:641px){.top .topinfo,.top-vd{display:none!important}}
 @media (max-width:640px){.mnav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:0 16px 10px;-webkit-overflow-scrolling:touch}.mnav::-webkit-scrollbar{display:none}.mnav a{flex:none;white-space:nowrap;font-size:14.5px;font-weight:600;color:var(--ink);padding:6px 13px;border-radius:999px;background:#F1EFEC}.mnav a[aria-current="page"]{background:#24497F;color:#fff}}
 @media (min-width:641px){.top{zoom:.9}}
+
+/* 2026.11.12 홈 버튼 */
+.home-btn{display:inline-flex;align-items:center;gap:6px;flex:none;background:#24497F;color:#fff!important;font-weight:700;font-size:15px;line-height:1;padding:8px 15px 8px 12px;border-radius:999px;text-decoration:none;white-space:nowrap;box-shadow:0 4px 12px -6px rgba(36,73,127,.6)}
+.home-btn:hover{background:#1F2F52}
+.home-btn svg{flex:none}
+@media (max-width:640px){.home-btn{font-size:13.5px;padding:7px 11px 7px 9px}}
