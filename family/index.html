@@ -632,6 +632,7 @@ body{line-height:1.55}
 .note{color:#3A3A34}
 .s{color:var(--muted)}
 </style>
+<style id="noDesc">#main4 .m4>span:last-child,#tiles .tile>span:last-child{display:none!important}#tiles .tile{justify-content:center}</style>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -4212,7 +4213,7 @@ set(0);
 </script>
 <!--/FIT-->
 <script>
-/* v16 글자 키우기 (2026.11.13): 컴퓨터는 모든 글자 +1px, 휴대폰은 15px 미만 +2px(최소 14px) */
+/* v16 글자 키우기 (2026.11.13): 컴퓨터는 모든 글자 +2px, 휴대폰은 15px 미만 +2px(최소 14px) */
 (function(){
   var MOB=window.matchMedia('(max-width:640px)').matches;
   if(MOB&&!true)return;
@@ -4224,7 +4225,7 @@ set(0);
     var plan=list.map(function(e){var p=e.parentElement,fs=getComputedStyle(e).fontSize;
       if(p&&done.has(p)&&p.dataset.fsUp&&getComputedStyle(p).fontSize===fs&&!e.style.fontSize)return [e,0];return [e,parseFloat(fs)]});
     plan.forEach(function(x){var e=x[0],fs=x[1];done.add(e);if(!fs)return;
-      var n=MOB?(fs<15?Math.max(fs+2,14):0):fs+1;if(n){e.dataset.fsUp=1;e.style.setProperty('font-size',n+'px','important')}});
+      var n=MOB?(fs<15?Math.max(fs+2,14):0):fs+2;if(n){e.dataset.fsUp=1;e.style.setProperty('font-size',n+'px','important')}});
   }
   var t;function later(){clearTimeout(t);t=setTimeout(run,60)}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',later);else later();
