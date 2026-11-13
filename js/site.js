@@ -199,14 +199,14 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   ov.addEventListener('click',function(e){if(e.target===ov)cl();});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ov.hidden)cl();});
   if(location.hash==='#qr')op();})();
 ;
-/* 출강 기록부터 바닥글까지 글자 작게: 컴퓨터 1px, 휴대폰 3px */
+/* 휴대폰: 출강 기록부터 바닥글까지 3px 작게 / 컴퓨터: 그 구간은 원래 크기, 나머지는 1px 크게 (2026.11.13) */
 (function(){
   var DOWN=2, SEL='#rooms,#wordcloud,#about,#career,#program,#process,#contact,footer', busy=false, t;
-  function targets(){var a=[];document.querySelectorAll(SEL).forEach(function(r){a.push(r);r.querySelectorAll('*').forEach(function(e){if(!e.closest('#wc-cloud'))a.push(e);});});return a;}
+  function targets(mob){var a=[];if(!mob){document.body.querySelectorAll('*').forEach(function(e){if(!/^(SCRIPT|STYLE|SVG|PATH|NOSCRIPT)$/i.test(e.tagName)&&!e.closest(SEL)&&!e.closest('#wc-cloud'))a.push(e);});return a;}document.querySelectorAll(SEL).forEach(function(r){a.push(r);r.querySelectorAll('*').forEach(function(e){if(!e.closest('#wc-cloud'))a.push(e);});});return a;}
   function run(){
-    if(busy)return;busy=true;DOWN=window.matchMedia('(max-width:640px)').matches?3:1;
+    if(busy)return;busy=true;var mob=window.matchMedia('(max-width:640px)').matches;DOWN=mob?3:-1;
     document.querySelectorAll('[data-fs]').forEach(function(e){e.style.removeProperty('font-size');e.removeAttribute('data-fs');});
-    var els=targets(),sz=els.map(function(e){return parseFloat(getComputedStyle(e).fontSize)||0;});
+    var els=targets(mob),sz=els.map(function(e){return parseFloat(getComputedStyle(e).fontSize)||0;});
     els.forEach(function(e,i){if(sz[i]>DOWN+8){e.style.setProperty('font-size',(sz[i]-DOWN)+'px','important');e.setAttribute('data-fs','');}});
     busy=false;
   }
