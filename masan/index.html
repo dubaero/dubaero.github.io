@@ -5443,6 +5443,8 @@ window.addEventListener('resize',fit);setTimeout(run,50);
 :is(#app,body) :is(button,.btn,.feature-card,.choice,.qtab,.job,.dx-card,.dx-opt,.gm-item,.gm-sticker,.gm-go,[role=button]):not(.tab3d):is(:hover,:active,:focus-visible,.on,.active,.selected){transform:none!important}
 #nav.nav button.tab3d,#nav.nav button.tab3d.active,#nav.nav button.tab3d:active{transform:none!important}
 #nav.nav button.tab3d:hover{transform:translateY(-2px)!important}
+/* 2026.11.13 같은 페이지 안에서 탭·보기 누를 때 새로고침처럼 보이는 등장 효과 끄기 */
+#app.same>.panel,#app.same .panel,#app.same .pop,#app.same .choice.on:after{animation:none!important}
 </style>
 <script>
 /* v15 모바일 글자 키우기: 15px 미만 글자는 +2px(최소 14px) */
@@ -5498,5 +5500,8 @@ window.addEventListener('resize',fit);setTimeout(run,50);
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',later);else later();
   new MutationObserver(later).observe(document.body,{childList:true,subtree:true});
 })();
+
+/* 2026.11.13 같은 페이지 안에서 다시 그릴 때는 등장 효과 없이 */
+;(function(){var last=null,_rs=render;render=function(){var a=document.getElementById('app');var same=(last===state.page);if(a)a.classList.toggle('same',same);_rs();last=state.page;}})();
 </script>
 </body></html>
