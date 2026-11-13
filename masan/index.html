@@ -4695,8 +4695,7 @@ function heartView(){
  if(H.tab==='keep'){
   left='<span class="jx-l">오늘 있었던 일 <small>말이나 글로 털어놓기 · 나만 보는 곳이에요</small></span><div class="jx-tools">'+micBtn('jx-h-in')+'</div><textarea class="jx-ta" id="jx-h-in" placeholder="예) 서류를 다섯 군데 냈는데 한 곳도 연락이 없어요. 내가 너무 늦은 건 아닌지 걱정돼요.">'+E(H.text)+'</textarea>'+
   '<span class="jx-l">지금 내 마음 <small>최대 3개까지 골라요</small></span><div class="jx-chips" id="jx-h-mood">'+Object.keys(MOODS).map(function(m){return '<button type="button" data-mood="'+E(m)+'"'+(H.moods.indexOf(m)>-1?' class="on"':'')+'>'+E(m)+'</button>'}).join('')+'</div>';
-  right='<div class="jx-hero" id="jx-h-out"></div><div class="jx-rest" id="jx-h-rest"></div><div class="jx-acts"><button type="button" class="jx-b mini" data-h="again">다른 응원 듣기</button><button type="button" class="jx-b mini" data-h="cp5">위로 복사</button><button type="button" class="jx-b mini fill" data-ht="card">이 마음으로 엽서 받기 ›</button></div>'+
-  '<p class="jx-help" style="margin-top:auto"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가면 사람에게 꼭 말해 주세요. 자살예방 상담전화 <a href="tel:109">109</a> · 정신건강 위기상담 <a href="tel:15770199">1577-0199</a></p>';
+  right='<div class="jx-hero" id="jx-h-out"></div><div class="jx-rest" id="jx-h-rest"></div><div class="jx-acts"><button type="button" class="jx-b mini" data-h="again">다른 응원 듣기</button><button type="button" class="jx-b mini" data-h="cp5">위로 복사</button><button type="button" class="jx-b mini fill" data-ht="card">이 마음으로 엽서 받기 ›</button></div>';
  }else{
   left='<span class="jx-l">① 요즘 나를 힘들게 하는 것 <small>여러 개 골라도 돼요</small></span><div id="jx-pc-hard">'+pcTabs()+'</div><input class="jx-in" id="jx-pc-mine" style="margin-top:6px" placeholder="직접 쓰기 (예: 자격증 시험이 다음 주라 마음이 급해요)" value="'+E(H.mine)+'">'+
   '<span class="jx-l">② 그림 느낌</span><div class="jx-chips peach" id="jx-pc-style">'+PC_STYLE.map(function(x,i){return '<button type="button" data-pcs="'+i+'" title="'+E(x[1])+'"'+(H.style===i?' class="on"':'')+'>'+E(x[0])+'</button>'}).join('')+'</div>'+
