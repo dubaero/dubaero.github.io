@@ -4225,6 +4225,15 @@ window.addEventListener('hashchange',function(){var k=location.hash.slice(1);if(
 })();
 </script>
 <!--/FIT-->
+<style id="mobileFix">
+@media(max-width:640px){
+ #v2-sit .vsg{margin:0 0 4px!important}
+ #v2-sit .vsg-h{margin:6px 0 3px!important}
+ #v2-sit .vsit{display:grid!important;grid-template-columns:1fr 1fr!important;gap:5px!important}
+ #v2-sit .vsit button{width:100%!important;margin:0!important;padding:6px 6px 6px 7px!important;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:0!important;letter-spacing:-.3px}
+ .lvbtns button{padding:7px 3px!important;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap}
+}
+</style>
 <script>
 /* v15 모바일 글자 키우기: 15px 미만 글자는 +2px(최소 14px) */
 (function(){
