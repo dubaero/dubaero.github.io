@@ -3188,7 +3188,7 @@ views.resume=()=>{const rv=state.rv,blind=rv.fmt==='blind';return `<section clas
  <div class="rv-split"><div class="rv-form">
 ${blind?` <h3 class="rv-h">STEP 1. 인적사항과 지원 직종</h3>
  
- <div class="rv-grid"><label class="field"><span>성명</span><input id="rvName" value="${E(state.name||'')}" placeholder="예: 김새일"></label><label class="field"><span>연락처</span><input id="rvContact" value="${E(state.contact||'')}" placeholder="예: 010-0000-0000"></label><label class="field"><span>이메일</span><input id="rvEmail" value="${E(state.email||'')}" placeholder="예: saeil@email.com"></label><label class="field"><span>거주지 (시·군·구까지만)</span><input id="rvAddr" value="${E(rv.addr||'')}" placeholder="예: 경남 창원시 마산합포구"></label></div>
+ <div class="rv-grid"><label class="field"><span>성명</span><input id="rvName" value="${E(state.name||'')}" placeholder="예: 김새일"></label><label class="field"><span>연락처</span><input id="rvContact" inputmode="tel" value="${E(state.contact||'')}" placeholder="예: 010-0000-0000"></label><label class="field"><span>이메일</span><input id="rvEmail" value="${E(state.email||'')}" placeholder="예: saeil@email.com"></label><label class="field"><span>거주지 (시·군·구까지만)</span><input id="rvAddr" value="${E(rv.addr||'')}" placeholder="예: 경남 창원시 마산합포구"></label></div>
  ${rvJobSel()}
  <h3 class="rv-h">STEP 2. 교육·자격·경력·경험</h3>
  <p class="rv-tip">지원 직무와 관련 있는 것부터 한 줄씩 써요. 더 있으면 <b>+</b>를 눌러 추가해요. 경력이 없으면 <b>경험사항</b>에 봉사·모임·아르바이트를 써도 돼요.</p>
@@ -3198,7 +3198,7 @@ ${blind?` <h3 class="rv-h">STEP 1. 인적사항과 지원 직종</h3>
  <div class="rv-block"><h4>경험사항</h4>${rvRows('exp',['활동명','기간','주요 내용'],['입주자 모임 총무','2021~2023','월별 회계 정리·공지'])}${state.experiences.some(x=>x&&x.trim())?`<button type="button" class="btn small outline" id="rvPull" style="margin-top:8px">강점과 경험에서 쓴 경험 불러오기</button>`:''}</div>
 `:` <h3 class="rv-h">STEP 1. 인적사항과 희망 직종</h3>
  ${phBox()}
- <div class="rv-grid"><label class="field"><span>성명</span><input id="rvName" value="${E(state.name||'')}" placeholder="예: 김새일"></label><label class="field"><span>생년월일</span><input id="rvBirth" value="${E(rv.birth||'')}" placeholder="예: 1982.05.14"></label><label class="field"><span>연락처</span><input id="rvContact" value="${E(state.contact||'')}" placeholder="예: 010-0000-0000"></label><label class="field"><span>이메일</span><input id="rvEmail" value="${E(state.email||'')}" placeholder="예: saeil@email.com"></label><label class="field rv-wide"><span>주소</span><input id="rvHome" value="${E(rv.home||'')}" placeholder="예: 경남 창원시 마산합포구 ○○로 12"></label><label class="field rv-wide"><span>희망 직종 (직접 쓰기)</span><input id="rvWish" value="${E(state.job||'')}" placeholder="예: 사무보조, 요양보호사, 매장 판매"></label></div>
+ <div class="rv-grid"><label class="field"><span>성명</span><input id="rvName" value="${E(state.name||'')}" placeholder="예: 김새일"></label><label class="field"><span>생년월일</span><input id="rvBirth" value="${E(rv.birth||'')}" placeholder="예: 1982.05.14"></label><label class="field"><span>연락처</span><input id="rvContact" inputmode="tel" value="${E(state.contact||'')}" placeholder="예: 010-0000-0000"></label><label class="field"><span>이메일</span><input id="rvEmail" value="${E(state.email||'')}" placeholder="예: saeil@email.com"></label><label class="field rv-wide"><span>주소</span><input id="rvHome" value="${E(rv.home||'')}" placeholder="예: 경남 창원시 마산합포구 ○○로 12"></label><label class="field rv-wide"><span>희망 직종 (직접 쓰기)</span><input id="rvWish" value="${E(state.job||'')}" placeholder="예: 사무보조, 요양보호사, 매장 판매"></label></div>
  <h3 class="rv-h">STEP 2. 학력·경력·자격</h3>
  <p class="rv-tip">최근 것부터 한 줄씩 써요. 더 있으면 <b>+</b>를 눌러 추가해요.</p>
  <div class="rv-block"><h4>학력사항</h4>${rvRows('sch',['학교명','전공·계열','재학 기간','졸업 구분'],['○○고등학교','인문계','1998.03~2001.02','졸업'])}</div>
@@ -3232,9 +3232,10 @@ function rvPreview(){const rv=state.rv,blind=rv.fmt==='blind',v=(t,ph)=>t&&t.tri
  ${rvSign()}
  <p class="rv-note">※ 교육용 초안입니다. 제출 전에 [ ] 부분을 모두 내 이야기로 바꾸고, 회사가 정한 서식이 있으면 그 서식을 쓰세요. 사실이 아닌 경력·성과는 쓰지 않아요.</p></div>`}
 function rvSync(){state.motivation=rvPlain(state.rv.q.motive||rvDraft('motive'));state.cover=RQ.map(([id,t])=>t+'\n'+rvPlain(state.rv.q[id]||rvDraft(id))).join('\n\n');state.history=state.rv.car.filter(r=>r[0]).map(r=>r.filter(Boolean).join(' / ')).join('\n');state.education=state.rv.edu.filter(r=>r[0]).map(r=>r.filter(Boolean).join(' / ')).join('\n');state.cert=state.rv.lic.filter(r=>r[0]).map(r=>r.filter(Boolean).join(' / ')).join('\n')}
+function rvTel(v){const d=v.replace(/\D/g,'').slice(0,11);if(d.startsWith('02')){if(d.length<3)return d;if(d.length<6)return d.slice(0,2)+'-'+d.slice(2);if(d.length<10)return d.slice(0,2)+'-'+d.slice(2,5)+'-'+d.slice(5);return d.slice(0,2)+'-'+d.slice(2,6)+'-'+d.slice(6,10)}if(d.length<4)return d;if(d.length<8)return d.slice(0,3)+'-'+d.slice(3);if(d.length<11)return d.slice(0,3)+'-'+d.slice(3,6)+'-'+d.slice(6);return d.slice(0,3)+'-'+d.slice(3,7)+'-'+d.slice(7)}
 function rvUpd(){const el=$('#resumePreview');if(el)el.innerHTML=rvPreview();rvSync()}
 init.resume=()=>{const rv=state.rv;phBind();
- [['#rvName','name'],['#rvContact','contact'],['#rvEmail','email']].forEach(([s,f])=>{const e=$(s);if(e)e.oninput=()=>{state[f]=e.value;rvUpd()}});
+ [['#rvName','name'],['#rvContact','contact'],['#rvEmail','email']].forEach(([s,f])=>{const e=$(s);if(e)e.oninput=()=>{if(f==='contact')e.value=rvTel(e.value);state[f]=e.value;rvUpd()}});
  const ad=$('#rvAddr');if(ad)ad.oninput=()=>{rv.addr=ad.value;rvUpd()};
  [['#rvBirth','birth'],['#rvHome','home']].forEach(([q,f])=>{const e=$(q);if(e)e.oninput=()=>{rv[f]=e.value;rvUpd()}});
  const wi=$('#rvWish');if(wi)wi.oninput=()=>{state.job=wi.value.trim()||'희망 직종';rvUpd()};
