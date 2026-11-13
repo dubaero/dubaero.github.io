@@ -5360,10 +5360,16 @@ window.addEventListener('resize',fit);setTimeout(run,50);
 </style>
 <script id="mi-voice-js">
 (function(){
-  var IDS=['exp0','exp1','exp2','traitReal','cover','history','education','cert','motivation'];
+  var IDS=['exp0','exp1','exp2','traitReal','cover','history','education','cert','motivation','jobpost'];
   var R=window.SpeechRecognition||window.webkitSpeechRecognition;
+  function isTarget(ta){
+    if(!ta)return false;
+    if(ta.id && IDS.indexOf(ta.id)>=0)return true;
+    if(ta.dataset && ta.dataset.rvq)return true;
+    return false;
+  }
   function attach(ta){
-    if(!R||!ta||!ta.id||IDS.indexOf(ta.id)<0||ta.dataset.micReady)return;
+    if(!R||!isTarget(ta)||ta.dataset.micReady)return;
     ta.dataset.micReady='1';
     var box=document.createElement('div');box.className='mi-voice';
     var b=document.createElement('button');b.type='button';b.className='mi-voice-btn';b.textContent='🎤 말로 입력하기';
@@ -5376,15 +5382,15 @@ window.addEventListener('resize',fit);setTimeout(run,50);
     b.onclick=function(){
       if(rec){try{rec.stop()}catch(e){}return}
       if(window.isSecureContext===false){m.textContent='보안 연결(HTTPS)에서만 음성 인식을 쓸 수 있어요.';return}
-      var r=new R();rec=r;base=(document.getElementById(ta.id)||ta).value.trim();
+      var r=new R();rec=r;base=ta.value.trim();
       r.lang='ko-KR';r.continuous=true;r.interimResults=true;
       r.onstart=function(){b.classList.add('on');b.textContent='● 듣는 중 (누르면 완료)';m.textContent='편하게 말씀해 주세요...'};
       r.onresult=function(ev){
         var fin='',mid='';
         for(var i=0;i<ev.results.length;i++){var t=ev.results[i][0]?ev.results[i][0].transcript:'';if(ev.results[i].isFinal){fin+=t+' '}else{mid+=t+' '}}
-        var el=document.getElementById(ta.id)||ta;
-        el.value=[base,fin.trim(),mid.trim()].filter(Boolean).join(' ');
-        el.dispatchEvent(new Event('input',{bubbles:true}));
+        ta.value=[base,fin.trim(),mid.trim()].filter(Boolean).join(' ');
+        if(typeof ta.oninput==='function'){try{ta.oninput()}catch(e){}}
+        ta.dispatchEvent(new Event('input',{bubbles:true}));
       };
       r.onerror=function(ev){
         var ms={'not-allowed':'마이크 권한을 허용해 주세요.','service-not-allowed':'음성 인식이 차단되어 있어요.','no-speech':'말소리가 들리지 않았어요. 다시 시도해 주세요.','audio-capture':'마이크를 찾지 못했어요.','network':'인터넷 연결을 확인해 주세요.'};
@@ -5392,16 +5398,19 @@ window.addEventListener('resize',fit);setTimeout(run,50);
       };
       r.onend=function(){
         m.textContent='입력되었습니다. 내용을 확인해 보세요.';
-        var el=document.getElementById(ta.id)||ta;
-        el.dispatchEvent(new Event('input',{bubbles:true}));
+        if(typeof ta.oninput==='function'){try{ta.oninput()}catch(e){}}
+        ta.dispatchEvent(new Event('input',{bubbles:true}));
         end();
       };
       try{r.start()}catch(e){m.textContent='마이크를 시작하지 못했습니다.';end()}
     };
   }
-  function scan(){IDS.forEach(function(id){attach(document.getElementById(id))})}
+  function scan(){
+    IDS.forEach(function(id){attach(document.getElementById(id))});
+    document.querySelectorAll('textarea[data-rvq]').forEach(function(ta){attach(ta)});
+  }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',scan)}else{scan()}
-  setInterval(scan,800);
+  setInterval(scan,600);
   new MutationObserver(scan).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
