@@ -4225,5 +4225,40 @@ window.addEventListener('hashchange',function(){var k=location.hash.slice(1);if(
 })();
 </script>
 <!--/FIT-->
+<script>
+/* v15 모바일 글자 키우기: 15px 미만 글자는 +2px(최소 14px) */
+(function(){
+  var mq=window.matchMedia('(max-width:640px)');
+  var SKIP='svg,svg *,canvas,script,style,.hero h1,.swipe-dots';
+  var done=new WeakSet(),orig=new WeakMap();
+  function ownText(el){for(var n=el.firstChild;n;n=n.nextSibling){if(n.nodeType===3&&n.textContent.trim())return true}return false}
+  function bump(){
+    if(!mq.matches)return;
+    var list=[],els=document.body.getElementsByTagName('*');
+    for(var i=0;i<els.length;i++){var el=els[i];if(done.has(el)||!ownText(el)||el.matches(SKIP))continue;list.push(el)}
+    var plan=list.map(function(el){
+      var fs=parseFloat(getComputedStyle(el).fontSize),p=el.parentElement;
+      if(p&&done.has(p)&&orig.has(p)&&getComputedStyle(p).fontSize===getComputedStyle(el).fontSize&&!el.style.fontSize){return [el,0]}
+      return [el,fs];
+    });
+    plan.forEach(function(x){var el=x[0],fs=x[1];done.add(el);if(fs&&fs<15){orig.set(el,fs);el.style.setProperty('font-size',Math.max(fs+2,14)+'px','important');el.style.setProperty('line-height','1.5','important')}});
+    dots();
+  }
+  function dots(){
+    document.querySelectorAll('.dx-flips,.sr-flips').forEach(function(box){
+      var n=box.children.length;if(n<2)return;
+      var d=box.nextElementSibling;
+      if(!d||!d.classList.contains('swipe-dots')){d=document.createElement('div');d.className='swipe-dots';box.after(d)}
+      if(d.dataset.n!=n){d.dataset.n=n;d.innerHTML='<span>옆으로 넘겨 보세요</span>'+Array(n+1).join('<i></i>')}
+      var upd=function(){var w=box.children[0].getBoundingClientRect().width+12,k=Math.round(box.scrollLeft/w);d.querySelectorAll('i').forEach(function(e,j){e.classList.toggle('on',j===k)})};
+      if(!box.dataset.sw){box.dataset.sw=1;box.addEventListener('scroll',upd,{passive:true})}
+      upd();
+    });
+  }
+  var t;function later(){clearTimeout(t);t=setTimeout(bump,60)}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',later);else later();
+  new MutationObserver(later).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>

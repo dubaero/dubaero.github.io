@@ -1883,7 +1883,7 @@ body:has(#app .jx) .wrap{padding-top:8px!important}
  for(var s=0;s<document.styleSheets.length;s++){try{walk(document.styleSheets[s].cssRules)}catch(e){}}
 })();
 </script><!--/FB-->
-<div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 디지털이음연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 내일이<br>빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><nav id="nav" class="nav"></nav><div class="feature-bar">
+<div class="wrap"><header class="top"><div class="logo"><span class="logo-mark">✳</span> 디지털이음연구소 <span style="color:#abb6ae;font-size:12px;font-weight:500">| 마산새일센터 교육용</span></div><small>나를 이해하고 · 일을 탐색하고 · 지원서를 완성하다</small></header><section class="hero"><div class="eyebrow">오늘두AI · CAREER DISCOVERY</div><h1>다시 시작하는 내일이 빛날 수 있도록</h1><p>나의 경험에서 새로운 가능성을 발견하고, 나에게 맞는 일을 탐색해 보세요.</p><p style="font-size:12px;margin-top:12px">성인을 위한 자기이해 · 직업탐색 · 입사지원 실습 플랫폼</p></section><nav id="nav" class="nav"></nav><div class="feature-bar">
   <button class="feature-card t-prompt" data-target="prompt" onclick="nav('prompt')"><span class="ti">🪄</span><span class="tl">프롬프트 디자인실</span></button>
   <button class="feature-card t-heart" data-target="heart" onclick="nav('heart')"><span class="ti">💗</span><span class="tl">토닥토닥 마음챙김</span></button>
   <button class="feature-card t-song" data-target="song" onclick="nav('song')"><span class="ti">🎼</span><span class="tl">나만의 노래 만들기</span></button>
@@ -5412,6 +5412,59 @@ window.addEventListener('resize',fit);setTimeout(run,50);
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',scan)}else{scan()}
   setInterval(scan,600);
   new MutationObserver(scan).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+<style id="mobileFix">
+/* v15 모바일 가독성 보정 (2026.11.13): 제목 한 줄 · 직업 카드 옆으로 넘기기 */
+.hero h1{white-space:nowrap}
+@media(max-width:640px){
+ .hero h1{font-size:clamp(17px,5.6vw,26px)!important;letter-spacing:-1px!important}
+ .dx-flips,.sr-flips{display:flex!important;grid-template-columns:none!important;overflow-x:auto!important;scroll-snap-type:x mandatory;gap:12px!important;padding:4px 2px 10px!important;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+ .dx-flips::-webkit-scrollbar,.sr-flips::-webkit-scrollbar{display:none}
+ .dx-flips>.dx-flip,.sr-flips>.dx-flip{flex:0 0 84%!important;max-width:none!important;width:84%!important;scroll-snap-align:center;min-height:400px!important}
+ .sr-flips>.dx-flip{min-height:370px!important}
+ .sr-flips .dx-art svg{position:absolute!important;inset:0!important;height:100%!important;width:100%!important}
+ .sr-flips .dx-fr-act,.dx-flips .dx-fr-act{flex-wrap:wrap!important;row-gap:6px!important}
+ .section-title{flex-wrap:wrap}.section-title .btn{white-space:nowrap}
+ .swipe-dots{display:flex;justify-content:center;align-items:center;gap:7px;margin:2px 0 10px;font-size:14px;color:#55695f;font-weight:700}
+ .swipe-dots i{width:9px;height:9px;border-radius:50%;background:#cfdcd4;display:inline-block}
+ .swipe-dots i.on{background:#2f6b56;width:22px;border-radius:6px}
+}
+@media(min-width:641px){.swipe-dots{display:none}}
+</style>
+<script>
+/* v15 모바일 글자 키우기: 15px 미만 글자는 +2px(최소 14px) */
+(function(){
+  var mq=window.matchMedia('(max-width:640px)');
+  var SKIP='svg,svg *,canvas,script,style,.hero h1,.swipe-dots';
+  var done=new WeakSet(),orig=new WeakMap();
+  function ownText(el){for(var n=el.firstChild;n;n=n.nextSibling){if(n.nodeType===3&&n.textContent.trim())return true}return false}
+  function bump(){
+    if(!mq.matches)return;
+    var list=[],els=document.body.getElementsByTagName('*');
+    for(var i=0;i<els.length;i++){var el=els[i];if(done.has(el)||!ownText(el)||el.matches(SKIP))continue;list.push(el)}
+    var plan=list.map(function(el){
+      var fs=parseFloat(getComputedStyle(el).fontSize),p=el.parentElement;
+      if(p&&done.has(p)&&orig.has(p)&&getComputedStyle(p).fontSize===getComputedStyle(el).fontSize&&!el.style.fontSize){return [el,0]}
+      return [el,fs];
+    });
+    plan.forEach(function(x){var el=x[0],fs=x[1];done.add(el);if(fs&&fs<15){orig.set(el,fs);el.style.setProperty('font-size',Math.max(fs+2,14)+'px','important');el.style.setProperty('line-height','1.5','important')}});
+    dots();
+  }
+  function dots(){
+    document.querySelectorAll('.dx-flips,.sr-flips').forEach(function(box){
+      var n=box.children.length;if(n<2)return;
+      var d=box.nextElementSibling;
+      if(!d||!d.classList.contains('swipe-dots')){d=document.createElement('div');d.className='swipe-dots';box.after(d)}
+      if(d.dataset.n!=n){d.dataset.n=n;d.innerHTML='<span>옆으로 넘겨 보세요</span>'+Array(n+1).join('<i></i>')}
+      var upd=function(){var w=box.children[0].getBoundingClientRect().width+12,k=Math.round(box.scrollLeft/w);d.querySelectorAll('i').forEach(function(e,j){e.classList.toggle('on',j===k)})};
+      if(!box.dataset.sw){box.dataset.sw=1;box.addEventListener('scroll',upd,{passive:true})}
+      upd();
+    });
+  }
+  var t;function later(){clearTimeout(t);t=setTimeout(bump,60)}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',later);else later();
+  new MutationObserver(later).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
 </body></html>
