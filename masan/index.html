@@ -5438,6 +5438,11 @@ window.addEventListener('resize',fit);setTimeout(run,50);
  .swipe-dots i.on{background:#2f6b56;width:22px;border-radius:6px}
 }
 @media(min-width:641px){.swipe-dots{display:none}}
+
+/* 2026.11.13 탭 움직임 정리: 위 8개 메뉴 탭만 살짝 움직이고, 나머지 탭·버튼은 고정 */
+:is(#app,body) :is(button,.btn,.feature-card,.choice,.qtab,.job,.dx-card,.dx-opt,.gm-item,.gm-sticker,.gm-go,[role=button]):not(.tab3d):is(:hover,:active,:focus-visible,.on,.active,.selected){transform:none!important}
+#nav.nav button.tab3d,#nav.nav button.tab3d.active,#nav.nav button.tab3d:active{transform:none!important}
+#nav.nav button.tab3d:hover{transform:translateY(-2px)!important}
 </style>
 <script>
 /* v15 모바일 글자 키우기: 15px 미만 글자는 +2px(최소 14px) */
