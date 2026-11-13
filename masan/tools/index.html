@@ -4269,5 +4269,25 @@ window.addEventListener('hashchange',function(){var k=location.hash.slice(1);if(
   new MutationObserver(later).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
+<script>
+/* v16 글자 키우기 (2026.11.13): 컴퓨터는 모든 글자 +1px */
+(function(){
+  var MOB=window.matchMedia('(max-width:640px)').matches;
+  if(MOB&&!false)return;
+  var SKIP='svg,svg *,canvas,script,style,noscript,.swipe-dots',done=new WeakSet();
+  function own(el){for(var n=el.firstChild;n;n=n.nextSibling){if(n.nodeType===3&&n.textContent.trim())return true}return false}
+  function run(){
+    var els=document.body.getElementsByTagName('*'),list=[];
+    for(var i=0;i<els.length;i++){var e=els[i];if(!done.has(e)&&own(e)&&!e.matches(SKIP))list.push(e)}
+    var plan=list.map(function(e){var p=e.parentElement,fs=getComputedStyle(e).fontSize;
+      if(p&&done.has(p)&&p.dataset.fsUp&&getComputedStyle(p).fontSize===fs&&!e.style.fontSize)return [e,0];return [e,parseFloat(fs)]});
+    plan.forEach(function(x){var e=x[0],fs=x[1];done.add(e);if(!fs)return;
+      var n=MOB?(fs<15?Math.max(fs+2,14):0):fs+1;if(n){e.dataset.fsUp=1;e.style.setProperty('font-size',n+'px','important')}});
+  }
+  var t;function later(){clearTimeout(t);t=setTimeout(run,60)}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',later);else later();
+  new MutationObserver(later).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>

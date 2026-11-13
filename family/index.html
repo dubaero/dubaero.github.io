@@ -1606,11 +1606,11 @@ var curCat='사업';
 function renderList(){
   var ft=$('#ftabs');ft.innerHTML='';CATS.forEach(function(c){var b=el('button',c[0]===curCat?'on':'',esc(c[1]));b.type='button';b.onclick=function(){curCat=c[0];renderList();};ft.appendChild(b);});
   var ul=$('#flist');ul.innerHTML='';var n=0;
-  FORMS.forEach(function(f){if(f.cat!==curCat)return;n++;var li=el('li',null,'<span class="n">'+n+'</span><span class="t">'+esc(f.name)+'<small>'+esc(f.sub)+'</small></span>');
+  FORMS.forEach(function(f){if(f.cat!==curCat)return;n++;var li=el('li',null,'<span class="n">'+n+'</span><span class="t">'+esc(f.name)+'</span>');
     var m=el('span','mini');var h=el('button','b-how','사용법');h.type='button';h.onclick=function(){openForm(f.id,true);};
     var g=el('button','b-go','✎ 작성');g.type='button';g.onclick=function(){location.hash=f.id;openForm(f.id);};
     m.appendChild(h);m.appendChild(g);li.appendChild(m);ul.appendChild(li);});
-  (LINKF[curCat]||[]).forEach(function(x){n++;var li=el('li',null,'<span class="n">'+n+'</span><span class="t">'+esc(x.label||x.name)+'<small>'+esc(x.sub)+'</small></span>');
+  (LINKF[curCat]||[]).forEach(function(x){n++;var li=el('li',null,'<span class="n">'+n+'</span><span class="t">'+esc(x.label||x.name)+'</span>');
     var m=el('span','mini');var d=el('a','b-how','서식 PDF');d.href='forms/'+x.pdf;d.target='_blank';d.rel='noopener';
     var c=el('button','b-go','프롬프트');c.type='button';c.onclick=function(){copy(genP(x.name,x.where,false),'['+x.name+'] 프롬프트를 복사했어요. 서식 PDF와 함께 AI에 붙여 넣으세요.');};
     m.appendChild(d);m.appendChild(c);li.appendChild(m);ul.appendChild(li);});
@@ -4211,5 +4211,25 @@ set(0);
 })();
 </script>
 <!--/FIT-->
+<script>
+/* v16 글자 키우기 (2026.11.13): 컴퓨터는 모든 글자 +1px, 휴대폰은 15px 미만 +2px(최소 14px) */
+(function(){
+  var MOB=window.matchMedia('(max-width:640px)').matches;
+  if(MOB&&!true)return;
+  var SKIP='svg,svg *,canvas,script,style,noscript,.swipe-dots',done=new WeakSet();
+  function own(el){for(var n=el.firstChild;n;n=n.nextSibling){if(n.nodeType===3&&n.textContent.trim())return true}return false}
+  function run(){
+    var els=document.body.getElementsByTagName('*'),list=[];
+    for(var i=0;i<els.length;i++){var e=els[i];if(!done.has(e)&&own(e)&&!e.matches(SKIP))list.push(e)}
+    var plan=list.map(function(e){var p=e.parentElement,fs=getComputedStyle(e).fontSize;
+      if(p&&done.has(p)&&p.dataset.fsUp&&getComputedStyle(p).fontSize===fs&&!e.style.fontSize)return [e,0];return [e,parseFloat(fs)]});
+    plan.forEach(function(x){var e=x[0],fs=x[1];done.add(e);if(!fs)return;
+      var n=MOB?(fs<15?Math.max(fs+2,14):0):fs+1;if(n){e.dataset.fsUp=1;e.style.setProperty('font-size',n+'px','important')}});
+  }
+  var t;function later(){clearTimeout(t);t=setTimeout(run,60)}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',later);else later();
+  new MutationObserver(later).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>
