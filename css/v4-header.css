@@ -1,0 +1,18 @@
+/* 2026.11 리뉴얼 공통 상단 메뉴 (모든 페이지) */
+.gh{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid #E6EAEF;font-family:"Noto Sans KR",system-ui,sans-serif;letter-spacing:-.01em}
+.gh-in{max-width:1200px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.gh-logo{display:flex;flex-direction:column;gap:1px;color:#17304F;text-decoration:none;line-height:1.25}
+.gh-logo b{font-size:21px;font-weight:700;letter-spacing:-.02em}
+.gh-logo small{font-size:12.5px;font-weight:500;color:#5F6B78}
+.gh-nav{display:flex;align-items:center;gap:30px;font-size:16px;font-weight:500}
+.gh-nav a{color:#2B3540;text-decoration:none;white-space:nowrap}
+.gh-nav a:hover,.gh-nav a[aria-current="page"]{color:#1F6FB2}
+.gh-nav a.gh-cta{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:8px;background:#17304F;color:#fff}
+.gh-nav a.gh-cta:hover{background:#1F6FB2;color:#fff}
+@media (max-width:760px){
+  .gh-in{flex-wrap:wrap;padding:12px 18px 0;gap:6px}
+  .gh-logo b{font-size:20px}
+  .gh-nav{width:100%;gap:0;justify-content:space-between;overflow-x:auto;font-size:16.5px;padding-bottom:2px}
+  .gh-nav a{padding:10px 6px}
+  .gh-nav a.gh-cta{min-height:38px;padding:0 14px;margin-left:6px}
+}

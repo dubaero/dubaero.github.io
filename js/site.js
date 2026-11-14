@@ -143,7 +143,13 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     }
   } catch(e){}
 
+  /* 2026.11 한 번 비밀번호를 맞힌 기기는 90일 동안 다시 묻지 않음 (자료실마다 따로 기억) */
+  var OKD=90*24*60*60*1000;
+  function roomOk(L){try{var t=+localStorage.getItem('room_ok:'+L.link);return !!(L.link&&t&&t>Date.now());}catch(e){return false;}}
+  function rememberRoom(L){try{if(L&&L.link)localStorage.setItem('room_ok:'+L.link,String(Date.now()+OKD));}catch(e){}}
+  function goRoom(L){var w=null;try{w=window.open(L.link,'_blank');if(w)w.opener=null;}catch(err){}if(!w)window.location.href=L.link;}
   function openGate(L){
+    if (roomOk(L)) { goRoom(L); return; }
     if (localStorage.getItem('dubaero_owner') === '1' && L.link) {
       var w = null;
       try { w = window.open(L.link, '_blank'); if (w) w.opener = null; } catch(err){}
@@ -173,7 +179,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
       return;
     }
     sha(v).then(function(h){
-      if(h===cur.code){var w=null;try{w=window.open(cur.link,'_blank');if(w)w.opener=null;}catch(err){}
+      if(h===cur.code){rememberRoom(cur);var w=null;try{w=window.open(cur.link,'_blank');if(w)w.opener=null;}catch(err){}
       if(w){gMsg.textContent='새 탭에서 강의 자료실을 열었어요.';return;}
       gMsg.textContent='확인됐어요. 아래 버튼을 눌러 자료실을 여세요.';var go=document.createElement('a');go.className='gate-go';go.href=cur.link;go.target='_blank';go.rel='noopener';go.textContent='강의 자료실 열기 →';gMsg.appendChild(document.createElement('br'));gMsg.appendChild(go);}
       else{gMsg.textContent='비밀번호가 맞지 않아요. 강의 때 안내받은 비밀번호를 넣어 주세요.';gIn.select();}
@@ -195,7 +201,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
 
   (function(){var ov=document.getElementById('qr-ov');if(!ov)return;
   function op(){ov.hidden=false;}function cl(){ov.hidden=true;if(location.hash==='#qr')history.replaceState(null,'',location.pathname);}
-  document.getElementById('qr-open').addEventListener('click',op);document.getElementById('qr-x').addEventListener('click',cl);
+  var qo=document.getElementById('qr-open');if(qo)qo.addEventListener('click',op);document.getElementById('qr-x').addEventListener('click',cl);
   ov.addEventListener('click',function(e){if(e.target===ov)cl();});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ov.hidden)cl();});
   if(location.hash==='#qr')op();})();
 ;
@@ -204,6 +210,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   var DOWN=2, SEL='#rooms,#wordcloud,#about,#career,#program,#process,#contact,footer', busy=false, t;
   function targets(mob){var a=[];if(!mob){document.body.querySelectorAll('*').forEach(function(e){if(!/^(SCRIPT|STYLE|SVG|PATH|NOSCRIPT)$/i.test(e.tagName)&&!e.closest(SEL)&&!e.closest('#wc-cloud'))a.push(e);});return a;}document.querySelectorAll(SEL).forEach(function(r){a.push(r);r.querySelectorAll('*').forEach(function(e){if(!e.closest('#wc-cloud'))a.push(e);});});return a;}
   function run(){
+    if(document.documentElement.getAttribute('data-v')==='4')return; /* 2026.11 리뉴얼 페이지는 글자 크기 자동 조정 안 함 */
     if(busy)return;busy=true;var mob=window.matchMedia('(max-width:640px)').matches;DOWN=mob?3:-1;
     document.querySelectorAll('[data-fs]').forEach(function(e){e.style.removeProperty('font-size');e.removeAttribute('data-fs');});
     var els=targets(mob),sz=els.map(function(e){return parseFloat(getComputedStyle(e).fontSize)||0;});
