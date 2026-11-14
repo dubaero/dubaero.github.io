@@ -438,3 +438,9 @@ a.lg{text-decoration:none;text-align:center}
 #room-cards .room-info{column-gap:4px;padding:10px 10px 11px}
 #room-cards .room-date{font-size:12px;letter-spacing:-.02em}
 .pg-grid{gap:16px}.pg{padding:24px 26px}.pg h3{font-size:19px;line-height:1.4}
+/* 배너 넘김 빠르게 */
+.bn-slide{transition:opacity .8s ease}
+.bn-slide img{transition:transform 4s linear}
+/* 강사 소개 첫 화면: 소개만 보이고 특징 칸은 아래로 */
+@media (min-width:901px){.ab4{min-height:calc(100vh - 72px);display:flex;align-items:center;padding:40px 0}.ab4 .w4{width:100%}}
+@media (min-width:901px){.ab4 .w4{grid-template-columns:290px minmax(0,1fr);gap:56px}.ab4-name h1{font-size:46px}.ab4-lead{font-size:26px}.ab4-txt{gap:14px}}

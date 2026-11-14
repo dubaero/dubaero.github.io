@@ -17,7 +17,7 @@
     info.innerHTML='';var t=el('span','bn-t');t.appendChild(el('small',null,sm?sm.textContent:''));t.appendChild(el('b',null,b?b.textContent:''));info.appendChild(t);}
   function show(i){var s=slides(),d=dots();if(!s.length)return;idx=(i+s.length)%s.length;
     s.forEach(function(x,k){x.classList.toggle('on',k===idx);});d.forEach(function(x,k){x.classList.toggle('on',k===idx);});syncInfo();}
-  function start(){stop();if(reduce||slides().length<2)return;timer=setInterval(function(){show(idx+1);},6000);}
+  function start(){stop();if(reduce||slides().length<2)return;timer=setInterval(function(){show(idx+1);},3500);}
   function stop(){if(timer)clearInterval(timer);timer=null;}
   function bindDots(){dots().forEach(function(b,k){b.addEventListener('click',function(){show(k);start();});});}
   stage.addEventListener('mouseenter',stop);stage.addEventListener('mouseleave',start);
