@@ -451,3 +451,8 @@ a.lg{text-decoration:none;text-align:center}
 /* 자료실 탭 교육명: 두 줄 고정, 글자 살짝 작게 */
 #room-cards .room-edu{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:12.5px;letter-spacing:-.04em;line-height:1.45}
 .h4-lead{max-width:none}
+/* 2026.11.14 강의 자료실 탭: 들어가기 자리에 기관 로고 (B안) */
+#room-cards .room{position:relative;overflow:hidden}
+#room-cards .room-logo{position:absolute;right:10px;top:9px;height:26px;width:auto;max-width:44px;object-fit:contain}
+#room-cards .room-info::after{content:none}
+#room-cards .room-date{grid-column:1/-1}

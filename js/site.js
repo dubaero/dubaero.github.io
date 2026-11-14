@@ -96,6 +96,8 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     if(L.img){var im=document.createElement('img');im.src=L.img;im.alt=(L.title||L.edu)+' 강의 표지';im.loading='lazy';sl.appendChild(im);}
     else{var ph=el('div','slide-ph'+(L.card?' ph-new':''));if(L.card)ph.appendChild(el('small',null,'NEW · 업무 서랍'));ph.appendChild(el('b',null,L.edu));sl.appendChild(ph);}
     a.appendChild(sl);
+    var LG={'마산여성새로일하기센터':'saeil','전북특별자치도 가족센터':'family','함양군사회복지사협회':'welfare','근로복지공단 인재개발원':'comwel','지역아동센터부산지원단':'child'}[L.org];
+    if(LG){var lg=document.createElement('img');lg.className='room-logo';lg.src='/img/logo/'+LG+'.png';lg.alt='';a.appendChild(lg);}
     var info=el('div','room-info');info.appendChild(el('span','room-date',L.date.replace(/\s*·\s*/g,'·')));info.appendChild(el('span','room-org',L.org));info.appendChild(el('span','room-edu',L.edu));
     a.appendChild(info);
     cards.appendChild(a);
