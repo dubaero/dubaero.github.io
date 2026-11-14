@@ -25,3 +25,12 @@
   .gh-nav a.gh-cta{position:absolute;top:12px;right:18px;margin:0;min-height:40px;padding:0 16px}
   .gh-x{display:none}
 }
+/* 2026.11.14 메뉴 탭에 아주 연한 바탕색 */
+.gh-nav{gap:10px}
+.gh-nav a:not(.gh-cta){background:#F4F7FB;border-radius:8px;padding:9px 16px}
+.gh-nav a:not(.gh-cta):hover{background:#EAF1F9}
+.gh-nav a:not(.gh-cta)[aria-current="page"]{background:#E4EEF8}
+@media (max-width:760px){
+  .gh-nav{gap:4px;padding-bottom:8px}
+  .gh-nav a:not(.gh-cta){flex:1 1 auto;text-align:center;padding:8px 2px}
+}
