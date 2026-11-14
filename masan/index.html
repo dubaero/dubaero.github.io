@@ -5163,7 +5163,7 @@ function songBind(){var el=q('.jx'),l1=q('#jx-s-l1'),l2=q('#jx-s-l2');el.querySe
 
 views.prompt=promptView;init.prompt=promptBind;
 /* 2026.11.12 가족센터 도구 디자인 그대로(일반인용) iframe 연결 */
-function frameView(k){return function(){return '<div class="jx jx-frame"><iframe id="jx-ifr" src="/masan/tools/?v=1113d#'+k+'" title="'+({heart:'마음 쉼터',vent:'빡침 번역기',song:'나만의 노래 만들기'})[k]+'" style="width:100%;border:0;display:block;border-radius:14px;background:#f7f9f7"></iframe></div>'}}
+function frameView(k){return function(){return '<div class="jx jx-frame"><iframe id="jx-ifr" src="/masan/tools/?v=1114a#'+k+'" title="'+({heart:'마음 쉼터',vent:'빡침 번역기',song:'나만의 노래 만들기'})[k]+'" style="width:100%;border:0;display:block;border-radius:14px;background:#f7f9f7"></iframe></div>'}}
 function frameFit(){var f=document.getElementById('jx-ifr');if(!f)return;var top=f.getBoundingClientRect().top+window.scrollY;f.style.height=Math.max(520,window.innerHeight-top-26)+'px'}
 function frameBind(){frameFit();setTimeout(frameFit,60)}
 window.addEventListener('resize',frameFit);
