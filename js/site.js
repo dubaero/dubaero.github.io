@@ -137,10 +137,10 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   function sha(t){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return ('0'+x.toString(16)).slice(-2);}).join('');});}
 
   /* 소장님(서정님) 프리패스 자동 연결 확인 */
+  var MASTER=['f3a5d86222eef5c5fb1378be55098057fbd6c7c399e43e1311773b4545ad2269','d2ff28beb6a7e88b09f21b6bb19d403182f66179a16187233c027c682c7d2f6f']; /* 강사 전용 비밀번호(암호화 값만 저장) */
   try {
-    if (new URLSearchParams(window.location.search).get('admin') === 'seojeong') {
-      localStorage.setItem('dubaero_owner', '1');
-    }
+    var adm=new URLSearchParams(window.location.search).get('admin');
+    if (adm) sha(adm).then(function(h){ if(MASTER.indexOf(h)>-1) localStorage.setItem('dubaero_owner', '1'); });
   } catch(e){}
 
   /* 2026.11 한 번 비밀번호를 맞힌 기기는 90일 동안 다시 묻지 않음 (자료실마다 따로 기억) */
@@ -170,15 +170,8 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     e.preventDefault();var v=gIn.value.trim();if(!v||!cur)return;
     if(!cur.code||!cur.link){gMsg.textContent='아직 준비 중인 자료실이에요.';return;}
     /* 소장님 마스터 비밀번호로도 영구 자동 인증 저장 */
-    if (v === 'seojeong' || v === 'dubaero') {
-      localStorage.setItem('dubaero_owner', '1');
-      var w = null;
-      try { w = window.open(cur.link, '_blank'); if (w) w.opener = null; } catch(err){}
-      if (w) { closeGate(); return; }
-      window.location.href = cur.link;
-      return;
-    }
     sha(v).then(function(h){
+      if (MASTER.indexOf(h)>-1) { localStorage.setItem('dubaero_owner', '1'); var L0=cur; closeGate(); goRoom(L0); return; }
       if(h===cur.code){rememberRoom(cur);var w=null;try{w=window.open(cur.link,'_blank');if(w)w.opener=null;}catch(err){}
       if(w){gMsg.textContent='새 탭에서 강의 자료실을 열었어요.';return;}
       gMsg.textContent='확인됐어요. 아래 버튼을 눌러 자료실을 여세요.';var go=document.createElement('a');go.className='gate-go';go.href=cur.link;go.target='_blank';go.rel='noopener';go.textContent='강의 자료실 열기 →';gMsg.appendChild(document.createElement('br'));gMsg.appendChild(go);}
