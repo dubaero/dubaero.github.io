@@ -49,9 +49,69 @@ def wanted(title, cat):
     return any(k in text for k in CFG.get("keywords", []))
 
 
+_PAGES = {}
+
+
+def post_page(log_no):
+    if log_no not in _PAGES:
+        try:
+            _PAGES[log_no] = get("https://m.blog.naver.com/%s/%s" % (CFG["blog_id"], log_no)).decode("utf-8", "ignore")
+        except Exception as e:  # noqa: BLE001
+            print("  글 읽기 실패", log_no, e)
+            _PAGES[log_no] = ""
+    return _PAGES[log_no]
+
+
+def _base(u):
+    return re.sub(r"\?.*$", "", html.unescape(u or ""))
+
+
+def photo_candidates(log_no):
+    """글 본문 속 실제 강의 현장 사진 주소 (대표 썸네일·제목 카드 제외).
+
+    본문 사진 순서대로 보고, 첫 사진(보통 썸네일 카드)과 대표사진은 건너뛴 뒤
+    가로가 더 긴 사진을 우선 고릅니다."""
+    page = post_page(log_no)
+    if not page:
+        return []
+    og = og_image(log_no)
+    skip = {_base(og)} if og else set()
+    found = []  # (주소, 가로, 세로)
+    for m in re.finditer(r"data-linkdata='([^']+)'", page):
+        try:
+            d = json.loads(html.unescape(m.group(1)))
+        except Exception:  # noqa: BLE001
+            continue
+        src = d.get("src") or ""
+        if "pstatic.net" not in src:
+            continue
+        try:
+            w, h = int(d.get("originalWidth") or 0), int(d.get("originalHeight") or 0)
+        except ValueError:
+            w = h = 0
+        found.append((src, w, h))
+    if not found:
+        for m in re.finditer(r'data-lazy-src="([^"]+)"', page):
+            if "pstatic.net" in m.group(1):
+                found.append((html.unescape(m.group(1)), 0, 0))
+    seen, uniq = set(), []
+    for src, w, h in found:
+        b = _base(src)
+        if b in seen:
+            continue
+        seen.add(b)
+        uniq.append((b, w, h))
+    body = [x for i, x in enumerate(uniq) if i > 0 and x[0] not in skip]
+    if not body:
+        return []
+    land = [x for x in body if x[1] and x[2] and x[1] > x[2] * 1.15]
+    pick = (land or body)[0][0]
+    return [pick + "?type=w966", pick + "?type=w773", pick]
+
+
 def og_image(log_no):
     try:
-        page = get("https://m.blog.naver.com/%s/%s" % (CFG["blog_id"], log_no)).decode("utf-8", "ignore")
+        page = post_page(log_no)
         m = re.search(r'property="og:image"\s+content="([^"]+)"', page) or re.search(r'content="([^"]+)"\s+property="og:image"', page)
         if m:
             return html.unescape(m.group(1))
@@ -127,11 +187,28 @@ def main():
                 print("  사진 저장 실패:", title, e)
                 continue
         keep_files.add(fname)
+        photo = None
+        pname = "%s-p.jpg" % log_no
+        ppath = os.path.join(IMG_DIR, pname)
+        if not os.path.exists(ppath):
+            try:
+                urls = photo_candidates(log_no)
+                if urls:
+                    open(ppath, "wb").write(download(urls))
+                    shrink(ppath)
+            except Exception as e:  # noqa: BLE001
+                print("  현장 사진 저장 실패:", title, e)
+                if os.path.exists(ppath):
+                    os.remove(ppath)
+        if os.path.exists(ppath):
+            keep_files.add(pname)
+            photo = "/img/blog/" + pname
         try:
             d = parsedate_to_datetime(it.findtext("pubDate")).astimezone(KST).strftime("%Y.%m.%d")
         except Exception:  # noqa: BLE001
             d = ""
-        items.append({"title": title, "date": d, "link": link, "img": "/img/blog/" + fname, "category": cat})
+        items.append({"title": title, "date": d, "link": link, "img": "/img/blog/" + fname,
+                      "photo": photo, "category": cat})
         print("  가져옴:", d, title)
         if len(items) >= CFG.get("max_items", 12):
             break

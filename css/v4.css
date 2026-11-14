@@ -169,7 +169,7 @@ button,input{font:inherit}
 /* ---------- 강사 소개 페이지 ---------- */
 .ab4{padding:72px 0 56px}
 .ab4 .w4{display:grid;grid-template-columns:320px minmax(0,1fr);gap:64px;align-items:start}
-.ab4-photo img{width:100%;border-radius:18px;background:#EEF3F8}
+.ab4-photo img{width:100%;height:auto;border-radius:18px;background:#EEF3F8}
 .ab4-txt{display:flex;flex-direction:column;gap:16px}
 .ab4-name{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
 .ab4-name h1{font-size:44px;font-weight:700;letter-spacing:-.035em;color:var(--navy);line-height:1.2}

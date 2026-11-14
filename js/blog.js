@@ -24,7 +24,7 @@
     stage.innerHTML='';dotsBox.innerHTML='';
     items.forEach(function(it,k){
       var a=link(it.link);a.className='bn-slide'+(k===0?' on':'');
-      var im=document.createElement('img');im.src=it.img;im.alt=(it.title||'강의 후기')+' 사진';if(k)im.loading='lazy';a.appendChild(im);
+      var im=document.createElement('img');im.src=it.photo||it.img;im.alt=(it.title||'강의 후기')+' 현장 사진';if(k)im.loading='lazy';a.appendChild(im);
       var cap=el('span','bn-cap'),t=el('span');t.appendChild(el('small',null,it.date||''));t.appendChild(el('b',null,it.title||'강의 후기'));
       cap.appendChild(t);cap.appendChild(el('i',null,'후기 보기 →'));a.appendChild(cap);stage.appendChild(a);
       var d=document.createElement('button');d.type='button';d.setAttribute('aria-label',(k+1)+'번째 사진');if(k===0)d.className='on';dotsBox.appendChild(d);
@@ -46,7 +46,8 @@
   fetch('/data/blog.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(data){
     var items=(data&&data.items||[]).filter(function(x){return x&&x.img&&x.link;});
     if(!items.length)return;
-    buildBanner(items.slice(0,4));start();
+    var photos=items.filter(function(x){return x.photo;});
+    if(photos.length){buildBanner(photos.slice(0,5));start();}
     buildReviews(items.slice(0,8));
   }).catch(function(){});
 })();
