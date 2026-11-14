@@ -49,8 +49,7 @@
   fetch('/data/blog.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(data){
     var items=(data&&data.items||[]).filter(function(x){return x&&x.img&&x.link;});
     if(!items.length)return;
-    var photos=items.filter(function(x){return x.photo;});
-    if(photos.length){buildBanner(photos.slice(0,5));start();}
+    /* 2026.11.14 배너는 강사님이 고른 현장 사진(index.html)으로 고정, 블로그는 아래 후기 칸만 자동 갱신 */
     buildReviews(items.slice(0,4));
   }).catch(function(){});
 })();
