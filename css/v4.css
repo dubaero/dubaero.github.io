@@ -416,3 +416,24 @@ button,input{font:inherit}
 .st4 h3{font-size:17.5px;margin:0}
 .st4 p{grid-column:2;font-size:15px;margin-top:2px}
 @media (max-width:640px){.ab4 .w4{grid-template-columns:1fr}.ab4-photo{max-width:180px}.ab4-tags{margin-top:6px}.st4 .w4{gap:16px;padding-top:22px;padding-bottom:22px}}
+/* 2026.11.14 홈 배너: 폭 줄이고, 높이는 제목~숫자 줄에 맞춤(JS) */
+.hero4 .w4{grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:72px;align-items:start}
+.bn-stage{aspect-ratio:auto;max-height:none;min-height:240px}
+@media (max-width:900px){.bn-stage{aspect-ratio:16/10;height:auto}}
+/* 홈 블로그 후기: 전체 출강 목록과 같은 표 */
+.rv4{background:var(--soft);border-top:1px solid var(--line);padding:56px 0 56px;margin-top:0}
+.lrow.rvrow{grid-template-columns:150px minmax(0,1fr) 130px}
+.lrow.rvrow .lo{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+a.lg{text-decoration:none;text-align:center}
+@media (max-width:640px){.lrow.rvrow{grid-template-columns:1fr auto;grid-template-areas:"o o" "d g"}.lrow.rvrow .lo{grid-area:o;white-space:normal}.lrow.rvrow .ld{grid-area:d}.lrow.rvrow .lg{grid-area:g}}
+/* 강의 자료실 탭: 높이 맞추고 남는 칸 없애기 */
+#room-cards .room-info{padding:10px 12px 11px}
+#room-cards .room-date{white-space:nowrap;font-size:12.5px}
+#room-cards .room-info::after{content:"들어가기→";font-size:11.5px}
+#room-cards .room-edu{-webkit-line-clamp:1}
+/* 강사 소개 특징 칸: 숨 쉴 공간 */
+.st4 .w4{gap:36px;padding-top:36px;padding-bottom:36px}
+.st4 p{margin-top:6px;line-height:1.6}
+.ab4{padding-bottom:44px}
+#room-cards .room-info{column-gap:4px;padding:10px 10px 11px}
+#room-cards .room-date{font-size:12px;letter-spacing:-.02em}

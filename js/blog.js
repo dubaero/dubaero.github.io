@@ -36,14 +36,24 @@
   }
   function buildReviews(items){
     if(!grid)return;grid.innerHTML='';
+    var h=el('div','lrow lhd rvrow');h.setAttribute('aria-hidden','true');h.appendChild(el('span',null,'날짜'));h.appendChild(el('span',null,'강의 후기'));h.appendChild(el('span'));grid.appendChild(h);
     items.forEach(function(it){
-      var a=link(it.link);a.className='rvl';
-      a.appendChild(el('span','rvl-d',it.date||''));
-      a.appendChild(el('span','rvl-t',it.title||'강의 후기'));
-      a.appendChild(el('span','rvl-go','후기 보기 →'));
-      grid.appendChild(a);
+      var r=el('div','lrow rvrow');
+      r.appendChild(el('span','ld',it.date||''));
+      r.appendChild(el('span','lo',it.title||'강의 후기'));
+      var a=link(it.link);a.className='lg';a.textContent='후기 보러 가기';r.appendChild(a);
+      grid.appendChild(r);
     });
   }
+  /* 배너 사진: 제목 첫 줄 ~ 숫자 줄 끝선에 높이 맞춤 */
+  function fitBanner(){
+    var txt=document.querySelector('.h4-txt'),h1=txt&&txt.querySelector('h1'),st=txt&&txt.querySelector('.h4-stats'),bn=document.getElementById('bn');
+    if(!h1||!st||!bn)return;
+    if(window.innerWidth<=900){bn.style.marginTop='';stage.style.height='';return;}
+    var t=txt.getBoundingClientRect().top,a=h1.getBoundingClientRect().top,b=st.getBoundingClientRect().bottom;
+    bn.style.marginTop=(a-t)+'px';stage.style.height=(b-a)+'px';
+  }
+  window.addEventListener('resize',fitBanner);window.addEventListener('load',fitBanner);fitBanner();
 
   bindDots();syncInfo();start();
   if(!window.fetch)return;
