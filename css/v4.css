@@ -392,3 +392,27 @@ button,input{font:inherit}
 .wc-chips button[data-w]{border:1px solid #CFD8E3;color:#2B3540;background:#fff}
 .wc-chips button[data-w]:hover{border-color:var(--navy);background:#F5F7FA}
 .wc-chips button[data-w].picked{background:var(--navy);border-color:var(--navy);color:#fff}
+/* 2026.11.14 홈 블로그 후기: 출강 목록처럼 텍스트 목록 */
+.rv-list{border:1px solid #E1E6EC;border-radius:12px;overflow:hidden;background:#fff}
+.rvl{display:grid;grid-template-columns:120px minmax(0,1fr) auto;align-items:center;gap:16px;padding:14px 20px;border-top:1px solid #EEF1F4;color:var(--ink);text-decoration:none}
+.rvl:first-child{border-top:0}
+.rvl:hover{background:#F5F8FC}
+.rvl-d{font-size:15px;color:var(--muted)}
+.rvl-t{font-size:16.5px;font-weight:500;color:var(--navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rvl-go{font-size:15px;font-weight:600;color:var(--blue);white-space:nowrap}
+@media (max-width:640px){.rvl{grid-template-columns:1fr auto;gap:4px 12px;padding:12px 14px}.rvl-d{grid-column:1/-1;font-size:14px}.rvl-t{white-space:normal;font-size:16.5px}}
+/* 강의 자료실 탭: 날짜·들어가기 줄 아래 한 줄 띄우고 기관명 */
+#room-cards .room-org{margin-top:10px}
+/* 강사 소개: 사진 작게, 태그·모토는 사진 아래 끝선에 맞춤, 여백 줄임 */
+.ab4{padding:48px 0 36px}
+.ab4 .w4{grid-template-columns:230px minmax(0,1fr);gap:44px;align-items:stretch}
+.ab4-txt{gap:10px;justify-content:flex-start}
+.ab4-tags{margin-top:auto}
+.ab4-name h1{font-size:40px}
+.ab4-lead{font-size:23px;margin-top:4px}
+.ab4-intro{font-size:17px;line-height:1.6}
+.st4 .w4{gap:24px;padding-top:26px;padding-bottom:26px}
+.st4 .w4>div{display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:baseline}
+.st4 h3{font-size:17.5px;margin:0}
+.st4 p{grid-column:2;font-size:15px;margin-top:2px}
+@media (max-width:640px){.ab4 .w4{grid-template-columns:1fr}.ab4-photo{max-width:180px}.ab4-tags{margin-top:6px}.st4 .w4{gap:16px;padding-top:22px;padding-bottom:22px}}

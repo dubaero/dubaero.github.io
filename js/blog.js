@@ -37,9 +37,10 @@
   function buildReviews(items){
     if(!grid)return;grid.innerHTML='';
     items.forEach(function(it){
-      var a=link(it.link);a.className='rv';
-      var box=el('span','rv-img'),im=document.createElement('img');im.src=it.img;im.alt='';im.loading='lazy';box.appendChild(im);a.appendChild(box);
-      var t=el('span');t.appendChild(el('b',null,it.title||'강의 후기'));t.appendChild(el('small',null,it.date||''));a.appendChild(t);
+      var a=link(it.link);a.className='rvl';
+      a.appendChild(el('span','rvl-d',it.date||''));
+      a.appendChild(el('span','rvl-t',it.title||'강의 후기'));
+      a.appendChild(el('span','rvl-go','후기 보기 →'));
       grid.appendChild(a);
     });
   }
@@ -50,6 +51,6 @@
     var items=(data&&data.items||[]).filter(function(x){return x&&x.img&&x.link;});
     if(!items.length)return;
     /* 2026.11.14 배너는 강사님이 고른 현장 사진(index.html)으로 고정, 블로그는 아래 후기 칸만 자동 갱신 */
-    buildReviews(items.slice(0,12));
+    buildReviews(items.slice(0,8));
   }).catch(function(){});
 })();
