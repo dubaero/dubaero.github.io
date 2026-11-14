@@ -387,3 +387,8 @@ button,input{font:inherit}
 /* 홈 배너 사진 작게 */
 .bn-stage{aspect-ratio:16/10;max-height:340px}
 .hero4 .w4{align-items:center}
+/* 워드클라우드 선택 버튼은 깔끔한 흰색, 아래 단어 칸만 색 */
+.wc-box{background:#fff}
+.wc-chips button[data-w]{border:1px solid #CFD8E3;color:#2B3540;background:#fff}
+.wc-chips button[data-w]:hover{border-color:var(--navy);background:#F5F7FA}
+.wc-chips button[data-w].picked{background:var(--navy);border-color:var(--navy);color:#fff}
