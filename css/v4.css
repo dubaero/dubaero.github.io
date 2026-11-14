@@ -358,3 +358,18 @@ button,input{font:inherit}
 #room-cards .room-info{grid-template-columns:minmax(0,1fr) auto;column-gap:4px}
 #room-cards .room-date{white-space:normal;font-size:12.5px}
 #room-cards .room-info::after{content:"들어가기→";font-size:12.5px}
+/* 2026.11.14 홈 블로그 썸네일: 네이버 원본(정사각형) 그대로, 안 잘리게 */
+.rv-img{aspect-ratio:1/1}
+.rv-img img{object-fit:contain;background:#fff}
+/* 강의 자료실 상단: 표처럼 3칸 x 2줄 */
+#room-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid #CFD8E3;border-top:3px solid var(--navy);border-radius:12px;overflow:hidden;background:#fff}
+#room-cards .room{border:0;border-radius:0;border-right:1px solid #E1E6EC;border-bottom:1px solid #E1E6EC;background:#fff;transform:none;flex:initial}
+#room-cards .room:nth-child(3n){border-right:0}
+#room-cards .room:nth-last-child(-n+3){border-bottom:0}
+#room-cards .room:hover{background:#F3F7FC;transform:none}
+#room-cards .room-info{padding:14px 18px;row-gap:3px}
+#room-cards .room-date{font-size:14px;white-space:nowrap}
+#room-cards .room-info::after{content:"들어가기 →";font-size:14px}
+#room-cards .room-org{font-size:17px}
+#room-cards .room-edu{font-size:15px;-webkit-line-clamp:1}
+@media (max-width:640px){#room-cards{display:grid;grid-template-columns:1fr;overflow:hidden;margin:0;padding:0}#room-cards .room{border-right:0!important;border-bottom:1px solid #E1E6EC!important}#room-cards .room:last-child{border-bottom:0!important}}
