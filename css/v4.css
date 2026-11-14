@@ -289,3 +289,4 @@ button,input{font:inherit}
   .gate-f{flex-direction:column}
   .qr-card{padding:14px;border-radius:18px}.qr-stage{width:calc(100vw - 60px)}
 }
+.pgtop{padding-top:56px}

@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/v4-header.css?v=1">
-<link rel="stylesheet" href="/css/v4.css?v=2">
+<link rel="stylesheet" href="/css/v4.css?v=3">
 </head>
 <body>
 
@@ -34,6 +34,7 @@
       <a href="/about/">강사 소개</a>
       <a href="/program/">강의 분야</a>
       <a href="/lectures/">강의 자료실</a>
+      <a href="/wordcloud/">실시간 워드클라우드</a>
       <a class="gh-cta" href="/contact/">강의 문의</a>
     </nav>
   </div>
@@ -66,31 +67,9 @@
   </div>
 </section>
 
-<section class="wc4">
-  <div class="w4">
-    <div class="wc" id="wordcloud">
-      <div class="wc-box">
-        <div class="wc-top">
-          <div><span class="live">실시간</span><h2>실시간 워드클라우드</h2><p>AI에게 맡기고 싶은 일을 골라 주세요. 많이 고른 단어일수록 크게 보입니다.</p></div>
-          <a href="#wordcloud" id="wc-open" class="more">참여하기 ↓</a>
-        </div>
-        <div class="wc-chips" id="wc-chips"><button type="button" data-w="보고서">보고서</button><button type="button" data-w="공문서">공문서</button><button type="button" data-w="사업계획서">사업계획서</button><button type="button" data-w="회의록">회의록</button><button type="button" data-w="상담 기록">상담 기록</button><button type="button" data-w="안내문">안내문</button><button type="button" data-w="홍보 문구">홍보 문구</button><button type="button" data-w="카드뉴스">카드뉴스</button><button type="button" data-w="인포그래픽">인포그래픽</button><button type="button" data-w="블로그">블로그</button><button type="button" data-w="엑셀 정리">엑셀 정리</button><button type="button" data-w="예산·정산">예산·정산</button><button type="button" data-w="녹음→회의록">녹음→회의록</button><button type="button" data-w="PPT">PPT</button><button type="button" data-w="이미지">이미지</button><button type="button" data-w="영상 편집">영상 편집</button><button type="button" data-w="번역">번역</button><button type="button" data-w="이메일">이메일</button><button type="button" data-w="자료 조사">자료 조사</button><button type="button" data-w="요약">요약</button><button type="button" data-w="일정">일정</button><button type="button" data-w="아이디어">아이디어</button><button type="button" class="etc" id="wc-etc">기타 (직접 입력)</button></div>
-        <form class="wc-form" id="wc-form" autocomplete="off" hidden>
-          <label for="wc-input" class="sr">단어 입력</label>
-          <input id="wc-input" maxlength="12" placeholder="배우고 싶은 업무를 적어 주세요">
-          <button type="submit" class="btn">보내기</button>
-        </form>
-        <div class="wc-cloud" id="wc-cloud" aria-live="polite"></div>
-        <p class="wc-note">지금은 고른 단어가 내 화면에 모이고, 강의 당일에는 수강생 모두의 단어가 함께 모입니다. 회색 단어는 예시입니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="rooms4" id="rooms">
   <div class="w4">
     <div class="sh"><div><span class="kick">LECTURE ROOM</span><h2>강의 자료실</h2><p>들으신 강의를 누르고, 강의 때 안내받은 비밀번호를 넣으면 자료와 업무 도구가 열립니다.</p></div></div>
-    <div class="room-grid" id="room-cards"></div>
     <div class="lec-head" id="all-lectures"><h3>전체 출강 목록</h3><div class="ltabs" id="lec-tabs" role="tablist"><button type="button" class="on" data-f="all">전체</button><button type="button" data-f="예정">예정</button><button type="button" data-f="진행 중">진행 중</button><button type="button" data-f="완료">완료</button></div><span class="lcount" id="lec-count"></span><label class="lsearch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="lec-q" placeholder="기관명을 입력하세요 (예: 가족센터)" aria-label="기관명 또는 교육명으로 강의 찾기" autocomplete="off"></label></div>
     <div class="lrows" id="lec-list">
       <div class="lrow lhd" aria-hidden="true"><span>날짜</span><span>상태</span><span>기관</span><span>교육</span><span></span></div>

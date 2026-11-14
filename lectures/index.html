@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" data-v="4">
 <head>
 <meta charset="utf-8">
 <title>강의 자료실 | 이서정 AI 강사</title>
@@ -17,19 +17,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.css?v=3">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/v4-header.css?v=1">
+<link rel="stylesheet" href="/css/v4.css?v=3">
 </head>
-<body><!--FB--><script>/* 2026.11.12 글자 1px 키우기(컴퓨터·휴대폰 공통) */
-(function(){if(window.__fb)return;window.__fb=1;
- function walk(rules){for(var i=0;i<rules.length;i++){var r=rules[i];
-  if(r.cssRules&&!r.style)walk(r.cssRules);
-  else if(r.style){var f=r.style.getPropertyValue('font-size');var m=/^(\d+(?:\.\d+)?)px$/.exec((f||'').trim());if(m)r.style.setProperty('font-size',(+m[1]+1)+'px',r.style.getPropertyPriority('font-size'));if(r.cssRules&&r.cssRules.length)walk(r.cssRules)}}}
- for(var s=0;s<document.styleSheets.length;s++){try{walk(document.styleSheets[s].cssRules)}catch(e){}}
-})();
-</script><!--/FB-->
+<body>
 
 <header class="gh">
   <div class="gh-in">
@@ -38,26 +30,38 @@
       <a href="/about/">강사 소개</a>
       <a href="/program/">강의 분야</a>
       <a href="/lectures/" aria-current="page">강의 자료실</a>
+      <a href="/wordcloud/">실시간 워드클라우드</a>
       <a class="gh-cta" href="/contact/">강의 문의</a>
     </nav>
   </div>
 </header>
 
 <main>
-<section class="rooms" id="rooms">
-  <div class="wrap">
-    <div class="sec-head" style="margin-bottom:32px">
-      <h2>강의 자료실</h2>
-      <p>강의를 누르면 그 강의의 자료와 업무 도구로 들어갑니다.</p>
-    </div>
-    <div class="room-grid" id="room-cards"></div>
-    <div class="lec-head" id="all-lectures"><h3>전체 출강 목록</h3><div class="ltabs" id="lec-tabs" role="tablist"><button type="button" class="on" data-f="all">전체</button><button type="button" data-f="예정">예정</button><button type="button" data-f="진행 중">진행 중</button><button type="button" data-f="완료">완료</button></div><label class="lsearch"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="lec-q" placeholder="기관명으로 찾기" aria-label="기관명 또는 교육명으로 출강 기록 찾기" autocomplete="off"></label><span class="lcount" id="lec-count"></span></div>
+<section class="rooms4 pgtop" id="rooms">
+  <div class="w4">
+    <div class="sh"><div><span class="kick">LECTURE ROOM</span><h2>강의 자료실</h2><p>들으신 강의를 누르고, 강의 때 안내받은 비밀번호를 넣으면 자료와 업무 도구가 열립니다.</p></div></div>
+    <div class="lec-head" id="all-lectures"><h3>전체 출강 목록</h3><div class="ltabs" id="lec-tabs" role="tablist"><button type="button" class="on" data-f="all">전체</button><button type="button" data-f="예정">예정</button><button type="button" data-f="진행 중">진행 중</button><button type="button" data-f="완료">완료</button></div><span class="lcount" id="lec-count"></span><label class="lsearch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="lec-q" placeholder="기관명을 입력하세요 (예: 가족센터)" aria-label="기관명 또는 교육명으로 강의 찾기" autocomplete="off"></label></div>
     <div class="lrows" id="lec-list">
       <div class="lrow lhd" aria-hidden="true"><span>날짜</span><span>상태</span><span>기관</span><span>교육</span><span></span></div>
     </div>
   </div>
 </section>
 </main>
+
+<footer class="ft4">
+  <div class="w4">
+    <div class="ft-brand"><b>이서정 · 생성형 AI 전문강사</b>오늘두AI · 디지털이음연구소</div>
+    <div class="ft-links">
+      <span>dltjwjd59@gmail.com<button type="button" class="hc-copy" data-copy="dltjwjd59@gmail.com">복사</button></span>
+      <a href="https://blog.naver.com/ricewitch" target="_blank" rel="noopener">블로그</a>
+      <a href="https://www.instagram.com/jeong260622/" target="_blank" rel="noopener">인스타그램</a>
+      <span>카카오톡 li8093</span>
+      <a href="/ansim-filter/">개인정보 안심 필터</a>
+      <button type="button" id="qr-open">홈페이지 QR</button>
+    </div>
+    <div class="ft-copy">© 2026 Lee Seojeong. All rights reserved.</div>
+  </div>
+</footer>
 
 <div class="qr-ov" id="qr-ov" hidden><div class="qr-card" role="dialog" aria-modal="true" aria-label="홈페이지 QR"><button type="button" class="qr-x" id="qr-x" aria-label="닫기">×</button><div class="qr-stage"><img class="qr-bgi" src="/img/qr-dubaero.png?v=4" alt="한 번 찍으면 두 배로! 이서정 강사 홈페이지 QR 코드" width="1176" height="1026"></div></div></div>
 <div class="gate" id="gate" hidden>
@@ -74,13 +78,6 @@
     <p class="gate-m" id="gate-msg" aria-live="polite"></p>
   </div>
 </div>
-
-<footer>
-  <div class="wrap">
-    <div><b>오늘두AI 이서정</b> · 생성형 AI 전문강사</div>
-    <div>© 2026 Lee Seojeong. All rights reserved.</div>
-  </div>
-</footer>
 
 <div class="toast" id="toast" role="status"></div>
 <script src="/js/site.js?v=4"></script>
