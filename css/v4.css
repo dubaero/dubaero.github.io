@@ -373,3 +373,17 @@ button,input{font:inherit}
 #room-cards .room-org{font-size:17px}
 #room-cards .room-edu{font-size:15px;-webkit-line-clamp:1}
 @media (max-width:640px){#room-cards{display:grid;grid-template-columns:1fr;overflow:hidden;margin:0;padding:0}#room-cards .room{border-right:0!important;border-bottom:1px solid #E1E6EC!important}#room-cards .room:last-child{border-bottom:0!important}}
+/* 2026.11.14 강의 자료실 상단: 테두리 있는 텍스트 탭 6개 한 줄 */
+#room-cards{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;border:0;border-radius:0;overflow:visible;background:none}
+#room-cards .room,#room-cards .room:nth-child(3n),#room-cards .room:nth-last-child(-n+3){border:1px solid #CFD8E3;border-top:3px solid var(--navy);border-radius:10px;background:#fff}
+#room-cards .room:hover{border-color:var(--blue);background:#F3F7FC;transform:translateY(-2px)}
+#room-cards .room-info{padding:10px 12px 12px;grid-template-columns:minmax(0,1fr) auto;row-gap:3px}
+#room-cards .room-date{font-size:12.5px;white-space:normal}
+#room-cards .room-info::after{content:"들어가기→";font-size:12.5px}
+#room-cards .room-org{font-size:15px}
+#room-cards .room-edu{font-size:13.5px;-webkit-line-clamp:2}
+@media (max-width:1100px){#room-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){#room-cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:8px}#room-cards .room{flex:0 0 72%;scroll-snap-align:start;border:1px solid #CFD8E3!important;border-top:3px solid var(--navy)!important}#room-cards .room-org{font-size:16.5px}}
+/* 홈 배너 사진 작게 */
+.bn-stage{aspect-ratio:16/10;max-height:340px}
+.hero4 .w4{align-items:center}
