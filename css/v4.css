@@ -457,3 +457,4 @@ a.lg{text-decoration:none;text-align:center}
 #room-cards .room-info::after{content:none}
 #room-cards .room-date{grid-column:1/-1}
 .bn-slide{transition:opacity 1.2s ease}.bn-slide img{transition:transform 6s linear}
+.bn-slide{transition:opacity .6s ease}.bn-slide img{transition:transform 3s linear}
