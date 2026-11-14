@@ -11,6 +11,7 @@ import json
 import os
 import re
 import sys
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
@@ -25,6 +26,7 @@ KST = timezone(timedelta(hours=9))
 
 
 def get(url, referer="https://blog.naver.com/"):
+    url = urllib.parse.quote(url, safe=":/?=&%#~+,;@!$'()*")
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Referer": referer})
     with urllib.request.urlopen(req, timeout=30) as r:
         return r.read()
@@ -47,13 +49,10 @@ def wanted(title, cat):
     return any(k in text for k in CFG.get("keywords", []))
 
 
-def find_image(desc, log_no):
-    m = re.search(r'<img[^>]+src="([^"]+)"', desc or "")
-    if m:
-        return html.unescape(m.group(1))
+def og_image(log_no):
     try:
         page = get("https://m.blog.naver.com/%s/%s" % (CFG["blog_id"], log_no)).decode("utf-8", "ignore")
-        m = re.search(r'<meta\s+property="og:image"\s+content="([^"]+)"', page)
+        m = re.search(r'property="og:image"\s+content="([^"]+)"', page) or re.search(r'content="([^"]+)"\s+property="og:image"', page)
         if m:
             return html.unescape(m.group(1))
     except Exception as e:  # noqa: BLE001
@@ -61,12 +60,33 @@ def find_image(desc, log_no):
     return None
 
 
-def bigger(url):
-    # 네이버 사진 주소는 type=w966 을 붙이면 적당한 크기로 받아짐
-    if "pstatic.net" in url:
-        url = re.sub(r"\?type=[^&]*", "", url)
-        url += ("&" if "?" in url else "?") + "type=w966"
-    return url
+def candidates(desc, log_no):
+    urls = []
+    og = og_image(log_no)
+    if og:
+        urls.append(og)
+    m = re.search(r'<img[^>]+src="([^"]+)"', desc or "")
+    if m:
+        urls.append(html.unescape(m.group(1)))
+    out = []
+    for u in urls:
+        base = re.sub(r"\?type=[^&]*$", "", u)
+        for v in (base + "?type=w966", u, base):
+            if v not in out:
+                out.append(v)
+    return out
+
+
+def download(urls):
+    last = None
+    for u in urls:
+        try:
+            data = get(u)
+            if len(data) > 3000:
+                return data
+        except Exception as e:  # noqa: BLE001
+            last = e
+    raise ValueError("사진을 받지 못함 (%s)" % last)
 
 
 def main():
@@ -78,20 +98,14 @@ def main():
         title = (it.findtext("title") or "").strip()
         cat = (it.findtext("category") or "").strip()
         link, log_no = clean_link(it.findtext("link") or "")
+        print("  [%s] %s" % (cat, title[:40]))
         if link in exclude or not wanted(title, cat):
-            continue
-        img = find_image(it.findtext("description") or "", log_no)
-        if not img:
-            print("  대표사진 없음:", title)
             continue
         fname = "%s.jpg" % log_no
         path = os.path.join(IMG_DIR, fname)
         if not os.path.exists(path):
             try:
-                data = get(bigger(img))
-                if len(data) < 2000:
-                    raise ValueError("이미지가 너무 작음")
-                open(path, "wb").write(data)
+                open(path, "wb").write(download(candidates(it.findtext("description") or "", log_no)))
             except Exception as e:  # noqa: BLE001
                 print("  사진 저장 실패:", title, e)
                 continue
