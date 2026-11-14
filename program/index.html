@@ -35,6 +35,14 @@
 .prog dd{font-weight:400!important;font-size:15.5px!important;color:#2B3540!important}
 .step b{font-weight:600!important;font-size:17.5px!important;color:#17304F!important}
 .step p{font-weight:400!important;font-size:15.5px!important;color:#5A6673!important}
+.pa-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:22px}
+.pa{background:#fff;border:1px solid #D5DEE8;border-top:3px solid #17304F;border-radius:12px;padding:24px 26px}
+.pa em{font-style:normal;font-size:14px;font-weight:600;color:#1F6FB2}
+.pa h3{font-size:20px!important;font-weight:700!important;color:#17304F!important;margin:4px 0 14px!important;letter-spacing:-.02em;line-height:1.4}
+.pa ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.pa li{position:relative;padding-left:16px;font-size:16px;line-height:1.55;color:#3A4652}
+.pa li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:#1F6FB2}
+@media (max-width:760px){.pa-grid{grid-template-columns:1fr}.pa{padding:20px}}
 </style>
 </head>
 <body><!--FB--><script>/* 2026.11.12 글자 1px 키우기(컴퓨터·휴대폰 공통) */
@@ -65,30 +73,7 @@
     <div class="sec-head">
       <h2>강의 분야와 프로그램</h2>
     </div>
-    <div class="groups">
-      <div class="group">
-        <div class="group-head"><span>01</span><h3>AI 활용 교육</h3></div>
-        <article class="prog">
-          <span class="tag">대표 강의</span>
-          <h4>생성형 AI 기초 및 실무 활용 교육</h4>
-        </article>
-        <article class="prog">
-          <span class="tag">업무 효율</span>
-          <h4>실전 AI 스마트워크</h4>
-        </article>
-      </div>
-      <div class="group">
-        <div class="group-head"><span>02</span><h3>AI 콘텐츠 제작</h3></div>
-        <article class="prog">
-          <span class="tag">홍보 콘텐츠</span>
-          <h4>AI 홍보 콘텐츠 · 카드뉴스 제작</h4>
-        </article>
-        <article class="prog">
-          <span class="tag">이미지 · 영상 · 음악</span>
-          <h4>AI 이미지 · 영상 · 음악 만들기</h4>
-        </article>
-      </div>
-    </div>
+    <div class="pa-grid"><article class="pa"><em>01</em><h3>생성형 AI 활용 실무 역량강화교육</h3><ul><li>ChatGPT · Gemini · Claude 앱별 특징과 기초 활용</li><li>6하원칙 지시법(프롬프트)으로 AI에게 제대로 일 시키기</li><li>자료 조사 · 문서 요약 · 회의록 정리</li><li>엑셀 · 반복 업무 자동화</li></ul></article><article class="pa"><em>02</em><h3>맞춤형 기관 업무 보고서 및 공문서 작성 AI 활용 교육</h3><ul><li>기관 서식에 맞춘 공문서 · 보고서 초안 작성</li><li>사업계획서 · 결과보고서 작성과 평가자 관점 재검토</li><li>안내문 · 가정통신문 · 상담기록 정리</li><li>기관 전용 업무 도우미 웹앱 만들기</li></ul></article><article class="pa"><em>03</em><h3>AI 활용 이미지 및 콘텐츠 생성 교육</h3><ul><li>AI 이미지 생성 · 편집</li><li>카드뉴스 · 포스터 · 홍보물 제작</li><li>AI 영상 · 음악 콘텐츠 제작</li><li>블로그 · SNS 홍보 콘텐츠 작성</li></ul></article><article class="pa"><em>04</em><h3>훈련기관·기업 맞춤형 생성형 AI 실습교육</h3><ul><li>교육 대상 · 수준별 맞춤 커리큘럼 설계</li><li>1회 특강부터 다회차 과정까지 구성</li><li>실습 중심 · 결과물 완성형 수업</li><li>수업 후 강의 자료실(프롬프트 · 자료) 제공</li></ul></article></div>
   </div>
 </section>
 
