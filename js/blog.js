@@ -51,9 +51,9 @@
     if(!h1||!st||!bn)return;
     if(window.innerWidth<=900){bn.style.marginTop='';stage.style.height='';return;}
     var t=txt.getBoundingClientRect().top,a=h1.getBoundingClientRect().top,b=st.getBoundingClientRect().bottom;
-    bn.style.marginTop=(a-t)+'px';stage.style.height=(b-a)+'px';
+    var foot=bn.querySelector('.bn-foot'),fh=foot?foot.getBoundingClientRect().height+14:0;bn.style.marginTop=(a-t)+'px';stage.style.height=Math.max(200,(b-a)-fh)+'px';
   }
-  window.addEventListener('resize',fitBanner);window.addEventListener('load',fitBanner);fitBanner();
+  window.addEventListener('resize',fitBanner);window.addEventListener('load',fitBanner);fitBanner();setTimeout(fitBanner,300);
 
   bindDots();syncInfo();start();
   if(!window.fetch)return;
