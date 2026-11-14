@@ -104,8 +104,11 @@ def photo_candidates(log_no):
     body = [x for i, x in enumerate(uniq) if i > 0 and x[0] not in skip]
     if not body:
         return []
-    land = [x for x in body if x[1] and x[2] and x[1] > x[2] * 1.15]
-    pick = (land or body)[0][0]
+    # 가로 사진 중 너무 납작한 배너(가로:세로 1.9 넘음)는 빼고,
+    # 글 앞뒤의 명함·안내 카드를 피하려고 본문 가운데쯤 사진을 고름
+    land = [x for x in body if x[1] and x[2] and x[2] * 1.15 < x[1] < x[2] * 1.9]
+    pool = land or body
+    pick = pool[len(pool) // 2][0]
     return [pick + "?type=w966", pick + "?type=w773", pick]
 
 
