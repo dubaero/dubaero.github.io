@@ -450,3 +450,4 @@ a.lg{text-decoration:none;text-align:center}
 #room-cards .room-org{margin-top:8px}
 /* 자료실 탭 교육명: 두 줄 고정, 글자 살짝 작게 */
 #room-cards .room-edu{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:12.5px;letter-spacing:-.04em;line-height:1.45}
+.h4-lead{max-width:none}
