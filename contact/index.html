@@ -21,6 +21,28 @@
 <link rel="stylesheet" href="/css/site.css?v=3">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/v4-header.css?v=1">
+<style>
+.cf-form{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cf-form label{display:flex;flex-direction:column;gap:5px;font-size:15px;font-weight:500;color:#2B3540}
+.cf-form label b{color:#C0392B;font-weight:500}
+.cf-form input,.cf-form textarea{font:inherit;font-size:16px;padding:11px 13px;border:1px solid #CFD8E3;border-radius:8px;background:#fff;color:#17304F}
+.cf-form input:focus,.cf-form textarea:focus{outline:2px solid #1F6FB2;outline-offset:0;border-color:#1F6FB2}
+.cf-hp{display:none}
+.cf-send{align-self:flex-start;min-height:48px;padding:0 26px;font-size:16px}
+.cf-msg{font-size:15px;color:#1F6FB2;min-height:1.4em}
+.cf-msg.err{color:#C0392B}
+@media (max-width:640px){.cf-row{grid-template-columns:1fr}}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){var f=document.getElementById('cf');if(!f)return;var m=document.getElementById('cf-msg'),b=f.querySelector('.cf-send');
+f.addEventListener('submit',function(e){e.preventDefault();if(f._honey.value)return;b.disabled=true;m.className='cf-msg';m.textContent='보내는 중입니다…';
+var d={};new FormData(f).forEach(function(v,k){if(k!=='_honey')d[k]=v;});d._subject='[홈페이지 강의 문의] '+(d['기관명']||'');d._template='table';d._captcha='false';
+fetch('https://formsubmit.co/ajax/dltjwjd59@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(d)})
+.then(function(r){return r.json();}).then(function(j){if(j.success==='true'||j.success===true){m.textContent='문의가 접수되었습니다. 확인 후 연락드리겠습니다.';f.reset();}else throw 0;})
+.catch(function(){m.className='cf-msg err';m.textContent='전송에 실패했어요. dltjwjd59@gmail.com으로 메일 주시거나 카카오톡으로 문의해 주세요.';})
+.finally(function(){b.disabled=false;});});});
+</script>
 </head>
 <body><!--FB--><script>/* 2026.11.12 글자 1px 키우기(컴퓨터·휴대폰 공통) */
 (function(){if(window.__fb)return;window.__fb=1;
@@ -49,20 +71,21 @@
   <div class="wrap">
     <div class="sec-head">
       <h2>강의 문의</h2>
-      <p>아래 내용을 함께 알려주시면 더 빠르게 맞춤 제안을 드릴 수 있습니다.</p>
+      <p>문의서를 보내 주시면 메일로 바로 받아 확인 후 연락드립니다.</p>
     </div>
     <div class="contact">
-      <div class="c-box">
-        <h3>문의 시 알려주세요</h3>
-        <ul class="checklist">
-          <li>기관명 · 담당자 연락처</li>
-          <li>교육 대상과 인원 (AI 사용 경험 수준)</li>
-          <li>희망 일정과 교육 시간</li>
-          <li>교육 장소 (PC 실습 가능 여부)</li>
-          <li>희망 주제 또는 교육 목적</li>
-        </ul>
-        <button class="btn point form-copy" type="button" data-copy="[강의 문의] 기관명&#10;• 기관명/담당자:&#10;• 교육 대상/인원:&#10;• 희망 일정/시간:&#10;• 교육 장소:&#10;• 희망 주제:">문의 양식 복사하기</button>
-        <p class="hint">복사한 양식을 메일이나 카카오톡에 붙여 넣어 보내주세요.</p>
+      <div class="c-box cf-box">
+        <h3>강의 문의서</h3>
+        <form id="cf" class="cf-form" autocomplete="on">
+          <input type="text" name="_honey" class="cf-hp" tabindex="-1" autocomplete="off">
+          <div class="cf-row"><label>기관명 <b>*</b><input name="기관명" required></label><label>담당자 <b>*</b><input name="담당자" required></label></div>
+          <div class="cf-row"><label>연락처 <b>*</b><input name="연락처" type="tel" required placeholder="010-0000-0000"></label><label>이메일<input name="email" type="email" placeholder="답장 받을 메일"></label></div>
+          <div class="cf-row"><label>교육 대상 · 인원<input name="교육대상_인원" placeholder="예: 종사자 30명"></label><label>희망 일정 · 시간<input name="희망일정" placeholder="예: 12월 중 3시간"></label></div>
+          <label>교육 장소 (PC 실습 가능 여부)<input name="교육장소"></label>
+          <label>희망 주제 · 문의 내용 <b>*</b><textarea name="문의내용" rows="5" required></textarea></label>
+          <button type="submit" class="btn point cf-send">문의 보내기</button>
+          <p class="cf-msg" id="cf-msg" aria-live="polite"></p>
+        </form>
       </div>
       <div class="c-box">
         <h3>연락처</h3>
