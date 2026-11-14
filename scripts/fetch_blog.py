@@ -193,7 +193,10 @@ def main():
         photo = None
         pname = "%s-p.jpg" % log_no
         ppath = os.path.join(IMG_DIR, pname)
-        if not os.path.exists(ppath):
+        no_photo = log_no in set(CFG.get("banner_exclude") or [])
+        if no_photo and os.path.exists(ppath):
+            os.remove(ppath)
+        if not no_photo and not os.path.exists(ppath):
             try:
                 urls = photo_candidates(log_no)
                 if urls:
