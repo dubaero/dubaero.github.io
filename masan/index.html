@@ -5515,4 +5515,26 @@ body:not(.page-sub) .hero:after{content:''!important;top:0!important;bottom:0!im
 /* 2026.11.13 같은 페이지 안에서 다시 그릴 때는 등장 효과 없이 */
 ;(function(){var last=null,_rs=render;render=function(){var a=document.getElementById('app');var same=(last===state.page);if(a)a.classList.toggle('same',same);_rs();last=state.page;}})();
 </script>
+<style id="nav4-style">
+/* 2026.11.14 위 탭 8개 → 4개 묶음(한 칸에 두 기능), 아래 기능 탭과 같은 모양 */
+#nav.nav4{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;margin:10px 0 12px!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
+#nav.nav4 .np{display:flex;align-items:stretch;min-height:64px;border-radius:14px;border:2px solid #f1e5c3;background:#fffcf3;overflow:hidden;box-shadow:none}
+#nav.nav4 .np.on{border-color:#e7cf86;background:#fff7dc}
+#nav.nav4 .np-b{flex:1 1 0;display:flex!important;align-items:center;justify-content:center;gap:6px;min-height:0!important;margin:0!important;padding:8px 6px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;transform:none!important;font-size:16px!important;font-weight:800!important;letter-spacing:-.03em;color:#3a2f1c!important;cursor:pointer;white-space:nowrap}
+#nav.nav4 .np-b .ti{font-size:18px;line-height:1}
+#nav.nav4 .np-b:hover{background:#fff3cf!important}
+#nav.nav4 .np-b.active{background:#fde9a6!important;color:#2a2010!important}
+#nav.nav4 .np-sep{flex:0 0 1px;background:#efe2bb;margin:12px 0}
+@media(max-width:760px){#nav.nav4{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}#nav.nav4 .np-b{font-size:14.5px!important;white-space:normal;text-align:center}}
+</style>
+<script id="nav4-script">
+(function(){
+ if(typeof render!=='function'||typeof pages==='undefined')return;
+ var G=[['home','self'],['strength','card'],['jobs','resume'],['interview','notes']],L={};pages.forEach(function(x){L[x[0]]=x[1];});
+ var IC=(typeof TABICON!=='undefined')?TABICON:{};
+ function groupNav(){var n=document.getElementById('nav');if(!n)return;n.className='nav nav4';
+  n.innerHTML=G.map(function(g){return '<div class="np'+(g.indexOf(state.page)>-1?' on':'')+'">'+g.map(function(p){return '<button type="button" class="np-b'+(p===state.page?' active':'')+'" onclick="nav(\''+p+'\')"'+(p===state.page?' aria-current="page"':'')+'>'+(IC[p]?'<span class="ti" aria-hidden="true">'+IC[p]+'</span>':'')+'<span class="tl">'+L[p]+'</span></button>';}).join('<span class="np-sep" aria-hidden="true"></span>')+'</div>';}).join('');}
+ var r=render;render=function(){r.apply(this,arguments);groupNav();};groupNav();
+})();
+</script>
 </body></html>
