@@ -13,8 +13,8 @@
   function slides(){return Array.prototype.slice.call(stage.querySelectorAll('.bn-slide'));}
   function dots(){return Array.prototype.slice.call(dotsBox.querySelectorAll('button'));}
   var info=document.getElementById('bn-info');
-  function syncInfo(){if(!info)return;var s=slides()[idx];if(!s)return;info.href=s.href;var sm=s.querySelector('.bn-cap small'),b=s.querySelector('.bn-cap b');
-    info.innerHTML='';var t=el('span','bn-t');t.appendChild(el('small',null,sm?sm.textContent:''));t.appendChild(el('b',null,b?b.textContent:''));info.appendChild(t);info.appendChild(el('i',null,'후기 보기 →'));}
+  function syncInfo(){if(!info)return;var s=slides()[idx];if(!s)return;var sm=s.querySelector('.bn-cap small'),b=s.querySelector('.bn-cap b');
+    info.innerHTML='';var t=el('span','bn-t');t.appendChild(el('small',null,sm?sm.textContent:''));t.appendChild(el('b',null,b?b.textContent:''));info.appendChild(t);}
   function show(i){var s=slides(),d=dots();if(!s.length)return;idx=(i+s.length)%s.length;
     s.forEach(function(x,k){x.classList.toggle('on',k===idx);});d.forEach(function(x,k){x.classList.toggle('on',k===idx);});syncInfo();}
   function start(){stop();if(reduce||slides().length<2)return;timer=setInterval(function(){show(idx+1);},6000);}
@@ -50,6 +50,6 @@
     var items=(data&&data.items||[]).filter(function(x){return x&&x.img&&x.link;});
     if(!items.length)return;
     /* 2026.11.14 배너는 강사님이 고른 현장 사진(index.html)으로 고정, 블로그는 아래 후기 칸만 자동 갱신 */
-    buildReviews(items.slice(0,4));
+    buildReviews(items.slice(0,12));
   }).catch(function(){});
 })();
