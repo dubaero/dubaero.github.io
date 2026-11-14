@@ -335,3 +335,11 @@ button,input{font:inherit}
 .rv small{font-size:13px}
 @media (max-width:1100px){.rv-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:640px){.rv-grid>.rv{flex:0 0 72%}.rv b{font-size:16px}}
+/* 2026.11.14 강의 자료실 배너: 원래처럼 가로로 납작(2.4:1) 안 잘리게, 들어가기는 날짜 옆 */
+.room-slide{aspect-ratio:2.4/1}
+.room-slide img{object-fit:cover;object-position:center}
+.room-info{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:6px;row-gap:1px;padding:7px 10px 9px}
+.room-date{grid-column:1;grid-row:1;font-size:12.5px;color:#A8432B;font-weight:500}
+.room-info::after{grid-column:2;grid-row:1;content:"들어가기 →";margin:0;padding:0;border:0;font-size:12.5px;font-weight:600;color:var(--blue);white-space:nowrap}
+.room-org{grid-column:1/-1;grid-row:2;font-size:14.5px}
+.room-date{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
