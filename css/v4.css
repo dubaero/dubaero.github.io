@@ -458,3 +458,17 @@ a.lg{text-decoration:none;text-align:center}
 #room-cards .room-date{grid-column:1/-1}
 .bn-slide{transition:opacity 1.2s ease}.bn-slide img{transition:transform 6s linear}
 .bn-slide{transition:opacity .6s ease}.bn-slide img{transition:transform 3s linear}
+
+/* 2026.11.14 모바일 전면 점검: 첫 화면 한 줄 배치, 출강 목록 상태는 날짜 옆 */
+@media (max-width:900px){.hero4 .w4{grid-template-columns:1fr;gap:28px}}
+@media (max-width:640px){
+  .h4-lead br{display:none}
+  .h4-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .h4-btns .b4{padding:0 10px;white-space:nowrap;min-height:50px}
+  .h4-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .h4-stats div{padding-top:12px}
+  .h4-stats span{font-size:14px;line-height:1.35}
+  .lrow:not(.rvrow){grid-template-columns:auto auto minmax(0,1fr);grid-template-areas:"o o o" "d s g";column-gap:10px}
+  .lrow:not(.rvrow) .ls{justify-self:start}
+  .lrow:not(.rvrow) .lg{justify-self:end}
+}

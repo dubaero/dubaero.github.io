@@ -798,3 +798,6 @@ body{font-size:15.5px!important}.ti{font-size:15.5px!important}.ti small{font-si
 #room-cards .room:nth-child(6){animation-delay:1.75s}
 #room-cards .room:hover{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){#room-cards .room{animation:none}}
+
+/* 2026.11.14 모바일: 진행 단계 2칸씩 */
+@media (max-width:640px){.steps{grid-template-columns:1fr 1fr;gap:22px 12px}.step::after{display:none}}

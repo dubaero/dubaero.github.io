@@ -16,3 +16,12 @@
   .gh-nav a{padding:10px 6px}
   .gh-nav a.gh-cta{min-height:38px;padding:0 14px;margin-left:6px}
 }
+
+/* 2026.11.14 모바일: 메뉴 4개가 한 줄에 다 보이게, 강의 문의는 이름 오른쪽 */
+@media (max-width:760px){
+  .gh-in{position:relative}
+  .gh-nav{overflow:visible;justify-content:space-between}
+  .gh-nav a{padding:10px 2px}
+  .gh-nav a.gh-cta{position:absolute;top:12px;right:18px;margin:0;min-height:40px;padding:0 16px}
+  .gh-x{display:none}
+}
