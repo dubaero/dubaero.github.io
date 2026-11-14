@@ -309,3 +309,14 @@ button,input{font:inherit}
 .wc-chips button[data-w].picked{background:var(--c);color:#fff}
 .wc-cloud{background:radial-gradient(circle at 20% 20%,#EAF2FF,transparent 55%),radial-gradient(circle at 85% 80%,#FFF0E8,transparent 55%),#F7F9FC;min-height:260px}
 
+
+/* 2026.11.14 강의 자료실 배너 6개 한 줄, 작게 */
+.room-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.room-info{padding:10px 12px 12px}
+.room-date{font-size:13px}
+.room-org{font-size:15px;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.room-info::after{content:"들어가기 →";margin-top:6px;padding-top:6px;font-size:13.5px}
+.rv4{padding:72px 0 8px}
+.rv-grid{gap:20px}
+@media (max-width:1100px){.room-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.room-grid>.room{flex:0 0 72%}.room-org{font-size:16px}}

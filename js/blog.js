@@ -51,6 +51,6 @@
     if(!items.length)return;
     var photos=items.filter(function(x){return x.photo;});
     if(photos.length){buildBanner(photos.slice(0,5));start();}
-    buildReviews(items.slice(0,8));
+    buildReviews(items.slice(0,4));
   }).catch(function(){});
 })();
