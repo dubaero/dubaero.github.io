@@ -11,7 +11,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
 (function(){
   if(!document.getElementById('wc-cloud'))return;
   var KEY='wc-want-v1', ex={'보고서':3,'카드뉴스':3,'공문서':2,'엑셀 정리':2,'회의록':1,'인포그래픽':1,'상담 기록':1};
-  var colors=['#24497F','#B5543C','#172033','#3E6FB0','#8A4A3A'];
+  var colors=['#1F6FB2','#E2683C','#14A07A','#8B5CF6','#E0A100','#D6457A','#0E9AA7'];
   var mine={};
   try{mine=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){mine={};}
   var cloud=document.getElementById('wc-cloud');

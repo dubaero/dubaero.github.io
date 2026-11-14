@@ -12,8 +12,11 @@
 
   function slides(){return Array.prototype.slice.call(stage.querySelectorAll('.bn-slide'));}
   function dots(){return Array.prototype.slice.call(dotsBox.querySelectorAll('button'));}
+  var info=document.getElementById('bn-info');
+  function syncInfo(){if(!info)return;var s=slides()[idx];if(!s)return;info.href=s.href;var sm=s.querySelector('.bn-cap small'),b=s.querySelector('.bn-cap b');
+    info.innerHTML='';var t=el('span','bn-t');t.appendChild(el('small',null,sm?sm.textContent:''));t.appendChild(el('b',null,b?b.textContent:''));info.appendChild(t);info.appendChild(el('i',null,'후기 보기 →'));}
   function show(i){var s=slides(),d=dots();if(!s.length)return;idx=(i+s.length)%s.length;
-    s.forEach(function(x,k){x.classList.toggle('on',k===idx);});d.forEach(function(x,k){x.classList.toggle('on',k===idx);});}
+    s.forEach(function(x,k){x.classList.toggle('on',k===idx);});d.forEach(function(x,k){x.classList.toggle('on',k===idx);});syncInfo();}
   function start(){stop();if(reduce||slides().length<2)return;timer=setInterval(function(){show(idx+1);},6000);}
   function stop(){if(timer)clearInterval(timer);timer=null;}
   function bindDots(){dots().forEach(function(b,k){b.addEventListener('click',function(){show(k);start();});});}
@@ -29,7 +32,7 @@
       cap.appendChild(t);cap.appendChild(el('i',null,'후기 보기 →'));a.appendChild(cap);stage.appendChild(a);
       var d=document.createElement('button');d.type='button';d.setAttribute('aria-label',(k+1)+'번째 사진');if(k===0)d.className='on';dotsBox.appendChild(d);
     });
-    idx=0;bindDots();
+    idx=0;bindDots();syncInfo();
   }
   function buildReviews(items){
     if(!grid)return;grid.innerHTML='';
@@ -41,7 +44,7 @@
     });
   }
 
-  bindDots();start();
+  bindDots();syncInfo();start();
   if(!window.fetch)return;
   fetch('/data/blog.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(data){
     var items=(data&&data.items||[]).filter(function(x){return x&&x.img&&x.link;});

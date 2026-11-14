@@ -87,7 +87,7 @@ button,input{font:inherit}
 .wc-form .btn{min-height:48px;padding:0 22px;border-radius:10px;border:0;background:var(--navy);color:#fff;font-size:16px;font-weight:500;cursor:pointer}
 .wc-cloud{min-height:220px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 18px;padding:26px;border-radius:14px;background:var(--soft)}
 .wc-cloud span{line-height:1.15;font-weight:700;transition:font-size .3s}
-.wc-cloud span.ex{color:#9AA6B8!important;font-weight:500}
+.wc-cloud span.ex{font-weight:600;opacity:.5}
 .wc-note{font-size:14px;color:var(--muted)}
 
 /* ---------- 강의 자료실 ---------- */
@@ -290,3 +290,22 @@ button,input{font:inherit}
   .qr-card{padding:14px;border-radius:18px}.qr-stage{width:calc(100vw - 60px)}
 }
 .pgtop{padding-top:56px}
+
+/* 2026.11.14 배너 설명은 사진 밖 아래로, 링크 하나만 */
+.bn-slide .bn-cap{display:none}
+.bn-foot{align-items:flex-start;gap:16px;padding:0 2px}
+.bn-info{display:flex;align-items:center;justify-content:space-between;gap:14px;flex:1;min-width:0;text-decoration:none;color:var(--navy)}
+.bn-info .bn-t{display:flex;flex-direction:column;min-width:0}
+.bn-info small{font-size:14px;color:var(--muted)}
+.bn-info b{font-size:17px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bn-info i{font-style:normal;font-size:15px;font-weight:600;color:var(--blue);white-space:nowrap}
+.bn-info:hover b{color:var(--blue)}
+.bn-dots{padding-top:10px;flex-shrink:0}
+/* 워드클라우드 색 */
+.wc-box{background:linear-gradient(180deg,#F4F8FF 0%,#fff 60%)}
+.wc-chips button:nth-child(7n+1){--c:#1F6FB2}.wc-chips button:nth-child(7n+2){--c:#E2683C}.wc-chips button:nth-child(7n+3){--c:#14A07A}.wc-chips button:nth-child(7n+4){--c:#8B5CF6}.wc-chips button:nth-child(7n+5){--c:#C98A00}.wc-chips button:nth-child(7n+6){--c:#D6457A}.wc-chips button:nth-child(7n){--c:#0E9AA7}
+.wc-chips button[data-w]{border-color:var(--c);color:var(--c);background:color-mix(in srgb,var(--c) 7%,#fff)}
+.wc-chips button[data-w]:hover{background:color-mix(in srgb,var(--c) 16%,#fff)}
+.wc-chips button[data-w].picked{background:var(--c);color:#fff}
+.wc-cloud{background:radial-gradient(circle at 20% 20%,#EAF2FF,transparent 55%),radial-gradient(circle at 85% 80%,#FFF0E8,transparent 55%),#F7F9FC;min-height:260px}
+
