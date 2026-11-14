@@ -1,7 +1,14 @@
 {
-  "blog_id": "ricewitch",
-  "categories": [],
-  "keywords": ["후기", "출강"],
-  "exclude_links": [],
-  "max_items": 12
+ "blog_id": "ricewitch",
+ "categories": [
+  "강의후기"
+ ],
+ "keywords": [
+  "후기",
+  "출강"
+ ],
+ "exclude_links": [
+  "https://blog.naver.com/ricewitch/224420571154"
+ ],
+ "max_items": 12
 }

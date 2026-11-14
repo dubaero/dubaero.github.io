@@ -77,6 +77,22 @@ def candidates(desc, log_no):
     return out
 
 
+def shrink(path):
+    """사진을 가로 1000px, 품질 80으로 줄여 홈페이지가 빨리 열리게 함 (Pillow 있을 때만)."""
+    try:
+        from PIL import Image
+    except ImportError:
+        return
+    try:
+        im = Image.open(path)
+        im = im.convert("RGB")
+        if im.width > 1000:
+            im = im.resize((1000, round(im.height * 1000 / im.width)))
+        im.save(path, "JPEG", quality=80, optimize=True, progressive=True)
+    except Exception as e:  # noqa: BLE001
+        print("  사진 줄이기 실패", path, e)
+
+
 def download(urls):
     last = None
     for u in urls:
@@ -106,6 +122,7 @@ def main():
         if not os.path.exists(path):
             try:
                 open(path, "wb").write(download(candidates(it.findtext("description") or "", log_no)))
+                shrink(path)
             except Exception as e:  # noqa: BLE001
                 print("  사진 저장 실패:", title, e)
                 continue
