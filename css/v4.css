@@ -456,3 +456,4 @@ a.lg{text-decoration:none;text-align:center}
 #room-cards .room-logo{position:absolute;right:10px;top:9px;height:26px;width:auto;max-width:44px;object-fit:contain}
 #room-cards .room-info::after{content:none}
 #room-cards .room-date{grid-column:1/-1}
+.bn-slide{transition:opacity 1.2s ease}.bn-slide img{transition:transform 6s linear}
