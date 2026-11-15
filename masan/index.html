@@ -6255,7 +6255,7 @@ async function passportDocx(){
     var b='<w:tblBorders>'+['top','left','bottom','right','insideH','insideV'].map(function(k){return '<w:'+k+' w:val="'+val+'" w:sz="'+sz+'" w:space="0" w:color="'+col+'"/>'}).join('')+'</w:tblBorders>';
     var wsum=ws.reduce(function(a,c){return a+c},0);
     return '<w:tbl><w:tblPr><w:tblW w:w="'+wsum+'" w:type="dxa"/>'+b+'<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>'+ws.map(function(w){return '<w:gridCol w:w="'+w+'"/>'}).join('')+'</w:tblGrid>'+rows.map(function(r){return '<w:tr><w:trPr><w:cantSplit/></w:trPr>'+r.join('')+'</w:tr>'}).join('')+'</w:tbl>'}
-  function HS(t){return P(t,{bold:1,sz:21,color:MINT,before:170,after:70,bb:'BFE7DB',keepNext:1})}
+  function HS(t){return P(t,{bold:1,sz:21,color:MINT,before:120,after:50,bb:'BFE7DB',keepNext:1})}
   function LBL(t,o){o=o||{};return P(t,{bold:1,sz:18,color:o.color||MINT,before:o.before==null?90:o.before,after:20,keepNext:1})}
   function BOX(inner,o){o=o||{};return T([[TC(inner,W,{fill:o.fill,mt:70,mb:70,ml:110,mr:110})]],[W],{sz:8,color:o.color||LINE})}
   function GAP(n){return P('',{after:0,line:n||60})}
@@ -6293,7 +6293,7 @@ async function passportDocx(){
   body+=T([[TC(photoCell,1700,{v:'center',mt:90,mb:90}),TC(idInfo,W-1700,{v:'center'})]],[1700,W-1700],{sz:8,color:GOLD});
   /* 사용설명서 4칸 */
   body+=P('나 의 사 용 설 명 서',{center:1,bold:1,sz:22,color:'3A2F14',before:200,after:70,cs:70,keepNext:1});
-  function quadCell(label,txt){return TC(P(label,{bold:1,sz:18,color:MINT,after:20,keepNext:1})+P(cut(txt||'아직 답하지 않았어요.',72),{sz:BS,line:215,after:0}),half,{mt:60,mb:60,ml:90,mr:90})}
+  function quadCell(label,txt){return TC(P(label,{bold:1,sz:18,color:MINT,after:20,keepNext:1})+P(cut(txt||'아직 답하지 않았어요.',92),{sz:BS,line:215,after:0}),half,{mt:60,mb:60,ml:90,mr:90})}
   var quad=T([
     [quadCell('일할 때 나는',pk.w),quadCell('함께 일할 때 나는',pk.r)],
     [quadCell('배터리가 떨어지면',pk.s),quadCell('일을 고르는 나만의 기준',pk.p)]
@@ -6301,14 +6301,13 @@ async function passportDocx(){
   body+=quad;
   /* 나의 선호와 관계 방식 */
   body+=HS('나의 선호와 관계 방식');
-  if(pew)body+=LBL('이런 사람이에요')+P(cut(pew,132),{sz:BS,justify:1,after:60});
-  if(avoidTxt)body+=BOX(LBL('숨은 얼굴',{color:PURP,before:0,after:20})+P(cut(avoidTxt,124),{sz:BS,justify:1,color:PURPTX,after:0}),{fill:PURPBG,color:'DCCFF8'})+GAP(60);
-  if(cautionTxt)body+=LBL('사용 시 주의')+P(cut(cautionTxt,118),{sz:BS,justify:1,after:60});
+  if(pew)body+=LBL('이런 사람이에요')+P(cut(pew,164),{sz:BS,justify:1,after:60});
+  if(avoidTxt)body+=BOX(LBL('숨은 얼굴',{color:PURP,before:0,after:20})+P(cut(avoidTxt,150),{sz:BS,justify:1,color:PURPTX,after:0}),{fill:PURPBG,color:'DCCFF8'})+GAP(60);
+  if(cautionTxt)body+=LBL('사용 시 주의')+P(cut(cautionTxt,140),{sz:BS,justify:1,after:60});
   body+=BOX(LBL('한 줄 요약',{before:0,after:20})+P('"'+cut(oneLine,64)+'" — 이 강점이 빛나는 일터를 찾으면 일이 훨씬 쉬워져요.',{sz:BS,color:'33413C',after:0}),{fill:MINTBG,color:'BFE7DB'});
   body+=P('재미로 보는 자기 이해 설명이에요. 정식 성격검사(MBTI 등)가 아니에요.',{sz:15,color:GRAY,before:40,after:0});
   body+=PBREAK();
   /* ── 2장 ── */
-  body+=P('2장 · 나의 강점과 탐색 기록',{sz:14,color:'B9A46A',cs:40,after:40});
   body+=HS('나의 강점과 보완점');
   var sRows=[];
   sRows.push([TC(P('강점',{bold:1,sz:18,color:MINT,after:0}),1700,{fill:MINTSOFT,v:'center'}),TC(P(cut(strengths.length?strengths.join(' · '):'아직 선택하지 않았어요.',96),{sz:BS,after:0}),W-1700)]);
@@ -6321,13 +6320,13 @@ async function passportDocx(){
   jRows.push([TC(P('공고 근거',{bold:1,sz:18,color:MINT,after:0}),1900,{fill:MINTSOFT,v:'center'}),TC(P(cut((state.jobpost||'').trim()||'아직 입력되지 않았습니다.',110),{sz:17,after:0}),W-1900)]);
   body+=T(jRows,[1900,W-1900],{sz:6,color:LINE});
   body+=HS('내가 직접 해 본 경험');
-  if(exp.length){exp.slice(0,5).forEach(function(t,i){body+=P((i+1)+'. '+cut(t,88),{sz:BS,after:30,indent:110})})}
+  if(exp.length){exp.slice(0,5).forEach(function(t,i){body+=P((i+1)+'. '+cut(t,88),{sz:BS,after:22,indent:110})})}
   else{body+=P('아직 작성된 경험이 없습니다.',{sz:17,color:GRAY,after:30})}
   body+=HS('면접 연습 기록');
   if(iv.length){
     iv.forEach(function(o){
-      body+=P('Q. '+cut(o.q,70),{bold:1,sz:17,color:MINT,before:50,after:10,keepNext:1});
-      body+=P('A. '+cut(o.a,100),{sz:BS,justify:1,after:25});
+      body+=P('Q. '+cut(o.q,70),{bold:1,sz:17,color:MINT,before:20,after:5,keepNext:1});
+      body+=P('A. '+cut(o.a,100),{sz:BS,justify:1,after:15});
       if(o.r)body+=P('↳ 다듬은 답변: '+cut(o.r,80),{sz:17,color:'5C5647',after:30});
     });
   }else{
@@ -6335,11 +6334,10 @@ async function passportDocx(){
   }
   /* 내가 고른 답 다시 보기 — 7행 표 대신 한 줄 핵심 키워드 요약 */
   if(qa.length){
-    body+=LBL('내가 고른 답 다시 보기',{before:110})+
-      P(cut(qa.map(function(o){return o.q+' · '+o.a.split(' · ').slice(0,2).join(' ')}).join('   |   '),160),{sz:16,color:'5C5647',after:0});
+    body+=P('내가 고른 답 다시 보기 · '+cut(qa.map(function(o){return o.a.split(' · ')[0]}).join(', '),44),{sz:16,color:'5C5647',before:80,after:0});
   }
   /* 발급 줄 + 도장 */
-  body+=P('',{after:0,line:120});
+  body+=P('',{after:0,line:60});
   var stampPara=sd?picParagraph('rId3','두배로 직업여권 도장',2,720000,720000,'center'):'';
   body+=T([[
     TC(P('두배로 · 디지털이음연구소',{bold:1,sz:18,color:MINT,after:20})+P('dubaero.kr   |   '+dstr+' 발급',{sz:16,color:GRAY,after:0}),W-2600,{v:'center'}),
