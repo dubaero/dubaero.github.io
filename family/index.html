@@ -3567,8 +3567,8 @@ var SONG_STYLE={'따뜻한 발라드':'피아노 중심 한국어 발라드, 느
 var SONG_VOICE={'여성 솔로':'부드럽고 따뜻한 여성 보컬','남성 솔로':'낮고 포근한 남성 보컬','남녀 듀엣':'1절은 여성, 2절은 남성, 후렴은 함께 부르는 듀엣','아이 목소리':'맑은 어린이 보컬','합창':'여러 사람이 함께 부르는 합창'};
 var SONG_RETRY='방금 만든 곡은 가사가 원래와 달라.\n앞에 준 규칙을 다시 지켜서, "가사 시작"부터 "가사 끝"까지 그대로 다시 만들어 줘.\n길이는 전체 버전으로 해 줘.';
 function songTags(t){return String(t||'').replace(/\[\s*1\s*절\s*\]/g,'[Verse 1]').replace(/\[\s*2\s*절\s*\]/g,'[Verse 2]').replace(/\[\s*3\s*절\s*\]/g,'[Verse 3]').replace(/\[\s*후렴\s*\]/g,'[Chorus]').replace(/\[\s*브릿지\s*\]/g,'[Bridge]').trim();}
-function songLock(title,style,voice,who,lyr){
-  return '[반드시 지킬 규칙]\n1. 아래 "가사 시작"부터 "가사 끝"까지의 가사를 한 글자도 바꾸지 말고 그대로 불러.\n2. 가사를 새로 쓰지 마. 줄이지 마. 늘리지 마.\n3. 단어를 다른 단어로 바꾸지 마. 순서를 바꾸지 마.\n4. 영어 가사, 랩, 추임새(예: 오오, 예예)를 넣지 마.\n5. 표시된 [Chorus]만 반복하고, 다른 부분을 마음대로 반복하지 마.\n6. 곡 제목은 반드시 "'+title+'"(으)로 해.\n\n곡 제목: '+title+'\n스타일: '+style+'\n보컬: '+voice+'\n앨범 표지: '+who+'에게 마음을 전하는 따뜻한 그림, 그림 안에 글자 절대 넣지 마\n\n===== 가사 시작 =====\n'+songTags(lyr)+'\n===== 가사 끝 =====\n\n마지막 확인: 위 가사를 그대로 불렀는지 다시 확인하고, 하나라도 다르면 원래 가사대로 고쳐서 만들어.';
+function songLock(title,style,voice,who,lyr,credit){
+  return '[반드시 지킬 규칙]\n1. 아래 "가사 시작"부터 "가사 끝"까지의 가사를 한 글자도 바꾸지 말고 그대로 불러.\n2. 가사를 새로 쓰지 마. 줄이지 마. 늘리지 마.\n3. 단어를 다른 단어로 바꾸지 마. 순서를 바꾸지 마.\n4. 영어 가사, 랩, 추임새(예: 오오, 예예)를 넣지 마.\n5. 표시된 [Chorus]만 반복하고, 다른 부분을 마음대로 반복하지 마.\n6. 곡 제목은 반드시 "'+title+'"(으)로 해.\n\n곡 제목: '+title+'\n스타일: '+style+'\n보컬: '+voice+'\n작사 정보: '+credit+'\n앨범 표지: '+who+'에게 마음을 전하는 따뜻한 그림. 위쪽에 노래 제목 "'+title+'"을 크게, 아래쪽에 "'+credit+'"을 정확한 한국어로 넣어. 이 두 가지 말고 다른 글자는 넣지 말고, 제목과 이름에 오타가 없는지 꼭 확인해.\n\n===== 가사 시작 =====\n'+songTags(lyr)+'\n===== 가사 끝 =====\n\n마지막 확인: 위 가사를 그대로 불렀는지 다시 확인하고, 하나라도 다르면 원래 가사대로 고쳐서 만들어.';
 }
 
 /* ===== 2026.11.10 나만의 노래 만들기 & 2026.11.11 클릭형 위저드 ===== */
@@ -3650,7 +3650,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     var ti = SW.title || '오늘도 수고했어, 내 동료야';
     var lyr = ((SW.lyrics1 || '') + '\n\n' + (SW.lyrics2 || '')).trim();
 
-    return songLock(ti, SONG_STYLE[SW.style], SONG_VOICE[SW.voice], w, lyr);
+    return songLock(ti, SONG_STYLE[SW.style], SONG_VOICE[SW.voice], w, lyr, c + ' | 작사: ' + a);
   }
 
   function render() {
