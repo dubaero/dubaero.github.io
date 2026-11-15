@@ -6146,13 +6146,13 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
     var avail=window.innerHeight-top-4;
     if(!avail||avail<200) return;
     /* zoom 은 글자 재배치까지 바꾸므로, 화면에 들어가는 가장 큰 배율을 이분 탐색으로 찾는다 */
-    var h1=sec.getBoundingClientRect().height;
-    if(!h1||h1<=avail) return;
+    var lim=window.innerHeight-26;
+    if(sec.getBoundingClientRect().bottom<=lim) return;
     var lo=.82,hi=1,best=.82;
     for(var i=0;i<6;i++){
       var mid=(lo+hi)/2;
       sec.style.zoom=String(mid);
-      if(sec.getBoundingClientRect().height<=avail){best=mid;lo=mid}else{hi=mid}
+      if(sec.getBoundingClientRect().bottom<=lim){best=mid;lo=mid}else{hi=mid}
     }
     sec.style.zoom=String(Math.floor(best*100)/100);
   }
