@@ -3232,18 +3232,20 @@ ${blind?` <h3 class="rv-h">STEP 1. 인적사항과 지원 직종</h3>
  ${RQ.map((q,i)=>rvQCard(q,i+1)).join('')}
  <div class="row" style="margin-top:14px"><button type="button" class="btn" id="rvAll">4문항 모두 초안 채우기</button><button type="button" class="btn outline" id="rvDocx">워드(.docx)로 저장</button><button type="button" class="btn outline" onclick="nav('interview')">면접 연습 →</button></div>
  </div><aside class="rv-side"><div class="rv-side-h"><b>입사지원서 미리보기</b><button type="button" class="btn small rv-dl" data-rvdl="1" title="워드 파일로 내려받기">📄 워드(.docx) 다운받기</button></div><div class="rv-legend"><span><i class="lg-u"></i>내가 입력한 정보</span><span><i class="lg-auto"></i>자동 예시 (고쳐 쓰기)</span><span><i class="lg-b"></i>[ ] 내가 채울 곳 — 누르면 그 칸으로 이동해요</span></div><div id="resumePreview">${rvPreview()}</div></aside></div></section>`};
-function rvTbl(head,rows,emptyTxt,key,min){const filled=rows.filter(r=>r.some(x=>x&&String(x).trim()));const need=Math.max(min||1,1),body=filled.slice();while(body.length<need)body.push([]);const hint=(filled.length===0);
+function rvTbl(head,rows,emptyTxt,key,min,w){const filled=rows.filter(r=>r.some(x=>x&&String(x).trim()));const need=Math.max(min||1,1),body=filled.slice();while(body.length<need)body.push([]);const hint=(filled.length===0);
  const J=i=>key?' data-rvjump="[data-rv='+key+'][data-k='+i+']"':'';
+ /* 2026.11.15 표 열 너비 고정(colgroup): 입력한 글자 수에 따라 열 너비가 흔들리지 않게 */
+ const colg=(w&&w.length===head.length)?'<colgroup>'+w.map(x=>'<col style="width:'+x+'">').join('')+'</colgroup>':'';
  const th=head.map((h,i)=>'<th'+J(i)+'>'+h+'</th>').join('');
  const trs=body.map((r,ri)=>'<tr>'+head.map((h,i)=>'<td'+J(i)+'>'+(r[i]?E(r[i]):(ri===0&&i===0&&hint?'<span class="rv-b rv-jump">['+emptyTxt+']</span>':'&nbsp;'))+'</td>').join('')+'</tr>').join('');
- return '<table class="rv-t"><thead><tr>'+th+'</tr></thead><tbody>'+trs+'</tbody></table>'}
+ return '<table class="rv-t">'+colg+'<thead><tr>'+th+'</tr></thead><tbody>'+trs+'</tbody></table>'}
 function rvPreviewGen(v){const rv=state.rv;
  const pht=state.photoData?`<img src="${state.photoData}" alt="증명사진">`:'<span class="rv-b">[사진]</span>';
  return `<div class="rv-paper rv-gen"><h2>이 력 서</h2>
  <div class="rv-sec" data-rvsec="info"><table class="rv-t rv-kv rv-idt"><tbody><tr><td class="rv-ph" rowspan="4" data-rvphoto="1" title="눌러서 증명사진 넣기">${pht}</td><th>성명</th><td data-rvjump="#rvName">${v(state.name,'이름','#rvName')}</td><th>생년월일</th><td data-rvjump="#rvBirth">${v(rv.birth,'생년월일','#rvBirth')}</td></tr><tr><th>연락처</th><td data-rvjump="#rvContact">${v(state.contact,'연락처','#rvContact')}</td><th>이메일</th><td data-rvjump="#rvEmail">${v(state.email,'이메일','#rvEmail')}</td></tr><tr><th>주소</th><td colspan="3" data-rvjump="#rvHome">${v(rv.home,'주소','#rvHome')}</td></tr><tr><th>희망 직종</th><td colspan="3" data-rvjump="#rvWish">${v(state.job,'희망 직종','#rvWish')}</td></tr></tbody></table></div>
- <div class="rv-sec" data-rvsec="edu"><h5>학력사항</h5>${rvTbl(['학교명','전공·계열','재학 기간','졸업 구분'],rv.sch,'최종 학력부터 써 보세요','sch',1)}</div>
- <div class="rv-sec" data-rvsec="car"><h5>경력사항</h5>${rvTbl(['근무처','근무 기간','담당 업무'],rv.car,'경력이 없으면 "해당 없음"','car',3)}</div>
- <div class="rv-sec" data-rvsec="lic"><h5>자격사항</h5>${rvTbl(['자격증명','발급기관','취득일'],rv.lic,'없으면 "해당 없음"','lic',3)}</div>
+ <div class="rv-sec" data-rvsec="edu"><h5>학력사항</h5>${rvTbl(['학교명','전공·계열','재학 기간','졸업 구분'],rv.sch,'최종 학력부터 써 보세요','sch',1,['32%','22%','24%','22%'])}</div>
+ <div class="rv-sec" data-rvsec="car"><h5>경력사항</h5>${rvTbl(['근무처','근무 기간','담당 업무'],rv.car,'경력이 없으면 "해당 없음"','car',3,['36%','24%','40%'])}</div>
+ <div class="rv-sec" data-rvsec="lic"><h5>자격사항</h5>${rvTbl(['자격증명','발급기관','취득일'],rv.lic,'없으면 "해당 없음"','lic',3,['34%','30%','36%'])}</div>
  ${rvSign()}
  </div>
  <div class="rv-pgbrk" aria-hidden="true"><span>1장 이력서</span><span>2장 자기소개서</span></div>
@@ -3254,10 +3256,10 @@ function rvPreview(){const rv=state.rv,blind=rv.fmt==='blind',v=(t,ph,j)=>t&&t.t
  if(!blind)return rvPreviewGen(v);
  return `<div class="rv-paper"><h2>입 사 지 원 서</h2><p class="rv-sub">${blind?'블라인드 채용 서식':'일반 기업 서식'} · 지원분야: <b>${E(state.job)}</b></p>
  <div class="rv-sec" data-rvsec="info"><h5>1. 인적사항</h5><div class="rv-id"><table class="rv-t rv-kv"><tr><th>성명</th><td data-rvjump="#rvName">${v(state.name,'이름','#rvName')}</td><th>지원분야</th><td data-rvjump="#rvJob">${E(state.job)}</td></tr><tr><th>연락처</th><td data-rvjump="#rvContact">${v(state.contact,'연락처','#rvContact')}</td><th>이메일</th><td data-rvjump="#rvEmail">${v(state.email,'이메일','#rvEmail')}</td></tr><tr><th>거주지</th><td colspan="3" data-rvjump="#rvAddr">${v(rv.addr,'시·군·구','#rvAddr')}</td></tr></table></div>${blind?'<p class="rv-note">※ 블라인드 서식에는 사진·생년월일·출신학교·가족관계를 쓰지 않아요.</p>':''}</div>
- <div class="rv-sec" data-rvsec="edu"><h5>2. 교육사항</h5>${rvTbl(['교육과정명','교육기관','기간·시간','주요 내용'],rv.edu,'직무 관련 교육을 1개 이상 써 보세요','edu',1)}</div>
- <div class="rv-sec" data-rvsec="lic"><h5>3. 자격사항</h5>${rvTbl(['자격증명','발급기관','취득일'],rv.lic,'없으면 "해당 없음" 또는 준비 중인 자격','lic',3)}</div>
- <div class="rv-sec" data-rvsec="car"><h5>4. 경력사항</h5>${rvTbl(['근무처','근무 기간','담당 업무'],rv.car,'경력이 없으면 비워 두고 경험사항을 자세히','car',3)}</div>
- <div class="rv-sec" data-rvsec="exp"><h5>5. 경험사항</h5>${rvTbl(['활동명','기간','주요 내용'],rv.exp,'봉사·모임·아르바이트·교육 실습 등','exp',1)}</div>
+ <div class="rv-sec" data-rvsec="edu"><h5>2. 교육사항</h5>${rvTbl(['교육과정명','교육기관','기간·시간','주요 내용'],rv.edu,'직무 관련 교육을 1개 이상 써 보세요','edu',1,['32%','22%','22%','24%'])}</div>
+ <div class="rv-sec" data-rvsec="lic"><h5>3. 자격사항</h5>${rvTbl(['자격증명','발급기관','취득일'],rv.lic,'없으면 "해당 없음" 또는 준비 중인 자격','lic',3,['34%','30%','36%'])}</div>
+ <div class="rv-sec" data-rvsec="car"><h5>4. 경력사항</h5>${rvTbl(['근무처','근무 기간','담당 업무'],rv.car,'경력이 없으면 비워 두고 경험사항을 자세히','car',3,['36%','24%','40%'])}</div>
+ <div class="rv-sec" data-rvsec="exp"><h5>5. 경험사항</h5>${rvTbl(['활동명','기간','주요 내용'],rv.exp,'봉사·모임·아르바이트·교육 실습 등','exp',1,['34%','22%','44%'])}</div>
  </div>
  <div class="rv-pgbrk" aria-hidden="true"><span>1장 입사지원서</span><span>2장 자기소개서</span></div>
  <div class="rv-paper"><h2 style="letter-spacing:.3em;font-size:19px">자 기 소 개 서</h2>
@@ -3266,7 +3268,28 @@ function rvPreview(){const rv=state.rv,blind=rv.fmt==='blind',v=(t,ph,j)=>t&&t.t
  <p class="rv-note">※ 교육용 초안입니다. 제출 전에 [ ] 부분을 모두 내 이야기로 바꾸고, 회사가 정한 서식이 있으면 그 서식을 쓰세요. 사실이 아닌 경력·성과는 쓰지 않아요.</p></div>`}
 function rvSync(){state.motivation=rvPlain(state.rv.q.motive||rvDraft('motive'));state.cover=RQ.map(([id,t])=>t+'\n'+rvPlain(state.rv.q[id]||rvDraft(id))).join('\n\n');state.history=state.rv.car.filter(r=>r[0]).map(r=>r.filter(Boolean).join(' / ')).join('\n');state.education=state.rv.edu.filter(r=>r[0]).map(r=>r.filter(Boolean).join(' / ')).join('\n');state.cert=state.rv.lic.filter(r=>r[0]).map(r=>r.filter(Boolean).join(' / ')).join('\n')}
 function rvTel(v){const d=v.replace(/\D/g,'').slice(0,11);if(d.startsWith('02')){if(d.length<3)return d;if(d.length<6)return d.slice(0,2)+'-'+d.slice(2);if(d.length<10)return d.slice(0,2)+'-'+d.slice(2,5)+'-'+d.slice(5);return d.slice(0,2)+'-'+d.slice(2,6)+'-'+d.slice(6,10)}if(d.length<4)return d;if(d.length<8)return d.slice(0,3)+'-'+d.slice(3);if(d.length<11)return d.slice(0,3)+'-'+d.slice(3,6)+'-'+d.slice(6);return d.slice(0,3)+'-'+d.slice(3,7)+'-'+d.slice(7)}
-function rvUpd(){const el=$('#resumePreview');if(el)el.innerHTML=rvPreview();rvSync()}
+/* 2026.11.15 미리보기 떨림 완전 제거: 미리보기를 통째로 갈아끼우지 않고, 실제로 바뀐 글자만 제자리에서 교체 */
+function rvMorphNodes(a,b){
+ if(!a||!b)return b;
+ if(a.nodeType!==b.nodeType||a.nodeName!==b.nodeName)return b;
+ if(a.nodeType===3||a.nodeType===8){if(a.nodeValue!==b.nodeValue)a.nodeValue=b.nodeValue;return a}
+ if(a.nodeType!==1)return a;
+ var i,an=a.attributes,bn=b.attributes;
+ for(i=an.length-1;i>=0;i--){if(!b.hasAttribute(an[i].name))a.removeAttribute(an[i].name)}
+ for(i=0;i<bn.length;i++){if(a.getAttribute(bn[i].name)!==bn[i].value)a.setAttribute(bn[i].name,bn[i].value)}
+ var ac=[].slice.call(a.childNodes),bc=[].slice.call(b.childNodes),n=Math.min(ac.length,bc.length),j,r;
+ for(j=0;j<n;j++){r=rvMorphNodes(ac[j],bc[j]);if(r!==ac[j])a.replaceChild(r,ac[j])}
+ for(j=n;j<bc.length;j++)a.appendChild(bc[j]);
+ for(j=ac.length-1;j>=bc.length;j--)a.removeChild(ac[j]);
+ return a}
+function rvPaint(el){
+ if(!el)return;
+ var side=el.closest?el.closest('.rv-side'):null,top=side?side.scrollTop:0,y=window.pageYOffset||0;
+ var tpl=document.createElement('div');tpl.innerHTML=rvPreview();
+ rvMorphNodes(el,tpl);
+ if(side&&side.scrollTop!==top)side.scrollTop=top;
+ if((window.pageYOffset||0)!==y)window.scrollTo(0,y)}
+function rvUpd(){const el=$('#resumePreview');if(el)rvPaint(el);rvSync()}
 init.resume=()=>{const rv=state.rv;phBind();
  [['#rvName','name'],['#rvContact','contact'],['#rvEmail','email']].forEach(([s,f])=>{const e=$(s);if(e)e.oninput=()=>{if(f==='contact')e.value=rvTel(e.value);state[f]=e.value;rvUpd()}});
  const ad=$('#rvAddr');if(ad)ad.oninput=()=>{rv.addr=ad.value;rvUpd()};
@@ -5602,7 +5625,7 @@ html,body{scroll-behavior:auto!important}
 <script id="dbr-final-fixes">
 /* 2026.11.15 입사지원서: 입력 칸은 그대로 두고 미리보기만 깜빡임 없이 즉시 갱신 (자동 포커스 이동 없음) */
 function dbrKeepImages(el,fn){if(!el)return fn();var old=[].slice.call(el.querySelectorAll('img'));var r=fn();var now=[].slice.call(el.querySelectorAll('img'));if(old.length===now.length){for(var i=0;i<now.length;i++){try{if(old[i].getAttribute('src')===now[i].getAttribute('src')&&now[i].parentNode){now[i].parentNode.replaceChild(old[i],now[i])}}catch(e){}}}return r}
-if(typeof rvUpd==='function'){var _dbrRvUpd=rvUpd;rvUpd=function(){var el=document.getElementById('resumePreview');return dbrKeepImages(el,function(){return _dbrRvUpd.apply(this,arguments)})}}
+/* 2026.11.15 rvUpd는 rvPaint로 제자리 갱신(사진·표 노드를 그대로 두므로) — 사진을 매 글자마다 다시 붙이던 래퍼는 쓰지 않음 */
 if(typeof updatePreview==='function'){var _dbrUp=updatePreview;updatePreview=function(){var el=document.getElementById('resumePreview');return dbrKeepImages(el,function(){return _dbrUp.apply(this,arguments)})}}
 </script>
 <style id="dbr-rvfocus">
@@ -5663,6 +5686,12 @@ body[data-page="resume"] .rv-info .rv-fmt button{font-size:11.5px!important;padd
 /* 미리보기 떨림 방지: 앵커·전환·최소높이 고정 */
 .rv-side{overflow-anchor:none!important}
 .rv-side .rv-paper,.rv-side .rv-sec,.rv-side .rv-qbox,.rv-side .rv-t,.rv-side .rv-t tr,.rv-side .rv-info{transition:none!important;animation:none!important;min-height:0!important}
+/* 2026.11.15 미리보기 떨림 완전 제거: 표 열 너비를 글자 수와 무관하게 고정하고, 긴 이메일·주소는 칸 안에서만 줄바꿈 (열 너비가 매 글자마다 흔들리던 원인) */
+.rv-side{scrollbar-gutter:stable}
+.rv-side .rv-t,.rv-paper .rv-t{table-layout:fixed!important;width:100%!important}
+.rv-side .rv-t th,.rv-side .rv-t td,.rv-paper .rv-t th,.rv-paper .rv-t td{word-break:break-all!important;overflow-wrap:anywhere!important;white-space:normal!important;min-width:0!important}
+.rv-paper .rv-id .rv-t th{width:18%!important}
+.rv-paper .rv-id .rv-t td{width:32%!important}
 </style>
 <script id="dbr-rvfocus-js">
 /* ===== 2026.11.15 입사지원서: 사전조사 연결 '딸깍' 조립 · 미리보기 따라가기 · 빈칸 클릭 이동 ===== */
