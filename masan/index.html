@@ -6076,7 +6076,6 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
       var strip=el('div','pg-strip');
       var sr=el('span','s-r');
       sr.appendChild(makeBtn('🪪 여권 워드 저장',null,function(){download(this)}));
-      sr.appendChild(makeBtn('🖨️ 인쇄·PDF','ghost',function(){window.print()}));
       strip.innerHTML='<span class="s-l">DUBARO · CAREER PASSPORT</span><span class="s-m">NO. '+stampNo()+'</span>';
       strip.appendChild(sr);
       title.parentNode.insertBefore(strip,title.nextSibling);
@@ -6128,7 +6127,6 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
     if(btnRow){
       if(!btnRow.querySelector('.pg-btn')){
         btnRow.insertBefore(makeBtn('🪪 나의 직업 여권(.docx) 다운받기','lg',function(){download(this)}),btnRow.firstChild);
-        btnRow.insertBefore(makeBtn('🖨️ 인쇄·PDF로 저장','ghost',function(){window.print()}),btnRow.children[1]);
       }
       sec.appendChild(btnRow);
     }
