@@ -6133,6 +6133,8 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
       sec.appendChild(btnRow);
     }
     fit();
+    /* 내용 높이가 바뀌면(글꼴·사진 로딩 등) 화면 맞춤을 다시 계산한다 */
+    try{if(!sec.dataset.zro&&window.ResizeObserver){sec.dataset.zro='1';new ResizeObserver(function(){clearTimeout(ft);ft=setTimeout(fit,120)}).observe(sec)}}catch(e){}
   }
   /* 컴퓨터 화면에서 여권 한 장이 한 화면에 들어오도록 미세 배율 조정(모바일·작은 창은 그대로) */
   var ft=null;
