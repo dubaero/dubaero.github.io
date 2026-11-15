@@ -3174,8 +3174,8 @@ function rvDraft(k){const d=rvData(),c=rvCat(),job=state.job,g1=d.goods[0]&&(PH[
   return `${head} 당시 ${BL('해결해야 했던 문제나 맡은 역할')}이 있었습니다.\n\n저는 ${d.work&&WS[d.work]?WS[d.work]:'먼저 상황을 파악한 뒤'} ${BL('내가 직접 한 구체적인 행동')}을 했습니다. 그 결과 ${BL('숫자·칭찬·변화로 보여 줄 수 있는 결과')}를 얻었습니다.\n\n경력이 멈춘 기간에도 ${BL('육아·가족 돌봄·봉사·교육 등 그동안 한 일')}을 하며 ${g1?U(g1):BL('나의 강점')}${jo(g1||'점','을','를')} 꾸준히 써 왔습니다. 이 경험을 ${job}의 ${c[1]} 업무에 그대로 살리겠습니다.`}
  if(k==='plan')return `입사 후에는 단계별 목표를 세워 성장하겠습니다.\n\n첫째, 입사 후 3개월 안에 ${c[3]}${jo(c[3],'을','를')} 빠르게 익혀 기본 업무를 혼자 처리할 수 있도록 하겠습니다.\n\n둘째, 1년 안에는 ${c[1]} 업무를 책임지고 맡아 ${BL('동료나 고객에게 도움이 될 구체적인 목표')}를 이루겠습니다.\n\n셋째, ${d.prio&&PR[d.prio]?PR[d.prio]:'새로운 도구와 방법을 꾸준히 배워 팀에 보탬이 되겠습니다.'}\n\n다시 시작한 만큼 ${g1?U(g1):BL('나의 강점')}${jo(g1||'점','을','를')} 살려 오래 믿고 맡길 수 있는 직원이 되겠습니다.`;
  return ''}
-function rvFmt(t){return E(t).replace(/«([^»]*)»/g,'<span class="rv-u">$1</span>').replace(/\[([^\]]*)\]/g,'<span class="rv-b">[$1]</span>')}
-function rvParas(t,auto){return String(t).split(/\n\s*\n/).filter(p=>p.trim()).map(p=>`<p class="${auto?'rv-auto':''}">${rvFmt(p.trim()).replace(/\n/g,'<br>')}</p>`).join('')}
+function rvFmt(t,qid){return E(t).replace(/«([^»]*)»/g,'<span class="rv-u">$1</span>').replace(/\[([^\]]*)\]/g,m=>qid?`<span class="rv-b rv-jump" data-rvjumpq="${qid}" data-rvphrase="${m}">${m}</span>`:`<span class="rv-b">${m}</span>`)}
+function rvParas(t,auto,qid){return String(t).split(/\n\s*\n/).filter(p=>p.trim()).map(p=>`<p class="${auto?'rv-auto':''}">${rvFmt(p.trim(),qid).replace(/\n/g,'<br>')}</p>`).join('')}
 const rvPlain=t=>String(t).replace(/[«»]/g,'');
 const rvLen=t=>rvPlain(t).length;
 function rvRows(key,cols,ph){const rv=state.rv;if(!rv[key].length)rv[key].push([]);return `<div class="rv-rows"><div class="rv-row rv-rowh" style="--n:${cols.length}">${cols.map(c=>`<span>${c}</span>`).join('')}<i></i></div>${rv[key].map((r,i)=>`<div class="rv-row" style="--n:${cols.length}">${cols.map((c,k)=>`<input aria-label="${c}" data-rv="${key}" data-i="${i}" data-k="${k}" value="${E(r[k]||'')}" placeholder="${i===0?'예: '+E(ph[k]):''}">`).join('')}${i===rv[key].length-1&&rv[key].length<5?`<button type="button" class="rv-add" data-rvadd="${key}" title="한 줄 더 추가" aria-label="한 줄 더 추가">+</button>`:`<button type="button" class="rv-del" data-rvdel="${key}" data-i="${i}" title="이 줄 지우기" aria-label="이 줄 지우기">×</button>`}</div>`).join('')}</div>`}
@@ -3185,14 +3185,17 @@ function rvJobList(ci){return ci<RJ.length?RJ[ci][4]:rvAllJobs()}
 function rvJobHint(){const wi=document.getElementById('rvWish');if(wi&&wi.value!==state.job)wi.value=state.job;const h=document.querySelector('.rv-hint');if(!h)return;const cat=document.getElementById('rvCat');const ci=cat&&cat.value!=='all'?Number(cat.value):RJ.length;h.innerHTML=`고용24 직종 분류처럼 대분류를 먼저 고르면 아래 직종이 바뀌어요. 지금 선택: <b>${E(state.job)}</b>${ci>=RJ.length?` · 전체 ${rvAllJobs().length}개 직종`:''}`}
 function rvSyncJobSel(){const cat=document.getElementById('rvCat'),sel=document.getElementById('rvJob');if(cat&&sel){const ci=cat.value==='all'?RJ.length:Number(cat.value);const list=rvJobList(ci);if(!list.includes(state.job))state.job=list[0]||state.job;sel.innerHTML=list.map(n=>`<option ${n===state.job?'selected':''}>${E(n)}</option>`).join('')}rvJobHint();try{rvUpd()}catch(e){}}
 function rvJobSel(){const ci=rvCatIdx(),list=rvJobList(ci);return `<div class="rv-jobsel"><label class="field"><span>① 직종 대분류</span><select id="rvCat"><option value="all" ${ci>=RJ.length?'selected':''}>전체 직종 (모두 보기)</option>${RJ.map((c,i)=>`<option value="${i}" ${i===ci?'selected':''}>${c[0]}</option>`).join('')}</select></label><label class="field"><span>② 지원 직종</span><select id="rvJob">${list.map(n=>`<option ${n===state.job?'selected':''}>${E(n)}</option>`).join('')}</select></label><label class="field"><span>③ 목록에 없으면 직접 입력</span><input id="rvJobIn" placeholder="예: 학교 행정실무사" value=""></label></div><p class="rv-hint">고용24 직종 분류처럼 대분류를 먼저 고르면 아래 직종이 바뀌어요. 지금 선택: <b>${E(state.job)}</b>${ci>=RJ.length?` · 전체 ${rvAllJobs().length}개 직종`:''}</p>`}
-function rvQCard(q,n){const [id,title,ask,len,steps,good,bad]=q,v=state.rv.q[id],open=state.rv.open[id];return `<div class="rv-q" id="rvq-${id}"><div class="rv-qh"><span class="rv-qn">${n}</span><div><h4>${title}</h4><p>${ask} <em>(${len})</em></p></div></div>
+function rvQCard(q,n){const [id,title,ask,len,steps,good,bad]=q,v=state.rv.q[id],open=!!state.rv.open[id];return `<div class="rv-q" id="rvq-${id}" data-rvcard="${id}"><div class="rv-qh"><span class="rv-qn">${n}</span><div><h4>${title}</h4><p>${ask} <em>(${len})</em></p></div></div>
  <div class="rv-guide"><b>이렇게 쓰면 돼요</b><ol>${steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>
- <div class="rv-qbtns"><button type="button" class="btn small" data-rvfill="${id}">내 답으로 초안 채우기</button><button type="button" class="btn small outline" data-rvex="${id}">${open?'예시 닫기':'잘 쓴 예시 보기'}</button></div>
- ${open?`<div class="rv-ex"><div class="rv-ex-good"><b>잘 쓴 예시</b>${rvParas(good)}</div><div class="rv-ex-bad"><b>아쉬운 예시</b><p>${E(bad)}</p></div></div>`:''}
- <label class="field"><span>내 답 (초안을 채운 뒤 <span class="rv-b">[괄호]</span> 부분을 내 이야기로 바꿔 쓰세요)</span><textarea data-rvq="${id}" rows="9" placeholder="위 버튼을 누르면 지금까지 고른 답과 강점으로 초안이 채워져요.">${E(rvPlain(v))}</textarea></label><p class="rv-count" data-rvc="${id}">${rvLen(v)}자</p></div>`}
+ ${typeof rlHTML==='function'?rlHTML(id):''}
+ <div class="rv-qbtns"><button type="button" class="btn small" data-rvfill="${id}">내 답으로 초안 채우기</button><button type="button" class="btn small outline" data-rvex="${id}" aria-expanded="${open?'true':'false'}">${open?'예시 닫기':'잘 쓴 예시 보기'}</button></div>
+ <div class="rv-ex" data-rlex="${id}"${open?'':' hidden'}><div class="rv-ex-good"><b>잘 쓴 예시</b>${rvParas(good)}</div><div class="rv-ex-bad"><b>아쉬운 예시</b><p>${E(bad)}</p></div><div class="rv-ex-use"><button type="button" class="btn small" data-rlexuse="${id}">이 예시로 내 답 채우기</button></div></div>
+ <label class="field"><span>내 답 (초안을 채운 뒤 <span class="rv-b">[괄호]</span> 부분을 내 이야기로 바꿔 쓰세요)</span><textarea data-rvq="${id}" rows="9" placeholder="위 칩을 누르거나 '내 답으로 초안 채우기'를 누르면 여기에 글이 채워져요.">${E(rvPlain(v))}</textarea></label><p class="rv-count" data-rvc="${id}">${rvLen(v)}자</p></div>`}
+
 views.resume=()=>{const rv=state.rv,blind=rv.fmt==='blind';return `<section class="panel rv">${section('나의 입사지원서 공작소','왼쪽에 쓰거나 고르면 오른쪽 서류가 바로 채워져요.',blind?'블라인드 서식':'기본 이력서', stepNav())}
- <div class="rv-info">${blind?'<b>블라인드 채용이란?</b> 학교 이름·나이·가족·사진처럼 일과 관계없는 정보는 빼고 <b>직무 능력과 경험</b>으로만 평가하는 방식이에요. 경력이 끊겼어도 교육·자격·봉사·모임 활동을 경험으로 쓸 수 있어요.':'<b>기본 이력서(일반 기업)</b> 사진·인적사항·<b>학력·경력·자격</b>과 <b>자기소개서</b>로 이루어진 가장 흔한 서식이에요. 희망 직종은 직접 써요.'}
+  <div class="rv-info"><p>${blind?'<b>블라인드 서식</b> · 나이·학교·사진처럼 일과 관계없는 정보는 빼고 직무 능력과 경험으로만 써요.':'<b>기본 이력서</b> · 사진·학력·경력·자격과 자기소개서를 갖춘 일반 기업용 서식이에요.'}</p>
   <div class="rv-fmt"><button type="button" class="${blind?'on':''}" data-rvfmt="blind">블라인드 서식 (사진 없음)</button><button type="button" class="${blind?'':'on'}" data-rvfmt="general">기본 이력서 (일반 기업)</button></div></div>
+
  <div class="rv-split"><div class="rv-form">
 ${blind?` <h3 class="rv-h">STEP 1. 인적사항과 지원 직종</h3>
  
@@ -3213,30 +3216,30 @@ ${blind?` <h3 class="rv-h">STEP 1. 인적사항과 지원 직종</h3>
  <div class="rv-block"><h4>경력사항</h4>${rvRows('car',['근무처','근무 기간','담당 업무'],['○○무역 사무팀','2012.03~2017.02','수출 서류·거래처 관리'])}</div>
  <div class="rv-block"><h4>자격사항</h4>${rvRows('lic',['자격증명','발급기관','취득일'],['컴퓨터활용능력 2급','대한상공회의소','2026.06'])}</div>
 `} <h3 class="rv-h">STEP 3. 자기소개서 4문항</h3>
- <p class="rv-tip"><b>"내 답으로 초안 채우기"</b>를 누르면 앞에서 고른 답과 강점으로 초안이 만들어져요. <span class="rv-b">[괄호]</span> 부분만 내 이야기로 바꿔 쓰면 돼요.</p>
+ <p class="rv-tip"><b>노란 칸의 칩을 누르면</b> 사전조사에서 고른 답으로 문단이 바로 조립돼요. <b>"내 답으로 초안 채우기"</b>도 그대로 쓸 수 있어요. <span class="rv-b">[괄호]</span> 부분만 내 이야기로 바꿔 쓰면 돼요.</p>
  ${RQ.map((q,i)=>rvQCard(q,i+1)).join('')}
  <div class="row" style="margin-top:14px"><button type="button" class="btn" id="rvAll">4문항 모두 초안 채우기</button><button type="button" class="btn outline" id="rvDocx">워드(.docx)로 저장</button><button type="button" class="btn outline" onclick="nav('interview')">면접 연습 →</button></div>
- </div><aside class="rv-side"><div class="rv-side-h"><b>입사지원서 미리보기</b><span>쓰는 대로 바로 채워져요</span></div><div class="rv-legend"><span><i class="lg-u"></i>내가 입력한 정보</span><span><i class="lg-auto"></i>자동 예시 (고쳐 쓰기)</span><span><i class="lg-b"></i>[ ] 내가 채울 곳</span></div><div id="resumePreview">${rvPreview()}</div></aside></div></section>`};
-function rvTbl(head,rows,emptyTxt){const filled=rows.filter(r=>r.some(x=>x&&String(x).trim()));return `<table class="rv-t"><thead><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${filled.length?filled.map(r=>`<tr>${head.map((h,i)=>`<td>${r[i]?E(r[i]):'<span class="rv-b">[ ]</span>'}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${head.length}" class="rv-empty"><span class="rv-b">[${emptyTxt}]</span></td></tr>`}</tbody></table>`}
+ </div><aside class="rv-side"><div class="rv-side-h"><b>입사지원서 미리보기</b><span>쓰는 대로 바로 채워져요</span></div><div class="rv-legend"><span><i class="lg-u"></i>내가 입력한 정보</span><span><i class="lg-auto"></i>자동 예시 (고쳐 쓰기)</span><span><i class="lg-b"></i>[ ] 내가 채울 곳 — 누르면 그 칸으로 이동해요</span></div><div id="resumePreview">${rvPreview()}</div></aside></div></section>`};
+function rvTbl(head,rows,emptyTxt,jump){const filled=rows.filter(r=>r.some(x=>x&&String(x).trim()));const C=jump?' rv-jump':'',J=jump?` data-rvjump="${jump}"`:'';return `<table class="rv-t"><thead><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${filled.length?filled.map(r=>`<tr>${head.map((h,i)=>`<td>${r[i]?E(r[i]):`<span class="rv-b${C}"${J}>[ ]</span>`}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${head.length}" class="rv-empty"><span class="rv-b${C}"${J}>[${emptyTxt}]</span></td></tr>`}</tbody></table>`}
 function rvPreviewGen(v){const rv=state.rv;return `<div class="rv-paper rv-gen"><h2>이 력 서</h2>
- <div class="rv-sec"><div class="rv-id"><div class="rv-photo">${state.photoData?`<img src="${state.photoData}" alt="증명사진">`:'<span class="rv-b">[사진]</span>'}</div><table class="rv-t rv-kv"><tr><th>성명</th><td>${v(state.name,'이름')}</td><th>생년월일</th><td>${v(rv.birth,'생년월일')}</td></tr><tr><th>연락처</th><td>${v(state.contact,'연락처')}</td><th>이메일</th><td>${v(state.email,'이메일')}</td></tr><tr><th>주소</th><td colspan="3">${v(rv.home,'주소')}</td></tr><tr><th>희망 직종</th><td colspan="3">${v(state.job,'희망 직종')}</td></tr></table></div></div>
- <div class="rv-sec"><h5>학력사항</h5>${rvTbl(['학교명','전공·계열','재학 기간','졸업 구분'],rv.sch,'최종 학력부터 써 보세요')}</div>
- <div class="rv-sec"><h5>경력사항</h5>${rvTbl(['근무처','근무 기간','담당 업무'],rv.car,'경력이 없으면 "해당 없음"')}</div>
- <div class="rv-sec"><h5>자격사항</h5>${rvTbl(['자격증명','발급기관','취득일'],rv.lic,'없으면 "해당 없음"')}</div>
+ <div class="rv-sec" data-rvsec="info"><div class="rv-id"><div class="rv-photo">${state.photoData?`<img src="${state.photoData}" alt="증명사진">`:'<span class="rv-b">[사진]</span>'}</div><table class="rv-t rv-kv"><tr><th>성명</th><td>${v(state.name,'이름','#rvName')}</td><th>생년월일</th><td>${v(rv.birth,'생년월일','#rvBirth')}</td></tr><tr><th>연락처</th><td>${v(state.contact,'연락처','#rvContact')}</td><th>이메일</th><td>${v(state.email,'이메일','#rvEmail')}</td></tr><tr><th>주소</th><td colspan="3">${v(rv.home,'주소','#rvHome')}</td></tr><tr><th>희망 직종</th><td colspan="3">${v(state.job,'희망 직종','#rvWish')}</td></tr></table></div></div>
+ <div class="rv-sec" data-rvsec="edu"><h5>학력사항</h5>${rvTbl(['학교명','전공·계열','재학 기간','졸업 구분'],rv.sch,'최종 학력부터 써 보세요','[data-rv=sch]')}</div>
+ <div class="rv-sec" data-rvsec="car"><h5>경력사항</h5>${rvTbl(['근무처','근무 기간','담당 업무'],rv.car,'경력이 없으면 "해당 없음"','[data-rv=car]')}</div>
+ <div class="rv-sec" data-rvsec="lic"><h5>자격사항</h5>${rvTbl(['자격증명','발급기관','취득일'],rv.lic,'없으면 "해당 없음"','[data-rv=lic]')}</div>
  <p class="rv-note" style="text-align:center">위에 적은 내용은 사실과 다름없습니다.</p>
  <h2 style="margin-top:22px">자 기 소 개 서</h2>
- <div class="rv-sec">${RQ.map(([id,title],i)=>{const t=rv.q[id],auto=!(t&&t.trim()),txt=auto?rvDraft(id):t;return `<div class="rv-qbox"><div class="rv-qt"><b>${i+1}. ${title}</b><span>${rvLen(txt)}자${auto?' · 자동 예시':''}</span></div>${rvParas(txt,auto)}</div>`}).join('')}</div>
+ <div class="rv-sec">${RQ.map(([id,title],i)=>{const t=rv.q[id],auto=!(t&&t.trim()),txt=auto?rvDraft(id):t;return `<div class="rv-qbox" data-rvsec="${id}"><div class="rv-qt"><b>${i+1}. ${title}</b><span>${rvLen(txt)}자${auto?' · 자동 예시':''}</span></div>${rvParas(txt,auto,id)}</div>`}).join('')}</div>
  ${rvSign()}
  <p class="rv-note">※ 교육용 초안입니다. 제출 전에 [ ] 부분을 모두 내 이야기로 바꾸고, 회사가 정한 서식이 있으면 그 서식을 쓰세요.</p></div>`}
-function rvPreview(){const rv=state.rv,blind=rv.fmt==='blind',v=(t,ph)=>t&&t.trim()?E(t):`<span class="rv-b">[${ph}]</span>`;
+function rvPreview(){const rv=state.rv,blind=rv.fmt==='blind',v=(t,ph,j)=>t&&t.trim()?E(t):`<span class="rv-b rv-jump" data-rvjump="${j}">[${ph}]</span>`;
  if(!blind)return rvPreviewGen(v);
  return `<div class="rv-paper"><h2>입 사 지 원 서</h2><p class="rv-sub">${blind?'블라인드 채용 서식':'일반 기업 서식'} · 지원분야: <b>${E(state.job)}</b></p>
- <div class="rv-sec"><h5>1. 인적사항</h5><div class="rv-id">${blind?'':`<div class="rv-photo">${state.photoData?`<img src="${state.photoData}" alt="증명사진">`:'<span class="rv-b">[증명사진]</span>'}</div>`}<table class="rv-t rv-kv"><tr><th>성명</th><td>${v(state.name,'이름')}</td><th>지원분야</th><td>${E(state.job)}</td></tr><tr><th>연락처</th><td>${v(state.contact,'연락처')}</td><th>이메일</th><td>${v(state.email,'이메일')}</td></tr><tr><th>거주지</th><td colspan="3">${v(rv.addr,'시·군·구')}</td></tr></table></div>${blind?'<p class="rv-note">※ 블라인드 서식에는 사진·생년월일·출신학교·가족관계를 쓰지 않아요.</p>':''}</div>
- <div class="rv-sec"><h5>2. 교육사항</h5>${rvTbl(['교육과정명','교육기관','기간·시간','주요 내용'],rv.edu,'직무 관련 교육을 1개 이상 써 보세요')}</div>
- <div class="rv-sec"><h5>3. 자격사항</h5>${rvTbl(['자격증명','발급기관','취득일'],rv.lic,'없으면 "해당 없음" 또는 준비 중인 자격')}</div>
- <div class="rv-sec"><h5>4. 경력사항</h5>${rvTbl(['근무처','근무 기간','담당 업무'],rv.car,'경력이 없으면 비워 두고 경험사항을 자세히')}</div>
- <div class="rv-sec"><h5>5. 경험사항</h5>${rvTbl(['활동명','기간','주요 내용'],rv.exp,'봉사·모임·아르바이트·교육 실습 등')}</div>
- <div class="rv-sec"><h5>6. 자기소개서</h5>${RQ.map(([id,title],i)=>{const t=rv.q[id],auto=!(t&&t.trim()),txt=auto?rvDraft(id):t;return `<div class="rv-qbox"><div class="rv-qt"><b>${i+1}. ${title}</b><span>${rvLen(txt)}자${auto?' · 자동 예시':''}</span></div>${rvParas(txt,auto)}</div>`}).join('')}</div>
+ <div class="rv-sec" data-rvsec="info"><h5>1. 인적사항</h5><div class="rv-id">${blind?'':`<div class="rv-photo">${state.photoData?`<img src="${state.photoData}" alt="증명사진">`:'<span class="rv-b">[증명사진]</span>'}</div>`}<table class="rv-t rv-kv"><tr><th>성명</th><td>${v(state.name,'이름','#rvName')}</td><th>지원분야</th><td>${E(state.job)}</td></tr><tr><th>연락처</th><td>${v(state.contact,'연락처','#rvContact')}</td><th>이메일</th><td>${v(state.email,'이메일','#rvEmail')}</td></tr><tr><th>거주지</th><td colspan="3">${v(rv.addr,'시·군·구','#rvAddr')}</td></tr></table></div>${blind?'<p class="rv-note">※ 블라인드 서식에는 사진·생년월일·출신학교·가족관계를 쓰지 않아요.</p>':''}</div>
+ <div class="rv-sec" data-rvsec="edu"><h5>2. 교육사항</h5>${rvTbl(['교육과정명','교육기관','기간·시간','주요 내용'],rv.edu,'직무 관련 교육을 1개 이상 써 보세요','[data-rv=edu]')}</div>
+ <div class="rv-sec" data-rvsec="lic"><h5>3. 자격사항</h5>${rvTbl(['자격증명','발급기관','취득일'],rv.lic,'없으면 "해당 없음" 또는 준비 중인 자격','[data-rv=lic]')}</div>
+ <div class="rv-sec" data-rvsec="car"><h5>4. 경력사항</h5>${rvTbl(['근무처','근무 기간','담당 업무'],rv.car,'경력이 없으면 비워 두고 경험사항을 자세히','[data-rv=car]')}</div>
+ <div class="rv-sec" data-rvsec="exp"><h5>5. 경험사항</h5>${rvTbl(['활동명','기간','주요 내용'],rv.exp,'봉사·모임·아르바이트·교육 실습 등','[data-rv=exp]')}</div>
+ <div class="rv-sec"><h5>6. 자기소개서</h5>${RQ.map(([id,title],i)=>{const t=rv.q[id],auto=!(t&&t.trim()),txt=auto?rvDraft(id):t;return `<div class="rv-qbox" data-rvsec="${id}"><div class="rv-qt"><b>${i+1}. ${title}</b><span>${rvLen(txt)}자${auto?' · 자동 예시':''}</span></div>${rvParas(txt,auto,id)}</div>`}).join('')}</div>
  ${rvSign()}
  <p class="rv-note">※ 교육용 초안입니다. 제출 전에 [ ] 부분을 모두 내 이야기로 바꾸고, 회사가 정한 서식이 있으면 그 서식을 쓰세요. 사실이 아닌 경력·성과는 쓰지 않아요.</p></div>`}
 function rvSync(){state.motivation=rvPlain(state.rv.q.motive||rvDraft('motive'));state.cover=RQ.map(([id,t])=>t+'\n'+rvPlain(state.rv.q[id]||rvDraft(id))).join('\n\n');state.history=state.rv.car.filter(r=>r[0]).map(r=>r.filter(Boolean).join(' / ')).join('\n');state.education=state.rv.edu.filter(r=>r[0]).map(r=>r.filter(Boolean).join(' / ')).join('\n');state.cert=state.rv.lic.filter(r=>r[0]).map(r=>r.filter(Boolean).join(' / ')).join('\n')}
@@ -3258,7 +3261,7 @@ init.resume=()=>{const rv=state.rv;phBind();
  document.querySelectorAll('[data-rvq]').forEach(t=>t.oninput=()=>{rv.q[t.dataset.rvq]=t.value;const c=document.querySelector(`[data-rvc="${t.dataset.rvq}"]`);if(c)c.textContent=rvLen(t.value)+'자';rvUpd()});
  const fill=id=>{rv.q[id]=rvPlain(rvDraft(id));const t=document.querySelector(`[data-rvq="${id}"]`);if(t){t.value=rv.q[id];const c=document.querySelector(`[data-rvc="${id}"]`);if(c)c.textContent=rvLen(t.value)+'자'}};
  document.querySelectorAll('[data-rvfill]').forEach(b=>b.onclick=()=>{const id=b.dataset.rvfill;if(rv.q[id]&&rv.q[id].trim()&&rv.armed!==id){rv.armed=id;showToast('이미 쓴 글이 있어요. 한 번 더 누르면 초안으로 바뀌어요.');return}rv.armed=null;fill(id);rvUpd();showToast('초안을 채웠어요. [ ] 괄호 부분을 내 이야기로 바꿔 주세요.')});
- document.querySelectorAll('[data-rvex]').forEach(b=>b.onclick=()=>{const id=b.dataset.rvex;rv.open[id]=!rv.open[id];const y=window.scrollY;render();window.scrollTo(0,y)});
+ /* 2026.11.15 예시는 제자리에서 펼침 (아래 dbr-rvfocus-js가 처리) */
  $('#rvAll').onclick=()=>{RQ.forEach(([id])=>{if(!(rv.q[id]&&rv.q[id].trim()))fill(id)});rvUpd();showToast('비어 있는 문항에 초안을 채웠어요. 미리보기에서 확인해 보세요.')};
  $('#rvDocx').onclick=async()=>{try{await rvDocx();showToast('워드 파일을 저장했어요. [ ] 부분을 꼭 채워 주세요.')}catch(err){showToast('다운로드 오류: '+err.message)}};
  const pull=$('#rvPull');if(pull)pull.onclick=()=>{const ex=state.experiences.filter(x=>x&&x.trim());ex.slice(0,3).forEach((t,i)=>{let r=rv.exp.find(r=>!r[0]);if(!r&&rv.exp.length<5){r=[];rv.exp.push(r)}if(r){r[0]='직접 해 본 일 '+(i+1);r[2]=t.trim()}});const y=window.scrollY;render();window.scrollTo(0,y);showToast('경험사항에 불러왔어요. 활동명과 기간을 고쳐 주세요.')};
@@ -3314,13 +3317,13 @@ function rvCaution(){const ck=state.rv.chk;return `<section class="panel rv-caut
  <div class="rv-cgrid">${RC.map(([t,bad,why,fix],i)=>`<div class="rv-c"><h4><span>${i+1}</span>${t}</h4><div class="rv-c-bad"><b>이렇게 쓰면 안 돼요</b><p>${E(bad)}</p></div><div class="rv-c-why"><b>왜 안 될까요?</b><p>${E(why)}</p></div><div class="rv-c-fix"><b>이렇게 고쳐요</b><p>${E(fix)}</p></div></div>`).join('')}</div>
  <div class="rv-chk"><div class="rv-chk-h"><div><h4>내 지원서 한 번에 점검하기</h4><p>위 실수를 내 자기소개서에서 자동으로 찾아 드려요. 최종 판단은 꼭 직접 읽어 보며 하세요.</p></div><button type="button" class="btn" id="rvChkBtn">점검하기</button></div>
  ${ck?`<ul class="rv-chk-list">${ck.map(([ok,t,d])=>`<li class="${ok?'ok':'no'}"><span>${ok?'✓':'!'}</span><div><b>${E(t)}</b><p>${E(d)}</p></div></li>`).join('')}</ul><p class="rv-note">통과 ${ck.filter(c=>c[0]).length} / ${ck.length}</p>`:''}</div></section>`}
-const _vRv=views.resume;views.resume=()=>{let h=_vRv();h=h.replace('<label class="field"><span>거주지 (시·군·구까지만)</span>',`<label class="field"><span>지원하는 회사(기관) 이름 <small style="color:#d9730d">회사마다 꼭 바꾸기</small></span><input id="rvCo" value="${E(state.rv.company)}" placeholder="예: 마산○○복지관"></label><label class="field"><span>거주지 (시·군·구까지만)</span>`);return h+rvCaution()};
+const _vRv=views.resume;views.resume=()=>{let h=_vRv();h=h.replace('<label class="field"><span>거주지 (시·군·구까지만)</span>',`<label class="field"><span>지원하는 회사(기관) 이름 <small style="color:#d9730d">회사마다 꼭 바꾸기</small></span><input id="rvCo" value="${E(state.rv.company)}" placeholder="예: 마산○○복지관"></label><label class="field"><span>거주지 (시·군·구까지만)</span>`);h=h.replace('<label class="field rv-wide"><span>희망 직종 (직접 쓰기)</span>',`<label class="field rv-wide"><span>지원하는 회사(기관) 이름 <small style="color:#d9730d">회사마다 꼭 바꾸기</small></span><input id="rvCo" value="${E(state.rv.company)}" placeholder="예: 마산○○복지관"></label><label class="field rv-wide"><span>희망 직종 (직접 쓰기)</span>`);return h+rvCaution()};
 const _iRv=init.resume;init.resume=()=>{_iRv();const co=$('#rvCo');if(co)co.oninput=()=>{state.rv.company=co.value;rvUpd()};const b=$('#rvChkBtn');if(b)b.onclick=()=>{state.rv.chk=rvCheck();const host=$('#rvCaut');host.outerHTML=rvCaution();init.resume.rebind();document.getElementById('rvCaut').scrollIntoView({block:'start'})}};
 init.resume.rebind=()=>{const b=$('#rvChkBtn');if(b)b.onclick=()=>{state.rv.chk=rvCheck();$('#rvCaut').outerHTML=rvCaution();init.resume.rebind()}};
 
 /* v12.9: 하단 확인 문구·날짜·서명란 */
 function rvToday(){const d=new Date();return `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`}
-function rvSign(){const co=(state.rv.company||'').trim(),nm=(state.name||'').trim();return `<div class="rv-sign"><p>위 기재한 내용은 모두 사실이며, 사실과 다를 경우 불이익을 받을 수 있음을 확인합니다.</p><p class="rv-date">${rvToday()}</p><p class="rv-who">지원자 : ${nm?E(nm):'<span class="rv-b">[이름]</span>'} <span class="rv-sig">(서명)</span></p><p class="rv-to">${co?E(co):'<span class="rv-b">[지원하는 회사 이름]</span>'} 귀중</p></div>`}
+function rvSign(){const co=(state.rv.company||'').trim(),nm=(state.name||'').trim();return `<div class="rv-sign"><p>위 기재한 내용은 모두 사실이며, 사실과 다를 경우 불이익을 받을 수 있음을 확인합니다.</p><p class="rv-date">${rvToday()}</p><p class="rv-who">지원자 : ${nm?E(nm):'<span class="rv-b rv-jump" data-rvjump="#rvName">[이름]</span>'} <span class="rv-sig">(서명)</span></p><p class="rv-to">${co?E(co):'<span class="rv-b rv-jump" data-rvjump="#rvCo">[지원하는 회사 이름]</span>'} 귀중</p></div>`}
 function rvSignDocx(){const co=(state.rv.company||'').trim(),nm=(state.name||'').trim();return rvP('',{after:120})+rvP('위 기재한 내용은 모두 사실이며, 사실과 다를 경우 불이익을 받을 수 있음을 확인합니다.',{center:1,after:200})+rvP(rvToday(),{center:1,after:200})+`<w:p><w:pPr><w:jc w:val="right"/><w:spacing w:after="200"/></w:pPr>${rvRuns('지원자 : '+(nm||'[이름]')+'          (서명)',21)}</w:p>`+rvP((co||'[지원하는 회사 이름]')+' 귀중',{center:1,bold:1,sz:24,after:200})}
 
 const rvExpN=t=>String(t).trim().replace(/[.。]$/,'').replace(/했습니다$/,'한').replace(/였습니다$/,'였던').replace(/습니다$/,'는');
@@ -5320,12 +5323,12 @@ function strength(){var sec=q('#app .stpage');if(!sec||sec.dataset.zt)return;sec
 /* 도감 말풍선: 하단 오른쪽, 작게 */
 function bubbles(){qa('#app g.cbub:not([data-zb])').forEach(function(g){g.setAttribute('data-zb',1);var r=q('rect',g);if(!r)return;var x=+r.getAttribute('x')+ +r.getAttribute('width'),y=+r.getAttribute('y')+ +r.getAttribute('height'),s=.68;g.setAttribute('transform','translate('+(214-x*s).toFixed(1)+' '+(156-y*s).toFixed(1)+') scale('+s+')')})}
 function run(){if(busy)return;busy=true;try{var p=(window.state&&state.page)||document.body.dataset.page;
- if(p==='resume')resume();if(p==='interview')interview();if(p==='notes')notes();if(p==='strength')strength();if(p==='card')bubbles();fit()}catch(e){console.error(e)}busy=false}
+ /* 2026.11.15 입사지원서: 탭 묶음 대신 STEP 1~3이 위에서부터 이어지는 집중 화면 */if(p==='interview')interview();if(p==='notes')notes();if(p==='strength')strength();if(p==='card')bubbles()}catch(e){console.error(e)}busy=false}
 function fit(){var e=q('#app .rv-split');if(e&&window.innerWidth>=900){var r=e.getBoundingClientRect();var h=Math.max(420,window.innerHeight-r.top-window.scrollY-14);e.style.height=h+'px';var over=document.documentElement.scrollHeight-window.innerHeight;if(over>0)e.style.height=Math.max(380,h-over-2)+'px'}}
 if(typeof window.nav==='function'&&!window.nav.__z){var on=window.nav;window.nav=function(pg){var r=on.apply(this,arguments);if(!window.__zpop){try{history.pushState({pg:pg},'')}catch(e){}}return r};window.nav.__z=1;try{history.replaceState({pg:document.body.dataset.page||'home'},'')}catch(e){}}
 window.addEventListener('popstate',function(e){var st=e.state;if(!st)return;window.__zpop=1;try{if(st.pg&&st.pg!==document.body.dataset.page)window.nav(st.pg);setTimeout(function(){window.__zpop=1;if(st.zk){if(TABS[st.zk])TABS[st.zk](st.zi,1);else MEM[st.zk]=st.zi}else{['resume','resumeG','strength'].forEach(function(k){MEM[k]=0;if(TABS[k])TABS[k](0,1)})}window.__zpop=0},60);}finally{setTimeout(function(){window.__zpop=0},80)}});
 var app=document.getElementById('app');if(app)new MutationObserver(function(){if(!busy)setTimeout(run,0)}).observe(app,{childList:true,subtree:true});
-window.addEventListener('resize',fit);setTimeout(run,50);
+setTimeout(run,50);
 })();
 </script><!--/ZT-->
 <style id="mi-mobile-read">
@@ -5572,4 +5575,200 @@ function dbrKeepImages(el,fn){if(!el)return fn();var old=[].slice.call(el.queryS
 if(typeof rvUpd==='function'){var _dbrRvUpd=rvUpd;rvUpd=function(){var el=document.getElementById('resumePreview');return dbrKeepImages(el,function(){return _dbrRvUpd.apply(this,arguments)})}}
 if(typeof updatePreview==='function'){var _dbrUp=updatePreview;updatePreview=function(){var el=document.getElementById('resumePreview');return dbrKeepImages(el,function(){return _dbrUp.apply(this,arguments)})}}
 </script>
+<style id="dbr-rvfocus">
+/* 2026.11.15 입사지원서 집중 화면: 위 8개 메뉴 탭·4개 도구 탭 숨김 (이동은 제목 가운데 이전·홈·다음 버튼) */
+body[data-page="resume"] #nav,body[data-page="resume"] .feature-bar{display:none!important}
+/* 안내문 한 줄 콤팩트 */
+body[data-page="resume"] .rv-info{display:flex!important;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:8px 12px!important;margin:0 0 8px!important;font-size:12.5px!important;line-height:1.45!important}
+body[data-page="resume"] .rv-info>p{margin:0!important;flex:1 1 320px;min-width:0}
+body[data-page="resume"] .rv-info .rv-fmt{margin:0!important;flex:0 0 auto;gap:6px}
+body[data-page="resume"] .rv-info .rv-fmt button{font-size:11.5px!important;padding:4px 10px!important}
+/* 오른쪽 미리보기 고정 + 자동 따라가기 */
+@media(min-width:900px){
+ body[data-page="resume"] .rv-split{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)!important;align-items:start!important;overflow:visible!important;height:auto!important}
+ body[data-page="resume"] .rv-split>.rv-side,body[data-page="resume"] .rv-side{position:sticky!important;top:10px!important;max-height:calc(100vh - 20px)!important;overflow-y:auto!important;overflow-x:hidden!important;align-self:start!important}
+}
+.rv-side{scrollbar-width:thin}
+/* 사전조사 연결 '딸깍' 클릭 조립 칩 */
+.rv-q .rl{background:#fbfaf3;border:1px solid #ece6cc;border-radius:10px;padding:8px 10px;margin:0 0 9px}
+.rv-q .rl-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0 0 6px}
+.rv-q .rl-h b{font-size:12.5px;color:#7a6a3a}
+.rv-q .rl-h span{font-size:10.8px;color:#9a8f76}
+.rv-q .rl-g{display:flex;gap:6px;align-items:flex-start;margin:0 0 5px}
+.rv-q .rl-g:last-child{margin-bottom:0}
+.rv-q .rl-gl{flex:0 0 76px;font-size:10.8px;font-weight:800;color:#8a7a4a;padding-top:5px;line-height:1.3}
+.rv-q .rl-chips{display:flex;flex-wrap:wrap;gap:4px;min-width:0}
+.rv-q .rl-chip{border:1px solid #e2dcc2;background:#fff;border-radius:14px;padding:3px 9px;font-size:11.5px;color:#3d4f46;cursor:pointer;font-family:inherit;line-height:1.45;text-align:left}
+.rv-q .rl-chip:hover{background:#fffdf0;border-color:#d8c98a}
+.rv-q .rl-chip.star{border-color:#e0c65e;background:#fff8d8;font-weight:800;color:#6b5410}
+.rv-q .rl-chip.on{background:#eef5f1;border-color:#5b8a73;color:#1f4a36;font-weight:800;box-shadow:inset 0 0 0 1px #5b8a73}
+.rv-q .rl-chip.on.star{background:#eaf3d9;border-color:#6f9a3a;color:#3f5a12}
+.rv-q .rl-chip .st{color:#c99a1a;font-weight:900}
+/* 답변 예시: 제자리에서 펼치고 접기 */
+.rv-ex[hidden]{display:none!important}
+.rv-ex-use{margin-top:2px;display:flex;justify-content:flex-end}
+/* 미리보기 빈칸 클릭 → 왼쪽 해당 칸으로 이동 */
+.rv-paper .rv-b.rv-jump{cursor:pointer;text-decoration:underline dotted #d9822b;text-underline-offset:2px;border-radius:3px}
+.rv-paper .rv-b.rv-jump:hover{background:#fff3d6;color:#b35f0d}
+</style>
+<script id="dbr-rvfocus-js">
+/* ===== 2026.11.15 입사지원서: 사전조사 연결 '딸깍' 조립 · 미리보기 따라가기 · 빈칸 클릭 이동 ===== */
+(function(){var rv=state.rv;rv.chips=rv.chips||{};if(!rv.chipText)rv.chipText={};if(!rv.chipAck)rv.chipAck={}})();
+function rlSel(id){var rv=state.rv;return rv.chips[id]||(rv.chips[id]={})}
+function rlIsOn(id,k){return !!rlSel(id)[k]}
+function rlNoun(t){t=String(t||'');
+ var pairs=[['이야기하기','이야기 나누는 것'],['SNS 하기','SNS 다루는 것'],['들어주기','끝까지 들어주는 태도'],['빠르고 야무지기','빠르고 야무진 점'],['아이디어 내기','아이디어를 내는 것'],['만들기','만드는 솜씨'],['꾸미기','꾸미는 솜씨'],['돌보기','돌보는 마음'],['세우기','세우는 습관'],['맞추기','맞추는 꼼꼼함'],['설명하기','설명하는 능력'],['다루기','다루는 능력'],['챙기기','챙기는 마음'],['움직이기','움직이는 습관'],['정리하기','정리하는 습관'],['지키기','지키는 성실함'],['배우기','배우는 적극성'],['듣기','듣는 경청'],['확인하기','확인하는 꼼꼼함'],['협력하기','협력하는 태도'],['대응하기','대응하는 순발력'],['관리하기','관리하는 능력'],['정돈하기','정돈하는 솜씨'],['응대하기','응대하는 친절'],['하기','하는 습관']];
+ for(var i=0;i<pairs.length;i++){var k=pairs[i][0];if(t.length>=k.length&&t.slice(-k.length)===k)return t.slice(0,t.length-k.length)+pairs[i][1]}
+ return t}
+function rlUniq(a){var s={},o=[];a.forEach(function(x){if(!x||!x.t)return;var k=x.t;if(s[k])return;s[k]=1;o.push(x)});return o}
+function rlStarFirst(a){return a.slice().sort(function(x,y){return (y.star?1:0)-(x.star?1:0)})}
+function rlGoodChips(){var a=[];
+ (state.strengths||[]).forEach(function(t){a.push({t:t,s:'제 강점은 '+(PH[t]||rlNoun(t))+'입니다.',star:true})});
+ (typeof sAns==='function'?sAns('good'):[]).forEach(function(t){var n=rlNoun(t);a.push({t:t,s:'주변에서 '+n+jo(n,'이','가')+' 있다는 말을 자주 듣습니다.',star:true})});
+ ['꼼꼼히 확인하기','약속과 시간 지키기','사람의 이야기 듣기','새로운 일 배우기','일정과 계획 세우기'].forEach(function(t){a.push({t:t,s:'제 강점은 '+(PH[t]||rlNoun(t))+'입니다.'})});
+ return rlStarFirst(rlUniq(a))}
+function rlGroups(id){var S=state,rv=S.rv,G=[];
+ function add(label,chips){chips=rlStarFirst(rlUniq(chips));if(chips.length)G.push({g:label,chips:chips})}
+ if(id==='motive'){
+  var gi=[];
+  (typeof sAns==='function'?sAns('interest'):[]).forEach(function(t){gi.push({t:t,s:'‘'+t+'’ 같은 일을 할 때 시간 가는 줄 모를 만큼 즐거웠기 때문입니다.',star:true})});
+  [['사람을 돕고 돌보는 일','사람을 돕고 돌보는 일에서 보람을 느꼈기 때문입니다.'],['정리하고 꼼꼼히 확인하는 일','정리하고 꼼꼼히 확인하는 일이 저와 잘 맞았기 때문입니다.'],['새로운 것을 배워 알려 주는 일','새로운 것을 배우고 다른 사람에게 알려 주는 일이 즐거웠기 때문입니다.'],['손으로 만들고 마무리하는 일','손으로 만들고 마무리하는 일에서 성취감을 느꼈기 때문입니다.']].forEach(function(x){gi.push({t:x[0],s:x[1]})});
+  add('① 관심 계기',gi);
+  add('② 나의 강점',rlGoodChips());
+  var gp=[];
+  rv.edu.filter(function(r){return r[0]}).forEach(function(r){gp.push({t:r[0],s:'‘'+r[0]+'’ 교육을 이수하며 '+(r[1]?r[1]+'에서 ':'')+'업무에 필요한 기본을 익혔습니다.'})});
+  rv.lic.filter(function(r){return r[0]}).forEach(function(r){gp.push({t:r[0],s:'‘'+r[0]+'’ 자격 과정을 통해 관련 지식을 쌓았습니다.'})});
+  [['새일센터 AI 교육 이수','새일센터에서 AI 활용 교육을 이수하며 디지털 도구를 익혔습니다.'],['컴퓨터·문서 실무 교육','문서 작성과 컴퓨터 실무 교육을 들어 업무 기본기를 갖추었습니다.'],['관련 자격 취득 준비','관련 자격증을 준비하며 전문 지식을 쌓고 있습니다.'],['봉사·모임 활동','봉사와 모임 활동으로 사람을 대하는 법을 익혔습니다.']].forEach(function(x){gp.push({t:x[0],s:x[1]})});
+  add('③ 준비 과정',gp);
+ }
+ if(id==='pros'){
+  add('① 나의 장점',rlGoodChips());
+  var gim=[];
+  (S.improvements||[]).forEach(function(t){gim.push({t:t,s:'보완할 점은 '+String(t).replace(/다$/,'다는')+' 점입니다.',star:true})});
+  [['할 일을 목록으로 적고 순서대로 처리하기','할 일을 목록으로 적고 급한 순서대로 처리하는 습관을 들이고 있습니다.'],['아침 5분 문서·컴퓨터 연습','아침마다 5분씩 문서 작성과 컴퓨터 작업을 연습하고 있습니다.'],['30초 자기소개 말하기 연습','30초 자기소개부터 소리 내어 말하는 연습을 하고 있습니다.'],['마감 30분 전 알람 맞추기','마감 30분 전에 알람을 맞춰 두고 미리 확인하고 있습니다.'],['인사와 첫 질문 미리 준비','인사와 첫 질문을 미리 준비해 먼저 말을 거는 연습을 하고 있습니다.'],['일을 작은 단계로 나누기','일을 작은 단계로 나눠 첫 단계부터 바로 시작하고 있습니다.']].forEach(function(x){gim.push({t:x[0],s:x[1]})});
+  add('② 보완할 점·노력',gim);
+ }
+ if(id==='career'){
+  var ge=[];
+  (S.experiences||[]).filter(function(x){return x&&x.trim()}).forEach(function(x){var t=x.trim().replace(/[.。]+$/,'');ge.push({t:t.length>18?t.slice(0,18)+'…':t,s:t+'.',star:true})});
+  rv.car.filter(function(r){return r[0]}).forEach(function(r){ge.push({t:r[0]+(r[1]?' '+r[1]:''),s:'‘'+r[0]+'’'+(r[1]?'에서 '+r[1]+' 동안 ':'에서 ')+(r[2]||'담당')+' 업무를 맡았습니다.'})});
+  rv.exp.filter(function(r){return r[0]}).forEach(function(r){var w=r[2]||'여러 가지 일';ge.push({t:r[0],s:'‘'+r[0]+'’ 활동에서 '+w+jo(w,'을','를')+' 맡았습니다.'})});
+  [['매장 판매·아르바이트','매장에서 손님을 응대하고 상품을 정리한 아르바이트 경험이 있습니다.'],['봉사활동','지역 봉사활동에 참여해 사람들을 도왔습니다.'],['모임 회계·총무','모임에서 회계와 총무를 맡아 자료를 정리하고 공지했습니다.'],['행사 준비와 진행','행사를 준비하고 진행하며 여러 사람과 일을 맞춰 본 경험이 있습니다.'],['가족 돌봄과 살림','가족을 돌보며 생활 속 일을 꾸준히 해 왔습니다.'],['아이 학교 학부모 활동','아이 학교 학부모 활동으로 회의와 행사를 준비했습니다.']].forEach(function(x){ge.push({t:x[0],s:x[1]})});
+  add('① 내가 해본 일',ge);
+  var gw=[];
+  var workS=function(t){return WS[t]?'일할 때는 '+WS[t]+' 일을 처리해 왔습니다.':'일할 때는 '+String(t).replace(/다$/,'다는')+' 방식이 편합니다.'};
+  (typeof sAns==='function'?sAns('work'):[]).forEach(function(t){gw.push({t:t,s:workS(t),star:true})});
+  ['먼저 설명을 듣고 순서를 정한다','직접 해보면서 하나씩 익힌다','다른 사람과 상의하며 진행한다','혼자 조사해 방법을 찾아본다'].forEach(function(t){gw.push({t:t,s:workS(t)})});
+  add('② 일하는 방식',gw);
+ }
+ if(id==='plan'){
+  var gpl=[];
+  (typeof sAns==='function'?sAns('priority'):[]).forEach(function(t){gpl.push({t:t,s:PR[t]||('입사 후에는 '+t+jo(t,'을','를')+' 가장 중요하게 생각하며 일하겠습니다.'),star:true})});
+  [['맡은 일은 기한 안에 끝내기','맡은 일은 기한 안에 정확히 끝내는 직원이 되겠습니다.'],['먼저 배우고 먼저 돕기','모르는 일은 먼저 배워 동료에게 먼저 도움이 되는 사람이 되겠습니다.'],['꼼꼼히 확인해 실수 줄이기','한 번 더 확인해 실수를 줄이는 꼼꼼한 직원이 되겠습니다.'],['새로운 도구 배워 업무 줄이기','AI 문서 도구처럼 새로운 도구를 익혀 반복 업무 시간을 줄이는 방법을 동료와 나누겠습니다.'],['오래 다니며 믿음 쌓기','오래 다니며 믿고 맡길 수 있는 직원이 되겠습니다.']].forEach(function(x){gpl.push({t:x[0],s:x[1]})});
+  add('① 입사 후 다짐',gpl);
+ }
+ return G}
+function rlChipsFlat(id){var G=rlGroups(id),out=[];G.forEach(function(g,gi){g.chips.forEach(function(c){out.push({k:gi+'|'+c.t,g:gi,gt:g.g,t:c.t,s:c.s,star:!!c.star})})});return out}
+function rlPicked(id){var set=rlSel(id);return rlChipsFlat(id).filter(function(c){return set[c.k]})}
+function rlHTML(id){var G=rlGroups(id);if(!G.length)return '';
+ var out='<div class="rl" data-rl="'+id+'"><div class="rl-h"><b>눌러서 바로 채우기</b><span>사전조사에서 고른 항목은 ★ 내 선택으로 맨 앞에 있어요</span></div>';
+ G.forEach(function(g,gi){out+='<div class="rl-g"><span class="rl-gl">'+g.g+'</span><div class="rl-chips">';
+  g.chips.forEach(function(c){var k=gi+'|'+c.t,on=rlIsOn(id,k);
+   out+='<button type="button" class="rl-chip'+(on?' on':'')+(c.star?' star':'')+'" data-rlq="'+id+'" data-rlk="'+E(k)+'">'+(c.star?'<span class="st">★</span> 내 선택 · ':'')+E(c.t)+'</button>'});
+  out+='</div></div>'});
+ return out+'</div>'}
+function rlBuild(id){var S=state,job=(S.job||'').trim()||'지원 직무',co=(S.rv.company||'').trim()||'귀사';
+ var picked=rlPicked(id),by={},out=[];
+ picked.forEach(function(c){(by[c.g]=by[c.g]||[]).push(c)});
+ var sents=function(gi){return (by[gi]||[]).map(function(c){return c.s}).join(' ')};
+ var c0=(typeof rvCat==='function')?rvCat():[0,job+'의 핵심 업무',job+'의 핵심 업무를 정확하게 해내는',job+'의 업무 도구',[]];
+ if(id==='motive'){var a=sents(0),b=sents(1),c=sents(2);
+  out.push('저는 '+job+' 직무에 지원했습니다.'+(a?' '+a:''));
+  if(b||c)out.push((b?b:'')+(b&&c?' ':'')+(c?c:''));
+  out.push(co+'에서 이 강점을 살려 맡은 일을 책임지고 오래 일하고 싶습니다.')}
+ if(id==='pros'){var b2=sents(0),c2=sents(1);
+  var imp=picked.filter(function(c){return c.g===1&&c.star&&(S.improvements||[]).indexOf(c.t)>-1});
+  if(b2)out.push(b2+' '+job+' 업무에서도 이 장점을 살려 '+(c0[2]||'제 역할을 다하는')+' 직원이 되겠습니다.');
+  if(c2)out.push((imp.length?'이를 위해 ':'')+c2)}
+ if(id==='career'){var e=sents(0),w=sents(1);
+  if(e)out.push(e); if(w)out.push(w);
+  out.push('이 경험을 '+job+'의 '+(c0[1]||'맡은 업무')+' 업무에 그대로 살리겠습니다.')}
+ if(id==='plan'){var d=sents(0);
+  out.push('입사 후 3개월 안에 '+(c0[3]||'맡은 업무의 기본')+jo(c0[3]||'업무','을','를')+' 빠르게 익혀 기본 업무를 혼자 처리하겠습니다. 1년 안에는 '+(c0[1]||job+'의 핵심 업무')+' 업무를 책임지고 맡겠습니다.');
+  if(d)out.push(d)}
+ return out.filter(Boolean).join('\n\n')}
+function rlToggleChip(btn){var id=btn.getAttribute('data-rlq'),k=btn.getAttribute('data-rlk'),rv=state.rv;
+ var ta=document.querySelector('textarea[data-rvq="'+id+'"]');
+ if(ta&&!rv.chipAck[id]){var cur=String(ta.value||'').trim(),last=String(rv.chipText&&rv.chipText[id]||'').trim();
+  if(cur&&cur!==last){if(!confirmSafe('직접 쓰신 글이 있어요. 칩으로 다시 조립하면 그 글이 바뀝니다. 계속할까요?'))return;rv.chipAck[id]=1}}
+ var set=rlSel(id);if(set[k])delete set[k];else set[k]=1;
+ btn.classList.toggle('on',!!set[k]);
+ var txt=rlBuild(id);rv.q[id]=txt;(rv.chipText||(rv.chipText={}))[id]=txt;
+ if(ta)ta.value=txt;
+ var c=document.querySelector('[data-rvc="'+id+'"]');if(c)c.textContent=rvLen(txt)+'자';
+ rv.sec=id;rvUpd();rvScrollSide(id)}
+function rlExToggle(btn){var id=btn.getAttribute('data-rvex'),box=document.querySelector('[data-rlex="'+id+'"]');if(!box)return;
+ var open=box.hasAttribute('hidden');
+ if(open)box.removeAttribute('hidden');else box.setAttribute('hidden','');
+ state.rv.open[id]=open;
+ btn.textContent=open?'예시 닫기':'잘 쓴 예시 보기';
+ btn.setAttribute('aria-expanded',open?'true':'false')}
+function rlUseEx(btn){var id=btn.getAttribute('data-rlexuse'),q=RQ.filter(function(x){return x[0]===id})[0];if(!q)return;
+ var txt=rvPlain(q[5]),rv=state.rv;
+ rv.q[id]=txt;(rv.chipText||(rv.chipText={}))[id]='';
+ var ta=document.querySelector('textarea[data-rvq="'+id+'"]');if(ta)ta.value=txt;
+ var c=document.querySelector('[data-rvc="'+id+'"]');if(c)c.textContent=rvLen(txt)+'자';
+ rv.sec=id;rvUpd();rvScrollSide(id);
+ showToast('예시를 내 답 칸에 넣었어요. 내 이야기로 고쳐 주세요.')}
+function rvScrollSide(sec){var side=document.querySelector('.rv-side');if(!side||!sec)return;
+ var el=side.querySelector('[data-rvsec="'+sec+'"]');if(!el)return;
+ var sr=side.getBoundingClientRect(),r=el.getBoundingClientRect();
+ var top=side.scrollTop+(r.top-sr.top)-6;if(top<0)top=0;
+ side.scrollTop=top}
+function rvSecName(el){if(!el||!el.closest)return null;
+ if(el.dataset&&el.dataset.rvq)return el.dataset.rvq;
+ var card=el.closest('[data-rvcard]');if(card)return card.getAttribute('data-rvcard');
+ var k=el.dataset&&(el.dataset.rv||el.dataset.rvadd||el.dataset.rvdel);
+ if(k)return k==='sch'?'edu':k;
+ var m={rvName:'info',rvContact:'info',rvEmail:'info',rvAddr:'info',rvHome:'info',rvBirth:'info',rvWish:'info',rvCat:'info',rvJob:'info',rvJobIn:'info',rvCo:'info'};
+ if(el.id&&m[el.id])return m[el.id];
+ var blk=el.closest('.rv-block');
+ if(blk){var h=blk.querySelector('h4'),t=h?h.textContent:'';
+  if(t.indexOf('교육')>-1)return 'edu';if(t.indexOf('자격')>-1)return 'lic';if(t.indexOf('경력')>-1)return 'car';if(t.indexOf('경험')>-1)return 'exp';if(t.indexOf('학력')>-1)return 'edu'}
+ return null}
+function rvSecOf(el){if(!el||!el.closest||!el.closest('.rv-form'))return;var s=rvSecName(el);if(!s)return;state.rv.sec=s;rvScrollSide(s)}
+function rvJumpTo(sel){try{var list=Array.prototype.slice.call(document.querySelectorAll(sel));if(!list.length)return;
+ var empty=list.filter(function(x){return !String(x.value||'').trim()});
+ var el=empty[0]||list[0];
+ el.scrollIntoView({block:'center',behavior:'auto'});
+ try{el.focus({preventScroll:true})}catch(e){el.focus()}}catch(e){}}
+function rvJumpQ(id,phrase){var ta=document.querySelector('textarea[data-rvq="'+id+'"]');if(!ta)return;var rv=state.rv;
+ if(!(rv.q[id]&&rv.q[id].trim())){var t=rvPlain(rvDraft(id));rv.q[id]=t;(rv.chipText||(rv.chipText={}))[id]='';ta.value=t;
+  var c=document.querySelector('[data-rvc="'+id+'"]');if(c)c.textContent=rvLen(t)+'자';rv.sec=id;rvUpd()}
+ ta.scrollIntoView({block:'center',behavior:'auto'});
+ try{ta.focus({preventScroll:true})}catch(e){}
+ var v=String(ta.value||''),p=phrase||'',i=p?v.indexOf(p):-1;
+ if(i<0&&p){var inner=p.replace(/^\[/,'').replace(/\]$/,'');i=v.indexOf(inner);if(i>=0)p=inner}
+ try{if(i>=0)ta.setSelectionRange(i,i+p.length);else ta.setSelectionRange(v.length,v.length)}catch(e){}}
+(function(){var _i=init.resume;
+ init.resume=function(){_i.apply(this,arguments);
+  var form=document.querySelector('.rv-form');
+  if(form&&!form.__rlBound){form.__rlBound=1;
+   form.addEventListener('focusin',function(e){rvSecOf(e.target)});
+   form.addEventListener('click',function(e){var t=e.target;
+    if(!t||!t.closest)return;
+    var chip=t.closest('[data-rlk]');if(chip){e.preventDefault();rlToggleChip(chip);return}
+    var ex=t.closest('[data-rvex]');if(ex){e.preventDefault();rlExToggle(ex);return}
+    var us=t.closest('[data-rlexuse]');if(us){e.preventDefault();rlUseEx(us);return}
+    rvSecOf(t)})}
+  var side=document.querySelector('.rv-side');
+  if(side&&!side.__rlBound){side.__rlBound=1;
+   side.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;
+    var q=t.closest('[data-rvjumpq]');if(q){e.preventDefault();rvJumpQ(q.getAttribute('data-rvjumpq'),q.getAttribute('data-rvphrase'));return}
+    var s=t.closest('[data-rvjump]');if(s){e.preventDefault();rvJumpTo(s.getAttribute('data-rvjump'))}})}
+  if(state.rv&&state.rv.sec)rvScrollSide(state.rv.sec)}})();
+try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
+(function(){if(typeof rvUpd!=='function')return;var _u=rvUpd;rvUpd=function(){var r=_u.apply(this,arguments);try{if(state.rv&&state.rv.sec)rvScrollSide(state.rv.sec)}catch(e){}return r}})();
+</script>
+
 </body></html>
