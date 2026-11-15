@@ -6075,7 +6075,7 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
     if(title&&!sec.querySelector('.pg-strip')){
       var strip=el('div','pg-strip');
       var sr=el('span','s-r');
-      sr.appendChild(makeBtn('🪪 여권 워드 저장',null,function(){download(this)}));
+      sr.appendChild(makeBtn('🪪 여권(.docx) 저장',null,function(){download(this)}));
       strip.innerHTML='<span class="s-l">DUBARO · CAREER PASSPORT</span><span class="s-m">NO. '+stampNo()+'</span>';
       strip.appendChild(sr);
       title.parentNode.insertBefore(strip,title.nextSibling);
