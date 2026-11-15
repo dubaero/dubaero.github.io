@@ -3286,7 +3286,11 @@ function rvPaint(el){
  if(!el)return;
  var side=el.closest?el.closest('.rv-side'):null,top=side?side.scrollTop:0,y=window.pageYOffset||0;
  var tpl=document.createElement('div');tpl.innerHTML=rvPreview();
- rvMorphNodes(el,tpl);
+ /* 컨테이너 자신(#resumePreview)의 id·속성은 건드리지 않고, 자식만 제자리 교체 */
+ var ac=[].slice.call(el.childNodes),bc=[].slice.call(tpl.childNodes),n=Math.min(ac.length,bc.length),i,r;
+ for(i=0;i<n;i++){r=rvMorphNodes(ac[i],bc[i]);if(r!==ac[i])el.replaceChild(r,ac[i])}
+ for(i=n;i<bc.length;i++)el.appendChild(bc[i]);
+ for(i=ac.length-1;i>=bc.length;i--)el.removeChild(ac[i]);
  if(side&&side.scrollTop!==top)side.scrollTop=top;
  if((window.pageYOffset||0)!==y)window.scrollTo(0,y)}
 function rvUpd(){const el=$('#resumePreview');if(el)rvPaint(el);rvSync()}
