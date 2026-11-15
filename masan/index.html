@@ -1915,7 +1915,7 @@ strength:()=>`<section class="panel stpage">${section('강점과 경험을 발�
 jobs:()=>`<section class="panel">${section('직업세계 탐색','직업을 단정적으로 추천하기보다, 내가 관심을 가질 만한 후보와 확인사항을 살펴봅니다.','공식 자료 확인', stepNav())}<div class="row"><input class="search" style="flex:1;min-width:210px" id="jobsearch" placeholder="직업명, 업무, 분야 검색 (예: 강사, 경리, 크리에이터)" value=""><button class="btn light" onclick="window.open('https://www.work24.go.kr/','_blank','noopener')">고용24 채용정보 ↗</button></div><div class="selected-preferences"><b>나의 희망직종 (최대 3개)</b><p class="muted">직업 카드에서 ‘희망직종 추가’를 선택하세요. 지원서용 직무는 아래에서 별도로 정할 수 있습니다.</p><div id="preferredJobChips"></div></div><div id="job-theme" class="job-theme-banner" aria-live="polite"></div><div id="jobResultsCount" style="margin:10px 0 4px;font-size:13px;font-weight:700;color:#356754;"></div><div id="jobResults" class="jobgrid"></div><div class="result"><b>내가 선택한 지원 직무:</b> <span id="selectedjob">${E(state.job)}</span><div class="muted">직업 카드를 선택한 뒤, 실제 공고 원문을 보고 지원 자격과 업무 내용을 비교하세요.</div></div><div id="careerIntro"></div><div class="two"><label class="field"><span>채용공고에서 확인한 주요 업무·필수 조건 (개인정보 제외)</span><textarea id="jobpost" placeholder="예: 문서 정리, 기본 컴퓨터 활용, 주 5일 근무">${E(state.jobpost)}</textarea></label><div class="result"><h3>새롭게 변화하는 직업 탐색</h3><p class="muted">AI·디지털 기술로 업무가 변화하는 직업이 있습니다. '없어질 직업'이라고 단정하지 않고, 실제 업무가 어떻게 변하는지 공식 자료를 확인합니다.</p><a href="https://www.keis.or.kr/" target="_blank" rel="noopener">한국고용정보원 자료 확인 ↗</a><br><a href="https://www.work24.go.kr/" target="_blank" rel="noopener">고용24에서 직업·채용 정보 찾기 ↗</a></div></div><button class="btn" onclick="nav('resume')">입사지원서 작성하기 →</button></section>`,
 resume:()=>`<section class="panel">${traitUI()}${section('나의 입사지원서 공작소','선택한 경험을 바탕으로 문장을 직접 완성하고, 워드파일로 내려받습니다.','편집 가능한 DOCX', stepNav())}<div class="banner">실제 제출 전에는 기업 지정 서식을 우선하세요. 사진은 필요한 경우에만 사용합니다. 마음·관계 탐색 답변은 지원서에 자동으로 들어가지 않습니다.</div><div class="two"><div><label class="field"><span>성명</span><input id="name" placeholder="본인 이름"></label><label class="field"><span>연락처</span><input id="contact" placeholder="본인 연락처"></label><label class="field"><span>이메일</span><input id="email" placeholder="본인 이메일"></label><label class="field"><span>지원 직무</span><select id="jobSelect">${jobs.map(j=>`<option ${j.name===state.job?'selected':''}>${E(j.name)}</option>`).join('')}</select></label><label class="field"><span>실제 경력·활동 사항 (선택)</span><textarea id="history" placeholder="기관명·기간·업무는 본인이 확인한 사실만 작성"></textarea></label><label class="field"><span>교육 및 자격사항 (선택)</span><textarea id="education" placeholder="교육 이수 등 실제로 확인 가능한 정보"></textarea></label><label class="field"><span>자격증 (선택)</span><textarea id="cert" placeholder="실제로 취득한 자격만"></textarea></label><label class="field"><span>지원동기와 업무 연결 (선택)</span><textarea id="motivation" placeholder="어떤 이유로 관심이 생겼으며 실제로 기여할 수 있는 점은?"></textarea></label></div><div><div class="result"><b>자기소개서 문장 만드는 법</b><p class="muted">① 실제 상황 → ② 내가 한 행동 → ③ 확인 가능한 결과 → ④ 지원 업무와 연결</p><button class="btn light small" id="makeCover">선택한 경험으로 문장 틀 만들기</button><p class="notice">AI가 사실을 확인하거나 실제로 없던 경력·성과를 생성하지 않습니다. 직접 검수해 주세요.</p></div><label class="field"><span>자기소개서 문항 / 핵심 소개글 (직접 수정)</span><textarea id="cover" style="min-height:190px" placeholder="자신의 실제 경험을 작성해 주세요."></textarea></label><div class="row"><button class="btn" id="downloadDocx">워드(.docx) 다운로드</button><button class="btn outline" onclick="nav('interview')">면접 연습 →</button></div><p class="muted">내려받은 파일은 Microsoft Word 또는 DOCX 호환 편집기에서 열고 수정할 수 있습니다.</p></div></div></section><section class="panel">${section('입사지원서 미리보기','실제 지원할 때 필요한 항목만 남기고 수정하세요.')}<div id="resumePreview"></div></section>`,
 interview:()=>`<section class="panel">${section('나의 면접연습실','지원 직무에 맞춰 질문을 한 번에 하나씩 연습합니다.','모의면접', stepNav())}<div class="banner">정해진 질문과 체크 기준을 사용하는 교육용 연습입니다. 이 버전에는 자유 대화형 AI 면접관이나 음성 평가 기능은 없습니다.</div><div class="itabs">${interviewBase.map((q,i)=>`<button class="itab ${i===state.interviewIdx?'active':''}" data-itab="${i}">${state.interview[i]?.answer?'✓ ':''}${E(q[0])}</button>`).join('')}</div><div class="result"><span class="eyebrow">모의 면접 연습</span><h3>${interviewBase[state.interviewIdx][1]}</h3><p class="muted">지원 직무: ${E(state.job)} · ${interviewBase[state.interviewIdx][0]}</p></div><div class="voice-tools"><button type="button" class="btn voice-start" id="voiceStart" aria-label="마이크로 면접 답변 시작">🎙 마이크로 답변하기</button><button type="button" class="btn outline" id="voiceStop" disabled>■ 말하기 중지</button><span class="voice-status" id="voiceStatus" aria-live="polite">마이크 버튼을 누르고 한국어로 답변해 보세요.</span></div><p class="muted">음성 인식은 브라우저 지원 및 마이크 권한이 필요합니다. 음성 데이터가 브라우저 제공사의 인식 서비스로 처리될 수 있으므로 개인정보는 말하지 마세요. 지원되지 않으면 아래 칸에 직접 입력할 수 있습니다.</p><label class="field"><span>나의 답변</span><textarea id="interviewAnswer" style="min-height:130px" placeholder="직접 해본 일을 바탕으로 답변을 입력하세요.">${E(state.interview[state.interviewIdx]?.answer||'')}</textarea></label><div class="row"><button class="btn" id="feedbackBtn">답변 점검하기</button><button class="btn outline" id="prevQ" ${state.interviewIdx===0?'disabled':''}>이전 질문</button><button class="btn outline" id="nextQ" ${state.interviewIdx===interviewBase.length-1?'disabled':''}>다음 질문</button></div><div id="feedbackArea" class="result">답변을 입력하면 질문 관련성, 구체적 사례, 확인할 사실, 수정 방법에 대한 점검 질문이 나타납니다.</div><label class="field"><span>수정해서 다시 답하기</span><textarea id="interviewRevised" placeholder="피드백을 참고해 다시 써보세요.">${E(state.interview[state.interviewIdx]?.revised||'')}</textarea></label><button class="btn light" onclick="nav('notes')">나의 면접 기록 확인하기 →</button></section>`,
-notes:()=>`<section class="panel">${section('나의 직업 여권','탐험 과정에서 발견한 내용을 확인합니다.','나의 기록', stepNav())}<div class="two"><div class="result"><h3>나의 선호와 관계 방식</h3>${selfResult()}</div><div class="result"><h3>나의 강점과 보완점</h3><p>${state.strengths.length?state.strengths.map(E).join(' · '):'아직 선택하지 않았습니다.'}</p><p class="muted">${state.improvements.map(a=>E(a)+' → '+E(guide[a])).join('<br>')}</p></div></div><div class="result"><h3>직업 탐색</h3><p>희망직종 3개 이내: <b>${state.preferredJobs.map(E).join(" · ")}</b></p><p>이번 지원서 직무: <b>${E(state.job)}</b></p><p class="muted">${E(state.jobpost||'공고 근거는 아직 입력되지 않았습니다.')}</p></div><div class="result"><h3>내가 직접 해본 경험</h3>${state.experiences.filter(Boolean).map((t)=>`<p>· ${E(t)}</p>`).join('')||'<p class="muted">아직 작성된 경험이 없습니다.</p>'}</div><div class="result"><h3>면접 연습 기록</h3>${state.interview.map((a,i)=>a?.answer?`<p><b>${E(interviewBase[i][1])}</b><br>${E(a.answer)}${a.revised?`<br><em>수정: ${E(a.revised)}</em>`:''}</p>`:'').join('')||'<p class="muted">아직 답변이 없습니다.</p>'}</div><div class="row"><button class="btn" onclick="downloadNotes()">개인 학습노트(.txt) 저장</button><button class="btn outline" onclick="nav('resume')">입사지원서 수정하기</button><button class="btn outline" onclick="clearAll()">내 입력정보 지우기</button></div></section>`};
+notes:()=>`<section class="panel" id="passport">${section('나의 직업 여권','탐험 과정에서 발견한 내용을 확인합니다.','나의 기록', stepNav())}<div class="two"><div class="result"><h3>나의 선호와 관계 방식</h3>${selfResult()}</div><div class="result"><h3>나의 강점과 보완점</h3><p>${state.strengths.length?state.strengths.map(E).join(' · '):'아직 선택하지 않았습니다.'}</p><p class="muted">${state.improvements.map(a=>E(a)+' → '+E(guide[a])).join('<br>')}</p></div></div><div class="result"><h3>직업 탐색</h3><p>희망직종 3개 이내: <b>${state.preferredJobs.map(E).join(" · ")}</b></p><p>이번 지원서 직무: <b>${E(state.job)}</b></p><p class="muted">${E(state.jobpost||'공고 근거는 아직 입력되지 않았습니다.')}</p></div><div class="result"><h3>내가 직접 해본 경험</h3>${state.experiences.filter(Boolean).map((t)=>`<p>· ${E(t)}</p>`).join('')||'<p class="muted">아직 작성된 경험이 없습니다.</p>'}</div><div class="result"><h3>면접 연습 기록</h3>${state.interview.map((a,i)=>a?.answer?`<p><b>${E(interviewBase[i][1])}</b><br>${E(a.answer)}${a.revised?`<br><em>수정: ${E(a.revised)}</em>`:''}</p>`:'').join('')||'<p class="muted">아직 답변이 없습니다.</p>'}</div><div class="row"><button class="btn" onclick="downloadNotes()">개인 학습노트(.txt) 저장</button><button class="btn outline" onclick="nav('resume')">입사지원서 수정하기</button><button class="btn outline" onclick="clearAll()">내 입력정보 지우기</button></div></section>`};
 function selfResult(){return qs.map(q=>state.questions[q.id]?`<p><b>${E(q.title)}</b><br>${E(state.questions[q.id])}</p>`:'').join('')||'<p class="muted">나를 이해하기에서 질문을 선택하면 결과가 표시됩니다.</p>'}
 function improvementText(){return state.improvements.map(k=>`<p><b>${E(k)}</b><br>${E(guide[k])}</p>`).join('')||'보완하고 싶은 부분을 선택하면 실천 방법이 표시됩니다.'}
 function careerColor(t){return ({office:'#31765f',promotion:'#8662a8',cooking:'#d1773e',startup:'#c26d63',care:'#7771aa',digital:'#436ca1',industry:'#587785'}[t]||'#397964')}
@@ -5869,6 +5869,141 @@ function rvDocxSave(){try{var p=rvDocx();if(p&&p.then)p.then(function(){showToas
   if(state.rv&&state.rv.sec)rvScrollSide(state.rv.sec)}})();
 try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
 (function(){if(typeof rvUpd!=='function')return;var _u=rvUpd;rvUpd=function(){var side=document.querySelector('.rv-side');var prevTop=side?side.scrollTop:0;var r=_u.apply(this,arguments);try{var s2=side&&side.isConnected?side:document.querySelector('.rv-side');if(s2)s2.scrollTop=prevTop}catch(e){}return r}})();
+</script>
+
+<!-- 2026.11.15 나의 직업 여권: 여권 신분면 + 2단 카드 → 한 페이지(한 화면) 배치 -->
+<style id="dbr-passport">
+#passport{display:block!important;padding:14px 20px 12px!important}
+#passport.zpass{display:block!important}
+#passport .section-title{margin-bottom:8px!important;align-items:center}
+#passport .section-title h2{font-size:19px!important;letter-spacing:-.6px}
+#passport .section-title p{font-size:11.5px!important;margin:0}
+/* 여권 신분면 */
+#passport .pg-id{display:flex;flex-direction:column;gap:6px;padding:8px 13px 9px;border:1px solid #d6e3da;border-radius:13px;background:linear-gradient(180deg,#fcfdfb,#f3f8f3);position:relative;overflow:hidden}
+#passport .pg-id:after{content:'';position:absolute;right:-34px;top:-46px;width:158px;height:158px;border-radius:50%;border:1px dashed #d7e5dc;pointer-events:none}
+#passport .pg-row{display:flex;gap:12px;align-items:center;position:relative;z-index:1}
+#passport .pg-photo{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+#passport .pg-photo img{display:block;width:72px;height:92px;object-fit:cover;border-radius:7px;border:1px solid #cddbd2;background:#fff;box-shadow:0 2px 6px #1e36301a}
+#passport .pg-photo .pp-none{width:72px;height:92px;border-radius:7px;border:1px dashed #c6d5cc;background:#fff;display:grid;place-items:center;text-align:center;font-size:10.5px;line-height:1.35;color:#9aa8a0}
+#passport .pg-photo .btn{font-size:10px!important;padding:2px 6px!important;min-height:0!important;border-radius:6px!important;line-height:1.3}
+#passport .pg-info{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4px}
+#passport .pg-namerow{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding-bottom:4px;border-bottom:1px solid #e2ebe4}
+#passport .pg-namerow b{font-size:19px!important;line-height:1.2;letter-spacing:-.6px;color:#1d3a31}
+#passport .pg-namerow span.muted{font-size:12.5px!important;color:#5c6f65}
+#passport .pg-namerow .btn{font-size:10px!important;padding:2px 6px!important;min-height:0!important;line-height:1.3}
+#passport .nr-head{border:0!important;background:transparent!important;padding:0!important;box-shadow:none!important;border-radius:0!important;display:block!important}
+#passport .nr-head .nr-label{font-size:10.5px!important;color:#7b8a82;font-weight:700;letter-spacing:0}
+#passport .nr-head .nr-type{display:inline!important;font-size:14.5px!important;margin:0 0 0 5px!important;color:#1f5540;letter-spacing:-.3px}
+#passport .nr-head .nr-tag{display:inline!important;font-size:11.2px!important;margin:0 0 0 8px!important;color:#55685e;font-weight:600}
+#passport .nr-head .nr-kw{margin:0!important}
+#passport .nr-head .nr-kw span{font-size:10.5px!important;padding:1.5px 8px!important;background:#fff!important;border-color:#dde8e1!important}
+/* 여권 신분면 아래 4칸 정보 */
+#passport .nr-mini{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0!important;margin:0!important;padding-top:6px!important;border-top:1px dashed #d5e4da!important;position:relative;z-index:1}
+#passport .nr-mini .nr-sec{padding:0 10px 0 9px!important;border-left:1px solid #e2ebe5!important}
+#passport .nr-mini .nr-sec:first-child{border-left:0!important;padding-left:2px!important}
+/* 본문 2단 */
+#passport .pg-body{display:grid!important;grid-template-columns:1.02fr .98fr!important;gap:9px!important;margin-top:8px!important;align-items:stretch}
+#passport .pg-body>.result{margin:0!important;padding:8px 12px!important;background:#f8fbf8!important;border:1px solid #dde8e0!important;border-radius:12px}
+#passport .pg-body>.result>h3{font-size:13.5px!important;margin:0 0 5px!important;color:#285440;letter-spacing:-.3px}
+#passport .nr{gap:5px!important;display:grid!important}
+#passport .nr-sec{padding:0 0 0 9px!important;border-left-width:3px!important}
+#passport .nr-sec h4{font-size:11.6px!important;margin:0!important}
+#passport .nr-sec p{font-size:11px!important;line-height:1.45!important}
+#passport .nr-sec-hid{padding:6px 10px!important;border-radius:10px!important;box-shadow:0 2px 0 #ddd3f2!important}
+#passport .nr-sum{padding:5px 9px!important;font-size:11px!important;line-height:1.45!important}
+#passport .nr-note{font-size:10px!important}
+#passport .nr-qa summary{font-size:10.8px!important;padding:2px 0!important}
+#passport .pg-right{display:flex!important;flex-direction:column!important;gap:7px!important;min-width:0}
+#passport .pg-tail{display:flex!important;flex-direction:column!important;gap:6px!important}
+#passport .pg-mini{margin:0!important;padding:6px 11px!important;background:#fff!important;border:1px solid #e1eae4!important;border-radius:10px}
+#passport .pg-mini h3{font-size:11.6px!important;margin:0 0 1px!important;color:#3d6d58;letter-spacing:0}
+#passport .pg-mini p{font-size:10.8px!important;line-height:1.45!important;margin:0}
+#passport>.row{margin-top:7px!important;gap:6px!important}
+#passport>.row .btn{font-size:11.5px!important;padding:6px 12px!important;border-radius:9px!important}
+@media(max-width:1000px){
+ #passport .pg-body{grid-template-columns:1fr!important}
+ #passport .nr-mini{grid-template-columns:1fr 1fr!important;gap:8px 0!important}
+ #passport .nr-mini .nr-sec:nth-child(3){border-left:0!important;padding-left:2px!important}
+ #passport .nr-sec p,#passport .pg-mini p{font-size:11.8px!important;line-height:1.5!important}
+ #passport .nr-head .nr-tag{display:block!important;margin:2px 0 0!important}
+}
+</style>
+<script>
+/* 2026.11.15 나의 직업 여권(탐험 기록) — 여권형 한 페이지 배치
+   기존 문구·기능은 그대로 두고 DOM 순서와 CSS만 정돈한다. */
+(function(){
+  function el(t,c){var d=document.createElement(t);if(c)d.className=c;return d}
+  function build(){
+    var sec=document.getElementById('passport');
+    if(!sec||sec.dataset.zp) return;
+    var pp=sec.querySelector('.pp-head'), two=sec.querySelector('.two');
+    if(!two) return;
+    sec.dataset.zp='1';
+    var left=two.children[0], right=two.children[1];
+    var nr=left&&left.querySelector('.nr'), head=nr&&nr.querySelector('.nr-head');
+    /* 1) 여권 신분면: 사진 + 성명·지원직무 + 유형·한 줄 소개의 해시태그 */
+    if(pp){
+      var bar=el('div','pg-id'), row=el('div','pg-row'), ph=el('div','pg-photo'), info=el('div','pg-info');
+      var im=pp.querySelector('img'), none=pp.querySelector('.pp-none'), btn=pp.querySelector('button');
+      if(im) ph.appendChild(im); else if(none) ph.appendChild(none);
+      if(btn) ph.appendChild(btn);
+      var box=pp.lastElementChild, b=box&&box.querySelector('b'), job=box&&box.querySelector('span.muted');
+      var nameRow=el('div','pg-namerow');
+      if(b) nameRow.appendChild(b);
+      if(job) nameRow.appendChild(job);
+      info.appendChild(nameRow);
+      if(head) info.appendChild(head);
+      row.appendChild(ph); row.appendChild(info);
+      bar.appendChild(row);
+      var title=sec.querySelector('.section-title');
+      title.parentNode.insertBefore(bar,title.nextSibling);
+      if(pp.parentNode) pp.parentNode.removeChild(pp);
+      /* 2) 일할 때·함께 일할 때·배터리·기준 → 신분면 아래 4칸 */
+      if(nr){
+        var secs=[].slice.call(nr.querySelectorAll('.nr-sec:not(.nr-sec-hid)'));
+        if(secs.length>1){
+          var mini=el('div','nr-mini');
+          secs.slice(1).forEach(function(s){mini.appendChild(s)});
+          bar.appendChild(mini);
+        }
+      }
+    }
+    /* 3) 오른쪽 칸: 강점·보완점 + 직업 탐색·경험·면접 기록 */
+    var rc=el('div','pg-right'), tail=el('div','pg-tail');
+    if(right) rc.appendChild(right);
+    var res=[].slice.call(sec.children).filter(function(k){return k.classList.contains('result')});
+    res.forEach(function(r){r.classList.add('pg-mini');tail.appendChild(r)});
+    rc.appendChild(tail);
+    two.appendChild(rc);
+    two.classList.add('pg-body');
+    var btnRow=[].slice.call(sec.children).filter(function(k){return k.classList.contains('row')})[0];
+    if(btnRow) sec.appendChild(btnRow);
+    fit();
+  }
+  /* 컴퓨터 화면에서 여권 한 장이 한 화면에 들어오도록 미세 배율 조정(모바일·작은 창은 그대로) */
+  var ft=null;
+  function fit(){
+    var sec=document.getElementById('passport'); if(!sec) return;
+    sec.style.zoom='';
+    if(window.innerWidth<1000||!sec.offsetParent||sec.classList.contains('zhide')) return;
+    var top=sec.getBoundingClientRect().top+window.scrollY;
+    var avail=window.innerHeight-top-4;
+    var h=sec.getBoundingClientRect().height;
+    if(!avail||!h||h<=avail) return;
+    var k=Math.max(.86,Math.min(1,Math.floor((avail/h)*100)/100-.01));
+    if(k<.995) sec.style.zoom=String(k);
+  }
+  function later(){clearTimeout(ft);ft=setTimeout(fit,60);setTimeout(fit,300)}
+  var _init=window.init&&init.notes;
+  if(window.init){init.notes=function(){if(_init)_init.apply(this,arguments);try{build()}catch(e){console.error('[passport]',e)};later()}}
+  window.addEventListener('resize',function(){clearTimeout(ft);ft=setTimeout(fit,150)});
+  try{
+    var obs=new MutationObserver(function(){later()});
+    var host=document.getElementById('app');
+    if(host)obs.observe(host,{childList:true,subtree:false});
+  }catch(e){}
+  if(window.state&&state.page==='notes'){setTimeout(build,0);later()}
+})();
 </script>
 
 </body></html>
