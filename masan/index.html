@@ -6063,6 +6063,19 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
   function toast(m){try{if(typeof showToast==='function'){showToast(m);return}}catch(e){}try{alert(m)}catch(e){}}
   window.passportDocxRun=function(btn){download(btn)};
   window.passportPrint=function(){window.print()};
+  /* 도장: 캔버스로 그린 PNG(화면·워드 공용). 아직 준비 전이면 비워 두고 나중에 채운다 */
+  function paintStamp(){
+    try{
+      var u=(typeof stampPngUrl==='function')?stampPngUrl():'';
+      var list=document.querySelectorAll('#passport .pg-stamp');
+      for(var i=0;i<list.length;i++){
+        var st=list[i];
+        if(st.querySelector('img'))continue;
+        if(u){st.innerHTML='';var im=el('img');im.src=u;im.alt='두배로 직업여권 도장';st.appendChild(im)}
+        else if(!st.firstChild){st.innerHTML='<span class="s1">DUBARO</span><span class="s2">직업여권</span><span class="s3">ISSUED</span>'}
+      }
+    }catch(e){}
+  }
   function build(){
     var sec=document.getElementById('passport');
     if(!sec||sec.dataset.zp) return;
@@ -6095,9 +6108,6 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
       if(head) info.appendChild(head);
       row.appendChild(ph); row.appendChild(info);
       var st=el('div','pg-stamp');
-      var su=(typeof stampPngUrl==='function')?stampPngUrl():'';
-      if(su){var si=el('img');si.src=su;si.alt='두배로 직업여권 도장';st.appendChild(si)}
-      else{st.innerHTML='<span class="s1">DUBARO</span><span class="s2">직업여권</span><span class="s3">ISSUED</span>'}
       row.appendChild(st);
       bar.appendChild(row);
       var ttl=sec.querySelector('.section-title'), stripEl=sec.querySelector('.pg-strip');
@@ -6129,6 +6139,7 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
       sec.appendChild(btnRow);
     }
     fit();
+    paintStamp();
     /* 내용 높이가 바뀌면(글꼴·사진 로딩 등) 화면 맞춤을 다시 계산한다 */
     try{if(!sec.dataset.zro&&window.ResizeObserver){sec.dataset.zro='1';new ResizeObserver(function(){clearTimeout(ft);ft=setTimeout(fit,120)}).observe(sec)}}catch(e){}
   }
@@ -6152,7 +6163,7 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
     }
     sec.style.zoom=String(Math.floor(best*100)/100);
   }
-  function later(){clearTimeout(ft);ft=setTimeout(fit,60);setTimeout(fit,300);setTimeout(fit,900);setTimeout(fit,2000);setTimeout(fit,3600)}
+  function later(){clearTimeout(ft);ft=setTimeout(fit,60);setTimeout(fit,300);setTimeout(fit,900);setTimeout(fit,2000);setTimeout(fit,3600);setTimeout(paintStamp,90);setTimeout(paintStamp,700);setTimeout(paintStamp,2000)}
   try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){setTimeout(fit,80)});window.addEventListener('load',function(){setTimeout(fit,150)})}catch(e){}
   /* const 로 선언된 전역(state·init)은 window에 붙지 않으므로 직접 참조한다 */
   if(typeof init!=='undefined'){
