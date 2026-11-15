@@ -6145,16 +6145,16 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
     var top=sec.getBoundingClientRect().top+window.scrollY;
     var avail=window.innerHeight-top-4;
     if(!avail||avail<200) return;
-    /* zoom 은 글자 재배치까지 바꾸므로, 들어갈 때까지 몇 번만 맞춰 본다 */
-    for(var i=0;i<4;i++){
-      var h=sec.getBoundingClientRect().height;
-      if(!h||h<=avail) return;
-      var cur=parseFloat(sec.style.zoom)||1;
-      var k=Math.max(.82,Math.floor(cur*avail/h*100)/100-.01);
-      if(k>=.995){sec.style.zoom='';return}
-      sec.style.zoom=String(k);
-      if(k<=.82) return;
+    /* zoom 은 글자 재배치까지 바꾸므로, 화면에 들어가는 가장 큰 배율을 이분 탐색으로 찾는다 */
+    var h1=sec.getBoundingClientRect().height;
+    if(!h1||h1<=avail) return;
+    var lo=.82,hi=1,best=.82;
+    for(var i=0;i<6;i++){
+      var mid=(lo+hi)/2;
+      sec.style.zoom=String(mid);
+      if(sec.getBoundingClientRect().height<=avail){best=mid;lo=mid}else{hi=mid}
     }
+    sec.style.zoom=String(Math.floor(best*100)/100);
   }
   function later(){clearTimeout(ft);ft=setTimeout(fit,60);setTimeout(fit,300);setTimeout(fit,900);setTimeout(fit,2000);setTimeout(fit,3600)}
   try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){setTimeout(fit,80)});window.addEventListener('load',function(){setTimeout(fit,150)})}catch(e){}
