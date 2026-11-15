@@ -6002,7 +6002,8 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
   }
   window.addEventListener('resize',function(){clearTimeout(ft);ft=setTimeout(fit,150)});
   function kick(){var s=document.getElementById('passport');if(s&&!s.dataset.zp){try{build()}catch(e){console.error('[passport]',e)}}later()}
-  document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;if(t.closest('.ztabs,#passport'))setTimeout(fit,60)});
+  /* 탭 전환 때만 화면 맞춤을 다시 계산한다(답 펼치기는 그대로 스크롤) */
+  document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;if(t.closest('.ztabs'))setTimeout(fit,60)});
   try{
     var host=document.getElementById('app');
     if(host)new MutationObserver(function(){kick()}).observe(host,{childList:true,subtree:false});
