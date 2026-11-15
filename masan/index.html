@@ -6302,7 +6302,7 @@ async function passportDocx(){
   body+=HS('나의 강점과 보완점');
   var sRows=[];
   sRows.push([TC(P('강점',{bold:1,sz:19,color:MINT,after:0}),2000,{fill:MINTSOFT,v:'center'}),TC(P(strengths.length?strengths.join(' · '):'아직 선택하지 않았어요.',{sz:21,after:0}),W-2000)]);
-  if(impr.length)sRows.push([TC(P('보완점',{bold:1,sz:19,color:GOLDTX,after:0}),2000,{fill:'FFFDF4',v:'center'}),TC(P(impr.join('\n'),{sz:21,after:0}),W-2000)]);
+  if(impr.length)sRows.push([TC(P('보완점',{bold:1,sz:19,color:PURP,after:0}),2000,{fill:PURPBG,v:'center'}),TC(P(impr.join('\n'),{sz:21,after:0}),W-2000)]);
   body+=T(sRows,[2000,W-2000],{sz:6,color:LINE});
   body+=HS('직업 탐색');
   var jRows=[];
