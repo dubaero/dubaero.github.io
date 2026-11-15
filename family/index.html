@@ -715,6 +715,21 @@ body{line-height:1.55}
 .aig-tbl td:first-child{text-align:left;font-weight:800;background:#fafbf9}
 .aig-tbl .o{color:#1f6b45;font-weight:900}.aig-tbl .x{color:#a3400f;font-weight:900}
 .aig-note{margin:10px 0 0;font-size:13.5px;color:var(--mu)}
+
+.aig-card{cursor:pointer;transition:box-shadow .2s,transform .2s}
+.aig-card.sel{box-shadow:0 0 0 4px var(--cs),0 8px 18px #0002;transform:translateY(-2px)}
+.aig-view{margin-top:12px;background:#f6f8f7;border:1px solid var(--ln);border-radius:16px;padding:12px 14px}
+.aig-vh{font-size:15px;margin-bottom:10px}.aig-vh b{font-size:17px;font-weight:900}.aig-vh small{color:var(--mu);margin-left:6px}
+.aig-steps2{display:flex;align-items:flex-start;gap:8px;overflow-x:auto;padding-bottom:4px}
+.aig-steps2 figure{margin:0;flex:0 0 auto;width:210px}
+.aig-steps2 img{width:100%;max-height:330px;object-fit:cover;object-position:top;border-radius:14px;border:3px solid #2b2b2b;background:#fff;display:block;cursor:zoom-in}
+.aig-steps2 figcaption{font-size:15px;font-weight:800;margin-top:6px;display:flex;gap:6px;align-items:flex-start}
+.aig-steps2 figcaption em{flex:none;font-style:normal;width:22px;height:22px;border-radius:50%;background:#e53935;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.aig-arw{align-self:center;font-size:30px;font-weight:900;color:#9aa8a1;margin-top:-30px}
+.aig-noimg{margin:0;font-size:15px;color:var(--mu)}
+.aig-zoom{position:fixed;inset:0;background:#000c;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+.aig-zoom img{max-width:100%;max-height:100%;border-radius:12px}
+@media(max-width:760px){.aig-steps2 figure{width:72%}}
 @media(max-width:900px){.aig-low{grid-template-columns:1fr}}
 @media(max-width:760px){.aig{font-size:16px}.aig-cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding-bottom:6px}.aig-card{flex:0 0 86%;scroll-snap-align:start}.aig-top h3{font-size:22px}.aig-sw{gap:6px}.aig-sw div{font-size:13px;padding:6px}}
 </style>
@@ -735,30 +750,31 @@ gpt:{cards:[
  {q:'이미 남은 기록을 지우려면?',sw:null,st:['왼쪽 대화 목록에서 대화 옆 ⋯ 누르기','삭제','한꺼번에 지우려면 설정에서 "모든 채팅 삭제"'],tip:'지운 대화는 되돌릴 수 없어요. 필요한 내용은 먼저 복사해 두세요.'}],
  tbl:{cols:['일반 채팅','학습 끈 채팅','임시 채팅'],rows:[['대화 목록에 남음','o','o','x'],['AI가 기억(메모리)','o','o','x'],['학습에 쓰임','o:기본 켜짐','x','x'],['보관 기간','내가 지울 때까지','내가 지울 때까지','최대 30일']]}},
 gem:{cards:[
- {k:'ins',s:'맞춤 설정 · 지침',t:'Gemini 관련 안내',m:'AI에게 주는 "내 사용설명서". 직접 적은 내용을 모든 대화에 반영해요. (예전 이름: 저장된 정보)',p:['설정 및 도움말','개인 맞춤','Gemini 관련 안내','추가'],on:'내 소개·말투·형식을 매번 말 안 해도 돼요',off:'직접 지울 때까지 계속 남아요',ex:'같은 일을 반복하면 지침을 넣은 Gem(나만의 비서)을 만들어 써도 좋아요'},
- {k:'mem',s:'메모리',t:'메모리 (지난 채팅 기억)',m:'AI의 수첩. 지난 대화를 기억해 다음 답에 반영해요.',p:['설정 및 도움말','개인 맞춤','메모리 끄기'],on:'지난 대화를 바탕으로 맞춤 답',off:'지난 대화를 꺼내 쓰지 않아요',ex:'"활동 유지"를 끄면 메모리도 같이 꺼져요'},
- {k:'tmp',s:'임시 채팅',t:'임시 채팅',m:'일회용 대화. 기록과 맞춤 기능 없이 한 번만 쓰는 모드예요.',p:['새 채팅 옆','임시 채팅 버튼'],on:'기록 X · 메모리 X · 학습 X',off:'72시간 보관 후 삭제 · Gem은 못 써요',ex:'개인 사정·민감한 고민을 잠깐 물어볼 때 좋아요'},
- {k:'trn',s:'데이터 관리 · 옵트아웃',t:'활동 유지',m:'대화를 기록에 남기고 서비스 개선(학습)에 쓸지 정하는 큰 스위치예요. (예전 이름: Gemini 앱 활동)',p:['설정 및 도움말','활동','활동 유지 끄기'],on:'켜면 기록 보관(기본 18개월), 일부는 개선에 쓰일 수 있어요',off:'끄면 기록 X · 학습 X (72시간 보관 후 삭제)',ex:'켜 두고 싶으면 "자동 삭제" 기간을 짧게 바꿀 수 있어요'}],
+ {k:'ins',s:'맞춤 설정 · 지침',t:'Gemini 요청 사항',m:'AI에게 주는 "내 사용설명서". 직접 적은 내용을 모든 대화에 반영해요.',img:[['g1','왼쪽 메뉴 아래 톱니바퀴'],['g2','개인 인텔리전스'],['g4','Gemini 요청 사항'],['g5','+ 추가 누르고 적기']],p:['톱니바퀴','개인 인텔리전스','Gemini 요청 사항','추가'],on:'내 소개·말투·형식을 매번 말 안 해도 돼요',off:'직접 지울 때까지 계속 남아요',ex:'같은 일을 반복하면 지침을 넣은 Gem(나만의 비서)을 만들어 써도 좋아요'},
+ {k:'mem',s:'메모리',t:'메모리',m:'AI의 수첩. 이전 대화로 나를 더 잘 파악해 다음 답에 반영해요.',img:[['g1','왼쪽 메뉴 아래 톱니바퀴'],['g2','개인 인텔리전스'],['g3','메모리 스위치 끄기']],p:['톱니바퀴','개인 인텔리전스','메모리 스위치 끄기'],on:'지난 대화를 바탕으로 맞춤 답',off:'지난 대화를 꺼내 쓰지 않아요',ex:'"활동 기록 보관"을 사용 중지하면 메모리도 같이 꺼져요'},
+ {k:'tmp',s:'임시 채팅',t:'임시 채팅',m:'일회용 대화. 최근 채팅에 안 남고 AI 개선에도 안 쓰여요.',img:[['g6','오른쪽 위 점선 연필 아이콘'],['g7','"잠깐 들르신 건가요?" 화면이면 임시 채팅']],p:['첫 화면 오른쪽 위','점선 연필 아이콘'],on:'기록 X · 메모리 X · 학습 X',off:'72시간 보관 후 삭제 · Gem은 못 써요',ex:'개인 사정·민감한 고민을 잠깐 물어볼 때 좋아요'},
+ {k:'trn',s:'데이터 관리 · 옵트아웃',t:'활동 기록 보관',m:'대화를 기록에 남기고 AI 모델 등 서비스 개선(학습)에 쓸지 정하는 큰 스위치예요.',img:[['g1','왼쪽 메뉴 아래 톱니바퀴'],['g8','맨 아래 활동'],['g9','활동 기록 보관: 사용 → 사용 중지']],p:['톱니바퀴','활동','활동 기록 보관 → 사용 중지'],on:'켜면 기록 보관(기본 18개월), 일부는 개선에 쓰일 수 있어요',off:'끄면 기록 X · 학습 X (72시간 보관 후 삭제)',ex:'켜 두고 싶으면 "○개월이 지난 활동 삭제"에서 자동 삭제 기간을 짧게 바꿀 수 있어요'}],
  faq:[
- {q:'대화가 기록에 안 남게 하려면?',sw:[0,0,0],st:['새 채팅 옆 임시 채팅 버튼 누르기','그대로 질문하기','앞으로 계속 안 남기려면: 설정 및 도움말 → 활동 → 활동 유지 끄기'],tip:'임시 채팅·활동 유지 끔 모두 72시간 동안은 보관됐다가 삭제돼요.'},
- {q:'내 대화가 AI 학습에 안 쓰이게 하려면?',sw:[0,0,0],st:['설정 및 도움말','활동','"활동 유지" 끄기'],tip:'제미나이는 학습과 기록이 한 스위치예요. 끄면 기록도 안 남고 메모리도 꺼져요. (직접 보낸 피드백은 예외)'},
- {q:'AI가 나를 기억 못 하게 하려면?',sw:[1,0,1],st:['설정 및 도움말','개인 맞춤','메모리(지난 채팅 기억) 끄기','직접 적은 지침은 "Gemini 관련 안내"에서 삭제'],tip:'메모리를 꺼도 기록·학습은 그대로예요. 둘 다 막으려면 "활동 유지"를 끄세요.'},
- {q:'매번 같은 설명을 안 하려면?',sw:null,st:['설정 및 도움말','개인 맞춤','Gemini 관련 안내','추가 → 내용 적고 제출'],tip:'예) 나는 ○○센터에서 일해. 답은 쉬운 말로, 표로, 끝에 확인할 점을 붙여 줘.'},
- {q:'이미 남은 기록을 지우려면?',sw:null,st:['왼쪽 대화 목록에서 대화 옆 ⋯ 누르기','삭제','한꺼번에: 설정 및 도움말 → 활동 → 기간 골라 삭제'],tip:'대화를 지우면 활동 기록에서도 같이 지워져요.'}],
- tbl:{cols:['활동 유지 켬','활동 유지 끔','임시 채팅'],rows:[['대화 목록에 남음','o','x','x'],['AI가 기억(메모리)','o','x','x'],['학습에 쓰임','o:일부','x','x'],['보관 기간','기본 18개월','72시간','72시간']]}}};
-var S={app:'gpt',q:0};
+ {q:'대화가 기록에 안 남게 하려면?',sw:[0,0,0],st:['첫 화면 오른쪽 위 점선 연필 아이콘 누르기','"잠깐 들르신 건가요?" 화면에서 질문하기','앞으로 계속 안 남기려면: 톱니바퀴 → 활동 → 활동 기록 보관 사용 중지'],tip:'임시 채팅·활동 기록 보관 중지 모두 72시간 동안은 보관됐다가 삭제돼요.'},
+ {q:'내 대화가 AI 학습에 안 쓰이게 하려면?',sw:[0,0,0],st:['왼쪽 메뉴 아래 톱니바퀴','활동','"활동 기록 보관" 사용 → 사용 중지'],tip:'제미나이는 학습과 기록이 한 스위치예요. 끄면 기록도 안 남고 메모리도 꺼져요. (직접 보낸 피드백은 예외)'},
+ {q:'AI가 나를 기억 못 하게 하려면?',sw:[1,0,1],st:['왼쪽 메뉴 아래 톱니바퀴','개인 인텔리전스','메모리 스위치 끄기','직접 적은 지침은 "Gemini 요청 사항"에서 삭제'],tip:'메모리를 꺼도 기록·학습은 그대로예요. 둘 다 막으려면 "활동 기록 보관"을 사용 중지하세요.'},
+ {q:'매번 같은 설명을 안 하려면?',sw:null,st:['왼쪽 메뉴 아래 톱니바퀴','개인 인텔리전스','Gemini 요청 사항','+ 추가 → 내용 적고 제출'],tip:'예) 나는 ○○센터에서 일해. 답은 쉬운 말로, 표로, 끝에 확인할 점을 붙여 줘.'},
+ {q:'이미 남은 기록을 지우려면?',sw:null,st:['왼쪽 대화 목록에서 대화 옆 ⋯ 누르기','삭제','한꺼번에: 톱니바퀴 → 활동 → 기간 골라 삭제'],tip:'대화를 지우면 활동 기록에서도 같이 지워져요.'}],
+ tbl:{cols:['활동 기록 보관 사용','사용 중지','임시 채팅'],rows:[['대화 목록에 남음','o','x','x'],['AI가 기억(메모리)','o','x','x'],['학습에 쓰임','o:일부','x','x'],['보관 기간','기본 18개월','72시간','72시간']]}}};
+var S={app:'gpt',q:0,c:0};
 function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-function card(c){var col=C[c.k];return '<div class="aig-card" style="--c:'+col[0]+';--cs:'+col[1]+'"><div class="hd"><small>'+esc(c.s)+'</small><b>'+esc(c.t)+'</b></div><div class="bd"><p class="mt">'+esc(c.m)+'</p><div class="aig-path">'+c.p.map(function(x,i){return (i?'<i>›</i>':'')+'<span>'+esc(x)+'</span>'}).join('')+'</div><div class="aig-onoff"><div class="on"><em>'+(c.k==='tmp'?'쓰면':'켜면')+'</em><span>'+esc(c.on)+'</span></div><div class="off"><em>'+(c.k==='tmp'?'참고':'끄면')+'</em><span>'+esc(c.off)+'</span></div></div><p class="ex">'+esc(c.ex)+'</p></div></div>'}
+function card(c,i){var col=C[c.k];return '<div class="aig-card'+(c.img?' has':'')+(i===S.c?' sel':'')+'" data-ac="'+i+'" style="--c:'+col[0]+';--cs:'+col[1]+'"><div class="hd"><small>'+esc(c.s)+'</small><b>'+esc(c.t)+'</b></div><div class="bd"><p class="mt">'+esc(c.m)+'</p><div class="aig-path">'+c.p.map(function(x,i){return (i?'<i>›</i>':'')+'<span>'+esc(x)+'</span>'}).join('')+'</div><div class="aig-onoff"><div class="on"><em>'+(c.k==='tmp'?'쓰면':'켜면')+'</em><span>'+esc(c.on)+'</span></div><div class="off"><em>'+(c.k==='tmp'?'참고':'끄면')+'</em><span>'+esc(c.off)+'</span></div></div><p class="ex">'+esc(c.ex)+'</p></div></div>'}
 function ans(){var a=D[S.app].faq[S.q],sw='';if(a.sw){var L=['대화 기록 남김','AI가 나를 기억','학습에 쓰임'];sw='<div class="aig-sw">'+a.sw.map(function(v,i){return '<div class="'+(v?'y':'n')+'">'+L[i]+'<br><span class="aig-tg"></span><small>'+(v?'켜짐':'꺼짐')+'</small></div>'}).join('')+'</div>'}
  return '<h4>'+esc(a.q)+'</h4>'+sw+'<ol class="aig-steps">'+a.st.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol><p class="aig-tip">'+esc(a.tip)+'</p>'}
 function tbl(){var t=D[S.app].tbl;return '<table><tr><th>이렇게 하면?</th>'+t.cols.map(function(c){return '<th>'+esc(c)+'</th>'}).join('')+'</tr>'+t.rows.map(function(r){return '<tr><td>'+esc(r[0])+'</td>'+r.slice(1).map(function(v){var m=/^(o|x)(?::(.*))?$/.exec(v);return m?'<td class="'+m[1]+'">'+(m[1]==='o'?'O':'X')+(m[2]?' <small>('+esc(m[2])+')</small>':'')+'</td>':'<td>'+esc(v)+'</td>'}).join('')+'</tr>'}).join('')+'</table>'}
 function inner(){var d=D[S.app];return '<div class="aig-top"><div><h3>내 정보 지키는 AI 설정</h3><p>맞춤 설정 · 지침 · 메모리 · 임시 채팅 · 학습 끄기(옵트아웃), 한눈에 보기</p></div><div class="aig-app" role="tablist"><button type="button" data-aapp="gpt" class="'+(S.app==='gpt'?'on':'')+'">ChatGPT</button><button type="button" data-aapp="gem" class="'+(S.app==='gem'?'on':'')+'">제미나이</button></div></div>'+
- '<div class="aig-cards">'+d.cards.map(card).join('')+'</div>'+
+ '<div class="aig-cards">'+d.cards.map(card).join('')+'</div>'+'<div class="aig-view" id="aig-view">'+view()+'</div>'+
  '<div class="aig-low"><div class="aig-box"><b>자주 묻는 질문</b><div class="aig-faq">'+d.faq.map(function(f,i){return '<button type="button" data-aq="'+i+'" class="'+(i===S.q?'on':'')+'">'+esc(f.q)+'</button>'}).join('')+'</div></div><div class="aig-box aig-ans" id="aig-ans">'+ans()+'</div></div>'+
  '<div class="aig-tbl">'+tbl()+'</div>'+
  '<p class="aig-note">메뉴 이름과 위치는 앱 업데이트에 따라 조금씩 바뀔 수 있어요 (2026년 11월 확인). 회사·학교 계정은 관리자가 정한 설정이 먼저예요. 어떤 설정이든 이름·연락처·주민번호 같은 개인정보는 처음부터 넣지 않는 게 가장 안전해요.</p>'}
+function view(){var c=D[S.app].cards[S.c];if(!c.img)return '<p class="aig-noimg">ChatGPT 실제 화면 사진은 곧 추가돼요. 지금은 위 카드의 순서대로 따라 해 보세요.</p>';return '<div class="aig-vh"><b>실제 화면으로 따라 하기</b> · '+esc(c.t)+' <small>카드를 누르면 사진이 바뀌어요</small></div><div class="aig-steps2">'+c.img.map(function(m,i){return (i?'<span class="aig-arw">›</span>':'')+'<figure><img src="/img/aig/'+m[0]+'.webp" alt="'+esc(m[1])+'" loading="lazy"><figcaption><em>'+(i+1)+'</em>'+esc(m[1])+'</figcaption></figure>'}).join('')+'</div>'}
 function html(){return '<div class="aig" id="aig">'+inner()+'</div>'}
-function bind(root){root=root||document.getElementById('aig');if(!root||root._b)return;root._b=1;root.addEventListener('click',function(e){var a=e.target.closest('[data-aapp]');if(a){S.app=a.dataset.aapp;root.innerHTML=inner();return}var q=e.target.closest('[data-aq]');if(q){S.q=+q.dataset.aq;root.querySelectorAll('[data-aq]').forEach(function(b){b.classList.toggle('on',b===q)});document.getElementById('aig-ans').innerHTML=ans()}})}
+function bind(root){root=root||document.getElementById('aig');if(!root||root._b)return;root._b=1;root.addEventListener('click',function(e){var a=e.target.closest('[data-aapp]');if(a){S.app=a.dataset.aapp;S.c=S.app==='gem'?S.c:0;root.innerHTML=inner();return}var im=e.target.closest('.aig-steps2 img');if(im){var z=document.createElement('div');z.className='aig-zoom';z.innerHTML='<img src="'+im.getAttribute('src')+'" alt="">';z.onclick=function(){z.remove()};document.body.appendChild(z);return}var ac=e.target.closest('[data-ac]');if(ac){S.c=+ac.dataset.ac;root.querySelectorAll('[data-ac]').forEach(function(x){x.classList.toggle('sel',x===ac)});document.getElementById('aig-view').innerHTML=view();return}var q=e.target.closest('[data-aq]');if(q){S.q=+q.dataset.aq;root.querySelectorAll('[data-aq]').forEach(function(b){b.classList.toggle('on',b===q)});document.getElementById('aig-ans').innerHTML=ans()}})}
 return {html:html,bind:bind};})();
 </script>
 </head>
