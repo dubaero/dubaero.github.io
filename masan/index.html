@@ -5892,11 +5892,11 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
 #passport .pg-namerow b{font-size:19px!important;line-height:1.2;letter-spacing:-.6px;color:#1d3a31}
 #passport .pg-namerow span.muted{font-size:12.5px!important;color:#5c6f65}
 #passport .pg-namerow .btn{font-size:10px!important;padding:2px 6px!important;min-height:0!important;line-height:1.3}
-#passport .nr-head{border:0!important;background:transparent!important;padding:0!important;box-shadow:none!important;border-radius:0!important;display:block!important}
+#passport .nr-head{border:0!important;background:transparent!important;padding:0!important;box-shadow:none!important;border-radius:0!important;display:flex!important;flex-wrap:wrap;align-items:baseline;gap:2px 7px}
 #passport .nr-head .nr-label{font-size:10.5px!important;color:#7b8a82;font-weight:700;letter-spacing:0}
-#passport .nr-head .nr-type{display:inline!important;font-size:14.5px!important;margin:0 0 0 5px!important;color:#1f5540;letter-spacing:-.3px}
-#passport .nr-head .nr-tag{display:inline!important;font-size:11.2px!important;margin:0 0 0 8px!important;color:#55685e;font-weight:600}
-#passport .nr-head .nr-kw{margin:0!important}
+#passport .nr-head .nr-type{display:inline!important;font-size:14.5px!important;margin:0!important;color:#1f5540;letter-spacing:-.3px}
+#passport .nr-head .nr-tag{display:inline!important;font-size:11.2px!important;margin:0!important;color:#55685e;font-weight:600}
+#passport .nr-head .nr-kw{display:flex!important;flex-wrap:wrap;gap:6px!important;margin:0!important}
 #passport .nr-head .nr-kw span{font-size:10.5px!important;padding:1.5px 8px!important;background:#fff!important;border-color:#dde8e1!important}
 /* 여권 신분면 아래 4칸 정보 */
 #passport .nr-mini{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0!important;margin:0!important;padding-top:6px!important;border-top:1px dashed #d5e4da!important;position:relative;z-index:1}
@@ -5926,7 +5926,7 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
  #passport .nr-mini{grid-template-columns:1fr 1fr!important;gap:8px 0!important}
  #passport .nr-mini .nr-sec:nth-child(3){border-left:0!important;padding-left:2px!important}
  #passport .nr-sec p,#passport .pg-mini p{font-size:11.8px!important;line-height:1.5!important}
- #passport .nr-head .nr-tag{display:block!important;margin:2px 0 0!important}
+ #passport .nr-head{gap:1px 6px!important}
 }
 </style>
 <script>
