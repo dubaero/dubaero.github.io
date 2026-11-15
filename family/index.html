@@ -346,7 +346,7 @@ a.b-how{text-decoration:none;display:inline-block}
 .p1,.p3{display:flex;flex-direction:column}.p3 .guide,.p1 .allbtn{margin-top:auto}.p3 .orgcard,.p3 .wide{padding:10px 14px}
 .orgcard[hidden]{display:none!important}
 /* ===== 업무도우미 큰 메뉴 · 프로젝트 · 빡침 번역기 · 5줄 (2026.11.07) ===== */
-.main4{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:16px 0 14px}
+.main4{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin:16px 0 14px}
 .main4 .m4{background:#fff;border:1.5px solid var(--ink);border-radius:16px;padding:16px;text-align:left;display:flex;flex-direction:column;gap:6px;cursor:pointer;font:inherit}
 .main4 .m4 .i{width:28px;height:28px;color:var(--ink)}
 .main4 .m4 b{font-size:19px;color:var(--ink)}
@@ -663,6 +663,104 @@ body{line-height:1.55}
 </style>
 <style id="noDesc">#main4 .m4>span:last-child,#tiles .tile>span:last-child{display:none!important}#tiles .tile{justify-content:center}</style>
 <style id="dashLight">.dash .flist .n{font-size:13px}.dash .flist .t{font-size:15px;font-weight:500}.dash .b-how,.dash .b-go{font-size:13px;font-weight:400}.dash .ftabs button{font-size:13.5px;font-weight:400}.dash .allbtn{font-size:14px;font-weight:400}.dash .tile b{font-size:14.5px;font-weight:500}.dash .links a{font-size:14.5px}.dash .links a b{font-weight:500}.dash .links a.hp{padding:20px 4px}.dash .guide button{font-size:15px;font-weight:500}.dash .guide p{font-size:13px}.dash .wide b{font-size:15px;font-weight:500}.dash .wide span{font-size:13px}.dash .wide em{font-size:13.5px;font-weight:500}</style>
+<style id="aig-css">
+/* 2026.11.16 AI 설정 가이드: 맞춤 설정·지침·메모리·임시 채팅·학습 끄기 */
+.aig{--g:#2f6b56;--b:#2f5e9c;--p:#7c3aed;--o:#c2410c;--ink:#1f2d27;--mu:#5d6f66;--ln:#e3e9e5;color:var(--ink);font-size:16px;line-height:1.55}
+.aig *{box-sizing:border-box}
+.aig-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.aig-top h3{margin:0;font-size:24px;font-weight:900;letter-spacing:-.5px}
+.aig-top p{margin:2px 0 0;color:var(--mu);font-size:15px}
+.aig-app{display:flex;background:#eef3f0;border-radius:999px;padding:4px;gap:4px}
+.aig-app button{border:0;background:transparent;font:inherit;font-weight:800;font-size:17px;padding:9px 22px;border-radius:999px;cursor:pointer;color:var(--mu)}
+.aig-app button.on{background:#fff;color:var(--ink);box-shadow:0 2px 6px #0002}
+.aig-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.aig-card{background:#fff;border:2px solid var(--c);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.aig-card .hd{background:var(--c);color:#fff;padding:10px 14px}
+.aig-card .hd small{display:block;font-size:13px;font-weight:700;opacity:.9}
+.aig-card .hd b{font-size:19px;font-weight:900}
+.aig-card .bd{padding:10px 14px 12px;display:flex;flex-direction:column;gap:8px;flex:1}
+.aig-card .mt{font-size:15px;font-weight:700;margin:0}
+.aig-path{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.aig-path span{background:#f4f6f5;border:1px solid var(--ln);border-radius:8px;padding:3px 8px;font-size:14px;font-weight:700}
+.aig-path span:last-child{background:var(--cs);border-color:var(--c);color:var(--c)}
+.aig-path i{font-style:normal;color:#9aa8a1;font-weight:900}
+.aig-onoff{display:grid;gap:4px;font-size:14px}
+.aig-onoff div{display:flex;gap:6px;align-items:flex-start}
+.aig-onoff em{flex:none;font-style:normal;font-weight:900;font-size:12px;padding:1px 7px;border-radius:6px;margin-top:2px}
+.aig-onoff .on em{background:#dff3e8;color:#1f6b45}
+.aig-onoff .off em{background:#fde4d6;color:#a3400f}
+.aig-card .ex{font-size:13.5px;color:var(--mu);background:#fafbf9;border-radius:8px;padding:6px 8px;margin:0}
+.aig-low{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:12px;margin-top:12px}
+.aig-box{background:#fff;border:1px solid var(--ln);border-radius:16px;padding:12px 14px}
+.aig-box>b{display:block;font-size:17px;font-weight:900;margin-bottom:8px}
+.aig-faq{display:flex;flex-direction:column;gap:6px}
+.aig-faq button{text-align:left;border:1.5px solid var(--ln);background:#fff;font:inherit;font-size:16px;font-weight:800;padding:9px 12px;border-radius:12px;cursor:pointer;color:var(--ink)}
+.aig-faq button.on{border-color:var(--g);background:#e9f5ef;color:#173f2f}
+.aig-ans h4{margin:0 0 8px;font-size:19px;font-weight:900;color:#173f2f}
+.aig-sw{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:10px}
+.aig-sw div{border:1px solid var(--ln);border-radius:12px;padding:8px;text-align:center;font-size:14px;font-weight:800}
+.aig-tg{display:inline-block;width:46px;height:26px;border-radius:13px;background:#cfd8d3;position:relative;margin:4px auto 2px;vertical-align:middle;transition:background .3s}
+.aig-tg::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0003;transition:left .3s}
+.aig-sw .y .aig-tg{background:#3b9a68}.aig-sw .y .aig-tg::after{left:23px}
+.aig-sw small{display:block;font-size:13px;font-weight:900}
+.aig-sw .y small{color:#1f6b45}.aig-sw .n small{color:#a3400f}
+.aig-steps{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:6px}
+.aig-steps li{counter-increment:s;display:flex;gap:8px;align-items:flex-start;font-size:16px;font-weight:700}
+.aig-steps li::before{content:counter(s);flex:none;width:24px;height:24px;border-radius:50%;background:var(--g);color:#fff;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.aig-tip{margin:10px 0 0;background:#fff8e6;border:1px solid #ecd99a;border-radius:10px;padding:8px 10px;font-size:14.5px;color:#5c4400}
+.aig-tbl{margin-top:12px;overflow-x:auto}
+.aig-tbl table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;font-size:15px}
+.aig-tbl th,.aig-tbl td{border:1px solid var(--ln);padding:7px 10px;text-align:center}
+.aig-tbl th{background:#f1f5f2;font-weight:900}
+.aig-tbl td:first-child{text-align:left;font-weight:800;background:#fafbf9}
+.aig-tbl .o{color:#1f6b45;font-weight:900}.aig-tbl .x{color:#a3400f;font-weight:900}
+.aig-note{margin:10px 0 0;font-size:13.5px;color:var(--mu)}
+@media(max-width:900px){.aig-low{grid-template-columns:1fr}}
+@media(max-width:760px){.aig{font-size:16px}.aig-cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding-bottom:6px}.aig-card{flex:0 0 86%;scroll-snap-align:start}.aig-top h3{font-size:22px}.aig-sw{gap:6px}.aig-sw div{font-size:13px;padding:6px}}
+</style>
+<script id="aig-js">
+window.AIG=(function(){
+var C={ins:['#2f6b56','#e3f1e8'],mem:['#2f5e9c','#e3ecf8'],tmp:['#7c3aed','#efe6fd'],trn:['#c2410c','#fde9dc']};
+var D={
+gpt:{cards:[
+ {k:'ins',s:'맞춤 설정 · 지침',t:'맞춤형 지침',m:'AI에게 주는 "내 사용설명서". 새 대화마다 먼저 읽고 시작해요.',p:['프로필(내 이름)','설정','개인 맞춤 설정','맞춤형 지침'],on:'매번 "나는 ○○야" 설명 안 해도 돼요',off:'지우면 기본 답변으로 돌아가요',ex:'예) 나는 가족센터 종사자야. 쉬운 말로, 표로 정리해 줘. (프로젝트마다 지침을 따로 넣을 수도 있어요)'},
+ {k:'mem',s:'메모리',t:'메모리',m:'AI의 수첩. 대화에서 알게 된 내 정보를 적어 두고 다음 대화에 꺼내 써요.',p:['설정','개인 맞춤 설정','메모리'],on:'저장된 메모리 + 지난 채팅 기록을 참고해 맞춤 답',off:'새로 기억하지도, 꺼내 쓰지도 않아요 (대화 목록은 그대로)',ex:'이미 기억한 것은 "메모리 관리"에서 하나씩 지울 수 있어요'},
+ {k:'tmp',s:'임시 채팅',t:'임시 채팅',m:'일회용 대화. 끝나면 목록에서 사라지는 "흔적 안 남기기" 모드예요.',p:['새 채팅 화면','오른쪽 위 점선 말풍선'],on:'기록 X · 메모리 X · 학습 X',off:'안전 확인용으로 최대 30일 보관 후 삭제',ex:'개인 사정·민감한 고민을 잠깐 물어볼 때 좋아요'},
+ {k:'trn',s:'데이터 관리 · 옵트아웃',t:'모두를 위한 모델 개선',m:'내 대화를 AI 공부 재료(학습)로 쓸지 정하는 스위치예요.',p:['설정','데이터 제어','모두를 위한 모델 개선 끄기'],on:'기본은 켜짐: 내 대화가 학습에 쓰일 수 있어요',off:'끄면 새 대화부터 학습 제외 (기록은 남아요)',ex:'한 번 끄면 휴대폰·컴퓨터 모두 같이 적용돼요'}],
+ faq:[
+ {q:'대화가 기록에 안 남게 하려면?',sw:[0,0,0],st:['새 채팅 화면 오른쪽 위 점선 말풍선(임시 채팅) 누르기','그대로 질문하기','창을 닫으면 대화 목록에서 사라져요'],tip:'임시 채팅도 안전 확인을 위해 최대 30일까지는 보관됐다가 삭제돼요.'},
+ {q:'내 대화가 AI 학습에 안 쓰이게 하려면?',sw:[1,1,0],st:['설정','데이터 제어','"모두를 위한 모델 개선" 끄기'],tip:'끈 뒤 새 대화부터 적용돼요. 대화 목록·메모리는 그대로 남으니, 기록까지 싫으면 임시 채팅을 쓰세요.'},
+ {q:'AI가 나를 기억 못 하게 하려면?',sw:[1,0,1],st:['설정','개인 맞춤 설정','메모리: "저장된 메모리 참조"·"채팅 기록 참조" 끄기','이미 기억한 것은 "메모리 관리"에서 삭제'],tip:'메모리를 꺼도 학습 설정은 따로예요. 학습까지 막으려면 "모두를 위한 모델 개선"도 끄세요.'},
+ {q:'매번 같은 설명을 안 하려면?',sw:null,st:['설정','개인 맞춤 설정','맞춤형 지침에 나·말투·답변 형식 적기'],tip:'예) 나는 ○○센터에서 일해. 답은 쉬운 말로, 표로, 끝에 확인할 점을 붙여 줘.'},
+ {q:'이미 남은 기록을 지우려면?',sw:null,st:['왼쪽 대화 목록에서 대화 옆 ⋯ 누르기','삭제','한꺼번에 지우려면 설정에서 "모든 채팅 삭제"'],tip:'지운 대화는 되돌릴 수 없어요. 필요한 내용은 먼저 복사해 두세요.'}],
+ tbl:{cols:['일반 채팅','학습 끈 채팅','임시 채팅'],rows:[['대화 목록에 남음','o','o','x'],['AI가 기억(메모리)','o','o','x'],['학습에 쓰임','o:기본 켜짐','x','x'],['보관 기간','내가 지울 때까지','내가 지울 때까지','최대 30일']]}},
+gem:{cards:[
+ {k:'ins',s:'맞춤 설정 · 지침',t:'Gemini 관련 안내',m:'AI에게 주는 "내 사용설명서". 직접 적은 내용을 모든 대화에 반영해요. (예전 이름: 저장된 정보)',p:['설정 및 도움말','개인 맞춤','Gemini 관련 안내','추가'],on:'내 소개·말투·형식을 매번 말 안 해도 돼요',off:'직접 지울 때까지 계속 남아요',ex:'같은 일을 반복하면 지침을 넣은 Gem(나만의 비서)을 만들어 써도 좋아요'},
+ {k:'mem',s:'메모리',t:'메모리 (지난 채팅 기억)',m:'AI의 수첩. 지난 대화를 기억해 다음 답에 반영해요.',p:['설정 및 도움말','개인 맞춤','메모리 끄기'],on:'지난 대화를 바탕으로 맞춤 답',off:'지난 대화를 꺼내 쓰지 않아요',ex:'"활동 유지"를 끄면 메모리도 같이 꺼져요'},
+ {k:'tmp',s:'임시 채팅',t:'임시 채팅',m:'일회용 대화. 기록과 맞춤 기능 없이 한 번만 쓰는 모드예요.',p:['새 채팅 옆','임시 채팅 버튼'],on:'기록 X · 메모리 X · 학습 X',off:'72시간 보관 후 삭제 · Gem은 못 써요',ex:'개인 사정·민감한 고민을 잠깐 물어볼 때 좋아요'},
+ {k:'trn',s:'데이터 관리 · 옵트아웃',t:'활동 유지',m:'대화를 기록에 남기고 서비스 개선(학습)에 쓸지 정하는 큰 스위치예요. (예전 이름: Gemini 앱 활동)',p:['설정 및 도움말','활동','활동 유지 끄기'],on:'켜면 기록 보관(기본 18개월), 일부는 개선에 쓰일 수 있어요',off:'끄면 기록 X · 학습 X (72시간 보관 후 삭제)',ex:'켜 두고 싶으면 "자동 삭제" 기간을 짧게 바꿀 수 있어요'}],
+ faq:[
+ {q:'대화가 기록에 안 남게 하려면?',sw:[0,0,0],st:['새 채팅 옆 임시 채팅 버튼 누르기','그대로 질문하기','앞으로 계속 안 남기려면: 설정 및 도움말 → 활동 → 활동 유지 끄기'],tip:'임시 채팅·활동 유지 끔 모두 72시간 동안은 보관됐다가 삭제돼요.'},
+ {q:'내 대화가 AI 학습에 안 쓰이게 하려면?',sw:[0,0,0],st:['설정 및 도움말','활동','"활동 유지" 끄기'],tip:'제미나이는 학습과 기록이 한 스위치예요. 끄면 기록도 안 남고 메모리도 꺼져요. (직접 보낸 피드백은 예외)'},
+ {q:'AI가 나를 기억 못 하게 하려면?',sw:[1,0,1],st:['설정 및 도움말','개인 맞춤','메모리(지난 채팅 기억) 끄기','직접 적은 지침은 "Gemini 관련 안내"에서 삭제'],tip:'메모리를 꺼도 기록·학습은 그대로예요. 둘 다 막으려면 "활동 유지"를 끄세요.'},
+ {q:'매번 같은 설명을 안 하려면?',sw:null,st:['설정 및 도움말','개인 맞춤','Gemini 관련 안내','추가 → 내용 적고 제출'],tip:'예) 나는 ○○센터에서 일해. 답은 쉬운 말로, 표로, 끝에 확인할 점을 붙여 줘.'},
+ {q:'이미 남은 기록을 지우려면?',sw:null,st:['왼쪽 대화 목록에서 대화 옆 ⋯ 누르기','삭제','한꺼번에: 설정 및 도움말 → 활동 → 기간 골라 삭제'],tip:'대화를 지우면 활동 기록에서도 같이 지워져요.'}],
+ tbl:{cols:['활동 유지 켬','활동 유지 끔','임시 채팅'],rows:[['대화 목록에 남음','o','x','x'],['AI가 기억(메모리)','o','x','x'],['학습에 쓰임','o:일부','x','x'],['보관 기간','기본 18개월','72시간','72시간']]}}};
+var S={app:'gpt',q:0};
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function card(c){var col=C[c.k];return '<div class="aig-card" style="--c:'+col[0]+';--cs:'+col[1]+'"><div class="hd"><small>'+esc(c.s)+'</small><b>'+esc(c.t)+'</b></div><div class="bd"><p class="mt">'+esc(c.m)+'</p><div class="aig-path">'+c.p.map(function(x,i){return (i?'<i>›</i>':'')+'<span>'+esc(x)+'</span>'}).join('')+'</div><div class="aig-onoff"><div class="on"><em>'+(c.k==='tmp'?'쓰면':'켜면')+'</em><span>'+esc(c.on)+'</span></div><div class="off"><em>'+(c.k==='tmp'?'참고':'끄면')+'</em><span>'+esc(c.off)+'</span></div></div><p class="ex">'+esc(c.ex)+'</p></div></div>'}
+function ans(){var a=D[S.app].faq[S.q],sw='';if(a.sw){var L=['대화 기록 남김','AI가 나를 기억','학습에 쓰임'];sw='<div class="aig-sw">'+a.sw.map(function(v,i){return '<div class="'+(v?'y':'n')+'">'+L[i]+'<br><span class="aig-tg"></span><small>'+(v?'켜짐':'꺼짐')+'</small></div>'}).join('')+'</div>'}
+ return '<h4>'+esc(a.q)+'</h4>'+sw+'<ol class="aig-steps">'+a.st.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol><p class="aig-tip">'+esc(a.tip)+'</p>'}
+function tbl(){var t=D[S.app].tbl;return '<table><tr><th>이렇게 하면?</th>'+t.cols.map(function(c){return '<th>'+esc(c)+'</th>'}).join('')+'</tr>'+t.rows.map(function(r){return '<tr><td>'+esc(r[0])+'</td>'+r.slice(1).map(function(v){var m=/^(o|x)(?::(.*))?$/.exec(v);return m?'<td class="'+m[1]+'">'+(m[1]==='o'?'O':'X')+(m[2]?' <small>('+esc(m[2])+')</small>':'')+'</td>':'<td>'+esc(v)+'</td>'}).join('')+'</tr>'}).join('')+'</table>'}
+function inner(){var d=D[S.app];return '<div class="aig-top"><div><h3>내 정보 지키는 AI 설정</h3><p>맞춤 설정 · 지침 · 메모리 · 임시 채팅 · 학습 끄기(옵트아웃), 한눈에 보기</p></div><div class="aig-app" role="tablist"><button type="button" data-aapp="gpt" class="'+(S.app==='gpt'?'on':'')+'">ChatGPT</button><button type="button" data-aapp="gem" class="'+(S.app==='gem'?'on':'')+'">제미나이</button></div></div>'+
+ '<div class="aig-cards">'+d.cards.map(card).join('')+'</div>'+
+ '<div class="aig-low"><div class="aig-box"><b>자주 묻는 질문</b><div class="aig-faq">'+d.faq.map(function(f,i){return '<button type="button" data-aq="'+i+'" class="'+(i===S.q?'on':'')+'">'+esc(f.q)+'</button>'}).join('')+'</div></div><div class="aig-box aig-ans" id="aig-ans">'+ans()+'</div></div>'+
+ '<div class="aig-tbl">'+tbl()+'</div>'+
+ '<p class="aig-note">메뉴 이름과 위치는 앱 업데이트에 따라 조금씩 바뀔 수 있어요 (2026년 11월 확인). 회사·학교 계정은 관리자가 정한 설정이 먼저예요. 어떤 설정이든 이름·연락처·주민번호 같은 개인정보는 처음부터 넣지 않는 게 가장 안전해요.</p>'}
+function html(){return '<div class="aig" id="aig">'+inner()+'</div>'}
+function bind(root){root=root||document.getElementById('aig');if(!root||root._b)return;root._b=1;root.addEventListener('click',function(e){var a=e.target.closest('[data-aapp]');if(a){S.app=a.dataset.aapp;root.innerHTML=inner();return}var q=e.target.closest('[data-aq]');if(q){S.q=+q.dataset.aq;root.querySelectorAll('[data-aq]').forEach(function(b){b.classList.toggle('on',b===q)});document.getElementById('aig-ans').innerHTML=ans()}})}
+return {html:html,bind:bind};})();
+</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -782,6 +880,12 @@ body{line-height:1.55}
   <p class="vnote">[지침] 표시는 「2026 가족사업안내」에 있는 일정이고, 나머지는 정솔의 추천이에요. 소속 시군구 안내와 꼭 대조하세요.</p>
   <div class="mpick" id="mo-pick"></div>
   <div class="month" id="mo-body"></div>
+</div>
+
+<!-- ===== AI 설정 가이드 ===== -->
+<div id="v-aiset" hidden>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>AI 설정 가이드</h2><span class="tag">기록 안 남기기 · 학습 끄기 · 메모리 · 지침</span></div>
+  <div id="aig-host"></div>
 </div>
 
 <!-- ===== 빡침 순화기 ===== -->
@@ -1547,7 +1651,7 @@ $('#org-modal').addEventListener('click',function(e){if(e.target===this)closeOrg
 orgUI();
 
 /* 화면 전환 */
-var VIEWS=['home','form','biz','month','vent','heart','multi','simple','rec','all','meet','drawer','song'];
+var VIEWS=['home','form','biz','month','vent','heart','multi','simple','rec','all','meet','drawer','song','aiset'];
 function show(v){VIEWS.forEach(function(k){$('#v-'+k).hidden=(k!==v);});var th=document.getElementById('tophome');if(th)th.hidden=(v==='home');window.scrollTo(0,0);}
 function go(key){
   if(key==='doc'||key==='pr'||/^dw-/.test(key)){if(typeof DW_X==='undefined')return;openDW(key);return show('drawer');}
@@ -1555,6 +1659,7 @@ function go(key){
   if(key==='biz'){renderBiz();return show('biz');}
   if(key==='month'){renderMonth(CURM);return show('month');}
   if(['vent','heart','multi','rec','song'].indexOf(key)>-1)return show(key);
+  if(key==='aiset'){var ab=$('#aig-host');if(ab&&!ab.firstChild){ab.innerHTML=AIG.html();AIG.bind();}return show('aiset');}
   if(key==='all'){renderAll($('#all-q').value);return show('all');}
   if(key==='meet'){renderMeet();return show('meet');}
   if(key==='img')return openSimple('img',{season:SEASON_NOW,type:'카드뉴스 (여러 장 넘김)'});
@@ -2969,8 +3074,8 @@ var DW=[
 
 /* ===== 업무도우미 큰 메뉴 4개 ===== */
 (function(){
-var M=[['doc','grid','업무 프로젝트','사업계획서·결과보고서 등 프로젝트로 따라 만들기'],['pr','mega','홍보물 프로젝트','카드뉴스·블로그·포스터 + 마음에 드는 홍보물로 프롬프트 얻기'],['song','note','나만의 노래 만들기','질문 4개에 답하면 우리 센터 노래와 앨범 표지'],['heart','heart','마음 쉼터','털어놓으면 나만의 마음챙김 5줄'],['vent','fire','빡침 번역기','같이 빡치고, 숨 고르고, 순화까지']];
-var box=$('#main4');M.forEach(function(m){var b=el('button','m4'+(m[0]==='vent'?' hot':''),svg(m[1])+'<b>'+esc(m[2])+'</b><span>'+esc(m[3])+'</span>');b.type='button';b.dataset.go=m[0];box.appendChild(b);});
+var M=[['doc','grid','업무 프로젝트','사업계획서·결과보고서 등 프로젝트로 따라 만들기'],['pr','mega','홍보물 프로젝트','카드뉴스·블로그·포스터 + 마음에 드는 홍보물로 프롬프트 얻기'],['song','note','나만의 노래 만들기','질문 4개에 답하면 우리 센터 노래와 앨범 표지'],['heart','heart','마음 쉼터','털어놓으면 나만의 마음챙김 5줄'],['vent','fire','빡침 번역기','같이 빡치고, 숨 고르고, 순화까지'],['aiset','shield','AI 설정 가이드','기록·메모리·학습 끄기 한눈에']];
+ICONS.shield=ICONS.shield||'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>';var box=$('#main4');M.forEach(function(m){var b=el('button','m4'+(m[0]==='vent'?' hot':''),svg(m[1])+'<b>'+esc(m[2])+'</b><span>'+esc(m[3])+'</span>');b.type='button';b.dataset.go=m[0];box.appendChild(b);});
 })();
 
 /* ===== 업무 프로젝트 · 홍보물 프로젝트 ===== */
