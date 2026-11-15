@@ -6247,7 +6247,7 @@ async function passportDocx(){
   function T(rows,ws,o){o=o||{};var col=o.color||LINE,sz=o.sz||6,val=o.val||'single';
     var b='<w:tblBorders>'+['top','left','bottom','right','insideH','insideV'].map(function(k){return '<w:'+k+' w:val="'+val+'" w:sz="'+sz+'" w:space="0" w:color="'+col+'"/>'}).join('')+'</w:tblBorders>';
     var wsum=ws.reduce(function(a,c){return a+c},0);
-    return '<w:tbl><w:tblPr><w:tblW w:w="'+wsum+'" w:type="dxa"/>'+b+'<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>'+ws.map(function(w){return '<w:gridCol w:w="'+w+'"/>'}).join('')+'</w:tblGrid>'+rows.map(function(r){return '<w:tr>'+r.join('')+'</w:tr>'}).join('')+'</w:tbl>'}
+    return '<w:tbl><w:tblPr><w:tblW w:w="'+wsum+'" w:type="dxa"/>'+b+'<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>'+ws.map(function(w){return '<w:gridCol w:w="'+w+'"/>'}).join('')+'</w:tblGrid>'+rows.map(function(r){return '<w:tr><w:trPr><w:cantSplit/></w:trPr>'+r.join('')+'</w:tr>'}).join('')+'</w:tbl>'}
   function HS(t){return P(t,{bold:1,sz:23,color:MINT,before:260,after:110,bb:'BFE7DB',keepNext:1})}
   function LBL(t,o){o=o||{};return P(t,{bold:1,sz:20,color:o.color||MINT,before:o.before==null?130:o.before,after:30,keepNext:1})}
   function BOX(inner,o){o=o||{};return T([[TC(inner,W,{fill:o.fill,mt:130,mb:130,ml:170,mr:170})]],[W],{sz:8,color:o.color||LINE})}
