@@ -5661,15 +5661,15 @@ function rlUniq(a){var s={},o=[];a.forEach(function(x){if(!x||!x.t)return;var k=
 function rlStarFirst(a){return a.slice().sort(function(x,y){return (y.star?1:0)-(x.star?1:0)})}
 function rlGoodChips(){var a=[];
  (state.strengths||[]).forEach(function(t){a.push({t:t,s:'제 강점은 '+(PH[t]||rlNoun(t))+'입니다.',star:true})});
- (typeof sAns==='function'?sAns('good'):[]).forEach(function(t){var n=rlNoun(t);a.push({t:t,s:'주변에서 '+n+jo(n,'이','가')+' 있다는 말을 자주 듣습니다.',star:true})});
+ (typeof sAns==='function'?sAns('good'):[]).forEach(function(t){a.push({t:t,s:'주변에서 '+t+jo(t,'을','를')+' 잘한다는 말을 자주 듣습니다.',star:true})});
  ['꼼꼼히 확인하기','약속과 시간 지키기','사람의 이야기 듣기','새로운 일 배우기','일정과 계획 세우기'].forEach(function(t){a.push({t:t,s:'제 강점은 '+(PH[t]||rlNoun(t))+'입니다.'})});
  return rlStarFirst(rlUniq(a))}
 function rlGroups(id){var S=state,rv=S.rv,G=[];
  function add(label,chips){chips=rlStarFirst(rlUniq(chips));if(chips.length)G.push({g:label,chips:chips})}
  if(id==='motive'){
   var gi=[];
-  (typeof sAns==='function'?sAns('interest'):[]).forEach(function(t){gi.push({t:t,s:'‘'+t+'’ 같은 일을 할 때 시간 가는 줄 모를 만큼 즐거웠기 때문입니다.',star:true})});
-  [['사람을 돕고 돌보는 일','사람을 돕고 돌보는 일에서 보람을 느꼈기 때문입니다.'],['정리하고 꼼꼼히 확인하는 일','정리하고 꼼꼼히 확인하는 일이 저와 잘 맞았기 때문입니다.'],['새로운 것을 배워 알려 주는 일','새로운 것을 배우고 다른 사람에게 알려 주는 일이 즐거웠기 때문입니다.'],['손으로 만들고 마무리하는 일','손으로 만들고 마무리하는 일에서 성취감을 느꼈기 때문입니다.']].forEach(function(x){gi.push({t:x[0],s:x[1]})});
+  (typeof sAns==='function'?sAns('interest'):[]).forEach(function(t){gi.push({t:t,s:'‘'+t+'’ 같은 일을 할 때 시간 가는 줄 모를 만큼 즐거웠습니다.',star:true})});
+  [['사람을 돕고 돌보는 일','사람을 돕고 돌보는 일에서 보람을 느꼈습니다.'],['정리하고 꼼꼼히 확인하는 일','정리하고 꼼꼼히 확인하는 일이 저와 잘 맞았습니다.'],['새로운 것을 배워 알려 주는 일','새로운 것을 배우고 다른 사람에게 알려 주는 일이 즐거웠습니다.'],['손으로 만들고 마무리하는 일','손으로 만들고 마무리하는 일에서 성취감을 느꼈습니다.']].forEach(function(x){gi.push({t:x[0],s:x[1]})});
   add('① 관심 계기',gi);
   add('② 나의 강점',rlGoodChips());
   var gp=[];
@@ -5758,10 +5758,11 @@ function rlUseEx(btn){var id=btn.getAttribute('data-rlexuse'),q=RQ.filter(functi
  rv.sec=id;rvUpd();rvScrollSide(id);
  showToast('예시를 내 답 칸에 넣었어요. 내 이야기로 고쳐 주세요.')}
 function rvScrollSide(sec){var side=document.querySelector('.rv-side');if(!side||!sec)return;
- var el=side.querySelector('[data-rvsec="'+sec+'"]');if(!el)return;
- var sr=side.getBoundingClientRect(),r=el.getBoundingClientRect();
- var top=side.scrollTop+(r.top-sr.top)-6;if(top<0)top=0;
- side.scrollTop=top}
+ var jump=function(){var el=side.querySelector('[data-rvsec="'+sec+'"]');if(!el)return;
+  var sr=side.getBoundingClientRect(),r=el.getBoundingClientRect();
+  var top=side.scrollTop+(r.top-sr.top)-6;if(top<0)top=0;
+  side.scrollTop=top};
+ jump();if(window.requestAnimationFrame)requestAnimationFrame(function(){jump()})}
 function rvSecName(el){if(!el||!el.closest)return null;
  if(el.dataset&&el.dataset.rvq)return el.dataset.rvq;
  var card=el.closest('[data-rvcard]');if(card)return card.getAttribute('data-rvcard');
@@ -5802,7 +5803,7 @@ function rvJumpQ(id,phrase){var ta=document.querySelector('textarea[data-rvq="'+
   if(side&&!side.__rlBound){side.__rlBound=1;
    side.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;
     var q=t.closest('[data-rvjumpq]');if(q){e.preventDefault();rvJumpQ(q.getAttribute('data-rvjumpq'),q.getAttribute('data-rvphrase'));return}
-    var s=t.closest('[data-rvjump]');if(s){e.preventDefault();rvJumpTo(s.getAttribute('data-rvjump'))}})}
+    var s=t.closest('[data-rvjump]');if(!s){var td=t.closest('td');if(td)s=td.querySelector('[data-rvjump]')}if(s){e.preventDefault();rvJumpTo(s.getAttribute('data-rvjump'))}})}
   if(state.rv&&state.rv.sec)rvScrollSide(state.rv.sec)}})();
 try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
 (function(){if(typeof rvUpd!=='function')return;var _u=rvUpd;rvUpd=function(){var side=document.querySelector('.rv-side');var prevTop=side?side.scrollTop:0;var r=_u.apply(this,arguments);try{var s2=side&&side.isConnected?side:document.querySelector('.rv-side');if(s2)s2.scrollTop=prevTop}catch(e){}return r}})();
