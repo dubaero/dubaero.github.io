@@ -5902,9 +5902,9 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
 #passport .nr-mini .nr-sec{padding:0 10px 0 9px!important;border-left:1px solid #e2ebe5!important}
 #passport .nr-mini .nr-sec:first-child{border-left:0!important;padding-left:2px!important}
 /* 본문 2단 */
-#passport .pg-body{display:grid!important;grid-template-columns:1.02fr .98fr!important;gap:9px!important;margin-top:8px!important;align-items:stretch}
+#passport .pg-body{display:grid!important;grid-template-columns:1.02fr .98fr!important;gap:9px!important;margin-top:8px!important;align-items:start}
 #passport .pg-body>.result{margin:0!important;padding:8px 12px!important;background:#f8fbf8!important;border:1px solid #dde8e0!important;border-radius:12px}
-#passport .pg-body>.result>h3{font-size:13.5px!important;margin:0 0 5px!important;color:#285440;letter-spacing:-.3px}
+#passport .pg-body>.result>h3{font-size:13.5px!important;margin:0 0 6px!important;padding-bottom:4px;border-bottom:1px dashed #dde8e1;color:#285440;letter-spacing:-.3px}
 #passport .nr{gap:5px!important;display:grid!important}
 #passport .nr-sec{padding:0 0 0 9px!important;border-left-width:3px!important}
 #passport .nr-sec h4{font-size:11.6px!important;margin:0!important}
@@ -6001,6 +6001,7 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
   }
   window.addEventListener('resize',function(){clearTimeout(ft);ft=setTimeout(fit,150)});
   function kick(){var s=document.getElementById('passport');if(s&&!s.dataset.zp){try{build()}catch(e){console.error('[passport]',e)}}later()}
+  document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;if(t.closest('#passport summary,#passport details,#passport .nr-qa'))setTimeout(fit,60)});
   try{
     var host=document.getElementById('app');
     if(host)new MutationObserver(function(){kick()}).observe(host,{childList:true,subtree:false});
