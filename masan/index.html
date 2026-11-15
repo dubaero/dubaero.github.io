@@ -6255,7 +6255,7 @@ async function passportDocx(){
     var b='<w:tblBorders>'+['top','left','bottom','right','insideH','insideV'].map(function(k){return '<w:'+k+' w:val="'+val+'" w:sz="'+sz+'" w:space="0" w:color="'+col+'"/>'}).join('')+'</w:tblBorders>';
     var wsum=ws.reduce(function(a,c){return a+c},0);
     return '<w:tbl><w:tblPr><w:tblW w:w="'+wsum+'" w:type="dxa"/>'+b+'<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>'+ws.map(function(w){return '<w:gridCol w:w="'+w+'"/>'}).join('')+'</w:tblGrid>'+rows.map(function(r){return '<w:tr><w:trPr><w:cantSplit/></w:trPr>'+r.join('')+'</w:tr>'}).join('')+'</w:tbl>'}
-  function HS(t){return P(t,{bold:1,sz:21,color:MINT,before:120,after:50,bb:'BFE7DB',keepNext:1})}
+  function HS(t){return P(t,{bold:1,sz:21,color:MINT,before:100,after:46,bb:'BFE7DB',keepNext:1})}
   function LBL(t,o){o=o||{};return P(t,{bold:1,sz:18,color:o.color||MINT,before:o.before==null?90:o.before,after:20,keepNext:1})}
   function BOX(inner,o){o=o||{};return T([[TC(inner,W,{fill:o.fill,mt:70,mb:70,ml:110,mr:110})]],[W],{sz:8,color:o.color||LINE})}
   function GAP(n){return P('',{after:0,line:n||60})}
@@ -6325,8 +6325,8 @@ async function passportDocx(){
   body+=HS('면접 연습 기록');
   if(iv.length){
     iv.forEach(function(o){
-      body+=P('Q. '+cut(o.q,70),{bold:1,sz:17,color:MINT,before:20,after:5,keepNext:1});
-      body+=P('A. '+cut(o.a,100),{sz:BS,justify:1,after:15});
+      body+=P('Q. '+cut(o.q,70),{bold:1,sz:17,color:MINT,before:12,after:4,keepNext:1});
+      body+=P('A. '+cut(o.a,100),{sz:BS,justify:1,after:10});
       if(o.r)body+=P('↳ 다듬은 답변: '+cut(o.r,80),{sz:17,color:'5C5647',after:30});
     });
   }else{
@@ -6338,12 +6338,12 @@ async function passportDocx(){
   }
   /* 발급 줄 + 도장 */
   body+=P('',{after:0,line:60});
-  var stampPara=sd?picParagraph('rId3','두배로 직업여권 도장',2,720000,720000,'center'):'';
+  var stampPara=sd?picParagraph('rId3','두배로 직업여권 도장',2,660000,660000,'center'):'';
   body+=T([[
     TC(P('두배로 · 디지털이음연구소',{bold:1,sz:18,color:MINT,after:20})+P('dubaero.kr   |   '+dstr+' 발급',{sz:16,color:GRAY,after:0}),W-2600,{v:'center'}),
     TC(stampPara||P(' ',{after:0}),2600,{v:'center'})
   ]],[W-2600,2600],{val:'none'});
-  body+=P('※ 이 파일은 두배로(dubaero.kr) 마산새일 웹앱에서 고른 답으로 만든 교육용 기록입니다. 문장은 언제든 직접 고쳐 쓸 수 있어요.',{sz:14,color:'9A9280',before:40,after:0});
+  body+=P('※ 두배로(dubaero.kr) 마산새일 웹앱에서 만든 교육용 기록 — 문장은 직접 고쳐 쓸 수 있어요.',{sz:14,color:'9A9280',before:30,after:0});
 
   /* 7. 파일 묶음 */
   var sect='<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="680" w:right="794" w:bottom="680" w:left="794" w:header="0" w:footer="0" w:gutter="0"/><w:pgBorders w:offsetFrom="page"><w:top w:val="single" w:sz="8" w:space="24" w:color="'+GOLD+'"/><w:left w:val="single" w:sz="8" w:space="24" w:color="'+GOLD+'"/><w:bottom w:val="single" w:sz="8" w:space="24" w:color="'+GOLD+'"/><w:right w:val="single" w:sz="8" w:space="24" w:color="'+GOLD+'"/></w:pgBorders></w:sectPr>';
