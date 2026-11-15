@@ -6290,7 +6290,6 @@ async function passportDocx(){
   body+=P('재미로 보는 자기 이해 설명이에요. 정식 성격검사(MBTI 등)가 아니에요.',{sz:17,color:GRAY,before:80,after:0});
   /* 5. 둘째 장 */
   body+='<w:p><w:r><w:br w:type="page"/></w:r></w:p>';
-  body+=P('나의 강점과 보완점 · 직업 탐색 · 경험 · 면접 기록',{bold:1,sz:18,color:'B9A46A',before:0,after:0});
   body+=HS('나의 강점과 보완점');
   var sRows=[];
   sRows.push([TC(P('강점',{bold:1,sz:19,color:MINT,after:0}),2000,{fill:MINTSOFT,v:'center'}),TC(P(strengths.length?strengths.join(' · '):'아직 선택하지 않았어요.',{sz:21,after:0}),W-2000)]);
@@ -6317,10 +6316,10 @@ async function passportDocx(){
   }
   if(qa.length){
     body+=HS('내가 고른 답 다시 보기');
-    qa.forEach(function(o){
-      body+=P('Q. '+o.q,{sz:18,color:GRAY,after:10});
-      body+=P('A. '+o.a,{sz:19,color:'3F3A2E',after:60});
+    var qaRows=qa.map(function(o){
+      return [TC(P('Q. '+o.q,{sz:18,color:MINT,after:0}),3600,{mt:70,mb:70}),TC(P('A. '+o.a,{sz:18,color:'3F3A2E',after:0}),W-3600,{mt:70,mb:70})];
     });
+    body+=T(qaRows,[3600,W-3600],{sz:4,color:'EEEAE1'});
   }
   /* 6. 발급 줄 + 도장 */
   body+=P('',{after:0,line:200});
