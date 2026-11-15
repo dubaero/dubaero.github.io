@@ -541,24 +541,35 @@ mark.hl{background:#D5EBC2;color:inherit;padding:1px 3px;border-radius:3px}
 .bx-t{font-size:11.5px;font-weight:700;color:var(--ink);margin-top:14px;text-align:center;white-space:nowrap}
 .bx-r b{display:block;color:var(--ink);font-size:14.5px}.bx-r small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.5}
 .bx-r .va{margin-top:8px}
-.bx-e .bxf{width:62px;height:62px;fill:none;stroke:#5B4636;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
-.bxf circle{fill:#fff}.bxf .bxb{fill:#fff6dd;stroke:none;transform-box:view-box;transform-origin:32px 35px;transform:scale(.7);transition:transform var(--d,1s) ease-in-out}
+.bx-e .bxf{width:56px;height:56px;fill:none;stroke:#2E6A8E;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.bxf circle{fill:#fff}.bxf .bxb{fill:#BFE0F2;transform-box:view-box;transform-origin:32px 31px;transform:scale(.7);transition:transform var(--d,1s) ease-in-out}
 .bxf .bxdn,.bxf .bxup{transition:opacity calc(var(--d,1s)*.6) ease-in-out}.bxf .bxup{opacity:0}
 .bxf .bxair{opacity:0;transition:opacity .6s}
 .bxf[data-ph="in"] .bxb,.bxf[data-ph="hold"] .bxb{transform:scale(1.35)}
 .bxf[data-ph="in"] .bxup,.bxf[data-ph="hold"] .bxup,.bxf[data-ph="done"] .bxup{opacity:1}.bxf[data-ph="in"] .bxdn,.bxf[data-ph="hold"] .bxdn,.bxf[data-ph="done"] .bxdn{opacity:0}
 .bxf .fl{fill:#F6A54A;stroke:#E07B39;stroke-width:1.2}
-.bxf .cu-face,.bxf .cu-ear,.bxf .cu-ft{fill:#FFE6D2;stroke:#5B4636;stroke-width:2}
-.bxf .cu-ear{fill:#FFD3C2}
-.bxf .cu-eye{fill:#3b2d28;stroke:none}
-.bxf .cu-bl{fill:#FFAFC0;stroke:none}
-.bxf .cu-mo{stroke:#3b2d28;stroke-width:1.4}
-.bxf .cu-bd{fill:#A8DCC9;stroke:#5B4636;stroke-width:2}
-.bxf .cu-arm{stroke:#5B4636;stroke-width:3.4}
-.bxf .cu-bowl{fill:#FFD27A}
-.bxf .cu-eye{transform-box:fill-box;transform-origin:center;animation:cuBlink 4s infinite}
-@keyframes cuBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.15)}}
-.bxf[data-ph="hold"] .cu-mo{d:path("M31 16.8 h2")}
+/* 2026.11.16 졸라맨 동작: 보고 따라 할 수 있게 팔·몸이 움직임 */
+.bxf .arm-l,.bxf .arm-r{transform-box:view-box;transform-origin:32px 24px;transition:transform var(--d,1s) ease-in-out}
+.bxf[data-ph="in"] .arm-l,.bxf[data-ph="hold"] .arm-l,.bxf[data-ph="done"] .arm-l,.bxf[data-ph="out"] .p-lion .arm-l{transform:rotate(95deg)}
+.bxf[data-ph="in"] .arm-r,.bxf[data-ph="hold"] .arm-r,.bxf[data-ph="done"] .arm-r,.bxf[data-ph="out"] .p-lion .arm-r{transform:rotate(-95deg)}
+.bxf .fig{transform-box:view-box;transform-origin:32px 58px;transition:transform var(--d,1s) ease-in-out}
+.bxf[data-ph="in"] .fig,.bxf[data-ph="hold"] .fig{transform:scale(1.05,1.08)}
+.bxf[data-ph="out"] .fig{transform:scale(1,.94)}
+.bxf[data-ph=""] .arm-l{animation:bxArmL 7s ease-in-out infinite}
+.bxf[data-ph=""] .arm-r{animation:bxArmR 7s ease-in-out infinite}
+.bxf[data-ph=""] .fig{animation:bxFigM 7s ease-in-out infinite}
+.bxf[data-ph=""] .bxb{animation:bxBel 7s ease-in-out infinite}
+.bxf[data-ph=""] .bxair{animation:bxAir 7s ease-in-out infinite}
+@keyframes bxArmL{0%,100%{transform:rotate(0)}35%,55%{transform:rotate(95deg)}}
+@keyframes bxArmR{0%,100%{transform:rotate(0)}35%,55%{transform:rotate(-95deg)}}
+@keyframes bxFigM{0%,100%{transform:scale(1,.96)}35%,55%{transform:scale(1.05,1.08)}}
+@keyframes bxBel{0%,100%{transform:scale(.6)}35%,55%{transform:scale(1.35)}}
+@keyframes bxAir{0%,60%{opacity:0}80%{opacity:.8}100%{opacity:0}}
+.rf-al,.rf-ar{transform-origin:32px 24px}
+.rf-al{animation:rfAL 6s ease-in-out infinite}
+.rf-ar{animation:rfAR 6s ease-in-out infinite}
+@keyframes rfAL{0%,100%{transform:rotate(0)}35%,50%{transform:rotate(95deg)}}
+@keyframes rfAR{0%,100%{transform:rotate(0)}35%,50%{transform:rotate(-95deg)}}
 .bxf .p-fl{transition:transform var(--d,1s) ease-in-out}
 .bxf .p-bal{transform-box:view-box;transform-origin:39px 17px;transform:scale(.35);transition:transform var(--d,1s) ease-in-out}.bxf .p-bal ellipse{fill:#F7B6C2}
 .bxf[data-ph="out"] .p-bal{transform:scale(1.15)}
@@ -3577,23 +3588,23 @@ function postP2(t){var hard=PC_HARD.filter(function(x,i){return PCS.hard[i];}),m
 /* ===== 2026.11.09 수정 14: 숨 고르기마다 다른 졸라맨 동작 ===== */
 function bxPh(l){return /멈추|^쉬기$/.test(l)?'hold':/들이쉬|킁킁|밀려와|올라가|한 번/.test(l)?'in':'out';}
 function bxFig(n){
- var H='<g class="cu-hd"><ellipse class="cu-ear" cx="26.5" cy="4.5" rx="2.6" ry="5"/><ellipse class="cu-ear" cx="37.5" cy="4.5" rx="2.6" ry="5"/><circle class="cu-face" cx="32" cy="13" r="9"/><circle class="cu-eye" cx="28.6" cy="12.6" r="1.3"/><circle class="cu-eye" cx="35.4" cy="12.6" r="1.3"/><ellipse class="cu-bl" cx="26.6" cy="16" rx="1.9" ry="1.1"/><ellipse class="cu-bl" cx="37.4" cy="16" rx="1.9" ry="1.1"/><path class="cu-mo" d="M30.6 16.6 q1.4 1.3 2.8 0"/></g>',
-  B='<path class="cu-bd" d="M22 33 q0 -11 10 -11 q10 0 10 11 v5 q0 7 -10 7 q-10 0 -10 -7z"/>',G='<ellipse class="cu-ft" cx="27" cy="47" rx="4.2" ry="2.6"/><ellipse class="cu-ft" cx="37" cy="47" rx="4.2" ry="2.6"/>',BEL='<circle class="bxb" cx="32" cy="35" r="4.5"/>',
-  DN='<path class="bxdn cu-arm" d="M23.5 28 L19 37 M40.5 28 L45 37"/>',UP='<path class="bxup cu-arm" d="M23.5 27 L15 13 M40.5 27 L49 13"/>',AIR='<path class="bxair" d="M42 11 q4 -3 8 0 M44 16 q4 -3 8 0"/>',
-  ARM='<path class="cu-arm" d="M23.5 28 L19 37 M40.5 28 L45 37"/>',FL='<path class="fl" d="M0 0 q-3 -5 0 -10 q3 5 0 10z"/>';
+ var H='<circle cx="32" cy="12" r="6"/>',B='<path d="M32 18 V40"/>',G='<path d="M32 40 L25 56 M32 40 L39 56"/>',BEL='<circle class="bxb" cx="32" cy="31" r="4.5"/>',
+  DN='<path class="bxdn" d="M32 24 L23 37 M32 24 L41 37"/>',UP='<path class="bxup" d="M32 24 L15 11 M32 24 L49 11"/>',AIR='<path class="bxair" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/>',
+  ARM='<path d="M32 24 L23 37 M32 24 L41 37"/>',AR='<g class="arm-l"><path d="M32 24 L23 37"/></g><g class="arm-r"><path d="M32 24 L41 37"/></g>',FL='<path class="fl" d="M0 0 q-3 -5 0 -10 q3 5 0 10z"/>';
  var X={
- '풍선 불기 숨':H+B+G+'<path d="M23.5 28 L19 37 M40.5 27 L40 18"/><g class="p-bal"><path d="M41 16 q2 6 -1 10"/><ellipse cx="48" cy="9" rx="6" ry="7"/></g>',
+ '풍선 불기 숨':H+B+G+'<path d="M32 24 L23 37 M32 24 L38 18"/><g class="p-bal"><path d="M41 16 q2 6 -1 10"/><ellipse cx="48" cy="9" rx="6" ry="7"/></g>',
  '촛불 흔들기 숨':H+B+G+ARM+AIR+'<rect x="47" y="40" width="6" height="15" rx="1"/><g class="p-fl" transform="translate(50 39)">'+FL+'</g>',
- '꽃 향기·촛불 숨':H+B+G+'<path class="cu-arm" d="M23.5 28 L19 37"/><g class="p-flw"><path class="cu-arm" d="M40.5 27 L40 18"/><circle cx="40" cy="14" r="2.4"/><circle cx="43" cy="12" r="2"/><circle cx="43" cy="16" r="2"/></g><g class="p-cdl"><path class="cu-arm" d="M40.5 28 L45 37"/><rect x="47" y="40" width="6" height="15" rx="1"/><g class="p-fl" transform="translate(50 39)">'+FL+'</g></g>'+AIR,
- '네모 숨 (박스 호흡)':'<rect class="p-box" x="8" y="6" width="48" height="52" rx="3"/><g transform="translate(16 8) scale(.5)">'+H+B+G+DN+BEL+'</g><circle class="p-dot" cx="0" cy="0" r="3.4"/>',
+ '꽃 향기·촛불 숨':H+B+G+'<path d="M32 24 L23 37"/><g class="p-flw"><path d="M32 24 L38 18"/><circle cx="40" cy="14" r="2.4"/><circle cx="43" cy="12" r="2"/><circle cx="43" cy="16" r="2"/></g><g class="p-cdl"><path d="M32 24 L41 37"/><rect x="47" y="40" width="6" height="15" rx="1"/><g class="p-fl" transform="translate(50 39)">'+FL+'</g></g>'+AIR,
+ '네모 숨 (박스 호흡)':'<rect class="p-box" x="8" y="6" width="48" height="52" rx="3"/><g transform="translate(16 8) scale(.5)">'+H+B+G+AR+BEL+'</g><circle class="p-dot" cx="0" cy="0" r="3.4"/>',
  '두 번 들이쉬고 한숨':H+B+G+BEL+'<g class="p-sh">'+DN.replace('bxdn','')+'</g>'+AIR,
- '꿀벌 숨':H+B+G+ARM+'<g class="p-bee"><ellipse cx="0" cy="0" rx="3.4" ry="2.4"/><path class="wing" d="M-1 -2 q-2 -5 2 -4 M1 -2 q2 -5 -2 -4"/></g><path class="bxair" d="M42 16 q3 -2 6 0 t6 0"/>',
- '사자 숨':'<g class="p-lion">'+'<g class="p-mane"><circle cx="32" cy="13" r="12" stroke-dasharray="3 2"/></g>'+H+'<ellipse class="p-mo" cx="32" cy="17" rx="1.6" ry="0.9"/>'+B+G+DN+UP+'</g>',
- '파도 숨':H+B+G+DN+UP+'<path class="p-wave" d="M0 58 q8 -6 16 0 t16 0 t16 0 t16 0"/>',
- '배 위 곰돌이 숨':'<g transform="translate(-21 28)">'+H+'</g><rect class="cu-bd" x="17" y="38" width="27" height="12" rx="6"/><path class="cu-arm" d="M43 42 L52 37 M43 46 L54 50 M24 40 L28 34"/><g class="p-bear"><circle cx="32" cy="36" r="5"/><circle cx="28.5" cy="31.5" r="1.8"/><circle cx="35.5" cy="31.5" r="1.8"/></g>',
- '나뭇잎 날리기 숨':H+B+G+'<path d="M23.5 28 L19 37 M40.5 27 L45 25"/><g class="p-leaf"><path d="M44 24 q5 -6 10 -2 q-5 6 -10 2z"/></g>'+AIR,
- '라면 식히기 숨':H+B+G+'<path d="M23.5 28 L22 33 M40.5 28 L42 33"/><path class="cu-bowl" d="M18 32 H46 q-2 11 -14 11 q-12 0 -14 -11z"/><g class="p-stm"><path d="M27 28 q-2 -4 0 -7 M32 28 q-2 -4 0 -7 M37 28 q-2 -4 0 -7"/></g>'+AIR};
- return X[n]||(H+B+BEL+G+DN+UP+AIR);}
+ '꿀벌 숨':H+B+G+ARM+'<g class="p-bee"><ellipse cx="0" cy="0" rx="3.4" ry="2.4"/><path class="wing" d="M-1 -2 q-2 -5 2 -4 M1 -2 q2 -5 -2 -4"/></g><path class="bxair" d="M40 14 q3 -2 6 0 t6 0"/>',
+ '사자 숨':'<g class="p-lion">'+'<g class="p-mane"><circle cx="32" cy="12" r="10" stroke-dasharray="3 2"/></g>'+H+'<ellipse class="p-mo" cx="32" cy="15" rx="1.6" ry="0.9"/>'+B+G+AR+'</g>',
+ '파도 숨':H+B+G+AR+'<path class="p-wave" d="M0 58 q8 -6 16 0 t16 0 t16 0 t16 0"/>',
+ '배 위 곰돌이 숨':'<circle cx="10" cy="44" r="6"/><path d="M16 44 H42 M42 44 L52 38 M42 44 L54 50 M22 44 L28 36"/><g class="p-bear"><circle cx="32" cy="36" r="5"/><circle cx="28.5" cy="31.5" r="1.8"/><circle cx="35.5" cy="31.5" r="1.8"/></g>',
+ '나뭇잎 날리기 숨':H+B+G+'<path d="M32 24 L23 37 M32 24 L44 26"/><g class="p-leaf"><path d="M44 24 q5 -6 10 -2 q-5 6 -10 2z"/></g>'+AIR,
+ '라면 식히기 숨':H+B+G+'<path d="M32 24 L24 32 M32 24 L40 32"/><path d="M20 32 H44 q-2 10 -12 10 q-10 0 -12 -10z"/><g class="p-stm"><path d="M27 28 q-2 -4 0 -7 M32 28 q-2 -4 0 -7 M37 28 q-2 -4 0 -7"/></g>'+AIR};
+ return X[n]||(H+B+BEL+G+AR+AIR);}
+var _bxF0=bxFig;bxFig=function(n){return '<g class="fig">'+_bxF0(n)+'</g>';};
 
 /* ===== 2026.11.09 수정 15: 모든 프로젝트 첫 대화 = 지침의 역할 + 지침 확인 + 소스 조사 + 부족한 것 묻고 작성 ===== */
 function dwRoleOf(d){var t=d.fullT?dwF(d.fullT,d):(d.full||'');var m=t.match(/너는 (.+?)다\./);var r=m?m[1]:dwF(d.role,d);var c=r.charCodeAt(r.length-1);return r+(c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28?'이야':'야');}
@@ -4066,7 +4077,7 @@ var RTYPE={};RESTX.forEach(function(r){RTYPE['쉼 하나: '+r[1]]=r[0];});
 function restFig(t){var f=RTYPE[t]||(/어깨/.test(t)?'shoulder':/물|차/.test(t)?'water':/창밖|보이는/.test(t)?'window':'breath');
  var H='<circle cx="32" cy="13" r="6"/>',B='<path d="M32 19 V40"/>',L='<path d="M32 40 L25 56 M32 40 L39 56"/>',A='<path d="M32 24 L23 37 M32 24 L41 37"/>';
  var X={
-  breath:H+B+A+L+'<circle class="rf-b" cx="32" cy="31" r="5"/><path class="rf-air" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/>',
+  breath:H+B+L+'<g class="rf-al"><path d="M32 24 L23 37"/></g><g class="rf-ar"><path d="M32 24 L41 37"/></g><circle class="rf-b" cx="32" cy="31" r="5"/><path class="rf-air" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/>',
   shoulder:H+B+L+'<g class="rf-sh"><path d="M22 24 H42 M22 24 L20 38 M42 24 L44 38"/></g>',
   water:H+'<path d="M32 19 V40 M32 24 L22 36"/>'+L+'<g class="rf-cup"><path d="M32 24 L42 30 L44 22"/><rect x="41" y="12" width="7" height="9" rx="1.5"/></g>',
   window:'<rect x="38" y="6" width="22" height="22" rx="2"/><path d="M49 6 V28 M38 17 H60"/><g class="rf-cloud"><path d="M41 13 q2 -3 5 -1 q3 -1 4 2 h-9z"/></g><circle cx="18" cy="16" r="6"/><path d="M18 22 V42 M18 27 L10 36 M18 27 L26 34 M18 42 L12 58 M18 42 L24 58"/>',
@@ -4130,7 +4141,7 @@ var BR=[
  {e:'🍃',n:'나뭇잎 날리기 숨',d:'손바닥 위 나뭇잎을 멀리 날려 보내듯 후~',p:[['들이쉬기',4,1.3],['멀리 후~',6,.8]]},
  {e:'🍜',n:'라면 식히기 숨',d:'뜨거운 라면 식히듯 후후~ 짧게 세 번',p:[['들이쉬기',3,1.3],['후!',1,.9],['후!',1,.9],['후~',2,.8]]}];
 var box=document.querySelector('#v2-tool .breath');if(!box)return;
-box.innerHTML='<div class="bx-ch" id="bx-ch"><span class="bx-e" id="bx-e"><svg class="bxf" id="bx-f" viewBox="0 0 64 64" aria-hidden="true"></svg></span><span class="bx-t" id="bx-t">준비</span></div><div class="bx-r"><b id="bx-n"></b><small id="bx-d"></small><div class="va"><button type="button" class="btn mini" id="bx-go">따라 하기 (3번)</button><button type="button" class="btn mini" id="bx-next">다른 숨 고르기 ›</button></div></div>';
+box.innerHTML='<div class="bx-ch" id="bx-ch"><span class="bx-e" id="bx-e"><svg class="bxf" id="bx-f" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="12" r="6"/><path d="M32 18 V40"/><circle class="bxb" cx="32" cy="31" r="4.5"/><path d="M32 40 L25 56 M32 40 L39 56"/><path class="bxdn" d="M32 24 L23 37 M32 24 L41 37"/><path class="bxup" d="M32 24 L15 11 M32 24 L49 11"/><path class="bxair" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/></svg></span><span class="bx-t" id="bx-t">준비</span></div><div class="bx-r"><b id="bx-n"></b><small id="bx-d"></small><div class="va"><button type="button" class="btn mini" id="bx-go">따라 하기 (3번)</button><button type="button" class="btn mini" id="bx-next">다른 숨 고르기 ›</button></div></div>';
 var cur=0,run=0;
 function set(i){cur=i;var b=BR[i];$('#bx-n').textContent=b.e+' '+b.n;var F=$('#bx-f');F.setAttribute('data-ph','');F.setAttribute('data-st','');F.innerHTML=bxFig(b.n);$('#bx-d').textContent=b.d;$('#bx-t').textContent='준비';$('#bx-e').style.transform='scale(1)';}
 function stop(){run++;}
