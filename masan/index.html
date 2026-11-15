@@ -5994,15 +5994,19 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
     if(k<.995) sec.style.zoom=String(k);
   }
   function later(){clearTimeout(ft);ft=setTimeout(fit,60);setTimeout(fit,300)}
-  var _init=window.init&&init.notes;
-  if(window.init){init.notes=function(){if(_init)_init.apply(this,arguments);try{build()}catch(e){console.error('[passport]',e)};later()}}
+  /* const 로 선언된 전역(state·init)은 window에 붙지 않으므로 직접 참조한다 */
+  if(typeof init!=='undefined'){
+    var _init=init.notes;
+    init.notes=function(){if(_init)_init.apply(this,arguments);try{build()}catch(e){console.error('[passport]',e)};later()};
+  }
   window.addEventListener('resize',function(){clearTimeout(ft);ft=setTimeout(fit,150)});
+  function kick(){var s=document.getElementById('passport');if(s&&!s.dataset.zp){try{build()}catch(e){console.error('[passport]',e)}}later()}
   try{
-    var obs=new MutationObserver(function(){later()});
     var host=document.getElementById('app');
-    if(host)obs.observe(host,{childList:true,subtree:false});
+    if(host)new MutationObserver(function(){kick()}).observe(host,{childList:true,subtree:false});
   }catch(e){}
-  if(window.state&&state.page==='notes'){setTimeout(build,0);later()}
+  if(typeof state!=='undefined'&&state.page==='notes'){setTimeout(kick,0)}
+  setTimeout(kick,120);
 })();
 </script>
 
