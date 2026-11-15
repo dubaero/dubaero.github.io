@@ -3079,34 +3079,95 @@ selfResult=function(){return SQ.map(q=>{const a=sAns(q.id);return a.length?`<div
 
 
 /* ===== v12.5: 나의 관계 사용설명서 — 성격유형 해설처럼 서술형 ===== */
+/* ===== 2026.11.15 직업 여권: 심리검사 해석 + 유쾌한 사용설명서 톤으로 전면 보강 ===== */
 const NT={
- care:['다정한 돌봄형','곁에 있으면 마음이 편해지는 사람','주변 사람이 힘들어 보이면 먼저 알아채고, 말보다 행동으로 챙기는 타입이에요. 누군가 "고마워요" 한마디를 하면 하루 피로가 싹 풀리죠. 단, 남을 챙기느라 나를 뒤로 미루는 버릇이 있으니 가끔은 나에게도 같은 다정함을 써 주세요.'],
- talk:['분위기 메이커 소통형','처음 만난 사람과도 5분이면 친해지는 사람','사람 사이에 흐르는 공기를 잘 읽고, 어색한 침묵을 못 참는 타입이에요. 어려운 이야기도 이 사람이 하면 부드럽게 들리죠. 대신 하루 종일 말만 하고 나면 기운이 빠지니, 조용히 충전하는 시간을 꼭 챙겨 주세요.'],
- tidy:['든든한 설계자형','어수선한 일도 이 사람 손을 거치면 정리되는 사람','머릿속에 늘 체크리스트가 돌아가는 타입이에요. 마감 하루 전이 아니라 사흘 전에 이미 끝내 놓고, 남들이 놓친 작은 실수까지 찾아내죠. 다만 계획이 갑자기 바뀌면 속으로 많이 당황하니, 미리 "변경 가능성"을 들어 두면 훨씬 편해요.'],
- number:['꼼꼼한 숫자 지킴이형','1원도 그냥 넘기지 않는 사람','숫자가 딱 맞아떨어질 때 쾌감을 느끼는 타입이에요. 가계부, 영수증, 일정표 같은 것이 정리돼 있어야 마음이 놓이죠. 대충 넘어가자는 말에는 조금 불편해지지만, 그 꼼꼼함이 결국 팀을 지켜 줘요.'],
- plan:['차근차근 전략가형','큰일도 작게 쪼개면 다 된다고 믿는 사람','일을 받으면 먼저 순서를 세우고 그다음에 움직이는 타입이에요. 계획표만 있으면 어떤 일이든 해낼 자신이 있죠. 계획 없이 바로 뛰어들어야 하는 상황은 살짝 힘들 수 있으니, 그럴 땐 "10분 계획"부터 세워 보세요.'],
- make:['야무진 손재주 실행형','말보다 손이 먼저 움직이는 사람','설명서보다 일단 만져 보고 해 보면서 익히는 타입이에요. 결과물이 눈에 보일 때 가장 뿌듯하고, 손이 빨라 주변에서 "어떻게 벌써 했어?" 소리를 자주 듣죠. 오래 앉아 서류만 보는 일은 금방 지루해질 수 있어요.'],
- food:['손맛 좋은 살림 고수형','한 끼로 사람을 행복하게 만드는 사람','냉장고 속 재료만 봐도 메뉴가 떠오르는 타입이에요. 누군가 맛있게 먹는 모습을 보는 게 가장 큰 보상이죠. 이 감각은 음식뿐 아니라 사람을 챙기는 모든 일에서 빛나요.'],
- body:['에너지 넘치는 현장형','가만히 있으면 오히려 피곤한 사람','몸을 움직이며 일할 때 머리도 더 잘 돌아가는 타입이에요. 바깥 공기, 현장의 활기가 나를 충전시키죠. 하루 종일 책상 앞에 앉아 있어야 하는 날은 중간중간 걷기 시간을 꼭 넣어 주세요.'],
- teach:['친절한 길잡이형','어려운 것도 쉽게 풀어 주는 사람','내가 아는 걸 남에게 알려 줄 때 가장 신나는 타입이에요. "아~ 이제 알겠다!" 하는 표정을 보면 피곤이 사라지죠. 설명이 길어질 수 있으니 핵심 세 줄로 줄이는 연습을 하면 더 강력해져요.'],
- idea:['반짝이는 아이디어형','"이렇게 해 보면 어때요?"가 입버릇인 사람','같은 일도 새로운 방법으로 해 보고 싶은 타입이에요. 회의 시간에 엉뚱하지만 쓸모 있는 아이디어를 꺼내 분위기를 바꾸죠. 반복되는 일은 금방 지루해질 수 있으니, 작은 변화를 스스로 만들어 보세요.'],
- digital:['호기심 많은 디지털 탐험형','새 앱이 나오면 일단 깔아 보는 사람','모르는 건 검색하고, 새로운 도구를 먼저 써 보는 타입이에요. 주변에서 "이거 어떻게 해?" 하고 물어 오는 사람이죠. AI 같은 새 도구와 특히 궁합이 좋아요.'],
+ care:['다정한 돌봄형','곁에 있으면 마음이 편해지는 사람','주변 사람이 힘들어 보이면 먼저 알아채고, 말보다 행동으로 챙기는 타입이에요. "고마워요" 한마디면 하루 피로가 싹 풀리죠. 다만 남을 챙기느라 나를 뒤로 미루는 버릇이 있으니, 가끔은 나에게도 같은 다정함을 써 주세요.'],
+ talk:['분위기 메이커 소통형','처음 만난 사람과도 5분이면 친해지는 사람','사람 사이에 흐르는 공기를 잘 읽고, 어색한 침묵을 못 참는 타입이에요. 어려운 이야기도 이 사람이 하면 부드럽게 들리죠. 대신 하루 종일 말하고 나면 기운이 빠지니, 조용히 충전하는 시간을 꼭 챙겨 주세요.'],
+ tidy:['든든한 설계자형','어수선한 일도 이 사람 손을 거치면 정리되는 사람','머릿속에 늘 체크리스트가 돌아가는 타입이에요. 마감 사흘 전에 이미 끝내 놓고, 남들이 놓친 작은 실수까지 찾아내죠. 계획이 갑자기 바뀌면 속으로 많이 당황하니, 미리 "변경될 수 있어요" 한마디를 들어 두면 훨씬 편해져요.'],
+ number:['꼼꼼한 숫자 지킴이형','1원도 그냥 넘기지 않는 사람','숫자가 딱 맞아떨어질 때 쾌감을 느끼는 타입이에요. 영수증, 일정표 같은 게 정리돼 있어야 마음이 놓이죠. "대충 넘어가자"는 말에는 살짝 불편해지지만, 그 꼼꼼함이 결국 팀을 지켜 줘요.'],
+ plan:['차근차근 전략가형','큰일도 작게 쪼개면 다 된다고 믿는 사람','일을 받으면 먼저 순서를 세우고 그다음에 움직이는 타입이에요. 계획표만 있으면 웬만한 일은 해낼 자신이 있죠. 계획 없이 바로 뛰어들어야 하는 상황은 살짝 힘드니, 그럴 땐 "10분 계획"부터 세워 보세요.'],
+ make:['야무진 손재주 실행형','말보다 손이 먼저 움직이는 사람','설명서보다 일단 만져 보고 익히는 타입이에요. 결과물이 눈에 보일 때 가장 뿌듯하고, 손이 빨라 주변에서 "어떻게 벌써 했어?" 소리를 자주 듣죠. 오래 앉아 서류만 보는 일은 금방 지루해질 수 있어요.'],
+ food:['손맛 좋은 살림 고수형','한 끼로 사람을 행복하게 만드는 사람','냉장고 속 재료만 봐도 메뉴가 떠오르는 타입이에요. 누군가 맛있게 먹는 모습을 보는 게 가장 큰 보상이죠. 그 감각은 음식뿐 아니라 사람을 챙기는 모든 일에서 빛나요.'],
+ body:['에너지 넘치는 현장형','가만히 있으면 오히려 피곤한 사람','몸을 움직이며 일할 때 머리도 더 잘 돌아가는 타입이에요. 바깥 공기와 현장의 활기가 충전기죠. 하루 종일 책상 앞에 앉아 있어야 하는 날은 중간중간 걷기 시간을 꼭 넣어 주세요.'],
+ teach:['친절한 길잡이형','어려운 것도 쉽게 풀어 주는 사람','내가 아는 걸 남에게 알려 줄 때 가장 신나는 타입이에요. "아~ 이제 알겠다!" 하는 표정을 보면 피곤이 사라지죠. 설명이 길어지기 쉬우니 핵심 세 줄로 줄이는 연습을 하면 더 강력해져요.'],
+ idea:['반짝이는 아이디어형','"이렇게 해 보면 어때요?"가 입버릇인 사람','같은 일도 새로운 방법으로 해 보고 싶은 타입이에요. 회의 시간에 엉뚱하지만 쓸모 있는 아이디어를 꺼내 분위기를 바꾸죠. 반복되는 일은 금방 지루해지니, 작은 변화를 스스로 만들어 보세요.'],
+ digital:['호기심 많은 디지털 탐험형','새 앱이 나오면 일단 깔아 보는 사람','모르는 건 검색하고, 새 도구를 먼저 써 보는 타입이에요. 주변에서 "이거 어떻게 해?" 하고 물어 오는 사람이죠. AI 같은 새 도구와 특히 궁합이 좋아요.'],
  people:['함께 가는 팀플레이어형','혼자 가면 빨리, 함께 가면 멀리 가는 사람','혼자보다 함께일 때 힘이 나는 타입이에요. 팀 안에서 사람과 사람을 이어 주는 역할을 자연스럽게 맡죠. 갈등이 생기면 마음이 쓰이니, 내 생각도 솔직하게 말하는 연습이 도움이 돼요.'],
  learn:['꾸준한 성장형','배우는 게 곧 쉬는 것인 사람','새로운 걸 알게 되는 순간이 즐거운 타입이에요. 교육 공지가 뜨면 일단 신청 버튼부터 누르죠. 배운 걸 바로 써먹을 기회를 만들면 성장 속도가 두 배가 돼요.']};
-const NW={'먼저 설명을 듣고 순서를 정한다':'새 일을 맡으면 바로 뛰어들기보다 "전체 그림"부터 확인해요. 설명을 듣고, 순서를 정하고, 그다음에 움직이죠. 그래서 시작은 조금 느려 보여도 끝은 누구보다 깔끔해요.','직접 해보면서 하나씩 익힌다':'설명서 열 장보다 한 번 해 보는 게 빠른 사람이에요. 부딪히며 배우기 때문에 현장 적응이 빠르고, 실수도 금방 내 것으로 만들어요.','다른 사람과 상의하며 진행한다':'혼자 끙끙 앓기보다 "이렇게 하면 어때요?" 하고 묻는 쪽이에요. 상의하면서 생각이 정리되고, 그 덕분에 팀 전체가 같은 방향을 보게 돼요.','혼자 조사해 방법을 찾아본다':'모르는 게 생기면 먼저 찾아보고 공부하는 사람이에요. 검색, 영상, AI까지 동원해 방법을 알아낸 뒤 움직이기 때문에 실수가 적어요.','매뉴얼과 체크리스트를 따른다':'정해진 기준과 순서를 꼼꼼히 챙기며 안전하게 업무를 완수하는 타입이에요.','우선 결과물 예시부터 확인한다':'완성된 목표 이미지를 먼저 보고 빠르게 방향을 잡는 감각이 있어요.','단계별로 피드백을 받으며 한다':'중간 과정을 공유하며 함께 맞춰 가는 소통형 일처리를 잘해요.','전체 그림을 먼저 이해하고 시작한다':'맥락과 목적을 파악한 뒤 주도적으로 움직이는 전략가 타입이에요.','마감 시간부터 정해 두고 달린다':'목표 일정이 정해지면 높은 몰입도로 기한을 맞춰내는 집중력이 뛰어나요.','익숙한 방식과 연결해 풀어낸다':'과거의 경험과 노하우를 새 업무에 빠르게 접목하는 응용력이 좋아요.'};
-const NR={'서로 충분히 의견을 나누는 분위기':'말이 오가는 따뜻한 팀에서 힘이 나요. 회의가 길어져도 "그래도 다 같이 정했으니까" 하는 마음에 든든해지는 타입이죠.','역할과 기준이 명확한 분위기':'누가 무엇을 하는지 분명할 때 가장 편안해요. 애매한 지시보다 "이건 ○○님 담당이에요"라는 한마디가 반가운 사람이에요.','스스로 집중할 시간을 존중하는 분위기':'일할 땐 조용히 몰입하는 시간이 필요해요. 그 시간을 존중받으면 놀라운 집중력으로 결과를 내놓는 사람이에요.','새로운 시도를 응원해주는 분위기':'"한번 해 봐요!"라는 말에 날개가 돋는 사람이에요. 실패해도 괜찮다는 분위기에서 가장 창의적이 돼요.'};
-const NS={'잠시 쉬고 생각을 정리할 시간':'힘든 순간엔 잠깐 멈추고 혼자 정리하는 시간이 필요해요. 차 한 잔, 짧은 산책이면 다시 시동이 걸려요.','해야 할 일을 작게 나눈 목록':'막막할 땐 할 일 목록이 구원이에요. 큰 산을 작은 계단으로 나누면 한 칸씩 오를 힘이 생겨요.','믿을 만한 사람과 이야기하기':'털어놓을 사람이 있으면 금방 회복돼요. 말하다 보면 답이 스스로 보이는 타입이에요.','작은 일부터 다시 해보기':'고민보다 움직임이 약이에요. 쉬운 일 하나를 끝내고 나면 자신감이 다시 차올라요.'};
-const NP={'출퇴근과 근무시간':'일을 고를 땐 "내 생활과 함께 갈 수 있는가"를 먼저 봐요. 가정과 일의 균형을 지키는 현실 감각이 뛰어난 사람이에요.','안정적인 업무와 명확한 절차':'일을 고를 땐 "오래, 안정적으로 할 수 있는가"를 봐요. 정해진 절차 안에서 실력을 꾸준히 쌓아 가는 사람이에요.','배울 수 있는 기회와 성장':'일을 고를 땐 "여기서 내가 클 수 있는가"를 봐요. 지금보다 내일이 더 기대되는 곳에서 빛나는 사람이에요.','동료와의 관계와 근무 분위기':'일을 고를 땐 "누구와 함께 일하는가"를 먼저 봐요. 좋은 사람들 곁이라면 어떤 일도 즐겁게 해내는 사람이에요.'};
-const ND={'낯선 사람 많이 만나기':'처음 보는 사람을 계속 만나야 하는 일','하루 종일 앉아 있기':'하루 종일 의자에 붙어 있어야 하는 일','숫자·계산':'숫자와 계산이 끝없이 이어지는 일','몸 많이 쓰는 일':'체력을 많이 써야 하는 일','컴퓨터 작업':'하루 종일 컴퓨터만 보는 일','감정 쓰는 응대':'감정을 많이 써야 하는 응대','밤·주말 근무':'밤이나 주말에 일해야 하는 일'};
+/* b: 본문(심리검사 해석) · s: 함께 고른 답 한 줄 · t: 타인을 위한 사용법 한 줄 */
+const NW={
+ '먼저 설명을 듣고 순서를 정한다':{b:'설명부터 듣고 순서를 정해야 마음이 놓이는 준비형이에요. 출발은 느긋해 보여도 끝은 누구보다 깔끔하게 매듭짓죠.',s:'혼자 그림을 그려 두는 편이에요.',t:'"설명 한 번만 듣고 정리해서 시작할게요"라고 말해 두면 서로 편해요.'},
+ '직접 해보면서 하나씩 익힌다':{b:'설명서 열 장보다 한 번 해 보는 게 빠른 실전 투입형이에요. 부딪히며 익힌 일은 오래 남아 현장에서 금세 감을 잡죠.',s:'몸으로 익히는 게 제일 빨라요.',t:'"일단 해보고 막히면 바로 물어볼게요"라고 하면 실수도 성장이 돼요.'},
+ '다른 사람과 상의하며 진행한다':{b:'"이렇게 하면 어때요?" 하고 묻는 사이에 생각이 정리되는 타입이에요. 덕분에 팀이 같은 방향을 보게 되죠.',s:'말하다 보면 답이 보여요.',t:'결정할 땐 마지막에 "제 생각은 이쪽이에요"까지 붙여 주세요.'},
+ '혼자 조사해 방법을 찾아본다':{b:'검색·영상·AI까지 동원해 답을 먼저 찾아보는 탐구형이에요. 확인하고 움직이니 실수가 적고, 한번 익힌 방법은 오래 써먹죠.',s:'혼자 파고들어 해결하는 걸 좋아해요.',t:'찾은 방법을 짧게라도 공유하면 팀의 무기가 돼요.'},
+ '매뉴얼과 체크리스트를 따른다':{b:'정해진 기준과 순서를 차근차근 밟아야 마음이 놓이는 타입이에요. 그 덕에 빠뜨림 없이 끝까지 해내죠.',s:'체크리스트가 있어야 편해요.',t:'급히 바뀔 땐 "어디까지 지키고 어디부터 유연하게 갈까요?"를 물어보세요.'},
+ '우선 결과물 예시부터 확인한다':{b:'완성된 모습을 먼저 보고 방향을 잡는 감각이 좋아요. 그래서 중간에 방향이 틀어지는 일이 적죠.',s:'예시 한 장이면 감이 와요.',t:'예시를 하나 보여주고 시작하면 결과가 빨리 맞아떨어져요.'},
+ '단계별로 피드백을 받으며 한다':{b:'중간중간 확인받으며 함께 맞춰 가는 소통형이에요. 마지막에 "생각한 것과 달라요"가 없는 타입이죠.',s:'중간 점검이 있으면 안심돼요.',t:'확인 시점을 미리 정해 두면(중간에 한 번만) 서로 부담이 적어요.'},
+ '전체 그림을 먼저 이해하고 시작한다':{b:'맥락과 목적을 먼저 알아야 힘이 나는 전략가예요. "왜 하는 일인지"를 알면 사소한 일도 의미 있게 해내죠.',s:'왜 하는 일인지가 중요해요.',t:'"이 일이 최종적으로 어디에 쓰이나요?" 한 번만 물어보세요.'},
+ '마감 시간부터 정해 두고 달린다':{b:'기한이 정해지면 놀라운 집중력이 나오는 타입이에요. 마감이 있는 일에서 오히려 실력이 살아나죠.',s:'데드라인이 있으면 불타올라요.',t:'중간 마감을 하나 정해 두면 마지막 밤을 새우는 일이 줄어요.'},
+ '익숙한 방식과 연결해 풀어낸다':{b:'새 일도 "전에 해 본 것과 비슷하네" 하고 연결해 푸는 응용력이 좋아요. 경험이 쌓일수록 빨라지죠.',s:'경험을 잘 재활용해요.',t:'"이건 예전 ○○랑 같은 원리예요"라고 말해 보세요. 설명이 쉬워져요.'}};
+const NR={
+ '서로 충분히 의견을 나누는 분위기':{b:'말이 오가는 따뜻한 팀에서 힘이 나요. 회의가 길어져도 "같이 정했으니까" 하고 든든해지는 타입이죠.',s:'충분히 이야기하는 팀이 좋아요.',t:'마지막엔 "그럼 이렇게 정리할게요" 한마디로 매듭지어 주면 좋아요.'},
+ '역할과 기준이 명확한 분위기':{b:'누가 무엇을 하는지 분명할 때 120%가 나와요. "이건 ○○님 담당이에요"라고 믿고 맡기면 기대 이상으로 해내죠.',s:'역할이 나뉜 팀이 편해요.',t:'역할이 겹치면 "제 몫은 어디까지인가요?"를 먼저 확인하세요.'},
+ '스스로 집중할 시간을 존중하는 분위기':{b:'조용히 몰입하는 시간이 꼭 필요한 타입이에요. 그 시간을 지켜 주면 놀라운 집중력으로 결과를 내놓죠.',s:'혼자 집중할 시간이 필요해요.',t:'이어폰이나 "집중 중" 표시 하나면 팀이 알아서 배려해 줘요.'},
+ '새로운 시도를 응원해주는 분위기':{b:'"한번 해 봐요!" 한마디에 날개가 돋는 타입이에요. 실패해도 된다는 분위기에서 가장 창의적이 되죠.',s:'응원받으면 더 과감해져요.',t:'실행 전에 한 번만 현실 점검을 같이 해 주세요.'},
+ '따뜻하게 격려하고 배려하는 분위기':{b:'눈빛만 봐도 분위기를 읽는 섬세한 사람이에요. 서로 챙겨 주는 팀에서 마음 놓고 힘을 내죠.',s:'서로 챙기는 팀이 좋아요.',t:'혼자 다 챙기다 지치니 "저도 도와주세요"를 연습해 보세요.'},
+ '불필요한 간섭 없이 자율적인 분위기':{b:'잔소리보다 신뢰를 주는 팀에서 빛나는 타입이에요. 알아서 잘 하니 옆에서 감시하지 않아도 되죠.',s:'믿고 맡겨 주면 잘해요.',t:'진행 상황은 중간에 한 번씩 알려 주세요. 신뢰가 더 오래가요.'},
+ '서로의 노고를 인정하고 칭찬하는 분위기':{b:'수고했다는 한마디에 하루 피로가 풀리는 타입이에요. 인정받은 만큼 더 잘하고 싶어지는, 칭찬이 연료인 사람이죠.',s:'칭찬 한마디가 큰 힘이 돼요.',t:'"이건 제가 했어요"라고 말하는 연습도 해 보세요.'},
+ '문제가 생기면 함께 해결하는 분위기':{b:'문제를 숨기지 않고 같이 머리 맞대는 팀을 좋아해요. 위기에서 오히려 진가가 나오는 든든한 동료죠.',s:'같이 머리 맞대는 걸 좋아해요.',t:'혼자 떠안지 말고 "같이 봐 주실 수 있나요?"를 먼저 꺼내세요.'},
+ '원칙과 약속을 철저히 지키는 분위기':{b:'약속이 지켜지는 팀에서 마음이 편한 타입이에요. 규칙이 분명하면 그 안에서 누구보다 성실하죠.',s:'규칙이 분명하면 편해요.',t:'상대가 몰라서 어긴 규칙은, 화내기 전에 한 번 설명해 주세요.'},
+ '즐겁고 활기찬 에너지가 넘치는 분위기':{b:'웃음이 있는 팀에서 능률이 두 배가 되는 타입이에요. 어색한 자리도 금세 풀리는 재주가 있죠.',s:'분위기 좋은 팀이 최고예요.',t:'기분이 가라앉으면 티가 나니, 그럴 땐 잠깐 쉬어도 괜찮아요.'}};
+const NS={
+ '잠시 쉬고 생각을 정리할 시간':{b:'힘들 땐 잠깐 멈춰 혼자 정리하는 시간이 약이 돼요. 차 한 잔, 짧은 산책이면 다시 시동이 걸리죠.',s:'혼자 정리할 시간이 필요해요.',t:'재촉하지 말고 "다시 말해 줄래요?" 한마디면 충분해요.'},
+ '해야 할 일을 작게 나눈 목록':{b:'막막할 때 할 일 목록이 구원이 되는 타입이에요. 큰 산을 작은 계단으로 나누면 오를 힘이 생기죠.',s:'목록으로 나누면 숨이 쉬어져요.',t:'"이것부터 하면 돼요" 하고 세 줄만 적어 주면 배터리가 차요.'},
+ '믿을 만한 사람과 이야기하기':{b:'털어놓을 사람이 있으면 금방 회복되는 타입이에요. 말하다 보면 답이 스스로 보이는, 말로 푸는 사람이죠.',s:'수다가 곧 충전이에요.',t:'조언보다 고개 끄덕임이 먼저일 때 힘이 나요.'},
+ '작은 일부터 다시 해보기':{b:'고민보다 움직임이 약이 되는 타입이에요. 쉬운 일 하나를 끝내면 자신감이 다시 차오르죠.',s:'손을 움직이면 기운이 나요.',t:'다 해치우려 하지 말고 하나만 하고 칭찬해 주세요.'},
+ '맛있는 음식 먹고 기분 전환하기':{b:'맛있는 한 끼가 마음의 충전기인 타입이에요. 따뜻한 국물 한 숟가락에 세상이 부드러워지죠.',s:'맛있는 걸 먹으면 풀려요.',t:'"오늘은 점심 맛있는 걸로 해요"라고 먼저 꺼내 보세요.'},
+ '선배나 동료에게 조언 구하기':{b:'경험자의 말을 듣고 방향을 잡는 타입이에요. 조언 한마디로 막힌 길이 뚫리죠.',s:'조언 한마디면 길이 보여요.',t:'"제가 이렇게 이해했는데 맞나요?"로 시작하면 대화가 빨라져요.'},
+ '걷거나 몸 움직이며 머리 비우기':{b:'머리가 복잡할수록 몸을 움직여야 풀리는 타입이에요. 10분만 걸어도 머릿속이 정리되죠.',s:'걷다 보면 정리가 돼요.',t:'"잠깐 걸으면서 이야기할까요?"가 좋은 제안이 돼요.'},
+ '조용한 공간에서 혼자 시간 갖기':{b:'사람 많은 곳에 오래 있으면 방전되는 타입이에요. 조용한 구석에서 10분만 있어도 다시 충전되죠.',s:'조용한 구석이 필요해요.',t:'그건 무관심이 아니라 충전이에요. 한마디 미리 말해 두면 오해가 없어요.'},
+ '지금까지 잘해온 일 떠올리기':{b:'스스로를 의심할 때 해 온 일을 떠올리며 힘을 내는 타입이에요. 작은 성공 기록이 가장 좋은 위로죠.',s:'해 온 일을 떠올리면 다시 힘이 나요.',t:'칭찬받은 말이나 결과물을 메모해 두면 비상 배터리가 돼요.'},
+ '문제의 원인을 차분히 분석하기':{b:'감정보다 원인을 먼저 들여다보는 이성형이에요. 이유를 알면 마음이 정리되고 다음 수가 보이죠.',s:'이유를 알면 마음이 풀려요.',t:'분석하다 밤 새우지 말고 "오늘은 여기까지" 선을 정해 두세요.'}};
+const NP={
+ '출퇴근이 편한 가까운 거리':{b:'"내 생활과 함께 갈 수 있는가"를 먼저 보는 현실 감각의 소유자예요. 가까운 거리는 곧 오래 다닐 힘이죠.',s:'가까운 곳이 오래 갑니다.',t:'면접에서 통근 시간을 꼭 물어보세요. 판단이 빨라져요.'},
+ '안정적인 업무와 명확한 절차':{b:'오래, 안정적으로 할 수 있는 일인지를 먼저 봐요. 정해진 절차 안에서 실력을 차곡차곡 쌓아 가는 타입이죠.',s:'안정성이 첫 번째예요.',t:'업무 범위가 문서로 정해져 있는지 확인해 보세요.'},
+ '배울 수 있는 기회와 성장':{b:'"여기서 내가 얼마나 클 수 있을까?"를 먼저 보는 성장 지향형이에요. 배울 게 있는 일터라면 오래, 즐겁게 빛나죠.',s:'배울 게 있어야 오래 다녀요.',t:'3년 뒤 어떤 사람이 되어 있을지 상상해 보고 고르세요.'},
+ '동료와의 좋은 관계와 근무 분위기':{b:'"누구와 함께 일하는가"를 먼저 보는 사람이에요. 좋은 사람들 곁이라면 어떤 일도 즐겁게 해내죠.',s:'함께 일하는 사람이 제일 중요해요.',t:'면접에서 팀 분위기를 한 번 물어보세요.'},
+ '규칙적인 근무 시간과 워라밸':{b:'일과 삶의 경계가 분명해야 힘이 나는 타입이에요. 규칙적인 시간이 오래 일하는 비결이죠.',s:'칼퇴가 곧 충전이에요.',t:'초과근무가 얼마나 되는지 미리 확인해 두세요.'},
+ '일의 성취감과 사회적 보람':{b:'"이 일이 누군가에게 도움이 되는가"를 중요한 기준으로 삼아요. 보람이 보이면 힘든 일도 견디죠.',s:'보람이 있어야 마음이 갑니다.',t:'이 일이 만드는 변화를 한 문장으로 말해 보세요. 면접 답이 돼요.'},
+ '내 능력과 전문성을 살리는 일':{b:'내가 잘하는 걸 인정받는 일에서 가장 빛나는 타입이에요. 전문성이 쌓일수록 더 재미있어지죠.',s:'잘하는 걸 살리고 싶어요.',t:'내 강점이 필요한 자리인지 채용 공고에서 찾아보세요.'},
+ '깨끗하고 쾌적한 근무 환경':{b:'주변이 정돈돼 있어야 마음이 편한 섬세한 타입이에요. 쾌적한 공간이 곧 집중력이 되죠.',s:'환경이 마음을 좌우해요.',t:'면접 때 사무실을 한 번 둘러봐도 좋아요.'},
+ '공정하고 합리적인 보상':{b:'한 일만큼 제대로 인정받는지를 꼼꼼히 보는 타입이에요. 합리적이라면 더 열심히 하죠.',s:'제 몫은 제대로 받아야죠.',t:'급여·수당 기준을 문서로 확인해 두세요.'},
+ '오래 안정적으로 다닐 수 있는 직장':{b:'"오래 다닐 수 있는 곳"을 먼저 보는 신중한 타입이에요. 한 곳에서 깊게 뿌리내리는 데 강하죠.',s:'오래 다닐 곳을 찾아요.',t:'이 직장에서 5년 뒤 어떤 자리에 있을지 물어보세요.'}};
+const ND={'낯선 사람 많이 만나기':'처음 보는 사람을 하루 종일 만나는 일','하루 종일 앉아 있기':'하루 종일 의자에 붙어 있는 일','숫자·계산·정산하기':'숫자와 계산이 끝없이 이어지는 일','몸 많이 쓰는 일':'체력을 많이 써야 하는 일','컴퓨터·스마트폰 작업':'하루 종일 화면만 들여다보는 일','감정 쓰는 응대와 민원':'감정을 많이 써야 하는 응대','밤·주말·교대 근무':'밤이나 주말에도 나가야 하는 일','시간에 쫓기는 촉박한 일':'마감에 쫓기는 촉박한 일','반복되는 지루한 단순 작업':'같은 일을 반복하는 단순 작업','규칙 없이 수시로 바뀌는 일':'규칙 없이 자꾸 바뀌는 일'};
+/* 고른 답 → 심리검사 해석 + 사용설명서 문장으로 조립 */
+function secTxt(M,arr){
+ const pk=(arr||[]).filter(x=>M[x]);
+ if(!pk.length)return (arr||[]).join(' ');
+ const m=M[pk[0]];
+ const ex=pk.slice(1).map(x=>M[x].s).filter(Boolean).join(' ');
+ return m.b+(ex?' '+ex:'')+' '+m.t;
+}
+function narrPack(){
+ const top=narrType(),t1=NT[top[0]]||NT.people,t2=top[1]&&NT[top[1]];
+ const kw=[...new Set([t1[0].replace(/형$/,''),t2&&t2[0].replace(/형$/,'')].filter(Boolean))];
+ const g=id=>sAns(id);
+ const pack={top:top,t1:t1,t2:t2,kw:kw,interest:g('interest'),good:g('good'),dislike:g('dislike'),picks:{work:g('work'),relation:g('relation'),stress:g('stress'),priority:g('priority')}};
+ pack.w=secTxt(NW,pack.picks.work);
+ pack.r=secTxt(NR,pack.picks.relation);
+ pack.s=secTxt(NS,pack.picks.stress);
+ pack.p=secTxt(NP,pack.picks.priority);
+ return pack;
+}
 function narrType(){const {p}=sProfile();const order=['care','tidy','teach','make','talk','plan','number','food','idea','digital','body','people','learn'];const top=Object.keys(p).sort((a,b)=>p[b]-p[a]||order.indexOf(a)-order.indexOf(b));return top}
 selfResult=function(){
  const any=SQ.some(q=>sAns(q.id).length);if(!any)return '<p class="muted">위 질문에 답하면 여기에 나만의 사용설명서가 이야기처럼 만들어져요.</p>';
  const top=narrType(),t1=NT[top[0]]||NT.people,t2=top[1]&&NT[top[1]];const nm=((state.name||'').trim()||'나')+'의';
  const it=sAns('interest'),gd=sAns('good'),dl=sAns('dislike'),wArr=sAns('work'),rArr=sAns('relation'),sArr=sAns('stress'),prArr=sAns('priority');
- const wTxt=wArr.map(x=>NW[x]||x).join(' ');
- const rTxt=rArr.map(x=>NR[x]||x).join(' ');
- const sTxt=sArr.map(x=>NS[x]||x).join(' ');
- const prTxt=prArr.map(x=>NP[x]||x).join(' ');
+ const wTxt=secTxt(NW,wArr);
+ const rTxt=secTxt(NR,rArr);
+ const sTxt=secTxt(NS,sArr);
+ const prTxt=secTxt(NP,prArr);
  const kw=[...new Set([t1[0].replace(/형$/,''),t2&&t2[0].replace(/형$/,'')].filter(Boolean))];
  const sec=(h,body)=>body?`<div class="nr-sec"><h4>${h}</h4><p>${body}</p></div>`:'';
  const qa=SQ.map(q=>{const a=sAns(q.id);return a.length?`<div class="qa"><div class="qa-q"><span>Q</span>${E(q.title)}</div><div class="qa-a ${q.neg?'qa-neg':''}"><span>A</span>${a.map(E).join(' · ')}</div></div>`:''}).join('');
@@ -3114,10 +3175,10 @@ selfResult=function(){
   <div class="nr-head"><span class="nr-label">${E(nm)} 유형</span><h3 class="nr-type">${E(t1[0])}</h3><p class="nr-tag">"${E(t1[1])}"</p><div class="nr-kw">${kw.map(k=>`<span>#${E(k)}</span>`).join('')}${it[0]?`<span>#${E(it[0])}</span>`:''}${gd[0]?`<span>#${E(gd[0])}</span>`:''}</div></div>
   ${sec('이런 사람이에요',`${it.length?`시간 가는 줄 모르는 순간은 <b>${it.map(E).join(', ')}</b>${jo(it[it.length-1],'을','를')} 할 때예요. `:''}${gd.length?`주변에서는 <b>${gd.map(E).join(', ')}</b>${jo(gd[gd.length-1],'을','를')} 정말 잘한다는 말을 자주 듣죠. `:''}${E(t1[2])}`)}
   ${t2&&t2!==t1?`<div class="nr-sec nr-sec-hid"><h4>숨은 얼굴</h4><p>겉으로는 ${E(t1[0])}이지만, 안에는 <b>${E(t2[0])}</b>의 모습도 있어요. ${E(t2[1])}이기도 하죠. 이 두 가지가 섞여 있어서 한 가지 일만 하기보다 여러 역할을 자연스럽게 해내요.</p></div>`:''}
-  ${sec('일할 때 나는',wTxt)}
-  ${sec('함께 일할 때 나는',rTxt)}
-  ${sec('배터리가 떨어지면',sTxt)}
-  ${sec('일을 고르는 나만의 기준',prTxt)}
+  ${sec('🕘 일할 때 나는',wTxt)}
+  ${sec('🤝 함께 일할 때 나는',rTxt)}
+  ${sec('🔋 배터리가 떨어지면',sTxt)}
+  ${sec('🧭 일을 고르는 나만의 기준',prTxt)}
   ${dl.length?sec('사용 시 주의',`<b>${dl.map(d=>E(ND[d]||d)).join(', ')}</b>${jo(ND[dl[dl.length-1]]||dl[dl.length-1],'은','는')} 되도록 피하고 싶어 해요. 이런 일을 오래 맡기면 금방 방전되니, 일을 고를 때 이 부분을 먼저 확인해 보세요. 피하고 싶은 걸 아는 것도 큰 강점이에요.`):''}
   <div class="nr-sum"><b>한 줄 요약</b> ${E(nm)} 사용설명서 — "${E(t1[1])}". 이 강점이 빛나는 일터를 찾으면 일이 훨씬 쉬워져요.</div>
   <p class="nr-note">재미로 보는 자기 이해 설명이에요. 정식 성격검사(MBTI 등)가 아니에요.</p>
@@ -5881,69 +5942,126 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
 (function(){if(typeof rvUpd!=='function')return;var _u=rvUpd;rvUpd=function(){var side=document.querySelector('.rv-side');var prevTop=side?side.scrollTop:0;var r=_u.apply(this,arguments);try{var s2=side&&side.isConnected?side:document.querySelector('.rv-side');if(s2)s2.scrollTop=prevTop}catch(e){}return r}})();
 </script>
 
-<!-- 2026.11.15 나의 직업 여권: 여권 신분면 + 2단 카드 → 한 페이지(한 화면) 배치 -->
+<!-- 2026.11.15 나의 직업 여권: 연노랑 상장·여권 서식(크림 골드)으로 전면 개편 + 워드 다운로드 -->
 <style id="dbr-passport">
-#passport{display:block!important;padding:14px 20px 12px!important}
-#passport.zpass{display:block!important}
+#passport{display:block!important;position:relative;padding:11px 22px 10px!important;background:linear-gradient(163deg,#fffef7 0%,#fffdec 40%,#fef6d6 100%)!important;border:1px solid #e6cf7a!important;border-radius:14px!important;box-shadow:0 12px 28px rgba(150,118,36,.12)!important}
 #passport.zhide{display:none!important}
-#passport .section-title{margin-bottom:8px!important;align-items:center}
-#passport .section-title h2{font-size:19px!important;letter-spacing:-.6px}
-#passport .section-title p{font-size:11.5px!important;margin:0}
+#passport:before{content:'';position:absolute;inset:7px;border:2px solid #e6cf7a;border-radius:9px;pointer-events:none;z-index:0}
+#passport:after{content:'';position:absolute;inset:11px;border:1px solid rgba(201,162,39,.32);border-radius:6px;pointer-events:none;z-index:0}
+#passport .pg-corn{position:absolute;inset:7px;pointer-events:none;z-index:3}
+#passport .pg-corn i{position:absolute;width:7px;height:7px;background:#c9a227;transform:rotate(45deg);opacity:.7;box-shadow:0 0 0 2px #fffdf4}
+#passport .pg-corn i.tl{left:-4px;top:-4px}
+#passport .pg-corn i.tr{right:-4px;top:-4px}
+#passport .pg-corn i.bl{left:-4px;bottom:-4px}
+#passport .pg-corn i.br{right:-4px;bottom:-4px}
+#passport .section-title{position:relative;z-index:2;margin-bottom:4px!important;align-items:center}
+#passport .section-title h2{font-size:18.5px!important;letter-spacing:-.5px;color:#6b4f12}
+#passport .section-title p{font-size:11.3px!important;margin:0;color:#8a7b52}
+#passport .tag{background:#fdf3d0!important;color:#8a6a1c!important;border:1px solid #ecd58f!important;font-size:11px!important;padding:3px 9px!important}
+#passport .section-title .btn{font-size:10.5px!important;padding:4px 8px!important;min-height:0!important;border-radius:7px!important;border-color:#e2cb86!important;color:#7a5a12!important;background:#fffdf4!important;box-shadow:0 2px 0 #eadfae!important}
+/* 여권 머리글 줄 (상단 오른쪽 다운로드 버튼) */
+#passport .pg-strip{position:relative;z-index:2;display:flex;align-items:center;gap:9px;margin:2px 0 7px;padding-bottom:5px;border-bottom:1px solid #eedda2}
+#passport .pg-strip .s-l{font-size:9.5px;font-weight:800;letter-spacing:1.5px;color:#b99a3f;white-space:nowrap}
+#passport .pg-strip .s-m{font-size:9.5px;letter-spacing:.6px;color:#c6b071;white-space:nowrap}
+#passport .pg-strip .s-r{margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.pg-btn{border:1px solid #d9bd6b;background:linear-gradient(180deg,#fffdf0,#fdf1c8);color:#6b4f12;font-weight:800;border-radius:8px;padding:5px 10px;font-size:11.2px;line-height:1.35;cursor:pointer;box-shadow:0 2px 0 #e6d194;white-space:nowrap}
+.pg-btn:hover{background:linear-gradient(180deg,#fffef8,#fdf6dd)}
+.pg-btn:active{transform:translateY(2px);box-shadow:0 0 0 #e6d194}
+.pg-btn.ghost{background:#fffdf4}
+.pg-btn.lg{font-size:12.5px;padding:8px 14px;border-radius:9px}
+.pg-btn:disabled{opacity:.65;cursor:default}
 /* 여권 신분면 */
-#passport .pg-id{display:flex;flex-direction:column;gap:6px;padding:8px 13px 9px;border:1px solid #d6e3da;border-radius:13px;background:linear-gradient(180deg,#fcfdfb,#f3f8f3);position:relative;overflow:hidden}
-#passport .pg-id:after{content:'';position:absolute;right:-34px;top:-46px;width:158px;height:158px;border-radius:50%;border:1px dashed #d7e5dc;pointer-events:none}
+#passport .pg-id{position:relative;z-index:2;display:flex;flex-direction:column;gap:5px;padding:8px 13px 9px;border:1px solid #e6cf7a;border-radius:11px;background:linear-gradient(180deg,#fffef9,#fdf7de);box-shadow:inset 0 0 0 3px #fffdf4,0 2px 8px rgba(160,128,36,.09)}
 #passport .pg-row{display:flex;gap:12px;align-items:center;position:relative;z-index:1}
 #passport .pg-photo{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
-#passport .pg-photo img{display:block;width:72px;height:92px;object-fit:cover;border-radius:7px;border:1px solid #cddbd2;background:#fff;box-shadow:0 2px 6px #1e36301a}
-#passport .pg-photo .pp-none{width:72px;height:92px;border-radius:7px;border:1px dashed #c6d5cc;background:#fff;display:grid;place-items:center;text-align:center;font-size:10.5px;line-height:1.35;color:#9aa8a0}
-#passport .pg-photo .btn{font-size:10px!important;padding:2px 6px!important;min-height:0!important;border-radius:6px!important;line-height:1.3}
+#passport .pg-photo img{display:block;width:72px;height:92px;object-fit:cover;border-radius:5px;border:1px solid #d9bd6b;background:#fff;box-shadow:0 0 0 3px #fff,0 2px 7px rgba(120,90,20,.16)}
+#passport .pg-photo .pp-none{width:72px;height:92px;border-radius:5px;border:1px dashed #d9c07a;background:#fffdf6;display:grid;place-items:center;text-align:center;font-size:10.5px;line-height:1.35;color:#b0a173}
+#passport .pg-photo .btn{font-size:10px!important;padding:2px 6px!important;min-height:0!important;border-radius:6px!important;line-height:1.3;border-color:#e2cb86!important;color:#7a5a12!important;background:#fffdf4!important}
 #passport .pg-info{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4px}
-#passport .pg-namerow{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding-bottom:4px;border-bottom:1px solid #e2ebe4}
-#passport .pg-namerow b{font-size:19px!important;line-height:1.2;letter-spacing:-.6px;color:#1d3a31}
-#passport .pg-namerow span.muted{font-size:12.5px!important;color:#5c6f65}
-#passport .pg-namerow .btn{font-size:10px!important;padding:2px 6px!important;min-height:0!important;line-height:1.3}
+#passport .pg-namerow{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding-bottom:4px;border-bottom:1px solid #f0e0ad}
+#passport .pg-namerow b{font-size:19px!important;line-height:1.2;letter-spacing:-.4px;color:#4a3a1c}
+#passport .pg-namerow span.muted{font-size:12.5px!important;color:#8a7b52}
+#passport .pg-namerow .btn{font-size:10px!important;padding:2px 6px!important;min-height:0!important;line-height:1.3;border-color:#e2cb86!important;color:#7a5a12!important;background:#fffdf4!important}
+#passport .pg-stamp{flex:0 0 auto;width:74px;height:74px;border-radius:50%;display:grid;place-content:center;gap:0;text-align:center;transform:rotate(-12deg);color:rgba(150,110,20,.55);border:2px solid rgba(176,138,42,.42);box-shadow:inset 0 0 0 3px rgba(255,255,255,.75),inset 0 0 0 4.5px rgba(176,138,42,.26);font-weight:800;line-height:1.18;pointer-events:none}
+#passport .pg-stamp .s1{font-size:7.5px;letter-spacing:1.3px}
+#passport .pg-stamp .s2{font-size:11.5px;letter-spacing:-.3px}
+#passport .pg-stamp .s3{font-size:6.6px;letter-spacing:1px}
 #passport .nr-head{border:0!important;background:transparent!important;padding:0!important;box-shadow:none!important;border-radius:0!important;display:flex!important;flex-wrap:wrap;align-items:baseline;gap:2px 7px}
-#passport .nr-head .nr-label{font-size:10.5px!important;color:#7b8a82;font-weight:700;letter-spacing:0}
-#passport .nr-head .nr-type{display:inline!important;font-size:14.5px!important;margin:0!important;color:#1f5540;letter-spacing:-.3px}
-#passport .nr-head .nr-tag{display:inline!important;font-size:11.2px!important;margin:0!important;color:#55685e;font-weight:600}
+#passport .nr-head .nr-label{font-size:10.5px!important;color:#a99a6d;font-weight:700;letter-spacing:0}
+#passport .nr-head .nr-type{display:inline!important;font-size:14.5px!important;margin:0!important;color:#7a5a12;letter-spacing:-.3px}
+#passport .nr-head .nr-tag{display:inline!important;font-size:11.2px!important;margin:0!important;color:#7d6a3e;font-weight:600}
 #passport .nr-head .nr-kw{display:flex!important;flex-wrap:wrap;gap:6px!important;margin:0!important}
-#passport .nr-head .nr-kw span{font-size:10.5px!important;padding:1.5px 8px!important;background:#fff!important;border-color:#dde8e1!important}
-/* 여권 신분면 아래 4칸 정보 */
-#passport .nr-mini{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0!important;margin:0!important;padding-top:6px!important;border-top:1px dashed #d5e4da!important;position:relative;z-index:1}
-#passport .nr-mini .nr-sec{padding:0 10px 0 9px!important;border-left:1px solid #e2ebe5!important}
-#passport .nr-mini .nr-sec:first-child{border-left:0!important;padding-left:2px!important}
+#passport .nr-head .nr-kw span{font-size:10.5px!important;padding:1.5px 8px!important;background:#fffdf3!important;border:1px solid #ecd58f!important;color:#8a6a20!important}
+/* 신분면 아래 4칸 사용설명서 */
+#passport .nr-mini{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0!important;margin:0!important;padding-top:7px!important;border-top:1px dashed #e6cf7a!important;position:relative;z-index:1}
+#passport .nr-mini .nr-sec{padding:0 10px!important;border-left:1px solid #f1e3b6!important}
+#passport .nr-mini .nr-sec:first-child{border-left:0!important;padding-left:1px!important}
 /* 본문 2단 */
-#passport .pg-body{display:grid!important;grid-template-columns:1.02fr .98fr!important;gap:9px!important;margin-top:8px!important;align-items:start}
-#passport .pg-body>.result{margin:0!important;padding:8px 12px!important;background:#f8fbf8!important;border:1px solid #dde8e0!important;border-radius:12px}
-#passport .pg-body>.result>h3{font-size:13.5px!important;margin:0 0 6px!important;padding-bottom:4px;border-bottom:1px dashed #dde8e1;color:#285440;letter-spacing:-.3px}
-#passport .nr{gap:5px!important;display:grid!important}
-#passport .nr-sec{padding:0 0 0 9px!important;border-left-width:3px!important}
-#passport .nr-sec h4{font-size:11.6px!important;margin:0!important}
-#passport .nr-sec p{font-size:11px!important;line-height:1.45!important}
-#passport .nr-sec-hid{padding:6px 10px!important;border-radius:10px!important;box-shadow:0 2px 0 #ddd3f2!important}
-#passport .nr-sum{padding:5px 9px!important;font-size:11px!important;line-height:1.45!important}
-#passport .nr-note{font-size:10px!important}
-#passport .nr-qa summary{font-size:10.8px!important;padding:2px 0!important}
+#passport .pg-body{display:grid!important;grid-template-columns:1.02fr .98fr!important;gap:8px!important;margin-top:7px!important;align-items:start}
+#passport .pg-body>.result{margin:0!important;padding:7px 11px!important;background:#fffdf5!important;border:1px solid #ecdc9f!important;border-radius:11px!important}
+#passport .pg-body>.result>h3{font-size:13px!important;margin:0 0 6px!important;padding-bottom:4px;border-bottom:1px dashed #ecdc9f;color:#7a5a12;letter-spacing:-.3px}
+#passport .nr{gap:4px!important;display:grid!important}
+#passport .nr-sec{padding:0 0 0 10px!important;border-left:3px solid #e2c778!important}
+#passport .nr-sec h4{font-size:11.6px!important;margin:0 0 1px!important;color:#7a5a12!important}
+#passport .nr-sec p{font-size:11px!important;line-height:1.5!important;color:#4a4230!important}
+#passport .nr-mini .nr-sec h4{font-size:11.4px!important;margin:0 0 2px!important;color:#7a5a12!important;letter-spacing:-.2px}
+#passport .nr-mini .nr-sec p{font-size:11px!important;line-height:1.48!important;color:#4a4230!important}
+#passport .nr-sec b{color:#7a5a12!important}
+#passport .nr-sec-hid{padding:6px 10px!important;border-radius:10px!important;border-left-width:3px!important;box-shadow:0 2px 0 #ddd3f2!important}
+#passport .nr-sum{padding:5px 9px!important;font-size:11px!important;line-height:1.5!important;background:#fffdf2!important;border:1px solid #ecdc9f!important;color:#4a4230!important}
+#passport .nr-sum b{color:#7a5a12!important}
+#passport .nr-note{font-size:10px!important;color:#a99a6d!important}
+#passport .nr-qa summary{font-size:10.8px!important;padding:2px 0!important;color:#8a7b52!important}
 #passport .pg-right{display:flex!important;flex-direction:column!important;gap:7px!important;min-width:0}
-#passport .pg-tail{display:flex!important;flex-direction:column!important;gap:6px!important}
-#passport .pg-mini{margin:0!important;padding:6px 11px!important;background:#fff!important;border:1px solid #e1eae4!important;border-radius:10px}
-#passport .pg-mini h3{font-size:11.6px!important;margin:0 0 1px!important;color:#3d6d58;letter-spacing:0}
-#passport .pg-mini p{font-size:10.8px!important;line-height:1.45!important;margin:0}
-#passport>.row{margin-top:7px!important;gap:6px!important}
-#passport>.row .btn{font-size:11.5px!important;padding:6px 12px!important;border-radius:9px!important}
+#passport .pg-tail{display:flex!important;flex-direction:column!important;gap:5px!important}
+#passport .pg-mini{margin:0!important;padding:5px 10px!important;background:#fffdf5!important;border:1px solid #ecdc9f!important;border-radius:10px}
+#passport .pg-mini h3{font-size:11.6px!important;margin:0 0 1px!important;color:#7a5a12!important;letter-spacing:0}
+#passport .pg-mini p{font-size:10.8px!important;line-height:1.45!important;margin:0;color:#4a4230}
+#passport>.row{position:relative;z-index:2;margin-top:6px!important;gap:6px!important}
+#passport>.row .btn{font-size:11.5px!important;padding:6px 12px!important;border-radius:9px!important;background:#fffdf5!important;color:#7a5a12!important;border-color:#e2cb86!important;box-shadow:0 2px 0 #eadfae!important}
+#passport>.row .pg-btn{font-size:12.5px!important;padding:8px 14px!important}
 @media(max-width:1000px){
  #passport .pg-body{grid-template-columns:1fr!important}
  #passport .nr-mini{grid-template-columns:1fr 1fr!important;gap:8px 0!important}
- #passport .nr-mini .nr-sec:nth-child(3){border-left:0!important;padding-left:2px!important}
- #passport .nr-sec p,#passport .pg-mini p{font-size:11.8px!important;line-height:1.5!important}
+ #passport .nr-mini .nr-sec:nth-child(3){border-left:0!important;padding-left:1px!important}
+ #passport .nr-sec p,#passport .pg-mini p{font-size:11.8px!important;line-height:1.55!important}
+ #passport .nr-mini .nr-sec p{font-size:11.6px!important;line-height:1.55!important}
  #passport .nr-head{gap:1px 6px!important}
+ #passport .pg-stamp{display:none}
+}
+@media(max-width:760px){
+ #passport{padding:12px 14px 11px!important}
+ #passport .nr-mini{grid-template-columns:1fr!important}
+ #passport .nr-mini .nr-sec{border-left:0!important;padding:6px 0!important;border-top:1px dashed #f1e3b6!important}
+ #passport .nr-mini .nr-sec:first-child{border-top:0!important}
+ #passport .nr-mini .nr-sec h4{font-size:12.8px!important}
+ #passport .nr-mini .nr-sec p{font-size:12.4px!important;line-height:1.6!important}
+ #passport .pg-strip{flex-wrap:wrap}
+ #passport .pg-strip .s-r{margin-left:0;width:100%}
+}
+@media print{
+ .top,.nav,.ztabs,.footer,.toast,#fxHello{display:none!important}
+ body{background:#fff!important}
+ .wrap{max-width:none!important;padding:0!important}
+ #app>.panel:not(#passport){display:none!important}
+ #manual{display:none!important}
+ #passport{display:block!important;zoom:.8!important;transform:none!important;box-shadow:none!important;border:2px solid #d9bd6b!important;padding:10mm!important;border-radius:0!important;break-inside:avoid}
+ #passport .pg-strip .s-r,#passport>.row{display:none!important}
+ @page{size:A4 landscape;margin:8mm}
 }
 </style>
 <script>
-/* 2026.11.15 나의 직업 여권(탐험 기록) — 여권형 한 페이지 배치
+/* 2026.11.15 나의 직업 여권(탐험 기록) — 상장 겸 여권 서식 한 페이지 배치
    기존 문구·기능은 그대로 두고 DOM 순서와 CSS만 정돈한다. */
 (function(){
   function el(t,c){var d=document.createElement(t);if(c)d.className=c;return d}
+  function noPad(n){return (n<10?'0':'')+n}
+  function stampNo(){var d=new Date();return d.getFullYear()+'.'+noPad(d.getMonth()+1)+'.'+noPad(d.getDate())}
+  function makeBtn(label,cls,fn){var b=el('button','pg-btn'+(cls?' '+cls:''));b.type='button';b.innerHTML=label;b.onclick=fn;return b}
+  function download(btn){if(btn){var t=btn.innerHTML;btn.disabled=true;btn.innerHTML='여권 만드는 중…';var back=function(){btn.disabled=false;btn.innerHTML=t};setTimeout(back,4000)}try{passportDocx().then(function(){toast('🪪 직업 여권 워드 파일을 저장했어요.')}).catch(function(e){toast('다운로드 오류: '+(e&&e.message||e))})}catch(e){toast('다운로드 오류: '+(e&&e.message||e))}}
+  function toast(m){try{if(typeof showToast==='function'){showToast(m);return}}catch(e){}try{alert(m)}catch(e){}}
+  window.passportDocxRun=function(btn){download(btn)};
+  window.passportPrint=function(){window.print()};
   function build(){
     var sec=document.getElementById('passport');
     if(!sec||sec.dataset.zp) return;
@@ -5952,7 +6070,23 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
     sec.dataset.zp='1';
     var left=two.children[0], right=two.children[1];
     var nr=left&&left.querySelector('.nr'), head=nr&&nr.querySelector('.nr-head');
-    /* 1) 여권 신분면: 사진 + 성명·지원직무 + 유형·한 줄 소개의 해시태그 */
+    /* 0) 상단 머리글 줄 + 모서리 장식 */
+    var title=sec.querySelector('.section-title');
+    if(title&&!sec.querySelector('.pg-strip')){
+      var strip=el('div','pg-strip');
+      var sr=el('span','s-r');
+      sr.appendChild(makeBtn('🪪 여권 워드 저장',null,function(){download(this)}));
+      sr.appendChild(makeBtn('🖨️ 인쇄·PDF','ghost',function(){window.print()}));
+      strip.innerHTML='<span class="s-l">DUBARO · CAREER PASSPORT</span><span class="s-m">NO. '+stampNo()+'</span>';
+      strip.appendChild(sr);
+      title.parentNode.insertBefore(strip,title.nextSibling);
+    }
+    if(!sec.querySelector('.pg-corn')){
+      var cn=el('div','pg-corn');
+      ['tl','tr','bl','br'].forEach(function(k){cn.appendChild(el('i',k))});
+      sec.appendChild(cn);
+    }
+    /* 1) 여권 신분면: 사진 + 성명·지원직무 + 유형·한 줄 소개의 해시태그 + 발급 도장 */
     if(pp){
       var bar=el('div','pg-id'), row=el('div','pg-row'), ph=el('div','pg-photo'), info=el('div','pg-info');
       var im=pp.querySelector('img'), none=pp.querySelector('.pp-none'), btn=pp.querySelector('button');
@@ -5965,16 +6099,19 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
       info.appendChild(nameRow);
       if(head) info.appendChild(head);
       row.appendChild(ph); row.appendChild(info);
+      var st=el('div','pg-stamp');
+      st.innerHTML='<span class="s1">DUBARO</span><span class="s2">직업여권</span><span class="s3">ISSUED</span>';
+      row.appendChild(st);
       bar.appendChild(row);
-      var title=sec.querySelector('.section-title');
-      title.parentNode.insertBefore(bar,title.nextSibling);
+      var ttl=sec.querySelector('.section-title'), stripEl=sec.querySelector('.pg-strip');
+      ttl.parentNode.insertBefore(bar,stripEl?stripEl.nextSibling:ttl.nextSibling);
       if(pp.parentNode) pp.parentNode.removeChild(pp);
       /* 2) 일할 때·함께 일할 때·배터리·기준 → 신분면 아래 4칸 */
       if(nr){
         var secs=[].slice.call(nr.querySelectorAll('.nr-sec:not(.nr-sec-hid)'));
         if(secs.length>1){
           var mini=el('div','nr-mini');
-          secs.slice(1).forEach(function(s){mini.appendChild(s)});
+          secs.slice(1,5).forEach(function(s){mini.appendChild(s)});
           bar.appendChild(mini);
         }
       }
@@ -5988,8 +6125,16 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
     two.appendChild(rc);
     two.classList.add('pg-body');
     var btnRow=[].slice.call(sec.children).filter(function(k){return k.classList.contains('row')})[0];
-    if(btnRow) sec.appendChild(btnRow);
+    if(btnRow){
+      if(!btnRow.querySelector('.pg-btn')){
+        btnRow.insertBefore(makeBtn('🪪 나의 직업 여권(.docx) 다운받기','lg',function(){download(this)}),btnRow.firstChild);
+        btnRow.insertBefore(makeBtn('🖨️ 인쇄·PDF로 저장','ghost',function(){window.print()}),btnRow.children[1]);
+      }
+      sec.appendChild(btnRow);
+    }
     fit();
+    /* 내용 높이가 바뀌면(글꼴·사진 로딩 등) 화면 맞춤을 다시 계산한다 */
+    try{if(!sec.dataset.zro&&window.ResizeObserver){sec.dataset.zro='1';new ResizeObserver(function(){clearTimeout(ft);ft=setTimeout(fit,120)}).observe(sec)}}catch(e){}
   }
   /* 컴퓨터 화면에서 여권 한 장이 한 화면에 들어오도록 미세 배율 조정(모바일·작은 창은 그대로) */
   var ft=null;
@@ -5999,12 +6144,20 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
     if(window.innerWidth<1000||!sec.offsetParent||sec.classList.contains('zhide')) return;
     var top=sec.getBoundingClientRect().top+window.scrollY;
     var avail=window.innerHeight-top-4;
-    var h=sec.getBoundingClientRect().height;
-    if(!avail||!h||h<=avail) return;
-    var k=Math.max(.86,Math.min(1,Math.floor((avail/h)*100)/100-.01));
-    if(k<.995) sec.style.zoom=String(k);
+    if(!avail||avail<200) return;
+    /* zoom 은 글자 재배치까지 바꾸므로, 화면에 들어가는 가장 큰 배율을 이분 탐색으로 찾는다 */
+    var lim=window.innerHeight-26;
+    if(sec.getBoundingClientRect().bottom<=lim) return;
+    var lo=.82,hi=1,best=.82;
+    for(var i=0;i<6;i++){
+      var mid=(lo+hi)/2;
+      sec.style.zoom=String(mid);
+      if(sec.getBoundingClientRect().bottom<=lim){best=mid;lo=mid}else{hi=mid}
+    }
+    sec.style.zoom=String(Math.floor(best*100)/100);
   }
-  function later(){clearTimeout(ft);ft=setTimeout(fit,60);setTimeout(fit,300)}
+  function later(){clearTimeout(ft);ft=setTimeout(fit,60);setTimeout(fit,300);setTimeout(fit,900);setTimeout(fit,2000);setTimeout(fit,3600)}
+  try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){setTimeout(fit,80)});window.addEventListener('load',function(){setTimeout(fit,150)})}catch(e){}
   /* const 로 선언된 전역(state·init)은 window에 붙지 않으므로 직접 참조한다 */
   if(typeof init!=='undefined'){
     var _init=init.notes;
@@ -6012,7 +6165,6 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
   }
   window.addEventListener('resize',function(){clearTimeout(ft);ft=setTimeout(fit,150)});
   function kick(){var s=document.getElementById('passport');if(s&&!s.dataset.zp){try{build()}catch(e){console.error('[passport]',e)}}later()}
-  /* 탭 전환 때만 화면 맞춤을 다시 계산한다(답 펼치기는 그대로 스크롤) */
   document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;if(t.closest('.ztabs'))setTimeout(fit,60)});
   try{
     var host=document.getElementById('app');
@@ -6022,5 +6174,90 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
   setTimeout(kick,120);
 })();
 </script>
-
+<script>
+/* 2026.11.15 나의 직업 여권 — 연노랑 상장·여권 서식 워드(.docx) 내려받기 */
+async function passportDocx(){
+  var nm=(state.name||'').trim()||'이름 미입력';
+  var pk=narrPack(), t1=pk.t1, t2=pk.t2;
+  var job=state.job||'';
+  var strengths=(state.strengths||[]).slice();
+  var impr=(state.improvements||[]).map(function(a){var g=(typeof guide!=='undefined'&&guide[a])||'';return g?a+' → '+g:a}).filter(function(s){return s.trim()});
+  var jobs=(state.preferredJobs||[]).slice();
+  var exp=(state.experiences||[]).filter(Boolean);
+  var nd=(pk.dislike||[]).map(function(d){return ND[d]||d});
+  var today=new Date();var dstr=today.getFullYear()+'년 '+(today.getMonth()+1)+'월 '+today.getDate()+'일';
+  /* 사진 */
+  var pd=null,pe='png',pt='image/png';
+  if(state.photoData){var m=state.photoData.match(/^data:(image\/(?:png|jpeg|webp));base64,(.+)$/);if(m){pt=m[1];pe=pt.split('/')[1].replace('jpeg','jpg');var bin=atob(m[2]);pd=Uint8Array.from(bin,function(c){return c.charCodeAt(0)})}}
+  var img=!!pd;
+  /* 워드 조판 도우미 */
+  function P(t,o){o=o||{};return '<w:p><w:pPr><w:spacing w:before="'+(o.before||0)+'" w:after="'+(o.after==null?60:o.after)+'" w:line="'+(o.line||250)+'" w:lineRule="auto"/>'+(o.center?'<w:jc w:val="center"/>':'')+'</w:pPr><w:r><w:rPr><w:rFonts w:eastAsia="Malgun Gothic"/><w:sz w:val="'+(o.sz||19)+'"/>'+(o.bold?'<w:b/>':'')+(o.cs?'<w:spacing w:val="'+o.cs+'"/>':'')+'<w:color w:val="'+(o.color||'43371F')+'"/></w:rPr><w:t xml:space="preserve">'+x(t)+'</w:t></w:r></w:p>'}
+  function TC(raw,w,o){o=o||{};return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/>'+(o.span?'<w:gridSpan w:val="'+o.span+'"/>':'')+(o.fill?'<w:shd w:val="clear" w:color="auto" w:fill="'+o.fill+'"/>':'')+'<w:vAlign w:val="'+(o.v||'top')+'"/></w:tcPr>'+(raw||P(' ',{}))+'</w:tc>'}
+  function T(rows,ws,o){o=o||{};var col=o.color||'E6CF7A',sz=o.sz||6,val=o.val||'single';
+    var b='<w:tblBorders>'+['top','left','bottom','right','insideH','insideV'].map(function(k){return '<w:'+k+' w:val="'+val+'" w:sz="'+sz+'" w:color="'+col+'"/>'}).join('')+'</w:tblBorders>';
+    var wsum=ws.reduce(function(a,c){return a+c},0);
+    return '<w:tbl><w:tblPr><w:tblW w:w="'+wsum+'" w:type="dxa"/>'+b+'<w:tblCellMar><w:top w:w="70" w:type="dxa"/><w:left w:w="120" w:type="dxa"/><w:bottom w:w="70" w:type="dxa"/><w:right w:w="120" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>'+ws.map(function(w){return '<w:gridCol w:w="'+w+'"/>'}).join('')+'</w:tblGrid>'+rows.map(function(r){return '<w:tr>'+r.join('')+'</w:tr>'}).join('')+'</w:tbl>'}
+  function H(t){return P(t,{bold:1,sz:20,color:'7A5A12',before:80,after:30})}
+  var W=9600, half=4800;
+  var imgPara='<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="30"/></w:pPr>'+(img?imageRun():P('[사진]',{center:1,sz:15,color:'B99A3F',after:0}))+'</w:p>';
+  var infoXml=P(nm,{bold:1,sz:28,after:20,color:'3F3012'})+
+    P('지원 직무 · '+(job||'-'),{sz:18,after:20})+
+    P(t1[0],{bold:1,sz:22,color:'7A5A12',after:10})+
+    P('"'+t1[1]+'"',{sz:18,after:20,color:'5A4B2A'})+
+    P(pk.kw.map(function(k){return '#'+k}).join('   ')+(pk.dislike&&pk.dislike.length?'':''),{sz:17,color:'8A6A20',after:20});
+  var idTbl=T([[TC(imgPara,1900,{v:'center'}),TC(infoXml,W-1900)]],[1900,W-1900],{sz:8});
+  var q=[
+    ['일할 때 나는',pk.w,''],
+    ['함께 일할 때 나는',pk.r,''],
+    ['배터리가 떨어지면',pk.s,''],
+    ['일을 고르는 나만의 기준',pk.p,'']
+  ];
+  var quad=T([
+    [TC(P(q[0][0],{bold:1,sz:19,color:'7A5A12',after:10})+P(q[0][1]||'아직 답하지 않았어요.',{sz:18,after:10,line:240}),half,{fill:'FFFDF3'}),
+     TC(P(q[1][0],{bold:1,sz:19,color:'7A5A12',after:10})+P(q[1][1]||'아직 답하지 않았어요.',{sz:18,after:10,line:240}),half,{fill:'FFFDF3'})],
+    [TC(P(q[2][0],{bold:1,sz:19,color:'7A5A12',after:10})+P(q[2][1]||'아직 답하지 않았어요.',{sz:18,after:10,line:240}),half,{fill:'FFFDF3'}),
+     TC(P(q[3][0],{bold:1,sz:19,color:'7A5A12',after:10})+P(q[3][1]||'아직 답하지 않았어요.',{sz:18,after:10,line:240}),half,{fill:'FFFDF3'})]
+  ],[half,half],{sz:6});
+  var rows=[[TC(P('나의 강점',{bold:1,sz:18,color:'7A5A12',after:0}),2200,{fill:'FDF3D0'}),
+             TC(P(strengths.length?strengths.join(' · '):'아직 선택하지 않았어요.',{sz:18,after:0}),W-2200)]];
+  if(impr.length) rows.push([TC(P('보완하고 싶은 점',{bold:1,sz:18,color:'7A5A12',after:0}),2200,{fill:'FDF3D0'}),TC(P(impr.join(' / '),{sz:18,after:0}),W-2200)]);
+  if(jobs.length) rows.push([TC(P('희망 직종',{bold:1,sz:18,color:'7A5A12',after:0}),2200,{fill:'FDF3D0'}),TC(P(jobs.join(' · '),{sz:18,after:0}),W-2200)]);
+  if(exp.length) rows.push([TC(P('내가 직접 해 본 일',{bold:1,sz:18,color:'7A5A12',after:0}),2200,{fill:'FDF3D0'}),TC(P(exp.map(function(t,i){return (i+1)+'. '+t}).join('\n'),{sz:18,after:0}),W-2200)]);
+  if(nd.length) rows.push([TC(P('되도록 피하고 싶은 일',{bold:1,sz:18,color:'7A5A12',after:0}),2200,{fill:'FDF3D0'}),TC(P(nd.join(' · '),{sz:18,after:0}),W-2200)]);
+  var prefTbl=T(rows,[2200,W-2200],{sz:6});
+  var qa='';
+  try{
+    SQ.forEach(function(qq){
+      var a=sAns(qq.id);if(!a.length)return;
+      qa+=P('Q. '+qq.title,{sz:16,color:'8A7B52',after:0,line:220})+P('A. '+a.join(' · '),{sz:17,after:40,line:220});
+    });
+  }catch(e){}
+  var inner=
+    idTbl+P('',{after:0,line:120})+
+    P('나 의 사 용 설 명 서',{center:1,bold:1,sz:23,color:'7A5A12',before:0,after:60,cs:40})+
+    quad+P('',{after:0,line:120})+
+    H('한 줄 요약')+P('"'+t1[1]+'" — 이 강점이 빛나는 일터를 찾으면 일이 훨씬 쉬워져요.',{sz:18,after:80})+
+    (t2&&t2!==t1?H('숨은 얼굴')+P('겉으로는 '+t1[0]+'이지만, 안에는 '+t2[0]+'의 모습도 있어요. '+t2[1]+'이기도 하죠.',{sz:18,after:80}):'')+
+    H('탐험 기록')+prefTbl+P('',{after:0,line:120})+
+    P('이 여권은 재미로 보는 자기이해 기록이에요. 정식 성격검사(MBTI 등)가 아닙니다.',{center:1,sz:15,color:'9A8B5F',after:10})+
+    P('두배로 · 디지털이음연구소   |   dubaero.kr   |   '+dstr+' 발급',{center:1,sz:15,color:'B99A3F',after:0});
+  var frame=T([[TC(inner,W,{v:'top'})]],[W],{sz:18,color:'D9BD6B',val:'double'});
+  var body=
+    P('CAREER  PASSPORT',{center:1,sz:14,color:'B99A3F',cs:80,after:10})+
+    P('나 의 직 업 여 권',{center:1,bold:1,sz:38,color:'5B4212',after:20,cs:40})+
+    P('나를 이해하고 함께 일하는 방법 · 직업 여권',{center:1,sz:16,color:'9A8B5F',after:160})+
+    frame+
+    P('',{after:0,line:120})+
+    P('※ 이 파일은 두배로(dubaero.kr) 마산새일 웹앱에서 내가 고른 답으로 만든 교육용 기록입니다. 문장은 언제든 직접 고쳐 쓸 수 있어요.',{sz:15,color:'9A8B5F',after:0});
+  var files=[
+    ['[Content_Types].xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>'+(img?'<Default Extension="'+pe+'" ContentType="'+pt+'"/>':'')+'<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>'],
+    ['_rels/.rels','<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'],
+    ['word/_rels/document.xml.rels','<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>'+(img?'<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/photo.'+pe+'"/>':'')+'</Relationships>'],
+    ['word/styles.xml','<?xml version="1.0" encoding="UTF-8"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:eastAsia="Malgun Gothic"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>'],
+    ['word/document.xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:body>'+body+'<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="800" w:right="850" w:bottom="800" w:left="850"/></w:sectPr></w:body></w:document>']
+  ];
+  if(img)files.push(['word/media/photo.'+pe,pd]);
+  saveBlob(zipFiles(files),'나의_직업_여권_'+(nm.replace(/[^가-힣a-zA-Z0-9]/g,'')||'이름')+'.docx');
+}
+</script>
 </body></html>
