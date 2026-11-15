@@ -6234,27 +6234,35 @@ async function passportDocx(){
   var stUrl=stampPngUrl(),sd=null;
   var sm=String(stUrl||'').match(/^data:image\/(?:png);base64,(.+)$/);
   if(sm){var sb=atob(sm[1]);sd=Uint8Array.from(sb,function(c){return c.charCodeAt(0)})}
-  /* 조판 도우미 */
-  var W=10100, half=5050;
-  function R(t,o){o=o||{};return '<w:r><w:rPr><w:rFonts w:ascii="Malgun Gothic" w:eastAsia="Malgun Gothic" w:hAnsi="Malgun Gothic"/>'+(o.bold?'<w:b/>':'')+(o.color?'<w:color w:val="'+o.color+'"/>':'')+(o.cs?'<w:spacing w:val="'+o.cs+'"/>':'')+'<w:sz w:val="'+(o.sz||21)+'"/></w:rPr><w:t xml:space="preserve">'+x(t)+'</w:t></w:r>'}
+  /* 조판 도우미 — 2026.11.15 저녁 2장 이내로 조이는 콤팩트 조판
+     · 여백: 위·아래 1.2cm(680), 좌·우 1.4cm(794) · 본문 9.5pt(w:sz 19) · 줄간격 w:line 215
+     · 표 셀 여백 위·아래 55(50~65) · 페이지 나눔은 1장(신분면·사용설명서·선호) / 2장(강점·탐색·경험·면접·발급) */
+  var W=10318, half=5159, BS=19;
+  /* 긴 답변은 80~100자 안팎으로 줄여 담는다(문장·쉼표 경계에서 자름) */
+  function cut(s,n){s=String(s==null?'':s).replace(/\s+/g,' ').trim();if(s.length<=n)return s;
+    var t=s.slice(0,n),i;
+    for(i=t.length-1;i>Math.floor(n*0.55);i--){var c=t.charAt(i);if(c===' '||c===','||c==='·'||c==='.'){t=t.slice(0,i);break}}
+    return t.replace(/[\s,·.]+$/,'')+'…'}
+  function R(t,o){o=o||{};return '<w:r><w:rPr><w:rFonts w:ascii="Malgun Gothic" w:eastAsia="Malgun Gothic" w:hAnsi="Malgun Gothic"/>'+(o.bold?'<w:b/>':'')+(o.color?'<w:color w:val="'+o.color+'"/>':'')+(o.cs?'<w:spacing w:val="'+o.cs+'"/>':'')+'<w:sz w:val="'+(o.sz||BS)+'"/></w:rPr><w:t xml:space="preserve">'+x(t)+'</w:t></w:r>'}
   function P(t,o){o=o||{};
     var jc=o.center?'<w:jc w:val="center"/>':(o.right?'<w:jc w:val="right"/>':(o.justify?'<w:jc w:val="both"/>':''));
-    var bd=o.bb?'<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="4" w:color="'+o.bb+'"/></w:pBdr>':'';    var ind=o.indent?'<w:ind w:left="'+o.indent+'"/>':'';
-    var ppr='<w:pPr>'+(o.keepNext?'<w:keepNext/>':'')+bd+'<w:spacing w:before="'+(o.before||0)+'" w:after="'+(o.after==null?60:o.after)+'" w:line="'+(o.line||280)+'" w:lineRule="auto"/>'+ind+jc+'</w:pPr>';
+    var bd=o.bb?'<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="3" w:color="'+o.bb+'"/></w:pBdr>':'';    var ind=o.indent?'<w:ind w:left="'+o.indent+'"/>':'';
+    var ppr='<w:pPr>'+(o.keepNext?'<w:keepNext/>':'')+bd+'<w:spacing w:before="'+(o.before||0)+'" w:after="'+(o.after==null?40:o.after)+'" w:line="'+(o.line||215)+'" w:lineRule="auto"/>'+ind+jc+'</w:pPr>';
     var lines=String(t==null?'':t).split('\n');
     return lines.map(function(line){return '<w:p>'+ppr+R(line,o)+'</w:p>'}).join('')}
-  function TC(raw,w,o){o=o||{};return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/>'+(o.span?'<w:gridSpan w:val="'+o.span+'"/>':'')+(o.fill?'<w:shd w:val="clear" w:color="auto" w:fill="'+o.fill+'"/>':'')+'<w:tcMar><w:top w:w="'+(o.mt==null?100:o.mt)+'" w:type="dxa"/><w:left w:w="'+(o.ml==null?140:o.ml)+'" w:type="dxa"/><w:bottom w:w="'+(o.mb==null?100:o.mb)+'" w:type="dxa"/><w:right w:w="'+(o.mr==null?140:o.mr)+'" w:type="dxa"/></w:tcMar><w:vAlign w:val="'+(o.v||'top')+'"/></w:tcPr>'+(raw||P(' ',{}))+'</w:tc>'}
+  function TC(raw,w,o){o=o||{};return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/>'+(o.span?'<w:gridSpan w:val="'+o.span+'"/>':'')+(o.fill?'<w:shd w:val="clear" w:color="auto" w:fill="'+o.fill+'"/>':'')+'<w:tcMar><w:top w:w="'+(o.mt==null?55:o.mt)+'" w:type="dxa"/><w:left w:w="'+(o.ml==null?90:o.ml)+'" w:type="dxa"/><w:bottom w:w="'+(o.mb==null?55:o.mb)+'" w:type="dxa"/><w:right w:w="'+(o.mr==null?90:o.mr)+'" w:type="dxa"/></w:tcMar><w:vAlign w:val="'+(o.v||'top')+ '"/></w:tcPr>'+(raw||P(' ',{}))+'</w:tc>'}
   function T(rows,ws,o){o=o||{};var col=o.color||LINE,sz=o.sz||6,val=o.val||'single';
     var b='<w:tblBorders>'+['top','left','bottom','right','insideH','insideV'].map(function(k){return '<w:'+k+' w:val="'+val+'" w:sz="'+sz+'" w:space="0" w:color="'+col+'"/>'}).join('')+'</w:tblBorders>';
     var wsum=ws.reduce(function(a,c){return a+c},0);
     return '<w:tbl><w:tblPr><w:tblW w:w="'+wsum+'" w:type="dxa"/>'+b+'<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>'+ws.map(function(w){return '<w:gridCol w:w="'+w+'"/>'}).join('')+'</w:tblGrid>'+rows.map(function(r){return '<w:tr><w:trPr><w:cantSplit/></w:trPr>'+r.join('')+'</w:tr>'}).join('')+'</w:tbl>'}
-  function HS(t){return P(t,{bold:1,sz:23,color:MINT,before:260,after:110,bb:'BFE7DB',keepNext:1})}
-  function LBL(t,o){o=o||{};return P(t,{bold:1,sz:20,color:o.color||MINT,before:o.before==null?130:o.before,after:30,keepNext:1})}
-  function BOX(inner,o){o=o||{};return T([[TC(inner,W,{fill:o.fill,mt:130,mb:130,ml:170,mr:170})]],[W],{sz:8,color:o.color||LINE})}
-  function GAP(n){return P('',{after:0,line:n||120})}
+  function HS(t){return P(t,{bold:1,sz:21,color:MINT,before:170,after:70,bb:'BFE7DB',keepNext:1})}
+  function LBL(t,o){o=o||{};return P(t,{bold:1,sz:18,color:o.color||MINT,before:o.before==null?90:o.before,after:20,keepNext:1})}
+  function BOX(inner,o){o=o||{};return T([[TC(inner,W,{fill:o.fill,mt:70,mb:70,ml:110,mr:110})]],[W],{sz:8,color:o.color||LINE})}
+  function GAP(n){return P('',{after:0,line:n||60})}
+  function PBREAK(){return '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/></w:pPr><w:r><w:br w:type="page"/></w:r></w:p>'}
   /* 문장 조립 */
-  var interestTxt=it.length?'시간 가는 줄 모르는 순간은 '+it.join(', ')+jow(it[it.length-1],'을','를')+' 할 때예요.':'';
-  var goodTxt=gd.length?'주변에서는 '+gd.join(', ')+jow(gd[gd.length-1],'을','를')+' 정말 잘한다는 말을 자주 듣죠.':'';
+  var interestTxt=it.length?'시간 가는 줄 모르는 순간은 '+it.slice(0,3).join(', ')+jow(it[Math.min(it.length,3)-1],'을','를')+' 할 때예요.':'';
+  var goodTxt=gd.length?'주변에서는 '+gd.slice(0,3).join(', ')+jow(gd[Math.min(gd.length,3)-1],'을','를')+' 정말 잘한다는 말을 자주 듣죠.':'';
   var pew=[interestTxt,goodTxt,(t1&&t1[2])||''].filter(function(s){return s&&String(s).trim()}).join(' ');
   var avoidTxt=(t2&&t2!==t1)?('겉으로는 '+t1[0]+'이지만, 안에는 '+t2[0]+'의 모습도 있어요. '+t2[1]+'이기도 하죠. 이 두 가지가 섞여 있어서 한 가지 일만 하기보다 여러 역할을 자연스럽게 해내요.'):'';
   var cautionTxt=nd.length?(nd.join(', ')+jow(nd[nd.length-1],'은','는')+' 되도록 피하고 싶어 해요. 이런 일을 오래 맡기면 금방 방전되니, 일을 고를 때 이 부분을 먼저 확인해 보세요. 피하고 싶은 걸 아는 것도 큰 강점이에요.'):'';
@@ -6266,87 +6274,88 @@ async function passportDocx(){
   try{(state.interview||[]).forEach(function(a,i){if(a&&(a.answer||'').trim()){iv.push({q:interviewBase[i][1],a:String(a.answer).trim(),r:(a.revised||'').trim()})}})}catch(e){}
   var qa=[];
   try{SQ.forEach(function(q){var a=sAns(q.id);if(a&&a.length)qa.push({q:q.title,a:a.join(' · ')})})}catch(e){}
-  /* 1. 머리글 */
+  var oneLine=(t1&&t1[1])?t1[1]:'';
+  /* ── 1장 ── */
   var body=
-    P('CAREER  PASSPORT',{center:1,sz:17,color:'A8893B',cs:140,after:30})+
-    P('나 의 직 업 여 권',{center:1,bold:1,sz:34,color:'3A2F14',cs:80,after:40})+
-    P('나를 이해하고 함께 일하는 방법 · 두배로 직업 여권',{center:1,sz:19,color:GRAY,after:40})+
-    P('발급일 '+dstr+'   ·   NO. '+no,{center:1,sz:16,color:'B9A46A',after:130});
-  /* 2. 신분면 */
-  var photoCell=img?picParagraph('rId2','증명사진',1,975360,1173480,'center'):P('[ 사진 ]',{center:1,sz:17,color:GRAY,after:0});
+    P('CAREER  PASSPORT',{center:1,sz:15,color:'A8893B',cs:120,after:15,line:240})+
+    P('나 의 직 업 여 권',{center:1,bold:1,sz:30,color:'3A2F14',cs:70,after:20,line:250})+
+    P('나를 이해하고 함께 일하는 방법 · 두배로 직업 여권',{center:1,sz:17,color:GRAY,after:20})+
+    P('발급일 '+dstr+'   ·   NO. '+no,{center:1,sz:15,color:'B9A46A',after:80});
+  /* 여권 신분면 */
+  var photoCell=img?picParagraph('rId2','증명사진',1,792000,1017600,'center'):P('[ 사진 ]',{center:1,sz:16,color:GRAY,after:0});
   var idInfo=
-    P(nm,{bold:1,sz:30,color:INK,after:40})+
-    P('지원 직무 · '+(job||'-'),{sz:20,color:'5C5647',after:130})+
-    P('나의 유형',{bold:1,sz:17,color:MINT,after:20})+
-    P((t1&&t1[0])||'',{bold:1,sz:26,color:PURP,after:30})+
-    P('"'+(t1?t1[1]:'')+'"',{sz:21,color:'3F3A2E',after:90})+
-    P(kwAll.map(function(k){return '#'+k}).join('   '),{sz:18,color:MINT,after:0});
-  body+=T([[TC(photoCell,2000,{v:'center',mt:150,mb:150}),TC(idInfo,W-2000,{v:'center'})]],[2000,W-2000],{sz:8,color:GOLD});
-  /* 3. 사용설명서 4칸 */
-  body+=P('나 의 사 용 설 명 서',{center:1,bold:1,sz:24,color:'3A2F14',before:320,after:120,cs:80});
+    P(nm,{bold:1,sz:26,color:INK,after:15})+
+    P('지원 직무 · '+(job||'-'),{sz:18,color:'5C5647',after:50})+
+    P('나의 유형',{bold:1,sz:15,color:MINT,after:10})+
+    P((t1&&t1[0])||'',{bold:1,sz:21,color:PURP,after:15})+
+    P('"'+cut(oneLine,64)+'"',{sz:18,color:'3F3A2E',after:35})+
+    P(kwAll.slice(0,6).map(function(k){return '#'+k}).join('   '),{sz:16,color:MINT,after:0});
+  body+=T([[TC(photoCell,1700,{v:'center',mt:90,mb:90}),TC(idInfo,W-1700,{v:'center'})]],[1700,W-1700],{sz:8,color:GOLD});
+  /* 사용설명서 4칸 */
+  body+=P('나 의 사 용 설 명 서',{center:1,bold:1,sz:22,color:'3A2F14',before:200,after:70,cs:70,keepNext:1});
+  function quadCell(label,txt){return TC(P(label,{bold:1,sz:18,color:MINT,after:20,keepNext:1})+P(cut(txt||'아직 답하지 않았어요.',72),{sz:BS,line:215,after:0}),half,{mt:60,mb:60,ml:90,mr:90})}
   var quad=T([
-    [TC(P('일할 때 나는',{bold:1,sz:20,color:MINT,after:40})+P(pk.w||'아직 답하지 않았어요.',{sz:21,line:290,after:0}),half,{mt:130,mb:130}),
-     TC(P('함께 일할 때 나는',{bold:1,sz:20,color:MINT,after:40})+P(pk.r||'아직 답하지 않았어요.',{sz:21,line:290,after:0}),half,{mt:130,mb:130})],
-    [TC(P('배터리가 떨어지면',{bold:1,sz:20,color:MINT,after:40})+P(pk.s||'아직 답하지 않았어요.',{sz:21,line:290,after:0}),half,{mt:130,mb:130}),
-     TC(P('일을 고르는 나만의 기준',{bold:1,sz:20,color:MINT,after:40})+P(pk.p||'아직 답하지 않았어요.',{sz:21,line:290,after:0}),half,{mt:130,mb:130})]
+    [quadCell('일할 때 나는',pk.w),quadCell('함께 일할 때 나는',pk.r)],
+    [quadCell('배터리가 떨어지면',pk.s),quadCell('일을 고르는 나만의 기준',pk.p)]
   ],[half,half],{sz:6,color:LINE});
   body+=quad;
-  /* 4. 나의 선호와 관계 방식 */
+  /* 나의 선호와 관계 방식 */
   body+=HS('나의 선호와 관계 방식');
-  if(pew)body+=LBL('이런 사람이에요')+P(pew,{sz:21,justify:1,after:110});
-  if(avoidTxt)body+=BOX(LBL('숨은 얼굴',{color:PURP,before:0,after:40})+P(avoidTxt,{sz:21,justify:1,color:PURPTX,after:0}),{fill:PURPBG,color:'DCCFF8'})+GAP(120);
-  if(cautionTxt)body+=LBL('사용 시 주의')+P(cautionTxt,{sz:21,justify:1,after:110});
-  body+=BOX(LBL('한 줄 요약',{before:0,after:40})+P('"'+(t1?t1[1]:'')+'" — 이 강점이 빛나는 일터를 찾으면 일이 훨씬 쉬워져요.',{sz:21,color:'33413C',after:0}),{fill:MINTBG,color:'BFE7DB'});
-  body+=P('재미로 보는 자기 이해 설명이에요. 정식 성격검사(MBTI 등)가 아니에요.',{sz:17,color:GRAY,before:80,after:0});
-  /* 둘째 장 */
+  if(pew)body+=LBL('이런 사람이에요')+P(cut(pew,132),{sz:BS,justify:1,after:60});
+  if(avoidTxt)body+=BOX(LBL('숨은 얼굴',{color:PURP,before:0,after:20})+P(cut(avoidTxt,124),{sz:BS,justify:1,color:PURPTX,after:0}),{fill:PURPBG,color:'DCCFF8'})+GAP(60);
+  if(cautionTxt)body+=LBL('사용 시 주의')+P(cut(cautionTxt,118),{sz:BS,justify:1,after:60});
+  body+=BOX(LBL('한 줄 요약',{before:0,after:20})+P('"'+cut(oneLine,64)+'" — 이 강점이 빛나는 일터를 찾으면 일이 훨씬 쉬워져요.',{sz:BS,color:'33413C',after:0}),{fill:MINTBG,color:'BFE7DB'});
+  body+=P('재미로 보는 자기 이해 설명이에요. 정식 성격검사(MBTI 등)가 아니에요.',{sz:15,color:GRAY,before:40,after:0});
+  body+=PBREAK();
+  /* ── 2장 ── */
+  body+=P('2장 · 나의 강점과 탐색 기록',{sz:14,color:'B9A46A',cs:40,after:40});
   body+=HS('나의 강점과 보완점');
   var sRows=[];
-  sRows.push([TC(P('강점',{bold:1,sz:19,color:MINT,after:0}),2000,{fill:MINTSOFT,v:'center'}),TC(P(strengths.length?strengths.join(' · '):'아직 선택하지 않았어요.',{sz:21,after:0}),W-2000)]);
-  if(impr.length)sRows.push([TC(P('보완점',{bold:1,sz:19,color:PURP,after:0}),2000,{fill:PURPBG,v:'center'}),TC(P(impr.join('\n'),{sz:21,after:0}),W-2000)]);
-  body+=T(sRows,[2000,W-2000],{sz:6,color:LINE});
+  sRows.push([TC(P('강점',{bold:1,sz:18,color:MINT,after:0}),1700,{fill:MINTSOFT,v:'center'}),TC(P(cut(strengths.length?strengths.join(' · '):'아직 선택하지 않았어요.',96),{sz:BS,after:0}),W-1700)]);
+  if(impr.length)sRows.push([TC(P('보완점',{bold:1,sz:18,color:PURP,after:0}),1700,{fill:PURPBG,v:'center'}),TC(P(impr.slice(0,3).map(function(s){return cut(s,84)}).join('\n'),{sz:BS,after:0}),W-1700)]);
+  body+=T(sRows,[1700,W-1700],{sz:6,color:LINE});
   body+=HS('직업 탐색');
   var jRows=[];
-  jRows.push([TC(P('희망 직종',{bold:1,sz:19,color:MINT,after:0}),2200,{fill:MINTSOFT,v:'center'}),TC(P(jobs.length?jobs.join(' · '):'아직 선택하지 않았어요.',{sz:21,after:0}),W-2200)]);
-  jRows.push([TC(P('이번 지원서 직무',{bold:1,sz:19,color:MINT,after:0}),2200,{fill:MINTSOFT,v:'center'}),TC(P(job||'-',{sz:21,after:0}),W-2200)]);
-  jRows.push([TC(P('공고 근거',{bold:1,sz:19,color:MINT,after:0}),2200,{fill:MINTSOFT,v:'center'}),TC(P((state.jobpost||'').trim()||'아직 입력되지 않았습니다.',{sz:20,after:0}),W-2200)]);
-  body+=T(jRows,[2200,W-2200],{sz:6,color:LINE});
+  jRows.push([TC(P('희망 직종',{bold:1,sz:18,color:MINT,after:0}),1900,{fill:MINTSOFT,v:'center'}),TC(P(cut(jobs.length?jobs.join(' · '):'아직 선택하지 않았어요.',90),{sz:BS,after:0}),W-1900)]);
+  jRows.push([TC(P('이번 지원서 직무',{bold:1,sz:18,color:MINT,after:0}),1900,{fill:MINTSOFT,v:'center'}),TC(P(job||'-',{sz:BS,after:0}),W-1900)]);
+  jRows.push([TC(P('공고 근거',{bold:1,sz:18,color:MINT,after:0}),1900,{fill:MINTSOFT,v:'center'}),TC(P(cut((state.jobpost||'').trim()||'아직 입력되지 않았습니다.',110),{sz:17,after:0}),W-1900)]);
+  body+=T(jRows,[1900,W-1900],{sz:6,color:LINE});
   body+=HS('내가 직접 해 본 경험');
-  if(exp.length){exp.forEach(function(t,i){body+=P((i+1)+'. '+t,{sz:21,after:80,indent:120})})}
-  else{body+=P('아직 작성된 경험이 없습니다.',{sz:20,color:GRAY,after:80})}
+  if(exp.length){exp.slice(0,5).forEach(function(t,i){body+=P((i+1)+'. '+cut(t,88),{sz:BS,after:30,indent:110})})}
+  else{body+=P('아직 작성된 경험이 없습니다.',{sz:17,color:GRAY,after:30})}
   body+=HS('면접 연습 기록');
   if(iv.length){
     iv.forEach(function(o){
-      body+=P('Q. '+o.q,{bold:1,sz:19,color:MINT,before:90,after:20});
-      body+=P('A. '+o.a,{sz:21,justify:1,after:50});
-      if(o.r)body+=P('↳ 다듬은 답변: '+o.r,{sz:20,color:'5C5647',after:60});
+      body+=P('Q. '+cut(o.q,70),{bold:1,sz:17,color:MINT,before:50,after:10,keepNext:1});
+      body+=P('A. '+cut(o.a,100),{sz:BS,justify:1,after:25});
+      if(o.r)body+=P('↳ 다듬은 답변: '+cut(o.r,80),{sz:17,color:'5C5647',after:30});
     });
   }else{
-    body+=P('아직 답변이 없습니다. 면접 연습에서 답변을 적으면 여기에 함께 기록됩니다.',{sz:20,color:GRAY,after:80});
+    body+=P('아직 답변이 없습니다. 면접 연습에서 답변을 적으면 여기에 함께 기록됩니다.',{sz:17,color:GRAY,after:30});
   }
+  /* 내가 고른 답 다시 보기 — 7행 표 대신 한 줄 핵심 키워드 요약 */
   if(qa.length){
-    body+=HS('내가 고른 답 다시 보기');
-    var qaRows=qa.map(function(o){
-      return [TC(P('Q. '+o.q,{sz:18,color:MINT,after:0}),3600,{mt:70,mb:70}),TC(P('A. '+o.a,{sz:18,color:'3F3A2E',after:0}),W-3600,{mt:70,mb:70})];
-    });
-    body+=T(qaRows,[3600,W-3600],{sz:4,color:'EEEAE1'});
+    body+=LBL('내가 고른 답 다시 보기',{before:110})+
+      P(cut(qa.map(function(o){return o.q+' · '+o.a.split(' · ').slice(0,2).join(' ')}).join('   |   '),160),{sz:16,color:'5C5647',after:0});
   }
-  /* 6. 발급 줄 + 도장 */
-  body+=P('',{after:0,line:200});
-  var stampPara=sd?picParagraph('rId3','두배로 직업여권 도장',2,760000,760000,'center'):'';
+  /* 발급 줄 + 도장 */
+  body+=P('',{after:0,line:120});
+  var stampPara=sd?picParagraph('rId3','두배로 직업여권 도장',2,720000,720000,'center'):'';
   body+=T([[
-    TC(P('두배로 · 디지털이음연구소',{bold:1,sz:20,color:MINT,after:30})+P('dubaero.kr   |   '+dstr+' 발급',{sz:18,color:GRAY,after:0}),W-2800,{v:'center'}),
-    TC(stampPara||P(' ',{after:0}),2800,{v:'center'})
-  ]],[W-2800,2800],{val:'none'});
-  body+=P('※ 이 파일은 두배로(dubaero.kr) 마산새일 웹앱에서 고른 답으로 만든 교육용 기록입니다. 문장은 언제든 직접 고쳐 쓸 수 있어요.',{sz:15,color:'9A9280',before:60,after:0});
+    TC(P('두배로 · 디지털이음연구소',{bold:1,sz:18,color:MINT,after:20})+P('dubaero.kr   |   '+dstr+' 발급',{sz:16,color:GRAY,after:0}),W-2600,{v:'center'}),
+    TC(stampPara||P(' ',{after:0}),2600,{v:'center'})
+  ]],[W-2600,2600],{val:'none'});
+  body+=P('※ 이 파일은 두배로(dubaero.kr) 마산새일 웹앱에서 고른 답으로 만든 교육용 기록입니다. 문장은 언제든 직접 고쳐 쓸 수 있어요.',{sz:14,color:'9A9280',before:40,after:0});
+
   /* 7. 파일 묶음 */
-  var sect='<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="900" w:right="900" w:bottom="900" w:left="900" w:header="0" w:footer="0" w:gutter="0"/><w:pgBorders w:offsetFrom="page"><w:top w:val="single" w:sz="8" w:space="26" w:color="'+GOLD+'"/><w:left w:val="single" w:sz="8" w:space="26" w:color="'+GOLD+'"/><w:bottom w:val="single" w:sz="8" w:space="26" w:color="'+GOLD+'"/><w:right w:val="single" w:sz="8" w:space="26" w:color="'+GOLD+'"/></w:pgBorders></w:sectPr>';
+  var sect='<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="680" w:right="794" w:bottom="680" w:left="794" w:header="0" w:footer="0" w:gutter="0"/><w:pgBorders w:offsetFrom="page"><w:top w:val="single" w:sz="8" w:space="24" w:color="'+GOLD+'"/><w:left w:val="single" w:sz="8" w:space="24" w:color="'+GOLD+'"/><w:bottom w:val="single" w:sz="8" w:space="24" w:color="'+GOLD+'"/><w:right w:val="single" w:sz="8" w:space="24" w:color="'+GOLD+'"/></w:pgBorders></w:sectPr>';
   var exts='<Default Extension="png" ContentType="image/png"/>'+(pe&&pe!=='png'?'<Default Extension="'+pe+'" ContentType="'+pt+'"/>':'');
   var rels='<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>'+(img?'<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/photo.'+pe+'"/>':'')+(sd?'<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/stamp.png"/>':'');
   var files=[
     ['[Content_Types].xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>'+exts+'<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>'],
     ['_rels/.rels','<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'],
     ['word/_rels/document.xml.rels','<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+rels+'</Relationships>'],
-    ['word/styles.xml','<?xml version="1.0" encoding="UTF-8"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Malgun Gothic" w:eastAsia="Malgun Gothic" w:hAnsi="Malgun Gothic"/><w:sz w:val="21"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>'],
+    ['word/styles.xml','<?xml version="1.0" encoding="UTF-8"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Malgun Gothic" w:eastAsia="Malgun Gothic" w:hAnsi="Malgun Gothic"/><w:sz w:val="19"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>'],
     ['word/document.xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:body>'+body+sect+'</w:body></w:document>']
   ];
   if(img)files.push(['word/media/photo.'+pe,pd]);
