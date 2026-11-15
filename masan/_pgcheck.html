@@ -6251,4 +6251,28 @@ async function passportDocx(){
   saveBlob(zipFiles(files),'나의_직업_여권_'+(nm.replace(/[^가-힣a-zA-Z0-9]/g,'')||'이름')+'.docx');
 }
 </script>
+<script>
+/* 미리보기 전용: 확인용 예시 답 (실제 index.html에는 들어가지 않음) */
+setTimeout(function(){
+ try{
+  state.name='이서정';
+  state.job='일반사무원';
+  state.questions={
+   interest:['사람 만나 이야기하기','가르치고 설명하기'],
+   good:['쉽게 풀어 설명하기','일정·돈 관리하기'],
+   dislike:['하루 종일 앉아 있기','숫자·계산·정산하기'],
+   work:['직접 해보면서 하나씩 익힌다','다른 사람과 상의하며 진행한다','마감 시간부터 정해 두고 달린다'],
+   relation:['서로 충분히 의견을 나누는 분위기','따뜻하게 격려하고 배려하는 분위기','즐겁고 활기찬 에너지가 넘치는 분위기'],
+   stress:['믿을 만한 사람과 이야기하기','맛있는 음식 먹고 기분 전환하기','걷거나 몸 움직이며 머리 비우기'],
+   priority:['배울 수 있는 기회와 성장','동료와의 좋은 관계와 근무 분위기','규칙적인 근무 시간과 워라밸']
+  };
+  state.preferredJobs=['직업상담사','평생교육사','다문화 가족 코디네이터'];
+  state.strengths=['사람의 이야기 듣기','고객에게 설명하기','일정과 계획 세우기'];
+  state.improvements=['약속과 시간 지키기가 어렵다'];
+  state.experiences=['가족센터 프로그램 보조 6개월','동네 문해교실 봉사 1년'];
+  render(); nav('notes');
+ }catch(e){console.error('seed',e)}
+},700);
+</script>
 </body></html>
+
