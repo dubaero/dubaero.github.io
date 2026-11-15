@@ -6149,7 +6149,7 @@ try{if(state.page==='resume'&&typeof render==='function')render()}catch(e){}
     var k=Math.max(.84,Math.min(1,Math.floor((avail/h)*100)/100-.01));
     if(k<.995) sec.style.zoom=String(k);
   }
-  function later(){clearTimeout(ft);ft=setTimeout(fit,60);setTimeout(fit,300);setTimeout(fit,900)}
+  function later(){clearTimeout(ft);ft=setTimeout(fit,60);setTimeout(fit,300);setTimeout(fit,900);setTimeout(fit,2000);setTimeout(fit,3600)}
   try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){setTimeout(fit,80)});window.addEventListener('load',function(){setTimeout(fit,150)})}catch(e){}
   /* const 로 선언된 전역(state·init)은 window에 붙지 않으므로 직접 참조한다 */
   if(typeof init!=='undefined'){
