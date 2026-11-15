@@ -6228,9 +6228,8 @@ async function passportDocx(){
   function R(t,o){o=o||{};return '<w:r><w:rPr><w:rFonts w:ascii="Malgun Gothic" w:eastAsia="Malgun Gothic" w:hAnsi="Malgun Gothic"/>'+(o.bold?'<w:b/>':'')+(o.color?'<w:color w:val="'+o.color+'"/>':'')+(o.cs?'<w:spacing w:val="'+o.cs+'"/>':'')+'<w:sz w:val="'+(o.sz||21)+'"/></w:rPr><w:t xml:space="preserve">'+x(t)+'</w:t></w:r>'}
   function P(t,o){o=o||{};
     var jc=o.center?'<w:jc w:val="center"/>':(o.right?'<w:jc w:val="right"/>':(o.justify?'<w:jc w:val="both"/>':''));
-    var bd=o.bb?'<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="4" w:color="'+o.bb+'"/></w:pBdr>':'';
-    var ind=o.indent?'<w:ind w:left="'+o.indent+'"/>':'';
-    var ppr='<w:pPr>'+bd+'<w:spacing w:before="'+(o.before||0)+'" w:after="'+(o.after==null?60:o.after)+'" w:line="'+(o.line||280)+'" w:lineRule="auto"/>'+ind+jc+'</w:pPr>';
+    var bd=o.bb?'<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="4" w:color="'+o.bb+'"/></w:pBdr>':'';    var ind=o.indent?'<w:ind w:left="'+o.indent+'"/>':'';
+    var ppr='<w:pPr>'+(o.keepNext?'<w:keepNext/>':'')+bd+'<w:spacing w:before="'+(o.before||0)+'" w:after="'+(o.after==null?60:o.after)+'" w:line="'+(o.line||280)+'" w:lineRule="auto"/>'+ind+jc+'</w:pPr>';
     var lines=String(t==null?'':t).split('\n');
     return lines.map(function(line){return '<w:p>'+ppr+R(line,o)+'</w:p>'}).join('')}
   function TC(raw,w,o){o=o||{};return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/>'+(o.span?'<w:gridSpan w:val="'+o.span+'"/>':'')+(o.fill?'<w:shd w:val="clear" w:color="auto" w:fill="'+o.fill+'"/>':'')+'<w:tcMar><w:top w:w="'+(o.mt==null?100:o.mt)+'" w:type="dxa"/><w:left w:w="'+(o.ml==null?140:o.ml)+'" w:type="dxa"/><w:bottom w:w="'+(o.mb==null?100:o.mb)+'" w:type="dxa"/><w:right w:w="'+(o.mr==null?140:o.mr)+'" w:type="dxa"/></w:tcMar><w:vAlign w:val="'+(o.v||'top')+'"/></w:tcPr>'+(raw||P(' ',{}))+'</w:tc>'}
@@ -6238,8 +6237,8 @@ async function passportDocx(){
     var b='<w:tblBorders>'+['top','left','bottom','right','insideH','insideV'].map(function(k){return '<w:'+k+' w:val="'+val+'" w:sz="'+sz+'" w:space="0" w:color="'+col+'"/>'}).join('')+'</w:tblBorders>';
     var wsum=ws.reduce(function(a,c){return a+c},0);
     return '<w:tbl><w:tblPr><w:tblW w:w="'+wsum+'" w:type="dxa"/>'+b+'<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>'+ws.map(function(w){return '<w:gridCol w:w="'+w+'"/>'}).join('')+'</w:tblGrid>'+rows.map(function(r){return '<w:tr>'+r.join('')+'</w:tr>'}).join('')+'</w:tbl>'}
-  function HS(t){return P(t,{bold:1,sz:23,color:MINT,before:260,after:110,bb:'BFE7DB'})}
-  function LBL(t,o){o=o||{};return P(t,{bold:1,sz:20,color:o.color||MINT,before:o.before==null?130:o.before,after:30})}
+  function HS(t){return P(t,{bold:1,sz:23,color:MINT,before:260,after:110,bb:'BFE7DB',keepNext:1})}
+  function LBL(t,o){o=o||{};return P(t,{bold:1,sz:20,color:o.color||MINT,before:o.before==null?130:o.before,after:30,keepNext:1})}
   function BOX(inner,o){o=o||{};return T([[TC(inner,W,{fill:o.fill,mt:130,mb:130,ml:170,mr:170})]],[W],{sz:8,color:o.color||LINE})}
   function GAP(n){return P('',{after:0,line:n||120})}
   /* 문장 조립 */
@@ -6288,8 +6287,7 @@ async function passportDocx(){
   if(cautionTxt)body+=LBL('사용 시 주의')+P(cautionTxt,{sz:21,justify:1,after:110});
   body+=BOX(LBL('한 줄 요약',{before:0,after:40})+P('"'+(t1?t1[1]:'')+'" — 이 강점이 빛나는 일터를 찾으면 일이 훨씬 쉬워져요.',{sz:21,color:'33413C',after:0}),{fill:MINTBG,color:'BFE7DB'});
   body+=P('재미로 보는 자기 이해 설명이에요. 정식 성격검사(MBTI 등)가 아니에요.',{sz:17,color:GRAY,before:80,after:0});
-  /* 5. 둘째 장 */
-  body+='<w:p><w:r><w:br w:type="page"/></w:r></w:p>';
+  /* 둘째 장 */
   body+=HS('나의 강점과 보완점');
   var sRows=[];
   sRows.push([TC(P('강점',{bold:1,sz:19,color:MINT,after:0}),2000,{fill:MINTSOFT,v:'center'}),TC(P(strengths.length?strengths.join(' · '):'아직 선택하지 않았어요.',{sz:21,after:0}),W-2000)]);
