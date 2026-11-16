@@ -834,7 +834,7 @@ return {html:html,bind:bind};})();
   <div class="how" id="f-how" hidden></div>
   <div class="split">
     <section class="in"><h3>쉬운 입력</h3><p class="sub">질문에 답만 하면 오른쪽 서식이 자동으로 채워져요. 처음이면 위의 <b>[예시 채우기]</b>를 눌러 어떻게 쓰는지 먼저 보세요. (예시는 모두 가상 "가온시 가족센터")</p><div id="f-qs"></div></section>
-    <section class="pv"><div class="pvt"><span>미리보기</span><span class="pvdl"><button type="button" class="btn mini fill" id="f-hwp">한글 받기</button><button type="button" class="btn mini" id="f-hwpex">예시본 한글 받기</button><button type="button" class="btn mini" id="f-word2">워드 받기</button></span><span id="f-src"></span></div><div class="doc" id="f-doc"></div></section>
+    <section class="pv"><div class="pvt"><span>미리보기</span><span class="pvdl"><button type="button" class="btn mini fill" id="f-hwp">한글 파일로 받기</button><button type="button" class="btn mini" id="f-pex">예시 넣기</button><button type="button" class="btn mini" id="f-word2">워드 받기</button></span><span id="f-src"></span></div><div class="doc" id="f-doc"></div></section>
   </div>
 
   <section class="aig" id="f-aig">
@@ -4543,16 +4543,16 @@ img{filter:contrast(1.12) saturate(1.18)}
 .post .pc-g>b .pcn{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;padding:0 8px;border-radius:999px;background:#A94E22;color:#fff;font-style:normal;font-size:17.7px;font-weight:900;margin-right:4px;align-self:center;box-shadow:0 2px 0 #7d3815}
 </style>
 <script src="/js/hwpx-lib.js?v=1"></script>
-<style id="pvdl-css">.pvt{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}.pvt .pvdl{display:inline-flex;gap:6px;flex-wrap:wrap}.pvt #f-src{margin-left:auto}</style>
+<style id="pvdl-css">#aig-ex{display:none!important}.pvt{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}.pvt .pvdl{display:inline-flex;gap:6px;flex-wrap:wrap}.pvt #f-src{margin-left:auto}</style>
 <script id="pvdl-js">
 (function(){
 function nm(){try{return ((O().set?O().name+'_':'')+CF.name).replace(/[^\w가-힣]+/g,'_')}catch(e){return '서식'}}
 function hw(suffix){if(!window.HWPX){toast('잠시 후 다시 눌러 주세요.');return}try{HWPX.save(document.getElementById('f-doc'),nm()+(suffix||''));toast('한글 파일을 받았어요. 한글 2014 이후 버전에서 열려요.')}catch(e){toast('한글 저장 오류: '+e.message)}}
-document.getElementById('f-hwp').onclick=function(){hw('')};
+document.getElementById('f-hwp').onclick=function(){hw(typeof PEX!=='undefined'&&PEX?'_예시':'')};
 document.getElementById('f-word2').onclick=function(){document.getElementById('f-word').click()};
-document.getElementById('f-hwpex').onclick=function(){var E=EX[CF.id];if(!E){toast('이 서식은 예시가 없어요.');return}
- var keep=JSON.parse(JSON.stringify(VAL));CF.qs.forEach(function(q){if(q.priv)return;var v=E[q.k];if(v==null||v==='')return;VAL[q.k]=Array.isArray(v)?v.slice():v});renderDoc();
- try{hw('_예시')}finally{Object.keys(VAL).forEach(function(k){delete VAL[k]});Object.assign(VAL,keep);renderDoc()}};
+var PEX=false;function pexLbl(){var b=document.getElementById('f-pex');if(b){b.textContent=PEX?'예시 빼기':'예시 넣기';b.classList.toggle('fill',PEX)}}
+document.getElementById('f-pex').onclick=function(){if(!EX[CF.id]){toast('이 서식은 예시가 없어요.');return}PEX=!PEX;var n=0;if(PEX)n=exFillSilent();else exClearSilent();pexLbl();toast(PEX?'예시를 서식에 넣었어요. 이대로 [한글 파일로 받기]를 누르면 예시 작성본을 받아요.':'예시를 뺐어요.')};
+var _of=openForm;openForm=function(){var r=_of.apply(this,arguments);PEX=false;EXK=[];pexLbl();return r};
 })();
 </script>
 <style id="lift-css">.lift-acts{margin:0 0 10px!important;display:flex!important;flex-wrap:wrap;justify-content:flex-end!important}.st-acts.sttop{justify-content:flex-end}.lift-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:0 0 8px}.lift-head>*{margin-top:0!important;margin-bottom:0!important}.lift-head>.lift-acts{margin-left:auto!important;flex:0 1 auto;width:auto!important}.lift-head>:first-child{flex:0 1 auto;width:auto!important;display:block}.lift-head>:first-child small{display:none}.lift-head>h4{display:flex!important;align-items:center;gap:6px}</style>
