@@ -899,9 +899,9 @@ main.wrap{padding-top:10px}
     <div class="post">
       <div><b>나를 응원하는 엽서</b><span>10년 후 나의 꿈과 모습을 고르면, 지금까지 잘 버티고 애써 온 나를 칭찬하고 10년 후의 꿈을 응원하는 선물 엽서를 만들어 줘요.</span></div>
       <div class="pc" id="pc">
-        <div class="pc-g"><b>① 10년 후 나의 꿈·모습 <small>여러 개 골라도, 직접 써도 돼요</small></b><div id="pc-hard"></div><input class="f1" id="pc-hard-in" placeholder="직접 쓰기 (예: 10년 후 작은 꽃집 사장님이 되어 있을 거예요)"></div>
-        <div class="pc-g"><b>② 지금까지 잘 해 온 나 <small>칭찬받고 싶은 것을 골라요</small></b><div class="pc-o" id="pc-pr"></div><input class="f1" id="pc-pr-in" placeholder="직접 쓰기 (예: 혼자 아이 셋을 키우며 일까지 해냈어요)"></div>
-        <div class="pc-g"><b>③ 그림 느낌 <small>제목·배경·손편지는 AI가 나를 기억해서 만들어요</small></b><div class="pc-o" id="pc-style"></div></div>
+        <div class="pc-g"><b><i class="pcn">1</i>10년 후 나의 꿈·모습 <small>여러 개 골라도, 직접 써도 돼요</small></b><div id="pc-hard"></div><input class="f1" id="pc-hard-in" placeholder="직접 쓰기 (예: 10년 후 작은 꽃집 사장님이 되어 있을 거예요)"></div>
+        <div class="pc-g"><b><i class="pcn">2</i>지금까지 잘 해 온 나 <small>칭찬받고 싶은 것을 골라요</small></b><div class="pc-o" id="pc-pr"></div><input class="f1" id="pc-pr-in" placeholder="직접 쓰기 (예: 혼자 아이 셋을 키우며 일까지 해냈어요)"></div>
+        <div class="pc-g"><b><i class="pcn">3</i>그림 느낌 <small>제목·배경·손편지는 AI가 나를 기억해서 만들어요</small></b><div class="pc-o" id="pc-style"></div></div>
         <div class="pc-g pc-row"><label>엽서에 부를 내 이름·애칭<input class="f1" id="pc-to" placeholder="예: 이서정 → 서정아 (ChatGPT에서 적어도 돼요)"></label><label>우표 소인에 찍을 날짜<input class="f1" id="pc-date" placeholder="예: 2026.11.19 (ChatGPT에서 적어도 돼요)"></label></div>
       </div>
       <div class="acts"><button type="button" class="btn fill" id="h2-gpt">ChatGPT로 선물 엽서 받기</button><button type="button" class="btn" id="h2-gem">제미나이로 선물 엽서 받기</button><button type="button" class="btn" id="h2-cp">프롬프트 복사</button></div>
@@ -4404,7 +4404,7 @@ body{letter-spacing:-0.015em}
 </script>
 <style id="pc-q-vis">
 /* 2026.11.16 응원 엽서: 질문 ①②③ 크게, 분류 탭은 연하게 */
-.post .pc-g>b{display:flex!important;align-items:baseline;flex-wrap:wrap;gap:4px 8px;font-size:19px!important;font-weight:900!important;color:#14261d!important;background:#EEF6F1;border-left:6px solid #2F6B56;border-radius:8px;padding:9px 14px;margin:14px 0 10px!important}
+.post .pc-g>b{display:flex!important;align-items:center;flex-wrap:wrap;gap:4px 8px;font-size:19px!important;font-weight:900!important;color:#14261d!important;background:#EEF6F1;border-left:6px solid #2F6B56;border-radius:8px;padding:9px 14px;margin:14px 0 10px!important}
 .post .pc-g:first-child>b{margin-top:4px!important}
 .post .pc-g>b small{font-size:14.5px!important;font-weight:600!important;color:#4c5d54!important;margin-left:0!important}
 .post .pc-tabs button,.post .pc-tabs button[class*="pt"]{background:#F7F9F8!important;border:1.5px solid #E2E8E4!important;color:#5B6B63!important;font-weight:700}
@@ -4412,6 +4412,7 @@ body{letter-spacing:-0.015em}
 .post .pc-tabs button.on,.post .pc-tabs button[class*="pt"].on,.post .pc-tabs button[class*="pt"].on:hover{background:#E6F3EC!important;border-color:#8CC0A5!important;color:#14402D!important;font-weight:800}
 .post .pc-tabs button em,.post .pc-tabs button.on em{background:#2F6B56!important;color:#fff!important}
 @media(max-width:640px){.post .pc-g>b{font-size:17px!important}}
+.post .pc-g>b .pcn{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;padding:0 8px;border-radius:999px;background:#C96A2B;color:#fff;font-style:normal;font-size:19px;font-weight:900;margin-right:4px;align-self:center;box-shadow:0 2px 0 #9a4f1d}
 </style>
 </body>
 </html>
