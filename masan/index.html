@@ -6631,30 +6631,30 @@ input::placeholder,textarea::placeholder{color:#555555!important;opacity:1}
 .st *{box-sizing:border-box}
 .st-steps{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
 .st-steps button{flex:1 1 auto;border:1.5px solid var(--ln);background:#f7f9f8;border-radius:12px;padding:9px 12px;font:inherit;font-weight:800;font-size:16px;color:#3b4a43;cursor:pointer;white-space:nowrap}
-.st-steps button i{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--o);color:#fff;font-style:normal;font-size:14px;margin-right:6px}
-.st-steps button.on{background:#fff4ec;border-color:var(--o);color:#7a3c12}
-.st-info{display:flex;flex-wrap:wrap;gap:6px 18px;background:#fffaf5;border:1px solid #f1d9c6;border-radius:12px;padding:9px 14px;margin-bottom:10px;font-size:15px}
-.st-info b{color:var(--o);margin-right:6px}
+.st-steps button i{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#8a978f;color:#fff;font-style:normal;font-size:14px;margin-right:6px}
+.st-steps button.on{background:#eef5f1;border-color:var(--g);color:#17402f}.st-steps button.on i{background:var(--g)}
+.st-info{display:flex;flex-wrap:wrap;gap:6px 18px;background:#f6f8f7;border:1px solid var(--ln);border-radius:12px;padding:9px 14px;margin-bottom:10px;font-size:15px}
+.st-info b{color:var(--g);margin-right:6px}
 .st-flow{font-weight:800;color:#1d4fb8;font-size:15px;margin:0 0 6px}
 .st-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:12px}
 .st-box{background:#fff;border:1px solid var(--ln);border-radius:14px;padding:12px 14px}
 .st-q{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:900;margin:10px 0 7px}
 .st-q:first-child{margin-top:0}
-.st-q em{font-style:normal;display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:999px;background:var(--o);color:#fff;font-size:15px}
+.st-q em{font-style:normal;display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:999px;background:#e6efea;color:var(--g);font-size:15px}
 .st-q small{font-size:13.5px;color:var(--mu);font-weight:600}
 .st-chips{display:flex;flex-wrap:wrap;gap:6px}
-.st-chips button{border:1.5px solid #e6d8ca;background:#fffdf9;border-radius:999px;padding:7px 13px;font:inherit;font-size:15px;cursor:pointer;color:#3a2a1d}
-.st-chips button.on{background:var(--o);border-color:var(--o);color:#fff;font-weight:800}
+.st-chips button{border:1.5px solid #d9e2dd;background:#fff;border-radius:999px;padding:7px 13px;font:inherit;font-size:15px;cursor:pointer;color:#2c3a33}
+.st-chips button.on{background:var(--g);border-color:var(--g);color:#fff;font-weight:800}
 .st-in{width:100%;margin-top:7px;border:1.5px solid #d6dfda;border-radius:10px;padding:9px 11px;font:inherit;font-size:15px}
 .st-in:focus{outline:2px solid #9cc7b6;border-color:#9cc7b6}
-.st-pv{white-space:pre-wrap;line-height:1.75;font-size:15px;background:#fffaf4;border:2px solid var(--o);border-left-width:8px;border-radius:10px;padding:12px 14px;max-height:430px;overflow:auto}
+.st-pv{white-space:pre-wrap;line-height:1.75;font-size:15px;background:#fbfcfb;border:1.5px solid #d6dfda;border-left:6px solid var(--g);border-radius:10px;padding:12px 14px;max-height:430px;overflow:auto}
 .st-pv .u{color:#1d4fb8;font-weight:800;text-decoration:underline;text-underline-offset:3px}
 .st-pv .b{color:#1d4fb8;font-weight:800}
 .st-pv .ph{color:#8a8f8c}
-.st-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.st-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.st-acts.sttop{margin:0 0 8px}
 .st-acts button{border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:800;font-size:15px;cursor:pointer}
 .st-acts .p{background:#1b2b22;color:#fff}.st-acts .s{background:#fff;border:1.5px solid #1b2b22;color:#1b2b22}
-.st-acts .h{background:var(--o);color:#fff}
+.st-acts .h{background:#fff;border:1.5px solid var(--g);color:var(--g)}
 .st-help{margin:8px 0 0;padding-left:18px;font-size:14.5px;color:var(--mu)}
 .st-help li{margin:2px 0}
 .st-card4{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
@@ -6693,7 +6693,7 @@ function save(){try{localStorage.setItem('st-v1',JSON.stringify({o:ST.o}))}catch
 function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 var CLOTH=['흰 셔츠 + 검정 정장 재킷','흰 셔츠 + 남색 정장 재킷','흰 블라우스 + 베이지 재킷','흰 블라우스 (재킷 없이)','흰 셔츠 (재킷 없이)'];
 var BG=['흰색','연한 하늘색','연한 회색'];
-var FACE=['밝고 환한 미소','은은한 미소'];
+var FACE=['아주 옅은 미소','은은한 미소'];var FACEP=['입을 다문 채 입꼬리만 아주 살짝 올린 옅은 미소(이는 보이지 않게, 자연스럽고 차분한 인상)','입꼬리를 살짝 올린 은은한 미소(이는 거의 보이지 않게)'];
 var SEASON=[
  {n:'봄',ex:'교토 벚꽃길 / 파리 튈르리 정원 / 네덜란드 튤립 정원 / 진해 여좌천 벚꽃 / 제주 유채꽃밭 / 경주 보문호 벚꽃',avoid:'두꺼운 코트·목도리 같은 겨울옷',fit:'가볍고 화사한 봄 재킷·니트'},
  {n:'여름',ex:'그리스 산토리니 / 하와이 해변 / 이탈리아 아말피 해안 / 제주 협재 바다 / 남해 다랭이마을 / 강릉 경포 해변',avoid:'두꺼운 겨울옷',fit:'시원하고 세련된 여름옷'},
@@ -6711,7 +6711,7 @@ function prompt(html){var o=ST.o,s=ST.step,L=[];
   '- 얼굴 생김새·피부 톤·나이는 실물 그대로, 보정은 자연스럽게 살짝만.',
   '- 옷: '+w(CLOTH[o.cloth])+', 단정하게.',
   '- 배경: '+w(BG[o.bg])+' 단색, 그림자 없이 고르고 밝은 조명.',
-  '- 표정: '+w(FACE[o.face])+', 정면, 어깨까지 보이는 상반신, 머리는 단정하게 정리.',
+  '- 표정: '+w(FACEP[o.face]||FACEP[0])+', 정면, 어깨까지 보이는 상반신, 머리는 단정하게 정리.',
   '- 크기: 세로 3×4 증명사진 비율, 질문 없이 바로 만들어 줘.']}
  if(s===1){var se=SEASON[o.season];
   L=['사진 속 인물의 얼굴 생김새만 실물과 가깝게 하고, 표정·동작·포즈·시선·머리·옷은 선택한 배경에 어울리도록 만들어 줘.',
@@ -6740,7 +6740,7 @@ function prompt(html){var o=ST.o,s=ST.step,L=[];
 function chips(arr,key,multi){var o=ST.o;return '<div class="st-chips">'+arr.map(function(x,i){var on=multi?!!o[key][i]:o[key]===i;return '<button type="button" data-stc="'+key+'" data-i="'+i+'"'+(on?' class="on"':'')+'>'+esc(x)+'</button>'}).join('')+'</div>'}
 function left(){var o=ST.o,s=ST.step;
  if(s===0)return '<div class="st-q"><em>1</em>옷</div>'+chips(CLOTH,'cloth')+'<div class="st-q"><em>2</em>배경색</div>'+chips(BG,'bg')+'<div class="st-q"><em>3</em>표정</div>'+chips(FACE,'face');
- if(s===1)return '<div class="st-q"><em>1</em>계절</div>'+chips(SEASON.map(function(x){return x.n}),'season')+'<div class="st-q"><em>2</em>지금의 나를 가장 빛나게 할 풍경 <small>비워 두면 AI가 골라요</small></div><input class="st-in" data-sti="scene" value="'+esc(o.scene)+'" placeholder="예) '+esc(SEASON[o.season].ex.split(' / ').slice(0,2).join(' / '))+'"><p class="st-help" style="padding-left:0;margin-top:6px">예시: '+esc(SEASON[o.season].ex)+'</p>';
+ if(s===1)return '<div class="st-q"><em>1</em>계절</div>'+chips(SEASON.map(function(x){return x.n}),'season')+'<div class="st-q"><em>2</em>지금의 나를 가장 빛나게 할 풍경 <small>비워 두면 AI가 골라요</small></div><div class="st-chips">'+SEASON[o.season].ex.split(' / ').map(function(x){return '<button type="button" data-stscene="'+esc(x)+'"'+(o.scene.trim()===x?' class="on"':'')+'>'+esc(x)+'</button>'}).join('')+'</div><input class="st-in" data-sti="scene" value="'+esc(o.scene)+'" placeholder="직접 쓰기 (예: 우리 동네 단골 카페 창가)">';
  var jp=jobsPick();
  return '<div class="st-q"><em>1</em>나의 직업 <small>직업 탐색에서 고른 희망직종</small></div>'+(jp.length?'<div class="st-chips">'+jp.map(function(x){return '<button type="button" data-stjob="'+esc(x)+'"'+((o.job||jp[0])===x?' class="on"':'')+'>'+esc(x)+'</button>'}).join('')+'</div>':'')+'<input class="st-in" data-sti="job" value="'+esc(o.job)+'" placeholder="직접 쓰기 (예: 바리스타, 요양보호사)">'+
  '<div class="st-q"><em>2</em>3년 후 직함</div>'+chips(TITLE,'title')+'<input class="st-in" data-sti="titleIn" value="'+esc(o.titleIn)+'" placeholder="직접 쓰기 (예: 수석 바리스타)">'+
@@ -6755,15 +6755,16 @@ function body(){var s=ST.step;
  if(s===3)return head+card4();
  var I=INFO[s];
  return head+'<div class="st-info"><span><b>사진 첨부</b>'+esc(I[0])+'</span><span><b>채울 빈칸</b>'+esc(I[1])+'</span><span><b>도움말</b>'+esc(I[2])+'</span></div>'+
- '<div class="st-grid"><div class="st-box" id="st-left">'+left()+'</div><div class="st-box"><p class="st-flow">① 사진 넣기 → ② 프롬프트 붙여넣기 → ③ 파란 글씨 확인 → ④ 보내기</p><div class="st-pv" id="st-pv">'+prompt(true)+'</div>'+
- '<div class="st-acts"><button type="button" class="p" data-sto="gpt">ChatGPT 열기 (프롬프트 복사)</button><button type="button" class="s" data-sto="gem">제미나이 열기 (프롬프트 복사)</button><button type="button" class="s" data-sto="cp">복사만</button>'+(s===0?'<button type="button" class="h" data-stgo="home">만든 증명사진 앱에 올리기 →</button>':'')+'</div>'+
- '<ul class="st-help"><li>앱이 열리면 먼저 사진을 넣고, 입력창에 붙여넣기(길게 누르기 → 붙여넣기) 한 뒤 보내요.</li><li>얼굴 사진이 걱정되면 "AI 설정 가이드"의 임시 채팅·학습 끄기를 먼저 확인해요.</li><li>무료 계정은 하루 그림 수가 적어요. 안 나오면 다른 앱이나 내일 다시 해요.</li></ul></div></div>'}
+ '<div class="st-grid"><div class="st-box" id="st-left">'+left()+'</div><div class="st-box"><p class="st-flow">① 사진 넣기 → ② 프롬프트 붙여넣기 → ③ 파란 글씨 확인 → ④ 보내기</p>'+
+ '<div class="st-acts sttop"><button type="button" class="p" data-sto="gpt">ChatGPT 열기</button><button type="button" class="s" data-sto="gem">제미나이 열기 (복사)</button><button type="button" class="s" data-sto="cp">복사만</button>'+(s===0?'<button type="button" class="h" data-stgo="home">만든 증명사진 앱에 올리기 →</button>':'')+'</div><div class="st-pv" id="st-pv">'+prompt(true)+'</div>'+
+ '<ul class="st-help"><li>ChatGPT는 프롬프트가 자동으로 들어가요. 사진만 올리면 돼요. 제미나이는 사진을 넣고 붙여넣기(길게 누르기 → 붙여넣기) 해요.</li><li>얼굴 사진이 걱정되면 "AI 설정 가이드"의 임시 채팅·학습 끄기를 먼저 확인해요.</li><li>무료 계정은 하루 그림 수가 적어요. 안 나오면 다른 앱이나 내일 다시 해요.</li></ul></div></div>'}
 function copy(t){try{navigator.clipboard.writeText(t)}catch(e){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(x){}a.remove()}}
 function toast(m){if(typeof showToast==='function')showToast(m)}
 function refresh(full){var r=document.getElementById('st-root');if(!r)return;if(full){r.innerHTML=body();return}var pv=document.getElementById('st-pv');if(pv)pv.innerHTML=prompt(true)}
 function bind(){var r=document.getElementById('st-root');if(!r||r._b)return;r._b=1;
  r.addEventListener('click',function(e){var b=e.target.closest('[data-sts]');if(b){ST.step=+b.dataset.sts;refresh(1);return}
   b=e.target.closest('[data-stc]');if(b){var k=b.dataset.stc,i=+b.dataset.i;if(k==='dream'){if(ST.o.dream[i])delete ST.o.dream[i];else ST.o.dream[i]=1}else{ST.o[k]=i;if(k==='title')ST.o.titleIn=''}save();refresh(1);return}
+  b=e.target.closest('[data-stscene]');if(b){var v=b.dataset.stscene;ST.o.scene=(ST.o.scene.trim()===v?'':v);save();refresh(1);return}
   b=e.target.closest('[data-stjob]');if(b){ST.o.job=b.dataset.stjob;save();refresh(1);return}
   b=e.target.closest('[data-sto]');if(b){var p=prompt(false);copy(p);var m=b.dataset.sto;if(m==='gpt'){var w=window.open('https://chatgpt.com/?q='+encodeURIComponent(p),'_blank');if(w)w.opener=null;toast('ChatGPT에 프롬프트가 들어갔어요. 사진을 올려 주세요.')}else if(m==='gem'){window.open('https://gemini.google.com/app','_blank','noopener');toast('프롬프트를 복사했어요. 사진을 넣고 붙여넣기 하세요.')}else toast('프롬프트를 복사했어요.');return}
   b=e.target.closest('[data-stgo]');if(b){if(typeof nav==='function')nav(b.dataset.stgo);return}});
