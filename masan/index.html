@@ -6816,6 +6816,43 @@ window.GBIZ={view:function(){return '<section class="panel st"><div style="displ
 })();
 </script>
 <script>views.studio=function(){return STUDIO.view()};init.studio=function(){STUDIO.bind()};views.gbiz=function(){return GBIZ.view()};init.gbiz=function(){GBIZ.bind()};if(state.page==='studio'||state.page==='gbiz')render();</script>
+<style id="iv-ex-css">
+#interviewAnswer{border:2px dashed #E07B39!important;background:#FFF9F4!important;min-height:150px!important;font-size:16px!important;line-height:1.6}
+#interviewAnswer:focus{border-style:solid!important;background:#fff!important;outline:none}
+.iv-ans-l{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}.iv-ans-l small{color:#B4561C;font-weight:700}
+.iv-ex{background:#fff;border:2px solid #E2BE4F;border-radius:12px;padding:12px 14px}
+.iv-ex .iv-ex-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 8px}
+.iv-ex .iv-ex-h b{font-size:17px;color:#4A3A00}.iv-ex .iv-ex-h span{font-size:13px;color:#7a6a3a;background:#FFF4CC;border-radius:999px;padding:2px 9px}
+.iv-ex ol{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.iv-ex li{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:start;line-height:1.6}
+.iv-ex li i{font-style:normal;font-size:12px;font-weight:800;color:#fff;background:#C9A63A;border-radius:999px;padding:2px 8px;white-space:nowrap;margin-top:3px}
+#feedbackArea:has(.iv-ex){height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important;padding:8px!important;background:transparent!important;border:0!important}
+.iv-ex .iv-ex-f{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;font-size:13.5px;color:#6b6b6b}
+</style>
+<script id="iv-ex-js">
+(function(){
+var J=function(){try{return state.job||'지원 직무'}catch(e){return '지원 직무'}};
+function EXS(i){var j=J();return ({
+0:[['나를 한마디로','안녕하십니까. 꼼꼼함이 가장 큰 강점인 지원자입니다.'],['실제 경험','아이 둘을 키우며 10년 동안 학부모회 총무를 맡아 회비와 행사 준비를 빠짐없이 챙겨 왔습니다.'],['다시 일할 준비','최근에는 AI·챗GPT 활용 과정을 들으며 문서 작성과 정리를 새로 배웠습니다.'],['직무로 마무리','이 꼼꼼함을 살려 '+j+' 업무를 정확하고 성실하게 해내겠습니다. 감사합니다.']],
+1:[['지원 이유 먼저','제가 '+j+'에 지원한 이유는 사람을 돕는 일에서 가장 큰 보람을 느끼기 때문입니다.'],['내 강점과 연결','동네 어르신들 장보기를 도와드리며 상대의 필요를 먼저 살피는 것이 제 강점이라는 것을 알게 되었습니다.'],['준비한 노력','그래서 관련 교육을 수료하며 이 일을 차근차근 준비해 왔습니다.'],['각오','오래 믿고 맡길 수 있는 직원이 되겠습니다.']],
+2:[['상황','저는 아파트 부녀회에서 3년 동안 바자회 준비를 맡았습니다. 처음에는 물건 정리가 늦어 손님이 오래 기다렸습니다.'],['내가 한 행동','그래서 제가 품목별 목록표를 만들어 하루 전에 미리 정리했습니다.'],['결과','그 결과 계산 시간이 절반으로 줄었고, 다음 해에도 다시 맡아 달라는 부탁을 받았습니다.'],['직무와 연결','이 경험을 살려 '+j+' 업무도 미리 준비하고 꼼꼼하게 해내겠습니다.']],
+3:[['배우는 순서','처음 맡는 일은 설명을 들으며 순서를 메모하겠습니다.'],['동료 배려','메모를 보며 직접 해 보고, 모르는 것은 모아 두었다가 한 번에 여쭤 보겠습니다.'],['실제 경험','이번 컴퓨터 교육에서도 이 방법으로 엑셀 기초를 2주 만에 익혔습니다.'],['목표 시점','일주일 안에 기본 업무를 혼자 할 수 있도록 하겠습니다.']],
+4:[['먼저 듣기','동료와 의견이 다를 때는 먼저 상대의 이야기를 끝까지 듣겠습니다.'],['이유로 말하기','그다음 제 생각을 이유와 함께 차분히 말씀드리겠습니다.'],['함께 정하기','일에 더 좋은 방법이 무엇인지 함께 정하겠습니다.'],['결정에 따르기','결정이 나면 제 의견과 달라도 따르며 최선을 다하겠습니다.']],
+5:[['솔직한 단점','제가 보완하고 있는 점은 일을 꼼꼼히 하다 보니 시간이 걸린다는 점입니다.'],['지금 하는 노력','그래서 할 일마다 마감 시간을 먼저 정해 두고 일하는 연습을 하고 있습니다.'],['달라진 모습','그 결과 이번 교육 과제는 모두 기한 안에 냈습니다.'],['업무 대비','입사 후에도 시간을 먼저 정하고 일해 업무에 지장이 없도록 하겠습니다.']],
+6:[['담담하게 공백 설명','가족을 돌보느라 5년 동안 일을 쉬었습니다.'],['공백 중 쓴 강점','그동안 아이 학교 봉사와 동네 모임 총무를 맡으며 사람을 대하고 돈을 관리하는 일을 꾸준히 해 왔습니다.'],['다시 일할 준비','다시 일하기 위해 AI·챗GPT 활용 과정을 수료했고, 컴퓨터활용능력 자격도 준비하고 있습니다.'],['각오','쉬었던 시간만큼 더 성실하게 일하겠습니다.']]
+})[i]||[]}
+function exText(i){return EXS(i).map(function(x){return x[1]}).join(' ')}
+function exHtml(i){var L=EXS(i),t=exText(i),sec=Math.round(t.replace(/\s/g,'').length/5);
+ return '<div class="iv-ex"><div class="iv-ex-h"><b>이렇게 답하면 돼요 · 예시 답변</b><span>가상 인물의 예시예요</span></div><ol>'+L.map(function(x){return '<li><i>'+E(x[0])+'</i><span>'+E(x[1])+'</span></li>'}).join('')+'</ol><div class="iv-ex-f"><span>말하는 시간 약 '+sec+'초</span><button type="button" class="btn small" id="ivExUse">예시를 내 답변 칸에 옮겨서 고쳐 쓰기</button></div><p class="muted" style="margin:8px 0 0;font-size:13.5px">그대로 외우지 말고, 내 경험으로 한 줄씩 바꿔 보세요. 다 쓰면 왼쪽 <b>답변 점검하기</b>를 눌러요.</p></div>'}
+var _v=views.interview;views.interview=function(){var h=_v();var i=state.interviewIdx||0;
+ h=h.replace(/<span>나의 답변<\/span>/,'<span class="iv-ans-l">나의 답변 <small>마이크로 말하거나, 여기에 직접 타자로 써도 돼요</small></span>');
+ h=h.replace(/placeholder="직접 해본 일을 바탕으로 답변을 입력하세요\."/,'placeholder="여기에 직접 써 보세요. 예시 답변처럼 ① 나를 한마디로 → ② 실제 경험 → ③ 준비한 것 → ④ 다짐 순서로 쓰면 쉬워요."');
+ h=h.replace(/(<div id="feedbackArea"[^>]*>)\s*답변을 말하거나 입력한 뒤 "답변 점검하기"를 누르면 여기에 결과가 나와요\.\s*(<\/div>)/,function(m,a,b){return a+exHtml(i)+b});
+ return h};
+document.addEventListener('click',function(e){if(e.target&&e.target.id==='ivExUse'){var ta=document.getElementById('interviewAnswer');if(!ta)return;var i=state.interviewIdx||0;ta.value=exText(i);ta.dispatchEvent(new Event('input',{bubbles:true}));ta.focus();try{showToast('예시를 옮겼어요. 내 경험으로 바꿔서 고쳐 써 보세요.')}catch(x){}}});
+if(state.page==='interview')render();
+})();
+</script>
 <script id="hwpx-js">
 /* 2026.11.16 입사지원서 한글(.hwpx) 저장 */
 (function(){
