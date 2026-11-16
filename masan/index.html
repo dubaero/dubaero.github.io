@@ -3494,8 +3494,8 @@ init.resume.rebind=()=>{const b=$('#rvChkBtn');if(b)b.onclick=()=>{state.rv.chk=
 
 /* v12.9: 하단 확인 문구·날짜·서명란 */
 function rvToday(){const d=new Date();return `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`}
-function rvSign(){const co=(state.rv.company||'').trim(),nm=(state.name||'').trim();return `<div class="rv-sign"><p>위 기재한 내용은 모두 사실이며, 사실과 다를 경우 불이익을 받을 수 있음을 확인합니다.</p><p class="rv-date">${rvToday()}</p><p class="rv-who">지원자 : ${nm?E(nm):'<span class="rv-b rv-jump" data-rvjump="#rvName">[이름]</span>'} <span class="rv-sig">(서명)</span></p></div>`}
-function rvSignDocx(){const co=(state.rv.company||'').trim(),nm=(state.name||'').trim();return rvP('',{after:900})+rvP('위 기재한 내용은 모두 사실이며, 사실과 다를 경우 불이익을 받을 수 있음을 확인합니다.',{center:1,after:200})+rvP(rvToday(),{center:1,after:200})+`<w:p><w:pPr><w:jc w:val="right"/><w:spacing w:after="200"/></w:pPr>${rvRuns('지원자 : '+(nm||'[이름]')+'          (서명)',21)}</w:p>`}
+function rvSign(){const co=(state.rv.company||'').trim(),nm=(state.name||'').trim();return `<div class="rv-sign"><p>위 기재한 내용은 모두 사실임을 확인합니다.</p><p class="rv-date">${rvToday()}</p><p class="rv-who">지원자 : ${nm?E(nm):'<span class="rv-b rv-jump" data-rvjump="#rvName">[이름]</span>'} <span class="rv-sig">(서명)</span></p></div>`}
+function rvSignDocx(){const co=(state.rv.company||'').trim(),nm=(state.name||'').trim();return rvP('위 기재한 내용은 모두 사실임을 확인합니다.',{center:1,after:900})+rvP(rvToday(),{center:1,after:200})+`<w:p><w:pPr><w:jc w:val="right"/><w:spacing w:after="200"/></w:pPr>${rvRuns('지원자 : '+(nm||'[이름]')+'          (서명)',21)}</w:p>`}
 
 const rvExpN=t=>String(t).trim().replace(/[.。]$/,'').replace(/했습니다$/,'한').replace(/였습니다$/,'였던').replace(/습니다$/,'는');
 /* ===== v13: 면접 연습실 — 답변 점검 · 보완 답변 예시 · 왜 좋은지 설명 ===== */
@@ -6835,7 +6835,7 @@ function T(head,rows,ws){var R=[];if(head)R.push(head.map(function(h){return {t:
   out+='<hp:tr>'+cells+'</hp:tr>'});
  var W=ws.reduce(function(a,b){return a+b},0)*5;tid++;
  return '<hp:p id="'+(pid++)+'" paraPrIDRef="20" styleIDRef="0" pageBreak="0" columnBreak="0" merged="0"><hp:run charPrIDRef="7"><hp:tbl id="'+(1000+tid)+'" zOrder="'+tid+'" numberingType="TABLE" textWrap="TOP_AND_BOTTOM" textFlow="BOTH_SIDES" lock="0" dropcapstyle="None" pageBreak="CELL" repeatHeader="1" rowCnt="'+nR+'" colCnt="'+nC+'" cellSpacing="0" borderFillIDRef="3" noAdjust="0"><hp:sz width="'+W+'" widthRelTo="ABSOLUTE" height="'+(RH*nR)+'" heightRelTo="ABSOLUTE" protect="0"/><hp:pos treatAsChar="1" affectLSpacing="0" flowWithText="1" allowOverlap="0" holdAnchorAndSO="0" vertRelTo="PARA" horzRelTo="COLUMN" vertAlign="TOP" horzAlign="LEFT" vertOffset="0" horzOffset="0"/><hp:outMargin left="0" right="0" top="0" bottom="0"/><hp:inMargin left="560" right="560" top="360" bottom="360"/>'+out+'</hp:tbl></hp:run><hp:run charPrIDRef="7"><hp:t/></hp:run></hp:p>'}
-function sign(){var co=(state.rv.company||'').trim(),nm=(state.name||'').trim();return P('\n\n\n')+P('위 기재한 내용은 모두 사실이며, 사실과 다를 경우 불이익을 받을 수 있음을 확인합니다.',{pp:21})+P(rvToday(),{pp:21})+P('지원자 : '+(nm||'[이름]')+'          (서명)',{pp:22})}
+function sign(){var co=(state.rv.company||'').trim(),nm=(state.name||'').trim();return P('위 기재한 내용은 모두 사실임을 확인합니다.',{pp:21})+P('\n\n\n')+P(rvToday(),{pp:21})+P('지원자 : '+(nm||'[이름]')+'          (서명)',{pp:22})}
 function qT(){var rv=state.rv,rows=[];RQ.forEach(function(q,i){var t=pl(rv.q[q[0]]&&rv.q[q[0]].trim()?rv.q[q[0]]:rvDraft(q[0])).replace(/\n\s*\n/g,'\n');rows.push([{t:(i+1)+'. '+q[1]+' ('+t.length+'자)',head:1}],[{t:t,pp:26}])});return T(null,rows,[9700])}
 var NOTE='※ 교육용 초안입니다. [ ] 괄호 부분을 모두 내 이야기로 바꾸고, 회사가 정한 서식이 있으면 그 서식을 쓰세요.';
 function body(){var rv=state.rv,blind=rv.fmt==='blind',GEN=!blind;
