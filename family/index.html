@@ -4522,7 +4522,7 @@ img{filter:contrast(1.12) saturate(1.18)}
 (function(){
   var MOB=window.matchMedia('(max-width:640px)').matches;
   if(MOB&&!true)return;
-  var SKIP='svg,svg *,canvas,script,style,noscript,.swipe-dots,#tiles .flame',done=new WeakSet();
+  var SKIP='svg,svg *,canvas,script,style,noscript,.swipe-dots,#tiles .flame,#tiles .tile b',done=new WeakSet();
   function own(el){for(var n=el.firstChild;n;n=n.nextSibling){if(n.nodeType===3&&n.textContent.trim())return true}return false}
   function run(){
     var els=document.body.getElementsByTagName('*'),list=[];
@@ -4580,6 +4580,7 @@ var _of=openForm;openForm=function(){var r=_of.apply(this,arguments);PEX=false;E
 @media (max-width:760px){#main4{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important}#main4 .m4{padding:9px 2px!important;flex-direction:column!important;gap:3px!important}#main4 .m4 b{font-size:11px!important;white-space:normal!important;word-break:keep-all;text-align:center;line-height:1.2}}
 #v-prompt .jx-top h2{display:none}
 #tiles .tile span.flame{font-size:17px!important}
+#tiles .tile b{font-size:13.9px!important}
 </style>
 <style id="st-css">
 /* 2026.11.16 나만의 사진관 · 제미나이 비서 */
