@@ -1931,8 +1931,18 @@ function selfResult(){return qs.map(q=>state.questions[q.id]?`<p><b>${E(q.title)
 function improvementText(){return state.improvements.map(k=>`<p><b>${E(k)}</b><br>${E(guide[k])}</p>`).join('')||'보완하고 싶은 부분을 선택하면 실천 방법이 표시됩니다.'}
 function careerColor(t){return ({office:'#31765f',promotion:'#8662a8',cooking:'#d1773e',startup:'#c26d63',care:'#7771aa',digital:'#436ca1',industry:'#587785'}[t]||'#397964')}
 function togglePreferred(name){let arr=state.preferredJobs;if(arr.includes(name)){state.preferredJobs=arr.filter(v=>v!==name);if(state.job===name&&state.preferredJobs.length)rvSetJob(state.preferredJobs[0])}else{if(arr.length>=3){showToast('희망직종은 최대 3개까지 선택할 수 있습니다.');return}state.preferredJobs=[...arr,name]}jobCards($('#jobsearch')?.value||'')}
-function rvSetJob(name){const old=state.job;if(old===name){state.job=name;return}const rv=state.rv;if(rv&&rv.q&&typeof RQ!=='undefined'&&typeof rvDraft==='function'){RQ.forEach(([id])=>{const cur=rv.q[id];if(!cur||!cur.trim())return;let od='';try{od=rvDraft(id)}catch(e){}if(rvPlain(cur).trim()===rvPlain(od).trim())rv.q[id]='';else rv.q[id]=cur.split('제가 '+old+' 직무에').join('제가 '+name+' 직무에')})}state.job=name}
-function goResume(name){if(!state.preferredJobs.includes(name)){if(state.preferredJobs.length>=3)state.preferredJobs=[...state.preferredJobs.slice(1),name];else state.preferredJobs=[...state.preferredJobs,name]}rvSetJob(name);try{if(state.rv&&state.rv.q)RQ.forEach(([id])=>{if(!(state.rv.q[id]||'').trim())state.rv.q[id]=rvDraft(id)})}catch(e){}nav('resume');showToast(name+' 직무에 맞게 지원동기 초안을 바꿨어요.')}
+function rvGen(id){const rv=state.rv;try{const set=typeof rlSel==='function'?rlSel(id):null;if(set&&Object.keys(set).length&&typeof rlBuild==='function'){const t=rlBuild(id);(rv.chipText||(rv.chipText={}))[id]=t;return t}}catch(e){}return rvDraft(id)}
+function rvSetJob(name,ask){const old=state.job,rv=state.rv;state.job=name;if(!rv||!rv.q||typeof RQ==='undefined')return;
+ const others=(typeof jobs!=='undefined'?jobs.map(j=>j.name):[]).filter(n=>n&&n!==name&&n.length>=2);
+ const user=[];
+ RQ.forEach(([id])=>{const cur=rv.q[id];if(!cur||!cur.trim())return;let od='';if(old!==name){state.job=old;try{od=rvDraft(id)}catch(e){}state.job=name}
+  const isAuto=(od&&rvPlain(cur).trim()===rvPlain(od).trim())||(rv.chipText&&rv.chipText[id]&&cur===rv.chipText[id]);
+  const stale=(old!==name&&cur.indexOf(old)>-1)||others.some(n=>cur.indexOf(n)>-1);
+  if(isAuto&&old!==name)rv.q[id]=rvGen(id);else if(stale||isAuto)user.push(id)});
+ if(!user.length)return;
+ if(ask&&confirmSafe('이미 쓴 자기소개서에 다른 직무 내용이 남아 있어요.\n'+name+' 직무에 맞게 4개 항목을 새 초안으로 바꿀까요?\n(취소하면 내 글은 그대로 두고 직무 이름만 바꿔요)')){user.forEach(id=>{rv.q[id]=rvGen(id)})}
+ else if(old!==name)user.forEach(id=>{rv.q[id]=rv.q[id].split(old).join(name)})}
+function goResume(name){if(!state.preferredJobs.includes(name)){if(state.preferredJobs.length>=3)state.preferredJobs=[...state.preferredJobs.slice(1),name];else state.preferredJobs=[...state.preferredJobs,name]}rvSetJob(name,true);try{if(state.rv&&state.rv.q)RQ.forEach(([id])=>{if(!(state.rv.q[id]||'').trim())state.rv.q[id]=rvGen(id)})}catch(e){}nav('resume');showToast(name+' 직무에 맞게 지원동기 초안을 바꿨어요.')}
 function setPrimaryJob(name){if(!state.preferredJobs.includes(name)){if(state.preferredJobs.length>=3){showToast('희망직종은 최대 3개입니다. 기존 직종을 제외한 후 지정해 주세요.');return}state.preferredJobs=[...state.preferredJobs,name]}rvSetJob(name);jobCards($('#jobsearch')?.value||'')}
 const synMap = {
   '경리': ['회계', '장부', '정산', '경리', '세무', '사무원', '급여'],
@@ -3401,8 +3411,8 @@ init.resume=()=>{const rv=state.rv;phBind();
  [['#rvBirth','birth'],['#rvHome','home']].forEach(([q,f])=>{const e=$(q);if(e)e.oninput=()=>{rv[f]=e.value;rvUpd()}});
  const wi=$('#rvWish');if(wi)wi.oninput=()=>{state.job=wi.value.trim()||'희망 직종';rvUpd()};
  const rc=$('#rvCat');if(rc)rc.onchange=()=>{rvSyncJobSel()};
- const rj=$('#rvJob');if(rj)rj.onchange=e=>{rvSetJob(e.target.value);const y=window.scrollY;render();window.scrollTo(0,y)};
- const ji=$('#rvJobIn');if(ji)ji.onchange=()=>{if(ji.value.trim()){rvSetJob(ji.value.trim());const y=window.scrollY;render();window.scrollTo(0,y)}};
+ const rj=$('#rvJob');if(rj)rj.onchange=e=>{rvSetJob(e.target.value,true);const y=window.scrollY;render();window.scrollTo(0,y)};
+ const ji=$('#rvJobIn');if(ji)ji.onchange=()=>{if(ji.value.trim()){rvSetJob(ji.value.trim(),true);const y=window.scrollY;render();window.scrollTo(0,y)}};
  document.querySelectorAll('[data-rvfmt]').forEach(b=>b.onclick=()=>{rv.fmt=b.dataset.rvfmt;render()});
  const keep=()=>{const y=window.scrollY,sp=document.querySelector('.rv-side');const st=sp?sp.scrollTop:0;render();window.scrollTo(0,y);const n=document.querySelector('.rv-side');if(n)n.scrollTop=st};
  document.querySelectorAll('[data-rvadd]').forEach(b=>b.onclick=()=>{rv[b.dataset.rvadd].push([]);keep()});
