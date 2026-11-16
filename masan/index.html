@@ -3741,10 +3741,8 @@ const _vIv=views.interview;views.interview=()=>_vIv().replace('정해진 질문�
     };
     const gpt = $('#pfGpt');
     if(gpt) gpt.onclick=()=>{
-      navigator.clipboard.writeText(buildPfPrompt()).then(()=>{
-        showToast('프롬프트를 복사했어요. ChatGPT 창에 붙여넣으세요.');
-        window.open('https://chatgpt.com/','_blank','noopener');
-      });
+      const _p=buildPfPrompt();const _w=window.open('https://chatgpt.com/?q='+encodeURIComponent(_p),'_blank');if(_w)_w.opener=null;
+      navigator.clipboard.writeText(_p).then(()=>showToast('ChatGPT에 프롬프트가 들어갔어요.'));
     };
     const gem = $('#pfGemini');
     if(gem) gem.onclick=()=>{
@@ -4020,10 +4018,8 @@ ${story ? '- 내가 털어놓은 속마음: ' + story + '\n' : ''}- 엽서에 �
     const gptP = $('#psGptPost');
     if(gptP) gptP.onclick = ()=>{
       const p = buildPostcardPrompt();
-      navigator.clipboard.writeText(p).then(()=>{
-        showToast('선물 엽서 프롬프트를 복사했어요. ChatGPT 창에 붙여넣으세요.');
-        window.open('https://chatgpt.com/', '_blank', 'noopener');
-      });
+      const _w=window.open('https://chatgpt.com/?q='+encodeURIComponent(p),'_blank');if(_w)_w.opener=null;
+      navigator.clipboard.writeText(p).then(()=>showToast('ChatGPT에 엽서 프롬프트가 들어갔어요.'));
     };
 
     const gemP = $('#psGeminiPost');
@@ -4425,10 +4421,8 @@ ${story ? '- 내가 털어놓은 속마음: ' + story + '\n' : ''}- 엽서에 �
     const gptV = $('#psGptVent');
     if(gptV) gptV.onclick=()=>{
       const p = `너는 "빡침 번역기"야. 직장/사회생활에서 생긴 갈등 상황을 우아하고 단호한 프로페셔널 비즈니스어로 순화해 줘.\n\n[있었던 일]\n${v.vIn||'(없음)'}\n\n[꼭 전할 핵심 사실]\n${v.vMust||'(없음)'}\n\n[조건]\n- 받는 사람: ${v.vWho}\n- 감정은 빼고 원칙과 사실, 다음 조치 위주로 단호하고 공손하게 작성해 줘.`;
-      navigator.clipboard.writeText(p).then(()=>{
-        showToast('번역 요청 프롬프트를 복사했어요. ChatGPT 창에 붙여넣으세요.');
-        window.open('https://chatgpt.com/','_blank','noopener');
-      });
+      const _w=window.open('https://chatgpt.com/?q='+encodeURIComponent(p),'_blank');if(_w)_w.opener=null;
+      navigator.clipboard.writeText(p).then(()=>showToast('ChatGPT에 번역 프롬프트가 들어갔어요.'));
     };
     const gemV = $('#psGeminiVent');
     if(gemV) gemV.onclick=()=>{
@@ -6771,7 +6765,7 @@ function bind(){var r=document.getElementById('st-root');if(!r||r._b)return;r._b
  r.addEventListener('click',function(e){var b=e.target.closest('[data-sts]');if(b){ST.step=+b.dataset.sts;refresh(1);return}
   b=e.target.closest('[data-stc]');if(b){var k=b.dataset.stc,i=+b.dataset.i;if(k==='dream'){if(ST.o.dream[i])delete ST.o.dream[i];else ST.o.dream[i]=1}else{ST.o[k]=i;if(k==='title')ST.o.titleIn=''}save();refresh(1);return}
   b=e.target.closest('[data-stjob]');if(b){ST.o.job=b.dataset.stjob;save();refresh(1);return}
-  b=e.target.closest('[data-sto]');if(b){var p=prompt(false);copy(p);var m=b.dataset.sto;if(m==='gpt'){window.open('https://chatgpt.com/','_blank','noopener');toast('프롬프트를 복사했어요. 사진을 넣고 붙여넣기 하세요.')}else if(m==='gem'){window.open('https://gemini.google.com/app','_blank','noopener');toast('프롬프트를 복사했어요. 사진을 넣고 붙여넣기 하세요.')}else toast('프롬프트를 복사했어요.');return}
+  b=e.target.closest('[data-sto]');if(b){var p=prompt(false);copy(p);var m=b.dataset.sto;if(m==='gpt'){var w=window.open('https://chatgpt.com/?q='+encodeURIComponent(p),'_blank');if(w)w.opener=null;toast('ChatGPT에 프롬프트가 들어갔어요. 사진을 올려 주세요.')}else if(m==='gem'){window.open('https://gemini.google.com/app','_blank','noopener');toast('프롬프트를 복사했어요. 사진을 넣고 붙여넣기 하세요.')}else toast('프롬프트를 복사했어요.');return}
   b=e.target.closest('[data-stgo]');if(b){if(typeof nav==='function')nav(b.dataset.stgo);return}});
  r.addEventListener('input',function(e){var t=e.target;if(t.dataset&&t.dataset.sti){ST.o[t.dataset.sti]=t.value;save();refresh(0)}});
  r.addEventListener('change',function(e){var t=e.target;if(t.dataset&&(t.dataset.sti==='job'||t.dataset.sti==='titleIn'))refresh(1)})}
