@@ -4644,7 +4644,7 @@ var _of=openForm;openForm=function(){var r=_of.apply(this,arguments);PEX=false;E
 </style>
 <script id="st-js">
 (function(){
-var ST={step:0,o:{cloth:0,bg:0,face:0,season:2,scene:'',fd:-1,fdIn:'',fp:-1,fpIn:'',fm:0}};
+var ST={step:0,o:{cloth:0,bg:0,face:0,season:2,scene:'',fd:-1,fdIn:'',fpT:'',fpIn:''}};
 try{var sv=JSON.parse(localStorage.getItem('st-fam-v1')||'null');if(sv&&sv.o)ST.o=Object.assign(ST.o,sv.o)}catch(e){}
 function save(){try{localStorage.setItem('st-fam-v1',JSON.stringify({o:ST.o}))}catch(e){}}
 function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -4661,7 +4661,8 @@ var DREAM=['배운 기술로 단골손님이 생긴 일터를 지키고 있어�
 var STEPS=['증명사진','가장 나다운 지금의 나','10년 후 나의 모습','응원 엽서'];
 var FD=['센터장이 되어 직원들과 회의를 이끄는 모습','가족상담 전문가로 무대에서 강연하는 모습','내 집 마련 후 가족과 집들이하는 모습','가족과 해외여행을 떠난 모습','내 이름으로 낸 책을 들고 있는 작가의 모습','대학원 졸업식에서 학위모를 쓴 모습','전원주택 마당에서 텃밭을 가꾸는 모습','내 카페·공방을 연 사장님의 모습','마라톤을 완주한 건강한 모습','후배들에게 존경받는 멘토로 상을 받는 모습'];
 var FP=['센터장실 창가','대학 강당 무대','내 집 거실','파리 에펠탑 앞','스위스 알프스 호숫가','제주 바닷가','전주 한옥마을','전원주택 마당','크루즈 갑판','시상식 무대'];
-var FM=['AI가 어울리게','맑은 낮','노을','야경'];
+var FPM=[['센터장실 창가','회의실','센터 개소식 행사장','센터 앞 현판'],['대학 강당 무대','전국 워크숍 단상','방송 스튜디오'],['햇살 드는 거실','정원 있는 마당','바다 보이는 테라스','새집 현관 앞'],['파리 에펠탑','스위스 알프스','그리스 산토리니','뉴욕 센트럴파크','교토 단풍길'],['서점 사인회','북카페','출판 기념회'],['캠퍼스 잔디밭','졸업식장','도서관 앞'],['텃밭','장독대 마당','시골집 툇마루'],['가게 앞 간판','카운터','작업대'],['결승선','해변 러닝 코스','시상대'],['시상식 무대','기념 촬영 포토월']];
+function fpList(){var o=ST.o;return (!o.fdIn.trim()&&o.fd>-1&&FPM[o.fd])?FPM[o.fd]:FP}
 function today(){var d=new Date();return d.getFullYear()+'. '+String(d.getMonth()+1).padStart(2,'0')+'. '+String(d.getDate()).padStart(2,'0')}
 
 function U(t){return '<span class="u">'+esc(t)+'</span>'}
@@ -4683,17 +4684,17 @@ function prompt(html){var o=ST.o,s=ST.step,L=[];
   '하단에 "'+today()+'"로 작게 넣고, 세로(2:3)로 질문 없이 바로 만들어 줘.',
   '',
   (html?'<span class="b">지금의 나를 가장 빛나게 할 '+esc(se.n)+' 풍경은?:</span> ':'지금의 나를 가장 빛나게 할 '+se.n+' 풍경은?: ')+(o.scene.trim()?w(o.scene.trim()):(html?'<span class="stph">(비워 두면 AI가 골라요) 예) '+esc(se.ex.split(' / ').slice(0,3).join(' / '))+'</span>':''))]}
- if(s===2){var d=o.fdIn.trim()||(o.fd>-1?FD[o.fd]:''),pl=o.fpIn.trim()||(o.fp>-1?FP[o.fp]:''),yr=new Date().getFullYear()+10;
-  L=['첨부한 내 사진 속 얼굴로, 10년 후 꿈을 이룬 나의 모습을 상상한 사진 한 장을 만들어 줘.','',
+ if(s===2){var d=o.fdIn.trim()||(o.fd>-1?FD[o.fd]:''),pl=o.fpIn.trim()||o.fpT,yr=new Date().getFullYear()+10;
+  L=['첨부한 내 사진 속 얼굴로, 10년 후 꿈을 이룬 나의 모습을 하이엔드 패션 매거진 화보 한 장으로 만들어 줘.','',
   '[10년 후의 나]',
   '- 꿈을 이룬 장면: '+(d?w(d):(html?'<span class="stph">(왼쪽에서 고르거나 직접 쓰세요)</span>':'(내가 꿈꾸는 10년 후 모습)')),
-  '- 장소·배경: '+(pl?w(pl):'그 장면에 가장 잘 어울리는 장소를 네가 골라 줘'),
-  '- 시간·분위기: '+w(FM[o.fm]==='AI가 어울리게'?'그 장면이 가장 빛나는 시간(맑은 낮·노을·야경 중)을 네가 골라 줘':FM[o.fm]),'',
-  '[이렇게 만들어 줘]',
-  '- 얼굴 생김새는 실물과 가깝게, 나이는 지금보다 10년 지난 자연스러운 모습으로. 세월이 쌓인 여유와 자신감이 배어 나오게.',
-  '- 표정·포즈·옷차림은 그 장면에 가장 어울리게, 꿈을 이룬 순간의 뿌듯하고 행복한 표정으로.',
-  '- 실제로 찍은 사진처럼 자연스럽게, 영화 포스터 같은 시네마틱한 조명과 깊이 있는 색감, 인물에 초점이 맞고 배경은 부드럽게.',
-  '- 증명사진처럼 정면에 똑바로 선 자세는 피해 줘.',
+  '- 배경: '+(pl?w(pl):'그 장면에 가장 잘 어울리는 배경을 네가 골라 줘'),'',
+  '[화보 연출]',
+  '- 성공한 커리어 우먼의 분위기가 물씬 풍기게, 강하고 아름답고 우아하게 표현해 줘. (사진 속 인물이 남성이면 성공한 커리어 리더로)',
+  '- 얼굴 생김새는 실물과 가깝게, 나이는 지금보다 10년 지난 모습으로. 세월이 쌓인 여유와 자신감이 배어 나오게.',
+  '- 옷차림·헤어·메이크업은 그 장면과 배경에 가장 잘 어울리는 세련된 스타일로.',
+  '- 인물과 배경이 자연스럽게 어우러지게. 그 장소가 가장 아름다운 시간과 빛을 네가 골라 시네마틱한 조명과 깊이 있는 색감으로.',
+  '- 자신감 있고 우아한 자세와 은은한 미소. 증명사진처럼 정면에 똑바로 선 자세는 피해 줘.',
   '- 하단에 작게 "10년 후, '+yr+'"을 넣고, 세로(2:3)로 질문 없이 바로 만들어 줘.']}
  return L.join('\n')}
 function chips(arr,key,multi){var o=ST.o;return '<div class="st-chips">'+arr.map(function(x,i){var on=multi?!!o[key][i]:o[key]===i;return '<button type="button" data-stc="'+key+'" data-i="'+i+'"'+(on?' class="on"':'')+'>'+esc(x)+'</button>'}).join('')+'</div>'}
@@ -4701,11 +4702,10 @@ function left(){var o=ST.o,s=ST.step;
  if(s===0)return '<div class="st-q q1"><em>1</em>옷</div>'+chips(CLOTH,'cloth')+'<div class="st-q q2"><em>2</em>배경색</div>'+chips(BG,'bg')+'<div class="st-q q3"><em>3</em>표정</div>'+chips(FACE,'face');
  if(s===1)return '<div class="st-q q1"><em>1</em>계절</div>'+chips(SEASON.map(function(x){return x.n}),'season')+'<div class="st-q q2"><em>2</em>지금의 나를 가장 빛나게 할 풍경 <small>비워 두면 AI가 골라요</small></div><div class="st-chips">'+SEASON[o.season].ex.split(' / ').map(function(x){return '<button type="button" data-stscene="'+esc(x)+'"'+(o.scene.trim()===x?' class="on"':'')+'>'+esc(x)+'</button>'}).join('')+'</div><input class="st-in" data-sti="scene" value="'+esc(o.scene)+'" placeholder="직접 쓰기 (예: 우리 동네 단골 카페 창가)">';
  return '<div class="st-q q1"><em>1</em>10년 후 꿈을 이룬 나는? <small>하나 고르거나 직접 쓰기</small></div>'+chips(FD,'fd')+'<input class="st-in" data-sti="fdIn" value="'+esc(o.fdIn)+'" placeholder="직접 쓰기 (예: 우리 센터 프로그램이 전국 우수사례로 뽑혀 발표하는 모습)">'+
- '<div class="st-q q2"><em>2</em>어디에서? <small>비워 두면 AI가 골라요</small></div>'+chips(FP,'fp')+'<input class="st-in" data-sti="fpIn" value="'+esc(o.fpIn)+'" placeholder="직접 쓰기 (예: 고향 바닷가 마을)">'+
- '<div class="st-q q3"><em>3</em>시간·분위기</div>'+chips(FM,'fm')}
+ '<div class="st-q q2"><em>2</em>배경 <small>꿈에 맞는 예시 · 비워 두면 AI가 골라요</small></div><div class="st-chips">'+fpList().map(function(t){return '<button type="button" data-stbg="'+esc(t)+'"'+(o.fpT===t&&!o.fpIn.trim()?' class="on"':'')+'>'+esc(t)+'</button>'}).join('')+'</div><input class="st-in" data-sti="fpIn" value="'+esc(o.fpIn)+'" placeholder="직접 쓰기 (예: 고향 바닷가 마을)">'}
 var INFO=[['내 얼굴이 잘 나온 셀카 1장','없어요 (왼쪽에서 고르기)','직원 소개·프로필·명함 사진으로 쓸 수 있어요'],
  ['1단계에서 만든 증명사진','지금의 나를 가장 빛나게 할 풍경','단풍만이 아니라 야경·노을·바다·설경도 좋아요 · 옷이 어색하면 "계절에 맞는 옷으로 다시"'],
- ['1단계에서 만든 증명사진','10년 후 꿈 · 장소 · 분위기','어색하면 "표정을 더 자연스럽게", "나이를 조금 더 젊게"처럼 한 줄만 보내요']];
+ ['1단계에서 만든 증명사진','10년 후 꿈 · 배경','어색하면 "표정을 더 자연스럽게", "나이를 조금 더 젊게"처럼 한 줄만 보내요']];
 function card4(){return '<div class="st-box st-card4"><svg viewBox="0 0 160 110" aria-hidden="true"><rect x="8" y="14" width="144" height="86" rx="8" fill="#fffaf2" stroke="#C96A2B" stroke-width="3"/><path d="M80 18v78" stroke="#e8cdb6" stroke-width="2"/><rect x="16" y="24" width="56" height="64" rx="4" fill="#ffd9b8"/><circle cx="44" cy="46" r="10" fill="#fff3c4"/><path d="M18 84l18-20 14 12 20-22v38H18z" fill="#f3a46b"/><rect x="118" y="22" width="24" height="28" rx="2" fill="#ffe2cf" stroke="#C96A2B"/><path d="M88 34h22M88 46h26M88 58h24M88 70h20" stroke="#9a8a7c" stroke-width="3" stroke-linecap="round"/><path d="M128 4c-8 0-8 12 0 10 8 2 8-10 0-10z" fill="#f59ab5"/></svg><div><b style="font-size:19px">10년 후의 내가 지금의 나에게 보내는 엽서</b><p style="margin:6px 0 10px;color:#4e5e56">1~3단계로 그린 10년 후의 꿈을 응원 엽서로 마무리해요. "마음 쉼터 → 나를 응원하는 엽서"에서 10년 후 꿈과 지금까지 잘 해 온 나를 고르면 돼요.</p><div class="st-acts"><button type="button" class="h" data-stgo="heart">응원 엽서 만들러 가기 →</button></div></div></div>'}
 function body(){var s=ST.step;
  var head='<div class="st-steps">'+STEPS.map(function(n,i){return '<button type="button" data-sts="'+i+'"'+(i===s?' class="on"':'')+'><i>'+(i+1)+'</i>'+esc(n)+'</button>'}).join('')+'</div>';
@@ -4720,7 +4720,8 @@ function toast(m){if(typeof showToast==='function')showToast(m)}
 function refresh(full){var r=document.getElementById('st-root');if(!r)return;if(full){r.innerHTML=body();return}var pv=document.getElementById('st-pv');if(pv)pv.innerHTML=prompt(true)}
 function bind(){var r=document.getElementById('st-root');if(!r||r._b)return;r._b=1;
  r.addEventListener('click',function(e){var b=e.target.closest('[data-sts]');if(b){ST.step=+b.dataset.sts;refresh(1);return}
-  b=e.target.closest('[data-stc]');if(b){var k=b.dataset.stc,i=+b.dataset.i;if(k==='fd'||k==='fp'){ST.o[k]=ST.o[k]===i?-1:i;ST.o[k+'In']=''}else{ST.o[k]=i}save();refresh(1);return}
+  b=e.target.closest('[data-stc]');if(b){var k=b.dataset.stc,i=+b.dataset.i;if(k==='fd'){ST.o.fd=ST.o.fd===i?-1:i;ST.o.fdIn='';ST.o.fpT=''}else{ST.o[k]=i}save();refresh(1);return}
+  b=e.target.closest('[data-stbg]');if(b){var v2=b.dataset.stbg;ST.o.fpT=(ST.o.fpT===v2?'':v2);ST.o.fpIn='';save();refresh(1);return}
   b=e.target.closest('[data-stscene]');if(b){var v=b.dataset.stscene;ST.o.scene=(ST.o.scene.trim()===v?'':v);save();refresh(1);return}
     b=e.target.closest('[data-sto]');if(b){var p=prompt(false);copy(p);var m=b.dataset.sto;if(m==='gpt'){var w=window.open('https://chatgpt.com/?q='+encodeURIComponent(p),'_blank');if(w)w.opener=null;toast('ChatGPT에 프롬프트가 들어갔어요. 사진을 올려 주세요.')}else if(m==='gem'){window.open('https://gemini.google.com/app','_blank','noopener');toast('프롬프트를 복사했어요. 사진을 넣고 붙여넣기 하세요.')}else toast('프롬프트를 복사했어요.');return}
   b=e.target.closest('[data-stgo]');if(b){if(typeof go==='function'){go(b.dataset.stgo);setTimeout(function(){var t=[].slice.call(document.querySelectorAll('#v-heart button')).filter(function(x){return /응원하는 엽서/.test(x.textContent)})[0];if(t)t.click()},150)}return}});
@@ -5691,6 +5692,11 @@ window.FAMPROMPT={render:render};
 </script>
 
 <style id="fam-st-color">
+#v-studio .st-pv{border:3px solid #E2BE4F!important;border-left:3px solid #E2BE4F!important;background:#FFFDF4!important;border-radius:12px!important}
+#v-studio .st-in{border:2px dashed #E07B39!important;background:#FFF9F4!important}
+#v-studio .st-in::placeholder{color:#B4561C;opacity:.85}
+#v-studio .st-in:focus{outline:none;border-style:solid!important;border-color:#C9651F!important;background:#fff!important}
+
 #v-studio .st-steps button{background:#FFFBEA!important;border-color:#F1E2A6!important;color:#5A4A12!important}
 #v-studio .st-steps button i{background:#C9A63A!important}
 #v-studio .st-steps button.on{background:#FFEFB3!important;border-color:#D9A400!important;color:#4A3A00!important}
