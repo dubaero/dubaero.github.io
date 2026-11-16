@@ -4415,7 +4415,7 @@ body{letter-spacing:-0.015em}
 @media(max-width:640px){.post .pc-g>b{font-size:17px!important}}
 .post .pc-g>b .pcn{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;padding:0 8px;border-radius:999px;background:#C96A2B;color:#fff;font-style:normal;font-size:19px;font-weight:900;margin-right:4px;align-self:center;box-shadow:0 2px 0 #9a4f1d}
 </style>
-<style id="lift-css">.lift-acts{margin:0 0 10px!important}</style>
+<style id="lift-css">.lift-acts{margin:0 0 10px!important;display:flex!important;flex-wrap:wrap;justify-content:flex-end!important}.st-acts.sttop{justify-content:flex-end}.lift-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:0 0 8px}.lift-head>*{margin-top:0!important;margin-bottom:0!important}.lift-head>.lift-acts{margin-left:auto!important;flex:0 1 auto;width:auto!important}.lift-head>:first-child{flex:0 1 auto;width:auto!important;display:block}.lift-head>:first-child small{display:none}</style>
 <script id="lift-js">
 /* 2026.11.16 AI 열기 버튼을 프롬프트·입력칸 위로 */
 (function(){
@@ -4427,8 +4427,8 @@ function ctl(e){return e.matches('input,select,textarea,button')||!!e.querySelec
 function lift(r){var p=r.parentNode;if(!p)return;r.dataset.lifted=1;var sib=[],e=r.previousElementSibling;while(e){sib.unshift(e);e=e.previousElementSibling}
  var t=null;for(var i=0;i<sib.length;i++){if(sib[i].matches(BOX)||sib[i].querySelector(BOX)){t=sib[i];break}}
  if(!t)for(i=0;i<sib.length;i++){if(ctl(sib[i])){t=sib[i];break}}
- if(!t)return;var pv=t.previousElementSibling;if(pv&&pv.matches('label,.l,.jx-l')&&!ctl(pv))t=pv;
- p.insertBefore(r,t);r.classList.add('lift-acts')}
+ if(!t)return;var pv=t.previousElementSibling;if(pv&&pv.matches('label,.l,.jx-l,h4')&&!ctl(pv))t=pv;
+ r.classList.add('lift-acts');if(t.matches('label,.l,.jx-l,h4')&&!ctl(t)){var w=document.createElement('div');w.className='lift-head';p.insertBefore(w,t);w.appendChild(t);w.appendChild(r)}else p.insertBefore(r,t)}
 function run(){[].forEach.call(document.querySelectorAll(ROW),function(r){if(isAct(r))lift(r)})}
 var q=0;function sch(){if(q)return;q=1;requestAnimationFrame(function(){q=0;run()})}
 function start(){run();new MutationObserver(sch).observe(document.body,{childList:true,subtree:true})}

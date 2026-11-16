@@ -5339,7 +5339,7 @@ function songBind(){var el=q('.jx'),l1=q('#jx-s-l1'),l2=q('#jx-s-l2');el.querySe
 
 views.prompt=promptView;init.prompt=promptBind;
 /* 2026.11.12 가족센터 도구 디자인 그대로(일반인용) iframe 연결 */
-function frameView(k){return function(){return '<div class="jx jx-frame"><iframe id="jx-ifr" src="/masan/tools/?v=1116i#'+k+'" title="'+({heart:'마음 쉼터',vent:'빡침 번역기',song:'나만의 노래 만들기'})[k]+'" style="width:100%;border:0;display:block;border-radius:14px;background:#f7f9f7"></iframe></div>'}}
+function frameView(k){return function(){return '<div class="jx jx-frame"><iframe id="jx-ifr" src="/masan/tools/?v=1116j#'+k+'" title="'+({heart:'마음 쉼터',vent:'빡침 번역기',song:'나만의 노래 만들기'})[k]+'" style="width:100%;border:0;display:block;border-radius:14px;background:#f7f9f7"></iframe></div>'}}
 function frameFit(){var f=document.getElementById('jx-ifr');if(!f)return;var top=f.getBoundingClientRect().top+window.scrollY;f.style.height=Math.max(520,window.innerHeight-top-26)+'px'}
 function frameBind(){frameFit();setTimeout(frameFit,60)}
 window.addEventListener('resize',frameFit);
@@ -6816,7 +6816,7 @@ window.GBIZ={view:function(){return '<section class="panel st"><div style="displ
 })();
 </script>
 <script>views.studio=function(){return STUDIO.view()};init.studio=function(){STUDIO.bind()};views.gbiz=function(){return GBIZ.view()};init.gbiz=function(){GBIZ.bind()};if(state.page==='studio'||state.page==='gbiz')render();</script>
-<style id="lift-css">.lift-acts{margin:0 0 10px!important}</style>
+<style id="lift-css">.lift-acts{margin:0 0 10px!important;display:flex!important;flex-wrap:wrap;justify-content:flex-end!important}.st-acts.sttop{justify-content:flex-end}.lift-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:0 0 8px}.lift-head>*{margin-top:0!important;margin-bottom:0!important}.lift-head>.lift-acts{margin-left:auto!important;flex:0 1 auto;width:auto!important}.lift-head>:first-child{flex:0 1 auto;width:auto!important;display:block}.lift-head>:first-child small{display:none}</style>
 <script id="lift-js">
 /* 2026.11.16 AI 열기 버튼을 프롬프트·입력칸 위로 */
 (function(){
@@ -6828,8 +6828,8 @@ function ctl(e){return e.matches('input,select,textarea,button')||!!e.querySelec
 function lift(r){var p=r.parentNode;if(!p)return;r.dataset.lifted=1;var sib=[],e=r.previousElementSibling;while(e){sib.unshift(e);e=e.previousElementSibling}
  var t=null;for(var i=0;i<sib.length;i++){if(sib[i].matches(BOX)||sib[i].querySelector(BOX)){t=sib[i];break}}
  if(!t)for(i=0;i<sib.length;i++){if(ctl(sib[i])){t=sib[i];break}}
- if(!t)return;var pv=t.previousElementSibling;if(pv&&pv.matches('label,.l,.jx-l')&&!ctl(pv))t=pv;
- p.insertBefore(r,t);r.classList.add('lift-acts')}
+ if(!t)return;var pv=t.previousElementSibling;if(pv&&pv.matches('label,.l,.jx-l,h4')&&!ctl(pv))t=pv;
+ r.classList.add('lift-acts');if(t.matches('label,.l,.jx-l,h4')&&!ctl(t)){var w=document.createElement('div');w.className='lift-head';p.insertBefore(w,t);w.appendChild(t);w.appendChild(r)}else p.insertBefore(r,t)}
 function run(){[].forEach.call(document.querySelectorAll(ROW),function(r){if(isAct(r))lift(r)})}
 var q=0;function sch(){if(q)return;q=1;requestAnimationFrame(function(){q=0;run()})}
 function start(){run();new MutationObserver(sch).observe(document.body,{childList:true,subtree:true})}
