@@ -898,9 +898,13 @@ return {html:html,bind:bind};})();
   <div class="month" id="mo-body"></div>
 </div>
 
+<!-- ===== 프롬프트 디자인실 · 나만의 사진관 · 제미나이 비서 (2026.11.16) ===== -->
+<div id="v-prompt" hidden><div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>프롬프트 디자인실</h2><span class="tag">고르고 터치하면 프롬프트 완성</span></div><div id="fam-prompt-host"></div></div>
+<div id="v-studio" hidden><div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>나만의 사진관</h2><span class="tag">증명사진 · 지금의 나 · 10년 후 나의 모습</span></div><div id="fam-studio-host"></div></div>
+<div id="v-gbiz" hidden><div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>제미나이 비서</h2><span class="tag">말하고 · 비추고 · 화면 보여 주며 묻기</span></div><div id="fam-gbiz-host"></div></div>
 <!-- ===== AI 설정 가이드 ===== -->
 <div id="v-aiset" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>AI 설정 가이드</h2><span class="tag">기록 안 남기기 · 학습 끄기 · 메모리 · 지침</span></div>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>AI 맞춤 설정 가이드</h2><span class="tag">기록 안 남기기 · 학습 끄기 · 메모리 · 지침</span></div>
   <div id="aig-host"></div>
 </div>
 
@@ -1540,17 +1544,17 @@ var FORMS=[
 
 
 var TILES=[
- {go:'biz',ic:'grid',t:'사업별 업무',s:'연간 단계별 프롬프트'},
- {go:'idea',ic:'bulb',t:'프로그램 기획',s:'가족 프로그램 아이디어',f:1},
- {go:'event',ic:'flag',t:'가족 행사·체험',s:'나들이·캠프·축제'},
- {go:'msg',ic:'mail',t:'문자·소통',s:'보호자·강사·기관'},
- {go:'promo',ic:'mega',t:'홍보·안내',s:'모집·카드뉴스·블로그'},
- {go:'img',ic:'image',t:'홍보 이미지 시안',s:'카드뉴스·포스터·인포그래픽·웹툰',f:1},
+ {go:'prompt',ic:'pen',t:'프롬프트 디자인실',s:'일상 프롬프트 터치로 완성'},
+ {go:'studio',ic:'camera',t:'나만의 사진관',s:'증명사진 · 10년 후 나의 모습'},
+ {go:'gbiz',ic:'mic',t:'제미나이 비서',s:'말하고 비추며 묻는 라이브'},
+ {go:'heart',ic:'heart',t:'마음 쉼터',s:'나만의 마음챙김'},
+ {go:'song',ic:'note',t:'나만의 노래 만들기',s:'우리 센터 노래'},
+ {go:'vent',ic:'fire',t:'빡침 번역기',s:'같이 빡치고 순화까지'},
+ {go:'aiset',ic:'shield',t:'AI 맞춤 설정 가이드',s:'기록·메모리·학습 끄기',red:1},
  {go:'rec',ic:'mic',t:'녹음 → 글',s:'어디서 바꿀까?'},
- {go:'budget',ic:'sum',t:'예산·정산 점검',s:'엑셀 오류 찾기'},
- {go:'month',ic:'cal',t:'이달의 추천',s:'',f:1}
+ {go:'budget',ic:'sum',t:'예산·정산 점검',s:'엑셀 오류 찾기'}
 ];
-var ICONS={grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+var ICONS={pen:'<path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/>',camera:'<rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8 7l2-3h4l2 3"/>',list:'<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.3"/><circle cx="4.5" cy="12" r="1.3"/><circle cx="4.5" cy="18" r="1.3"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
  fire:'<path d="M12 21c-4 0-7-2.7-7-6.5 0-3 2-4.8 3.2-6.2.4 1.6 1.4 2.6 2.3 2.9C10.3 7.5 11.5 5 14 3c0 3 5 5 5 11.5 0 3.8-3 6.5-7 6.5z"/>',
  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
  mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
@@ -1668,7 +1672,7 @@ $('#org-modal').addEventListener('click',function(e){if(e.target===this)closeOrg
 orgUI();
 
 /* 화면 전환 */
-var VIEWS=['home','form','biz','month','vent','heart','multi','simple','rec','all','meet','drawer','song','aiset'];
+var VIEWS=['home','form','biz','month','vent','heart','multi','simple','rec','all','meet','drawer','song','aiset','prompt','studio','gbiz'];
 function show(v){VIEWS.forEach(function(k){$('#v-'+k).hidden=(k!==v);});var th=document.getElementById('tophome');if(th)th.hidden=(v==='home');window.scrollTo(0,0);}
 function go(key){
   if(key==='doc'||key==='pr'||/^dw-/.test(key)){if(typeof DW_X==='undefined')return;openDW(key);return show('drawer');}
@@ -1676,6 +1680,9 @@ function go(key){
   if(key==='biz'){renderBiz();return show('biz');}
   if(key==='month'){renderMonth(CURM);return show('month');}
   if(['vent','heart','multi','rec','song'].indexOf(key)>-1)return show(key);
+  if(key==='prompt'){if(window.FAMPROMPT&&!$('#fam-prompt-host').firstChild)FAMPROMPT.render();return show('prompt');}
+  if(key==='studio'){var sh=$('#fam-studio-host');if(window.STUDIO&&!sh.firstChild){sh.innerHTML=STUDIO.view();STUDIO.bind();}return show('studio');}
+  if(key==='gbiz'){var gh=$('#fam-gbiz-host');if(window.GBIZ&&!gh.firstChild){gh.innerHTML=GBIZ.view();GBIZ.bind();}return show('gbiz');}
   if(key==='aiset'){var ab=$('#aig-host');if(ab&&!ab.firstChild){ab.innerHTML=AIG.html();AIG.bind();}return show('aiset');}
   if(key==='all'){renderAll($('#all-q').value);return show('all');}
   if(key==='meet'){renderMeet();return show('meet');}
@@ -1776,7 +1783,7 @@ var LINKF={'사업':[
  {name:'공동육아나눔터 사업결과보고서',label:'나눔터 결과보고서',sub:'공동육아나눔터 · 2권 42~44쪽',pdf:'E04.pdf',where:'2권 42~44쪽'},
  {name:'공동육아나눔터 사업정산보고서',label:'나눔터 정산보고서',sub:'공동육아나눔터 · 2권 46쪽',pdf:'E06.pdf',where:'2권 46쪽'}]};
 renderList();
-TILES.forEach(function(t){var s=t.go==='month'?CURM+'월 일정·프로그램':t.s;var b=el('button','tile'+(t.hot?' hot':'')+(t.f?' feat':''),svg(t.ic)+'<b>'+esc(t.t)+'</b><span>'+esc(s)+'</span>');b.type='button';b.dataset.go=t.go;b.dataset.k=t.t+t.s;$('#tiles').appendChild(b);});
+TILES.forEach(function(t){var s=t.go==='month'?CURM+'월 일정·프로그램':t.s;var b=el('button','tile'+(t.hot?' hot':'')+(t.f?' feat':'')+(t.red?' red':''),svg(t.ic)+'<b>'+esc(t.t)+'</b><span>'+esc(s)+'</span>');b.type='button';b.dataset.go=t.go;b.dataset.k=t.t+t.s;$('#tiles').appendChild(b);});
 $('#q').addEventListener('input',function(){var v=this.value.trim();document.querySelectorAll('#tiles .tile').forEach(function(n){n.style.opacity=(!v||n.dataset.k.indexOf(v)>-1)?1:.25;});
   if(v){var f=FORMS.find(function(x){return (x.name+x.sub).indexOf(v)>-1;});if(f&&f.cat!==curCat){curCat=f.cat;renderList();}}
   document.querySelectorAll('#flist li').forEach(function(n){n.style.opacity=(!v||n.textContent.indexOf(v)>-1)?1:.25;});});
@@ -3097,8 +3104,8 @@ var DW=[
 
 /* ===== 업무도우미 큰 메뉴 4개 ===== */
 (function(){
-var M=[['doc','grid','업무 프로젝트','사업계획서·결과보고서 등 프로젝트로 따라 만들기'],['pr','mega','홍보물 프로젝트','카드뉴스·블로그·포스터 + 마음에 드는 홍보물로 프롬프트 얻기'],['song','note','나만의 노래 만들기','질문 4개에 답하면 우리 센터 노래와 앨범 표지'],['heart','heart','마음 쉼터','털어놓으면 나만의 마음챙김 5줄'],['vent','fire','빡침 번역기','같이 빡치고, 숨 고르고, 순화까지'],['aiset','shield','AI 설정 가이드','기록·메모리·학습 끄기 한눈에']];
-ICONS.shield=ICONS.shield||'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>';var box=$('#main4');M.forEach(function(m){var b=el('button','m4'+(m[0]==='vent'?' hot':''),svg(m[1])+'<b>'+esc(m[2])+'</b><span>'+esc(m[3])+'</span>');b.type='button';b.dataset.go=m[0];box.appendChild(b);});
+var M=[['doc','grid','업무 프로젝트',''],['pr','mega','홍보물 프로젝트',''],['biz','list','업무별 프롬프트',''],['idea','bulb','프로그램 기획',''],['event','flag','가족 행사·체험',''],['msg','mail','문자·소통',''],['promo','mega','홍보·안내',''],['img','image','홍보 이미지 시안','']];
+ICONS.shield=ICONS.shield||'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>';var box=$('#main4');M.forEach(function(m){var b=el('button','m4',svg(m[1])+'<b>'+esc(m[2])+'</b><span>'+esc(m[3])+'</span>');b.type='button';b.dataset.go=m[0];box.appendChild(b);});
 })();
 
 /* ===== 업무 프로젝트 · 홍보물 프로젝트 ===== */
@@ -4555,6 +4562,1126 @@ document.getElementById('f-pex').onclick=function(){if(!EX[CF.id]){toast('이 �
 var _of=openForm;openForm=function(){var r=_of.apply(this,arguments);PEX=false;EXK=[];pexLbl();return r};
 })();
 </script>
+<style id="nav8-css">
+#main4{grid-template-columns:repeat(8,minmax(0,1fr))!important;gap:8px!important;margin:12px 0 12px!important}
+#main4 .m4{flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:5px!important;padding:10px 4px!important;border-radius:12px!important;border-width:1.5px!important;min-height:0!important;background:#fff!important}
+#main4 .m4 .i,#main4 .m4 svg{width:18px!important;height:18px!important;flex:none}
+#main4 .m4 b{font-size:12px!important;white-space:nowrap;letter-spacing:-.4px}
+#main4 .m4>span{display:none!important}
+#tiles .tile.red{border:2px solid #D9342B!important;background:#FFF1F0!important;color:#C0271F}#tiles .tile.red b{color:#C0271F!important;font-weight:800!important}#tiles .tile.red svg{color:#C0271F;stroke:#C0271F}
+#v-studio .st h2,#v-gbiz .st h2{display:none}#v-studio .st>div:first-child,#v-gbiz .st>div:first-child{display:none!important}
+#v-studio .panel.st,#v-gbiz .panel.st{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px}
+@media (max-width:760px){#main4{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important}#main4 .m4{padding:9px 2px!important;flex-direction:column!important;gap:3px!important}#main4 .m4 b{font-size:11px!important;white-space:normal!important;word-break:keep-all;text-align:center;line-height:1.2}}
+#v-prompt .jx-top h2{display:none}
+</style>
+<style id="st-css">
+/* 2026.11.16 나만의 사진관 · 제미나이 비서 */
+.st{--o:#C96A2B;--g:#1F6F5A;--ink:#17231d;--mu:#4e5e56;--ln:#dfe7e2;color:var(--ink);font-size:16px}
+.st *{box-sizing:border-box}
+.st-steps{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.st-steps button{flex:1 1 auto;border:1.5px solid var(--ln);background:#f7f9f8;border-radius:12px;padding:9px 12px;font:inherit;font-weight:800;font-size:16px;color:#3b4a43;cursor:pointer;white-space:nowrap}
+.st-steps button i{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#8a978f;color:#fff;font-style:normal;font-size:14px;margin-right:6px}
+.st-steps button.on{background:#eef5f1;border-color:var(--g);color:#17402f}.st-steps button.on i{background:var(--g)}
+.st-info{display:flex;flex-wrap:wrap;gap:6px 18px;background:#f6f8f7;border:1px solid var(--ln);border-radius:12px;padding:9px 14px;margin-bottom:10px;font-size:15px}
+.st-info b{color:var(--g);margin-right:6px}
+.st-flow{font-weight:800;color:#1d4fb8;font-size:15px;margin:0 0 6px}
+.st-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:12px}
+.st-box{background:#fff;border:1px solid var(--ln);border-radius:14px;padding:12px 14px}
+.st-q{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:900;margin:10px 0 7px}
+.st-q:first-child{margin-top:0}
+.st-q em{font-style:normal;display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:999px;background:#e6efea;color:var(--g);font-size:15px}
+.st-q small{font-size:13.5px;color:var(--mu);font-weight:600}
+.st-chips{display:flex;flex-wrap:wrap;gap:6px}
+.st-chips button{border:1.5px solid #d9e2dd;background:#fff;border-radius:999px;padding:7px 13px;font:inherit;font-size:15px;cursor:pointer;color:#2c3a33}
+.st-chips button.on{background:var(--g);border-color:var(--g);color:#fff;font-weight:800}
+.st-in{width:100%;margin-top:7px;border:1.5px solid #d6dfda;border-radius:10px;padding:9px 11px;font:inherit;font-size:15px}
+.st-in:focus{outline:2px solid #9cc7b6;border-color:#9cc7b6}
+.st-pv{white-space:pre-wrap;line-height:1.75;font-size:15px;background:#fbfcfb;border:1.5px solid #d6dfda;border-left:6px solid var(--g);border-radius:10px;padding:12px 14px;max-height:430px;overflow:auto}
+.st-pv .u{color:#1d4fb8;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.st-pv .b{color:#1d4fb8;font-weight:800}
+.st-pv .ph{color:#8a8f8c}
+.st-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.st-acts.sttop{margin:0 0 8px}
+.st-acts button{border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:800;font-size:15px;cursor:pointer}
+.st-acts .p{background:#1b2b22;color:#fff}.st-acts .s{background:#fff;border:1.5px solid #1b2b22;color:#1b2b22}
+.st-acts .h{background:#fff;border:1.5px solid var(--g);color:var(--g)}
+.st-help{margin:8px 0 0;padding-left:18px;font-size:14.5px;color:var(--mu)}
+.st-help li{margin:2px 0}
+.st-card4{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.st-card4 svg{width:150px;height:auto}
+@media(max-width:860px){.st-grid{grid-template-columns:1fr}.st-pv{max-height:none}.st-steps button{font-size:14.5px;padding:8px 9px}.st-card4{grid-template-columns:1fr}}
+/* 제미나이 비서 */
+.gb-how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:10px}
+.gb-how>div{background:#f4f7ff;border:1px solid #d9e3fb;border-radius:14px;padding:10px;display:flex;gap:10px;align-items:center}
+.gb-how svg{width:64px;flex:none}
+.gb-how b{display:block;font-size:16px;color:#1d3f8f}.gb-how span{font-size:14px;color:#3e4a66}
+.gb-note{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:#3e4a66;margin:0 0 10px}
+.gb-note b{color:#1d3f8f}
+.gb-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.gb-tabs button{border:1.5px solid #dfe5f2;background:#f7f9fd;color:#46506a;border-radius:999px;padding:8px 15px;font:inherit;font-weight:800;font-size:15.5px;cursor:pointer}
+.gb-tabs button.on{background:#1d3f8f;border-color:#1d3f8f;color:#fff}
+.gb-tabs button.em.on{background:#c62828;border-color:#c62828}
+.gb-sos{background:#fdecec;border:2px solid #e53935;color:#8b1a1a;font-weight:900;border-radius:12px;padding:9px 14px;margin-bottom:10px;font-size:15.5px}
+.gb-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.gb-card{background:#fff;border:1px solid #e1e6f0;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.gb-card svg{display:block;width:100%;height:auto}
+.gb-card .bd{padding:9px 11px 11px;display:flex;flex-direction:column;gap:6px;flex:1}
+.gb-card h4{margin:0;font-size:17px;font-weight:900}
+.gb-mode{display:flex;gap:4px;flex-wrap:wrap}
+.gb-mode span{font-size:12.5px;font-weight:800;border-radius:999px;padding:2px 8px;background:#eef2fb;color:#2b4aa0}
+.gb-say{margin:0;background:#f4f7ff;border-radius:10px;padding:7px 9px;font-size:14.5px;font-weight:700;color:#1b2a52}
+.gb-say::before{content:'이렇게 말해 보세요';display:block;font-size:12px;font-weight:800;color:#5a6b9a;margin-bottom:2px}
+.gb-warn{margin:0;font-size:13.5px;color:#b3261e;font-weight:700}
+.gb-card.em{border-color:#f2b8b5}
+@media(max-width:860px){.gb-how{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.gb-how>div{flex-direction:column;text-align:center;padding:8px 4px;gap:4px}.gb-how svg{width:40px}.gb-how b{font-size:14px}.gb-how span{display:none}.gb-cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}.gb-card{flex:0 0 82%;scroll-snap-align:start}}
+</style>
+<script id="st-js">
+(function(){
+var ST={step:0,o:{cloth:0,bg:0,face:0,season:2,scene:'',fd:-1,fdIn:'',fp:-1,fpIn:'',fm:0}};
+try{var sv=JSON.parse(localStorage.getItem('st-fam-v1')||'null');if(sv&&sv.o)ST.o=Object.assign(ST.o,sv.o)}catch(e){}
+function save(){try{localStorage.setItem('st-fam-v1',JSON.stringify({o:ST.o}))}catch(e){}}
+function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+var CLOTH=['흰 셔츠 + 검정 정장 재킷','흰 셔츠 + 남색 정장 재킷','흰 블라우스 + 베이지 재킷','흰 블라우스 (재킷 없이)','흰 셔츠 (재킷 없이)'];
+var BG=['흰색','연한 하늘색','연한 회색'];
+var FACE=['아주 옅은 미소','은은한 미소'];var FACEP=['입을 다문 채 입꼬리만 아주 살짝 올린 옅은 미소(이는 보이지 않게, 자연스럽고 차분한 인상)','입꼬리를 살짝 올린 은은한 미소(이는 거의 보이지 않게)'];
+var SEASON=[
+ {n:'봄',ex:'교토 벚꽃길 / 파리 튈르리 정원 / 네덜란드 튤립 정원 / 진해 여좌천 벚꽃 / 제주 유채꽃밭 / 경주 보문호 벚꽃',avoid:'두꺼운 코트·목도리 같은 겨울옷',fit:'가볍고 화사한 봄 재킷·니트'},
+ {n:'여름',ex:'그리스 산토리니 / 하와이 해변 / 이탈리아 아말피 해안 / 제주 협재 바다 / 남해 다랭이마을 / 강릉 경포 해변',avoid:'두꺼운 겨울옷',fit:'시원하고 세련된 여름옷'},
+ {n:'가을',ex:'파리 센 강변 노을 / 프라하 카를교 야경 / 스위스 알프스 호숫가 / 교토 단풍 사찰 / 제주 억새 오름 / 서울 한강 야경 / 경주 은행나무길 / 순천만 갈대밭 노을',avoid:'두꺼운 코트·목도리 같은 겨울옷',fit:'요즘 감각의 세련된 가을 패션'},
+ {n:'겨울',ex:'핀란드 오로라 설원 / 오스트리아 할슈타트 설경 / 뉴욕 크리스마스 거리 / 삿포로 눈 축제 / 평창 설원 / 서울 덕수궁 돌담길 눈 / 부산 해운대 겨울 바다 야경',avoid:'너무 얇은 여름옷',fit:'따뜻하고 세련된 겨울 코트·니트 패션'}];
+var TITLE=['3년 차 선임','팀장','실장','원장','사장님(대표)','프리랜서 전문가'];
+var DREAM=['배운 기술로 단골손님이 생긴 일터를 지키고 있어요','후배를 가르치는 든든한 선임이 되었어요','다시 시작한 일로 가족에게 자랑스러운 사람이 되었어요','내 이름을 건 가게를 열었어요','AI를 잘 다루는 일잘러로 인정받고 있어요','자격증을 따서 원하던 일을 하고 있어요'];
+var STEPS=['증명사진','가장 나다운 지금의 나','10년 후 나의 모습','응원 엽서'];
+var FD=['센터장이 되어 직원들과 회의를 이끄는 모습','가족상담 전문가로 무대에서 강연하는 모습','내 집 마련 후 가족과 집들이하는 모습','가족과 해외여행을 떠난 모습','내 이름으로 낸 책을 들고 있는 작가의 모습','대학원 졸업식에서 학위모를 쓴 모습','전원주택 마당에서 텃밭을 가꾸는 모습','내 카페·공방을 연 사장님의 모습','마라톤을 완주한 건강한 모습','후배들에게 존경받는 멘토로 상을 받는 모습'];
+var FP=['센터장실 창가','대학 강당 무대','내 집 거실','파리 에펠탑 앞','스위스 알프스 호숫가','제주 바닷가','전주 한옥마을','전원주택 마당','크루즈 갑판','시상식 무대'];
+var FM=['AI가 어울리게','맑은 낮','노을','야경'];
+function today(){var d=new Date();return d.getFullYear()+'. '+String(d.getMonth()+1).padStart(2,'0')+'. '+String(d.getDate()).padStart(2,'0')}
+
+function U(t){return '<span class="u">'+esc(t)+'</span>'}
+function prompt(html){var o=ST.o,s=ST.step,L=[];
+ var w=html?U:function(t){return t};
+ if(s===0){L=['첨부한 내 사진으로 직원 프로필·사원증에 쓸 증명사진을 만들어 줘.',
+  '- 얼굴 생김새·피부 톤·나이는 실물 그대로, 보정은 자연스럽게 살짝만.',
+  '- 옷: '+w(CLOTH[o.cloth])+', 단정하게.',
+  '- 배경: '+w(BG[o.bg])+' 단색, 그림자 없이 고르고 밝은 조명.',
+  '- 표정: '+w(FACEP[o.face]||FACEP[0])+', 정면, 어깨까지 보이는 상반신, 머리는 단정하게 정리.',
+  '- 크기: 세로 3×4 증명사진 비율, 질문 없이 바로 만들어 줘.']}
+ if(s===1){var se=SEASON[o.season];
+  L=['사진 속 인물의 얼굴 생김새만 실물과 가깝게 하고, 표정·동작·포즈·시선·머리·옷은 선택한 배경에 어울리도록 만들어 줘.',
+  '아래에 내가 적은 '+w(se.n)+' 풍경 속에서 찍은 \'가장 나다운 지금의 나\' 사진을 만들어 줘. 적은 내용이 없으면 인물의 분위기에 가장 어울리는 국내외 '+se.n+' 명소를 네가 골라 줘.',
+  '그 장소가 가장 아름답게 빛나는 시간(맑은 낮, 노을, 야경 중)과 그곳 '+se.n+'의 특별한 풍경을 살리고, 인물에게는 그 장소와 옷 색이 가장 조화로운 '+se.fit+'을 입혀 줘.',
+  '하이엔드 패션 매거진의 인물 화보처럼, 시네마틱한 조명과 깊이 있는 색감, 인물에 초점이 맞고 배경은 부드럽게 흐려진 얕은 심도로 만들어 줘.',
+  '인물에게서는 세월이 쌓인 깊이와 성숙한 여유가 배어 나오도록, 자연스럽고 은은한 미소와 자신감 있고 우아한 자세로 표현하고, 장소가 어디인지 배경에 맞게 분위기 있게 넣어 줘.',
+  se.avoid+'과 증명사진처럼 정면에 선 자세는 피해 줘.',
+  '하단에 "'+today()+'"로 작게 넣고, 세로(2:3)로 질문 없이 바로 만들어 줘.',
+  '',
+  (html?'<span class="b">지금의 나를 가장 빛나게 할 '+esc(se.n)+' 풍경은?:</span> ':'지금의 나를 가장 빛나게 할 '+se.n+' 풍경은?: ')+(o.scene.trim()?w(o.scene.trim()):(html?'<span class="ph">(비워 두면 AI가 골라요) 예) '+esc(se.ex.split(' / ').slice(0,3).join(' / '))+'</span>':''))]}
+ if(s===2){var d=o.fdIn.trim()||(o.fd>-1?FD[o.fd]:''),pl=o.fpIn.trim()||(o.fp>-1?FP[o.fp]:''),yr=new Date().getFullYear()+10;
+  L=['첨부한 내 사진 속 얼굴로, 10년 후 꿈을 이룬 나의 모습을 상상한 사진 한 장을 만들어 줘.','',
+  '[10년 후의 나]',
+  '- 꿈을 이룬 장면: '+(d?w(d):(html?'<span class="ph">(왼쪽에서 고르거나 직접 쓰세요)</span>':'(내가 꿈꾸는 10년 후 모습)')),
+  '- 장소·배경: '+(pl?w(pl):'그 장면에 가장 잘 어울리는 장소를 네가 골라 줘'),
+  '- 시간·분위기: '+w(FM[o.fm]==='AI가 어울리게'?'그 장면이 가장 빛나는 시간(맑은 낮·노을·야경 중)을 네가 골라 줘':FM[o.fm]),'',
+  '[이렇게 만들어 줘]',
+  '- 얼굴 생김새는 실물과 가깝게, 나이는 지금보다 10년 지난 자연스러운 모습으로. 세월이 쌓인 여유와 자신감이 배어 나오게.',
+  '- 표정·포즈·옷차림은 그 장면에 가장 어울리게, 꿈을 이룬 순간의 뿌듯하고 행복한 표정으로.',
+  '- 실제로 찍은 사진처럼 자연스럽게, 영화 포스터 같은 시네마틱한 조명과 깊이 있는 색감, 인물에 초점이 맞고 배경은 부드럽게.',
+  '- 증명사진처럼 정면에 똑바로 선 자세는 피해 줘.',
+  '- 하단에 작게 "10년 후, '+yr+'"을 넣고, 세로(2:3)로 질문 없이 바로 만들어 줘.']}
+ return L.join('\n')}
+function chips(arr,key,multi){var o=ST.o;return '<div class="st-chips">'+arr.map(function(x,i){var on=multi?!!o[key][i]:o[key]===i;return '<button type="button" data-stc="'+key+'" data-i="'+i+'"'+(on?' class="on"':'')+'>'+esc(x)+'</button>'}).join('')+'</div>'}
+function left(){var o=ST.o,s=ST.step;
+ if(s===0)return '<div class="st-q"><em>1</em>옷</div>'+chips(CLOTH,'cloth')+'<div class="st-q"><em>2</em>배경색</div>'+chips(BG,'bg')+'<div class="st-q"><em>3</em>표정</div>'+chips(FACE,'face');
+ if(s===1)return '<div class="st-q"><em>1</em>계절</div>'+chips(SEASON.map(function(x){return x.n}),'season')+'<div class="st-q"><em>2</em>지금의 나를 가장 빛나게 할 풍경 <small>비워 두면 AI가 골라요</small></div><div class="st-chips">'+SEASON[o.season].ex.split(' / ').map(function(x){return '<button type="button" data-stscene="'+esc(x)+'"'+(o.scene.trim()===x?' class="on"':'')+'>'+esc(x)+'</button>'}).join('')+'</div><input class="st-in" data-sti="scene" value="'+esc(o.scene)+'" placeholder="직접 쓰기 (예: 우리 동네 단골 카페 창가)">';
+ return '<div class="st-q"><em>1</em>10년 후 꿈을 이룬 나는? <small>하나 고르거나 직접 쓰기</small></div>'+chips(FD,'fd')+'<input class="st-in" data-sti="fdIn" value="'+esc(o.fdIn)+'" placeholder="직접 쓰기 (예: 우리 센터 프로그램이 전국 우수사례로 뽑혀 발표하는 모습)">'+
+ '<div class="st-q"><em>2</em>어디에서? <small>비워 두면 AI가 골라요</small></div>'+chips(FP,'fp')+'<input class="st-in" data-sti="fpIn" value="'+esc(o.fpIn)+'" placeholder="직접 쓰기 (예: 고향 바닷가 마을)">'+
+ '<div class="st-q"><em>3</em>시간·분위기</div>'+chips(FM,'fm')}
+var INFO=[['내 얼굴이 잘 나온 셀카 1장','없어요 (왼쪽에서 고르기)','직원 소개·프로필·명함 사진으로 쓸 수 있어요'],
+ ['1단계에서 만든 증명사진','지금의 나를 가장 빛나게 할 풍경','단풍만이 아니라 야경·노을·바다·설경도 좋아요 · 옷이 어색하면 "계절에 맞는 옷으로 다시"'],
+ ['1단계에서 만든 증명사진','10년 후 꿈 · 장소 · 분위기','어색하면 "표정을 더 자연스럽게", "나이를 조금 더 젊게"처럼 한 줄만 보내요']];
+function card4(){return '<div class="st-box st-card4"><svg viewBox="0 0 160 110" aria-hidden="true"><rect x="8" y="14" width="144" height="86" rx="8" fill="#fffaf2" stroke="#C96A2B" stroke-width="3"/><path d="M80 18v78" stroke="#e8cdb6" stroke-width="2"/><rect x="16" y="24" width="56" height="64" rx="4" fill="#ffd9b8"/><circle cx="44" cy="46" r="10" fill="#fff3c4"/><path d="M18 84l18-20 14 12 20-22v38H18z" fill="#f3a46b"/><rect x="118" y="22" width="24" height="28" rx="2" fill="#ffe2cf" stroke="#C96A2B"/><path d="M88 34h22M88 46h26M88 58h24M88 70h20" stroke="#9a8a7c" stroke-width="3" stroke-linecap="round"/><path d="M128 4c-8 0-8 12 0 10 8 2 8-10 0-10z" fill="#f59ab5"/></svg><div><b style="font-size:19px">10년 후의 내가 지금의 나에게 보내는 엽서</b><p style="margin:6px 0 10px;color:#4e5e56">1~3단계로 그린 10년 후의 꿈을 응원 엽서로 마무리해요. "마음 쉼터 → 나를 응원하는 엽서"에서 10년 후 꿈과 지금까지 잘 해 온 나를 고르면 돼요.</p><div class="st-acts"><button type="button" class="h" data-stgo="heart">응원 엽서 만들러 가기 →</button></div></div></div>'}
+function body(){var s=ST.step;
+ var head='<div class="st-steps">'+STEPS.map(function(n,i){return '<button type="button" data-sts="'+i+'"'+(i===s?' class="on"':'')+'><i>'+(i+1)+'</i>'+esc(n)+'</button>'}).join('')+'</div>';
+ if(s===3)return head+card4();
+ var I=INFO[s];
+ return head+'<div class="st-info"><span><b>사진 첨부</b>'+esc(I[0])+'</span><span><b>채울 빈칸</b>'+esc(I[1])+'</span><span><b>도움말</b>'+esc(I[2])+'</span></div>'+
+ '<div class="st-grid"><div class="st-box" id="st-left">'+left()+'</div><div class="st-box"><p class="st-flow">① 사진 넣기 → ② 프롬프트 붙여넣기 → ③ 파란 글씨 확인 → ④ 보내기</p>'+
+ '<div class="st-acts sttop"><button type="button" class="p" data-sto="gpt">ChatGPT 열기</button><button type="button" class="s" data-sto="gem">제미나이 열기 (복사)</button><button type="button" class="s" data-sto="cp">복사만</button>'+'</div><div class="st-pv" id="st-pv">'+prompt(true)+'</div>'+
+ '<ul class="st-help"><li>ChatGPT는 프롬프트가 자동으로 들어가요. 사진만 올리면 돼요. 제미나이는 사진을 넣고 붙여넣기(길게 누르기 → 붙여넣기) 해요.</li><li>얼굴 사진이 걱정되면 "AI 맞춤 설정 가이드"의 임시 채팅·학습 끄기를 먼저 확인해요.</li><li>무료 계정은 하루 그림 수가 적어요. 안 나오면 다른 앱이나 내일 다시 해요.</li></ul></div></div>'}
+function copy(t){try{navigator.clipboard.writeText(t)}catch(e){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(x){}a.remove()}}
+function toast(m){if(typeof showToast==='function')showToast(m)}
+function refresh(full){var r=document.getElementById('st-root');if(!r)return;if(full){r.innerHTML=body();return}var pv=document.getElementById('st-pv');if(pv)pv.innerHTML=prompt(true)}
+function bind(){var r=document.getElementById('st-root');if(!r||r._b)return;r._b=1;
+ r.addEventListener('click',function(e){var b=e.target.closest('[data-sts]');if(b){ST.step=+b.dataset.sts;refresh(1);return}
+  b=e.target.closest('[data-stc]');if(b){var k=b.dataset.stc,i=+b.dataset.i;if(k==='fd'||k==='fp'){ST.o[k]=ST.o[k]===i?-1:i;ST.o[k+'In']=''}else{ST.o[k]=i}save();refresh(1);return}
+  b=e.target.closest('[data-stscene]');if(b){var v=b.dataset.stscene;ST.o.scene=(ST.o.scene.trim()===v?'':v);save();refresh(1);return}
+    b=e.target.closest('[data-sto]');if(b){var p=prompt(false);copy(p);var m=b.dataset.sto;if(m==='gpt'){var w=window.open('https://chatgpt.com/?q='+encodeURIComponent(p),'_blank');if(w)w.opener=null;toast('ChatGPT에 프롬프트가 들어갔어요. 사진을 올려 주세요.')}else if(m==='gem'){window.open('https://gemini.google.com/app','_blank','noopener');toast('프롬프트를 복사했어요. 사진을 넣고 붙여넣기 하세요.')}else toast('프롬프트를 복사했어요.');return}
+  b=e.target.closest('[data-stgo]');if(b){if(typeof go==='function'){go(b.dataset.stgo);setTimeout(function(){var t=[].slice.call(document.querySelectorAll('#v-heart button')).filter(function(x){return /응원하는 엽서/.test(x.textContent)})[0];if(t)t.click()},150)}return}});
+ r.addEventListener('input',function(e){var t=e.target;if(t.dataset&&t.dataset.sti){ST.o[t.dataset.sti]=t.value;save();refresh(0)}});
+ r.addEventListener('change',function(e){var t=e.target;if(t.dataset&&(t.dataset.sti==='fdIn'||t.dataset.sti==='fpIn'))refresh(1)})}
+window.STUDIO={view:function(){return '<section class="panel st"><div class="sec-h" style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px"><h2 style="margin:0;font-size:24px">나만의 사진관</h2><span style="color:#4e5e56">증명사진 한 장으로 지금의 나 · 10년 후의 나까지</span></div><div id="st-root">'+body()+'</div></section>'},bind:bind};
+
+/* ===== 제미나이 비서 ===== */
+var GBC=[['em','응급·안전'],['life','실생활'],['digi','디지털'],['work','현장 업무'],['mind','마음·배움']];
+var GB=[
+ ['em','화상 응급처치','🔥','✋',['음성'],'뜨거운 물에 손을 데었어. 지금 바로 뭘 해야 해?','물집이 크거나 넓게 데면 바로 병원·119'],
+ ['em','베인 상처','🩹','👆',['카메라','음성'],'손가락이 베였는데 이 상처 어떻게 처치해?','피가 멈추지 않으면 바로 병원'],
+ ['em','아이가 삼킨 물건','👶','🔋',['카메라'],'아이가 이걸 삼킨 것 같아. 이 포장지 좀 봐 줘','숨쉬기 힘들어하면 즉시 119'],
+ ['em','쓰러진 사람 발견','🚑','📞',['음성'],'119에 신고했어. 기다리는 동안 내가 뭘 하면 돼?','119 상담원 안내가 언제나 먼저예요'],
+ ['em','정전·차단기','⚡','🏠',['카메라'],'전기가 나갔어. 이 차단기에서 뭘 올려야 해?','타는 냄새가 나면 만지지 말고 119'],
+ ['em','약 봉투 확인','💊','📋',['카메라'],'이 약 봉투, 언제 몇 알 먹으라는 거야?','최종 확인은 꼭 약사·의사에게'],
+ ['life','냉장고 요리','🧊','🍳',['카메라'],'이 재료로 30분 안에 저녁 메뉴 알려 줘',''],
+ ['life','가전 표시등','🔧','💡',['카메라'],'보일러에 이 불이 깜빡여. 무슨 뜻이야?','전기·가스는 무리하게 고치지 말고 기사님께'],
+ ['life','고지서·안내문','📄','🔍',['카메라'],'이 고지서 핵심만 쉽게 알려 줘','금액·날짜는 원문으로 한 번 더 확인'],
+ ['life','외국어 메뉴판','🍜','🌏',['카메라'],'이 메뉴판 한국어로 읽어 주고 추천해 줘',''],
+ ['life','오늘 옷차림','👗','🪞',['카메라'],'오늘 모임인데 이 옷 어때? 어울리는 신발도',''],
+ ['life','시든 화분','🪴','💧',['카메라'],'이 화분 잎이 왜 노래져? 어떻게 살려?',''],
+ ['digi','키오스크·앱 사용','📱','👉',['화면 공유'],'이 화면에서 다음에 뭘 눌러야 해?',''],
+ ['digi','수상한 문자','⚠️','✉️',['화면 공유'],'이 문자 사기 같아? 링크 눌러도 돼?','링크는 누르지 말고 먼저 확인부터'],
+ ['digi','휴대폰 설정','⚙️','🔠',['화면 공유'],'글씨를 크게 하는 법 하나씩 알려 줘',''],
+ ['work','가정 방문 통역','🏠','🗣️',['음성'],'베트남어로 "다음 주 화요일 오전에 다시 방문할게요"라고 말해 줘','상담 내용·이름 같은 개인정보는 말하지 않기'],
+ ['work','공문·안내문 핵심','📄','🔍',['카메라'],'이 공문에서 마감일이랑 제출 서류만 알려 줘','날짜·금액은 원문으로 다시 확인'],
+ ['work','행사장 안전 점검','🎪','✅',['카메라'],'이 행사장 보고 아이들한테 위험한 곳 알려 줘',''],
+ ['work','프로그램 아이디어','💡','👨‍👩‍👧',['음성'],'주말 가족 프로그램 아이디어 3개만 말해 줘',''],
+ ['work','엑셀 화면 묻기','📊','👉',['화면 공유'],'이 엑셀에서 월별 합계 내는 법 알려 줘','이용자 이름이 보이는 화면은 공유하지 않기'],
+ ['mind','고민 털어놓기','💬','🌙',['음성'],'오늘 민원 응대가 너무 힘들었어. 들어 줄래?','마음이 많이 힘들면 사람에게도 꼭 말해요'],
+ ['mind','외국어 말하기','🗣️','☕',['음성'],'카페에서 영어로 주문하는 연습하자',''],
+ ['mind','아이 숙제 돕기','✏️','📐',['카메라'],'이 수학 문제 아이한테 쉽게 설명하는 법 알려 줘','']];
+var GBS={c:'em'};
+var COL={em:['#fde7e7','#e53935'],life:['#e8f5ee','#1F6F5A'],digi:['#ece9fb','#5b45c4'],work:['#fff1e6','#C96A2B'],mind:['#e8f1fb','#2f6fa8']};
+function scene(x){var c=COL[x[0]],m=x[4][0];
+ var screen=m==='화면 공유'?'<rect x="104" y="30" width="56" height="86" rx="8" fill="#fff" stroke="'+c[1]+'" stroke-width="3"/><rect x="111" y="40" width="42" height="8" rx="3" fill="'+c[0]+'"/><rect x="111" y="54" width="42" height="26" rx="4" fill="'+c[0]+'"/><text x="132" y="106" font-size="22" text-anchor="middle">'+x[3]+'</text>':m==='카메라'?'<rect x="104" y="30" width="56" height="86" rx="8" fill="#1d2433"/><rect x="109" y="38" width="46" height="62" rx="4" fill="'+c[0]+'"/><text x="132" y="80" font-size="30" text-anchor="middle">'+x[2]+'</text><circle cx="132" cy="108" r="4" fill="#fff"/>':'<rect x="104" y="30" width="56" height="86" rx="8" fill="#1d2433"/><circle cx="132" cy="62" r="18" fill="'+c[0]+'"/><path d="M122 62h4M128 55v14M134 52v20M140 58v8" stroke="'+c[1]+'" stroke-width="3" stroke-linecap="round"/><text x="132" y="104" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">Live</text>';
+ var big=m==='화면 공유'?x[2]:m==='카메라'?x[3]:x[2];
+ return '<svg viewBox="0 0 240 132" aria-hidden="true"><rect width="240" height="132" fill="'+c[0]+'"/><circle cx="54" cy="70" r="40" fill="#fff" opacity=".75"/><text x="54" y="86" font-size="42" text-anchor="middle">'+big+'</text>'+screen+'<path d="M168 30h56a8 8 0 0 1 8 8v22a8 8 0 0 1-8 8h-40l-10 9v-9h-6a8 8 0 0 1-8-8V38a8 8 0 0 1 8-8z" fill="#fff" stroke="'+c[1]+'" stroke-width="2"/><text x="196" y="53" font-size="13" text-anchor="middle" fill="'+c[1]+'" font-weight="800">'+esc(m)+'</text></svg>'}
+function gbBody(){var tabs='<div class="gb-tabs">'+GBC.map(function(c){return '<button type="button" data-gbc="'+c[0]+'" class="'+(c[0]==='em'?'em ':'')+(GBS.c===c[0]?'on':'')+'">'+esc(c[1])+'</button>'}).join('')+'</div>';
+ var list=GB.filter(function(x){return x[0]===GBS.c});
+ return tabs+(GBS.c==='em'?'<div class="gb-sos">위급하면 먼저 119에 전화하세요. 제미나이는 구조를 기다리는 동안 돕는 보조예요.</div>':'')+
+ '<div class="gb-cards">'+list.map(function(x){return '<div class="gb-card'+(x[0]==='em'?' em':'')+'">'+scene(x)+'<div class="bd"><h4>'+esc(x[1])+'</h4><div class="gb-mode">'+x[4].map(function(m){return '<span>'+esc(m)+'</span>'}).join('')+'</div><p class="gb-say">"'+esc(x[5])+'"</p>'+(x[6]?'<p class="gb-warn">'+esc(x[6])+'</p>':'')+'</div></div>'}).join('')+'</div>'}
+function phone(n){var inner=n===1?'<rect x="14" y="50" width="36" height="12" rx="6" fill="#1d3f8f"/><text x="32" y="59" font-size="8" fill="#fff" text-anchor="middle" font-weight="700">Live</text><rect x="14" y="20" width="36" height="22" rx="4" fill="#e3ebfd"/>':n===2?'<circle cx="24" cy="56" r="7" fill="#1d3f8f"/><rect x="20" y="53" width="8" height="6" rx="1" fill="#fff"/><circle cx="40" cy="56" r="7" fill="#1d3f8f"/><rect x="36" y="52" width="8" height="8" rx="1" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="32" cy="32" r="12" fill="#e3ebfd"/>':'<circle cx="32" cy="38" r="14" fill="#e3ebfd"/><path d="M24 38h3M29 32v12M35 30v16M40 35v6" stroke="#1d3f8f" stroke-width="2.5" stroke-linecap="round"/>';
+ return '<svg viewBox="0 0 64 80"><rect x="8" y="4" width="48" height="72" rx="8" fill="#fff" stroke="#1d3f8f" stroke-width="3"/>'+inner+'</svg>'}
+function gbBind(){var r=document.getElementById('gb-root');if(!r||r._b)return;r._b=1;r.addEventListener('click',function(e){var b=e.target.closest('[data-gbc]');if(b){GBS.c=b.dataset.gbc;r.innerHTML=gbBody()}})}
+window.GBIZ={view:function(){return '<section class="panel st"><div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px"><h2 style="margin:0;font-size:24px">제미나이 비서</h2><span style="color:#4e5e56">말하고 · 비추고 · 화면 보여 주며 묻는 제미나이 라이브</span></div>'+
+ '<div class="gb-how"><div>'+phone(1)+'<div><b>1. Live 버튼</b><span>제미나이 앱 아래쪽 Live 버튼을 눌러요</span></div></div><div>'+phone(2)+'<div><b>2. 카메라 · 화면 공유</b><span>보여 줄 게 있으면 카메라나 화면 공유 버튼</span></div></div><div>'+phone(3)+'<div><b>3. 그냥 말하기</b><span>사람에게 묻듯 말로 물어보면 말로 답해요</span></div></div></div>'+
+ '<p class="gb-note"><span><b>휴대폰 앱에서만</b> (컴퓨터 웹에서는 안 돼요)</span><span><b>무료</b>로 쓸 수 있어요</span><span>끝난 뒤 <b>대화 내용을 글로</b> 다시 볼 수 있어요</span><span>숫자·금액은 <b>원문과 한 번 더</b> 확인</span></p>'+
+ '<div id="gb-root">'+gbBody()+'</div></section>'},bind:gbBind};
+})();
+</script>
+<style id="fam-jx-css">/* ===== 2026.11.12 v2 한 화면 도구: 프롬프트 디자인실 · 마음챙김 · 노래 · 빡침 번역기 (jx-) ===== */
+.jx{--jg:#2f6b56;--jgs:#e3f1e8;--jo:#c96a2b;--jl:#dfe9e2;--jt:#22352d;--jm:#111111;padding:12px 14px!important}
+.jx-top{display:flex;align-items:center;gap:10px;margin:0 0 8px;flex-wrap:wrap}
+.jx-top h2{margin:0;font-size:18px;color:var(--jt)}
+.jx-top p{margin:0;font-size:13px;color:var(--jm);flex:1;min-width:200px}
+.jx-tabs2{display:flex;gap:6px}
+.jx-tabs2 button{font:inherit;font-size:14px;font-weight:800;padding:7px 16px;border-radius:10px;border:1.5px solid #cbd5e1;background:#eef6f1;color:#2f5f4b;cursor:pointer}
+.jx-tabs2 button.on{background:var(--jg);border-color:var(--jg);color:#fff}
+.jx-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;min-height:0}
+.jx.fit .jx-body{height:var(--jxh,auto)}
+.jx-col{min-height:0;overflow:auto;background:#fff;border:1.5px solid var(--jl);border-radius:14px;padding:12px 14px;scrollbar-width:thin}
+.jx-col.r{display:flex;flex-direction:column;gap:8px;background:#fbfdfc}
+.jx .jx-l{display:flex;align-items:baseline;gap:6px;margin:10px 0 6px;font-size:13.5px;font-weight:800;color:var(--jt)}
+.jx .jx-l:first-child{margin-top:0}
+.jx .jx-l small{font-weight:600;color:var(--jm);font-size:12px}
+.jx .jx-chips{display:flex;flex-wrap:wrap;gap:5px}
+.jx .jx-chips button{font:inherit;font-size:13px;padding:5px 11px;border-radius:999px;border:1.5px solid #cbd5e1;background:#fff;color:var(--jt);cursor:pointer;line-height:1.3}
+.jx .jx-chips button:hover{border-color:var(--jg)}
+.jx .jx-chips button.on{background:var(--jg);border-color:var(--jg);color:#fff;font-weight:700}
+.jx .jx-chips.warm button{background:#fff8e6;border-color:#957819;color:#5e4708}
+.jx .jx-chips.warm button.on{background:#f3c94b;border-color:#9b760a;color:#3b2c00}
+.jx .jx-chips.peach button{background:#fff4ee;border-color:#c95b29;color:#7a3d22}
+.jx .jx-chips.peach button.on{background:var(--jo);border-color:var(--jo);color:#fff}
+.jx .jx-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.jx .jx-grid button{font:inherit;text-align:left;padding:7px 9px;border-radius:10px;border:1.5px solid #cbd5e1;background:#fff;cursor:pointer;line-height:1.3}
+.jx .jx-grid button b{display:block;font-size:13.5px;color:var(--jt)}
+.jx .jx-grid button span{display:block;font-size:11.5px;color:var(--jm);margin-top:1px}
+.jx .jx-grid button.on{background:var(--jgs);border-color:var(--jg);box-shadow:inset 0 0 0 1px var(--jg)}
+.jx textarea.jx-ta,.jx input.jx-in,.jx select.jx-in{width:100%;box-sizing:border-box;font:inherit;font-size:14px;padding:8px 11px;border:1.5px solid #cbd5e1;border-radius:10px;background:#fbfdfc;color:var(--jt)}
+.jx textarea.jx-ta{min-height:58px;height:62px;resize:vertical;line-height:1.5}
+.jx .jx-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.jx .jx-tools{display:flex;align-items:center;gap:6px;margin-bottom:5px;flex-wrap:wrap}
+.jx .jx-mic{display:inline-flex;align-items:center;gap:5px;font:inherit;font-size:12.5px;font-weight:700;padding:5px 11px;border-radius:999px;border:1.5px solid var(--jg);background:#fff;color:var(--jg);cursor:pointer}
+.jx .jx-mic.rec{background:#c0392b;border-color:#c0392b;color:#fff}
+.jx .jx-acts{display:flex;flex-wrap:wrap;gap:6px}
+.jx .jx-b{font:inherit;font-size:13.5px;font-weight:800;padding:8px 14px;border-radius:10px;border:1.5px solid var(--jg);background:#fff;color:var(--jg);cursor:pointer}
+.jx .jx-b.fill{background:var(--jg);color:#fff}
+.jx .jx-b.mini{font-size:12.5px;padding:5px 10px;border-radius:9px}
+.jx .jx-b.warn{border-color:#c0392b;color:#c0392b}
+.jx .jx-b:hover{filter:brightness(.96)}
+.jx .jx-warn{margin:4px 0 0;font-size:12px;color:#b0452a}
+.jx .jx-note{font-size:12px;color:var(--jm);margin:0;line-height:1.5}
+/* 오른쪽 결과·프롬프트 */
+.jx .jx-pv{flex:1;min-height:120px;overflow:auto;padding:12px 14px;border-radius:12px;background:#fff;border:1.5px solid #cbd5e1;font-size:13.5px;line-height:1.7;color:var(--jt);white-space:pre-wrap;word-break:keep-all}
+.jx .jx-pv .g{background:#dff1e5;color:#1d5a40;font-weight:800;text-decoration:underline;text-decoration-color:#6fae8c;text-underline-offset:3px;padding:0 2px;border-radius:3px}
+.jx .jx-pv .o{background:#ffe7cf;color:#a24d12;font-weight:800;text-decoration:underline;text-decoration-color:#e3a56f;text-underline-offset:3px;padding:0 2px;border-radius:3px}
+.jx .jx-pv .k{color:#2f6b56;font-weight:900}
+.jx .jx-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--jm)}
+.jx .jx-legend i{font-style:normal;font-weight:800;padding:0 4px;border-radius:3px;text-decoration:underline;text-underline-offset:2px}
+.jx .jx-legend .lg{background:#dff1e5;color:#1d5a40}.jx .jx-legend .lo{background:#ffe7cf;color:#a24d12}
+/* 마음챙김 결과 */
+.jx .jx-hero{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:#fff9f5;border:1.5px solid #c2602d}
+.jx .jx-hero.cool{background:#eef6f1;border-color:#cbd5e1}
+.jx .jx-five{flex:1;min-width:0}
+.jx .jx-five h4{margin:0 0 6px;font-size:14px;color:#8a3e22}
+.jx .jx-five p{margin:0 0 4px;font-size:14.5px;line-height:1.55;color:#3a2a22;font-weight:600}
+.jx .jx-five p.cheer{color:#c0501f;font-weight:900}
+.jx .jx-five p.rest{color:var(--jg);font-weight:700;font-size:13.5px}
+.jx .jx-empty{color:var(--jm);font-size:14px;line-height:1.6;margin:6px 0}
+.jx .jx-help{font-size:12px;color:var(--jm);line-height:1.5}
+.jx .jx-help a{color:#b0452a;font-weight:800}
+.jx .jx-ptabs{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.jx .jx-ptabs button{font:inherit;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:9px;border:1.5px solid #cbd5e1;background:#eef6f1;color:#2f5f4b;cursor:pointer}
+.jx .jx-ptabs button.on{background:var(--jg);border-color:var(--jg);color:#fff}
+.jx .jx-ptabs em{font-style:normal;display:inline-block;min-width:16px;margin-left:3px;padding:0 4px;border-radius:8px;background:#f3c94b;color:#3b2c00;font-size:11px}
+/* 빡침 번역기 */
+.jx .jx-lv{display:flex;gap:6px}
+.jx .jx-lv button{flex:1;font:inherit;font-size:13.5px;font-weight:800;padding:6px 4px;border-radius:10px;border:1.5px solid #c95b29;background:#fff4ee;color:#7a3d22;cursor:pointer}
+.jx .jx-lv button.on{background:#e8603c;border-color:#c64a28;color:#fff}
+.jx .jx-sg{display:grid;grid-template-columns:62px minmax(0,1fr);gap:6px;align-items:start;margin-bottom:5px}
+.jx .jx-sg-h{font-size:12px;font-weight:800;color:#a0522d;padding-top:5px}
+.jx .jx-flav{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.jx .jx-flav button{font:inherit;font-size:12.5px;font-weight:800;padding:4px 11px;border-radius:999px;border:1.5px solid #ca5a2c;background:#fff;color:#a0522d;cursor:pointer}
+.jx .jx-flav button.on{background:#a0522d;border-color:#a0522d;color:#fff}
+.jx .jx-flav span{font-size:12px;color:var(--jm)}
+.jx .jx-emp p{margin:0 0 3px;font-size:14px;line-height:1.5;color:#3a2a22}
+.jx .jx-emp h4{margin:0 0 5px;font-size:13.5px;color:#8a3e22}
+.jx .jx-emp .samk{display:inline-block;padding:0 7px;border-radius:6px;background:#e8603c;color:#fff;margin-left:3px}
+.jx .jx-emp p.sam b{display:inline-block;min-width:20px;color:#e8603c;font-size:16px}
+.jx .jx-emp p.v3{color:var(--jg);font-weight:800}
+.jx .jx-ap{display:flex;flex-wrap:wrap;gap:4px}
+.jx .jx-ap button{font:inherit;font-size:12px;padding:4px 8px;border-radius:8px;border:1.5px solid #cbd5e1;background:#fff;color:var(--jt);cursor:pointer}
+.jx .jx-ap button.on{background:var(--jg);border-color:var(--jg);color:#fff;font-weight:700}
+.jx .jx-msg{padding:10px 12px;border-radius:12px;background:#fff;border:1.5px solid #cbd5e1}
+.jx .jx-msg-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.jx .jx-msg-h h4{margin:0;font-size:13.5px;color:var(--jt)}
+.jx .jx-msg pre{margin:0;white-space:pre-wrap;font:inherit;font-size:13.5px;line-height:1.6;color:var(--jt)}
+.jx .jx-msg pre .o{background:#ffe7cf;color:#a24d12;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.jx .jx-bstat{font-size:13px;font-weight:800;color:var(--jg);margin-top:4px}
+/* 노래 */
+.jx .jx-lyr{display:grid;grid-template-columns:1fr 1fr;gap:0;flex:1;min-height:150px;border:1.5px solid #cbd5e1;border-radius:12px;background:#fff;overflow:hidden}
+.jx .jx-lyr>div{display:flex;flex-direction:column;padding:10px 12px;min-height:0}
+.jx .jx-lyr>div+div{border-left:1px dashed #cbd5e1}
+.jx .jx-lyr b{font-size:12px;color:#13624e;background:#eaf6f0;padding:1px 8px;border-radius:5px;width:fit-content;margin-bottom:4px}
+.jx .jx-lyr textarea{flex:1;border:none;outline:none;resize:none;font:inherit;font-size:13.5px;line-height:1.7;color:var(--jt);background:transparent;min-height:120px}
+.jx .jx-sinfo{display:flex;flex-wrap:wrap;gap:6px;font-size:12.5px}
+.jx .jx-sinfo span{padding:2px 9px;border-radius:999px;background:#fff;border:1px solid #49886b;color:#1f3a29;font-weight:600}
+.jx .jx-sinfo em{font-style:normal;color:#185f4d;font-weight:900;margin-right:3px;text-decoration:underline}
+.jx .jx-pv.small{flex:0 0 auto;max-height:118px;font-size:12.5px}
+
+@media (max-width:900px){.jx-body{grid-template-columns:1fr}.jx.fit .jx-body{height:auto}.jx-col{overflow:visible}.jx .jx-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.jx .jx-lyr{grid-template-columns:1fr}.jx .jx-lyr>div+div{border-left:none;border-top:1px dashed #cbd5e1}.jx .jx-pv{max-height:none}}
+@media (max-width:560px){.jx .jx-row{grid-template-columns:1fr}.jx .jx-sg{grid-template-columns:1fr}.jx .jx-sg-h{padding-top:0}}
+/* 상단: 단계 줄 + 도구 줄 */
+@media (max-width:600px){}
+
+/* 한 화면 압축 */
+.jx .jx-grid button span{display:none}
+.jx .jx-grid button{padding:8px 9px}
+.jx .jx-l{margin:8px 0 5px}
+@media (max-height:820px) and (min-width:901px){.jx .jx-chips button{font-size:12.5px;padding:4px 10px}.jx textarea.jx-ta{height:52px;min-height:48px}.jx .jx-five p{font-size:13.5px}.jx .jx-emp p{font-size:13.5px}}
+@media (max-height:860px) and (min-width:901px){
+.jx .jx-msg pre{font-size:13px;line-height:1.5}.jx .jx-hero{padding:9px 11px}
+}
+
+
+/* 노래: 단계 자동 넘김 + 1절·2절 한 판(스크롤 하나) */
+.jx-col.flexcol{display:flex;flex-direction:column}
+.jx .jx-step{display:flex;gap:4px;margin-bottom:12px}
+.jx .jx-step button{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;font:inherit;font-size:13px;font-weight:800;padding:7px 4px;border-radius:10px;border:1.5px solid #cbd5e1;background:#fff;color:#111111;cursor:pointer}
+.jx .jx-step button i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#eef3f0;font-size:12px}
+.jx .jx-step button.on{border-color:var(--jg);background:var(--jgs);color:var(--jt)}
+.jx .jx-step button.on i{background:var(--jg);color:#fff}
+.jx .jx-step button.done{color:var(--jg)}
+.jx .jx-step button.done i{background:#cfe8da;color:var(--jg)}
+.jx .jx-q{margin:0 0 10px;font-size:15.5px;color:var(--jt)}
+.jx .jx-q small{font-size:12.5px;color:var(--jm);font-weight:600;margin-left:4px}
+.jx .jx-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.jx .jx-opts button{font:inherit;text-align:left;padding:11px 13px;border-radius:12px;border:1.5px solid #cbd5e1;background:#fff;cursor:pointer;transition:.12s}
+.jx .jx-opts button:hover{border-color:var(--jg);background:#f4faf7}
+.jx .jx-opts button b{display:block;font-size:14.5px;color:var(--jt)}
+.jx .jx-opts button span{display:block;font-size:12px;color:var(--jm);margin-top:2px}
+.jx .jx-opts button.on{border-color:var(--jg);background:var(--jgs);box-shadow:inset 0 0 0 1px var(--jg)}
+.jx .jx-done{padding:14px 16px;border-radius:12px;background:#eaf6f0;border:1.5px solid #338c56}
+.jx .jx-done b{display:block;font-size:16px;color:#13624e;margin-bottom:4px}
+.jx .jx-done p{margin:0 0 8px;font-size:13.5px;color:var(--jt);line-height:1.55}
+.jx .jx-done u{text-decoration-color:#e3a56f;text-underline-offset:3px;font-weight:800}
+.jx .jx-lyr{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;align-content:start;overflow-y:auto;padding:12px 14px;flex:1;min-height:150px}
+.jx .jx-lyr>div{padding:0;display:block}
+.jx .jx-lyr>div+div{border-left:none;padding-left:18px;box-shadow:inset 1px 0 0 #e0ece6}
+.jx .jx-lyr textarea{display:block;width:100%;overflow:hidden;min-height:0;height:auto;resize:none;flex:none}
+@media (max-width:900px){.jx .jx-lyr>div+div{padding-left:0;box-shadow:none;border-top:1px dashed #cbd5e1;margin-top:10px;padding-top:10px}}
+/* ===== 졸라맨 v3: 상황별 동작 ===== */
+.jx-fig{flex:none;width:96px;height:104px;overflow:visible}
+.jx-fig.big{width:150px;height:162px}
+.jx-fig *{stroke:#26332d;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.jx-fig .face *{stroke-width:2.4}
+.jx-fig .eye{fill:#26332d;stroke:none}
+.jx-fig .hand{fill:#26332d;stroke:none;transform-box:fill-box;transform-origin:center}
+.jx-fig .cheek{fill:#f6b4a0;stroke:none;opacity:.85}
+.jx-fig .heart{fill:#e8603c;stroke:none;transform-box:fill-box;transform-origin:center;animation:fgFloat 2.2s ease-in-out infinite}
+.jx-fig .h2{animation-delay:1.1s}
+.jx-fig .spark{stroke:#f3b521;stroke-width:2.8;animation:fgBlink .8s ease-in-out infinite}
+.jx-fig .steam{stroke:#9aa7a1;stroke-width:2.4;transform-box:fill-box;transform-origin:bottom;animation:fgSteam 1s ease-out infinite}
+.jx-fig .s2{animation-delay:.35s}.jx-fig .s3{animation-delay:.18s}
+.jx-fig .lid{fill:#e8603c;stroke-width:2.4;transform-box:fill-box;transform-origin:center;animation:fgLid .9s ease-in-out infinite}
+.jx-fig .bl{fill:#bfe3cf;stroke:#2f6b56;stroke-width:2.2;transform-box:fill-box;transform-origin:center}
+.jx-fig .txt,.jx-fig .note,.jx-fig .zz{fill:#2f6b56;stroke:none;font:800 13px sans-serif}
+.jx-fig .zz{fill:#5d6f66}
+.jx-fig .drop{fill:#7fb4e0;stroke:none;animation:fgDrop 1.4s ease-in infinite}
+.jx-fig .cloud path{fill:#d7dde2;stroke:#8a97a0;stroke-width:2}
+.jx-fig .rain path{stroke:#7fb4e0;stroke-width:2.2;animation:fgRain .9s linear infinite}
+.jx-fig .cup{fill:#f3c94b;stroke-width:2.2}
+.jx-fig .stm path{stroke:#9aa7a1;stroke-width:2;animation:fgSteam 1.4s ease-out infinite}
+.jx-fig .win{stroke:#9fbcab;stroke-width:2.2;fill:#eef6f1}
+.jx-fig .warm path{stroke:#f3b521;stroke-width:2.2;animation:fgBlink 1.6s ease-in-out infinite}
+.jx-fig .who{transform-box:view-box;transform-origin:60px 118px}
+.jx-fig .hd{transform-box:view-box;transform-origin:60px 39px}
+.jx-fig .aL,.jx-fig .aR{transform-box:view-box;transform-origin:60px 46px}
+.jx-fig .lL,.jx-fig .lR{transform-box:view-box;transform-origin:60px 84px}
+/* 숨 고르기: 4초 들이쉬기(배·팔 올라감) → 4초 멈춤 → 6초 내쉬기(배 줄어듦·입김) = 14초 */
+.jx-fig.p-breath .bl{animation:fgBelly 14s ease-in-out infinite}
+.jx-fig.p-breath .aL{animation:fgArmL 14s ease-in-out infinite}
+.jx-fig.p-breath .aR{animation:fgArmR 14s ease-in-out infinite}
+.jx-fig.p-breath .air-in{animation:fgIn 14s linear infinite}
+.jx-fig.p-breath .air-out{animation:fgOut 14s linear infinite}
+.jx-fig.p-breath .m-c{animation:fgMc 14s linear infinite}
+.jx-fig.p-breath .m-o{animation:fgOut 14s linear infinite}
+.jx-fig.p-breath.go .bl,.jx-fig.p-breath.go .aL,.jx-fig.p-breath.go .aR,.jx-fig.p-breath.go .air-in,.jx-fig.p-breath.go .air-out,.jx-fig.p-breath.go .m-c,.jx-fig.p-breath.go .m-o{animation-iteration-count:3}
+.jx-fig .air-in path{stroke:#2f6b56;stroke-width:2.4}.jx-fig .air-out path,.jx-fig .air-out2 path{stroke:#7fb4e0;stroke-width:2.4}
+@keyframes fgBelly{0%{transform:scale(1)}28.6%{transform:scale(2.5)}57%{transform:scale(2.5)}100%{transform:scale(1)}}
+@keyframes fgArmL{0%{transform:rotate(0)}28.6%,57%{transform:rotate(32deg)}100%{transform:rotate(0)}}
+@keyframes fgArmR{0%{transform:rotate(0)}28.6%,57%{transform:rotate(-32deg)}100%{transform:rotate(0)}}
+@keyframes fgIn{0%,26%{opacity:1}29%,100%{opacity:0}}
+@keyframes fgOut{0%,56%{opacity:0}58%,98%{opacity:1}100%{opacity:0}}
+@keyframes fgMc{0%,56%{opacity:1}58%,98%{opacity:0}100%{opacity:1}}
+.jx-fig.p-sigh .bl{animation:fgSigh 3s ease-in-out infinite}.jx-fig.p-sigh .air-out2{animation:fgBlink 3s ease-in-out infinite}
+@keyframes fgSigh{0%,100%{transform:scale(2.2)}60%{transform:scale(.9)}}
+.jx-fig.p-hug .aL{animation:fgTapL 1s ease-in-out infinite}.jx-fig.p-hug .aR{animation:fgTapR 1s ease-in-out infinite}
+@keyframes fgTapL{0%,100%{transform:rotate(0)}50%{transform:rotate(-8deg)}}@keyframes fgTapR{0%,100%{transform:rotate(0)}50%{transform:rotate(8deg)}}
+.jx-fig.p-cheer .aL{transform:rotate(150deg)}.jx-fig.p-cheer .aR{transform:rotate(-150deg)}.jx-fig.p-cheer .who{animation:fgJump .8s ease-in-out infinite}
+.jx-fig.p-shrug .aL,.jx-fig.p-shrug .aR,.jx-fig.p-shrug .hd{animation:fgShrug 2s ease-in-out infinite}
+@keyframes fgShrug{0%,100%{transform:translateY(0)}35%,65%{transform:translateY(-8px)}}
+.jx-fig.p-fist .aL{transform:rotate(60deg)}.jx-fig.p-fist .aR{transform:rotate(-60deg)}.jx-fig.p-fist .hand{animation:fgFist 2s ease-in-out infinite}
+@keyframes fgFist{0%,45%{transform:scale(1.7)}55%,100%{transform:scale(.6)}}
+.jx-fig.p-stretch .aL{animation:fgStL 3s ease-in-out infinite}.jx-fig.p-stretch .aR{animation:fgStR 3s ease-in-out infinite}.jx-fig.p-stretch .who{animation:fgTall 3s ease-in-out infinite}
+@keyframes fgStL{0%,100%{transform:rotate(0)}40%,70%{transform:rotate(155deg)}}@keyframes fgStR{0%,100%{transform:rotate(0)}40%,70%{transform:rotate(-155deg)}}
+@keyframes fgTall{0%,100%{transform:translateY(0)}40%,70%{transform:translateY(-5px)}}
+.jx-fig.p-neck .hd{animation:fgNeck 4s ease-in-out infinite}
+@keyframes fgNeck{0%,100%{transform:rotate(0)}25%{transform:rotate(-22deg)}75%{transform:rotate(22deg)}}
+.jx-fig.p-scrunch .hd{animation:fgScr 1.6s ease-in-out infinite;transform-origin:60px 26px}
+@keyframes fgScr{0%,100%{transform:scale(1.08)}50%{transform:scale(.82)}}
+.jx-fig.p-shake .who{animation:fgShake .18s linear infinite}.jx-fig.p-shake .aL{animation:fgFlapL .3s linear infinite}.jx-fig.p-shake .aR{animation:fgFlapR .3s linear infinite}
+@keyframes fgFlapL{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(25deg)}}@keyframes fgFlapR{0%,100%{transform:rotate(15deg)}50%{transform:rotate(-25deg)}}
+.jx-fig.p-walk .lL,.jx-fig.p-walk .aR{animation:fgSwA 1s ease-in-out infinite}.jx-fig.p-walk .lR,.jx-fig.p-walk .aL{animation:fgSwB 1s ease-in-out infinite}.jx-fig.p-walk .who{animation:fgBob .5s ease-in-out infinite}
+@keyframes fgSwA{0%,100%{transform:rotate(18deg)}50%{transform:rotate(-18deg)}}@keyframes fgSwB{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(18deg)}}
+@keyframes fgBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.jx-fig.p-tea .aR{animation:fgSip 3s ease-in-out infinite}
+@keyframes fgSip{0%,100%{transform:rotate(0)}50%{transform:rotate(-6deg)}}
+.jx-fig.p-hum .who{animation:fgSway 2s ease-in-out infinite}.jx-fig .note{animation:fgFloat 2s ease-in-out infinite}.jx-fig .n2{animation-delay:.7s}.jx-fig .n3{animation-delay:1.3s}
+.jx-fig.p-look .hd{animation:fgLook 4s ease-in-out infinite}
+@keyframes fgLook{0%,100%{transform:rotate(0)}50%{transform:rotate(8deg)}}
+.jx-fig.p-tired .hd{transform:rotate(22deg)}.jx-fig.p-tired .who{animation:fgSway 4s ease-in-out infinite}.jx-fig .zz{animation:fgFloat 2.4s ease-in-out infinite}.jx-fig .z2{animation-delay:1.2s}
+.jx-fig.p-anx .who{animation:fgShake .3s linear infinite}
+.jx-fig.p-sad .hd{transform:rotate(-12deg)}.jx-fig.p-sad .who{animation:fgSway 4s ease-in-out infinite}
+.jx-fig.p-angry1 .who{animation:fgShake .25s linear infinite}.jx-fig.p-angry2 .who,.jx-fig.p-angry3 .who{animation:fgStomp .5s ease-in-out infinite}
+.jx-fig.p-calm .who{animation:fgSway 4s ease-in-out infinite}
+@keyframes fgFloat{0%{transform:translateY(4px);opacity:.4}50%{transform:translateY(-6px);opacity:1}100%{transform:translateY(4px);opacity:.4}}
+@keyframes fgJump{0%,100%{transform:translateY(0)}45%{transform:translateY(-10px)}}
+@keyframes fgBlink{0%,100%{opacity:.2}50%{opacity:1}}
+@keyframes fgSway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes fgShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+@keyframes fgStomp{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-8px) rotate(-4deg)}60%{transform:translateY(0) rotate(4deg)}}
+@keyframes fgSteam{0%{opacity:0;transform:translateY(4px) scaleY(.6)}40%{opacity:1}100%{opacity:0;transform:translateY(-8px) scaleY(1.1)}}
+@keyframes fgLid{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(-18deg)}}
+@keyframes fgDrop{0%{transform:translateY(0);opacity:1}100%{transform:translateY(10px);opacity:0}}
+@keyframes fgRain{0%{transform:translateY(0);opacity:1}100%{transform:translateY(8px);opacity:0}}
+@media (prefers-reduced-motion:reduce){.jx-fig *{animation-duration:0s!important}}
+/* 따라 하기 상자 */
+.jx .jx-rest{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;background:#eef6f1;border:1.5px solid #cbd5e1}
+.jx .jx-rest .jx-five p{color:#1d5a40;font-weight:700}
+.jx .jx-phase{font-size:22px;font-weight:900;color:#2f6b56;margin:2px 0}
+.jx .jx-phase small{display:block;font-size:13px;font-weight:700;color:#111111}
+.jx .jx-dots{display:flex;gap:5px;margin-top:4px}.jx .jx-dots i{width:10px;height:10px;border-radius:50%;background:#cfe3d6}.jx .jx-dots i.on{background:#2f6b56}
+
+.jx .jx-five p.jx-phase{font-size:26px;font-weight:900;color:#2f6b56;margin:0 0 2px;line-height:1.25}
+.jx .jx-five p.jx-phase small{display:block;font-size:13.5px;font-weight:700;color:#111111;margin-top:2px}
+.jx-fig.big{width:124px;height:134px}
+.jx .jx-rest{padding:8px 12px}
+</style>
+<style id="dbr-pr">
+.jx:has(#jx-p-task) .jx-legend{display:none!important}
+.jx:has(#jx-p-task) .jx-l{margin:7px 0 4px;font-size:12.5px}
+.jx:has(#jx-p-task) .jx-l small{font-size:11px}
+#jx-p-task{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:4px!important}
+#jx-p-task button{padding:5px 6px!important;text-align:center}
+#jx-p-task button b{font-size:12px!important;font-weight:700}
+#jx-p-task button span{display:none!important}
+#jx-p-g .jx-chips{gap:4px}
+#jx-p-g .jx-chips button{font-size:12px!important;padding:3px 9px!important}
+#jx-p-g .jx-chips.warm button.on{background:#c96a2b!important;border-color:#c96a2b!important;color:#fff!important}
+#jx-p-pv{font-size:13px!important;line-height:1.65!important;color:#33463f}
+#jx-p-pv .k{font-weight:700!important;color:#2f6b56!important;font-size:12.5px}
+#jx-p-pv .g{background:none!important;font-weight:400!important;color:inherit!important;text-decoration:underline!important;text-decoration-color:#8cc9ad!important;text-decoration-thickness:2px!important;padding:0!important}
+#jx-p-pv .o{background:#fff8e6!important;font-weight:400!important;color:#8a5a12!important;text-decoration:none!important;padding:0 2px!important}
+.jx:has(#jx-p-task) .jx-ta{min-height:54px!important;height:54px}
+.fr-list{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:6px;padding-right:2px}
+.fr-hint{margin:0 0 2px;font-size:12.5px;color:#111111}.fr-hint b{color:#c96a2b}
+.fr-empty{margin:auto;text-align:center;color:#111111;font-size:13.5px;line-height:1.7;padding:30px 10px;border:1.5px dashed #cbd5e1;border-radius:12px;width:100%}
+.fr-it{flex:none;border:1.5px solid #cbd5e1;border-radius:12px;background:#fff;overflow:hidden}
+.fr-it.open{border-color:#3e8967}
+.fr-h{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:100%;padding:7px 10px;cursor:pointer}
+.fr-e{font-size:20px}.fr-t{flex:1;display:flex;flex-direction:column}.fr-t b{font-size:14px;color:#1e3630}.fr-t small{font-size:11.5px;color:#111111}
+.fr-t em{font-style:normal;font-weight:700}.fr-ok{color:#2f6b56}.fr-miss{color:#c96a2b}
+.fr-plus{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#eef6f1;color:#2f6b56;font-weight:800;font-size:17px}
+.fr-it.open .fr-plus{background:#c96a2b;color:#fff}
+.fr-b{padding:2px 14px 10px 46px;font-size:13px;line-height:1.6;color:#33463f}
+.fr-b p{margin:2px 0}.fr-b ol{margin:4px 0 8px;padding-left:18px}
+</style>
+<style id="dbr-pgx">
+#jx-p-g .pg-x{font:inherit;font-size:12px;padding:3px 10px;border-radius:999px;border:1.5px dashed #528668;background:#fff;color:#1e3630;width:150px;outline:none}
+#jx-p-g .pg-x:focus{border-style:solid;border-color:#2f6b56}
+#jx-p-g .pg-x:not(:placeholder-shown){background:#fff8e6;border-color:#957819}
+</style>
+<style id="jx-task-nowrap">
+#jx-p-task{display:flex!important;flex-wrap:wrap;gap:6px}
+#jx-p-task button{flex:1 1 auto;white-space:nowrap;min-width:0;padding-left:12px;padding-right:12px}
+#jx-p-task button b{white-space:nowrap}
+</style>
+<script id="fam-prompt-js">
+(function(){
+var state={page:'prompt',jx:{}};try{state.jx=JSON.parse(localStorage.getItem('fam-jx')||'{}')||{}}catch(e){}
+var views={},init={};var decorateFeatures=function(){};var E=function(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+function showToast(m){try{toast(m)}catch(e){}}
+function render(){var h=document.getElementById('fam-prompt-host');if(!h||!views.prompt)return;h.innerHTML=views.prompt();try{init.prompt&&init.prompt()}catch(e){}try{localStorage.setItem('fam-jx',JSON.stringify(state.jx))}catch(e){}}
+/* ===== 2026.11.12 v2 한 화면 도구 (일반 구직자용): 프롬프트 디자인실 · 토닥토닥 마음챙김 · 나만의 노래 만들기 · 빡침 번역기 ===== */
+(function(){
+if(typeof decorateFeatures!=='function')window.decorateFeatures=function(){document.querySelectorAll('.feature-bar .feature-card').forEach(function(c){c.classList.toggle('active',c.dataset.target===state.page)})};
+if(!state.jx)state.jx={};
+var S=state.jx;
+function T(m){try{showToast(m)}catch(e){}}
+function cp(t,m){var ok=function(){T(m||'복사했어요. AI 창에 붙여 넣으세요.')};
+ if(navigator.clipboard)navigator.clipboard.writeText(t).then(ok,fb);else fb();
+ function fb(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){T('길게 눌러 직접 복사해 주세요.')}a.remove()}}
+function gpt(p){var w=window.open('https://chatgpt.com/?q='+encodeURIComponent(p),'_blank');if(w)w.opener=null}
+function gem(p,m){cp(p,m||'프롬프트를 복사했어요. 제미나이 입력창에 붙여 넣으세요.');var w=window.open('https://gemini.google.com/app','_blank');if(w)w.opener=null}
+function rnd(a,not){var c=a.filter(function(x){return x!==not});return c[Math.floor(Math.random()*c.length)]||a[0]}
+function q(s){return document.querySelector('#app '+s)}
+var MIC='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>';
+function micBtn(id){return '<button type="button" class="jx-mic" data-mic="'+id+'">'+MIC+'<span>눌러서 말하기</span></button>'}
+var rec=null,recB=null;
+function bindMic(){document.querySelectorAll('#app [data-mic]').forEach(function(b){b.onclick=function(){
+ var SR=window.SpeechRecognition||window.webkitSpeechRecognition,ta=document.getElementById(b.dataset.mic);
+ if(!SR){T('이 브라우저는 받아쓰기가 안 돼요. 휴대폰 키보드의 마이크를 써 주세요.');ta.focus();return}
+ if(rec&&recB===b){rec.stop();return}if(rec)rec.stop();
+ rec=new SR();rec.lang='ko-KR';rec.interimResults=true;rec.continuous=true;recB=b;var base=ta.value?ta.value.replace(/\s*$/,' '):'';
+ rec.onresult=function(e){var t='';for(var i=0;i<e.results.length;i++)t+=e.results[i][0].transcript;ta.value=base+t;ta.dispatchEvent(new Event('input'))};
+ rec.onstart=function(){b.classList.add('rec');b.querySelector('span').textContent='듣는 중… 다 말하면 누르기'};
+ rec.onend=function(){b.classList.remove('rec');b.querySelector('span').textContent='눌러서 말하기';rec=null;recB=null};
+ try{rec.start()}catch(e){}}})}
+/* 한 화면 맞춤: 남은 높이만큼만 쓰고 페이지는 스크롤되지 않게 */
+function fit(){var el=document.querySelector('#app .jx');if(!el)return;var b=el.querySelector('.jx-body');
+ if(window.innerWidth<=900){el.classList.remove('fit');b.style.removeProperty('--jxh');return}
+ el.classList.add('fit');var top=b.getBoundingClientRect().top+window.scrollY;var h=Math.max(430,window.innerHeight-top-30);el.style.setProperty('--jxh',h+'px')}
+if(!window._jxFit){window._jxFit=1;window.addEventListener('resize',function(){clearTimeout(window._jxFt);window._jxFt=setTimeout(fit,120)})}
+function shell(title,sub,tabs,left,right){return '<section class="panel jx"><div class="jx-top"><h2>'+title+'</h2><p>'+sub+'</p>'+(tabs||'')+'</div><div class="jx-body"><div class="jx-col">'+left+'</div><div class="jx-col r">'+right+'</div></div></section>'}
+function after(){bindMic();fit();setTimeout(fit,60);try{window.scrollTo(0,0)}catch(e){}}
+
+/* ---------- 졸라맨 ---------- */
+function fig(pose,lv,big){
+ var P=pose;if(P==='angry')P=lv>=2?'angry3':lv>=1?'angry2':'angry1';
+ var EY='<circle class="eye" cx="55" cy="24" r="1.9"/><circle class="eye" cx="65" cy="24" r="1.9"/>',EC='<path d="M52 24 h5 M63 24 h5"/>';
+ var M={smile:'<path d="M54.5 30 Q60 35 65.5 30"/>',sad:'<path d="M54.5 33 Q60 28.5 65.5 33"/>',flat:'<path d="M55 31.5 L65 31.5"/>',o:'<circle cx="60" cy="31.5" r="2.4"/>'};
+ var face=EY+M.smile,cheek=false;
+ var arms='<g class="aL"><path d="M60 46 L44 72"/><circle class="hand" cx="44" cy="72" r="2.6"/></g><g class="aR"><path d="M60 46 L76 72"/><circle class="hand" cx="76" cy="72" r="2.6"/></g>';
+ var ex='',belly='';
+ switch(P){
+ case 'breath':face=EY+'<g class="m-c">'+M.flat+'</g><g class="m-o">'+M.o+'</g>';belly='<circle class="bl" cx="60" cy="64" r="6"/>';ex='<g class="air-in"><path d="M86 20 L72 26"/><path d="M76 21 L72 26 L77 29"/><path d="M90 30 L76 30"/></g><g class="air-out"><path d="M66 33 q8 2 14 -1"/><path d="M66 36 q9 4 17 2"/><path d="M66 30 q7 -2 12 -6"/></g>';break;
+ case 'sigh':face=EC+M.o;belly='<circle class="bl" cx="60" cy="64" r="6"/>';ex='<g class="air-out2"><path d="M66 33 q8 2 14 -1"/><path d="M66 36 q9 4 17 2"/></g><text class="txt" x="84" y="22">휴~</text>';break;
+ case 'hug':cheek=true;arms='<g class="aL"><path d="M60 46 L46 58 L68 56"/></g><g class="aR"><path d="M60 46 L74 58 L52 56"/></g>';ex='<path class="heart" d="M92 26 C84 19 85 11 92 16 C99 11 100 19 92 26Z"/><path class="heart h2" d="M26 36 C21 32 22 26 26 29 C30 26 31 32 26 36Z"/>';break;
+ case 'cheer':cheek=true;ex='<path class="spark" d="M30 14 l-5 -5 M27 24 l-8 0 M90 14 l5 -5 M93 24 l8 0"/>';break;
+ case 'shrug':break;
+ case 'fist':break;
+ case 'stretch':face=EC+M.o;break;
+ case 'neck':face=EC+M.smile;break;
+ case 'eyes':face=EC+M.smile;arms='<g class="aL"><path d="M60 46 L46 42 L52 25"/><circle class="hand" cx="52" cy="25" r="3.4"/></g><g class="aR"><path d="M60 46 L74 42 L68 25"/><circle class="hand" cx="68" cy="25" r="3.4"/></g>';ex='<g class="warm"><path d="M44 16 l-4 -4 M76 16 l4 -4 M60 8 v-5"/></g>';break;
+ case 'scrunch':face='<path d="M52 22 l5 3 M68 22 l-5 3"/><path d="M54 31 Q60 34 66 31"/>';break;
+ case 'shake':face=EC+M.o;break;
+ case 'walk':break;
+ case 'tea':face=EC+M.smile;arms='<g class="aL"><path d="M60 46 L44 72"/><circle class="hand" cx="44" cy="72" r="2.6"/></g><g class="aR"><path d="M60 46 L78 56 L72 38"/></g>';ex='<rect class="cup" x="69" y="34" width="10" height="11" rx="2"/><g class="stm"><path d="M72 30 q-2 -4 0 -8"/><path d="M77 30 q2 -4 0 -8"/></g>';break;
+ case 'hum':face=EC+M.o;ex='<text class="note n1" x="80" y="24">♪</text><text class="note n2" x="90" y="38">♫</text><text class="note n3" x="26" y="30">♪</text>';break;
+ case 'look':face='<circle class="eye" cx="57" cy="24" r="1.9"/><circle class="eye" cx="67" cy="24" r="1.9"/>'+M.flat;ex='<rect class="win" x="88" y="14" width="24" height="28" rx="2"/><path class="win" d="M100 14 V42 M88 28 H112"/>';break;
+ case 'tired':face=EC+M.sad;ex='<text class="zz z1" x="78" y="16">z</text><text class="zz z2" x="86" y="8">Z</text>';break;
+ case 'anx':face=EY+'<path d="M54 32 q3 -2 6 0 q3 2 6 0"/>';ex='<path class="drop" d="M75 16 q4 6 0 9 q-4 -3 0 -9Z"/>';break;
+ case 'sad':face=EY+M.sad;ex='<g class="cloud"><path d="M42 6 q0 -7 8 -7 q3 -6 10 -3 q6 -4 11 2 q7 0 7 7 Z"/></g><g class="rain"><path d="M48 10 v5 M58 12 v5 M68 10 v5"/></g>';break;
+ case 'calm':face=EY+M.smile;belly='';break;
+ default:
+  if(P.indexOf('angry')===0){face=EY+M.flat+'<path d="M51 18 L57 21 M69 18 L63 21"/>';arms='<g class="aL"><path d="M60 46 L46 58 L54 68"/><circle class="hand" cx="54" cy="68" r="3"/></g><g class="aR"><path d="M60 46 L74 58 L66 68"/><circle class="hand" cx="66" cy="68" r="3"/></g>';ex='<path class="steam" d="M50 8 q-3 -4 0 -8"/><path class="steam s2" d="M70 8 q3 -4 0 -8"/>';if(P!=='angry1')ex+='<path class="steam s3" d="M60 5 q-3 -4 0 -8"/>';if(P==='angry3')ex+='<path class="lid" d="M47 17 Q60 5 73 17 Z"/>'}
+ }
+ if(cheek)face+='<circle class="cheek" cx="51" cy="29" r="2.4"/><circle class="cheek" cx="69" cy="29" r="2.4"/>';
+ return '<svg class="jx-fig p-'+P+(big?' big':'')+'" viewBox="0 0 120 130" aria-hidden="true"><g class="who"><g class="hd"><circle cx="60" cy="26" r="13"/><g class="face">'+face+'</g></g><path d="M60 39 V84"/>'+belly+arms+'<g class="lL"><path d="M60 84 L48 118"/></g><g class="lR"><path d="M60 84 L72 118"/></g></g>'+ex+'</svg>'}
+var MOODPOSE={'지쳤어요':'tired','속상해요':'sad','마음이 무거워요':'sad','불안해요':'anx','앞날이 막막해요':'look','자신감이 떨어졌어요':'sad','억울해요':'angry','허무해요':'tired','외로워요':'sad','자꾸 비교돼요':'look','화가 나요':'angry','서운해요':'sad','초조해요':'anx','우울해요':'sad','답답해요':'sigh','겁이 나요':'anx','가족에게 미안해요':'hug','혼란스러워요':'look','설레요':'cheer','그래도 해 보고 싶어요':'cheer'};
+function restPose(t){var R=[[/복식호흡/,'breath'],[/으쓱/,'shrug'],[/주먹/,'fist'],[/기지개/,'stretch'],[/고개|목 옆/,'neck'],[/나비/,'hug'],[/손바닥/,'eyes'],[/찡그/,'scrunch'],[/털기/,'shake'],[/콧노래/,'hum'],[/창밖|먼 곳|보이는 것/,'look'],[/물이나 차|차 한 잔/,'tea'],[/칭찬/,'cheer'],[/한숨/,'sigh'],[/걷기/,'walk']];for(var i=0;i<R.length;i++)if(R[i][0].test(t))return R[i][1];return 'calm'}
+
+/* ---------- 쉼 하나 ---------- */
+var REST=['복식호흡: 배에 손을 얹고 코로 4초 들이마셔 배를 풍선처럼 부풀리고, 입으로 6초 후~ 내쉬기. 세 번.','어깨를 귀까지 으쓱 올렸다가 툭 떨어뜨리기, 세 번.','두 주먹을 5초 동안 꽉 쥐었다가 확 펴기. 손끝까지 힘이 빠지는 걸 느껴 보기, 세 번.','두 팔을 하늘로 쭉 뻗어 기지개 + 하품 크게 한 번.','고개를 오른쪽, 왼쪽으로 천천히 기울이며 목 옆을 쭉 늘이기, 각 5초.','두 팔을 X자로 가슴에 얹고 나비처럼 토닥토닥 열 번. "괜찮아, 잘하고 있어."','두 손바닥을 싹싹 비벼 따뜻하게 만든 뒤 눈 위에 10초 올려 두기.','얼굴을 쭈글쭈글 최대한 찡그렸다가 활짝 펴기, 세 번. 거울 보면 웃음 보장.','강아지가 물 털듯 온몸을 탈탈 털기, 10초. 손목·발목까지!','좋아하는 노래 한 소절 콧노래로 흥얼거리기.','창밖이나 먼 곳을 1분 동안 멍하니 바라보기. 눈도 마음도 쉬어요.','보이는 것 5개, 들리는 것 3개를 천천히 찾아보기.','따뜻한 물이나 차 한 잔을 천천히, 온도와 향을 느끼며 마시기.','작게 소리 내어 나를 칭찬하기: "나 오늘 진짜 고생했다. 최고다!"','한숨 크게 "휴우~" 세 번 쉬기. 한숨은 참지 말고 시원하게!','동네 한 바퀴 천천히 걷기. 발바닥 느낌에만 집중.'];
+
+/* =====================================================================
+   A. 토닥토닥 마음챙김 : [내 마음 지킴이] [내 마음 엽서] 탭
+   ===================================================================== */
+var MOODS={
+ '지쳤어요':'몸도 마음도 정말 많이 지쳤죠. 여기까지 온 것만으로도 대단해요.',
+ '속상해요':'애쓴 만큼 알아주지 않아 속상한 하루였네요.',
+ '마음이 무거워요':'말로 다 못 할 무게를 안고 여기까지 오셨네요.',
+ '불안해요':'잘될지 몰라 불안한 마음, 새로 시작하는 사람이라면 누구나 느껴요.',
+ '앞날이 막막해요':'앞이 잘 안 보이는 날엔 딱 한 걸음만 보면 돼요.',
+ '자신감이 떨어졌어요':'자신감이 떨어진 건 실력이 없어서가 아니라 잠시 쉬었기 때문이에요.',
+ '억울해요':'최선을 다했는데 몰라주면 억울한 게 당연해요.',
+ '허무해요':'열심히 한 일이 티 나지 않아 허무한 날도 있어요.',
+ '외로워요':'혼자 버티는 것 같은 날, 그 마음 충분히 알아요.',
+ '자꾸 비교돼요':'남의 속도와 비교하지 않아도 돼요. 내 시계는 따로 있어요.',
+ '화가 나요':'화가 나는 건 그만큼 소중한 걸 지키고 싶어서예요.',
+ '서운해요':'믿었던 만큼 서운한 마음도 큰 거예요.',
+ '초조해요':'마음이 급할수록 숨 한 번 고르고 가도 늦지 않아요.',
+ '우울해요':'마음에 비가 오는 날도 있어요. 그 비는 반드시 그쳐요.',
+ '답답해요':'꽉 막힌 것 같은 마음, 여기서 조금 풀어 놓고 가요.',
+ '겁이 나요':'겁이 나는 건 새로운 문 앞에 서 있다는 뜻이에요.',
+ '가족에게 미안해요':'미안한 마음은 그만큼 가족을 아끼는 마음이에요.',
+ '혼란스러워요':'무엇부터 할지 몰라도 괜찮아요. 하나씩 정리하면 길이 보여요.',
+ '설레요':'설레는 마음, 그게 바로 새 출발의 신호예요!',
+ '그래도 해 보고 싶어요':'그래도 해 보고 싶다는 그 마음, 그게 바로 다시 시작하는 힘이에요.'};
+var HC=[
+ {k:['서류','탈락','떨어','불합격','연락','답이 없','지원'],h:'서류 앞에서 마음 졸인 날',L:['떨어졌다는 소식은 내가 부족하다는 뜻이 아니라, 자리가 맞지 않았다는 뜻이에요.','지원서를 낸 것 자체가 이미 용기 낸 거예요.','맞는 자리는 아직 나를 기다리고 있어요.']},
+ {k:['면접','떨려','긴장','질문','말을 못','버벅'],h:'면접 앞에서 떨린 날',L:['떨린다는 건 그만큼 진심이라는 뜻이에요.','완벽한 답보다 솔직한 내 이야기가 더 오래 남아요.','면접은 시험이 아니라 서로 맞는지 알아보는 대화예요.']},
+ {k:['나이','늦었','젊은','경력 공백','쉬었','오래 쉬','경단'],h:'"늦은 건 아닐까" 싶은 날',L:['늦은 출발은 없어요. 지금이 내 출발선이에요.','쉬는 동안에도 나는 살림과 돌봄으로 단단해졌어요.','나이만큼 쌓인 경험이 일터에서는 큰 힘이 돼요.']},
+ {k:['아이','육아','가족','남편','아내','부모님','돌봄','집안일'],h:'가족과 나 사이에서 바빴던 날',L:['가족을 챙기며 나를 위한 시간까지 내는 당신, 정말 대단해요.','엄마·아빠이기 전에 나도 소중한 사람이에요.','미안한 마음보다 애쓰는 나를 먼저 안아 줘요.']},
+ {k:['돈','생활비','월세','대출','빠듯','비용'],h:'생활 걱정이 컸던 날',L:['걱정이 많은 건 그만큼 책임감이 크다는 뜻이에요.','한 번에 다 해결하지 않아도 돼요. 오늘 할 수 있는 한 가지만.','지금 배우는 시간이 내일의 힘이 될 거예요.']},
+ {k:['컴퓨터','엑셀','AI','어려워','못 따라','모르겠'],h:'새로 배우느라 버거운 날',L:['처음 배우는 건 누구에게나 어려워요.','모르는 걸 물어보는 것도 실력이에요.','어제보다 하나 더 알게 됐다면 충분히 잘한 거예요.']},
+ {k:['피곤','잠','아파','지쳐','힘들','방전'],h:'몸도 마음도 지친 날',L:['오늘 하루, 정말 많은 걸 버텨 내셨어요.','지친 건 게을러서가 아니라 그만큼 애썼다는 증거예요.','쉬는 것도 다시 시작하는 준비예요.']}];
+
+var CHEER=['내가 걸어온 시간이 이미 경력이에요. 자신 있게 가요!','오늘 한 걸음이면 충분해요. 그 한 걸음이 내일을 바꿔요!','다시 시작하는 사람이 가장 용감한 사람이에요. 바로 당신이요!','넘어져도 괜찮아요. 일어설 때마다 더 단단해지니까요!','늦은 게 아니라, 지금이 딱 내 타이밍이에요!','내가 나를 믿어 주면, 세상도 따라와요.','작은 성공 하나가 큰 나를 만들어요. 오늘 하나 해냈어요!','나는 생각보다 훨씬 잘하고 있어요. 진짜로요!','포기하지 않는 마음, 그게 가장 강한 스펙이에요.','당신의 경험은 누군가에게 꼭 필요한 힘이 될 거예요.'];
+var HEND=['하면 된다, 될 때까지 해 본다! 오늘의 나, 파이팅!','내일의 나에게: 한 번에 하나씩, 그거면 충분해. 가 보자고!','오늘의 나, 참 수고했어. 내일은 더 빛날 거야!','나는 나를 믿어. 천천히, 그러나 멈추지 않고!'];
+var PC_HG=[
+ ['구직·취업',['서류에서 자꾸 떨어져요','면접이 두렵고 떨려요','연락 오는 곳이 없어요','나이가 걸림돌 같아요','경력 공백이 신경 쓰여요','어떤 일을 해야 할지 모르겠어요','자격증·공부가 버거워요','컴퓨터·AI가 어렵게 느껴져요','원하는 조건의 일자리가 없어요','첫 출근이 걱정돼요']],
+ ['다시 시작',['오랜만에 사회로 나가려니 떨려요','예전 경력이 쓸모없게 느껴져요','배우는 속도가 느린 것 같아요','가족에게 미안한 마음이 커요','짧은 시간이라도 일하고 싶어요','내가 잘하는 게 뭔지 모르겠어요']],
+ ['사람·관계',['마음을 털어놓을 사람이 없어요','거절을 못 해서 힘들어요','오해를 받아 속상해요','친구들과 멀어진 것 같아요','남의 눈치를 너무 봐요','새로운 사람 만나기가 어려워요']],
+ ['가정·자녀',['아이와 대화가 잘 안 돼요','일과 육아를 같이 하기 벅차요','아이에게 화내고 후회해요','아이 공부·진로가 걱정돼요','좋은 부모인지 자신이 없어요','집안일이 끝이 없어요']],
+ ['부부·가족',['배우자와 마음이 엇갈려요','집안일·육아 분담으로 다퉈요','부모님 돌봄이 걱정돼요','가족이 내 마음을 몰라줘요']],
+ ['나 자신·마음',['잘하고 있는지 모르겠어요','자꾸 남과 비교하게 돼요','나를 위한 시간이 없어요','자신감이 떨어졌어요','괜히 눈물이 나요','새로 시작할 용기가 안 나요','하고 싶은 게 뭔지 모르겠어요']],
+ ['몸·쉼',['몸이 많이 지쳤어요','잠을 잘 못 자요','제대로 쉬지 못했어요','늘 피곤하고 몸이 무거워요']],
+ ['돈·생활',['생활비가 빠듯해요','아이 교육비가 부담돼요','집 문제(이사·전세)가 걱정돼요','노후 준비가 걱정돼요','나를 위해 쓰는 돈이 아까워요']]];
+var PC_STYLE=[['AI 추천','나를 아는 AI가 내 이야기에 가장 어울리는 그림 느낌으로'],['햇살 수채화 풍경','따뜻한 햇살, 꽃과 나무, 멀리 이어진 산책길이 있는 수채화 풍경'],['꽃잎 압화 빈티지','말린 꽃잎과 잎사귀를 눌러 붙인 듯한 빈티지 종이 엽서'],['동화 일러스트','작은 집과 귀여운 동물 친구들이 있는 아기자기한 동화책 그림'],['밤하늘 별빛','은은한 달빛과 반짝이는 별, 따뜻한 불빛이 켜진 작은 마을'],['창가의 따뜻한 차','창가에 놓인 따뜻한 차 한 잔과 책, 포근한 담요'],['바닷가 노을','잔잔한 바다와 분홍빛 노을, 모래 위 조개껍데기'],['계절 숲길 산책','계절 색이 가득한 숲길과 햇살이 비치는 오솔길']];
+
+if(!S.h)S.h={tab:'keep',moods:[],text:'',ptab:0,hard:[],mine:'',style:0,to:'',date:''};
+var H=S.h;if(!H.tab)H.tab='keep';var cur5=[];
+function hMatch(t){var best=-1,sc=0;HC.forEach(function(c,i){var n=c.k.filter(function(w){return t.indexOf(w)>-1}).length;if(n>sc){sc=n;best=i}});return best}
+function hFive(){var t=(H.text||'').trim(),ci=t?hMatch(t):-1,c=ci>=0?HC[ci]:null,m=H.moods;if(!t&&!m.length)return null;
+ var L=[];if(c)L.push(c.L[0]);m.forEach(function(x){if(L.length<3)L.push(MOODS[x])});if(L.length<2)L.push(c?rnd(c.L.slice(1)):rnd(CHEER));
+ L.push(rnd(CHEER));L.push(rnd(HEND));
+ return {title:c?c.h:(m.length?m.join(' · '):'오늘을 버틴 나에게'),L:L}}
+function hPose(){var m=H.moods;return m.length?(MOODPOSE[m[m.length-1]]||'hug'):'hug'}
+function hRest(t){var b=q('#jx-h-rest');if(!b)return;H.rest=t||H.rest||REST[0];b.innerHTML=fig(restPose(H.rest))+'<div class="jx-five"><h4 style="color:#1d5a40">쉼 하나 · 그림 보고 따라 해 보세요</h4><p>'+E(H.rest)+'</p><div class="jx-acts" style="margin-top:6px"><button type="button" class="jx-b mini" data-h="rest">다른 쉼 해 보기 ›</button></div></div>'}
+function hShow(){var box=q('#jx-h-out');if(!box)return;var r=hFive();
+ if(!r){box.innerHTML=fig('sad')+'<div class="jx-five"><h4>💌 나를 위한 위로와 응원</h4><p class="jx-empty">왼쪽에서 오늘 있었던 일을 털어놓거나<br>지금 내 마음을 골라 보세요. 여기에 바로 위로와 응원이 떠요.</p></div>';cur5=[];return}
+ cur5=r.L;var n=r.L.length;box.innerHTML=fig(hPose())+'<div class="jx-five"><h4>💌 나를 위한 위로와 응원 · '+E(r.title)+'</h4>'+r.L.map(function(x,i){return '<p'+(i>=n-2?' class="cheer"':'')+'>'+E(x)+'</p>'}).join('')+'</div>'}
+function pcTabs(){var tabs='',body='';PC_HG.forEach(function(g,gi){var cnt=0,ch='';g[1].forEach(function(x){var on=H.hard.indexOf(x)>-1;if(on)cnt++;ch+='<button type="button" data-pch="'+E(x)+'"'+(on?' class="on"':'')+'>'+E(x)+'</button>'});
+ tabs+='<button type="button" data-pct="'+gi+'"'+(H.ptab===gi?' class="on"':'')+'>'+E(g[0])+(cnt?'<em>'+cnt+'</em>':'')+'</button>';if(H.ptab===gi)body='<div class="jx-chips warm">'+ch+'</div>'});
+ return '<div class="jx-ptabs">'+tabs+'</div>'+body}
+function postL(){var hard=H.hard.slice();if((H.mine||'').trim())hard.push(H.mine.trim());var st=PC_STYLE[H.style]||PC_STYLE[0],nm=(H.to||'').trim().replace(/\s+/g,''),dt=(H.date||'').trim(),t=(H.text||'').trim();
+ if(/^[가-힣]{3}$/.test(nm))nm=nm.slice(1);
+ var L=[['엽서에 불러 줄 내 이름: ','k'],[nm||'(이름)','o',1],['\n',''],['우표 소인 날짜: ','k'],[dt||'(날짜)','o',1],['\n',''],['(위 두 줄만 채워서 보내 주세요)\n\n---\n',''],
+  ['그동안 나와 나눈 대화를 기억하는 친구로서, 나를 인정하고 위로하고 응원하는 선물 같은 엽서 그림을 만들어 줘.','g',1],['\n\n[요즘 나를 힘들게 하는 것]\n','k']];
+ if(hard.length)hard.forEach(function(x){L.push(['- ','']);L.push([x,'o',1])});else L.push(['- (고르지 않았어. 그동안 대화에서 요즘 내가 힘들어하던 것을 떠올려 줘)','',1]);
+ if(H.moods.length){L.push(['\n[지금 내 마음] ','k']);L.push([H.moods.join(', '),'o',1])}
+ if(t){L.push(['\n[오늘 있었던 일]\n','k']);L.push([t,'o',1])}
+ L.push(['\n[그림 느낌] ','k']);L.push([st[0]+' — '+st[1],'g',1]);
+ L.push(['\n[이렇게 만들어 줘]\n','k']);
+ L.push(['- 글이나 설명 없이, 질문도 하지 말고, 바로 엽서 그림 한 장만 만들어 줘. 선물처럼 열어 보는 순간 처음 보게.\n- 그동안 나눈 대화와 기억에서 내가 꾸준히 노력해 온 부분과 나의 강점을 떠올려 담아 줘. 기억이 없으면 지어내지 말고 위의 힘든 마음을 알아주는 따뜻한 말로만.\n- 앞면 제목: 다시 시작하는 나를 힘껏 응원하는 한 줄(15자 이내).\n- 뒷면 손편지: 힘든 마음을 알아주고, 인정하고, 힘이 번쩍 나게 응원하는 5줄. 한 줄 25자 이내. 첫 줄 위에 내 이름을 성 빼고 다정하게("민지야,"). 이름 칸이 비어 있으면 "나에게,".\n- 회사 이름·숫자·사람 이름 같은 구체적인 사실, 건강·가족사 같은 민감한 이야기는 넣지 마.\n- 앞면 배경: 손편지와 가장 잘 어울리는 아름다운 풍경(꽃길·바다·숲·노을·별밤 등). 사람은 작은 뒷모습만.\n- 구성: 앞면과 뒷면이 위아래로 함께 보이는 세로 2:3 한 장. 뒷면은 크림색 종이, 가운데 세로선, 왼쪽 손편지, 오른쪽 위 우표와 둥근 소인(날짜가 없으면 날짜 없이), 오른쪽 아래 "받는 사람: (내 이름)".\n- 리넨 천 위에 작은 꽃과 리본 묶은 선물 상자를 곁들여 정말 선물 받은 느낌으로. 한글은 틀리지 않게, 크고 또렷하게.','']);
+ return L}
+function postP(){return postL().map(function(x){return x[0]}).join('').replace('(이름)','').replace('(날짜)','')}
+function postH(){return postL().map(function(x){var t=E(x[0]);return x[1]==='k'?'<span class="k">'+t+'</span>':x[1]==='o'?'<span class="o">'+t+'</span>':x[1]==='g'?'<span class="g">'+t+'</span>':t}).join('')}
+function heartView(){
+ var tabs='<div class="jx-tabs2" role="tablist"><button type="button" data-ht="keep"'+(H.tab==='keep'?' class="on"':'')+'>내 마음 지킴이</button><button type="button" data-ht="card"'+(H.tab==='card'?' class="on"':'')+'>내 마음 엽서</button></div>';
+ var left,right;
+ if(H.tab==='keep'){
+  left='<span class="jx-l">오늘 있었던 일 <small>말이나 글로 털어놓기 · 나만 보는 곳이에요</small></span><div class="jx-tools">'+micBtn('jx-h-in')+'</div><textarea class="jx-ta" id="jx-h-in" placeholder="예) 서류를 다섯 군데 냈는데 한 곳도 연락이 없어요. 내가 너무 늦은 건 아닌지 걱정돼요.">'+E(H.text)+'</textarea>'+
+  '<span class="jx-l">지금 내 마음 <small>최대 3개까지 골라요</small></span><div class="jx-chips" id="jx-h-mood">'+Object.keys(MOODS).map(function(m){return '<button type="button" data-mood="'+E(m)+'"'+(H.moods.indexOf(m)>-1?' class="on"':'')+'>'+E(m)+'</button>'}).join('')+'</div>';
+  right='<div class="jx-hero" id="jx-h-out"></div><div class="jx-rest" id="jx-h-rest"></div><div class="jx-acts"><button type="button" class="jx-b mini" data-h="again">다른 응원 듣기</button><button type="button" class="jx-b mini" data-h="cp5">위로 복사</button><button type="button" class="jx-b mini fill" data-ht="card">이 마음으로 엽서 받기 ›</button></div>';
+ }else{
+  left='<span class="jx-l">① 요즘 나를 힘들게 하는 것 <small>여러 개 골라도 돼요</small></span><div id="jx-pc-hard">'+pcTabs()+'</div><input class="jx-in" id="jx-pc-mine" style="margin-top:6px" placeholder="직접 쓰기 (예: 자격증 시험이 다음 주라 마음이 급해요)" value="'+E(H.mine)+'">'+
+  '<span class="jx-l">② 그림 느낌</span><div class="jx-chips peach" id="jx-pc-style">'+PC_STYLE.map(function(x,i){return '<button type="button" data-pcs="'+i+'" title="'+E(x[1])+'"'+(H.style===i?' class="on"':'')+'>'+E(x[0])+'</button>'}).join('')+'</div>'+
+  '<div class="jx-row" style="margin-top:8px"><label><span class="jx-l" style="margin-top:0">③ 엽서에 부를 내 이름</span><input class="jx-in" id="jx-pc-to" placeholder="예: 김민지 → 민지" value="'+E(H.to)+'"></label><label><span class="jx-l" style="margin-top:0">우표 소인 날짜</span><input class="jx-in" id="jx-pc-date" placeholder="예: 2026.11.20" value="'+E(H.date)+'"></label></div>'+
+  '<p class="jx-note" style="margin-top:8px">평소 쓰던 ChatGPT나 제미나이가 그동안 나눈 대화를 기억해서, 나만 아는 이야기로 인정·위로·응원의 선물 엽서를 만들어 줘요.</p>';
+  right='<span class="jx-l">완성된 엽서 프롬프트 <small>고른 대로 바로 바뀌어요</small></span><div class="jx-pv" id="jx-pc-pv"></div>'+
+  '<div class="jx-acts"><button type="button" class="jx-b fill" data-h="gpt">ChatGPT로 선물 엽서 받기</button><button type="button" class="jx-b" data-h="gem">제미나이로 받기</button><button type="button" class="jx-b" data-h="cpp">복사</button></div>'+
+  '<div class="jx-legend"><span><i class="lo">주황 밑줄</i> 내가 고른 내용</span><span><i class="lg">초록 밑줄</i> AI에게 주는 역할·그림 느낌</span></div>'+
+  '<p class="jx-note">평소 쓰던 계정으로 로그인한 채로 여세요. 무료 계정은 하루에 만들 수 있는 그림 수가 적어서, 안 나오면 내일 다시 해 보세요.</p>';
+ }
+ return shell('토닥토닥 마음챙김','털어놓거나 마음을 고르면 바로 위로와 응원이 떠요.',tabs,left,right)}
+function heartBind(){var el=q('.jx');
+ if(H.tab==='keep'){hShow();hRest();var ta=q('#jx-h-in'),tm;ta.addEventListener('input',function(){H.text=ta.value;clearTimeout(tm);tm=setTimeout(hShow,450)})}
+ else{var pv=q('#jx-pc-pv');var up=function(){pv.innerHTML=postH()};up();
+  [['#jx-pc-mine','mine'],['#jx-pc-to','to'],['#jx-pc-date','date']].forEach(function(a){var i=q(a[0]);i.addEventListener('input',function(){H[a[1]]=i.value;up()})});el._up=up}
+ el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.ht){H.tab=b.dataset.ht;render();return}
+  if(b.dataset.mood){var m=b.dataset.mood,i=H.moods.indexOf(m);if(i>-1)H.moods.splice(i,1);else{if(H.moods.length>=3){T('마음은 최대 3개까지 고를 수 있어요.');return}H.moods.push(m)}
+   q('#jx-h-mood').querySelectorAll('button').forEach(function(x){x.classList.toggle('on',H.moods.indexOf(x.dataset.mood)>-1)});hShow();return}
+  if(b.dataset.pct!=null){H.ptab=+b.dataset.pct;q('#jx-pc-hard').innerHTML=pcTabs();return}
+  if(b.dataset.pch){var x=b.dataset.pch,j=H.hard.indexOf(x);if(j>-1)H.hard.splice(j,1);else H.hard.push(x);q('#jx-pc-hard').innerHTML=pcTabs();el._up();return}
+  if(b.dataset.pcs!=null){H.style=+b.dataset.pcs;q('#jx-pc-style').querySelectorAll('button').forEach(function(y){y.classList.toggle('on',y===b)});el._up();return}
+  var a=b.dataset.h;if(!a)return;
+  if(a==='again'){hShow();hRest(rnd(REST,H.rest))}
+  if(a==='rest')hRest(rnd(REST,H.rest));
+  if(a==='cp5'&&cur5.length)cp(cur5.join('\n')+'\n쉼 하나: '+H.rest,'위로와 응원을 복사했어요.');
+  if(a==='gpt'){var p=postP();cp(p,'프롬프트를 넣었어요. ChatGPT 입력창 맨 위에 이름과 날짜만 확인하고 보내세요.');gpt(p)}
+  if(a==='gem')gem(postP());
+  if(a==='cpp')cp(postP())});
+ after()}
+
+/* =====================================================================
+   B. 빡침 번역기
+   ===================================================================== */
+var LV=[['화남','😤'],['폭발 직전','🔥'],['뚜껑 열림','💥']];
+var WHO=['회사·인사 담당자','직장 동료·상사','가족','지인·이웃','고객센터·업체'];
+var HOW=['문자·카톡 (짧게)','메일 (격식 있게)','직접 말하기 (대본)'];
+var OPEN={'회사·인사 담당자':'안녕하세요, [지원 분야]에 지원한 [이름]입니다.','직장 동료·상사':'[이름]님, 안녕하세요.','가족':'[호칭], 할 말이 있어서 차분하게 적어 봐.','지인·이웃':'안녕하세요, [호칭].','고객센터·업체':'안녕하세요, [주문·접수 번호] 건으로 문의드립니다.'};
+var SITS=[
+ ['구직·면접',[
+  {n:'면접 결과 연락 없음',in:'면접 보고 일주일이 지났는데 합격인지 불합격인지 연락이 없어요.',who:'회사·인사 담당자',emp:'기다리는 하루가 일주일 같죠. 휴대폰만 수십 번 봤을 거예요.',fact:'[날짜]에 [지원 분야] 면접을 본 [이름]입니다.',rule:'결과 안내 일정이 궁금해 연락드립니다.',ask:'결과가 언제쯤 나오는지 알려 주실 수 있을까요?',firm:'다른 곳 일정도 있어 [날짜]까지 알려 주시면 감사하겠습니다.',sam:[['연락줘','연락 한 통이 그렇게 어려워요?','락(樂)은 없고 기다림만 한가득!','줘요, 합격이든 불합격이든 답 좀 줘요!'],['기다림','기다리다 목이 기린 됐어요.','다들 바쁜 건 알지만 저도 바빠요!','림(林)처럼 서 있는 제 마음, 언제 봐 줄 거예요?']]},
+  {n:'공고와 다른 조건',in:'공고엔 9시~4시라더니 면접에서 6시까지 가능하냐고 물어요.',who:'회사·인사 담당자',emp:'조건 보고 지원했는데 말이 바뀌면 허탈하죠.',fact:'공고에는 근무 시간이 [시간]으로 안내되어 있었습니다.',rule:'저는 [가족 돌봄 등 사정]으로 공고 조건을 보고 지원했습니다.',ask:'공고 조건대로 근무가 가능한지 확인 부탁드립니다.',firm:'조건이 다르다면 이번 지원은 다시 생각해 보겠습니다.',sam:[['말바꿈','말이 바뀌는 속도, 거의 광속이네요.','바뀐 조건 들으려고 면접 온 거 아닌데!','꿈같던 공고, 알고 보니 낚시였나요?'],['공고문','공고는 장식이에요?','고쳐 쓸 거면 처음부터 제대로 쓰시지!','문 열고 들어오니 딴 세상이네요.']]},
+  {n:'무례한 면접 질문',in:'면접에서 "애 키우면 자주 빠지지 않아요?" 이런 질문을 받았어요.',who:'회사·인사 담당자',emp:'일할 준비 다 하고 갔는데 그런 질문이라니, 진짜 속상하죠.',fact:'[날짜] 면접에서 받은 질문에 대해 말씀드리고 싶습니다.',rule:'저는 근무 시간에 맞춰 일할 수 있도록 돌봄 계획을 세워 두었습니다.',ask:'제 역량과 경험으로 평가해 주시면 감사하겠습니다.',firm:'업무와 관계없는 사생활 질문은 삼가 주시면 좋겠습니다.',sam:[['선넘네','선을 아주 우아하게 넘으시네요.','넘을 건 제 능력이지, 제 사생활이 아니에요!','네네, 그 질문은 정중히 반사합니다.']]},
+  {n:'나이·공백만 봄',in:'경력 공백이랑 나이 얘기만 하고 제가 뭘 할 수 있는지는 안 물어봐요.',who:'회사·인사 담당자',emp:'내가 할 수 있는 건 안 보고 숫자만 보니 답답하죠.',fact:'면접에서 경력 공백에 대해 말씀하셨던 [이름]입니다.',rule:'공백 기간에도 [배운 것·한 일]로 준비해 왔습니다.',ask:'[지원 분야]에 바로 쓸 수 있는 제 경험을 한 번 더 말씀드릴 기회를 주실 수 있을까요?',firm:'제가 할 수 있는 일로 평가받고 싶습니다.',sam:[['숫자만','숫자만 보면 사람이 보이나요?','자, 제 경험도 좀 봐 주세요!','만 원짜리 지폐도 앞뒤가 있는데요!']]}]],
+ ['일터·동료',[
+  {n:'첫 출근 텃세',in:'첫 출근인데 아무도 알려 주지 않고 "알아서 해요"만 해요.',who:'직장 동료·상사',emp:'처음이라 모르는 게 당연한데 혼자 덩그러니, 진짜 서럽죠.',fact:'이번에 [부서]에 새로 온 [이름]입니다.',rule:'업무를 정확하게 하고 싶어서 여쭤봅니다.',ask:'[업무] 순서를 10분만 알려 주실 수 있을까요?',firm:'모르는 부분은 메모해서 한 번에 여쭤보겠습니다.',sam:[['알아서','알아서 하라는데 뭘 알아야 하죠?','아무도 안 알려 주면 저는 투명인간인가요?','서러워도 메모장 들고 버팁니다!']]},
+  {n:'마감 직전 떠넘기기',in:'퇴근 10분 전에 "이것도 해 줄 수 있죠?" 하고 넘겨요.',who:'직장 동료·상사',emp:'퇴근 직전 폭탄 받으면 눈앞이 캄캄하죠.',fact:'요청하신 [업무명] 확인했습니다.',rule:'오늘은 [사정]이 있어 퇴근 시간까지 마치기 어렵습니다.',ask:'[날짜] 오전까지 마무리해도 될까요?',firm:'다음부터는 조금 일찍 말씀해 주시면 감사하겠습니다.',sam:[['폭탄님','폭탄 돌리기 하세요? 퇴근 10분 전에!','탄식밖에 안 나오네, "이것도 해 줄 수 있죠?"','님아, 제 퇴근은 소중하거든요?']]},
+  {n:'공은 가져가는 동료',in:'같이 한 일인데 보고할 땐 자기가 다 한 것처럼 말해요.',who:'직장 동료·상사',emp:'같이 땀 흘렸는데 내 이름만 쏙 빠지면 진짜 서운하죠.',fact:'[업무명] 진행 내용 정리해서 공유드립니다.',rule:'[맡은 부분]은 제가 맡아 진행했습니다.',ask:'보고할 때 역할을 함께 적어 주시면 좋겠습니다.',firm:'다음부터는 역할을 나눠 적는 것으로 했으면 합니다.',sam:[['숟가락','숟가락 얹는 실력, 미슐랭 3스타급이네.','가만히 있다가 보고할 때만 원맨쇼?','락(樂)은 당신이, 고생은 제가? 공평 좀 합시다.']]},
+  {n:'말 바꾸는 상사',in:'어제는 이렇게 하라더니 오늘은 왜 그렇게 했냐고 해요.',who:'직장 동료·상사',emp:'시킨 대로 했는데 혼나면 억울해서 말문이 막히죠.',fact:'[날짜]에 말씀하신 대로 [업무]를 진행했습니다.',rule:'방향이 바뀌었다면 바로 반영하겠습니다.',ask:'앞으로는 바뀐 내용을 짧게라도 메시지로 남겨 주실 수 있을까요?',firm:'지시 내용은 제가 메모로 정리해 확인받겠습니다.',sam:[['어제는','어제는 A, 오늘은 B, 내일은 뭐예요?','제가 독심술사는 아니잖아요!','는(늘) 저만 혼나는 이 구조, 이상하지 않아요?']]}]],
+ ['가족·집',[
+  {n:'집안일은 나만',in:'교육 듣고 와서 저녁하고 빨래까지 다 저 혼자 해요.',who:'가족',emp:'공부하고 와서 또 출근하는 기분, 진짜 지치죠.',fact:'요즘 내가 [교육·일]을 다니면서 시간이 많이 부족해.',rule:'집안일을 나 혼자 다 하기는 어려워.',ask:'[설거지·빨래 등]은 [요일]마다 맡아 줄 수 있을까?',firm:'이번 주부터 이렇게 나눠서 해 보자.',sam:[['나혼자','나 혼자 사는 집이었어요?','혼자 하는 집안일, 이게 무슨 예능이야!','자, 오늘부터 집안일 분배표 붙입니다!']]},
+  {n:'잔소리 폭탄',in:'"그 나이에 무슨 공부야" 하고 계속 잔소리를 해요.',who:'가족',emp:'응원받고 싶은데 잔소리만 들으면 힘 빠지죠.',fact:'내가 요즘 [교육·자격증] 준비를 하고 있어.',rule:'다시 일하려고 내가 고민해서 정한 거야.',ask:'걱정되는 건 알지만, 응원 한마디 해 주면 더 힘이 날 것 같아.',firm:'내 결정은 내가 책임지고 해 볼게.',sam:[['잔소리','잔소리는 공짜라고 막 쓰시네요.','소리 말고 응원 좀 들려주세요!','리(里)마다 소문내며 성공해 보일게요!']]},
+  {n:'내 시간 존중 안 함',in:'공부 좀 하려고 앉으면 꼭 부르고 심부름을 시켜요.',who:'가족',emp:'겨우 낸 내 시간이 자꾸 끊기면 속상하죠.',fact:'[시간]에는 내가 공부하는 시간이야.',rule:'이 시간만큼은 집중하고 싶어.',ask:'급한 일이 아니면 그 시간 끝나고 불러 줄래?',firm:'문 앞에 "공부 중" 써 붙여 둘게.',sam:[['내시간','내 시간도 시간이에요!','시켜 먹는 심부름, 오늘은 품절입니다.','간절한 한 시간, 제발 지켜 주세요!']]}]],
+ ['일상·생활',[
+  {n:'고객센터 뺑뺑이',in:'고객센터에 전화했더니 30분째 이 부서 저 부서로 돌려요.',who:'고객센터·업체',emp:'같은 말 다섯 번째 하면 영혼이 빠져나가죠.',fact:'[주문·접수 번호] 건으로 오늘 [몇 번] 문의드렸습니다.',rule:'같은 내용을 여러 번 설명했지만 아직 해결되지 않았습니다.',ask:'담당 부서에서 [날짜]까지 직접 연락 부탁드립니다.',firm:'해결되지 않으면 [소비자 상담 등]에 문의하겠습니다.',sam:[['돌리기','돌리고 돌리고, 여기가 회전목마예요?','리모컨도 아닌데 왜 자꾸 저를 돌려요!','기다림 음악, 이제 다 외웠어요.']]},
+  {n:'약속 자꾸 바꾸는 지인',in:'만나기로 한 날마다 당일에 취소하는 친구가 있어요.',who:'지인·이웃',emp:'시간 비워 두고 기다렸는데 또 취소면 허탈하죠.',fact:'오늘 약속 또 취소됐네.',rule:'나도 시간을 비워 두고 기다렸어.',ask:'다음엔 못 오게 되면 하루 전에 알려 줄래?',firm:'당일 취소가 계속되면 약속 잡기가 어려울 것 같아.',sam:[['또취소','또 취소? 이제 놀랍지도 않다.','소중한 내 시간, 반품 안 돼요!','취(取)할 건 사과 한마디뿐!']]},
+  {n:'층간 소음',in:'밤 11시만 되면 위층에서 쿵쿵 소리가 나요.',who:'지인·이웃',emp:'겨우 누웠는데 쿵쿵 소리면 잠이 확 달아나죠.',fact:'[호수]에 사는 이웃입니다. 밤 [시간]쯤 소리가 자주 들려서요.',rule:'다음 날 일찍 나가야 해서 잠을 잘 못 자고 있습니다.',ask:'밤 [시간] 이후에는 조금만 조심해 주시면 감사하겠습니다.',firm:'계속되면 관리사무소에 도움을 요청하겠습니다.',sam:[['쿵쿵쿵','쿵! 제 심장도 같이 쿵!','쿵쿵 리듬, 이제 노래로 들려요.','쿵 소리 말고 꿀잠 좀 주세요!']]}]]];
+var FLAT=[];SITS.forEach(function(g){g[1].forEach(function(s){FLAT.push(s)})});
+var SAMG=[['열받네','열이 머리끝까지 올라와요!','받아 줄 만큼 받아 줬잖아요.','네네, 이번엔 저도 할 말은 해야겠네요.'],['참는다','참을 인 세 번이면 된다던데, 저 지금 백 번째예요.','는(늘) 나만 참는 이 구조, 이상하지 않아요?','다 계획이 있어요. 웃으면서 할 말 하는 계획!'],['빡친다','빡치는 거 정상이에요!','친절하게 했더니 돌아오는 게 이거?','다음엔 받은 만큼 정중하게 돌려드립니다.']];
+var TAIL={mild:[['아오, 얄미워!','어휴, 진짜 얄밉다.'],['아니 이게 말이 돼요?! 미치고 팔짝 뛰겠네.','아오, 머리에서 김 나요!'],['와, 이건 진짜 선 넘었다!','뚜껑 열리는 소리 "뻥!" 들렸어요.']],
+ spicy:[['에이씨, 짜증 나네!','아 진짜 얄미워 죽겠네!'],['와 진짜 개빡치네!','이런 젠장, 뒷목 잡겠네!'],['와 씨, 이건 진짜 선 넘었다! 삐— 백 번!','이런 망할, 에라이!']]};
+var EMPG=['화가 나는 게 당연한 상황이에요. 지금 그 마음, 하나도 이상하지 않아요.','그 상황에서 여기까지 버틴 것만으로도 대단해요.','이건 당신이 예민한 게 아니라 상황이 진짜 이상한 거예요.'];
+var GAMAN=['그래도 더 나은 내가 참는다. 오늘의 나, 인내심 국가대표!','됐다, 수준 맞추지 말자. 더 나은 내가 웃으면서 참는다.','화는 났지만 품격은 지킨다. 참는 나, 오늘도 한 뼘 자랐다.','그래, 내가 어른이다. 참고, 저녁엔 맛있는 걸로 보상받는다.','싸우면 똑같아진다. 더 멋진 내가 한 번 더 참는다.','이 정도로 무너질 내가 아니지. 우아하게 참고, 할 말은 문자로 한다.','참는 게 지는 게 아니다. 더 나은 내가 웃으며 선을 긋는다.'];
+var AP=[
+ ['사실·기준 안내',function(s,op,l){return [op,s.fact,s.rule,s.ask,l===2?s.firm:'',l===2?'협조 부탁드립니다.':'감사합니다.']}],
+ ['공감 먼저',function(s,op){return [op,'여러 사정이 있으셨을 거라 생각합니다.',s.fact,s.rule,s.ask,'감사합니다.']}],
+ ['감사 먼저',function(s,op){return [op,'바쁘신 와중에 읽어 주셔서 감사합니다.',s.fact,s.ask,'좋은 답 기다리겠습니다.']}],
+ ['선택지 주기',function(s,op){return [op,s.fact,'아래 중 편하신 방법을 알려 주세요.','① [방법 A]','② [방법 B]','[날짜]까지 답 주시면 감사하겠습니다.']}],
+ ['대안 제시',function(s,op){return [op,s.fact,s.rule,'대신 [가능한 대안]은 가능합니다.',s.ask,'감사합니다.']}],
+ ['확인 답 받기',function(s,op){return [op,s.fact,s.ask,'확인하셨으면 [날짜]까지 "확인"이라고만 답해 주세요.','감사합니다.']}],
+ ['내 마음 전하기',function(s,op){return [op,s.fact,'그래서 저는 [내 마음: 속상했어요·당황했어요].',s.ask,'제 마음을 알아주시면 고맙겠습니다.']}],
+ ['함께 방법 찾기',function(s,op){return [op,s.fact,'같은 일이 반복되지 않도록 좋은 방법을 함께 찾고 싶습니다.','[날짜]에 잠깐 이야기 나눌 수 있을까요?','감사합니다.']}],
+ ['기한 다시 정하기',function(s,op){return [op,s.fact,s.rule,'[새 기한]까지로 다시 정했으면 합니다.','어려우면 [날짜]까지 미리 알려 주세요.','감사합니다.']}],
+ ['원칙과 다음 행동',function(s,op){return [op,s.fact,s.rule,s.ask,s.firm,'협조 부탁드립니다.']}]];
+var GEN={fact:'[있었던 일을 사실만 한 문장으로]',rule:'[내 사정이나 지켜야 할 기준]',ask:'[부탁할 행동과 기한]',firm:'[반복되면 어떻게 할지 분명하게]'};
+
+if(!S.v)S.v={lv:1,fl:'mild',cur:0,text:FLAT[0].in,who:FLAT[0].who,how:HOW[0],ap:0};
+var V=S.v,said=null;
+function vSit(){return V.cur>=0?FLAT[V.cur]:GEN}
+function vEmp(fresh){var s=V.cur>=0?FLAT[V.cur]:null;
+ if(fresh||!said){var pool=s&&s.sam?s.sam:SAMG;said={s:rnd(pool,said&&said.s),t:rnd(TAIL[V.fl][V.lv]),g:rnd(GAMAN,said&&said.g),e:s?s.emp:rnd(EMPG)}}
+ var x=said,box=q('#jx-v-txt');if(!box)return;if(!bRun)q('#jx-v-fig').innerHTML=fig('angry',V.lv);
+ box.innerHTML='<h4>같이 빡쳐 주기 · '+LV[V.lv][1]+' '+LV[V.lv][0]+' · 삼행시 <span class="samk">'+E(x.s[0])+'</span></h4>'+
+ x.s.slice(1).map(function(l){return '<p class="sam"><b>'+E(l.charAt(0))+'</b>'+E(l.slice(1))+'</p>'}).join('')+'<p>'+E(x.t+' '+x.e)+'</p><p class="v3">'+E(x.g)+'</p>';
+ window._jxSay=x.s.slice(1).join(' ')+' '+x.t+' '+x.e+' '+x.g}
+function vText(){var s=vSit(),op=OPEN[V.who]||OPEN['지인·이웃'];var t=AP[V.ap][1](s,op,V.lv).filter(Boolean).join('\n');
+ if(V.who==='가족'){[['[내 마음: 속상했어요·당황했어요]','[내 마음: 속상했어·서운했어]'],['여러 사정이 있으셨을 거라 생각합니다.','너도 사정이 있었겠지.'],['바쁘신 와중에 읽어 주셔서 감사합니다.','바쁜데 읽어 줘서 고마워.'],['제 마음을 알아주시면 고맙겠습니다.','내 마음 알아주면 좋겠어.'],['그래서 저는','그래서 나는'],['협조 부탁드립니다.','같이 해 줘.'],['좋은 답 기다리겠습니다.','답 기다릴게.'],['아래 중 편하신 방법을 알려 주세요.','아래 중 편한 방법을 골라 줘.'],['답 주시면 감사하겠습니다.','알려 줘.'],['확인하셨으면','확인했으면'],['답해 주세요.','답해 줘.'],['감사합니다.','고마워.'],['좋은 방법을 함께 찾고 싶습니다.','좋은 방법을 같이 찾고 싶어.'],['이야기 나눌 수 있을까요?','이야기 나눌 수 있을까?'],['다시 정했으면 합니다.','다시 정하자.'],['미리 알려 주세요.','미리 알려 줘.'],['가능합니다.','가능해.']].forEach(function(r){t=t.split(r[0]).join(r[1])})}
+ if(/메일/.test(V.how))t='제목: [용건] 관련 문의드립니다\n\n'+t;if(/직접 말/.test(V.how))t='(천천히, 눈을 보고 말해요)\n'+t;return t}
+function vMsg(){var m=q('#jx-v-msg');if(m)m.innerHTML=E(vText()).replace(/\[[^\]]+\]/g,function(x){return '<span class="o">'+x+'</span>'});var h=q('#jx-v-aph');if(h)h.textContent=(V.ap+1)+'. '+AP[V.ap][0];
+ var ap=q('#jx-v-ap');if(ap)ap.innerHTML=AP.map(function(a,i){return '<button type="button" data-ap="'+i+'"'+(i===V.ap?' class="on"':'')+'>'+(i+1)+'. '+E(a[0])+'</button>'}).join('')}
+function vPrompt(){var s=vSit();return '너는 감정은 빼고 할 말은 분명하게 전하도록 돕는 대화 코치야.\n아래 상황을 보고 '+V.who+'에게 보낼 '+V.how+' 글을 다듬어 줘.\n\n[있었던 일]\n'+((V.text||'').trim()||'[있었던 일을 적어 주세요]')+'\n\n[초안]\n'+vText()+'\n\n[이렇게 써 줘]\n- 사실 → 내 사정·기준 → 부탁 → 다음 행동·기한 순서로\n- 비난이나 비꼬는 말 없이, 정중하지만 단호하게\n- 짧은 버전 1개와 조금 더 부드러운 버전 1개\n- 이름·전화번호 같은 개인정보는 [ ] 칸으로 비워 둬'}
+function ventView(){var idx=0;
+ var left='<span class="jx-l">1. 지금 빡침 지수</span><div class="jx-lv" id="jx-v-lv">'+LV.map(function(v,i){return '<button type="button" data-lv="'+i+'"'+(i===V.lv?' class="on"':'')+'>'+v[1]+' '+v[0]+'</button>'}).join('')+'</div>'+
+ '<span class="jx-l">2. 어떤 상황? <small>누르면 바로 같이 빡쳐 줘요</small></span><div id="jx-v-sit">'+SITS.map(function(g){return '<div class="jx-sg"><span class="jx-sg-h">'+E(g[0])+'</span><div class="jx-chips peach">'+g[1].map(function(s){var i=idx++;return '<button type="button" data-sit="'+i+'"'+(i===V.cur?' class="on"':'')+' title="'+E(s.in)+'">'+E(s.n)+'</button>'}).join('')+'</div></div>'}).join('')+'</div>'+
+ '<span class="jx-l">3. 무슨 일이 있었나요? <small>개인정보는 빼고</small></span><div class="jx-tools">'+micBtn('jx-v-in')+'</div><textarea class="jx-ta" id="jx-v-in" placeholder="예) 면접 보고 일주일이 지났는데 연락이 없어요.">'+E(V.text)+'</textarea>'+
+ '<div class="jx-row" style="margin-top:6px"><label><span class="jx-l" style="margin-top:0">4. 누구에게?</span><select class="jx-in" id="jx-v-who">'+WHO.map(function(w){return '<option'+(w===V.who?' selected':'')+'>'+w+'</option>'}).join('')+'</select></label><label><span class="jx-l" style="margin-top:0">어떻게?</span><select class="jx-in" id="jx-v-how">'+HOW.map(function(w){return '<option'+(w===V.how?' selected':'')+'>'+w+'</option>'}).join('')+'</select></label></div>'+
+ '<span class="jx-l">5. 해결 방안 10가지 <small>눌러서 오른쪽 문자를 바꿔 보세요</small></span><div class="jx-ap" id="jx-v-ap"></div>';
+ var right='<div class="jx-flav" id="jx-v-flav"><button type="button" data-fl="mild"'+(V.fl==='mild'?' class="on"':'')+'>순한 맛</button><button type="button" data-fl="spicy"'+(V.fl==='spicy'?' class="on"':'')+'>매운맛</button><span>여럿이 볼 땐 순한 맛</span><span style="margin-left:auto"></span><button type="button" class="jx-b mini" data-v="again">다른 말</button><button type="button" class="jx-b mini" data-v="say">소리로 듣기</button></div>'+
+ '<div class="jx-hero" id="jx-v-emp"><div id="jx-v-fig"></div><div class="jx-five"><div class="jx-emp" id="jx-v-txt"></div></div></div>'+
+ '<div class="jx-rest" id="jx-v-br"><div id="jx-v-bfig">'+fig('breath')+'</div><div class="jx-five" id="jx-v-btxt"></div></div>'+
+  '<div class="jx-msg"><div class="jx-msg-h"><h4>순화된 문자 · <span id="jx-v-aph"></span></h4><button type="button" class="jx-b mini" data-v="mcp">문자 복사</button></div><pre id="jx-v-msg"></pre></div>'+
+ '<div class="jx-acts"><button type="button" class="jx-b fill" data-v="gpt">ChatGPT로 더 다듬기</button><button type="button" class="jx-b" data-v="gem">제미나이로 더 다듬기</button><span class="jx-note" style="align-self:center"><span class="o" style="background:#ffe7cf;color:#a24d12;font-weight:800;text-decoration:underline">[ ] 주황 칸</span>은 내 상황으로 바꿔요</span></div>';
+ return shell('빡침 번역기','같이 빡쳐 주고, 숨 고르고, 순화된 문자로 바꿔 드려요.','',left,right)}
+var bRun=false;
+function vRest(t){var h=q('#jx-v-bfig'),bt=q('#jx-v-btxt');if(!h||bRun)return;if(t){V.rest=t;h.innerHTML=fig(restPose(t));bt.innerHTML='<h4 style="color:#1d5a40;margin:0 0 4px">다른 숨 고르기 · 그림 보고 따라 해 보세요</h4><p class="jx-note" style="font-size:13.5px;color:#22352d;font-weight:600">'+E(t)+'</p><div class="jx-acts" style="margin-top:6px"><button type="button" class="jx-b mini fill" data-v="breath">숨 고르기 (4·4·6초)</button><button type="button" class="jx-b mini" data-v="rest">다른 것 ›</button></div>';return}
+ h.innerHTML=fig('breath');bt.innerHTML='<h4 style="color:#1d5a40;margin:0 0 4px">숨 고르고 보내기</h4><p class="jx-note" style="font-size:13.5px;color:#22352d">졸라맨처럼 <b>코로 4초 들이쉬어 배를 부풀리고</b> · 4초 멈추고 · <b>입으로 6초 후~</b> 내쉬어요. 세 번.</p><div class="jx-acts" style="margin-top:6px"><button type="button" class="jx-b mini fill" data-v="breath">같이 숨 고르기 시작</button><button type="button" class="jx-b mini" data-v="rest">다른 숨 고르기 ›</button></div>'}
+function ventBind(){said=null;bRun=false;vRest();vEmp(true);vMsg();var el=q('.jx');
+ var ta=q('#jx-v-in'),tm;ta.addEventListener('input',function(){V.text=ta.value;var hit=FLAT.findIndex(function(s){return s.in===V.text.trim()});if(hit<0&&V.cur>=0){V.cur=-1;q('#jx-v-sit').querySelectorAll('button').forEach(function(x){x.classList.remove('on')})}clearTimeout(tm);tm=setTimeout(function(){vEmp(true);vMsg()},350)});
+ q('#jx-v-who').onchange=function(){V.who=this.value;vMsg()};q('#jx-v-how').onchange=function(){V.how=this.value;vMsg()};
+ el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.lv!=null){V.lv=+b.dataset.lv;q('#jx-v-lv').querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});vEmp(true);vMsg();return}
+  if(b.dataset.sit!=null){V.cur=+b.dataset.sit;var s=FLAT[V.cur];V.text=s.in;V.who=s.who;ta.value=s.in;q('#jx-v-who').value=s.who;q('#jx-v-sit').querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});vEmp(true);vMsg();return}
+  if(b.dataset.fl){V.fl=b.dataset.fl;q('#jx-v-flav').querySelectorAll('[data-fl]').forEach(function(x){x.classList.toggle('on',x===b)});vEmp(true);return}
+  if(b.dataset.ap!=null){V.ap=+b.dataset.ap;vMsg();return}
+  var a=b.dataset.v;if(!a)return;
+  if(a==='again'){vEmp(true);V.ap=(V.ap+1)%AP.length;vMsg()}
+  if(a==='say'){if(!('speechSynthesis' in window)){T('이 브라우저는 읽어 주기를 지원하지 않아요.');return}speechSynthesis.cancel();var u=new SpeechSynthesisUtterance((window._jxSay||'').replace(/삐—/g,'삐'));u.lang='ko-KR';u.rate=1.05;speechSynthesis.speak(u)}
+  if(a==='rest'){vRest(rnd(REST,V.rest));return}
+  if(a==='mcp')cp(vText(),'문자를 복사했어요. [ ] 칸을 채워서 보내세요.');
+  if(a==='gpt'){var p=vPrompt();cp(p,'프롬프트를 넣었어요.');gpt(p)}
+  if(a==='gem')gem(vPrompt());
+  if(a==='breath'){if(bRun)return;bRun=true;var holder=q('#jx-v-bfig'),bt=q('#jx-v-btxt');holder.innerHTML=fig('breath',0,1);var f=holder.querySelector('svg');f.classList.add('go');try{q('#jx-v-br').scrollIntoView({block:'nearest',behavior:'auto'})}catch(e){}
+   var ph=[['들이쉬기','코로 천천히, 배를 풍선처럼',4],['멈추기','배를 부풀린 채로 잠깐',4],['내쉬기','입으로 후~ 길게',6]],i=0,n=0;
+   (function nx(){if(!document.body.contains(holder)){bRun=false;return}
+    if(n>=3){holder.innerHTML=fig('calm');bt.innerHTML='<p class="jx-phase">잘했어요!<small>마음이 조금 가라앉았나요? 이제 차분하게 문자를 보내 볼까요?</small></p><div class="jx-acts"><button type="button" class="jx-b mini fill" data-v="breath">한 번 더</button><button type="button" class="jx-b mini" data-v="rest">다른 숨 고르기 ›</button></div>';bRun=false;return}
+    var p=ph[i],t=p[2];var dots='<div class="jx-dots">'+[0,1,2].map(function(k){return '<i'+(k<=n?' class="on"':'')+'></i>'}).join('')+'</div>';
+    function draw(){bt.innerHTML='<p class="jx-phase">'+p[0]+' '+t+'<small>'+p[1]+' · '+(n+1)+'번째 / 3번</small></p>'+dots}
+    draw();var iv=setInterval(function(){t--;if(t>0)draw();else clearInterval(iv)},1000);setTimeout(function(){i++;if(i>2){i=0;n++}nx()},p[2]*1000)})()}});
+ after()}
+
+/* =====================================================================
+   C. 프롬프트 디자인실 : 왼쪽 고르기 · 오른쪽 완성 프롬프트
+   ===================================================================== */
+var FRG=(function(){
+const PANTRY = ["소금","간장","설탕","식용유","참기름","깨","고춧가루","다진 마늘","후추","된장","고추장","식초"];
+const COMMON = ["달걀","밥","김치","두부","감자","고구마","양파","대파","당근","애호박","콩나물","시금치","어묵","돼지고기","소고기","닭고기","참치캔","소시지","떡","김","우유","식빵","바나나","사과","밀가루","치즈","버섯","단호박","미역","냉동만두","토마토","양배추"];
+const SYN = {"계란":"달걀","파":"대파","쪽파":"대파","돼지":"돼지고기","삼겹살":"돼지고기","앞다리살":"돼지고기","쇠고기":"소고기","불고기감":"소고기","닭":"닭고기","닭다리":"닭고기","참치":"참치캔","햄":"소시지","비엔나":"소시지","떡볶이떡":"떡","떡국떡":"떡","가래떡":"떡","공기밥":"밥","쌀밥":"밥","식은밥":"밥","부침가루":"밀가루","튀김가루":"밀가루","팽이버섯":"버섯","표고버섯":"버섯","새송이":"버섯","느타리":"버섯","만두":"냉동만두","슬라이스치즈":"치즈","호박":"애호박","김밥김":"김","조미김":"김"};
+const norm = w => { w = w.replace(/\s+/g,""); return SYN[w] || w; };
+
+/* need: 꼭 필요한 재료, opt: 있으면 더 좋은 재료 (기본 양념은 따로 적지 않음) */
+const RECIPES = [
+/* 식사 */
+{n:"김치볶음밥",e:"🍳",t:"meal",need:["김치","밥"],opt:["달걀","대파","소시지","참치캔"],time:"15분",
+ s:["김치는 잘게 썰고, 대파는 송송 썰어요.","팬에 식용유를 두르고 대파를 볶아 향을 내요.","김치를 넣고 3분 정도 볶다가 설탕을 조금 넣어요.","밥을 넣고 고루 섞으며 볶고, 참기름을 둘러 마무리해요.","달걀 프라이를 올리면 완성이에요."]},
+{n:"달걀말이",e:"🥚",t:"meal",need:["달걀"],opt:["대파","당근","양파","치즈"],time:"15분",
+ s:["달걀을 풀고 소금을 조금 넣어요.","대파와 당근을 아주 잘게 다져 달걀물에 섞어요.","약한 불에 기름을 두르고 달걀물을 얇게 부어요.","반쯤 익으면 한쪽부터 돌돌 말고, 남은 달걀물을 부어 이어 말아요.","한 김 식힌 뒤 썰어요."]},
+{n:"감자조림",e:"🥔",t:"meal",need:["감자"],opt:["양파","당근"],time:"25분",
+ s:["감자는 깍둑 썰어 찬물에 잠깐 담가요.","팬에 기름을 두르고 감자를 2~3분 볶아요.","물 1컵, 간장 3큰술, 설탕 1큰술을 넣고 뚜껑을 덮어 졸여요.","감자가 부드러워지고 국물이 졸면 참기름과 깨를 뿌려요."]},
+{n:"두부조림",e:"🧈",t:"meal",need:["두부"],opt:["대파","양파"],time:"20분",
+ s:["두부는 도톰하게 썰어 물기를 빼요.","팬에 기름을 두르고 두부 앞뒤를 노릇하게 구워요.","간장 3큰술, 물 반 컵, 설탕 조금, 고춧가루 조금, 다진 마늘을 섞어 양념을 만들어요.","양념을 붓고 대파를 올려 국물이 자작해질 때까지 졸여요."]},
+{n:"된장찌개",e:"🍲",t:"meal",need:["두부","된장"],opt:["애호박","감자","양파","버섯","대파"],time:"25분",
+ s:["감자, 애호박, 양파, 두부를 한입 크기로 썰어요.","물 3컵에 된장 2큰술을 풀고 끓여요.","감자를 먼저 넣고, 끓어오르면 애호박·양파·버섯을 넣어요.","두부와 대파를 넣고 한소끔 더 끓여요."]},
+{n:"김치찌개",e:"🥘",t:"meal",need:["김치"],opt:["돼지고기","두부","대파","참치캔","양파"],time:"30분",
+ s:["돼지고기와 김치를 냄비에 넣고 기름을 조금 둘러 볶아요.","물 3컵을 붓고 고춧가루와 다진 마늘을 넣어 끓여요.","15분 정도 끓여 김치가 부드러워지면 두부와 대파를 넣어요.","간은 김치 국물이나 간장으로 맞춰요."]},
+{n:"소고기 미역국",e:"🍜",t:"meal",need:["미역"],opt:["소고기"],time:"30분",
+ s:["마른 미역을 물에 20분 불린 뒤 먹기 좋게 잘라요.","냄비에 참기름을 두르고 소고기와 미역을 볶아요.","물 5컵을 붓고 끓어오르면 중불로 15분 끓여요.","국간장과 다진 마늘로 간을 맞춰요."]},
+{n:"콩나물국",e:"🌱",t:"meal",need:["콩나물"],opt:["대파"],time:"15분",
+ s:["콩나물을 씻어 냄비에 넣고 물 5컵을 부어요.","뚜껑을 덮고 끓여요. 중간에 열면 비린내가 날 수 있어요.","끓으면 다진 마늘과 소금으로 간하고 대파를 넣어요."]},
+{n:"달걀국",e:"🥣",t:"meal",need:["달걀"],opt:["대파","양파"],time:"10분",
+ s:["물 4컵을 끓이고 국간장과 소금으로 간해요.","양파를 넣어 살짝 끓여요.","달걀을 풀어 둥글게 둘러 붓고 젓지 말고 30초 기다려요.","대파를 넣고 불을 꺼요."]},
+{n:"어묵볶음",e:"🍢",t:"meal",need:["어묵"],opt:["양파","당근"],time:"15분",
+ s:["어묵과 양파를 길게 썰어요.","팬에 기름을 두르고 양파를 먼저 볶아요.","어묵을 넣고 간장 2큰술, 설탕 1큰술, 물 조금을 넣어 볶아요.","참기름과 깨로 마무리해요."]},
+{n:"애호박볶음",e:"🥒",t:"meal",need:["애호박"],opt:["양파","당근"],time:"10분",
+ s:["애호박은 반달 모양으로 썰어요.","팬에 기름을 두르고 다진 마늘과 양파를 볶아요.","애호박을 넣고 소금으로 간하며 부드럽게 볶아요.","깨를 뿌려 마무리해요."]},
+{n:"제육볶음",e:"🐷",t:"meal",need:["돼지고기"],opt:["양파","대파","당근"],time:"25분",
+ s:["고추장 2큰술, 간장 1큰술, 설탕 1큰술, 다진 마늘, 고춧가루를 섞어 양념을 만들어요.","돼지고기에 양념을 버무려 10분 재워요.","팬에 고기를 볶다가 양파와 당근을 넣어요.","고기가 다 익으면 대파를 넣고 참기름을 둘러요."]},
+{n:"소고기 불고기",e:"🥩",t:"meal",need:["소고기"],opt:["양파","당근","대파","버섯"],time:"30분",
+ s:["간장 4큰술, 설탕 2큰술, 다진 마늘, 참기름, 후추를 섞어 양념을 만들어요.","소고기에 양념을 버무려 15분 재워요.","팬에 고기와 채소를 함께 볶아요.","국물이 자작해지면 완성이에요."]},
+{n:"카레라이스",e:"🍛",t:"meal",need:["감자","양파","밥"],opt:["당근","돼지고기","소고기","닭고기"],time:"35분",extra:["카레 가루"],
+ s:["감자, 당근, 양파, 고기를 한입 크기로 썰어요.","냄비에 기름을 두르고 고기와 채소를 볶아요.","물 4컵을 붓고 채소가 익을 때까지 15분 끓여요.","불을 줄이고 카레 가루를 풀어 저으며 걸쭉해질 때까지 끓여 밥에 얹어요."]},
+{n:"참치마요덮밥",e:"🐟",t:"meal",need:["참치캔","밥"],opt:["김","달걀","양파"],time:"15분",extra:["마요네즈"],
+ s:["참치는 기름을 빼고 마요네즈와 섞어요.","양파는 잘게 썰어 간장과 설탕 조금을 넣고 살짝 볶아요.","밥 위에 볶은 양파, 참치마요, 스크램블 달걀을 올려요.","김을 부숴 뿌리면 완성이에요."]},
+{n:"잡채",e:"🍝",t:"meal",need:["당면"],opt:["시금치","당근","양파","돼지고기","버섯","어묵"],time:"40분",
+ s:["당면을 물에 30분 불리고 끓는 물에 6분 삶아 건져요.","채소와 고기를 가늘게 썰어 각각 볶아요.","당면에 간장 4큰술, 설탕 2큰술, 참기름을 넣고 팬에서 살짝 볶아요.","볶은 재료를 모두 넣고 버무려 깨를 뿌려요."]},
+{n:"감자채볶음",e:"🍟",t:"meal",need:["감자"],opt:["양파","당근"],time:"15분",
+ s:["감자를 가늘게 채 썰어 찬물에 헹궈 전분을 빼요.","팬에 기름을 두르고 감자와 양파를 볶아요.","소금으로 간하고 감자가 투명해질 때까지 볶아요.","깨를 뿌려 마무리해요."]},
+{n:"시금치나물",e:"🥬",t:"meal",need:["시금치"],opt:[],time:"10분",
+ s:["끓는 물에 소금을 조금 넣고 시금치를 30초 데쳐요.","찬물에 헹궈 물기를 꼭 짜요.","간장 조금, 소금, 다진 마늘, 참기름, 깨를 넣고 조물조물 무쳐요."]},
+{n:"콩나물무침",e:"🌿",t:"meal",need:["콩나물"],opt:["대파"],time:"15분",
+ s:["콩나물에 물 반 컵을 붓고 뚜껑을 덮어 5분 쪄요.","찬물에 헹구지 말고 넓게 펼쳐 식혀요.","소금, 다진 마늘, 참기름, 깨, 대파를 넣고 무쳐요."]},
+{n:"떡국",e:"🍥",t:"meal",need:["떡"],opt:["달걀","대파","소고기","김"],time:"25분",
+ s:["떡을 물에 10분 정도 불려요.","냄비에 참기름을 두르고 소고기를 볶은 뒤 물 6컵을 부어 끓여요.","떡을 넣고 떡이 떠오를 때까지 끓여요.","국간장으로 간하고 달걀을 풀어 넣은 뒤 대파와 김을 올려요."]},
+{n:"오므라이스",e:"🍳",t:"meal",need:["달걀","밥"],opt:["양파","당근","소시지"],time:"25분",extra:["케첩"],
+ s:["양파, 당근, 소시지를 잘게 썰어 볶아요.","밥을 넣고 케첩 2큰술과 소금으로 간해 볶아요.","달걀을 풀어 팬에 얇게 부쳐요.","볶음밥을 달걀로 감싸 접시에 담고 케첩을 뿌려요."]},
+{n:"닭볶음탕",e:"🍗",t:"meal",need:["닭고기"],opt:["감자","당근","양파","대파"],time:"45분",
+ s:["닭고기는 끓는 물에 한 번 데쳐 헹궈요.","간장 4큰술, 고추장 1큰술, 고춧가루 2큰술, 설탕 1큰술, 다진 마늘로 양념을 만들어요.","냄비에 닭, 감자, 당근, 물 3컵, 양념을 넣고 끓여요.","25분 정도 졸이다가 양파와 대파를 넣고 5분 더 끓여요."]},
+{n:"소시지 채소볶음",e:"🌭",t:"meal",need:["소시지"],opt:["양파","당근","버섯"],time:"15분",extra:["케첩"],
+ s:["소시지에 칼집을 내고 채소를 한입 크기로 썰어요.","끓는 물에 소시지를 30초 데쳐요.","팬에 채소와 소시지를 볶아요.","케첩 2큰술, 설탕 조금, 간장 조금을 넣고 고루 볶아요."]},
+{n:"비빔밥",e:"🥗",t:"meal",need:["밥"],opt:["콩나물","시금치","당근","애호박","달걀","소고기"],time:"30분",
+ s:["나물과 채소를 각각 데치거나 볶아 소금으로 간해요.","밥 위에 재료를 둘러 담아요.","달걀 프라이를 올려요.","고추장 조금과 참기름을 곁들여 비벼 먹어요."]},
+{n:"버섯두부덮밥",e:"🍄",t:"meal",need:["두부","버섯","밥"],opt:["양파","대파"],time:"20분",
+ s:["두부는 깍둑 썰고 버섯과 양파는 먹기 좋게 썰어요.","팬에 양파와 버섯을 볶아요.","물 1컵, 간장 3큰술, 설탕 1큰술을 넣고 두부를 넣어 끓여요.","전분물이 있으면 넣어 걸쭉하게 만들고 밥 위에 얹어요."]},
+/* 간식 */
+{n:"고구마맛탕",e:"🍠",t:"snack",need:["고구마"],opt:[],time:"25분",
+ s:["고구마를 한입 크기로 썰어 물기를 닦아요.","기름을 넉넉히 두르고 고구마를 노릇하게 익혀요.","다른 팬에 설탕 3큰술과 식용유 1큰술을 넣고 약한 불로 녹여요.","고구마를 넣고 재빨리 버무린 뒤 깨를 뿌려요."]},
+{n:"찐감자",e:"🥔",t:"snack",need:["감자"],opt:["치즈"],time:"25분",
+ s:["감자를 깨끗이 씻어 반으로 잘라요.","찜기에 20분 정도 쪄요. 젓가락이 쑥 들어가면 다 익은 거예요.","소금이나 설탕을 살짝 곁들여요. 치즈를 올려도 좋아요."]},
+{n:"군고구마",e:"🍠",t:"snack",need:["고구마"],opt:[],time:"40분",
+ s:["고구마를 깨끗이 씻어 물기를 닦아요.","에어프라이어 200도에서 30~40분 구워요. 중간에 한 번 뒤집어요.","한 김 식혀 껍질을 벗겨 먹어요."]},
+{n:"떡볶이",e:"🌶️",t:"snack",need:["떡"],opt:["어묵","대파","달걀","양파"],time:"20분",
+ s:["떡은 물에 헹구고 어묵은 먹기 좋게 썰어요.","물 2컵에 고추장 2큰술, 설탕 1큰술, 간장 1큰술, 고춧가루를 풀어 끓여요.","떡과 어묵을 넣고 저어가며 졸여요.","국물이 걸쭉해지면 대파를 넣어요. 매운 것을 못 드시면 고추장을 줄이고 케첩을 섞어요."]},
+{n:"감자전",e:"🥞",t:"snack",need:["감자"],opt:["양파"],time:"25분",
+ s:["감자를 강판에 갈아 체에 받쳐 물기를 빼요.","가라앉은 녹말을 다시 섞고 소금으로 간해요.","팬에 기름을 두르고 얇게 펴서 앞뒤로 노릇하게 부쳐요."]},
+{n:"채소전",e:"🥬",t:"snack",need:["밀가루"],opt:["애호박","양파","당근","대파","김치"],time:"20분",
+ s:["채소를 가늘게 채 썰어요.","밀가루 1컵, 물 1컵, 소금 조금을 섞어 반죽을 만들어요.","채소를 반죽에 넣고 고루 섞어요.","기름 두른 팬에 얇게 펴서 앞뒤로 부쳐요."]},
+{n:"김치전",e:"🥟",t:"snack",need:["김치","밀가루"],opt:["양파","돼지고기","참치캔"],time:"20분",
+ s:["김치를 잘게 썰어요.","밀가루 1컵, 물 1컵, 김치 국물 조금을 섞어 반죽을 만들어요.","김치와 양파를 넣고 섞어요.","기름 두른 팬에 얇게 펴서 바삭하게 부쳐요."]},
+{n:"바나나우유",e:"🍌",t:"snack",need:["바나나","우유"],opt:[],time:"5분",
+ s:["바나나 2개를 잘라 믹서에 넣어요.","우유 2컵을 붓고 곱게 갈아요.","단맛이 부족하면 꿀이나 설탕을 조금 넣어요."]},
+{n:"과일 요거트컵",e:"🍓",t:"snack",need:["요거트"],opt:["바나나","사과"],time:"10분",
+ s:["과일을 작게 깍둑 썰어요.","컵에 요거트를 담아요.","과일을 올리고 꿀을 조금 뿌려요."]},
+{n:"프렌치토스트",e:"🍞",t:"snack",need:["식빵","달걀"],opt:["우유"],time:"15분",
+ s:["달걀 2개, 우유 반 컵, 설탕 조금을 섞어요.","식빵을 달걀물에 앞뒤로 적셔요.","버터나 기름을 두른 팬에 약한 불로 노릇하게 구워요.","설탕을 살짝 뿌려요."]},
+{n:"주먹밥",e:"🍙",t:"snack",need:["밥"],opt:["김","참치캔","김치","달걀"],time:"15분",
+ s:["밥에 참기름, 깨, 소금을 넣어 고루 섞어요.","참치마요나 볶은 김치를 속재료로 준비해요.","밥을 한 줌 쥐고 속을 넣어 동그랗게 뭉쳐요.","김가루를 묻히거나 김으로 감싸요."]},
+{n:"단호박찜",e:"🎃",t:"snack",need:["단호박"],opt:[],time:"25분",
+ s:["단호박을 전자레인지에 3분 돌려 썰기 쉽게 만들어요.","반으로 갈라 씨를 빼고 먹기 좋게 잘라요.","찜기에 15분 정도 쪄요."]},
+{n:"군만두",e:"🥟",t:"snack",need:["냉동만두"],opt:[],time:"15분",
+ s:["팬에 기름을 두르고 만두를 올려요.","중불에서 바닥이 노릇해지면 물 3큰술을 넣고 뚜껑을 덮어요.","물이 졸면 뚜껑을 열고 한 번 더 바삭하게 구워요."]},
+{n:"치즈 토스트",e:"🧀",t:"snack",need:["식빵","치즈"],opt:["달걀","소시지"],time:"10분",
+ s:["팬에 식빵을 올리고 약한 불로 구워요.","한쪽에 치즈를 올리고 원하면 달걀 프라이를 함께 올려요.","다른 식빵으로 덮어 치즈가 녹을 때까지 앞뒤로 구워요."]},
+{n:"사과 시나몬 구이",e:"🍎",t:"snack",need:["사과"],opt:[],time:"15분",
+ s:["사과를 얇게 썰어요.","팬에 버터나 기름을 조금 두르고 사과를 구워요.","설탕을 조금 뿌려 부드러워질 때까지 익혀요. 계피 가루가 있으면 살짝 뿌려요."]},
+/* 색다른 메뉴 */
+{n:"감자 뇨키",e:"🥟",t:"meal",sp:1,need:["감자","밀가루"],opt:["우유","치즈","버섯","양파"],time:"40분",
+ s:["감자를 쪄서 뜨거울 때 곱게 으깨요.","밀가루를 조금씩 넣으며 말랑한 반죽이 될 때까지 섞어요. 소금을 조금 넣어요.","반죽을 길게 밀어 엄지손톱 크기로 썰고 포크로 살짝 눌러 무늬를 내요.","끓는 물에 넣어 떠오르면 1분 뒤 건져요.","팬에 양파·버섯을 볶고 우유와 치즈를 넣어 소스를 만든 뒤 뇨키를 버무려요. 간장 버터에 볶아도 맛있어요."]},
+{n:"해시브라운",e:"🥔",t:"snack",sp:1,need:["감자"],opt:["양파","치즈"],time:"25분",
+ s:["감자를 가늘게 채 썰어 물에 헹군 뒤 물기를 꼭 짜요.","소금, 후추를 넣고 섞어요. 양파를 잘게 넣어도 좋아요.","기름을 넉넉히 두른 팬에 납작하게 펴서 꾹꾹 눌러요.","바닥이 노릇하고 바삭해지면 뒤집어 반대쪽도 구워요. 케첩을 곁들여요."]},
+{n:"감자 크로켓",e:"🧆",t:"snack",sp:1,need:["감자","밀가루","달걀"],opt:["양파","당근","치즈"],time:"40분",extra:["빵가루"],
+ s:["감자를 쪄서 으깨고, 잘게 썬 양파·당근을 볶아 섞어요. 소금 후추로 간해요.","한입 크기로 동글납작하게 빚어요. 가운데에 치즈를 넣으면 더 맛있어요.","밀가루 → 달걀물 → 빵가루 순서로 옷을 입혀요.","기름에 노릇하게 튀기거나, 에어프라이어 180도에서 12분 구워요."]},
+{n:"감자 그라탕",e:"🧀",t:"meal",sp:1,need:["감자","치즈"],opt:["우유","양파","소시지","버섯"],time:"35분",
+ s:["감자를 얇게 썰어 전자레인지에 4분 돌려 살짝 익혀요.","양파·소시지·버섯을 볶고 우유 1컵, 소금, 후추를 넣어 끓여요.","그릇에 감자와 볶은 재료를 켜켜이 담아요.","치즈를 듬뿍 올리고 에어프라이어 180도에서 10분, 치즈가 노릇해지면 완성이에요."]},
+{n:"감자채 피자",e:"🍕",t:"snack",sp:1,need:["감자","치즈"],opt:["소시지","양파","버섯"],time:"25분",extra:["케첩"],
+ s:["감자를 가늘게 채 썰어 물기를 빼고 소금을 조금 뿌려요.","기름 두른 팬에 동그랗게 펴서 바삭하게 구워 도우를 만들어요.","뒤집은 뒤 케첩을 바르고 소시지·양파를 올려요.","치즈를 뿌리고 뚜껑을 덮어 치즈가 녹을 때까지 약한 불로 익혀요."]},
+{n:"고구마 그라탕",e:"🍠",t:"snack",sp:1,need:["고구마","치즈"],opt:["우유","소시지"],time:"30분",
+ s:["고구마를 쪄서 으깨요. 우유를 조금 넣으면 부드러워요.","그릇에 으깬 고구마를 평평하게 담아요.","소시지를 잘게 썰어 올리고 치즈를 듬뿍 뿌려요.","에어프라이어 180도에서 8~10분 구워요."]},
+{n:"고구마 라떼",e:"🥤",t:"snack",sp:1,need:["고구마","우유"],opt:[],time:"10분",
+ s:["찐 고구마 1개의 껍질을 벗겨요.","우유 2컵과 함께 믹서에 곱게 갈아요.","냄비에 데워 따뜻하게 마시거나 차갑게 마셔요. 꿀을 조금 넣어도 좋아요."]},
+{n:"두부 스테이크",e:"🥩",t:"meal",sp:1,need:["두부","달걀"],opt:["양파","당근","대파","밀가루"],time:"30분",extra:["케첩"],
+ s:["두부를 면포나 키친타월로 물기를 꼭 짜고 으깨요.","잘게 다진 양파·당근, 달걀 1개, 밀가루 2큰술, 소금, 후추를 넣고 치대요.","손바닥 크기로 동글납작하게 빚어요.","약한 불에 앞뒤로 노릇하게 구워요.","케첩 2큰술, 간장 1큰술, 설탕 조금, 물 3큰술을 졸여 소스로 끼얹어요."]},
+{n:"두부 강정",e:"🍯",t:"snack",sp:1,need:["두부","밀가루"],opt:[],time:"25분",
+ s:["두부를 깍둑 썰어 물기를 빼고 소금을 살짝 뿌려요.","밀가루(전분이 있으면 더 바삭해요)를 고루 묻혀요.","기름에 노릇하게 구워요.","간장 1큰술, 고추장 1큰술, 설탕 2큰술, 물 3큰술을 끓여 두부를 버무리고 깨를 뿌려요."]},
+{n:"에그 인 헬(토마토 달걀 냄비)",e:"🍳",t:"meal",sp:1,need:["달걀","토마토"],opt:["양파","소시지","치즈","버섯"],time:"25분",
+ s:["토마토를 잘게 썰고 양파·소시지도 썰어요.","팬에 양파와 소시지를 볶다가 토마토를 넣고 으깨며 10분 끓여 소스를 만들어요. 소금, 설탕 조금으로 간해요.","소스에 홈을 내고 달걀을 하나씩 깨 넣어요.","뚜껑을 덮고 달걀이 익을 때까지 약한 불로 익혀요. 치즈를 뿌리고 빵이나 밥과 함께 먹어요."]},
+{n:"토마토 달걀 볶음",e:"🍅",t:"meal",sp:1,need:["달걀","토마토"],opt:["대파"],time:"10분",
+ s:["토마토는 한입 크기로, 대파는 송송 썰어요.","달걀을 풀어 기름 두른 팬에 반숙으로 스크램블해서 덜어요.","같은 팬에 대파와 토마토를 볶다가 설탕 조금, 소금으로 간해요.","달걀을 다시 넣고 살짝 섞어요. 밥 위에 얹으면 덮밥이 돼요."]},
+{n:"김치 치즈 리조또",e:"🍚",t:"meal",sp:1,need:["김치","밥","우유"],opt:["치즈","양파","소시지","버섯"],time:"20분",
+ s:["김치와 양파를 잘게 썰어 볶아요.","밥을 넣고 우유 1컵을 부어 저어가며 끓여요.","걸쭉해지면 치즈를 올려 녹여요.","후추를 살짝 뿌려 마무리해요."]},
+{n:"김치 피자전",e:"🍕",t:"snack",sp:1,need:["김치","밀가루","치즈"],opt:["양파","소시지"],time:"20분",
+ s:["김치를 잘게 썰어 밀가루 1컵, 물 1컵과 섞어 반죽을 만들어요.","팬에 얇게 펴서 한쪽 면을 구워요.","뒤집은 뒤 소시지와 양파를 올리고 치즈를 뿌려요.","뚜껑을 덮어 치즈가 녹으면 피자처럼 잘라요."]},
+{n:"떡꼬치",e:"🍡",t:"snack",sp:1,need:["떡"],opt:[],time:"20분",extra:["케첩"],
+ s:["떡을 끓는 물에 살짝 데쳐 말랑하게 해요.","꼬치에 4~5개씩 끼워요. 꼬치가 없으면 그냥 구워도 돼요.","기름 두른 팬에 노릇하게 구워요.","고추장 1큰술, 케첩 2큰술, 설탕 1큰술, 물 2큰술을 졸여 떡에 발라요."]},
+{n:"로제 떡볶이",e:"🌸",t:"snack",sp:1,need:["떡","우유"],opt:["어묵","소시지","치즈","양파"],time:"20분",
+ s:["물 1컵에 고추장 1큰술, 설탕 1큰술, 고춧가루 조금을 풀어 끓여요.","떡과 어묵, 양파를 넣고 끓여요.","우유 1컵을 넣고 약한 불로 저어가며 끓여요.","치즈를 올려 녹이면 완성이에요. 덜 맵고 부드러워요."]},
+{n:"양배추 오코노미야키",e:"🥞",t:"meal",sp:1,need:["양배추","밀가루","달걀"],opt:["소시지","어묵","대파","김"],time:"25분",extra:["마요네즈"],
+ s:["양배추를 가늘게 채 썰어요.","밀가루 1컵, 물 반 컵, 달걀 1개를 섞고 양배추·소시지·대파를 넣어요.","팬에 도톰하게 펴서 약한 불로 앞뒤 5분씩 익혀요.","돈가스 소스나 케첩을 바르고 마요네즈를 뿌린 뒤 김가루를 올려요."]},
+{n:"애호박 피자",e:"🥒",t:"snack",sp:1,need:["애호박","치즈"],opt:["소시지","양파"],time:"15분",extra:["케첩"],
+ s:["애호박을 1cm 두께로 동그랗게 썰어요.","팬에 살짝 구워 소금을 뿌려요.","케첩을 조금 바르고 소시지와 치즈를 올려요.","뚜껑을 덮어 치즈가 녹으면 완성이에요."]},
+{n:"바나나 팬케이크",e:"🥞",t:"snack",sp:1,need:["바나나","달걀"],opt:["밀가루","우유"],time:"15분",
+ s:["잘 익은 바나나 1개를 포크로 곱게 으깨요.","달걀 2개를 넣고 섞어요. 밀가루 2큰술을 넣으면 더 폭신해요.","약한 불에 기름을 살짝 두르고 작게 부어 앞뒤로 구워요.","꿀이나 과일을 올려요."]},
+{n:"식빵 러스크",e:"🍞",t:"snack",sp:1,need:["식빵"],opt:[],time:"20분",extra:["버터"],
+ s:["식빵을 길쭉하게 4등분해요.","녹인 버터에 설탕을 섞어 식빵에 발라요.","에어프라이어 160도에서 10분, 뒤집어 5분 더 바삭하게 구워요.","식으면 더 바삭해져요."]},
+{n:"김치 치즈 주먹밥 구이",e:"🍙",t:"snack",sp:1,need:["밥","김치","치즈"],opt:["참치캔"],time:"20분",
+ s:["김치를 잘게 썰어 볶아요.","밥에 볶은 김치와 참기름을 섞어요.","치즈를 가운데 넣고 동글납작하게 뭉쳐요.","기름 두른 팬에 앞뒤로 노릇하게 구워요."]},
+{n:"콩나물 불고기(콩불)",e:"🌱",t:"meal",sp:1,need:["콩나물","돼지고기"],opt:["양파","대파","당근"],time:"25분",
+ s:["고추장 2큰술, 간장 2큰술, 설탕 1큰술, 고춧가루, 다진 마늘로 양념을 만들어 고기에 버무려요.","넓은 팬 바닥에 콩나물을 깔고 그 위에 양념한 고기와 채소를 올려요.","뚜껑을 덮고 중불로 7분 익혀요.","뚜껑을 열고 고루 섞으며 볶아요. 남은 양념에 밥을 볶아 먹어도 좋아요."]},
+{n:"간장 닭구이 덮밥",e:"🍗",t:"meal",sp:1,need:["닭고기","밥"],opt:["양파","대파","달걀"],time:"25분",
+ s:["닭고기는 한입 크기로 썰어요.","껍질 쪽부터 팬에 노릇하게 구워요.","간장 3큰술, 설탕 1큰술, 물 3큰술, 다진 마늘을 넣고 양파와 함께 졸여요.","밥 위에 올리고 대파를 뿌려요. 달걀 반숙을 곁들이면 더 좋아요."]},
+{n:"시금치 달걀 프리타타",e:"🥧",t:"meal",sp:1,need:["달걀","시금치"],opt:["우유","양파","치즈","감자","소시지"],time:"25분",
+ s:["달걀 4개에 우유 3큰술, 소금, 후추를 넣고 풀어요.","팬에 양파와 시금치를 살짝 볶아요.","달걀물을 붓고 치즈를 뿌려요.","뚜껑을 덮고 약한 불로 10분, 가운데까지 익으면 피자처럼 잘라요."]},
+{n:"단호박 수프",e:"🎃",t:"meal",sp:1,need:["단호박","우유"],opt:["양파"],time:"30분",
+ s:["단호박을 쪄서 껍질과 씨를 빼요.","양파를 볶은 뒤 단호박과 우유 2컵을 넣고 곱게 갈아요.","냄비에 붓고 약한 불로 저어가며 데워요.","소금, 설탕으로 간해요. 식빵을 구워 곁들이면 좋아요."]},
+{n:"감자 수프",e:"🥣",t:"meal",sp:1,need:["감자","우유"],opt:["양파","버섯"],time:"30분",
+ s:["감자와 양파를 얇게 썰어 버터나 기름에 볶아요.","물 1컵을 넣고 감자가 푹 익을 때까지 끓여요.","우유 2컵을 넣고 곱게 갈아요.","다시 데우며 소금, 후추로 간해요."]},
+{n:"달걀빵 머핀",e:"🧁",t:"snack",need:["달걀","밀가루","우유"],opt:["치즈","소시지"],time:"25분",
+ s:["밀가루 1컵, 우유 반 컵, 달걀 1개, 설탕 2큰술을 섞어요.","종이컵이나 머핀틀에 반죽을 반쯤 채워요.","가운데에 달걀을 하나씩 깨 넣고 치즈를 올려요.","에어프라이어 170도에서 15분 정도 구워요."]}
+];
+
+
+
+return {PANTRY:PANTRY,COMMON:COMMON,norm:norm,RECIPES:RECIPES};})();
+
+function fHas(set,item,pantry){if(set.has(item))return true;if(pantry&&FRG.PANTRY.indexOf(item)>-1)return true;var ok=false;set.forEach(function(h){if(h.length>1&&(h.indexOf(item)>-1||item.indexOf(h)>-1))ok=true});return ok}
+function fList(){var sv=pSel(P.k),have=new Set(sv.b.map(function(i){return FRG.COMMON[i]}));String(sv.xb||'').split(/[,，、\s]+/).map(function(x){return x.trim()}).filter(Boolean).forEach(function(x){have.add(FRG.norm(x))}),type=['meal','snack','all'][sv.a],pantry=sv.c!==1;
+ if(!have.size)return {have:have,list:[]};
+ var list=FRG.RECIPES.filter(function(r){return type==='all'||r.t===type}).map(function(r){
+  var nh=r.need.filter(function(i){return fHas(have,i,pantry)}),oh=r.opt.filter(function(i){return fHas(have,i,pantry)}),miss=r.need.filter(function(i){return !fHas(have,i,pantry)}).concat(r.extra||[]);
+  var used=nh.filter(function(i){return !(pantry&&FRG.PANTRY.indexOf(i)>-1)}).length+oh.length;
+  return {r:r,nh:nh,oh:oh,miss:miss,score:miss.length*10-used-(r.sp?1.5:0)}}).filter(function(x){return x.nh.filter(function(i){return FRG.PANTRY.indexOf(i)<0}).length>0||x.oh.length>0}).sort(function(a,b){return a.score-b.score});
+ return {have:have,list:list}}
+function fText(x){var r=x.r;return '['+r.n+'] 4~5인분 · 약 '+r.time+'\n재료: '+r.need.concat(r.opt,r.extra||[]).join(', ')+' (기본 양념 별도)\n'+(x.miss.length?'더 필요한 재료: '+x.miss.join(', ')+'\n':'')+'\n만드는 법\n'+r.s.map(function(t,i){return (i+1)+'. '+t}).join('\n')}
+function fHtml(){var R=fList();if(!R.have.size)return '<p class="fr-empty">왼쪽에서 냉장고에 있는 재료를 눌러 주세요.<br>재료를 고르면 바로 추천 메뉴가 나와요.</p>';
+ if(!R.list.length)return '<p class="fr-empty">고른 재료로 만들 메뉴를 찾지 못했어요.<br>재료를 더 고르거나 "식사·간식 모두"를 눌러 보세요.</p>';
+ var ready=R.list.filter(function(x){return !x.miss.length}).length;
+ return '<p class="fr-hint">'+R.list.length+'가지 메뉴'+(ready?' · 지금 바로 만들 수 있는 메뉴 <b>'+ready+'가지</b>':'')+'</p>'+R.list.slice(0,12).map(function(x,i){var r=x.r,open=P.fopen===r.n;
+  return '<div class="fr-it'+(open?' open':'')+'"><button type="button" class="fr-h" data-fo="'+E(r.n)+'"><span class="fr-e">'+r.e+'</span><span class="fr-t"><b>'+E(r.n)+'</b><small>'+(r.t==='meal'?'식사':'간식')+' · 약 '+r.time+' · '+(x.miss.length?'<em class="fr-miss">'+x.miss.length+'가지 더 필요</em>':'<em class="fr-ok">바로 가능</em>')+'</small></span><span class="fr-plus">'+(open?'−':'+')+'</span></button>'+
+  (open?'<div class="fr-b"><p><b>있는 재료</b> '+E(x.nh.concat(x.oh).filter(function(i){return FRG.PANTRY.indexOf(i)<0}).join(', ')||'기본 양념')+'</p>'+(x.miss.length?'<p><b class="fr-miss">더 필요한 재료</b> '+E(x.miss.join(', '))+'</p>':'')+'<ol>'+r.s.map(function(t){return '<li>'+E(t)+'</li>'}).join('')+'</ol><button type="button" class="jx-b mini" data-fc="'+i+'">레시피 복사</button></div>':'')+'</div>'}).join('')}
+/* 2026.11.12 일상 프롬프트 디자인실 */
+var TASKS=[
+ {t:'냉장고 파먹기',s:'재료 터치 → 메뉴·레시피',fridge:1,role:'집밥 요리 선생님',
+  g:[{l:'무엇을 만들까요?',k:'a',o:['식사','간식','식사·간식 모두']},
+     {l:'냉장고에 있는 재료 (터치)',k:'b',m:1,o:FRG.COMMON},
+     {l:'기본 양념 (소금·간장·설탕·기름 등)',k:'c',o:['있어요','없어요']}],
+  task:'',fmt:'',ph:''},
+ {t:'여행 계획 짜기',s:'일정·동선·맛집 한 번에',role:'동선을 꼼꼼하게 짜 주는 여행 플래너',
+  g:[{l:'어디로 가나요?',k:'a',o:['가까운 근교','부산·경남','제주','서울·수도권','강원','전라도','일본','동남아','아직 못 정했어요']},
+     {l:'기간',k:'b',o:['당일치기','1박 2일','2박 3일','3박 이상']},
+     {l:'누구와',k:'c',o:['혼자','아이와 가족','부부·연인','친구','부모님 모시고']},
+     {l:'여행 스타일 (여러 개)',k:'d',m:1,o:['맛집','자연·산책','카페','역사·문화','아이 체험','휴식·온천','사진 명소','가성비']}],
+  task:'고른 조건에 맞는 여행 일정을 시간표로 짜 줘. 이동 동선이 꼬이지 않게, 쉬는 시간도 넣어 줘.',
+  fmt:'① 날짜별 시간표 표(시간 | 장소 | 할 일 | 이동 방법) ② 꼭 먹어 볼 음식 3가지 ③ 예상 경비 범위 ④ 챙길 준비물 체크리스트',ph:'예) 차 없이 대중교통으로 / 예산은 1인 20만 원 / 무릎이 안 좋아 많이 못 걸어요'},
+ {t:'당뇨 식단 짜기',s:'혈당 걱정 덜어 주는 집밥',role:'당뇨 식단을 쉽게 알려 주는 영양 상담 선생님',
+  g:[{l:'기간',k:'a',o:['하루','3일','일주일']},
+     {l:'끼니',k:'b',o:['아침·점심·저녁','세 끼 + 간식','저녁만']},
+     {l:'좋아하는 것 (여러 개)',k:'c',m:1,o:['한식','잡곡밥','생선','두부·콩','나물·채소','닭고기','국·찌개','면 요리']},
+     {l:'더 원하는 것 (여러 개)',k:'d',m:1,o:['싱겁게','장보기 목록','외식할 때 팁','간식 대신 먹을 것','혈당 덜 오르는 먹는 순서']}],
+  task:'고른 조건으로 집에서 쉽게 만들 수 있는 당뇨 관리 식단을 짜 줘. 재료는 동네 마트에서 살 수 있는 것으로.',
+  fmt:'① 식단표(날짜 | 아침 | 점심 | 저녁 | 간식) ② 피하면 좋은 음식·바꿔 먹을 음식 표 ③ 고른 추가 항목',ph:'예) 60대 어머니 식단이에요 / 밀가루를 좋아하세요',safe:'- 이 식단은 일반 정보야. 약을 먹거나 진료 중이면 담당 의사·영양사의 안내가 먼저라고 마지막에 꼭 알려 줘.'},
+ {t:'다이어트 식단',s:'무리 없이 가볍게',role:'굶지 않고 꾸준히 하는 다이어트를 돕는 식단 코치',
+  g:[{l:'목표',k:'a',o:['한 달 가볍게 2~3kg','붓기 빼고 가볍게','건강하게 습관 만들기']},
+     {l:'기간',k:'b',o:['3일','일주일','한 달 계획']},
+     {l:'식사 스타일 (여러 개)',k:'c',m:1,o:['한식 위주','도시락 싸기','편의점 활용','배달 줄이기','간식 바꾸기','가족 밥상과 같이']},
+     {l:'운동',k:'d',o:['운동 안 해요','걷기만','집에서 홈트','헬스장 다녀요']}],
+  task:'고른 조건에 맞춰 배고프지 않게 지킬 수 있는 다이어트 식단과 하루 습관을 짜 줘. 극단적인 굶기나 한 가지 음식만 먹는 방법은 빼 줘.',
+  fmt:'① 식단표(날짜 | 아침 | 점심 | 저녁 | 간식) ② 장보기 목록 ③ 하루 습관 체크리스트 5개',ph:'예) 저녁 약속이 잦아요 / 단 걸 좋아해요'},
+ {t:'자격증 준비',s:'무엇을 언제 어떻게',role:'자격증 시험 준비를 처음부터 끝까지 안내하는 학습 코치',
+  g:[{l:'따고 싶은 자격증',k:'a',o:['컴퓨터활용능력 2급','요양보호사','사회복지사 2급','보육교사','한식조리기능사','바리스타','전산회계','직업상담사 2급','공인중개사','정리수납전문가','GTQ 포토샵','아직 고민 중']},
+     {l:'하루 공부 시간',k:'b',o:['30분','1시간','2시간 이상']},
+     {l:'목표 기간',k:'c',o:['1개월','3개월','6개월']},
+     {l:'알고 싶은 것 (여러 개)',k:'d',m:1,o:['시험 일정·비용','자격 조건','공부 계획표','무료 강의·교재','합격 공부법','따고 나서 할 수 있는 일']}],
+  task:'고른 자격증을 준비하려면 무엇이 필요한지 쉽게 정리하고, 내 공부 시간에 맞는 계획표를 만들어 줘.',
+  fmt:'① 자격증 한눈에 보기 표(하는 일 | 자격 조건 | 시험 과목 | 비용 | 시험 시기) ② 주별 공부 계획표 ③ 고른 항목 정리 ④ 오늘 바로 할 일 1가지',ph:'예) 컴퓨터를 잘 못해요 / 아이 재우고 밤에만 공부해요',safe:'- 시험 일정·비용·자격 조건은 바뀔 수 있으니 공식 사이트(예: 큐넷)에서 확인하라고 [확인 필요]로 표시해.'},
+ {t:'장보기·가계부',s:'일주일 예산 안에서',role:'알뜰하게 살림을 꾸리는 생활 경제 코치',
+  g:[{l:'식구 수',k:'a',o:['1인','2인','3~4인','5인 이상']},
+     {l:'일주일 장보기 예산',k:'b',o:['5만 원','10만 원','15만 원','20만 원']},
+     {l:'원하는 것 (여러 개)',k:'c',m:1,o:['일주일 메뉴','장보기 목록','남는 재료 활용','가계부 표','고정비 줄이기','아이 간식']}],
+  task:'고른 예산 안에서 일주일을 버틸 수 있는 살림 계획을 세워 줘.',
+  fmt:'① 일주일 메뉴표 ② 마트별로 나눈 장보기 목록과 예상 금액 ③ 고른 항목 정리',ph:'예) 아이 둘 / 고기는 꼭 넣고 싶어요'},
+ {t:'건강 걷기·운동',s:'집에서 가볍게 시작',role:'운동 초보도 따라 할 수 있게 알려 주는 생활 체육 코치',
+  g:[{l:'장소',k:'a',o:['집','동네 공원','헬스장','계단·아파트']},
+     {l:'하루 시간',k:'b',o:['10분','20분','40분 이상']},
+     {l:'신경 쓰이는 곳 (여러 개)',k:'c',m:1,o:['무릎','허리','어깨·목','체력이 약해요','특별히 없어요']},
+     {l:'목표',k:'d',o:['몸 가볍게','체력 기르기','뱃살','자세 바르게']}],
+  task:'고른 조건으로 4주 동안 따라 할 수 있는 운동 계획을 짜 줘. 동작마다 쉽게 설명해 줘.',
+  fmt:'① 주별 계획표 ② 오늘 할 동작 5개(동작 | 횟수 | 주의할 점) ③ 꾸준히 하는 요령 3가지',ph:'예) 운동을 거의 안 해 봤어요',safe:'- 아프거나 진료 중인 곳이 있으면 의사와 먼저 상의하라고 마지막에 알려 줘.'},
+ {t:'아이와 주말 놀거리',s:'집·동네에서 신나게',role:'아이와 함께할 놀이를 척척 알려 주는 놀이 선생님',
+  g:[{l:'아이 나이',k:'a',o:['유아(3~5세)','초등 저학년','초등 고학년','중학생']},
+     {l:'어디서',k:'b',o:['집 안','동네·공원','가까운 나들이']},
+     {l:'원하는 놀이 (여러 개)',k:'c',m:1,o:['만들기','몸으로 놀기','요리 놀이','책·이야기','과학 실험','돈 안 드는 것']}],
+  task:'고른 조건으로 이번 주말에 바로 할 수 있는 놀이 5가지를 추천해 줘.',
+  fmt:'표(놀이 | 준비물 | 걸리는 시간 | 아이가 배우는 것) + 가장 추천하는 놀이 진행 순서',ph:'예) 형제가 둘이에요 / 비 오는 날이에요'},
+ {t:'집 정리·청소 계획',s:'하루 15분씩 깔끔하게',role:'정리수납 전문가',
+  g:[{l:'정리할 곳 (여러 개)',k:'a',m:1,o:['옷장','주방','냉장고','욕실','아이 방','베란다','서류·사진','현관']},
+     {l:'하루 쓸 수 있는 시간',k:'b',o:['15분','30분','주말에 몰아서']}],
+  task:'고른 곳을 무리 없이 정리할 수 있는 2주 계획을 짜 줘. 버릴 것·남길 것 고르는 기준도 알려 줘.',
+  fmt:'① 날짜별 정리 계획표 ② 버릴까 말까 기준 체크리스트 ③ 다시 어질러지지 않는 습관 3가지',ph:'예) 옷이 너무 많아요 / 수납장이 부족해요'},
+ {t:'모임 인사·초대 글',s:'문자·단톡 한 번에',role:'따뜻하고 센스 있는 글을 쓰는 글쓰기 코치',
+  g:[{l:'어떤 글인가요?',k:'a',o:['모임 초대','생일 축하','감사 인사','명절 인사','안부 문자','부탁·거절']},
+     {l:'누구에게',k:'b',o:['가족','친구','동네 이웃','모임 회원','선생님']},
+     {l:'말투',k:'c',o:['쉽고 친근하게','정중하고 단정하게','유쾌하게']}],
+  task:'고른 상황에 맞는 글을 길이별로 써 줘.',
+  fmt:'짧은 문자 1개 + 단톡방용 1개 + 조금 긴 버전 1개',ph:'예) 다음 주 토요일 6시 우리 집 집들이예요'}];
+if(!S.p3)S.p3={k:0,sel:{},text:''};
+var P=S.p3;
+function pSel(i){var o=P.sel[i],ok=!!o;if(ok)TASKS[i].g.forEach(function(g){if(g.m?!Array.isArray(o[g.k]):typeof o[g.k]!=='number')ok=false});if(!ok){o={};TASKS[i].g.forEach(function(g){o[g.k]=g.m?[]:0;o['x'+g.k]=''});P.sel[i]=o}return o}
+function pVal(g,v,x){x=(x||'').trim();if(g.m){var a=v.map(function(i){return g.o[i]});if(x)a.push(x);return a.length?a.join(', '):'(고르지 않음)'}return x?(v===-1?x:g.o[v]+' / 기타: '+x):g.o[v]}
+function pParts(){var t=TASKS[P.k],sv=pSel(P.k);return {role:'너는 '+t.role+'야.',ctx:t.g.map(function(g){return '- '+g.l.replace(/ \(.*\)$/,'').replace(/\?$/,'')+': '+pVal(g,sv[g.k],sv['x'+g.k])}).join('\n'),task:t.task,mine:(P.text||'').trim(),ph:'['+t.ph+']',fmt:t.fmt,safe:t.safe||''}}
+var RULES='- 내가 말하지 않은 사실은 지어내지 말고 [확인 필요]로 표시해.\n- 꼭 필요한 정보가 없으면 먼저 한두 가지만 물어봐.\n- 어려운 말 없이 쉬운 말로, 표로 한눈에 보이게.';
+function pText(){var x=pParts();return '[역할]\n'+x.role+'\n\n[내가 고른 것]\n'+x.ctx+'\n\n[할 일]\n'+x.task+'\n\n[더 알려 줄 것]\n'+(x.mine||'(없음)')+'\n\n[답변 형식]\n'+x.fmt+'\n\n[지킬 것]\n'+RULES+(x.safe?'\n'+x.safe:'')}
+function pHtml(){var x=pParts();return '<span class="k">[역할]</span>\n<span class="g">'+E(x.role)+'</span>\n\n<span class="k">[내가 고른 것]</span>\n<span class="g">'+E(x.ctx)+'</span>\n\n<span class="k">[할 일]</span>\n'+E(x.task)+'\n\n<span class="k">[더 알려 줄 것]</span>\n<span class="o">'+E(x.mine||x.ph)+'</span>\n\n<span class="k">[답변 형식]</span>\n'+E(x.fmt)+'\n\n<span class="k">[지킬 것]</span>\n'+E(RULES+(x.safe?'\n'+x.safe:''))}
+function pGroups(){var t=TASKS[P.k],sv=pSel(P.k);return t.g.map(function(g){return '<span class="jx-l">'+E(g.l)+(g.m?' <small>여러 개 골라도 돼요</small>':'')+'</span><div class="jx-chips'+(g.m?' warm':'')+'">'+g.o.map(function(o,i){var on=g.m?sv[g.k].indexOf(i)>-1:sv[g.k]===i;return '<button type="button" data-pg="'+g.k+'" data-pi="'+i+'"'+(on?' class="on"':'')+'>'+E(o)+'</button>'}).join('')+'<input class="pg-x" data-px="'+g.k+'" value="'+E(sv['x'+g.k]||'')+'" placeholder="기타 (직접 입력)"></div>'}).join('')}
+function promptView(){
+ var left='<span class="jx-l">무엇을 해 볼까요?</span><div class="jx-grid" id="jx-p-task">'+TASKS.map(function(t,i){return '<button type="button" data-pk="'+i+'"'+(P.k===i?' class="on"':'')+'><b>'+E(t.t)+'</b><span>'+E(t.s)+'</span></button>'}).join('')+'</div>'+
+ '<div id="jx-p-g">'+pGroups()+'</div>'+
+ (TASKS[P.k].fridge?'':'<span class="jx-l">더 알려 줄 것 <small>비워 둬도 돼요 · 개인정보는 빼 주세요</small></span><div class="jx-tools">'+micBtn('jx-p-in')+'<button type="button" class="jx-b mini" data-p="clr">지우기</button></div><textarea class="jx-ta" id="jx-p-in" placeholder="'+E(TASKS[P.k].ph)+'">'+E(P.text)+'</textarea>');
+ var FR=!!TASKS[P.k].fridge;
+ var right=FR?'<span class="jx-l" style="margin:0">추천 메뉴 <small>＋를 누르면 레시피가 나와요</small></span><div class="fr-list" id="jx-fr">'+fHtml()+'</div>':'<span class="jx-l" style="margin:0">완성된 프롬프트 <small>고른 대로 바로 바뀌어요</small></span><div class="jx-pv" id="jx-p-pv"></div>'+
+ (FR?'':'<div class="jx-acts"><button type="button" class="jx-b fill" data-p="gpt">ChatGPT에서 열기</button><button type="button" class="jx-b" data-p="gem">제미나이에서 열기</button><button type="button" class="jx-b" data-p="cp">복사</button></div>');
+ return shell('프롬프트 디자인실','일상에서 하고 싶은 것을 고르고 터치만 하면, 오른쪽에 AI가 찰떡같이 알아듣는 프롬프트가 완성돼요.','',left,right)}
+function promptBind(){var pv=q('#jx-p-pv'),ta=q('#jx-p-in'),el=q('.jx'),fl=q('#jx-fr');function up(){if(fl){fl.innerHTML=fHtml();return}if(pv)pv.innerHTML=pHtml()}up();
+ if(ta)ta.addEventListener('input',function(){P.text=ta.value;up()});
+ el.addEventListener('input',function(e){var x=e.target.closest('[data-px]');if(!x)return;pSel(P.k)['x'+x.dataset.px]=x.value;up()});
+ el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.pk!=null){P.k=+b.dataset.pk;render();return}
+  if(b.dataset.fo!=null){P.fopen=P.fopen===b.dataset.fo?null:b.dataset.fo;up();return}
+  if(b.dataset.fc!=null){var L=fList().list,x=L[+b.dataset.fc];if(x)cp(fText(x),'레시피를 복사했어요.');return}
+  if(b.dataset.pg){var t=TASKS[P.k],sv=pSel(P.k),g=t.g.filter(function(z){return z.k===b.dataset.pg})[0],i=+b.dataset.pi;
+   if(g.m){var a=sv[g.k],j=a.indexOf(i);if(j>-1)a.splice(j,1);else a.push(i);b.classList.toggle('on',j<0)}
+   else{sv[g.k]=i;b.parentNode.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)})}
+   up();return}
+  var a2=b.dataset.p;if(!a2)return;
+  if(a2==='clr'&&ta){ta.value='';P.text='';up()}
+  if(a2==='cp')cp(pText());
+  if(a2==='gpt'){var p=pText();cp(p,'프롬프트를 넣었어요.');gpt(p)}
+  if(a2==='gem')gem(pText())});
+ after()}
+
+/* =====================================================================
+   D. 나만의 노래 만들기 : 이름 · 전할 대상 · 제목 → 1절|2절 가사 → 바로 가져가기
+   ===================================================================== */
+var SWHO=[['나 자신','나를 믿고 응원하는 노래'],['소중한 가족','부모님·배우자·자녀'],['함께 일하는 동료','같이 땀 흘리는 사람'],['오랜 친구','언제나 내 편'],['함께 배우는 동기','같이 다시 시작하는 우리'],['직접 입력','내가 전하고 싶은 사람']];
+var STL=[['오늘도 한 걸음 더','수고했어, 나의 오늘','다시 뛰는 내 심장','늦은 출발은 없어','나는 나를 믿어','{N}, 이제 시작이야','될 때까지 해 볼래','나의 두 번째 봄','빛나는 내일을 향해','괜찮아, 잘하고 있어','거울 속 나에게','다시 피는 꽃'],
+ ['고마워요, 우리 가족','늦은 밤 켜 둔 불빛','당신이 있어 다시 걸어','우리 집 가장 따뜻한 자리','사랑한다는 말 대신','함께라서 행복해','엄마도 다시 꿈꿔','{N}의 가족에게','오늘 저녁은 내가 웃게 해 줄게','우리 집 응원단'],
+ ['함께 걷는 동료여','커피 한 잔의 힘','같이 하자는 그 말','우리가 있어 든든해','내일도 웃으며 만나','고마운 내 짝꿍','마감 앞의 우리','같은 자리, 같은 마음'],
+ ['언제나 내 편','오래된 사진 속 우리','고마운 내 친구야','너라면 잘할 거야','우리 같이 빛나자','연락이 뜸해도','철없던 그날처럼','{N}의 오랜 친구에게'],
+ ['다시 시작하는 우리','같은 교실, 같은 꿈','함께라면 할 수 있어','서툰 클릭의 기적','우리의 두 번째 출발','각자의 자리에서 빛나','쉬는 시간의 수다','될 때까지 함께'],
+ ['{W}에게','고마운 {W}','당신 덕분에','함께라서 다행이야','이 노래를 {W}에게','잊지 않을게','{W}, 고마워요','그날의 따뜻함']];
+function stFill(t){var n=((G.name||'').trim().replace(/\s+/g,''))||'나';if(/^[가-힣]{3}$/.test(n))n=n.slice(1);return t.split('{N}').join(n).split('{W}').join(gW())}
+function stPick(){var L=STL[G.who].slice(),o=[];while(L.length&&o.length<5){o.push(L.splice(Math.floor(Math.random()*L.length),1)[0])}G.topts=o.map(stFill);G.toptsFor=G.who}
+var LYR=[
+ ['알람 소리에 눈을 뜨는 아침\n거울 속 나에게 살짝 웃어 봐\n늦었다고 말하던 어제는 안녕\n오늘부터 다시 시작이야\n\n{T}, 나를 믿어 볼래\n천천히 가도 괜찮아, 멈추지만 않으면 돼','서툰 손으로 적어 본 이력서\n한 줄 한 줄이 나의 이야기\n떨리는 마음도 나의 용기야\n문을 두드리는 나를 응원해\n\n{T}, 나를 믿어 볼래\n될 때까지 해 보는 거야, 내일은 더 빛날 테니까'],
+ ['바쁜 아침 서로 챙기던 손길\n말하지 못한 고마움이 쌓였어\n늦은 밤 불 켜 둔 우리 집\n그 불빛이 나를 버티게 해\n\n{T}, 사랑하는 우리 가족\n당신이 있어 나는 다시 걸어','새로운 길 앞에 망설일 때\n"할 수 있어" 건네준 그 한마디\n이제는 내가 웃게 해 줄게\n조금 더 단단해진 모습으로\n\n{T}, 사랑하는 우리 가족\n함께라서 오늘도 행복해'],
+ ['같은 시간 같은 자리에서\n커피 한 잔 나누던 우리\n힘든 날엔 먼저 건넨 농담\n그 웃음에 하루를 버텼어\n\n{T}, 함께 걷는 동료여\n우리가 있어 오늘도 든든해','마감 앞에 지친 어깨 위로\n"같이 하자" 손을 내밀던 너\n혼자였다면 못 했을 일들\n함께라서 해낼 수 있었어\n\n{T}, 함께 걷는 동료여\n내일도 우리 웃으며 만나'],
+ ['오래된 사진 속 우리 둘\n철없이 웃던 그날의 우리\n연락이 뜸해도 변함없이\n언제나 내 편이던 너\n\n{T}, 고마운 내 친구야\n네가 있어 나는 외롭지 않아','새로운 길에 선 나에게\n"너라면 잘할 거야" 웃어 준 너\n그 말 하나로 다시 힘을 내\n이번엔 내가 너를 응원할게\n\n{T}, 고마운 내 친구야\n우리 같이 빛나는 내일로 가자'],
+ ['처음 만난 교실 낯선 자리\n쭈뼛쭈뼛 건넨 첫인사\n모르는 건 서로 물어 가며\n하나씩 함께 배워 온 우리\n\n{T}, 다시 시작하는 우리\n같이 가서 더 멀리 갈 수 있어','서툰 클릭 한 번에도 웃고\n완성한 결과물에 박수 치던\n그 마음 그대로 간직하며\n각자의 자리에서 빛날 거야\n\n{T}, 다시 시작하는 우리\n될 때까지 해 보자, 함께라면 할 수 있어'],
+ ['문득 떠오른 {W}의 얼굴\n고마운 마음 전하고 싶어서\n서툰 글씨로 적어 본 노래\n내 마음이 닿았으면 해\n\n{T}, {W}에게\n당신 덕분에 오늘도 힘을 내','힘들었던 날 곁에 있어 준\n그 따뜻함을 잊지 않을게\n이제는 내가 웃게 해 줄게\n더 단단해진 모습으로\n\n{T}, {W}에게\n함께라서 내일이 기대돼']];
+function sgDef(){return {step:1,name:'',who:0,whoC:'',title:'',tiC:'',topts:null,toptsFor:-1,l1:'',l2:'',ed:false}}
+if(!S.sg)S.sg=sgDef();
+var G=S.sg;if(!G.step)G.step=1;
+function gW(){return G.who===5?((G.whoC||'').trim()||'고마운 당신'):SWHO[G.who][0]}
+function gT(){if(G.title==='__c')return (G.tiC||'').trim()||'나만의 노래';return G.title||stFill(STL[G.who][0])}
+function gLyr(){if(G.ed)return [G.l1,G.l2];var L=LYR[G.who],w=gW(),t=gT();return L.map(function(x){return x.split('{T}').join(t).split('{W}').join(w)})}
+function sgPrompt(){var l=gLyr(),n=(G.name||'').trim();return '아래 가사로 노래를 만들어 줘.\n\n[노래 정보]\n- 제목: '+gT()+'\n- 작사: '+(n||'나')+'\n- 전할 대상: '+gW()+'\n\n[가사]\n[1절]\n'+l[0]+'\n\n[2절]\n'+l[1]+'\n\n[부탁]\n- 가사는 바꾸지 말고 그대로 불러 줘.\n- 장르와 분위기는 가사에 가장 잘 어울리게 골라 줘. (제미나이 화면에서 내가 직접 골라도 돼)\n- 앨범 표지는 '+gW()+'에게 전하는 마음이 느껴지는 따뜻한 그림으로, 그림 안에 글자는 넣지 마.'}
+function sgPH(){var n=(G.name||'').trim();return '아래 가사로 노래를 만들어 줘.\n\n<span class="k">[노래 정보]</span>\n- 제목: <span class="o">'+E(gT())+'</span>\n- 작사: <span class="o">'+E(n||'나')+'</span>\n- 전할 대상: <span class="o">'+E(gW())+'</span>\n\n<span class="k">[가사]</span> 위 1절·2절 그대로\n\n<span class="k">[부탁]</span>\n- <span class="g">가사는 바꾸지 말고 그대로</span> 불러 줘.\n- 장르와 분위기는 가사에 어울리게 (제미나이 화면에서 직접 골라도 돼)\n- 앨범 표지는 따뜻한 그림으로, <span class="g">그림 안에 글자는 넣지 마.</span>'}
+var SSTEP=['내 이름','전할 대상','노래 제목','완성'];
+function songView(){var st=G.step,body='';
+ var steps='<div class="jx-step" id="jx-s-steps">'+SSTEP.map(function(t,i){var n=i+1;return '<button type="button" data-sg="'+n+'" class="'+(n===st?'on':n<st?'done':'')+'"><i>'+(n<st?'✓':n)+'</i>'+t+'</button>'}).join('')+'</div>';
+ if(st===1)body='<h4 class="jx-q">STEP 1. 노래에 들어갈 내 이름을 적어 주세요</h4><input class="jx-in" id="jx-s-name" placeholder="예: 김민지 (작사가로 들어가요)" value="'+E(G.name)+'"><div class="jx-acts" style="margin-top:10px"><button type="button" class="jx-b fill" data-s="next">다음: 전할 대상 고르기 ›</button></div><p class="jx-note" style="margin-top:8px">이름 없이 넘어가도 돼요. 엔터를 눌러도 다음으로 넘어가요.</p>';
+ if(st===2)body='<h4 class="jx-q">STEP 2. 누구에게 전할 노래인가요? <small>고르면 바로 다음으로 넘어가요</small></h4><div class="jx-opts">'+SWHO.map(function(w,i){return '<button type="button" data-sw="'+i+'"'+(G.who===i?' class="on"':'')+'><b>'+E(w[0])+'</b><span>'+E(w[1])+'</span></button>'}).join('')+'</div>'+
+  (G.who===5?'<div class="jx-tools" style="margin-top:8px"><input class="jx-in" id="jx-s-whoc" placeholder="예: 함께 공부한 새일센터 동기들" value="'+E(G.whoC)+'" style="flex:1"><button type="button" class="jx-b fill" data-s="next">다음 ›</button></div>':'');
+ if(st===3){if(!G.topts||G.toptsFor!==G.who)stPick();body='<h4 class="jx-q">STEP 3. 노래 제목을 골라 주세요 <small>'+E(gW())+'에게 어울리는 제목이에요 · 고르면 바로 가사 완성</small></h4><div class="jx-opts">'+G.topts.map(function(t,i){return '<button type="button" data-st="'+i+'"'+(G.title===t?' class="on"':'')+'><b>'+E(t)+'</b></button>'}).join('')+'<button type="button" data-st="c"'+(G.title==='__c'?' class="on"':'')+'><b>직접 입력</b><span>내가 정한 제목</span></button></div><div class="jx-acts" style="margin-top:8px"><button type="button" class="jx-b mini" data-s="more">다른 제목 보기 ↻</button></div>'+
+  (G.title==='__c'?'<div class="jx-tools" style="margin-top:8px"><input class="jx-in" id="jx-s-tic" placeholder="제목을 적어 주세요" value="'+E(G.tiC)+'" style="flex:1"><button type="button" class="jx-b fill" data-s="next">완성 ›</button></div>':'')}
+ if(st===4)body='<div class="jx-done"><b>가사가 완성됐어요!</b><p>오른쪽에서 가사를 바로 고칠 수 있어요. 마음에 들면 <u>제미나이에서 노래 만들기</u>를 누르세요.</p><div class="jx-sinfo"><span><em>작사</em>'+E((G.name||'').trim()||'나')+'</span><span><em>전할 대상</em>'+E(gW())+'</span><span><em>제목</em>'+E(gT())+'</span></div></div><p class="jx-note" style="margin-top:10px">노래 장르·분위기(발라드, 경쾌한 팝 등)는 제미나이에서 노래를 만들 때 바로 고를 수 있어요. 바꾸고 싶은 단계는 위 번호를 누르면 돼요.</p>';
+ var left=steps+'<div class="jx-stepbody">'+body+'</div><div class="jx-acts" style="margin-top:auto;padding-top:12px">'+(st>1?'<button type="button" class="jx-b mini" data-s="prev">‹ 이전</button>':'')+'<button type="button" class="jx-b mini warn" data-s="reset">처음부터 새로 만들기 ↻</button></div>';
+ var l=gLyr();
+ var right='<div class="jx-sinfo" id="jx-s-info"></div>'+
+ '<div class="jx-lyr" id="jx-s-lyr"><div><b>1절</b><textarea id="jx-s-l1" rows="1" aria-label="1절 가사">'+E(l[0])+'</textarea></div><div><b>2절</b><textarea id="jx-s-l2" rows="1" aria-label="2절 가사">'+E(l[1])+'</textarea></div></div>'+
+ '<span class="jx-l" style="margin:0">가져갈 프롬프트 <small>가사는 위에서 바로 고쳐도 돼요</small></span><div class="jx-pv small" id="jx-s-pv"></div>'+
+ '<div class="jx-acts"><button type="button" class="jx-b fill" data-s="gem">제미나이에서 노래 만들기</button><button type="button" class="jx-b" data-s="gpt">ChatGPT로 가져가기</button><button type="button" class="jx-b" data-s="cp">복사</button></div>';
+ return shell('나만의 노래 만들기','이름·대상·제목을 차례로 고르면 1절·2절 가사가 바로 완성돼요.','',left,right)}
+function songBind(){var el=q('.jx'),l1=q('#jx-s-l1'),l2=q('#jx-s-l2');el.querySelector('.jx-col').classList.add('flexcol');
+ function grow(){[l1,l2].forEach(function(t){t.style.height='auto'});var h=Math.max(l1.scrollHeight,l2.scrollHeight);l1.style.height=h+'px';l2.style.height=h+'px'}
+ function info(){q('#jx-s-info').innerHTML='<span><em>제목</em>'+E(gT())+'</span><span><em>작사</em>'+E((G.name||'').trim()||'나')+'</span><span><em>전할 대상</em>'+E(gW())+'</span>';q('#jx-s-pv').innerHTML=sgPH()}
+ function lyr(){if(G.ed)return;var l=gLyr();l1.value=l[0];l2.value=l[1];grow()}
+ function go(n){G.step=Math.max(1,Math.min(4,n));render()}
+ info();grow();setTimeout(grow,80);
+ var nm=q('#jx-s-name');if(nm){nm.addEventListener('input',function(){G.name=this.value;info()});nm.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();go(2)}});setTimeout(function(){nm.focus()},50)}
+ var wc=q('#jx-s-whoc');if(wc){wc.addEventListener('input',function(){G.whoC=this.value;lyr();info()});wc.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();go(3)}});wc.focus()}
+ var tc=q('#jx-s-tic');if(tc){tc.addEventListener('input',function(){G.tiC=this.value;lyr();info()});tc.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();go(4)}});tc.focus()}
+ [l1,l2].forEach(function(t){t.addEventListener('input',function(){G.ed=true;G.l1=l1.value;G.l2=l2.value;grow()})});
+ el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.sg){go(+b.dataset.sg);return}
+  if(b.dataset.sw!=null){var nw=+b.dataset.sw;if(G.ed&&nw!==G.who&&!confirm('직접 고친 가사가 새 가사로 바뀌어요. 바꿀까요?'))return;if(nw!==G.who){G.ed=false;G.title='';G.topts=null}G.who=nw;if(nw===5){render();return}go(3);return}
+  if(b.dataset.st!=null){var old=gT();if(b.dataset.st==='c'){G.title='__c';render();return}G.title=G.topts[+b.dataset.st];if(G.ed){G.l1=G.l1.split(old).join(gT());G.l2=G.l2.split(old).join(gT())}go(4);return}
+  if(b.dataset.s==='more'){stPick();render();return}
+  var a=b.dataset.s;if(!a)return;
+  if(a==='next'){go(G.step+1);return}
+  if(a==='prev'){go(G.step-1);return}
+  if(a==='reset'){S.sg=sgDef();G=S.sg;render();T('처음부터 새로 시작해요.');return}
+  if(a==='gem')gem(sgPrompt(),'프롬프트를 복사했어요. 제미나이에서 붙여 넣고, 음악 만들기에서 장르를 골라 보세요.');
+  if(a==='gpt'){var p=sgPrompt();cp(p,'프롬프트를 넣었어요.');gpt(p)}
+  if(a==='cp')cp(sgPrompt())});
+ after()}
+
+views.prompt=promptView;init.prompt=promptBind;
+/* 2026.11.12 가족센터 도구 디자인 그대로(일반인용) iframe 연결 */
+function frameView(k){return function(){return '<div class="jx jx-frame"><iframe id="jx-ifr" src="/masan/tools/?v=1116k#'+k+'" title="'+({heart:'마음 쉼터',vent:'빡침 번역기',song:'나만의 노래 만들기'})[k]+'" style="width:100%;border:0;display:block;border-radius:14px;background:#f7f9f7"></iframe></div>'}}
+function frameFit(){var f=document.getElementById('jx-ifr');if(!f)return;var top=f.getBoundingClientRect().top+window.scrollY;f.style.height=Math.max(520,window.innerHeight-top-26)+'px'}
+function frameBind(){frameFit();setTimeout(frameFit,60)}
+window.addEventListener('resize',frameFit);
+views.heart=frameView('heart');init.heart=frameBind;
+views.vent=frameView('vent');init.vent=frameBind;
+views.song=frameView('song');init.song=frameBind;
+if(['prompt','heart','vent','song'].indexOf(state.page)>-1)render();
+})();
+
+window.FAMPROMPT={render:render};
+})();
+</script>
+
 <style id="lift-css">.lift-acts{margin:0 0 10px!important;display:flex!important;flex-wrap:wrap;justify-content:flex-end!important}.st-acts.sttop{justify-content:flex-end}.lift-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:0 0 8px}.lift-head>*{margin-top:0!important;margin-bottom:0!important}.lift-head>.lift-acts{margin-left:auto!important;flex:0 1 auto;width:auto!important}.lift-head>:first-child{flex:0 1 auto;width:auto!important;display:block}.lift-head>:first-child small{display:none}.lift-head>h4{display:flex!important;align-items:center;gap:6px}</style>
 <script id="lift-js">
 /* 2026.11.16 AI 열기 버튼을 프롬프트·입력칸 위로 */
