@@ -5339,7 +5339,7 @@ function songBind(){var el=q('.jx'),l1=q('#jx-s-l1'),l2=q('#jx-s-l2');el.querySe
 
 views.prompt=promptView;init.prompt=promptBind;
 /* 2026.11.12 가족센터 도구 디자인 그대로(일반인용) iframe 연결 */
-function frameView(k){return function(){return '<div class="jx jx-frame"><iframe id="jx-ifr" src="/masan/tools/?v=1116h#'+k+'" title="'+({heart:'마음 쉼터',vent:'빡침 번역기',song:'나만의 노래 만들기'})[k]+'" style="width:100%;border:0;display:block;border-radius:14px;background:#f7f9f7"></iframe></div>'}}
+function frameView(k){return function(){return '<div class="jx jx-frame"><iframe id="jx-ifr" src="/masan/tools/?v=1116i#'+k+'" title="'+({heart:'마음 쉼터',vent:'빡침 번역기',song:'나만의 노래 만들기'})[k]+'" style="width:100%;border:0;display:block;border-radius:14px;background:#f7f9f7"></iframe></div>'}}
 function frameFit(){var f=document.getElementById('jx-ifr');if(!f)return;var top=f.getBoundingClientRect().top+window.scrollY;f.style.height=Math.max(520,window.innerHeight-top-26)+'px'}
 function frameBind(){frameFit();setTimeout(frameFit,60)}
 window.addEventListener('resize',frameFit);
@@ -6816,4 +6816,24 @@ window.GBIZ={view:function(){return '<section class="panel st"><div style="displ
 })();
 </script>
 <script>views.studio=function(){return STUDIO.view()};init.studio=function(){STUDIO.bind()};views.gbiz=function(){return GBIZ.view()};init.gbiz=function(){GBIZ.bind()};if(state.page==='studio'||state.page==='gbiz')render();</script>
+<style id="lift-css">.lift-acts{margin:0 0 10px!important}</style>
+<script id="lift-js">
+/* 2026.11.16 AI 열기 버튼을 프롬프트·입력칸 위로 */
+(function(){
+var ROW='.acts,.jx-acts,.row,.ps-res-acts',BOX='pre,textarea[readonly],.aig-p,.jx-pv,.st-pv,.ps-res-text,.gm-prompt textarea';
+var RE=/(ChatGPT|GPT|제미나이|Gemini)[^<]{0,14}(열기|받기|만들기|다듬기|가져가기|\)|↗)|위로받기/;
+function isAct(r){if(r.dataset.lifted||r.closest('.sp-h,.jx-msg-h,.st,.aig-head')||r.querySelector('[data-aapp],[data-open]'))return false;
+ return [].some.call(r.querySelectorAll('button,a'),function(b){return RE.test(b.textContent)})}
+function ctl(e){return e.matches('input,select,textarea,button')||!!e.querySelector('input,select,textarea,button')}
+function lift(r){var p=r.parentNode;if(!p)return;r.dataset.lifted=1;var sib=[],e=r.previousElementSibling;while(e){sib.unshift(e);e=e.previousElementSibling}
+ var t=null;for(var i=0;i<sib.length;i++){if(sib[i].matches(BOX)||sib[i].querySelector(BOX)){t=sib[i];break}}
+ if(!t)for(i=0;i<sib.length;i++){if(ctl(sib[i])){t=sib[i];break}}
+ if(!t)return;var pv=t.previousElementSibling;if(pv&&pv.matches('label,.l,.jx-l')&&!ctl(pv))t=pv;
+ p.insertBefore(r,t);r.classList.add('lift-acts')}
+function run(){[].forEach.call(document.querySelectorAll(ROW),function(r){if(isAct(r))lift(r)})}
+var q=0;function sch(){if(q)return;q=1;requestAnimationFrame(function(){q=0;run()})}
+function start(){run();new MutationObserver(sch).observe(document.body,{childList:true,subtree:true})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
+</script>
 </body></html>

@@ -4537,5 +4537,25 @@ img{filter:contrast(1.12) saturate(1.18)}
 @media(max-width:640px){.post .pc-g>b{font-size:17px!important}}
 .post .pc-g>b .pcn{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;padding:0 8px;border-radius:999px;background:#A94E22;color:#fff;font-style:normal;font-size:19px;font-weight:900;margin-right:4px;align-self:center;box-shadow:0 2px 0 #7d3815}
 </style>
+<style id="lift-css">.lift-acts{margin:0 0 10px!important}</style>
+<script id="lift-js">
+/* 2026.11.16 AI 열기 버튼을 프롬프트·입력칸 위로 */
+(function(){
+var ROW='.acts,.jx-acts,.row,.ps-res-acts',BOX='pre,textarea[readonly],.aig-p,.jx-pv,.st-pv,.ps-res-text,.gm-prompt textarea';
+var RE=/(ChatGPT|GPT|제미나이|Gemini)[^<]{0,14}(열기|받기|만들기|다듬기|가져가기|\)|↗)|위로받기/;
+function isAct(r){if(r.dataset.lifted||r.closest('.sp-h,.jx-msg-h,.st,.aig-head')||r.querySelector('[data-aapp],[data-open]'))return false;
+ return [].some.call(r.querySelectorAll('button,a'),function(b){return RE.test(b.textContent)})}
+function ctl(e){return e.matches('input,select,textarea,button')||!!e.querySelector('input,select,textarea,button')}
+function lift(r){var p=r.parentNode;if(!p)return;r.dataset.lifted=1;var sib=[],e=r.previousElementSibling;while(e){sib.unshift(e);e=e.previousElementSibling}
+ var t=null;for(var i=0;i<sib.length;i++){if(sib[i].matches(BOX)||sib[i].querySelector(BOX)){t=sib[i];break}}
+ if(!t)for(i=0;i<sib.length;i++){if(ctl(sib[i])){t=sib[i];break}}
+ if(!t)return;var pv=t.previousElementSibling;if(pv&&pv.matches('label,.l,.jx-l')&&!ctl(pv))t=pv;
+ p.insertBefore(r,t);r.classList.add('lift-acts')}
+function run(){[].forEach.call(document.querySelectorAll(ROW),function(r){if(isAct(r))lift(r)})}
+var q=0;function sch(){if(q)return;q=1;requestAnimationFrame(function(){q=0;run()})}
+function start(){run();new MutationObserver(sch).observe(document.body,{childList:true,subtree:true})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
+</script>
 </body>
 </html>
