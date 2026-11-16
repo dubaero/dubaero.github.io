@@ -897,10 +897,11 @@ main.wrap{padding-top:10px}
     <p class="warn">다른 사람 이름이나 개인정보는 빼고 "오늘 내 마음" 위주로 적어 주세요.</p>
     <div class="five" id="h2-out" hidden></div>
     <div class="post">
-      <div><b>나를 응원하는 엽서</b><span>요즘 힘든 마음만 고르세요. 평소 쓰던 ChatGPT나 제미나이가 그동안 나눈 대화를 바탕으로, 나만 아는 이야기를 담아 인정·위로·응원의 선물 엽서를 만들어 줘요.</span></div>
+      <div><b>나를 응원하는 엽서</b><span>10년 후 나의 꿈과 모습을 고르면, 지금까지 잘 버티고 애써 온 나를 칭찬하고 10년 후의 꿈을 응원하는 선물 엽서를 만들어 줘요.</span></div>
       <div class="pc" id="pc">
-        <div class="pc-g"><b>① 요즘 나를 힘들게 하는 것 <small>여러 개 골라도 돼요</small></b><div id="pc-hard"></div><input class="f1" id="pc-hard-in" placeholder="직접 쓰기 (예: 요즘 이유 없이 자꾸 지쳐요)"></div>
-        <div class="pc-g"><b>② 그림 느낌 <small>제목·배경·손편지는 AI가 나를 기억해서 만들어요</small></b><div class="pc-o" id="pc-style"></div></div>
+        <div class="pc-g"><b>① 10년 후 나의 꿈·모습 <small>여러 개 골라도, 직접 써도 돼요</small></b><div id="pc-hard"></div><input class="f1" id="pc-hard-in" placeholder="직접 쓰기 (예: 10년 후 작은 꽃집 사장님이 되어 있을 거예요)"></div>
+        <div class="pc-g"><b>② 지금까지 잘 해 온 나 <small>칭찬받고 싶은 것을 골라요</small></b><div class="pc-o" id="pc-pr"></div><input class="f1" id="pc-pr-in" placeholder="직접 쓰기 (예: 혼자 아이 셋을 키우며 일까지 해냈어요)"></div>
+        <div class="pc-g"><b>③ 그림 느낌 <small>제목·배경·손편지는 AI가 나를 기억해서 만들어요</small></b><div class="pc-o" id="pc-style"></div></div>
         <div class="pc-g pc-row"><label>엽서에 부를 내 이름·애칭<input class="f1" id="pc-to" placeholder="예: 이서정 → 서정아 (ChatGPT에서 적어도 돼요)"></label><label>우표 소인에 찍을 날짜<input class="f1" id="pc-date" placeholder="예: 2026.11.19 (ChatGPT에서 적어도 돼요)"></label></div>
       </div>
       <div class="acts"><button type="button" class="btn fill" id="h2-gpt">ChatGPT로 선물 엽서 받기</button><button type="button" class="btn" id="h2-gem">제미나이로 선물 엽서 받기</button><button type="button" class="btn" id="h2-cp">프롬프트 복사</button></div>
@@ -3554,33 +3555,38 @@ var _dwInstr1109b=dwInstr;
 dwInstr=function(d){var h=_dwInstr1109b(d);if(!d.fullT&&!d.full)return h;return dwFullHtml(DWTXT.ins,d.fullT?DW_NOTE.one:DW_NOTE.full);};
 
 /* ===== 2026.11.09 수정 13: 나에게 보내는 엽서 — 문구 고르기·디자인 고르기·앞뒷면 선물 엽서 ===== */
-var PC_HG=[["이유 없이 지칠 때", ["이유 없이 지치고 힘들어요", "아무것도 하기 싫어요", "괜히 눈물이 나요", "마음이 텅 빈 것 같아요", "하루가 너무 길게 느껴져요", "나만 제자리인 것 같아요"]], ["동료·사람 관계", ["동료와 사이가 껄끄러워요", "말 한마디에 상처받았어요", "거절을 못 해서 힘들어요", "오해를 받아 속상해요", "남의 눈치를 너무 봐요", "마음을 털어놓을 사람이 없어요"]], ["가족 갈등", ["가족이 내 마음을 몰라줘요", "부모님과 자꾸 부딪혀요", "형제자매와 서운한 일이 있어요", "명절·집안 행사가 부담돼요", "부모님 돌봄이 걱정돼요"]], ["자녀와 갈등", ["아이와 대화가 잘 안 돼요", "아이에게 화내고 후회해요", "사춘기 아이와 자꾸 부딪혀요", "아이 공부·진로가 걱정돼요", "좋은 부모인지 자신이 없어요"]], ["부부", ["배우자와 마음이 엇갈려요", "집안일·육아 분담으로 다퉈요", "대화가 점점 줄었어요", "서운한 말이 마음에 남아요"]], ["나 자신·마음", ["잘하고 있는지 모르겠어요", "자꾸 남과 비교하게 돼요", "나를 위한 시간이 없어요", "자신감이 떨어졌어요", "하고 싶은 게 뭔지 모르겠어요"]], ["몸·쉼", ["몸이 많이 지쳤어요", "잠을 잘 못 자요", "제대로 쉬지 못했어요", "늘 피곤하고 몸이 무거워요"]], ["돈·생활", ["생활비가 빠듯해요", "집안일이 끝이 없어요", "해야 할 일이 너무 많아요", "혼자 다 챙기느라 벅차요"]]];
+var PC_HG=[["일·직업", ["원하는 회사에 취업해 인정받는 나", "내 분야 전문가가 된 나", "자격증을 따서 새 일을 하는 나", "좋아하는 일로 돈 버는 나", "후배를 가르치는 든든한 선배", "AI를 척척 다루는 일잘러"]], ["창업·도전", ["내 가게(카페·공방) 사장님", "온라인 쇼핑몰 대표", "강사·컨설턴트로 활동하는 나", "작가·유튜버·크리에이터", "사회적기업·협동조합 운영", "프리랜서로 자유롭게 일하는 나"]], ["돈·생활", ["경제적으로 여유로운 나", "내 집을 마련한 나", "빚 없이 차곡차곡 저축하는 나", "노후 준비가 든든한 나"]], ["가족·관계", ["가족과 웃음이 넘치는 집", "아이가 자랑스러워하는 엄마·아빠", "부모님께 효도하는 나", "좋은 사람들과 함께하는 나"]], ["나·건강", ["건강하고 활기찬 나", "마음이 단단하고 편안한 나", "꾸준히 운동하는 나", "하고 싶던 공부를 마친 나"]], ["여행·취미", ["가고 싶던 나라를 여행하는 나", "취미로 작품 전시를 연 나", "악기·그림·춤을 즐기는 나", "봉사하며 나누는 삶"]]];
+var PC_PR=["포기하지 않고 버텨 왔어요", "맡은 일을 책임감 있게 해냈어요", "가족을 위해 늘 애써 왔어요", "새로운 걸 배우려 꾸준히 노력했어요", "넘어져도 다시 일어났어요", "하루하루 성실하게 살아왔어요", "다시 시작할 용기를 냈어요", "힘들어도 웃으며 사람들을 챙겼어요"];
 var PC_HARD=[];PC_HG.forEach(function(g){g[1].forEach(function(x){PC_HARD.push(x);});});
 var PC_STYLE=[['AI 추천','나를 아는 AI가 내 이야기에 가장 어울리는 그림 느낌으로'],['햇살 수채화 풍경','따뜻한 햇살, 꽃과 나무, 멀리 이어진 산책길이 있는 수채화 풍경'],['꽃잎 압화 빈티지','말린 꽃잎과 잎사귀를 눌러 붙인 듯한 빈티지 종이 엽서'],['동화 일러스트','작은 집과 귀여운 동물 친구들이 있는 아기자기한 동화책 그림'],['밤하늘 별빛','은은한 달빛과 반짝이는 별, 따뜻한 불빛이 켜진 작은 마을'],['창가의 따뜻한 차','창가에 놓인 따뜻한 차 한 잔과 책, 포근한 담요'],['바닷가 노을','잔잔한 바다와 분홍빛 노을, 모래 위 조개껍데기'],['계절 숲길 산책','계절 색이 가득한 숲길과 햇살이 비치는 오솔길']];
-var PCS={hard:{},style:0};
+var PCS={hard:{},pr:{},style:0};
 function pcRender(){var h=$('#pc-hard'),st=$('#pc-style');if(!h)return;
  if(PCS.tab==null)PCS.tab=0;var k=0,tabs='',body='';PC_HG.forEach(function(g,gi){var cnt=0,ch='';g[1].forEach(function(x){var i=k++;if(PCS.hard[i])cnt++;ch+='<button type="button" data-pch="'+i+'"'+(PCS.hard[i]?' class="on"':'')+'>'+esc(x)+'</button>';});tabs+='<button type="button" data-pct="'+gi+'" class="pt'+gi+(PCS.tab===gi?' on':'')+'">'+esc(g[0])+(cnt?' <em>'+cnt+'</em>':'')+'</button>';if(PCS.tab===gi)body='<div class="pc-o pt'+gi+'">'+ch+'</div>';});h.innerHTML='<div class="pc-tabs">'+tabs+'</div>'+body;
+ var pr=$('#pc-pr');if(pr)pr.innerHTML=PC_PR.map(function(x,i){return '<button type="button" data-pcp="'+i+'"'+(PCS.pr[i]?' class="on"':'')+'>'+esc(x)+'</button>';}).join('');
  st.innerHTML=PC_STYLE.map(function(x,i){return '<button type="button" data-pcs="'+i+'" title="'+esc(x[1])+'"'+(PCS.style===i?' class="on"':'')+'>'+esc(x[0])+'</button>';}).join('');}
 document.addEventListener('click',function(e){var tb=e.target.closest('[data-pct]');if(tb){PCS.tab=+tb.dataset.pct;pcRender();return;}var b=e.target.closest('[data-pch]');if(b){var i=+b.dataset.pch;if(PCS.hard[i])delete PCS.hard[i];else PCS.hard[i]=1;pcRender();}
+ b=e.target.closest('[data-pcp]');if(b){var j=+b.dataset.pcp;if(PCS.pr[j])delete PCS.pr[j];else PCS.pr[j]=1;pcRender();}
  b=e.target.closest('[data-pcs]');if(b){PCS.style=+b.dataset.pcs;pcRender();}
  if(e.target.id==='h2-gem'){var p=postP2(pcStory());if(p)openAt('https://gemini.google.com/app',p,'제미나이');}});
 function pcStory(){var i=$('#h2-in');return i?i.value.trim():'';}
 setTimeout(pcRender,0);
 function postP2(t){var hard=PC_HARD.filter(function(x,i){return PCS.hard[i];}),mine=(($('#pc-hard-in')||{}).value||'').trim();if(mine)hard.push(mine);
-
+ var pr=PC_PR.filter(function(x,i){return PCS.pr[i];}),pm=(($('#pc-pr-in')||{}).value||'').trim();if(pm)pr.push(pm);
  var st=PC_STYLE[PCS.style],nm=(($('#pc-to')||{}).value||'').trim().replace(/\s+/g,''),pdate=(($('#pc-date')||{}).value||'').trim();
  if(/^[가-힣]{3}$/.test(nm))nm=nm.slice(1);else if(/^(남궁|황보|제갈|선우|독고|사공|서문)[가-힣]{2}$/.test(nm))nm=nm.slice(2);
- var L=['엽서에 불러 줄 내 이름: '+nm,'우표 소인 날짜: '+pdate,'(위 두 줄만 채워서 보내 주세요)','','---','그동안 나와 나눈 대화를 기억하는 친구로서, 나를 인정하고 위로하고 응원하는 선물 같은 엽서 그림을 만들어 줘.','','[요즘 나를 힘들게 하는 것]'];
- if(hard.length)hard.forEach(function(x){L.push('- '+x);});else L.push('- (고르지 않았어. 그동안 대화에서 요즘 내가 힘들어하던 것을 떠올려 줘)');
+ var L=['엽서에 불러 줄 내 이름: '+nm,'우표 소인 날짜: '+pdate,'(위 두 줄만 채워서 보내 주세요)','','---','그동안 나와 나눈 대화를 기억하는 친구로서, 지금까지 열심히 살아온 나를 칭찬하고 인정하면서 10년 후 나의 꿈과 미래를 응원하는 선물 같은 엽서 그림을 만들어 줘. 10년 후의 내가 지금의 나에게 보내는 엽서처럼.','','[10년 후 내가 이루고 싶은 꿈·모습]'];
+ if(hard.length)hard.forEach(function(x){L.push('- '+x);});else L.push('- (고르지 않았어. 그동안 대화에서 내가 말한 꿈이나 바람을 떠올려 줘. 없으면 지금보다 더 행복하고 단단해진 나로)');
+ L.push('','[지금까지 잘 해 온 나]');
+ if(pr.length)pr.forEach(function(x){L.push('- '+x);});else L.push('- (고르지 않았어. 그동안 대화에서 내가 애써 온 모습을 떠올려 줘)');
  if(t)L.push('','[오늘 내 마음]',t);
  L.push('','[그림 느낌] '+st[0]+' — '+st[1],'',
  '[이렇게 만들어 줘]',
  '- 글이나 설명은 따로 보여 주지 말고, 질문도 하지 말고, 바로 엽서 그림 한 장만 만들어 줘. 선물처럼 열어 보는 순간 처음 보게.',
- '- 지금까지 나와 나눈 대화와 기억해 둔 내용에서 내가 꾸준히 노력해 온 부분과 나의 강점, 좋아한다고 말한 꽃·여행지를 떠올려서 담아 줘. 기억이 없으면 지어내지 말고 위의 힘든 마음을 알아주는 따뜻한 말로만.',
- '- 앞면 제목: 나의 노력과 강점을 살려 나를 응원하는 한 줄(15자 이내).',
- '- 뒷면 손편지: 힘든 마음을 알아주면서 나를 인정하고 위로하고 응원하는 5줄. 한 줄에 한 문장, 25자 이내. 첫 줄 위에 내 이름을 성 빼고 다정하게("서정아,", "민수야,"). 이름 칸이 비어 있으면 "나에게,".',
+ '- 지금까지 나와 나눈 대화와 기억해 둔 내용에서 내가 꾸준히 노력해 온 부분, 나의 강점, 내가 말한 꿈과 좋아하는 것을 떠올려서 담아 줘. 기억이 없으면 지어내지 말고 위에 고른 내용으로만.',
+ '- 앞면 제목: 10년 후 나의 꿈을 응원하는 한 줄(15자 이내).',
+ '- 뒷면 손편지 6줄, 한 줄에 한 문장, 25자 이내. 1~2줄은 지금까지 버티고 애써 온 나를 인정하고 칭찬하기. 3~4줄은 10년 후 꿈이 이루어진 모습을 미래에서 본 것처럼 그려 주기("10년 뒤 너는 ~하고 있어"). 5~6줄은 오늘의 나를 응원하기. 첫 줄 위에 내 이름을 성 빼고 다정하게("서정아,", "민수야,"). 이름 칸이 비어 있으면 "나에게,". 맨 아래에 "— 10년 후의 내가".',
  '- 회사·기관 이름, 날짜, 숫자, 사람 이름 같은 구체적인 사실은 쓰지 말고, "늦은 밤까지 애쓴 시간"처럼 전체적인 노력과 마음으로 표현해. 건강·가족사 같은 민감한 이야기도 넣지 마.',
- '- 앞면 배경: 손편지의 위로와 응원에 가장 잘 어울리는 가장 아름다운 풍경. 꽃길, 바다, 숲, 호숫가, 노을, 별밤, 눈 내리는 마을처럼 매번 다양하게. 좋아한다고 말한 꽃이나 여행지가 있으면 그 풍경으로. 나의 일과 일상을 상징하는 소품을 한두 개, 사람은 작은 뒷모습만.',
+ '- 앞면 배경: 10년 후 꿈이 이루어진 순간을 상징하는 가장 아름다운 장면. 예를 들어 꽃이 가득한 내 가게 앞, 햇살 드는 사무실 창가, 박수 받는 무대, 가족과 함께하는 바닷가처럼 고른 꿈에 맞게. 사람은 작은 뒷모습만, 꿈을 상징하는 소품을 한두 개.',
  '- 구성: 엽서 앞면과 뒷면이 위아래로 함께 보이는 세로 2:3 한 장. 앞면은 배경 위에 제목을 손글씨로 크게. 뒷면은 크림색 종이에 가운데 세로선, 왼쪽에 손편지, 오른쪽 위에 앞면과 어울리는 우표와 둥근 소인(날짜 칸이 비어 있으면 날짜 없이), 오른쪽 아래 "받는 사람: (내 이름)".',
  '- 엽서는 리넨 천 위에 놓고, 작은 꽃과 리본 묶은 선물 상자를 곁들여 정말 선물 받은 느낌으로.',
  '- 한글은 틀리지 않게, 크고 또렷하게.');
