@@ -2681,7 +2681,13 @@ function clearForm(){openForm(CF.id);toast('입력한 내용을 모두 지웠어
 
 $('#f-ex').onclick=fillEx;$('#f-clear').onclick=clearForm;
 var AEX=false;
-$('#aig-ex').onclick=function(){AEX=!AEX;renderAI();toast(AEX?'예시 메모를 넣은 프롬프트예요. 실제로 쓸 땐 내 메모로 바꾸세요.':'예시 메모를 뺐어요.');};
+var EXK=[];
+function exFillSilent(){var E=EX[CF.id];EXK=[];if(!E)return 0;CF.qs.forEach(function(q){if(q.priv)return;var v=E[q.k];if(v==null||v==='')return;var cur=VAL[q.k];if(cur&&(!Array.isArray(cur)||cur.length))return;VAL[q.k]=Array.isArray(v)?v.slice():v;EXK.push(q.k);
+  if(q.t==='one'||q.t==='many'){var box=$('#f-qs').children[CF.qs.indexOf(q)];if(box)box.querySelectorAll('.opts button').forEach(function(b){var on=Array.isArray(VAL[q.k])?VAL[q.k].indexOf(b.textContent)>-1:VAL[q.k]===b.textContent;b.classList.toggle('on',on);});}
+  else{var inp=document.getElementById('fq-'+q.k);if(inp)inp.value=VAL[q.k];}});renderDoc();return EXK.length}
+function exClearSilent(){var E=EX[CF.id]||{};EXK.forEach(function(k){var q=CF.qs.filter(function(x){return x.k===k})[0];if(!q)return;if(JSON.stringify(VAL[k])!==JSON.stringify(E[k]))return;VAL[k]=Array.isArray(E[k])?[]:'';
+  if(q.t==='one'||q.t==='many'){var box=$('#f-qs').children[CF.qs.indexOf(q)];if(box)box.querySelectorAll('.opts button').forEach(function(b){b.classList.remove('on')});}else{var inp=document.getElementById('fq-'+k);if(inp)inp.value='';}});EXK=[];renderDoc()}
+$('#aig-ex').onclick=function(){AEX=!AEX;var n=0;if(AEX)n=exFillSilent();else exClearSilent();renderAI();toast(AEX?(n?'예시 자료를 위 서식과 프롬프트에 함께 넣었어요. 모두 가상 "가온시 가족센터" 예시예요.':'예시 자료를 프롬프트에 넣었어요. 서식 빈칸은 이미 채워져 있어요.'):'예시 자료를 뺐어요.');};
 function exify(t){if(!AEX||!EXM[CF.id])return t;return t.replace('(여기에 메모를 붙여 넣거나, 손메모 사진을 첨부하세요)',EXM[CF.id]).replace('(올해 실적표·예산표·일정·참여 인원을 붙여 넣거나 엑셀·PDF로 첨부하세요)',EXM[CF.id]).replace('(엑셀 표나 응답을 붙여 넣기)',EXM[CF.id]);}
 /* 간단 도구 예시 */
 function setEx(k,arr){var f=(SIMPLE[k].f||[]).find(function(x){return !x.o;});if(f)f.ex=arr;}
@@ -4537,7 +4543,7 @@ img{filter:contrast(1.12) saturate(1.18)}
 @media(max-width:640px){.post .pc-g>b{font-size:17px!important}}
 .post .pc-g>b .pcn{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;padding:0 8px;border-radius:999px;background:#A94E22;color:#fff;font-style:normal;font-size:19px;font-weight:900;margin-right:4px;align-self:center;box-shadow:0 2px 0 #7d3815}
 </style>
-<style id="lift-css">.lift-acts{margin:0 0 10px!important;display:flex!important;flex-wrap:wrap;justify-content:flex-end!important}.st-acts.sttop{justify-content:flex-end}.lift-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:0 0 8px}.lift-head>*{margin-top:0!important;margin-bottom:0!important}.lift-head>.lift-acts{margin-left:auto!important;flex:0 1 auto;width:auto!important}.lift-head>:first-child{flex:0 1 auto;width:auto!important;display:block}.lift-head>:first-child small{display:none}</style>
+<style id="lift-css">.lift-acts{margin:0 0 10px!important;display:flex!important;flex-wrap:wrap;justify-content:flex-end!important}.st-acts.sttop{justify-content:flex-end}.lift-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:0 0 8px}.lift-head>*{margin-top:0!important;margin-bottom:0!important}.lift-head>.lift-acts{margin-left:auto!important;flex:0 1 auto;width:auto!important}.lift-head>:first-child{flex:0 1 auto;width:auto!important;display:block}.lift-head>:first-child small{display:none}.lift-head>h4{display:flex!important;align-items:center;gap:6px}</style>
 <script id="lift-js">
 /* 2026.11.16 AI 열기 버튼을 프롬프트·입력칸 위로 */
 (function(){
