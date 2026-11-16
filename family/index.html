@@ -4606,7 +4606,7 @@ var _of=openForm;openForm=function(){var r=_of.apply(this,arguments);PEX=false;E
 .st-pv{white-space:pre-wrap;line-height:1.75;font-size:15px;background:#fbfcfb;border:1.5px solid #d6dfda;border-left:6px solid var(--g);border-radius:10px;padding:12px 14px;max-height:430px;overflow:auto}
 .st-pv .u{color:#1d4fb8;font-weight:800;text-decoration:underline;text-underline-offset:3px}
 .st-pv .b{color:#1d4fb8;font-weight:800}
-.st-pv .ph{color:#8a8f8c}
+.st-pv .stph{color:#8a8f8c}
 .st-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.st-acts.sttop{margin:0 0 8px}
 .st-acts button{border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:800;font-size:15px;cursor:pointer}
 .st-acts .p{background:#1b2b22;color:#fff}.st-acts .s{background:#fff;border:1.5px solid #1b2b22;color:#1b2b22}
@@ -4681,11 +4681,11 @@ function prompt(html){var o=ST.o,s=ST.step,L=[];
   se.avoid+'과 증명사진처럼 정면에 선 자세는 피해 줘.',
   '하단에 "'+today()+'"로 작게 넣고, 세로(2:3)로 질문 없이 바로 만들어 줘.',
   '',
-  (html?'<span class="b">지금의 나를 가장 빛나게 할 '+esc(se.n)+' 풍경은?:</span> ':'지금의 나를 가장 빛나게 할 '+se.n+' 풍경은?: ')+(o.scene.trim()?w(o.scene.trim()):(html?'<span class="ph">(비워 두면 AI가 골라요) 예) '+esc(se.ex.split(' / ').slice(0,3).join(' / '))+'</span>':''))]}
+  (html?'<span class="b">지금의 나를 가장 빛나게 할 '+esc(se.n)+' 풍경은?:</span> ':'지금의 나를 가장 빛나게 할 '+se.n+' 풍경은?: ')+(o.scene.trim()?w(o.scene.trim()):(html?'<span class="stph">(비워 두면 AI가 골라요) 예) '+esc(se.ex.split(' / ').slice(0,3).join(' / '))+'</span>':''))]}
  if(s===2){var d=o.fdIn.trim()||(o.fd>-1?FD[o.fd]:''),pl=o.fpIn.trim()||(o.fp>-1?FP[o.fp]:''),yr=new Date().getFullYear()+10;
   L=['첨부한 내 사진 속 얼굴로, 10년 후 꿈을 이룬 나의 모습을 상상한 사진 한 장을 만들어 줘.','',
   '[10년 후의 나]',
-  '- 꿈을 이룬 장면: '+(d?w(d):(html?'<span class="ph">(왼쪽에서 고르거나 직접 쓰세요)</span>':'(내가 꿈꾸는 10년 후 모습)')),
+  '- 꿈을 이룬 장면: '+(d?w(d):(html?'<span class="stph">(왼쪽에서 고르거나 직접 쓰세요)</span>':'(내가 꿈꾸는 10년 후 모습)')),
   '- 장소·배경: '+(pl?w(pl):'그 장면에 가장 잘 어울리는 장소를 네가 골라 줘'),
   '- 시간·분위기: '+w(FM[o.fm]==='AI가 어울리게'?'그 장면이 가장 빛나는 시간(맑은 낮·노을·야경 중)을 네가 골라 줘':FM[o.fm]),'',
   '[이렇게 만들어 줘]',
@@ -4697,11 +4697,11 @@ function prompt(html){var o=ST.o,s=ST.step,L=[];
  return L.join('\n')}
 function chips(arr,key,multi){var o=ST.o;return '<div class="st-chips">'+arr.map(function(x,i){var on=multi?!!o[key][i]:o[key]===i;return '<button type="button" data-stc="'+key+'" data-i="'+i+'"'+(on?' class="on"':'')+'>'+esc(x)+'</button>'}).join('')+'</div>'}
 function left(){var o=ST.o,s=ST.step;
- if(s===0)return '<div class="st-q"><em>1</em>옷</div>'+chips(CLOTH,'cloth')+'<div class="st-q"><em>2</em>배경색</div>'+chips(BG,'bg')+'<div class="st-q"><em>3</em>표정</div>'+chips(FACE,'face');
- if(s===1)return '<div class="st-q"><em>1</em>계절</div>'+chips(SEASON.map(function(x){return x.n}),'season')+'<div class="st-q"><em>2</em>지금의 나를 가장 빛나게 할 풍경 <small>비워 두면 AI가 골라요</small></div><div class="st-chips">'+SEASON[o.season].ex.split(' / ').map(function(x){return '<button type="button" data-stscene="'+esc(x)+'"'+(o.scene.trim()===x?' class="on"':'')+'>'+esc(x)+'</button>'}).join('')+'</div><input class="st-in" data-sti="scene" value="'+esc(o.scene)+'" placeholder="직접 쓰기 (예: 우리 동네 단골 카페 창가)">';
- return '<div class="st-q"><em>1</em>10년 후 꿈을 이룬 나는? <small>하나 고르거나 직접 쓰기</small></div>'+chips(FD,'fd')+'<input class="st-in" data-sti="fdIn" value="'+esc(o.fdIn)+'" placeholder="직접 쓰기 (예: 우리 센터 프로그램이 전국 우수사례로 뽑혀 발표하는 모습)">'+
- '<div class="st-q"><em>2</em>어디에서? <small>비워 두면 AI가 골라요</small></div>'+chips(FP,'fp')+'<input class="st-in" data-sti="fpIn" value="'+esc(o.fpIn)+'" placeholder="직접 쓰기 (예: 고향 바닷가 마을)">'+
- '<div class="st-q"><em>3</em>시간·분위기</div>'+chips(FM,'fm')}
+ if(s===0)return '<div class="st-q q1"><em>1</em>옷</div>'+chips(CLOTH,'cloth')+'<div class="st-q q2"><em>2</em>배경색</div>'+chips(BG,'bg')+'<div class="st-q q3"><em>3</em>표정</div>'+chips(FACE,'face');
+ if(s===1)return '<div class="st-q q1"><em>1</em>계절</div>'+chips(SEASON.map(function(x){return x.n}),'season')+'<div class="st-q q2"><em>2</em>지금의 나를 가장 빛나게 할 풍경 <small>비워 두면 AI가 골라요</small></div><div class="st-chips">'+SEASON[o.season].ex.split(' / ').map(function(x){return '<button type="button" data-stscene="'+esc(x)+'"'+(o.scene.trim()===x?' class="on"':'')+'>'+esc(x)+'</button>'}).join('')+'</div><input class="st-in" data-sti="scene" value="'+esc(o.scene)+'" placeholder="직접 쓰기 (예: 우리 동네 단골 카페 창가)">';
+ return '<div class="st-q q1"><em>1</em>10년 후 꿈을 이룬 나는? <small>하나 고르거나 직접 쓰기</small></div>'+chips(FD,'fd')+'<input class="st-in" data-sti="fdIn" value="'+esc(o.fdIn)+'" placeholder="직접 쓰기 (예: 우리 센터 프로그램이 전국 우수사례로 뽑혀 발표하는 모습)">'+
+ '<div class="st-q q2"><em>2</em>어디에서? <small>비워 두면 AI가 골라요</small></div>'+chips(FP,'fp')+'<input class="st-in" data-sti="fpIn" value="'+esc(o.fpIn)+'" placeholder="직접 쓰기 (예: 고향 바닷가 마을)">'+
+ '<div class="st-q q3"><em>3</em>시간·분위기</div>'+chips(FM,'fm')}
 var INFO=[['내 얼굴이 잘 나온 셀카 1장','없어요 (왼쪽에서 고르기)','직원 소개·프로필·명함 사진으로 쓸 수 있어요'],
  ['1단계에서 만든 증명사진','지금의 나를 가장 빛나게 할 풍경','단풍만이 아니라 야경·노을·바다·설경도 좋아요 · 옷이 어색하면 "계절에 맞는 옷으로 다시"'],
  ['1단계에서 만든 증명사진','10년 후 꿈 · 장소 · 분위기','어색하면 "표정을 더 자연스럽게", "나이를 조금 더 젊게"처럼 한 줄만 보내요']];
@@ -4711,7 +4711,7 @@ function body(){var s=ST.step;
  if(s===3)return head+card4();
  var I=INFO[s];
  return head+'<div class="st-info"><span><b>사진 첨부</b>'+esc(I[0])+'</span><span><b>채울 빈칸</b>'+esc(I[1])+'</span><span><b>도움말</b>'+esc(I[2])+'</span></div>'+
- '<div class="st-grid"><div class="st-box" id="st-left">'+left()+'</div><div class="st-box"><p class="st-flow">① 사진 넣기 → ② 프롬프트 붙여넣기 → ③ 파란 글씨 확인 → ④ 보내기</p>'+
+ '<div class="st-grid"><div class="st-box" id="st-left">'+left()+'</div><div class="st-box"><p class="st-flow">① 사진 넣기 → ② 프롬프트 붙여넣기 → ③ 초록 글씨 확인 → ④ 보내기</p>'+
  '<div class="st-acts sttop"><button type="button" class="p" data-sto="gpt">ChatGPT 열기</button><button type="button" class="s" data-sto="gem">제미나이 열기 (복사)</button><button type="button" class="s" data-sto="cp">복사만</button>'+'</div><div class="st-pv" id="st-pv">'+prompt(true)+'</div>'+
  '<ul class="st-help"><li>ChatGPT는 프롬프트가 자동으로 들어가요. 사진만 올리면 돼요. 제미나이는 사진을 넣고 붙여넣기(길게 누르기 → 붙여넣기) 해요.</li><li>얼굴 사진이 걱정되면 "AI 맞춤 설정 가이드"의 임시 채팅·학습 끄기를 먼저 확인해요.</li><li>무료 계정은 하루 그림 수가 적어요. 안 나오면 다른 앱이나 내일 다시 해요.</li></ul></div></div>'}
 function copy(t){try{navigator.clipboard.writeText(t)}catch(e){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(x){}a.remove()}}
@@ -5689,6 +5689,21 @@ window.FAMPROMPT={render:render};
 })();
 </script>
 
+<style id="fam-st-color">
+#v-studio .st-steps button{background:#FFFBEA!important;border-color:#F1E2A6!important;color:#5A4A12!important}
+#v-studio .st-steps button i{background:#C9A63A!important}
+#v-studio .st-steps button.on{background:#FFEFB3!important;border-color:#D9A400!important;color:#4A3A00!important}
+#v-studio .st-steps button.on i{background:#B88A00!important}
+#v-studio .st-flow{color:#4A3A00!important}
+#v-studio .st-pv .u,#v-studio .st-pv .b{color:#1F6F5A!important}
+#v-studio #st-left .st-q.q1 em{background:#E3F1EA!important;color:#1F6F5A!important}
+#v-studio #st-left .st-q.q2 em{background:#FDEBDC!important;color:#B4561C!important}
+#v-studio #st-left .st-q.q3 em{background:#EEE6F8!important;color:#6A48A8!important}
+#v-studio #st-left .st-q.q4 em{background:#FFF1C9!important;color:#8A6A00!important}
+#v-studio #st-left .st-q.q1{color:#1F6F5A}
+#v-studio #st-left .st-q.q2{color:#B4561C}
+#v-studio #st-left .st-q.q3{color:#6A48A8}
+</style>
 <style id="lift-css">.lift-acts{margin:0 0 10px!important;display:flex!important;flex-wrap:wrap;justify-content:flex-end!important}.st-acts.sttop{justify-content:flex-end}.lift-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:0 0 8px}.lift-head>*{margin-top:0!important;margin-bottom:0!important}.lift-head>.lift-acts{margin-left:auto!important;flex:0 1 auto;width:auto!important}.lift-head>:first-child{flex:0 1 auto;width:auto!important;display:block}.lift-head>:first-child small{display:none}.lift-head>h4{display:flex!important;align-items:center;gap:6px}</style>
 <script id="lift-js">
 /* 2026.11.16 AI 열기 버튼을 프롬프트·입력칸 위로 */
