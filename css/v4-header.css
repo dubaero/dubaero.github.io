@@ -34,3 +34,8 @@
   .gh-nav{gap:4px;padding-bottom:8px}
   .gh-nav a:not(.gh-cta){flex:1 1 auto;text-align:center;padding:8px 2px}
 }
+
+/* 2026.11.17 실시간 워드클라우드 탭만 연노랑 버터 색 — 수강생이 바로 찾도록 (다른 탭·레이아웃 그대로) */
+.gh-nav a.gh-wc{background:#FFE07A;color:#17304F;font-weight:700;box-shadow:inset 0 0 0 2px #E0A100}
+.gh-nav a.gh-wc .gh-x{color:#8A5A00}
+.gh-nav a.gh-wc:hover,.gh-nav a.gh-wc[aria-current="page"]{background:#FFD34D;color:#17304F}
