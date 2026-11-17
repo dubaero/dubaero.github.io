@@ -5070,11 +5070,11 @@ function cp(t,m){var ok=function(){T(m||'복사했어요. AI 창에 붙여 넣�
 function gpt(p){var w=window.open('https://chatgpt.com/?q='+encodeURIComponent(p),'_blank');if(w)w.opener=null}
 function gem(p,m){cp(p,m||'프롬프트를 복사했어요. 제미나이 입력창에 붙여 넣으세요.');var w=window.open('https://gemini.google.com/app','_blank');if(w)w.opener=null}
 function rnd(a,not){var c=a.filter(function(x){return x!==not});return c[Math.floor(Math.random()*c.length)]||a[0]}
-function q(s){return document.querySelector('#app '+s)}
+function q(s){return document.querySelector('#fam-prompt-host '+s)}
 var MIC='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>';
 function micBtn(id){return '<button type="button" class="jx-mic" data-mic="'+id+'">'+MIC+'<span>눌러서 말하기</span></button>'}
 var rec=null,recB=null;
-function bindMic(){document.querySelectorAll('#app [data-mic]').forEach(function(b){b.onclick=function(){
+function bindMic(){document.querySelectorAll('#fam-prompt-host [data-mic]').forEach(function(b){b.onclick=function(){
  var SR=window.SpeechRecognition||window.webkitSpeechRecognition,ta=document.getElementById(b.dataset.mic);
  if(!SR){T('이 브라우저는 받아쓰기가 안 돼요. 휴대폰 키보드의 마이크를 써 주세요.');ta.focus();return}
  if(rec&&recB===b){rec.stop();return}if(rec)rec.stop();
@@ -5084,7 +5084,7 @@ function bindMic(){document.querySelectorAll('#app [data-mic]').forEach(function
  rec.onend=function(){b.classList.remove('rec');b.querySelector('span').textContent='눌러서 말하기';rec=null;recB=null};
  try{rec.start()}catch(e){}}})}
 /* 한 화면 맞춤: 남은 높이만큼만 쓰고 페이지는 스크롤되지 않게 */
-function fit(){var el=document.querySelector('#app .jx');if(!el)return;var b=el.querySelector('.jx-body');
+function fit(){var el=document.querySelector('#fam-prompt-host .jx');if(!el)return;var b=el.querySelector('.jx-body');
  if(window.innerWidth<=900){el.classList.remove('fit');b.style.removeProperty('--jxh');return}
  el.classList.add('fit');var top=b.getBoundingClientRect().top+window.scrollY;var h=Math.max(430,window.innerHeight-top-30);el.style.setProperty('--jxh',h+'px')}
 if(!window._jxFit){window._jxFit=1;window.addEventListener('resize',function(){clearTimeout(window._jxFt);window._jxFt=setTimeout(fit,120)})}
