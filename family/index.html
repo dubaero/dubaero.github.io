@@ -663,8 +663,8 @@ body{line-height:1.55}
 .note{color:#3A3A34}
 .s{color:var(--muted)}
 .sugc{background:#fff}.sugc.on{background:var(--warm)}
-@media (min-width:761px){#v-form .pv{position:sticky;top:12px;max-height:calc(100vh - 24px);display:flex;flex-direction:column;overflow:hidden}#v-form .pv .doc{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain}}
-#v-form .pv,#v-form .in{overflow-anchor:none}
+@media (min-width:761px){#v-form .pv{position:static!important}}
+html:has(#v-form:not([hidden])),body:has(#v-form:not([hidden])),#v-form,#v-form *{overflow-anchor:none}
 #f-ex{display:none!important}
 
 </style>
