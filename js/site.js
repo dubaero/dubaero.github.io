@@ -9,47 +9,104 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
 });
 ;
 (function(){
+  /* 2026.11.18 실시간 워드클라우드 — 수강생이 보낸 단어를 강사 화면에 모음 (가입 없는 무료 중계 ntfy.sh, 하루 단위 방, 12시간 뒤 자동 삭제)
+     수강생: 단어를 고르고 [보내기] → 한 번에 전송 / 강사(강사 기기 또는 주소 끝 ?host=1): 모두의 단어가 실시간으로 모임 */
   if(!document.getElementById('wc-cloud'))return;
-  var KEY='wc-want-v1', ex={'보고서':3,'카드뉴스':3,'공문서':2,'엑셀 정리':2,'회의록':1,'인포그래픽':1,'상담 기록':1};
+  var EX={'보고서':3,'카드뉴스':3,'공문서':2,'엑셀 정리':2,'회의록':1,'인포그래픽':1,'상담 기록':1};
   var colors=['#1F6FB2','#E2683C','#14A07A','#8B5CF6','#E0A100','#D6457A','#0E9AA7'];
-  var mine={};
-  try{mine=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){mine={};}
-  var cloud=document.getElementById('wc-cloud');
+  var q;try{q=new URLSearchParams(location.search);}catch(e){q={get:function(){return null;}};}
+  function day(){return new Date(Date.now()+9*3600e3).toISOString().slice(0,10).replace(/-/g,'');}
+  var room=String(q.get('room')||'').replace(/[^a-zA-Z0-9_-]/g,'').slice(0,20);
+  var TOPIC='dubaero-wc-r8k2q-'+day()+(room?'-'+room:''),BASE='https://ntfy.sh/'+TOPIC;
+  var host=false;try{host=localStorage.getItem('dubaero_owner')==='1';}catch(e){}
+  if(q.get('host')==='1')host=true;if(q.get('host')==='0')host=false;
+  var cloud=document.getElementById('wc-cloud'),note=document.querySelector('.wc-note');
+  var form=document.getElementById('wc-form'),inp=document.getElementById('wc-input');
+  var st=document.createElement('style');
+  st.textContent='.wc-send{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}.wc-send button{min-height:50px;padding:0 24px;border:0;border-radius:10px;background:#17304F;color:#fff;font:inherit;font-size:16.5px;font-weight:700;cursor:pointer}.wc-send button:disabled{background:#9AA6B3;cursor:default}.wc-send span{font-size:15.5px;color:#4A5562}.wc-send span.ok{color:#14794F;font-weight:700}.wc-send span.err{color:#B5553A;font-weight:700}'+
+   '.wc-host{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:12px 16px;border-radius:12px;background:#F4F7FB;font-size:16px;color:#17304F}.wc-host b{font-size:20px}.wc-host i{font-style:normal;font-size:14px;color:#9AA6B3}.wc-host i.on{color:#14794F;font-weight:700}.wc-host button{margin-left:auto;min-height:42px;padding:0 16px;border:1px solid #C9D3DD;border-radius:9px;background:#fff;color:#17304F;font:inherit;font-size:15px;font-weight:500;cursor:pointer}';
+  document.head.appendChild(st);
+  function clean(w){return String(w||'').trim().replace(/\s+/g,' ').slice(0,12);}
+  var sel=[],mineKey='wc-sent-'+TOPIC,mine={},all={},people=0,seen={};
+  try{mine=JSON.parse(localStorage.getItem(mineKey)||'{}')||{};}catch(e){mine={};}
+  /* 보내기 줄 */
+  var bar=document.createElement('div');bar.className='wc-send';
+  bar.innerHTML='<button type="button" id="wc-send">보내기</button><span id="wc-msg">단어를 여러 개 골라도 돼요. 다 고르면 [보내기]를 눌러 주세요.</span>';
+  cloud.parentNode.insertBefore(bar,cloud);
+  var sendBtn=bar.querySelector('button'),msg=bar.querySelector('span');
+  function say(t,c){msg.textContent=t;msg.className=c||'';}
+  /* 강사 취합 줄 */
+  var hb=null;
+  if(host){hb=document.createElement('div');hb.className='wc-host';cloud.parentNode.insertBefore(hb,cloud);}
+  function hostBar(on){if(!hb)return;var n=Object.keys(all).reduce(function(s,k){return s+all[k];},0);
+    hb.innerHTML='강사 취합 화면 · 참여 <b>'+people+'</b>명 · 단어 <b>'+n+'</b>개 <i class="'+(on?'on':'')+'">'+(on?'● 실시간 연결됨':'연결 중…')+'</i><button type="button" id="wc-copy">결과 복사</button>';
+    hb.querySelector('button').onclick=copyAll;}
+  var live=false;
+  function draw(c,showEx){
+    cloud.textContent='';var list=Object.keys(c).map(function(w){return [w,c[w],false];});
+    if(showEx)Object.keys(EX).forEach(function(w){if(!c[w])list.push([w,EX[w],true]);});
+    var max=Math.max.apply(null,list.map(function(a){return a[1];}).concat([1]));
+    list.sort(function(a,b){return b[1]-a[1];});
+    list.forEach(function(a,i){var sp=document.createElement('span');sp.textContent=a[0];
+      sp.style.fontSize=(16+30*(a[1]/max))+'px';sp.style.color=colors[i%colors.length];
+      if(a[2])sp.className='ex';else if(host)sp.title=a[1]+'표';cloud.appendChild(sp);});
+  }
   function render(){
-    cloud.textContent='';
-    var hasMine=Object.keys(mine).length>0;
-    var all=[];
-    Object.keys(mine).forEach(function(w){all.push([w,mine[w],false]);});
-    Object.keys(ex).forEach(function(w){if(!mine[w])all.push([w,ex[w],true]);});
-    var max=Math.max.apply(null,all.map(function(a){return a[1];}).concat([1]));
-    all.sort(function(a,b){return b[1]-a[1];});
-    all.forEach(function(a,i){
-      var sp=document.createElement('span');
-      sp.textContent=a[0];
-      sp.style.fontSize=(16+28*(a[1]/max))+'px';
-      sp.style.color=colors[i%colors.length];
-      if(a[2])sp.className='ex';
-      cloud.appendChild(sp);
+    if(host){draw(all,!Object.keys(all).length);hostBar(live);}
+    else{var c={};Object.keys(mine).forEach(function(w){c[w]=mine[w];});sel.forEach(function(w){c[w]=(c[w]||0)+1;});draw(c,!Object.keys(c).length);}
+    sendBtn.textContent=sel.length?'보내기 ('+sel.length+'개)':'보내기';
+  }
+  function toggle(w,b){w=clean(w);if(!w)return;var i=sel.indexOf(w);
+    if(i>-1){sel.splice(i,1);if(b)b.classList.remove('picked');}
+    else{if(sel.length>=10){say('한 번에 10개까지 보낼 수 있어요.','err');return;}sel.push(w);if(b)b.classList.add('picked');}
+    say(sel.length?'고른 단어: '+sel.join(', '):'단어를 여러 개 골라도 돼요. 다 고르면 [보내기]를 눌러 주세요.');render();}
+  document.querySelectorAll('#wc-chips button[data-w]').forEach(function(b){b.addEventListener('click',function(){toggle(b.getAttribute('data-w'),b);});});
+  var fb=form.querySelector('button');if(fb)fb.textContent='추가';
+  var etc=document.getElementById('wc-etc');if(etc)etc.addEventListener('click',function(){form.hidden=false;inp.focus();});
+  form.addEventListener('submit',function(e){e.preventDefault();toggle(inp.value,null);inp.value='';});
+  function send(tries){
+    var words=sel.slice();if(!words.length){say('먼저 단어를 골라 주세요.','err');return;}
+    sendBtn.disabled=true;say(tries?'사람이 많아 잠시 후 다시 보내는 중이에요… ('+tries+'/6)':'보내는 중…');
+    fetch(BASE,{method:'POST',body:JSON.stringify({w:words})}).then(function(r){
+      if(!r.ok)throw r.status;
+      words.forEach(function(w){mine[w]=(mine[w]||0)+1;});try{localStorage.setItem(mineKey,JSON.stringify(mine));}catch(e){}
+      sel=[];document.querySelectorAll('#wc-chips button.picked').forEach(function(b){b.classList.remove('picked');});
+      sendBtn.disabled=false;say('보냈어요! 강사님 화면에 함께 모입니다.','ok');render();
+    }).catch(function(){
+      if(tries<6){setTimeout(function(){send(tries+1);},5000+Math.random()*10000);}
+      else{sendBtn.disabled=false;say('보내지 못했어요. 잠시 후 [보내기]를 다시 눌러 주세요.','err');}
     });
   }
-  function add(w){
-    w=String(w||'').trim().replace(/\s+/g,' ');
-    if(!w)return;
-    mine[w]=(mine[w]||0)+1;
-    try{localStorage.setItem(KEY,JSON.stringify(mine));}catch(err){}
-    render();
+  sendBtn.addEventListener('click',function(){send(0);});
+  function take(j){
+    if(!j||j.event!=='message'||seen[j.id])return;seen[j.id]=1;
+    var m;try{m=JSON.parse(j.message);}catch(e){m={w:[j.message]};}
+    var ws=(m&&m.w||[]).map(clean).filter(Boolean).slice(0,10);if(!ws.length)return;
+    people++;ws.forEach(function(w){all[w]=(all[w]||0)+1;});render();
   }
-  var form=document.getElementById('wc-form'), inp=document.getElementById('wc-input');
-  document.querySelectorAll('#wc-chips button[data-w]').forEach(function(b){
-    b.addEventListener('click',function(){add(b.getAttribute('data-w'));b.classList.add('picked');});
-  });
-  document.getElementById('wc-etc').addEventListener('click',function(){form.hidden=false;inp.focus();});
-  form.addEventListener('submit',function(e){e.preventDefault();add(inp.value);inp.value='';});
+  function copyAll(){
+    var keys=Object.keys(all).sort(function(a,b){return all[b]-all[a];});
+    var t='실시간 워드클라우드 결과 ('+day().replace(/(\d{4})(\d\d)(\d\d)/,'$1.$2.$3')+(room?' · '+room:'')+')\n참여 '+people+'명\n\n'+keys.map(function(k,i){return (i+1)+'. '+k+' — '+all[k]+'표';}).join('\n');
+    var done=function(){var b=document.getElementById('wc-copy');if(b)b.textContent='복사했어요';setTimeout(function(){hostBar(live);},1600);};
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(done,function(){prompt('아래 결과를 복사해 주세요',t);});else prompt('아래 결과를 복사해 주세요',t);
+  }
+  if(host){
+    if(window.EventSource){
+      var es=new EventSource(BASE+'/sse?since=all');
+      es.addEventListener('open',function(){live=true;hostBar(true);});
+      es.addEventListener('message',function(e){try{take(JSON.parse(e.data));}catch(err){}});
+      es.onerror=function(){live=false;hostBar(false);};
+    }else{
+      var poll=function(){fetch(BASE+'/json?poll=1&since=all').then(function(r){return r.text();}).then(function(t){live=true;t.split('\n').forEach(function(l){if(l)try{take(JSON.parse(l));}catch(e){}});hostBar(true);}).catch(function(){live=false;hostBar(false);});};
+      poll();setInterval(poll,15000);
+    }
+  }
+  if(note)note.textContent=host?'강사님 화면입니다. 오늘 수강생이 보낸 단어가 모두 모이고, 12시간 뒤 자동으로 지워집니다. 단어에 마우스를 올리면 표 수가 보여요.':'고른 단어를 [보내기]로 보내면 강사님 화면에 모두의 단어가 모입니다. 연한 단어는 예시입니다.';
   render();
   var sec=document.getElementById('wordcloud');
-  function openWc(e){ if(e)e.preventDefault(); sec.hidden=false; sec.scrollIntoView({behavior:'smooth',block:'start'}); }
+  function openWc(e){if(e)e.preventDefault();sec.hidden=false;sec.scrollIntoView({behavior:'smooth',block:'start'});}
   document.getElementById('wc-open').addEventListener('click',openWc);
-  if(location.hash==='#wordcloud'){ sec.hidden=false; setTimeout(function(){sec.scrollIntoView({block:'start'});},50); }
+  if(location.hash==='#wordcloud'){sec.hidden=false;setTimeout(function(){sec.scrollIntoView({block:'start'});},50);}
 })();
 ;
 (function(){
