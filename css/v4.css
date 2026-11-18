@@ -476,11 +476,11 @@ a.lg{text-decoration:none;text-align:center}
   .lrow:not(.rvrow) .ls{justify-self:start}
   .lrow:not(.rvrow) .lg{justify-self:end}
 }
-/* 2026.11.18 홈 히어로: 통계 3칸 삭제, 왼쪽 글을 배너와 줄 맞춤 (위=사진 위, 버튼=사진 아래, 회색 줄=배너 점 줄) */
+/* 2026.11.18 홈 히어로: 통계 3칸·회색 줄 삭제. 배너는 수정 전 크기 그대로, 왼쪽 글은 배너 높이에 맞춰 간격을 넓혀 배치 (맨 윗줄=사진 위, 버튼 아래=배너 점 줄) */
 @media (min-width:901px){
   .hero4{padding-top:107px}
   .hero4 .w4{align-items:stretch}
-  .hero4 .bn{align-self:start}
-  .hero4 .h4-txt{gap:17px}
-  .hero4 .h4-txt::after{content:"";display:block;margin-top:auto;border-top:1px solid var(--line)}
+  .hero4 .bn{align-self:start;margin-top:0!important}
+  .hero4 .bn-stage{aspect-ratio:489/318;height:auto!important;min-height:0}
+  .hero4 .h4-txt{gap:0;justify-content:space-between}
 }
