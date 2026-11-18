@@ -25,7 +25,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   var form=document.getElementById('wc-form'),inp=document.getElementById('wc-input');
   var st=document.createElement('style');
   st.textContent='.wc-send{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}.wc-send button{min-height:50px;padding:0 24px;border:0;border-radius:10px;background:#17304F;color:#fff;font:inherit;font-size:16.5px;font-weight:700;cursor:pointer}.wc-send button:disabled{background:#9AA6B3;cursor:default}.wc-send span{font-size:15.5px;color:#4A5562}.wc-send span.ok{color:#14794F;font-weight:700}.wc-send span.err{color:#B5553A;font-weight:700}'+
-   '.wc-host{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:12px 16px;border-radius:12px;background:#F4F7FB;font-size:16px;color:#17304F}.wc-host b{font-size:20px}.wc-host i{font-style:normal;font-size:14px;color:#9AA6B3}.wc-host i.on{color:#14794F;font-weight:700}.wc-host button{margin-left:auto;min-height:42px;padding:0 16px;border:1px solid #C9D3DD;border-radius:9px;background:#fff;color:#17304F;font:inherit;font-size:15px;font-weight:500;cursor:pointer}';
+   '.wc-host{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:12px 16px;border-radius:12px;background:#F4F7FB;font-size:16px;color:#17304F}.wc-host b{font-size:20px}.wc-host i{font-style:normal;font-size:14px;color:#9AA6B3}.wc-host i.on{color:#14794F;font-weight:700}.wc-host .wc-hbtn{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}.wc-host button.arm{background:#B5553A;border-color:#B5553A;color:#fff}.wc-host button{min-height:42px;padding:0 16px;border:1px solid #C9D3DD;border-radius:9px;background:#fff;color:#17304F;font:inherit;font-size:15px;font-weight:500;cursor:pointer}';
   document.head.appendChild(st);
   function clean(w){return String(w||'').trim().replace(/\s+/g,' ').slice(0,12);}
   var sel=[],mineKey='wc-sent-'+TOPIC,mine={},all={},people=0,seen={};
@@ -40,8 +40,9 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   var hb=null;
   if(host){hb=document.createElement('div');hb.className='wc-host';cloud.parentNode.insertBefore(hb,cloud);}
   function hostBar(on){if(!hb)return;var n=Object.keys(all).reduce(function(s,k){return s+all[k];},0);
-    hb.innerHTML='강사 취합 화면 · 참여 <b>'+people+'</b>명 · 단어 <b>'+n+'</b>개 <i class="'+(on?'on':'')+'">'+(on?'● 실시간 연결됨':'연결 중…')+'</i><button type="button" id="wc-copy">결과 복사</button>';
-    hb.querySelector('button').onclick=copyAll;}
+    hb.innerHTML='강사 취합 화면 · 참여 <b>'+people+'</b>명 · 단어 <b>'+n+'</b>개 <i class="'+(on?'on':'')+'">'+(on?'● 실시간 연결됨':'연결 중…')+'</i><span class="wc-hbtn"><button type="button" id="wc-re">새로고침</button><button type="button" id="wc-clr"'+(clrArm?' class="arm"':'')+'>'+(clrArm?'정말 지울까요? 한 번 더':'지우기')+'</button><button type="button" id="wc-copy">결과 복사</button></span>';
+    hb.querySelector('#wc-copy').onclick=copyAll;hb.querySelector('#wc-re').onclick=reconnect;hb.querySelector('#wc-clr').onclick=clearAll;}
+  var clrArm=false,clrT=null;
   var live=false;
   function draw(c,showEx){
     cloud.textContent='';var list=Object.keys(c).map(function(w){return [w,c[w],false];});
@@ -83,6 +84,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   function take(j){
     if(!j||j.event!=='message'||seen[j.id])return;seen[j.id]=1;
     var m;try{m=JSON.parse(j.message);}catch(e){m={w:[j.message]};}
+    if(m&&m.reset){all={};people=0;render();return;}
     var ws=(m&&m.w||[]).map(clean).filter(Boolean).slice(0,10);if(!ws.length)return;
     people++;ws.forEach(function(w){all[w]=(all[w]||0)+1;});render();
   }
@@ -92,12 +94,25 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     var done=function(){var b=document.getElementById('wc-copy');if(b)b.textContent='복사했어요';setTimeout(function(){hostBar(live);},1600);};
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(done,function(){prompt('아래 결과를 복사해 주세요',t);});else prompt('아래 결과를 복사해 주세요',t);
   }
+  /* 새로고침: 연결을 다시 열고 오늘 보낸 단어를 처음부터 다시 모음 / 지우기: '여기부터 새로' 표시를 보내 그 전 단어는 강사 화면에서 빼기 */
+  var es=null;
+  function connect(){
+    if(es){try{es.close();}catch(e){}}
+    all={};people=0;seen={};live=false;render();
+    es=new EventSource(BASE+'/sse?since=all');
+    es.addEventListener('open',function(){live=true;hostBar(true);});
+    es.addEventListener('message',function(e){try{take(JSON.parse(e.data));}catch(err){}});
+    es.onerror=function(){live=false;hostBar(false);};
+  }
+  function reconnect(){if(window.EventSource)connect();else location.reload();}
+  function clearAll(){
+    if(!clrArm){clrArm=true;hostBar(live);clearTimeout(clrT);clrT=setTimeout(function(){clrArm=false;hostBar(live);},4000);return;}
+    clrArm=false;clearTimeout(clrT);
+    fetch(BASE,{method:'POST',body:JSON.stringify({reset:1})}).then(function(r){if(!r.ok)throw 0;all={};people=0;render();}).catch(function(){alert('지우지 못했어요. 잠시 후 다시 눌러 주세요.');});
+  }
   if(host){
     if(window.EventSource){
-      var es=new EventSource(BASE+'/sse?since=all');
-      es.addEventListener('open',function(){live=true;hostBar(true);});
-      es.addEventListener('message',function(e){try{take(JSON.parse(e.data));}catch(err){}});
-      es.onerror=function(){live=false;hostBar(false);};
+      connect();
     }else{
       var poll=function(){fetch(BASE+'/json?poll=1&since=all').then(function(r){return r.text();}).then(function(t){live=true;t.split('\n').forEach(function(l){if(l)try{take(JSON.parse(l));}catch(e){}});hostBar(true);}).catch(function(){live=false;hostBar(false);});};
       poll();setInterval(poll,15000);
