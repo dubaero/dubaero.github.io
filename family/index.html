@@ -1040,9 +1040,11 @@ return {html:html,bind:bind};})();
           <span class="sw-arrow">›</span>
           <span class="sw-step" data-step="2"><b>2</b> 전할 대상</span>
           <span class="sw-arrow">›</span>
-          <span class="sw-step" data-step="4"><b>3</b> 노래 제목</span>
+          <span class="sw-step" data-step="3"><b>3</b> 노래 주제</span>
           <span class="sw-arrow">›</span>
-          <span class="sw-step" data-step="5"><b>4</b> 스타일·보컬 & 복사</span>
+          <span class="sw-step" data-step="4"><b>4</b> 노래 제목</span>
+          <span class="sw-arrow">›</span>
+          <span class="sw-step" data-step="5"><b>5</b> 스타일·보컬</span>
         </div>
       </div>
 
@@ -1080,9 +1082,23 @@ return {html:html,bind:bind};})();
         </div>
       </div>
 
+      <!-- 스텝 3: 어떤 노래를 만들까요? -->
+      <div class="sw-pane" id="sw-p3">
+        <div class="sw-q">3. 어떤 노래를 만들까요?</div>
+        <div class="sw-desc">고른 대상에 맞는 주제·장르예요. 번호를 클릭하면 다음 질문으로 넘어갑니다.</div>
+        <div class="sw-grid" id="sw-grid-theme"></div>
+        <div class="sw-custom-row">
+          <input type="text" class="f1" id="sw-theme-custom" placeholder="직접 입력 (예: 다문화 엄마들의 우정 · 밝은 팝)">
+          <button type="button" class="btn mini" id="sw-theme-custom-btn">직접 입력 적용 ›</button>
+        </div>
+        <div class="sw-nav-acts">
+          <button type="button" class="btn mini sw-prev" data-to="2">‹ 이전</button>
+        </div>
+      </div>
+
       <!-- 스텝 4: 노래 제목을 골라 주세요 -->
       <div class="sw-pane" id="sw-p4">
-        <div class="sw-q">3. 노래 제목을 골라 주세요</div>
+        <div class="sw-q">4. 노래 제목을 골라 주세요</div>
         <div class="sw-desc">마음에 드는 제목 번호를 클릭하면 가사 확인 단계로 넘어갑니다.</div>
         <div class="sw-grid" id="sw-grid-title">
           <button type="button" class="sw-opt" data-val="우리 함께 걸어요"><span class="sw-num">1</span><b>우리 함께 걸어요</b><small>서로의 손을 잡고 따뜻하게 동행하는 노래</small></button>
@@ -1096,14 +1112,14 @@ return {html:html,bind:bind};})();
           <button type="button" class="btn mini" id="sw-title-custom-btn">제목 적용하기 ›</button>
         </div>
         <div class="sw-nav-acts">
-          <button type="button" class="btn mini sw-prev" data-to="2">‹ 이전</button>
+          <button type="button" class="btn mini sw-prev" data-to="3">‹ 이전</button>
         </div>
       </div>
 
       <!-- 스텝 5: 노래 가사 확인 및 최종 완성 (원스톱) -->
       <div class="sw-pane" id="sw-p5">
-        <div class="sw-q">4. 스타일·보컬 고르고 완성 프롬프트 복사</div>
-        <div class="sw-desc">선택하신 대상과 주제에 맞춰 따뜻한 가사가 완성되었어요. 가사를 확인하고 바로 복사해 제미나이에서 음악을 완성하세요!</div>
+        <div class="sw-q">5. 스타일·보컬 고르고 완성 프롬프트 복사</div>
+        <div class="sw-desc">스타일과 보컬을 고르고 완성 프롬프트를 복사해 제미나이에 붙여 넣으세요. 제미나이가 가사와 앨범 표지를 만들어 줘요.</div>
         
         <div class="sw-chips" id="sw-chips" style="margin:8px 0 12px"></div>
         <div class="sw-sv">
@@ -1111,7 +1127,7 @@ return {html:html,bind:bind};})();
           <span class="sw-sv-h">보컬</span><div class="sw-grid sw-grid-sm" id="sw-grid-voice"><button type="button" class="sw-opt on" data-val="여성 솔로"><b>여성 솔로</b></button><button type="button" class="sw-opt" data-val="남성 솔로"><b>남성 솔로</b></button><button type="button" class="sw-opt" data-val="남녀 듀엣"><b>남녀 듀엣</b></button><button type="button" class="sw-opt" data-val="아이 목소리"><b>아이 목소리</b></button><button type="button" class="sw-opt" data-val="합창"><b>합창</b></button></div>
         </div>
 
-        <div class="sw-lyrics-card">
+        <div class="sw-lyrics-card" hidden style="display:none">
           <div class="sw-lyrics-head">
             <span class="sw-lyrics-title" id="sw-lyr-title">🎵 오늘도 수고했어, 내 동료야</span>
             <span class="sw-lyrics-style" id="sw-lyr-target">가족센터 종사자 (동료) 힐링</span>
@@ -1134,7 +1150,7 @@ return {html:html,bind:bind};})();
 
         <!-- 가사 바로 밑에 배치된 원스톱 복사 및 제미나이 직행 버튼 -->
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px">
-          <button type="button" class="btn fill large" id="sw-act-cp" style="font-size:14.2px;padding:11px 22px">📋 가사 포함 완성 프롬프트 복사하기</button>
+          <button type="button" class="btn fill large" id="sw-act-cp" style="font-size:14.2px;padding:11px 22px">📋 완성 프롬프트 복사하기</button>
           <button type="button" class="btn large" id="sw-act-gem" style="font-size:13.7px;padding:11px 20px">✨ 제미나이로 바로 열기</button>
           <button type="button" class="btn mini" id="sw-act-retry">↺ 가사가 바뀌었을 때 다시 요청 문장 복사</button><button type="button" class="btn mini" id="sw-act-cover">↺ 표지 글자가 틀렸을 때 다시 요청 문장 복사</button>
           <button type="button" class="btn mini sw-prev" data-to="4">‹ 제목 다시 고르기</button>
@@ -1148,15 +1164,15 @@ return {html:html,bind:bind};})();
       <div>
         <h4 class="sg-h">따라 하기 3단계 (초간단!)</h4>
         <ol class="song-steps">
-          <li>위에서 <b>질문 3개를 클릭하고 가사를 확인</b>한 뒤 <b>[가사 포함 완성 프롬프트 복사하기]</b>를 눌러요.</li>
-          <li><b>[제미나이로 바로 열기]</b>를 눌러 제미나이 대화창(또는 입력창 [+] → 음악 만들기)에 붙여 넣어요.</li>
-          <li>제미나이가 가사와 딱 맞는 <b>따뜻한 앨범 표지 그림</b>과 <b>음악</b>을 한 번에 바로 만들어 줘요! (코드블록을 다시 복사할 필요 없어요)</li>
+          <li>위에서 <b>질문 4개를 클릭</b>하고 스타일·보컬을 고른 뒤 <b>[완성 프롬프트 복사하기]</b>를 눌러요.</li>
+          <li><b>[제미나이로 바로 열기]</b>를 눌러 제미나이 새 대화에 붙여 넣으면 가사와 앨범 표지가 나와요.</li>
+          <li>가사 코드블록을 복사해 제미나이 <b>[+] → 음악 만들기</b>에 붙여 넣으면 노래가 만들어져요.</li>
         </ol>
         <h4 class="sg-h">음악 설정은 이렇게</h4>
         <table class="kv song-kv">
           <tr><th>스타일·보컬</th><td>위에서 고른 <b>노래 스타일과 보컬</b>이 프롬프트에 그대로 들어가요. 제미나이에서 장르를 따로 고르지 않아도 돼요.</td></tr>
           <tr><th>길이</th><td>제미나이 화면에서 꼭 <b>전체(풀 버전)</b>를 고르세요. 짧은 버전은 가사가 다 들어가지 않아 가사가 바뀔 수 있어요.</td></tr>
-          <tr><th>가사 고정</th><td>프롬프트 맨 위 <b>[반드시 지킬 규칙]</b>이 가사를 한 글자도 바꾸지 않게 지시해요.</td></tr>
+          
         </table>
         <h4 class="sg-h">이럴 땐 이렇게</h4>
         <table class="kv song-kv">
@@ -3733,8 +3749,8 @@ dwFirst=function(d){_dwFirst1109d(d);var v=dwV(),role='너는 '+dwRoleOf(d)+'.';
  return '<div class="ins">'+row(hl(role),DW_NOTE.role)+row(hl(task),DW_NOTE.first)+row(body.map(esc).join('<br>'))+(form?row('<b>[기본정보 틀]</b> 콜론(:) 뒤를 채워서 보내요<br>'+form.map(esc).join('<br>')):'')+'</div>';};
 
 /* ===== 2026.11.15 노래 가사 고정 프롬프트 (스타일 8 · 보컬 5) ===== */
-var SONG_STYLE={'따뜻한 발라드':'피아노 중심 한국어 발라드, 느린 빠르기, 후렴에서 점점 벅차오르게','어쿠스틱 포크':'어쿠스틱 기타 한 대, 담백하고 편안한 분위기, 중간 빠르기','밝은 팝':'경쾌한 박자의 밝은 한국어 팝, 손뼉 소리, 기분 좋은 분위기','시티팝':'1980년대 시티팝, 부드러운 신시사이저와 베이스, 저녁 드라이브 느낌','트로트':'정겨운 트로트, 신나는 박자와 꺾기, 가족 잔치 분위기','동요풍':'맑고 귀여운 동요 느낌, 실로폰과 피아노, 온 가족이 따라 부르기 쉽게','재즈':'잔잔한 재즈, 피아노와 콘트라베이스, 따뜻한 저녁 식탁 분위기','감동 합창':'피아노로 시작해 현악기와 합창으로 커지는 감동적인 편곡'};
-var SONG_VOICE={'여성 솔로':'부드럽고 따뜻한 여성 보컬','남성 솔로':'낮고 포근한 남성 보컬','남녀 듀엣':'1절은 여성, 2절은 남성, 후렴은 함께 부르는 듀엣','아이 목소리':'맑은 어린이 보컬','합창':'여러 사람이 함께 부르는 합창'};
+var SONG_STYLE={'따뜻한 발라드':'피아노 중심 한국어 발라드, 느린 빠르기, 후렴에서 점점 벅차오르게','잔잔한 피아노':'피아노 한 대로 잔잔하게, 느린 빠르기, 마음이 쉬어 가는 분위기','어쿠스틱 포크':'어쿠스틱 기타 한 대, 담백하고 편안한 분위기, 중간 빠르기','밝은 팝':'경쾌한 박자의 밝은 한국어 팝, 손뼉 소리, 기분 좋은 분위기','시티팝':'1980년대 시티팝, 부드러운 신시사이저와 베이스, 저녁 드라이브 느낌','트로트':'정겨운 트로트, 신나는 박자와 꺾기, 가족 잔치 분위기','동요풍':'맑고 귀여운 동요 느낌, 실로폰과 피아노, 온 가족이 따라 부르기 쉽게','자장가':'포근한 자장가, 오르골과 피아노, 아주 느리고 다정하게','재즈':'잔잔한 재즈, 피아노와 콘트라베이스, 따뜻한 저녁 식탁 분위기','보사노바':'부드러운 보사노바 기타, 산뜻하고 여유로운 분위기','로파이':'편안한 로파이 비트, 따뜻한 건반, 쉬어 가는 카페 분위기','R&B':'부드러운 R&B, 그루브 있는 베이스, 감성적인 분위기','록 밴드':'밝은 록 밴드 사운드, 일렉 기타와 드럼, 다 함께 떼창','응원 행진곡':'힘찬 북과 브라스의 응원 행진곡, 다 함께 박수 치며 부르기','국악 퓨전':'가야금·해금과 현대 악기가 어우러진 국악 퓨전, 정겨운 분위기','뮤지컬':'뮤지컬 넘버처럼 이야기가 있는 구성, 후렴에서 크게 터지게','왈츠':'3박자 왈츠, 피아노와 현악기, 춤추듯 우아하게','캐럴':'종소리와 방울이 있는 따뜻한 겨울 캐럴','감동 합창':'피아노로 시작해 현악기와 합창으로 커지는 감동적인 편곡'};
+var SONG_VOICE={'여성 솔로':'부드럽고 따뜻한 여성 보컬','맑은 여성':'맑고 청아한 여성 보컬','중저음 여성':'차분한 중저음 여성 보컬','남성 솔로':'낮고 포근한 남성 보컬','허스키 남성':'따뜻하고 허스키한 남성 보컬','남녀 듀엣':'1절은 여성, 2절은 남성, 후렴은 함께 부르는 듀엣','엄마와 아이':'엄마와 아이가 함께 부르는 듀엣','아빠와 아이':'아빠와 아이가 함께 부르는 듀엣','아이 목소리':'맑은 어린이 보컬','어린이 합창단':'맑은 어린이 합창단','정겨운 어르신':'정감 있는 어르신 목소리','합창':'여러 사람이 함께 부르는 합창','아카펠라':'악기 없이 목소리로만 화음을 쌓는 아카펠라 그룹'};
 var SONG_RETRY='방금 만든 곡은 가사가 원래와 달라.\n앞에 준 규칙을 다시 지켜서, "가사 시작"부터 "가사 끝"까지 그대로 다시 만들어 줘.\n길이는 전체 버전으로 해 줘.';
 function songTags(t){return String(t||'').replace(/\[\s*1\s*절\s*\]/g,'[Verse 1]').replace(/\[\s*2\s*절\s*\]/g,'[Verse 2]').replace(/\[\s*3\s*절\s*\]/g,'[Verse 3]').replace(/\[\s*후렴\s*\]/g,'[Chorus]').replace(/\[\s*브릿지\s*\]/g,'[Bridge]').trim();}
 function songLock(title,style,voice,who,lyr,credit){
@@ -3744,7 +3760,7 @@ function songLock(title,style,voice,who,lyr,credit){
 var SONG_COVER_RETRY=function(){var m=window.__songMeta||{title:'(곡 제목)',credit:'(작사 정보)'};return '노래는 그대로 두고, 앨범 표지 이미지를 새로 한 장 그려 줘. (이미지 생성)\n- 위쪽에 큰 글자로 "'+m.title+'"\n- 아래쪽에 작은 글자로 "'+m.credit+'"\n- 이 두 줄 말고 다른 글자는 넣지 마. 가사 문장도 글자로 쓰지 마. 두 줄 모두 한 글자도 틀리면 안 돼.\n- 그림: 사진이 아닌 손그림 수채화 일러스트, 부드러운 그림책 풍, 크림·살구·연노랑의 포근한 빛. 가사 속 따뜻한 장면을 그림으로만 표현해.\n- 정사각형 1:1, 글자 뒤 배경은 밝고 단순하게.';};
 
 /* ===== 2026.11.10 나만의 노래 만들기 & 2026.11.11 클릭형 위저드 ===== */
-var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 작사가이자 앨범 표지 디자이너야.\n누구나 쉽고 재미있게 우리만의 노래를 만들도록 도와줘.\n[질문 규칙]\n질문은 총 4개, 한 번에 하나씩만 해.\n답변을 받으면 바로 다음 질문으로 넘어가.\n이미 답한 내용은 다시 묻지 마.\n질문 1. 센터명과 작사자 이름을 입력해 주세요.\n예: 행복가족센터 / 김행복\n질문 2. 누구에게 전할 노래인가요?\n① 센터 이용 가족 ② 부모와 자녀 ③ 부부와 가족 ④ 가족센터 종사자 ⑤ 지역주민 ⑥ 나 자신 ⑦ 기타\n질문 3. 어떤 노래를 만들까요?\n선택한 대상에 맞춰 가족사랑, 부모자녀 관계, 가족 소통, 다양한 가족의 행복, 돌봄, 가족 응원, 종사자 힐링 등 가족사업 주제와 음악 장르를 결합해 선택지 5개와 직접 입력 항목을 제시해.\n질문 4. 노래 제목을 골라 주세요.\n앞의 답변에 맞는 짧고 기억하기 좋은 한국어 제목 5개를 추천해.\n[4번째 답변 후 자동 제작]\n추가 질문 없이 다음 순서로 결과를 보여줘.\n\n1. 확정된 제목\n\n2. 코드블록 하나에 다음 내용을 모두 작성해.\n음악 스타일: 장르, 빠르기, 악기, 보컬 분위기\n제목: 확정된 제목\n[1절]\n[후렴]\n[2절]\n[후렴]\n쉬운 한국어로, 함께 부르기 좋은 반복 후렴을 만들어.\n센터명은 정확히 포함하고, 실제로 제공되지 않은 사업 경험이나 사연은 꾸미지 마.\n3. 앨범 표지 이미지 1장을 실제 생성해.\n\n* 정사각형 1:1, 따뜻하고 귀여운 고품질 그림책 일러스트\n* 크림색, 살구색, 연초록 등의 포근한 색감\n* 노래 제목과 가사에 맞는 장면과 소품\n* 제목은 크게, 아래에는 '센터명 | 작사: 이름'을 정확한 한국어로 표시\n* 본인 사진이 이미 첨부되어 있다면 그 사진을 참고해 얼굴과 헤어스타일의 특징을 살린 사랑스러운 일러스트로 표현\n* 사진이 없다면 사람이나 얼굴 없이 그림책풍으로 제작\n* 다른 사람이나 가족 이용자의 얼굴을 임의로 만들지 마\n* 제목 및 이름 오타를 확인하고 가능한 경우 수정해\n* 실제 이미지 생성 기능이 없으면 솔직하게 알려줘\n\n4. 마지막에는 다음을 안내해.\n\"위의 가사 코드블록을 복사한 뒤 제미나이의 + 버튼 → 음악 만들기를 선택하세요.\n복사한 내용을 붙여넣고 원하는 장르를 선택해 노래를 생성해 보세요.\n원하는 장르가 없다면 맞춤 또는 프롬프트 기반 입력에서 음악 스타일을 그대로 활용하세요.\"\n음악 파일은 직접 만들지 마.\n지금 질문 1부터 시작해.";
+var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 작사가이자 앨범 표지 디자이너야.\n누구나 쉽고 재미있게 우리만의 노래를 만들도록 도와줘.\n[질문 규칙]\n질문은 총 4개, 한 번에 하나씩만 해.\n답변을 받으면 바로 다음 질문으로 넘어가.\n이미 답한 내용은 다시 묻지 마.\n질문 1. 센터명과 작사자 이름을 입력해 주세요.\n예: 행복가족센터 / 김행복\n질문 2. 누구에게 전할 노래인가요?\n① 센터 이용 가족 ② 부모와 자녀 ③ 부부와 가족 ④ 가족센터 종사자 ⑤ 지역주민 ⑥ 나 자신 ⑦ 기타\n질문 3. 어떤 노래를 만들까요?\n선택한 대상에 맞춰 가족사랑, 부모자녀 관계, 가족 소통, 다양한 가족의 행복, 돌봄, 가족 응원, 종사자 힐링 등 가족사업 주제와 음악 장르를 결합해 선택지 5개와 직접 입력 항목을 제시해.\n질문 4. 노래 제목을 골라 주세요.\n앞의 답변에 맞는 짧고 기억하기 좋은 한국어 제목 5개를 추천해.\n[4번째 답변 후 자동 제작]\n추가 질문 없이 다음 순서로 결과를 보여줘.\n\n1. 확정된 제목\n\n2. 코드블록 하나에 다음 내용을 모두 작성해.\n음악 스타일: 장르, 빠르기, 악기, 보컬 분위기\n제목: 확정된 제목\n[1절]\n[후렴]\n[2절]\n[후렴]\n쉬운 한국어로, 함께 부르기 좋은 반복 후렴을 만들어.\n센터명은 정확히 포함하고, 실제로 제공되지 않은 사업 경험이나 사연은 꾸미지 마.\n3. 앨범 표지 이미지 1장을 실제 생성해.\n\n* 정사각형 1:1, 따뜻하고 귀여운 고품질 그림책 일러스트\n* 크림색, 살구색, 연초록 등의 포근한 색감\n* 노래 제목과 가사에 맞는 장면과 소품\n* 제목은 크게, 아래에는 '센터명 | 작사: 이름'을 정확한 한국어로 표시\n* 다른 사람이나 가족 이용자의 얼굴을 임의로 만들지 마\n* 제목 및 이름 오타를 확인하고 가능한 경우 수정해\n* 실제 이미지 생성 기능이 없으면 솔직하게 알려줘\n\n4. 마지막에는 다음을 안내해.\n\"위의 가사 코드블록을 복사한 뒤 제미나이의 + 버튼 → 음악 만들기를 선택하세요.\n복사한 내용을 붙여넣고 원하는 장르를 선택해 노래를 생성해 보세요.\n원하는 장르가 없다면 맞춤 또는 프롬프트 기반 입력에서 음악 스타일을 그대로 활용하세요.\"\n음악 파일은 직접 만들지 마.\n지금 질문 1부터 시작해.";
 
 (function(){
   var SW = {
@@ -3809,20 +3825,45 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     com:['다시 날아오를 시간','포기하지 마','할 수 있어, 우리','당신 덕분에','마음을 담아','새로운 문 앞에서','설레는 첫걸음','꿈은 지금부터']
   };
   function fKey(w){w=w||'';if(/종사자|동료/.test(w))return 'staff';if(/나 자신/.test(w))return 'me';if(/부모|자녀|아이/.test(w))return 'kid';if(/부부/.test(w))return 'couple';if(/주민|이웃/.test(w))return 'town';return 'fam';}
-  function titleList(){var pool=FT[fKey(SW.who)].concat(FT.com),o=[];while(pool.length&&o.length<12)o.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);return o;}
+  function titleList(){var pool=FT[fKey(SW.who)].slice(),o=[];while(pool.length&&o.length<5)o.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);return o;}
   function rebuildTitles(){var g=$('#sw-grid-title');if(!g)return;var L=titleList();g.innerHTML=L.map(function(x,i){return '<button type="button" class="sw-opt'+(x===SW.title?' on':'')+'" data-val="'+esc(x)+'"><span class="sw-num">'+(i+1)+'</span><b>'+esc(x)+'</b><small>'+esc(SW.who||'')+'에게 어울리는 제목</small></button>';}).join('')+'<button type="button" class="sw-opt" id="sw-title-more" style="justify-content:center;align-items:center;border-style:dashed"><b>↻ 다른 제목 더 보기</b><small>누를 때마다 새 제목</small></button>';}
   document.addEventListener('click',function(e){if(e.target.closest('#sw-title-more')){e.stopPropagation();rebuildTitles();}},true);
   setTimeout(rebuildTitles,0);
 
+  var THEMES={staff:['종사자 힐링 · 잔잔한 어쿠스틱','동료 응원 · 밝은 팝','수고한 하루 위로 · 따뜻한 발라드','함께하는 팀워크 · 신나는 트로트','다시 힘내는 출근길 · 시티팝'],
+    kid:['부모자녀 사랑 · 동요풍','함께 크는 우리 · 밝은 팝','칭찬과 응원 · 응원 행진곡','잠들기 전 사랑 고백 · 자장가','가족 놀이 시간 · 어쿠스틱 포크'],
+    couple:['서로에게 고마움 · 따뜻한 발라드','함께 걸어온 시간 · 어쿠스틱 포크','다시 설레는 우리 · 시티팝','가족 소통 · 재즈','우리 가족 응원 · 감동 합창'],
+    town:['이웃과 함께 · 트로트','다양한 가족의 행복 · 밝은 팝','마을 공동체 · 감동 합창','서로 돕는 돌봄 · 어쿠스틱 포크','우리 동네 축제 · 응원 행진곡'],
+    me:['나를 위한 쉼 · 잔잔한 피아노','다시 일어서는 용기 · 따뜻한 발라드','오늘의 나를 칭찬 · 밝은 팝','마음 쉬어 가기 · 로파이','나답게 천천히 · 어쿠스틱 포크'],
+    fam:['가족사랑 · 따뜻한 발라드','가족 소통 · 밝은 팝','다양한 가족의 행복 · 감동 합창','가족 응원 · 트로트','함께하는 돌봄 · 어쿠스틱 포크']};
+  function rebuildThemes(){var g=$('#sw-grid-theme');if(!g)return;var L=THEMES[fKey(SW.who)]||THEMES.fam;g.innerHTML=L.map(function(x,i){return '<button type="button" class="sw-opt'+(x===SW.theme?' on':'')+'" data-val="'+esc(x)+'"><span class="sw-num">'+(i+1)+'</span><b>'+esc(x)+'</b></button>';}).join('');}
+  function autoStyle(t){var M=[['자장가','자장가'],['동요','동요풍'],['시티팝','시티팝'],['밝은 팝','밝은 팝'],['트로트','트로트'],['재즈','재즈'],['합창','감동 합창'],['로파이','로파이'],['피아노','잔잔한 피아노'],['행진곡','응원 행진곡'],['어쿠스틱','어쿠스틱 포크'],['포크','어쿠스틱 포크'],['발라드','따뜻한 발라드'],['국악','국악 퓨전'],['록','록 밴드'],['캐럴','캐럴']];
+    for(var i=0;i<M.length;i++){if(String(t||'').indexOf(M[i][0])>-1&&SONG_STYLE[M[i][1]]){SW.style=M[i][1];var g=$('#sw-grid-style');if(g)g.querySelectorAll('.sw-opt').forEach(function(b){b.classList.toggle('on',b.dataset.val===SW.style);});return;}}}
+  function buildGrids(){var gs=$('#sw-grid-style'),gv=$('#sw-grid-voice');
+    if(gs)gs.innerHTML=Object.keys(SONG_STYLE).map(function(k){return '<button type="button" class="sw-opt'+(k===SW.style?' on':'')+'" data-val="'+esc(k)+'"><b>'+esc(k)+'</b></button>';}).join('');
+    if(gv)gv.innerHTML=Object.keys(SONG_VOICE).map(function(k){return '<button type="button" class="sw-opt'+(k===SW.voice?' on':'')+'" data-val="'+esc(k)+'"><b>'+esc(k)+'</b></button>';}).join('');}
+  setTimeout(function(){buildGrids();rebuildThemes();},0);
+
+  function jo(t,a,b){var m=String(t).match(/[가-힣](?=[^가-힣]*$)/);if(!m)return a+'('+b+')';return (m[0].charCodeAt(0)-0xAC00)%28?a:b;}
   function buildPrompt() {
     var c = SW.center || '전북특별자치도가족센터';
     var a = SW.author || '이서정';
     var w = SW.who || '가족센터 종사자 (동료)';
-    var t = SW.theme || '종사자 힐링과 응원 · 포근한 포크';
+    var t = SW.theme || '종사자 힐링 · 잔잔한 어쿠스틱';
     var ti = SW.title || '오늘도 수고했어, 내 동료야';
-    var lyr = ((SW.lyrics1 || '') + '\n\n' + (SW.lyrics2 || '')).trim();
-
-    return songLock(ti, SONG_STYLE[SW.style], SONG_VOICE[SW.voice], w, lyr, c + ' | 작사: ' + a);
+    var cr = c + ' | 작사: ' + a;
+    window.__songMeta={title:ti,credit:cr,who:w};
+    return '너는 전북특별자치도가족센터 종사자를 위한 전문 작사가이자 앨범 표지 디자이너야.\n'+
+      '아래 정보로 우리만의 노래 가사와 앨범 표지를 만들어 줘. 질문하지 말고 바로 만들어.\n\n'+
+      '[노래 정보]\n센터명: '+c+'\n작사자: '+a+'\n전할 대상: '+w+'\n노래 주제: '+t+'\n노래 제목: '+ti+'\n음악 스타일: '+SONG_STYLE[SW.style]+'\n보컬: '+SONG_VOICE[SW.voice]+'\n\n'+
+      '[바로 제작]\n추가 질문 없이 다음 순서로 결과를 보여줘.\n\n'+
+      '1. 확정된 제목: '+ti+'\n\n'+
+      '2. 코드블록 하나에 다음 내용을 모두 작성해.\n음악 스타일: 장르, 빠르기, 악기, 보컬 분위기 (위 음악 스타일과 보컬 그대로)\n제목: '+ti+'\n[1절]\n[후렴]\n[2절]\n[후렴]\n쉬운 한국어로, 함께 부르기 좋은 반복 후렴을 만들어.\n센터명은 정확히 포함하고, 실제로 제공되지 않은 사업 경험이나 사연은 꾸미지 마.\n\n'+
+      '3. 앨범 표지 이미지 1장을 실제 생성해.\n'+
+      '* 정사각형 1:1, 따뜻하고 귀여운 고품질 그림책 일러스트\n* 크림색, 살구색, 연초록 등의 포근한 색감\n* 노래 제목과 가사에 맞는 장면과 소품\n'+
+      '* 위쪽에 노래 제목 "'+ti+'"'+jo(ti,'을','를')+' 크게, 아래쪽에 "'+cr+'"'+jo(cr,'을','를')+' 정확한 한국어로 표시\n'+
+      '* 다른 사람이나 가족 이용자의 얼굴을 임의로 만들지 마\n* 제목 및 이름 오타를 확인하고 가능한 경우 수정해\n* 실제 이미지 생성 기능이 없으면 솔직하게 알려줘\n\n'+
+      '4. 마지막에는 다음을 안내해.\n"위의 가사 코드블록을 복사한 뒤 제미나이의 + 버튼 → 음악 만들기를 선택하세요.\n복사한 내용을 붙여넣고 원하는 장르를 선택해 노래를 생성해 보세요.\n원하는 장르가 없다면 맞춤 또는 프롬프트 기반 입력에서 음악 스타일을 그대로 활용하세요."\n음악 파일은 직접 만들지 마.';
   }
 
   function render() {
@@ -3855,6 +3896,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
       chips.innerHTML = '<span class="sw-chip"><em>센터</em>' + esc(SW.center) + '</span>' +
         '<span class="sw-chip"><em>작사</em>' + esc(SW.author) + '</span>' +
         '<span class="sw-chip"><em>대상</em>' + esc(SW.who) + '</span>' +
+        '<span class="sw-chip"><em>주제</em>' + esc(SW.theme) + '</span>' +
         '<span class="sw-chip"><em>제목</em>' + esc(SW.title) + '</span>' +
         '<span class="sw-chip"><em>스타일</em>' + esc(SW.style) + '</span>' +
         '<span class="sw-chip"><em>보컬</em>' + esc(SW.voice) + '</span>';
@@ -3945,17 +3987,11 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
       for (var j = 0; j < opts.length; j++) opts[j].classList.toggle('on', opts[j] === opt);
 
       if (grid.id === 'sw-grid-who') {
-        SW.who = val; rebuildTitles();
-        var d = getDefaultLyrics(SW.lyricsVariant);
-        SW.lyrics1 = d.p1;
-        SW.lyrics2 = d.p2;
+        SW.who = val; rebuildTitles(); rebuildThemes();
         render();
-        setTimeout(function(){ gotoStep(4); }, 220);
+        setTimeout(function(){ gotoStep(3); }, 220);
       } else if (grid.id === 'sw-grid-theme') {
-        SW.theme = val;
-        var d = getDefaultLyrics(SW.lyricsVariant);
-        SW.lyrics1 = d.p1;
-        SW.lyrics2 = d.p2;
+        SW.theme = val; autoStyle(val);
         render();
         setTimeout(function(){ gotoStep(4); }, 220);
       } else if (grid.id === 'sw-grid-style') {
@@ -3976,20 +4012,14 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     if (e.target.id === 'sw-who-custom-btn') {
       var inp = $('#sw-who-custom');
       if (inp && inp.value.trim()) {
-        SW.who = inp.value.trim(); rebuildTitles();
-        var d = getDefaultLyrics(SW.lyricsVariant);
-        SW.lyrics1 = d.p1;
-        SW.lyrics2 = d.p2;
+        SW.who = inp.value.trim(); rebuildTitles(); rebuildThemes();
         render();
-        gotoStep(4);
+        gotoStep(3);
       }
     } else if (e.target.id === 'sw-theme-custom-btn') {
       var inp = $('#sw-theme-custom');
       if (inp && inp.value.trim()) {
-        SW.theme = inp.value.trim();
-        var d = getDefaultLyrics(SW.lyricsVariant);
-        SW.lyrics1 = d.p1;
-        SW.lyrics2 = d.p2;
+        SW.theme = inp.value.trim(); autoStyle(SW.theme);
         render();
         gotoStep(4);
       }
