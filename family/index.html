@@ -3853,13 +3853,12 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     var cr = c + ' | 작사: ' + a;
     var lyr = ((SW.lyrics1 || '') + '\n\n' + (SW.lyrics2 || '')).trim();
     window.__songMeta={title:ti,credit:cr,who:w};
-    return '아래 제목과 가사로 노래를 만들어 줘. 가사는 한 글자도 바꾸지 말고 그대로 불러.\n'+
-      '- 노래 제목: '+ti+'\n'+
-      '- 작사: '+cr+'\n'+
-      '- 음악 스타일: '+SONG_STYLE[SW.style]+'\n'+
-      '- 보컬: '+SONG_VOICE[SW.voice]+'\n'+
-      '- 앨범 표지: 따뜻한 그림책 일러스트, 정사각형. 위에 노래 제목 "'+ti+'", 아래에 "'+cr+'"만 넣기\n\n'+
-      '[가사]\n'+songTags(lyr);
+    var st=SW.style, vo=SW.voice;
+    return '"'+ti+'" 노래를 만들어 줘. '+c+' '+a+' 작사야.\n'+
+      '아래 가사를 그대로 살려서, '+st+' 스타일('+SONG_STYLE[st]+')에 '+vo+'('+SONG_VOICE[vo]+')로 불러 줘.\n'+
+      '앨범 표지는 따뜻한 그림책 일러스트 정사각형으로, 위에 "'+ti+'", 아래에 "'+cr+'"을 넣어 줘.\n'+
+      '지금 바로 만들어 줘.\n\n'+
+      '가사\n'+lyr;
   }
 
   function render() {
