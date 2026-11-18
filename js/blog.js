@@ -45,13 +45,12 @@
       grid.appendChild(r);
     });
   }
-  /* 배너 사진: 제목 첫 줄 ~ 숫자 줄 끝선에 높이 맞춤 */
+  /* 배너 사진: 2026.11.18 — 왼쪽 글 맨 윗줄 ~ 버튼 아래 끝에 사진 높이 맞춤 (회색 줄은 배너 점 줄과 CSS로 맞춤) */
   function fitBanner(){
-    var txt=document.querySelector('.h4-txt'),h1=txt&&txt.querySelector('h1'),st=txt&&txt.querySelector('.h4-stats'),bn=document.getElementById('bn');
-    if(!h1||!st||!bn)return;
+    var txt=document.querySelector('.h4-txt'),bt=txt&&txt.querySelector('.h4-btns'),bn=document.getElementById('bn');
+    if(!bt||!bn)return;
     if(window.innerWidth<=900){bn.style.marginTop='';stage.style.height='';return;}
-    var t=txt.getBoundingClientRect().top,a=h1.getBoundingClientRect().top,b=st.getBoundingClientRect().bottom;
-    var foot=bn.querySelector('.bn-foot'),fh=foot?foot.getBoundingClientRect().height+14:0;bn.style.marginTop=(a-t)+'px';stage.style.height=Math.max(200,(b-a)-fh)+'px';
+    bn.style.marginTop='0px';stage.style.height=Math.max(200,bt.getBoundingClientRect().bottom-txt.getBoundingClientRect().top)+'px';
   }
   window.addEventListener('resize',fitBanner);window.addEventListener('load',fitBanner);fitBanner();setTimeout(fitBanner,300);
 
