@@ -45,13 +45,8 @@
       grid.appendChild(r);
     });
   }
-  /* 배너 사진: 2026.11.18 — 왼쪽 글 맨 윗줄 ~ 버튼 아래 끝에 사진 높이 맞춤 (회색 줄은 배너 점 줄과 CSS로 맞춤) */
-  function fitBanner(){
-    var txt=document.querySelector('.h4-txt'),bt=txt&&txt.querySelector('.h4-btns'),bn=document.getElementById('bn');
-    if(!bt||!bn)return;
-    if(window.innerWidth<=900){bn.style.marginTop='';stage.style.height='';return;}
-    bn.style.marginTop='0px';stage.style.height=Math.max(200,bt.getBoundingClientRect().bottom-txt.getBoundingClientRect().top)+'px';
-  }
+  /* 배너 사진: 2026.11.18 — 배너 크기는 CSS(비율 고정)로, 왼쪽 글이 배너 높이에 맞춰 배치됨 */
+  function fitBanner(){var bn=document.getElementById('bn');if(!bn)return;bn.style.marginTop='';stage.style.height='';}
   window.addEventListener('resize',fitBanner);window.addEventListener('load',fitBanner);fitBanner();setTimeout(fitBanner,300);
 
   bindDots();syncInfo();start();
