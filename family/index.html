@@ -662,6 +662,9 @@ body{line-height:1.55}
 
 .note{color:#3A3A34}
 .s{color:var(--muted)}
+.sugc{background:#fff}.sugc.on{background:var(--warm)}
+#f-pex{display:none!important}
+
 </style>
 <style id="noDesc">#main4 .m4>span:last-child,#tiles .tile>span:last-child{display:none!important}#tiles .tile{justify-content:center}</style>
 <style id="dashLight">.dash .flist .n{font-size:12.7px}.dash .flist .t{font-size:14.7px;font-weight:500}.dash .b-how,.dash .b-go{font-size:12.7px;font-weight:400}.dash .ftabs button{font-size:13.2px;font-weight:400}.dash .allbtn{font-size:13.7px;font-weight:400}.dash .tile b{font-size:14.2px;font-weight:500}.dash .links a{font-size:14.2px}.dash .links a b{font-weight:500}.dash .links a.hp{padding:20px 4px}.dash .guide button{font-size:14.7px;font-weight:500}.dash .guide p{font-size:12.7px}.dash .wide b{font-size:14.7px;font-weight:500}.dash .wide span{font-size:12.7px}.dash .wide em{font-size:13.2px;font-weight:500}</style>
@@ -2781,44 +2784,44 @@ function sugFor(k,v){var t=TIP[v.tgt]||'';
   if(k==='event'){var a=((EVT[v.kind]||{})[v.when])||[];return a.map(function(x,i){return {h:(i+1)+'안 · '+x,d:'대상 '+v.tgt+(t?' → '+t:'')+'. '+v.when+' 운영.'};});}
   if(k==='idea'){var a=IDEA[v.area]||[];return a.map(function(x,i){return {h:(i+1)+'안 · '+x,d:v.tgt+' 대상 · '+v.when+' · '+v.size+(t?' → '+t:'')};});}
   if(k==='msg'){var a=MSGX[v.kind]||[];return a.map(function(x,i){return {h:(i+1)+'안',d:x};});}
-  if(k==='promo'){var b=v.biz;if(v.out==='블로그 초안')return [{h:'1안 · 제목',d:'우리 동네 '+b+', 이렇게 함께해요'},{h:'2안 · 제목',d:'아이와 보내는 주말, '+b+'에서 찾았어요'},{h:'3안 · 제목',d:'참여 가족이 말하는 '+b+' 이야기'}];
-    if(v.out==='문자·카톡 모집 문구')return [{h:'1안',d:'['+b+'] 참여 가족을 모집해요!\n· 대상: [대상]\n· 일시: [날짜·시간]\n· 장소: [장소]\n· 신청: [방법] / 문의 [전화]'},{h:'2안 (쉬운 한국어)',d:b+'에 오세요.\n언제: [날짜]\n어디: [장소]\n신청: [전화]'},{h:'3안 · 마감 강조',d:'['+b+'] 선착순 [인원] 가족, [마감일]에 마감해요!\n· 일시: [날짜·시간] · 장소: [장소]\n· 신청: [방법]'}];
-    return [{h:'1안 · 질문형',d:'1장 “주말에 뭐 하지?” / 2장 '+b+'에서 함께 놀아요 / 3장 언제·어디서 / 4장 지금 신청하세요'},{h:'2안 · 이야기형',d:'1장 우리 가족의 작은 변화 / 2장 '+b+' 이런 활동 / 3장 일정 안내 / 4장 신청·문의'},{h:'3안 · 정보형',d:'1장 '+b+' 한눈에 보기 / 2장 이런 가족께 추천 / 3장 일정·장소·인원 / 4장 신청 방법 3단계'}];}
+  if(k==='promo'){var b=v.biz;if(v.out==='블로그 초안')return [{h:'예시 1 · 제목',d:'우리 동네 '+b+', 이렇게 함께해요'},{h:'예시 2 · 제목',d:'아이와 보내는 주말, '+b+'에서 찾았어요'},{h:'예시 3 · 제목',d:'참여 가족이 말하는 '+b+' 이야기'}];
+    if(v.out==='문자·카톡 모집 문구')return [{h:'1안',d:'['+b+'] 참여 가족을 모집해요!\n· 대상: [대상]\n· 일시: [날짜·시간]\n· 장소: [장소]\n· 신청: [방법] / 문의 [전화]'},{h:'2안 (쉬운 한국어)',d:b+'에 오세요.\n언제: [날짜]\n어디: [장소]\n신청: [전화]'},{h:'예시 3 · 마감 강조',d:'['+b+'] 선착순 [인원] 가족, [마감일]에 마감해요!\n· 일시: [날짜·시간] · 장소: [장소]\n· 신청: [방법]'}];
+    return [{h:'예시 1 · 질문형',d:'1장 “주말에 뭐 하지?” / 2장 '+b+'에서 함께 놀아요 / 3장 언제·어디서 / 4장 지금 신청하세요'},{h:'예시 2 · 이야기형',d:'1장 우리 가족의 작은 변화 / 2장 '+b+' 이런 활동 / 3장 일정 안내 / 4장 신청·문의'},{h:'예시 3 · 정보형',d:'1장 '+b+' 한눈에 보기 / 2장 이런 가족께 추천 / 3장 일정·장소·인원 / 4장 신청 방법 3단계'}];}
   if(k==='img'){
     var S=SEASON[v.season]||SEASON[SEASON_NOW];
     var m=(S.mot||'').split(',').map(function(x){return x.trim();});
     var type=v.type||'카드뉴스';
     if(type.indexOf('카드뉴스')>-1){
       return [
-        {h:'표지 시안 · 질문형',d:'"이번 주말 아이와 뭐 하지?" 1:1 정사각, '+(v.tgt||'가족')+' 일러스트'},
-        {h:'내용 시안 · 핵심 3단계',d:'핵심 활동 3가지를 카드별로 나누어 가독성 극대화'},
-        {h:'마무리 시안 · 신청 QR',d:'신청 링크 및 센터 전화번호가 돋보이는 엔딩 카드'}
+        {h:'예시 1 · 표지 질문형',d:'"이번 주말 아이와 뭐 하지?" 1:1 정사각, '+(v.tgt||'가족')+' 일러스트'},
+        {h:'예시 2 · 내용 핵심 3단계',d:'핵심 활동 3가지를 카드별로 나누어 가독성 극대화'},
+        {h:'예시 3 · 마무리 신청 QR',d:'신청 링크 및 센터 전화번호가 돋보이는 엔딩 카드'}
       ];
     }else if(type.indexOf('인포그래픽')>-1){
       return [
-        {h:'1안 · 4단계 로드맵',d:'신청부터 참여, 사후 모임까지 한눈에 파악하는 플로우 차트'},
-        {h:'2안 · 핵심 혜택 비교표',d:'참여 가족이 얻는 실질적 변화와 지원 내역 3단 박스'}
+        {h:'예시 1 · 4단계 로드맵',d:'신청부터 참여, 사후 모임까지 한눈에 파악하는 플로우 차트'},
+        {h:'예시 2 · 핵심 혜택 비교표',d:'참여 가족이 얻는 실질적 변화와 지원 내역 3단 박스'}
       ];
     }else if(type.indexOf('웹툰')>-1){
       return [
-        {h:'1안 · 4컷 인스타툰',d:'1컷(주말 고민) → 2컷(센터 발견) → 3컷(체험 감동) → 4컷(신청 안내)'},
-        {h:'2안 · 캐릭터 일상툰',d:'아이와 부모의 재미있는 대화로 풀어내는 참여 후기'}
+        {h:'예시 1 · 4컷 인스타툰',d:'1컷(주말 고민) → 2컷(센터 발견) → 3컷(체험 감동) → 4컷(신청 안내)'},
+        {h:'예시 2 · 캐릭터 일상툰',d:'아이와 부모의 재미있는 대화로 풀어내는 참여 후기'}
       ];
     }else if(type.indexOf('이모티콘')>-1){
       return [
-        {h:'1안 · 소통 기본 4종',d:'응원해요 / 감사해요 / 신청완료 / 오늘도 수고했어'},
-        {h:'2안 · 센터 실무 8종',d:'상담중 / 함께해요 / 출석인증 등 채널 맞춤 스티커'}
+        {h:'예시 1 · 소통 기본 4종',d:'응원해요 / 감사해요 / 신청완료 / 오늘도 수고했어'},
+        {h:'예시 2 · 센터 실무 8종',d:'상담중 / 함께해요 / 출석인증 등 채널 맞춤 스티커'}
       ];
     }else if(type.indexOf('배너')>-1){
       return [
-        {h:'1안 · 16:9 와이드',d:'좌측 60% 헤드라인·버튼 + 우측 40% 키비주얼'},
-        {h:'2안 · 카톡 채널용',d:'모바일 화면 상단에 맞춘 컴팩트 배너 시안'}
+        {h:'예시 1 · 16:9 와이드',d:'좌측 60% 헤드라인·버튼 + 우측 40% 키비주얼'},
+        {h:'예시 2 · 카톡 채널용',d:'모바일 화면 상단에 맞춘 컴팩트 배너 시안'}
       ];
     }else{
       return [
-        {h:'1안 · '+(m[0]||v.season)+' 포스터',d:v.tgt+'이(가) '+(m[0]||'')+' 사이에서 웃는 장면, 색: '+S.col},
-        {h:'2안 · 여백 확보형',d:'상단에 큼직한 타이틀과 하단에 접수처가 들어갈 공간 확보'},
-        {h:'3안 · 활동 장면 클로즈업',d:v.tgt+'이(가) 함께 활동하는 모습을 위에서 내려다본 구도'}
+        {h:'예시 1 · '+(m[0]||v.season)+' 포스터',d:v.tgt+'이(가) '+(m[0]||'')+' 사이에서 웃는 장면, 색: '+S.col},
+        {h:'예시 2 · 여백 확보형',d:'상단에 큼직한 타이틀과 하단에 접수처가 들어갈 공간 확보'},
+        {h:'예시 3 · 활동 장면 클로즈업',d:v.tgt+'이(가) 함께 활동하는 모습을 위에서 내려다본 구도'}
       ];
     }
   }
@@ -4052,10 +4055,10 @@ function apply(){if(busy)return;busy=true;
   cards.forEach(function(c){var s=c.querySelector('span');if(s&&/이\(가\)/.test(s.textContent))s.textContent=josa(s.textContent);c.setAttribute('role','button');c.tabIndex=0;});
   if(cards.length){if(!cards.some(function(c){return cardText(c)===SEL;}))SEL='';
     cards.forEach(function(c){c.classList.toggle('on',cardText(c)===SEL);});
-    var h=sug.querySelector('h4');if(h&&!h.querySelector('.sg-hint'))h.insertAdjacentHTML('beforeend',' <span class="sg-hint">누르면 프롬프트에 들어가요</span>');
+    var h=sug.querySelector('h4');if(h&&!h.querySelector('.sg-hint'))h.insertAdjacentHTML('beforeend',' <span class="sg-hint">하나만 골라 누르면 그 방향이 프롬프트에 들어가요 (안 골라도 돼요)</span>');
     if(!sug.querySelector('.sg-none')){var n=el('button','sg-none'+(SEL?'':' on'),'안 고름');n.type='button';sug.appendChild(n);}else sug.querySelector('.sg-none').classList.toggle('on',!SEL);}
   var old=pv.querySelector('.sg-add');if(old)old.remove();
-  if(SEL){var a=el('span','sg-add');a.textContent='\n\n[고른 안으로 만들어 줘] '+SEL.replace(/\n/g,' / ');pv.appendChild(a);}
+  if(SEL){var a=el('span','sg-add');a.textContent='\n\n[이 예시 방향을 반영해 줘] '+SEL.replace(/\n/g,' / ');pv.appendChild(a);}
   var at=$('#s-att');if(at)at.querySelectorAll('li').forEach(function(li){if(/그림 안에 넣지 않고/.test(li.textContent))li.textContent='센터 로고: AI에게 그리게 하지 말고, 그림을 받은 뒤 캔바에서 진짜 로고 파일을 얹으세요.';});
   busy=false;}
 sug.addEventListener('click',function(e){var c=e.target.closest('.sugc'),n=e.target.closest('.sg-none');if(!c&&!n)return;SEL=c&&cardText(c)!==SEL?cardText(c):'';apply();});
@@ -5786,6 +5789,18 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  if(typeof bizP==='function'){var _b=bizP;bizP=function(m){var t=_b(m);return m==='none'?t:inj(t);};}
  if(typeof genP==='function'){var _g=genP;genP=function(n,w,mi){var t=_g(n,w,mi);return HEAVY.test(n)?inj(t):simp(t);};}
  if(typeof BIZ!=='undefined'){[[0,2],[1,1],[1,2],[1,4],[2,0],[2,1],[2,2],[2,3],[2,4],[3,2],[4,2]].forEach(function(x){var st=BIZ[x[0]]&&BIZ[x[0]].steps&&BIZ[x[0]].steps[x[1]];if(st&&st.prompt)st.prompt=simp(st.prompt);});}
+ /* 서식 화면: [예시 채우기] 하나로 넣기·빼기 (미리보기의 [예시 넣기]는 숨김) */
+ (function(){var b=document.getElementById('f-ex');if(!b||typeof exFillSilent!=='function')return;var ON=false;
+  function lbl(){b.textContent=ON?'예시 빼기':'예시 채우기';}
+  b.onclick=function(){if(!EX[CF.id]){toast('이 서식은 예시가 없어요.');return;}
+   if(ON){exClearSilent();ON=false;toast('예시를 뺐어요. 직접 입력한 내용은 그대로 있어요.');}
+   else{var n=exFillSilent();ON=true;toast(n?'예시를 빈칸에 넣었어요. 모두 가상 "가온시 가족센터" 예시예요.':'빈칸이 없어요. [지우기]로 비운 뒤 다시 눌러 보세요.');}
+   if(typeof renderDoc==='function')renderDoc();if(typeof renderAI==='function')try{renderAI();}catch(e){}lbl();};
+  var c=document.getElementById('f-clear');if(c){var oc=c.onclick;c.onclick=function(e){ON=false;lbl();if(oc)return oc.call(this,e);};}
+  if(typeof go==='function'){var _go=go;go=function(k){ON=false;lbl();return _go.apply(this,arguments);};}
+ })();
+ /* 주소로 바로 들어온 경우에도 새 프롬프트로 다시 그리기 */
+ try{var vf=document.getElementById('v-form');if(vf&&!vf.hidden&&typeof renderAI==='function')renderAI();}catch(e){}
 })();
 </script>
 </body>
