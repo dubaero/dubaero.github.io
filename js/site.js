@@ -32,7 +32,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   try{mine=JSON.parse(localStorage.getItem(mineKey)||'{}')||{};}catch(e){mine={};}
   /* 보내기 줄 */
   var bar=document.createElement('div');bar.className='wc-send';
-  bar.innerHTML='<button type="button" id="wc-send">보내기</button><span id="wc-msg">단어를 여러 개 골라도 돼요. 다 고르면 [보내기]를 눌러 주세요.</span>';
+  bar.innerHTML='<button type="button" id="wc-send" hidden>보내기</button><span id="wc-msg">단어를 누르면 바로 보내져요. 여러 개 눌러도 돼요.</span>';
   cloud.parentNode.insertBefore(bar,cloud);
   var sendBtn=bar.querySelector('button'),msg=bar.querySelector('span');
   function say(t,c){msg.textContent=t;msg.className=c||'';}
@@ -57,25 +57,26 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     else{var c={};Object.keys(mine).forEach(function(w){c[w]=mine[w];});sel.forEach(function(w){c[w]=(c[w]||0)+1;});draw(c,!Object.keys(c).length);}
     sendBtn.textContent=sel.length?'보내기 ('+sel.length+'개)':'보내기';
   }
-  function toggle(w,b){w=clean(w);if(!w)return;var i=sel.indexOf(w);
-    if(i>-1){sel.splice(i,1);if(b)b.classList.remove('picked');}
-    else{if(sel.length>=10){say('한 번에 10개까지 보낼 수 있어요.','err');return;}sel.push(w);if(b)b.classList.add('picked');}
-    say(sel.length?'고른 단어: '+sel.join(', '):'단어를 여러 개 골라도 돼요. 다 고르면 [보내기]를 눌러 주세요.');render();}
+  var tmr=null,busy=false;
+  function toggle(w,b,now){w=clean(w);if(!w)return;
+    if(b&&b.classList.contains('picked'))return;
+    if(sel.indexOf(w)<0)sel.push(w);if(b)b.classList.add('picked');
+    render();clearTimeout(tmr);
+    if(now)send(0);else{say('보내는 중…');tmr=setTimeout(function(){send(0);},900);}}
   document.querySelectorAll('#wc-chips button[data-w]').forEach(function(b){b.addEventListener('click',function(){toggle(b.getAttribute('data-w'),b);});});
   var fb=form.querySelector('button');if(fb)fb.textContent='추가';
   var etc=document.getElementById('wc-etc');if(etc)etc.addEventListener('click',function(){form.hidden=false;inp.focus();});
-  form.addEventListener('submit',function(e){e.preventDefault();toggle(inp.value,null);inp.value='';});
+  form.addEventListener('submit',function(e){e.preventDefault();toggle(inp.value,null,true);inp.value='';inp.focus();});
   function send(tries){
-    var words=sel.slice();if(!words.length){say('먼저 단어를 골라 주세요.','err');return;}
-    sendBtn.disabled=true;say(tries?'사람이 많아 잠시 후 다시 보내는 중이에요… ('+tries+'/6)':'보내는 중…');
+    if(busy&&!tries)return;var words=sel.slice(0,10);if(!words.length)return;
+    busy=true;say(tries?'사람이 많아 잠시 후 다시 보내는 중이에요… ('+tries+'/6)':'보내는 중…');
     fetch(BASE,{method:'POST',body:JSON.stringify({w:words})}).then(function(r){
-      if(!r.ok)throw r.status;
-      words.forEach(function(w){mine[w]=(mine[w]||0)+1;});try{localStorage.setItem(mineKey,JSON.stringify(mine));}catch(e){}
-      sel=[];document.querySelectorAll('#wc-chips button.picked').forEach(function(b){b.classList.remove('picked');});
-      sendBtn.disabled=false;say('보냈어요! 강사님 화면에 함께 모입니다.','ok');render();
+      if(!r.ok)throw r.status;busy=false;
+      words.forEach(function(w){mine[w]=(mine[w]||0)+1;var i=sel.indexOf(w);if(i>-1)sel.splice(i,1);});try{localStorage.setItem(mineKey,JSON.stringify(mine));}catch(e){}
+      say('보냈어요! 강사님 화면에 함께 모입니다.','ok');render();if(sel.length)send(0);
     }).catch(function(){
       if(tries<6){setTimeout(function(){send(tries+1);},5000+Math.random()*10000);}
-      else{sendBtn.disabled=false;say('보내지 못했어요. 잠시 후 [보내기]를 다시 눌러 주세요.','err');}
+      else{busy=false;say('보내지 못했어요. 잠시 후 단어를 다시 눌러 주세요.','err');document.querySelectorAll('#wc-chips button.picked').forEach(function(b){if(sel.indexOf(b.getAttribute('data-w'))>-1)b.classList.remove('picked');});sel=[];render();}
     });
   }
   sendBtn.addEventListener('click',function(){send(0);});
@@ -102,7 +103,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
       poll();setInterval(poll,15000);
     }
   }
-  if(note)note.textContent=host?'강사님 화면입니다. 오늘 수강생이 보낸 단어가 모두 모이고, 12시간 뒤 자동으로 지워집니다. 단어에 마우스를 올리면 표 수가 보여요.':'고른 단어를 [보내기]로 보내면 강사님 화면에 모두의 단어가 모입니다. 연한 단어는 예시입니다.';
+  if(note)note.textContent=host?'강사님 화면입니다. 오늘 수강생이 보낸 단어가 모두 모이고, 12시간 뒤 자동으로 지워집니다. 단어에 마우스를 올리면 표 수가 보여요.':'단어를 누르면 강사님 화면에 모두의 단어가 모입니다. 연한 단어는 예시입니다.';
   render();
   var sec=document.getElementById('wordcloud');
   function openWc(e){if(e)e.preventDefault();sec.hidden=false;sec.scrollIntoView({behavior:'smooth',block:'start'});}
