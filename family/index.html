@@ -5799,7 +5799,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   if(typeof go==='function'){var _go=go;go=function(k){ON=false;lbl();return _go.apply(this,arguments);};}
  })();
  /* 주소로 바로 들어온 경우에도 새 프롬프트로 다시 그리기 */
- try{var vf=document.getElementById('v-form');if(vf&&!vf.hidden&&typeof renderAI==='function')renderAI();}catch(e){}
+ try{var hk=decodeURIComponent((location.hash||'').slice(1));if(hk&&typeof go==='function')go(hk);var vf=document.getElementById('v-form');if(vf&&!vf.hidden&&typeof renderAI==='function')renderAI();}catch(e){}
 })();
 </script>
 </body>
