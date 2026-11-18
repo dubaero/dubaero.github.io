@@ -40,9 +40,17 @@
 .gh-nav a.gh-wc .gh-x{color:#8A5A00}
 .gh-nav a.gh-wc:hover,.gh-nav a.gh-wc[aria-current="page"]{background:#FFD34D;color:#17304F}
 
-/* 2026.11.18 상단 메뉴: 강의 문의 탭 삭제(홈 첫 화면 '강의 문의하기' 버튼으로 연결), 남은 4개 탭은 모두 같은 중간 파랑 — 지금 보는 페이지만 진한 남색 */
+/* 2026.11.18 상단 메뉴: 강의 문의 탭 삭제(홈 첫 화면·각 페이지 아래 '강의 문의하기'로 연결). 탭은 원래 연한 색, 워드클라우드만 연한 노랑 */
 .gh-nav a.gh-cta{display:none!important}
-.gh-nav a,.gh-nav a:not(.gh-cta),.gh-nav a.gh-wc{background:#1F6FB2;color:#fff;font-weight:500;box-shadow:none}
-.gh-nav a .gh-x,.gh-nav a.gh-wc .gh-x{color:inherit}
-.gh-nav a:hover,.gh-nav a:not(.gh-cta):hover,.gh-nav a.gh-wc:hover{background:#17304F;color:#fff}
-.gh-nav a[aria-current="page"],.gh-nav a:not(.gh-cta)[aria-current="page"],.gh-nav a.gh-wc[aria-current="page"]{background:#17304F;color:#fff}
+.gh-nav a.gh-wc{background:#FFF3C4;color:#17304F;font-weight:700;box-shadow:inset 0 0 0 1px #F0D57A}
+.gh-nav a.gh-wc .gh-x{color:#8A5A00}
+.gh-nav a.gh-wc:hover,.gh-nav a.gh-wc[aria-current="page"]{background:#FFE89A;color:#17304F}
+
+/* 2026.11.18 페이지 아래 강의 문의 칸 (상단 메뉴에서 강의 문의 탭을 뺀 대신) */
+.gh-ask{max-width:1200px;margin:0 auto;padding:48px 32px 88px;box-sizing:border-box;font-family:"Noto Sans KR",system-ui,sans-serif;letter-spacing:-.01em}
+.gh-ask-box{border-radius:18px;background:#EAF2FA;padding:44px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
+.gh-ask h2{margin:0;font-size:26px;font-weight:700;color:#17304F;letter-spacing:-.02em;line-height:1.35}
+.gh-ask p{margin:6px 0 0;font-size:16.5px;color:#4A5562;line-height:1.6}
+.gh-ask-btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:8px;background:#17304F;color:#fff!important;font-size:16.5px;font-weight:500;text-decoration:none;white-space:nowrap}
+.gh-ask-btn:hover{background:#1F6FB2}
+@media (max-width:760px){.gh-ask{padding:32px 18px 56px}.gh-ask-box{padding:28px 22px}.gh-ask h2{font-size:22px}.gh-ask-btn{width:100%}}
