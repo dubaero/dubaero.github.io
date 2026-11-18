@@ -1040,11 +1040,9 @@ return {html:html,bind:bind};})();
           <span class="sw-arrow">›</span>
           <span class="sw-step" data-step="2"><b>2</b> 전할 대상</span>
           <span class="sw-arrow">›</span>
-          <span class="sw-step" data-step="3"><b>3</b> 노래 주제</span>
+          <span class="sw-step" data-step="4"><b>3</b> 노래 제목</span>
           <span class="sw-arrow">›</span>
-          <span class="sw-step" data-step="4"><b>4</b> 노래 제목</span>
-          <span class="sw-arrow">›</span>
-          <span class="sw-step" data-step="5"><b>5</b> 스타일·보컬</span>
+          <span class="sw-step" data-step="5"><b>4</b> 스타일·보컬</span>
         </div>
       </div>
 
@@ -1082,23 +1080,9 @@ return {html:html,bind:bind};})();
         </div>
       </div>
 
-      <!-- 스텝 3: 어떤 노래를 만들까요? -->
-      <div class="sw-pane" id="sw-p3">
-        <div class="sw-q">3. 어떤 노래를 만들까요?</div>
-        <div class="sw-desc">고른 대상에 맞는 주제·장르예요. 번호를 클릭하면 다음 질문으로 넘어갑니다.</div>
-        <div class="sw-grid" id="sw-grid-theme"></div>
-        <div class="sw-custom-row">
-          <input type="text" class="f1" id="sw-theme-custom" placeholder="직접 입력 (예: 다문화 엄마들의 우정 · 밝은 팝)">
-          <button type="button" class="btn mini" id="sw-theme-custom-btn">직접 입력 적용 ›</button>
-        </div>
-        <div class="sw-nav-acts">
-          <button type="button" class="btn mini sw-prev" data-to="2">‹ 이전</button>
-        </div>
-      </div>
-
       <!-- 스텝 4: 노래 제목을 골라 주세요 -->
       <div class="sw-pane" id="sw-p4">
-        <div class="sw-q">4. 노래 제목을 골라 주세요</div>
+        <div class="sw-q">3. 노래 제목을 골라 주세요</div>
         <div class="sw-desc">마음에 드는 제목 번호를 클릭하면 가사 확인 단계로 넘어갑니다.</div>
         <div class="sw-grid" id="sw-grid-title">
           <button type="button" class="sw-opt" data-val="우리 함께 걸어요"><span class="sw-num">1</span><b>우리 함께 걸어요</b><small>서로의 손을 잡고 따뜻하게 동행하는 노래</small></button>
@@ -1112,13 +1096,13 @@ return {html:html,bind:bind};})();
           <button type="button" class="btn mini" id="sw-title-custom-btn">제목 적용하기 ›</button>
         </div>
         <div class="sw-nav-acts">
-          <button type="button" class="btn mini sw-prev" data-to="3">‹ 이전</button>
+          <button type="button" class="btn mini sw-prev" data-to="2">‹ 이전</button>
         </div>
       </div>
 
       <!-- 스텝 5: 노래 가사 확인 및 최종 완성 (원스톱) -->
       <div class="sw-pane" id="sw-p5">
-        <div class="sw-q">5. 스타일·보컬 고르고 완성 프롬프트 복사</div>
+        <div class="sw-q">4. 스타일·보컬 고르고 완성 명령어 복사</div>
         <div class="sw-desc">가사를 확인하고(직접 고쳐도 돼요) 스타일·보컬을 고른 뒤, 완성 명령어를 복사해 제미나이 [+] → 음악 만들기에 붙여 넣으면 바로 노래가 나와요.</div>
         
         <div class="sw-chips" id="sw-chips" style="margin:8px 0 12px"></div>
@@ -1164,7 +1148,7 @@ return {html:html,bind:bind};})();
       <div>
         <h4 class="sg-h">따라 하기 3단계 (초간단!)</h4>
         <ol class="song-steps">
-          <li>위에서 <b>질문 4개를 클릭</b>하고 가사·스타일·보컬을 확인한 뒤 <b>[완성 명령어 복사하기]</b>를 눌러요.</li>
+          <li>위에서 <b>질문 3개를 클릭</b>하고 가사·스타일·보컬을 확인한 뒤 <b>[완성 명령어 복사하기]</b>를 눌러요.</li>
           <li><b>[제미나이로 바로 열기]</b>를 누르고 입력창 <b>[+] → 음악 만들기</b>를 켠 뒤 붙여 넣어요.</li>
           <li>노래와 앨범 표지가 한 번에 나와요.</li>
         </ol>
@@ -3891,7 +3875,6 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
       chips.innerHTML = '<span class="sw-chip"><em>센터</em>' + esc(SW.center) + '</span>' +
         '<span class="sw-chip"><em>작사</em>' + esc(SW.author) + '</span>' +
         '<span class="sw-chip"><em>대상</em>' + esc(SW.who) + '</span>' +
-        '<span class="sw-chip"><em>주제</em>' + esc(SW.theme) + '</span>' +
         '<span class="sw-chip"><em>제목</em>' + esc(SW.title) + '</span>' +
         '<span class="sw-chip"><em>스타일</em>' + esc(SW.style) + '</span>' +
         '<span class="sw-chip"><em>보컬</em>' + esc(SW.voice) + '</span>';
@@ -3984,7 +3967,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
       if (grid.id === 'sw-grid-who') {
         SW.who = val; rebuildTitles(); rebuildThemes(); SW.lyrics1=''; SW.lyrics2='';
         render();
-        setTimeout(function(){ gotoStep(3); }, 220);
+        setTimeout(function(){ gotoStep(4); }, 220);
       } else if (grid.id === 'sw-grid-theme') {
         SW.theme = val; autoStyle(val); SW.lyrics1=''; SW.lyrics2='';
         render();
@@ -4009,7 +3992,7 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
       if (inp && inp.value.trim()) {
         SW.who = inp.value.trim(); rebuildTitles(); rebuildThemes(); SW.lyrics1=''; SW.lyrics2='';
         render();
-        gotoStep(3);
+        gotoStep(4);
       }
     } else if (e.target.id === 'sw-theme-custom-btn') {
       var inp = $('#sw-theme-custom');
