@@ -18,8 +18,9 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   function day(){return new Date(Date.now()+9*3600e3).toISOString().slice(0,10).replace(/-/g,'');}
   var room=String(q.get('room')||'').replace(/[^a-zA-Z0-9_-]/g,'').slice(0,20);
   var TOPIC='dubaero-wc-r8k2q-'+day()+(room?'-'+room:''),BASE='https://ntfy.sh/'+TOPIC;
-  var host=false;try{host=localStorage.getItem('dubaero_owner')==='1';}catch(e){}
-  if(q.get('host')==='1')host=true;if(q.get('host')==='0')host=false;
+  var host=false;try{host=localStorage.getItem('dubaero_owner')==='1'||localStorage.getItem('wc_host')==='1';}catch(e){}
+  if(q.get('host')==='1'){host=true;try{localStorage.setItem('wc_host','1');}catch(e){}}
+  if(q.get('host')==='0'){host=false;try{localStorage.removeItem('wc_host');}catch(e){}}
   var cloud=document.getElementById('wc-cloud'),note=document.querySelector('.wc-note');
   var form=document.getElementById('wc-form'),inp=document.getElementById('wc-input');
   var st=document.createElement('style');
