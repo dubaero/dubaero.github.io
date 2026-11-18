@@ -5798,6 +5798,20 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   var c=document.getElementById('f-clear');if(c){var oc=c.onclick;c.onclick=function(e){ON=false;lbl();if(oc)return oc.call(this,e);};}
   if(typeof go==='function'){var _go=go;go=function(k){ON=false;lbl();return _go.apply(this,arguments);};}
  })();
+ /* 2026.11.18 서식 자료실: 꼭 필요한 것만 — 사업·보고 / 홍보물 */
+ (function(){if(typeof CATS==='undefined'||typeof renderList!=='function')return;
+  CATS.length=0;CATS.push(['사업','사업·보고'],['홍보','홍보물']);
+  if(typeof curCat!=='undefined'&&curCat!=='사업'&&curCat!=='홍보')curCat='사업';
+  var _rl=renderList;
+  renderList=function(){_rl.apply(this,arguments);if(curCat!=='홍보')return;var ul=document.getElementById('flist');if(!ul)return;ul.innerHTML='';
+   (typeof DW!=='undefined'?DW:[]).filter(function(d){return d.g==='pr'&&d.fullT;}).forEach(function(d,i){
+    var li=el('li',null,'<span class="n">'+(i+1)+'</span><span class="t">'+esc(d.t)+'</span>');var m=el('span','mini');
+    var c=el('button','b-how','프롬프트');c.type='button';c.onclick=function(){copy(dwF(d.fullT,d),'['+d.t+'] 프롬프트를 복사했어요. ChatGPT 새 채팅에 붙여 넣으세요.');};
+    var g=el('button','b-go','열기');g.type='button';g.onclick=function(){location.hash='dw-'+d.id;go('dw-'+d.id);};
+    m.appendChild(c);m.appendChild(g);li.appendChild(m);ul.appendChild(li);});};
+  var q=document.getElementById('q');if(q)q.placeholder='찾을 업무를 입력하세요 (예: 사업계획서, 결과보고, 카드뉴스)';
+  try{renderList();}catch(e){}
+ })();
  /* 주소로 바로 들어온 경우에도 새 프롬프트로 다시 그리기 */
  try{var hk=decodeURIComponent((location.hash||'').slice(1));if(hk&&typeof go==='function')go(hk);var vf=document.getElementById('v-form');if(vf&&!vf.hidden&&typeof renderAI==='function')renderAI();}catch(e){}
 })();
