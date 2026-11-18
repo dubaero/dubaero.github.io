@@ -1119,7 +1119,7 @@ return {html:html,bind:bind};})();
       <!-- 스텝 5: 노래 가사 확인 및 최종 완성 (원스톱) -->
       <div class="sw-pane" id="sw-p5">
         <div class="sw-q">5. 스타일·보컬 고르고 완성 프롬프트 복사</div>
-        <div class="sw-desc">스타일과 보컬을 고르고 완성 프롬프트를 복사해 제미나이에 붙여 넣으세요. 제미나이가 가사와 앨범 표지를 만들어 줘요.</div>
+        <div class="sw-desc">가사를 확인하고(직접 고쳐도 돼요) 스타일·보컬을 고른 뒤, 완성 명령어를 복사해 제미나이 [+] → 음악 만들기에 붙여 넣으면 바로 노래가 나와요.</div>
         
         <div class="sw-chips" id="sw-chips" style="margin:8px 0 12px"></div>
         <div class="sw-sv">
@@ -1127,7 +1127,7 @@ return {html:html,bind:bind};})();
           <span class="sw-sv-h">보컬</span><div class="sw-grid sw-grid-sm" id="sw-grid-voice"><button type="button" class="sw-opt on" data-val="여성 솔로"><b>여성 솔로</b></button><button type="button" class="sw-opt" data-val="남성 솔로"><b>남성 솔로</b></button><button type="button" class="sw-opt" data-val="남녀 듀엣"><b>남녀 듀엣</b></button><button type="button" class="sw-opt" data-val="아이 목소리"><b>아이 목소리</b></button><button type="button" class="sw-opt" data-val="합창"><b>합창</b></button></div>
         </div>
 
-        <div class="sw-lyrics-card" hidden style="display:none">
+        <div class="sw-lyrics-card">
           <div class="sw-lyrics-head">
             <span class="sw-lyrics-title" id="sw-lyr-title">🎵 오늘도 수고했어, 내 동료야</span>
             <span class="sw-lyrics-style" id="sw-lyr-target">가족센터 종사자 (동료) 힐링</span>
@@ -1150,7 +1150,7 @@ return {html:html,bind:bind};})();
 
         <!-- 가사 바로 밑에 배치된 원스톱 복사 및 제미나이 직행 버튼 -->
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px">
-          <button type="button" class="btn fill large" id="sw-act-cp" style="font-size:14.2px;padding:11px 22px">📋 완성 프롬프트 복사하기</button>
+          <button type="button" class="btn fill large" id="sw-act-cp" style="font-size:14.2px;padding:11px 22px">📋 완성 명령어 복사하기</button>
           <button type="button" class="btn large" id="sw-act-gem" style="font-size:13.7px;padding:11px 20px">✨ 제미나이로 바로 열기</button>
           <button type="button" class="btn mini" id="sw-act-retry">↺ 가사가 바뀌었을 때 다시 요청 문장 복사</button><button type="button" class="btn mini" id="sw-act-cover">↺ 표지 글자가 틀렸을 때 다시 요청 문장 복사</button>
           <button type="button" class="btn mini sw-prev" data-to="4">‹ 제목 다시 고르기</button>
@@ -1164,9 +1164,9 @@ return {html:html,bind:bind};})();
       <div>
         <h4 class="sg-h">따라 하기 3단계 (초간단!)</h4>
         <ol class="song-steps">
-          <li>위에서 <b>질문 4개를 클릭</b>하고 스타일·보컬을 고른 뒤 <b>[완성 프롬프트 복사하기]</b>를 눌러요.</li>
-          <li><b>[제미나이로 바로 열기]</b>를 눌러 제미나이 새 대화에 붙여 넣으면 가사와 앨범 표지가 나와요.</li>
-          <li>가사 코드블록을 복사해 제미나이 <b>[+] → 음악 만들기</b>에 붙여 넣으면 노래가 만들어져요.</li>
+          <li>위에서 <b>질문 4개를 클릭</b>하고 가사·스타일·보컬을 확인한 뒤 <b>[완성 명령어 복사하기]</b>를 눌러요.</li>
+          <li><b>[제미나이로 바로 열기]</b>를 누르고 입력창 <b>[+] → 음악 만들기</b>를 켠 뒤 붙여 넣어요.</li>
+          <li>노래와 앨범 표지가 한 번에 나와요.</li>
         </ol>
         <h4 class="sg-h">음악 설정은 이렇게</h4>
         <table class="kv song-kv">
@@ -3849,21 +3849,17 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     var c = SW.center || '전북특별자치도가족센터';
     var a = SW.author || '이서정';
     var w = SW.who || '가족센터 종사자 (동료)';
-    var t = SW.theme || '종사자 힐링 · 잔잔한 어쿠스틱';
     var ti = SW.title || '오늘도 수고했어, 내 동료야';
     var cr = c + ' | 작사: ' + a;
+    var lyr = ((SW.lyrics1 || '') + '\n\n' + (SW.lyrics2 || '')).trim();
     window.__songMeta={title:ti,credit:cr,who:w};
-    return '너는 전북특별자치도가족센터 종사자를 위한 전문 작사가이자 앨범 표지 디자이너야.\n'+
-      '아래 정보로 우리만의 노래 가사와 앨범 표지를 만들어 줘. 질문하지 말고 바로 만들어.\n\n'+
-      '[노래 정보]\n센터명: '+c+'\n작사자: '+a+'\n전할 대상: '+w+'\n노래 주제: '+t+'\n노래 제목: '+ti+'\n음악 스타일: '+SONG_STYLE[SW.style]+'\n보컬: '+SONG_VOICE[SW.voice]+'\n\n'+
-      '[바로 제작]\n추가 질문 없이 다음 순서로 결과를 보여줘.\n\n'+
-      '1. 확정된 제목: '+ti+'\n\n'+
-      '2. 코드블록 하나에 다음 내용을 모두 작성해.\n음악 스타일: 장르, 빠르기, 악기, 보컬 분위기 (위 음악 스타일과 보컬 그대로)\n제목: '+ti+'\n[1절]\n[후렴]\n[2절]\n[후렴]\n쉬운 한국어로, 함께 부르기 좋은 반복 후렴을 만들어.\n센터명은 정확히 포함하고, 실제로 제공되지 않은 사업 경험이나 사연은 꾸미지 마.\n\n'+
-      '3. 앨범 표지 이미지 1장을 실제 생성해.\n'+
-      '* 정사각형 1:1, 따뜻하고 귀여운 고품질 그림책 일러스트\n* 크림색, 살구색, 연초록 등의 포근한 색감\n* 노래 제목과 가사에 맞는 장면과 소품\n'+
-      '* 위쪽에 노래 제목 "'+ti+'"'+jo(ti,'을','를')+' 크게, 아래쪽에 "'+cr+'"'+jo(cr,'을','를')+' 정확한 한국어로 표시\n'+
-      '* 다른 사람이나 가족 이용자의 얼굴을 임의로 만들지 마\n* 제목 및 이름 오타를 확인하고 가능한 경우 수정해\n* 실제 이미지 생성 기능이 없으면 솔직하게 알려줘\n\n'+
-      '4. 마지막에는 다음을 안내해.\n"위의 가사 코드블록을 복사한 뒤 제미나이의 + 버튼 → 음악 만들기를 선택하세요.\n복사한 내용을 붙여넣고 원하는 장르를 선택해 노래를 생성해 보세요.\n원하는 장르가 없다면 맞춤 또는 프롬프트 기반 입력에서 음악 스타일을 그대로 활용하세요."\n음악 파일은 직접 만들지 마.';
+    return '아래 제목과 가사로 노래를 만들어 줘. 가사는 한 글자도 바꾸지 말고 그대로 불러.\n'+
+      '- 노래 제목: '+ti+'\n'+
+      '- 작사: '+cr+'\n'+
+      '- 음악 스타일: '+SONG_STYLE[SW.style]+'\n'+
+      '- 보컬: '+SONG_VOICE[SW.voice]+'\n'+
+      '- 앨범 표지: 따뜻한 그림책 일러스트, 정사각형. 위에 노래 제목 "'+ti+'", 아래에 "'+cr+'"만 넣기\n\n'+
+      '[가사]\n'+songTags(lyr);
   }
 
   function render() {
@@ -3987,11 +3983,11 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
       for (var j = 0; j < opts.length; j++) opts[j].classList.toggle('on', opts[j] === opt);
 
       if (grid.id === 'sw-grid-who') {
-        SW.who = val; rebuildTitles(); rebuildThemes();
+        SW.who = val; rebuildTitles(); rebuildThemes(); SW.lyrics1=''; SW.lyrics2='';
         render();
         setTimeout(function(){ gotoStep(3); }, 220);
       } else if (grid.id === 'sw-grid-theme') {
-        SW.theme = val; autoStyle(val);
+        SW.theme = val; autoStyle(val); SW.lyrics1=''; SW.lyrics2='';
         render();
         setTimeout(function(){ gotoStep(4); }, 220);
       } else if (grid.id === 'sw-grid-style') {
@@ -4012,14 +4008,14 @@ var SONG_P="너는 전북특별자치도가족센터 종사자를 위한 전문 
     if (e.target.id === 'sw-who-custom-btn') {
       var inp = $('#sw-who-custom');
       if (inp && inp.value.trim()) {
-        SW.who = inp.value.trim(); rebuildTitles(); rebuildThemes();
+        SW.who = inp.value.trim(); rebuildTitles(); rebuildThemes(); SW.lyrics1=''; SW.lyrics2='';
         render();
         gotoStep(3);
       }
     } else if (e.target.id === 'sw-theme-custom-btn') {
       var inp = $('#sw-theme-custom');
       if (inp && inp.value.trim()) {
-        SW.theme = inp.value.trim(); autoStyle(SW.theme);
+        SW.theme = inp.value.trim(); autoStyle(SW.theme); SW.lyrics1=''; SW.lyrics2='';
         render();
         gotoStep(4);
       }
