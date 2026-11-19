@@ -5865,7 +5865,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   '진행 순서를 꼭 지켜. ①~③은 첫 답변 한 번에 보여 주고 멈춰. 내 답을 받기 전에는 초안을 쓰지 마.',
   '① 전년도 비교 분석: 소스의 {prev} {now} 서식 항목별로 꼼꼼히 비교해서 표로 정리해. 표 열은 [항목 | 전년도 내용 요약 | 문제점 | 보완점 | 올해 개선 방향 | 근거 자료]. 문제점은 "근거 부족·목표와 실적 불일치·평가지표 누락·숫자 오류·표현 모호"처럼 구체적으로 쓰고, 올해 지침·평가지표에서 바뀐 기준도 반영해. 전년도 자료가 없으면 그 사실을 먼저 알리고 올해 서식·지침 기준으로 항목별 점검표를 만들어.',
   '② 올해 작성 방향: 표 바로 아래에 "올해 보고서 작성 방향"을 3~5줄로 정리해. 전년도보다 무엇을 보완해 어떻게 쓸지 핵심만.',
-  '③ 부족 자료·확인 질문: 더 넣으면 좋은 자료가 있으면 이름을 콕 집어 알려 주고, 자료로 알 수 없어 꼭 확인할 내용만 번호·보기를 붙여 한 번에 질문해(가능하면 5개 이내, 자료로 알 수 있는 건 묻지 마). 마지막에 "이 분석과 방향대로 초안을 작성할까요?"라고 묻고 멈춰.',
+  '③ 부족 자료·확인 질문: 더 넣으면 좋은 자료가 있으면 이름을 콕 집어 알려 주고, 질문은 ①에서 찾은 문제점 중 가장 큰 문제점(최대 3개)에 대해서만 번호·보기를 붙여 한 번에 해. 자료로 알 수 있거나 작은 문제는 묻지 말고 [확인 필요]로 두고 진행해. 마지막에 "이 분석과 방향대로 초안을 작성할까요?"라고 묻고 멈춰.',
   '④ 초안: 내가 답하거나 "작성해 줘"라고 하면, 서식의 항목명·순서·표 모양 그대로 전체를 작성해. ①의 개선 방향을 항목마다 실제 문장에 반영하고, 각 항목 끝에 "▶ 개선 반영: 전년도 ○○ → 올해 ○○"를 한 줄로 붙여. 내가 모른다고 한 칸은 [확인 필요]로 둬.',
   '⑤ 검토: {rv} 입장의 검토 담당자로 문제점 3~5가지를 브리핑하고 멈춰. 내가 승인하면 보완한 최종본을 보여 줘. 최종본에서는 "▶ 개선 반영" 줄을 빼.',
   '⑥ 파일: 최종본을 서식과 같은 모양의 한글(.hwpx) 파일로 만들어 줘. 소스에 서식 파일(한글·워드)이 있으면 그 파일에 그대로 채워. 만든 뒤 파일을 다시 열어 내용이 다 들어갔는지 확인하고, 안 되면 숨기지 말고 알린 뒤 워드(.docx)로 만들어 줘.',
@@ -5876,16 +5876,16 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   '이름·연락처·국적 등 개인을 알아볼 수 있는 정보는 쓰지 말고 가명(이용자A, 가족A)이나 OOO으로 써.'
  ];
  function fill(s,d){var c=CMP[d.id];return s.replace('{prev}',c.prev).replace('{now}',c.now);}
- var ASK='(AI 첫 답변 모양)\n① 항목별 비교 분석 표 — 항목 | 전년도 내용 | 문제점 | 보완점 | 올해 개선 방향 | 근거\n② 올해 작성 방향 3~5줄\n③ 더 넣으면 좋은 자료 + 꼭 확인할 질문 (한 번에)\n→ "이 분석과 방향대로 초안을 작성할까요?"';
+ var ASK='(AI 첫 답변 모양)\n① 항목별 비교 분석 표 — 항목 | 전년도 내용 | 문제점 | 보완점 | 올해 개선 방향 | 근거\n② 올해 작성 방향 3~5줄\n③ 더 넣으면 좋은 자료 + 가장 큰 문제점 질문 (최대 3개, 한 번에)\n→ "이 분석과 방향대로 초안을 작성할까요?"';
  DW.forEach(function(d){if(CMP[d.id]){d.ask=ASK;}});
  if(typeof dwInstr==='function'){var _i=dwInstr;dwInstr=function(d){if(!(d&&CMP[d.id]))return _i(d);var o=DW_COMMON.doc;DW_COMMON.doc=COM.map(function(x){return fill(x,d);});try{return _i(d);}finally{DW_COMMON.doc=o;}};}
  if(typeof dwFirst==='function'){var _f=dwFirst;dwFirst=function(d){var h=_f(d);if(!(d&&CMP[d.id]))return h;
   var c=CMP[d.id],role=DWTXT.first.split('\n')[0],task=DWTXT.first.split('\n')[1];
-  var body=['이 프로젝트 지침을 먼저 확인하고 순서대로 진행해 줘.','먼저 소스의 '+c.prev+' '+c.now+' 항목별로 비교해서, 문제점·보완점·올해 개선 방향을 표로 꼼꼼하게 보여 줘.','표 아래에 올해 작성 방향을 정리하고, 부족한 자료와 꼭 확인할 내용은 한 번에 물어봐 줘. 마지막에 이 방향으로 초안을 작성할지 물어봐 줘.'];
+  var body=['이 프로젝트 지침을 먼저 확인하고 순서대로 진행해 줘.','먼저 소스의 '+c.prev+' '+c.now+' 항목별로 비교해서, 문제점·보완점·올해 개선 방향을 표로 꼼꼼하게 보여 줘.','표 아래에 올해 작성 방향을 정리하고, 부족한 자료를 알려 주고, 질문은 가장 큰 문제점만 골라 한 번에 해 줘. 마지막에 이 방향으로 초안을 작성할지 물어봐 줘.'];
   DWTXT.first=role+'\n'+task+'\n'+body.join('\n');
   return '<div class="ins">'+row(hl(role),DW_NOTE.role)+row(hl(task),'<b>첫 대화</b> 바로 쓰지 않고 전년도와 항목별로 비교 분석부터 해요. 무엇이 문제였고 올해 무엇을 고칠지 먼저 보고 시작해요.')+row(body.map(esc).join('<br>'))+'</div>';};}
  if(typeof dwDrawer==='function'){var _d=dwDrawer;dwDrawer=function(d){var h=_d(d);if(!(d&&CMP[d.id]))return h;
-  return h.replace('AI가 꼭 필요한 것만 요약해서 묻고, 답하면 전체를 작성해요.','AI가 먼저 전년도와 항목별로 비교 분석 표를 보여 주고, 올해 작성 방향과 꼭 필요한 질문을 한 번에 드려요.')
+  return h.replace('AI가 꼭 필요한 것만 요약해서 묻고, 답하면 전체를 작성해요.','AI가 먼저 전년도와 항목별로 비교 분석 표를 보여 주고, 올해 작성 방향과 가장 큰 문제점 질문만 한 번에 드려요.')
    .replace(/<div class="apply"><b>이후 진행<\/b>[^<]*<\/div>/,'<div class="apply"><b>이후 진행</b> 질문에 답하거나 「작성해 줘」 → 항목마다 개선점을 반영한 초안 (▶ 개선 반영 표시) → 검토 담당자로 점검·보완 → 한글(.hwpx) 파일 (안 되면 워드). 고칠 곳이 있으면 그냥 말로 요청하세요.</div>');};}
  if(typeof dwRender==='function'&&document.getElementById('dw-body'))try{dwRender();}catch(e){}
 })();
