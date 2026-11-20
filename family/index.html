@@ -5878,6 +5878,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  function fill(s,d){var c=CMP[d.id];return s.replace('{prev}',c.prev).replace('{now}',c.now);}
  var ASK='(AI 첫 답변 모양)\n① 분석 요약 표 — 항목 | 잘된 점 | 문제점 | 올해 추가·보완 | 지침상 추가/삭제 | 이유·근거 | 작성 가이드\n② 추가하면 좋은 자료 표 — 자료 | 왜 필요한지 | 없으면\n③ "추가하고 싶은 정보나 자료가 있으신가요?" → "서식에 맞게 초안을 작성할까요?"';
  DW.forEach(function(d){if(CMP[d.id]){d.ask=ASK;}});
+ /* 2026.11.20 첫 답변 표가 하나만 나오게: 예전 ①단계 규칙(별도 표) 정리 */
+ DW.forEach(function(d){if(!CMP[d.id]||!d.rules)return;d.rules=d.rules.map(function(r){
+  if(/^① 자료 분석에서는 올해 서식 항목 목록/.test(r))return null;
+  if(/^전년도 결과보고서의 미흡한 점, 회의 결정, 수요조사를 개선 대응표로/.test(r))return '① 분석 요약 표의 문제점·올해 추가·보완할 것 칸에는 전년도 결과보고서의 미흡한 점, 회의 결정, 수요조사 결과를 반영해.';
+  if(/^① 자료 분석에서는 계획 대비 실적 대조표를/.test(r))return '초안의 결과 항목에는 계획 대비 실적 대조표를 넣어: | 항목 | 계획(목표) | 실적 | 달성률(계산식) | 근거 자료 |. 연령별 합 = 전체 합, 월별 합 = 연간 실적을 검산하고, 집행 내역과 실적이 안 맞는 곳도 표시해.';
+  return r;}).filter(Boolean);});
  if(typeof dwInstr==='function'){var _i=dwInstr;dwInstr=function(d){if(!(d&&CMP[d.id]))return _i(d);var o=DW_COMMON.doc;DW_COMMON.doc=COM.map(function(x){return fill(x,d);});try{return _i(d);}finally{DW_COMMON.doc=o;}};}
  if(typeof dwFirst==='function'){var _f=dwFirst;dwFirst=function(d){var h=_f(d);if(!(d&&CMP[d.id]))return h;
   var c=CMP[d.id],role=DWTXT.first.split('\n')[0],task=DWTXT.first.split('\n')[1];
