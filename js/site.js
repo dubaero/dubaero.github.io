@@ -187,12 +187,13 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     var cs=getComputedStyle(cards),gap=parseFloat(cs.columnGap)||0,rgap=parseFloat(cs.rowGap)||0;
     var roll=el('div','room-roll');roll.style.cssText='grid-column:1/-1;overflow:hidden;min-width:0';cards.appendChild(roll);
     var colW=(roll.clientWidth-gap*5)/6;
-    var track=el('div','room-track');track.style.cssText='display:grid;grid-template-rows:repeat(2,auto);grid-auto-flow:column;grid-auto-columns:'+colW+'px;column-gap:'+gap+'px;row-gap:'+rgap+'px;transition:transform .9s ease';
+    var track=el('div','room-track');var rowH=cards.children[0]?cards.children[0].offsetHeight:0;
+    track.style.cssText='display:grid;grid-template-rows:repeat(2,'+(rowH?rowH+'px':'auto')+');grid-auto-flow:column;grid-auto-columns:'+colW+'px;column-gap:'+gap+'px;row-gap:'+rgap+'px;transition:transform .9s ease';
     roll.appendChild(track);base.concat(base).forEach(function(L){track.appendChild(mkRoom(L));});
     /* 멈추지 않고 천천히 이어서 흐르기 (한 칸에 약 4초), 마우스를 올리면 잠시 멈춤 */
     var dist=(colW+gap)*cols,dur=cols*4;track.style.transition='none';
     var kf=document.getElementById('room-roll-kf');if(!kf){kf=document.createElement('style');kf.id='room-roll-kf';document.head.appendChild(kf);}
-    kf.textContent='@keyframes roomRoll{from{transform:translateX(0)}to{transform:translateX(-'+dist+'px)}}.room-roll:hover .room-track{animation-play-state:paused}';
+    kf.textContent='@keyframes roomRoll{from{transform:translateX(0)}to{transform:translateX(-'+dist+'px)}}.room-roll:hover .room-track{animation-play-state:paused}.room-track .room{height:100%;overflow:hidden}.room-track .room-org{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}';
     track.style.animation='roomRoll '+dur+'s linear infinite';track.style.willChange='transform';
   }
   renderCards();
