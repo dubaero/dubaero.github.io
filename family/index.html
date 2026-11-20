@@ -5934,7 +5934,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
         var z=(parseFloat(v.style.zoom)||base)*(r.height-o)/r.height;
         v.style.zoom=Math.max(Math.min(base,1),z).toFixed(3);
       }
-      var o2=over(v);if(o2<=1)return;
+      var o2=0;/* 2026.11.20 프롬프트 칸을 줄여 칸 안에서 스크롤하는 방식은 쓰지 않음 (프롬프트는 바로 다 보이게) */
       var c=[].slice.call(v.querySelectorAll('pre,.aig-p,textarea')).filter(function(e){return e.offsetParent&&e.getBoundingClientRect().height>200;}).sort(function(a,b){return b.getBoundingClientRect().height-a.getBoundingClientRect().height;});
       for(var i=0;i<c.length&&o2>1;i++){
         var e=c[i],h=e.getBoundingClientRect().height,sc=h/(e.offsetHeight||h),cut=Math.min(o2,h-170);if(cut<=0)continue;
