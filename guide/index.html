@@ -33,10 +33,10 @@
   transition:border-color .15s,box-shadow .15s,transform .15s
 }
 .gd-card:hover,.gd-card:focus-visible{border-color:#8FBFA0;border-top-color:#45A029;box-shadow:0 10px 26px rgba(23,48,79,.09);transform:translateY(-2px);outline:none}
+.gd-ico svg{display:block;margin-top:3px}
 .gd-ico{
   width:64px;height:64px;flex:none;display:grid;place-items:center;border-radius:16px;
-  background:#ECFDF5;border:1px solid #86EFAC;color:#166534;
-  font-size:32px;font-weight:800;line-height:1;letter-spacing:-.02em;
+  background:#F2FCEF;border:1px solid #86EFAC;color:#166534;
   box-shadow:0 2px 0 #CFE9D3
 }
 .gd-body{display:flex;flex-direction:column;gap:7px;min-width:0}
@@ -53,7 +53,8 @@
 @media (max-width:760px){
   .gd4{padding:36px 0 56px}
   .gd-card{grid-template-columns:auto minmax(0,1fr);gap:16px;padding:20px 18px}
-  .gd-ico{width:52px;height:52px;border-radius:14px;font-size:25px}
+  .gd-ico{width:52px;height:52px;border-radius:14px}
+  .gd-ico svg{width:38px;height:40px}
   .gd-go{grid-column:1/-1;justify-content:center;width:100%}
   .gd-t{font-size:19px}
   .gd-d{font-size:15.5px}
@@ -105,7 +106,7 @@
 
     <div class="gd-grid">
       <button class="gd-card" id="pickle-card" type="button">
-        <span class="gd-ico" aria-hidden="true">ㅍ</span>
+        <span class="gd-ico" aria-hidden="true"><svg viewBox="0 0 240 250" width="46" height="48" focusable="false" aria-hidden="true"><g fill="none" stroke="#2E7A17" stroke-linecap="round"><line x1="50" y1="58" x2="190" y2="58" stroke-width="62"/><line x1="50" y1="188" x2="190" y2="188" stroke-width="56"/><line x1="80" y1="58" x2="80" y2="188" stroke-width="46"/><line x1="160" y1="58" x2="160" y2="188" stroke-width="46"/></g><g fill="none" stroke="#5BB93B" stroke-linecap="round"><line x1="50" y1="58" x2="190" y2="58" stroke-width="50"/><line x1="50" y1="188" x2="190" y2="188" stroke-width="44"/><line x1="80" y1="58" x2="80" y2="188" stroke-width="34"/><line x1="160" y1="58" x2="160" y2="188" stroke-width="34"/></g><ellipse cx="86" cy="70" rx="8.5" ry="4.6" fill="#FFB9A6" opacity="0.6"/><ellipse cx="154" cy="70" rx="8.5" ry="4.6" fill="#FFB9A6" opacity="0.6"/><circle cx="103" cy="52" r="9.6" fill="#FFFFFF"/><circle cx="104.4" cy="53" r="4.9" fill="#16300C"/><circle cx="137" cy="52" r="9.6" fill="#FFFFFF"/><circle cx="138.4" cy="53" r="4.9" fill="#16300C"/><path d="M112 66 Q120 75 128 66" fill="none" stroke="#1F4D10" stroke-width="4" stroke-linecap="round"/></svg></span>
         <span class="gd-body">
           <span class="gd-meta"><span class="gd-tag">무료 가이드</span><span class="gd-tag blue">초보자 실습용 웹앱</span></span>
           <span class="gd-t">피클(Pickle) 에이전트 완전정복</span>
