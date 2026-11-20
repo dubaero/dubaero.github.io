@@ -5885,7 +5885,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  if(typeof dwInstr==='function'){var _i=dwInstr;dwInstr=function(d){if(!(d&&CMP[d.id]))return _i(d);var o=DW_COMMON.doc;DW_COMMON.doc=COM.map(function(x){return fill(x,d);});try{return _i(d);}finally{DW_COMMON.doc=o;}};}
  if(typeof dwFirst==='function'){var _f=dwFirst;dwFirst=function(d){var h=_f(d);if(!(d&&CMP[d.id]))return h;
   var c=CMP[d.id],role=DWTXT.first.split('\n')[0],task=DWTXT.first.split('\n')[1];
-  var body=['지침의 1~3단계를 첫 답변에 한 번에 보여 주고 멈춰.','비교 대상: '+c.prev.replace(/을$|를$/,'')+' ↔ '+c.now.replace(/와$|과$/,'')];
+  var body=['지침 순서대로 진행해 줘. (요약)','1. 분석 요약 표: 항목별 잘된 점·문제점·올해 추가·보완·지침상 추가/삭제·이유·근거·작성 가이드','2. 추가하면 좋은 자료 표','3. "추가할 자료가 있나요?" "초안을 작성할까요?" 묻고 멈추기 (1~3은 첫 답변에 한 번에)','4. 꼭 필요한 예산·수치만 제안값과 함께 한 번에 확인','5. 서식 그대로 초안 → 6. 검토 → 한글 파일','비교 대상: '+c.prev.replace(/을$|를$/,'')+' ↔ '+c.now.replace(/와$|과$/,'')];
   DWTXT.first=role+'\n'+task+'\n'+body.join('\n');
   return '<div class="ins">'+row(hl(role),DW_NOTE.role)+row(hl(task),'<b>첫 대화</b> 바로 쓰지 않고 전년도와 항목별로 비교 분석부터 해요. 무엇이 문제였고 올해 무엇을 고칠지 먼저 보고 시작해요.')+row(body.map(esc).join('<br>'))+'</div>';};}
  if(typeof dwDrawer==='function'){var _d=dwDrawer;dwDrawer=function(d){var h=_d(d);if(!(d&&CMP[d.id]))return h;
