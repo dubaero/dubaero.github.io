@@ -170,8 +170,8 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     if(L.img){var im=document.createElement('img');im.src=L.img;im.alt=(L.title||L.edu)+' 강의 표지';im.loading='lazy';sl.appendChild(im);}
     else{var ph=el('div','slide-ph'+(L.card?' ph-new':''));if(L.card)ph.appendChild(el('small',null,'NEW · 업무 서랍'));ph.appendChild(el('b',null,L.edu));sl.appendChild(ph);}
     a.appendChild(sl);
-    var LG=LOGO[L.org];
-    if(LG){var lg=document.createElement('img');lg.className='room-logo';lg.src='/img/logo/'+LG+'.png';lg.alt='';a.appendChild(lg);}
+    var LG=LOGO[L.org],LGI=window.LOGO_ORG&&window.LOGO_IMG&&LOGO_IMG[LOGO_ORG[L.org]];
+    if(LG||LGI){var lg=document.createElement('img');lg.className='room-logo';lg.src=LGI||('/img/logo/'+LG+'.png');lg.alt='';a.appendChild(lg);}
     var info=el('div','room-info');info.appendChild(el('span','room-date',L.date.replace(/\s*·\s*/g,'·')));info.appendChild(el('span','room-org',L.org));info.appendChild(el('span','room-edu',L.edu));
     a.appendChild(info);
     return a;}
