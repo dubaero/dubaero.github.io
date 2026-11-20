@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>프롬프트 디자인실 · 두배로 이서정</title>
+<meta name="description" content="질문 한 줄이 결과를 바꿉니다. 역할·맥락·상황·결과값 네 칸으로 배우는 프롬프트 작성법과 바로 복사하는 실전 템플릿.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://dubaero.kr/guide/">
+<!-- GUIDE_GUARD : guide/index.html 과 같은 잠금 키(sessionStorage 'guide_ok' / localStorage 'guide_ok_t')를 사용합니다. -->
+<script>
+/* 2026.11.20 dubaero.kr AI 가이드 — 비밀번호(8093)를 확인하지 않고는 이 화면이 열리지 않게 */
+(function(){try{
+  var ok=false;
+  try{ok=(sessionStorage.getItem("guide_ok")==="1");}catch(e){}
+  if(!ok){var t=+localStorage.getItem("guide_ok_t");ok=!!(t&&t>Date.now());}
+  if(!ok){location.replace("/guide/?locked=1");}
+}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+/* ============================================================
+   0. 기본 설정 — 강의장 프로젝터에서도 크게 읽히는 글자 크기
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#EEF2FF;
+  --surface:#FFFFFF;
+  --canvas:#F8FAFC;
+  --indigo:#4F46E5;
+  --indigo-2:#6366F1;
+  --indigo-dark:#4338CA;
+  --violet:#7C3AED;
+  --violet-2:#8B5CF6;
+  --deep:#1E1B4B;
+  --ink:#1E1B4B;
+  --ink-2:#302C6B;
+  --muted:#4E5478;
+  --line:#DDE3F7;
+  --line-strong:#C5CDF0;
+  --soft:#F4F6FF;
+  --mist:#EDF1FF;
+  --radius:20px;
+  --shadow:0 6px 18px rgba(30,27,75,.07);
+  --shadow-lg:0 16px 40px rgba(30,27,75,.13);
+  --h1:clamp(36px,4.3vw,60px);
+  --h2:clamp(27px,3vw,44px);
+  --h3:clamp(20px,1.7vw,26px);
+  --lead:clamp(17px,1.5vw,22px);
+  --body:clamp(16.5px,1.36vw,19.5px);
+  --small:clamp(15px,1.16vw,17.5px);
+  --tiny:clamp(13.5px,1.05vw,15.5px);
+  --font:'Pretendard Variable',Pretendard,'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic','맑은 고딕',system-ui,-apple-system,sans-serif;
+}
+html,body{height:100%;margin:0}
+body{
+  font-family:var(--font);
+  color:var(--ink);
+  background:var(--bg);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  letter-spacing:-.012em;
+  word-break:keep-all;
+}
+p,li,span,div{overflow-wrap:break-word}
+/* 은은한 배경 (정지 상태, 애니메이션 없음) */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(58% 50% at 90% 4%,rgba(99,102,241,.16),transparent 70%),
+    radial-gradient(52% 46% at 4% 96%,rgba(139,92,246,.15),transparent 70%),
+    radial-gradient(40% 36% at 50% 50%,rgba(255,255,255,.65),transparent 72%);
+}
+button{font-family:inherit;color:inherit;cursor:pointer;border:0;background:none;letter-spacing:inherit}
+h1,h2,h3,h4,p,ul,ol,li{margin:0}
+ul,ol{padding:0;list-style:none}
+b,strong{font-weight:800}
+::selection{background:#D9DEFF}
+
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.ico{width:1.15em;height:1.15em;display:inline-block;vertical-align:-.18em;color:currentColor;flex:none}
+
+/* ============================================================
+   1. 상단 바 / 하단 컨트롤
+   ============================================================ */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:56px;z-index:40;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:0 clamp(14px,2.4vw,30px);
+  background:linear-gradient(to bottom,rgba(238,242,255,.97),rgba(238,242,255,.72));
+  backdrop-filter:blur(6px);
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15.5px;color:var(--ink);min-width:0}
+.brand-mark{
+  width:26px;height:26px;border-radius:8px;flex:none;
+  background:linear-gradient(140deg,var(--indigo-2),var(--indigo-dark));
+  color:#fff;display:grid;place-items:center;font-size:14px;font-weight:800;line-height:1;
+  box-shadow:0 2px 0 #3730A3;
+}
+.brand-mark .ico{font-size:15px}
+.brand > span:not(.brand-mark){white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-sub{font-weight:600;color:var(--muted);font-size:13.5px}
+.top-actions{display:flex;gap:7px;flex:none}
+.ico-btn{
+  display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+  padding:8px 12px;border-radius:11px;border:1px solid var(--line-strong);
+  background:#fff;font-size:13.5px;font-weight:700;color:var(--ink-2);
+  box-shadow:0 1px 2px rgba(30,27,75,.05);
+  transition:background .18s ease,border-color .18s ease,color .18s ease;
+}
+.ico-btn:hover{background:var(--soft);border-color:var(--indigo);color:var(--indigo-dark)}
+.ico-btn .ico{font-size:16px}
+.ico-btn.back-link .ico{transform:rotate(180deg)}
+.ico-btn.back-link{color:var(--indigo-dark)}
+
+.bottombar{
+  position:fixed;left:0;right:0;bottom:0;height:78px;z-index:40;
+  display:flex;align-items:center;gap:clamp(10px,2vw,22px);
+  padding:0 clamp(14px,2.4vw,30px) 4px;
+  background:linear-gradient(to top,rgba(238,242,255,.98),rgba(238,242,255,.6));
+}
+.nav-btn{
+  width:46px;height:46px;border-radius:50%;flex:none;
+  display:grid;place-items:center;font-size:20px;font-weight:800;
+  border:1.5px solid var(--line-strong);background:#fff;color:var(--indigo-dark);
+  box-shadow:0 2px 0 rgba(197,205,240,.8);
+  transition:background .18s ease,border-color .18s ease,color .18s ease,opacity .18s ease;
+}
+.nav-btn:hover:not(:disabled){background:var(--indigo);border-color:var(--indigo);color:#fff}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.progress{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+.bar{height:6px;border-radius:99px;background:#DCE3FA;overflow:hidden}
+.bar-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#818CF8,var(--indigo));transition:width .3s ease}
+.dots{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
+.dot{width:17px;height:7px;border-radius:99px;background:#D2D9F6;flex:none;transition:background .2s ease,width .2s ease}
+.dot:hover{background:#AAB4EC}
+.dot.active{background:var(--indigo);width:28px}
+.counter{font-size:13.5px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.counter b{color:var(--indigo-dark);font-size:15px}
+
+/* ============================================================
+   2. 슬라이드 공통
+   ============================================================ */
+#deck{position:fixed;inset:0;z-index:10}
+.slide{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  padding:62px clamp(18px,3.8vw,54px) 84px;
+  opacity:0;visibility:hidden;
+  transition:opacity .3s ease;
+  overflow:hidden;
+}
+.slide.active{opacity:1;visibility:visible}
+.slide.tall{align-items:flex-start;overflow-y:auto;overflow-x:hidden}
+.inner{width:100%;max-width:1220px;display:flex;flex-direction:column;gap:clamp(11px,1.6vh,19px);min-width:0}
+.head{display:flex;flex-direction:column;gap:7px;min-width:0}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+  font-size:13.5px;font-weight:800;letter-spacing:.04em;color:var(--indigo-dark);
+  background:#E5E8FF;border:1px solid #C3C9F7;border-radius:99px;padding:5px 13px;
+}
+.sub{font-size:var(--lead);color:var(--muted);font-weight:700;line-height:1.45}
+.title{
+  font-size:var(--h2);font-weight:800;line-height:1.18;
+  letter-spacing:-.03em;color:var(--ink);word-break:keep-all;
+}
+.hl{color:var(--indigo-dark);background:linear-gradient(transparent 58%,#D6DBFF 58%);padding:0 3px;border-radius:4px}
+.punch{
+  font-size:var(--lead);font-weight:800;color:var(--deep);
+  display:block;text-align:center;
+}
+.punch .ico{font-size:1.1em;color:var(--indigo);vertical-align:-.16em;margin-right:5px}
+.tip{
+  font-size:var(--tiny);color:var(--muted);line-height:1.55;font-weight:600;
+  display:block;position:relative;padding-left:26px;
+}
+.tip .ico{position:absolute;left:0;top:.14em;color:var(--indigo);font-size:1.2em}
+.num{
+  display:inline-grid;place-items:center;width:18px;height:18px;flex:none;
+  border-radius:6px;background:#E7EAFF;color:var(--indigo-dark);
+  font-size:11.5px;font-weight:800;line-height:1;
+}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+.desktop-only{display:initial}
+.mobile-only{display:none}
+
+/* ============================================================
+   3. 표지
+   ============================================================ */
+.hero{gap:clamp(12px,2vh,22px)}
+.hero-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(16px,3vw,40px)}
+.hero-copy{display:flex;flex-direction:column;gap:10px;align-items:flex-start;min-width:0}
+.hero-kicker{font-size:calc(var(--lead) + 2px);font-weight:800;color:var(--indigo-dark);letter-spacing:-.02em}
+.hero h1{font-size:var(--h1);font-weight:800;line-height:1.13;letter-spacing:-.035em;color:var(--deep)}
+.hero-sub{font-size:var(--lead);line-height:1.5;color:var(--ink-2);font-weight:600}
+.hero-sub b{color:var(--indigo-dark)}
+.mascot{width:clamp(120px,14vw,178px);flex:none}
+.mascot svg{width:100%;height:auto;display:block;overflow:visible}
+.ms-body{animation:msBob 3.6s cubic-bezier(.34,.78,.4,1) infinite;transform-origin:50% 94%;transform-box:fill-box}
+.ms-eye{transform-box:fill-box;transform-origin:center;animation:msBlink 4.8s ease-in-out infinite}
+.ms-badge{animation:msPop 3.6s cubic-bezier(.34,.78,.4,1) infinite;transform-origin:center;transform-box:fill-box}
+@keyframes msBob{
+  0%,56%{transform:translateY(0) scale(1,1)}
+  64%{transform:translateY(-6%) scale(.985,1.02)}
+  72%{transform:translateY(0) scale(1.02,.98)}
+  80%,100%{transform:translateY(0) scale(1,1)}
+}
+@keyframes msBlink{0%,90%,100%{transform:scaleY(1)} 95%{transform:scaleY(.08)}}
+@keyframes msPop{
+  0%,44%{transform:translateY(0) rotate(0)}
+  52%{transform:translateY(-7%) rotate(6deg)}
+  60%{transform:translateY(0) rotate(0)}
+  68%,100%{transform:translateY(0) rotate(0)}
+}
+.formula-preview{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.1vw,14px)}
+.fp{
+  background:#fff;border:1px solid var(--line);border-left:4px solid var(--indigo);
+  border-radius:16px;padding:13px 15px;display:flex;flex-direction:column;gap:3px;
+  box-shadow:0 3px 0 rgba(197,205,240,.35);min-width:0;
+}
+.fp:nth-child(2){border-left-color:var(--violet)}
+.fp:nth-child(3){border-left-color:var(--indigo-2)}
+.fp:nth-child(4){border-left-color:var(--violet-2)}
+.fp-n{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:800;letter-spacing:.04em;color:var(--indigo)}
+.fp b{font-size:var(--small);font-weight:800;color:var(--deep);line-height:1.3}
+.fp small{font-size:var(--tiny);color:var(--muted);font-weight:600;line-height:1.35}
+.hero-foot{display:flex;align-items:center;gap:clamp(12px,2vw,22px);flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 30px;border-radius:14px;font-size:clamp(16px,1.4vw,19px);font-weight:800;
+  background:linear-gradient(140deg,var(--indigo-2),var(--indigo-dark));color:#fff;
+  box-shadow:0 4px 0 #3730A3,0 10px 22px rgba(79,70,229,.28);
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 5px 0 #3730A3,0 12px 26px rgba(79,70,229,.32)}
+.btn-primary:active{transform:translateY(2px);box-shadow:0 2px 0 #3730A3}
+.btn-primary span{font-size:1.05em;line-height:1}
+.hero-by{font-size:var(--small);font-weight:800;color:var(--ink-2)}
+.hero-by span{color:var(--muted);font-weight:600}
+.hero-hint{font-size:var(--tiny);color:var(--muted);font-weight:600;margin-left:auto}
+.hero-hint b{color:var(--indigo-dark)}
+
+/* ============================================================
+   4. Before / After (2장)
+   ============================================================ */
+.seg-wrap{display:flex;gap:8px;background:#E7EBFF;border:1px solid var(--line-strong);border-radius:14px;padding:5px;align-self:stretch;max-width:620px}
+.seg-row{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap}
+.seg-hint{font-size:var(--tiny);font-weight:700;color:#8A90B4}
+.seg{
+  flex:1;padding:11px 14px;border-radius:10px;font-size:var(--small);font-weight:800;color:var(--muted);
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:background .18s ease,color .18s ease,box-shadow .18s ease;
+}
+.seg .ico{font-size:1.1em}
+.seg.on{background:#fff;color:var(--indigo-dark);box-shadow:0 2px 6px rgba(30,27,75,.13)}
+.cmp{position:relative;min-height:238px}
+.cmp-pane{display:none;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(10px,1.6vw,20px);align-items:stretch}
+.cmp-pane.on{display:grid}
+.ask,.answer{border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.ask{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}
+.ask-label{font-size:12.5px;font-weight:800;letter-spacing:.05em;color:var(--indigo);display:flex;align-items:center;gap:6px}
+.ask-text{font-size:var(--body);line-height:1.55;font-weight:700;color:var(--ink-2);background:var(--soft);border:1px dashed var(--line-strong);border-radius:12px;padding:11px 14px}
+.ask-text.plain{color:#5B6070;background:#F7F8FB;border-color:#D9DEE8}
+.answer{background:linear-gradient(160deg,#F7F8FF,#FFFFFF);border:1px solid var(--line-strong);box-shadow:var(--shadow)}
+.answer.bad{background:linear-gradient(160deg,#FBFBFD,#F4F5F8);border-color:#DCE0EA}
+.answer-label{font-size:12.5px;font-weight:800;letter-spacing:.05em;color:var(--indigo-dark);display:flex;align-items:center;gap:6px}
+.answer.bad .answer-label{color:#707684}
+.ans-line{font-size:var(--body);line-height:1.5;color:var(--ink-2);font-weight:600}
+.answer.bad .ans-line{color:#6B7080}
+.ans-line b{color:var(--indigo-dark)}
+.answer.bad .ans-line b{color:#4C515E}
+.verdict{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;font-size:var(--tiny);font-weight:800;padding:6px 11px;border-radius:99px;margin-top:auto}
+.verdict.no{background:#F1F2F6;color:#686D7B;border:1px solid #DDE0E8}
+.verdict.yes{background:#E9EBFF;color:var(--indigo-dark);border:1px solid #C3C9F7}
+.verdict .ico{font-size:1.05em}
+
+/* ============================================================
+   5. 4요소 (3장)
+   ============================================================ */
+.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1.1vw,14px)}
+.fb{
+  background:#fff;border:2px solid var(--line);border-radius:16px;padding:13px 12px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;
+  transition:border-color .18s ease,background .18s ease,transform .15s ease,box-shadow .18s ease;
+  min-width:0;
+}
+.fb:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(30,27,75,.1)}
+.fb .fb-n{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:800;color:var(--indigo);letter-spacing:.04em}
+.fb b{font-size:clamp(19px,1.8vw,25px);font-weight:800;color:var(--deep);line-height:1.25}
+.fb small{font-size:var(--tiny);color:var(--muted);font-weight:600;line-height:1.35}
+.fb.on{border-color:var(--indigo);background:linear-gradient(170deg,#EEF0FF,#FFFFFF);box-shadow:0 3px 0 rgba(79,70,229,.25)}
+.fb.on .fb-n{color:var(--violet)}
+.fb[data-k="context"].on{border-color:var(--violet);background:linear-gradient(170deg,#F3EFFF,#FFFFFF);box-shadow:0 3px 0 rgba(124,58,237,.22)}
+.fb[data-k="situation"].on{border-color:var(--indigo-2);background:linear-gradient(170deg,#EEF1FF,#FFFFFF);box-shadow:0 3px 0 rgba(99,102,241,.22)}
+.fb[data-k="output"].on{border-color:var(--violet-2);background:linear-gradient(170deg,#F4F0FF,#FFFFFF);box-shadow:0 3px 0 rgba(139,92,246,.22)}
+.detail{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(12px,2vw,26px);align-items:center;
+  background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 20px;box-shadow:var(--shadow);
+  min-height:132px;
+}
+.d-left{display:flex;flex-direction:column;gap:6px;min-width:0}
+.d-tag{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--indigo-dark)}
+.d-desc{font-size:var(--body);line-height:1.5;color:var(--ink-2);font-weight:600}
+.d-ex{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--indigo-2);border-radius:13px;padding:12px 15px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.d-label{font-size:12.5px;font-weight:800;color:var(--muted);letter-spacing:.04em}
+.d-quote{font-size:var(--body);line-height:1.5;font-weight:800;color:var(--deep)}
+.copy-btn{
+  align-self:flex-start;display:inline-flex;align-items:center;gap:6px;
+  font-size:var(--tiny);font-weight:800;padding:8px 13px;border-radius:10px;
+  background:#F1F3FF;color:var(--indigo-dark);border:1px solid #C9CFF7;
+  transition:background .18s ease,color .18s ease,border-color .18s ease;
+}
+.copy-btn:hover{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+.copy-btn.done{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+
+/* ============================================================
+   6. 조립 체험 (4장)
+   ============================================================ */
+.builder{display:grid;grid-template-columns:1.18fr .82fr;gap:clamp(12px,1.8vw,22px);align-items:stretch;min-width:0}
+.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:0}
+.bgroup{background:#fff;border:1px solid var(--line);border-radius:15px;padding:11px 12px;display:flex;flex-direction:column;gap:6px;min-width:0;box-shadow:0 2px 8px rgba(30,27,75,.04)}
+.bgroup-h{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.03em;color:var(--indigo-dark)}
+.bgroup-h .n{width:20px;height:20px;border-radius:6px;background:#E7EAFF;display:grid;place-items:center;font-size:11.5px;color:var(--indigo-dark)}
+.opt{
+  text-align:left;font-size:clamp(15.5px,1.12vw,16.5px);font-weight:700;line-height:1.35;color:var(--ink-2);
+  padding:9px 11px;border-radius:9px;border:1px solid #E3E7F6;background:#FAFBFF;
+  transition:background .15s ease,border-color .15s ease,color .15s ease;
+}
+.opt:hover{background:#EFF2FF;border-color:#C9CFF7}
+.opt.on{background:var(--indigo);border-color:var(--indigo);color:#fff;font-weight:800}
+.compose{
+  background:linear-gradient(165deg,#1E1B4B,#312E81);color:#fff;border-radius:18px;padding:16px 18px;
+  display:flex;flex-direction:column;gap:9px;min-width:0;box-shadow:var(--shadow-lg);
+}
+.compose-h{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;letter-spacing:.04em;color:#C7D2FE}
+.compose-count{margin-left:auto;font-size:12.5px;font-weight:800;color:#fff;background:rgba(255,255,255,.16);border-radius:99px;padding:3px 9px}
+.compose-body{
+  flex:1;min-height:104px;background:rgba(255,255,255,.08);border:1px solid rgba(199,210,254,.35);
+  border-radius:12px;padding:12px 14px;font-size:clamp(15px,1.14vw,17px);line-height:1.6;font-weight:600;
+  color:#F8FAFF;white-space:pre-wrap;overflow-wrap:break-word;
+}
+.compose-body.ph{color:#A5B4FC;font-weight:600}
+.compose-actions{display:flex;gap:7px;flex-wrap:wrap}
+.btn-copy{
+  display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:11px;
+  background:#fff;color:var(--indigo-dark);font-size:var(--small);font-weight:800;
+  box-shadow:0 3px 0 rgba(0,0,0,.18);
+}
+.btn-copy:hover{background:#EEF0FF}
+.btn-copy.done{background:#A5F3C4;color:#14532D}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border-radius:11px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(199,210,254,.4);color:#E0E7FF;
+  font-size:var(--tiny);font-weight:800;
+}
+.btn-ghost:hover{background:rgba(255,255,255,.18)}
+
+/* ============================================================
+   7. 문서 템플릿 (5장)
+   ============================================================ */
+.tabs{display:flex;gap:7px;flex-wrap:wrap}
+.tab-btn{
+  display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:12px;
+  border:1.5px solid var(--line-strong);background:#fff;font-size:var(--small);font-weight:800;color:var(--muted);
+  transition:background .18s ease,border-color .18s ease,color .18s ease;
+}
+.tab-btn .ico{font-size:1.15em}
+.tab-btn:hover{background:var(--soft);color:var(--indigo-dark)}
+.tab-btn.on{background:var(--indigo);border-color:var(--indigo);color:#fff}
+.tab-panel{display:none}
+.tab-panel.on{display:grid}
+.doc{
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:clamp(12px,1.8vw,22px);
+  align-items:stretch;min-width:0;
+}
+.prompt-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px 18px;display:flex;flex-direction:column;gap:10px;min-width:0;box-shadow:var(--shadow)}
+.pc-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pc-head b{font-size:var(--small);font-weight:800;color:var(--deep)}
+.pc-head .copy-btn{margin-left:auto}
+.prompt-text{
+  margin:0;font-family:inherit;font-size:clamp(15px,1.1vw,17px);line-height:1.6;color:#2A2C55;
+  background:var(--canvas);border:1px solid #E6EAF7;border-radius:11px;padding:13px 15px;
+  white-space:pre-wrap;overflow-wrap:break-word;font-weight:600;
+}
+.doc-side{display:flex;flex-direction:column;gap:10px;min-width:0}
+.doc-tip{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:13px 15px;display:flex;flex-direction:column;gap:6px}
+.doc-tip b{font-size:13.5px;font-weight:800;color:var(--indigo-dark);letter-spacing:.03em}
+.doc-tip p{font-size:var(--tiny);line-height:1.55;color:var(--muted);font-weight:600}
+.doc-tip code{font-family:inherit;background:#fff;border:1px solid var(--line-strong);border-radius:6px;padding:1px 5px;font-weight:800;color:var(--indigo-dark);font-size:.98em}
+.chips-inline{display:flex;flex-wrap:wrap;gap:5px}
+.chips-inline span{font-size:12.5px;font-weight:800;color:var(--indigo-dark);background:#fff;border:1px solid #C9CFF7;border-radius:99px;padding:4px 9px}
+
+/* ============================================================
+   8. 이미지 5요소 (6장)
+   ============================================================ */
+.five{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.fv{
+  background:#fff;border:2px solid var(--line);border-radius:14px;padding:11px 10px;
+  display:flex;flex-direction:column;gap:3px;align-items:flex-start;text-align:left;min-width:0;
+  transition:border-color .18s ease,background .18s ease,transform .15s ease;
+}
+.fv:hover{transform:translateY(-2px)}
+.fv .fv-n{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:800;letter-spacing:.03em;color:var(--violet)}
+.fv .fv-n .num{width:16px;height:16px;font-size:10.5px;background:#F1EDFF;color:var(--violet)}
+.fv b{font-size:clamp(15.5px,1.32vw,19px);font-weight:800;color:var(--deep);line-height:1.25}
+.fv small{font-size:12.5px;color:var(--muted);font-weight:600;line-height:1.3}
+.fv.on{border-color:var(--violet);background:linear-gradient(170deg,#F2EDFF,#FFFFFF);box-shadow:0 3px 0 rgba(124,58,237,.2)}
+.compose-line{
+  display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 18px;box-shadow:var(--shadow);
+}
+.cl-seg{
+  font-size:var(--body);font-weight:800;color:#7A7FA2;transition:color .18s ease,background .18s ease;
+  padding:2px 6px;border-radius:7px;
+}
+.cl-seg.on{color:var(--deep);background:#EDEBFF}
+.cl-plus{color:#B9BFE4;font-weight:800;font-size:var(--small)}
+.img-detail{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(12px,2vw,24px);align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 18px;box-shadow:var(--shadow);min-height:112px}
+.img-detail .d-ex{border-left-color:var(--violet)}
+.img-detail .d-tag{color:var(--violet)}
+.img-detail .num{background:#F1EDFF;color:var(--violet)}
+
+/* ============================================================
+   9. 이미지 실전 (7장)
+   ============================================================ */
+.pair{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:clamp(8px,1.2vw,14px);align-items:stretch}
+.pair-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 15px;display:flex;flex-direction:column;gap:7px;min-width:0;box-shadow:var(--shadow)}
+.pair-card.after{border-color:#BFCAF8;background:linear-gradient(165deg,#F6F7FF,#FFFFFF)}
+.pair-label{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;font-size:12.5px;font-weight:800;padding:4px 10px;border-radius:99px;background:#F1F2F7;color:#6A6F7E}
+.pair-card.after .pair-label{background:#E5E8FF;color:var(--indigo-dark)}
+.pair-say{font-size:var(--small);line-height:1.5;font-weight:800;color:var(--ink-2)}
+.pair-card.after .pair-say{color:var(--deep)}
+.pair-note{font-size:var(--tiny);line-height:1.5;color:var(--muted);font-weight:600}
+.pair-arrow{display:grid;place-items:center;color:var(--indigo);font-size:clamp(18px,2vw,26px);font-weight:800}
+.tpl-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.tpl{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:7px;min-width:0;box-shadow:0 2px 8px rgba(30,27,75,.05)}
+.tpl-h{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:var(--violet);letter-spacing:.03em}
+.tpl p{font-size:clamp(14.5px,1.03vw,16px);line-height:1.55;color:var(--ink-2);font-weight:600;flex:1}
+.tpl .copy-btn{margin-top:auto;padding:6px 10px;font-size:12.5px}
+
+/* ============================================================
+   10. 고치는 주문 (8장)
+   ============================================================ */
+.fixcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(9px,1.2vw,14px)}
+.fx{
+  background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:15px 17px;
+  display:flex;flex-direction:column;gap:8px;text-align:left;min-width:0;
+  transition:border-color .18s ease,box-shadow .18s ease,transform .15s ease;
+}
+.fx:hover{border-color:var(--indigo-2);box-shadow:0 10px 22px rgba(30,27,75,.1);transform:translateY(-2px)}
+.fx.open{border-color:var(--indigo);background:linear-gradient(170deg,#F3F4FF,#FFFFFF)}
+.fx-h{display:flex;align-items:center;gap:8px}
+.fx-badge{width:30px;height:30px;border-radius:9px;background:#E9EBFF;color:var(--indigo-dark);display:grid;place-items:center;font-size:16px;flex:none}
+.fx-h b{font-size:clamp(19px,1.65vw,24px);font-weight:800;color:var(--deep);letter-spacing:-.02em}
+.fx p{font-size:clamp(16.5px,1.2vw,18px);line-height:1.55;color:var(--ink-2);font-weight:600;background:var(--soft);border:1px dashed var(--line-strong);border-radius:10px;padding:11px 13px;flex:1;min-height:78px}
+.demo{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:clamp(8px,1.2vw,14px);align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 18px;box-shadow:var(--shadow)}
+.demo-side{display:flex;flex-direction:column;gap:5px;min-width:0}
+.demo-label{font-size:12.5px;font-weight:800;letter-spacing:.04em;color:#8A90B4}
+.demo-side.on .demo-label{color:var(--indigo-dark)}
+.demo-text{font-size:clamp(15.5px,1.1vw,17px);font-weight:700;line-height:1.5;color:#737890}
+.demo-side.on .demo-text{color:var(--deep)}
+.demo-arrow{color:var(--indigo);font-size:22px;font-weight:800;line-height:1}
+.fx-why{display:none;font-size:12.5px;font-weight:700;color:var(--indigo-dark);line-height:1.45}
+.fx.open .fx-why{display:block}
+.fx.open .fx-hint{display:none}
+.fx .copy-btn{margin-top:auto;padding:6px 10px;font-size:12.5px}
+.fx-hint{font-size:12px;font-weight:700;color:#8A90B4;align-self:flex-end}
+
+/* ============================================================
+   11. 실수 3가지 (9장)
+   ============================================================ */
+.mistakes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(9px,1.2vw,14px)}
+.mk{
+  background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:20px 20px;
+  display:flex;flex-direction:column;gap:11px;text-align:left;min-width:0;
+}
+.mk:hover{border-color:#B9C1F0}
+.mk-h{display:flex;align-items:center;gap:8px}
+.mk-x{width:26px;height:26px;border-radius:8px;background:#F3F0FB;color:#7C6BB8;display:grid;place-items:center;font-size:14px;flex:none}
+.mk-h b{font-size:clamp(19px,1.6vw,23px);font-weight:800;color:var(--deep);letter-spacing:-.02em;line-height:1.3}
+.mk-say{font-size:clamp(16.5px,1.15vw,18px);line-height:1.5;color:#6F7488;font-weight:600;font-style:normal;background:#F7F8FC;border-radius:9px;padding:11px 13px;min-height:74px;display:flex;align-items:center}
+.mk-say::before{content:"예) ";font-weight:800;color:#9AA0B8}
+.mk-fix{display:flex;gap:6px;align-items:flex-start;font-size:clamp(16.5px,1.15vw,18px);line-height:1.55;font-weight:700;color:var(--indigo-dark)}
+.mk-fix .ico{margin-top:.2em}
+.mk-fix b{font-weight:800}
+
+/* ============================================================
+   12. 치트키 · 미션 (10장)
+   ============================================================ */
+.cheats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(9px,1.2vw,14px)}
+.cheat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px 17px;display:flex;flex-direction:column;gap:8px;min-width:0;box-shadow:0 3px 10px rgba(30,27,75,.05)}
+.cheat-h{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;color:var(--indigo-dark);letter-spacing:.03em}
+.cheat-h .ico{font-size:1.25em}
+.cheat-h em{font-style:normal;color:var(--violet);font-weight:800;font-size:11.5px;background:#F1EDFF;border-radius:99px;padding:3px 8px;margin-left:auto;white-space:nowrap}
+.cheat p{font-size:clamp(15px,1.08vw,16.5px);line-height:1.55;color:#2C2F55;font-weight:600;flex:1}
+.cheat b{color:var(--indigo-dark)}
+.cheat .copy-btn{margin-top:auto}
+.missions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.mission{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px 13px;min-width:0}
+.m-num{width:26px;height:26px;border-radius:8px;background:#E9EBFF;color:var(--indigo-dark);display:grid;place-items:center;font-size:13px;font-weight:800;flex:none}
+.mission:nth-child(2) .m-num{background:#F1EDFF;color:var(--violet)}
+.mission:nth-child(3) .m-num{background:#EDF0FF;color:var(--indigo-2)}
+.m-text{font-size:var(--tiny);line-height:1.4;font-weight:700;color:var(--ink-2)}
+.closer{display:flex;align-items:center;gap:clamp(10px,1.6vw,18px);justify-content:space-between;flex-wrap:wrap;background:linear-gradient(140deg,#1E1B4B,#3730A3);color:#fff;border-radius:16px;padding:14px 20px}
+.closer .txt h3{font-size:clamp(17px,1.5vw,21px);font-weight:800;letter-spacing:-.025em;line-height:1.3}
+.closer .txt p{font-size:var(--tiny);color:#C7D2FE;font-weight:600;margin-top:3px}
+.closer a{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--indigo-dark);text-decoration:none;font-size:var(--tiny);font-weight:800;padding:9px 14px;border-radius:10px;white-space:nowrap}
+
+/* ============================================================
+   13. 목차 오버레이 / 토스트
+   ============================================================ */
+.overview{
+  position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;
+  background:rgba(30,27,75,.46);backdrop-filter:blur(3px);
+  opacity:0;visibility:hidden;transition:opacity .22s ease;
+  padding:clamp(14px,3vw,40px);
+}
+.overview.open{opacity:1;visibility:visible}
+.ov-panel{
+  width:100%;max-width:980px;max-height:100%;overflow:auto;
+  background:#fff;border-radius:24px;padding:clamp(16px,2.4vw,28px);
+  box-shadow:0 30px 70px rgba(15,14,50,.3);
+}
+.ov-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.ov-head h3{font-size:var(--h3);font-weight:800;letter-spacing:-.025em}
+.ov-head .sub{font-size:14px}
+.ov-close{margin-left:auto;padding:8px 14px;border-radius:10px;border:1.5px solid var(--line-strong);font-size:13.5px;font-weight:800;color:var(--muted);background:#fff}
+.ov-close:hover{background:var(--soft);color:var(--indigo-dark)}
+.ov-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.ov-item{
+  text-align:left;background:#FAFBFF;border:2px solid var(--line);border-radius:14px;
+  padding:12px 13px;display:flex;flex-direction:column;gap:4px;
+  transition:border-color .18s ease,background .18s ease;
+}
+.ov-item:hover{border-color:var(--indigo-2);background:#F3F5FF}
+.ov-item.current{border-color:var(--indigo);background:#E9ECFF}
+.ov-num{font-size:12.5px;font-weight:800;color:var(--indigo);letter-spacing:.04em}
+.ov-title{font-size:14px;font-weight:800;color:var(--ink);line-height:1.35;letter-spacing:-.02em}
+
+.toast{
+  position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(6px);
+  z-index:70;background:#1E1B4B;color:#fff;font-size:14px;font-weight:700;
+  padding:11px 18px;border-radius:99px;box-shadow:0 10px 24px rgba(15,14,50,.3);
+  opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease;
+  max-width:calc(100vw - 32px);text-align:center;
+}
+.toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+
+/* ============================================================
+   14. 반응형
+   ============================================================ */
+@media (max-width:1100px){
+  .cmp-pane{grid-template-columns:1fr 1fr}
+  .builder{grid-template-columns:1fr}
+  .compose-body{min-height:86px}
+  .doc{grid-template-columns:1fr}
+  .doc-side{flex-direction:row;flex-wrap:wrap}
+  .doc-tip{flex:1;min-width:220px}
+  .four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .five{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tpl-row{grid-template-columns:1fr 1fr}
+  .ov-grid{grid-template-columns:repeat(3,1fr)}
+  .slide{padding:58px 20px 80px}
+  .inner{max-width:760px}
+}
+@media (max-width:860px){
+  .cmp-pane{grid-template-columns:1fr}
+  .pair{grid-template-columns:1fr}
+  .pair-arrow{display:none}
+  .fixcards,.mistakes,.cheats,.missions{grid-template-columns:1fr}
+  .detail,.img-detail{grid-template-columns:1fr;gap:10px}
+  .demo{grid-template-columns:1fr;gap:8px}
+  .demo-arrow{display:none;text-align:center}
+  .tpl-row{grid-template-columns:1fr}
+  .hero-top{grid-template-columns:1fr;justify-items:center;text-align:center;gap:8px}
+  .hero-copy{align-items:center}
+  .hero-hint{display:none}
+  .hero-foot{justify-content:center}
+  .formula-preview{grid-template-columns:1fr 1fr}
+  .desktop-only{display:none!important}
+  .mobile-only{display:initial}
+  .doc-side{flex-direction:column}
+}
+@media (max-width:740px){
+  :root{--h1:34px;--h2:26px;--h3:20px;--lead:16.5px;--body:17px;--small:15px;--tiny:13.5px}
+  .topbar{height:50px;padding:0 12px}
+  .brand{font-size:13.5px;gap:8px}
+  .brand-sub{display:none}
+  .brand-mark{width:22px;height:22px;font-size:12px;border-radius:7px}
+  .brand-mark .ico{font-size:13px}
+  .ico-btn{padding:7px 9px;font-size:12.5px}
+  .ico-btn span{display:none}
+  .ico-btn .ico{font-size:17px}
+  .ico-btn.back-link{padding:6px 8px}
+  .ico-btn.back-link .lb{display:inline;font-size:12px}
+  .slide{padding:54px 14px 76px}
+  .inner{gap:10px}
+  .bottombar{height:70px;gap:9px;padding:0 12px 2px}
+  .nav-btn{width:40px;height:40px;font-size:17px}
+  .dots{gap:4px}
+  .dot{width:12px;height:5px}
+  .dot.active{width:20px}
+  .counter{font-size:11.5px}
+  .counter b{font-size:13px}
+  .mascot{width:118px}
+  .hero h1{font-size:34px}
+  .hero-kicker{font-size:16.5px}
+  .hero-sub{font-size:15.5px}
+  .formula-preview{gap:7px}
+  .fp{padding:10px 11px;border-radius:13px}
+  .fp b{font-size:15.5px}
+  .fp small{font-size:11.5px}
+  .btn-primary{width:100%;font-size:16.5px;padding:13px 22px}
+  .hero-by{width:100%;text-align:center;font-size:13.5px}
+  .seg-wrap{max-width:none}
+  .seg-hint{display:none}
+  .seg{font-size:13.5px;padding:9px 8px}
+  .ask,.answer{padding:13px 14px}
+  .ask-text,.ans-line{font-size:16px}
+  .fb{padding:11px 10px}
+  .fb b{font-size:18px}
+  .fb small{font-size:11.5px}
+  .detail,.img-detail{padding:13px 14px}
+  .bgrid{grid-template-columns:1fr}
+  .bgroup{padding:10px 11px;gap:5px}
+  .bgroup-h{font-size:12.5px}
+  .opt{font-size:14.5px;padding:8px 10px}
+  .compose{padding:14px 15px}
+  .compose-body{font-size:15.5px}
+  .tab-btn{padding:9px 12px;font-size:14px}
+  .prompt-text{font-size:14.5px;line-height:1.6;padding:12px 14px}
+  .prompt-card{padding:13px 14px}
+  .five{grid-template-columns:1fr 1fr}
+  .fv b{font-size:16.5px}
+  .compose-line{padding:12px 14px;gap:4px 6px}
+  .cl-seg{font-size:15.5px}
+  .pair-card{padding:12px 13px}
+  .fx,.mk,.cheat{padding:13px 14px}
+  .demo{padding:12px 14px}
+  .demo-text{font-size:16px}
+  .cheat p{font-size:14px}
+  .closer{flex-direction:column;align-items:flex-start;gap:9px;padding:14px 16px}
+  .ov-grid{grid-template-columns:1fr 1fr}
+  .toast{bottom:80px;font-size:13px;padding:9px 15px}
+}
+@media (max-height:700px) and (min-width:741px){
+  .slide{padding-top:54px;padding-bottom:80px}
+  .mascot{width:clamp(100px,11vw,140px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .ms-body,.ms-eye,.ms-badge{animation:none}
+  .slide{transition:none}
+  .btn-primary{transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- 아이콘 정의 -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-pencil" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.4 18.9l.9-3.7L16 4.6a1.9 1.9 0 012.7 0l.7.7a1.9 1.9 0 010 2.7L8.8 18.6l-4.4.3z"/><path d="M14.7 6l3.3 3.3"/></g></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="4" y="4" width="6.6" height="6.6" rx="1.7"/><rect x="13.4" y="4" width="6.6" height="6.6" rx="1.7"/><rect x="4" y="13.4" width="6.6" height="6.6" rx="1.7"/><rect x="13.4" y="13.4" width="6.6" height="6.6" rx="1.7"/></g></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 4.2H4.2v5M14.8 4.2h5v5M14.8 19.8h5v-5M9.2 19.8H4.2v-5"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 12h14M13.4 6.9L18.6 12l-5.2 5.1"/></g></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8.6" y="8.6" width="10.9" height="10.9" rx="2.4"/><path d="M16.1 5.4H6.9A1.9 1.9 0 005 7.3v9.2"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 12.6l4.6 4.6L19.2 7.4"/></g></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.8l1.9 5.1 5.1 1.9-5.1 1.9L12 17.8l-1.9-5.1L5 10.8l5.1-1.9z"/></g></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></g></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.4" r="3.6"/><path d="M4.8 20.2c.7-3.7 3.5-5.8 7.2-5.8s6.5 2.1 7.2 5.8"/></g></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.6h16v9.8H10.4L6 19.2v-3.8H4z"/><path d="M8 9.2h8M8 12.2h5"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="M12 7.4V12l3.2 2"/></g></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.9h7.1l3.9 3.9V20H6.5z"/><path d="M13.4 4.1v4h4M9.3 12h5.4M9.3 15.4h5.4"/></g></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.8" y="5.4" width="16.4" height="13.2" rx="2.6"/><circle cx="8.9" cy="10.1" r="1.5"/><path d="M4.4 16.4l4.6-4 3.3 2.9 2.9-2.4 4.4 3.8"/></g></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 17.4h5.6M10 20.2h4"/><path d="M12 3.8a5.6 5.6 0 00-3.3 10.1c.5.4.8.9.8 1.5h5a2 2 0 01.8-1.5A5.6 5.6 0 0012 3.8z"/></g></symbol>
+  <symbol id="i-table" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.2" width="16" height="13.6" rx="2.2"/><path d="M4 9.6h16M4 14.2h16M10.4 9.6v9.2"/></g></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="17.4" r="2.6"/><circle cx="17" cy="17.4" r="2.6"/><path d="M8.9 15.4L18 4.6M15.1 15.4L6 4.6"/></g></symbol>
+  <symbol id="i-smile" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="M8.6 14.2c.9 1.4 2.1 2.1 3.4 2.1s2.5-.7 3.4-2.1"/><path d="M9.4 9.9h.01M14.6 9.9h.01"/></g></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.2"/><circle cx="12" cy="12" r=".9"/></g></symbol>
+</svg>
+
+<!-- 상단 바 -->
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark"><svg class="ico" aria-hidden="true"><use href="#i-pencil"/></svg></span>
+    <span>프롬프트 디자인실</span>
+    <span class="brand-sub">· 두배로 이서정</span>
+  </div>
+  <div class="top-actions">
+    <a class="ico-btn back-link" href="/guide/" aria-label="AI 가이드로 돌아가기"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg><span class="lb">AI 가이드</span></a>
+    <button class="ico-btn" id="btnOverview" type="button" aria-label="목차 열기">
+      <svg class="ico" aria-hidden="true"><use href="#i-grid"/></svg><span>목차</span>
+    </button>
+    <button class="ico-btn" id="btnFull" type="button" aria-label="전체화면 전환">
+      <svg class="ico" aria-hidden="true"><use href="#i-expand"/></svg><span>전체화면</span>
+    </button>
+  </div>
+</header>
+
+<main id="deck">
+
+  <!-- ───────── 1. 표지 ───────── -->
+  <section class="slide active" data-title="표지 · 질문 한 줄이 결과를 바꿉니다" data-kicker="표지">
+    <div class="inner hero">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <p class="eyebrow"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg>생성형 AI 활용 · 두배로</p>
+          <p class="hero-kicker">프롬프트 디자인실</p>
+          <h1>질문 한 줄이<br><span class="hl">결과를 바꿉니다</span></h1>
+          <p class="hero-sub">같은 AI, 같은 주제 — 달라진 건 질문뿐. <b>역할 · 맥락 · 상황 · 결과값</b> 네 칸만 채우면 AI가 내 일을 알아듣습니다.</p>
+        </div>
+        <div class="mascot" aria-hidden="true">
+          <svg viewBox="0 0 210 215" role="img" aria-label="질문 카드 캐릭터">
+            <ellipse cx="104" cy="198" rx="50" ry="8" fill="#C3C9F0" opacity=".55"/>
+            <g class="ms-body">
+              <rect x="26" y="30" width="150" height="126" rx="30" fill="#FFFFFF" stroke="#C3C9F0" stroke-width="3.4"/>
+              <path d="M74 154l0 26 30-26z" fill="#FFFFFF" stroke="#C3C9F0" stroke-width="3.4" stroke-linejoin="round"/>
+              <rect x="74" y="152" width="34" height="6" fill="#FFFFFF"/>
+              <g class="ms-eye">
+                <circle cx="82" cy="82" r="10" fill="#1E1B4B"/>
+                <circle cx="78.6" cy="78.4" r="3.1" fill="#FFFFFF"/>
+              </g>
+              <g class="ms-eye">
+                <circle cx="122" cy="82" r="10" fill="#1E1B4B"/>
+                <circle cx="118.6" cy="78.4" r="3.1" fill="#FFFFFF"/>
+              </g>
+              <ellipse cx="68" cy="102" rx="9" ry="5" fill="#FFB9A6" opacity=".55"/>
+              <ellipse cx="136" cy="102" rx="9" ry="5" fill="#FFB9A6" opacity=".55"/>
+              <path d="M88 104q14 13 28 0" fill="none" stroke="#4338CA" stroke-width="4.6" stroke-linecap="round"/>
+            </g>
+            <g class="ms-badge">
+              <circle cx="172" cy="40" r="27" fill="#4F46E5"/>
+              <circle cx="172" cy="40" r="27" fill="none" stroke="#3730A3" stroke-width="2.4"/>
+              <text x="172" y="52" text-anchor="middle" font-family="Pretendard,'Noto Sans KR',sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">?</text>
+            </g>
+            <g fill="#8B5CF6" opacity=".85">
+              <path d="M30 18l2.4 6.2 6.2 2.4-6.2 2.4L30 35.2l-2.4-6.2-6.2-2.4 6.2-2.4z"/>
+              <path d="M196 132l1.8 4.6 4.6 1.8-4.6 1.8-1.8 4.6-1.8-4.6-4.6-1.8 4.6-1.8z"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <ul class="formula-preview">
+        <li class="fp"><span class="fp-n"><span class="num">1</span>역할</span><b>누구처럼 답할지</b><small>"너는 10년 차 사회복지사야"</small></li>
+        <li class="fp"><span class="fp-n"><span class="num">2</span>맥락</span><b>왜, 무엇을 위해</b><small>"어르신 무료 특강 홍보용이야"</small></li>
+        <li class="fp"><span class="fp-n"><span class="num">3</span>상황</span><b>지금 처한 조건</b><small>"2시간뿐, 초보자가 많아"</small></li>
+        <li class="fp"><span class="fp-n"><span class="num">4</span>결과값</span><b>어떤 모양으로</b><small>"표 1개 + 3줄 요약, 친근하게"</small></li>
+      </ul>
+
+      <div class="hero-foot">
+        <button class="btn-primary" type="button" data-goto="1">시작하기 <span aria-hidden="true">→</span></button>
+        <span class="hero-by">강사 이서정 <span>· 두배로</span></span>
+        <span class="hero-hint">← → Space 이동 · F 전체화면 · 상단 <b>목차</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── 2. Before / After ───────── -->
+  <section class="slide" data-title="왜 프롬프트가 중요할까 (Before vs After)" data-kicker="01 · 왜 프롬프트인가">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">01 · 왜 프롬프트인가</p>
+        <h2 class="title">대충 물으면 <span class="hl">대충 옵니다</span></h2>
+        <p class="sub">같은 AI, 같은 주제 — 물어보는 방식만 바꿔 봤습니다.</p>
+      </div>
+
+      <div class="seg-row">
+        <div class="seg-wrap" role="tablist" aria-label="비교 보기">
+          <button class="seg on" type="button" role="tab" aria-selected="true" data-mode="rough"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>대충 물었을 때</button>
+          <button class="seg" type="button" role="tab" aria-selected="false" data-mode="designed"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>설계해서 물었을 때</button>
+        </div>
+        <p class="seg-hint">두 답을 번갈아 눌러 보세요</p>
+      </div>
+
+      <div class="cmp">
+        <div class="cmp-pane on" data-pane="rough">
+          <div class="ask">
+            <p class="ask-label"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>내가 한 말</p>
+            <p class="ask-text plain">"SNS 홍보 글 써 줘."</p>
+            <p class="pair-note" style="color:#6F7488">무엇을 홍보하는지, 누구에게 보여 줄지, 몇 줄인지 말하지 않았습니다.</p>
+            <p class="verdict no"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>어디에나 쓰는 말</p>
+          </div>
+          <div class="answer bad">
+            <p class="answer-label"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg>AI가 준 답</p>
+            <p class="ans-line">"좋은 프로그램입니다! 많은 관심 부탁드립니다."</p>
+            <p class="ans-line">"지금 바로 신청해 보세요."</p>
+            <p class="ans-line">"많은 참여 바랍니다."</p>
+            <p class="verdict no"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>써야 할 게 또 생깁니다</p>
+          </div>
+        </div>
+
+        <div class="cmp-pane" data-pane="designed">
+          <div class="ask">
+            <p class="ask-label"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>내가 한 말</p>
+            <p class="ask-text">"너는 10년 차 사회복지 홍보 담당자야. 어르신 대상 무료 스마트폰 교실 홍보용이야. 정원 20명, 신청은 전화로 받아. 3줄 안내문, 친근한 말투로 써 줘."</p>
+            <p class="verdict yes"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>누구에게 · 무엇을 · 어떤 모양으로</p>
+          </div>
+          <div class="answer">
+            <p class="answer-label"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg>AI가 준 답</p>
+            <p class="ans-line"><b>스마트폰, 20분이면 충분합니다</b></p>
+            <p class="ans-line">12월 3일 오전 10시 · 복지관 2층, 어르신 20명</p>
+            <p class="ans-line">전화 한 통이면 신청 끝 — 010-0000-0000</p>
+            <p class="verdict yes"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>그대로 붙여 쓸 수 있습니다</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="punch"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg>차이는 딱 하나 — <b>누구에게, 무엇을, 어떤 모양으로</b> 말했느냐</p>
+    </div>
+  </section>
+
+  <!-- ───────── 3. 4요소 ───────── -->
+  <section class="slide" data-title="프롬프트 기본 공식 4단계" data-kicker="02 · 기본 공식">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">02 · 기본 공식</p>
+        <h2 class="title">프롬프트는 <span class="hl">네 칸</span>만 채우면 됩니다</h2>
+        <p class="sub">칸을 눌러 보세요. 각 칸에 들어갈 말이 아래에 나옵니다.</p>
+      </div>
+
+      <div class="four" id="fourBlocks">
+        <button class="fb on" type="button" data-k="role"><span class="fb-n"><span class="num">1</span></span><b>역할</b><small>누구처럼 답할지</small></button>
+        <button class="fb" type="button" data-k="context"><span class="fb-n"><span class="num">2</span></span><b>맥락</b><small>왜, 무엇을 위해</small></button>
+        <button class="fb" type="button" data-k="situation"><span class="fb-n"><span class="num">3</span></span><b>상황</b><small>지금 처한 조건</small></button>
+        <button class="fb" type="button" data-k="output"><span class="fb-n"><span class="num">4</span></span><b>결과값</b><small>어떤 모양으로</small></button>
+      </div>
+
+      <div class="detail" id="fbDetail">
+        <div class="d-left">
+          <p class="d-tag" id="dTag"><span class="num">1</span>역할</p>
+          <p class="d-desc" id="dDesc">AI에게 어떤 사람의 눈과 말투로 답할지 정해 줍니다. 같은 질문도 "10년 차 사회복지사"가 답하면 말투도 기준도 달라집니다.</p>
+        </div>
+        <div class="d-ex">
+          <p class="d-label">이렇게 씁니다</p>
+          <p class="d-quote" id="dQuote">너는 10년 차 사회복지사야.</p>
+          <button class="copy-btn" type="button" data-src="dQuote" data-toast="예시 문장을 복사했어요. 내 상황에 맞게 고쳐 쓰세요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>예시 복사</button>
+        </div>
+      </div>
+
+      <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg>네 칸을 다 채우지 않아도 됩니다. <b>역할 + 결과값</b>만 있어도 답이 확 달라집니다.</p>
+    </div>
+  </section>
+
+  <!-- ───────── 4. 조립 체험 ───────── -->
+  <section class="slide" data-title="공식 조립 체험 (클릭해서 조합하기)" data-kicker="03 · 조립 체험">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">03 · 조립 체험</p>
+        <h2 class="title">골라서 <span class="hl">한 줄</span>로 만들어 보세요</h2>
+        <p class="sub">칸마다 하나씩 누르면 완성된 프롬프트가 오른쪽에 쌓입니다.</p>
+      </div>
+
+      <div class="builder">
+        <div class="bgrid" id="builder">
+          <div class="bgroup" data-group="role">
+            <p class="bgroup-h"><span class="n">1</span>역할 — 누구처럼?</p>
+            <button class="opt" type="button" data-group="role">너는 10년 차 사회복지사야.</button>
+            <button class="opt" type="button" data-group="role">너는 SNS 마케터야.</button>
+            <button class="opt" type="button" data-group="role">너는 초등학교 선생님이야.</button>
+          </div>
+          <div class="bgroup" data-group="context">
+            <p class="bgroup-h"><span class="n">2</span>맥락 — 왜, 무엇을?</p>
+            <button class="opt" type="button" data-group="context">어르신 대상 무료 스마트폰 교실 홍보용이야.</button>
+            <button class="opt" type="button" data-group="context">우리 센터 12월 행사 안내를 가정에 보낼 거야.</button>
+            <button class="opt" type="button" data-group="context">중학생 대상 진로 특강을 알릴 거야.</button>
+          </div>
+          <div class="bgroup" data-group="situation">
+            <p class="bgroup-h"><span class="n">3</span>상황 — 지금 조건은?</p>
+            <button class="opt" type="button" data-group="situation">참석 인원은 20명이고, 신청은 전화로 받아.</button>
+            <button class="opt" type="button" data-group="situation">예산이 거의 없고 준비 기간은 3일이야.</button>
+            <button class="opt" type="button" data-group="situation">2시간 강의이고 대부분 처음 접해.</button>
+          </div>
+          <div class="bgroup" data-group="output">
+            <p class="bgroup-h"><span class="n">4</span>결과값 — 어떤 모양?</p>
+            <button class="opt" type="button" data-group="output">3줄 안내문을 친근한 말투로 써 줘.</button>
+            <button class="opt" type="button" data-group="output">표 1개와 5줄 요약으로 정리해 줘.</button>
+            <button class="opt" type="button" data-group="output">카톡으로 보낼 200자 안내문으로 써 줘.</button>
+          </div>
+        </div>
+
+        <div class="compose">
+          <p class="compose-h"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg>완성된 프롬프트<span class="compose-count" id="composeCount">0 / 4</span></p>
+          <p class="compose-body ph" id="builtPrompt">왼쪽에서 네 칸을 하나씩 골라 보세요. 고른 만큼 여기에 문장이 쌓입니다.</p>
+          <div class="compose-actions">
+            <button class="btn-copy" type="button" data-src="builtPrompt" data-toast="완성된 프롬프트를 복사했어요. 챗GPT·제미나이에 붙여넣어 보세요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+            <button class="btn-ghost" type="button" id="fillExample">예시로 채우기</button>
+            <button class="btn-ghost" type="button" id="clearBuilt">비우기</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg>마지막에 <b>"위 조건에 맞게 작성해 줘"</b>가 붙는 것만으로도 답의 모양이 잡힙니다.</p>
+    </div>
+  </section>
+
+  <!-- ───────── 5. 문서 템플릿 ───────── -->
+  <section class="slide" data-title="문서·공문서·안내문 프롬프트 공식" data-kicker="04 · 문서">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">04 · 문서·공문서·안내문</p>
+        <h2 class="title">문서는 <span class="hl">틀</span>로 뽑습니다</h2>
+        <p class="sub">이름과 날짜만 바꿔 넣으세요. 복사해서 그대로 붙여넣으면 됩니다.</p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="문서 종류">
+        <button class="tab-btn on" type="button" role="tab" aria-selected="true" data-tab="report"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg>보고서</button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="letter"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>가정통신문</button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="notice"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg>행사 안내문</button>
+      </div>
+
+      <div class="tab-panel on" data-panel="report">
+        <div class="doc">
+          <div class="prompt-card">
+            <div class="pc-head">
+              <b>업무 보고서 · 1장</b>
+              <button class="copy-btn" type="button" data-src="docReport" data-toast="보고서 프롬프트를 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+            </div>
+            <pre class="prompt-text" id="docReport">너는 공공기관에서 10년 일한 사회복지사야.
+아래 내용을 1장짜리 업무 보고서로 정리해 줘.
+
+- 대상: 지역 어르신 20명, 스마트폰 기초 교육 2회
+- 성과: 수료 19명, 만족도 4.6점
+- 문제: 기기마다 화면이 달라 설명이 길어짐
+- 다음 계획: 기기별 요약 카드 제작
+
+형식: 1) 개요 2) 추진 결과 3) 문제와 개선 4) 다음 계획
+각 항목 3줄 이내, 공문서 말투로. 없는 내용은 만들지 마.</pre>
+          </div>
+          <div class="doc-side">
+            <div class="doc-tip">
+              <b>바꿔 넣을 곳</b>
+              <p>대상 · 성과 · 문제 · 다음 계획 네 줄만 내 내용으로 바꾸세요. 나머지는 그대로 써도 됩니다.</p>
+              <div class="chips-inline"><span>숫자는 그대로</span><span>3줄 이내</span><span>공문서 말투</span></div>
+            </div>
+            <div class="doc-tip">
+              <b>한 줄만 더 붙이면</b>
+              <p>"보고 받는 사람은 <code>센터장</code>이야."를 앞에 붙이면 결론부터 쓰는 보고서가 됩니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-panel="letter">
+        <div class="doc">
+          <div class="prompt-card">
+            <div class="pc-head">
+              <b>가정통신문 · 400자</b>
+              <button class="copy-btn" type="button" data-src="docLetter" data-toast="가정통신문 프롬프트를 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+            </div>
+            <pre class="prompt-text" id="docLetter">너는 가정통신문을 쓰는 초등학교 담임 선생님이야.
+12월 5일 진로 체험 활동 안내문을 학부모님께 보낼 거야.
+
+- 일시: 12월 5일 오전 9시 ~ 12시 / 장소: 3층 강당
+- 준비물: 필기도구, 겨울 외투
+- 신청: 12월 2일까지 알림장 회신
+
+형식: 제목 + 인사 1줄 + 안내 3줄 + 준비물 + 문의
+정중하지만 어렵지 않은 말투로, 400자 이내.
+날짜와 장소는 그대로 넣고, 확인이 필요한 내용은 표시해 줘.</pre>
+          </div>
+          <div class="doc-side">
+            <div class="doc-tip">
+              <b>바꿔 넣을 곳</b>
+              <p>일시 · 장소 · 준비물 · 신청 방법 네 줄. 학부모가 궁금해하는 건 이 네 가지뿐입니다.</p>
+              <div class="chips-inline"><span>400자 이내</span><span>정중한 말투</span><span>제목 포함</span></div>
+            </div>
+            <div class="doc-tip">
+              <b>한 줄만 더 붙이면</b>
+              <p>"문의는 담임 <code>010-0000-0000</code>으로"를 넣으라고 하면 연락처까지 정리됩니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-panel="notice">
+        <div class="doc">
+          <div class="prompt-card">
+            <div class="pc-head">
+              <b>행사 안내문 · 표 포함</b>
+              <button class="copy-btn" type="button" data-src="docNotice" data-toast="행사 안내문 프롬프트를 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+            </div>
+            <pre class="prompt-text" id="docNotice">너는 동네 작은 도서관의 행사 담당자야.
+12월 13일 토요일 오후 2시 '겨울 그림책 읽기' 행사 안내문을 써 줘.
+
+- 대상: 6~7세 어린이와 보호자 15가족 / 장소: 2층 이야기방
+- 참가비 무료, 신청은 전화와 카톡 / 마감 12월 10일
+- 주차 공간이 좁아 대중교통 이용을 권함
+
+형식: 제목 + 3줄 소개 + 일시·장소·신청 표 1개 + 주차 안내 1줄
+따뜻한 말투로, 500자 이내. 표는 항목과 내용 두 칸으로.</pre>
+          </div>
+          <div class="doc-side">
+            <div class="doc-tip">
+              <b>바꿔 넣을 곳</b>
+              <p>행사 이름 · 날짜 · 대상 · 신청 방법. 표로 정리해 달라고 하면 그대로 게시할 수 있습니다.</p>
+              <div class="chips-inline"><span>표 1개</span><span>500자 이내</span><span>따뜻한 말투</span></div>
+            </div>
+            <div class="doc-tip">
+              <b>한 줄만 더 붙이면</b>
+              <p>"카톡 단체방에 보낼 짧은 버전도 3줄로 따로 써 줘."를 붙이면 두 가지가 한 번에 나옵니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── 6. 이미지 5요소 ───────── -->
+  <section class="slide" data-title="이미지 생성 프롬프트 공식 5요소" data-kicker="05 · 이미지 공식">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">05 · 이미지 공식</p>
+        <h2 class="title">그림은 <span class="hl">다섯 칸</span>으로 말합니다</h2>
+        <p class="sub">칸을 누르면 예시가 켜집니다. 다섯 칸을 다 채우면 내가 상상한 그림이 나옵니다.</p>
+      </div>
+
+      <div class="five" id="fiveBlocks">
+        <button class="fv on" type="button" data-k="topic"><span class="fv-n"><span class="num">1</span>주제</span><b>무엇을</b><small>사람 · 사물 · 풍경</small></button>
+        <button class="fv" type="button" data-k="act"><span class="fv-n"><span class="num">2</span>행동·표정</span><b>무엇을 하는</b><small>웃는 · 걷는 · 손 흔드는</small></button>
+        <button class="fv" type="button" data-k="bg"><span class="fv-n"><span class="num">3</span>배경·조명</span><b>어디에서</b><small>햇살 · 노을 · 실내</small></button>
+        <button class="fv" type="button" data-k="style"><span class="fv-n"><span class="num">4</span>화풍</span><b>어떤 느낌으로</b><small>실사 · 수채화 · 3D</small></button>
+        <button class="fv" type="button" data-k="ratio"><span class="fv-n"><span class="num">5</span>비율·분위기</span><b>어떤 크기로</b><small>정사각형 · 가로형</small></button>
+      </div>
+
+      <div class="compose-line" id="imgLine">
+        <span class="cl-seg on" data-k="topic">할머니가</span><span class="cl-plus">+</span>
+        <span class="cl-seg on" data-k="act">웃으며 손을 흔드는</span><span class="cl-plus">+</span>
+        <span class="cl-seg on" data-k="bg">햇살 드는 부엌, 따뜻한 오후 빛</span><span class="cl-plus">+</span>
+        <span class="cl-seg on" data-k="style">수채화 일러스트</span><span class="cl-plus">+</span>
+        <span class="cl-seg on" data-k="ratio">정사각형, 포근한 분위기</span>
+      </div>
+
+      <div class="img-detail" id="imgDetail">
+        <div class="d-left">
+          <p class="d-tag" id="fvTag"><span class="num">1</span>주제</p>
+          <p class="d-desc" id="fvDesc">무엇을 그릴지 한 단어로 정합니다. "할머니"처럼 사람이어도 되고, "겨울 창가"처럼 장면이어도 됩니다.</p>
+        </div>
+        <div class="d-ex">
+          <p class="d-label">이렇게 씁니다</p>
+          <p class="d-quote" id="fvQuote">할머니가</p>
+          <button class="copy-btn" type="button" data-src="fvQuote" data-toast="예시 표현을 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>예시 복사</button>
+        </div>
+      </div>
+
+      <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg>화풍과 분위기를 빼먹으면 매번 다른 그림이 나옵니다. <b>4번·5번 칸</b>이 결과를 붙잡아 줍니다.</p>
+    </div>
+  </section>
+
+  <!-- ───────── 7. 이미지 실전 ───────── -->
+  <section class="slide" data-title="이미지 요청 실전 예시" data-kicker="06 · 이미지 실전">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">06 · 이미지 실전</p>
+        <h2 class="title">"강아지 그려줘"에서 <span class="hl">한 장의 그림</span>으로</h2>
+      </div>
+
+      <div class="pair">
+        <div class="pair-card">
+          <span class="pair-label"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>적용 전</span>
+          <p class="pair-say">"강아지 그려줘."</p>
+          <p class="pair-note">어떤 강아지인지, 어디 있는지, 어떤 느낌인지 말하지 않았습니다. 마음에 들 때까지 다시 뽑는 일이 반복됩니다.</p>
+        </div>
+        <div class="pair-arrow" aria-hidden="true">→</div>
+        <div class="pair-card after">
+          <span class="pair-label"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>5요소 적용 후</span>
+          <p class="pair-say">"골든리트리버가 잔디 위에서 꼬리를 흔드는 모습, 노을 진 공원, 따뜻한 역광, 반려동물 사진작가의 실사 사진, 정사각형, 포근한 분위기."</p>
+          <p class="pair-note">세 번을 다시 뽑아도 비슷한 그림이 나옵니다. 강의 표지와 카드뉴스에 바로 쓸 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="tpl-row">
+        <div class="tpl">
+          <p class="tpl-h"><svg class="ico" aria-hidden="true"><use href="#i-image"/></svg>강의 홍보 포스터</p>
+          <p id="tplPoster">60대 어르신 두 분이 스마트폰 화면을 함께 들여다보며 환하게 웃는 모습, 밝은 교육장, 창으로 들어오는 오후 햇살, 자연스러운 실사 사진, 가로형 16:9, 따뜻하고 신뢰감 있는 분위기, 위쪽에 글자를 넣을 여백</p>
+          <button class="copy-btn" type="button" data-src="tplPoster" data-toast="포스터 이미지 프롬프트를 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+        </div>
+        <div class="tpl">
+          <p class="tpl-h"><svg class="ico" aria-hidden="true"><use href="#i-image"/></svg>카드뉴스 표지</p>
+          <p id="tplCard">겨울 아침 창가에 놓인 따뜻한 차 한 잔과 펼친 책, 김이 피어오르는 모습, 부드러운 아침 빛, 감성 사진, 정사각형 1:1, 차분하고 포근한 분위기</p>
+          <button class="copy-btn" type="button" data-src="tplCard" data-toast="카드뉴스 프롬프트를 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+        </div>
+        <div class="tpl">
+          <p class="tpl-h"><svg class="ico" aria-hidden="true"><use href="#i-image"/></svg>캐릭터 한 컷</p>
+          <p id="tplChar">안경 쓴 다람쥐가 작은 노트북으로 강의하는 모습, 한 손을 들어 설명하는 표정, 남색 배경에 은은한 조명, 3D 캐릭터, 정사각형, 친근하고 밝은 분위기</p>
+          <button class="copy-btn" type="button" data-src="tplChar" data-toast="캐릭터 프롬프트를 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+        </div>
+      </div>
+
+      <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg>사람 얼굴이 나오는 그림은 실제 인물과 닮지 않게, <b>"가상의 인물"</b>이라고 한 줄 붙여 주세요.</p>
+    </div>
+  </section>
+
+  <!-- ───────── 8. 고치는 주문 ───────── -->
+  <section class="slide" data-title="결과가 마음에 안 들 때 고치는 3가지 주문" data-kicker="07 · 고치기">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">07 · 고치기</p>
+        <h2 class="title">결과가 별로면 <span class="hl">한 마디</span>만 더</h2>
+        <p class="sub">처음부터 다시 시키지 마세요. 카드를 눌러 이유를 보고, 문장을 복사하세요.</p>
+      </div>
+
+      <div class="fixcards" id="fixCards">
+        <div class="fx" role="button" tabindex="0" data-fx>
+          <div class="fx-h"><span class="fx-badge"><svg class="ico" aria-hidden="true"><use href="#i-smile"/></svg></span><b>더 쉽게</b><span class="fx-hint">눌러 보기</span></div>
+          <p id="fxEasy">방금 답변을 초등학생도 이해할 수 있게 다시 써 줘. 어려운 말은 쉬운 말로 바꾸고, 예시를 하나 붙여 줘.</p>
+          <span class="fx-why">어려운 말이 남아 있으면 정작 필요한 사람이 이해하지 못합니다.</span>
+          <button class="copy-btn" type="button" data-src="fxEasy" data-toast="'더 쉽게' 주문을 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+        </div>
+        <div class="fx" role="button" tabindex="0" data-fx>
+          <div class="fx-h"><span class="fx-badge"><svg class="ico" aria-hidden="true"><use href="#i-table"/></svg></span><b>표로 바꿔줘</b><span class="fx-hint">눌러 보기</span></div>
+          <p id="fxTable">지금 내용을 '항목 / 내용' 두 칸 표로 정리해 줘. 표 아래에 한 줄 요약도 붙여 줘.</p>
+          <span class="fx-why">비교와 일정은 표가 가장 빨리 읽힙니다. 회의 자료에 그대로 씁니다.</span>
+          <button class="copy-btn" type="button" data-src="fxTable" data-toast="'표로 바꿔줘' 주문을 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+        </div>
+        <div class="fx" role="button" tabindex="0" data-fx>
+          <div class="fx-h"><span class="fx-badge"><svg class="ico" aria-hidden="true"><use href="#i-scissors"/></svg></span><b>3줄만 줄여줘</b><span class="fx-hint">눌러 보기</span></div>
+          <p id="fxShort">핵심만 남기고 3줄로 줄여 줘. 숫자와 날짜는 그대로 살려 줘.</p>
+          <span class="fx-why">길면 아무도 끝까지 읽지 않습니다. 문자·카톡에는 3줄이 딱 맞습니다.</span>
+          <button class="copy-btn" type="button" data-src="fxShort" data-toast="'3줄로 줄여줘' 주문을 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+        </div>
+      </div>
+
+      <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg>고칠 때는 <b>무엇이 문제인지</b>까지 붙이면 한 번에 끝납니다. 예: "너무 딱딱해. 어르신께 말하듯 3줄로 줄여 줘."</p>
+
+      <div class="demo">
+        <div class="demo-side">
+          <p class="demo-label">고치기 전</p>
+          <p class="demo-text">"예산이 부족하여 사업 추진이 어려울 것으로 사료됩니다."</p>
+        </div>
+        <span class="demo-arrow" aria-hidden="true">→</span>
+        <div class="demo-side on">
+          <p class="demo-label">'더 쉽게' 한 뒤</p>
+          <p class="demo-text">"예산이 모자라서 이번 달에는 시작하기 어렵습니다."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── 9. 실수 3가지 ───────── -->
+  <section class="slide" data-title="피해야 할 프롬프트 실수 3가지" data-kicker="08 · 실수">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">08 · 실수</p>
+        <h2 class="title">이 셋만 피하면 <span class="hl">절반은 성공</span></h2>
+        <p class="sub">셋 다 오늘 바로 고칠 수 있습니다. 고치는 문장은 카드 안에 있습니다.</p>
+      </div>
+
+      <div class="mistakes" id="mistakes">
+        <div class="mk">
+          <div class="mk-h"><span class="mk-x"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg></span><b>너무 두루뭉술함</b></div>
+          <p class="mk-say">"좋은 글 써 줘."</p>
+          <p class="mk-fix"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>누구에게 · 몇 줄 · 어떤 말투로</b>를 붙이세요. → "학부모에게 보낼 3줄 안내문, 정중한 말투로."</span></p>
+        </div>
+        <div class="mk">
+          <div class="mk-h"><span class="mk-x"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg></span><b>한 번에 10가지 요구</b></div>
+          <p class="mk-say">"보고서 쓰고 표로 정리하고 이미지도 만들고 영어로도 번역해 줘."</p>
+          <p class="mk-fix"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>한 번에 하나씩.</b> 결과를 확인한 뒤 다음을 부탁하세요. 품질이 확실히 올라갑니다.</span></p>
+        </div>
+        <div class="mk">
+          <div class="mk-h"><span class="mk-x"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg></span><b>대상·말투 누락</b></div>
+          <p class="mk-say">"행사 안내문 써 줘."</p>
+          <p class="mk-fix"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>누가 읽을지, 어떤 말투인지</b>를 먼저 정하세요. → "60대 참석자에게, 친근한 말투로, 300자."</span></p>
+        </div>
+      </div>
+
+      <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg>AI는 눈치를 보지 않습니다. <b>말하지 않은 것은 모른다</b>고 생각하세요.</p>
+    </div>
+  </section>
+
+  <!-- ───────── 10. 치트키 · 미션 ───────── -->
+  <section class="slide" data-title="오늘의 실전 치트키 & 미션" data-kicker="09 · 마무리">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">09 · 오늘 가져갈 것</p>
+        <h2 class="title">만능 프롬프트 <span class="hl">3종</span>과 오늘의 미션</h2>
+      </div>
+
+      <div class="cheats">
+        <div class="cheat">
+          <p class="cheat-h"><span class="num">1</span>만능 정리<em>회의·메모</em></p>
+          <p id="cheat1">너는 문서 정리를 잘하는 비서야. 아래 내용을 1) 핵심 3줄 2) 할 일 목록 3) 다음 단계로 정리해 줘. 확실하지 않은 내용은 '확인 필요'라고 표시하고, 지어내지 마. [내용 붙여넣기]</p>
+          <button class="copy-btn" type="button" data-src="cheat1" data-toast="만능 정리 프롬프트를 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+        </div>
+        <div class="cheat">
+          <p class="cheat-h"><span class="num">2</span>만능 글쓰기<em>안내·홍보</em></p>
+          <p id="cheat2">너는 10년 차 홍보 담당자야. 아래 내용을 안내문으로 써 줘. 읽는 사람은 [대상], 분량은 [3줄/300자], 말투는 [친근하게/정중하게]. 날짜·장소·연락처는 그대로 넣어 줘. [내용]</p>
+          <button class="copy-btn" type="button" data-src="cheat2" data-toast="만능 글쓰기 프롬프트를 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+        </div>
+        <div class="cheat">
+          <p class="cheat-h"><span class="num">3</span>만능 이미지<em>그림·표지</em></p>
+          <p id="cheat3">[주제], [행동·표정], [배경·조명], [화풍], [비율·분위기] — 다섯 칸을 채워서 이미지로 만들어 줘. 글자는 넣지 말고, 여백을 넉넉하게 둬.</p>
+          <button class="copy-btn" type="button" data-src="cheat3" data-toast="만능 이미지 프롬프트를 복사했어요."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>복사</button>
+        </div>
+      </div>
+
+      <div class="missions">
+        <div class="mission"><span class="m-num">1</span><p class="m-text">내 업무 하나를 4칸 공식으로 다시 써 보기</p></div>
+        <div class="mission"><span class="m-num">2</span><p class="m-text">만능 정리에 오늘 회의 메모 붙여넣기</p></div>
+        <div class="mission"><span class="m-num">3</span><p class="m-text">마음에 안 드는 답에 "표로 바꿔줘" 한 번</p></div>
+      </div>
+
+      <div class="closer">
+        <div class="txt">
+          <h3>질문을 바꾸면 결과가 바뀝니다</h3>
+          <p>오늘부터 한 줄만 더 붙여 보세요. 그 한 줄이 결과를 바꿉니다.</p>
+        </div>
+        <a href="/guide/"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg>AI 가이드로</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 하단 컨트롤 -->
+<footer class="bottombar">
+  <button class="nav-btn" id="btnPrev" type="button" aria-label="이전 장">←</button>
+  <div class="progress">
+    <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+    <div class="dots" id="dots" role="tablist" aria-label="장 이동"></div>
+  </div>
+  <button class="nav-btn" id="btnNext" type="button" aria-label="다음 장">→</button>
+  <span class="counter"><b id="curNum">01</b> / <span id="totalNum">10</span></span>
+</footer>
+
+<!-- 목차 -->
+<div class="overview" id="overview" role="dialog" aria-modal="true" aria-label="목차">
+  <div class="ov-panel">
+    <div class="ov-head">
+      <h3>목차</h3>
+      <span class="sub">원하는 장을 누르면 바로 이동합니다</span>
+      <button class="ov-close" id="ovClose" type="button">닫기 ✕</button>
+    </div>
+    <div class="ov-grid" id="ovGrid"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">복사했어요</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- 슬라이드 이동 ---------- */
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var idx = 0;
+
+  var dotsWrap = document.getElementById('dots');
+  var barFill = document.getElementById('barFill');
+  var curNum = document.getElementById('curNum');
+  var totalNum = document.getElementById('totalNum');
+  var btnPrev = document.getElementById('btnPrev');
+  var btnNext = document.getElementById('btnNext');
+  var overview = document.getElementById('overview');
+  var ovGrid = document.getElementById('ovGrid');
+  var toast = document.getElementById('toast');
+
+  totalNum.textContent = String(total).padStart(2, '0');
+
+  slides.forEach(function (s, i) {
+    var d = document.createElement('button');
+    d.type = 'button';
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', (i + 1) + '장 · ' + (s.dataset.title || ''));
+    d.addEventListener('click', function () { go(i); });
+    dotsWrap.appendChild(d);
+  });
+
+  slides.forEach(function (s, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'ov-item';
+    b.innerHTML = '<span class="ov-num">' + String(i + 1).padStart(2, '0') + '</span>' +
+                  '<span class="ov-title">' + (s.dataset.title || '') + '</span>';
+    b.addEventListener('click', function () { closeOverview(); go(i); });
+    ovGrid.appendChild(b);
+  });
+
+  var dotEls = Array.prototype.slice.call(dotsWrap.children);
+  var ovEls = Array.prototype.slice.call(ovGrid.children);
+
+  function go(n) {
+    n = Math.max(0, Math.min(total - 1, n));
+    idx = n;
+    slides.forEach(function (s, i) { s.classList.toggle('active', i === n); });
+    dotEls.forEach(function (d, i) { d.classList.toggle('active', i === n); });
+    ovEls.forEach(function (d, i) { d.classList.toggle('current', i === n); });
+    barFill.style.width = (total <= 1 ? 100 : (n / (total - 1)) * 100) + '%';
+    curNum.textContent = String(n + 1).padStart(2, '0');
+    btnPrev.disabled = n === 0;
+    btnNext.disabled = n === total - 1;
+    scheduleFit();
+  }
+
+  btnPrev.addEventListener('click', function () { go(idx - 1); });
+  btnNext.addEventListener('click', function () { go(idx + 1); });
+
+  /* 진행 바를 눌러도 이동 */
+  var barEl = document.querySelector('.bar');
+  barEl.style.cursor = 'pointer';
+  barEl.setAttribute('role', 'slider');
+  barEl.setAttribute('aria-label', '장 이동');
+  barEl.addEventListener('click', function (e) {
+    var r = barEl.getBoundingClientRect();
+    var ratio = Math.min(0.999, Math.max(0, (e.clientX - r.left) / r.width));
+    go(Math.round(ratio * (total - 1)));
+  });
+
+  document.querySelectorAll('[data-goto]').forEach(function (b) {
+    b.addEventListener('click', function () { go(parseInt(b.dataset.goto, 10)); });
+  });
+
+  /* ---------- 목차 ---------- */
+  function openOverview() { overview.classList.add('open'); }
+  function closeOverview() { overview.classList.remove('open'); }
+  document.getElementById('btnOverview').addEventListener('click', openOverview);
+  document.getElementById('ovClose').addEventListener('click', closeOverview);
+  overview.addEventListener('click', function (e) { if (e.target === overview) closeOverview(); });
+
+  /* ---------- 전체화면 ---------- */
+  var btnFull = document.getElementById('btnFull');
+  btnFull.addEventListener('click', function () {
+    var el = document.documentElement;
+    if (!document.fullscreenElement) {
+      if (el.requestFullscreen) { el.requestFullscreen().catch(function () {}); }
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen().catch(function () {});
+    }
+  });
+
+  /* ---------- 키보드 ---------- */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeOverview(); return; }
+    var tag = (e.target && e.target.tagName ? e.target.tagName : '').toLowerCase();
+    if ((tag === 'button' || tag === 'a' || tag === 'input' || tag === 'textarea' || (e.target && e.target.isContentEditable)) &&
+        (e.key === ' ' || e.key === 'Enter')) return;
+    if (e.key === 'ArrowRight' || (e.key === ' ' && !e.shiftKey) || e.key === 'PageDown') {
+      e.preventDefault(); go(idx + 1);
+    } else if (e.key === 'ArrowLeft' || (e.key === ' ' && e.shiftKey) || e.key === 'PageUp') {
+      e.preventDefault(); go(idx - 1);
+    } else if (e.key === 'Home') { e.preventDefault(); go(0); }
+    else if (e.key === 'End') { e.preventDefault(); go(total - 1); }
+    else if (e.key === 'f' || e.key === 'F') { btnFull.click(); }
+    else if (e.key === 'o' || e.key === 'O') {
+      if (overview.classList.contains('open')) closeOverview(); else openOverview();
+    }
+  });
+
+  /* ---------- 터치 스와이프 ---------- */
+  var sx = 0, sy = 0, tracking = false;
+  document.getElementById('deck').addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; tracking = true;
+  }, { passive: true });
+  document.getElementById('deck').addEventListener('touchend', function (e) {
+    if (!tracking) return;
+    tracking = false;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+      if (dx < 0) go(idx + 1); else go(idx - 1);
+    }
+  }, { passive: true });
+
+  /* ---------- 2장: Before / After ---------- */
+  var segs = Array.prototype.slice.call(document.querySelectorAll('.seg'));
+  segs.forEach(function (b) {
+    b.addEventListener('click', function () {
+      segs.forEach(function (x) {
+        var on = x === b;
+        x.classList.toggle('on', on);
+        x.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      document.querySelectorAll('.cmp-pane').forEach(function (p) {
+        p.classList.toggle('on', p.dataset.pane === b.dataset.mode);
+      });
+      scheduleFit();
+    });
+  });
+
+  /* ---------- 3장: 4요소 상세 ---------- */
+  var FOUR = {
+    role: { n: '1', name: '역할', desc: 'AI에게 어떤 사람의 눈과 말투로 답할지 정해 줍니다. 같은 질문도 "10년 차 사회복지사"가 답하면 말투도 기준도 달라집니다.', quote: '너는 10년 차 사회복지사야.' },
+    context: { n: '2', name: '맥락', desc: '왜 이 일을 하는지, 누구에게 보여 줄 내용인지 알려 줍니다. 배경을 아는 만큼 답이 내 상황에 붙습니다.', quote: '어르신 대상 무료 특강 홍보용이야.' },
+    situation: { n: '3', name: '상황', desc: '지금 처한 조건을 숫자로 알려 줍니다. 시간·인원·분량이 정해지면 답이 현실적으로 바뀝니다.', quote: '시간이 2시간뿐이고, 참석자는 대부분 스마트폰이 처음이야.' },
+    output: { n: '4', name: '결과값', desc: '어떤 모양으로 받을지 정합니다. 표·줄 수·말투를 말하면 다시 손볼 일이 줄어듭니다.', quote: '표 1개와 3줄 요약, 친근한 말투로 정리해 줘.' }
+  };
+  var dTag = document.getElementById('dTag');
+  var dDesc = document.getElementById('dDesc');
+  var dQuote = document.getElementById('dQuote');
+  var fourBlocks = Array.prototype.slice.call(document.querySelectorAll('#fourBlocks .fb'));
+  fourBlocks.forEach(function (b) {
+    b.addEventListener('click', function () {
+      fourBlocks.forEach(function (x) { x.classList.toggle('on', x === b); });
+      var d = FOUR[b.dataset.k];
+      if (!d) return;
+      dTag.innerHTML = '<span class="num">' + d.n + '</span>' + d.name;
+      dDesc.textContent = d.desc;
+      dQuote.textContent = d.quote;
+    });
+  });
+
+  /* ---------- 4장: 조립 체험 ---------- */
+  var ORDER = ['role', 'context', 'situation', 'output'];
+  var picked = {};
+  var builtPrompt = document.getElementById('builtPrompt');
+  var composeCount = document.getElementById('composeCount');
+  var builder = document.getElementById('builder');
+
+  function renderBuilt() {
+    var parts = [];
+    ORDER.forEach(function (k) { if (picked[k]) parts.push(picked[k]); });
+    composeCount.textContent = parts.length + ' / 4';
+    if (!parts.length) {
+      builtPrompt.classList.add('ph');
+      builtPrompt.textContent = '왼쪽에서 네 칸을 하나씩 골라 보세요. 고른 만큼 여기에 문장이 쌓입니다.';
+    } else {
+      builtPrompt.classList.remove('ph');
+      builtPrompt.textContent = parts.join(' ') + (parts.length === 4 ? '\n\n위 조건에 맞게 작성해 줘.' : '');
+    }
+    scheduleFit();
+  }
+
+  builder.querySelectorAll('.opt').forEach(function (o) {
+    o.addEventListener('click', function () {
+      var g = o.dataset.group;
+      if (picked[g] === o.textContent.trim()) {
+        picked[g] = null;
+        o.classList.remove('on');
+      } else {
+        picked[g] = o.textContent.trim();
+        builder.querySelectorAll('.opt[data-group="' + g + '"]').forEach(function (x) {
+          x.classList.toggle('on', x === o);
+        });
+      }
+      renderBuilt();
+    });
+  });
+
+  document.getElementById('fillExample').addEventListener('click', function () {
+    builder.querySelectorAll('.bgroup').forEach(function (g) {
+      var first = g.querySelector('.opt');
+      if (!first) return;
+      g.querySelectorAll('.opt').forEach(function (x) { x.classList.toggle('on', x === first); });
+      picked[first.dataset.group] = first.textContent.trim();
+    });
+    renderBuilt();
+  });
+
+  document.getElementById('clearBuilt').addEventListener('click', function () {
+    picked = {};
+    builder.querySelectorAll('.opt').forEach(function (x) { x.classList.remove('on'); });
+    renderBuilt();
+  });
+
+  renderBuilt();
+
+  /* ---------- 5장: 문서 탭 ---------- */
+  var tabBtns = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
+  tabBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      tabBtns.forEach(function (x) {
+        var on = x === b;
+        x.classList.toggle('on', on);
+        x.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      document.querySelectorAll('.tab-panel').forEach(function (p) {
+        p.classList.toggle('on', p.dataset.panel === b.dataset.tab);
+      });
+      scheduleFit();
+    });
+  });
+
+  /* ---------- 6장: 이미지 5요소 ---------- */
+  var FIVE = {
+    topic: { n: '1', name: '주제', desc: '무엇을 그릴지 한 단어로 정합니다. "할머니"처럼 사람이어도 되고, "겨울 창가"처럼 장면이어도 됩니다.', quote: '할머니가' },
+    act: { n: '2', name: '행동·표정', desc: '무엇을 하고 있는지, 어떤 표정인지 알려 줍니다. 같은 사람도 행동에 따라 그림이 완전히 달라집니다.', quote: '웃으며 손을 흔드는' },
+    bg: { n: '3', name: '배경·조명', desc: '어디에 있는지, 빛이 어떤지 정합니다. 배경과 조명이 그림의 온도를 만듭니다.', quote: '햇살 드는 부엌, 따뜻한 오후 빛' },
+    style: { n: '4', name: '화풍', desc: '사진인지, 수채화인지, 3D 캐릭터인지 고릅니다. 화풍이 빠지면 매번 다른 느낌이 나옵니다.', quote: '수채화 일러스트' },
+    ratio: { n: '5', name: '비율·분위기', desc: '정사각형·가로형 같은 비율과 밝고 차분한 분위기를 정합니다. 쓰임새에 맞춰 고르세요.', quote: '정사각형, 포근한 분위기' }
+  };
+  var fvTag = document.getElementById('fvTag');
+  var fvDesc = document.getElementById('fvDesc');
+  var fvQuote = document.getElementById('fvQuote');
+  var fiveBlocks = Array.prototype.slice.call(document.querySelectorAll('#fiveBlocks .fv'));
+  var clSegs = Array.prototype.slice.call(document.querySelectorAll('#imgLine .cl-seg'));
+  fiveBlocks.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = b.dataset.k;
+      fiveBlocks.forEach(function (x) { x.classList.toggle('on', x === b); });
+      clSegs.forEach(function (s) { s.classList.toggle('on', s.dataset.k === k); });
+      var d = FIVE[k];
+      if (!d) return;
+      fvTag.innerHTML = '<span class="num">' + d.n + '</span>' + d.name;
+      fvDesc.textContent = d.desc;
+      fvQuote.textContent = d.quote;
+    });
+  });
+
+  /* ---------- 8장: 고치기 카드 ---------- */
+  document.querySelectorAll('[data-fx]').forEach(function (c) {
+    function toggle() { c.classList.toggle('open'); }
+    c.addEventListener('click', function (e) {
+      if (e.target.closest('.copy-btn')) return;
+      toggle();
+    });
+    c.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
+
+  /* ---------- 9장: 실수 카드 ---------- */
+  /* 고치는 법은 카드에 항상 보이도록 했습니다 (누르지 않아도 읽힘). */
+
+  /* ---------- 복사 + 토스트 ---------- */
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    window.clearTimeout(showToast._t);
+    showToast._t = window.setTimeout(function () { toast.classList.remove('show'); }, 2000);
+  }
+  window.showToast = showToast;
+
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (err) {}
+    document.body.removeChild(ta);
+  }
+
+  document.querySelectorAll('[data-src]').forEach(function (btn) {
+    var orig = btn.innerHTML;
+    btn.addEventListener('click', function () {
+      var src = document.getElementById(btn.getAttribute('data-src'));
+      if (!src) return;
+      var text = src.textContent.replace(/^\s+|\s+$/g, '');
+      if (!text) { showToast('먼저 내용을 채워 주세요.'); return; }
+      var done = function () {
+        btn.classList.add('done');
+        btn.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>복사했어요';
+        showToast(btn.getAttribute('data-toast') || '복사했어요. 붙여넣어 보세요.');
+        window.clearTimeout(btn._t);
+        btn._t = window.setTimeout(function () {
+          btn.classList.remove('done');
+          btn.innerHTML = orig;
+        }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });
+      } else {
+        fallbackCopy(text); done();
+      }
+    });
+  });
+
+  /* ---------- 화면에 맞추기 ----------
+     넓은 화면(프로젝터·PC): 내용이 넘치면 살짝 줄여 한 화면에 담기
+     좁은 화면(휴대폰): 글자를 줄이지 않고 위아래로 넘겨 보기 */
+  var MIN_SCALE = 0.86;
+  function fitSlides() {
+    slides.forEach(function (sl) {
+      if (!sl.classList.contains('active')) return;
+      var inner = sl.querySelector('.inner');
+      if (!inner) return;
+      inner.style.transform = '';
+      sl.classList.remove('tall');
+      var cs = getComputedStyle(sl);
+      var avail = sl.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      var h = inner.getBoundingClientRect().height;
+      if (!(avail > 0) || h <= avail + 1) return;
+      if (window.innerWidth <= 1100) {
+        sl.classList.add('tall');
+        return;
+      }
+      var k = Math.max(MIN_SCALE, avail / h);
+      inner.style.transformOrigin = 'center center';
+      inner.style.transform = 'scale(' + k.toFixed(3) + ')';
+      if (k >= MIN_SCALE) return;
+      if (inner.getBoundingClientRect().height > avail + 1) sl.classList.add('tall');
+    });
+  }
+  var fitTimer = null;
+  function scheduleFit() {
+    window.clearTimeout(fitTimer);
+    fitTimer = window.setTimeout(fitSlides, 60);
+  }
+  window.addEventListener('resize', scheduleFit);
+  window.addEventListener('orientationchange', scheduleFit);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(scheduleFit); }
+
+  /* ---------- 시작 ---------- */
+  go(0);
+  scheduleFit();
+})();
+</script>
+</body>
+</html>

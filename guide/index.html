@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>AI 가이드 | 이서정 AI 강사</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="강의에서 다룬 AI 도구를 누구나 무료로 다시 따라 해 볼 수 있는 AI 가이드입니다. 피클 에이전트 완전정복 실습 웹앱을 비밀번호로 열어 보세요.">
+<meta name="description" content="강의에서 다룬 AI 도구를 누구나 무료로 다시 따라 해 볼 수 있는 AI 가이드입니다. 피클 에이전트 완전정복·프롬프트 디자인실·이미지 제작실·챗GPT·제미나이·클로드 활용법을 비밀번호로 열어 보세요.">
 <link rel="canonical" href="https://dubaero.kr/guide/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="두배로">
@@ -49,8 +49,8 @@
 .gd-ico{width:62px;height:62px;flex:none;display:grid;place-items:center;border-radius:16px;background:#fff;border:1px solid var(--line);color:var(--acc)}
 .gd-ico svg{width:32px;height:32px;display:block}
 /* 진행 중 카드의 캐릭터는 틀 없이 그대로 — ㅍ 실루엣이 또렷하게 보이도록 */
-.gd-card.live .gd-ico{width:74px;height:74px;background:transparent;border:0;border-radius:0;box-shadow:none}
-.gd-card.live .gd-ico svg{width:74px;height:72px}
+#pickle-card .gd-ico{width:74px;height:74px;background:transparent;border:0;border-radius:0;box-shadow:none}
+#pickle-card .gd-ico svg{width:74px;height:72px}
 
 /* 가운데 글 */
 .gd-bd{display:flex;flex-direction:column;gap:4px;min-width:0}
@@ -88,8 +88,8 @@
   .gd-card{padding:13px 16px;gap:0 13px;border-left-width:3px;grid-template-columns:64px minmax(0,1fr)}
   .gd-ico{width:54px;height:54px;border-radius:14px}
   .gd-ico svg{width:28px;height:28px}
-  .gd-card.live .gd-ico{width:64px;height:64px}
-  .gd-card.live .gd-ico svg{width:64px;height:62px}
+  #pickle-card .gd-ico{width:64px;height:64px}
+  #pickle-card .gd-ico svg{width:64px;height:62px}
   .gd-t{font-size:18px}
   .gd-d{font-size:14.5px}
 }
@@ -99,8 +99,8 @@
   .gd-card{padding:13px 14px;gap:0 12px;border-radius:14px;grid-template-columns:58px minmax(0,1fr)}
   .gd-ico{width:50px;height:50px;border-radius:13px}
   .gd-ico svg{width:26px;height:26px}
-  .gd-card.live .gd-ico{width:58px;height:58px}
-  .gd-card.live .gd-ico svg{width:58px;height:56px}
+  #pickle-card .gd-ico{width:58px;height:58px}
+  #pickle-card .gd-ico svg{width:58px;height:56px}
   .gd-t{font-size:17.5px}
   .gd-d{font-size:14.5px}
   .gd-tag{font-size:11.5px;padding:4px 8px}
@@ -150,10 +150,10 @@
         <p>누구나 따라 해 볼 수 있는 무료 실습 자료</p>
       </div>
     </div>
-    <p class="gd-intro">강의에서 함께 다룬 AI 도구를 집에서도 그대로 다시 해 볼 수 있도록, 화면을 누르며 따라 하는 실습용 웹앱으로 만들어 두었습니다. 지금은 <b>피클 에이전트 완전정복</b>이 열려 있고, 나머지 자료도 차례로 열립니다.</p>
+    <p class="gd-intro">강의에서 함께 다룬 AI 도구를 집에서도 그대로 다시 해 볼 수 있도록, 화면을 누르며 따라 하는 실습용 웹앱 네 개로 만들어 두었습니다. <b>피클 에이전트 완전정복</b>부터 <b>프롬프트 디자인실</b>·<b>이미지 제작실</b>·<b>챗GPT·제미나이·클로드 활용법</b>까지, 원하는 카드를 눌러 바로 시작하세요.</p>
 
     <div class="gd-grid">
-      <button class="gd-card live mint" id="pickle-card" type="button">
+      <button class="gd-card live mint" id="pickle-card" type="button" data-deck="/guide/pickle.html">
         <span class="gd-ico" aria-hidden="true">
           <svg class="gd-pk" viewBox="0 0 240 250" focusable="false" aria-hidden="true"><ellipse cx="120" cy="236" rx="58" ry="8" fill="#AFD29B" opacity="0.55"/><g fill="none" stroke="#2E7A17" stroke-linecap="round"><line x1="50" y1="58" x2="190" y2="58" stroke-width="62"/><line x1="50" y1="188" x2="190" y2="188" stroke-width="56"/><line x1="80" y1="58" x2="80" y2="188" stroke-width="46"/><line x1="160" y1="58" x2="160" y2="188" stroke-width="46"/></g><g fill="none" stroke="#5BB93B" stroke-linecap="round"><line x1="50" y1="58" x2="190" y2="58" stroke-width="50"/><line x1="50" y1="188" x2="190" y2="188" stroke-width="44"/><line x1="80" y1="58" x2="80" y2="188" stroke-width="34"/><line x1="160" y1="58" x2="160" y2="188" stroke-width="34"/></g><ellipse cx="86" cy="70" rx="8.5" ry="4.6" fill="#FFB9A6" opacity="0.6"/><ellipse cx="154" cy="70" rx="8.5" ry="4.6" fill="#FFB9A6" opacity="0.6"/><g class="pk-eye"><circle cx="103" cy="52" r="9.6" fill="#FFFFFF"/><circle cx="104.4" cy="53" r="4.9" fill="#16300C"/><circle cx="101.4" cy="50" r="1.8" fill="#FFFFFF" opacity="0.95"/></g><g class="pk-eye"><circle cx="137" cy="52" r="9.6" fill="#FFFFFF"/><circle cx="138.4" cy="53" r="4.9" fill="#16300C"/><circle cx="135.4" cy="50" r="1.8" fill="#FFFFFF" opacity="0.95"/></g><path d="M112 66 Q120 75 128 66" fill="none" stroke="#1F4D10" stroke-width="4" stroke-linecap="round"/></svg>
         </span>
@@ -167,52 +167,52 @@
         </span>
       </button>
 
-      <div class="gd-card soon indigo">
+      <button class="gd-card live indigo" type="button" data-deck="/guide/prompt.html">
         <span class="gd-ico" aria-hidden="true">
           <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="36" height="30" rx="5"/><path d="M13 18l5 4-5 4M22 27h9"/><path d="M34 4l1.6 4.4L40 10l-4.4 1.6L34 16l-1.6-4.4L28 10l4.4-1.6z"/></svg>
         </span>
         <span class="gd-bd">
           <span class="gd-hd">
-            <span class="gd-badges"><span class="gd-tag">무료 가이드</span></span>
-            <span class="gd-soon">곧 열립니다</span>
+            <span class="gd-badges"><span class="gd-tag">무료 가이드</span><span class="gd-tag solid">실습 웹앱</span></span>
+            <span class="gd-go">열기 <span aria-hidden="true">→</span></span>
           </span>
           <span class="gd-t">프롬프트 디자인실</span>
-          <span class="gd-d">질문 한 줄로 원하는 결과 뽑는 법 · 역할·조건·형식 3단 공식과 바로 복사하는 실전 템플릿</span>
+          <span class="gd-d">질문 한 줄로 원하는 결과 뽑는 법 · 역할·맥락·상황·결과값 4단 공식과 이미지 프롬프트 작성법</span>
         </span>
-      </div>
+      </button>
 
-      <div class="gd-card soon peach">
+      <button class="gd-card live peach" type="button" data-deck="/guide/image.html">
         <span class="gd-ico" aria-hidden="true">
           <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="9" width="38" height="28" rx="5"/><circle cx="17" cy="19" r="3.4"/><path d="M6 32l9-8 7 6 5-4 9 7"/></svg>
         </span>
         <span class="gd-bd">
           <span class="gd-hd">
-            <span class="gd-badges"><span class="gd-tag">무료 가이드</span></span>
-            <span class="gd-soon">곧 열립니다</span>
+            <span class="gd-badges"><span class="gd-tag">무료 가이드</span><span class="gd-tag solid">실습 웹앱</span></span>
+            <span class="gd-go">열기 <span aria-hidden="true">→</span></span>
           </span>
           <span class="gd-t">이미지 제작실</span>
-          <span class="gd-d">포스터·카드뉴스·사원증·카톡 배경까지 · 화풍 지정과 원하는 분위기 정확히 뽑는 노하우</span>
+          <span class="gd-d">포스터·카드뉴스·사원증·카톡 배경까지 · 화풍 지정과 원하는 분위기 정확히 뽑는 노하우</span>
         </span>
-      </div>
+      </button>
 
-      <div class="gd-card soon sky">
+      <button class="gd-card live sky" type="button" data-deck="/guide/ai-tools.html">
         <span class="gd-ico" aria-hidden="true">
           <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="20" r="9"/><circle cx="31" cy="20" r="9"/><circle cx="24" cy="31" r="9"/></svg>
         </span>
         <span class="gd-bd">
           <span class="gd-hd">
-            <span class="gd-badges"><span class="gd-tag">무료 가이드</span></span>
-            <span class="gd-soon">곧 열립니다</span>
+            <span class="gd-badges"><span class="gd-tag">무료 가이드</span><span class="gd-tag solid">실습 웹앱</span></span>
+            <span class="gd-go">열기 <span aria-hidden="true">→</span></span>
           </span>
-          <span class="gd-t">챗GPT · 제미나이 · 클로드 활용법</span>
-          <span class="gd-d">글쓰기·문서·검색·이미지까지 · 3대 AI의 장단점 비교와 상황별 딱 맞는 도구 고르기</span>
+          <span class="gd-t">챗GPT · 제미나이 · 클로드 활용법</span>
+          <span class="gd-d">글쓰기·문서·검색·이미지까지 · 3대 AI의 장단점 비교와 상황별 딱 맞는 도구 고르기</span>
         </span>
-      </div>
+      </button>
     </div>
 
     <p class="gd-note">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.2" y="10.2" width="15.6" height="10" rx="2.4"/><path d="M8.2 10.2V7.6a3.8 3.8 0 017.6 0v2.6"/></svg>
-      자료는 비밀번호로 열립니다. 강의 시간에 안내받은 비밀번호를 입력해 주세요.
+      네 가지 가이드 모두 강의 시간에 안내받은 비밀번호로 열립니다. 한 번 입력하면 90일 동안은 다시 묻지 않아요.
     </p>
   </div>
 </section>
@@ -239,7 +239,7 @@
   <div class="gd-gate-box" role="dialog" aria-modal="true" aria-labelledby="gd-gate-title">
     <button type="button" class="gd-gate-x" id="gd-gate-x" aria-label="닫기">×</button>
     <p class="gd-gate-k">AI 가이드</p>
-    <h3 id="gd-gate-title">피클(Pickle) 에이전트 완전정복</h3>
+    <h3 id="gd-gate-title">AI 가이드</h3>
     <p class="gd-gate-d">강의에서 안내받은 비밀번호를 입력하면 바로 열립니다.</p>
     <form id="gd-gate-form" class="gd-gate-f" autocomplete="off">
       <label for="gd-gate-in" class="sr">비밀번호</label>
@@ -255,19 +255,35 @@
   /* 비밀번호는 SHA-256 값만 저장 (강의 자료실과 같은 방식) */
   var CODE='6c1ec2ad4dff71c654bf9b20f7153487f97e87327fe4b867008dd2d6d20b3712';
   var TTL=90*24*60*60*1000;               /* 한 번 맞히면 90일 동안 다시 묻지 않음 */
-  var DECK='/guide/pickle.html';
   var gate=document.getElementById('gd-gate'),form=document.getElementById('gd-gate-form'),
-      input=document.getElementById('gd-gate-in'),msg=document.getElementById('gd-gate-msg');
+      input=document.getElementById('gd-gate-in'),msg=document.getElementById('gd-gate-msg'),
+      gateTitle=document.getElementById('gd-gate-title'),toast=document.getElementById('toast');
+  var pendingDeck='';   /* 비밀번호를 맞히면 열 카드. 비어 있으면 /guide/ 에 그대로 머문다 */
 
   function remembered(){
     try{var t=+localStorage.getItem('guide_ok_t');return !!(t&&t>Date.now());}catch(e){return false;}
+  }
+  function sessionOk(){
+    try{return sessionStorage.getItem('guide_ok')==='1';}catch(e){return false;}
+  }
+  function unlocked(){return sessionOk()||remembered();}
+  function showToast(m){
+    if(!toast)return;
+    toast.textContent=m;toast.classList.add('show');
+    setTimeout(function(){toast.classList.remove('show');},2400);
+  }
+  function go(){
+    if(pendingDeck){location.href=pendingDeck;return;}
+    showToast('비밀번호가 확인됐어요. 원하는 자료를 눌러 주세요.');
   }
   function remember(){
     try{localStorage.setItem('guide_ok_t',String(Date.now()+TTL));}catch(e){}
     try{sessionStorage.setItem('guide_ok','1');}catch(e){}
   }
-  function openGate(){
-    if(remembered()){try{sessionStorage.setItem('guide_ok','1');}catch(e){}location.href=DECK;return;}
+  function openGate(deck,title,quiet){
+    pendingDeck=deck||'';
+    if(gateTitle)gateTitle.textContent=title||'AI 가이드';
+    if(unlocked()){remember();if(!quiet)go();return;}
     msg.textContent='';msg.className='gd-gate-m';input.value='';gate.hidden=false;
     setTimeout(function(){input.focus();},30);
   }
@@ -279,7 +295,11 @@
     });
   }
 
-  document.getElementById('pickle-card').addEventListener('click',openGate);
+  document.querySelectorAll('.gd-card[data-deck]').forEach(function(card){
+    card.addEventListener('click',function(){
+      openGate(card.getAttribute('data-deck'),card.querySelector('.gd-t').textContent);
+    });
+  });
   document.getElementById('gd-gate-x').addEventListener('click',closeGate);
   gate.addEventListener('click',function(e){if(e.target===gate)closeGate();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!gate.hidden)closeGate();});
@@ -289,7 +309,7 @@
     var v=input.value.trim();
     if(!v)return;
     sha(v).then(function(h){
-      if(h===CODE){remember();gate.hidden=true;location.href=DECK;}
+      if(h===CODE){remember();gate.hidden=true;input.value='';msg.textContent='';go();}
       else{msg.className='gd-gate-m err';msg.textContent='비밀번호가 맞지 않아요. 강의 때 안내받은 비밀번호를 넣어 주세요.';input.select();}
     }).catch(function(){
       msg.className='gd-gate-m err';
@@ -301,7 +321,7 @@
   try{
     if(/[?&]locked=1/.test(location.search)){
       history.replaceState(null,'','/guide/');
-      openGate();
+      openGate('','AI 가이드',true);
     }
   }catch(e){}
 
