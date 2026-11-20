@@ -5901,6 +5901,11 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 #jx-p-task button:not(.on){background:#EEF5F0!important;border-color:#C5D9CC!important}
 #jx-p-task button:not(.on):hover{background:#E2EFE6!important}
 </style>
+<style id="hide-choices">/* 2026.11.20 불필요한 선택 버튼 숨김: 자료 있어요/없어요, 서식 있어요/없어요, 자료 위치 (기본값: 자료 있음·우리 센터 서식·이번 대화에 첨부) */
+#aig-mode,#aig-loc,#all-src{display:none!important}
+#aig-src>span,#aig-src>button{display:none!important}
+#aig-src{background:none!important;border:0!important;padding:0!important;margin:6px 0 0!important;justify-content:flex-end}
+</style>
 <style id="wide-fit">/* 2026.11.20 넓은 화면: 좌우로 넓게 펼치기 */
 @media (min-width:1101px){.wrap{max-width:1440px}#v-home .hero-art img{max-height:230px;width:auto;max-width:100%;object-fit:contain;margin-left:auto;display:block}}
 </style>
