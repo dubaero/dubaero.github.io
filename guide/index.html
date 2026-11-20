@@ -5,6 +5,7 @@
 <title>AI 가이드 | 이서정 AI 강사</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="강의에서 다룬 AI 도구를 누구나 무료로 다시 따라 해 볼 수 있는 AI 가이드입니다. 피클 에이전트 완전정복·프롬프트 디자인실·이미지 제작실·챗GPT·제미나이·클로드 활용법을 비밀번호로 열어 보세요.">
+<link rel="preload" as="image" href="/guide/assets/pickle-3d.png">
 <link rel="canonical" href="https://dubaero.kr/guide/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="두배로">
@@ -29,42 +30,61 @@
 /* 카드마다 주제 색 — 연한 바탕 + 또렷한 테두리 + 진한 글자 */
 .gd-card{
   --tint:#F7FAFC; --line:#D5DEE8; --acc:#64748B; --deep:#17304F; --dtext:#3B4A59;
+  --bg-badge:#EFF3F8; --ink-badge:#3B4A59; --bg-btn:#EFF3F8; --line-btn:#D5E0EC; --ink-btn:#22405E; --bg-btn-h:#E4EBF4;
   position:relative;display:grid;grid-template-columns:74px minmax(0,1fr);align-items:center;gap:0 16px;
   width:100%;text-align:left;padding:14px 18px;
   background:var(--tint);color:var(--deep);
-  border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:16px;
-  box-shadow:0 1px 3px rgba(23,48,79,.05);
-  transition:box-shadow .15s,transform .15s
+  border:1.5px solid var(--line);border-left:4px solid var(--acc);border-radius:16px;
+  box-shadow:0 1px 2px rgba(23,48,79,.04);
+  transition:box-shadow .15s,transform .15s,border-color .15s
 }
 .gd-card::before,.gd-card::after{content:none!important;display:none!important}
-.gd-card.mint{--tint:#F0FDF4;--line:#86EFAC;--acc:#22C55E;--deep:#166534;--dtext:#2C5540}
-.gd-card.indigo{--tint:#EEF2FF;--line:#A5B4FC;--acc:#6366F1;--deep:#3730A3;--dtext:#3F3F86}
-.gd-card.peach{--tint:#FFF7ED;--line:#FDBA74;--acc:#F97316;--deep:#9A3412;--dtext:#7C3D1E}
-.gd-card.sky{--tint:#EFF6FF;--line:#93C5FD;--acc:#3B82F6;--deep:#1E40AF;--dtext:#26417A}
+.gd-card.mint{--tint:#F4FBF7;--line:#D5EDE0;--acc:#B8E3CC;--deep:#17563A;--dtext:#46655A;
+  --bg-badge:#E2F4EA;--ink-badge:#1E6B47;--bg-btn:#E2F5EA;--line-btn:#B8E3CC;--ink-btn:#1B5E3A;--bg-btn-h:#D2EFE0}
+.gd-card.indigo{--tint:#F6F7FE;--line:#D8DCF6;--acc:#C4C9F0;--deep:#343C86;--dtext:#4E5578;
+  --bg-badge:#E8EAFA;--ink-badge:#3F4899;--bg-btn:#E8EAFA;--line-btn:#C4C9F0;--ink-btn:#353D8A;--bg-btn-h:#DCE0F8}
+.gd-card.peach{--tint:#FFF8F3;--line:#F6DDD0;--acc:#F2C9B6;--deep:#8A3C1E;--dtext:#7A5A4A;
+  --bg-badge:#FCECE3;--ink-badge:#9A4120;--bg-btn:#FCECE3;--line-btn:#F2C9B6;--ink-btn:#8F3B1C;--bg-btn-h:#F9E0D3}
+.gd-card.sky{--tint:#F3F9FF;--line:#CFE3FA;--acc:#BBD7F7;--deep:#1F4E8C;--dtext:#445C7A;
+  --bg-badge:#E4F0FD;--ink-badge:#235A9E;--bg-btn:#E4F0FD;--line-btn:#BBD7F7;--ink-btn:#1F508F;--bg-btn-h:#D6E8FC}
 .gd-card.live{cursor:pointer}
-.gd-card.live:hover,.gd-card.live:focus-visible{transform:translateY(-2px);box-shadow:0 10px 22px rgba(23,48,79,.13);outline:none}
+.gd-card.live:hover,.gd-card.live:focus-visible{transform:translateY(-2px);box-shadow:0 10px 22px rgba(23,48,79,.09);outline:none}
 .gd-card.soon{box-shadow:none}
 
 /* 왼쪽 아이콘 상자 */
 .gd-ico{width:62px;height:62px;flex:none;display:grid;place-items:center;border-radius:16px;background:#fff;border:1px solid var(--line);color:var(--acc)}
 .gd-ico svg{width:32px;height:32px;display:block}
-/* 진행 중 카드의 캐릭터는 틀 없이 그대로 — ㅍ 실루엣이 또렷하게 보이도록 */
-#pickle-card .gd-ico{width:74px;height:74px;background:transparent;border:0;border-radius:0;box-shadow:none}
-#pickle-card .gd-ico svg{width:74px;height:72px}
+/* 진행 중 카드의 3D 캐릭터 — 틀 없이 그대로, 바닥 그림자만 부드럽게 */
+#pickle-card .gd-ico{width:74px;height:74px;background:transparent;border:0;border-radius:0;box-shadow:none;position:relative}
+#pickle-card .gd-ico::after{
+  content:"";position:absolute;left:16%;right:16%;bottom:1px;height:9px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(26,92,59,.22),rgba(26,92,59,0));z-index:0
+}
+.gd-pk3d{
+  position:relative;z-index:1;width:100%;height:100%;object-fit:contain;display:block;
+  transform-origin:50% 92%;animation:pickleBounce 2.2s ease-in-out infinite
+}
+@keyframes pickleBounce{
+  0%,100%{transform:translateY(0) scale(1,1)}
+  28%{transform:translateY(-8%) scale(.985,1.025)}
+  46%{transform:translateY(0) scale(1.025,.975)}
+  62%{transform:translateY(-3%) scale(1,1)}
+  78%,100%{transform:translateY(0) scale(1,1)}
+}
 
 /* 가운데 글 */
 .gd-bd{display:flex;flex-direction:column;gap:4px;min-width:0}
 .gd-hd{display:flex;align-items:center;gap:8px;min-height:32px}
 .gd-badges{display:flex;flex-wrap:wrap;gap:5px}
-.gd-tag{font-size:12px;font-weight:700;line-height:1;padding:5px 9px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--deep);white-space:nowrap}
-.gd-tag.solid{background:var(--deep);border-color:var(--deep);color:#fff}
+.gd-tag{font-size:12px;font-weight:700;line-height:1;padding:5px 9px;border-radius:999px;background:var(--bg-badge);border:1px solid var(--line);color:var(--ink-badge);white-space:nowrap}
+.gd-tag.solid{background:rgba(255,255,255,.85);border-color:var(--line-btn);color:var(--ink-badge)}
 .gd-t{font-size:20px;font-weight:800;letter-spacing:-.025em;line-height:1.26;color:var(--deep);word-break:keep-all;overflow-wrap:break-word}
 .gd-d{font-size:15.5px;line-height:1.5;color:var(--dtext);word-break:keep-all;overflow-wrap:break-word}
 
 /* 오른쪽 버튼 */
 .gd-go,.gd-soon{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:9px;font-size:14px;font-weight:800;white-space:nowrap}
-.gd-go{background:var(--deep);color:#fff;box-shadow:0 2px 0 rgba(0,0,0,.12)}
-.gd-card.live:hover .gd-go{box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.gd-go{background:var(--bg-btn);color:var(--ink-btn);border:1px solid var(--line-btn);box-shadow:none;transition:background .15s}
+.gd-card.live:hover .gd-go,.gd-card.live:focus-visible .gd-go{background:var(--bg-btn-h)}
 .gd-go span{font-size:15px;line-height:1}
 .gd-soon{background:#fff;border:1px dashed var(--line);color:var(--deep);font-weight:700}
 .gd-note{margin-top:20px;font-size:15px;color:#5F6B78;display:flex;align-items:center;gap:8px}
@@ -81,7 +101,7 @@
   84%,100%{transform:translateY(0) scale(1,1)}
 }
 @keyframes gdBlink{0%,91%,100%{transform:scaleY(1)} 95%{transform:scaleY(.06)}}
-@media (prefers-reduced-motion:reduce){.gd-pk,.gd-pk .pk-eye{animation:none}}
+@media (prefers-reduced-motion:reduce){.gd-pk,.gd-pk .pk-eye,.gd-pk3d{animation:none!important}}
 
 @media (max-width:960px){
   .gd-grid{gap:14px}
@@ -89,7 +109,6 @@
   .gd-ico{width:54px;height:54px;border-radius:14px}
   .gd-ico svg{width:28px;height:28px}
   #pickle-card .gd-ico{width:64px;height:64px}
-  #pickle-card .gd-ico svg{width:64px;height:62px}
   .gd-t{font-size:18px}
   .gd-d{font-size:14.5px}
 }
@@ -100,7 +119,6 @@
   .gd-ico{width:50px;height:50px;border-radius:13px}
   .gd-ico svg{width:26px;height:26px}
   #pickle-card .gd-ico{width:58px;height:58px}
-  #pickle-card .gd-ico svg{width:58px;height:56px}
   .gd-t{font-size:17.5px}
   .gd-d{font-size:14.5px}
   .gd-tag{font-size:11.5px;padding:4px 8px}
@@ -155,7 +173,7 @@
     <div class="gd-grid">
       <button class="gd-card live mint" id="pickle-card" type="button" data-deck="/guide/pickle.html">
         <span class="gd-ico" aria-hidden="true">
-          <svg class="gd-pk" viewBox="0 0 240 250" focusable="false" aria-hidden="true"><ellipse cx="120" cy="236" rx="58" ry="8" fill="#AFD29B" opacity="0.55"/><g fill="none" stroke="#2E7A17" stroke-linecap="round"><line x1="50" y1="58" x2="190" y2="58" stroke-width="62"/><line x1="50" y1="188" x2="190" y2="188" stroke-width="56"/><line x1="80" y1="58" x2="80" y2="188" stroke-width="46"/><line x1="160" y1="58" x2="160" y2="188" stroke-width="46"/></g><g fill="none" stroke="#5BB93B" stroke-linecap="round"><line x1="50" y1="58" x2="190" y2="58" stroke-width="50"/><line x1="50" y1="188" x2="190" y2="188" stroke-width="44"/><line x1="80" y1="58" x2="80" y2="188" stroke-width="34"/><line x1="160" y1="58" x2="160" y2="188" stroke-width="34"/></g><ellipse cx="86" cy="70" rx="8.5" ry="4.6" fill="#FFB9A6" opacity="0.6"/><ellipse cx="154" cy="70" rx="8.5" ry="4.6" fill="#FFB9A6" opacity="0.6"/><g class="pk-eye"><circle cx="103" cy="52" r="9.6" fill="#FFFFFF"/><circle cx="104.4" cy="53" r="4.9" fill="#16300C"/><circle cx="101.4" cy="50" r="1.8" fill="#FFFFFF" opacity="0.95"/></g><g class="pk-eye"><circle cx="137" cy="52" r="9.6" fill="#FFFFFF"/><circle cx="138.4" cy="53" r="4.9" fill="#16300C"/><circle cx="135.4" cy="50" r="1.8" fill="#FFFFFF" opacity="0.95"/></g><path d="M112 66 Q120 75 128 66" fill="none" stroke="#1F4D10" stroke-width="4" stroke-linecap="round"/></svg>
+          <img class="gd-pk3d" src="/guide/assets/pickle-3d.png" alt="피클 3D 캐릭터" width="400" height="400">
         </span>
         <span class="gd-bd">
           <span class="gd-hd">
