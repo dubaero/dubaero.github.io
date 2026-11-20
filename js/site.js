@@ -163,7 +163,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
   var cards=document.getElementById('room-cards');
   function renderCards(){if(!cards)return;cards.innerHTML='';
-  LECTURES.filter(function(L){return L.card;}).concat(LECTURES.filter(function(L){return L.st!=='예정'&&!L.card;})).forEach(function(L){
+  LECTURES.filter(function(L){return L.card;}).concat(LECTURES.filter(function(L){return L.st!=='예정'&&!L.card;})).slice(0,24).forEach(function(L){
     var a=el('button','room');a.type='button';a.setAttribute('aria-label',L.org+' 강의 자료실 열기');
     a.addEventListener('click',function(){openGate(L);});
     var sl=el('div','room-slide');
@@ -177,9 +177,6 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     cards.appendChild(a);
   });}
   renderCards();
-  /* 2026.11.20 강의 자료실 배너: 넓은 화면에서는 전부 4줄로 */
-  function fitRooms(){if(!cards)return;var n=cards.children.length;cards.style.gridTemplateColumns=(window.innerWidth>1100&&n)?'repeat('+Math.ceil(n/4)+',minmax(0,1fr))':'';}
-  fitRooms();window.addEventListener('resize',fitRooms);
   var list=document.getElementById('lec-list'),count=document.getElementById('lec-count'),filter='all',expanded=false,LIMIT=10,page=0;
   function renderList(){if(!list)return;
     Array.prototype.slice.call(list.querySelectorAll('.lrow:not(.lhd)')).forEach(function(n){n.remove();});
