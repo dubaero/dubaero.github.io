@@ -29,7 +29,7 @@
 /* 카드마다 주제 색 — 연한 바탕 + 또렷한 테두리 + 진한 글자 */
 .gd-card{
   --tint:#F7FAFC; --line:#D5DEE8; --acc:#64748B; --deep:#17304F; --dtext:#3B4A59;
-  position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:0 16px;
+  position:relative;display:grid;grid-template-columns:74px minmax(0,1fr);align-items:center;gap:0 16px;
   width:100%;text-align:left;padding:14px 18px;
   background:var(--tint);color:var(--deep);
   border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:16px;
@@ -85,7 +85,7 @@
 
 @media (max-width:960px){
   .gd-grid{gap:14px}
-  .gd-card{padding:13px 16px;gap:0 13px;border-left-width:3px}
+  .gd-card{padding:13px 16px;gap:0 13px;border-left-width:3px;grid-template-columns:64px minmax(0,1fr)}
   .gd-ico{width:54px;height:54px;border-radius:14px}
   .gd-ico svg{width:28px;height:28px}
   .gd-card.live .gd-ico{width:64px;height:64px}
@@ -96,7 +96,7 @@
 @media (max-width:680px){
   .gd4{padding:34px 0 52px}
   .gd-grid{grid-template-columns:1fr;gap:12px;margin-top:20px}
-  .gd-card{padding:13px 14px;gap:0 12px;border-radius:14px}
+  .gd-card{padding:13px 14px;gap:0 12px;border-radius:14px;grid-template-columns:58px minmax(0,1fr)}
   .gd-ico{width:50px;height:50px;border-radius:13px}
   .gd-ico svg{width:26px;height:26px}
   .gd-card.live .gd-ico{width:58px;height:58px}
