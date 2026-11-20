@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="ko" data-v="4">
+<head>
+<meta charset="utf-8">
+<title>AI 가이드 | 이서정 AI 강사</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="강의에서 다룬 AI 도구를 누구나 무료로 다시 따라 해 볼 수 있는 AI 가이드입니다. 피클 에이전트 완전정복 실습 웹앱을 비밀번호로 열어 보세요.">
+<link rel="canonical" href="https://dubaero.kr/guide/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="두배로">
+<meta property="og:url" content="https://dubaero.kr/guide/">
+<meta property="og:title" content="AI 가이드 | 이서정 AI 강사">
+<meta property="og:description" content="누구나 따라 해 볼 수 있는 무료 AI 실습 자료입니다.">
+<meta property="og:image" content="https://dubaero.kr/img/og.jpg?v=1">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/v4-header.css?v=6">
+<link rel="stylesheet" href="/css/v4.css?v=32">
+<style>
+/* ===== 2026.11.20 AI 가이드 — 무료 실습 자료 배너 ===== */
+.gd4{padding:56px 0 72px}
+.gd-intro{max-width:760px;margin:10px 0 0;font-size:17px;line-height:1.75;color:#4A5562}
+.gd-grid{display:grid;gap:16px;max-width:980px;margin-top:28px}
+.gd-card{
+  position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:22px;
+  width:100%;text-align:left;padding:26px 28px;background:#fff;color:#2B3540;cursor:pointer;
+  border:1px solid #D5DEE8;border-top:3px solid #5BB93B;border-radius:14px;
+  box-shadow:0 2px 10px rgba(23,48,79,.04);
+  transition:border-color .15s,box-shadow .15s,transform .15s
+}
+.gd-card:hover,.gd-card:focus-visible{border-color:#8FBFA0;border-top-color:#45A029;box-shadow:0 10px 26px rgba(23,48,79,.09);transform:translateY(-2px);outline:none}
+.gd-ico{
+  width:64px;height:64px;flex:none;display:grid;place-items:center;border-radius:16px;
+  background:#ECFDF5;border:1px solid #86EFAC;color:#166534;
+  font-size:32px;font-weight:800;line-height:1;letter-spacing:-.02em;
+  box-shadow:0 2px 0 #CFE9D3
+}
+.gd-body{display:flex;flex-direction:column;gap:7px;min-width:0}
+.gd-meta{display:flex;flex-wrap:wrap;gap:6px}
+.gd-tag{font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;background:#ECFDF5;border:1px solid #86EFAC;color:#166534}
+.gd-tag.blue{background:#EFF6FF;border-color:#BFDBFE;color:#1E3A8A}
+.gd-t{font-size:22px;font-weight:700;letter-spacing:-.02em;color:#17304F;line-height:1.35}
+.gd-t small{font-size:15px;font-weight:500;color:#5F6B78;margin-left:4px}
+.gd-d{font-size:16px;line-height:1.65;color:#4A5562}
+.gd-go{display:inline-flex;align-items:center;gap:6px;flex:none;min-height:44px;padding:0 18px;border-radius:10px;background:#ECFDF5;border:1px solid #86EFAC;color:#166534;font-size:15.5px;font-weight:700;white-space:nowrap}
+.gd-card:hover .gd-go{background:#DCFCE7;border-color:#4ADE80}
+.gd-note{margin-top:18px;font-size:14.5px;color:#5F6B78;display:flex;align-items:center;gap:8px}
+.gd-note svg{width:17px;height:17px;flex:none;color:#8A949F}
+@media (max-width:760px){
+  .gd4{padding:36px 0 56px}
+  .gd-card{grid-template-columns:auto minmax(0,1fr);gap:16px;padding:20px 18px}
+  .gd-ico{width:52px;height:52px;border-radius:14px;font-size:25px}
+  .gd-go{grid-column:1/-1;justify-content:center;width:100%}
+  .gd-t{font-size:19px}
+  .gd-d{font-size:15.5px}
+}
+/* 비밀번호 창 (강의 자료실과 같은 모양) */
+.gd-gate{position:fixed;inset:0;z-index:80;background:rgba(23,48,79,.5);display:grid;place-items:center;padding:16px}
+.gd-gate-box{position:relative;width:min(440px,100%);background:#fff;border-radius:18px;padding:32px 28px 26px;display:grid;gap:10px}
+.gd-gate-x{position:absolute;top:10px;right:14px;border:0;background:none;font-size:30px;line-height:1;color:#5F6B78;cursor:pointer;padding:6px}
+.gd-gate-k{font-size:14px;font-weight:700;color:#1F6FB2}
+.gd-gate-box h3{font-size:21px;color:#17304F;line-height:1.4}
+.gd-gate-d{font-size:15.5px;color:#4A5562}
+.gd-gate-f{display:flex;gap:8px;margin-top:6px}
+.gd-gate-f input{width:100%;font-size:18px;padding:12px 16px;border:1px solid #C9D3DD;border-radius:10px;color:#17304F;background:#fff}
+.gd-gate-f input:focus{outline:2px solid #1F6FB2;outline-offset:1px}
+.gd-gate-f button{flex:none;min-height:50px;padding:0 20px;border-radius:10px;border:0;background:#17304F;color:#fff;font-size:16px;font-weight:500;cursor:pointer}
+.gd-gate-f button:hover{background:#1F6FB2}
+.gd-gate-m{font-size:15px;color:#4A5562;min-height:1.4em}
+.gd-gate-m.err{color:#C0392B}
+@media (max-width:420px){.gd-gate-f{flex-direction:column}}
+</style>
+</head>
+<body><script src="/js/fs.js?v=1"></script>
+
+<header class="gh">
+  <div class="gh-in">
+    <a class="gh-logo" href="/" aria-label="이서정 AI 강사 홈"><b>이서정</b><small>오늘두AI · 디지털이음연구소</small></a>
+    <nav class="gh-nav" aria-label="주 메뉴">
+      <a href="/about/">강사 소개</a>
+      <a href="/program/">강의 분야</a>
+      <a href="/lectures/">강의 자료실</a>
+      <a class="gh-ai" href="/guide/" aria-current="page">AI 가이드</a>
+      <a class="gh-wc" href="/wordcloud/">워드클라우드</a>
+      <a class="gh-cta" href="/contact/">강의 문의</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="gd4" id="guide">
+  <div class="w4">
+    <div class="sh">
+      <div>
+        <span class="kick">FREE GUIDE</span>
+        <h2>AI 가이드</h2>
+        <p>누구나 따라 해 볼 수 있는 무료 실습 자료</p>
+      </div>
+    </div>
+    <p class="gd-intro">강의에서 함께 다룬 AI 도구를 집에서도 그대로 다시 해 볼 수 있도록, 화면을 누르며 따라 하는 실습용 웹앱으로 만들어 두었습니다. 강의를 듣지 않았어도 순서대로 따라 하면 됩니다.</p>
+
+    <div class="gd-grid">
+      <button class="gd-card" id="pickle-card" type="button">
+        <span class="gd-ico" aria-hidden="true">ㅍ</span>
+        <span class="gd-body">
+          <span class="gd-meta"><span class="gd-tag">무료 가이드</span><span class="gd-tag blue">초보자 실습용 웹앱</span></span>
+          <span class="gd-t">피클(Pickle) 에이전트 완전정복</span>
+          <span class="gd-d">말만 하면 움직이는 AI 비서 피클의 메뉴·기능·실전 예시를 통통 튀는 화면으로 쉽게 따라 해 보세요.</span>
+        </span>
+        <span class="gd-go">열기 →</span>
+      </button>
+    </div>
+
+    <p class="gd-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.2" y="10.2" width="15.6" height="10" rx="2.4"/><path d="M8.2 10.2V7.6a3.8 3.8 0 017.6 0v2.6"/></svg>
+      자료는 비밀번호로 열립니다. 강의 시간에 안내받은 비밀번호를 입력해 주세요.
+    </p>
+  </div>
+</section>
+<section class="gh-ask" aria-label="강의 문의"><div class="gh-ask-box"><div><h2>우리 기관에 맞는 AI 교육이 필요하신가요?</h2><p>교육 대상·인원·일정·목적을 알려 주시면 맞춤 구성안을 보내 드립니다.</p></div><a class="gh-ask-btn" href="/contact/">강의 문의하기</a></div></section>
+</main>
+
+<footer class="ft4">
+  <div class="w4">
+    <div class="ft-brand"><b>이서정 · 생성형 AI 전문강사</b>오늘두AI · 디지털이음연구소</div>
+    <div class="ft-links">
+      <span>dltjwjd59@gmail.com<button type="button" class="hc-copy" data-copy="dltjwjd59@gmail.com">복사</button></span>
+      <a href="https://blog.naver.com/ricewitch" target="_blank" rel="noopener">블로그</a>
+      <a href="https://www.instagram.com/jeong260622/" target="_blank" rel="noopener">인스타그램</a>
+      <span>카카오톡 li8093</span>
+      <a href="/ansim-filter/">개인정보 안심 필터</a>
+    </div>
+    <div class="ft-copy">© 2026 Lee Seojeong. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<div class="gd-gate" id="gd-gate" hidden>
+  <div class="gd-gate-box" role="dialog" aria-modal="true" aria-labelledby="gd-gate-title">
+    <button type="button" class="gd-gate-x" id="gd-gate-x" aria-label="닫기">×</button>
+    <p class="gd-gate-k">AI 가이드</p>
+    <h3 id="gd-gate-title">피클(Pickle) 에이전트 완전정복</h3>
+    <p class="gd-gate-d">강의에서 안내받은 비밀번호를 입력하면 바로 열립니다.</p>
+    <form id="gd-gate-form" class="gd-gate-f" autocomplete="off">
+      <label for="gd-gate-in" class="sr">비밀번호</label>
+      <input id="gd-gate-in" type="password" inputmode="numeric" placeholder="비밀번호" autocapitalize="off" spellcheck="false">
+      <button type="submit">열기</button>
+    </form>
+    <p class="gd-gate-m" id="gd-gate-msg" aria-live="polite"></p>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* 비밀번호는 SHA-256 값만 저장 (강의 자료실과 같은 방식) */
+  var CODE='6c1ec2ad4dff71c654bf9b20f7153487f97e87327fe4b867008dd2d6d20b3712';
+  var TTL=90*24*60*60*1000;               /* 한 번 맞히면 90일 동안 다시 묻지 않음 */
+  var DECK='/guide/pickle.html';
+  var gate=document.getElementById('gd-gate'),form=document.getElementById('gd-gate-form'),
+      input=document.getElementById('gd-gate-in'),msg=document.getElementById('gd-gate-msg');
+
+  function remembered(){
+    try{var t=+localStorage.getItem('guide_ok_t');return !!(t&&t>Date.now());}catch(e){return false;}
+  }
+  function remember(){
+    try{localStorage.setItem('guide_ok_t',String(Date.now()+TTL));}catch(e){}
+    try{sessionStorage.setItem('guide_ok','1');}catch(e){}
+  }
+  function openGate(){
+    if(remembered()){try{sessionStorage.setItem('guide_ok','1');}catch(e){}location.href=DECK;return;}
+    msg.textContent='';msg.className='gd-gate-m';input.value='';gate.hidden=false;
+    setTimeout(function(){input.focus();},30);
+  }
+  function closeGate(){gate.hidden=true;input.value='';msg.textContent='';}
+  function sha(t){
+    if(!(window.crypto&&crypto.subtle))return Promise.reject(new Error('no-subtle'));
+    return crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)).then(function(b){
+      return Array.prototype.map.call(new Uint8Array(b),function(x){return ('0'+x.toString(16)).slice(-2);}).join('');
+    });
+  }
+
+  document.getElementById('pickle-card').addEventListener('click',openGate);
+  document.getElementById('gd-gate-x').addEventListener('click',closeGate);
+  gate.addEventListener('click',function(e){if(e.target===gate)closeGate();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!gate.hidden)closeGate();});
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=input.value.trim();
+    if(!v)return;
+    sha(v).then(function(h){
+      if(h===CODE){remember();gate.hidden=true;location.href=DECK;}
+      else{msg.className='gd-gate-m err';msg.textContent='비밀번호가 맞지 않아요. 강의 때 안내받은 비밀번호를 넣어 주세요.';input.select();}
+    }).catch(function(){
+      msg.className='gd-gate-m err';
+      msg.textContent='이 화면에서는 확인할 수 없어요. 휴대폰이나 PC의 최신 브라우저에서 열어 주세요.';
+    });
+  });
+
+  /* 다른 창(자료실)에서 '비밀번호 확인' 후 돌아온 경우 안내 */
+  try{
+    if(/[?&]locked=1/.test(location.search)){
+      history.replaceState(null,'','/guide/');
+      openGate();
+    }
+  }catch(e){}
+
+  /* 이메일 복사 */
+  document.querySelectorAll('[data-copy]').forEach(function(el){
+    el.addEventListener('click',function(){
+      var toast=document.getElementById('toast');
+      function show(m){toast.textContent=m;toast.classList.add('show');setTimeout(function(){toast.classList.remove('show');},1800);}
+      try{navigator.clipboard.writeText(el.getAttribute('data-copy')).then(function(){show('복사했어요');},function(){show('길게 눌러 직접 복사해 주세요');});}
+      catch(e){show('길게 눌러 직접 복사해 주세요');}
+    });
+  });
+})();
+</script>
+</body>
+</html>

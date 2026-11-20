@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>피클 에이전트 완전정복 · 두배로 이서정</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://dubaero.kr/guide/">
+<script>
+/* 2026.11.20 dubaero.kr AI 가이드 — 비밀번호(8093)를 확인하지 않고는 이 화면이 열리지 않게 */
+(function(){try{
+  var ok=false;
+  try{ok=(sessionStorage.getItem("guide_ok")==="1");}catch(e){}
+  if(!ok){var t=+localStorage.getItem("guide_ok_t");ok=!!(t&&t>Date.now());}
+  if(!ok){location.replace("/guide/?locked=1");}
+}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+/* ============================================================
+   0. 기본 설정
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#F6FAF3;
+  --surface:#FFFFFF;
+  --green:#45A029;
+  --green-dark:#2C6B17;
+  --green-deep:#1F4E10;
+  --pickle:#5BB93B;
+  --ink:#1A2419;
+  --ink-2:#1E293B;
+  --muted:#54644F;
+  --line:#DDE9D6;
+  --line-strong:#C2D9B5;
+  --soft:#F1F7EC;
+  --butter:#FFF7DE;
+  --butter-line:#EFCB68;
+  --butter-ink:#7A5606;
+  --sky:#EDF4FD;
+  --sky-line:#C6DCF3;
+  --sky-ink:#1B4C82;
+  --radius:20px;
+  --shadow:0 6px 18px rgba(26,36,25,.06);
+  --shadow-lg:0 16px 40px rgba(26,36,25,.12);
+  --font:'Pretendard Variable',Pretendard,'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic','맑은 고딕',system-ui,-apple-system,sans-serif;
+}
+html,body{height:100%;margin:0}
+body{
+  font-family:var(--font);
+  color:var(--ink);
+  background:var(--bg);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  letter-spacing:-.01em;
+}
+/* 은은한 배경 (정지 상태, 애니메이션 없음) */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(60% 50% at 88% 6%,rgba(91,185,59,.14),transparent 70%),
+    radial-gradient(50% 45% at 6% 94%,rgba(239,203,104,.18),transparent 70%);
+}
+button{font-family:inherit;color:inherit;cursor:pointer;border:0;background:none;letter-spacing:inherit}
+h1,h2,h3,h4,p,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+b,strong{font-weight:800}
+::selection{background:#D6F0C5}
+
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.ico{width:1.15em;height:1.15em;display:inline-block;vertical-align:-.18em;color:currentColor;flex:none}
+
+/* ============================================================
+   1. 상단 바 / 하단 컨트롤
+   ============================================================ */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:54px;z-index:40;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(14px,2.4vw,30px);
+  background:linear-gradient(to bottom,rgba(246,250,243,.96),rgba(246,250,243,.72));
+  backdrop-filter:blur(6px);
+}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:14px;color:var(--ink)}
+.brand-mark{
+  width:24px;height:24px;border-radius:8px;background:var(--pickle);color:#fff;
+  display:grid;place-items:center;font-size:13px;font-weight:800;line-height:1;
+  box-shadow:0 2px 0 #3D8C25;
+}
+.brand-sub{font-weight:600;color:var(--muted);font-size:12.5px}
+.top-actions{display:flex;gap:6px}
+.ico-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 11px;border-radius:11px;border:1px solid var(--line-strong);
+  background:#fff;font-size:12.5px;font-weight:700;color:var(--ink-2);
+  box-shadow:0 1px 2px rgba(26,36,25,.04);
+  transition:background .18s ease,border-color .18s ease,color .18s ease;
+}
+.ico-btn:hover{background:var(--soft);border-color:var(--green);color:var(--green-dark)}
+.ico-btn .ico{font-size:15px}
+
+.bottombar{
+  position:fixed;left:0;right:0;bottom:0;height:76px;z-index:40;
+  display:flex;align-items:center;gap:clamp(10px,2vw,22px);
+  padding:0 clamp(14px,2.4vw,30px) 4px;
+  background:linear-gradient(to top,rgba(246,250,243,.98),rgba(246,250,243,.6));
+}
+.nav-btn{
+  width:44px;height:44px;border-radius:50%;flex:none;
+  display:grid;place-items:center;font-size:19px;font-weight:800;
+  border:1.5px solid var(--line-strong);background:#fff;color:var(--green-dark);
+  box-shadow:0 2px 0 rgba(194,217,181,.7);
+  transition:background .18s ease,border-color .18s ease,color .18s ease,opacity .18s ease;
+}
+.nav-btn:hover:not(:disabled){background:var(--green);border-color:var(--green);color:#fff}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.progress{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+.bar{height:5px;border-radius:99px;background:#E3EDDC;overflow:hidden}
+.bar-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#7DCB5A,var(--green));transition:width .3s ease}
+.dots{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
+.dot{
+  width:16px;height:6px;border-radius:99px;background:#D6E4CD;flex:none;
+  transition:background .2s ease,width .2s ease;
+}
+.dot:hover{background:#A9CE94}
+.dot.active{background:var(--green);width:26px}
+.counter{font-size:12.5px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.counter b{color:var(--green-dark);font-size:14px}
+
+/* ============================================================
+   2. 슬라이드
+   ============================================================ */
+#deck{position:fixed;inset:0;z-index:10}
+.slide{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  padding:60px clamp(16px,3.6vw,52px) 82px;
+  opacity:0;visibility:hidden;
+  transition:opacity .3s ease;
+  overflow:hidden;
+}
+.slide.active{opacity:1;visibility:visible}
+.inner.narrow{max-width:900px}
+.inner{
+  width:100%;max-width:1150px;
+  display:flex;flex-direction:column;gap:clamp(9px,1.5vh,18px);
+}
+.head{display:flex;flex-direction:column;gap:7px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;align-self:flex-start;
+  font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--green-dark);
+  background:#E8F5DE;border:1px solid #C9E5B3;border-radius:99px;padding:4px 11px;
+}
+.sub{font-size:clamp(13.5px,1.2vw,17px);color:var(--muted);font-weight:600;line-height:1.5}
+.title{
+  font-size:clamp(22px,2.6vw,38px);font-weight:800;line-height:1.22;
+  letter-spacing:-.025em;color:var(--ink);
+}
+.hl{color:var(--green-dark);background:linear-gradient(transparent 60%,#D8F1C8 60%);padding:0 2px;border-radius:3px}
+.punch{
+  font-size:clamp(14.5px,1.35vw,19px);font-weight:800;color:var(--green-deep);
+  display:block;text-align:center;
+}
+.punch .ico{vertical-align:-.14em;margin-right:7px;font-size:.95em}
+.tip{
+  font-size:clamp(11.5px,1vw,13.5px);color:var(--muted);line-height:1.5;
+  display:flex;gap:7px;align-items:flex-start;
+}
+.tip .ico{color:var(--green);font-size:15px;margin-top:1px}
+.tip b{color:var(--ink-2)}
+
+/* ============================================================
+   3. 표지
+   ============================================================ */
+.cover{align-items:center;text-align:center;gap:clamp(8px,1.4vh,16px)}
+.cover h1{
+  font-size:clamp(25px,3.5vw,50px);font-weight:800;line-height:1.2;letter-spacing:-.035em;
+  color:var(--ink);
+}
+.cover h1 .hl{color:var(--green-dark);background:linear-gradient(transparent 58%,#D8F1C8 58%)}
+.cover-sub{font-size:clamp(13px,1.35vw,19px);color:var(--muted);font-weight:700}
+.cover-sub b{color:var(--green-dark)}
+.cover-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green);color:#fff;font-weight:800;
+  font-size:clamp(14px,1.25vw,17px);padding:13px 26px;border-radius:14px;
+  box-shadow:0 4px 0 #2F7A1A,0 10px 22px rgba(69,160,41,.22);
+  transition:background .18s ease,box-shadow .18s ease;
+}
+.btn-primary:hover{background:#3D8F24}
+.btn-primary:active{box-shadow:0 2px 0 #2F7A1A}
+.cover-by{font-size:clamp(12px,1.05vw,15px);font-weight:800;color:var(--ink-2)}
+.cover-by span{color:var(--muted);font-weight:600}
+.cover-hint{font-size:clamp(10.5px,.92vw,12.5px);color:#7C8B77;font-weight:600}
+.cover .eyebrow{align-self:center}
+
+/* ============================================================
+   4. 피클 캐릭터
+   ============================================================ */
+.pickle-wrap{display:inline-block;width:clamp(112px,15vw,176px);line-height:0;cursor:pointer}
+.pickle-wrap.sm{width:clamp(96px,11vw,140px)}
+.pickle-wrap.lg{width:clamp(140px,19vw,236px)}
+.pickle-svg{width:100%;height:auto;display:block;transition:transform .22s ease;transform-origin:50% 88%}
+.pickle-wrap:hover .pickle-svg{transform:scale(1.04)}
+.pickle-hop{
+  display:inline-block;line-height:0;
+  transform-origin:50% 96%;
+  animation:bounce 2.9s cubic-bezier(.34,.78,.4,1) infinite;
+}
+.pickle-hop.jump{animation:pk-jump .62s cubic-bezier(.3,.8,.4,1) 1}
+.pk-eye{transform-box:fill-box;transform-origin:center;animation:blink 5.2s ease-in-out infinite}
+.pk-shadow{transform-box:fill-box;transform-origin:center;animation:pk-shadow 2.9s cubic-bezier(.34,.78,.4,1) infinite}
+
+@keyframes bounce{
+  0%,6%{transform:translateY(0) scale(1,1)}
+  13%{transform:translateY(-15px) scale(.965,1.04)}
+  20%{transform:translateY(0) scale(1.05,.95)}
+  27%{transform:translateY(-8px) scale(.985,1.015)}
+  34%{transform:translateY(0) scale(1.03,.975)}
+  40%{transform:translateY(-4px) scale(1,1)}
+  46%,100%{transform:translateY(0) scale(1,1)}
+}
+@keyframes pk-jump{
+  0%{transform:translateY(0) scale(1,1)}
+  22%{transform:translateY(-20px) scale(.94,1.06)}
+  46%{transform:translateY(0) scale(1.06,.94)}
+  66%{transform:translateY(-8px) scale(.98,1.02)}
+  84%{transform:translateY(0) scale(1.02,.98)}
+  100%{transform:translateY(0) scale(1,1)}
+}
+@keyframes blink{
+  0%,93%,100%{transform:scaleY(1)}
+  96%{transform:scaleY(.08)}
+}
+@keyframes pk-shadow{
+  0%,6%{transform:scaleX(1);opacity:.5}
+  13%{transform:scaleX(.86);opacity:.32}
+  20%{transform:scaleX(1.04);opacity:.56}
+  27%{transform:scaleX(.9);opacity:.36}
+  34%{transform:scaleX(1.02);opacity:.52}
+  40%,100%{transform:scaleX(1);opacity:.5}
+}
+
+/* ============================================================
+   5. 공통 카드 · 칩 · 버튼
+   ============================================================ */
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(13px,1.5vw,20px);box-shadow:var(--shadow);
+}
+.card.butter{background:var(--butter);border-color:var(--butter-line)}
+.card.soft{background:var(--soft);border-color:var(--line-strong)}
+.card-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.card-head .ico{color:var(--green);font-size:18px}
+.card-head h3{font-size:clamp(14px,1.25vw,17px);font-weight:800;letter-spacing:-.02em}
+.card-head .more{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--muted)}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 12px;border-radius:99px;border:1px solid var(--line-strong);
+  background:#fff;font-size:clamp(11.5px,1.02vw,13px);font-weight:700;color:var(--ink-2);
+}
+.chip.on{background:#E7F5DC;border-color:#B4DB9B;color:var(--green-dark)}
+.chip.butter{background:var(--butter);border-color:var(--butter-line);color:var(--butter-ink)}
+
+.two-col{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(12px,1.9vw,24px);align-items:stretch}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.4vw,18px)}
+
+/* ============================================================
+   6. Slide 2 · 비교
+   ============================================================ */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,22px)}
+.compare-card{display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+.compare-card.gray{background:#FBFCFA;border-color:#DFE7DA}
+.compare-card.green{background:#F4FBEE;border-color:#B9E09F;box-shadow:0 10px 26px rgba(69,160,41,.12)}
+.cc-head{display:flex;align-items:center;gap:9px}
+.cc-tag{
+  font-size:10.5px;font-weight:800;letter-spacing:.04em;padding:3px 9px;border-radius:99px;
+  background:#EDF0EB;color:#6C7A67;border:1px solid #DDE5D8;flex:none;
+}
+.cc-tag.on{background:var(--green);color:#fff;border-color:var(--green)}
+.cc-head h3{font-size:clamp(15px,1.42vw,19.5px);font-weight:800;letter-spacing:-.02em}
+.cc-list{display:flex;flex-direction:column;gap:6px}
+.cc-list li{
+  display:block;position:relative;padding-left:20px;
+  font-size:clamp(12.5px,1.1vw,15px);line-height:1.5;
+  color:#5C6A57;font-weight:600;
+}
+.cc-list li::before{content:"—";position:absolute;left:2px;top:0;color:#A9B6A3}
+.cc-list.on li{color:var(--ink-2)}
+.cc-list.on li::before{content:"✓";position:absolute;left:1px;top:0;color:var(--green);font-weight:800}
+.bubble-mock{display:flex;flex-direction:column;gap:6px;margin-top:auto}
+.b{font-size:clamp(11px,.95vw,12.5px);padding:7px 11px;border-radius:12px;line-height:1.4;max-width:94%}
+.b.me{align-self:flex-end;background:#EDF0EA;border:1px solid #DFE6D9;color:#4E5A4A;border-bottom-right-radius:4px}
+.b.it{align-self:flex-start;background:#fff;border:1px dashed #D6DFD0;color:#7A8675;border-bottom-left-radius:4px}
+.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.act{
+  font-size:clamp(12.5px,1.12vw,16px);font-weight:800;color:var(--green-deep);
+  background:#fff;border:1.5px solid #B7DF9C;border-radius:12px;padding:8px 10px;text-align:center;
+  box-shadow:0 2px 0 rgba(183,223,156,.6);
+}
+.arrow-between{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;
+  display:grid;place-items:center;font-size:17px;font-weight:800;z-index:3;
+  box-shadow:0 4px 12px rgba(69,160,41,.3);border:3px solid var(--bg);
+}
+.compare-wrap{position:relative}
+
+/* ============================================================
+   7. Slide 3 · 프로필 편집
+   ============================================================ */
+.char-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;background:#F7FCF3;border-color:#CBE7B7}
+.char-name{font-size:clamp(14px,1.2vw,16px);font-weight:800;color:var(--green-deep)}
+.char-desc{font-size:clamp(10.5px,.95vw,12.5px);color:var(--muted);line-height:1.45;max-width:24em}
+.edit-list{display:flex;flex-direction:column;gap:8px}
+.edit-row{
+  display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:10px 13px;box-shadow:0 2px 6px rgba(26,36,25,.04);
+}
+.edit-ico{
+  width:34px;height:34px;flex:none;border-radius:11px;background:#EAF5E1;color:var(--green-dark);
+  display:grid;place-items:center;font-size:17px;
+}
+.edit-row b{font-size:clamp(13.5px,1.16vw,16px);display:block;letter-spacing:-.02em}
+.edit-row p{font-size:clamp(11.5px,.98vw,13.5px);color:var(--muted);line-height:1.4;margin-top:2px;font-weight:600}
+.edit-row .say{
+  margin-left:auto;display:flex;gap:5px;flex:none;
+}
+.say-pill{
+  font-size:10.5px;font-weight:800;padding:4px 9px;border-radius:99px;
+  background:var(--butter);color:var(--butter-ink);border:1px solid var(--butter-line);white-space:nowrap;
+}
+
+/* ============================================================
+   8. Slide 4 · 4개 탭
+   ============================================================ */
+.tabbar{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:7px;
+  width:100%;max-width:620px;margin:0 auto;
+  background:#fff;border:1px solid var(--line);border-radius:18px;padding:7px;
+  box-shadow:var(--shadow);
+}
+.tab-btn{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:10px 6px;border-radius:13px;font-size:clamp(11.5px,1.05vw,13.5px);font-weight:800;
+  color:#77876F;border:1.5px solid transparent;background:#FAFCF8;
+  transition:background .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.tab-btn .ico{font-size:19px}
+.tab-btn:hover{background:#F0F7EA;color:var(--green-dark)}
+.tab-btn.active{
+  background:#E9F6DF;color:var(--green-deep);border-color:var(--green);
+  box-shadow:inset 0 -3px 0 rgba(69,160,41,.25);
+}
+.tab-panels{position:relative}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.tp-grid{
+  display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(14px,2vw,26px);align-items:center;
+  width:100%;max-width:790px;margin:0 auto;
+  background:#FAFCF7;border:1px solid var(--line);border-radius:18px;
+  padding:clamp(13px,1.7vw,22px);
+}
+.tp-text h3{font-size:clamp(16px,1.5vw,20px);font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.tp-text h3 .ico{color:var(--green);font-size:21px}
+.tp-text .lead{font-size:clamp(12.5px,1.06vw,14.5px);color:var(--muted);font-weight:600;line-height:1.55;margin-top:6px}
+.tp-list{display:flex;flex-direction:column;gap:7px;margin-top:10px}
+.tp-list li{display:block;position:relative;padding-left:24px;font-size:clamp(12.5px,1.08vw,15px);line-height:1.5;font-weight:600;color:var(--ink-2)}
+.tp-list li .ico{position:absolute;left:0;top:3px;color:var(--green);font-size:15px}
+.screen{
+  width:100%;max-width:300px;margin:0 auto;background:#fff;border:2px solid var(--line-strong);
+  border-radius:22px;padding:9px;box-shadow:0 10px 24px rgba(26,36,25,.09);
+  display:flex;flex-direction:column;gap:7px;
+}
+.screen-top{display:flex;align-items:center;gap:7px;padding:1px 3px 6px;border-bottom:1px solid var(--line)}
+.avatar{
+  width:24px;height:24px;border-radius:50%;background:var(--pickle);color:#fff;
+  display:grid;place-items:center;font-size:13px;font-weight:800;flex:none;
+  box-shadow:0 1px 0 #3D8C25;
+}
+.screen-top b{font-size:11.5px;font-weight:800}
+.screen-top .live{margin-left:auto;font-size:9.5px;font-weight:700;color:var(--green-dark);background:#E9F6DF;border-radius:99px;padding:2px 7px}
+.bubble{font-size:11.5px;line-height:1.45;padding:7px 10px;border-radius:12px;max-width:92%}
+.bubble.me{align-self:flex-end;background:#E7F5DC;border:1px solid #C6E4AE;border-bottom-right-radius:4px}
+.bubble.pk{align-self:flex-start;background:#F4F6F2;border:1px solid #E2E8DC;border-bottom-left-radius:4px}
+.mini-card{
+  border:1px solid var(--line);border-radius:12px;padding:8px 10px;background:#fff;
+  box-shadow:0 2px 6px rgba(26,36,25,.05);display:flex;flex-direction:column;gap:4px;
+}
+.mini-card .mc-top{display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;color:var(--green-dark)}
+.mini-card p{font-size:10.5px;color:var(--muted);line-height:1.4;font-weight:600}
+.mc-actions{display:flex;gap:5px;margin-top:2px}
+.mc-btn{font-size:9.5px;font-weight:800;padding:4px 8px;border-radius:8px;background:#EAF5E1;color:var(--green-dark);border:1px solid #C9E3B6}
+.mini-rows{display:flex;flex-direction:column;gap:5px}
+.mini-row{display:flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:var(--ink-2);padding:5px 4px}
+.mini-row .ico{color:var(--green);font-size:13px}
+.mini-row .chev{margin-left:auto;color:#B7C4B0;font-weight:800;font-size:11px}
+.mini-tiles{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.mini-tile{background:#F7FBF4;border:1px solid var(--line);border-radius:11px;padding:8px 6px;text-align:center}
+.mini-tile .ico{font-size:18px;color:var(--green)}
+.mini-tile b{display:block;font-size:10.5px;margin-top:3px}
+.mini-tile span{font-size:9px;color:var(--muted);font-weight:600}
+.mini-note{font-size:9.5px;color:#8A9784;font-weight:600;text-align:center}
+
+/* ============================================================
+   9. Slide 5 · 채팅/전화
+   ============================================================ */
+.steps{display:flex;flex-direction:column;gap:10px;justify-content:center;align-self:stretch}
+.step{
+  display:flex;gap:12px;align-items:center;text-align:left;width:100%;flex:1 1 0;min-height:0;
+  background:#fff;border:1.5px solid var(--line);border-radius:15px;padding:11px 13px;
+  box-shadow:0 2px 6px rgba(26,36,25,.04);
+  transition:border-color .18s ease,background .18s ease,box-shadow .18s ease;
+}
+.step:hover{border-color:#B4DB9B;background:#FBFEF9}
+.step.on{border-color:var(--green);background:#F5FCEE;box-shadow:0 6px 16px rgba(69,160,41,.12)}
+.step-num{
+  width:26px;height:26px;flex:none;border-radius:9px;background:#EAF5E1;color:var(--green-dark);
+  display:grid;place-items:center;font-size:12.5px;font-weight:800;
+}
+.step.on .step-num{background:var(--green);color:#fff}
+.step b{font-size:clamp(13.5px,1.15vw,16px);display:block;letter-spacing:-.02em}
+.step p{font-size:clamp(11.5px,.98vw,13.5px);color:var(--muted);line-height:1.45;margin-top:3px;font-weight:600}
+.phone{
+  width:100%;max-width:280px;margin:0 auto;background:#fff;border:2px solid var(--line-strong);
+  border-radius:26px;padding:10px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;gap:7px;
+}
+.phone-top{display:flex;align-items:center;gap:7px;padding:1px 3px 7px;border-bottom:1px solid var(--line)}
+.phone-top b{font-size:11.5px;font-weight:800}
+.phone-top .status{margin-left:auto;font-size:9.5px;color:#93A08D;font-weight:700}
+.chat-body{display:flex;flex-direction:column;gap:6px;min-height:0}
+.msg{font-size:11px;line-height:1.45;padding:7px 10px;border-radius:12px;max-width:92%;transition:box-shadow .2s ease,border-color .2s ease}
+.msg.me{align-self:flex-end;background:#E7F5DC;border:1px solid #C6E4AE;border-bottom-right-radius:4px}
+.msg.pk{align-self:flex-start;background:#F4F6F2;border:1px solid #E2E8DC;border-bottom-left-radius:4px}
+.msg.lit,.rc.lit{box-shadow:0 0 0 3px rgba(69,160,41,.28);border-color:var(--green)}
+.thumb{
+  width:100%;height:56px;border-radius:9px;margin-bottom:6px;
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    repeating-linear-gradient(to bottom,#DCE6D6 0 3px,transparent 3px 11px) 12px 30px/60% 26px no-repeat,
+    linear-gradient(#EDF3E8,#E7F0E1) padding-box;
+  border:1px solid #C9DCC0;display:grid;place-items:center;font-size:9.5px;color:#7E8C78;font-weight:700;
+}
+.rc{border:1px solid var(--line);border-radius:13px;padding:8px 10px;background:#fff;box-shadow:0 2px 8px rgba(26,36,25,.06);transition:box-shadow .2s ease,border-color .2s ease}
+.rc-top{display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;color:var(--green-dark);margin-bottom:4px}
+.rc p{font-size:10.5px;color:var(--muted);line-height:1.4;font-weight:600}
+.rc .kv{display:flex;gap:5px;font-size:10.5px;line-height:1.5;color:var(--ink-2);font-weight:600}
+.rc .kv span:first-child{color:var(--muted);flex:none;min-width:34px}
+.rc-actions{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
+.call-strip{
+  display:flex;align-items:center;gap:7px;background:#EDF6E6;border:1px solid #C9E3B6;
+  border-radius:11px;padding:6px 9px;font-size:10px;font-weight:800;color:var(--green-dark);
+}
+.call-strip .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none}
+.phone-input{
+  display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:99px;
+  padding:6px 10px;font-size:10px;color:#9AA795;font-weight:600;background:#FBFCFA;
+}
+.phone-input .ico{margin-left:auto;color:var(--green);font-size:14px}
+
+/* ============================================================
+   10. Slide 6 · 둘러보기
+   ============================================================ */
+.explore-list{display:flex;flex-direction:column;gap:7px}
+.sec-label{font-size:10.5px;font-weight:800;letter-spacing:.05em;color:#8B9884;margin-top:2px}
+.sec-label:first-child{margin-top:0}
+.ex-card{
+  display:flex;flex-direction:column;gap:2px;text-align:left;width:100%;
+  background:#fff;border:1.5px solid var(--line);border-radius:13px;padding:9px 12px;
+  box-shadow:0 2px 6px rgba(26,36,25,.04);
+  transition:border-color .18s ease,background .18s ease;
+}
+.ex-card:hover{border-color:#B4DB9B;background:#FBFEF9}
+.ex-card.on{border-color:var(--green);background:#F4FBEE}
+.ex-card b{font-size:clamp(13px,1.12vw,15.5px);display:flex;align-items:center;gap:6px}
+.ex-card b .ico{color:var(--green);font-size:15px}
+.ex-card span{font-size:clamp(11px,.96vw,13px);color:var(--muted);font-weight:600}
+.ex-detail{display:flex;flex-direction:column;justify-content:center;background:#F9FDF6;border-color:#CDE7BA;min-height:180px}
+.ex-pane{display:none}
+.ex-pane.active{display:block}
+.ex-pane h3{font-size:clamp(15px,1.36vw,18.5px);font-weight:800;letter-spacing:-.02em}
+.ex-pane p{font-size:clamp(12px,1.02vw,14px);color:var(--muted);line-height:1.55;margin-top:6px;font-weight:600}
+.quote{
+  margin-top:10px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);
+  border-radius:10px;padding:9px 12px;font-size:clamp(12px,1.03vw,14px);font-weight:700;color:var(--ink-2);line-height:1.5;
+}
+.quote small{display:block;font-size:9.5px;color:#93A08D;font-weight:700;margin-bottom:3px}
+.start-btn{
+  display:inline-flex;align-items:center;gap:6px;margin-top:9px;
+  background:var(--green);color:#fff;font-size:11.5px;font-weight:800;
+  padding:7px 15px;border-radius:10px;box-shadow:0 2px 0 #2F7A1A;
+}
+
+/* ============================================================
+   11. Slide 7 · 보관함 · 프로필
+   ============================================================ */
+.arch-head{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.arch-head b{font-size:clamp(14px,1.25vw,17px);font-weight:800}
+.arch-plus{
+  margin-left:auto;width:24px;height:24px;border-radius:8px;background:var(--green);color:#fff;
+  display:grid;place-items:center;font-size:14px;font-weight:800;box-shadow:0 2px 0 #2F7A1A;
+}
+.arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.arch-tile{background:#F8FBF5;border:1px solid var(--line);border-radius:13px;padding:11px 9px;text-align:center}
+.arch-tile .ico{font-size:22px;color:var(--green)}
+.arch-tile b{display:block;font-size:clamp(11.5px,1vw,13.5px);margin-top:5px}
+.arch-tile span{font-size:10px;color:var(--muted);font-weight:600}
+.arch-rows{margin-top:10px;border-top:1px solid var(--line);padding-top:4px}
+.arch-rows .mini-row{font-size:clamp(11px,.96vw,13px);padding:6px 2px;border-bottom:1px dashed #E6EEE0}
+.arch-rows .mini-row:last-child{border-bottom:0}
+.mini{margin-top:9px;font-size:clamp(10.5px,.92vw,12.5px);color:var(--muted);line-height:1.5;font-weight:600}
+.mini b{color:var(--ink-2)}
+.mini-tabs{display:flex;gap:6px;margin-bottom:9px;flex-wrap:wrap}
+.mini-tab{
+  padding:6px 13px;border-radius:99px;border:1.5px solid var(--line-strong);background:#fff;
+  font-size:clamp(11px,.98vw,13px);font-weight:800;color:#77876F;
+  transition:background .18s ease,color .18s ease,border-color .18s ease;
+}
+.mini-tab:hover{background:#F1F8EB;color:var(--green-dark)}
+.mini-tab.active{background:var(--green);border-color:var(--green);color:#fff}
+.mini-pane{display:none}
+.mini-pane.active{display:block}
+.rec{display:flex;gap:9px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed #E6EEE0}
+.rec:last-child{border-bottom:0}
+.rec-ico{width:26px;height:26px;border-radius:9px;background:#EFF7E8;color:var(--green-dark);display:grid;place-items:center;font-size:13px;flex:none}
+.rec b{font-size:clamp(11.5px,1vw,13.5px);display:block;letter-spacing:-.02em}
+.rec span{font-size:clamp(10px,.9vw,11.5px);color:var(--muted);font-weight:600}
+.rec .st{margin-left:auto;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:99px;background:#EAF5E1;color:var(--green-dark);flex:none}
+.rec .st.off{background:#F1F2F0;color:#8B9785}
+
+/* ============================================================
+   12. Slide 8 · 연결 & 안심
+   ============================================================ */
+.trust-card{display:flex;flex-direction:column;gap:8px;padding:clamp(15px,1.7vw,23px)}
+.trust-ico{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-size:22px;margin-bottom:3px}
+.trust-ico.g{background:#EAF5E1;color:var(--green-dark)}
+.trust-ico.b{background:var(--butter);color:var(--butter-ink)}
+.trust-ico.s{background:var(--sky);color:var(--sky-ink)}
+.trust-card h3{font-size:clamp(14px,1.22vw,17px);font-weight:800;letter-spacing:-.02em;line-height:1.3}
+.trust-card p{font-size:clamp(11.5px,.98vw,13.5px);color:var(--muted);line-height:1.55;font-weight:600}
+.trust-card .row{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.svc{
+  display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;
+  background:#F7FBF4;border:1px solid var(--line);border-radius:8px;padding:3px 8px;color:var(--ink-2);
+}
+.limit-bar{height:8px;border-radius:99px;background:#E7EEE2;overflow:hidden;margin-top:4px}
+.limit-fill{height:100%;width:38%;background:linear-gradient(90deg,#8ED46B,var(--green));border-radius:99px}
+.limit-note{display:flex;justify-content:space-between;font-size:10px;color:#7E8C78;font-weight:700;margin-top:4px}
+.tr-row{
+  display:flex;align-items:center;gap:6px;font-size:clamp(10.5px,.92vw,12.5px);font-weight:600;
+  color:#54644F;line-height:1.4;padding:5px 0;border-top:1px dashed #E6EEE0;
+}
+.tr-row b{color:var(--ink-2);font-weight:800;margin-right:4px}
+.tr-row .ico{color:var(--green);font-size:13px;flex:none}
+.privacy-strip{
+  display:flex;align-items:center;gap:9px;background:#F4FBEE;border:1px solid #C9E3B6;
+  border-radius:13px;padding:9px 13px;font-size:clamp(10.5px,.95vw,12.5px);
+  font-weight:700;color:var(--green-deep);line-height:1.45;
+}
+.privacy-strip .ico{font-size:17px;flex:none}
+
+/* ============================================================
+   13. Slide 9~11 · 실전 예시
+   ============================================================ */
+.seg-row{display:flex;gap:7px;flex-wrap:wrap}
+.seg{
+  padding:8px 15px;border-radius:11px;border:1.5px solid var(--line-strong);background:#fff;
+  font-size:clamp(11.5px,1.02vw,13.5px);font-weight:800;color:#6F7D69;
+  transition:background .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.seg:hover{background:#F3FAED;border-color:#B4DB9B;color:var(--green-dark)}
+.seg.on{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 3px 0 #2F7A1A}
+.stage{max-width:880px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:9px}
+.pane{display:none}
+.pane.active{display:block}
+.chat-line{display:flex;justify-content:flex-end}
+.say-bubble{
+  background:#E7F5DC;border:1px solid #C6E4AE;border-radius:16px 16px 5px 16px;
+  padding:10px 14px;font-size:clamp(12.5px,1.08vw,15px);font-weight:700;color:var(--ink);
+  line-height:1.45;max-width:min(680px,92%);
+}
+.result{
+  background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:clamp(13px,1.5vw,19px);
+  box-shadow:0 8px 22px rgba(26,36,25,.08);display:flex;flex-direction:column;gap:8px;
+}
+.result-top{display:flex;align-items:center;gap:8px;font-size:clamp(12.5px,1.1vw,15px);font-weight:800;color:var(--green-dark)}
+.result-top .avatar{width:26px;height:26px;font-size:14px}
+.result-top .tag{margin-left:auto;font-size:9.5px;font-weight:800;color:#87947F;background:#F2F6EF;border-radius:99px;padding:2px 8px}
+.result-row{display:flex;gap:9px;align-items:flex-start;font-size:clamp(12px,1.04vw,14.5px);line-height:1.5}
+.result-row .ico{color:var(--green);font-size:14px;margin-top:2px;flex:none}
+.result-row .k{flex:none;min-width:3.2em;font-weight:800;color:var(--ink-2)}
+.result-row .v{color:#54644F;font-weight:600}
+.result-row .v b{color:var(--ink)}
+.act-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:3px}
+.act-btn{
+  font-size:clamp(10.5px,.96vw,12.5px);font-weight:800;padding:7px 12px;border-radius:9px;
+  background:#EAF5E1;color:var(--green-dark);border:1px solid #C9E3B6;
+}
+.act-btn.ghost{background:#fff;color:#79866F;border-color:var(--line-strong)}
+.act-btn.primary{background:var(--green);color:#fff;border-color:var(--green)}
+
+.cmp-table{width:100%;border-collapse:separate;border-spacing:0;font-size:clamp(11.5px,1vw,13.5px)}
+.cmp-table th,.cmp-table td{padding:8px 10px;text-align:center;border-bottom:1px solid var(--line)}
+.cmp-table th{font-size:10px;color:#8B9884;font-weight:800;letter-spacing:.03em;background:#F8FBF5}
+.cmp-table th:first-child,.cmp-table td:first-child{text-align:left;font-weight:800;color:var(--ink-2)}
+.cmp-table td{font-weight:700;color:#54644F}
+.cmp-table tr.best td{background:#F3FBEC}
+.cmp-table tr.best td:first-child{color:var(--green-dark)}
+.o{color:var(--green);font-weight:800;font-size:1.25em;line-height:1}
+.x{color:#C27676;font-weight:800;font-size:1.25em;line-height:1}
+.cmp-note{font-size:clamp(10.5px,.92vw,12px);color:var(--green-deep);font-weight:800;display:flex;gap:6px;align-items:center;margin-top:6px}
+
+/* ============================================================
+   14. Slide 12 · 미션
+   ============================================================ */
+.missions{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(9px,1.3vw,16px)}
+.mission{
+  background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:clamp(11px,1.3vw,16px);
+  display:flex;flex-direction:column;gap:7px;box-shadow:var(--shadow);
+}
+.mission:nth-child(2){background:#FFFCF2;border-color:var(--butter-line)}
+.m-top{display:flex;align-items:center;gap:7px}
+.m-num{width:23px;height:23px;border-radius:8px;background:#EAF5E1;color:var(--green-dark);display:grid;place-items:center;font-size:11.5px;font-weight:800}
+.mission:nth-child(2) .m-num{background:#FCE9B6;color:var(--butter-ink)}
+.m-top b{font-size:clamp(11.5px,1.02vw,13.5px);font-weight:800}
+.m-text{font-size:clamp(12.5px,1.1vw,15px);line-height:1.55;font-weight:700;color:var(--ink-2);flex:1}
+.m-sub{font-size:clamp(10.5px,.92vw,12.5px);font-weight:700;color:#8B9884}
+.copy-btn{
+  align-self:flex-start;display:inline-flex;align-items:center;gap:5px;
+  font-size:10.5px;font-weight:800;padding:5px 11px;border-radius:9px;
+  background:#F2F8ED;color:var(--green-dark);border:1px solid #CFE5BF;
+  transition:background .18s ease,color .18s ease,border-color .18s ease;
+}
+.copy-btn:hover{background:var(--green);color:#fff;border-color:var(--green)}
+.copy-btn.done{background:var(--green);color:#fff;border-color:var(--green)}
+.closer{display:flex;align-items:center;gap:clamp(10px,1.5vw,18px);justify-content:center;text-align:left}
+.closer .txt h3{font-size:clamp(15px,1.6vw,22px);font-weight:800;letter-spacing:-.03em;line-height:1.3}
+.closer .txt p{font-size:clamp(11px,1vw,13px);color:var(--muted);font-weight:600;margin-top:3px}
+.recap{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+
+/* ============================================================
+   15. 목차 오버레이
+   ============================================================ */
+.overview{
+  position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;
+  background:rgba(23,36,21,.42);backdrop-filter:blur(3px);
+  opacity:0;visibility:hidden;transition:opacity .22s ease;
+  padding:clamp(14px,3vw,40px);
+}
+.overview.open{opacity:1;visibility:visible}
+.ov-panel{
+  width:100%;max-width:920px;max-height:100%;overflow:auto;
+  background:#fff;border-radius:24px;padding:clamp(16px,2.4vw,28px);
+  box-shadow:0 30px 70px rgba(15,26,14,.3);
+}
+.ov-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.ov-head h3{font-size:clamp(16px,1.5vw,20px);font-weight:800;letter-spacing:-.02em}
+.ov-head .sub{font-size:12px}
+.ov-close{margin-left:auto;padding:7px 13px;border-radius:10px;border:1px solid var(--line-strong);font-size:12px;font-weight:800;color:var(--muted);background:#fff}
+.ov-close:hover{background:var(--soft);color:var(--green-dark)}
+.ov-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ov-item{
+  text-align:left;background:#FAFCF8;border:1.5px solid var(--line);border-radius:13px;
+  padding:10px 11px;display:flex;flex-direction:column;gap:3px;
+  transition:border-color .18s ease,background .18s ease;
+}
+.ov-item:hover{border-color:var(--green);background:#F4FBEE}
+.ov-item.current{border-color:var(--green);background:#EAF6E1}
+.ov-num{font-size:10.5px;font-weight:800;color:var(--green);letter-spacing:.04em}
+.ov-title{font-size:11.5px;font-weight:800;color:var(--ink);line-height:1.35;letter-spacing:-.02em}
+
+/* ============================================================
+   16. 토스트
+   ============================================================ */
+.toast{
+  position:fixed;left:50%;bottom:94px;transform:translateX(-50%) translateY(6px);
+  z-index:70;background:#22331F;color:#fff;font-size:12.5px;font-weight:700;
+  padding:9px 16px;border-radius:99px;box-shadow:0 10px 24px rgba(15,26,14,.28);
+  opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease;
+}
+.toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+
+/* ============================================================
+   17. 반응형
+   ============================================================ */
+@media (max-width:1000px){
+  .two-col{grid-template-columns:1fr}
+  .tp-grid{grid-template-columns:1fr}
+  .compare{grid-template-columns:1fr;gap:10px}
+  .arrow-between{display:none}
+  .three-col{grid-template-columns:1fr}
+  .missions{grid-template-columns:1fr}
+  .ov-grid{grid-template-columns:repeat(3,1fr)}
+  .desk-only{display:none!important}
+  .slide{padding:56px 18px 78px}
+  .inner{max-width:660px}
+  .screen{max-width:100%}
+  .phone{max-width:100%}
+}
+@media (max-width:620px){
+  .topbar{height:48px;padding:0 12px}
+  .brand{font-size:12.5px;gap:7px}
+  .brand-sub{display:none}
+  .brand-mark{width:21px;height:21px;font-size:11px;border-radius:7px}
+  .ico-btn{padding:6px 9px;font-size:11.5px}
+  .ico-btn span{display:none}
+  .ico-btn .ico{font-size:16px}
+  .slide{padding:50px 13px 72px}
+  .bottombar{height:68px;gap:9px;padding:0 12px 2px}
+  .nav-btn{width:38px;height:38px;font-size:16px}
+  .dots{gap:4px}
+  .dot{width:12px;height:5px}
+  .dot.active{width:20px}
+  .counter{font-size:11px}
+  .counter b{font-size:12px}
+  .title{font-size:24px;line-height:1.26}
+  .sub{font-size:14px}
+  .cover h1{font-size:25px}
+  .cover-sub{font-size:12.5px}
+  .btn-primary{font-size:14px;padding:12px 22px}
+  .cover-hint{font-size:10px;line-height:1.5;padding:0 8px}
+  .pickle-wrap{width:120px}
+  .pickle-wrap.sm{width:94px}
+  .pickle-wrap.lg{width:132px}
+  .card{padding:12px;border-radius:16px}
+  .compare-card{gap:8px}
+  .cc-head h3{font-size:14px}
+  .bubble-mock{display:none}
+  .edit-row{padding:9px 11px;gap:9px}
+  .edit-row .say{display:none}
+  .tabbar{padding:5px;gap:5px;border-radius:15px}
+  .tab-btn{padding:9px 3px;font-size:11.5px;gap:3px}
+  .tab-btn .ico{font-size:18px}
+  .tp-grid{padding:12px}
+  .tp-text h3{font-size:17px}
+  .tp-text .lead{font-size:13px}
+  .tp-list li{font-size:13.5px}
+  .step{padding:11px 12px;gap:10px;flex:0 0 auto}
+  .step b{font-size:14.5px}
+  .step p{font-size:12.5px}
+  .seg{padding:8px 13px;font-size:13px}
+  .say-bubble{font-size:13.5px;padding:10px 12px}
+  .result{padding:13px;gap:8px}
+  .result-top{font-size:13px}
+  .result-row{font-size:13px}
+  .act-btn{font-size:11.5px;padding:7px 11px}
+  .cmp-table th,.cmp-table td{padding:6px 6px;font-size:12px}
+  .missions{gap:8px}
+  .mission{padding:12px}
+  .m-text{font-size:14px}
+  .ex-card b{font-size:14.5px}
+  .ex-card span{font-size:12.5px}
+  .ex-pane p{font-size:13px}
+  .quote{font-size:13px;padding:9px 11px}
+  .trust-card h3{font-size:14.5px}
+  .trust-card p{font-size:11.5px}
+  .trust-card{padding:11px;gap:5px}
+  .trust-ico{display:none}
+  .tr-row{font-size:10.5px;padding:3px 0}
+  .three-col{gap:7px}
+  .limit-note{font-size:9.5px}
+  .trust-card .row{margin-top:0}
+  .svc{font-size:9.5px;padding:2px 7px}
+  .arch-tile{padding:9px 7px}
+  .rec{padding:5px 0}
+  .rec-ico{width:23px;height:23px;font-size:12px}
+  .thumb{height:44px}
+  .phone{gap:6px;padding:9px}
+  .steps{gap:8px}
+  .cc-list li{font-size:13.5px}
+  .cc-head h3{font-size:15.5px}
+  .edit-row b{font-size:14px}
+  .edit-row p{font-size:12px}
+  .mini-tab{font-size:12.5px;padding:6px 11px}
+  .rec b{font-size:13px}
+  .rec span{font-size:11.5px}
+  .chip{font-size:12.5px}
+  .tip{font-size:11.5px}
+  .mini{font-size:11.5px}
+  .closer{gap:10px}
+  .closer .txt h3{font-size:15px}
+  .closer .txt p{font-size:11px}
+  .privacy-strip{font-size:10.5px;padding:8px 10px}
+  .ov-grid{grid-template-columns:1fr 1fr}
+  .toast{bottom:80px;font-size:11.5px;padding:8px 13px}
+  .eyebrow{font-size:10.5px;padding:3px 9px}
+  .punch{font-size:13px}
+  .tip{font-size:10.5px}
+}
+@media (max-height:660px){
+  .slide{padding-top:52px;padding-bottom:74px}
+  .pickle-wrap.lg{width:clamp(96px,13vw,150px)}
+  .cover h1{font-size:clamp(22px,2.9vw,38px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .pickle-hop,.pk-eye,.pk-shadow{animation:none}
+  .slide{transition:none}
+}
+</style>
+<style>
+/* 2026.11.20 AI 가이드(index)에서 들어온 경우 — 돌아가기 링크 */
+.ico-btn.back-link .ico{transform:rotate(180deg)}
+.ico-btn.back-link{text-decoration:none;color:var(--green-dark);border-color:var(--line-strong);background:#fff}
+.ico-btn.back-link:hover{background:var(--soft);border-color:var(--green);color:var(--green-dark)}
+@media (max-width:620px){
+  .ico-btn.back-link{padding:6px 8px}
+  .ico-btn.back-link .lb{display:inline;font-size:11.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- 아이콘 정의 -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-chat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 5.6h15.6v10H10.4L5.6 19.9v-4.3H4.2z"/></g></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.3"/><path d="M15.3 8.7l-2 4.6-4.6 2 2-4.6z"/></g></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.7 8.1L12 4.2l8.3 3.9v7.8L12 19.8l-8.3-3.9z"/><path d="M3.7 8.1L12 12l8.3-3.9M12 12v7.8"/></g></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.3" r="3.5"/><path d="M5.4 19.9c.6-3.5 3.3-5.5 6.6-5.5s6 2 6.6 5.5"/></g></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.3 4.2h3l1.5 3.8-1.9 1.4a10.7 10.7 0 005.7 5.7l1.4-1.9 3.8 1.5v3a2 2 0 01-2 2C11.5 19.7 4.3 12.5 4.3 6.2a2 2 0 012-2z"/></g></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 5.2v13.6M5.2 12h13.6"/></g></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8.6" y="8.6" width="10.9" height="10.9" rx="2.4"/><path d="M16.1 5.4H6.9A1.9 1.9 0 005 7.3v9.2"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 12.6l4.6 4.6L19.2 7.4"/></g></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="4" y="4" width="6.6" height="6.6" rx="1.7"/><rect x="13.4" y="4" width="6.6" height="6.6" rx="1.7"/><rect x="4" y="13.4" width="6.6" height="6.6" rx="1.7"/><rect x="13.4" y="13.4" width="6.6" height="6.6" rx="1.7"/></g></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 4.2H4.2v5M14.8 4.2h5v5M14.8 19.8h5v-5M9.2 19.8H4.2v-5"/></g></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.9" y="5.4" width="16.2" height="14.4" rx="2.6"/><path d="M3.9 10h16.2M8.4 3.6v3.4M15.6 3.6v3.4"/></g></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.6" width="17" height="12.8" rx="2.4"/><path d="M4.1 7.3l7.9 5.6 7.9-5.6"/></g></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.9h7.1l3.9 3.9V20H6.5z"/><path d="M13.4 4.1v4h4M9.3 12h5.4M9.3 15.4h5.4"/></g></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9.3" y="3.6" width="5.4" height="9.6" rx="2.7"/><path d="M5.7 11.6a6.3 6.3 0 0012.6 0M12 17.9v2.5"/></g></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6l7 2.6v6c0 4-3 6.8-7 8.2-4-1.4-7-4.2-7-8.2v-6z"/><path d="M8.9 12.1l2.2 2.2 4.1-4.3"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="M12 7.4V12l3.2 2"/></g></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13.2 3.6L6.2 13.4h4.9l-.6 7 7.3-9.8h-5z"/></g></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.8l1.9 5.1 5.1 1.9-5.1 1.9L12 17.8l-1.9-5.1L5 10.8l5.1-1.9z"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 12h14M13.4 6.9L18.6 12l-5.2 5.1"/></g></symbol>
+  <symbol id="i-photo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.8" y="5.4" width="16.4" height="13.2" rx="2.6"/><circle cx="8.9" cy="10.1" r="1.5"/><path d="M4.4 16.4l4.6-4 3.3 2.9 2.9-2.4 4.4 3.8"/></g></symbol>
+  <symbol id="i-name" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.6 18.6l.9-3.6L15.9 4.6a2 2 0 012.8 0l1 1a2 2 0 010 2.8L9.3 18.7l-4.7-.1z"/><path d="M14.4 6.1l3.5 3.5"/></g></symbol>
+  <symbol id="i-talk" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.8 4.6h11v7.2h-5l-3.2 2.6v-2.6H3.8z"/><path d="M17.6 8.9h2.6v6.4h-2.2v2.4l-2.6-2.4h-2.6"/></g></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3.8v2M12 18.2v2M4.9 7.9l1.7 1M17.4 15.1l1.7 1M19.1 7.9l-1.7 1M6.6 15.1l-1.7 1"/></g></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.2 8.2h13.6l-1 11.2H6.2z"/><path d="M9 8.2V6.6a3 3 0 016 0v1.6"/></g></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19.4s-6.8-4-6.8-8.5a3.9 3.9 0 017-2.2 3.9 3.9 0 017 2.2c0 4.5-6.9 8.5-6.9 8.5z"/></g></symbol>
+</svg>
+
+<!-- 상단 바 -->
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">ㅍ</span>
+    <span>피클 에이전트 완전정복</span>
+    <span class="brand-sub">· 두배로 이서정</span>
+  </div>
+  <div class="top-actions">
+    <a class="ico-btn back-link" href="/guide/" aria-label="AI 가이드로 돌아가기"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg><span class="lb">AI 가이드</span></a>
+    <button class="ico-btn" id="btnOverview" type="button" aria-label="목차 열기">
+      <svg class="ico" aria-hidden="true"><use href="#i-grid"/></svg><span>목차</span>
+    </button>
+    <button class="ico-btn" id="btnFull" type="button" aria-label="전체화면 전환">
+      <svg class="ico" aria-hidden="true"><use href="#i-expand"/></svg><span>전체화면</span>
+    </button>
+  </div>
+</header>
+
+<main id="deck">
+
+  <!-- ───────── 1. 표지 ───────── -->
+  <section class="slide active" data-title="표지" data-kicker="표지">
+    <div class="inner cover">
+      <div class="pickle-wrap lg" id="coverPickle" title="피클을 눌러 보세요">
+        <div class="pickle-hop" data-pickle></div>
+      </div>
+      <p class="eyebrow"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg>생성형 AI 활용 · 두배로</p>
+      <h1>말만 하면 움직이는<br><span class="hl">내 손안의 AI 비서, 피클</span></h1>
+      <p class="cover-sub">찾아보고 · 만들어 주고 · 전화하고 · 챙겨 주는 <b>AI 에이전트</b></p>
+      <div class="cover-cta">
+        <button class="btn-primary" type="button" data-goto="1">시작하기 <span aria-hidden="true">→</span></button>
+        <span class="cover-by">강사 이서정 <span>· 두배로</span></span>
+      </div>
+      <p class="cover-hint">← → 또는 Space 로 넘기기 · F 전체화면 · 상단 <b>목차</b>로 원하는 장으로</p>
+    </div>
+  </section>
+
+  <!-- ───────── 2. 챗봇 vs 피클 ───────── -->
+  <section class="slide" data-title="챗봇 vs 피클 에이전트" data-kicker="01 · 왜 피클인가">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">01 · 왜 피클인가</p>
+        <h2 class="title">답변만 하는 AI vs <span class="hl">대신 해 주는 AI</span></h2>
+        <p class="sub">같은 부탁에도 돌아오는 것이 다릅니다 — 설명과 결과</p>
+      </div>
+      <div class="compare-wrap">
+        <div class="compare">
+          <div class="card compare-card gray">
+            <div class="cc-head"><span class="cc-tag">챗봇</span><h3>답변만 하는 AI</h3></div>
+            <ul class="cc-list">
+              <li>질문 → 답변 → 끝</li>
+              <li>검색하고, 정리하고, 예약하는 건 내 몫</li>
+              <li>결국 일은 다시 내 손으로</li>
+            </ul>
+            <div class="bubble-mock">
+              <span class="b me">이번 주 여행 일정 짜줘</span>
+              <span class="b it">네, 이렇게 짜면 좋습니다… (텍스트만 돌아옴)</span>
+            </div>
+          </div>
+          <div class="card compare-card green">
+            <div class="cc-head"><span class="cc-tag on">피클</span><h3>대신 찾아보고 해 주는 AI</h3></div>
+            <div class="act-grid">
+              <span class="act">찾아보고</span><span class="act">만들고</span><span class="act">전화하고</span><span class="act">챙겨주고</span>
+            </div>
+            <ul class="cc-list on">
+              <li>일정·비교표·문서까지 <b>결과물</b>로</li>
+              <li>예약해 두고 <b>때가 되면 먼저 챙김</b></li>
+              <li>어려운 말 없이 <b>내 말로</b> 부탁해도 통함</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="punch"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg>묻는 AI에서, <b>맡기는 AI</b>로</p>
+    </div>
+  </section>
+
+  <!-- ───────── 3. 내 피클 꾸미기 ───────── -->
+  <section class="slide" data-title="내 피클 꾸미기 & 첫 만남" data-kicker="02 · 첫 만남">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">02 · 첫 만남</p>
+        <h2 class="title">먼저, <span class="hl">내 피클</span>을 만나 보세요</h2>
+        <p class="sub">채팅 위쪽의 내 피클을 누르면 프로필이 열립니다</p>
+      </div>
+      <div class="two-col">
+        <div class="card char-card">
+          <div class="pickle-wrap sm"><div class="pickle-hop" data-pickle></div></div>
+          <div class="char-name">ㅍ · 피클</div>
+          <p class="char-desc">한국어 앱에서는 자음 ㄱ~ㅎ 모양으로도 꾸밀 수 있어요. 색은 '맞춤 설정'에서 바꿉니다.</p>
+        </div>
+        <div class="edit-list">
+          <div class="edit-row">
+            <span class="edit-ico"><svg class="ico" aria-hidden="true"><use href="#i-photo"/></svg></span>
+            <div><b>모습 변경하기</b><p>자음(ㄱ~ㅎ) · 단색 · 색은 '맞춤 설정'</p></div>
+          </div>
+          <div class="edit-row">
+            <span class="edit-ico"><svg class="ico" aria-hidden="true"><use href="#i-name"/></svg></span>
+            <div><b>이름</b><p>부르고 싶은 이름으로 — 모습은 그대로</p></div>
+          </div>
+          <div class="edit-row">
+            <span class="edit-ico"><svg class="ico" aria-hidden="true"><use href="#i-mic"/></svg></span>
+            <div><b>목소리</b><p>미리 들어 보고 고르기 — 통화할 때 이 목소리</p></div>
+          </div>
+          <div class="edit-row">
+            <span class="edit-ico"><svg class="ico" aria-hidden="true"><use href="#i-talk"/></svg></span>
+            <div><b>말투 변경하기</b><p>미리보기로 확인한 뒤 '적용하기'</p></div>
+            <div class="say"><span class="say-pill">존댓말로 해줘</span><span class="say-pill">편하게 해줘</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg><span>처음에는 ㅍ 모습 그대로도 충분해요. <b>목소리</b>와 <b>말투</b>만 바꿔도 훨씬 친근해집니다.</span></p>
+    </div>
+  </section>
+
+  <!-- ───────── 4. 앱 4개 탭 ───────── -->
+  <section class="slide" data-title="앱 4개 탭 한눈에 보기" data-kicker="03 · 앱 지도">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">03 · 앱 지도</p>
+        <h2 class="title">앱에는 탭이 <span class="hl">딱 4개</span>입니다</h2>
+        <p class="sub">아래 탭을 눌러 각 화면이 하는 일을 확인해 보세요</p>
+      </div>
+      <div class="tabbar" role="tablist" aria-label="앱 탭">
+        <button class="tab-btn active" type="button" role="tab" aria-selected="true" data-tab="chat">
+          <svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg><span>기본 채팅</span>
+        </button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="explore">
+          <svg class="ico" aria-hidden="true"><use href="#i-compass"/></svg><span>둘러보기</span>
+        </button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="archive">
+          <svg class="ico" aria-hidden="true"><use href="#i-box"/></svg><span>보관함</span>
+        </button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="mypickle">
+          <svg class="ico" aria-hidden="true"><use href="#i-person"/></svg><span>나의 피클</span>
+        </button>
+      </div>
+      <div class="tab-panels">
+        <div class="tab-panel active" data-panel="chat">
+          <div class="tp-grid">
+            <div class="tp-text">
+              <h3><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>기본 채팅</h3>
+              <p class="lead">피클과 이야기하는 유일한 창구. 앱을 열면 바로 이 화면입니다.</p>
+              <ul class="tp-list">
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>글·사진·파일 모두 여기로 보냅니다</li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>입력창이 비면 <b>통화 버튼</b>이 나타납니다</li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>결과 카드의 버튼을 눌러 바로 실행</li>
+              </ul>
+            </div>
+            <div class="screen desk-only">
+              <div class="screen-top"><span class="avatar">ㅍ</span><b>피클</b><span class="live">작업 중</span></div>
+              <span class="bubble me">이번 주 강의 자료 찾아서 한 곳에 모아줘</span>
+              <span class="bubble pk">3개 폴더에서 12개 파일을 찾았어요. 한 폴더로 정리할까요?</span>
+              <div class="mini-card">
+                <div class="mc-top"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg>자료 정리</div>
+                <p>파일 12개 · 3개 폴더 → '강의자료' 폴더</p>
+                <div class="mc-actions"><span class="mc-btn">정리하기</span><span class="mc-btn">목록 보기</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-panel" data-panel="explore">
+          <div class="tp-grid">
+            <div class="tp-text">
+              <h3><svg class="ico" aria-hidden="true"><use href="#i-compass"/></svg>둘러보기</h3>
+              <p class="lead">뭘 시켜야 할지 모를 때, 남들이 많이 맡긴 일부터 훑어보는 곳.</p>
+              <ul class="tp-list">
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><b>요즘 많이 맡긴 일</b> · <b>피클의 제안</b></li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>카테고리 칩: 돈 · 쇼핑 · 건강 · 사람·반려동물 · 일·서류 · 여행 · 집 · 즐길 거리</li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>카드를 누르고 <b>시작하기</b>를 누르면 내 채팅에 요청이 들어갑니다</li>
+              </ul>
+            </div>
+            <div class="screen desk-only">
+              <div class="screen-top"><span class="avatar">ㅍ</span><b>둘러보기</b></div>
+              <div class="chips" style="gap:4px">
+                <span class="chip on" style="font-size:9.5px;padding:3px 8px">전체</span>
+                <span class="chip" style="font-size:9.5px;padding:3px 8px">돈</span>
+                <span class="chip" style="font-size:9.5px;padding:3px 8px">여행</span>
+                <span class="chip" style="font-size:9.5px;padding:3px 8px">일·서류</span>
+              </div>
+              <div class="mini-card">
+                <div class="mc-top"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg>아침 브리핑</div>
+                <p>일정·날씨·메일 3줄 요약</p>
+                <div class="mc-actions"><span class="mc-btn">시작하기</span></div>
+              </div>
+              <div class="mini-card">
+                <div class="mc-top"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>사진으로 일정 등록</div>
+                <p>안내문 사진 → 캘린더</p>
+                <div class="mc-actions"><span class="mc-btn">시작하기</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-panel" data-panel="archive">
+          <div class="tp-grid">
+            <div class="tp-text">
+              <h3><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg>보관함</h3>
+              <p class="lead">받은 결과물을 다시 꺼내는 창고. 지난달 자료도 여기 있습니다.</p>
+              <ul class="tp-list">
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><b>아티팩트</b> — 문서·페이지</li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><b>미디어</b> — 사진·영상</li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>오른쪽 아래 <b>+</b> 로 새로 만들어 달라고 하기</li>
+              </ul>
+            </div>
+            <div class="screen desk-only">
+              <div class="screen-top"><span class="avatar">ㅍ</span><b>보관함</b><span class="live">11월</span></div>
+              <div class="mini-tiles">
+                <div class="mini-tile"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg><b>아티팩트</b><span>문서·페이지</span></div>
+                <div class="mini-tile"><svg class="ico" aria-hidden="true"><use href="#i-photo"/></svg><b>미디어</b><span>사진·영상</span></div>
+              </div>
+              <div class="mini-rows">
+                <div class="mini-row"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg>강의 안내문 정리<span class="chev">›</span></div>
+                <div class="mini-row"><svg class="ico" aria-hidden="true"><use href="#i-photo"/></svg>영수증 3장<span class="chev">›</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-panel" data-panel="mypickle">
+          <div class="tp-grid">
+            <div class="tp-text">
+              <h3><svg class="ico" aria-hidden="true"><use href="#i-person"/></svg>나의 피클</h3>
+              <p class="lead">내 계정과 설정. 연결도, 공개 범위도, 사용량도 여기서 정합니다.</p>
+              <ul class="tp-list">
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><b>일일 사용량 한도</b> · 매일 새벽 4시 초기화</li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><b>내 계정</b> · <b>피클에 연결된 앱 및 서비스</b></li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>결제 수단 · 정보 공개 범위 설정 · 알림 · 화면 및 디자인 · 언어 · 도움말</li>
+              </ul>
+            </div>
+            <div class="screen desk-only">
+              <div class="screen-top"><span class="avatar">ㅍ</span><b>나의 피클</b></div>
+              <div class="mini-card" style="background:#F7FCF3;border-color:#C9E3B6">
+                <div class="mc-top"><svg class="ico" aria-hidden="true"><use href="#i-bolt"/></svg>일일 사용량 한도</div>
+                <div class="limit-bar"><div class="limit-fill"></div></div>
+                <p>매일 새벽 4시에 초기화 · 한도 초기화 티켓</p>
+              </div>
+              <div class="mini-rows">
+                <div class="mini-row"><svg class="ico" aria-hidden="true"><use href="#i-person"/></svg>내 계정<span class="chev">›</span></div>
+                <div class="mini-row"><svg class="ico" aria-hidden="true"><use href="#i-grid"/></svg>연결된 앱 및 서비스<span class="chev">›</span></div>
+                <div class="mini-row"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg>정보 공개 범위 설정<span class="chev">›</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg><span>왼쪽 위 메뉴에는 <b>친구</b> · <b>추가 대화</b> · <b>검색</b>이 있어요. 친구 화면에서 <b>친구 추가</b>로 초대하고, <b>피클에서 친구가 되면</b> 사람끼리 채팅하는 대신 <b>피클끼리</b> 이야기합니다. 그 내용은 '추가 대화'에서 확인해요.</span></p>
+    </div>
+  </section>
+
+  <!-- ───────── 5. 기본 채팅 & 전화 ───────── -->
+  <section class="slide" data-title="기본 채팅 & 전화 통화" data-kicker="04 · 기본 채팅">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">04 · 기본 채팅</p>
+        <h2 class="title">글, 사진, 그리고 <span class="hl">'말로' 맡기기</span></h2>
+        <p class="sub">단계를 누르면 화면에서 어디에 해당하는지 표시됩니다</p>
+      </div>
+      <div class="two-col">
+        <div class="steps" data-group="s5">
+          <button class="step on" type="button" data-lit="m1">
+            <span class="step-num">1</span>
+            <div><b>+ 버튼 — 사진 · 카메라 · 파일</b><p>안내문, 영수증, 화면 캡처까지 그대로 보내면 됩니다.</p></div>
+          </button>
+          <button class="step" type="button" data-lit="m2">
+            <span class="step-num">2</span>
+            <div><b>통화 버튼 — 운전 중·이동 중에도</b><p>입력창이 비어 있을 때 나타납니다. 말로 맡기고 결과만 받으세요.</p></div>
+          </button>
+          <button class="step" type="button" data-lit="m3">
+            <span class="step-num">3</span>
+            <div><b>결과 카드 — 버튼 한 번에 실행</b><p>'캘린더에 추가'처럼 카드 안의 버튼을 그대로 누르면 끝.</p></div>
+          </button>
+        </div>
+        <div class="phone">
+          <div class="phone-top"><span class="avatar">ㅍ</span><b>피클</b><span class="status">오후 2:12</span></div>
+          <div class="chat-body">
+            <div class="msg me" data-msg="m1">
+              <div class="thumb">안내문 사진 첨부</div>
+              이 안내문에서 접수 기간만 뽑아서 캘린더에 넣어줘
+            </div>
+            <div class="msg pk" data-msg="m1">접수 기간은 <b>11월 25일 ~ 12월 5일</b>이에요. 일정에 넣어 둘까요?</div>
+            <div class="call-strip" data-msg="m2"><span class="live-dot"></span>통화 중 · 00:42 · 말로 맡기는 중</div>
+            <div class="rc" data-msg="m3">
+              <div class="rc-top"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>일정에 추가할까요?</div>
+              <div class="kv"><span>일정</span><span>접수 마감 · 12/5(금)</span></div>
+              <div class="rc-actions"><span class="mc-btn">캘린더에 추가</span><span class="mc-btn">나중에</span></div>
+            </div>
+          </div>
+          <div class="phone-input">메시지를 입력하세요<svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg></div>
+        </div>
+      </div>
+      <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-mic"/></svg><span>운전 중에는 화면을 보지 말고 <b>통화 버튼</b>만 누르세요. 말로 맡기고, 도착해서 결과 카드만 확인하면 됩니다.</span></p>
+    </div>
+  </section>
+
+  <!-- ───────── 6. 둘러보기 ───────── -->
+  <section class="slide" data-title="둘러보기 — 뭘 시킬지 모를 때" data-kicker="05 · 둘러보기">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">05 · 둘러보기</p>
+        <h2 class="title">뭘 시킬지 모를 때는 <span class="hl">둘러보기</span></h2>
+        <p class="sub">카드를 누르면 어떤 부탁이 되는지 보여 드려요</p>
+      </div>
+      <div class="chips">
+        <span class="chip on">전체</span><span class="chip">돈</span><span class="chip">쇼핑</span><span class="chip">건강</span>
+        <span class="chip">사람·반려동물</span><span class="chip">일·서류</span><span class="chip">여행</span><span class="chip">집</span><span class="chip">즐길 거리</span>
+      </div>
+      <div class="two-col">
+        <div class="explore-list" data-group="ex">
+          <p class="sec-label">요즘 많이 맡긴 일</p>
+          <button class="ex-card on" type="button" data-show="ex1">
+            <b><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg>아침 브리핑</b><span>일정 · 날씨 · 메일 3줄 요약</span>
+          </button>
+          <button class="ex-card" type="button" data-show="ex2">
+            <b><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>사진으로 일정 등록</b><span>안내문 · 영수증 → 캘린더</span>
+          </button>
+          <p class="sec-label">피클의 제안</p>
+          <button class="ex-card" type="button" data-show="ex3">
+            <b><svg class="ico" aria-hidden="true"><use href="#i-bag"/></svg>이번 주 장보기 정리</b><span>냉장고 사진 → 장바구니 목록</span>
+          </button>
+        </div>
+        <div class="card ex-detail">
+          <div class="ex-pane active" data-pane id="ex1">
+            <h3>아침 브리핑</h3>
+            <p>일정·날씨·꼭 봐야 할 메일을 3줄로 정리해 줍니다. 매일 아침 예약도 가능해요.</p>
+            <div class="quote"><small>이렇게 말해요</small>“오늘 일정이랑 날씨, 중요한 메일만 요약해줘.”</div>
+            <span class="start-btn">시작하기 <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          </div>
+          <div class="ex-pane" data-pane id="ex2">
+            <h3>사진으로 일정 등록</h3>
+            <p>안내문·영수증·화면 캡처를 보내면 날짜와 장소를 뽑아 캘린더에 넣어 줍니다.</p>
+            <div class="quote"><small>이렇게 말해요</small>“이 사진에 있는 날짜랑 장소를 캘린더에 넣어줘.”</div>
+            <span class="start-btn">시작하기 <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          </div>
+          <div class="ex-pane" data-pane id="ex3">
+            <h3>이번 주 장보기 정리</h3>
+            <p>냉장고 사진을 보내면 있는 재료로 만들 수 있는 메뉴와 살 것만 정리해 줍니다.</p>
+            <div class="quote"><small>이렇게 말해요</small>“냉장고 사진 보고 이번 주 장볼 것만 정리해줘.”</div>
+            <span class="start-btn">시작하기 <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          </div>
+        </div>
+      </div>
+      <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-compass"/></svg><span>카드를 눌러 <b>시작하기</b>를 누르면, 그 요청이 내 말로 채팅에 들어가고 채팅 화면이 열립니다. 지운 카드는 <b>되돌리기</b>로 살릴 수 있어요.</span></p>
+    </div>
+  </section>
+
+  <!-- ───────── 7. 보관함 & 프로필 ───────── -->
+  <section class="slide" data-title="보관함 & 프로필 관리" data-kicker="06 · 보관함·프로필">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">06 · 보관함·프로필</p>
+        <h2 class="title">결과는 <span class="hl">보관함</span>에, 기록은 <span class="hl">프로필</span>에</h2>
+        <p class="sub">지난 결과를 다시 꺼내고, 무슨 일을 했는지 한눈에 봅니다</p>
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <div class="arch-head"><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg><b>보관함</b><span class="arch-plus">+</span></div>
+          <div class="arch-grid">
+            <div class="arch-tile">
+              <svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg><b>아티팩트</b><span>문서 · 페이지</span>
+            </div>
+            <div class="arch-tile">
+              <svg class="ico" aria-hidden="true"><use href="#i-photo"/></svg><b>미디어</b><span>사진 · 영상</span>
+            </div>
+          </div>
+          <div class="arch-rows">
+            <div class="mini-row"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg>11월 18일 · 안내문 정리<span class="chev">›</span></div>
+            <div class="mini-row"><svg class="ico" aria-hidden="true"><use href="#i-photo"/></svg>11월 17일 · 영수증 3장<span class="chev">›</span></div>
+            <div class="mini-row"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg>11월 10일 · 숙소 비교표<span class="chev">›</span></div>
+          </div>
+          <p class="mini">채팅에서 주고받은 파일과 사진이 <b>날짜별</b>로 쌓입니다. 오른쪽 아래 <b>+</b> 를 누르면 새로 만들어 달라고 할 수 있어요.</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><svg class="ico" aria-hidden="true"><use href="#i-person"/></svg><h3>내 피클 프로필</h3><span class="more">채팅 위 피클 누르기</span></div>
+          <div class="mini-tabs" data-group="p7">
+            <button class="mini-tab active" type="button" data-show="p7a">한 일</button>
+            <button class="mini-tab" type="button" data-show="p7b">예약한 작업</button>
+            <button class="mini-tab" type="button" data-show="p7c">함께한 추억</button>
+          </div>
+          <div class="mini-panes">
+            <div class="mini-pane active" data-pane id="p7a">
+              <div class="rec"><span class="rec-ico"><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg></span><div><b>아침 브리핑 정리</b><span>오늘 오전 7:00</span></div><span class="st">완료</span></div>
+              <div class="rec"><span class="rec-ico"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg></span><div><b>안내문 → 캘린더 등록</b><span>어제 오후 2:12</span></div><span class="st">완료</span></div>
+              <div class="rec"><span class="rec-ico"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg></span><div><b>식당 예약 문의</b><span>어제 오전 11:30</span></div><span class="st">완료</span></div>
+              <div class="rec"><span class="rec-ico"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg></span><div><b>주간 일정 정리</b><span>지난 금요일 오후 6:00</span></div><span class="st">완료</span></div>
+            </div>
+            <div class="mini-pane" data-pane id="p7b">
+              <div class="rec"><span class="rec-ico"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg></span><div><b>매일 오전 7:00 · 아침 브리핑</b><span>반복</span></div><span class="st">작동 중</span></div>
+              <div class="rec"><span class="rec-ico"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg></span><div><b>금요일 18:00 · 한 주 정리</b><span>한 번</span></div><span class="st">작동 중</span></div>
+              <div class="rec"><span class="rec-ico"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg></span><div><b>매월 25일 · 카드값 확인</b><span>반복</span></div><span class="st off">일시정지</span></div>
+            </div>
+            <div class="mini-pane" data-pane id="p7c">
+              <div class="rec"><span class="rec-ico"><svg class="ico" aria-hidden="true"><use href="#i-heart"/></svg></span><div><b>11월 18일</b><span>강의 자료를 한 폴더로 정리했어요</span></div></div>
+              <div class="rec"><span class="rec-ico"><svg class="ico" aria-hidden="true"><use href="#i-heart"/></svg></span><div><b>11월 15일</b><span>처음으로 아침 브리핑을 맡겼어요</span></div></div>
+              <p class="mini">지운 추억은 피클도 기억하지 못해요. 남기고 싶은 기록만 남겨 두세요.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg><span><b>예약한 작업</b>은 언제든 <b>일시정지 · 수정 · 삭제</b>할 수 있고, <b>한 일</b>에서는 진행 중인 작업을 취소할 수도 있어요.</span></p>
+    </div>
+  </section>
+
+  <!-- ───────── 8. 연결 & 안심 ───────── -->
+  <section class="slide" data-title="연결 & 안심 설정 (나의 피클)" data-kicker="07 · 연결·안심">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">07 · 연결·안심</p>
+        <h2 class="title">연결은 선택, 공개는 <span class="hl">내가 정합니다</span></h2>
+        <p class="sub">'나의 피클'에서 연결과 공개 범위, 사용량을 한 번에 관리합니다</p>
+      </div>
+      <div class="three-col">
+        <div class="card trust-card">
+          <span class="trust-ico g"><svg class="ico" aria-hidden="true"><use href="#i-grid"/></svg></span>
+          <h3>피클에 연결된 앱 및 서비스</h3>
+          <p>연결한 것만 볼 수 있어요. 필요 없으면 그 자리에서 끄면 됩니다.</p>
+          <div class="row"><span class="svc">구글 메일</span><span class="svc">캘린더</span><span class="svc">드라이브</span></div>
+          <div class="tr-row"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>연결 안 한 앱은 열리지 않아요</div>
+          <div class="tr-row desk-only"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>끄고 싶을 때 언제든 끄기</div>
+        </div>
+        <div class="card trust-card">
+          <span class="trust-ico b"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg></span>
+          <h3>정보 공개 범위 설정</h3>
+          <p>무엇을 어디까지 말할지 내가 정합니다.</p>
+          <div class="tr-row"><b>친구에게</b>바쁜지만 알려주기</div>
+          <div class="tr-row"><b>연결마다</b>따로 정하기</div>
+          <div class="tr-row"><b>절대 공유 안 함</b>내가 고른 것</div>
+        </div>
+        <div class="card trust-card">
+          <span class="trust-ico s"><svg class="ico" aria-hidden="true"><use href="#i-bolt"/></svg></span>
+          <h3>일일 사용량 한도</h3>
+          <div class="limit-bar"><div class="limit-fill"></div></div>
+          <div class="limit-note"><span>오늘 사용량</span><span>매일 새벽 4시 초기화</span></div>
+          <p>한도를 다 쓰면 <b>한도 초기화 티켓</b>으로 이어서 사용할 수 있어요.</p>
+          <div class="tr-row"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>남은 시간과 한도는 여기서 확인</div>
+          <div class="tr-row desk-only"><b>한도 초기화 티켓</b>전체 · 절반</div>
+        </div>
+      </div>
+      <div class="privacy-strip">
+        <svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg>
+        <span>결제 수단 화면은 기기 잠금(지문·비밀번호)을 거쳐야 열립니다. 카드 정보는 피클도 읽지 못해요.</span>
+      </div>
+      <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-person"/></svg><span>같은 화면 아래에 <b>내 계정</b> · <b>결제 수단</b> · <b>알림 설정</b> · <b>화면 및 디자인</b> · <b>언어</b> · <b>도움말</b>이 이어집니다.</span></p>
+    </div>
+  </section>
+
+  <!-- ───────── 9. 실전 1 ───────── -->
+  <section class="slide" data-title="실전 1 — 매일 아침 비서 브리핑" data-kicker="08 · 실전 1">
+    <div class="inner narrow">
+      <div class="head">
+        <p class="eyebrow">08 · 실전 1</p>
+        <h2 class="title">아침에 한 마디, <span class="hl">"오늘 브리핑 해줘"</span></h2>
+        <p class="sub">버튼을 눌러 결과가 어떻게 오는지 확인해 보세요</p>
+      </div>
+      <div class="stage">
+        <div class="seg-row" data-group="n9">
+          <button class="seg on" type="button" data-show="n9a">① 그냥 물어보기</button>
+          <button class="seg" type="button" data-show="n9b">② 매일 아침 예약하기</button>
+        </div>
+        <div class="chat-line"><span class="say-bubble">오늘 일정이랑 날씨, 꼭 봐야 할 메일만 정리해줘.</span></div>
+        <div class="pane active" data-pane id="n9a">
+          <div class="result">
+            <div class="result-top"><span class="avatar">ㅍ</span>오늘의 브리핑<span class="tag">방금 도착</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg><span class="k">일정</span><span class="v"><b>09:00</b> 강의 준비 · <b>14:00</b> 팀 회의 · <b>18:30</b> 병원</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-bolt"/></svg><span class="k">날씨</span><span class="v">오후 한때 비 <b>60%</b> · 12~17도 — 우산 챙기세요</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><span class="k">메일</span><span class="v">확인 필요 <b>2건</b> — 강의 일정 확정 요청, 견적 회신</span></div>
+            <div class="act-btns">
+              <span class="act-btn primary">캘린더 열기</span>
+              <span class="act-btn">메일 답장 초안</span>
+              <span class="act-btn ghost">다시 요약</span>
+            </div>
+          </div>
+          <p class="tip" style="margin-top:8px"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg><span>받은 결과는 채팅에 그대로 남아 나중에 다시 열어볼 수 있고, 만든 문서·사진은 <b>보관함</b>에도 함께 쌓입니다.</span></p>
+        </div>
+        <div class="pane" data-pane id="n9b">
+          <div class="result">
+            <div class="result-top"><span class="avatar">ㅍ</span>예약한 작업<span class="tag">매일 · 오전 7:00</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span class="k">내용</span><span class="v">아침 브리핑 — 일정 · 날씨 · 중요 메일</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg><span class="k">받는 곳</span><span class="v">기본 채팅으로 그때 도착</span></div>
+            <div class="act-btns">
+              <span class="act-btn">일시정지</span>
+              <span class="act-btn ghost">시간 바꾸기</span>
+              <span class="act-btn ghost">삭제</span>
+            </div>
+          </div>
+          <p class="tip" style="margin-top:7px"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg><span>'매일 아침 7시에 브리핑해줘'라고 한 번만 말하면, <b>예약한 작업</b>에 등록되고 매일 알아서 챙겨 줍니다.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── 10. 실전 2 ───────── -->
+  <section class="slide" data-title="실전 2 — 사진 한 장으로 끝내기" data-kicker="09 · 실전 2">
+    <div class="inner narrow">
+      <div class="head">
+        <p class="eyebrow">09 · 실전 2</p>
+        <h2 class="title">사진 한 장이면 <span class="hl">충분합니다</span></h2>
+        <p class="sub">안내문 · 영수증 · 화면 캡처 — 무엇을 보낼지 골라 보세요</p>
+      </div>
+      <div class="stage">
+        <div class="seg-row" data-group="n10">
+          <button class="seg on" type="button" data-show="n10a">안내문 사진</button>
+          <button class="seg" type="button" data-show="n10b">영수증 사진</button>
+          <button class="seg" type="button" data-show="n10c">화면 캡처</button>
+        </div>
+        <div class="pane active" data-pane id="n10a">
+          <div class="chat-line"><span class="say-bubble">이 안내문에서 접수 기간이랑 준비물만 뽑아서 일정에 넣어줘.</span></div>
+          <div class="result">
+            <div class="result-top"><span class="avatar">ㅍ</span>안내문 정리<span class="tag">사진 1장</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg><span class="k">접수</span><span class="v"><b>11/25(화) ~ 12/05(금)</b> · 평일 9~18시</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span class="k">준비물</span><span class="v">신분증, 통장 사본</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-person"/></svg><span class="k">장소</span><span class="v">○○센터 3층 접수처</span></div>
+            <div class="act-btns">
+              <span class="act-btn primary">캘린더에 추가</span>
+              <span class="act-btn">체크리스트로 만들기</span>
+            </div>
+          </div>
+        </div>
+        <div class="pane" data-pane id="n10b">
+          <div class="chat-line"><span class="say-bubble">이 영수증들 오늘 지출로 정리해줘.</span></div>
+          <div class="result">
+            <div class="result-top"><span class="avatar">ㅍ</span>오늘 지출 3건 · <b>42,800원</b><span class="tag">영수증 3장</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg><span class="k">교재</span><span class="v">18,000원</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg><span class="k">주차</span><span class="v">4,800원</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg><span class="k">식비</span><span class="v">20,000원</span></div>
+            <div class="act-btns">
+              <span class="act-btn primary">표로 정리</span>
+              <span class="act-btn ghost">가계부 앱으로</span>
+            </div>
+          </div>
+        </div>
+        <div class="pane" data-pane id="n10c">
+          <div class="chat-line"><span class="say-bubble">이 회의 화면 5줄로 요약하고, 할 일만 뽑아줘.</span></div>
+          <div class="result">
+            <div class="result-top"><span class="avatar">ㅍ</span>회의 요약<span class="tag">캡처 1장</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span class="k">결정</span><span class="v">일정 2건 확정 · 예산은 다음 주 재논의</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg><span class="k">할 일</span><span class="v">자료 취합(나) · 장소 확정(팀) · 안내문 발송(금요일)</span></div>
+            <div class="act-btns">
+              <span class="act-btn primary">문서로 저장</span>
+              <span class="act-btn">메일 초안 작성</span>
+            </div>
+          </div>
+        </div>
+        <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-photo"/></svg><span>보내는 방법은 하나예요. 채팅의 <b>+ 버튼 → 사진</b>(또는 <b>카메라</b>)에서 고르면 끝. 여러 장을 한 번에 보내도 됩니다.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── 11. 실전 3 ───────── -->
+  <section class="slide" data-title="실전 3 — 조건 비교 & 대신 전화" data-kicker="10 · 실전 3">
+    <div class="inner narrow">
+      <div class="head">
+        <p class="eyebrow">10 · 실전 3</p>
+        <h2 class="title">비교는 <span class="hl">표로</span>, 확인은 <span class="hl">전화로</span></h2>
+        <p class="sub">"조건에 맞는 곳만 골라서, 예약 되는지까지 확인해 줘"</p>
+      </div>
+      <div class="stage">
+        <div class="seg-row" data-group="n11">
+          <button class="seg on" type="button" data-show="n11a">① 조건 비교</button>
+          <button class="seg" type="button" data-show="n11b">② 대신 전화</button>
+        </div>
+        <div class="chips">
+          <span class="chip butter">주차 가능</span><span class="chip butter">4명 예약</span><span class="chip butter">1인 3만원 이하</span>
+        </div>
+        <div class="pane active" data-pane id="n11a">
+          <div class="result">
+            <div class="result-top"><span class="avatar">ㅍ</span>조건에 맞춘 비교<span class="tag">3곳</span></div>
+            <table class="cmp-table">
+              <thead><tr><th>곳</th><th>주차</th><th>예약</th><th>1인 가격</th></tr></thead>
+              <tbody>
+                <tr class="best"><td>A식당</td><td><span class="o">○</span></td><td><span class="o">○</span></td><td>25,000원</td></tr>
+                <tr><td>B식당</td><td><span class="x">×</span></td><td><span class="o">○</span></td><td>18,000원</td></tr>
+                <tr><td>C식당</td><td><span class="o">○</span></td><td><span class="x">×</span></td><td>22,000원</td></tr>
+              </tbody>
+            </table>
+            <p class="cmp-note"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>세 조건을 모두 채운 곳은 A식당 한 곳이에요.</p>
+            <div class="act-btns"><span class="act-btn primary">전화로 확인하기</span><span class="act-btn ghost">지도에서 보기</span></div>
+          </div>
+        </div>
+        <div class="pane" data-pane id="n11b">
+          <div class="chat-line"><span class="say-bubble">A식당에 전화해서 오늘 7시 4명 예약 되는지, 주차 되는지 물어봐줘.</span></div>
+          <div class="result">
+            <div class="result-top"><span class="avatar">ㅍ</span>A식당에 전화해 확인했어요<span class="tag">통화 1분 12초</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span class="k">예약</span><span class="v">오늘 <b>19:00 · 4명</b> 가능</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span class="k">주차</span><span class="v">가게 앞 <b>3대</b>까지 무료</span></div>
+            <div class="result-row"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span class="k">기타</span><span class="v">콜키지 무료 · 2시간 이용</span></div>
+            <div class="act-btns">
+              <span class="act-btn primary">예약 확정 문자 보내기</span>
+              <span class="act-btn ghost">길찾기</span>
+            </div>
+          </div>
+        </div>
+        <p class="tip"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span>전화는 <b>내가 정한 조건</b>을 말로 전달하고 결과만 정리해 오는 방식이에요. 통화 기록은 <b>추가 대화</b>에 남습니다.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── 12. 실습 미션 ───────── -->
+  <section class="slide" data-title="오늘의 실습 미션 & 마무리" data-kicker="11 · 실습">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">11 · 오늘의 실습</p>
+        <h2 class="title">오늘, <span class="hl">딱 한 번만</span> 맡겨 보세요</h2>
+        <p class="sub">복사해서 피클에게 그대로 붙여넣어 보세요</p>
+      </div>
+      <div class="missions">
+        <div class="mission">
+          <div class="m-top"><span class="m-num">1</span><b>아침 루틴</b></div>
+          <p class="m-text">"내일 오전 일정 알려주고, 우산 필요한지도 알려줘."</p>
+          <span class="m-sub">→ 일정 3개 + 우산 한 줄로 정리</span>
+          <button class="copy-btn" type="button" data-copy="내일 오전 일정 알려주고, 우산 필요한지도 알려줘."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>문장 복사</button>
+        </div>
+        <div class="mission">
+          <div class="m-top"><span class="m-num">2</span><b>사진 한 장</b></div>
+          <p class="m-text">"이 사진에 있는 날짜와 장소를 캘린더에 넣어줘."</p>
+          <span class="m-sub">→ 사진 한 장이 일정 카드로</span>
+          <button class="copy-btn" type="button" data-copy="이 사진에 있는 날짜와 장소를 캘린더에 넣어줘."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>문장 복사</button>
+        </div>
+        <div class="mission">
+          <div class="m-top"><span class="m-num">3</span><b>예약 맡기기</b></div>
+          <p class="m-text">"금요일 오후에 비는 시간에 치과 예약 잡아줘."</p>
+          <span class="m-sub">→ 빈 시간 찾아 예약까지</span>
+          <button class="copy-btn" type="button" data-copy="금요일 오후에 비는 시간에 치과 예약 잡아줘."><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>문장 복사</button>
+        </div>
+      </div>
+      <div class="closer">
+        <div class="pickle-wrap sm"><div class="pickle-hop" data-pickle></div></div>
+        <div class="txt">
+          <h3>피클은 답이 아니라 <span class="hl">결과</span>를 가져옵니다</h3>
+          <p>오늘 배운 네 가지 — 4개 탭 · 말로 맡기기 · 사진 한 장 · 예약해 두기</p>
+          <div class="recap">
+            <span class="chip on">기본 채팅</span><span class="chip on">둘러보기</span><span class="chip on">보관함</span><span class="chip on">나의 피클</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 하단 컨트롤 -->
+<footer class="bottombar">
+  <button class="nav-btn" id="btnPrev" type="button" aria-label="이전 장">←</button>
+  <div class="progress">
+    <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+    <div class="dots" id="dots" role="tablist" aria-label="장 이동"></div>
+  </div>
+  <button class="nav-btn" id="btnNext" type="button" aria-label="다음 장">→</button>
+  <span class="counter"><b id="curNum">01</b> / <span id="totalNum">12</span></span>
+</footer>
+
+<!-- 목차 -->
+<div class="overview" id="overview" role="dialog" aria-modal="true" aria-label="목차">
+  <div class="ov-panel">
+    <div class="ov-head">
+      <h3>목차</h3>
+      <span class="sub">원하는 장을 누르면 바로 이동합니다</span>
+      <button class="ov-close" id="ovClose" type="button">닫기 ✕</button>
+    </div>
+    <div class="ov-grid" id="ovGrid"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">문장을 복사했어요</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- 피클 캐릭터 (ㅍ) ---------- */
+  var PICKLE =
+    '<svg class="pickle-svg" viewBox="0 0 240 250" role="img" aria-label="피클 캐릭터">' +
+      '<ellipse class="pk-shadow" cx="120" cy="234" rx="62" ry="9" fill="#A9CF95" opacity="0.5"/>' +
+      '<g fill="none" stroke="#2E7A17" stroke-linecap="round">' +
+        '<line x1="50" y1="58" x2="190" y2="58" stroke-width="62"/>' +
+        '<line x1="50" y1="188" x2="190" y2="188" stroke-width="56"/>' +
+        '<line x1="80" y1="58" x2="80" y2="188" stroke-width="46"/>' +
+        '<line x1="160" y1="58" x2="160" y2="188" stroke-width="46"/>' +
+      '</g>' +
+      '<g fill="none" stroke="#5BB93B" stroke-linecap="round">' +
+        '<line x1="50" y1="58" x2="190" y2="58" stroke-width="50"/>' +
+        '<line x1="50" y1="188" x2="190" y2="188" stroke-width="44"/>' +
+        '<line x1="80" y1="58" x2="80" y2="188" stroke-width="34"/>' +
+        '<line x1="160" y1="58" x2="160" y2="188" stroke-width="34"/>' +
+      '</g>' +
+      '<ellipse cx="86" cy="70" rx="8.5" ry="4.6" fill="#FFB9A6" opacity="0.6"/>' +
+      '<ellipse cx="154" cy="70" rx="8.5" ry="4.6" fill="#FFB9A6" opacity="0.6"/>' +
+      '<g class="pk-eye">' +
+        '<circle cx="103" cy="52" r="9.6" fill="#FFFFFF"/>' +
+        '<circle cx="104.4" cy="53" r="4.9" fill="#16300C"/>' +
+        '<circle cx="101.4" cy="50" r="1.8" fill="#FFFFFF" opacity="0.95"/>' +
+      '</g>' +
+      '<g class="pk-eye">' +
+        '<circle cx="137" cy="52" r="9.6" fill="#FFFFFF"/>' +
+        '<circle cx="138.4" cy="53" r="4.9" fill="#16300C"/>' +
+        '<circle cx="135.4" cy="50" r="1.8" fill="#FFFFFF" opacity="0.95"/>' +
+      '</g>' +
+      '<path d="M112 66 Q120 75 128 66" fill="none" stroke="#1F4D10" stroke-width="4" stroke-linecap="round"/>' +
+    '</svg>';
+
+  document.querySelectorAll('[data-pickle]').forEach(function (el) {
+    el.innerHTML = PICKLE;
+  });
+
+  /* ---------- 슬라이드 이동 ---------- */
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var idx = 0;
+
+  var dotsWrap = document.getElementById('dots');
+  var barFill = document.getElementById('barFill');
+  var curNum = document.getElementById('curNum');
+  var totalNum = document.getElementById('totalNum');
+  var btnPrev = document.getElementById('btnPrev');
+  var btnNext = document.getElementById('btnNext');
+  var overview = document.getElementById('overview');
+  var ovGrid = document.getElementById('ovGrid');
+  var toast = document.getElementById('toast');
+
+  totalNum.textContent = String(total).padStart(2, '0');
+
+  slides.forEach(function (s, i) {
+    var d = document.createElement('button');
+    d.type = 'button';
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', (i + 1) + '장 · ' + (s.dataset.title || ''));
+    d.addEventListener('click', function () { go(i); });
+    dotsWrap.appendChild(d);
+  });
+
+  slides.forEach(function (s, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'ov-item';
+    b.innerHTML = '<span class="ov-num">' + String(i + 1).padStart(2, '0') + '</span>' +
+                  '<span class="ov-title">' + (s.dataset.title || '') + '</span>';
+    b.addEventListener('click', function () { closeOverview(); go(i); });
+    ovGrid.appendChild(b);
+  });
+
+  var dotEls = Array.prototype.slice.call(dotsWrap.children);
+  var ovEls = Array.prototype.slice.call(ovGrid.children);
+
+  function go(n) {
+    n = Math.max(0, Math.min(total - 1, n));
+    idx = n;
+    slides.forEach(function (s, i) { s.classList.toggle('active', i === n); });
+    dotEls.forEach(function (d, i) { d.classList.toggle('active', i === n); });
+    ovEls.forEach(function (d, i) { d.classList.toggle('current', i === n); });
+    barFill.style.width = (total <= 1 ? 100 : (n / (total - 1)) * 100) + '%';
+    curNum.textContent = String(n + 1).padStart(2, '0');
+    btnPrev.disabled = n === 0;
+    btnNext.disabled = n === total - 1;
+  }
+
+  btnPrev.addEventListener('click', function () { go(idx - 1); });
+  btnNext.addEventListener('click', function () { go(idx + 1); });
+
+  /* 진행 바를 눌러도 이동 */
+  var barEl = document.querySelector('.bar');
+  barEl.style.cursor = 'pointer';
+  barEl.setAttribute('role', 'slider');
+  barEl.setAttribute('aria-label', '장 이동');
+  barEl.addEventListener('click', function (e) {
+    var r = barEl.getBoundingClientRect();
+    var ratio = Math.min(0.999, Math.max(0, (e.clientX - r.left) / r.width));
+    go(Math.round(ratio * (total - 1)));
+  });
+
+  document.querySelectorAll('[data-goto]').forEach(function (b) {
+    b.addEventListener('click', function () { go(parseInt(b.dataset.goto, 10)); });
+  });
+
+  /* ---------- 목차 ---------- */
+  function openOverview() { overview.classList.add('open'); }
+  function closeOverview() { overview.classList.remove('open'); }
+  document.getElementById('btnOverview').addEventListener('click', openOverview);
+  document.getElementById('ovClose').addEventListener('click', closeOverview);
+  overview.addEventListener('click', function (e) { if (e.target === overview) closeOverview(); });
+
+  /* ---------- 전체화면 ---------- */
+  var btnFull = document.getElementById('btnFull');
+  btnFull.addEventListener('click', function () {
+    var el = document.documentElement;
+    if (!document.fullscreenElement) {
+      if (el.requestFullscreen) { el.requestFullscreen().catch(function () {}); }
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen().catch(function () {});
+    }
+  });
+
+  /* ---------- 키보드 ---------- */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeOverview(); return; }
+    if (e.key === 'ArrowRight' || (e.key === ' ' && !e.shiftKey) || e.key === 'PageDown') {
+      e.preventDefault(); go(idx + 1);
+    } else if (e.key === 'ArrowLeft' || (e.key === ' ' && e.shiftKey) || e.key === 'PageUp') {
+      e.preventDefault(); go(idx - 1);
+    } else if (e.key === 'Home') { e.preventDefault(); go(0); }
+    else if (e.key === 'End') { e.preventDefault(); go(total - 1); }
+    else if (e.key === 'f' || e.key === 'F') { btnFull.click(); }
+    else if (e.key === 'o' || e.key === 'O') {
+      if (overview.classList.contains('open')) closeOverview(); else openOverview();
+    }
+  });
+
+  /* ---------- 터치 스와이프 ---------- */
+  var sx = 0, sy = 0, tracking = false;
+  document.getElementById('deck').addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; tracking = true;
+  }, { passive: true });
+  document.getElementById('deck').addEventListener('touchend', function (e) {
+    if (!tracking) return;
+    tracking = false;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+      if (dx < 0) go(idx + 1); else go(idx - 1);
+    }
+  }, { passive: true });
+
+  /* ---------- 탭(4개 화면) ---------- */
+  var tabBtns = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
+  var tabPanels = Array.prototype.slice.call(document.querySelectorAll('.tab-panel'));
+  tabBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      tabBtns.forEach(function (x) {
+        var on = x === b;
+        x.classList.toggle('active', on);
+        x.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      tabPanels.forEach(function (p) { p.classList.toggle('active', p.dataset.panel === b.dataset.tab); });
+    });
+  });
+
+  /* ---------- 패널 전환 (공통) ---------- */
+  document.querySelectorAll('[data-show]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.dataset.show);
+      if (!target) return;
+      var group = btn.closest('[data-group]') || btn.parentElement;
+      Array.prototype.forEach.call(group.querySelectorAll('[data-show]'), function (b) {
+        b.classList.toggle('on', b === btn);
+        b.classList.toggle('active', b === btn);
+      });
+      var paneWrap = target.parentElement;
+      Array.prototype.forEach.call(paneWrap.children, function (c) {
+        if (c.hasAttribute('data-pane')) c.classList.toggle('active', c === target);
+      });
+    });
+  });
+
+  /* ---------- 채팅 메시지 강조 (5장) ---------- */
+  var s5 = document.querySelector('[data-group="s5"]');
+  if (s5) {
+    Array.prototype.forEach.call(s5.querySelectorAll('[data-lit]'), function (btn) {
+      btn.addEventListener('click', function () {
+        var key = btn.dataset.lit;
+        Array.prototype.forEach.call(s5.querySelectorAll('[data-lit]'), function (b) {
+          b.classList.toggle('on', b === btn);
+        });
+        document.querySelectorAll('.phone [data-msg]').forEach(function (m) {
+          m.classList.toggle('lit', m.dataset.msg === key);
+        });
+      });
+    });
+  }
+
+  /* ---------- 캐릭터 클릭 ---------- */
+  var cp = document.getElementById('coverPickle');
+  if (cp) {
+    cp.addEventListener('click', function () {
+      var hop = cp.querySelector('.pickle-hop');
+      hop.classList.remove('jump');
+      void hop.offsetWidth;
+      hop.classList.add('jump');
+      window.setTimeout(function () { hop.classList.remove('jump'); }, 700);
+    });
+  }
+
+  /* ---------- 문장 복사 ---------- */
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    window.clearTimeout(showToast._t);
+    showToast._t = window.setTimeout(function () { toast.classList.remove('show'); }, 1800);
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (err) {}
+    document.body.removeChild(ta);
+  }
+
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.dataset.copy;
+      var done = function () {
+        btn.classList.add('done');
+        btn.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>복사했어요';
+        showToast('문장을 복사했어요. 피클에게 붙여넣어 보세요.');
+        window.setTimeout(function () {
+          btn.classList.remove('done');
+          btn.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>문장 복사';
+        }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });
+      } else {
+        fallbackCopy(text); done();
+      }
+    });
+  });
+
+  /* ---------- 화면이 아주 작을 때 내용이 잘리지 않도록 살짝 줄이기 ---------- */
+  function fitSlides() {
+    slides.forEach(function (sl) {
+      var inner = sl.querySelector('.inner');
+      if (!inner) return;
+      inner.style.transform = '';
+      var cs = getComputedStyle(sl);
+      var avail = sl.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      var h = inner.getBoundingClientRect().height;
+      if (avail > 0 && h > avail + 1) {
+        var k = Math.max(0.74, avail / h);
+        inner.style.transformOrigin = 'center center';
+        inner.style.transform = 'scale(' + k.toFixed(3) + ')';
+      }
+    });
+  }
+  var fitTimer = null;
+  function scheduleFit() {
+    window.clearTimeout(fitTimer);
+    fitTimer = window.setTimeout(fitSlides, 60);
+  }
+  window.addEventListener('resize', scheduleFit);
+  window.addEventListener('orientationchange', scheduleFit);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(scheduleFit); }
+
+  /* ---------- 시작 ---------- */
+  go(0);
+  scheduleFit();
+})();
+</script>
+</body>
+</html>
