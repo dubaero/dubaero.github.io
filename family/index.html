@@ -5894,5 +5894,9 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  if(typeof dwRender==='function'&&document.getElementById('dw-body'))try{dwRender();}catch(e){}
 })();
 </script>
+<style id="view-zoom">/* 2026.11.20 메뉴 안쪽 화면 글자 키우기 (첫 화면 메뉴는 그대로) */
+@media (min-width:641px){[id^="v-"]:not(#v-home){zoom:1.12}}
+@media (max-width:640px){[id^="v-"]:not(#v-home){zoom:1.06}}
+</style>
 </body>
 </html>
