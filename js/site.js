@@ -189,9 +189,11 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     var colW=(roll.clientWidth-gap*5)/6;
     var track=el('div','room-track');track.style.cssText='display:grid;grid-template-rows:repeat(2,auto);grid-auto-flow:column;grid-auto-columns:'+colW+'px;column-gap:'+gap+'px;row-gap:'+rgap+'px;transition:transform .9s ease';
     roll.appendChild(track);base.concat(base).forEach(function(L){track.appendChild(mkRoom(L));});
-    var k=0,stop=false;roll.addEventListener('mouseenter',function(){stop=true;});roll.addEventListener('mouseleave',function(){stop=false;});
-    rollT=setInterval(function(){if(stop||document.hidden)return;k++;track.style.transition='transform .9s ease';track.style.transform='translateX('+(-(colW+gap)*k)+'px)';
-      if(k>=cols){setTimeout(function(){track.style.transition='none';track.style.transform='translateX(0)';k=0;},950);}},3000);
+    /* 멈추지 않고 천천히 이어서 흐르기 (한 칸에 약 4초), 마우스를 올리면 잠시 멈춤 */
+    var dist=(colW+gap)*cols,dur=cols*4;track.style.transition='none';
+    var kf=document.getElementById('room-roll-kf');if(!kf){kf=document.createElement('style');kf.id='room-roll-kf';document.head.appendChild(kf);}
+    kf.textContent='@keyframes roomRoll{from{transform:translateX(0)}to{transform:translateX(-'+dist+'px)}}.room-roll:hover .room-track{animation-play-state:paused}';
+    track.style.animation='roomRoll '+dur+'s linear infinite';track.style.willChange='transform';
   }
   renderCards();
   var rollRT=null;window.addEventListener('resize',function(){clearTimeout(rollRT);rollRT=setTimeout(function(){if(rollWide||window.innerWidth>1100)renderCards();},250);});
