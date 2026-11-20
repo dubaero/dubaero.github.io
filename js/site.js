@@ -162,21 +162,39 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   ];
   function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
   var cards=document.getElementById('room-cards');
-  function renderCards(){if(!cards)return;cards.innerHTML='';
-  LECTURES.filter(function(L){return L.card;}).concat(LECTURES.filter(function(L){return L.st!=='예정'&&!L.card;})).slice(0,24).forEach(function(L){
+  var LOGO={'마산여성새로일하기센터':'saeil','마산여성인력개발센터':'saeil','전북특별자치도 가족센터':'family','함양군사회복지사협회':'welfare','근로복지공단 인재개발원':'comwel','근로복지공단':'comwel','지역아동센터부산지원단':'child'};
+  function mkRoom(L){
     var a=el('button','room');a.type='button';a.setAttribute('aria-label',L.org+' 강의 자료실 열기');
     a.addEventListener('click',function(){openGate(L);});
     var sl=el('div','room-slide');
     if(L.img){var im=document.createElement('img');im.src=L.img;im.alt=(L.title||L.edu)+' 강의 표지';im.loading='lazy';sl.appendChild(im);}
     else{var ph=el('div','slide-ph'+(L.card?' ph-new':''));if(L.card)ph.appendChild(el('small',null,'NEW · 업무 서랍'));ph.appendChild(el('b',null,L.edu));sl.appendChild(ph);}
     a.appendChild(sl);
-    var LG={'마산여성새로일하기센터':'saeil','전북특별자치도 가족센터':'family','함양군사회복지사협회':'welfare','근로복지공단 인재개발원':'comwel','지역아동센터부산지원단':'child'}[L.org];
+    var LG=LOGO[L.org];
     if(LG){var lg=document.createElement('img');lg.className='room-logo';lg.src='/img/logo/'+LG+'.png';lg.alt='';a.appendChild(lg);}
     var info=el('div','room-info');info.appendChild(el('span','room-date',L.date.replace(/\s*·\s*/g,'·')));info.appendChild(el('span','room-org',L.org));info.appendChild(el('span','room-edu',L.edu));
     a.appendChild(info);
-    cards.appendChild(a);
-  });}
+    return a;}
+  /* 2026.11.20 강의 자료실 배너: 넓은 화면은 6개씩 3줄 — 첫 줄 고정, 아래 두 줄은 천천히 돌아감 */
+  var rollT=null,rollWide=null;
+  function renderCards(){if(!cards)return;cards.innerHTML='';if(rollT){clearInterval(rollT);rollT=null;}
+    var all=LECTURES.filter(function(L){return L.card;}).concat(LECTURES.filter(function(L){return L.st!=='예정'&&!L.card;}));
+    rollWide=window.innerWidth>1100;
+    if(!rollWide){all.slice(0,24).forEach(function(L){cards.appendChild(mkRoom(L));});return;}
+    all.slice(0,6).forEach(function(L){cards.appendChild(mkRoom(L));});
+    var rest=all.slice(6);if(!rest.length)return;
+    var base=rest.length%2?rest.concat(rest):rest,cols=base.length/2;
+    var cs=getComputedStyle(cards),gap=parseFloat(cs.columnGap)||0,rgap=parseFloat(cs.rowGap)||0;
+    var roll=el('div','room-roll');roll.style.cssText='grid-column:1/-1;overflow:hidden;min-width:0';cards.appendChild(roll);
+    var colW=(roll.clientWidth-gap*5)/6;
+    var track=el('div','room-track');track.style.cssText='display:grid;grid-template-rows:repeat(2,auto);grid-auto-flow:column;grid-auto-columns:'+colW+'px;column-gap:'+gap+'px;row-gap:'+rgap+'px;transition:transform .9s ease';
+    roll.appendChild(track);base.concat(base).forEach(function(L){track.appendChild(mkRoom(L));});
+    var k=0,stop=false;roll.addEventListener('mouseenter',function(){stop=true;});roll.addEventListener('mouseleave',function(){stop=false;});
+    rollT=setInterval(function(){if(stop||document.hidden)return;k++;track.style.transition='transform .9s ease';track.style.transform='translateX('+(-(colW+gap)*k)+'px)';
+      if(k>=cols){setTimeout(function(){track.style.transition='none';track.style.transform='translateX(0)';k=0;},950);}},3000);
+  }
   renderCards();
+  var rollRT=null;window.addEventListener('resize',function(){clearTimeout(rollRT);rollRT=setTimeout(function(){if(rollWide||window.innerWidth>1100)renderCards();},250);});
   var list=document.getElementById('lec-list'),count=document.getElementById('lec-count'),filter='all',expanded=false,LIMIT=10,page=0;
   function renderList(){if(!list)return;
     Array.prototype.slice.call(list.querySelectorAll('.lrow:not(.lhd)')).forEach(function(n){n.remove();});
