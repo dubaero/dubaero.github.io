@@ -178,6 +178,18 @@ u.v{text-decoration:none;background:#FFF1C9;border-radius:4px;padding:0 3px;font
 .sbar b{color:var(--ink)}.sbar select,.sbar input{font:inherit;padding:6px 10px;border:1.5px solid var(--line);border-radius:8px;background:#fff}.sbar span{font-size:.9rem;color:var(--muted)}
 .subt{flex-wrap:wrap}
 @media(max-width:980px){.menu{grid-template-columns:repeat(3,1fr)}.mt.red{grid-column:span 3}.mt span{white-space:normal;text-align:center}.hero{grid-template-columns:1fr!important}.hero h1{white-space:normal}.hero-art{height:auto}.hero-art img{width:100%;height:auto}.dash{grid-template-columns:1fr!important}}
+.bzrow{display:flex;flex-wrap:wrap;gap:6px;background:#F1EBE1;border-radius:12px;padding:10px;margin-bottom:10px}
+.bzrow button{font:inherit;font-weight:700;font-size:.95rem;padding:6px 12px;border-radius:18px;border:1.5px solid var(--line);background:#fff;cursor:pointer}
+.bzrow button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.fsteps{display:grid;grid-template-columns:repeat(5,1fr);border:1.5px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:10px}
+.fsteps button{font:inherit;font-weight:800;background:#fff;border:0;border-right:1px solid var(--line);padding:8px;cursor:pointer;color:var(--ink)}
+.fsteps button:last-child{border-right:0}.fsteps small{display:block;font-size:.8rem}
+.fsteps button.on{background:var(--ink);color:#fff}
+.fcard{background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px}
+.fhead h3{margin:0;color:var(--ink);font-size:1.25rem}.fhead p{margin:4px 0 12px;font-size:.92rem;color:var(--muted)}.unv{color:var(--point)}
+.exbox{background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px}.exbox b{color:var(--ink)}.ga{background:#FFF0EC;color:var(--point);border:1px solid #F0C8AE;border-radius:6px;padding:0 6px;font-size:.8rem;margin-left:4px}
+.exbox pre{white-space:pre-wrap;font:inherit;margin:8px 0 0;line-height:1.7}
+@media(max-width:980px){.fsteps{grid-template-columns:repeat(5,1fr)}}
 </style>
 </head>
 <body>
@@ -205,7 +217,7 @@ u.v{text-decoration:none;background:#FFF1C9;border-radius:4px;padding:0 3px;font
   <section class="dash">
     <div class="panel">
       <div class="ph"><h2>사업 자료실</h2><small>사업을 고르면 사업명이 프롬프트에 들어가요</small></div>
-      <div class="stab"><button type="button" class="on" data-stab="rep">사업·보고</button><button type="button" data-stab="pr">홍보물</button></div>
+      <div class="stab"><button type="button" class="on" data-stab="rep">사업·보고</button><button type="button" data-stab="pr">홍보·운영</button></div>
       <ol class="blist" id="blist"></ol>
     </div>
     <div class="panel">
@@ -242,20 +254,22 @@ var RULES=['- 자료에 없는 숫자·날짜·금액은 만들지 말고 [확�
    [[강조|옆 설명]]  {사업}{대상}{기간} = 위 칸에서 자동으로 바뀜
    PROJ = 사업별 프로젝트(지침+첫 대화) · QUICK = 딸깍 자동화(프롬프트 하나) */
 var FLOW='① 지침 요약 → ② 비교표 → ③ 자료 한 번에 요청 → ④ 작성 방향 요약 → ⑤ 초안 → 승인 담당자 검토 → 완성본';
+var FLOWPLAN=['[대화를 시작하면 이 순서로 — 단계마다 멈추고 내 확인을 받아]','1) 지침을 확인하고 3줄 요약','2) 표: 전년도와 다른 점 / 추가·보완할 점 / 근거(자료·쪽) / 목표','3) 초안에 더 필요한 자료를 한 번에 요청','4) 작성 방향 요약 → 내가 좋다고 하면 초안','5) [[사업평가·승인 담당자|검토하는 사람]] 입장에서 감점될 곳 3가지를 고쳐 완성본'];
+var FLOWREP=['[대화를 시작하면 이 순서로 — 단계마다 멈추고 내 확인을 받아]','1) 지침과 사업계획서를 확인하고 3줄 요약','2) 표: 계획 / 실적 / 달성률(계산식) / 성과와 근거 / 아쉬운 점과 개선','3) 부족한 근거 자료를 한 번에 요청','4) 작성 방향 요약 → 내가 좋다고 하면 서식 순서대로 초안','5) [[평가위원|검토하는 사람]] 입장에서 근거 없는 성과·숫자 오류를 고쳐 완성본'];
 var PROJ=[
 {id:'plan',ic:'doc',t:'사업계획서',pn:'○○사업 사업계획서',key:'계획서 사업계획 신규사업 연간계획 가족잔치 PCISP',when:'사업마다 한 번 세팅 — 올해 사업계획서',mode:'proj',
  src:['올해 사업계획서 서식(한글)','올해 사업운영 안내지침·가이드라인','전년도 사업계획서','전년도 결과보고서'],
- guide:['너는 [[{사업} 사업계획서 작성 담당자이자 사업평가·승인 담당자|역할 — 쓰는 눈과 승인하는 눈]]야.','- 순서: 운영지침 분석 → 전년도 계획서·결과보고서로 보완점 찾기 → 올해 서식에 작성.'].concat(RULES,['- 서식 칸과 순서 그대로, 완성본은 한글(.hwpx) 파일로.']),
- ask:['[[{기간} {사업}|내 사업]] 사업계획서를 시작하자.','① 지침을 확인했으면 3줄로 요약해 줘.','② 표로: 올해 지침에서 전년도와 다른 점 / 추가·보완할 점 / 근거 / 목표','③ 초안에 필요한 자료(수요조사·만족도 조사·필수 첨부서류 등)를 한 번에 요청해 줘.','④ 자료를 받으면 작성 방향 요약을 먼저 보여 주고, 내가 좋다고 하면 초안 → [[사업평가·승인 담당자|검토하는 사람]] 입장에서 검토·보완 → 완성본.'],
+ guide:['너는 [[{사업} 사업계획서 작성 담당자이자 사업평가·승인 담당자|역할 — 쓰는 눈과 승인하는 눈]]야.','- 순서: 운영지침 분석 → 전년도 계획서·결과보고서로 보완점 찾기 → 올해 서식에 작성.'].concat(FLOWPLAN,RULES,['- 서식 칸과 순서 그대로 써서, 한글 문서에 칸별로 붙여 넣을 수 있게 해 줘.']),
+ ask:['[[{기간} {사업}|내 사업]] 사업계획서를 시작하자. 지침대로 1)부터 진행해 줘.','소스에 아직 없는 자료(수요조사·만족도 조사·필수 첨부서류 등)는 3)에서 한 번에 알려 줘.'],
  chk:['예산 합계와 산출 근거','목표가 숫자로 확인되는지','지침에 없는 항목을 만들지 않았는지']},
 {id:'report',ic:'chart',t:'결과보고서',pn:'○○사업 결과보고서',key:'결과 성과 실적 평가 연말 보고 GH DAY',when:'사업이 끝난 뒤 — 계획 대비 결과·성과',mode:'proj',
  src:['올해 결과보고서 서식(한글)','사업운영 안내지침','올해 사업계획서','실적·출석·만족도 자료, 활동 사진'],
- guide:['너는 [[{사업} 결과보고서 작성 담당자이자 사업평가 담당자|역할 — 쓰는 눈과 평가하는 눈]]야.','- 순서: 지침 확인 → 계획 대비 실적·성과 분석 → 올해 서식에 작성.','- "계획 → 운영 → 결과·성과"가 근거와 함께 보이게.'].concat(RULES,['- 서식 칸과 순서 그대로, 완성본은 한글(.hwpx) 파일로.']),
- ask:['[[{기간} {사업}|내 사업]] 결과보고서를 시작하자.','① 지침을 확인했으면 3줄로 요약해 줘.','② 표로: 계획 / 실적 / 달성률 / 성과와 근거 / 아쉬운 점과 개선','③ 부족한 근거 자료(출석부·만족도·사진 등)를 한 번에 요청해 줘.','④ 작성 방향 요약을 먼저 보여 주고, 내가 좋다고 하면 초안 → [[평가 담당자|검토하는 사람]] 입장에서 검토·보완 → 완성본.'],
+ guide:['너는 [[{사업} 결과보고서 작성 담당자이자 사업평가 담당자|역할 — 쓰는 눈과 평가하는 눈]]야.','- 순서: 지침 확인 → 계획 대비 실적·성과 분석 → 올해 서식에 작성.','- "계획 → 운영 → 결과·성과"가 근거와 함께 보이게.'].concat(FLOWREP,RULES,['- 서식 칸과 순서 그대로 써서, 한글 문서에 칸별로 붙여 넣을 수 있게 해 줘.']),
+ ask:['[[{기간} {사업}|내 사업]] 결과보고서를 시작하자. 지침대로 1)부터 진행해 줘.','소스에 아직 없는 근거 자료(출석부·만족도·사진 등)는 3)에서 한 번에 알려 줘.'],
  chk:['계획 대비 실적 숫자','예산 집행률','[확인 필요]로 남은 칸']},
 {id:'prog',ic:'spark',t:'프로그램 계획서',pn:'○○사업 프로그램 기획',key:'프로그램 기획 제안 계획 캠퍼스 평생교육 주간활동 아이디어',when:'사업에 맞는 새 프로그램을 제안하고 계획서까지',mode:'proj',
  src:['사업운영 안내지침','이용자 욕구·수요조사 결과','지난 프로그램 결과·만족도','프로그램 계획서 서식(한글)'],
- guide:['너는 [[{사업} 프로그램 기획 전문가|역할]]야.','- 순서: 지침·이용자 욕구 분석 → 프로그램 3가지 제안 → 내가 고른 것을 서식에 작성.','- 장애인 당사자가 주체가 되고, 우리 복지관에서 바로 할 수 있게 현실적으로.'].concat(RULES,['- 서식 칸과 순서 그대로, 완성본은 한글(.hwpx) 파일로.']),
+ guide:['너는 [[{사업} 프로그램 기획 전문가|역할]]야.','- 순서: 지침·이용자 욕구 분석 → 프로그램 3가지 제안 → 내가 고른 것을 서식에 작성.','- 장애인 당사자가 주체가 되고, 우리 복지관에서 바로 할 수 있게 현실적으로.'].concat(RULES,['- 서식 칸과 순서 그대로 써서, 한글 문서에 칸별로 붙여 넣을 수 있게 해 줘.']),
  ask:['[[{대상}|대상]]을 위한 [[{사업}|내 사업]] 프로그램을 기획하자.','① 지침과 수요조사를 확인했으면 3줄로 요약해 줘.','② 표로 3안: 이름 / 목적 / 대상·인원 / 회기·내용 / 기대효과 / 근거','③ 내가 고르면 필요한 정보를 한 번에 묻고, 서식대로 초안 → [[심사자|검토하는 사람]] 입장에서 검토·보완 → 완성본.'],
  chk:['수요조사 근거가 있는지','회기·인원·예산이 현실적인지','당사자 중심 표현인지']}
 ];
@@ -311,6 +325,7 @@ var QUICK=[
 ];
 var CARDS=PROJ.concat(QUICK);
 var MORE=[
+{id:'flow',ic:'box',t:'사업별 진행',when:'사업을 누르면 계획부터 보고까지 프롬프트가 자동으로',mode:'flow'},
 {id:'find',ic:'find',t:'지침에서 찾기',key:'지침 노트북 근거 평가지표 사업안내 규정',when:'두꺼운 지침에서 근거 찾기 (제미나이 노트북)',mode:'chat',steps:[['새 노트북','제미나이 노트북에서 새로 만들기'],['자료 넣기','지침 PDF 추가'],['질문','아래 프롬프트 붙여넣기'],['출처 확인','쪽수를 눌러 원문 대조']],att:['지침 PDF'],
  p:['넣은 자료 안에서만 답해 줘. [[{사업}|내 사업]]의 [평가 지표 / 필수 서류 / 예산 기준]을 표로 정리하고 줄마다 쪽수를 붙여 줘. 자료에 없으면 "자료에 없음".'],
  chk:['출처 쪽수','"자료에 없음"','원문 대조']},
@@ -354,10 +369,48 @@ var TOOLS=[
  tpl:function(v){return ['나 지금 [['+(v.who||'[누구]')+'|누구 때문에]] 너무 빡쳐. '+(v.what||'[있었던 일]'),'① 먼저 내 편이 되어 같이 빡쳐 줘 — 웃기게, 센 말은 "○○"로 가려서.','② 복식호흡 3번 하자고 짧게 안내해 줘.','③ 상대에게 실제로 보낼 수 있는 순화된 문장 2가지 (정중한 버전 / 단호한 버전).']}}
 ];
 var BIZ=[['스마트재활센터','easy'],['하이드림솔루션 사례회의','meet'],['장애인식개선 교육','aware'],['기흥행복한놀이터','prog'],['기흥행복한캠퍼스','prog'],['주간이용센터 PCISP','daily'],['평생교육 프로그램','prog'],['직업지원·일자리 모집','recruit'],['주간활동 일지','daily'],['후원·자원봉사','donor'],['재가복지·문화기행','easy'],['공문·예산 공고','doc'],['월간 「N월의 기록」','promo'],['식단·차량 안내','easy'],['활동지원사 모집','recruit'],['2026 연말 가족잔치','plan'],['21st GH DAY 결과보고','report']];
+/* ===== 사업별 진행 (가족센터 '업무 프로젝트' 방식) — 사업을 누르면 단계별 프롬프트가 자동 세팅 ===== */
+var BZ=[
+{n:'스마트재활센터',att:['이용자별 기능평가 결과(사전·사후, 가명)','로봇·순환재활 기기 이용 실적','이용자·보호자 만족도'],note:'의료 효과를 단정하지 말고 "기능 유지·향상이 관찰됨"처럼 쓰고, 측정 도구 이름을 밝혀.',team:'사회통합지원팀',core:'3STEP 로봇보행·디지털 순환재활·인지치료·SMART GYM·아쿠아짐',who:'재활이 필요한 장애인과 보호자',goal:'로봇·디지털 재활로 이용자의 신체기능 유지·향상',kpi:'이용 실인원·연인원, 회기 수, 기능 변화(측정 도구), 만족도',promo:'이용 안내문·보호자 설명회 안내',log:'재활 회기 기록',items:'일시 / 프로그램(로봇보행·순환재활 등) / 이용자(가명) / 수행 내용 / 관찰된 변화 / 다음 회기 계획',guide:'보건복지부 「장애인복지사업안내」 장애인복지관 운영 + 재활 관련 지원사업 지침'},
+{n:'가족통합지원(I Be School·치료)',att:['대기자 현황','치료 영역별(인지·언어·미술·음악) 실적','보호자 만족도','바우처 이용 현황(해당 시)'],note:'아동의 진단명·발달 정보는 가명·요약으로만 다루고, 영역별 성과를 나눠 써.',team:'가족통합지원팀',core:'종합상담·대기자관리, I Be School(개별치료·창의교실·방과후교실), 인지·언어·미술·음악치료, 가족지원',who:'장애아동·청소년과 가족',goal:'아동의 발달 지원과 가족의 양육 부담 완화',kpi:'상담·치료 실인원·연인원, 대기자 수, 목표 달성 정도, 보호자 만족도',promo:'치료·방과후교실 이용 안내',log:'치료·수업 일지',items:'일시 / 영역(인지·언어·미술·음악) / 아동(가명) / 목표 / 수행 내용 / 관찰(사실과 추정 구분) / 보호자 전달 사항',guide:'보건복지부 「장애인복지사업안내」 장애인복지관 운영 + 발달재활서비스 관련 지침'},
+{n:'하이드림솔루션',att:['사례관리 현황 집계표(가명)','통합사례회의 결과 요약','협력기관 목록','후원금 집행 내역'],note:'실제 사례 원문·실명은 받지 말고 집계표와 가명 요약만으로 써.',team:'지역복지팀',core:'민관협력 고난도 위기가정 통합사례관리, 통합사례회의, 자원 연계',who:'지역 내 위기 장애인 가정',goal:'민관 협력으로 위기가정의 위기 해소와 생활 안정',kpi:'사례관리 가구 수, 통합사례회의 횟수, 연계 자원 수, 위기 해소·종결 건수',promo:'협력기관 협조 공문·후원 연계 안내',log:'통합사례회의록',items:'일시 / 참석 기관 / 사례(가명) 현황 / 결정 사항 / 미정 사항 / 담당 / 마감',guide:'보건복지부 「장애인복지사업안내」 + 통합사례관리 관련 지침'},
+{n:'장애인식개선(포니야 놀자!)',att:['교육 실시 현황(기관·인원)','사전·사후 인식 설문 결과','교육 콘텐츠 목록(교육북·웹툰 등)','협력 기관 목록'],note:'법정 의무교육과 기관 자체 교육을 구분하고, 장애를 동정·영웅으로 그리는 표현이 없는지 점검해.',team:'사회통합지원팀',core:'유치원·학교·기업 찾아가는 장애인식개선 교육, 교육북·웹툰·애니메이션 콘텐츠',who:'유치원·초중고 학생, 기업 직원, 지역주민',goal:'장애에 대한 올바른 이해와 함께 사는 태도 형성',kpi:'교육 횟수·인원, 사전·사후 인식 변화, 만족도, 콘텐츠 제작 수',promo:'교육 신청 안내·학교 협조 공문',log:'교육 실시 기록',items:'일시 / 기관 / 대상·인원 / 교육 주제 / 진행 내용 / 반응 / 개선할 점',guide:'「장애인복지법」 장애인식개선교육 관련 규정 + 기관 사업 지침'},
+{n:'기흥행복한놀이터',att:['체험 운영 실적','참여 기관 목록','안전관리 계획','참여자 만족도'],note:'체험 종목별 안전 수칙과 보조 인력 배치를 꼭 넣어.',team:'사회통합지원팀',core:'포니 이론교육 + 디지털 스포츠 체험(휠체어 볼링·저시력 농구 등)',who:'초등학생·청소년과 지역주민',goal:'체험을 통해 장애를 이해하고 함께 노는 경험 만들기',kpi:'체험 횟수·인원, 참여 기관 수, 사전·사후 인식 변화, 만족도',promo:'체험 프로그램 신청 안내',log:'체험 운영 기록',items:'일시 / 참여 기관·인원 / 체험 종목 / 진행 순서 / 안전 사항 / 반응 / 개선할 점',guide:'기관 사업 지침 (지원사업이면 해당 공모 지침)'},
+{n:'기흥행복한캠퍼스',att:['반별 출석 요약','작품·발표 기록','강사 수업 계획','참여자 만족도'],note:'Art·Digital·Sports·Special 반별로 나눠 계획과 성과를 써.',team:'사회통합지원팀',core:'Art·Digital·Sports·Special Class 반별 평생교육',who:'성인 장애인',goal:'배움과 여가를 통한 자기표현과 사회참여 확대',kpi:'반별 참여 실인원·연인원, 출석률, 작품·발표 성과, 만족도',promo:'반별 참여자 모집 카드뉴스',log:'수업 일지',items:'일시 / 반 / 참여 인원 / 수업 내용 / 참여 모습(사실) / 다음 수업 준비',guide:'기관 사업 지침 + 평생교육 관련 지침'},
+{n:'주간이용센터(PCISP)',att:['PCISP 요약(가명)','평생학습 프로그램 실적','보호자 상담·부모교육 요약','만족도'],note:'개별 목표는 이용자가 주어인 문장으로 쓰고, 평생학습도시사업 실적은 따로 구분해.',team:'부설 주간이용센터',core:'개별지원계획(PCISP), 평생학습도시사업, 여가활동, 지역사회적응훈련, 부모교육',who:'주간이용센터 이용 성인 장애인과 보호자',goal:'이용자 중심 개별지원으로 지역사회 생활 역량 강화',kpi:'PCISP 수립·점검 건수, 개별 목표 달성 정도, 프로그램 참여율, 보호자 만족도',promo:'프로그램·부모교육 안내',log:'PCISP 점검 기록',items:'점검일 / 이용자(가명) / 개별 목표 / 이번 기간 수행 / 달성 정도(사실 근거) / 다음 목표 조정',guide:'보건복지부 「장애인복지사업안내」 장애인주간보호시설 + 평생학습도시사업 지침'},
+{n:'주간활동서비스',att:['서비스 제공시간 실적표','반별 활동 계획','개인별 지원계획 요약(가명)','보호자 만족도'],note:'제공시간·인력 기준은 사업안내 원문과 대조하고, 영역별(신체건강·창작표현 등) 활동을 나눠 써.',team:'자립전환지원팀(주간활동)',core:'주간활동 1~3반: 신체건강·창작표현·정서참여·일상생활·자립·역량강화',who:'발달장애 성인',goal:'낮 시간 의미 있는 활동으로 지역사회 참여와 자립 역량 강화',kpi:'이용 인원·제공 시간, 영역별 활동 횟수, 개인별 목표 달성, 보호자 만족도',promo:'활동 소식·보호자 안내문',log:'주간활동 일지',items:'일시 / 반 / 활동 영역 / 활동 내용 / 이용자별 관찰(사실과 추정 구분) / 차량·안전 / 다음 활동',guide:'보건복지부 「발달장애인 주간활동서비스 사업안내」'},
+{n:'직업지원(훈련·직업대학)',att:['훈련생 현황','취업·고용유지 실적','참여 사업체 목록','일자리사업 참여자 현황'],note:'취업 인원과 고용유지 기간(3·6개월)을 구분하고, 훈련과 일자리사업 실적을 섞지 마.',team:'자립전환지원팀(직업)',core:'장애인일자리사업, 훈련대학·직업대학, 취업알선·적응지원, 직무지도, 카페 운영',who:'취업을 준비하는 장애인과 사업체',goal:'직업훈련과 취업 연계로 경제적 자립 지원',kpi:'훈련 인원·수료율, 취업 인원, 3·6개월 고용 유지율, 사업체 발굴 수',promo:'일자리·훈련생 모집 공고',log:'직무지도·적응지원 기록',items:'일시 / 훈련생(가명) / 사업체·직무 / 지도 내용 / 수행 수준(사실) / 사업체 의견 / 다음 지원',guide:'「장애인일자리사업 안내」 + 직업재활 관련 지침'},
+{n:'장애인활동지원',att:['이용자·활동지원사 현황','매칭·변경 실적','활동지원사 교육 실적','민원 처리 요약'],note:'급여·시간 등 기준 숫자는 사업안내 원문에서만 가져와.',team:'사회서비스지원팀',core:'장애인활동지원사업 운영, 활동지원사 모집·교육·관리',who:'활동지원 이용자와 활동지원사',goal:'안정적인 활동지원으로 이용자의 자립생활 지원',kpi:'이용자·활동지원사 수, 매칭 건수, 교육 횟수, 민원·만족도',promo:'활동지원사 모집·교육 안내',log:'상담·매칭 기록',items:'일시 / 이용자·활동지원사(가명) / 상담 내용 / 조치 / 다음 확인',guide:'보건복지부 「장애인활동지원 사업안내」'},
+{n:'재가복지·문화기행',att:['지원 가구 현황','행사·나들이별 결과','후원·연계 자원 내역','사진 설명'],note:'행사마다 안전 대책과 후원 사용 내역을 함께 써.',team:'지역복지팀',core:'재가복지(김장·생일잔치·클린업), 시크릿산타, 문화기행·나들이',who:'재가 장애인 가정',goal:'재가 장애인의 생활 지원과 문화 향유 기회 확대',kpi:'지원 가구 수, 행사·나들이 횟수와 인원, 연계 자원, 만족도',promo:'행사·나들이 안전 안내문',log:'행사 운영 기록',items:'일시 / 행사명 / 참여 가구·인원 / 진행 내용 / 안전 사항 / 반응 / 개선할 점',guide:'기관 사업 지침 + 후원·지원사업 지침'},
+{n:'후원·자원봉사',att:['후원금(품) 수입·사용 내역','자원봉사자 현황(VMS)','기업연계 목록','감사·예우 실적'],note:'후원금은 지정 목적대로 쓰였는지 확인하고, 금액은 원자료 숫자 그대로 써.',team:'지역복지팀',core:'후원 개발·관리, 기업연계, 기흥아너리더스클럽, 자원봉사(VMS)·기흥행복마을',who:'후원자·기업·자원봉사자',goal:'지역 자원 발굴과 지속적인 후원·봉사 참여',kpi:'후원자·후원금(품) 규모, 신규 발굴 수, 봉사 인원·시간, 재참여율',promo:'후원·봉사 모집과 감사 문자',log:'후원·봉사 관리 기록',items:'일시 / 후원자·봉사자(가명) / 내용 / 사용처 / 감사·안내 여부 / 다음 연락',guide:'「사회복지사업법」 후원금 관리 규정 + 기관 지침'},
+{n:'개관기념행사·가족잔치',att:['행사 계획(일정·장소·프로그램)','예산·후원 내역','참여 인원','만족도·사진 설명'],note:'협력기관·후원처 감사 표기와 안전 계획을 꼭 넣어.',team:'총무기획팀',core:'개관기념 「GH DAY」 월간 행사, 연말 가족잔치',who:'이용자·가족·지역주민',goal:'이용자·가족·지역이 함께하는 축제로 기관 공동체 강화',kpi:'참여 인원, 프로그램 수, 협력 기관·후원 수, 만족도',promo:'행사 포스터·카드뉴스·초청 공문',log:'행사 준비 회의록',items:'일시 / 참석 / 결정 사항 / 미정 사항 / 담당 / 마감',guide:'기관 연간 사업계획 + 행사 관련 내부 지침'}
+];
+var STP=[['계획','연초 · 사업계획서'],['홍보','모집·안내'],['운영','일지·기록'],['실적','실적 점검'],['보고','결과보고서']];
+var FB=0,FS=0;
+function flowG(b,k){var plan=k===0;return ['너는 용인시기흥장애인복지관 [['+b.n+(plan?' 사업계획서':' 결과보고서')+' 작성 담당자이자 '+(plan?'사업평가·승인':'사업평가')+' 담당자|역할 — 사업마다 바뀜]]야.','- 사업: '+b.n+' ('+b.core+') / 대상: '+b.who,'- 근거 지침: '+b.guide,'- [['+(plan?'소스 자료':'소스 자료')+'|사업마다 다름]]: '+(plan?'올해 사업계획서 서식, 사업운영 안내지침, 전년도 사업계획서, 전년도 결과보고서, ':'결과보고서 서식, 올해 사업계획서, ')+b.att.join(', '),'- 성과지표 후보: '+b.kpi,'- [[이 사업에서 꼭 지킬 것|사업마다 다름]]: '+b.note].concat(plan?FLOWPLAN:FLOWREP,RULES,['- 서식 칸과 순서 그대로, 운영 사실과 개선 제안은 구분해.'])}
+function flowA(b,k){return ['[['+b.n+'|사업]] '+(k===0?'올해 사업계획서':'결과보고서')+'를 시작하자. 지침대로 1)부터 진행해 줘.','소스에 아직 없는 자료가 있으면 3)에서 한 번에 알려 줘.']}
+function flowP(b,k){var R2=RULES;
+ if(k===1)return ['너는 [[장애인복지관 홍보 담당자|역할]]야. '+b.n+' [['+b.promo+'|만들 것]]을 만들어 줘.','보는 사람: '+b.who,'1) 문자·카톡용 5줄 이내','2) 카드뉴스 4장 구성 (장마다 제목 + 본문 2줄)','3) 쉬운 말 버전 (발달장애인·어르신도 읽기 쉽게)','- 정보에 없는 날짜·장소·연락처는 [확인 필요]로 남겨.','- 장애를 동정·영웅으로 그리지 말고 존중하는 표현으로.','[행사·모집 정보]','(여기에 붙여 넣기)'];
+ if(k===2)return ['아래 [메모]를 '+b.n+' [['+b.log+'|기록 이름]] 형식으로 정리해 줘.','항목: '+b.items,'- 본 것(사실)과 생각(추정)을 나눠 써.','- 메모에 없는 인원·날짜는 [확인 필요], 이름은 A, B 같은 가명으로.','[메모]','(녹음 전사본이나 손메모를 붙여 넣기)'];
+ return ['너는 [['+b.n+' 실적 점검 도우미|역할]]야. 아래 [실적표]를 점검해 줘.','1) 실인원·연인원이 뒤바뀌거나 실인원이 연인원보다 큰 칸','2) 빈 칸, 합계가 안 맞는 칸, 계획 목표 대비 달성률(계산식)','3) 문제마다: 위치 / 이유 / 확인할 원자료','- 지표: '+b.kpi,'- 계산 과정을 보여 주고, 확실하지 않으면 [확인 필요].','[실적표]','(엑셀 표를 붙여 넣거나 파일 첨부)']}
+function flowEx(b,k){var y='[가상] ';
+ if(k===0)return y+'2027 '+b.n+' 사업계획(방향 요약)\n1. 목적: '+b.goal+'\n2. 대상: '+b.who+'\n3. 주요 내용: '+b.core+'\n4. 성과지표: '+b.kpi+'\n5. 전년도 대비 보완: [확인 필요: 전년도 결과보고서]';
+ if(k===1)return y+b.n+' '+b.promo+'\n· 누가: '+b.who+'\n· 언제: [확인 필요: 날짜]\n· 무엇을: '+b.core.split(',')[0]+'\n· 신청: '+b.team+' [확인 필요: 연락처]';
+ if(k===2)return y+b.log+' 예시\n'+b.items.split(' / ').map(function(x){return '· '+x+': …'}).join('\n');
+ if(k===3)return y+'점검 결과\n· 실인원 합계와 연인원 합계 검산 완료\n· 3월 칸 비어 있음 → [확인 필요]\n· 목표 대비 달성률 = 실적 ÷ 목표 × 100 (계산식 함께 표시)';
+ return y+b.n+' 결과보고 요약\n'+b.n+'은(는) 「'+b.goal+'」을 목표로 운영했다. 실적과 달성률은 실적표 확인 후 확정한다 [확인 필요]. 성과는 근거 자료(만족도·관찰 기록)와 함께 적는다.'}
+function flowView(){var b=BZ[FB],k=FS;
+ var h='<div class="bzrow">'+BZ.map(function(x,i){return '<button type="button" data-fb="'+i+'"'+(i===FB?' class="on"':'')+'>'+esc(x.n)+'</button>'}).join('')+'</div>';
+ h+='<div class="fsteps">'+STP.map(function(s,i){return '<button type="button" data-fs="'+i+'"'+(i===k?' class="on"':'')+'><small>'+(i+1)+'</small>'+s[0]+'</button>'}).join('')+'</div>';
+ h+='<div class="fcard"><div class="fhead"><div><h3>'+STP[k][0]+' 단계 — '+esc(b.n)+'</h3><p>'+STP[k][1]+' · 담당 '+esc(b.team)+' · 근거: '+esc(b.guide)+' <span class="unv">(장·쪽 미확인)</span></p></div></div>';
+ h+='<div class="split"><div class="col"><div class="exbox"><b>예시 결과 <span class="ga">가상</span></b><pre>'+esc(flowEx(b,k))+'</pre></div>'+((k===0||k===4)?'<div class="exbox" style="margin-top:10px"><b>이 사업 소스에 넣을 자료</b><ol style="margin:6px 0 0 18px;padding:0">'+(k===0?['올해 사업계획서 서식','사업운영 안내지침·가이드라인','전년도 사업계획서','전년도 결과보고서']:['결과보고서 서식','올해 사업계획서']).concat(b.att).map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol><p class="tip" style="margin:6px 0 0">쓰는 법: ChatGPT 프로젝트 만들기 → ① 지침 붙여넣기 → 위 자료를 소스에 올리기 → ② 첫 대화</p></div><div class="warn" style="margin-top:10px"><b>파일은 PDF로!</b> 한글(.hwp) 파일은 AI가 잘 못 읽어요. 한글에서 <b>파일 → PDF로 저장하기</b> 후 올리세요. 스캔한 그림 PDF보다 글자가 선택되는 PDF가 정확해요. 서식도 PDF로 보여 주고, 완성본은 칸별로 받아 한글에 붙여 넣어요.</div>':'')+'<p class="tip">사업을 바꾸면 지침·첨부 자료·프롬프트가 그 사업에 맞게 바로 바뀌어요.</p></div><div class="col">'+((k===0||k===4)?pbox('flow_g','① 프로젝트 지침',flowG(b,k))+pbox('flow_a','② 첫 대화',flowA(b,k)):pbox('flow_p','바로 쓰는 프롬프트',flowP(b,k)))+'</div></div></div>';
+ return h}
+
 /* 첫 화면 메뉴 탭 (가족센터 방식): 누르면 위에 작은 탭 */
-var TABS=[{id:'rep',ic:'doc',t:'보고서 프로젝트',mode:'hub',kids:['plan','report']},{id:'promo',ic:'img',t:'홍보물',kids:['promo']},{id:'pgm',ic:'spark',t:'프로그램 기획',mode:'hub',kids:['idea','prog']},{id:'rec',ic:'mic',t:'회의록·일지',mode:'hub',kids:['meet','daily']},{id:'news',ic:'book',t:'보도자료·공문',mode:'hub',kids:['press','doc']},{id:'msg',ic:'easy',t:'안내·문자',mode:'hub',kids:['easy','donor','trans','three']},{id:'aware',ic:'heart',t:'장애인식개선',kids:['aware']},{id:'recruit',ic:'people',t:'모집공고',kids:['recruit']},{id:'custom',ic:'lock',t:'AI 맞춤 설정 가이드',kids:['custom'],red:1}];
-var SAUP=['스마트재활센터','하이드림솔루션','장애인식개선 교육','기흥행복한놀이터','기흥행복한캠퍼스','주간이용센터','주간활동서비스','평생교육 프로그램','직업지원','활동지원','재가복지','후원·자원봉사','연말 가족잔치','GH DAY'];
+var TABS=[{id:'rep',ic:'doc',t:'업무 프로젝트',mode:'hub',kids:['flow','plan','report']},{id:'promo',ic:'img',t:'홍보물',kids:['promo']},{id:'pgm',ic:'spark',t:'프로그램 기획',mode:'hub',kids:['idea','prog']},{id:'rec',ic:'mic',t:'회의록·일지',mode:'hub',kids:['meet','daily']},{id:'news',ic:'book',t:'보도자료·공문',mode:'hub',kids:['press','doc']},{id:'msg',ic:'easy',t:'안내·문자',mode:'hub',kids:['easy','donor','trans','three']},{id:'aware',ic:'heart',t:'장애인식개선',kids:['aware']},{id:'recruit',ic:'people',t:'모집공고',kids:['recruit']},{id:'custom',ic:'lock',t:'AI 맞춤 설정 가이드',kids:['custom'],red:1}];
+var SAUP_OLD=['스마트재활센터','하이드림솔루션','장애인식개선 교육','기흥행복한놀이터','기흥행복한캠퍼스','주간이용센터','주간활동서비스','평생교육 프로그램','직업지원','활동지원','재가복지','후원·자원봉사','연말 가족잔치','GH DAY'];
 TABS.forEach(function(T){if(T.kids.length>1)T.kids.forEach(function(k){var c=PROJ.concat(QUICK,MORE).filter(function(x){return x.id===k})[0];if(c)c.par=T.id})});
+var SAUP=BZ.map(function(x){return x.n});
 var ALL=CARDS.concat(MORE,TOOLS,TABS.filter(function(t){return t.mode==='hub'}));
 function find(id){for(var i=0;i<ALL.length;i++)if(ALL[i].id===id)return ALL[i];}
 
@@ -380,7 +433,7 @@ function pbox(id,title,lines){PT[id]=lines;return '<div class="pbox"><div class=
 
 /* ===== 화면 그리기 ===== */
 var STAB='rep';
-function blist(){$('#blist').innerHTML=SAUP.map(function(n,i){var bt=STAB==='rep'?[['plan','계획서'],['report','결과보고']]:[['promo','홍보물'],['press','보도자료']];return '<li><span class="n">'+(i+1)+'</span><b>'+esc(n)+'</b>'+bt.map(function(x,j){return '<button type="button" class="'+(j?'w':'u')+'" data-saup="'+esc(n)+'" data-to="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</li>'}).join('')}
+function blist(){$('#blist').innerHTML=BZ.map(function(z,i){var n=z.n;var bt=STAB==='rep'?[['계획서',0],['결과보고',4]]:[['홍보물',1],['일지·기록',2]];return '<li><span class="n">'+(i+1)+'</span><b>'+esc(n)+'</b>'+bt.map(function(x,j){return '<button type="button" class="'+(j?'w':'u')+'" data-saup="'+esc(n)+'" data-fs2="'+x[1]+'">'+x[0]+'</button>'}).join('')+'</li>'}).join('')}
 function home(){$('#menu').innerHTML=TABS.map(function(c){return '<button type="button" class="mt'+(c.red?' red':'')+'" data-go="'+c.id+'">'+svg(c.ic)+'<span>'+c.t+'</span></button>'}).join('');
  blist();
  $('#tiles').innerHTML=TOOLS.map(function(c){return '<button type="button" class="tile" data-go="'+c.id+'">'+svg(c.ic)+'<span>'+c.t+'</span></button>'}).join('');
@@ -389,14 +442,14 @@ var CUR=null;
 function show(id){var c=find(id);if(!c)return;if(c.mode==='hub'){show(c.kids[0]);return}if(c.mode==='pick'){var pool=CARDS.concat(MORE).filter(function(x){return x.mode==='proj'||x.mode==='chat'});c=pool[Math.floor(Math.random()*pool.length)];toast('오늘은 「'+c.t+'」 하나만 해 봐요!')}
  CUR=c.id;var P0=c.par?find(c.par):null;var h='<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>'+(P0?P0.t:c.t)+'</h2>'+(P0?'<div class="subt">'+P0.kids.map(function(k){return '<button type="button" data-go="'+k+'"'+(k===c.id?' class="on"':'')+'>'+find(k).t+'</button>'}).join('')+'</div>':'')+'</div>';
  if(c.mode==='proj'||c.mode==='chat'||(c.mode==='build'&&c.id!=='pdesign'&&!TOOLS.filter(function(t){return t.id===c.id}).length)){var cur=ls('gh_사업')||'';h+='<div class="sbar"><b>사업명</b><select id="saup"><option value="">사업을 고르세요</option>'+SAUP.map(function(n){return '<option'+(n===cur?' selected':'')+'>'+esc(n)+'</option>'}).join('')+(cur&&SAUP.indexOf(cur)<0?'<option selected>'+esc(cur)+'</option>':'')+'</select><input id="saup2" placeholder="직접 쓰기 (예: 2026 연말 가족잔치)" value=""><span>사업명을 고르면 아래 지침과 프롬프트에 같이 바뀌어 들어가요.</span></div>'}
- if(c.mode==='guide')h+=guideView();else if(c.mode==='projhub')h+=projView();else if(c.mode==='build')h+=buildView(c);else if(c.mode==='studio'||c.mode==='gbiz')h+=modView(c);else if(c.mode==='priv')h+=privView();else if(c.mode==='apps')h+=appsView();else h+=toolView(c);
+ if(c.mode==='guide')h+=guideView();else if(c.mode==='projhub')h+=projView();else if(c.mode==='build')h+=buildView(c);else if(c.mode==='studio'||c.mode==='gbiz')h+=modView(c);else if(c.mode==='priv')h+=privView();else if(c.mode==='apps')h+=appsView();else if(c.mode==='flow')h+=flowView();else h+=toolView(c);
  var v=$('#v-tool');v.innerHTML=h;v.hidden=false;var MH=document.getElementById('mod-host');if(MH){var M=c.mode==='studio'?window.STUDIO:window.GBIZ;if(M){MH.innerHTML=M.view();M.bind()}else MH.textContent='도구를 불러오지 못했어요. 새로고침해 주세요.'}$('#v-home').hidden=true;document.querySelector('[data-home].home').hidden=false;window.scrollTo(0,0);bindTool(c)}
 function goHome(){CUR=null;$('#v-tool').hidden=true;$('#v-home').hidden=false;document.querySelector('[data-home].home').hidden=true;window.scrollTo(0,0)}
 function toolView(c){var L='';
  if(c.types)L+='<h3>종류 고르기</h3><div class="types">'+c.types.map(function(t){return '<button type="button" data-type="'+esc(t)+'"'+(t===TYPE?' class="on"':'')+'>'+esc(t)+'</button>'}).join('')+'</div>';
  if(c.mode==='proj')L+='<h3>이렇게 써요</h3><ol><li>ChatGPT 왼쪽 메뉴 <b>프로젝트 → 새 프로젝트</b> (이름: '+(c.pn||c.t)+')</li><li>오른쪽 <b>① 지침</b>을 복사해 프로젝트 지침 칸에 붙여넣기</li><li>아래 자료를 프로젝트 <b>소스</b>에 올리기</li><li><b>② 첫 대화</b>를 복사해 프로젝트 안 새 채팅에 붙여넣기</li><li>AI가 요약·비교표를 보여 주면 요청한 자료를 한 번에 주기</li></ol>';
  else L+='<h3>딸깍 3단계</h3><ol>'+((c.att&&c.att.length)?'<li>입력창 <b>[+]</b>로 첨부: <b>'+c.att.map(esc).join(' · ')+'</b></li>':'')+'<li>오른쪽 프롬프트 <b>[복사]</b> 또는 <b>ChatGPT 열기</b></li><li><b>[ ]</b> 칸만 내 내용으로 바꾸고 보내기 — 끝</li></ol>';
- if(c.mode==='proj'&&c.src)L+='<h3>프로젝트 소스에 넣을 자료</h3><ul>'+c.src.map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ul><p class="tip">진행 순서: '+FLOW+'</p>';
+ if(c.mode==='proj'&&c.src)L+='<h3>프로젝트 소스에 넣을 자료</h3><ul>'+c.src.map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ul><div class="warn" style="margin-top:10px"><b>파일은 PDF로!</b> 한글(.hwp) 파일은 AI가 잘 못 읽어요. 한글에서 <b>파일 → PDF로 저장하기</b> 후 올리세요. 스캔한 그림 PDF보다 글자가 선택되는 PDF가 정확해요. 서식도 PDF로 보여 주고, 완성본은 칸별로 받아 한글에 붙여 넣어요.</div><p class="tip">진행 순서: '+FLOW+'</p>';
  L+='<h3>결과에서 사람이 확인할 3가지</h3><ul class="chk">'+c.chk.filter(Boolean).map(function(s){return '<li>'+esc(s)+'</li>'}).join('')+'</ul>';
  L+='<div class="warn">'+(c.warn?'<b>잠깐!</b> '+esc(c.warn):'<b>개인정보</b> 실명·연락처·주민번호·사례 원문은 넣지 마세요. 가명(A, B)으로 바꿔서.')+'</div>';
  var R='';if(c.steps)R+='<div class="steps4">'+c.steps.map(function(s,i){return '<div><b>'+(i+1)+'. '+esc(s[0])+'</b>'+esc(s[1])+'</div>'}).join('')+'</div>';
@@ -455,8 +508,10 @@ document.addEventListener('keydown',function(e){if(e.target.id==='saup2'&&e.key=
 document.addEventListener('focusout',function(e){if(e.target.id==='saup2'&&e.target.value.trim()){ls('gh_사업',e.target.value.trim());show(CUR)}});
 document.addEventListener('click',function(e){var t=e.target.closest('button,a');if(!t)return;
  if(t.hasAttribute('data-home')){goHome();return}
+ if(t.dataset.fb){FB=+t.dataset.fb;show('flow');return}
+ if(t.dataset.fs){FS=+t.dataset.fs;show('flow');return}
  if(t.dataset.stab){STAB=t.dataset.stab;t.parentNode.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===t)});blist();return}
- if(t.dataset.saup){ls('gh_사업',t.dataset.saup);show(t.dataset.to);return}
+ if(t.dataset.saup){ls('gh_사업',t.dataset.saup);var bi=BZ.map(function(x){return x.n}).indexOf(t.dataset.saup);if(bi>-1&&t.dataset.fs2){FB=bi;FS=+t.dataset.fs2;show('flow');return}show(t.dataset.to);return}
  if(t.dataset.go){show(t.dataset.go);return}
  if(t.dataset.biz){var b=BIZ[+t.dataset.biz];ls('gh_사업',b[0]);$('#v-biz').value=b[0];show(b[1]);return}
  if(t.dataset.bf){var c0=find(CUR);var same=t.classList.contains('on');BVS[CUR][t.dataset.bf]=same?'':t.dataset.bv;t.parentNode.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===t&&!same)});rebuild(c0);return}
