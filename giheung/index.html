@@ -205,6 +205,7 @@ u.v{text-decoration:none;background:#FFF1C9;border-radius:4px;padding:0 3px;font
 .jxf{width:100%;border:0;display:block;border-radius:14px;background:#F9F8F7;min-height:640px;height:calc(100vh - 150px)}
 .doct{display:flex;gap:6px;margin-bottom:8px}.doct button{font:inherit;font-weight:800;padding:7px 18px;border-radius:10px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer}.doct button.on{background:var(--ink);color:#fff}
 .bf{margin-bottom:8px}.types button{padding:3px 10px;font-size:.88rem}.fstep{padding:10px 12px;margin-bottom:8px}.hero{padding:16px 22px;margin:10px 0 10px}.hero-art{height:170px}.hero-art img{height:170px}.hero h1{font-size:1.7rem}
+.doct{flex-wrap:wrap;align-items:center}.bzsel{display:inline-flex;align-items:center;gap:8px;margin-left:auto;background:#F1EBE1;border-radius:10px;padding:4px 10px}.bzsel b{color:var(--ink)}.bzsel select{font:inherit;font-weight:700;padding:5px 8px;border:1.5px solid var(--ink);border-radius:8px;background:#fff;min-width:230px}
 </style>
 </head>
 <body>
@@ -374,8 +375,8 @@ function promoA(saup){return [(saup?'[['+saup+'|내 사업]] ':'')+'홍보물을
  var BZN=['스마트재활센터','가족통합지원(I Be School·치료)','하이드림솔루션','장애인식개선(포니야 놀자!)','기흥행복한놀이터','기흥행복한캠퍼스','주간이용센터(PCISP)','주간활동서비스','직업지원(훈련·직업대학)','장애인활동지원','재가복지·문화기행','후원·자원봉사','개관기념행사·가족잔치'];
  function bz(n){return (typeof BZ!=='undefined'?BZ:[]).filter(function(x){return x.n===n})[0]}
  function lines(x){return String(x||'').split('\n').filter(function(y){return y.trim()}).map(function(y){return '- '+y})}
- Q.promo.fdyn=function(v){var F=[{k:'saup',lab:'① 어떤 사업 홍보물인가요?',ch:BZN}],z=bz(v.saup);if(!z)return F;var o=z.op;
-  return F.concat([{k:'item',lab:'② 무엇을 홍보할까요?',ch:o.it},{k:'goal',lab:'③ 목적',ch:o.go},{k:'who',lab:'④ 누가 볼까요?',ch:o.wh},{k:'kind',lab:'⑤ 어떤 홍보물',ch:o.kd.concat(['잘 모르겠어요(AI 추천)'])},{k:'mood',lab:'⑥ 분위기',ch:['따뜻하게','밝고 신나게','차분하고 믿음직하게','귀엽게']},{k:'style',lab:'⑦ 그림 스타일',ch:['따뜻한 실사','귀여운 일러스트','깔끔한 안내형','수채화','동화책','입체 캐릭터','웹툰','감성 콜라주']},{k:'info',lab:'⑧ 꼭 넣을 정보 (콜론 뒤에 쓰기 · 모르면 비워 두기)',ta:1,mic:1,rows:7,val:'행사·프로그램명: \n날짜·시간: \n장소: \n대상·인원: \n신청 방법·기간: \n문의: ',ph:'예) 행사·프로그램명: 소아로봇 「밤비니」 하반기 이용자 모집 / 날짜·시간: 7월~12월 / 장소: 스마트재활센터 / 대상·인원: 만 4~12세 10명 / 신청 방법·기간: 6월 20일까지 전화'}])};
+ Q.promo.mode='pproj';Q.promo.fdyn=function(v){var F=[],z=bz(v.saup);if(!z)return F;var o=z.op;
+  return F.concat([{k:'item',lab:'① 무엇을 홍보할까요?',ch:o.it},{k:'goal',lab:'② 목적',ch:o.go},{k:'who',lab:'③ 누가 볼까요?',ch:o.wh},{k:'kind',lab:'④ 어떤 홍보물',ch:o.kd.concat(['잘 모르겠어요(AI 추천)'])},{k:'mood',lab:'⑤ 분위기',ch:['따뜻하게','밝고 신나게','차분하고 믿음직하게','귀엽게']},{k:'style',lab:'⑥ 그림 스타일',ch:['따뜻한 실사','귀여운 일러스트','깔끔한 안내형','수채화','동화책','입체 캐릭터','웹툰','감성 콜라주']},{k:'info',lab:'⑦ 꼭 넣을 정보 (콜론 뒤에 쓰기 · 모르면 비워 두기)',ta:1,mic:1,rows:7,val:'행사·프로그램명: \n날짜·시간: \n장소: \n대상·인원: \n신청 방법·기간: \n문의: ',ph:'예) 행사·프로그램명: 소아로봇 「밤비니」 하반기 이용자 모집 / 날짜·시간: 7월~12월 / 장소: 스마트재활센터 / 대상·인원: 만 4~12세 10명 / 신청 방법·기간: 6월 20일까지 전화'}])};
  Q.promo.tpl=function(v){var z=bz(v.saup);if(!z)return ['① 왼쪽에서 사업을 먼저 고르세요.','사업을 고르면 그 사업에 맞는 홍보 항목·목적·대상이 나와요.'];
   return ['너는 [[장애인복지관 홍보 기획자이자 홍보디자인 전문가|역할]]다.','[[사업: '+z.n+'|사업마다 바뀜]] — '+z.core,'홍보: [['+(v.item||'[무엇을]')+'|무엇을]] / 목적: '+(v.goal||'[목적]')+' / 보는 사람: '+(v.who||'[대상]')+' / 홍보물: '+(v.kind||'[종류]')+' / 분위기: '+(v.mood||'[분위기]')+' / 스타일: '+(v.style||'[스타일]'),'[꼭 넣을 정보 — 빈 칸은 확인 후 진행]'].concat(lines(v.info),['[순서]','① 기획안 3가지 (장마다 화면 구성·문구)','② [[서로 다른 디자인 시안 2개|색·구도가 다른 A·B]] (포스터는 완성본, 카드뉴스는 표지)','③ 선택한 시안으로 한 장씩 제작 + 정보·오탈자 검수','[규칙]','- '+z.note,'- 동정·영웅 묘사 금지, 당사자가 주인공. 날짜·전화번호·로고는 캔바에서 넣도록 자리만 비우기.'])};
  Q.promo.when='사업을 고르면 그 사업에 맞는 선택지가 나와요';Q.promo.att=['행사 정보·사진(있으면)'];
@@ -434,8 +435,21 @@ var BZ=[
 ];
 var STP=[['계획','연초 · 사업계획서'],['홍보','모집·안내'],['운영','일지·기록'],['실적','실적 점검'],['보고','결과보고서']];
 var FB=0,FS=0;
-function flowG(b,k){return k===0?planG(b.n,b):k===4?repG(b.n,b):promoG(b.n)}
-function flowA(b,k){return k===0?askDoc(b.n,'사업계획서',['올해 서식','운영지침','전년도 사업계획서','전년도 결과보고서'],b):k===4?askDoc(b.n,'결과보고서',['올해 결과보고서 서식','올해 사업계획서','전년도 결과보고서','평가기준'],b,1):promoA(b.n)}
+var PSPEC={all:{nm:'홍보물',one:'① 홍보물 선택: 카드뉴스·포스터·인포그래픽·웹툰·「N월의 기록」·사진 홍보·쉬운 안내문 중 선택(모르면 3개 추천).',plan:'장마다 역할·화면 구성·문구',make:'선택한 시안으로 한 장씩 제작'},
+ card:{nm:'카드뉴스',plan:'장별 구성(기본 5장, 4~7장): 표지 → 소개 → 핵심 정보 → 신청 방법 → 참여 독려. 한 장 문구는 제목 1줄 + 본문 2줄 이내',make:'1:1 정사각형으로 한 장씩 제작(합본 금지)'},
+ blog:{nm:'블로그·홈페이지 글',plan:'제목 3안과 글 구성(사전 안내: 소개 → 일정·대상 → 신청 / 사후 후기: 현장 → 참여자 반응 → 의미 → 다음 안내)',make:'본문 작성 + 사진 들어갈 자리 [사진: 설명] 표시. 이미지 생성 없음',noimg:1},
+ info:{nm:'인포그래픽',plan:'한 장 세로형 구성: 제목 → 핵심 숫자·절차 → 그림 설명 → 행동 안내',make:'세로형 한 장 제작, 숫자는 자료 그대로'},
+ poster:{nm:'전단지·포스터',plan:'A4 세로 구성: 제목 → 대표 이미지 → 행사 정보 → 신청 안내 → 기관 정보 자리',make:'A4 세로 완성본 제작(인쇄용 여백 확보)'},
+ toon:{nm:'웹툰·이모티콘',plan:'4컷 웹툰(상황 → 문제 → 과정 → 해결) 또는 이모티콘 12종 구성',make:'컷·이모티콘을 한 장씩 제작, 캐릭터 외형 통일'}};
+function promoTG(t,b){var p=PSPEC[t]||PSPEC.all;var L=['너는 [[장애인복지관 '+p.nm+' 기획·디자인 전문가|역할 — 누가 쓰느냐에 따라 결과 수준이 달라져요]]다.','[[목표: '+b.n+' '+p.nm+' 완성. 대상이 쉽게 이해하고 참여하게.|맥락 — 위에서 사업을 바꾸면 자동으로 바뀌어요]]',t==='all'?'- 여러 홍보물을 이 프로젝트에서 만든다.':'- 이 프로젝트에서는 '+p.nm+'만 만든다. 다른 요청은 해당 프로젝트로 안내.','[제작 순서 — 받은 정보 다시 묻기 금지]'];
+ var st=[];if(p.one)st.push(p.one);st.push('기본정보: 첫 대화의 [기본정보 틀]로 받는다. 빈 칸은 확인 후 진행.');st.push('기획안 3가지: '+p.plan+'. 기획안 전 이미지 생성 금지.');if(!p.noimg){st.push('디자인 스타일 8가지 제시, 추천 3개 표시.');st.push('디자인 시안 A·B: 색·구도를 다르게 먼저 제시하고 선택받은 뒤 진행.')}st.push(p.make+' → 정보·오탈자 검수.');
+ L=L.concat(st.map(function(x,i){return '①②③④⑤⑥'.charAt(i)+' '+x}));
+ L=L.concat(['[이 사업 특성]','- 사업 내용: '+b.core,'- 주 대상: '+b.who,'- 홍보 항목 예: '+b.op.it.join(' · '),'- 주의: '+b.note]);
+ if(!p.noimg)L=L.concat(['[디자인 스타일]'],STYLE8);
+ return L.concat(['[규칙]','- 날짜·장소·연락처·신청 방법은 지어내기 금지, 확인 후 진행. 이미지에 [확인 필요] 글자 넣기 금지.','- 동정·영웅 묘사 금지, 당사자가 주인공. 로고·포니 캐릭터·전화번호는 캔바에서 넣도록 자리만 비우기.','- 얼굴 사진은 게시 동의된 것만.'])}
+function promoTA(t,b){var p=PSPEC[t]||PSPEC.all;return ['너는 [[장애인복지관 '+p.nm+' 기획·디자인 전문가|역할]]다.','[['+b.n+' '+p.nm+'을(를) 만든다.|맥락 — 사업을 바꾸면 자동으로 바뀌어요]]','지침을 먼저 확인하고 순서와 규칙대로 진행한다. 소스 자료를 모두 활용하고, 부족한 정보는 확인 후 진행한다.','[기본정보 틀] 콜론(:) 뒤를 채워서 보내기','홍보할 것(예: '+b.op.it.slice(0,2).join(', ')+'): ','목적('+b.op.go.slice(0,3).join('·')+'): ','보는 사람('+b.op.wh.slice(0,3).join('·')+'): ','날짜·시간: ','장소: ','신청 방법·기간: ','문의 연락처: ']}
+function flowG(b,k){return k===0?planG(b.n,b):k===4?repG(b.n,b):promoTG(PK,b)}
+function flowA(b,k){return k===0?askDoc(b.n,'사업계획서',['올해 서식','운영지침','전년도 사업계획서','전년도 결과보고서'],b):k===4?askDoc(b.n,'결과보고서',['올해 결과보고서 서식','올해 사업계획서','전년도 결과보고서','평가기준'],b,1):promoTA(PK,b)}
 function flowP(b,k){
  if(k===2)return ['너는 [['+b.n+' 기록 담당자|역할]]야. 아래 메모를 [['+b.log+'|기록 이름]] 서식에 정리해 줘.','항목: '+b.items,'- 사실과 추정(~로 보임)을 구분하고, 빈 칸은 [확인 필요].','- 이름은 A·B 가명, 진단명·연락처는 빼. '+b.note,'[메모]','(녹음 전사본이나 손메모)'];
  return ['너는 [['+b.n+' 실적 점검 도우미|역할]]야. 아래 실적표를 점검해 줘.','1) 지표별 표: 지표 | 목표 | 실적 | 달성률(계산식). 지표: '+b.kpi,'2) 실인원·연인원 뒤바뀜, 빈 칸, 합계 오류를 위치·이유와 함께','3) 목표에 못 미칠 지표의 보완 방법 2가지','- 표에 없는 숫자는 만들지 마.','[실적표]','(붙여 넣거나 파일 첨부)']}
@@ -449,14 +463,16 @@ function aiBack(b,k){var sub=b.core.split(/[,·:]/).map(function(x){return x.tri
  if(k===4)return ['(AI 첫 답변 모양)','① 지침·계획서 요약 3줄 — 올해 목표 / 세부사업 / 평가지표','② 계획 대비 실적표','   세부사업 | 계획 | 실적 | 달성률 | 성과와 근거 | 아쉬운 점','   예) '+(sub[0]||b.n)+' | [계획 숫자] | [실적 숫자] | 실적÷계획×100 | (자료 이름·쪽) | …','③ "추가할 자료가 있나요?" — 예: '+b.att.slice(0,2).join(', ')];
  if(k===1)return ['(AI 첫 답변 모양)','"어떤 홍보물을 만들까요? 잘 모르겠다면 목적에 맞게 추천해 드려요."','1. 카드뉴스  2. 포스터  3. 인포그래픽  4. 웹툰','5. 월간 「N월의 기록」  6. 사진 홍보  7. 쉬운 안내문  8. 잘 모르겠어요','→ 기본정보 → 기획안 3가지 → 스타일 선택 → 디자인 시안 A·B 비교 → 고른 시안으로 제작'];
  return ['(AI 첫 답변 모양)','① 지침 요약 3줄 — 사업 목적 / 올해 달라진 기준(쪽) / 평가지표','② 비교표','   세부사업 | 전년도 실적 | 올해 지침과 다른 점 | 추가·보완 | 근거 | 올해 목표','   예) '+(sub[0]||b.n)+' | [전년도 숫자] | … | … | (지침 ○쪽) | [제안값]','   예) '+(sub[1]||'세부사업 2')+' | … | 유지 / 개선 / 신규 / 중단 검토 표시','③ "추가할 자료가 있나요? 없으면 확인 질문을 드릴게요" — 예: '+b.att.slice(0,2).join(', ')]}
-function flowView(){var b=BZ[FB],k=FS;
- var h='<div class="doct">'+[[0,'사업계획서'],[4,'결과보고서']].map(function(x){return '<button type="button" data-fs="'+x[0]+'"'+(k===x[0]?' class="on"':'')+'>'+x[1]+'</button>'}).join('')+'</div>';
- h+='<div class="bzrow">'+BZ.map(function(x,i){return '<button type="button" data-fb="'+i+'"'+(i===FB?' class="on"':'')+'>'+esc(x.n)+'</button>'}).join('')+'</div>';
+var PTY=[['all','통합 홍보물'],['card','카드뉴스'],['blog','블로그·홈페이지 글'],['info','인포그래픽'],['poster','전단지·포스터'],['toon','웹툰·이모티콘'],['click','클릭으로 만들기']],PK='all';
+function bzSel(){return '<label class="bzsel"><b>사업명</b><select id="bzsel">'+BZ.map(function(x,i){return '<option value="'+i+'"'+(i===FB?' selected':'')+'>'+esc(x.n)+'</option>'}).join('')+'</select></label>'}
+function flowView(){var promo=CUR==='promo';var b=BZ[FB],k=promo?1:FS;
+ var h='<div class="doct">'+(promo?PTY.map(function(x){return '<button type="button" data-pk2="'+x[0]+'"'+(PK===x[0]?' class="on"':'')+(x[0]==='click'?' style="border-style:dashed"':'')+'>'+x[1]+'</button>'}).join(''):[[0,'사업계획서'],[4,'결과보고서']].map(function(x){return '<button type="button" data-fs="'+x[0]+'"'+(k===x[0]?' class="on"':'')+'>'+x[1]+'</button>'}).join(''))+bzSel()+'</div>';
+ if(promo&&PK==='click'){var c=find('promo');BVS.promo=BVS.promo||{};if(BVS.promo.saup!==b.n)BVS.promo={saup:b.n,info:BVS.promo.info};return h+buildView(c)}
 
- h+='<div class="fcard"><div class="fhead"><div><h3>'+(k===0?'사업계획서':'결과보고서')+' — '+esc(b.n)+'</h3><p>담당 '+esc(b.team)+' · 근거: '+esc(b.guide)+' <span class="unv">(장·쪽 미확인)</span></p></div></div>';
+ h+='<div class="fcard"><div class="fhead"><div><h3>'+(k===0?'사업계획서':k===4?'결과보고서':PTY.filter(function(x){return x[0]===PK})[0][1]+' 프로젝트')+' — '+esc(b.n)+'</h3><p>담당 '+esc(b.team)+' · 근거: '+esc(b.guide)+' <span class="unv">(장·쪽 미확인)</span></p></div></div>';
  var proj=(k===0||k===1||k===4);
  var fact='<div class="exbox"><b>이 사업 한눈에</b> <small style="color:var(--muted)">(복지관 홈페이지 조직도·사업안내·공지, 2026년 11월 조사)</small><ul style="margin:6px 0 0 18px;padding:0">'+b.fact.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div>';
- if(proj){var dn=k===0?'사업계획서':k===4?'결과보고서':'홍보물';var pn=dn+' - '+b.n;
+ if(proj){var dn=k===0?'사업계획서':k===4?'결과보고서':(PSPEC[PK]||PSPEC.all).nm;var pn=dn+' - '+b.n;
   var srcs=k===0?[['올해 사업계획서 서식 (PDF)','항목·순서를 그대로 맞춰요',1],['사업운영 안내지침·가이드라인 (PDF)','올해 기준과 평가지표를 반영해요',1],['전년도 사업계획서','구성과 내용을 비교해요',1],['전년도 결과보고서','실적·미흡한 점을 보완해요',1],['수요조사·만족도조사 결과','추진배경·타당성의 근거 수치예요',0]]:k===4?[['올해 결과보고서 서식 (PDF)','항목·순서를 그대로 맞춰요',1],['올해 사업계획서','계획 대비 실적을 비교해요',1],['전년도 결과보고서','전년도와 비교해 보완해요',1],['평가기준 (평가지표)','평가에 유리하게 구성해요',1],['실적 집계·만족도조사 결과','성과를 수치로 보여 줘요',0]]:[['사업 안내문·공문·운영계획','기본정보를 미리 채워요',1],['마음에 드는 기존 홍보물 (「N월의 기록」 등)','원하는 분위기를 참고해요',0],['행사 사진 (게시 동의된 것)','사진 홍보에 써요',0],['기관 대표 색상','통일감이 생겨요 (로고는 캔바에서 넣기)',0]];
   if(k!==1)srcs=srcs.concat(b.att.map(function(x){return [x,'이 사업만의 근거 자료예요',0]}));
   var L='<div class="fstep"><h4><span>1</span>프로젝트 만들기</h4><div class="pname">프로젝트 이름: <b>'+esc(pn)+'</b></div><ol><li>ChatGPT 왼쪽 메뉴에서 <b>프로젝트 → 새 프로젝트</b>를 누르세요.</li><li>이름 칸에 위 이름을 넣고 만드세요. 사업마다 하나씩 만들면 섞이지 않아요.</li><li>메모리 선택이 보이면 <b>프로젝트 전용</b>을 고르세요. 다른 대화와 섞이지 않아요.</li></ol></div>';
@@ -506,7 +522,7 @@ var CUR=null;
 function show(id){var c=find(id);if(!c)return;if(c.mode==='hub'){show(c.kids[0]);return}if(c.mode==='pick'){var pool=CARDS.concat(MORE).filter(function(x){return x.mode==='proj'||x.mode==='chat'});c=pool[Math.floor(Math.random()*pool.length)];toast('오늘은 「'+c.t+'」 하나만 해 봐요!')}
  CUR=c.id;var P0=c.par?find(c.par):null;var h='<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>'+(P0?P0.t:c.t)+'</h2>'+(P0?'<div class="subt">'+P0.kids.map(function(k){return '<button type="button" data-go="'+k+'"'+(k===c.id?' class="on"':'')+'>'+find(k).t+'</button>'}).join('')+'</div>':'')+'</div>';
  if(c.mode==='proj'||c.mode==='chat'||(c.mode==='build'&&c.id!=='pdesign'&&c.id!=='promo'&&!TOOLS.filter(function(t){return t.id===c.id}).length)){var cur=ls('gh_사업')||'';h+='<div class="sbar"><b>사업명</b><select id="saup"><option value="">사업을 고르세요</option>'+SAUP.map(function(n){return '<option'+(n===cur?' selected':'')+'>'+esc(n)+'</option>'}).join('')+(cur&&SAUP.indexOf(cur)<0?'<option selected>'+esc(cur)+'</option>':'')+'</select><input id="saup2" placeholder="직접 쓰기 (예: 2026 연말 가족잔치)" value=""><span>사업명을 고르면 아래 지침과 프롬프트에 같이 바뀌어 들어가요.</span></div>'}
- if(c.mode==='guide')h+=guideView();else if(c.mode==='projhub')h+=projView();else if(c.mode==='build')h+=buildView(c);else if(c.mode==='studio'||c.mode==='gbiz')h+=modView(c);else if(c.mode==='priv')h+=privView();else if(c.mode==='apps')h+=appsView();else if(c.mode==='flow')h+=flowView();else if(c.mode==='pds')h+=pdView();else if(c.mode==='frame')h+='<iframe class="jxf" id="jxf" src="/giheung/tools/?v=1124#'+c.fr+'" title="'+c.t+'"></iframe>';else h+=toolView(c);
+ if(c.mode==='guide')h+=guideView();else if(c.mode==='projhub')h+=projView();else if(c.mode==='build')h+=buildView(c);else if(c.mode==='studio'||c.mode==='gbiz')h+=modView(c);else if(c.mode==='priv')h+=privView();else if(c.mode==='apps')h+=appsView();else if(c.mode==='flow'||c.mode==='pproj')h+=flowView();else if(c.mode==='pds')h+=pdView();else if(c.mode==='frame')h+='<iframe class="jxf" id="jxf" src="/giheung/tools/?v=1124#'+c.fr+'" title="'+c.t+'"></iframe>';else h+=toolView(c);
  var v=$('#v-tool');v.innerHTML=h;v.hidden=false;var MH=document.getElementById('mod-host');if(MH){var M=c.mode==='studio'?window.STUDIO:window.GBIZ;if(M){MH.innerHTML=M.view();M.bind()}else MH.textContent='도구를 불러오지 못했어요. 새로고침해 주세요.'}$('#v-home').hidden=true;document.querySelector('[data-home].home').hidden=false;window.scrollTo(0,0);bindTool(c)}
 /* ===== 프롬프트 디자인실 (가족센터와 같은 일상 버전): 고르고 터치하면 오른쪽에 프롬프트 완성 ===== */
 var PTASKS=[
@@ -655,11 +671,12 @@ function bindTool(c){var v=$('#v-tool');
 function rerender(c){var v=$('#v-tool');v.querySelectorAll('.pbox').forEach(function(box){var id=box.querySelector('[data-cp]').dataset.cp;box.querySelector('.pbody').innerHTML=PT[id].map(lineHTML).join('')})}
 
 /* ===== 이벤트 ===== */
-document.addEventListener('change',function(e){if(e.target.id==='saup'){ls('gh_사업',e.target.value);show(CUR)}});
+document.addEventListener('change',function(e){if(e.target.id==='bzsel'){FB=+e.target.value;show(CUR);return}if(e.target.id==='saup'){ls('gh_사업',e.target.value);show(CUR)}});
 document.addEventListener('keydown',function(e){if(e.target.id==='saup2'&&e.key==='Enter'&&e.target.value.trim()){ls('gh_사업',e.target.value.trim());show(CUR)}});
 document.addEventListener('focusout',function(e){if(e.target.id==='saup2'&&e.target.value.trim()){ls('gh_사업',e.target.value.trim());show(CUR)}});
 document.addEventListener('click',function(e){var t=e.target.closest('button,a');if(!t)return;
  if(t.hasAttribute('data-home')){goHome();return}
+ if(t.dataset.pk2){PK=t.dataset.pk2;show('promo');return}
  if(t.dataset.pre){BVS[t.dataset.pre]={saup:t.dataset.saup2};show(t.dataset.pre);return}
  if(t.dataset.fb){FB=+t.dataset.fb;show('flow');return}
  if(t.dataset.fs){FS=+t.dataset.fs;show('flow');return}
