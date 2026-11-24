@@ -110,9 +110,9 @@ button,input{font:inherit}
 .room-info::after{content:"자료실 들어가기 →";margin-top:8px;padding-top:10px;border-top:1px solid #EEF1F4;font-size:14.5px;font-weight:500;color:var(--blue)}
 .lec-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin:52px 0 16px}
 .lec-head h3{font-size:22px;font-weight:700;color:var(--navy);letter-spacing:-.02em;margin-right:4px}
-.lsearch{order:5;flex:1 1 100%;display:flex;align-items:center;gap:12px;min-height:60px;padding:0 20px;border-radius:12px;background:#fff;border:2px solid var(--blue);color:var(--blue)}
+.lsearch{order:5;flex:1 1 100%;min-width:0;max-width:100%;display:flex;align-items:center;gap:12px;min-height:60px;padding:0 20px;border-radius:12px;background:#fff;border:2px solid var(--blue);color:var(--blue)}
 .lsearch svg{width:22px;height:22px;flex:none}
-.lsearch input{flex:1;min-width:0;border:0;outline:none;background:transparent;font-size:18px;color:var(--navy)}
+.lsearch input{flex:1;min-width:0;width:100%;border:0;outline:none;background:transparent;font-size:18px;color:var(--navy)}
 .lsearch input::placeholder{color:#7A8591}
 .ltabs{display:flex;gap:6px;flex-wrap:wrap}
 .ltabs button{font-size:14.5px;font-weight:500;padding:6px 15px;border-radius:999px;border:1px solid #C9D3DD;background:#fff;color:var(--sub);cursor:pointer}
@@ -135,6 +135,47 @@ button,input{font:inherit}
 .lpg{min-width:44px;min-height:44px;padding:0 12px;border-radius:8px;border:1px solid #C9D3DD;background:#fff;color:var(--sub);font-size:15px;cursor:pointer}
 .lpg.on{background:var(--navy);border-color:var(--navy);color:#fff}
 .lpg:disabled{opacity:.4;cursor:default}
+
+/* 2026.11.25 강의 자료실: 출강 장표 표지 배너 2줄 (위 고정 카드 아래)
+   천천히 끊김 없이 흐르고, 마우스·터치하면 잠시 멈춤. 움직임 줄이기 설정을 쓰는 기기는 흐르지 않고 옆으로 넘겨 봄 */
+.lfx4{margin:34px 0 6px}
+.lfx-h{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:6px 20px;margin-bottom:12px}
+.lfx-h h3{font-size:20px;font-weight:700;color:var(--navy);letter-spacing:-.02em;margin-top:4px}
+.lfx-h p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.lfx-rows{position:relative;display:grid;gap:10px;background:#fff;border:1px solid #E1E6EC;border-radius:16px;padding:12px;overflow:hidden}
+/* 양 끝은 흰색으로 부드럽게 사라져 잘린 느낌이 없게 */
+.lfx-rows::before,.lfx-rows::after{content:"";position:absolute;top:0;bottom:0;width:52px;pointer-events:none;z-index:2}
+.lfx-rows::before{left:0;background:linear-gradient(90deg,#fff,rgba(255,255,255,0))}
+.lfx-rows::after{right:0;background:linear-gradient(270deg,#fff,rgba(255,255,255,0))}
+.lfx-row{overflow:hidden;min-width:0}
+.lfx-track{display:flex;gap:10px;width:max-content;will-change:transform;animation:lfxL linear infinite}
+.lfx-track.rev{animation-name:lfxR}
+.lfx-item{flex:0 0 auto;display:flex;flex-direction:column;width:clamp(198px,20.5vw,244px);margin:0;border-radius:14px;overflow:hidden;border:1px solid #E4E9EF;background:#fff;box-shadow:0 1px 2px rgba(16,32,56,.04)}
+.lfx-item img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#F2F5F8}
+.lfx-body{display:flex;flex-direction:column;padding:11px 13px 13px}
+.lfx-tag{display:block;font-size:10.8px;font-weight:600;color:#8794A1;letter-spacing:-.01em;line-height:1.45;word-break:keep-all}
+.lfx-ttl{display:block;font-size:13.8px;font-weight:700;color:#14263C;letter-spacing:-.025em;line-height:1.34;margin:7px 0 0;word-break:keep-all}
+.lfx-desc{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11.4px;font-weight:500;color:#6D7B89;letter-spacing:-.015em;line-height:1.42;margin-top:4px}
+.lfx-item:hover{border-color:#C9D6E2;box-shadow:0 6px 18px rgba(16,32,56,.09)}
+@keyframes lfxL{from{transform:translate3d(0,0,0)}to{transform:translate3d(calc(-1 * var(--d,0px)),0,0)}}
+@keyframes lfxR{from{transform:translate3d(calc(-1 * var(--d,0px)),0,0)}to{transform:translate3d(0,0,0)}}
+.lfx-rows:hover .lfx-track,.lfx-rows.hold .lfx-track{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){
+  .lfx-track{animation:none!important;transform:none!important}
+  .lfx-row{overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px}
+  .lfx-item{scroll-snap-align:start}
+}
+@media (max-width:640px){
+  .lfx4{margin:26px 0 4px}
+  .lfx-h h3{font-size:18px}
+  .lfx-h p{font-size:13.5px}
+  .lfx-rows{padding:9px;gap:8px;border-radius:14px}
+  .lfx-rows::before,.lfx-rows::after{width:26px}
+  .lfx-track{gap:8px}
+  .lfx-item{width:clamp(190px,68vw,258px);border-radius:12px}
+  .lfx-body{padding:10px 11px 12px}
+  .lfx-ttl{font-size:13.2px}
+}
 
 /* ---------- 강의 후기 (블로그) ---------- */
 .rv4{padding:84px 0 0}

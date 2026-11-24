@@ -70,9 +70,15 @@
 @media (max-width:760px){
   .gh-nav a:not(.gh-cta){border-radius:7px;padding:7px 4px}
 }
-/* 좁은 휴대폰: 탭 5개를 3 + 2 로 나눠 글씨를 줄이지 않고 한눈에 */
-@media (max-width:560px){
-  .gh-nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
-  .gh-nav a:not(.gh-cta){grid-column:span 2;text-align:center;padding:9px 4px}
+/* 2026.11.25 모바일 전체(≤760px): 탭 5개를 3 + 2 두 줄로 — 글씨를 줄이거나 옆으로 밀지 않고 한눈에
+   (이전에는 560px 이하에서만 3+2라 561~760px 구간이 한 줄에 눌려 있었음) */
+@media (max-width:760px){
+  .gh-in{padding:12px 16px 10px;gap:8px}
+  .gh-nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;width:100%;padding-bottom:0;overflow:visible;font-size:16px}
+  .gh-nav a:not(.gh-cta){grid-column:span 2;display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px 4px;border-radius:9px;text-align:center;white-space:nowrap;letter-spacing:-.02em}
   .gh-nav a:nth-of-type(4),.gh-nav a:nth-of-type(5){grid-column:span 3}
+}
+@media (max-width:400px){
+  .gh-nav{gap:5px;font-size:15.5px}
+  .gh-nav a:not(.gh-cta){min-height:42px;padding:7px 3px}
 }

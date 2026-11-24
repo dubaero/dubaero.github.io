@@ -177,29 +177,14 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     var info=el('div','room-info');info.appendChild(el('span','room-date',L.date.replace(/\s*·\s*/g,'·')));info.appendChild(el('span','room-org',L.org));info.appendChild(el('span','room-edu',L.edu));
     a.appendChild(info);
     return a;}
-  /* 2026.11.20 강의 자료실 배너: 넓은 화면은 6개씩 3줄 — 첫 줄 고정, 아래 두 줄은 천천히 돌아감 */
+  /* 2026.11.20 강의 자료실 배너: 넓은 화면은 6개씩 — 첫 줄은 고정, 아래는 표지 배너 2줄(#lec-fx)이 흐름 */
   var rollT=null,rollWide=null;
   function renderCards(){if(!cards)return;cards.innerHTML='';if(rollT){clearInterval(rollT);rollT=null;}
     var all=LECTURES.filter(function(L){return L.card;}).concat(LECTURES.filter(function(L){return L.st!=='예정'&&!L.card;}));
     rollWide=window.innerWidth>1100;
     if(!rollWide){all.slice(0,24).forEach(function(L){cards.appendChild(mkRoom(L));});return;}
+    /* 2026.11.25: 아래 두 줄은 사진 표지가 흐르는 #lec-fx가 대신함 */
     all.slice(0,6).forEach(function(L){cards.appendChild(mkRoom(L));});
-    var rest=all.slice(6);if(!rest.length)return;
-    var half=Math.ceil(rest.length/2),rowsL=[rest.slice(0,half),rest.slice(half)];if(!rowsL[1].length)rowsL[1]=rest.slice();
-    var cs=getComputedStyle(cards),gap=parseFloat(cs.columnGap)||0,rgap=parseFloat(cs.rowGap)||0;
-    var roll=el('div','room-roll');roll.style.cssText='grid-column:1/-1;overflow:hidden;min-width:0;display:flex;flex-direction:column;row-gap:'+rgap+'px';cards.appendChild(roll);
-    var colW=(roll.clientWidth-gap*5)/6,rowH=cards.children[0]?cards.children[0].offsetHeight:0;
-    /* 2026.11.20 두 줄이 서로 반대로(위 줄 ←, 아래 줄 →) 끊김 없이 천천히 흐르기 — 한 칸에 약 6초, 마우스를 올리면 잠시 멈춤 */
-    var kf=document.getElementById('room-roll-kf');if(!kf){kf=document.createElement('style');kf.id='room-roll-kf';document.head.appendChild(kf);}
-    var css='.room-roll:hover .room-track{animation-play-state:paused}.room-track .room{height:100%;overflow:hidden}.room-track .room-org{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}';
-    rowsL.forEach(function(list,ri){
-      while(list.length<6)list=list.concat(list);
-      var track=el('div','room-track');track.style.cssText='display:grid;grid-auto-flow:column;grid-template-rows:'+(rowH?rowH+'px':'auto')+';grid-auto-columns:'+colW+'px;column-gap:'+gap+'px;width:max-content';
-      list.concat(list).forEach(function(L){track.appendChild(mkRoom(L));});roll.appendChild(track);
-      var dist=(colW+gap)*list.length,dur=list.length*6,name='roomRoll'+ri;
-      css+='@keyframes '+name+'{from{transform:translateX('+(ri?-dist:0)+'px)}to{transform:translateX('+(ri?0:-dist)+'px)}}';
-      track.style.animation=name+' '+dur+'s linear infinite';track.style.willChange='transform';});
-    kf.textContent=css;
   }
   renderCards();
   var rollRT=null;window.addEventListener('resize',function(){clearTimeout(rollRT);rollRT=setTimeout(function(){if(rollWide||window.innerWidth>1100)renderCards();},250);});
@@ -319,3 +304,42 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     document.querySelectorAll(SEL).forEach(function(r){mo.observe(r,{childList:true,subtree:true});});}
 })();
 ;(function(){var n=document.querySelector('.mnav'),c=n&&n.querySelector('[aria-current]');if(c)n.scrollLeft=c.offsetLeft-16;})();
+;(function(){
+  /* 2026.11.25 강의 자료실 '출강 장표 표지' 2줄 배너 — 한 칸에 약 8초, 위 줄은 왼쪽·아래 줄은 오른쪽으로 천천히.
+     마우스를 올리거나 손가락으로 잠시 붙잡으면 멈추고, 움직임 줄이기 설정이면 흐르지 않고 옆으로 넘겨 봅니다. */
+  var host=document.getElementById('lec-fx');if(!host)return;
+  var rows=[].slice.call(host.querySelectorAll('.lfx-row'));
+  var box=host.querySelector('.lfx-rows');
+  var reduce=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  function clean(track){[].slice.call(track.querySelectorAll('[data-clone]')).forEach(function(n){n.remove();});track.removeAttribute('data-built');}
+  function build(){
+    rows.forEach(function(row,i){
+      var track=row.querySelector('.lfx-track');if(!track)return;
+      clean(track);
+      if(reduce.matches)return;
+      var setW=track.scrollWidth;if(!setW)return;
+      var need=Math.max(2,Math.ceil((row.clientWidth+setW)/setW)+1);
+      var base=[].slice.call(track.children);
+      for(var k=1;k<need;k++){
+        base.forEach(function(n){
+          var c=n.cloneNode(true);c.setAttribute('data-clone','1');c.setAttribute('aria-hidden','true');
+          [].slice.call(c.querySelectorAll('img')).forEach(function(im){im.setAttribute('loading','lazy');im.setAttribute('alt','');});
+          track.appendChild(c);
+        });
+      }
+      track.style.setProperty('--d',setW+'px');
+      track.style.animationDuration=Math.max(20,Math.round(setW/32))+'s';
+      track.setAttribute('data-built','1');
+    });
+  }
+  build();
+  var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(build,300);});
+  var ht;
+  function pause(){if(box)box.classList.add('hold');clearTimeout(ht);}
+  function resume(ms){clearTimeout(ht);ht=setTimeout(function(){if(box)box.classList.remove('hold');},ms||0);}
+  host.addEventListener('pointerenter',function(){pause();});
+  host.addEventListener('pointerleave',function(){resume(400);});
+  host.addEventListener('touchstart',function(){pause();resume(2600);},{passive:true});
+  host.addEventListener('focusin',pause);
+  host.addEventListener('focusout',function(){resume(400);});
+})();

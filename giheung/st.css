@@ -77,3 +77,26 @@
 #v-studio #st-left .st-q.q1{color:#1F6F5A}
 #v-studio #st-left .st-q.q2{color:#B4561C}
 #v-studio #st-left .st-q.q3{color:#6A48A8}
+
+/* ===== 2026.11.25 개편: 흐름 6단계 · 자료 체크 · 서식 항목 카드 ===== */
+.fsteps.s6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.fsteps.s6 button b{font-weight:900;font-size:.98rem}
+.fband{background:#fff;border:2px solid var(--line);border-radius:18px;padding:16px;margin-bottom:22px}
+.fband .chip{font-weight:700}
+.fband .chip:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.frow12{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.frow12 .fc{font:inherit;background:var(--bg);border:1.5px solid var(--line);border-radius:20px;padding:6px 14px;font-weight:700;font-size:.92rem;cursor:pointer}
+.frow12 .fc.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.srcb{font-size:.9rem;color:var(--point);font-weight:700;margin:0 0 10px;line-height:1.5}
+.srcc{display:flex;gap:9px;align-items:flex-start;cursor:pointer}
+.srcc input{width:18px;height:18px;margin-top:3px;accent-color:#12482C;flex:none}
+.srcl li.off{opacity:.5}
+.srcl li.off b{text-decoration:line-through}
+.srcbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 8px}
+.srcbar button{font:inherit;font-size:.85rem;font-weight:700;border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:4px 10px;cursor:pointer}
+.srcbar button:hover{border-color:var(--ink)}
+.srcbar span{font-size:.85rem;color:var(--muted);margin-left:auto;font-weight:700}
+@media (max-width:980px){.fsteps.s6{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.fsteps.s6{grid-template-columns:repeat(2,minmax(0,1fr))}.fband{padding:12px}}
+.fband .ph{flex-wrap:wrap}
+.fband .ph h2{white-space:nowrap}
