@@ -130,7 +130,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   /* 강의 추가: 맨 위에 한 줄 추가 (날짜, 상태, 기관, 교육, 강의 제목, 강의실 주소) */
   var LECTURES=[
     {keep:true,card:true,date:'2026.12.12 신마산',st:'예정',org:'제일요양보호사교육원',edu:'AI 활용 업무역량강화교육 업무비서 웹앱 실습',link:''},
-    {keep:true,card:true,date:'2026.12.02',st:'예정',org:'용인시기흥장애인복지관',edu:'반복 업무의 빠른 길 안내, 친절한 AI 비서',link:''},
+    {img:'/img/lec-giheung.jpg',keep:true,card:true,date:'2026.12.02',st:'예정',org:'용인시기흥장애인복지관',edu:'반복 업무의 빠른 길 안내, 친절한 AI 비서',link:'/giheung/',code:'f037893010a61f811555d791a220f2e0aa2b46125428c168b10d14b6abd27fca'},
     {date:'2026.11.23 ~ 12.03',st:'예정',org:'마산여성인력개발센터',edu:'구직·경력단절 여성 NCS AI 기초 역량 강화 과정',link:''},
     {img:'/img/lec-masan-1120.jpg',keep:true,date:'2026.11.20',st:'완료',org:'마산여성새로일하기센터',edu:'취업팡팡 집단상담 · AI 맞춤형 입사지원서 완성',link:'/masan/',code:'43cce5d2f89e9987210baf8b16ac6b75916c5d081c442d51637f7009cea2e8b5',card:true},
     {img:'/img/lec-jeonbuk-family.jpg',date:'2026.11.19',st:'완료',org:'전북특별자치도 가족센터',edu:'시군가족센터 종사자 AI 실무 워크숍',link:'/family/',code:'27782676119a0706a707ff64a30386cdf9bdea6ef1033726fbd8b36a5a55caff',card:true},
