@@ -140,8 +140,8 @@ u.v{text-decoration:none;background:#FFF1C9;border-radius:4px;padding:0 3px;font
 @media(max-width:980px){.ph3{grid-template-columns:1fr 1fr}}@media(max-width:560px){.ph3{grid-template-columns:1fr}.tiles.t3{grid-template-columns:1fr 1fr}}
 .sec{margin-bottom:14px}.sh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}.sh b{font-size:1.2rem;color:var(--ink);font-weight:900}.sh span{color:var(--muted);font-size:.93rem}
 .subt{display:flex;gap:6px;background:var(--pale);padding:5px;border-radius:14px}.subt button{font:inherit;font-weight:800;font-size:1.05rem;padding:8px 18px;border-radius:10px;border:0;background:transparent;color:var(--ink);cursor:pointer}.subt button.on{background:var(--ink);color:#fff}.projrow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.pj{background:#fff;border:2.5px solid var(--ink);border-radius:18px;padding:16px 18px;text-align:left;display:flex;gap:14px;align-items:center}.pj:hover{background:var(--pale)}.pj .ic{width:54px;height:54px;border-radius:16px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;flex:none}.pj b{font-size:1.2rem;color:var(--ink);display:block}.pj span{font-size:.9rem;color:var(--muted)}
-.main{grid-template-columns:repeat(10,1fr) minmax(0,1.3fr)!important}
-@media(max-width:980px){.projrow{grid-template-columns:1fr}.main{grid-template-columns:repeat(3,1fr)}.m.red{grid-column:span 3;flex-direction:row;justify-content:center}.dash{grid-template-columns:1fr}.split{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.hero-art{aspect-ratio:892/726}}
+.main{grid-template-columns:repeat(9,minmax(0,1fr))!important}.m b{white-space:nowrap;font-size:1.02rem}.m{padding:14px 4px 12px}
+@media(max-width:980px){.main{grid-template-columns:repeat(3,1fr)!important}.m b{white-space:normal}.projrow{grid-template-columns:1fr}.main{grid-template-columns:repeat(3,1fr)}.m.red{grid-column:span 3;flex-direction:row;justify-content:center}.dash{grid-template-columns:1fr}.split{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.hero-art{aspect-ratio:892/726}}
 @media(max-width:560px){:root{--fs:16px}h1{font-size:1.45rem}.hero{margin-top:14px}.col{overflow-x:auto}.gt{min-width:520px}.vars input{width:100%}.vars label{width:100%}.row{grid-template-columns:1fr}.row .nt{padding-bottom:4px}.steps4{grid-template-columns:repeat(2,1fr)}.tiles{grid-template-columns:1fr}.badge{display:none}}
 </style>
 </head>
@@ -164,14 +164,6 @@ u.v{text-decoration:none;background:#FFF1C9;border-radius:4px;padding:0 3px;font
       <label class="search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="찾을 업무를 입력하세요 (예: 가족잔치, 결과보고, 후원 감사)"></label>
     </div>
     <div class="hero-art"><img src="/img/giheung/hero-sprout.webp" alt="복지관 직원과 장애인 이용자들이 함께 웃으며 새싹 화분을 심는 그림"></div>
-  </section>
-
-  <section class="vars" aria-label="내 사업 넣기">
-    <b>내 사업 넣기</b>
-    <label>사업 <input id="v-biz" placeholder="예: 2026 연말 가족잔치"></label>
-    <label>대상 <input id="v-who" placeholder="예: 이용자 가족·지역주민"></label>
-    <label>기간 <input id="v-term" placeholder="예: 2026년 12월"></label>
-    <small>여기 넣으면 모든 프롬프트에 자동으로 들어가요 (이 기기에만 저장)</small>
   </section>
 
   <section class="sec"><div class="sh"><b>핵심 업무</b><span>보고서는 사업별 프로젝트로 · 홍보물·프로그램은 클릭해서 고르기</span></div><div class="projrow" id="projrow"></div></section>
@@ -358,7 +350,7 @@ function home(){$('#projrow').innerHTML=TABS.map(function(c){return '<button typ
  $('#bizchips').innerHTML=BIZ.map(function(b,i){return '<button type="button" class="chip" data-biz="'+i+'">'+esc(b[0])+'</button>'}).join('');
  $('#tiles').innerHTML=TOOLS.map(function(c){return '<button type="button" class="tile" data-go="'+c.id+'">'+svg(c.ic)+'<span>'+c.t+'</span></button>'}).join('');
  $('#tiles2').innerHTML=MORE.map(function(c){return '<button type="button" class="tile" data-go="'+c.id+'">'+svg(c.ic)+c.t+'</button>'}).join('');
- ['사업','대상','기간'].forEach(function(k){var el=document.getElementById(VK[k]);var x=ls('gh_'+k);if(x)el.value=x;el.oninput=function(){ls('gh_'+k,el.value)}})}
+ }
 var CUR=null;
 function show(id){var c=find(id);if(!c)return;if(c.mode==='hub'){show(c.kids[0]);return}if(c.mode==='pick'){var pool=CARDS.concat(MORE).filter(function(x){return x.mode==='proj'||x.mode==='chat'});c=pool[Math.floor(Math.random()*pool.length)];toast('오늘은 「'+c.t+'」 하나만 해 봐요!')}
  CUR=c.id;var P0=c.par?find(c.par):null;var h='<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>'+(P0?P0.t:c.t)+'</h2>'+(P0?'<div class="subt">'+P0.kids.map(function(k){return '<button type="button" data-go="'+k+'"'+(k===c.id?' class="on"':'')+'>'+find(k).t+'</button>'}).join('')+'</div>':'')+'<span class="when">'+esc(c.when||'')+'</span></div>';
