@@ -199,6 +199,10 @@ u.v{text-decoration:none;background:#FFF1C9;border-radius:4px;padding:0 3px;font
 .aiback{margin-top:8px;border:1.5px dashed var(--line);border-radius:10px;padding:10px 12px;background:#FCFAF5}.aiback b{color:var(--ink)}.aiback pre{white-space:pre-wrap;font:inherit;font-size:.92rem;margin:6px 0 0;line-height:1.6}
 .fcard>.split>.col{background:transparent;border:0;padding:0}
 .bex{margin:4px 2px 0;font-size:.88rem;color:#8a6a3a;background:#FFF8EC;border:1px dashed #E8CFA6;border-radius:8px;padding:5px 9px;line-height:1.5}
+.pdgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.pdgrid button{font:inherit;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:8px 10px;cursor:pointer}.pdgrid button b{display:block;font-size:.98rem;color:var(--ink)}.pdgrid button span{font-size:.8rem;color:var(--muted)}.pdgrid button.on{background:var(--ink);border-color:var(--ink)}.pdgrid button.on b,.pdgrid button.on span{color:#fff}
+.pdc .pdx{width:150px!important;padding:5px 10px!important;border-style:dashed!important;border-radius:18px!important;font-size:.88rem!important}.pdc.warm button{background:#FFF8EC;border-color:#E8CFA6}.pdc.warm button.on{background:#C96A2B;border-color:#C96A2B;color:#fff}
+@media(max-width:560px){.pdgrid{grid-template-columns:1fr 1fr}}
+.jxf{width:100%;border:0;display:block;border-radius:14px;background:#F9F8F7;min-height:640px;height:calc(100vh - 150px)}
 </style>
 </head>
 <body>
@@ -391,31 +395,12 @@ var MORE=[
 ];
 /* ===== AI 도구함 (가족센터 도구를 복지관 종사자용으로) ===== */
 var TOOLS=[
-{id:'pdesign',ic:'pen',t:'프롬프트 디자인실',when:'칸만 고르면 지시문이 완성돼요 (지시 6하원칙)',mode:'build',
- f:[{k:'role',lab:'누가 (역할)',ch:['복지관 홍보 담당자','사업계획서 평가위원','10년 차 사회복지사','공문 담당자','특수교육 강사','보호자 상담 담당']},
-    {k:'task',lab:'무엇을',ch:['행사 안내문','사업계획서 초안','회의록 정리','후원 감사 문자','프로그램 아이디어 3개','보도자료']},
-    {k:'who',lab:'누구에게',ch:['이용자','보호자','지역주민','팀장님','후원자','유치원 아이들']},
-    {k:'form',lab:'어떻게 (형식·분량)',ch:['5줄 이내','표로','개조식 공문체','문자 90자','A4 한 장','3가지 안']},
-    {k:'tone',lab:'말투',ch:['따뜻하게','쉽고 짧게','정중하게','밝고 신나게']},
-    {k:'memo',lab:'내용 메모 (콜론 뒤에 쓰세요)',ta:1,rows:6,val:'무엇: \n언제: \n어디서: \n누구: \n신청·문의: ',ph:'예) 무엇: 연말 가족잔치 / 언제: 12월 19일(금) 14시 / 어디서: 4층 강당 / 누구: 이용자 가족 80명 / 신청·문의: 담당자에게'}],
- tpl:function(v){return ['너는 [['+(v.role||'[역할]')+'|누가 — 역할을 주면 전문가처럼 답해요]]야.','[['+(v.who||'[대상]')+'|누구에게]]에게 보낼 [['+(v.task||'[결과물]')+'|무엇을]]을 써 줘.','- 형식: '+(v.form||'[형식·분량]')+' / 말투: '+(v.tone||'[말투]'),'- 내용: '+(v.memo||'[메모]'),'- 메모에 없는 숫자·날짜는 [확인 필요]로 표시해.']}},
+{id:'pdesign',ic:'pen',t:'프롬프트 디자인실',when:'고르고 터치하면 프롬프트 완성',mode:'pds'},
 {id:'studio',ic:'camera',t:'나만의 사진관',when:'증명사진 · 10년 후 나의 모습',mode:'studio'},
 {id:'gbiz',ic:'mic',t:'제미나이 비서',when:'말하고 비추며 묻는 라이브',mode:'gbiz'},
-{id:'rest',ic:'heart',t:'마음 쉼터',when:'일하다 지치고 힘들 때 — 나만의 마음챙김',mode:'build',
- f:[{k:'feel',lab:'지금 마음',ch:['지쳤어요','속상해요','불안해요','억울해요','허탈해요','그냥 쉬고 싶어요']},
-    {k:'what',lab:'있었던 일 (말해도 돼요)',ta:1,mic:1,ph:'예) 보호자 민원 전화를 한 시간 받고 나니 아무것도 못 하겠어요'}],
- tpl:function(v){return ['너는 [[사회복지 현장을 잘 아는 따뜻한 동료|역할]]야.','나는 지금 '+(v.feel||'[마음]')+'. 오늘 있었던 일: '+(v.what||'[있었던 일]'),'- 훈계나 해결책 말고 공감 먼저, 나만을 위한 위로를 5줄로.','- 마지막 줄은 오늘 밤 해 볼 작은 쉼 한 가지.']},
- warn:'정말 힘들 때는 혼자 버티지 말고 가까운 사람이나 전문 상담에 도움을 요청하세요.'},
-{id:'song',ic:'note',t:'AI 작곡실',when:'우리 팀 · 이용자 응원 노래 만들기',mode:'build',open:'gem',
- f:[{k:'for',lab:'누구를 위한 노래',ch:['우리 팀','주간활동 친구들','이용자 가족','자원봉사자','연말 가족잔치','나 자신']},
-    {k:'genre',lab:'장르',ch:['신나는 동요','발라드','트로트','댄스 팝','어쿠스틱','행진곡']},
-    {k:'story',lab:'넣고 싶은 이야기',ta:1,mic:1,ph:'예) 1년 동안 함께 웃고 버틴 우리 팀, 내년에도 잘 부탁해'}],
- tpl:function(v){return ['[['+(v.for||'[누구]')+'|누구를 위한]]를 위한 [['+(v.genre||'[장르]')+'|장르]] 노래를 만들어 줘.','이야기: '+(v.story||'[넣고 싶은 이야기]'),'- 1절과 후렴, 따라 부르기 쉬운 말로. 장애를 동정하는 표현은 쓰지 마.','- 노래 분위기·악기 설명과, 앨범 커버 그림 설명도 함께.']},
- warn:'노래 만들기는 제미나이 앱에서 해 보세요 (기능 이름과 지원 여부는 화면에서 확인).'},
-{id:'vent',ic:'fire',t:'빡침 번역기',when:'같이 빡치고, 숨 고르고, 순화까지',mode:'build',
- f:[{k:'who',lab:'누구 때문에',ch:['민원 전화','윗선 지시','동료','보호자','서류·행정','그냥 오늘 전부']},
-    {k:'what',lab:'털어놓기 (말로 해도 돼요)',ta:1,mic:1,ph:'예) 마감 하루 전에 서식이 또 바뀌었대요'}],
- tpl:function(v){return ['나 지금 [['+(v.who||'[누구]')+'|누구 때문에]] 너무 빡쳐. '+(v.what||'[있었던 일]'),'① 먼저 내 편이 되어 같이 빡쳐 줘 — 웃기게, 센 말은 "○○"로 가려서.','② 복식호흡 3번 하자고 짧게 안내해 줘.','③ 상대에게 실제로 보낼 수 있는 순화된 문장 2가지 (정중한 버전 / 단호한 버전).']}}
+{id:'rest',ic:'heart',t:'마음 쉼터',when:'일하다 지치고 힘들 때 — 내 마음 지킴이 · 응원 엽서',mode:'frame',fr:'heart'},
+{id:'song',ic:'note',t:'AI 작곡실',when:'우리 팀 · 이용자 · 나를 위한 노래 만들기',mode:'frame',fr:'song'},
+{id:'vent',ic:'fire',t:'빡침 번역기',when:'같이 빡치고, 숨 고르고, 순화까지',mode:'frame',fr:'vent'}
 ];
 var BIZ=[['스마트재활센터','easy'],['하이드림솔루션 사례회의','meet'],['장애인식개선 교육','aware'],['기흥행복한놀이터','prog'],['기흥행복한캠퍼스','prog'],['주간이용센터 PCISP','daily'],['평생교육 프로그램','prog'],['직업지원·일자리 모집','recruit'],['주간활동 일지','daily'],['후원·자원봉사','donor'],['재가복지·문화기행','easy'],['공문·예산 공고','doc'],['월간 「N월의 기록」','promo'],['식단·차량 안내','easy'],['활동지원사 모집','recruit'],['2026 연말 가족잔치','plan'],['21st GH DAY 결과보고','report']];
 /* ===== 사업별 진행 (가족센터 '업무 프로젝트' 방식) — 사업을 누르면 단계별 프롬프트가 자동 세팅 ===== */
@@ -507,8 +492,95 @@ var CUR=null;
 function show(id){var c=find(id);if(!c)return;if(c.mode==='hub'){show(c.kids[0]);return}if(c.mode==='pick'){var pool=CARDS.concat(MORE).filter(function(x){return x.mode==='proj'||x.mode==='chat'});c=pool[Math.floor(Math.random()*pool.length)];toast('오늘은 「'+c.t+'」 하나만 해 봐요!')}
  CUR=c.id;var P0=c.par?find(c.par):null;var h='<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>'+(P0?P0.t:c.t)+'</h2>'+(P0?'<div class="subt">'+P0.kids.map(function(k){return '<button type="button" data-go="'+k+'"'+(k===c.id?' class="on"':'')+'>'+find(k).t+'</button>'}).join('')+'</div>':'')+'</div>';
  if(c.mode==='proj'||c.mode==='chat'||(c.mode==='build'&&c.id!=='pdesign'&&!TOOLS.filter(function(t){return t.id===c.id}).length)){var cur=ls('gh_사업')||'';h+='<div class="sbar"><b>사업명</b><select id="saup"><option value="">사업을 고르세요</option>'+SAUP.map(function(n){return '<option'+(n===cur?' selected':'')+'>'+esc(n)+'</option>'}).join('')+(cur&&SAUP.indexOf(cur)<0?'<option selected>'+esc(cur)+'</option>':'')+'</select><input id="saup2" placeholder="직접 쓰기 (예: 2026 연말 가족잔치)" value=""><span>사업명을 고르면 아래 지침과 프롬프트에 같이 바뀌어 들어가요.</span></div>'}
- if(c.mode==='guide')h+=guideView();else if(c.mode==='projhub')h+=projView();else if(c.mode==='build')h+=buildView(c);else if(c.mode==='studio'||c.mode==='gbiz')h+=modView(c);else if(c.mode==='priv')h+=privView();else if(c.mode==='apps')h+=appsView();else if(c.mode==='flow')h+=flowView();else h+=toolView(c);
+ if(c.mode==='guide')h+=guideView();else if(c.mode==='projhub')h+=projView();else if(c.mode==='build')h+=buildView(c);else if(c.mode==='studio'||c.mode==='gbiz')h+=modView(c);else if(c.mode==='priv')h+=privView();else if(c.mode==='apps')h+=appsView();else if(c.mode==='flow')h+=flowView();else if(c.mode==='pds')h+=pdView();else if(c.mode==='frame')h+='<iframe class="jxf" id="jxf" src="/giheung/tools/?v=1124#'+c.fr+'" title="'+c.t+'"></iframe>';else h+=toolView(c);
  var v=$('#v-tool');v.innerHTML=h;v.hidden=false;var MH=document.getElementById('mod-host');if(MH){var M=c.mode==='studio'?window.STUDIO:window.GBIZ;if(M){MH.innerHTML=M.view();M.bind()}else MH.textContent='도구를 불러오지 못했어요. 새로고침해 주세요.'}$('#v-home').hidden=true;document.querySelector('[data-home].home').hidden=false;window.scrollTo(0,0);bindTool(c)}
+/* ===== 프롬프트 디자인실 (가족센터와 같은 일상 버전): 고르고 터치하면 오른쪽에 프롬프트 완성 ===== */
+var PTASKS=[
+ {t:'냉장고 파먹기',s:'재료 터치 → 메뉴·레시피',role:'집밥 요리 선생님',
+  g:[{l:'무엇을 만들까요?',k:'a',o:['식사','간식','식사·간식 모두']},
+     {l:'냉장고에 있는 재료 (여러 개)',k:'b',m:1,o:['계란','두부','김치','양파','감자','대파','돼지고기','닭고기','참치캔','햄·소시지','애호박','버섯','당근','콩나물','어묵','밥']},
+     {l:'기본 양념 (소금·간장·설탕·기름 등)',k:'c',o:['있어요','없어요']}],
+  task:'고른 재료로 만들 수 있는 메뉴를 추천하고 레시피를 알려 줘. 없는 재료는 되도록 쓰지 말아 줘.',
+  fmt:'① 메뉴 5가지 표(메뉴 | 쓰는 재료 | 더 필요한 재료 | 걸리는 시간) ② 가장 추천하는 메뉴 레시피(순서대로) ③ 남은 재료 보관 팁',ph:'예) 아이가 매운 걸 못 먹어요 / 20분 안에 끝내고 싶어요'},
+ {t:'여행 계획 짜기',s:'일정·동선·맛집 한 번에',role:'동선을 꼼꼼하게 짜 주는 여행 플래너',
+  g:[{l:'어디로 가나요?',k:'a',o:['가까운 근교','부산·경남','제주','서울·수도권','강원','전라도','일본','동남아','아직 못 정했어요']},
+     {l:'기간',k:'b',o:['당일치기','1박 2일','2박 3일','3박 이상']},
+     {l:'누구와',k:'c',o:['혼자','아이와 가족','부부·연인','친구','부모님 모시고']},
+     {l:'여행 스타일 (여러 개)',k:'d',m:1,o:['맛집','자연·산책','카페','역사·문화','아이 체험','휴식·온천','사진 명소','가성비']}],
+  task:'고른 조건에 맞는 여행 일정을 시간표로 짜 줘. 이동 동선이 꼬이지 않게, 쉬는 시간도 넣어 줘.',
+  fmt:'① 날짜별 시간표 표(시간 | 장소 | 할 일 | 이동 방법) ② 꼭 먹어 볼 음식 3가지 ③ 예상 경비 범위 ④ 챙길 준비물 체크리스트',ph:'예) 차 없이 대중교통으로 / 예산은 1인 20만 원 / 무릎이 안 좋아 많이 못 걸어요'},
+ {t:'당뇨 식단 짜기',s:'혈당 걱정 덜어 주는 집밥',role:'당뇨 식단을 쉽게 알려 주는 영양 상담 선생님',
+  g:[{l:'기간',k:'a',o:['하루','3일','일주일']},
+     {l:'끼니',k:'b',o:['아침·점심·저녁','세 끼 + 간식','저녁만']},
+     {l:'좋아하는 것 (여러 개)',k:'c',m:1,o:['한식','잡곡밥','생선','두부·콩','나물·채소','닭고기','국·찌개','면 요리']},
+     {l:'더 원하는 것 (여러 개)',k:'d',m:1,o:['싱겁게','장보기 목록','외식할 때 팁','간식 대신 먹을 것','혈당 덜 오르는 먹는 순서']}],
+  task:'고른 조건으로 집에서 쉽게 만들 수 있는 당뇨 관리 식단을 짜 줘. 재료는 동네 마트에서 살 수 있는 것으로.',
+  fmt:'① 식단표(날짜 | 아침 | 점심 | 저녁 | 간식) ② 피하면 좋은 음식·바꿔 먹을 음식 표 ③ 고른 추가 항목',ph:'예) 60대 어머니 식단이에요 / 밀가루를 좋아하세요',safe:'- 이 식단은 일반 정보야. 약을 먹거나 진료 중이면 담당 의사·영양사의 안내가 먼저라고 마지막에 꼭 알려 줘.'},
+ {t:'다이어트 식단',s:'무리 없이 가볍게',role:'굶지 않고 꾸준히 하는 다이어트를 돕는 식단 코치',
+  g:[{l:'목표',k:'a',o:['한 달 가볍게 2~3kg','붓기 빼고 가볍게','건강하게 습관 만들기']},
+     {l:'기간',k:'b',o:['3일','일주일','한 달 계획']},
+     {l:'식사 스타일 (여러 개)',k:'c',m:1,o:['한식 위주','도시락 싸기','편의점 활용','배달 줄이기','간식 바꾸기','가족 밥상과 같이']},
+     {l:'운동',k:'d',o:['운동 안 해요','걷기만','집에서 홈트','헬스장 다녀요']}],
+  task:'고른 조건에 맞춰 배고프지 않게 지킬 수 있는 다이어트 식단과 하루 습관을 짜 줘. 극단적인 굶기나 한 가지 음식만 먹는 방법은 빼 줘.',
+  fmt:'① 식단표(날짜 | 아침 | 점심 | 저녁 | 간식) ② 장보기 목록 ③ 하루 습관 체크리스트 5개',ph:'예) 저녁 약속이 잦아요 / 단 걸 좋아해요'},
+ {t:'자격증 준비',s:'무엇을 언제 어떻게',role:'자격증 시험 준비를 처음부터 끝까지 안내하는 학습 코치',
+  g:[{l:'따고 싶은 자격증',k:'a',o:['컴퓨터활용능력 2급','사회복지사 1급','요양보호사','직업상담사 2급','평생교육사','바리스타','전산회계','한식조리기능사','GTQ 포토샵','아직 고민 중']},
+     {l:'하루 공부 시간',k:'b',o:['30분','1시간','2시간 이상']},
+     {l:'목표 기간',k:'c',o:['1개월','3개월','6개월']},
+     {l:'알고 싶은 것 (여러 개)',k:'d',m:1,o:['시험 일정·비용','자격 조건','공부 계획표','무료 강의·교재','합격 공부법','따고 나서 할 수 있는 일']}],
+  task:'고른 자격증을 준비하려면 무엇이 필요한지 쉽게 정리하고, 내 공부 시간에 맞는 계획표를 만들어 줘.',
+  fmt:'① 자격증 한눈에 보기 표(하는 일 | 자격 조건 | 시험 과목 | 비용 | 시험 시기) ② 주별 공부 계획표 ③ 고른 항목 정리 ④ 오늘 바로 할 일 1가지',ph:'예) 퇴근하고 밤에만 공부해요 / 컴퓨터는 잘 못해요',safe:'- 시험 일정·비용·자격 조건은 바뀔 수 있으니 공식 사이트(예: 큐넷)에서 확인하라고 [확인 필요]로 표시해.'},
+ {t:'장보기·가계부',s:'일주일 예산 안에서',role:'알뜰하게 살림을 꾸리는 생활 경제 코치',
+  g:[{l:'식구 수',k:'a',o:['1인','2인','3~4인','5인 이상']},
+     {l:'일주일 장보기 예산',k:'b',o:['5만 원','10만 원','15만 원','20만 원']},
+     {l:'원하는 것 (여러 개)',k:'c',m:1,o:['일주일 메뉴','장보기 목록','남는 재료 활용','가계부 표','고정비 줄이기','아이 간식']}],
+  task:'고른 예산 안에서 일주일을 버틸 수 있는 살림 계획을 세워 줘.',
+  fmt:'① 일주일 메뉴표 ② 마트별로 나눈 장보기 목록과 예상 금액 ③ 고른 항목 정리',ph:'예) 아이 둘 / 고기는 꼭 넣고 싶어요'},
+ {t:'건강 걷기·운동',s:'집에서 가볍게 시작',role:'운동 초보도 따라 할 수 있게 알려 주는 생활 체육 코치',
+  g:[{l:'장소',k:'a',o:['집','동네 공원','헬스장','계단·아파트']},
+     {l:'하루 시간',k:'b',o:['10분','20분','40분 이상']},
+     {l:'신경 쓰이는 곳 (여러 개)',k:'c',m:1,o:['무릎','허리','어깨·목','체력이 약해요','특별히 없어요']},
+     {l:'목표',k:'d',o:['몸 가볍게','체력 기르기','뱃살','자세 바르게']}],
+  task:'고른 조건으로 4주 동안 따라 할 수 있는 운동 계획을 짜 줘. 동작마다 쉽게 설명해 줘.',
+  fmt:'① 주별 계획표 ② 오늘 할 동작 5개(동작 | 횟수 | 주의할 점) ③ 꾸준히 하는 요령 3가지',ph:'예) 하루 종일 앉아서 일해요 / 운동을 거의 안 해 봤어요',safe:'- 아프거나 진료 중인 곳이 있으면 의사와 먼저 상의하라고 마지막에 알려 줘.'},
+ {t:'아이와 주말 놀거리',s:'집·동네에서 신나게',role:'아이와 함께할 놀이를 척척 알려 주는 놀이 선생님',
+  g:[{l:'아이 나이',k:'a',o:['유아(3~5세)','초등 저학년','초등 고학년','중학생']},
+     {l:'어디서',k:'b',o:['집 안','동네·공원','가까운 나들이']},
+     {l:'원하는 놀이 (여러 개)',k:'c',m:1,o:['만들기','몸으로 놀기','요리 놀이','책·이야기','과학 실험','돈 안 드는 것']}],
+  task:'고른 조건으로 이번 주말에 바로 할 수 있는 놀이 5가지를 추천해 줘.',
+  fmt:'표(놀이 | 준비물 | 걸리는 시간 | 아이가 배우는 것) + 가장 추천하는 놀이 진행 순서',ph:'예) 형제가 둘이에요 / 비 오는 날이에요'},
+ {t:'집 정리·청소 계획',s:'하루 15분씩 깔끔하게',role:'정리수납 전문가',
+  g:[{l:'정리할 곳 (여러 개)',k:'a',m:1,o:['옷장','주방','냉장고','욕실','아이 방','베란다','서류·사진','현관']},
+     {l:'하루 쓸 수 있는 시간',k:'b',o:['15분','30분','주말에 몰아서']}],
+  task:'고른 곳을 무리 없이 정리할 수 있는 2주 계획을 짜 줘. 버릴 것·남길 것 고르는 기준도 알려 줘.',
+  fmt:'① 날짜별 정리 계획표 ② 버릴까 말까 기준 체크리스트 ③ 다시 어질러지지 않는 습관 3가지',ph:'예) 옷이 너무 많아요 / 수납장이 부족해요'},
+ {t:'모임 인사·초대 글',s:'문자·단톡 한 번에',role:'따뜻하고 센스 있는 글을 쓰는 글쓰기 코치',
+  g:[{l:'어떤 글인가요?',k:'a',o:['모임 초대','생일 축하','감사 인사','명절 인사','안부 문자','부탁·거절']},
+     {l:'누구에게',k:'b',o:['가족','친구','동네 이웃','모임 회원','직장 동료']},
+     {l:'말투',k:'c',o:['쉽고 친근하게','정중하고 단정하게','유쾌하게']}],
+  task:'고른 상황에 맞는 글을 길이별로 써 줘.',
+  fmt:'짧은 문자 1개 + 단톡방용 1개 + 조금 긴 버전 1개',ph:'예) 다음 주 토요일 6시 우리 집 집들이예요'}];
+var PD={k:1,sel:{},text:''};
+function pdSel(i){if(!PD.sel[i]){var o={};PTASKS[i].g.forEach(function(g){o[g.k]=g.m?[]:0;o['x'+g.k]=''});PD.sel[i]=o}return PD.sel[i]}
+function pdVal(g,v,x){x=(x||'').trim();if(g.m){var a=v.map(function(i){return g.o[i]});if(x)a.push(x);return a.length?a.join(', '):'(고르지 않음)'}return x?g.o[v]+' / 기타: '+x:g.o[v]}
+var PDRULE=['- 내가 말하지 않은 사실은 지어내지 말고 [확인 필요]로 표시해.','- 꼭 필요한 정보가 없으면 먼저 한두 가지만 물어봐.','- 어려운 말 없이 쉬운 말로, 표로 한눈에 보이게.'];
+function pdLines(){var t=PTASKS[PD.k],sv=pdSel(PD.k);var mine=(PD.text||'').trim();
+ return ['[역할]','[[너는 '+t.role+'야.|역할 — 누가 답하느냐에 따라 답의 수준이 달라져요]]','[내가 고른 것]'].concat(t.g.map(function(g){return '- '+g.l.replace(/ \(.*\)$/,'').replace(/\?$/,'')+': '+pdVal(g,sv[g.k],sv['x'+g.k])}),['[할 일]',t.task,'[더 알려 줄 것]'],(mine?mine.split('\n'):['(없음)']),['[답변 형식]',t.fmt,'[지킬 것]'],PDRULE,t.safe?[t.safe]:[])}
+function pdGroups(){var t=PTASKS[PD.k],sv=pdSel(PD.k);return t.g.map(function(g){return '<div class="bf"><b>'+esc(g.l)+(g.m?' <small style="font-weight:500;color:var(--muted)">여러 개 골라도 돼요</small>':'')+'</b><div class="types pdc'+(g.m?' warm':'')+'">'+g.o.map(function(o,i){var on=g.m?sv[g.k].indexOf(i)>-1:sv[g.k]===i;return '<button type="button" data-pg="'+g.k+'" data-pi="'+i+'"'+(on?' class="on"':'')+'>'+esc(o)+'</button>'}).join('')+'<input class="pdx" data-px="'+g.k+'" value="'+esc(sv['x'+g.k]||'')+'" placeholder="기타 (직접 입력)"></div></div>'}).join('')}
+function pdView(){var t=PTASKS[PD.k];
+ var L='<p class="tip" style="margin:0 0 10px">일상에서 하고 싶은 것을 고르고 터치만 하면, 오른쪽에 AI가 찰떡같이 알아듣는 프롬프트가 완성돼요.</p><div class="bf"><b>무엇을 해 볼까요?</b><div class="pdgrid">'+PTASKS.map(function(x,i){return '<button type="button" data-pk="'+i+'"'+(PD.k===i?' class="on"':'')+'><b>'+esc(x.t)+'</b><span>'+esc(x.s)+'</span></button>'}).join('')+'</div></div>'+pdGroups()+
+ '<div class="bf"><b>더 알려 줄 것 <small style="font-weight:500;color:var(--muted)">비워 둬도 돼요 · 개인정보는 빼 주세요</small></b><textarea id="pd-in" rows="3">'+esc(PD.text)+'</textarea><p class="bex">'+esc(t.ph)+'</p><button type="button" class="mic" data-mic="pd-in">눌러서 말하기</button> <button type="button" class="mic" data-pdclr="1">지우기</button></div>';
+ return '<div class="split bld"><div class="col">'+L+'</div><div class="col">'+pbox('pd_p','완성된 프롬프트',pdLines())+'<p class="tip">고른 대로 바로 바뀌어요 · 주황 밑줄 = 역할</p></div></div>'}
+function pdUp(){PT.pd_p=pdLines();var b=document.querySelector('[data-cp="pd_p"]');if(b)b.closest('.pbox').querySelector('.pbody').innerHTML=PT.pd_p.map(lineHTML).join('')}
+document.addEventListener('input',function(e){var x=e.target;if(x.dataset&&x.dataset.px!=null){pdSel(PD.k)['x'+x.dataset.px]=x.value;pdUp()}else if(x.id==='pd-in'){PD.text=x.value;pdUp()}});
+document.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||CUR!=='pdesign')return;
+ if(b.dataset.pk!=null){PD.k=+b.dataset.pk;show('pdesign');return}
+ if(b.dataset.pdclr){var ta=document.getElementById('pd-in');if(ta)ta.value='';PD.text='';pdUp();return}
+ if(b.dataset.pg){var t=PTASKS[PD.k],sv=pdSel(PD.k),g=t.g.filter(function(z){return z.k===b.dataset.pg})[0],i=+b.dataset.pi;
+  if(g.m){var a=sv[g.k],j=a.indexOf(i);if(j>-1)a.splice(j,1);else a.push(i);b.classList.toggle('on',j<0)}
+  else{sv[g.k]=i;b.parentNode.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)})}
+  pdUp()}});
+
 function goHome(){CUR=null;$('#v-tool').hidden=true;$('#v-home').hidden=false;document.querySelector('[data-home].home').hidden=true;window.scrollTo(0,0)}
 function toolView(c){var L='';
  if(c.types)L+='<h3>종류 고르기</h3><div class="types">'+c.types.map(function(t){return '<button type="button" data-type="'+esc(t)+'"'+(t===TYPE?' class="on"':'')+'>'+esc(t)+'</button>'}).join('')+'</div>';
