@@ -139,7 +139,7 @@ u.v{text-decoration:none;background:#FFF1C9;border-radius:4px;padding:0 3px;font
 .ph3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.pcard{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;text-align:left;display:flex;flex-direction:column;gap:4px}.pcard:hover{border-color:var(--ink)}.pcard b{font-size:1.05rem;color:var(--ink)}.pcard span{font-size:.88rem;color:var(--muted)}.pcard em{font-style:normal;font-size:.85rem;color:var(--point);font-weight:700;margin-top:4px}
 @media(max-width:980px){.ph3{grid-template-columns:1fr 1fr}}@media(max-width:560px){.ph3{grid-template-columns:1fr}.tiles.t3{grid-template-columns:1fr 1fr}}
 .sec{margin-bottom:14px}.sh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}.sh b{font-size:1.2rem;color:var(--ink);font-weight:900}.sh span{color:var(--muted);font-size:.93rem}
-.projrow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.pj{background:#fff;border:2.5px solid var(--ink);border-radius:18px;padding:16px 18px;text-align:left;display:flex;gap:14px;align-items:center}.pj:hover{background:var(--pale)}.pj .ic{width:54px;height:54px;border-radius:16px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;flex:none}.pj b{font-size:1.2rem;color:var(--ink);display:block}.pj span{font-size:.9rem;color:var(--muted)}
+.subt{display:flex;gap:6px;background:var(--pale);padding:5px;border-radius:14px}.subt button{font:inherit;font-weight:800;font-size:1.05rem;padding:8px 18px;border-radius:10px;border:0;background:transparent;color:var(--ink);cursor:pointer}.subt button.on{background:var(--ink);color:#fff}.projrow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.pj{background:#fff;border:2.5px solid var(--ink);border-radius:18px;padding:16px 18px;text-align:left;display:flex;gap:14px;align-items:center}.pj:hover{background:var(--pale)}.pj .ic{width:54px;height:54px;border-radius:16px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;flex:none}.pj b{font-size:1.2rem;color:var(--ink);display:block}.pj span{font-size:.9rem;color:var(--muted)}
 .main{grid-template-columns:repeat(10,1fr) minmax(0,1.3fr)!important}
 @media(max-width:980px){.projrow{grid-template-columns:1fr}.main{grid-template-columns:repeat(3,1fr)}.m.red{grid-column:span 3;flex-direction:row;justify-content:center}.dash{grid-template-columns:1fr}.split{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.hero-art{aspect-ratio:892/726}}
 @media(max-width:560px){:root{--fs:16px}h1{font-size:1.45rem}.hero{margin-top:14px}.col{overflow-x:auto}.gt{min-width:520px}.vars input{width:100%}.vars label{width:100%}.row{grid-template-columns:1fr}.row .nt{padding-bottom:4px}.steps4{grid-template-columns:repeat(2,1fr)}.tiles{grid-template-columns:1fr}.badge{display:none}}
@@ -174,7 +174,7 @@ u.v{text-decoration:none;background:#FFF1C9;border-radius:4px;padding:0 3px;font
     <small>여기 넣으면 모든 프롬프트에 자동으로 들어가요 (이 기기에만 저장)</small>
   </section>
 
-  <section class="sec"><div class="sh"><b>사업별 프로젝트</b><span>사업마다 한 번 세팅하고 계속 — 지침 요약 → 비교표 → 자료 요청 → 초안 → 승인 담당자 검토 → 완성본</span></div><div class="projrow" id="projrow"></div></section>
+  <section class="sec"><div class="sh"><b>핵심 업무</b><span>보고서는 사업별 프로젝트로 · 홍보물·프로그램은 클릭해서 고르기</span></div><div class="projrow" id="projrow"></div></section>
   <section class="sec"><div class="sh"><b>딸깍 자동화</b><span>서식·메모·녹음 넣고 프롬프트 하나로 바로</span></div><div class="main" id="main"></div></section>
 
   <div class="gbrow"><button type="button" class="gbanner" data-go="projhub"><svg class="i" viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg><div><b>프로젝트 만드는 법</b><br><span>지침 · 소스 · 첫 대화 — 처음 한 번만 따라 하면 계속 써요</span></div><em>따라 하기 ›</em></button><button type="button" class="gbanner alt" data-go="guide"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><div><b>ChatGPT · 제미나이 · Claude 한눈에</b><br><span>최신 업데이트 · 무료와 유료 · 따라 하기 · 맞춤설정</span></div><em>AI 앱 가이드 ›</em></button></div>
@@ -228,7 +228,7 @@ var PROJ=[
  guide:['너는 [[{사업} 결과보고서 작성 담당자이자 사업평가 담당자|역할 — 쓰는 눈과 평가하는 눈]]야.','- 순서: 지침 확인 → 계획 대비 실적·성과 분석 → 올해 서식에 작성.','- "계획 → 운영 → 결과·성과"가 근거와 함께 보이게.'].concat(RULES,['- 서식 칸과 순서 그대로, 완성본은 한글(.hwpx) 파일로.']),
  ask:['[[{기간} {사업}|내 사업]] 결과보고서를 시작하자.','① 지침을 확인했으면 3줄로 요약해 줘.','② 표로: 계획 / 실적 / 달성률 / 성과와 근거 / 아쉬운 점과 개선','③ 부족한 근거 자료(출석부·만족도·사진 등)를 한 번에 요청해 줘.','④ 작성 방향 요약을 먼저 보여 주고, 내가 좋다고 하면 초안 → [[평가 담당자|검토하는 사람]] 입장에서 검토·보완 → 완성본.'],
  chk:['계획 대비 실적 숫자','예산 집행률','[확인 필요]로 남은 칸']},
-{id:'prog',ic:'spark',t:'프로그램 계획·제안',pn:'○○사업 프로그램 기획',key:'프로그램 기획 제안 계획 캠퍼스 평생교육 주간활동 아이디어',when:'사업에 맞는 새 프로그램을 제안하고 계획서까지',mode:'proj',
+{id:'prog',ic:'spark',t:'프로그램 계획서',pn:'○○사업 프로그램 기획',key:'프로그램 기획 제안 계획 캠퍼스 평생교육 주간활동 아이디어',when:'사업에 맞는 새 프로그램을 제안하고 계획서까지',mode:'proj',
  src:['사업운영 안내지침','이용자 욕구·수요조사 결과','지난 프로그램 결과·만족도','프로그램 계획서 서식(한글)'],
  guide:['너는 [[{사업} 프로그램 기획 전문가|역할]]야.','- 순서: 지침·이용자 욕구 분석 → 프로그램 3가지 제안 → 내가 고른 것을 서식에 작성.','- 장애인 당사자가 주체가 되고, 우리 복지관에서 바로 할 수 있게 현실적으로.'].concat(RULES,['- 서식 칸과 순서 그대로, 완성본은 한글(.hwpx) 파일로.']),
  ask:['[[{대상}|대상]]을 위한 [[{사업}|내 사업]] 프로그램을 기획하자.','① 지침과 수요조사를 확인했으면 3줄로 요약해 줘.','② 표로 3안: 이름 / 목적 / 대상·인원 / 회기·내용 / 기대효과 / 근거','③ 내가 고르면 필요한 정보를 한 번에 묻고, 서식대로 초안 → [[심사자|검토하는 사람]] 입장에서 검토·보완 → 완성본.'],
@@ -285,6 +285,9 @@ var QUICK=[
 {id:'priv',ic:'lock',t:'개인정보 체크',red:true,key:'개인정보 보안 가명 주의',when:'AI를 쓰기 전에 꼭 한 번',mode:'priv'}
 ];
 var CARDS=PROJ.concat(QUICK);
+/* 첫 화면 큰 탭 3개: 보고서(사업계획서·결과보고서) / 홍보물 / 프로그램 기획·제안 */
+var TABS=[{id:'rep',ic:'doc',t:'보고서',mode:'hub',kids:['plan','report']},{id:'promo',ic:'img',t:'홍보물',kids:['promo']},{id:'pgm',ic:'spark',t:'프로그램 기획·제안',mode:'hub',kids:['idea','prog']}];
+TABS.forEach(function(T){T.kids.forEach(function(k){var c=PROJ.concat(QUICK).filter(function(x){return x.id===k})[0];if(c&&T.kids.length>1)c.par=T.id})});
 var MORE=[
 {id:'find',ic:'find',t:'지침에서 찾기',key:'지침 노트북 근거 평가지표 사업안내 규정',when:'두꺼운 지침에서 근거 찾기 (제미나이 노트북)',mode:'chat',steps:[['새 노트북','제미나이 노트북에서 새로 만들기'],['자료 넣기','지침 PDF 추가'],['질문','아래 프롬프트 붙여넣기'],['출처 확인','쪽수를 눌러 원문 대조']],att:['지침 PDF'],
  p:['넣은 자료 안에서만 답해 줘. [[{사업}|내 사업]]의 [평가 지표 / 필수 서류 / 예산 기준]을 표로 정리하고 줄마다 쪽수를 붙여 줘. 자료에 없으면 "자료에 없음".'],
@@ -329,7 +332,7 @@ var TOOLS=[
  tpl:function(v){return ['나 지금 [['+(v.who||'[누구]')+'|누구 때문에]] 너무 빡쳐. '+(v.what||'[있었던 일]'),'① 먼저 내 편이 되어 같이 빡쳐 줘 — 웃기게, 센 말은 "○○"로 가려서.','② 복식호흡 3번 하자고 짧게 안내해 줘.','③ 상대에게 실제로 보낼 수 있는 순화된 문장 2가지 (정중한 버전 / 단호한 버전).']}}
 ];
 var BIZ=[['스마트재활센터','easy'],['하이드림솔루션 사례회의','meet'],['장애인식개선 교육','aware'],['기흥행복한놀이터','prog'],['기흥행복한캠퍼스','prog'],['주간이용센터 PCISP','daily'],['평생교육 프로그램','prog'],['직업지원·일자리 모집','recruit'],['주간활동 일지','daily'],['후원·자원봉사','donor'],['재가복지·문화기행','easy'],['공문·예산 공고','doc'],['월간 「N월의 기록」','promo'],['식단·차량 안내','easy'],['활동지원사 모집','recruit'],['2026 연말 가족잔치','plan'],['21st GH DAY 결과보고','report']];
-var ALL=CARDS.concat(MORE,TOOLS);
+var ALL=CARDS.concat(MORE,TOOLS,TABS.filter(function(t){return t.mode==='hub'}));
 function find(id){for(var i=0;i<ALL.length;i++)if(ALL[i].id===id)return ALL[i];}
 
 /* ===== 변수 ===== */
@@ -350,15 +353,15 @@ var PT={};
 function pbox(id,title,lines){PT[id]=lines;return '<div class="pbox"><div class="pbar"><span class="t">'+title+'</span><button type="button" class="cp" data-cp="'+id+'">복사</button><button type="button" data-ai="gpt" data-p="'+id+'">ChatGPT 열기</button><button type="button" data-ai="gem" data-p="'+id+'">제미나이 열기</button><button type="button" data-ai="cla" data-p="'+id+'">Claude 열기</button></div><div class="pbody">'+lines.map(lineHTML).join('')+'</div></div>'}
 
 /* ===== 화면 그리기 ===== */
-function home(){$('#projrow').innerHTML=PROJ.map(function(c){return '<button type="button" class="pj" data-go="'+c.id+'"><span class="ic">'+svg(c.ic)+'</span><div><b>'+c.t+'</b><span>'+esc(c.when)+'</span></div></button>'}).join('');
- $('#main').innerHTML=QUICK.map(function(c){return '<button type="button" class="m'+(c.red?' red':'')+'" data-go="'+c.id+'"><span class="ic">'+svg(c.ic)+'</span><b>'+c.t+'</b></button>'}).join('');
+function home(){$('#projrow').innerHTML=TABS.map(function(c){return '<button type="button" class="pj" data-go="'+c.id+'"><span class="ic">'+svg(c.ic)+'</span><div><b>'+c.t+'</b>'+(c.kids.length>1?'<span>'+c.kids.map(function(k){return find(k).t}).join(' · ')+'</span>':'')+'</div></button>'}).join('');
+ $('#main').innerHTML=QUICK.filter(function(c){return c.id!=='promo'&&c.id!=='idea'}).map(function(c){return '<button type="button" class="m'+(c.red?' red':'')+'" data-go="'+c.id+'"><span class="ic">'+svg(c.ic)+'</span><b>'+c.t+'</b></button>'}).join('');
  $('#bizchips').innerHTML=BIZ.map(function(b,i){return '<button type="button" class="chip" data-biz="'+i+'">'+esc(b[0])+'</button>'}).join('');
  $('#tiles').innerHTML=TOOLS.map(function(c){return '<button type="button" class="tile" data-go="'+c.id+'">'+svg(c.ic)+'<span>'+c.t+'</span></button>'}).join('');
  $('#tiles2').innerHTML=MORE.map(function(c){return '<button type="button" class="tile" data-go="'+c.id+'">'+svg(c.ic)+c.t+'</button>'}).join('');
  ['사업','대상','기간'].forEach(function(k){var el=document.getElementById(VK[k]);var x=ls('gh_'+k);if(x)el.value=x;el.oninput=function(){ls('gh_'+k,el.value)}})}
 var CUR=null;
-function show(id){var c=find(id);if(!c)return;if(c.mode==='pick'){var pool=CARDS.concat(MORE).filter(function(x){return x.mode==='proj'||x.mode==='chat'});c=pool[Math.floor(Math.random()*pool.length)];toast('오늘은 「'+c.t+'」 하나만 해 봐요!')}
- CUR=c.id;var h='<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>'+c.t+'</h2><span class="when">'+esc(c.when||'')+'</span></div>';
+function show(id){var c=find(id);if(!c)return;if(c.mode==='hub'){show(c.kids[0]);return}if(c.mode==='pick'){var pool=CARDS.concat(MORE).filter(function(x){return x.mode==='proj'||x.mode==='chat'});c=pool[Math.floor(Math.random()*pool.length)];toast('오늘은 「'+c.t+'」 하나만 해 봐요!')}
+ CUR=c.id;var P0=c.par?find(c.par):null;var h='<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>'+(P0?P0.t:c.t)+'</h2>'+(P0?'<div class="subt">'+P0.kids.map(function(k){return '<button type="button" data-go="'+k+'"'+(k===c.id?' class="on"':'')+'>'+find(k).t+'</button>'}).join('')+'</div>':'')+'<span class="when">'+esc(c.when||'')+'</span></div>';
  if(c.mode==='guide')h+=guideView();else if(c.mode==='projhub')h+=projView();else if(c.mode==='build')h+=buildView(c);else if(c.mode==='studio'||c.mode==='gbiz')h+=modView(c);else if(c.mode==='priv')h+=privView();else if(c.mode==='apps')h+=appsView();else h+=toolView(c);
  var v=$('#v-tool');v.innerHTML=h;v.hidden=false;var MH=document.getElementById('mod-host');if(MH){var M=c.mode==='studio'?window.STUDIO:window.GBIZ;if(M){MH.innerHTML=M.view();M.bind()}else MH.textContent='도구를 불러오지 못했어요. 새로고침해 주세요.'}$('#v-home').hidden=true;document.querySelector('[data-home].home').hidden=false;window.scrollTo(0,0);bindTool(c)}
 function goHome(){CUR=null;$('#v-tool').hidden=true;$('#v-home').hidden=false;document.querySelector('[data-home].home').hidden=true;window.scrollTo(0,0)}
