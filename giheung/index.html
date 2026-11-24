@@ -113,6 +113,24 @@ u.v{text-decoration:none;background:#FFF1C9;border-radius:4px;padding:0 3px;font
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 20px;border-radius:24px;font-weight:700;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
 .toast.on{opacity:1}
 .appimg{width:100%;border-radius:12px;border:2px solid var(--line);display:block}
+.gbanner{width:100%;display:flex;align-items:center;gap:14px;background:var(--ink);color:#fff;border:0;border-radius:16px;padding:14px 20px;margin-bottom:16px;text-align:left}
+.gbanner b{font-size:1.12rem}.gbanner span{opacity:.9;font-size:.93rem}.gbanner em{margin-left:auto;font-style:normal;background:#F2C46B;color:#14301F;border-radius:20px;padding:5px 14px;font-weight:900;white-space:nowrap}
+.gtabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.gtabs button{background:#fff;border:2px solid var(--line);border-radius:12px;padding:7px 16px;font-weight:900;font-size:.98rem}
+.gtabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.gt{width:100%;border-collapse:collapse;font-size:.93rem;background:#fff}
+.gt th,.gt td{border:1.5px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+.gt thead th{background:var(--ink);color:#fff;text-align:center}
+.gt tbody th{background:var(--pale);color:var(--ink);white-space:nowrap}
+.gt td.c{text-align:center}
+.news li{margin:4px 0}
+.hw{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.hw .col{padding:14px}
+.hw h4{font-size:1.05rem;color:var(--ink)}
+.hw .w{font-size:.88rem;color:var(--muted);margin-bottom:6px}
+.hw ol{padding-left:1.2em;margin-bottom:10px}
+.gnote{font-size:.85rem;color:var(--muted);margin:8px 0 24px}
+@media(max-width:980px){.hw{grid-template-columns:1fr}.gt{font-size:.85rem}.gbanner{flex-wrap:wrap}.gbanner em{margin-left:0}}
 @media(max-width:980px){.main{grid-template-columns:repeat(3,1fr)}.m.red{grid-column:span 3;flex-direction:row;justify-content:center}.dash{grid-template-columns:1fr}.split{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.hero-art{aspect-ratio:892/726}}
 @media(max-width:560px){:root{--fs:16px}h1{font-size:1.75rem}.vars input{width:100%}.vars label{width:100%}.row{grid-template-columns:1fr}.row .nt{padding-bottom:4px}.steps4{grid-template-columns:repeat(2,1fr)}.tiles{grid-template-columns:1fr}.badge{display:none}}
 </style>
@@ -148,6 +166,8 @@ u.v{text-decoration:none;background:#FFF1C9;border-radius:4px;padding:0 3px;font
 
   <section class="main" id="main" aria-label="큰 메뉴"></section>
 
+  <button type="button" class="gbanner" data-go="guide"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><div><b>ChatGPT · 제미나이 · Claude 한눈에</b><br><span>최신 업데이트 · 무료와 유료 차이 · 기능 따라 하기 · 맞춤설정 가이드 · 앱 설치</span></div><em>AI 앱 가이드 ›</em></button>
+
   <section class="dash">
     <div class="panel">
       <div class="ph"><h2>사업별 바로 찾기</h2><small>우리 복지관 사업을 누르면 맞는 도구가 열려요</small></div>
@@ -175,6 +195,7 @@ u.v{text-decoration:none;background:#FFF1C9;border-radius:4px;padding:0 3px;font
 </main>
 <div class="toast" id="toast"></div>
 
+<script src="guide.js?v=1"></script>
 <script>
 (function(){
 var $=function(s){return document.querySelector(s)};
@@ -248,6 +269,7 @@ var TOOLS=[
  p:['너는 [[사회복지 현장을 잘 아는 따뜻한 동료|역할]]야.','오늘 있었던 일을 들어 주고, 나만을 위한 위로를 5줄로 해 줘.','- 훈계나 해결책 말고 공감 먼저.','- 마지막 줄은 오늘 밤 해 볼 작은 쉼 한 가지.','오늘 있었던 일: [말하거나 적기]'],chk:['내 마음이 조금 가벼워졌는지','',''],warn:'정말 힘들 때는 혼자 버티지 말고 가까운 사람이나 전문 상담에 도움을 요청하세요.'},
 {id:'custom',ic:'gear',t:'맞춤설정 지침',when:'AI가 우리 기관 규칙을 늘 지키게 할 때',mode:'chat',src:[],steps:[['ChatGPT','프로필 → 설정 → 맞춤설정'],['제미나이','설정 → 저장된 정보·지침'],['Claude','설정 → 프로필'],['붙여넣기','아래 지침 복사해서 입력']],
  p:['나는 [[용인시기흥장애인복지관 [팀명] 직원|내 팀명으로 바꿔요]]이야.','- 답은 개조식으로, 기관 문서는 공문체로 써 줘.','- 실명·연락처·주민번호는 쓰지 마.','- 자료에 없는 숫자는 [확인 필요]로 표시해.','- 모르는 게 있으면 쓰기 전에 먼저 물어봐.'],chk:['팀명을 바꿨는지','새 채팅에서 규칙을 지키는지','']},
+{id:'guide',ic:'pc',t:'AI 앱 가이드',when:'세 가지 AI 앱의 최신 기능·요금·따라 하기',mode:'guide'},
 {id:'apps',ic:'pc',t:'AI 앱 설치',when:'컴퓨터에 ChatGPT · 제미나이 · Claude 앱을 깔 때',mode:'apps'},
 {id:'pick',ic:'spark',t:'오늘 뭐 하지?',mode:'pick'}
 ];
@@ -280,7 +302,7 @@ function home(){$('#main').innerHTML=CARDS.map(function(c){return '<button type=
 var CUR=null;
 function show(id){var c=find(id);if(!c)return;if(c.mode==='pick'){var pool=CARDS.filter(function(x){return x.mode!=='priv'}).concat(MORE);c=pool[Math.floor(Math.random()*pool.length)];toast('오늘은 「'+c.t+'」 하나만 해 봐요!')}
  CUR=c.id;var h='<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>'+c.t+'</h2><span class="when">'+esc(c.when||'')+'</span></div>';
- if(c.mode==='priv')h+=privView();else if(c.mode==='apps')h+=appsView();else h+=toolView(c);
+ if(c.mode==='guide')h+=guideView();else if(c.mode==='priv')h+=privView();else if(c.mode==='apps')h+=appsView();else h+=toolView(c);
  var v=$('#v-tool');v.innerHTML=h;v.hidden=false;$('#v-home').hidden=true;document.querySelector('[data-home].home').hidden=false;window.scrollTo(0,0);bindTool(c)}
 function goHome(){CUR=null;$('#v-tool').hidden=true;$('#v-home').hidden=false;document.querySelector('[data-home].home').hidden=true;window.scrollTo(0,0)}
 function toolView(c){var L='';
@@ -297,6 +319,18 @@ function toolView(c){var L='';
  return '<div class="split"><div class="col">'+L+'</div><div class="col">'+R+'</div></div>'}
 var QUIZ=[['이용자 이름을 지우고 "A씨"로 바꿔 넣는다','O'],['상담 기록 원문을 그대로 붙여 요약시킨다','X'],['통계표(인원·횟수)만 넣어 보고서를 쓴다','O'],['후원자 계좌번호가 있는 엑셀을 그대로 올린다','X'],['공개된 지침 PDF를 넣고 근거를 찾는다','O']];
 function privView(){return '<div class="split"><div class="col"><h3>처음부터 넣지 않을 5가지</h3><ol><li>이름 (이용자·보호자·후원자)</li><li>주민번호·생년월일</li><li>전화번호·주소·계좌</li><li>진단명·장애 정도 등 건강 정보</li><li>상담·사례 기록 원문</li></ol><h3>가명화 3단계</h3><ol><li>이름 → A, B, C</li><li>날짜·장소 → "11월 중순", "복지관"</li><li>특정되는 사연 → 일반적인 표현으로</li></ol><div class="warn"><b>설정도 확인</b> AI 앱 설정에서 <b>내 대화를 모델 학습에 쓰는 항목</b>을 끌 수 있어요. 공용 계정 말고 <b>1인 1계정</b>으로 쓰세요.</div></div><div class="col"><h3>O · X 퀴즈 — 넣어도 될까?</h3><div class="quiz">'+QUIZ.map(function(q,i){return '<div><span>'+esc(q[0])+'</span><button type="button" data-q="'+i+'" data-a="O">O</button><button type="button" data-q="'+i+'" data-a="X">X</button></div>'}).join('')+'</div><p class="tip" id="qres">눌러 보면 정답이 나와요.</p><img class="appimg" style="margin-top:12px" src="/img/giheung/walk.webp" alt="휠체어를 사용하는 사람과 동행인이 웃으며 걷는 모습"></div></div>'}
+
+var GTAB='cmp';
+function tbl(h,rows){return '<table class="gt"><thead><tr>'+h.map(function(x){return '<th>'+x+'</th>'}).join('')+'</tr></thead><tbody>'+rows.map(function(r){return '<tr><th>'+r[0]+'</th>'+r.slice(1).map(function(x){return '<td'+(x.length<8?' class="c"':'')+'>'+x+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table>'}
+function guideView(){var G=window.GUIDE;if(!G)return '<p>가이드를 불러오지 못했어요. 새로고침해 주세요.</p>';
+ var T=[['cmp','한눈에 비교'],['gpt','ChatGPT'],['gem','제미나이'],['cla','Claude'],['custom','맞춤설정 가이드'],['inst','앱 설치']];
+ var h='<div class="gtabs">'+T.map(function(t){return '<button type="button" data-gtab="'+t[0]+'"'+(GTAB===t[0]?' class="on"':'')+'>'+t[1]+'</button>'}).join('')+'</div>';
+ if(GTAB==='cmp'){h+='<div class="col" style="margin-bottom:12px">'+tbl(G.cmp.head,G.cmp.rows)+'<h3 style="margin-top:14px">그래서 우리는 이렇게 써요</h3><ol>'+G.cmp.rule.map(function(r){return '<li>'+r+'</li>'}).join('')+'</ol></div><div class="col"><h3>ChatGPT 기능 5단계 — 어디까지 맡길까?</h3><img class="appimg" src="/img/giheung/gpt5.webp" alt="ChatGPT Chat, Project, Work, Codex, Dot 5단계 기능과 무료·유료 비교"></div>';}
+ else if(GTAB==='custom'){var c=find('custom');h+='<div class="split"><div class="col"><h3>어디에 넣나요?</h3><table class="gt"><tbody>'+G.custom.where.map(function(w){return '<tr><th>'+w[0]+'</th><td>'+w[1]+'</td></tr>'}).join('')+'</tbody></table><h3>알아 두면 좋은 점</h3><ul class="chk">'+G.custom.tips.map(function(t){return '<li>'+t+'</li>'}).join('')+'</ul></div><div class="col">'+pbox('custom_g','맞춤설정에 붙여넣을 지침',c.p)+'<p class="tip">팀명만 바꿔서 세 앱 모두에 똑같이 넣어 두면, 어느 앱을 써도 우리 기관 규칙대로 답해요.</p></div></div>';}
+ else if(GTAB==='inst'){h+=appsView();}
+ else{var A=G.apps[GTAB];h+='<div class="split"><div class="col"><h3>최근에 바뀐 것</h3><ul class="news">'+A.news.map(function(n){return '<li>'+n+'</li>'}).join('')+'</ul></div><div class="col"><h3>무료와 유료, 이렇게 달라요</h3>'+tbl(A.plan.head,A.plan.rows)+'<p class="tip">가격과 한도는 자주 바뀌어요. 결제 전 공식 요금 페이지에서 확인하세요.</p></div></div>';
+  h+='<h3 style="color:var(--ink);font-size:1.15rem;margin:4px 0 10px">기능 따라 하기</h3><div class="hw">'+A.how.map(function(w,i){return '<div class="col"><h4>'+w.t+'</h4><p class="w">'+w.when+'</p><ol>'+w.steps.map(function(s){return '<li>'+s+'</li>'}).join('')+'</ol>'+pbox(GTAB+'_h'+i,'바로 써 보기',w.p.split('\n'))+'</div>'}).join('')+'</div>';}
+ return h+'<p class="gnote">2026년 11월 확인 · 메뉴 이름과 요금제는 업데이트에 따라 바뀔 수 있어요</p>'}
 function appsView(){return '<div class="col" style="margin-bottom:24px"><img class="appimg" src="/img/giheung/apps.webp" alt="ChatGPT, 제미나이, Claude 데스크톱 앱의 장점과 다운로드 방법"><div class="chips" style="margin-top:12px"><a class="chip" href="https://chatgpt.com/download" target="_blank" rel="noopener">ChatGPT 다운로드</a><a class="chip" href="https://gemini.google/kr/desktop/" target="_blank" rel="noopener">제미나이 다운로드</a><a class="chip" href="https://claude.com/download" target="_blank" rel="noopener">Claude 다운로드</a></div><p class="tip">ChatGPT와 제미나이는 Windows 단축키(Alt + Space)가 같아요. 둘 다 깔면 한쪽 설정에서 바꿔 두세요.</p></div>'}
 function bindTool(c){var v=$('#v-tool');
  v.querySelectorAll('input[data-v]').forEach(function(el){el.oninput=function(){ls('gh_'+el.dataset.v,el.value);var o=document.getElementById(VK[el.dataset.v]);if(o)o.value=el.value;rerender(c)}});
@@ -308,6 +342,7 @@ document.addEventListener('click',function(e){var t=e.target.closest('button,a')
  if(t.hasAttribute('data-home')){goHome();return}
  if(t.dataset.go){show(t.dataset.go);return}
  if(t.dataset.biz){var b=BIZ[+t.dataset.biz];ls('gh_사업',b[0]);$('#v-biz').value=b[0];show(b[1]);return}
+ if(t.dataset.gtab){GTAB=t.dataset.gtab;show('guide');return}
  if(t.dataset.cp){copy(plain(PT[t.dataset.cp]));return}
  if(t.dataset.ai){openAI(t.dataset.ai,plain(PT[t.dataset.p]));return}
  if(t.dataset.q){var q=QUIZ[+t.dataset.q],ok=t.dataset.a===q[1];t.parentNode.querySelectorAll('button').forEach(function(x){x.className=''});t.className=ok?'ok':'no';$('#qres').textContent=ok?'맞아요! 정답은 '+q[1]+'.':'아쉬워요. 정답은 '+q[1]+'.';return}
@@ -316,7 +351,7 @@ document.addEventListener('click',function(e){var t=e.target.closest('button,a')
 $('#q').addEventListener('keydown',function(e){if(e.key!=='Enter')return;var w=this.value.trim();if(!w)return;var hit=ALL.filter(function(c){return (c.t+' '+(c.key||'')+' '+(c.when||'')).indexOf(w)>-1});if(hit.length)show(hit[0].id);else toast('딱 맞는 메뉴가 없어요. 큰 메뉴에서 골라 주세요.')});
 if(ls('gh_big')){document.body.classList.add('big');$('#bigbtn').setAttribute('aria-pressed','true')}
 home();
-if(location.hash.length>1&&find(location.hash.slice(1)))show(location.hash.slice(1));
+var HS=location.hash.slice(1);if(HS.indexOf('guide-')===0){GTAB=HS.slice(6);show('guide')}else if(HS&&find(HS))show(HS);
 })();
 </script>
 </body>
