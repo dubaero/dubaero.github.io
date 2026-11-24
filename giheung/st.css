@@ -1,0 +1,79 @@
+
+/* 2026.11.16 나만의 사진관 · 제미나이 비서 */
+.st{--o:#C96A2B;--g:#1F6F5A;--ink:#17231d;--mu:#4e5e56;--ln:#E6E4E0;color:var(--ink);font-size:17px}
+.st *{box-sizing:border-box}
+.st-steps{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.st-steps button{flex:1 1 auto;border:1.5px solid var(--ln);background:#F9F8F7;border-radius:12px;padding:9px 12px;font:inherit;font-weight:800;font-size:17px;color:#3b4a43;cursor:pointer;white-space:nowrap}
+.st-steps button i{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#8a978f;color:#fff;font-style:normal;font-size:15px;margin-right:6px}
+.st-steps button.on{background:#F4F2EF;border-color:var(--g);color:#17402f}.st-steps button.on i{background:var(--g)}
+.st-info{display:flex;flex-wrap:wrap;gap:6px 18px;background:#F8F7F6;border:1px solid var(--ln);border-radius:12px;padding:9px 14px;margin-bottom:10px;font-size:16px}
+.st-info b{color:var(--g);margin-right:6px}
+.st-flow{font-weight:800;color:#1d4fb8;font-size:16px;margin:0 0 6px}
+.st-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:12px}
+.st-box{background:#fff;border:1px solid var(--ln);border-radius:14px;padding:12px 14px}
+.st-q{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:900;margin:10px 0 7px}
+.st-q:first-child{margin-top:0}
+.st-q em{font-style:normal;display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:999px;background:#EEEBE7;color:var(--g);font-size:16px}
+.st-q small{font-size:14.5px;color:var(--mu);font-weight:600}
+.st-chips{display:flex;flex-wrap:wrap;gap:6px}
+.st-chips button{border:1.5px solid #E1DEDA;background:#fff;border-radius:999px;padding:7px 13px;font:inherit;font-size:16px;cursor:pointer;color:#2c3a33}
+.st-chips button.on{background:var(--g);border-color:var(--g);color:#fff;font-weight:800}
+.st-in{width:100%;margin-top:7px;border:1.5px solid #DEDBD7;border-radius:10px;padding:9px 11px;font:inherit;font-size:16px}
+.st-in:focus{outline:2px solid #C4B59F;border-color:#C4B59F}
+.st-pv{white-space:pre-wrap;line-height:1.75;font-size:16px;background:#FCFCFB;border:1.5px solid #DEDBD7;border-left:6px solid var(--g);border-radius:10px;padding:12px 14px;max-height:430px;overflow:auto}
+.st-pv .u{color:#1d4fb8;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.st-pv .b{color:#1d4fb8;font-weight:800}
+.st-pv .stph{color:#8a8f8c}
+.st-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.st-acts.sttop{margin:0 0 8px}
+.st-acts button{border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:800;font-size:16px;cursor:pointer}
+.st-acts .p{background:#1b2b22;color:#fff}.st-acts .s{background:#fff;border:1.5px solid #1b2b22;color:#1b2b22}
+.st-acts .h{background:#fff;border:1.5px solid var(--g);color:var(--g)}
+.st-help{margin:8px 0 0;padding-left:18px;font-size:15.5px;color:var(--mu)}
+.st-help li{margin:2px 0}
+.st-card4{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.st-card4 svg{width:150px;height:auto}
+@media(max-width:860px){.st-grid{grid-template-columns:1fr}.st-pv{max-height:none}.st-steps button{font-size:15.5px;padding:8px 9px}.st-card4{grid-template-columns:1fr}}
+/* 제미나이 비서 */
+.gb-how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:10px}
+.gb-how>div{background:#f4f7ff;border:1px solid #d9e3fb;border-radius:14px;padding:10px;display:flex;gap:10px;align-items:center}
+.gb-how svg{width:64px;flex:none}
+.gb-how b{display:block;font-size:17px;color:#1d3f8f}.gb-how span{font-size:15px;color:#3e4a66}
+.gb-note{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:15px;color:#3e4a66;margin:0 0 10px}
+.gb-note b{color:#1d3f8f}
+.gb-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.gb-tabs button{border:1.5px solid #dfe5f2;background:#f7f9fd;color:#46506a;border-radius:999px;padding:8px 15px;font:inherit;font-weight:800;font-size:16.5px;cursor:pointer}
+.gb-tabs button.on{background:#1d3f8f;border-color:#1d3f8f;color:#fff}
+.gb-tabs button.em.on{background:#c62828;border-color:#c62828}
+.gb-sos{background:#fdecec;border:2px solid #e53935;color:#8b1a1a;font-weight:900;border-radius:12px;padding:9px 14px;margin-bottom:10px;font-size:16.5px}
+.gb-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.gb-card{background:#fff;border:1px solid #e1e6f0;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.gb-card svg{display:block;width:100%;height:auto}
+.gb-card .bd{padding:9px 11px 11px;display:flex;flex-direction:column;gap:6px;flex:1}
+.gb-card h4{margin:0;font-size:18px;font-weight:900}
+.gb-mode{display:flex;gap:4px;flex-wrap:wrap}
+.gb-mode span{font-size:13.5px;font-weight:800;border-radius:999px;padding:2px 8px;background:#eef2fb;color:#2b4aa0}
+.gb-say{margin:0;background:#f4f7ff;border-radius:10px;padding:7px 9px;font-size:15.5px;font-weight:700;color:#1b2a52}
+.gb-say::before{content:'이렇게 말해 보세요';display:block;font-size:13px;font-weight:800;color:#5a6b9a;margin-bottom:2px}
+.gb-warn{margin:0;font-size:14.5px;color:#b3261e;font-weight:700}
+.gb-card.em{border-color:#f2b8b5}
+@media(max-width:860px){.gb-how{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.gb-how>div{flex-direction:column;text-align:center;padding:8px 4px;gap:4px}.gb-how svg{width:40px}.gb-how b{font-size:15px}.gb-how span{display:none}.gb-cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}.gb-card{flex:0 0 82%;scroll-snap-align:start}}
+
+
+#v-studio .st-pv{border:3px solid #E2BE4F!important;border-left:3px solid #E2BE4F!important;background:#FFFDF4!important;border-radius:12px!important}
+#v-studio .st-in{border:2px dashed #E07B39!important;background:#FFF9F4!important}
+#v-studio .st-in::placeholder{color:#B4561C;opacity:.85}
+#v-studio .st-in:focus{outline:none;border-style:solid!important;border-color:#C9651F!important;background:#fff!important}
+
+#v-studio .st-steps button{background:#FFFBEA!important;border-color:#F1E2A6!important;color:#5A4A12!important}
+#v-studio .st-steps button i{background:#C9A63A!important}
+#v-studio .st-steps button.on{background:#FFEFB3!important;border-color:#D9A400!important;color:#4A3A00!important}
+#v-studio .st-steps button.on i{background:#B88A00!important}
+#v-studio .st-flow{color:#4A3A00!important}
+#v-studio .st-pv .u,#v-studio .st-pv .b{color:#1F6F5A!important}
+#v-studio #st-left .st-q.q1 em{background:#F0EBE4!important;color:#1F6F5A!important}
+#v-studio #st-left .st-q.q2 em{background:#FDEBDC!important;color:#B4561C!important}
+#v-studio #st-left .st-q.q3 em{background:#EEE6F8!important;color:#6A48A8!important}
+#v-studio #st-left .st-q.q4 em{background:#FFF1C9!important;color:#8A6A00!important}
+#v-studio #st-left .st-q.q1{color:#1F6F5A}
+#v-studio #st-left .st-q.q2{color:#B4561C}
+#v-studio #st-left .st-q.q3{color:#6A48A8}
