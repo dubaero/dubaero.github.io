@@ -13,7 +13,7 @@
 :root{--bg:#F7F3E8;--card:#fff;--ink:#1E4A34;--ink2:#2F6B4A;--text:#111;--muted:#2B3A31;--point:#D9603F;--soft:#FBF4E6;--pale:#EEF2EC;--line:#D9D2C2;--fs:17px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{font-size:var(--fs)}
-body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;line-height:1.55;word-break:keep-all;-webkit-text-size-adjust:100%}
+body{overflow-x:hidden;overflow-wrap:anywhere;background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;line-height:1.55;word-break:keep-all;-webkit-text-size-adjust:100%}
 body.big{--fs:20px}
 button{font:inherit;cursor:pointer;color:inherit}
 a{color:inherit}
@@ -139,7 +139,7 @@ u.v{text-decoration:none;background:#FFF1C9;border-radius:4px;padding:0 3px;font
 .ph3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.pcard{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;text-align:left;display:flex;flex-direction:column;gap:4px}.pcard:hover{border-color:var(--ink)}.pcard b{font-size:1.05rem;color:var(--ink)}.pcard span{font-size:.88rem;color:var(--muted)}.pcard em{font-style:normal;font-size:.85rem;color:var(--point);font-weight:700;margin-top:4px}
 @media(max-width:980px){.ph3{grid-template-columns:1fr 1fr}}@media(max-width:560px){.ph3{grid-template-columns:1fr}.tiles.t3{grid-template-columns:1fr 1fr}}
 @media(max-width:980px){.main{grid-template-columns:repeat(3,1fr)}.m.red{grid-column:span 3;flex-direction:row;justify-content:center}.dash{grid-template-columns:1fr}.split{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.hero-art{aspect-ratio:892/726}}
-@media(max-width:560px){:root{--fs:16px}h1{font-size:1.75rem}.vars input{width:100%}.vars label{width:100%}.row{grid-template-columns:1fr}.row .nt{padding-bottom:4px}.steps4{grid-template-columns:repeat(2,1fr)}.tiles{grid-template-columns:1fr}.badge{display:none}}
+@media(max-width:560px){:root{--fs:16px}h1{font-size:1.45rem}.hero{margin-top:14px}.col{overflow-x:auto}.gt{min-width:520px}.vars input{width:100%}.vars label{width:100%}.row{grid-template-columns:1fr}.row .nt{padding-bottom:4px}.steps4{grid-template-columns:repeat(2,1fr)}.tiles{grid-template-columns:1fr}.badge{display:none}}
 </style>
 </head>
 <body>
