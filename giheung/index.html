@@ -1616,6 +1616,11 @@ body:has(#v-mind:not([hidden]))>main.wrap{width:100%;max-width:1240px}
 .gh-viz-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(146px,100%),1fr));align-content:start;gap:6px;padding:12px;flex:1}.gh-viz-item{padding:6px 8px;border-radius:7px;background:#fff}.gh-viz-item b{font-size:12px}.gh-viz-item b:empty{display:none}.gh-viz-item p{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45;margin:0;font-size:14px;font-weight:650}.gh-viz-card footer{background:var(--accent);color:var(--art);padding:8px 12px;font-weight:800;font-size:12px;overflow-wrap:anywhere}.gh-visual-more{margin-top:8px}.gh-visual-more summary{cursor:pointer;font-weight:750;padding:6px}
 @media(max-width:440px){.gh-month-list{grid-template-columns:1fr}.gh-viz-body{padding:8px}.gh-viz-card.wide,.gh-viz-card.sq{aspect-ratio:auto}}
 </style>
+<style id="gh-group-original-frame">
+html:has(#v-groupref:not([hidden])){zoom:1!important}#v-groupref{width:100%}.gh-ref-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:7px 3px}.gh-ref-bar h2{font-size:17px;margin:0;color:#204735}.gh-ref-bar a{margin-left:auto;font-size:12px;color:#285743;font-weight:750}.gh-ref-frame{display:block;width:100%;height:calc(100dvh - 105px);min-height:420px;background:#fff;border:1px solid #cbddd3;border-radius:10px}
+body:has(#v-groupref:not([hidden]))>main.wrap{width:100%;max-width:none;padding:0 10px}body:has(#v-groupref:not([hidden]))>footer{display:none}
+@media(max-width:560px){.gh-ref-bar{gap:7px}.gh-ref-bar h2{font-size:14px}.gh-ref-bar a{font-size:11px}.gh-ref-frame{height:calc(100dvh - 128px)}}
+</style>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -6546,7 +6551,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 /* 2026.11.20 넓은 화면에서 첫 화면·메뉴 화면이 스크롤 없이 한 화면에 들어오게 자동 맞춤 (휴대폰·태블릿은 그대로)
    1) 화면 비율을 조금 줄여 맞추고(원래 글자 크기 아래로는 줄이지 않음) 2) 그래도 넘치면 긴 프롬프트 칸만 칸 안에서 스크롤 */
 (function(){
-  var SKIP={'v-vent':1,'v-heart':1,'v-song':1,'v-drawer':1,'v-msg':1,'v-promo2':1,'v-plan2':1,'v-donwork':1,'v-donate':1,'v-planmenu':1,'v-mindwork':1},T=null,busy=false;
+  var SKIP={'v-groupref':1,'v-vent':1,'v-heart':1,'v-song':1,'v-drawer':1,'v-msg':1,'v-promo2':1,'v-plan2':1,'v-donwork':1,'v-donate':1,'v-planmenu':1,'v-mindwork':1},T=null,busy=false;
   function cur(){return [].slice.call(document.querySelectorAll('[id^="v-"]')).filter(function(v){return !v.hidden&&v.parentElement&&!v.parentElement.closest('[id^="v-"]');})[0];}
   function reset(){
     [].forEach.call(document.querySelectorAll('[id^="v-"]'),function(v){if(v.style.zoom)v.style.zoom='';});
@@ -6635,7 +6640,7 @@ function homeHTML(){
   var left='<section class="bx"><div class="bx-h"><h2>서식 자료실</h2><span class="hint"><button type="button" data-gh="all">전체 보기 ›</button></span></div>'+
     '<div class="bx-b"><ul class="plist">'+L+'</ul></div></section>';
 
-  var Q=[['msg','문자·소통','문자·안부 전화','msg'],['promomenu','홍보·안내','모집·SNS·소식지','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['planmenu','프로그램 기획','사업별 기획 질문','bulb'],['mind','빡침 번역기','마음챙김','heart']];
+  var Q=[['group-msg','문자·소통','후원·보호자 문자','msg'],['group-promo','홍보·안내','소식지·SNS','meg'],['group-donate','후원 관리','서식·감사 문자','hand'],['group-fridge','프롬프트 디자인실','냉장고 재료로','pen'],['group-life','프로그램·생활','여가·나들이·행사','bulb'],['group-log','프로그램 일지','여가·자립 진행 기록','pen'],['mind','빡침 번역기','마음챙김','heart']];
   var mid='<section class="bx"><div class="bx-h"><h2>업무 바로가기</h2></div>'+
     '<div class="qgrid">'+Q.map(function(x,i){if(x[0]==='mind')return '<div class="qm gh-care-tile"><div><button type="button" data-gh="mind"><span aria-hidden="true">🌋</span> 빡침 번역기</button><button type="button" data-gh="heart"><span aria-hidden="true">♥</span> 마음챙김</button></div></div>';return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+I(x[3])+'<b>'+E(x[1])+'</b><small>'+E(x[2])+'</small></button>'}).join('')+'</div>'+
     '<div class="bar2">'+
@@ -7597,6 +7602,7 @@ function boot(){
         qa('[data-gi-pane]',bar).forEach(function(b){b.setAttribute('aria-pressed',String(b===pb));});
       }return;
     }
+    if(e.target.closest('[data-ref-back]')){var group=$('#v-groupref');if(group){group.replaceChildren();delete group.dataset.groupTab;}go('home');return;}
     if(e.target.closest('#gh-org')){openOrg();return;}
     var donor=e.target.closest('[data-don-key]');if(donor){renderDonWork(donor.dataset.donKey);return;}
     var mode=e.target.closest('[data-plan-mode]');if(mode){selectPlanDraft('mode:'+mode.dataset.planMode,{mode:mode.dataset.planMode,size:'1회 행사',area:'지역사회중심지원(CBSS)'});go('plan2');return;}
@@ -7787,8 +7793,30 @@ window.dwRender=function(){
    '</ol><p class="hintl"><a href="https://help.openai.com/ko-kr/articles/10169521-projects-in-chatgpt" target="_blank" rel="noopener">ChatGPT 프로젝트 공식 도움말 ↗</a></p>';
 };
 
+var GROUP_PANELS={
+ 'group-msg':['문자·소통','c-msg'],
+ 'group-promo':['홍보·안내','c-promo'],
+ 'group-donate':['후원 관리','donate'],
+ 'group-fridge':['프롬프트 디자인실','fridge'],
+ 'group-life':['프로그램·생활','c-life'],
+ 'group-log':['프로그램 일지','form-program']
+};
+function groupView(key){
+ var info=GROUP_PANELS[key],url='https://ai-biseo.github.io/#'+info[1],view=ensure('groupref','');
+ var chosen=view.dataset.groupTab;
+ if(chosen!==key||!view.firstChild){
+   view.dataset.groupTab=key;
+   view.innerHTML='<div class="gh-ref-bar"><button type="button" class="vback" data-ref-back>← 기흥 업무도우미</button><h2>'+E(info[0])+'</h2><a href="'+E(url)+'" target="_blank" rel="noopener noreferrer">원본 새 탭에서 열기 ↗</a></div>'+
+    '<iframe class="gh-ref-frame" title="'+E(info[0])+' · 공동생활가정 원본" allow="microphone; clipboard-write" referrerpolicy="no-referrer" src="'+E(url)+'"></iframe>';
+ }
+ show('groupref');
+ var clean=location.pathname+location.search+'#'+key;
+ if(location.hash!=='#'+key)history.replaceState(history.state,'',clean);
+}
 var _go=window.go;
 window.go=function(k){
+  if(Object.hasOwn(GROUP_PANELS,k)){groupView(k);return;}
+  if(k==='home'){if(location.hash.indexOf('#group-')===0)history.replaceState(history.state,'',location.pathname+location.search);show('home');return;}
   if(k==='appguide'){renderAppGuide();show('appguide');return}
   if(k==='msg'){renderMsg();show('msg');return}
   if(k==='planmenu'){selectPlanDraft('manual');renderPlan();show('plan2');return}
