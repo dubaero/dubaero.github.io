@@ -1623,13 +1623,10 @@ body:has(#v-groupref:not([hidden]))>footer{display:none}
 #v-groupref{width:100%}
 </style>
 <script src="/giheung/workflow.js?v=2" defer></script>
-<style id="gh-desktop-lesson">
-#v-home [data-gh=mind] .ic{color:#a84231}#v-home [data-gh=heart] .ic{color:#ad3c53;fill:#f6c9d4}
-@media(min-width:901px){#v-home .cols3>.bx:nth-child(2) .qgrid{grid-template-rows:repeat(3,minmax(0,1fr));align-content:stretch}#v-home .qgrid .qm{min-height:0;padding:4px 3px;gap:2px}#v-home .qgrid .qm .ic{width:20px;height:20px}}
-.ag-slide{background:#f8f5ec;border:1px solid #cfdbd0;border-radius:14px;padding:clamp(12px,2.3vw,27px);color:#203c33}.ag-slide>header{border-left:5px solid #d57554;padding-left:12px;margin-bottom:12px}.ag-slide header span,.ag-pick>span{font-weight:850;letter-spacing:.02em;color:#285e4c;font-size:12px}.ag-slide h3{font-size:clamp(20px,3vw,34px);line-height:1.2;margin:3px 0 6px}.ag-slide p{margin:2px 0}
-.ag-panel-row,.ag-pick>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.ag-panel{border:1px solid #c7dad0;border-radius:10px;background:#edf6f0;padding:13px;color:#244c3c;min-width:0}.ag-pc{background:#fff0e4;border-color:#efd3bc;color:#713e2e}.ag-panel svg{width:72px;float:right;margin:0 0 3px 7px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:3}.ag-panel h4{margin:3px 0 5px;font-size:21px}.ag-panel p{font-size:13px;overflow-wrap:anywhere}.ag-chip{display:inline-block;border-radius:99px;background:#fff;padding:2px 8px;font-size:11px;font-weight:800}
-.ag-pick{margin:11px 0 7px}.ag-pick>div{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:4px;gap:7px}.ag-pick button{display:grid;text-align:left;gap:2px;background:#fff;border:1px solid #c9d9cf;border-radius:7px;padding:7px;color:#27493d;font-size:12px;line-height:1.4}.ag-pick button strong{font-size:14px}.ag-slide-note{font-size:12px}.ag-slide-end{display:flex;gap:5px 12px;align-items:center;flex-wrap:wrap;margin-top:8px}.ag-slide-end .btn{color:#fff;background:#22604c;font-weight:800}.ag-slide-end small a{color:#305b4e}
-@media(max-width:650px){.ag-panel-row,.ag-pick>div{grid-template-columns:1fr}.ag-panel svg{width:58px}}
+<style id="gh-clean-app-menu">
+#v-home [data-gh=mind] .flame{font-size:18px;line-height:1}#v-home [data-gh=heart] .ic{color:#E5568C;fill:#F7A6C4}
+@media(min-width:901px){#v-home .cols3>.bx:nth-child(2) .qgrid{grid-template-rows:repeat(3,minmax(0,1fr));align-content:stretch}#v-home .qgrid .qm{min-height:0;padding:5px 3px;gap:4px}#v-home .qgrid .qm .ic{width:20px;height:20px}}
+#v-appguide .ag-install-links{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}#v-appguide .ag-existing{margin-top:10px;color:#315749}#v-appguide .ag-existing summary{font-size:13px;font-weight:750;cursor:pointer}
 </style>
 </head>
 <body>
@@ -6640,7 +6637,7 @@ function homeHTML(){
    ['event','','행사·체험','운영계획·안전계획 한 번에','event'],
    ['promo2','','홍보·안내','행사 후기·소식지·안내문·이미지','promo2'],
    ['img','','홍보 이미지','SNS 카드·소식지 삽화 프롬프트','img'],
-   ['appguide','','AI 데스크톱 앱','기존 설치 캡처·앱별 가이드','appguide']
+   ['appguide','','AI 앱 설치','','appguide']
   ];
   var L=R.map(function(x,i){
     var at=' data-gh="'+x[0]+'"'+(x[1]?' data-gh-project="'+x[1]+'"':'');
@@ -6652,9 +6649,9 @@ function homeHTML(){
   var left='<section class="bx"><div class="bx-h"><h2>서식 자료실</h2><span class="hint"><button type="button" data-gh="all">전체 보기 ›</button></span></div>'+
     '<div class="bx-b"><ul class="plist">'+L+'</ul></div></section>';
 
-  var Q=[['group-msg','문자·소통','후원·보호자 문자','msg'],['group-promo','홍보·안내','소식지·SNS','meg'],['group-donate','후원 관리','서식·감사 문자','hand'],['group-fridge','프롬프트 디자인실','냉장고 재료로','pen'],['group-life','프로그램·생활','여가·나들이·행사','bulb'],['group-log','프로그램 일지','여가·자립 진행 기록','pen'],['mind','빡침 번역기','공감·순화 문자','volcano'],['heart','마음챙김','쉬어가는 시간','heart'],['appguide','AI 데스크톱 앱','웹과 비교·설치','desktop']];
+  var Q=[['group-msg','문자·소통','msg'],['group-promo','홍보·안내','meg'],['group-donate','후원 관리','hand'],['group-fridge','프롬프트 디자인실','pen'],['group-life','프로그램·생활','bulb'],['group-log','프로그램 일지','pen'],['mind','빡침 번역기','flame'],['heart','마음챙김','heart'],['appguide','AI 앱 설치','desktop']];
   var mid='<section class="bx"><div class="bx-h"><h2>업무 바로가기</h2></div>'+
-    '<div class="qgrid">'+Q.map(function(x,i){return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+I(x[3])+'<b>'+E(x[1])+'</b><small>'+E(x[2])+'</small></button>'}).join('')+'</div>'+
+    '<div class="qgrid">'+Q.map(function(x,i){return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+(x[2]==='flame'?'<span class="flame" aria-hidden="true">🔥</span>':I(x[2]))+'<b>'+E(x[1])+'</b></button>'}).join('')+'</div>'+
     '<div class="bar2">'+
       '<button type="button" class="gprof" id="gh-org">'+I('home')+'<span><b>'+(o.set?E(o.name):'우리 복지관 정보 등록')+'</b><small>'+(o.set?(E(o.staff||'')||'모든 서식에 자동 입력 중'):'한 번 넣으면 모든 서식에 자동 입력')+'</small></span><em>'+(o.set?'바꾸기':'등록하기')+'</em></button>'+
       '<button type="button" class="grec" data-gh="rec">'+I('mic')+'<span><b>회의 녹음 서식 만들기</b><small>녹음 → 글 → 회의록·공문 초안</small></span><em>시작</em></button>'+
@@ -6728,7 +6725,7 @@ custom:{
 }
 };
 
-var AG_TAB='webdesk';
+var AG_TAB='install';
 var AG_APPS=[
  {id:'gpt',name:'ChatGPT',benefit:'서식·글·이미지 초안을 만들고, Chat·Work·Codex를 앱에서 전환해 쓸 수 있어요. 기능은 계정과 요금제에 따라 달라요.',download:'https://chatgpt.com/download/',help:'https://help.openai.com/en/articles/20001276-moving-to-the-new-chatgpt-desktop-app',steps:['공식 다운로드에서 Windows 또는 macOS를 고르세요.','내려받은 파일을 열거나, Microsoft Store가 열리면 설치를 누르세요.','앱을 실행하고 ChatGPT 계정으로 로그인하세요.']},
  {id:'gem',name:'제미나이',benefit:'일하던 화면에서 빠르게 질문하고, 문서·이메일 초안을 만들거나 이미지 내용을 물어볼 수 있어요.',download:'https://gemini.google/kr/desktop/',help:'https://support.google.com/gemini/answer/18263854?hl=ko',steps:['공식 다운로드에서 Windows 또는 macOS를 고르세요.','Windows에서는 GeminiSetup.exe를 열고 설치 안내를 따르세요.','시작 메뉴에서 Gemini를 열고 Google 계정으로 로그인하세요. Windows 바로 열기는 Alt + Space예요.']},
@@ -6748,41 +6745,21 @@ function agImage(name,alt){
  var url='/img/giheung/'+name+'.webp';
  return '<figure class="ag-box"><a href="'+url+'" target="_blank" rel="noopener" aria-label="원본 캡처 자료 크게 보기"><img class="ag-image" src="'+url+'" alt="'+E(alt)+'"></a><figcaption class="ag-caption">기존 강의 자료 · 2026.11.24 화면 기준 <a href="'+url+'" target="_blank" rel="noopener">크게 보기 ↗</a></figcaption></figure>';
 }
-function agDesktopBoard(){
- var art=function(path){return '<svg viewBox="0 0 96 68" aria-hidden="true"><rect x="4" y="4" width="88" height="53" rx="8"/>'+path+'</svg>';};
- var web=art('<path d="M4 17h88M14 11h1m6 0h1m6 0h1M18 28h55M18 37h41M18 46h28"/>');
- var desk=art('<path d="M35 65h26M48 57v8M19 17h30M19 26h22"/><rect x="46" y="25" width="33" height="20" rx="4"/><path d="M54 34h17"/>');
- return '<section class="ag-slide" aria-labelledby="ag-slide-title"><header><span>복지관 AI 실습 · PC편</span><h3 id="ag-slide-title">웹이랑 데스크톱 앱, 언제 뭘 쓰나요?</h3><p>처음 써 보거나 공용 PC라면 <b>웹</b>, 내 PC에서 업무 중 자주 꺼내 쓴다면 <b>데스크톱 앱</b>.</p></header>'+
- '<div class="ag-panel-row"><article class="ag-panel ag-web">'+web+'<span class="ag-chip">설치 없이 시작</span><h4>웹으로 사용</h4>'+
- '<p>브라우저에서 주소를 열고 로그인해요.</p><p><b>복지관 예시</b>　공용 PC에서 홍보글 초안 만들기</p><p><b>주의</b>　공용 PC를 떠날 때는 로그아웃</p></article>'+
- '<article class="ag-panel ag-pc">'+desk+'<span class="ag-chip">PC에 설치하고 사용</span><h4>데스크톱 앱</h4>'+
- '<p>시작 메뉴나 작업표시줄에서 열어요. 지원하는 앱은 단축키로 불러올 수 있어요.</p><p><b>복지관 예시</b>　계획서를 쓰다가 초안·요약 요청</p><p><b>주의</b>　기관 PC 설치 권한과 파일 접근 범위 확인</p></article></div>'+
- '<div class="ag-pick"><span>앱별로 무엇을 해볼까요?</span><div>'+[
- ['gpt','ChatGPT','질문은 Chat, 자료 조사·보고서 초안은 Work, 웹앱 수정은 Codex로.'],
- ['gem','제미나이','작업 중 바로 열어 질문하고 이메일·안내문 초안 만들기. Windows: Alt + Space.'],
- ['cla','Claude','긴 계획서 항목 정리. 지원되는 계정은 Cowork로 여러 단계 업무 맡기기.']
- ].map(function(x){return '<button type="button" data-ag-tab="'+x[0]+'"><strong>'+x[1]+'</strong><span>'+x[2]+'</span></button>';}).join('')+'</div></div>'+
- '<p class="ag-slide-note">설치한다고 모든 기능이 열리거나 인터넷 없이 작동하는 건 아니에요. 앱·운영체제·계정·기관 정책에 따라 기능이 다릅니다.</p>'+
- '<div class="ag-slide-end"><button type="button" class="btn" data-ag-tab="install">기존 설치 안내·다운로드 캡처 보기 →</button><small><a href="https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex" target="_blank" rel="noopener">OpenAI 도움말</a> · <a href="https://gemini.google/kr/desktop/" target="_blank" rel="noopener">Google 데스크톱 안내</a> · <a href="https://support.claude.com/en/articles/10065433-install-claude-desktop" target="_blank" rel="noopener">Claude 설치 도움말</a></small></div></section>';
-}
 function renderAppGuide(){
- var tabs=[['webdesk','웹 vs 데스크톱 앱'],['install','설치·원본 캡처'],['compare','AI 3종 비교'],['gpt','ChatGPT'],['gem','제미나이'],['cla','Claude']];
- var g=GI_APP_GUIDE,h='';
- if(AG_TAB==='webdesk'){h=agDesktopBoard();}
- else if(AG_TAB==='install'){
-  h=agImage('apps','ChatGPT, 제미나이, Claude 공식 다운로드 화면을 캡처한 데스크톱 앱 3종 설치 안내')+agAppCards(AG_APPS);
+ var g=GI_APP_GUIDE,h='',isInstall=AG_TAB==='install';
+ if(isInstall){
+  h=agImage('apps','원본 강의 장표: ChatGPT, 제미나이, Claude 데스크톱 앱들의 장점 및 다운로드 화면과 설치 방법')+
+    '<div class="ag-install-links">'+AG_APPS.map(function(a){return '<a class="ag-open" target="_blank" rel="noopener" href="'+a.download+'">'+E(a.name)+' 다운로드 ↗</a>';}).join('')+'</div>';
  }else if(AG_TAB==='compare'){
-  h='<section class="ag-box"><h3>복지관 업무에서 이렇게 골라요</h3>'+agTable(g.cmp.head,g.cmp.rows.filter(function(r){return !/무료|유료/.test(r[0]);}))+'<ul>'+g.cmp.rule.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></section>'+
-    agImage('gpt5','ChatGPT Chat·Project·Work·Codex·Dot 기능 5단계 비교 교육 장표');
+  h=agImage('gpt5','기존 강의 장표: ChatGPT Chat·Project·Work·Codex·Dot 5단계 비교');
  }else{
   var app=AG_APPS.find(function(a){return a.id===AG_TAB;}),d=g.apps[AG_TAB];
-  h=agAppCards([app])+'<p class="ag-note">아래는 당시 강의 실습 예제예요. 화면과 기능 사용 범위는 계정·요금제·업데이트에 따라 달라질 수 있어요.</p><div class="ag-cards">'+d.how.map(function(w,i){
+  h=agAppCards([app])+'<div class="ag-cards">'+d.how.map(function(w,i){
    return '<section class="ag-box"><h3>'+E(w.t)+'</h3><p>'+E(w.when)+'</p><ol>'+w.steps.map(function(k){return '<li>'+k+'</li>';}).join('')+'</ol>'+outBlock('실습 예시','ag-'+AG_TAB+i,w.p.replace(/\{사업\}/g,'[사업명]'))+'</section>';
   }).join('')+'</div>';
  }
- $('#v-appguide').innerHTML='<section class="ag gi-task"><div class="ag-title"><button type="button" class="vback" data-home>← 업무도우미</button><h2>AI 데스크톱 앱</h2></div>'+
-  '<nav aria-label="데스크톱 앱 가이드" class="gh-subtabs">'+tabs.map(function(t){return '<button type="button" data-ag-tab="'+t[0]+'" class="'+(AG_TAB===t[0]?'on':'')+'" aria-pressed="'+(AG_TAB===t[0])+'">'+E(t[1])+'</button>';}).join('')+'<button type="button" data-gh="aiset">맞춤 설정 캡처 가이드 ↗</button></nav>'+
-  (AG_TAB==='webdesk'?'':'<p class="ag-note">기존 강의 자료는 당시 화면입니다. 현재 설치 화면이 다르면 공식 다운로드·도움말을 기준으로 보세요.</p>')+h+'</section>';
+ var more=isInstall?'<details class="ag-existing"><summary>기존 AI 앱 가이드</summary><nav class="gh-subtabs" aria-label="기존 가이드">'+[['compare','기능 비교 장표'],['gpt','ChatGPT'],['gem','제미나이'],['cla','Claude']].map(function(t){return '<button type="button" data-ag-tab="'+t[0]+'">'+E(t[1])+'</button>';}).join('')+'<button type="button" data-gh="aiset">맞춤설정 가이드</button></nav></details>':'<button type="button" class="btn mini" data-ag-tab="install">← AI 앱 설치</button>';
+ $('#v-appguide').innerHTML='<section class="ag gi-task"><div class="ag-title"><button type="button" class="vback" data-home>← 업무도우미</button><h2>'+(isInstall?'AI 앱 설치':'AI 앱 가이드')+'</h2></div>'+h+more+'</section>';
 }
 
 function renderHome(){var h=$('#v-home');if(!h)return;h.innerHTML=homeHTML();bindSearch();}
@@ -7561,7 +7538,7 @@ function renderGm(){
 }
 
 /* ---------- ⑥ 마음·사진 (4탭) ---------- */
-var MIND=[['vent','🌋 빡침공감 번역기'],['heart','♥ 마음챙김'],['card','응원엽서'],['studio','나만의 사진관']];
+var MIND=[['vent','🔥 빡침 번역기'],['heart','♥ 마음챙김'],['card','응원엽서'],['studio','나만의 사진관']];
 function openMind(tab){openMindLegacy(tab||'vent');}
 function openMindWork(tab){gmMode=tab;renderGm();show('mindwork');}
 function openMindLegacy(tab){
@@ -7579,7 +7556,7 @@ function openMindLegacy(tab){
       frame=document.createElement('iframe');frame.className='legacy-tool-frame';frame.id='mind-frame-'+tab;
       frame.title=tab==='vent'?'빡침공감 번역기':'마음 쉼터';
       frame.setAttribute('allow','microphone');
-      frame.src='/giheung/tools/?v=gh-care-6#'+tab;host.appendChild(frame);
+      frame.src='/giheung/tools/?v=gh-care-7#'+tab;host.appendChild(frame);
     }
     frame.hidden=false;show('mind');return;
   }
@@ -7604,7 +7581,7 @@ function ensure(id,html){var n=$('#v-'+id);if(!n){n=document.createElement('div'
 function boot(){
   /* 새 화면 틀 만들기 */
   ensure('appguide','');ensure('msg','');ensure('plan2','');ensure('promo2','');ensure('promomenu','');ensure('donate','');ensure('donwork','');ensure('planmenu','');ensure('mindwork','');
-  ensure('mind','<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음돌봄·사진관</h2><span class="tag">업무 감정 정리 · 응원엽서 · 잠깐 쉼 · 사진 실습</span></div><div class="mtabs" role="tablist">'+MIND.map(function(x){return '<button type="button" role="tab" aria-selected="false" data-mt="'+x[0]+'">'+x[1]+'</button>'+(x[0]==='heart'?'<button type="button" data-gh="appguide">AI 데스크톱 앱</button>':'')}).join('')+'</div><button type="button" class="btn mini mind-work-alt" id="mind-work-alt" hidden>복지관 상황 보기</button><div id="mind-body"></div>');
+  ensure('mind','<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음돌봄·사진관</h2><span class="tag">업무 감정 정리 · 응원엽서 · 잠깐 쉼 · 사진 실습</span></div><div class="mtabs" role="tablist">'+MIND.map(function(x){return '<button type="button" role="tab" aria-selected="false" data-mt="'+x[0]+'">'+x[1]+'</button>'+(x[0]==='heart'?'<button type="button" data-gh="appguide">AI 앱 설치</button>':'')}).join('')+'</div><button type="button" class="btn mini mind-work-alt" id="mind-work-alt" hidden>복지관 상황 보기</button><div id="mind-body"></div>');
   /* 홈 그리기 + 기존 홈 요소 정리 */
   var old=$('#main4');if(old)old.remove();
   if(typeof VIEWS!=='undefined'){['vent','heart','studio'].forEach(function(k){var i=VIEWS.indexOf(k);if(i>-1)VIEWS.splice(i,1)})}
@@ -7852,7 +7829,7 @@ var _go=window.go;
 window.go=function(k){
   if(Object.hasOwn(GROUP_PANELS,k)){groupView(k);return;}
   if(k==='home'){if(location.hash.indexOf('#group-')===0)history.replaceState(history.state,'',location.pathname+location.search);show('home');return;}
-  if(k==='appguide'){AG_TAB='webdesk';renderAppGuide();show('appguide');return}
+  if(k==='appguide'){AG_TAB='install';renderAppGuide();show('appguide');return}
   if(k==='msg'){renderMsg();show('msg');return}
   if(k==='planmenu'){selectPlanDraft('manual');renderPlan();show('plan2');return}
   if(k==='plan2'){renderPlan();show('plan2');return}
