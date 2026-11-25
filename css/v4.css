@@ -114,9 +114,10 @@ button,input{font:inherit}
 .lsearch svg{width:22px;height:22px;flex:none}
 .lsearch input{flex:1;min-width:0;width:100%;border:0;outline:none;background:transparent;font-size:18px;color:var(--navy)}
 .lsearch input::placeholder{color:#7A8591}
-.ltabs{display:flex;gap:6px;flex-wrap:wrap}
-.ltabs button{font-size:14.5px;font-weight:500;padding:6px 15px;border-radius:999px;border:1px solid #C9D3DD;background:#fff;color:var(--sub);cursor:pointer}
-.ltabs button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.ltabs{display:flex;gap:5px;flex-wrap:wrap}
+.ltabs button{font-size:13.5px;font-weight:500;padding:5px 12px;border-radius:999px;border:1px solid #E2E8F0;background:#fff;color:#4A5562;cursor:pointer}
+.ltabs button:hover{background:#F7F9FC;border-color:#C9D6E4}
+.ltabs button.on{background:#fff;border-color:var(--navy);color:var(--navy);font-weight:700}
 .lcount{font-size:14.5px;color:var(--muted);margin-left:auto}
 .lrows{background:#fff;border:1px solid #E1E6EC;border-radius:var(--radius);overflow:hidden}
 .lrow{display:grid;grid-template-columns:170px 64px minmax(0,1fr) minmax(0,1.4fr) 120px;gap:16px;align-items:center;padding:14px 22px;border-bottom:1px solid #EEF1F4;font-size:15.5px}
@@ -514,16 +515,16 @@ a.lg{text-decoration:none;text-align:center}
 }
 
 /* 2026.11.25 강의 자료실 상단 카드: PC 한 줄 6칸 × 2줄(총 12개)
-   2026.11.25 서정님: "아래 탭은 한 가지 색으로" → 카드마다 무지개색으로 칠하지 않고 은은한 민트 한 톤으로 통일 */
-#room-cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-flow:row;gap:12px}
-#room-cards .room{flex:0 0 auto;width:auto;min-width:0;border:1px solid #CBEAE0;border-top:3px solid #8FD6C1;border-radius:10px;background:#F2FBF8}
-#room-cards .room:hover{background:#E7F7F1;border-color:#9FDCC9;transform:translateY(-2px)}
-#room-cards .room-date{color:#4C6E63}
-#room-cards .room-info{padding:9px 11px 10px;row-gap:2px}
-#room-cards .room-date{font-size:11.5px;letter-spacing:-.02em}
-#room-cards .room-org{font-size:14px;margin-top:3px;line-height:1.32;font-weight:700}
-#room-cards .room-edu{font-size:12.5px;-webkit-line-clamp:2;line-height:1.4}
-#room-cards .room-logo{height:20px;max-width:36px;right:8px;top:7px}
+   2026.11.25 서정님: "민트·하늘 배경 빼고 깔끔한 하얀색 + 연한 테두리로 통일, 카드도 슬림하게" */
+#room-cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-flow:row;gap:11px}
+#room-cards .room{flex:0 0 auto;width:auto;min-width:0;border:1px solid #E2E8F0;border-top:1px solid #E2E8F0;border-radius:10px;background:#FFFFFF}
+#room-cards .room:hover{background:#FFFFFF;border-color:#B9C6D6;box-shadow:0 4px 12px rgba(16,32,56,.08);transform:translateY(-2px)}
+#room-cards .room-date{color:#64748B}
+#room-cards .room-info{padding:8px 10px 9px;row-gap:1px}
+#room-cards .room-date{font-size:11px;letter-spacing:-.02em}
+#room-cards .room-org{font-size:13.5px;margin-top:2px;line-height:1.3;font-weight:700}
+#room-cards .room-edu{font-size:12px;-webkit-line-clamp:2;line-height:1.38}
+#room-cards .room-logo{height:18px;max-width:32px;right:7px;top:6px}
 @media (max-width:1100px){
   #room-cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
   #room-cards .room-org{font-size:15.5px}
@@ -533,30 +534,32 @@ a.lg{text-decoration:none;text-align:center}
   #room-cards{display:grid;grid-template-columns:none;grid-template-rows:repeat(2,auto);grid-auto-flow:column;grid-auto-columns:58%;gap:10px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;margin-right:-18px;padding:0 18px 8px 0}
   #room-cards::-webkit-scrollbar{display:none}
   #room-cards .room{scroll-snap-align:start;border-radius:10px}
-  #room-cards .room-info{padding:9px 11px 10px}
-  #room-cards .room-date{font-size:11.5px}
-  #room-cards .room-org{font-size:15px}
-  #room-cards .room-edu{font-size:13px}
+  #room-cards .room-info{padding:8px 10px 9px}
+  #room-cards .room-date{font-size:11px}
+  #room-cards .room-org{font-size:14.5px}
+  #room-cards .room-edu{font-size:12.5px}
 }
-/* 2026.11.25 아래 출강 후기 카드: 세로 카드(위 3/4 이미지 + 아래 1/4 두 줄 텍스트),
-   카드 전체는 정사각이 아니라 가로가 살짝 긴 직사각형 — PC 216×174 / 모바일 176×144.
-   위 3/4 = 블로그 썸네일 원본을 자르지 않고(object-fit:contain) 연한 여백 안에 중앙 정렬(사람 머리·글자 1px도 안 잘림)
-   아래 1/4 = 강의명 한 줄 + `날짜 · 기관` 한 줄, 넘치면 말줄임(…) */
-.lfx4 .lfx-item{display:flex;flex-direction:column;align-items:stretch;gap:0;width:216px;height:174px;padding:0;background:#fff;border:1px solid #E1E6EC;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(16,32,56,.05)}
-.lfx4 .lfx-item img{display:block;width:100%;height:75%;flex:0 0 75%;aspect-ratio:auto;object-fit:contain;object-position:center;background:#F4F7FA;border:0;border-radius:0}
-.lfx4 .lfx-body{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;height:25%;flex:0 0 25%;padding:0 9px;background:#fff;border-top:1px solid #EDF1F5}
-.lfx4 .lfx-ttl{display:block;font-size:12px;line-height:1.3;font-weight:700;color:var(--navy);letter-spacing:-.02em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lfx4 .lfx-meta{display:block;font-size:10px;line-height:1.3;font-weight:500;color:#6C7C88;letter-spacing:-.02em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 2026.11.25 아래 출강 후기 카드: 가로가 살짝 더 긴 직사각형 · 이미지가 좌우 꽉 참(회색 여백 0)
+   2026.11.25 서정님: "카드는 조금 길게 두고, 이미지는 좌우 빈 공간 없이 꽉 차게"
+   → PC 224x198 (이미지 224x154 + 아래 텍스트 44) / 모바일 184x166 (이미지 184x126 + 텍스트 40)
+     이미지는 object-fit:cover + object-position:center 35% 로 좌우 여백 없이 채움(사람 머리·글자 잘림 최소화)
+     아래 = 강의명 한 줄 + `날짜 · 기관` 한 줄, 넘치면 말줄임(...) */
+.lfx4 .lfx-item{display:flex;flex-direction:column;align-items:stretch;gap:0;width:224px;height:198px;padding:0;background:#fff;border:1px solid #E1E6EC;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(16,32,56,.05)}
+.lfx4 .lfx-item img{display:block;width:100%;height:auto;flex:0 0 154px;aspect-ratio:auto;object-fit:cover;object-position:center 35%;background:#F4F7FA;border:0;border-radius:0}
+.lfx4 .lfx-body{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;height:auto;flex:1 1 auto;padding:0 8px;background:#fff;border-top:1px solid #EDF1F5}
+.lfx4 .lfx-ttl{display:block;font-size:12px;line-height:1.25;font-weight:700;color:var(--navy);letter-spacing:-.02em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lfx4 .lfx-meta{display:block;font-size:9.5px;line-height:1.25;font-weight:500;color:#6C7C88;letter-spacing:-.02em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:760px){
-  .lfx4 .lfx-item{width:176px;height:144px;border-radius:9px}
-  .lfx4 .lfx-body{gap:1px;padding:0 8px}
-  .lfx4 .lfx-ttl{font-size:11.5px;line-height:1.3}
-  .lfx4 .lfx-meta{font-size:10px;line-height:1.3}
+  .lfx4 .lfx-item{width:184px;height:166px;border-radius:9px}
+  .lfx4 .lfx-item img{flex:0 0 126px}
+  .lfx4 .lfx-body{height:auto;flex:1 1 auto;gap:1px;padding:0 7px}
+  .lfx4 .lfx-ttl{font-size:11.5px;line-height:1.25}
+  .lfx4 .lfx-meta{font-size:9px;line-height:1.25}
 }
-/* 모바일에서는 예전 규칙(#room-cards .room{border-top:navy!important})이 남아 있어 민트로 다시 못박기 */
+/* 모바일에서는 예전 규칙(#room-cards .room{border-top:navy!important})이 남아 있어 흰색으로 다시 못박기 */
 @media (max-width:760px){
-  #room-cards .room{border:1px solid #CBEAE0!important;border-top:3px solid #8FD6C1!important;background:#F2FBF8}
-  #room-cards .room:hover{background:#E7F7F1}
+  #room-cards .room{border:1px solid #E2E8F0!important;border-top:1px solid #E2E8F0!important;background:#FFFFFF}
+  #room-cards .room:hover{background:#FFFFFF}
 }
 
 /* 2026.11.25 홈 첫 화면 브랜드 슬로건 한 줄 */
@@ -604,7 +607,7 @@ a.lg{text-decoration:none;text-align:center}
 }
 /* 2026.11.25 강사 소개 태그 4개: 무지개색 대신 페이지 안 카드와 같은 은은한 민트 한 가지 */
 .ab4-tags li{background:#F2FBF8;border:1px solid #CBEAE0;color:#2E6A58;font-weight:600}
-/* 2026.11.25 강의 자료실 필터 탭: 네 개 다 같은 민트, 고른 것(Active)만 진하게 */
-.ltabs button{background:#F2FBF8;border-color:#CBEAE0;color:#2E6A58}
-.ltabs button:hover{background:#E7F7F1;border-color:#9FDCC9}
-.ltabs button.on{background:#BFE8DA;border-color:#7FCDB5;color:#0E5B47;font-weight:700}
+/* 2026.11.25 강의 자료실 필터 탭: 네 개 다 흰 배경 + 연한 테두리, 고른 것(Active)만 얇은 네이비 테두리 + 진한 글씨 */
+.ltabs button{background:#FFFFFF;border-color:#E2E8F0;color:#4A5562}
+.ltabs button:hover{background:#F7F9FC;border-color:#C9D6E4}
+.ltabs button.on{background:#FFFFFF;border-color:#17304F;color:#17304F;font-weight:700}
