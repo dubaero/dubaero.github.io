@@ -20,12 +20,55 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/v4-header.css?v=12">
 <link rel="stylesheet" href="/css/v4.css?v=38">
+<style>
+/* 2026.11.25 강사 소개 개편: 영어 ABOUT·중복 소속 삭제, 핵심 가치 두 줄로, 히어로 압축,
+   브랜드(Digital & You) 카드가 첫 화면 하단에 걸치도록 여백 정리 (이 페이지에만 적용) */
+.ab4{padding:52px 0 40px;min-height:0;display:block}
+.ab4 .w4{grid-template-columns:286px minmax(0,1fr);gap:54px;align-items:center;width:100%}
+.ab4-txt{gap:11px;justify-content:flex-start}
+.ab4-lead{font-size:24px;margin-top:0}
+.ab4-values{margin:4px 0 0;display:flex;flex-direction:column;gap:2px}
+.ab4-values b{display:block;font-size:21px;font-weight:700;letter-spacing:-.03em;color:var(--navy);line-height:1.42}
+.ab4-values span{display:block;font-size:16px;font-weight:600;letter-spacing:-.02em;color:#2E6A58;line-height:1.5}
+.ab4-tags{margin-top:8px}
+.ab4-motto{margin-top:2px}
+.dy4{padding:42px 0 46px}
+.dy4 .sh{margin-bottom:12px}
+.dy4 .sh .kick{margin-bottom:0}
+.dy-hero{grid-template-columns:auto auto;justify-content:center;column-gap:34px}
+@media (max-width:900px){
+  .ab4{padding:32px 0 26px}
+  .ab4 .w4{grid-template-columns:214px minmax(0,1fr);gap:30px}
+  .ab4-lead{font-size:22px}
+  .ab4-values b{font-size:19px}
+  .ab4-values span{font-size:15px}
+  .dy4{padding:26px 0 30px}
+  .dy-hero{grid-template-columns:1fr;justify-content:stretch}
+}
+@media (max-width:640px){
+  .ab4{padding:20px 0 18px}
+  .ab4 .w4{grid-template-columns:1fr;gap:16px}
+  .ab4-photo{max-width:150px}
+  .ab4-txt{gap:8px}
+  .ab4-name{gap:2px 10px}
+  .ab4-name h1{font-size:31px}
+  .ab4-name span{font-size:15.5px}
+  .ab4-lead{font-size:19.5px;line-height:1.4}
+  .ab4-values{margin-top:2px}
+  .ab4-values b{font-size:16.5px}
+  .ab4-values span{font-size:13.5px}
+  .ab4-tags{gap:6px;margin-top:4px}
+  .ab4-tags li{font-size:12.5px;padding:5px 10px}
+  .ab4-motto{font-size:14px}
+  .dy4{padding:20px 0 24px}
+}
+</style>
 </head>
 <body><script src="/js/fs.js?v=1"></script>
 
 <header class="gh">
   <div class="gh-in">
-    <a class="gh-logo" href="/" aria-label="이서정 AI 강사 홈"><img class="gh-logo-mark" src="/img/du-logo.png?v=2" alt="" width="42" height="34" decoding="async"><span class="gh-logo-tx"><b>이서정</b><small>오늘두AI · 디지털이음연구소</small></span></a>
+    <a class="gh-logo" href="/" aria-label="이서정 AI 강사 홈"><img class="gh-logo-mark" src="/img/du-logo.png?v=3" alt="" width="42" height="34" decoding="async"><span class="gh-logo-tx"><b>이서정</b><small>오늘두AI · 디지털이음연구소</small></span></a>
     <nav class="gh-nav" aria-label="주 메뉴">
       <a href="/lectures/">강의 자료실</a>
       <a href="/about/" aria-current="page">강사 소개</a>
@@ -42,11 +85,9 @@
   <div class="w4">
     <figure class="ab4-photo"><img src="/img/profile.jpg?v=2" alt="이서정 강사 프로필 사진" width="476" height="707"></figure>
     <div class="ab4-txt">
-      <span class="kick">ABOUT</span>
       <div class="ab4-name"><h1>이서정</h1><span>생성형 AI 전문강사</span></div>
-      <p class="ab4-org">오늘두AI · 디지털이음연구소</p>
       <p class="ab4-lead">AI를 쉽게 배우고, <em>나답게 활용하도록.</em></p>
-      <p class="ab4-intro">교육기관의 목적과 대상에 맞게 맞춤형 교육을 설계합니다.</p>
+      <div class="ab4-values"><b>사람 중심 · 디지털 기술</b><span>연결과 이음 · 실천과 활용 · 지속적인 성장</span></div>
       <ul class="ab4-tags"><li>생성형 AI 실무</li><li>업무 문서 자동화</li><li>AI 이미지 · 카드뉴스</li><li>기관 맞춤형 역량 강화</li></ul>
       <p class="ab4-motto">강의 모토<b>하면 된다, 될 때까지 해본다.</b></p>
     </div>
@@ -55,7 +96,7 @@
 
 <section class="dy4" id="brand" aria-label="브랜드 스토리">
   <div class="w4">
-    <div class="sh"><div><span class="kick">BRAND STORY</span><h2>Digital &amp; You</h2><p>기술의 중심에 사람을, 배움의 끝에 변화를.</p></div></div>
+    <div class="sh"><div><span class="kick">BRAND STORY</span></div></div>
     <div class="dy-hero">
       <div class="dy-du">
         <div class="dy-d"><b>D</b><span class="dy-lab"><em>Digital</em><span class="dy-sub">가능성을 여는 기술</span></span></div>
@@ -67,12 +108,6 @@
         <p>사람과 디지털을 잇고, 배움과 실천을 잇습니다. 오늘의 배움을 내일의 가능성으로.</p>
       </div>
     </div>
-    <ul class="dy-vals">
-      <li><em>01</em><b>사람 중심</b><p>기술의 발전보다 기술을 활용하는 사람의 성장을 중요하게 생각합니다.</p></li>
-      <li><em>02</em><b>연결과 이음</b><p>사람과 기술, 지식과 경험, 교육과 실무 사이의 간격을 줄입니다.</p></li>
-      <li><em>03</em><b>실천과 활용</b><p>아는 것에서 끝나지 않고 직접 만들고 활용하는 교육을 추구합니다.</p></li>
-      <li><em>04</em><b>지속적인 성장</b><p>교육이 끝난 이후에도 스스로 활용하고 성장할 수 있도록 돕습니다.</p></li>
-    </ul>
   </div>
 </section>
 
