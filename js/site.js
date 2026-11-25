@@ -182,8 +182,8 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   function renderCards(){if(!cards)return;cards.innerHTML='';if(rollT){clearInterval(rollT);rollT=null;}
     var all=LECTURES.filter(function(L){return L.card;}).concat(LECTURES.filter(function(L){return L.st!=='예정'&&!L.card;}));
     rollWide=window.innerWidth>1100;
-    /* 2026.11.25: 상단 하얀 카드는 6개를 3칸 × 2줄로 (모바일도 2줄 가로 스크롤). 나머지는 아래 출강 목록에서 */
-    all.slice(0,6).forEach(function(L){cards.appendChild(mkRoom(L));});
+    /* 2026.11.25: 상단 하얀 카드는 12개를 한 줄 6칸 × 2줄로 (모바일은 2줄 가로 스크롤). 나머지는 아래 출강 목록에서 */
+    all.slice(0,12).forEach(function(L){cards.appendChild(mkRoom(L));});
   }
   renderCards();
   var rollRT=null;window.addEventListener('resize',function(){clearTimeout(rollRT);rollRT=setTimeout(function(){if(rollWide||window.innerWidth>1100)renderCards();},250);});
