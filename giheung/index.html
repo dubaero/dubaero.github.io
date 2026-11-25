@@ -2953,6 +2953,7 @@ var DW=[
   more:[['절차 인포그래픽','신청부터 서비스 제공까지 절차를 이용자용 인포그래픽 구성안 3가지로 만들어 줘.']],
   rv:'실적을 보고받는 지자체 담당자'},
  {id:'press',g:'pr',t:'보도자료',when:'행사·성과 보도 · 언론 문의',
+  full:'# 장애인복지관 보도자료 작성 지침\n\n## 역할\n너는 지역 언론에 복지기관 보도자료를 15년간 써 온 홍보 담당자다. 확인된 사실만으로, 읽는 사람이 30초 안에 무슨 일이 있었는지 알게 쓴다.\n\n## 순서 — 받은 정보를 다시 묻지 말고 이 순서로\n① 기본정보 확인: 행사·사업명 / 일시·장소 / 참여 인원(실인원) / 주최·주관 / 담당 연락처. 빈 칸만 한 번에 질문.\n② 제목 3안: 사실 위주 30자 이내, 낚시성·과장 표현 금지.\n③ 리드 1문단: 누가·무엇을·언제·어디서·왜를 한 문단에.\n④ 본문 3~4문단: 무엇을 했는지 → 참여자 반응(이용자 표현은 가명) → 기관의 의미·향후 계획.\n⑤ 사진 설명 2~3장: 장면을 객관적으로. 얼굴 게시 동의 여부를 함께 메모.\n⑥ 검수표: 기관 명칭·인원·날짜·장소·연락처가 자료와 같은지 대조.\n\n## 규칙\n- 자료에 없는 숫자·날짜·인용은 만들지 말고 [확인 필요]로 둔다.\n- 이용자 실명·연락처·상담 사연·동의 없는 얼굴 사진은 쓰지 않는다.\n- "최고", "유일", "감동적인" 같은 주관·과장 표현은 뺀다.\n- 장애를 결핍이나 극복 서사로 쓰지 않고, 환경의 장벽과 참여의 관점으로 쓴다.\n- 마지막에 담당자에게 확인할 것 3가지를 적는다.',
   role:'지역 언론에 복지기관 보도자료를 15년간 써 온 홍보 담당자',
   ctx:'{사업} 보도자료를 써',
   rules:['제목은 사실 위주로 30자 이내, 낚시성 표현은 쓰지 마.','리드는 누가·무엇을·언제·어디서·왜를 한 문단에 담아.','사진 설명은 장면을 객관적으로 쓰고, 얼굴 게시 동의 여부를 메모해.','과장·최고·유일 같은 표현과 주관적 평가는 빼고, 확인된 사실만 써.'],
@@ -3318,7 +3319,7 @@ DW_NOTE.full='<b>통합 지침</b> 이 지침 하나로 8가지 홍보물을 모
  var a=DW_X.pr.indexOf('all');if(a>=0)DW_X.pr.splice(a,1);DW_X.pr.splice(1,0,'all');
 })();
 function dwInstr(d){
-  if(d.full){DWTXT.ins=d.full;return '<div class="ins">'+row(esc(d.full).replace(/\n/g,'<br>'),DW_NOTE.full)+'</div>';}
+  if(d.full){DWTXT.ins=d.full;return '<div class="ins">'+row(esc(d.full).replace(/\n/g,'<br>'),d.id==='press'?DW_NOTE.one:DW_NOTE.full)+'</div>';}
   var role=dwF(d.role,d),ctx=dwF(d.ctx,d),txt=d.id==='blog',com=txt?DW_COMMON.prText:DW_COMMON[d.g];
   var lines=(com||[]).concat(d.rules||[]).map(function(x){return '- '+dwF(x,d);}),img=d.g==='pr'&&!txt;
   DWTXT.ins='너는 '+role+'야.\n'+ctx+'.\n'+lines.join('\n')+(img?'\n\n[디자인 스타일]\n'+DW_STYLE.join('\n'):'');
@@ -3521,7 +3522,7 @@ function dwFullHtml(t,note){
  if(r2)h+=row(hl(r2.trim()),DW_NOTE.ctx);
  return h+row((rest.trim()?br(rest.trim())+'<br><br>':'')+br(t.slice(e).replace(/^\n+/,'')))+'</div>';}
 var _dwInstr1109b=dwInstr;
-dwInstr=function(d){var h=_dwInstr1109b(d);if(!d.fullT&&!d.full)return h;return dwFullHtml(DWTXT.ins,d.fullT?DW_NOTE.one:DW_NOTE.full);};
+dwInstr=function(d){var h=_dwInstr1109b(d);if(!d.fullT&&!d.full)return h;return dwFullHtml(DWTXT.ins,(d.fullT||d.id==='press')?DW_NOTE.one:DW_NOTE.full);};
 
 /* ===== 2026.11.09 수정 13: 나에게 보내는 엽서 — 문구 고르기·디자인 고르기·앞뒷면 선물 엽서 ===== */
 var PC_HG=[["승진·커리어", ["승진해서 팀을 이끄는 나", "관장·관리자가 된 나", "가족상담 전문가가 된 나", "자격증·학위를 딴 나", "후배들이 닮고 싶은 선배", "AI로 일 잘하는 업무 달인"]], ["성공·창업", ["내 상담소·센터를 연 나", "강사·컨설턴트로 활동하는 나", "책을 낸 작가", "가족 프로그램 기획 전문가로 이름난 나", "공모 사업을 척척 따내는 나", "새로운 분야에 도전한 나"]], ["돈·생활", ["경제적으로 여유로운 나", "내 집을 마련한 나", "빚 없이 차곡차곡 저축하는 나", "노후 준비가 든든한 나"]], ["가족·관계", ["가족과 웃음이 넘치는 집", "아이가 자랑스러워하는 엄마·아빠", "부모님께 효도하는 나", "좋은 사람들과 함께하는 나"]], ["나·건강", ["건강하고 활기찬 나", "마음이 단단하고 편안한 나", "꾸준히 운동하는 나", "하고 싶던 공부를 마친 나"]], ["여행·취미", ["가고 싶던 나라를 여행하는 나", "취미로 작품 전시를 연 나", "악기·그림·춤을 즐기는 나", "봉사하며 나누는 삶"]]];
