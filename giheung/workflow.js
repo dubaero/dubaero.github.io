@@ -3,7 +3,7 @@
 "use strict";
 global.mountGiheungWorkflow=function(host,options){
  const root=host.attachShadow({mode:"open"}),page=global.document;
- const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=11";
+ const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=12";
  const body=page.createElement("div");body.className="group-body";body.innerHTML='<div class="wrap"><main id="app"></main></div>';
  root.append(style,body);
  const document={
@@ -4140,7 +4140,7 @@ const GH_PROMO_CHANNELS=BY["sns-post"].chips.find(x=>x.k==="where").opts;
 const GH_PROMO_SNS="인스타그램·블로그·카카오톡";
 function ghPromoChannel(currentWhere){
  const channel=GH_SECTOR_STATE.promo.channel||currentWhere||GH_PROMO_CHANNELS[0];
- return '<fieldset class="gh-promo-channel"><legend>어디에 올리나요?</legend><div class="chips">'+GH_PROMO_CHANNELS.map(x=>'<button type="button" class="pill b3d'+(channel===x?' main':'')+'" data-gh-promo-channel="'+esc(x)+'" aria-pressed="'+(channel===x)+'">'+esc(x)+'</button>').join('')+'</div><p class="hint">채널과 글 종류를 고르면 오른쪽 원고가 바로 바뀌어요.</p></fieldset>';
+ return '<fieldset class="gh-promo-channel"><legend>어디에 올리나요?</legend><div class="chips">'+GH_PROMO_CHANNELS.map(x=>'<button type="button" class="pill b3d'+(channel===x?' main':'')+'" data-gh-promo-channel="'+esc(x)+'" aria-pressed="'+(channel===x)+'">'+esc(x)+'</button>').join('')+'</div><p class="hint">채널과 프로그램을 고르면 오른쪽에 지난 활동의 후기 원고가 바로 나와요.</p></fieldset>';
 }
 function ghFieldScenarios(c){
  const i={promo:0,msg:1,life:2}[c],g=GH_SECTOR_STATE[c].g;
@@ -4163,27 +4163,32 @@ function ghSmsDistrict(part){
 function ghDefaultScenario(c){
  const list=ghScenarios(c),saved=GH_SECTOR_STATE[c].picked;
  const ix=list.indexOf(saved||({msg:"참여 안내",promo:GH_PROMO_SNS}[c]));
+ if(ix<0&&c==="promo")return list.indexOf(saved&&![GH_PROMO_SNS,...GH_PROMO_VISUAL].includes(saved)?GH_PROMO_NOTICES[0]:GH_PROMO_SNS);
  return ix<0?0:ix;
 }
 const GH_PROMO_VISUAL=["카드뉴스","행사 포스터","홍보 이미지·삽화","인포그래픽"];
-const GH_PROMO_WRITING=[GH_PROMO_SNS,"참여자 모집 공지","일정 변경·휴강","이용·접근성 안내","월간 소식지"];
-function ghPromoControls(mode){
- const st=GH_SECTOR_STATE.promo,g=options.catalog[st.g],program=g.items[st.p],list=ghScenarios("promo");
- const choices=names=>'<div class="gh-scenario-grid">'+names.map(x=>'<button class="b3d" type="button" data-gh-scenario="promo:'+list.indexOf(x)+'" aria-pressed="'+(st.picked===x)+'">'+esc(x===GH_PROMO_SNS?'활동·행사 후기':x)+'</button>').join("")+'</div>';
- return '<div class="gh-promo-mode" role="group" aria-label="홍보 작업"><button type="button" data-gh-promo-mode="write" aria-pressed="'+(mode==="write")+'">게시 원고</button><button type="button" data-gh-promo-mode="visual" aria-pressed="'+(mode==="visual")+'">이미지 제작 프롬프트</button></div>'+
-  (mode==="write"?ghPromoChannel()+'<section class="gh-work-sector gh-promo-choices"><h3>어떤 글인가요?</h3>'+choices(GH_PROMO_WRITING)+'</section>':'<section class="gh-work-sector gh-promo-choices"><h3>어떤 이미지를 만들까요?</h3>'+choices(GH_PROMO_VISUAL)+'</section>')+
-  '<details class="gh-work-sector gh-promo-sector"'+(st.details?' open':'')+'><summary>복지관 사업별로 고르기'+(st.programOn?' · '+esc(program):'')+'</summary><div class="gh-sector-program">'+
-  '<label for="gh-promo-sector">사업 분야</label><select id="gh-promo-sector" data-gh-sector="promo">'+options.catalog.map((x,i)=>'<option value="'+i+'"'+(st.g===i?' selected':'')+'>'+esc(x.label)+'</option>').join('')+'</select>'+
-  '<label for="gh-sector-program">프로그램</label><select id="gh-sector-program" data-gh-program="promo"><option value="-1"'+(!st.programOn?' selected':'')+'>선택 안 함</option>'+g.items.map((x,i)=>'<option value="'+i+'"'+(st.programOn&&st.p===i?' selected':'')+'>'+esc(x)+'</option>').join('')+'</select>'+
-  '<a href="'+esc(ghServiceSource(g,program))+'" target="_blank" rel="noopener">공식 사업소개 ↗</a></div>'+
-  (mode==="write"?choices(ghFieldScenarios("promo")):"")+'</details>';
+const GH_PROMO_NOTICES=["참여자 모집 공지","일정 변경·휴강","이용·접근성 안내","월간 소식지"];
+function ghReviewPrograms(g){return options.catalog[g].items;}
+function ghPromoReviewChoices(){
+ const st=GH_SECTOR_STATE.promo,programs=ghReviewPrograms(st.g);
+ const chip=(attr,i,label,on)=>'<button type="button" class="b3d" '+attr+'="'+i+'" aria-pressed="'+on+'">'+esc(label)+'</button>';
+ return '<section class="gh-work-sector gh-review-choices"><h3>복지관 사업 분야</h3><div class="gh-scenario-grid" role="group" aria-label="복지관 사업 분야">'+
+  options.catalog.map((g,i)=>chip("data-gh-review-area",i,g.label,i===st.g)).join("")+'</div>'+
+  '<h3>어떤 활동의 후기를 쓰나요?</h3><div class="gh-scenario-grid" role="group" aria-label="후기를 쓸 프로그램">'+
+  programs.map((name,i)=>chip("data-gh-review-program",i,name,st.programOn&&st.p===i)).join("")+
+  chip("data-gh-review-program",-1,"다른 활동 직접 쓰기",!st.programOn)+'</div></section>';
 }
-function ghPromoKind(what){
- if(/월간|소식지/.test(what))return "month";
- if(/변경|휴강|취소/.test(what))return "change";
- if(/모집|신규 신청/.test(what))return "recruit";
- if(/후기|활동 사진과 감사|후원 결과/.test(what)||what===GH_PROMO_SNS)return "story";
- return "guide";
+function ghPromoControls(mode){
+ const st=GH_SECTOR_STATE.promo,list=ghScenarios("promo");
+ const choices=names=>'<div class="gh-scenario-grid">'+names.map(x=>'<button class="b3d" type="button" data-gh-scenario="promo:'+list.indexOf(x)+'" aria-pressed="'+(st.picked===x)+'">'+esc(x)+'</button>').join("")+'</div>';
+ const g=options.catalog[st.g],program=g.items[st.p];
+ const picker=mode==="review"?"":'<details class="gh-work-sector gh-promo-sector"'+(st.workDetails?' open':'')+'><summary>복지관 사업별로 고르기'+(st.programOn?' · '+esc(program):'')+'</summary><div class="gh-sector-program">'+
+ '<label for="gh-promo-sector">사업 분야</label><select id="gh-promo-sector" data-gh-sector="promo">'+options.catalog.map((x,i)=>'<option value="'+i+'"'+(st.g===i?' selected':'')+'>'+esc(x.label)+'</option>').join("")+'</select>'+
+ '<label for="gh-sector-program">프로그램</label><select id="gh-sector-program" data-gh-program="promo"><option value="-1"'+(!st.programOn?' selected':'')+'>선택 안 함</option>'+g.items.map((x,i)=>'<option value="'+i+'"'+(st.programOn&&st.p===i?' selected':'')+'>'+esc(x)+'</option>').join("")+'</select></div>'+
+ (mode==="notice"?choices(ghFieldScenarios("promo").filter(x=>!/후기|활동 사진과 감사|후원 결과/.test(x))):"")+'</details>';
+ const modeButtons=[["review","활동 후기"],["notice","모집·안내·소식"],["visual","이미지 제작 프롬프트"]];
+ return '<div class="gh-promo-mode" role="group" aria-label="홍보 작업">'+modeButtons.map(([k,label])=>'<button type="button" data-gh-promo-mode="'+k+'" aria-pressed="'+(mode===k)+'">'+label+'</button>').join("")+'</div>'+
+  (mode==="review"?ghPromoChannel()+ghPromoReviewChoices():mode==="notice"?'<section class="gh-work-sector gh-promo-choices"><h3>어떤 안내나 소식을 쓰나요?</h3>'+choices(GH_PROMO_NOTICES)+'</section>':'<section class="gh-work-sector gh-promo-choices"><h3>어떤 이미지를 만들까요?</h3>'+choices(GH_PROMO_VISUAL)+'</section>')+picker;
 }
 function ghDistrict(c){
  if(c==="msg")return ghSmsDistrict();
@@ -4194,34 +4199,35 @@ function ghDistrict(c){
   '<p class="hint">사업명은 복지관 공식 안내 기준입니다. 아래 선택지는 업무 예시이며 실제 모집 일정은 아닙니다.</p></section>';
 }
 function ghOpenScenario(c,i){
- const q=GH_SECTOR_STATE[c],g=options.catalog[q.g],what=ghScenarios(c)[i];
- const program=(c==="msg"||c==="promo")&&!q.programOn?"":g.items[q.p],ctx={program,what,group:g.label,check:g.check,area:g.area};
+ const q=GH_SECTOR_STATE[c],g=options.catalog[q.g],what=ghScenarios(c)[i],review=c==="promo"&&what===GH_PROMO_SNS;
+ const program=(c==="msg"||c==="promo")&&!q.programOn?"":g.items[q.p];
+ const ctx={program,what,group:g.label,check:g.check,area:g.area,review};
  if(!what)return;
- const oldDetails=app.querySelector(".gh-promo-sector");
- if(c==="promo"&&oldDetails)q.details=oldDetails.open;
+ const old=app.querySelector(".gh-promo-sector");if(c==="promo"&&old)q.workDetails=old.open;
  q.picked=what;
  if(c==="life"){options.plan(ctx);return;}
  const visual=c==="promo"&&GH_PROMO_VISUAL.includes(what);
- const k=c==="msg"?"gh-welfare-msg":visual?({"카드뉴스":"cardnews","행사 포스터":"poster","홍보 이미지·삽화":"image-prompt","인포그래픽":"infographic"}[what]):"sns-post";
- const t=BY[k],key=k+"|"+g.label+"|"+program+"|"+what;
+ const k=c==="msg"?"gh-welfare-msg":visual?({"카드뉴스":"cardnews","행사 포스터":"poster","홍보 이미지·삽화":"image-prompt","인포그래픽":"infographic"}[what]):review?"sns-post":what==="월간 소식지"?"newsletter":"notice";
+ const t=BY[k],key=review?k+"|review|"+program:k+"|"+g.label+"|"+program+"|"+what;
  if(!ghScenarioDrafts[key]){
    const active=ghScenarioRoute,live=values[k];ghScenarioRoute=null;delete values[k];const fresh=getVals(t);ghScenarioRoute=active;if(live)values[k]=live;else delete values[k];
    fresh.v._work=ctx;
    if(c==="msg")fresh.v.reader=(q.programOn&&(q.g===1||q.g===4))?"보호자·가족":q.programOn&&q.g===9?"후원자·봉사자":"이용자";
+   if(k==="notice")fresh.v.purpose=/모집|신청/.test(what)?"참여자 모집":/변경|휴강|취소/.test(what)?"일정 변경·취소":/접근|이동/.test(what)?"안전·접근성 안내":"이용·행사 안내";
    if(k==="poster"||k==="cardnews"||k==="infographic")fresh.v.title=program;
    if(k==="image-prompt"&&program)fresh.v.scene=program+"의 "+what;
    ghScenarioDrafts[key]=fresh;
  }
  const left=app.querySelector(".gh-always-split .tin"),y=left?.scrollTop||0;
  const draft=ghScenarioDrafts[key];
- if(c==="promo"&&k==="sns-post"){
-  q.lastWriting=what;
-  q.writer??=draft;
-  q.writer.v._work=ctx;
-  q.writer.v.where=q.channel||GH_PROMO_CHANNELS[0];
+ if(review){
+  draft.v._work=ctx;
+  draft.v.where=q.channel||GH_PROMO_CHANNELS[0];
+  if(q.tone)draft.v.tone=q.tone;
  }
+ if(c==="promo"&&!review&&!visual)q.lastNotice=what;
  if(c==="msg"){if(q.tone)draft.v.tone=q.tone;if(q.reader)draft.v.reader=q.reader;}
- ghScenarioRoute={k,cat:c,state:c==="promo"&&k==="sns-post"?q.writer:draft};current=t;
+ ghScenarioRoute={k,cat:c,state:draft};current=t;
  renderTask(t);
  const shown=app.querySelector(".gh-always-split .tin");if(shown)shown.scrollTop=y;
 }
@@ -4456,63 +4462,33 @@ function ghEditorial(v,d){
  if(web){
   const story=join([main,prep,steps]);
   return [
-   ["복지관 홈페이지 행사 후기",join([webHead,intro,context|| (d.empty?"[일시·장소·참여 대상]":""),
+   ["복지관 홈페이지 행사 후기",join([webHead,intro,context|| (d.empty?(v._work?.review?"[진행한 날짜와 장소]":"[일시·장소·참여 대상]"):""),
     story,scene,reaction?para(f,reaction):"",img,next,thank])],
    ["홈페이지 목록용 요약",join([webHead,main,plain(d.steps)||plain(d.moment)])]
   ];
  }
  return [
-  ["네이버 블로그 원고",join([blogHead,intro,para(a,[context,main,img].filter(Boolean).join("\n")),
+  [v._work?.review?"네이버 블로그 후기 원고":"네이버 블로그 원고",join([blogHead,intro,para(a,[context,main,img].filter(Boolean).join("\n")),
    d.empty&&v._work?para("함께한 마음","[이번 활동에 담은 취지나 함께 나눈 이야기]"):"",
    para(b,prep),para(c,steps),para(e,scene),para(f,reaction),
    d.empty&&v._work?para("고마운 분들","[함께해 주신 분께 전하고 싶은 감사 인사]"):"",next,d.empty&&v._work?para("활동을 마치며",thank):thank,d.tags])],
   ["블로그 소개글",join([blogHead,main,thank])]
  ];
 }
-function ghPromoPublish(v,kind){
- const x=v._work,raw=String(v.act||"").trim(),d=promoMemo(raw),channel=v.where,blog=channel==="네이버 블로그",web=channel==="복지관 홈페이지";
- const title=d.title||x.what,warm=!/공식|차분/.test(v.tone||"");
- const join=a=>a.filter(Boolean).join("\n\n"),section=(h,t)=>t?(blog?"■ "+h+"\n":web?h+"\n":"")+t:"";
- const found={},notes=[],labels={일시:"일시",행사일시:"일시",날짜:"일시",시간:"시간",장소:"장소",대상:"참여 대상",참여대상:"참여 대상",인원:"모집 인원",모집인원:"모집 인원",참여인원:"참여 인원",모집기간:"모집 기간",신청:"신청 방법",신청방법:"신청 방법",방법:"신청 방법",문의:"문의",문의처:"문의",연락처:"문의",참가비:"참가비",준비물:"준비물",기존일정:"기존 일정",기존일시:"기존 일정",기존:"기존 일정",변경일정:"변경 일정",변경일시:"변경 일정",변경:"변경 일정",사유:"변경 사유",변경사유:"변경 사유",활동:"활동",올릴활동:"활동",활동내용:"활동",내용:"활동",다음일정:"다음 소식",다음활동:"다음 소식",접근성:"이용 지원"};
- d.lines.forEach(line=>{
-  const m=line.match(/^([^:：]{1,20})[:：]\s*(.*)$/),label=m&&labels[m[1].replace(/\s/g,"")];
-  if(label&&m[2])found[label]=m[2];else notes.push(promoLine(line));
- });
- const vals=(...rows)=>rows.map(([k,h])=>found[k]?k+": "+found[k]:!raw&&h?k+": ["+h+"]":"").filter(Boolean).join("\n");
- const extra=[found["활동"]&&promoLine(found["활동"]),...notes].filter(Boolean).join("\n");
- const bright=v.tone==="밝고 경쾌하게", easy=/쉽/.test(v.tone||"");
- let heading=title,intro,body,cta;
- if(kind==="recruit"){
-  heading=blog?title+(bright?", 같이 해 봐요!":warm?" | 함께할 분을 기다려요":" 안내"):title;
-  intro=bright?"새로운 프로그램에 함께해 보실래요? 참여를 고민하고 계신 분들을 위해 필요한 내용을 모았어요!":easy?"프로그램에 함께할 분을 찾고 있어요. 언제, 어디에서 하는지 아래에서 확인할 수 있어요.":warm?"프로그램에 관심은 있는데 어떻게 참여하는지 궁금하셨나요? 처음 알아보는 분도 편하게 살펴보실 수 있도록, 어떤 활동인지부터 신청 방법까지 안내해 드려요.":"프로그램 참여를 희망하는 분께 모집 내용과 신청 절차를 안내드립니다.";
-  body=[section(warm?"어떤 프로그램인가요?":"프로그램 소개",extra||(!raw?(x.program||title)+"에서 [참여자가 해 보는 활동과 프로그램 취지]를 소개해요.":"")),
-    section(warm?"누가, 언제, 어디에서 함께하나요?":"참여 일정과 대상",vals(["참여 대상","누가 참여할 수 있나요?"],["모집 인원","몇 명을 모집하나요?"],["일시","활동 날짜와 시간"],["시간",""],["장소","활동 장소"],["참가비",""],["준비물",""])),
-    section(warm?"신청은 이렇게 해 주세요":"접수와 문의",vals(["모집 기간","접수 시작일~마감일"],["신청 방법","신청 링크 또는 접수 방법"],["문의","담당 부서와 기관 전화번호"]))];
-  cta=warm?"신청 전에 궁금한 점이 있거나 참여에 필요한 지원이 있다면, 안내된 문의처로 편하게 말씀해 주세요.":"참여 관련 문의와 접근 지원 요청은 안내된 공식 문의처로 연락해 주시기 바랍니다.";
- }else if(kind==="change"){
-  intro=warm?"일정을 잡아 두신 분들이 헛걸음하지 않도록 달라진 내용을 먼저 전해 드려요.":"기존 일정에 변경 사항이 있어 안내드립니다.";
-  body=[section("달라지는 일정",[vals(["기존 일정","변경 전 일시"],["변경 일정","바뀐 일시 또는 취소 여부"],["장소",""],["변경 사유",""]),extra].filter(Boolean).join("\n")),section("참여와 문의",vals(["신청 방법",""],["문의","담당 부서와 기관 전화번호"]))];
-  cta=warm?"미리 시간을 내 주신 분들께 양해를 부탁드려요. 변경된 일정에 참여하기 어렵거나 궁금한 점이 있다면 문의처로 알려 주세요.":"일정 확인에 참고해 주시고, 추가 문의는 공식 문의처를 이용해 주시기 바랍니다.";
- }else if(kind==="month"){
-  heading=d.title||"이달의 기흥복지관 이야기";
-  intro=bright?"이번 달에는 복지관에서 어떤 일이 있었을까요? 그동안의 소식을 한자리에 모았어요!":warm?"이번 달 복지관에서 함께한 일들을 한데 모아 전해 드려요. 놓친 이야기도 편하게 살펴보세요.":"이번 달 복지관 활동과 다음 소식을 정리했습니다.";
-  body=[section("이달에 함께한 일",extra||(!raw?"[이번 달 활동과 기억에 남는 장면]":"")),section("다음에 만나요",found["다음 소식"]||(!raw?"[다음 일정이나 전하고 싶은 소식]":"")),section("소식 문의",vals(["문의",""]))];
-  cta=warm?"다음 달에도 복지관에서 이어지는 이야기로 찾아올게요.":"다음 복지관 소식도 이어서 안내드리겠습니다.";
- }else{
-  intro=easy?"처음 이용하는 분도 어렵지 않게, 무엇을 준비하고 어디로 오면 되는지 알려 드려요.":warm?"처음 이용하거나 방문하실 때 어디부터 알아보면 좋을지 궁금하셨죠? 필요한 내용을 순서대로 정리해 봤어요.":"처음 방문하거나 서비스를 이용하는 분께 이용 방법을 안내드립니다.";
-  body=[section("어떤 내용인가요?",extra||(!raw?(x.program||title)+"에 대해 [알리고 싶은 내용]을 안내해 드려요.":"")),
-   section("이용하기 전에 알아 두세요",vals(["참여 대상","안내 대상"],["일시","이용 일정"],["시간",""],["장소","이용 장소"],["준비물",""],["이용 지원",""],["참가비",""])),
-   section("이용 방법과 문의",vals(["신청 방법","이용 방법 또는 신청 경로"],["문의","담당 부서와 기관 전화번호"]))];
-  cta=warm?"이용 전에 궁금한 점이나 필요한 지원이 있으면, 안내된 연락처로 편하게 문의해 주세요.":"이용 문의는 안내된 경로를 확인해 주시기 바랍니다.";
- }
- const greet="안녕하세요, "+PROMO_ORG+"입니다.";
- const all=join([heading,greet+" "+intro,...body,cta,blog||channel==="인스타그램"?"#용인시기흥장애인복지관 #복지관소식":""]);
- const short=join([heading,extra||intro,vals(["일시",""],["모집 기간",""],["신청 방법",""])]);
- const name=web?"복지관 홈페이지 게시글":channel+" 원고";
- return [[name,all],[blog?"블로그 소개글":web?"홈페이지 목록용 요약":channel+" 짧은 원고",short]];
-}
+const REVIEW_CUES={
+ "스마트재활·치료":"어떤 과제나 움직임을 시도했는지",
+ "아동·청소년":"어떤 놀이·배움 활동을 했는지",
+ "평생교육·여가":"무엇을 배우거나 만들어 보았는지",
+ "직업·취업지원":"어떤 직무를 경험하고 연습했는지",
+ "가족·보호자":"가족이 함께 해 본 활동이나 함께 나눈 이야기",
+ "권리·인식개선":"어떤 주제를 이야기하고 어떤 약속을 나눴는지",
+ "지역·문화행사":"지역에서 어떤 체험이나 공연·교류 활동을 했는지",
+ "재가·사례관리":"개인을 알아볼 수 없는 범위에서 어떤 지원 활동을 했는지",
+ "주간·활동지원":"참여자가 고른 활동과 직접 해 본 일",
+ "후원·자원봉사":"함께한 활동과 실제로 전해진 도움"
+};
 function promoPost(v){
- if(v._work&&ghPromoKind(v._work.what)!=="story")return ghPromoPublish(v,ghPromoKind(v._work.what));
+
  const raw=String(v.act||"").trim(),empty=!raw,P=v._work?.program||"",org=PROMO_ORG;
  const meta={}, blocks={work:[],prep:[],steps:[],moment:[],reaction:[],thanks:[],next:[],photo:[]};
  const keys={
@@ -4530,7 +4506,7 @@ function promoPost(v){
   else blocks[active].push(line);
  });
  const sentences=blocks.work.flatMap(x=>x.split(/(?<=[.!?。])\s+/));
- const picked=v._work?.what;
+ const picked=v._work?.what,review=v._work?.review,cue=P&&REVIEW_CUES[v._work.group];
  const local=picked&&![GH_PROMO_SNS,"홈페이지 행사 후기"].includes(picked)?picked:"";
  const name=meta.title||P||local||"복지관 활동 이야기",title=empty&&!P&&!local?"[올릴 활동]":name;
  const context=[meta.when,meta.where].filter(Boolean).join(" · ");
@@ -4540,7 +4516,7 @@ function promoPost(v){
   if(s.length<25)return josa(s,"을","를")+" 진행했어요.";
   return sent(s);
  };
- const main=sentences[0]?natural(sentences[0]):empty?"이용자분들과 함께 [올릴 활동]을 진행했어요.":(meta.title||P?josa(name,"을","를")+" 진행했어요.":"");
+ const main=sentences[0]?natural(sentences[0]):empty?(P?P+"에서 함께한 활동을 전해요. ["+(cue||"그날 함께한 활동")+"]":"이용자분들과 함께 [올릴 활동]을 진행했어요."):(!review&&(meta.title||P)?josa(name,"을","를")+" 진행했어요.":"");
  const prep=blocks.prep.map(sent).join("\n");
  const steps=sentences.slice(1).map(sent).concat(blocks.steps.map(sent)).join("\n");
  const moment=blocks.moment.map(sent).join("\n"),react=blocks.reaction.join("\n"),next=blocks.next.map(sent).join("\n"),thanks=blocks.thanks.map(sent).join("\n");
@@ -4552,18 +4528,18 @@ function promoPost(v){
  const facts=[meta.when&&"일시: "+meta.when,meta.where&&"장소: "+meta.where,meta.who&&"참여 대상: "+meta.who,meta.count&&"참여 인원: "+meta.count].filter(Boolean).join("\n");
  const short=join([title,main,tone[1]]);
  if(v.where==="인스타그램")return [
-  ["인스타그램 원고",join(["📌 "+title,context,tone[0],[main,steps,moment,react].filter(Boolean).join("\n"),thanks||tone[1],tags])],
+  [review?"인스타그램 후기 원고":"인스타그램 원고",join([review?"📸 "+title+(P&&!meta.title?" 이야기":""):"📌 "+title,context,tone[0],[main,steps,moment,react].filter(Boolean).join("\n"),thanks||tone[1],tags])],
   ["인스타그램 짧은 원고",join([title,main,tags])]
  ];
  if(v.where==="카카오톡 채널")return [
-  ["카카오톡 채널 원고",join(["["+org+" 소식] "+title,context,tone[0],[main,moment||react||steps].filter(Boolean).join("\n"),thanks||tone[1]])],
+  [review?"카카오톡 채널 후기 원고":"카카오톡 채널 원고",join(["["+org+" 소식] "+title,(review?"안녕하세요. ":"")+tone[0],context,[main,moment||react||steps].filter(Boolean).join("\n"),thanks||tone[1]])],
   ["카카오톡 한눈에 보기",short]
  ];
  return ghEditorial(v,{title,main,empty,meta,prep,steps,moment,react,next,thanks,photo,tags});
 }
 
 function promoMonth(v){
- const d=promoMemo(v.events);if(!d.lines.length&&!d.title)d.lines=["[이번 달에 진행한 활동]","[다음에 알려 드릴 소식]"];if(!d.title&&v._work)d.title=v._work.program+" 소식";
+ const d=promoMemo(v.events);if(!d.lines.length&&!d.title)d.lines=["[이번 달에 진행한 활동]","[다음에 알려 드릴 소식]"];if(!d.title&&v._work)d.title=v._work.program?v._work.program+" 소식":"이달의 복지관 소식";
  const lines={
   "보호자":["보호자님, 안녕하세요. 복지관에서 있었던 일을 전해 드립니다.","궁금한 점은 복지관에 문의해 주세요."],
   "참여자 가족":["가족 여러분, 안녕하세요. 복지관의 이번 달 활동을 나눕니다.","이번 달 이야기를 읽어 주셔서 고맙습니다."],
@@ -4578,7 +4554,7 @@ function promoMonth(v){
 }
 function promoNotice(v){
  const d=promoMemo(v.content);
- if(!d.lines.length&&!d.title)d.lines=v.purpose==="일정 변경·취소"?["기존 일정: [일시]","변경 일정: [일시 또는 취소 여부]","문의: [공식 문의처]"]:["일시: [날짜·시간]","장소: [장소]","참여 대상: [대상]","신청·문의: [방법과 공식 문의처]"];if(!d.title&&v._work)d.title=v._work.program+" · "+v._work.what;
+ if(!d.lines.length&&!d.title)d.lines=v.purpose==="일정 변경·취소"?["기존 일정: [일시]","변경 일정: [일시 또는 취소 여부]","문의: [공식 문의처]"]:["일시: [날짜·시간]","장소: [장소]","참여 대상: [대상]","신청·문의: [방법과 공식 문의처]"];if(!d.title&&v._work)d.title=[v._work.program,v._work.what].filter(Boolean).join(" · ");
  const lead=v.tone==="쉬운 말로"?"알아두면 좋은 내용을 아래에 정리했어요.":v.tone==="따뜻하게"?"참여하시기 편하도록 필요한 내용을 모았습니다.":"아래 내용을 확인해 주시기 바랍니다.";
  return [["복지관 안내문 원고",[`[${v.purpose}]${d.title?" "+d.title:""}`,`${v.reader} 여러분, 안녕하세요. ${PROMO_ORG}입니다. ${lead}`,d.lines.map(promoLine).join("\n"),PROMO_ORG].filter(Boolean).join("\n\n")]];
 }
@@ -4994,14 +4970,9 @@ function renderTask(t){
     }</div></fieldset>`).join("");
   const inputsHTML = (t.inputs||[]).map(i=>{
     const id = `f-${t.id}-${i.k}`;
-    const gpk=district==="promo"&&t.id==="sns-post"?ghPromoKind(st.v._work.what):"";
-    const pm={
-      story:["올릴 활동","예: 제목: 우리 동네 원예교실\n참여자들이 꽃을 직접 골라 화분에 심었어요. 완성한 화분을 1층에 전시했어요."],
-      recruit:["모집할 내용","예: 제목: 스마트재활 체험 모집\n활동: 로봇보행 장비를 체험합니다.\n일시: 12월 5일 오후 2시\n장소: 복지관 2층\n모집 기간: 12월 3일까지\n신청 방법: 홈페이지 신청"],
-      change:["바뀐 일정과 안내 내용","예: 기존 일정: 금요일 오후 2시\n변경 일정: 다음 주 월요일 오후 3시\n사유: 교육실 점검"],
-      guide:["안내할 내용","예: 내용: 처음 방문하시는 분은 1층 안내데스크로 와 주세요.\n장소: 복지관 1층"],
-      month:["이번 달에 있었던 일","예: 참여자들이 만든 화분을 1층에 전시했어요.\n다음 일정: 12월에는 작은 발표회가 열려요."]
-    }[gpk];
+    const gpk=district==="promo"&&t.id==="sns-post"?"story":"";
+    const cue=st.v._work?.program&&REVIEW_CUES[st.v._work.group];
+    const pm=gpk?["이미 진행한 활동","활동 이름, 그날 실제로 한 일, 기억에 남는 장면을 적거나 말해 보세요. 예: 제목: 우리 동네 원예교실\n참여자들이 꽃을 골라 화분에 심었어요. 완성한 화분을 1층에 전시했어요."+(cue?"\n이 사업에서는 "+cue+" 적어 보세요.":"")]:null;
     const lab = `<label for="${id}">${esc(pm?.[0]||i.label)} ${i.opt?"<small>(선택)</small>":""}</label>`;
     const smsExtra={notice:"예: 늦거나 참석이 어려우시면 미리 알려 주세요.",change:"예: 기존 일시: 목요일 오후 2시 / 사유: 교육실 점검",wait:"예: 대기순번: 3번 / 안내시점: 12월 8일",prep:"예: 재료는 복지관에서 준비해 드려요.",meet:"예: 회신: 이동 지원이 필요한지",access:"예: 접근성: 정문 경사로와 엘리베이터",visit:"예: 회신: 시간이 괜찮으신지"};
     const hint=t.id==="gh-welfare-msg"?(smsExtra[smsKind(st.v._work?.what)]||("예: "+SMS_HINT[smsKind(st.v._work?.what)])):pm?.[1]||i.ph;
@@ -5035,12 +5006,12 @@ function renderTask(t){
       <h2>${district?esc(CATS[district].name):((TASK_EM[t.id]||"")+" "+esc(t.title))}</h2>
       <button class="star b3d" type="button" id="fav-btn" aria-pressed="${isFav}">${isFav?"★ 담김":"☆ 자주 쓰는 업무"}</button>
     </div>
-    ${district?'<button type="button" class="btn gh-result-jump" data-gh-result-jump>원고·프롬프트 보기 ↓</button>':'<p class="fstat">'+esc(t.desc)+'</p>'}
+    ${district?'<button type="button" class="btn gh-result-jump" data-gh-result-jump>'+(district==="promo"&&t.id==="sns-post"?"후기 원고 보기":"원고·프롬프트 보기")+' ↓</button>':'<p class="fstat">'+esc(t.desc)+'</p>'}
     ${!district&&st.v._work?'<p class="gh-scenario-tip"><b>'+esc(st.v._work.program)+' · '+esc(st.v._work.what)+'</b><br>'+esc(st.v._work.check)+'</p>':""}
     <div class="ftabs" role="tablist"><button type="button" role="tab" class="on" data-ttab="in">✍️ 고르기·채우기</button><button type="button" role="tab" data-ttab="out">${t.plan?"📋 계획서":t.cal?"📅 식단표":t.draft?"완성 원고":hasOut?"💬 완성 문구":visual?"이미지 제작 프롬프트":"✨ AI에게 맡기기"}</button></div>
     <div class="tsplit">
       <section class="tin" aria-label="고르기와 채우기">
-        ${district==="promo"?ghPromoControls(visual?"visual":"write"):district?ghDistrict(district):""}
+        ${district==="promo"?ghPromoControls(visual?"visual":t.id==="sns-post"?"review":"notice"):district?ghDistrict(district):""}
         ${t.plan?`<div class="plan-tpl"><b>우리 시설에서 쓰는 계획서 양식이 있나요?</b><span>양식을 올리면 아래 내용이 그 양식 칸에 그대로 들어가요.</span><label class="pill b3d main" for="plan-att">우리 시설 서식 올리기</label></div>`:""}
         ${chipsHTML}
         <div class="divider"></div>
@@ -5171,16 +5142,31 @@ function goHome(){ if(REC.on)recStop(); options.home(); }
 app.addEventListener("click",e=>{
  const mode=e.target.closest("[data-gh-promo-mode]");
  if(mode){
-   const wanted=mode.dataset.ghPromoMode==="write"?(GH_SECTOR_STATE.promo.lastWriting||GH_PROMO_SNS):"카드뉴스";
+   const wanted=mode.dataset.ghPromoMode==="review"?GH_PROMO_SNS:mode.dataset.ghPromoMode==="notice"?(ghScenarios("promo").includes(GH_SECTOR_STATE.promo.lastNotice)?GH_SECTOR_STATE.promo.lastNotice:GH_PROMO_NOTICES[0]):"카드뉴스";
    ghOpenScenario("promo",ghScenarios("promo").indexOf(wanted));
    app.querySelector('[data-gh-promo-mode="'+mode.dataset.ghPromoMode+'"]')?.focus({preventScroll:true});return;
+ }
+ const area=e.target.closest("[data-gh-review-area]"),programTab=e.target.closest("[data-gh-review-program]");
+ if(area||programTab){
+   const q=GH_SECTOR_STATE.promo;
+   if(area){
+    const next=Number(area.dataset.ghReviewArea);
+    if(next!==q.g||!q.programOn){q.g=next;q.p=q.reviewPicks?.[next]??0;q.programOn=true;}
+   }else{
+    const i=Number(programTab.dataset.ghReviewProgram);q.programOn=i>=0;
+    if(i>=0){q.p=i;(q.reviewPicks??={})[q.g]=i;}
+   }
+   ghOpenScenario("promo",ghScenarios("promo").indexOf(GH_PROMO_SNS));
+   const attr=area?"data-gh-review-area":"data-gh-review-program",key=(area||programTab).getAttribute(attr);
+   app.querySelector("["+attr+'="'+key+'"]')?.focus({preventScroll:true});
+   return;
  }
  const ghChannel=e.target.closest("[data-gh-promo-channel]");
  if(ghChannel){
    const value=ghChannel.dataset.ghPromoChannel;
    GH_SECTOR_STATE.promo.channel=value;
-   if(current?.draft&&ghScenarioRoute?.cat==="promo"){
-     getVals(current).v[current.id==="sns-post"?"where":"_channel"]=value;rebuild(current);
+   if(current?.id==="sns-post"&&ghScenarioRoute?.cat==="promo"){
+     getVals(current).v.where=value;rebuild(current);
      app.querySelectorAll("[data-gh-promo-channel]").forEach(b=>{const on=b===ghChannel;b.classList.toggle("main",on);b.setAttribute("aria-pressed",String(on));});
    }else{
      const i=ghScenarios("promo").indexOf(GH_PROMO_SNS);
@@ -5350,7 +5336,7 @@ app.addEventListener("change",e=>{
   if(e.target.id==="fpantry"){ fr.pantry=e.target.checked; refreshFridge(); return; }
   if(!current) return;
   const c = e.target.closest("[data-chip]");
-  if(c){ getVals(current).v[c.dataset.chip] = c.value;if(current.id==="gh-welfare-msg"&&["tone","reader"].includes(c.dataset.chip))GH_SECTOR_STATE.msg[c.dataset.chip]=c.value;rebuild(current); }
+  if(c){ getVals(current).v[c.dataset.chip] = c.value;if(current.id==="sns-post"&&ghScenarioRoute?.cat==="promo"&&c.dataset.chip==="tone")GH_SECTOR_STATE.promo.tone=c.value;if(current.id==="gh-welfare-msg"&&["tone","reader"].includes(c.dataset.chip))GH_SECTOR_STATE.msg[c.dataset.chip]=c.value;rebuild(current); }
   if(e.target.id==="safe-check"){
     document.getElementById("copy-btn").disabled = !e.target.checked&&!VISUAL_TASKS.has(current.id);
     app.querySelectorAll(".ai-link").forEach(a=>a.setAttribute("aria-disabled",String(!e.target.checked)));
