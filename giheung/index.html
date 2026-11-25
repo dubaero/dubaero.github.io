@@ -1207,6 +1207,145 @@ body.gi-work>main.wrap{max-width:none;width:100%;padding:0 16px 24px}
 }
 </style>
 
+<style id="giheung-one-screen">
+/* 공동생활가정 원본의 한 화면 구조와 실제 사용 색상을 기흥 메뉴에 적용 */
+:root{--ref-font:"Noto Sans KR","Pretendard","Apple SD Gothic Neo","Malgun Gothic","맑은 고딕",system-ui,sans-serif;--ref-ink:#1F2E28;--ref-muted:#5A6B63;--ref-green:#2E7D64;--ref-line:#CFDED6;--ref-panel:#F8FBF9}
+body,button,input,select,textarea{font-family:var(--ref-font)}
+.ghome,.gi-task,#v-drawer{color:var(--ref-ink)}
+.ghome .bx{border:1px solid #D3E3DA;border-radius:12px;box-shadow:0 2px 8px rgba(31,59,49,.06)}
+.ghome .bx-h{padding:0 0 8px;border-bottom:2px solid var(--ref-green);align-items:center;min-height:29px}
+.ghome .bx-h h2{font-size:16px;font-weight:800}
+.ghome .bx-h .hint button{font-size:13px;color:var(--ref-muted);font-weight:650;text-decoration:none}
+.ghome .plist li{grid-template-columns:26px minmax(0,1fr) auto;align-items:center;gap:12px;padding:4px 6px;border-bottom:1px solid #E2ECE7}
+.ghome .plist .no{font-size:12px;color:var(--ref-muted)}
+.ghome .plist .t{display:block;font-size:13px;font-weight:700;color:var(--ref-ink);line-height:1.36;text-align:left}
+.ghome .plist .m{display:none}
+.ghome .plist .mini{gap:7px}
+.ghome .plist .b-how,.ghome .plist .b-go{min-height:27px;border-radius:6px;padding:4px 8px;font-size:11px;font-weight:750;white-space:nowrap}
+.ghome .plist .b-how{border-color:#F6B880;color:#A64A08;background:#FFF0E0}
+.ghome .plist .b-go{border-color:var(--ref-green);color:#fff;background:var(--ref-green);display:flex;align-items:center;gap:4px}
+.ghome .plist .b-go .ic,.ghome .glinks .ic{width:14px;height:14px;flex:none}
+.ghome .plist .b-go:hover{background:#22604C}
+.ghome .bd-all{border:1px solid #CBE6DA;border-radius:8px;background:#EAF7F0;color:var(--ref-ink);font-weight:400;min-height:48px;padding:8px 12px;display:flex;flex-wrap:nowrap}
+.ghome .bd-all b{color:#22604C;font-size:13px}.ghome .bd-all span{flex:initial;white-space:normal;font-size:12px}.ghome .bd-all svg{width:18px;height:18px;flex:none;color:var(--ref-green)}
+.ghome .qgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ghome .cols3>.bx:nth-child(2) .qm{min-height:0;padding:8px 4px;align-items:center;justify-content:center;text-align:center;border-color:#E2ECE7;background:var(--ref-panel);gap:5px;border-radius:10px}
+.ghome .cols3>.bx:nth-child(2) .qm.hot,.ghome .cols3>.bx:nth-child(2) .qm:hover{border-color:var(--ref-green);background:#EAF5F0}
+.ghome .cols3>.bx:nth-child(2) .qm b{font-size:12.6px;font-weight:800;word-break:keep-all;white-space:nowrap}
+.ghome .qm small{font-size:11px;line-height:1.4;text-align:center;word-break:keep-all}
+.ghome .qm .ic{width:24px;height:24px;margin:0;color:var(--ref-green)}
+.ghome .bar2{display:grid;gap:10px;margin-top:0}
+.ghome .gprof,.ghome .grec{min-height:49px;border-radius:8px;padding:7px 10px}
+.ghome .gprof{border:2px solid var(--ref-green);background:#E6F4EE}
+.ghome .gprof em{background:var(--ref-green);color:#fff;border-color:var(--ref-green)}
+.ghome .grec{border-color:#E6CFAB;background:#FFF6EC}
+.ghome .grec em{border-color:#E7BA8B;color:#985012}
+.ghome .glbl{background:#E8F5EE;border-radius:6px;padding:4px 10px;color:#22604C;font-weight:800;font-size:12px}
+.ghome .glinks a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 7px;padding:7px 5px;align-items:center;word-break:keep-all}.ghome .glinks a span{grid-column:1;grid-row:2}.ghome .glinks a svg{grid-column:2;grid-row:1 / span 2;color:#52675D}
+.ghome .glinks b{font-size:13px}.ghome .glinks span{font-size:11.5px;white-space:normal}.ghome .ghelp{align-items:center;justify-content:center;padding:8px 5px;flex:none}
+.ghome .ghelp .gh-main{font-size:13px;color:var(--ref-green)}.ghome .ghelp .gh-sub{padding-left:0}
+.gi-task .gh-subtabs button,#v-drawer #dw-tabs button{background:#fff;color:var(--ref-ink);border:1px solid var(--ref-line);border-radius:8px;font-weight:700}
+.gi-task .gh-subtabs button.on,#v-drawer #dw-tabs button.on{background:var(--ref-green);color:#fff;border-color:var(--ref-green);font-weight:800}
+.gi-task .gh-pick legend{font-size:14px}.gi-task .gh-chip span{font-size:14px;font-weight:700}
+.gi-task .col.R{background:var(--ref-panel)}
+.gi-pan-tabs{display:none}
+.gh-focus{font-weight:800;text-decoration:underline;text-decoration-color:#7DB4A0;text-decoration-thickness:2px;text-underline-offset:3px}
+.gh-point{font-weight:800;color:#22604C;background:#E2F2EA;border-radius:3px;padding:1px 4px;box-decoration-break:clone}
+.gh-selection,.gh-preview{background:#fff;border:1px solid var(--ref-line);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.gh-selection>b{display:block;color:#22604C;font-size:14px;margin-bottom:6px}
+.gh-selection dl{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0}
+.gh-selection dl div{display:flex;gap:5px;align-items:baseline;font-size:13px}
+.gh-selection dt{color:#52675D}.gh-selection dd{margin:0;font-weight:750;color:#1F3B31}
+.gh-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:8px;margin:0;padding:0;list-style:none}
+.gh-tiles li{display:flex;align-items:start;gap:8px;background:#EEF8F3;border:1px solid #D3E3DA;border-radius:8px;padding:8px;color:#1F3B31;font-size:13px}
+.gh-tiles li>span{width:22px;height:22px;display:grid;place-items:center;background:#2E7D64;border-radius:50%;color:#fff;flex:none;font-size:12px;font-weight:800}
+.gh-tiles li p{margin:2px 0 0;color:#52675D}
+.gi-task .gnote,#v-drawer .gnote{border:1px solid #CBE6DA;border-left:4px solid #2E7D64;background:#EEF8F3;color:#244D3F}
+#v-drawer .gh-steps strong,.gi-task legend{font-weight:800;text-decoration:underline;text-decoration-color:#A4CBBD;text-underline-offset:4px}
+#v-drawer .gh-text,.gi-task .gh-text,#v-simple .sright .aig-p{font-family:var(--ref-font)}
+#v-drawer .dw-in label{font-size:14px}
+#v-drawer .dw2 .dw-step{border-color:#CFDED6;border-radius:10px}
+#v-simple .sright .aig-p mark,#v-form .aig-p mark{font-weight:800;color:#22604C;background:#E2F2EA;text-decoration:underline;text-underline-offset:3px}
+
+body.gi-work .top{position:static;border-bottom:1px solid #E3ECE7}
+body.gi-work .top .wrap{min-height:49px}
+@media(min-width:900px) and (min-height:575px){
+ html:has(body.gh-mode){overflow:hidden}
+ body.gh-mode{height:100dvh;min-height:0;overflow:hidden}
+ body.gh-mode>.top{display:none}
+ body.gh-mode>main.wrap{width:100%;max-width:none;min-height:0;flex:1 1 0;display:flex;padding:18px max(24px,calc(26vw - 200px),calc(50vw - 696px)) clamp(12px,5vh,60px)}
+ body.gh-mode>footer{flex:none;padding:10px 0;background:#2D3D36;color:#EDF2EF;font-size:12px;line-height:1.5}
+ body.gh-mode>footer .wrap{max-width:none;padding-inline:max(24px,calc(26vw - 200px),calc(50vw - 696px))}
+ body.gh-mode #v-home{flex:1 1 0;min-height:0;display:flex}
+ #v-home>.ghome{display:flex;flex:1 1 0;min-height:0;gap:16px}
+ #v-home .hero3{--hero-h:clamp(155px,25vh,220px);height:var(--hero-h);min-height:0;flex:none;margin:0;border:0;grid-template-columns:minmax(0,1fr) minmax(0,calc(var(--hero-h)*1.86))}
+ #v-home .hero3 .ht{padding:12px 32px;gap:7px;min-height:0}
+ #v-home .hero3 .badge{font-size:14px;font-weight:800}
+ #v-home .hero3 h1{font-weight:800;font-size:clamp(20px,2vw,27px);color:#1F3B31}
+ #v-home .hero3 h1 em{color:var(--ref-green)}
+ #v-home .hero3 .sub{font-size:13px;color:#4A675C}
+ #v-home .hero3 .gsearch{min-height:46px;margin-top:14px;border-color:var(--ref-line)}
+ #v-home .hero3 .gsearch input{height:46px;font-size:14px}
+ #v-home .hero3 .hi{min-height:0;height:var(--hero-h);background:#E2F3EA}
+ #v-home .hero3 .hi img{object-fit:contain}
+ #v-home .cols3{flex:1 1 0;min-height:0;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr) minmax(0,.95fr);gap:18px}
+ #v-home .bx{min-height:0;padding:15px clamp(12px,1.6vw,22px);gap:8px;overflow:hidden}
+ #v-home .bx-b{min-height:0;overflow:auto;scrollbar-width:thin}
+ #v-home .bx-b>.plist{min-height:100%;justify-content:space-evenly}
+ #v-home .cols3>.bx:nth-child(2) .qgrid{flex:1 1 0;min-height:0;grid-template-rows:repeat(2,minmax(0,104px));align-content:center}
+ #v-home .cols3>.bx:nth-child(3) .ghelp{margin-top:auto}
+ #v-home .bd-all{margin-top:0}
+ html:has(body.gi-work,#v-drawer:not([hidden])){overflow:hidden}
+ body.gi-work,body:has(#v-drawer:not([hidden])){height:100dvh;min-height:0;overflow:hidden}
+ body.gi-work>footer,body:has(#v-drawer:not([hidden]))>footer{display:none!important}
+ body.gi-work>main.wrap,body:has(#v-drawer:not([hidden]))>main.wrap{flex:1 1 0;min-height:0;display:flex;overflow:hidden;padding-bottom:12px}
+ body.gi-work>main.wrap>[id^=v-]:not([hidden]),#v-drawer:not([hidden]){display:flex;flex:1 1 0;min-width:0;min-height:0;flex-direction:column}
+ body.gi-work .gi-task{min-height:0;flex:1 1 0;display:flex;flex-direction:column}
+ body.gi-work :is(.gi-task .x2,.dw2),#v-drawer .dw2{flex:1 1 0;min-height:0;align-items:stretch;margin-bottom:0}
+ body.gi-work :is(#v-msg,#v-plan2,#v-promo2,#v-donwork) .gi-task .x2>.col,#v-drawer .x2.dw2>.col{min-height:0;max-height:none;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;position:static}
+}
+@media(min-width:900px) and (max-height:800px){
+ body.gh-mode>main.wrap{padding-top:16px;padding-bottom:20px}
+ #v-home .hero3 .ht{padding-block:8px;gap:5px}
+ #v-home .hero3 .gsearch{margin-top:7px;min-height:42px}
+ #v-home .hero3 .gsearch input{height:42px}
+ #v-home .bx{padding-block:10px;gap:6px}
+ #v-home .plist li{padding-block:2px}
+ #v-home .bar2{gap:7px}
+}
+@media(max-width:899px){
+ .gi-pan-tabs{display:flex;gap:7px;margin:0 0 8px}
+ .gi-pan-tabs button{background:#fff;border:1px solid var(--ref-line);color:var(--ref-ink);border-radius:8px;padding:9px 12px;font-size:14px;cursor:pointer}
+ .gi-pan-tabs button[aria-pressed=true]{background:var(--ref-green);color:#fff;border-color:var(--ref-green)}
+ .gi-task .x2[data-pane=in]>.R,.gi-task .x2[data-pane=out]>.L,#v-drawer .x2[data-pane=in]>.R,#v-drawer .x2[data-pane=out]>.L{display:none}
+ #v-drawer .x2{grid-template-columns:minmax(0,1fr)}
+ .ghome .qgrid{gap:8px}
+ .ghome .plist li{gap:7px}
+}
+@media(min-width:900px) and (max-height:655px){
+ body.gh-mode>main.wrap{padding-bottom:10px}
+ body.gh-mode>footer{padding-block:4px;line-height:1.45;font-size:10.5px;margin-top:3px}
+ #v-home .bx{gap:4px;padding-block:7px}
+ #v-home .hero3{--hero-h:155px}
+ #v-home .qgrid{gap:7px}
+ #v-home .qm .ic{width:20px;height:20px}
+ #v-home .gprof,#v-home .grec{min-height:40px;padding-block:4px}
+ #v-home .gprof b,#v-home .grec b{font-size:12px}
+ #v-home .gprof small,#v-home .grec small{font-size:10.5px;line-height:1.25}
+ #v-home .qm small{font-size:10px}
+ #v-home .cols3>.bx:nth-child(2) .qm{padding:3px 1px;gap:2px}
+ #v-home .glbl{font-size:11px}
+ #v-home .glinks a{padding:4px 3px;line-height:1.35}
+ #v-home .glinks b{font-size:12px}
+ #v-home .glinks span{font-size:10.5px}
+ #v-home .ghelp{padding:4px 3px}.ghome .ghelp .gh-sub{font-size:10px}
+ #v-home .plist li{padding-block:1px}
+ #v-home .plist .b-how,#v-home .plist .b-go{min-height:22px;padding-block:1px}
+ #v-home .bd-all{min-height:35px;padding-block:4px}
+ #v-home .bd-all .bd-desc{display:none}
+}
+</style>
+
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -1726,7 +1865,7 @@ body.gi-work>main.wrap{max-width:none;width:100%;padding:0 16px 24px}
   </div>
 </div>
 
-<footer><div class="wrap"><b>용인시기흥장애인복지관 업무도우미</b> · 입력한 내용은 이 기기 안에서만 쓰이고 저장·전송되지 않아요. AI가 만든 글은 초안이에요. 사실·날짜·숫자는 꼭 직접 확인하세요.<br>제작·운영 <b>두배로 · 생성형 AI 전문강사 이서정</b><span class="fsep" style="display:inline-block;width:1px;height:15px;background:rgba(255,255,255,.55);margin:0 16px;vertical-align:middle"></span><a href="https://dubaero.kr/">dubaero.kr</a><span class="fsep" style="display:inline-block;width:1px;height:15px;background:rgba(255,255,255,.55);margin:0 16px;vertical-align:middle"></span>이메일 <b>dltjwjd59@gmail.com</b> <button type="button" onclick="navigator.clipboard.writeText('dltjwjd59@gmail.com');this.textContent='복사됨'" style="font:inherit;font-size:12px;padding:1px 8px;border-radius:6px;border:1px solid #fff;background:transparent;color:#fff;cursor:pointer;vertical-align:middle">복사</button><span class="fsep" style="display:inline-block;width:1px;height:15px;background:rgba(255,255,255,.55);margin:0 16px;vertical-align:middle"></span>카카오톡 <b>li8093</b></div></footer>
+<footer><div class="wrap"><b>용인시기흥장애인복지관 업무도우미</b> <span class="gh-footer-note"> · 기관 정보는 이 브라우저에 저장됩니다. AI 초안의 개인정보·사실·숫자를 확인하세요.</span><br>제작·운영 <b>두배로 · 생성형 AI 전문강사 이서정</b><span class="fsep" style="display:inline-block;width:1px;height:15px;background:rgba(255,255,255,.55);margin:0 16px;vertical-align:middle"></span><a href="https://dubaero.kr/">dubaero.kr</a><span class="fsep" style="display:inline-block;width:1px;height:15px;background:rgba(255,255,255,.55);margin:0 16px;vertical-align:middle"></span>이메일 <b>dltjwjd59@gmail.com</b> <button type="button" onclick="navigator.clipboard.writeText('dltjwjd59@gmail.com');this.textContent='복사됨'" style="font:inherit;font-size:12px;padding:1px 8px;border-radius:6px;border:1px solid #fff;background:transparent;color:#fff;cursor:pointer;vertical-align:middle">복사</button><span class="fsep" style="display:inline-block;width:1px;height:15px;background:rgba(255,255,255,.55);margin:0 16px;vertical-align:middle"></span>카카오톡 <b>li8093</b></div></footer>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -2078,7 +2217,7 @@ var NOW=new Date();var TODAY=NOW.getFullYear()+'. '+(NOW.getMonth()+1)+'. '+NOW.
 var CURM=NOW.getMonth()+1;
 
 /* 기관 정보 (이 기기에만 저장) */
-var OKEY='dubaero_family_org',ORG={};
+var OKEY='dubaero_giheung_org',ORG={};
 try{ORG=JSON.parse(localStorage.getItem(OKEY)||'{}')||{};}catch(e){ORG={};}
 function O(){var n=ORG.name||'';return{name:n||'○○장애인복지관',head:ORG.head||(n?n+'장':'○○장애인복지관장'),team:ORG.team||'',staff:ORG.staff||'',addr:ORG.addr||'',tel:ORG.tel||'',fax:ORG.fax||'',mail:ORG.mail||'',set:!!n};}
 function orgUI(){var o=O(),a=$('#org-state'),b=$('#h-org');if(a)a.textContent=o.set?o.name+(o.staff?' · '+o.staff:'')+' (수정하려면 누르기)':'서식에 자동 입력';if(b)b.textContent=o.set?o.name:'용인시기흥장애인복지관 종사자';}
@@ -3432,7 +3571,7 @@ function openDW(key){if(key==='doc'||key==='pr'){if(DWG!==key)DWT='start';DWG=ke
 document.addEventListener('click',function(e){var t=e.target.closest('[data-dwt]');if(t&&t.closest('#v-drawer')){DWT=t.dataset.dwt;dwRender();var active=$('#dw-tabs button.on');if(active)active.focus({preventScroll:true});return;}
   var c=e.target.closest('[data-cp]');if(c&&c.closest('#v-drawer')){var t=DWTXT[c.dataset.cp];if(t)copy(t);return;}
   var o=e.target.closest('[data-open]');if(o){var u={gpt:'https://chatgpt.com/',nb:'https://notebooklm.google.com/'}[o.dataset.open];var w=window.open(u,'_blank');if(w)w.opener=null;}});
-document.addEventListener('change',function(e){var c=e.target.closest('[data-chk]');if(!c)return;DWCHK[c.dataset.chk]=c.checked;var d=DW.find(function(z){return z.id===DWT;});var first=$('#dw-live-first');if(d&&first){dwFirst(d);first.textContent=DWTXT.first;}});
+document.addEventListener('change',function(e){var c=e.target.closest('[data-chk]');if(!c)return;DWCHK[c.dataset.chk]=c.checked;var d=DW.find(function(z){return z.id===DWT;});var first=$('#dw-live-first');if(d&&first){dwFirst(d);first.innerHTML=window.giheungPromptMarkup(DWTXT.first);}});
 ['dw-biz','dw-who'].forEach(function(id){$('#'+id).addEventListener('input',function(){clearTimeout(window._dwT);window._dwT=setTimeout(function(){if(!$('#v-drawer').hidden)dwRender();},100);});});
 $('#dw-seas').value=SEASON_NOW;$('#dw-seas').addEventListener('change',dwRender);
 $('#dw-swap').onclick=function(){openDW(DWG==='doc'?'pr':'doc');location.hash=DWG;};
@@ -4789,7 +4928,7 @@ img{filter:contrast(1.12) saturate(1.18)}
   function own(el){for(var n=el.firstChild;n;n=n.nextSibling){if(n.nodeType===3&&n.textContent.trim())return true}return false}
   function run(){
     var els=document.body.getElementsByTagName('*'),list=[];
-    for(var i=0;i<els.length;i++){var e=els[i];if(!done.has(e)&&own(e)&&!e.matches(SKIP))list.push(e)}
+    for(var i=0;i<els.length;i++){var e=els[i];if(!done.has(e)&&own(e)&&!e.matches(SKIP)&&!e.closest('#v-home,#v-drawer,.gi-task'))list.push(e)}
     var plan=list.map(function(e){var p=e.parentElement,fs=getComputedStyle(e).fontSize;
       if(p&&done.has(p)&&p.dataset.fsUp&&getComputedStyle(p).fontSize===fs&&!e.style.fontSize)return [e,0];return [e,parseFloat(fs)]});
     plan.forEach(function(x){var e=x[0],fs=x[1];done.add(e);if(!fs)return;
@@ -6211,7 +6350,7 @@ function homeHTML(){
    ['doc','plan','사업계획서 프로젝트','지침·지표 근거로 계획서 한 편','doc'],
    ['doc','result','결과보고서 프로젝트','계획 대비 실적·달성률까지 표로','result'],
    ['pr','','홍보물 프로젝트','카드뉴스·포스터·보도자료·블로그','pr'],
-   ['prompt','','사업별 맞춤형 프롬프트 생성기','식단·요리 포함 · 고르면 자동 세팅','prompt'],
+   ['prompt','','맞춤형 프롬프트 생성기','식단·요리 포함 · 고르면 자동 세팅','prompt'],
    ['planmenu','','프로그램 기획 제안','영역·대상만 골라도 계획서 표','planmenu'],
    ['event','','행사·체험','운영계획·안전계획 한 번에','event'],
    ['promo2','','홍보·안내','행사후기·공지·카드뉴스·릴스','promo2'],
@@ -6223,25 +6362,26 @@ function homeHTML(){
     return '<li><span class="no">'+(i+1)+'</span>'+
       '<button type="button" class="t"'+at+'>'+E(x[2])+'<span class="m">'+E(x[3])+'</span></button>'+
       '<span class="mini"><button type="button" class="b-how" data-hh="'+x[4]+'">사용법</button>'+
-      '<button type="button" class="b-go"'+at+'>열기</button></span></li>';
+      '<button type="button" class="b-go"'+at+'><svg class="ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 16 11-11 4 4-11 11H4zM13 7l4 4"/></svg>열기</button></span></li>';
   }).join('');
   var left='<section class="bx"><div class="bx-h"><h2>서식 자료실</h2><span class="hint"><button type="button" data-gh="all">전체 보기 ›</button></span></div>'+
     '<div class="bx-b"><ul class="plist">'+L+'</ul></div>'+
-    '<button type="button" class="bd-all" data-gh="all">기존 서식 14종 작성하기 <span>상담일지 · 사례관리 회의록 · 만족도 조사 …</span> ›</button></section>';
+    '<button type="button" class="bd-all" data-gh="all">'+I('pen')+'<span><b>복지관 서식 작성하기</b><span class="bd-desc"> · 상담일지, 사례관리 회의록, 만족도 조사 등</span></span><em>›</em></button></section>';
 
-  var Q=[['msg','문자·소통','문자와 안부 전화 예시','msg'],['promo2','홍보·안내','행사후기·공지·카드뉴스','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['planmenu','프로그램·기획','여가·나들이·행사 계획','bulb'],['month','이달의 추천','월 바꾸고 질문 카드','cal'],['mind','마음·사진','빡침·엽서·쉼터·사진관','heart']];
-  var mid='<section class="bx"><div class="bx-h"><h2>업무 바로가기</h2><span class="hint">누르면 바로 작성</span></div>'+
+  var Q=[['msg','문자·소통','문자·안부 전화','msg'],['promo2','홍보·안내','공지·카드뉴스','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['planmenu','프로그램','여가·나들이·행사','bulb'],['month','이달의 추천','월 바꾸고 질문 카드','cal'],['mind','마음·사진','빡침·엽서·쉼터·사진관','heart']];
+  var mid='<section class="bx"><div class="bx-h"><h2>업무 바로가기</h2></div>'+
     '<div class="qgrid">'+Q.map(function(x,i){return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+I(x[3])+'<b>'+E(x[1])+'</b><small>'+E(x[2])+'</small></button>'}).join('')+'</div>'+
     '<div class="bar2">'+
       '<button type="button" class="gprof" id="gh-org">'+I('home')+'<span><b>'+(o.set?E(o.name):'우리 복지관 정보 등록')+'</b><small>'+(o.set?(E(o.staff||'')||'모든 서식에 자동 입력 중'):'한 번 넣으면 모든 서식에 자동 입력')+'</small></span><em>'+(o.set?'바꾸기':'등록하기')+'</em></button>'+
       '<button type="button" class="grec" data-gh="rec">'+I('mic')+'<span><b>회의 녹음 서식 만들기</b><small>녹음 → 글 → 회의록·공문 초안</small></span><em>시작</em></button>'+
     '</div></section>';
 
-  var links=[['홈페이지','복지관 소식·안내','https://www.a-sak.or.kr'],['공지사항','변경·모집 안내','https://www.a-sak.or.kr'],['프로그램 안내','신청·이용 안내','https://www.a-sak.or.kr']];
-  var links2=[['2026 장애인복지시설 사업안내','보건복지부 지침 원문','https://www.mohw.go.kr'],['경기도 사회복지시설평가','경기복지재단','https://ggwf.gg.go.kr']];
+  var links=[['2026 장애인복지시설 사업안내','제3권 PDF 첨부 자료실','https://www.jifb.or.kr/bbs/board.php?bo_table=4_5_1_1&wr_id=222'],['지역사회재활시설 사업안내','제3장 한글 파일 자료실','https://www.jifb.or.kr/bbs/board.php?bo_table=4_5_1_1&wr_id=221']];
+  var links2=[['경기도 사회복지시설평가','경기복지재단 평가 자료실','https://ggwf.gg.go.kr/archives/category/busi002/evaluation_bbs']];
+  var extIcon='<svg class="ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 5h6v6m0-6-9 9m8 0v5H5V6h5"/></svg>';
   var right='<section class="bx"><div class="bx-h"><h2>관련 기관 바로가기</h2></div>'+
-   '<div class="bx-b"><div class="glbl">용인시기흥장애인복지관</div><ul class="glinks">'+links.map(function(x){return '<li><a href="'+x[2]+'" target="_blank" rel="noopener"><b>'+E(x[0])+'</b><span>'+E(x[1])+'</span><span class="arw">↗</span></a></li>'}).join('')+'</ul>'+
-   '<div class="glbl">보건복지부 · 경기복지재단</div><ul class="glinks">'+links2.map(function(x){return '<li><a href="'+x[2]+'" target="_blank" rel="noopener"><b>'+E(x[0])+'</b><span>'+E(x[1])+'</span><span class="arw">↗</span></a></li>'}).join('')+'</ul>'+
+   '<div class="bx-b"><div class="glbl">장애인복지시설 운영 지침 · 공개 자료실</div><ul class="glinks">'+links.map(function(x){return '<li><a href="'+E(x[2])+'" target="_blank" rel="noopener"><b>'+E(x[0])+'</b><span>'+E(x[1])+'</span>'+extIcon+'</a></li>'}).join('')+'</ul>'+
+   '<div class="glbl">경기도 평가자료 바로가기</div><ul class="glinks">'+links2.map(function(x){return '<li><a href="'+E(x[2])+'" target="_blank" rel="noopener"><b>'+E(x[0])+'</b><span>'+E(x[1])+'</span>'+extIcon+'</a></li>'}).join('')+'</ul>'+
    '<div class="ghelp"><button type="button" class="gh-main" data-gh="manual">'+I('help')+'<b>업무도우미 이용 매뉴얼</b><em>›</em></button>'+
    '<div class="gh-sub"><button type="button" data-gh="manual">처음 쓰는 법</button> · <button type="button" data-gh="manual">PC로 보내기</button> · <button type="button" data-gh="manual">안전수칙</button></div></div>'+
    '</div></section>';
@@ -6311,10 +6451,13 @@ function msgHTML(tag,body,note){
   return '<div class="msg"><div class="msg-h"><b>'+E(note||'문자')+'</b><small>'+body.replace(/\s/g,'').length+'자</small>'+cbtn('복사',tag)+'</div><p>'+E(body)+'</p></div>';
 }
 
+function paneTabs(){
+  return '<div class="gi-pan-tabs" role="group" aria-label="작업 화면"><button type="button" data-gi-pane="in" aria-pressed="true">고르기·채우기</button><button type="button" data-gi-pane="out" aria-pressed="false">결과·프롬프트</button></div>';
+}
 function x2(title,tag,left,right,tabs,back){
   return '<section class="gi-task"><div class="fbar"><button type="button" class="vback" '+(back?'data-gh="'+E(back)+'"':'data-home')+'>← '+(back==='donate'?'후원 관리':back==='planmenu'?'프로그램·기획':'업무도우미')+'</button><h2>'+E(title)+'</h2></div>'+
-   (tag?'<p class="fstat">'+E(tag)+'</p>':'')+(tabs||'')+
-   '<div class="x2"><section aria-label="고르기와 사용법" class="col L">'+left+'</section><section aria-label="예시와 전체 프롬프트" class="col R">'+right+'</section></div></section>';
+   (tag?'<p class="fstat">'+E(tag)+'</p>':'')+(tabs||'')+paneTabs()+
+   '<div class="x2" data-pane="in"><section aria-label="고르기와 사용법" class="col L">'+left+'</section><section aria-label="예시와 전체 프롬프트" class="col R">'+right+'</section></div></section>';
 }
 
 /* ---------- ① 문자·소통 ---------- */
@@ -6356,9 +6499,18 @@ var CALL_TOPIC={
   '불참 후 안부':'지난 [프로그램명]에 함께하지 못해 안부가 궁금했어요. 다음 참여에 도움이 필요한 부분이 있으신가요?',
   '일정 변경 안내':'[프로그램명] 일정이 [새 일정]으로 바뀌었어요. 바뀐 일정이 괜찮으신지 확인해도 될까요?'
 };
+function promptMarkup(t){
+  return String(t||'').split('\n').map(function(line){
+    var safe=E(line);
+    if(/^\s*(?:#{1,5}\s|\[[^\]]+\]\s*$|[①②③④⑤⑥⑦⑧]|(?:-\s*)?\[(?:\d+단계[^\]]*|필수|금지|범위)\])/.test(line))
+      return safe.replace(/^(\s*(?:#{1,5}\s*[^:：]+|\[[^\]]+\]|[①②③④⑤⑥⑦⑧]\s*[^:：]{1,35}|-?\s*\[[^\]]+\]))/, '<strong class="gh-point">$1</strong>');
+    return safe.replace(/\[확인 필요\]|작성해 줘|개인정보|서식 항목·순서|소스 추가/g,'<strong class="gh-focus">$&</strong>');
+  }).join('\n');
+}
+window.giheungPromptMarkup=promptMarkup;
 function outBlock(title,key,t){
   TXT[key]=t;
-  return '<div class="out-h"><h3>'+E(title)+'</h3>'+cbtn('복사',key)+'</div><pre class="paper gh-text">'+E(t)+'</pre>';
+  return '<div class="out-h"><h3>'+E(title)+'</h3>'+cbtn('복사',key)+'</div><pre class="paper gh-text">'+promptMarkup(t)+'</pre>';
 }
 function msgRight(){
   var v=ST_MSG,call=v.mode==='안부 전화',to=call?v.callTo:v.to,k=call?v.callKind:v.kind,m=call?v.callMemo:v.memo;
@@ -6431,12 +6583,12 @@ function planRight(){
    '<div class="ph3">모집 문구</div><p class="small">'+E(d.name)+'에 함께하실 분을 모집합니다. '+E(v.when+' ('+WON[v.when]+')')+', '+E(v.tgt)+' 대상, 신청 방법 [확인 필요].</p></div>'+
    '<div class="gnote">숫자·인원은 <b>[확인 필요]</b>로 남겼어요. 예산·모집 인원은 우리 복지관 자료로 채우면 됩니다.</div>';
   var prompt=planPrompt();
-  return right+outBlock('AI에 넣을 전체 프롬프트','plan-prompt',prompt);
+  return selectionSummary([['서비스 영역',v.area],['대상',v.tgt],['시기',v.when],['규모',v.size]])+right+outBlock('AI에 넣을 전체 프롬프트','plan-prompt',prompt);
 }
 
 /* ---------- ③ 홍보·안내 ---------- */
-var ST_PR={kind:'홈페이지 행사후기 올리기',biz:'스마트재활센터',memo:''};
-var PRK=['홈페이지 행사후기 올리기','공지사항','카드뉴스 4장','릴스·숏폼 대본','블로그 초안','보도자료'];
+var ST_PR={kind:'홈페이지 행사후기 올리기',biz:'스마트재활센터',memo:'',purpose:'참여자 모집',audience:'이용자·보호자',style:'깔끔한 공공기관형',count:'4장'};
+var PRK=['홈페이지 행사후기 올리기','공지사항','카드뉴스','포스터','릴스·숏폼 대본','블로그 초안','보도자료'];
 function prData(){
   var v=ST_PR,extra=v.memo?('\n\n[우리 상황] '+v.memo):'';
   var k=v.kind,b=v.biz;
@@ -6447,8 +6599,16 @@ function prData(){
   if(k==='공지사항'){
     return {title:'공지사항 글',body:'[공지] '+b+'\n\n1. 대상: [확인 필요]\n2. 일시: [확인 필요]\n3. 장소: [확인 필요]\n4. 신청 방법: [확인 필요]\n5. 문의: [확인 필요]\n\n※ 일정 변경 시 홈페이지·문자로 다시 안내드립니다.\n※ 개인정보(이름·연락처)는 공지에 쓰지 않습니다.'+extra};
   }
-  if(k==='카드뉴스 4장'){
-    return {title:'카드뉴스 4장 구성',body:'[카드뉴스 4장]\n1장 | 큰 제목: "'+b+' 함께해요" | 본문: 누구나 참여할 수 있어요 | 그림: 밝은 활동 사진\n2장 | 큰 제목: "무엇을 하나요" | 본문: 활동 2~3가지 | 그림: 활동 장면\n3장 | 큰 제목: "언제·어디서" | 본문: [확인 필요] | 그림: 장소 사진\n4장 | 큰 제목: "신청 방법" | 본문: [신청 방법·마감 확인 필요] | 그림: 문의 아이콘\n\n공통: 한 줄 20자 이내, 색+글자로 구분, 얼굴 사진은 동의받은 것만'+extra};
+  if(k==='카드뉴스'){
+    var cover=v.purpose==='활동 후기'?'함께한 순간':v.purpose==='이용 안내'?'이렇게 이용해요':'함께할 분을 찾습니다';
+    var last=v.purpose==='활동 후기'?['마무리','참여해 주신 분께 감사 · 확인된 다음 소식만 안내']:v.purpose==='이용 안내'?['문의','이용 절차 · 문의처 [확인 필요]']:['신청 방법','신청 경로 · 마감 · 문의처 [확인 필요]'];
+    var slides=[['표지',b+' · '+cover],['활동 소개','실제로 무엇을 하는지 쉬운 말로 소개'],['핵심 정보','대상 '+v.audience+' · 일시·장소 [확인 필요]'],last];
+    if(v.count==='3장')slides.splice(1,1);
+    if(v.count==='6장')slides.splice(3,0,['참여 준비','준비물과 이동·접근성 확인'],['한눈에 정리','꼭 기억할 내용 두 줄']);
+    return {title:'카드뉴스 '+v.count+' 구성',slides:slides,body:'[카드뉴스 '+v.count+' · '+v.purpose+']\n'+slides.map(function(r,i){return (i+1)+'장 | '+r[0]+' | '+r[1];}).join('\n')+'\n\n그림 방향: '+v.style+'\n글자는 한 줄씩 짧고 선명하게. 얼굴 사진은 게시 동의가 확인된 경우만 사용.'+extra};
+  }
+  if(k==='포스터'){
+    return {title:'포스터 한 장 구성',slides:[['상단',b+' · '+v.purpose],['가운데','대표 장면 하나 · 대상 '+v.audience],['하단','일시·장소·신청·문의 [확인 필요]']],body:'[포스터 한 장]\n제목: '+b+' · '+v.purpose+'\n대상: '+v.audience+'\n그림 방향: '+v.style+'\n일시·장소·신청·문의: [확인 필요]'+extra};
   }
   if(k==='릴스·숏폼 대본'){
     return {title:'릴스 15초 대본',body:'[릴스 15초 · 3장면]\n0~3초 후킹: "'+b+', 이렇게 하고 있어요" (현장 손·작품 클로즈업)\n3~9초 본편: 활동 2장면 + 자막 "이용자가 직접 합니다"\n9~15초 마무리: 단체 장면 + 자막 "문의 [확인 필요]"\n\n자막 원칙: 한 화면 12자 이내 · 얼굴은 동의받은 분만 · 배경 음악은 저작권 없는 것\n해시태그: #'+b+' #장애인복지 #용인'+extra};
@@ -6459,19 +6619,31 @@ function prData(){
   return {title:'보도자료',body:'[보도자료]\n제목 3안\n1) 용인시기흥장애인복지관, '+b+' 운영\n2) '+b+', 지역과 함께한 하루\n3) "'+(v.memo||'[확인 필요]')+'" '+b+' 현장\n\n리드: 누가·무엇을·언제·어디서·왜를 한 문단\n본문 3문단: 무엇을 했는지 → 참여자 반응(가명) → 의미·향후 계획\n사진 설명 2~3장 + 얼굴 게시 동의 여부\n검수표: 기관명·인원·날짜·장소·연락처 대조\n※ 과장·최고·유일 표현은 빼고 확인된 사실만 씁니다.'+extra};
 }
 
+function selectionSummary(items){
+  return '<div class="gh-selection"><b>선택한 조건</b><dl>'+items.map(function(v){return '<div><dt>'+E(v[0])+'</dt><dd>'+E(v[1])+'</dd></div>';}).join('')+'</dl></div>';
+}
 function promoRight(){
-  var v=ST_PR,d=prData();
-  var prompt='너는 용인시기흥장애인복지관 홍보 담당자야.\n\n[만들 것] '+v.kind+'\n[사업] '+v.biz+'\n[행사 정보]\n'+(v.memo.trim()||'[행사명·대상·일시·장소·신청 방법 입력]')+'\n\n[구성 참고]\n'+d.body.replace(/\n\n\[우리 상황\][\s\S]*$/,'')+'\n\n[지킬 것]\n쉬운 말로 쓰고 제공한 사실만 사용해. 모집 대상·날짜·장소·인원·신청 방법을 임의로 만들지 말고 [확인 필요]로 표시해. 실명·상담 사연·동의 없는 사진은 사용하지 마. 웹앱에서는 게시하지 않아.';
-  return outBlock(d.title+' · 예시','promo',d.body)+outBlock('AI에 넣을 전체 프롬프트','promo-prompt',prompt);
+  var v=ST_PR,d=prData(),visual=v.kind==='카드뉴스'||v.kind==='포스터';
+  var cond=[['사업',v.biz],['목적',v.purpose],['보는 사람',v.audience]];
+  if(visual)cond.push(['디자인',v.style]);
+  if(v.kind==='카드뉴스')cond.push(['분량',v.count]);
+  var prompt='너는 용인시기흥장애인복지관 홍보 담당자야.\n\n[제작 조건]\n만들 것: '+v.kind+'\n'+cond.map(function(r){return r.join(': ');}).join('\n')+'\n\n[행사 정보]\n'+(v.memo.trim()||'[행사명·대상·일시·장소·신청 방법 입력]')+'\n\n[구성 참고]\n'+d.body.replace(/\n\n\[우리 상황\][\s\S]*$/,'')+'\n\n[지킬 것]\n쉬운 말로 쓰고 제공한 사실만 사용해. 모집 대상·날짜·장소·인원·신청 방법을 임의로 만들지 말고 [확인 필요]로 표시해. 실명·상담 사연·동의 없는 사진은 사용하지 마.';
+  var preview=d.slides?'<section class="gh-preview"><div class="out-h"><h3>'+E(d.title)+'</h3>'+cbtn('예시 복사','promo')+'</div><ol class="gh-tiles">'+d.slides.map(function(x,i){return '<li><span>'+(i+1)+'</span><div><b>'+E(x[0])+'</b><p>'+E(x[1])+'</p></div></li>';}).join('')+'</ol></section>':outBlock(d.title+' · 예시','promo',d.body);
+  TXT.promo=d.body;
+  return selectionSummary(cond)+preview+outBlock('AI에 넣을 전체 프롬프트','promo-prompt',prompt);
 }
 function renderPromo(){
-  var v=ST_PR;
-  var left='<p class="gh-guide">위에서 만들 것을 고른 뒤, 사업과 행사 정보를 넣으세요.</p>'+
-   radioPick('어떤 사업인가요?',typeof SIMPLE!=='undefined'?SIMPLE.promo.f[0].o:[],'prbiz',v.biz)+'<hr class="gi-divider">'+
-   '<label class="ch-l" for="pr-memo"><b>2. 행사 정보</b></label><textarea class="memo" id="pr-memo" placeholder="예: 개관기념행사, 12/2 10시, 복지관 1층">'+E(v.memo)+'</textarea>'+
-   '<p class="hintl">오른쪽 예시를 확인하고 날짜·신청 방법·사진 게시 동의를 점검하세요.</p>';
-  $('#v-promo2').innerHTML=x2('홍보·안내','',left,promoRight(),choice('무엇을 만들까요?',PRK,'data-prk',v.kind,'gh-subtabs'));
+  var v=ST_PR,visual=v.kind==='카드뉴스'||v.kind==='포스터';
+  var left=radioPick('어떤 사업인가요?',typeof SIMPLE!=='undefined'?SIMPLE.promo.f[0].o:[],'prbiz',v.biz)+
+   radioPick('목적',['참여자 모집','이용 안내','활동 후기'],'pr-purpose',v.purpose)+
+   radioPick('보는 사람',['이용자·보호자','지역 주민','종사자','후원자·협력기관'],'pr-audience',v.audience)+
+   (visual?radioPick('그림 스타일',['깔끔한 공공기관형','따뜻한 일러스트','쉬운 글·큰 글씨','현장 사진 중심'],'pr-style',v.style):'')+
+   (v.kind==='카드뉴스'?radioPick('카드뉴스 몇 장?',['3장','4장','6장'],'pr-count',v.count):'')+
+   '<hr class="gi-divider"><label class="ch-l" for="pr-memo"><b>행사 정보</b></label><textarea class="memo" id="pr-memo" placeholder="예: 개관기념행사, 12/2 10시, 복지관 1층">'+E(v.memo)+'</textarea>'+
+   '<p class="hintl">날짜·신청 방법·사진 게시 동의를 확인한 뒤 사용하세요.</p>';
+  $('#v-promo2').innerHTML=x2('홍보·안내','조건을 고르면 오른쪽의 예시와 전체 프롬프트가 바로 바뀝니다.',left,promoRight(),choice('무엇을 만들까요?',PRK,'data-prk',v.kind,'gh-subtabs'));
 }
+
 /* ---------- ④ 후원 관리 ---------- */
 function radioPick(label,items,key,value){
   return '<fieldset class="gh-pick"><legend>'+E(label)+'</legend><div class="chips">'+items.map(function(k){
@@ -6613,6 +6785,12 @@ function boot(){
   if(typeof orgUI==='function'){try{orgUI()}catch(e){}}
   /* 이벤트 */
   document.addEventListener('click',function(e){
+    var pb=e.target.closest('[data-gi-pane]');if(pb){
+      var bar=pb.parentNode,sides=bar.nextElementSibling;if(sides){
+        sides.dataset.pane=pb.dataset.giPane;
+        qa('[data-gi-pane]',bar).forEach(function(b){b.setAttribute('aria-pressed',String(b===pb));});
+      }return;
+    }
     if(e.target.closest('#gh-org')){openOrg();return;}
     var donor=e.target.closest('[data-don-key]');if(donor){renderDonWork(donor.dataset.donKey);return;}
     var mode=e.target.closest('[data-plan-mode]');if(mode){ST_PLAN.mode=mode.dataset.planMode;ST_PLAN.title='';ST_PLAN.size='1회 행사';ST_PLAN.area='지역사회중심지원(CBSS)';go('plan2');return;}
@@ -6644,7 +6822,7 @@ function boot(){
     var radio=e.target,key=radio.dataset.ghRadio;if(!key||!radio.checked)return;
     var v=radio.value,call=ST_MSG.mode==='안부 전화';
     if(key==='mto'||key==='mk'){ST_MSG[key==='mto'?(call?'callTo':'to'):(call?'callKind':'kind')]=v;updateOutput('#v-msg',msgRight);}
-    if(key==='prbiz'){ST_PR.biz=v;updateOutput('#v-promo2',promoRight);}
+    if(key==='prbiz'||key.startsWith('pr-')){ST_PR[key==='prbiz'?'biz':key.slice(3)]=v;updateOutput('#v-promo2',promoRight);}
     if(key.startsWith('plan-')){ST_PLAN[key.slice(5)]=v;ST_PLAN.idx=0;updateOutput('#v-plan2',planRight);}
     if(key.startsWith('don-')&&DONSTATE[donKey]){DONSTATE[donKey][key.slice(4)]=v;updateOutput('#v-donwork',donRight);}
   });
@@ -6662,7 +6840,7 @@ function boot(){
 /* 기흥 실습: 가족센터의 4단계 세팅 순서, 기흥 전용 지침·소스는 그대로. */
 var oldDWRender=window.dwRender,oldDWFirst=window.dwFirst;
 function dwPanel(title,key,t,copyLabel,id){
-  return '<section class="dw-step"><div class="out-h"><h3>'+E(title)+'</h3>'+cpBtn(key,copyLabel)+'</div><pre '+(id?'id="'+id+'" ':'')+'class="paper gh-text">'+E(t)+'</pre></section>';
+  return '<section class="dw-step"><div class="out-h"><h3>'+E(title)+'</h3>'+cpBtn(key,copyLabel)+'</div><pre '+(id?'id="'+id+'" ':'')+'class="paper gh-text">'+promptMarkup(t)+'</pre></section>';
 }
 window.dwDrawer=function(d){
   var proj=d.t+' 프로젝트',name=dwV()['사업'];
@@ -6689,6 +6867,11 @@ window.dwFirst=function(d){
 };
 window.dwRender=function(){
   oldDWRender();
+  var dwContent=$('#v-drawer .dw2');
+  if(dwContent&&!dwContent.hasAttribute('data-pane')){
+    dwContent.dataset.pane='in';
+    dwContent.insertAdjacentHTML('beforebegin',paneTabs());
+  }
   var guide=$('#dw-guide');
   if(!guide){
     guide=document.createElement('div');
