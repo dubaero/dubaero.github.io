@@ -6628,8 +6628,8 @@ function homeHTML(){
    ['prompt','','맞춤형 프롬프트 생성기','식단·요리 포함 · 고르면 자동 세팅','prompt'],
    ['planmenu','','프로그램 기획 제안','영역·대상만 골라도 계획서 표','planmenu'],
    ['event','','행사·체험','운영계획·안전계획 한 번에','event'],
-   ['promo2','','홍보·안내','행사후기·공지·카드뉴스·릴스','promo2'],
-   ['img','','홍보 이미지 제안','카드뉴스·포스터 시안','img'],
+   ['promo2','','홍보·안내','행사 후기·소식지·안내문·이미지','promo2'],
+   ['img','','홍보 이미지','SNS 카드·소식지 삽화 프롬프트','img'],
    ['appguide','','AI 앱·설치 가이드','ChatGPT·제미나이·Claude','appguide']
   ];
   var L=R.map(function(x,i){
@@ -7797,6 +7797,7 @@ window.dwRender=function(){
 var GROUP_PANELS={
  'group-msg':['문자·소통','c-msg'],
  'group-promo':['홍보·안내','c-promo'],
+ 'group-image':['홍보 이미지','t-image-prompt'],
  'group-donate':['후원 관리','donate'],
  'group-fridge':['프롬프트 디자인실','fridge'],
  'group-life':['프로그램·생활','c-life'],
@@ -7827,9 +7828,9 @@ window.go=function(k){
   if(k==='msg'){renderMsg();show('msg');return}
   if(k==='planmenu'){selectPlanDraft('manual');renderPlan();show('plan2');return}
   if(k==='plan2'){renderPlan();show('plan2');return}
-  if(k==='img'){ST_PR.kind='홍보 이미지';renderPromo();show('promo2');return}
+  if(k==='img'){groupView('group-image');return}
   if(k==='promomenu'){groupView('group-promo');return}
-  if(k==='promo2'){renderPromo();show('promo2');return}
+  if(k==='promo2'){groupView('group-promo');return}
   if(k==='donate'){renderDonate();show('donate');return}
   if(k==='month'){selectPlanDraft('manual');renderPlan();show('plan2');var n=$('#plan-month');if(n){n.open=true;n.scrollIntoView({block:'nearest'});}return}
   if(k==='manual'){if(typeof openSimple==='function'){openSimple('base');}return}
