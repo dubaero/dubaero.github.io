@@ -2,12 +2,12 @@
 <html lang="ko">
 <head><script src="/js/room-gate.js?v=2"></script>
 <meta charset="utf-8">
-<title>용인시기흥장애인복지관 업무도우미 | 두배로</title>
+<title>용인시기흥장애인복지관 AI 업무도우미 | 두배로</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 
 :root{--bg:#F7F4EC;--card:#fff;--ink:#12482C;--text:#111111;--muted:#1F2937;--line:#B5A994;--blue:#0B6B3A;--soft:#F2ECE4;--soft2:#F7F5ED;--point:#C2350F;--warm:#FFEEDF;--warm-line:#E5B48F;--ok:#0B6B3A;color-scheme:light}
@@ -1440,6 +1440,53 @@ body.gi-work .top .wrap{min-height:49px}
 }
 </style>
 
+<style id="giheung-brand">
+body{font-family:var(--ref-font)!important}
+button,input,textarea,select,pre{font-family:var(--ref-font)}
+#v-home .hero3{--gh-photo-h:clamp(112px,21vh,181px);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;min-height:0;height:calc(var(--gh-photo-h) + 20px);padding-right:10px;overflow:visible}
+#v-home .hero3 .ht{min-width:0;padding:8px clamp(14px,3vw,32px);gap:5px}
+#v-home .hero3 .badge{font-size:12px;color:#22604c}
+#v-home .hero3 .badge svg{height:18px;width:18px}
+#v-home .hero3 h1{font-size:clamp(20px,2.25vw,29px);font-weight:800;letter-spacing:-.033em;color:#1f2e28}
+#v-home .hero3 h1 em{color:#22604c;white-space:nowrap}
+#v-home .hero3 .hi{width:auto;min-height:0;height:var(--gh-photo-h);aspect-ratio:892 / 726;border-radius:8px;background:#e6f1ea;overflow:hidden}
+#v-home .hero3 .hi img{display:block;position:absolute;max-height:none;object-fit:contain}
+#v-home .hero3 .gsearch{margin-top:4px;min-height:32px;max-width:420px}
+#v-home .hero3 .gsearch input{height:32px;font-size:12px}
+#v-home .glinks a{display:flex;align-items:baseline;gap:4px;white-space:nowrap;line-height:1.4;padding:5px 2px}
+#v-home .glinks a b,#v-home .glinks a span{white-space:nowrap}
+#v-home .glinks a b{font-weight:800;font-size:12px}
+#v-home .glinks a span{font-size:11px;color:#44584e}
+#v-home .glinks a span::before{content:"·";margin-right:4px}
+#v-home .glinks a .ic{align-self:center;margin-left:auto;width:12px;height:12px}
+#v-home .cols3>.bx:nth-child(2) .qm b{color:#163e30;font-weight:800;white-space:normal;overflow-wrap:normal;line-height:1.27}
+#v-home .cols3>.bx:nth-child(2) .qm{background:#f1f7f3;border-color:#cbded3}
+#v-home .cols3>.bx:nth-child(2) .qm.hot{background:#e4f2ea;border-color:#80aa96}
+.gi-task .vback,#v-drawer .vback,#v-all .vback,#v-mind .vback{font-weight:800;color:#fff;background:#22604c;border-color:#22604c}
+.gi-task .vback:hover,#v-drawer .vback:hover,#v-all .vback:hover,#v-mind .vback:hover{background:#194c3b}
+.gi-task .gh-subtabs button,#v-drawer #dw-tabs button,#v-mind .mtabs button{color:#1f2e28;font-weight:800;background:#fff;border:1px solid #b6cec0}
+.gi-task .gh-subtabs button.on,#v-drawer #dw-tabs button.on,#v-mind .mtabs button.on{color:#fff;background:#2e7d64;border-color:#2e7d64;font-weight:800}
+.gi-task .gh-chip span,.gh-qgrid button,.gh-month-list button{color:#1f2e28;font-weight:700}
+.gi-task .gh-chip input:checked+span{color:#fff;background:#2e7d64;border-color:#2e7d64}
+.gi-task .gh-chip input:checked+span::before{background:#fff;border-color:#fff;color:#22604c}
+html:has(#v-mind:not([hidden])),#v-mind{zoom:1!important}
+#v-mind .mtabs{gap:5px;margin:4px 0 8px}
+#v-mind .legacy-tool-frame{display:block;width:100%;height:max(525px,calc(100dvh - 150px));background:#f9f8f7;border:1px solid #cfdfd5;border-radius:10px}
+#v-mind .mind-work-alt{float:right;margin:0 0 4px 8px;color:#22604c;font-size:12px;font-weight:700}
+.gh-ai-links button[data-ai-to=gpt]{background:#22604c;color:#fff;border-color:#22604c;font-weight:800}
+.gh-ai-links button[data-ai-to=gpt]:hover{background:#194c3b}
+@media(max-width:899px){
+ #v-home .hero3{--gh-photo-h:clamp(86px,21vw,150px);height:auto;min-height:calc(var(--gh-photo-h) + 20px);overflow:visible}
+ #v-home .hero3 h1{font-size:clamp(17px,4.3vw,23px)}
+ #v-home .hero3 .ht{padding-left:10px;padding-right:7px}
+ #v-home .hero3 .sub{font-size:11px}
+}
+@media(max-width:380px){
+ #v-home .hero3{--gh-photo-h:72px}
+ #v-home .hero3 .gsearch input{font-size:11px}
+}
+</style>
+
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -1868,9 +1915,8 @@ body.gi-work .top .wrap{min-height:49px}
 
 <!-- ===== 전체 서식 찾기 ===== -->
 <div id="v-all" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>전체 서식 찾기</h2><span class="tag">2026년 장애인복지시설 사업안내</span></div>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>전체 서식</h2><span class="tag">2026년 장애인복지시설 사업안내</span></div>
   <p class="vnote">모든 서식의 항목은 지침·서비스 최저기준·2026 평가지표가 요구하는 그대로예요. 쪽수는 「2026년 장애인복지시설 사업안내」에 인쇄된 쪽 번호예요. 우리 복지관 서식이 있으면 그걸, 없으면 지침의 그 쪽 서식을 PDF로 받아 AI에 첨부하고 [프롬프트 복사]를 붙여 넣으세요. ✎ 표시는 이 업무도우미에서 바로 채울 수 있어요.</p>
-  <label class="search" style="margin:0 0 6px;max-width:none"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="all-q" type="search" placeholder="서식 이름으로 찾기 (예: 계획서, 동의서, 척도)"></label>
   <div class="srcsw" id="all-src"><span>프롬프트에 넣을 서식:</span><button type="button" data-v="1">우리 복지관 서식 첨부</button><button type="button" data-v="0" class="on">지침 원문 서식 첨부</button></div>
   <p id="all-n" style="font-size:12.2px;color:var(--muted);margin-bottom:10px"></p>
   <div id="all-body" class="allwrap"></div>
@@ -2338,7 +2384,7 @@ function go(key){
   if(key==='studio'){var sh=$('#fam-studio-host');if(window.STUDIO&&!sh.firstChild){sh.innerHTML=STUDIO.view();STUDIO.bind();}return show('studio');}
   if(key==='gbiz'){var gh=$('#fam-gbiz-host');if(window.GBIZ&&!gh.firstChild){gh.innerHTML=GBIZ.view();GBIZ.bind();}return show('gbiz');}
   if(key==='aiset'){var ab=$('#aig-host');if(ab&&!ab.firstChild){ab.innerHTML=AIG.html();AIG.bind();}return show('aiset');}
-  if(key==='all'){renderAll($('#all-q').value);return show('all');}
+  if(key==='all'){renderAll();return show('all');}
   if(key==='meet'){renderMeet();return show('meet');}
   if(key==='img')return openSimple('img',{season:SEASON_NOW,type:'카드뉴스 (여러 장 넘김)'});
   if(SIMPLE[key])return openSimple(key);
@@ -2781,7 +2827,6 @@ function renderAll(q){
   $('#all-n').textContent=q?('찾은 서식 '+n+'개'):'지침·평가지표가 요구하는 서식 '+n+'개';
   if(!n)box.appendChild(el('div','empty','찾는 서식이 없어요. 다른 말로 찾아보세요.'));
 }
-$('#all-q').addEventListener('input',function(){renderAll(this.value);});
 
 /* --- 홍보 이미지: 계절 자동 + 시안 3개 먼저 --- */
 var SEASON={'봄':{m:'3~5월',mot:'벚꽃, 개나리, 새싹, 소풍 돗자리, 나비',col:'연분홍, 연두, 크림'},'여름':{m:'6~8월',mot:'물놀이, 수박, 큰 나무 그늘, 밀짚모자, 매미',col:'하늘색, 민트, 흰색'},'가을':{m:'9~11월',mot:'낙엽, 단풍길, 감·밤, 억새, 노을',col:'주황, 갈색, 코랄, 머스터드'},'겨울':{m:'12~2월',mot:'눈, 목도리, 따뜻한 차, 성탄 불빛, 털장갑',col:'아이보리, 딥그린, 빨강'}};
@@ -6459,10 +6504,9 @@ function homeHTML(){
       '<button type="button" class="b-go"'+at+'><svg class="ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 16 11-11 4 4-11 11H4zM13 7l4 4"/></svg>열기</button></span></li>';
   }).join('');
   var left='<section class="bx"><div class="bx-h"><h2>서식 자료실</h2><span class="hint"><button type="button" data-gh="all">전체 보기 ›</button></span></div>'+
-    '<div class="bx-b"><ul class="plist">'+L+'</ul></div>'+
-    '<button type="button" class="bd-all" data-gh="all">'+I('pen')+'<span><b>복지관 서식 작성하기</b><span class="bd-desc"> · 상담일지, 사례관리 회의록, 만족도 조사 등</span></span><em>›</em></button></section>';
+    '<div class="bx-b"><ul class="plist">'+L+'</ul></div></section>';
 
-  var Q=[['msg','문자·소통','문자·안부 전화','msg'],['promo2','홍보·안내','공지·카드뉴스','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['planmenu','프로그램 기획','사업별 기획 질문','bulb'],['month','이달의 추천','월별 프로그램·할 일','cal'],['mind','마음돌봄·사진관','업무 감정 정리·응원엽서','heart']];
+  var Q=[['msg','문자·소통','문자·안부 전화','msg'],['promo2','홍보·안내','공지·카드뉴스','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['planmenu','프로그램 기획','사업별 기획 질문','bulb'],['month','이달의 추천','월별 프로그램·할 일','cal'],['mind','빡침 번역기','공감·심호흡·마음쉼터','heart']];
   var mid='<section class="bx"><div class="bx-h"><h2>업무 바로가기</h2></div>'+
     '<div class="qgrid">'+Q.map(function(x,i){return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+I(x[3])+'<b>'+E(x[1])+'</b><small>'+E(x[2])+'</small></button>'}).join('')+'</div>'+
     '<div class="bar2">'+
@@ -6470,20 +6514,20 @@ function homeHTML(){
       '<button type="button" class="grec" data-gh="rec">'+I('mic')+'<span><b>회의 녹음 서식 만들기</b><small>녹음 → 글 → 회의록·공문 초안</small></span><em>시작</em></button>'+
     '</div></section>';
 
-  var links=[['2026 장애인복지시설 사업안내','제3권 PDF 첨부 자료실','https://www.jifb.or.kr/bbs/board.php?bo_table=4_5_1_1&wr_id=222'],['지역사회재활시설 사업안내','제3장 한글 파일 자료실','https://www.jifb.or.kr/bbs/board.php?bo_table=4_5_1_1&wr_id=221']];
-  var links2=[['경기도 사회복지시설평가','경기복지재단 평가 자료실','https://ggwf.gg.go.kr/archives/category/busi002/evaluation_bbs']];
+  var links=[['공지사항','공문·서식 안내','https://kawid.or.kr/bbs/board.php?bo_table=B20&sca=%ED%98%91%ED%9A%8C%EA%B3%B5%EC%A7%80','한국장애인복지시설협회 공지사항'],['2026 사업안내','장애인복지시설 PDF','https://www.jifb.or.kr/bbs/board.php?bo_table=4_5_1_1&wr_id=222','2026 장애인복지시설 사업안내 제3권 PDF'],['지역사회재활시설','사업안내 한글','https://www.jifb.or.kr/bbs/board.php?bo_table=4_5_1_1&wr_id=221','장애인지역사회재활시설 사업안내 제3장 HWPX']];
+  var links2=[['경기복지재단','시설평가 자료실','https://ggwf.gg.go.kr/archives/category/busi002/evaluation_bbs','경기도 사회복지시설 평가 자료실']];
   var extIcon='<svg class="ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 5h6v6m0-6-9 9m8 0v5H5V6h5"/></svg>';
   var right='<section class="bx"><div class="bx-h"><h2>관련 기관 바로가기</h2></div>'+
-   '<div class="bx-b"><div class="glbl">운영 지침 파일 · 공개 자료실</div><ul class="glinks">'+links.map(function(x){return '<li><a href="'+E(x[2])+'" target="_blank" rel="noopener"><b>'+E(x[0])+'</b><span>'+E(x[1])+'</span>'+extIcon+'</a></li>'}).join('')+'</ul>'+
-   '<div class="glbl">경기도 평가자료 바로가기</div><ul class="glinks">'+links2.map(function(x){return '<li><a href="'+E(x[2])+'" target="_blank" rel="noopener"><b>'+E(x[0])+'</b><span>'+E(x[1])+'</span>'+extIcon+'</a></li>'}).join('')+'</ul>'+
+   '<div class="bx-b"><div class="glbl">운영 지침 파일 · 공개 자료실</div><ul class="glinks">'+links.map(function(x){return '<li><a href="'+E(x[2])+'" target="_blank" rel="noopener" title="'+E(x[3])+'"><b>'+E(x[0])+'</b><span>'+E(x[1])+'</span>'+extIcon+'</a></li>'}).join('')+'</ul>'+
+   '<div class="glbl">경기도 평가자료 바로가기</div><ul class="glinks">'+links2.map(function(x){return '<li><a href="'+E(x[2])+'" target="_blank" rel="noopener" title="'+E(x[3])+'"><b>'+E(x[0])+'</b><span>'+E(x[1])+'</span>'+extIcon+'</a></li>'}).join('')+'</ul>'+
    '<div class="ghelp"><button type="button" class="gh-main" data-gh="manual">'+I('help')+'<b>업무도우미 이용 매뉴얼</b><em>›</em></button>'+
    '<div class="gh-sub"><button type="button" data-gh="manual">처음 쓰는 법</button> · <button type="button" data-gh="manual">PC로 보내기</button> · <button type="button" data-gh="manual">안전수칙</button></div></div>'+
    '</div></section>';
 
   return '<div class="ghome">'+
-   '<section class="hero3"><div class="ht"><span class="badge">'+I('sprout')+' 용인시기흥장애인복지관</span>'+
-     '<h1>혼자서도 든든한 업무파트너, <em>AI 업무도우미</em></h1>'+
-     '<p class="sub">서식·사업은 지침과 요청문으로, 문자·안내는 누르면 바로 완성됩니다.</p>'+
+   '<section class="hero3"><div class="ht"><span class="badge">'+I('sprout')+' 종사자 실습용</span>'+
+     '<h1>용인시기흥장애인복지관 <em>AI 업무도우미</em></h1>'+
+     '<p class="sub">복지관 서식 · 사업 기획 · 문자와 홍보 실습</p>'+
      '<label class="gsearch">'+I('help')+'<input id="q" type="search" autocomplete="off" aria-label="기능 찾기" placeholder="업무 찾기 (예: 후원 문자)"><div class="gsres" id="gsr" hidden></div></label>'+
    '</div><div class="hi"><img src="/img/giheung/hero-sprout.webp" alt="복지관 종사자와 장애인 이용자가 함께 새싹 화분을 심는 모습" width="892" height="726"></div></section>'+
    '<div class="cols3">'+left+mid+right+'</div></div>';
@@ -6627,7 +6671,7 @@ function aiStrip(key,title,compact){
   return '<div class="gh-ai-strip" role="group" aria-label="'+E(title)+'">'+(compact?'':'<div><b>'+E(title)+'</b>'+(/^(plan-prompt|promo-prompt)$/.test(key)?'<button type="button" class="gh-jump" data-gi-jump="'+key+'">전문 보기 ↓</button>':'')+'</div>')+
     '<div class="gh-ai-links">'+Object.keys(GH_AI).map(function(id){
       return '<button type="button" class="btn" data-ai-to="'+id+'" data-ai-text="'+E(key)+'">'+GH_AI[id][0]+'로 열기 <span aria-hidden="true">↗</span></button>';
-    }).join('')+'</div><small>버튼을 누르면 '+(key==='ins'?'지침이':'프롬프트가')+' 복사돼요. 새 탭에서 붙여 넣으세요.</small></div>';
+    }).join('')+'</div><small><b>ChatGPT:</b> 새 대화에 자동 입력 · <b>제미나이·클로드:</b> 자동 복사 후 붙여넣기. 실명·연락처 등 개인정보는 제외하세요.</small></div>';
 }
 function aiLaunch(id,t){
   var dest=GH_AI[id];
@@ -6643,9 +6687,16 @@ function aiLaunch(id,t){
   try{pending=navigator.clipboard&&navigator.clipboard.writeText(t);}catch(e){}
   if(!pending)pending=Promise.resolve(fallback());
   else pending=pending.then(function(){return true;},fallback);
-  // Open synchronously on the click. Never put the prompt in a URL or submit it.
-  var w=window.open(dest[1],'_blank');if(w)w.opener=null;
+  // Keep the entire prompt in the clipboard too, in case login or URL limits prevent prefill.
+  var url=dest[1],prefill=false;
+  if(id==='gpt'){
+    // The fragment fills the composer without the auto-send behavior of the query string.
+    var link=new URL(url);link.hash=new URLSearchParams({q:t,disable_auto_send:'1'}).toString();
+    if(link.href.length<12000){url=link.href;prefill=true;}
+  }
+  var w=window.open(url,'_blank');if(w)w.opener=null;
   pending.then(function(ok){
+    if(w&&prefill){toast(ok?'ChatGPT 새 대화에 넘겼어요. 입력창이 비어 있으면 붙여 넣으세요.':'ChatGPT 새 대화에 넘겼어요.');return;}
     toast(ok?(w?'복사했어요. '+dest[0]+' 입력창에 붙여 넣으세요.':'복사했어요. 새 탭이 차단됐어요. '+dest[0]+'을 직접 열어 붙여 넣으세요.'):'복사 권한이 없어요. 웹앱의 프롬프트를 직접 선택해 복사해 주세요.');
   });
 }
@@ -7103,15 +7154,28 @@ function renderGm(){
 }
 
 /* ---------- ⑥ 마음·사진 (4탭) ---------- */
-var MIND=[['vent','① 빡침공감'],['card','② 응원엽서'],['heart','③ 마음쉼터'],['studio','④ 나만의 사진관']];
-function openMind(tab){
-  tab=tab||'vent';
-  if(tab==='vent'||tab==='heart'){gmMode=tab;renderGm();show('mindwork');return;}
-  openMindLegacy(tab);
-}
+var MIND=[['vent','① 빡침공감 번역기'],['card','② 응원엽서'],['heart','③ 마음쉼터'],['studio','④ 나만의 사진관']];
+function openMind(tab){openMindLegacy(tab||'vent');}
+function openMindWork(tab){gmMode=tab;renderGm();show('mindwork');}
 function openMindLegacy(tab){
   tab=tab||'vent';
   var host=$('#mind-body');if(!host)return;
+  qa('#v-mind .mtabs button').forEach(function(b){
+    var active=b.dataset.mt===tab;b.classList.toggle('on',active);b.setAttribute('aria-selected',String(active));
+  });
+  qa('.legacy-tool-frame',host).forEach(function(f){f.hidden=true;});
+  var alt=$('#mind-work-alt');if(alt){alt.hidden=tab!=='vent'&&tab!=='heart';alt.dataset.gmWork=tab;}
+  ['v-vent','v-heart','v-studio'].forEach(function(id){var n=document.getElementById(id);if(n)n.hidden=true;});
+  if(tab==='vent'||tab==='heart'){
+    var frame=$('#mind-frame-'+tab);
+    if(!frame){
+      frame=document.createElement('iframe');frame.className='legacy-tool-frame';frame.id='mind-frame-'+tab;
+      frame.title=tab==='vent'?'빡침공감 번역기':'마음 쉼터';
+      frame.setAttribute('allow','microphone');
+      frame.src='/giheung/tools/?v=1124#'+tab;host.appendChild(frame);
+    }
+    frame.hidden=false;show('mind');return;
+  }
   if(tab==='studio'){var sh=$('#fam-studio-host');if(sh&&!sh.firstChild&&window.STUDIO){sh.innerHTML=STUDIO.view();try{STUDIO.bind()}catch(e){}}}
   var src=$('#v-'+(tab==='card'||tab==='heart'?'heart':tab));
   qa('.mtabs button').forEach(function(b){b.classList.toggle('on',b.dataset.mt===tab)});
@@ -7133,7 +7197,7 @@ function ensure(id,html){var n=$('#v-'+id);if(!n){n=document.createElement('div'
 function boot(){
   /* 새 화면 틀 만들기 */
   ensure('msg','');ensure('plan2','');ensure('promo2','');ensure('donate','');ensure('donwork','');ensure('planmenu','');ensure('mindwork','');
-  ensure('mind','<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음돌봄·사진관</h2><span class="tag">업무 감정 정리 · 응원엽서 · 잠깐 쉼 · 사진 실습</span></div><div class="mtabs" role="tablist">'+MIND.map(function(x){return '<button type="button" data-mt="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div><div id="mind-body"></div>');
+  ensure('mind','<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음돌봄·사진관</h2><span class="tag">업무 감정 정리 · 응원엽서 · 잠깐 쉼 · 사진 실습</span></div><div class="mtabs" role="tablist">'+MIND.map(function(x){return '<button type="button" role="tab" aria-selected="false" data-mt="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div><button type="button" class="btn mini mind-work-alt" id="mind-work-alt" hidden>복지관 상황 예시 보기</button><div id="mind-body"></div>');
   /* 홈 그리기 + 기존 홈 요소 정리 */
   var old=$('#main4');if(old)old.remove();
   if(typeof VIEWS!=='undefined'){['vent','heart','studio'].forEach(function(k){var i=VIEWS.indexOf(k);if(i>-1)VIEWS.splice(i,1)})}
@@ -7198,6 +7262,7 @@ function boot(){
       if(ST_PR.memo===ST_PR.demoMemo)ST_PR.memo='';
       ST_PR.demo=false;ST_PR.demoFields={};ST_PR.demoMemo='';renderPromo();return;
     }
+    var work=e.target.closest('[data-gm-work]');if(work){openMindWork(work.dataset.gmWork);return;}
     var ml=e.target.closest('[data-gm-legacy]');if(ml){openMindLegacy(ml.dataset.gmLegacy);return;}
     var mi=e.target.closest('[data-mind-entry]');if(mi){var m=MIND.find(function(x){return x[1]===mi.dataset.mindEntry;});if(m)openMind(m[0]);return;}
     var mt=e.target.closest('[data-mt]');if(mt){openMind(mt.dataset.mt);return}
