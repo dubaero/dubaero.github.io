@@ -36,14 +36,13 @@
 .step b{font-weight:600!important;font-size:17.5px!important;color:#17304F!important}
 .step p{font-weight:400!important;font-size:15.5px!important;color:#5A6673!important}
 .pa-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:22px}
-.pa{background:#F2FBF8;border:1px solid #CBEAE0;border-top:3px solid #8FD6C1;border-radius:12px;padding:24px 26px}
-.pa em{color:#2E9B7C}
-.pa li::before{background:#2E9B7C}
-.pa em{font-style:normal;font-size:14px;font-weight:600;color:#2E9B7C}
+/* 2026.11.25 민트 바탕 제거 → 흰 바탕 + 진한 남색 테두리로 복원 */
+.pa{background:#FFFFFF;border:1.5px solid #17304F;border-top:3px solid #17304F;border-radius:12px;padding:24px 26px}
+.pa em{font-style:normal;font-size:14px;font-weight:600;color:#17304F}
 .pa h3{font-size:20px!important;font-weight:700!important;color:#17304F!important;margin:4px 0 14px!important;letter-spacing:-.02em;line-height:1.4}
 .pa ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
 .pa li{position:relative;padding-left:16px;font-size:16px;line-height:1.55;color:#3A4652}
-.pa li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:#1F6FB2}
+.pa li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:#17304F}
 @media (max-width:760px){.pa-grid{grid-template-columns:1fr}.pa{padding:20px}}
 </style>
 </head>
