@@ -1487,6 +1487,60 @@ html:has(#v-mind:not([hidden])),#v-mind{zoom:1!important}
 }
 </style>
 
+<style id="giheung-promo-one-form">
+#v-promo2 .gh-event-head{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap;margin-bottom:4px}
+#v-promo2 .gh-event-head h3{font-size:14px;line-height:1.4;color:#1f2e28;font-weight:800}
+#v-promo2 .gh-event-example{display:flex;align-items:center;gap:5px}
+#v-promo2 .gh-event-example .gi-action{min-height:24px;padding:2px 6px;font-size:11px}
+#v-promo2 .gh-event-rows{display:grid;gap:3px;margin:0 0 6px}
+#v-promo2 .gh-event-row{display:grid;grid-template-columns:minmax(88px,22%) minmax(0,1fr);gap:5px;align-items:center;margin:0;font-weight:750}
+#v-promo2 .gh-event-row input{margin:0;min-height:28px;padding:4px 7px}
+#v-promo2 .gh-event-row input::placeholder{color:#69766e}
+#v-promo2 .gh-event-row input:focus-visible,#v-promo2 details summary:focus-visible{outline:2px solid #2e7d64;outline-offset:1px}
+#v-promo2 .gh-event-row label{font-size:12px;line-height:1.25}
+#v-promo2 .gh-promo-options{border:1px solid #d5e2d9;border-radius:7px;margin:5px 0;padding:0 6px}
+#v-promo2 .gh-promo-options summary{font-weight:750;font-size:12px;color:#1f503d;cursor:pointer;padding:4px 0}
+#v-promo2 .gh-promo-options[open] summary{margin-bottom:4px;border-bottom:1px solid #e4ece6}
+#v-promo2 .gh-entered-facts{padding:6px 8px}
+#v-promo2 .gh-entered-facts h4{font-size:12px;margin:0 0 3px}
+#v-promo2 .gh-entered-facts dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 7px;margin:0}
+#v-promo2 .gh-entered-facts dl div{display:grid;grid-template-columns:78px minmax(0,1fr);gap:4px;padding:3px 5px;background:#fff8f2;border-radius:4px}
+#v-promo2 .gh-entered-facts dt,#v-promo2 .gh-entered-facts dd{font-size:11.5px;margin:0;overflow-wrap:anywhere}
+#v-promo2 .gh-entered-facts dd{font-weight:700;color:#23362d}
+#v-promo2 .gh-entered-facts dd.is-empty{color:#68776f;font-weight:400}
+#v-promo2 .gh-tiles li p{white-space:pre-line;overflow-wrap:anywhere}
+#v-promo2 .gh-promo-preview-mobile{display:none}
+@media(min-width:1200px){#v-promo2 .gh-entered-facts dl{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:899px){
+ #v-promo2 .gh-event-row input{font-size:16px;min-height:34px}
+ #v-promo2 .gh-promo-preview-mobile{display:inline-flex;margin:2px 0 5px}
+ #v-promo2 .gh-entered-facts dl div{grid-template-columns:66px minmax(0,1fr)}
+}
+@media(max-width:380px){#v-promo2 .gh-entered-facts dl{grid-template-columns:minmax(0,1fr)}}
+</style>
+
+<style id="giheung-ai-app-guide">
+#v-appguide{zoom:1!important}
+#v-appguide .ag{max-width:1120px;margin:0 auto 24px}
+#v-appguide .ag-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0}
+#v-appguide .ag-title h2{font-size:20px;color:#1f3b31}
+#v-appguide .ag-title .vback{background:#22604c;color:#fff;font-weight:800}
+#v-appguide .ag-note{font-size:12px;color:#6b4938;background:#fff0df;padding:6px 9px;border-radius:6px;margin:0 0 8px}
+#v-appguide .ag-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:8px}
+#v-appguide .ag-box{min-width:0;background:#fff;border:1px solid #d1e0d7;border-radius:8px;padding:10px;margin-bottom:8px;font-size:13px}
+#v-appguide .ag-box h3{font-size:15px;color:#214d3d;margin-bottom:4px}
+#v-appguide .ag-box :is(ol,ul){padding-left:20px;margin:3px 0}
+#v-appguide figure{margin:0}
+#v-appguide .ag-image{width:100%;height:auto;display:block;border:1px solid #dedfd5;border-radius:7px}
+#v-appguide .ag-caption{display:flex;align-items:center;justify-content:space-between;gap:5px;flex-wrap:wrap;font-size:12px;margin-top:4px;color:#53655d}
+#v-appguide .ag-open{display:inline-flex;padding:4px 8px;border-radius:6px;background:#22604c;color:white;text-decoration:none;font-weight:700;margin:4px 4px 0 0}
+#v-appguide .ag-table-wrap{overflow-x:auto}
+#v-appguide table{width:100%;border-collapse:collapse;font-size:12px;text-align:left;min-width:400px}
+#v-appguide :is(th,td){padding:5px 7px;border:1px solid #d5e2da}
+#v-appguide th{background:#f1f7f3;color:#214d3d}
+#v-appguide .ag-box pre{margin:6px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+</style>
+
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -6494,7 +6548,7 @@ function homeHTML(){
    ['event','','행사·체험','운영계획·안전계획 한 번에','event'],
    ['promo2','','홍보·안내','행사후기·공지·카드뉴스·릴스','promo2'],
    ['img','','홍보 이미지 제안','카드뉴스·포스터 시안','img'],
-   ['aiset','','AI 맞춤 설정 가이드','기록·학습·메모리 끄기','aiset']
+   ['appguide','','AI 앱·설치 가이드','ChatGPT·제미나이·Claude','appguide']
   ];
   var L=R.map(function(x,i){
     var at=' data-gh="'+x[0]+'"'+(x[1]?' data-gh-project="'+x[1]+'"':'');
@@ -6532,6 +6586,95 @@ function homeHTML(){
    '</div><div class="hi"><img src="/img/giheung/hero-sprout.webp" alt="복지관 종사자와 장애인 이용자가 함께 새싹 화분을 심는 모습" width="892" height="726"></div></section>'+
    '<div class="cols3">'+left+mid+right+'</div></div>';
 }
+/* AI 앱 가이드 — ChatGPT · 제미나이 · Claude (2026년 11월 확인, 바뀔 수 있음) */
+var GI_APP_GUIDE={
+cmp:{
+ head:['','ChatGPT','제미나이','Claude'],
+ rows:[
+  ['한 줄로','글쓰기·서식·이미지까지 두루 잘하는 업무 비서','구글 계정과 이어지고 카메라로 보여 주며 묻는 비서','긴 서식·파일과 문서·포스터 만들기에 강한 비서'],
+  ['이럴 때','공문·계획서·안내문, 홍보 이미지','현장에서 종이 서식 비추며 질문, 지침 PDF에서 근거 찾기','긴 계획서 다듬기, 한글 서식 채우기, 포스터·발표자료'],
+  ['무료로 되는 것','텍스트 대화, 프로젝트(파일 5개), 캔버스, 이미지·리서치 일부','Live(카메라), 캔버스, 노트북, 스킬, 이미지 일부','채팅, 프로젝트 5개, 아티팩트, Design·Slides·Docs, 스킬'],
+  ['유료에서 열리는 것','예약 작업, 맞춤형 GPT, Work(웹·모바일), 더 많은 파일·이미지','예약된 작업, 상위 모델, 영상 생성, 더 큰 사용량','리서치, Cowork, Chrome·오피스 연동, 무제한 프로젝트'],
+  ['데스크톱 앱','Chat·Work·Codex 모드 (무료 포함)','단축키로 바로 호출 (Windows·Mac)','Chat 무료, Cowork는 유료'],
+  ['복지관 추천','사업계획서·결과보고 프로젝트','지침 노트북, Live로 서식 질문','한글 서식 그대로 받기, 행사 포스터']
+ ],
+ rule:['매달 같은 문서 → ChatGPT·Claude <b>프로젝트</b>에 서식·지침을 넣고 꺼내 쓰기','현장에서 말·카메라로 → 제미나이 <b>Live</b>로 비추며 묻기','내 자료에서만 근거 → 제미나이 <b>노트북</b>에 지침 PDF를 넣고 묻기']
+},
+apps:{
+ gpt:{name:'ChatGPT',url:'https://chatgpt.com',
+  news:['<b>ChatGPT Work</b> — 여러 단계 일을 맡기면 문서·발표자료·표까지 완성 (예전 "에이전트 모드"는 Work로 바뀜)','<b>데스크톱 앱</b>에서 Chat·Work·Codex 모드를 무료 플랜도 사용 (사용량 한도 있음)','<b>프로젝트 안에서 Work</b>를 켜면 프로젝트 지침·자료를 그대로 씀','<b>Dot(닷)</b> — 대화가 끝나도 계속 일하는 상시 비서 (Pro·Business Premium 전용)'],
+  plan:{head:['','무료','Go','Plus','Pro'],rows:[['텍스트 대화','○','○','○','○'],['프로젝트 파일','5개','25개','25개','40개'],['이미지·심층 리서치','조금','더 많이','넉넉히','최대'],['예약 작업·맞춤형 GPT','×','×','○','○'],['Work','데스크톱 앱','데스크톱 앱','웹·모바일·데스크톱','웹·모바일·데스크톱'],['광고','없음','있을 수 있음','없음','없음']]},
+  how:[
+   {t:'프로젝트 만들기',when:'매달 쓰는 문서를 서랍처럼',steps:['왼쪽 메뉴 <b>프로젝트 → 새 프로젝트</b>','<b>지침</b> 칸에 이 프로젝트의 규칙 붙여넣기','<b>파일 추가</b>로 서식·지침·전년도 문서 올리기','프로젝트 안에서 새 채팅 시작'],p:'이 프로젝트의 자료를 먼저 읽고, 내가 앞으로 무엇을 시키면 좋을지 3가지 제안해 줘.'},
+   {t:'캔버스로 함께 고치기',when:'안내문·계획서를 옆 창에서 다듬을 때',steps:['입력창 <b>[+]</b> 또는 도구에서 <b>캔버스</b>','초안을 붙여넣기','고칠 문장을 드래그해 "더 쉽게" 지시'],p:'캔버스에서 아래 안내문을 열고, 어르신도 읽기 쉽게 문장을 짧게 고쳐 줘.\n[안내문 붙여넣기]'},
+   {t:'심층 리서치',when:'다른 기관 사례·정책을 출처와 함께 조사할 때',steps:['입력창 <b>[+] → 심층 리서치</b>','조사할 주제와 범위 입력','계획을 확인하고 시작 (몇 분 걸려요)'],p:'장애인복지관의 디지털 재활 프로그램 운영 사례를 국내 공공기관 자료 위주로 조사해 줘. 출처 링크를 붙이고, 확인 안 된 내용은 미확인으로 표시해.'},
+   {t:'Work로 큰일 맡기기',when:'계획서 묶음·발표자료까지 한 번에',steps:['데스크톱 앱 또는 유료 웹에서 입력창 위 <b>Work</b> 켜기','결과물을 구체적으로 설명','진행 중 질문·승인 요청에 답하기','완성본 검토'],p:'첨부한 자료로 {사업} 운영위원회 보고용 발표자료 8장을 만들어 줘. 사람이 확인할 숫자는 표시해 줘.'},
+   {t:'이미지 만들기',when:'행사 홍보물 배경 그림',steps:['입력창에 장면을 자세히 설명','마음에 들 때까지 "이 부분만 바꿔 줘"','글자는 캔바에서 직접 넣기'],p:'따뜻한 실사 느낌, 장애인 이용자와 가족·직원이 함께 웃으며 음식을 나누는 연말 잔치 장면. 글자는 넣지 말고, 위쪽에 제목 넣을 빈 공간을 둬.'}
+  ]},
+ gem:{name:'제미나이',url:'https://gemini.google.com/app',
+  news:['<b>Gems → 스킬</b>로 바뀌는 중 (개인 계정 Gems는 12월 17일 앱에서 사라짐 — 쓰던 Gems는 미리 백업)','<b>무료는 모델 자동 선택</b>만 (10월부터)','<b>노트북</b> — 예전 NotebookLM, 내가 넣은 자료 안에서만 답하고 쪽수까지 보여 줌','<b>Windows 앱</b> 출시 (9월) — Alt + Space로 어디서나 호출'],
+  plan:{head:['','무료','AI Plus','AI Pro'],rows:[['모델','자동 선택','Flash 계열','상위 모델'],['사용량','기본','기본의 2배','기본의 4배'],['예약된 작업','×','○','○'],['동영상 생성','×','○','○'],['저장공간','15GB','—','5TB']]},
+  how:[
+   {t:'Live로 비추며 묻기',when:'종이 서식·게시판·오류 화면을 보여 주며',steps:['휴대폰 제미나이 앱 → 입력창 옆 <b>Live</b>','<b>카메라</b> 켜고 서식 비추기','말로 질문하기'],p:'(말로) 이 서식에서 내가 채워야 할 칸이 어디인지 하나씩 알려 줘.'},
+   {t:'노트북에 지침 넣기',when:'두꺼운 사업안내·평가 지침에서 근거 찾기',steps:['<b>노트북 → 새 노트북</b>','지침 PDF 추가','질문하고, 답에 붙은 <b>출처 번호</b> 눌러 원문 확인'],p:'넣은 자료 안에서만 답해 줘. {사업}의 평가 지표를 표로 정리하고 줄마다 쪽수를 붙여 줘. 자료에 없으면 "자료에 없음"이라고 써.'},
+   {t:'스킬 만들기',when:'자주 쓰는 지시를 저장해 두고 꺼내 쓰기',steps:['왼쪽 메뉴에서 <b>스킬</b>','새 스킬 → 이름과 지시 입력','대화에서 스킬 불러 쓰기'],p:'너는 용인시기흥장애인복지관 안내문 담당이야. 내가 주는 내용을 이용자·보호자용 쉬운 안내문으로 바꾸고, 맨 위에 무엇·언제·어디서·신청 방법 4줄을 붙여.'},
+   {t:'Deep Research',when:'출처 있는 조사 보고서가 필요할 때',steps:['입력창 도구에서 <b>Deep Research</b>','주제 입력 → 계획 확인','완성 보고서를 문서로 내보내기'],p:'경기도 장애인복지관의 장애인식개선 교육 운영 사례를 조사해 표로 정리해 줘. 출처를 붙여 줘.'}
+  ]},
+ cla:{name:'Claude',url:'https://claude.ai',
+  news:['<b>무료에도</b> Design(포스터)·Slides(발표자료)·Docs·스킬 포함','<b>프로젝트</b> 무료 5개 — 사업별 서랍으로','<b>데스크톱 앱</b> — Chat 무료, Cowork(내 PC 파일로 여러 단계 작업)는 유료','<b>코드 실행·파일 생성</b>을 켜면 한글(HWPX) 서식 칸을 채운 파일로 받을 수 있음 (공식 지원 형식은 아님)'],
+  plan:{head:['','무료','Pro','Max'],rows:[['채팅·아티팩트','○','○','○'],['프로젝트','5개','무제한','무제한'],['Design·Slides·Docs','○','○','○'],['리서치','×','○','○'],['Cowork·Chrome·오피스 연동','×','○','○'],['사용량','기본','기본','5배 이상']]},
+  how:[
+   {t:'프로젝트 만들기',when:'사업별 자료와 지침을 한 방에',steps:['왼쪽 <b>프로젝트 → 새 프로젝트</b>','<b>지침</b> 입력, <b>파일</b>에 서식·지침 올리기','프로젝트 안에서 대화'],p:'이 프로젝트 자료를 읽고, {사업} 사업계획서를 쓸 때 꼭 확인할 점 5가지를 표로 정리해 줘.'},
+   {t:'한글 서식 그대로 받기',when:'AI 결과를 한글에 옮기기 싫을 때',steps:['한글에서 <b>다른 이름으로 저장 → HWPX</b>','Claude <b>설정 → 기능 → 코드 실행 및 파일 생성</b> 켜기','HWPX 파일 첨부 + 아래 프롬프트'],p:'첨부한 HWPX 서식의 표와 칸 모양을 그대로 유지하고, 빈칸에만 아래 메모 내용을 채워서 같은 형식 파일로 돌려줘. 메모에 없는 칸은 [확인 필요]로 남겨.\n[메모 붙여넣기]'},
+   {t:'Design으로 포스터',when:'행사 포스터·원페이지 안내',steps:['대화에서 "포스터 만들어 줘"','옆 창에 열린 디자인을 보며 수정 지시','PDF·이미지로 내보내기'],p:'{사업} 안내 포스터를 A4 세로로 만들어 줘. 제목 크게, 일시·장소·신청 방법이 10초 안에 보이게, 따뜻한 크림·녹색 톤으로.'},
+   {t:'시크릿 채팅',when:'기록에 남기고 싶지 않은 초안',steps:['새 채팅에서 <b>시크릿</b> 켜기','대화가 기록·메모리에 남지 않음','그래도 개인정보는 넣지 않기'],p:'(시크릿 채팅에서) 아래 문장을 부드러운 공문 말투로 바꿔 줘.\n[문장]'}
+  ]}
+},
+custom:{
+ where:[['ChatGPT','프로필 → <b>설정 → 맞춤설정</b> → "ChatGPT가 어떻게 응답했으면 하나요?"'],['제미나이','설정 → <b>저장된 정보·지침</b> (메뉴 이름은 화면에서 확인)'],['Claude','설정 → <b>프로필</b>의 개인 선호 칸 (메뉴 이름은 화면에서 확인)']],
+ tips:['맞춤설정은 <b>모든 대화</b>에, 프로젝트 지침은 <b>그 프로젝트</b>에만 적용돼요','메모리는 나를 기억해요 — 그래서 <b>1인 1계정</b>, 공용 계정은 쓰지 마세요','설정의 <b>모델 학습 사용</b> 항목을 끄면 내 대화가 학습에 쓰이지 않아요']
+}
+};
+
+var AG_TAB='install';
+var AG_APPS=[
+ {id:'gpt',name:'ChatGPT',benefit:'서식·글·이미지 초안을 만들고, Chat·Work·Codex를 앱에서 전환해 쓸 수 있어요. 기능은 계정과 요금제에 따라 달라요.',download:'https://chatgpt.com/download/',help:'https://help.openai.com/en/articles/20001276-moving-to-the-new-chatgpt-desktop-app',steps:['공식 다운로드에서 Windows 또는 macOS를 고르세요.','내려받은 파일을 열거나, Microsoft Store가 열리면 설치를 누르세요.','앱을 실행하고 ChatGPT 계정으로 로그인하세요.']},
+ {id:'gem',name:'제미나이',benefit:'일하던 화면에서 빠르게 질문하고, 문서·이메일 초안을 만들거나 이미지 내용을 물어볼 수 있어요.',download:'https://gemini.google/kr/desktop/',help:'https://support.google.com/gemini/answer/18263854?hl=ko',steps:['공식 다운로드에서 Windows 또는 macOS를 고르세요.','Windows에서는 GeminiSetup.exe를 열고 설치 안내를 따르세요.','시작 메뉴에서 Gemini를 열고 Google 계정으로 로그인하세요. Windows 바로 열기는 Alt + Space예요.']},
+ {id:'cla',name:'Claude',benefit:'긴 계획서와 보고서 초안을 읽고 구조를 정리하기 좋아요. Cowork와 Claude Code의 이용 범위는 요금제에 따라 달라요.',download:'https://claude.com/download',help:'https://support.claude.com/en/articles/10065433-install-claude-desktop',steps:['공식 다운로드에서 내 운영체제를 고르세요.','설치가 끝나면 Windows 시작 메뉴 또는 Mac 응용 프로그램에서 Claude를 여세요.','Claude 계정으로 로그인하세요.']},
+];
+function agAppCards(apps){
+ return '<div class="ag-cards">'+apps.map(function(a){
+  return '<article class="ag-box"><h3>'+E(a.name)+' 데스크톱 앱</h3><p>'+E(a.benefit)+'</p><ol>'+a.steps.map(function(k){return '<li>'+E(k)+'</li>';}).join('')+'</ol><a class="ag-open" target="_blank" rel="noopener" href="'+a.download+'">'+E(a.name)+' 공식 다운로드 ↗</a><a target="_blank" rel="noopener" href="'+a.help+'">공식 설치 도움말 ↗</a></article>';
+ }).join('')+'</div>';
+}
+function agTable(header,rows){
+ return '<div class="ag-table-wrap"><table><thead><tr>'+header.map(function(s,i){return '<th scope="col">'+E(s||'비교 항목')+'</th>';}).join('')+'</tr></thead><tbody>'+rows.map(function(r){
+  return '<tr><th scope="row">'+E(r[0])+'</th>'+r.slice(1).map(function(y){return '<td>'+E(y)+'</td>';}).join('')+'</tr>';
+ }).join('')+'</tbody></table></div>';
+}
+function agImage(name,alt){
+ var url='/img/giheung/'+name+'.webp';
+ return '<figure class="ag-box"><a href="'+url+'" target="_blank" rel="noopener" aria-label="원본 캡처 자료 크게 보기"><img class="ag-image" src="'+url+'" alt="'+E(alt)+'"></a><figcaption class="ag-caption">기존 강의 자료 · 2026.11.24 화면 기준 <a href="'+url+'" target="_blank" rel="noopener">크게 보기 ↗</a></figcaption></figure>';
+}
+function renderAppGuide(){
+ var tabs=[['install','앱 설치·캡처'],['compare','한눈에 비교'],['gpt','ChatGPT'],['gem','제미나이'],['cla','Claude']];
+ var g=GI_APP_GUIDE,h='';
+ if(AG_TAB==='install'){
+  h=agImage('apps','ChatGPT, 제미나이, Claude 공식 다운로드 화면을 캡처한 데스크톱 앱 3종 설치 안내')+agAppCards(AG_APPS);
+ }else if(AG_TAB==='compare'){
+  h='<section class="ag-box"><h3>복지관 업무에서 이렇게 골라요</h3>'+agTable(g.cmp.head,g.cmp.rows.filter(function(r){return !/무료|유료/.test(r[0]);}))+'<ul>'+g.cmp.rule.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></section>'+
+    agImage('gpt5','ChatGPT Chat·Project·Work·Codex·Dot 기능 5단계 비교 교육 장표');
+ }else{
+  var app=AG_APPS.find(function(a){return a.id===AG_TAB;}),d=g.apps[AG_TAB];
+  h=agAppCards([app])+'<p class="ag-note">아래는 당시 강의 실습 예제예요. 화면과 기능 사용 범위는 계정·요금제·업데이트에 따라 달라질 수 있어요.</p><div class="ag-cards">'+d.how.map(function(w,i){
+   return '<section class="ag-box"><h3>'+E(w.t)+'</h3><p>'+E(w.when)+'</p><ol>'+w.steps.map(function(k){return '<li>'+k+'</li>';}).join('')+'</ol>'+outBlock('실습 예시','ag-'+AG_TAB+i,w.p.replace(/\{사업\}/g,'[사업명]'))+'</section>';
+  }).join('')+'</div>';
+ }
+ $('#v-appguide').innerHTML='<section class="ag gi-task"><div class="ag-title"><button type="button" class="vback" data-home>← 업무도우미</button><h2>AI 데스크톱 앱 가이드</h2></div>'+
+  '<nav aria-label="데스크톱 앱 가이드" class="gh-subtabs">'+tabs.map(function(t){return '<button type="button" data-ag-tab="'+t[0]+'" class="'+(AG_TAB===t[0]?'on':'')+'" aria-pressed="'+(AG_TAB===t[0])+'">'+E(t[1])+'</button>';}).join('')+'<button type="button" data-gh="aiset">맞춤 설정 캡처 가이드 ↗</button></nav>'+
+  '<p class="ag-note">캡처와 실제 화면이 다르면 아래 공식 다운로드·도움말을 기준으로 보세요.</p>'+h+'</section>';
+}
+
 function renderHome(){var h=$('#v-home');if(!h)return;h.innerHTML=homeHTML();bindSearch();}
 
 /* ---------- 사용법 도움말 ---------- */
@@ -6542,8 +6685,9 @@ var HELP={
  prompt:['사업별 맞춤형 프롬프트 생성기','업무/일상을 고르고 항목을 누르면 프롬프트가 완성됩니다. 식단·요리(냉장고 파먹기, 당뇨 식단)도 들어 있어요.','① 업무 또는 일상 선택','② 상황·조건을 칩으로 고르기','③ 완성된 프롬프트를 복사해 AI에 붙여 넣기'],
  planmenu:['프로그램 기획 제안','왼쪽에서 서비스 영역·대상·시기·규모를 누르면 오른쪽 프로그램 계획서 표가 실시간으로 채워집니다.','① 영역과 대상을 고르기','② 규모(1회·4회기·8회기·연중) 선택','③ 표를 복사해 계획서에 붙이기'],
  event:['행사·체험','행사 종류·시기·대상을 고르면 운영계획과 안전계획을 만듭니다.','① 행사 종류 선택','② 시기·대상·장소 조건 적기','③ 진행표·안전계획·안내문 받기'],
- promo2:['홍보·안내','무엇을 만들지(행사후기·공지·카드뉴스·릴스·블로그·보도자료)를 고르면 오른쪽 글이 바로 완성됩니다.','① 종류와 사업 고르기','② 행사 정보를 쉼표로 적기','③ 글을 복사해 홈페이지·블로그에 올리기'],
+ promo2:['홍보·안내','무엇을 만들지(행사후기·공지·카드뉴스·릴스·블로그·보도자료)를 고르면 오른쪽 글이 바로 완성됩니다.','① 종류와 사업 고르기','② 왼쪽 항목 옆에 행사 정보를 적기','③ 글을 복사해 홈페이지·블로그에 올리기'],
  img:['홍보 이미지 제안','카드뉴스·포스터 시안 방향을 고르면 이미지 프롬프트가 나옵니다.','① 만들 이미지 종류 선택','② 들어갈 문구·사진 방향 적기','③ 프롬프트를 복사해 이미지 AI에 붙여 넣기'],
+ appguide:['AI 앱·설치 가이드','세 데스크톱 앱의 장점, 기능과 다운로드 버튼 위치를 살펴봐요.','① 앱 설치·캡처에서 화면 보기','② 사용할 앱의 공식 다운로드 열기','③ 설치 후 본인 계정으로 로그인'],
  aiset:['AI 맞춤 설정 가이드','기록 남기지 않기·학습 끄기·메모리·지침을 실제 화면 사진으로 따라 할 수 있어요.','① 제미나이/ChatGPT 선택','② 카드를 눌러 화면 사진 보기','③ 톱니바퀴 → 활동 순서로 설정'],
  manual:['업무도우미 이용 매뉴얼','처음 쓰는 법·PC로 보내기·안전수칙·입력 금지선을 모았습니다.','① 입력 금지선 확인','② 우리 복지관 정보 등록','③ 만든 글은 반드시 직접 확인']
 };
@@ -6592,10 +6736,10 @@ function msgHTML(tag,body,note){
 function paneTabs(){
   return '<div class="gi-pan-tabs" role="group" aria-label="작업 화면"><button type="button" data-gi-pane="in" aria-pressed="true">고르기·채우기</button><button type="button" data-gi-pane="out" aria-pressed="false">결과·프롬프트</button></div>';
 }
-function x2(title,tag,left,right,tabs,back){
+function x2(title,tag,left,right,tabs,back,showBoth){
   return '<section class="gi-task"><div class="fbar"><button type="button" class="vback" '+(back?'data-gh="'+E(back)+'"':'data-home')+'>← '+(back==='donate'?'후원 관리':back==='planmenu'?'프로그램·기획':'업무도우미')+'</button><h2>'+E(title)+'</h2></div>'+
-   (tag?'<p class="fstat">'+E(tag)+'</p>':'')+(tabs||'')+paneTabs()+
-   '<div class="x2" data-pane="in"><section aria-label="고르기와 사용법" class="col L">'+left+'</section><section aria-label="예시와 전체 프롬프트" class="col R">'+right+'</section></div></section>';
+   (tag?'<p class="fstat">'+E(tag)+'</p>':'')+(tabs||'')+(showBoth?'':paneTabs())+
+   '<div class="x2" data-pane="'+(showBoth?'both':'in')+'"><section aria-label="고르기와 사용법" class="col L">'+left+'</section><section aria-label="예시와 전체 프롬프트" class="col R">'+right+'</section></div></section>';
 }
 
 /* ---------- ① 문자·소통 ---------- */
@@ -6815,7 +6959,7 @@ function planRight(){
 var ST_PR={kind:'홈페이지 행사후기 올리기',group:'스마트재활·치료',biz:'스마트재활센터',memo:'',purpose:'활동 후기',audience:'이용자·보호자',style:'깔끔한 공공기관형',count:'4장',ratio:'세로 4:5',fields:{},demo:false};
 var PRK=['홈페이지 행사후기 올리기','홈페이지 안내 글','블로그 초안','공지사항','카드뉴스','포스터','홍보 이미지','릴스·숏폼 대본','소식지','문자·SNS 짧은 글','보도자료'];
 var GH_PROMO_FIELDS=[
- ['title','프로그램명','겨울 가족 체험교실'],
+ ['title','프로그램명','문화예술 체험교실'],
  ['when','행사 일시','12월 5일 오후 2시~4시'],
  ['where','장소','복지관 2층 프로그램실'],
  ['recruit','모집 기간','11월 18일~11월 30일'],
@@ -6823,20 +6967,32 @@ var GH_PROMO_FIELDS=[
  ['countPeople','모집 인원','15가족'],
  ['method','신청 방법','복지관 홈페이지의 신청 양식'],
  ['contact','문의처','담당 부서 대표번호'],
- ['price','참가비','무료 또는 [확인 필요]'],
- ['access','접근성·준비물','엘리베이터 이용 가능 여부 확인']
+ ['price','참가비','무료 또는 5,000원'],
+ ['documents','접수물','신청서 1부'],
+ ['supplies','준비물','편한 옷, 개인 물병'],
+ ['access','접근성 안내','휠체어 이용 시 1층 출입구']
 ];
 function prName(v){return (v.fields.title||'').trim()||v.biz||'[프로그램명]';}
 function prFacts(v,all){
  return GH_PROMO_FIELDS.filter(function(f){return all||f[0]==='title'||(v.fields[f[0]]||'').trim();}).map(function(f){return [f[1],f[0]==='title'?prName(v):(v.fields[f[0]]||'').trim()||'[확인 필요]'];});
 }
 function prDetails(v){return prFacts(v,true).map(function(r){return r.join(': ');}).join('\n');}
+function prValue(v,key){return String(v.fields[key]||'').trim();}
+function prLines(v,keys,placeholder){
+ return GH_PROMO_FIELDS.filter(function(f){return keys.indexOf(f[0])!==-1&&(placeholder||prValue(v,f[0]));}).map(function(f){return f[1]+': '+(prValue(v,f[0])||'[확인 필요]');}).join('\n');
+}
+function prFactSheet(v){
+ return '<section class="gh-preview gh-entered-facts" aria-labelledby="gh-entered-title"><h4 class="gh-focus" tabindex="-1" id="gh-entered-title" data-gi-scroll="promo-live">입력한 행사 정보 · 실시간</h4><dl>'+GH_PROMO_FIELDS.map(function(f){
+   var value=prValue(v,f[0]);return '<div><dt>'+E(f[1])+'</dt><dd data-pr-live="'+f[0]+'"'+(value?'':' class="is-empty"')+'>'+E(value||'—')+'</dd></div>';
+ }).join('')+'</dl></section>';
+}
 function prLog(v){return v.memo.trim()||'[실제로 한 활동·안내할 상황 입력]';}
 function prPractice(v){return v.demo?'[실습용 가상 예시 · 실제 모집 안내 아님]\n\n':'';}
 function promoPreviewText(v){
  var name=prName(v),aud=(v.fields.target||v.audience),f=v.fields, m=prLog(v);
  var kind=v.kind,p=v.purpose,blog=kind==='블로그 초안',home=kind==='홈페이지 행사후기 올리기'||kind==='홈페이지 안내 글';
  var heading,lead,sections;
+ var registration=prLines(v,['recruit','countPeople','method','contact','price','documents','supplies','access'],false);
  if(p==='활동 후기'||(kind==='홈페이지 행사후기 올리기'&&p!=='참여자 모집'&&p!=='이용 안내')){
    heading=name+' 활동 이야기';
    lead=blog?'안녕하세요. 용인시기흥장애인복지관입니다. 오늘은 '+name+'에서 어떤 활동을 했는지 전해 드려요.':name+' 활동 소식을 전합니다.';
@@ -6856,8 +7012,9 @@ function promoPreviewText(v){
  }else{
    heading='[참여자 모집] '+name;
    lead=blog?'안녕하세요. 용인시기흥장애인복지관입니다. '+name+'에 함께할 분들을 모집합니다. 아래 내용을 확인해 주세요.':name+' 참여자를 모집합니다. 관심 있는 분은 아래 신청 정보를 확인해 주세요.';
-   sections=[['어떤 프로그램인가요?',m],['모집 개요','대상: '+aud+'\n인원: '+(f.countPeople||'[확인 필요]')+'\n일시: '+(f.when||'[확인 필요]')+'\n장소: '+(f.where||'[확인 필요]')],['신청 방법','모집 기간: '+(f.recruit||'[확인 필요]')+'\n신청: '+(f.method||'[확인 필요]')+'\n참가비: '+(f.price||'[확인 필요]')+'\n문의: '+(f.contact||'[확인 필요]')],['참여 전 확인',(f.access||'[준비물·이동 지원 확인 필요]')]];
+   sections=[['어떤 프로그램인가요?',m],['모집 개요','대상: '+aud+'\n인원: '+(f.countPeople||'[확인 필요]')+'\n일시: '+(f.when||'[확인 필요]')+'\n장소: '+(f.where||'[확인 필요]')],['신청 방법','모집 기간: '+(f.recruit||'[확인 필요]')+'\n신청: '+(f.method||'[확인 필요]')+'\n참가비: '+(f.price||'[확인 필요]')+'\n문의: '+(f.contact||'[확인 필요]')],['참여 전 확인',prLines(v,['documents','supplies','access'],false)||'[접수물·준비물·이동 지원 확인 필요]']];
  }
+ if(p!=='참여자 모집'&&registration)sections.push(['신청·참여 참고',registration]);
  if(kind==='보도자료'){heading=name+' '+p;lead='용인시기흥장애인복지관은 '+name+' 관련 '+p+' 정보를 전한다.';}
  if(kind==='문자·SNS 짧은 글'){sections=sections.slice(0,3);}
  if(kind==='소식지'){sections.unshift(['한 줄 소개',m]);}
@@ -6886,6 +7043,8 @@ function prExample(v){
 function prData(){
   var v=ST_PR,extra=v.memo?('\n\n[우리 상황] '+v.memo):'';
   var k=v.kind,b=prName(v);
+ var basics=prLines(v,['when','where','target','countPeople'],true), signup=prLines(v,['recruit','method','contact','price','documents','supplies','access'],false);
+ var joined=signup||'신청 방법·모집 기간·문의처 [확인 필요]';
   if(k==='홈페이지 행사후기 올리기'){
     var s='[행사후기 · 홈페이지]\n제목 3안\n1) '+b+' "함께해서 더 즐거웠던 하루"\n2) '+(v.memo?v.memo.split(/[,\n]/)[0]:'함께한')+' 활동 이야기\n3) 사진으로 보는 '+b+' 현장\n\n본문 (3문단)\n· 1문단: 언제·어디서·누구와 무엇을 했는지 한 문장\n· 2문단: 이용자 반응 한 줄 (이름 대신 "한 이용자") + 진행 담당이 본 장면\n· 3문단: 다음 일정·감사 인사\n\n사진 자리: [사진: 단체] [사진: 활동 장면] [사진: 작품]\n해시태그: #용인시기흥장애인복지관 #'+b+' #지역사회 #함께\n\n올리는 순서: 관리자 로그인 → 알림마당·소식 → 글쓰기 → 제목·본문·사진 → 등록'+extra;
     return {title:'홈페이지 행사후기',body:s};
@@ -6895,15 +7054,16 @@ function prData(){
   }
   if(k==='카드뉴스'){
     var cover=v.purpose==='활동 후기'?'함께한 순간':v.purpose==='이용 안내'?'이렇게 이용해요':'함께할 분을 찾습니다';
-    var last=v.purpose==='활동 후기'?['마무리','참여해 주신 분께 감사 · 확인된 다음 소식만 안내']:v.purpose==='이용 안내'?['문의','이용 절차 · 문의처 [확인 필요]']:['신청 방법','신청 경로 · 마감 · 문의처 [확인 필요]'];
-    var slides=[['표지',b+' · '+cover],['활동 소개','실제로 무엇을 하는지 쉬운 말로 소개'],['핵심 정보','대상 '+v.audience+' · 일시·장소 [확인 필요]'],last];
+    var last=v.purpose==='활동 후기'?['마무리',signup||'참여해 주신 분께 감사 · 확인된 다음 소식만 안내']:v.purpose==='이용 안내'?['문의·이용 안내',joined]:['신청 안내',joined];
+    var slides=[['표지',b+' · '+cover],['활동 소개',v.memo.trim()||'실제로 무엇을 하는지 쉬운 말로 소개'],['핵심 정보',basics],last];
     if(v.count==='3장')slides.splice(1,1);
-    if(v.count==='6장'||v.count==='8장')slides.splice(3,0,['참여 준비','준비물과 이동·접근성 확인'],['한눈에 정리','꼭 기억할 내용 두 줄']);
+    if(v.count==='6장'||v.count==='8장')slides.splice(3,0,['참여 준비',prLines(v,['documents','supplies','access'],false)||'준비물과 이동·접근성 확인'],['한눈에 정리','꼭 기억할 내용 두 줄']);
     if(v.count==='8장')slides.splice(4,0,['활동에서 내가 고르는 것','활동 선택지와 쉬어가는 방법'],['자주 묻는 질문','문의 방법과 참여 전 확인 사항']);
     return {title:'카드뉴스 '+v.count+' 구성',slides:slides,body:'[카드뉴스 '+v.count+' · '+v.purpose+']\n'+slides.map(function(r,i){return (i+1)+'장 | '+r[0]+' | '+r[1];}).join('\n')+'\n\n그림 방향: '+v.style+'\n글자는 한 줄씩 짧고 선명하게. 얼굴 사진은 게시 동의가 확인된 경우만 사용.'+extra};
   }
   if(k==='포스터'||k==='홍보 이미지'){
-    return {title:(k==='포스터'?'포스터':'홍보 이미지')+' 한 장 구성',slides:[['상단',b+' · '+v.purpose],['가운데','대표 장면 하나 · 대상 '+v.audience],['하단','일시·장소·신청·문의 [확인 필요]']],body:'[포스터 한 장]\n제목: '+b+' · '+v.purpose+'\n대상: '+v.audience+'\n그림 방향: '+v.style+'\n일시·장소·신청·문의: [확인 필요]'+extra};
+    var mid=prLines(v,['when','where','target','countPeople'],true),foot=joined;
+    return {title:(k==='포스터'?'포스터':'홍보 이미지')+' 한 장 구성',slides:[['상단',b+' · '+v.purpose],['가운데',mid],['하단',foot]],body:'[포스터 한 장]\n제목: '+b+' · '+v.purpose+'\n'+mid+'\n\n'+foot+'\n\n그림 방향: '+v.style+extra};
   }
   if(k==='릴스·숏폼 대본'){
     return {title:'릴스 15초 대본',body:'[릴스 15초 · 3장면]\n0~3초 후킹: "'+b+', 이렇게 하고 있어요" (현장 손·작품 클로즈업)\n3~9초 본편: 활동 2장면 + 자막 "이용자가 직접 합니다"\n9~15초 마무리: 단체 장면 + 자막 "문의 [확인 필요]"\n\n자막 원칙: 한 화면 12자 이내 · 얼굴은 동의받은 분만 · 배경 음악은 저작권 없는 것\n해시태그: #'+b+' #장애인복지 #용인'+extra};
@@ -6930,23 +7090,28 @@ function promoRight(){
   var preview=d.slides?'<section class="gh-preview"><div class="out-h"><h3>'+E(d.title)+'</h3>'+cbtn('예시 복사','promo')+'</div><ol class="gh-tiles">'+d.slides.map(function(x,i){return '<li><span>'+(i+1)+'</span><div><b>'+E(x[0])+'</b><p>'+E(x[1])+'</p></div></li>';}).join('')+'</ol></section>':outBlock(d.title+' · 예시','promo',d.body);
   TXT.promo=prPractice(v)+d.body+'\n\n'+prDetails(v);
   if(articleData)preview=prTextCard(v,articleData);
-  if(visual)preview+='<section class="gh-preview"><h4 class="gh-focus">이미지에 들어갈 정보</h4><dl class="gh-facts">'+prFacts(v,true).map(function(r){return '<div><dt>'+E(r[0])+'</dt><dd>'+E(r[1])+'</dd></div>';}).join('')+'</dl></section>';
-  return '<div class="out-h"><h3>예시와 원픽 프롬프트</h3>'+cbtn('원픽 프롬프트 복사','promo-prompt')+'</div>'+aiStrip('promo-prompt','원픽 프롬프트로 AI 열기')+selectionSummary(cond)+giGuide(v.biz)+preview+outBlock('원픽 · 완성 제작 프롬프트','promo-prompt',prompt);
+  return '<div class="out-h"><h3>예시와 원픽 프롬프트</h3>'+cbtn('원픽 프롬프트 복사','promo-prompt')+'</div>'+aiStrip('promo-prompt','원픽 프롬프트로 AI 열기')+prFactSheet(v)+preview+selectionSummary(cond)+giGuide(v.biz)+outBlock('원픽 · 완성 제작 프롬프트','promo-prompt',prompt);
 }
 function renderPromo(){
   var v=ST_PR,visual=['카드뉴스','포스터','홍보 이미지'].includes(v.kind);
-  var left='<button type="button" class="gh-jump" data-gi-jump="promo-fields">행사 정보 입력 ↓</button>'+giPicker(v.group,v.biz,'prcat')+
+  var prior=$('#pr-options'),shown=prior&&prior.open;
+  var rows=GH_PROMO_FIELDS.map(function(x){
+    var id='pr-field-'+x[0];
+    return '<div class="gi-field gh-event-row"><label for="'+id+'">'+E(x[1])+'</label><input type="text" id="'+id+'" data-gi-field="promo-'+x[0]+'" value="'+E(v.fields[x[0]]||'')+'" placeholder="예: '+E(x[2])+'"></div>';
+  }).join('');
+  var left='<div class="gh-event-head"><h3>행사 정보 입력</h3><div class="gh-event-example"><button type="button" class="gi-action" data-pr-example>가상 예시 넣기</button>'+(v.demo?'<button type="button" class="gi-action" data-pr-clear>가상 예시 빼기</button>':'')+'</div></div>'+
+   '<div class="gh-event-rows" data-gi-scroll="promo-fields">'+rows+'</div>'+
+   '<button type="button" class="gh-jump gh-promo-preview-mobile" data-gi-jump="promo-live">입력한 내용 확인 ↓</button>'+
+   '<label class="ch-l" for="pr-memo"><b>활동·안내 내용</b><small>선택</small></label>'+micRow('pr-memo').outerHTML+
+   '<textarea class="memo" id="pr-memo" placeholder="예: 참여자가 직접 만든 작품을 소개해요.">'+E(v.memo)+'</textarea>'+
+   '<details class="gh-promo-options" id="pr-options"'+(shown?' open':'')+'><summary>사업·홍보 목적·디자인 더 고르기</summary>'+giPicker(v.group,v.biz,'prcat')+
    radioPick('3. 어떤 목적인가요?',['참여자 모집','이용 안내','활동 후기','일정 변경·취소','교육·캠페인','후원·봉사 모집','안전·접근성 안내'],'pr-purpose',v.purpose)+
    radioPick('4. 누가 보나요?',['이용자·보호자','아동·청소년','발달장애인','지역 주민','종사자','후원자·협력기관','자원봉사자'],'pr-audience',v.audience)+
    (visual?radioPick('5. 그림 스타일',['깔끔한 공공기관형','따뜻한 일러스트','쉬운 글·큰 글씨','현장 사진 중심','웹툰','동화책','인포그래픽'],'pr-style',v.style)+radioPick('이미지 비율',['세로 4:5','정사각형 1:1','가로 16:9','세로 A4'],'pr-ratio',v.ratio):'')+
-   (v.kind==='카드뉴스'?radioPick('카드뉴스 몇 장?',['3장','4장','6장','8장'],'pr-count',v.count):'')+
-   '<hr class="gi-divider"><button type="button" class="gi-action" data-pr-example>가상 예시 넣기</button>'+(v.demo?'<button type="button" class="gi-action" data-pr-clear>가상 예시 빼기</button>':'')+
-   '<div class="gh-fieldgrid" data-gi-scroll="promo-fields">'+GH_PROMO_FIELDS.map(function(x){return inputField('promo-'+x[0],x[1],v.fields[x[0]],x[2]);}).join('')+'</div>'+
-   '<label class="ch-l" for="pr-memo"><b>실제 상황·활동 내용</b></label>'+micRow('pr-memo').outerHTML+
-   '<textarea class="memo" id="pr-memo" placeholder="무엇을 했는지, 안내하거나 바뀐 내용을 적거나 말해 주세요.">'+E(v.memo)+'</textarea>'+
-   '<p class="hintl">실명·진단명·상담 사연을 넣지 마세요. 받아쓰기는 브라우저가 지원하고 마이크 권한을 허용했을 때만 작동해요.</p>';
+   (v.kind==='카드뉴스'?radioPick('카드뉴스 몇 장?',['3장','4장','6장','8장'],'pr-count',v.count):'')+'</details>'+
+   '<p class="hintl">정해지지 않은 정보는 비워 두고 개인 정보는 쓰지 마세요.</p>';
   var kind=v.kind==='홍보 이미지'?'홍보 이미지 만들기':'홍보·안내';
-  $('#v-promo2').innerHTML=x2(kind,'유형을 고르고 입력하면 오른쪽 예시가 바뀌어요.',left,promoRight(),choice('무엇을 만들까요?',PRK,'data-prk',v.kind,'gh-subtabs'));
+  $('#v-promo2').innerHTML=x2(kind,'왼쪽에 적으면 미리보기에 바로 반영돼요.',left,promoRight(),choice('무엇을 만들까요?',PRK,'data-prk',v.kind,'gh-subtabs'),null,true);
   bindMics($('#v-promo2'));
 }
 
@@ -7172,7 +7337,7 @@ function openMindLegacy(tab){
       frame=document.createElement('iframe');frame.className='legacy-tool-frame';frame.id='mind-frame-'+tab;
       frame.title=tab==='vent'?'빡침공감 번역기':'마음 쉼터';
       frame.setAttribute('allow','microphone');
-      frame.src='/giheung/tools/?v=1124#'+tab;host.appendChild(frame);
+      frame.src='/giheung/tools/?v=gh-care-2#'+tab;host.appendChild(frame);
     }
     frame.hidden=false;show('mind');return;
   }
@@ -7196,7 +7361,7 @@ var ROUTE={};
 function ensure(id,html){var n=$('#v-'+id);if(!n){n=document.createElement('div');n.id='v-'+id;n.hidden=true;n.innerHTML=html;$('main.wrap').appendChild(n);if(typeof VIEWS!=='undefined'&&VIEWS.indexOf(id)<0)VIEWS.push(id);}return n}
 function boot(){
   /* 새 화면 틀 만들기 */
-  ensure('msg','');ensure('plan2','');ensure('promo2','');ensure('donate','');ensure('donwork','');ensure('planmenu','');ensure('mindwork','');
+  ensure('appguide','');ensure('msg','');ensure('plan2','');ensure('promo2','');ensure('donate','');ensure('donwork','');ensure('planmenu','');ensure('mindwork','');
   ensure('mind','<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음돌봄·사진관</h2><span class="tag">업무 감정 정리 · 응원엽서 · 잠깐 쉼 · 사진 실습</span></div><div class="mtabs" role="tablist">'+MIND.map(function(x){return '<button type="button" role="tab" aria-selected="false" data-mt="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div><button type="button" class="btn mini mind-work-alt" id="mind-work-alt" hidden>복지관 상황 예시 보기</button><div id="mind-body"></div>');
   /* 홈 그리기 + 기존 홈 요소 정리 */
   var old=$('#main4');if(old)old.remove();
@@ -7256,6 +7421,7 @@ function boot(){
       if(g==='plan2')selectPlanDraft('manual');
       go(g);return;
     }
+    var ag=e.target.closest('[data-ag-tab]');if(ag){AG_TAB=ag.dataset.agTab;rerenderChoice(ag,'data-ag-tab',renderAppGuide);return;}
     if(e.target.closest('[data-pr-example]')){prExample(ST_PR);renderPromo();return;}
     if(e.target.closest('[data-pr-clear]')){
       Object.keys(ST_PR.demoFields||{}).forEach(function(k){if(ST_PR.fields[k]===ST_PR.demoFields[k])delete ST_PR.fields[k];});
@@ -7388,6 +7554,7 @@ window.dwRender=function(){
 
 var _go=window.go;
 window.go=function(k){
+  if(k==='appguide'){renderAppGuide();show('appguide');return}
   if(k==='msg'){renderMsg();show('msg');return}
   if(k==='planmenu'){renderPlanMenu();show('planmenu');return}
   if(k==='plan2'){renderPlan();show('plan2');return}
