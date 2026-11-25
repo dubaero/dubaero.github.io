@@ -4487,17 +4487,86 @@ const REVIEW_CUES={
  "주간·활동지원":"참여자가 고른 활동과 직접 해 본 일",
  "후원·자원봉사":"함께한 활동과 실제로 전해진 도움"
 };
+const REVIEW_VOICE={
+ "따뜻하게":{
+  blog:n=>n+", 함께한 하루를 전해요", lead:n=>"오늘은 "+n+"에서 함께한 이야기를 나눠 볼게요.",
+  ig:n=>n+", 오늘의 한 장면 📷", kakao:"복지관에서 함께한 소식을 전해 드려요.",
+  close:"함께한 시간을 이렇게 나눌 수 있어 기뻐요. 다음 복지관 이야기도 전해 드릴게요."
+ },
+ "부드럽게":{
+  blog:n=>n+"에서 보낸 시간", lead:n=>n+"에서 있었던 일을 사진을 넘기듯 하나씩 들려드릴게요.",
+  ig:n=>n+" 이야기, 한 장씩 넘겨 보세요.", kakao:"오늘은 복지관에서 있었던 일을 짧게 들려드릴게요.",
+  close:"복지관에서 이어지는 이야기도 천천히 전해 드릴게요."
+ },
+ "밝고 경쾌하게":{
+  blog:n=>n+", 그날엔 무슨 일이 있었을까요?", lead:n=>n+" 현장 소식이에요. 그날 있었던 일들을 지금부터 만나 볼까요?",
+  ig:n=>"오늘의 복지관 소식 ✨ "+n, kakao:"복지관에서 어떤 활동을 했을까요? 그날 소식을 전해요!",
+  close:"다음 활동 소식에서 또 만나요!"
+ },
+ "차분하게":{
+  blog:n=>n+"에서 기록한 장면들", lead:n=>n+"에서 있었던 일을 차분히 정리했습니다.",
+  ig:n=>n+" | 활동 기록", kakao:"복지관에서 진행한 활동을 간단히 전합니다.",
+  close:"앞으로도 복지관 활동 소식을 차례로 전하겠습니다."
+ },
+ "쉽게":{
+  blog:n=>n+"에서 무엇을 했나요?", lead:n=>n+"에서 한 일을 알기 쉽게 전해요.",
+  ig:n=>n+"에서 한 일", kakao:"복지관에서 한 일을 쉬운 말로 알려 드려요.",
+  close:"다음에 한 활동도 알려 드릴게요."
+ },
+ "공식적이고 정중하게":{
+  blog:n=>n+" 현장 소식", lead:n=>n+"의 활동 내용을 전해 드립니다.",
+  ig:n=>n+" | 복지관 활동 소식", kakao:"복지관에서 진행한 활동 소식을 전해 드립니다.",
+  close:"앞으로도 복지관의 활동을 꾸준히 전해 드리겠습니다."
+ }
+};
+function ghChannelReview(v,d){
+ const tone=v.tone||"따뜻하게",voice=REVIEW_VOICE[tone]||REVIEW_VOICE["따뜻하게"],style=GH_BLOG_STYLE[tone]||GH_BLOG_STYLE["따뜻하게"];
+ const formal=tone==="차분하게"||tone==="공식적이고 정중하게",join=parts=>parts.filter(Boolean).join("\n\n");
+ const form=s=>!s?"":formal?s.replace(/했어요(?=[.!?。]|$)/gm,"했습니다").replace(/았어요(?=[.!?。]|$)/gm,"았습니다").replace(/었어요(?=[.!?。]|$)/gm,"었습니다").replace(/있어요(?=[.!?。]|$)/gm,"있습니다"):s.replace(/했습니다(?=[.!?。]|$)/gm,"했어요").replace(/았습니다(?=[.!?。]|$)/gm,"았어요").replace(/었습니다(?=[.!?。]|$)/gm,"었어요").replace(/있습니다(?=[.!?。]|$)/gm,"있어요");
+ const n=d.title, group=v._work.group,cue=v._work.program&&REVIEW_CUES[group];
+ const org=PROMO_ORG, greeting="안녕하세요, "+org+"입니다.";
+ const whenWhere=[d.meta.when,d.meta.where].filter(Boolean).join(" · ");
+ const note=d.empty?"[그날 "+(cue||"함께한 일을 한두 문장으로 적어 주세요")+"]":"";
+ const first=form(d.main),steps=form(d.steps),scene=form(d.moment),feeling=form(d.feeling);
+ const courtesy=form(d.thanks)||voice.close;
+ const section=(h,t)=>t?"■ "+h+"\n"+t:"";
+ const captions=d.photo?"[사진: "+d.photo+"]":d.empty?"[사진: 활동 모습]":"";
+ const actual=[first,steps,scene,feeling].filter(Boolean);
+ const shortFocus=scene||steps||feeling||first||note;
+ if(v.where==="인스타그램"){
+  const second=shortFocus!==first?shortFocus:"";
+  return [["인스타그램 후기 원고",join([voice.ig(n),[first||note,second].filter((x,i,a)=>x&&a.indexOf(x)===i).join("\n"),(d.react||"").split("\n")[0],d.thanks?form(d.thanks):"",d.tags])],
+   ["인스타그램 한 줄 캡션",join([voice.ig(n),shortFocus,d.tags])]];
+ }
+ if(v.where==="카카오톡 채널"){
+  const bit=x=>(x||"").split(/\n|(?<=[.!?。])\s+/)[0];
+  const closing=form(d.thanks)||(formal?"다음 복지관 소식도 전해 드리겠습니다.":"다음 소식도 전해 드릴게요.");
+  return [["카카오톡 채널 후기 원고",join(["["+org+" 소식] "+n,greeting+" "+voice.kakao,
+   [bit(first)||bit(shortFocus),first&&shortFocus!==first?bit(shortFocus):""].filter((x,i,a)=>x&&a.indexOf(x)===i).join("\n"),closing])],
+   ["카카오톡 한눈에 보기",join([n,bit(shortFocus),closing])]];
+ }
+ const [a,b,c,e,f]=style.headings;
+ const text=join([voice.blog(n),greeting+" "+voice.lead(n),
+  section(a,[whenWhere,first||(!actual.length?note:""),captions].filter(Boolean).join("\n")),
+  section("함께한 마음",feeling),
+  section(b,form(d.prep)||(d.empty?"[활동 전에 함께 준비한 일]":"")),
+  section(c,steps||(d.empty?"[참여자들이 직접 해 본 일과 진행 순서]":"")),
+  section(e,scene||(d.empty?"[기억에 남는 실제 장면이나 공개 가능한 반응]":"")),
+  section(f,d.react||(d.empty?"[공개해도 되는 참여자의 실제 한마디]":"")),
+  section("고마운 분들",form(d.thanks)),section("다음에 전할 소식",form(d.next)),section("활동을 마치며",form(d.finish)||voice.close),d.tags]);
+ return [["네이버 블로그 후기 원고",text],["블로그 짧은 소개글",join([voice.blog(n),first||shortFocus||voice.lead(n),courtesy])]];
+}
 function promoPost(v){
 
  const raw=String(v.act||"").trim(),empty=!raw,P=v._work?.program||"",org=PROMO_ORG;
- const meta={}, blocks={work:[],prep:[],steps:[],moment:[],reaction:[],thanks:[],next:[],photo:[]};
+ const meta={}, blocks={work:[],prep:[],steps:[],moment:[],reaction:[],thanks:[],next:[],photo:[],feeling:[],finish:[]};
  const keys={
   "제목":"title","프로그램명":"title","행사명":"title","활동명":"title",
   "일시":"when","행사일시":"when","날짜":"when","장소":"where","참여대상":"who","참여인원":"count",
   "활동":"work","올릴활동":"work","활동내용":"work","준비":"prep","준비과정":"prep","진행":"steps","진행내용":"steps","과정":"steps",
   "기억에남는장면":"moment","기억에남는순간":"moment","한장면":"moment",
   "참여자반응":"reaction","참여자의반응":"reaction","반응":"reaction","참여자한마디":"reaction","소감":"reaction",
-  "감사":"thanks","다음활동":"next","다음일정":"next","사진":"photo","사진설명":"photo"
+  "함께한마음":"feeling","느낌":"feeling","의미":"feeling","마치며":"finish","활동을마치며":"finish","감사":"thanks","다음활동":"next","다음일정":"next","사진":"photo","사진설명":"photo"
  };
  let active="work";
  raw.split(/\r?\n/).map(x=>x.trim()).filter(Boolean).forEach(line=>{
@@ -4508,12 +4577,16 @@ function promoPost(v){
  const sentences=blocks.work.flatMap(x=>x.split(/(?<=[.!?。])\s+/));
  const picked=v._work?.what,review=v._work?.review,cue=P&&REVIEW_CUES[v._work.group];
  const local=picked&&![GH_PROMO_SNS,"홈페이지 행사 후기"].includes(picked)?picked:"";
- const name=meta.title||P||local||"복지관 활동 이야기",title=empty&&!P&&!local?"[올릴 활동]":name;
+ const activityLabel=review&&sentences[0]&&sentences[0].length<=34&&!/[.!?。…]|(?:요|다|했음|었음|았음|함)$/.test(sentences[0])?sentences[0]:"";
+ const name=meta.title||activityLabel||P||local||"복지관 활동 이야기",title=empty&&!P&&!local?"[올릴 활동]":name;
  const context=[meta.when,meta.where].filter(Boolean).join(" · ");
  const natural=s=>{
   if(/[.!?。…]$/.test(s)||/[:：]/.test(s))return s;
   if(/(?:요|다|함|음|됨|임)$/.test(s))return sent(s);
-  if(s.length<25)return josa(s,"을","를")+" 진행했어요.";
+  if(s.length<25){
+   const verb=/(나들이|소풍|견학|현장 방문|여행|캠프)$/.test(s)?"다녀왔어요":/(잔치|발표회|전시회|간담회|공연)$/.test(s)?"열었어요":/(만들기|연습|체험|놀이)$/.test(s)?"해 봤어요":"함께했어요";
+   return josa(s,"을","를")+" "+verb+".";
+  }
   return sent(s);
  };
  const main=sentences[0]?natural(sentences[0]):empty?(P?P+"에서 함께한 활동을 전해요. ["+(cue||"그날 함께한 활동")+"]":"이용자분들과 함께 [올릴 활동]을 진행했어요."):(!review&&(meta.title||P)?josa(name,"을","를")+" 진행했어요.":"");
@@ -4522,10 +4595,13 @@ function promoPost(v){
  const moment=blocks.moment.map(sent).join("\n"),react=blocks.reaction.join("\n"),next=blocks.next.map(sent).join("\n"),thanks=blocks.thanks.map(sent).join("\n");
  const photo=blocks.photo.join(" · ");
  const tone=PROMO_TONE[v.tone]||PROMO_TONE["따뜻하게"];
- const tag=(meta.title||P).replace(/[^가-힣a-zA-Z0-9]/g,"").slice(0,28);
+ const tag=(meta.title||activityLabel||P).replace(/[^가-힣a-zA-Z0-9]/g,"").slice(0,28);
  const tags="#용인시기흥장애인복지관 #장애인복지관 #복지관소식"+(tag?" #"+tag:empty?" #올릴활동":"");
  const join=x=>x.filter(Boolean).join("\n\n");
- const facts=[meta.when&&"일시: "+meta.when,meta.where&&"장소: "+meta.where,meta.who&&"참여 대상: "+meta.who,meta.count&&"참여 인원: "+meta.count].filter(Boolean).join("\n");
+ if(review&&["네이버 블로그","인스타그램","카카오톡 채널"].includes(v.where))return ghChannelReview(v,{
+   title,main:empty?"":main,empty,meta,prep,steps,moment,react,next,thanks,photo,tags,
+   feeling:blocks.feeling.map(sent).join("\n"),finish:blocks.finish.map(sent).join("\n")
+ });
  const short=join([title,main,tone[1]]);
  if(v.where==="인스타그램")return [
   [review?"인스타그램 후기 원고":"인스타그램 원고",join([review?"📸 "+title+(P&&!meta.title?" 이야기":""):"📌 "+title,context,tone[0],[main,steps,moment,react].filter(Boolean).join("\n"),thanks||tone[1],tags])],
@@ -4956,9 +5032,10 @@ function readRefImage(file){
   });
 }
 function outsHTML(t){
-  const list=OUTS[t.id](getVals(t).v).map(([l,x])=>[l,applyProf(x)]);
+  const v=getVals(t).v,list=OUTS[t.id](v).map(([l,x])=>[l,applyProf(x)]);
+  const sample=t.id==="sns-post"&&v._work?.review&&!String(v.act||"").trim()?'<p class="gh-scenario-tip">예시 원고입니다. 실제로 있었던 일을 입력하면 후기 초안이 바뀝니다.</p>':"";
   if(t.draft&&!list.length)return '<div class="out-item"><div class="out-top"><b>복사할 원고</b></div><p>왼쪽 한 칸에 내용을 쓰거나 마이크로 말하면 여기에 원고가 바로 나옵니다.</p></div>';
-  return list.map(([lab,x],i)=>`<div class="out-item"><div class="out-top"><b>${t.draft?esc(lab):'추천 '+(i+1)+' · '+esc(lab)}</b><button type="button" class="b3d" data-copyout="${i}">${t.draft?"원고 복사":"복사"}</button></div>
+  return sample+list.map(([lab,x],i)=>`<div class="out-item"><div class="out-top"><b>${t.draft?esc(lab):'추천 '+(i+1)+' · '+esc(lab)}</b><button type="button" class="b3d" data-copyout="${i}">${t.draft?"원고 복사":"복사"}</button></div>
     <textarea class="out-text" id="out-${i}" aria-label="${esc(lab)}" rows="${Math.max(t.draft?8:3,Math.min(18,x.split("\n").length+2))}">${esc(x)}</textarea></div>`).join("");
 }
 
