@@ -1063,3 +1063,17 @@ details.plan-more .aibar{border-style:dashed}
 
 :host{display:block;min-width:0;background:white}.group-body{min-width:0;min-height:0}.group-body>.wrap{min-height:0}.group-body:has(>.wrap #app .dn){background:white}
 .gh-work-sector{padding:12px;background:#f7fbf8;border:1px solid #c9ded2;border-radius:12px}.gh-work-sector fieldset{margin:0 0 10px}.gh-sector-program{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0 10px;font-size:14px}.gh-sector-program label{font-weight:800}.gh-sector-program select{width:min(420px,100%);font:inherit;color:inherit;padding:5px 7px;border:1px solid #afcbbd;border-radius:7px;background:#fff}.gh-sector-program a{font-size:12px;color:#225a46}.gh-work-sector h3{font-size:16px;margin-bottom:6px}.gh-scenario-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.gh-scenario-grid button{min-height:38px;padding:6px;text-align:center;font-size:13px;border:1px solid #c2d8cc;border-radius:7px;background:#fff;color:#284a3d;--press:1px;word-break:keep-all}.gh-scenario-grid button:hover,.gh-scenario-grid button:focus-visible{background:#fff1e5;border-color:#c88564}.gh-work-sector .hint{margin-top:7px}.gh-scenario-tip{padding:7px 9px;border-radius:7px;background:#fff0df;color:#5d3a23;font-size:13px}.gh-existing-work summary{cursor:pointer;margin-bottom:8px;font-size:14px;font-weight:800}@media(max-width:650px){.gh-scenario-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Always-visible workbench: controls left, live output right; narrow screens keep both in order. */
+.gh-always-split{animation:none!important}.gh-always-split .ftabs{display:none!important}
+.gh-always-split .gh-result-jump{display:none}
+.gh-always-split .gh-work-sector{padding:7px 9px}
+.gh-always-split .gh-work-sector .chips{gap:4px}
+.gh-always-split .gh-work-sector .chip span{min-height:29px!important;padding:2px 6px;font-size:12px}.gh-always-split .gh-work-sector .chip span::before{width:14px;height:14px;font-size:10px}
+.gh-always-split .gh-work-sector legend,.gh-always-split .gh-sector-program{font-size:13px}
+.gh-always-split .gh-work-sector h3,.gh-always-split .gh-work-title{font-size:15px;margin:3px 0}
+.gh-always-split .gh-scenario-grid{gap:4px}
+.gh-always-split .gh-scenario-grid button{min-height:30px;padding:3px 4px;font-size:12px}
+.gh-always-split .gh-scenario-grid button[aria-pressed=true]{background:#e2f3eb;color:#124f3b;border-color:#70a891;font-weight:800}
+.gh-always-split .tout{scroll-margin-top:8px}
+@media(max-width:859px){.gh-always-split .tsplit .tin,.gh-always-split .tsplit .tout{display:flex!important}.gh-always-split .gh-result-jump{display:block;align-self:start;margin:3px 0;padding:5px 9px;border:1px solid #b8d3c6;background:#eef7f1;border-radius:6px}}

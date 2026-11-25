@@ -3,7 +3,7 @@
 "use strict";
 global.mountGiheungWorkflow=function(host,options){
  const root=host.attachShadow({mode:"open"}),page=global.document;
- const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=3";
+ const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=5";
  const body=page.createElement("div");body.className="group-body";body.innerHTML='<div class="wrap"><main id="app"></main></div>';
  root.append(style,body);
  const document={
@@ -4141,20 +4141,27 @@ function ghScenarios(c){
  const sector=options.catalog[g],program=sector.items[GH_SECTOR_STATE[c].p],specific=GH_PROGRAM_WORK.find(x=>x[0].test(program));
  return Array.from(new Set((specific?specific[i+1]:[]).concat(GH_FIELD_WORK[g]?.[i]||[],GH_COMMON_WORK[c])));
 }
+function ghDefaultScenario(c){
+ const list=ghScenarios(c),saved=GH_SECTOR_STATE[c].picked;
+ const ix=list.indexOf(saved||({msg:"참여 안내",promo:"인스타그램·블로그·카카오톡"}[c]));
+ return ix<0?0:ix;
+}
 function ghDistrict(c){
  const s=GH_SECTOR_STATE[c],g=options.catalog[s.g],ps=g.items;
  return '<section class="gh-work-sector"><fieldset><legend>1. 복지관 사업 분야</legend><div class="chips">'+options.catalog.map((x,i)=>'<label class="chip"><input type="radio" name="gh-sector" data-gh-sector="'+c+'" value="'+i+'"'+(s.g===i?' checked':'')+'><span>'+esc(x.label)+'</span></label>').join('')+'</div></fieldset>'+
   '<div class="gh-sector-program"><label for="gh-sector-program">2. 실제 사업·프로그램</label><select id="gh-sector-program" data-gh-program="'+c+'">'+ps.map((x,i)=>'<option value="'+i+'"'+(s.p===i?' selected':'')+'>'+esc(x)+'</option>').join('')+'</select><a href="'+esc(ghServiceSource(g,ps[s.p]))+'" target="_blank" rel="noopener">공식 사업소개 ↗</a></div>'+
-  '<h3>3. '+esc(ps[s.p])+'에서 어떤 일을 하나요?</h3><div class="gh-scenario-grid">'+ghScenarios(c).map((x,i)=>'<button class="b3d" type="button" data-gh-scenario="'+c+':'+i+'">'+esc(x)+'</button>').join('')+'</div>'+
+  '<h3>3. '+esc(ps[s.p])+'에서 어떤 일을 하나요?</h3><div class="gh-scenario-grid">'+ghScenarios(c).map((x,i)=>'<button class="b3d" type="button" data-gh-scenario="'+c+':'+i+'" aria-pressed="'+(s.picked===x)+'">'+esc(x)+'</button>').join('')+'</div>'+
   '<p class="hint">사업명은 복지관 공식 안내 기준입니다. 아래 선택지는 업무 예시이며 실제 모집 일정은 아닙니다.</p></section>';
 }
 function ghOpenScenario(c,i){
  const q=GH_SECTOR_STATE[c],g=options.catalog[q.g],program=g.items[q.p],what=ghScenarios(c)[i],ctx={program,what,group:g.label,check:g.check,area:g.area};
+ if(!what)return;
+ q.picked=what;
  if(c==="life"){options.plan(ctx);return;}
  const k=c==="msg"?"gh-welfare-msg":/카드뉴스/.test(what)?"cardnews":/포스터/.test(what)?"poster":/삽화/.test(what)?"image-prompt":/인포그래픽/.test(what)?"infographic":/소식지/.test(what)?"newsletter":/후기|인스타그램/.test(what)?"sns-post":"notice";
  const t=BY[k],key=k+"|"+g.label+"|"+program+"|"+what;
  if(!ghScenarioDrafts[key]){
-   const live=values[k];delete values[k];const fresh=getVals(t);if(live)values[k]=live;else delete values[k];
+   const active=ghScenarioRoute,live=values[k];ghScenarioRoute=null;delete values[k];const fresh=getVals(t);ghScenarioRoute=active;if(live)values[k]=live;else delete values[k];
    fresh.v._work=ctx;
    if(c==="msg")fresh.v.reader=(q.g===1||q.g===4)?"보호자·가족":q.g===9?"후원자·봉사자":"이용자";
    if(k==="notice")fresh.v.purpose=/변경|휴강|취소/.test(what)?"일정 변경·취소":/모집|신청/.test(what)?"참여자 모집":/접근|이동/.test(what)?"안전·접근성 안내":"이용·행사 안내";
@@ -4163,11 +4170,15 @@ function ghOpenScenario(c,i){
    if(k==="image-prompt")fresh.v.scene=program+"의 "+what;
    ghScenarioDrafts[key]=fresh;
  }
- ghScenarioRoute={k,state:ghScenarioDrafts[key]};go("t-"+k);
+ const left=app.querySelector(".gh-always-split .tin"),y=left?.scrollTop||0;
+ ghScenarioRoute={k,cat:c,state:ghScenarioDrafts[key]};current=t;
+ renderTask(t);
+ const shown=app.querySelector(".gh-always-split .tin");if(shown)shown.scrollTop=y;
 }
 const ghScenarioDrafts=Object.create(null);let ghScenarioRoute=null;
 
 function renderCat(c){
+  if((c==="msg"||c==="promo")&&options.catalog?.length){ghOpenScenario(c,ghDefaultScenario(c));return;}
   const list = TASKS.filter(t=>t.cat===c&&!t.hideOld);
   const district=!!GH_SECTOR_STATE[c]&&options.catalog&&options.catalog.length;
   app.innerHTML = `<div class="fade cat-${c}" style="display:flex;flex-direction:column;gap:18px">
@@ -4388,7 +4399,7 @@ function promoPost(v){
  ];
 }
 function promoMonth(v){
- const d=promoMemo(v.events);if(!d.lines.length&&!d.title)return [];if(!d.title&&v._work)d.title=v._work.program+" 소식";
+ const d=promoMemo(v.events);if(!d.lines.length&&!d.title)d.lines=["[이번 달에 진행한 활동]","[다음에 알려 드릴 소식]"];if(!d.title&&v._work)d.title=v._work.program+" 소식";
  const lines={
   "보호자":["보호자님, 안녕하세요. 복지관에서 있었던 일을 전해 드립니다.","궁금한 점은 복지관에 문의해 주세요."],
   "참여자 가족":["가족 여러분, 안녕하세요. 복지관의 이번 달 활동을 나눕니다.","이번 달 이야기를 읽어 주셔서 고맙습니다."],
@@ -4402,16 +4413,28 @@ function promoMonth(v){
  return [[v.reader+"용 소식지 원고",[`[${PROMO_ORG}] ${d.title||"이달의 소식"}`,lines[0],d.lines.map(x=>"• "+promoLine(x)).join("\n"),lines[1]+" "+tone[1]].filter(Boolean).join("\n\n")]];
 }
 function promoNotice(v){
- const d=promoMemo(v.content);if(!d.lines.length&&!d.title)return [];if(!d.title&&v._work)d.title=v._work.program+" · "+v._work.what;
+ const d=promoMemo(v.content);
+ if(!d.lines.length&&!d.title)d.lines=v.purpose==="일정 변경·취소"?["기존 일정: [일시]","변경 일정: [일시 또는 취소 여부]","문의: [공식 문의처]"]:["일시: [날짜·시간]","장소: [장소]","참여 대상: [대상]","신청·문의: [방법과 공식 문의처]"];if(!d.title&&v._work)d.title=v._work.program+" · "+v._work.what;
  const lead=v.tone==="쉬운 말로"?"알아두면 좋은 내용을 아래에 정리했어요.":v.tone==="따뜻하게"?"참여하시기 편하도록 필요한 내용을 모았습니다.":"아래 내용을 확인해 주시기 바랍니다.";
  return [["복지관 안내문 원고",[`[${v.purpose}]${d.title?" "+d.title:""}`,`${v.reader} 여러분, 안녕하세요. ${PROMO_ORG}입니다. ${lead}`,d.lines.map(promoLine).join("\n"),PROMO_ORG].filter(Boolean).join("\n\n")]];
 }
 function ghWelfareMsg(v){
- const x=v._work||{}, input=(v.body||"").trim();if(!input)return [];
+ const x=v._work||{}, input=(v.body||"").trim();
+ const examples=[
+  [/변경|휴강|취소|보강/,"[기존 일시]에서 [변경된 일시]로 바뀌었습니다.\n장소: [장소]\n문의: [공식 문의처]"],
+  [/대기/,"신청을 접수했습니다. 대기 상태이며, 참여 가능 여부는 [안내 시점]에 알려 드리겠습니다."],
+  [/준비물|실습 기기|준비 확인/,"일시: [날짜·시간]\n준비물: [확인한 준비물]\n준비하기 어려우면 [공식 문의처]로 알려 주세요."],
+  [/안부|불참/,"최근 잘 지내고 계신지 안부 전합니다. 참여 일정이나 필요한 지원을 편하게 알려 주세요."],
+  [/감사/,"[함께해 주신 내용]에 감사드립니다.\n[공유할 활동 소식 또는 다음 일정]"],
+  [/선정|확정/,"[선정 또는 참여 결과]를 알려 드립니다.\n일시: [날짜·시간] / 장소: [장소]\n회신: [방법·기한]"],
+  [/접수|회신/,"신청 내용을 확인했습니다.\n[추가로 확인할 내용] / 회신 기한: [기한]"],
+  [/송영|인계|탑승|전달/,"만나는 곳: [장소]\n만나는 시간: [시간]\n변경이 필요하다면 [공식 문의처]로 알려 주세요."]
+ ];
+ const example=examples.find(a=>a[0].test(x.what||""))?.[1]||"일시: [날짜·시간]\n장소: [장소]\n확인할 내용: [준비물·참여 방법·회신 기한]";
  const reader={"이용자":"이용자님","보호자·가족":"보호자님과 가족 여러분","지역 주민":"지역 주민 여러분","후원자·봉사자":"후원자님과 자원봉사자님","협력기관":"협력기관 담당자님","복지관 직원":"직원 여러분"}[v.reader];
  const intro=v.tone==="쉬운 말로"?"꼭 알아두실 내용을 알려 드려요.":v.tone==="부드럽게"?"확인하실 내용을 전해 드려요.":"아래와 같이 안내드립니다.";
  const sign=v.tone==="부드럽게"?"궁금한 점은 편하게 알려 주세요.":v.tone==="쉬운 말로"?"모르는 것이 있으면 복지관에 물어봐 주세요.":"감사합니다.";
- return [["보낼 문자",[`[${x.program||"용인시기흥장애인복지관"}${x.what?" · "+x.what:""}]`,`${reader}, 안녕하세요. ${intro}`,input,sign].join("\n")]];
+ return [["보낼 문자",[`[${x.program||"용인시기흥장애인복지관"}${x.what?" · "+x.what:""}]`,`${reader}, 안녕하세요. ${intro}`,input||example,sign].join("\n")]];
 }
 const OUTS = {
  "gh-welfare-msg":v=>ghWelfareMsg(v),
@@ -4631,7 +4654,7 @@ function outsHTML(t){
 }
 
 function renderTask(t){
-  const st = getVals(t);
+  const st = getVals(t),district=ghScenarioRoute?.k===t.id?ghScenarioRoute.cat:null;
   const isFav = favs.includes(t.id);
   const chipsHTML = (t.chips||[]).map(c=>`<fieldset><legend>${esc(c.label)}</legend><div class="chips">${
       c.opts.map((o,i)=>`<label class="chip"><input type="radio" name="c-${c.k}" id="c-${t.id}-${c.k}-${i}" value="${esc(o)}" data-chip="${c.k}" ${st.v[c.k]===o?"checked":""}><span>${esc(o)}</span></label>`).join("")
@@ -4643,7 +4666,7 @@ function renderTask(t){
                        : `<input id="${id}" type="text" data-input="${i.k}" placeholder="${esc(phOf(id,i.ph))}" value="${esc(st.v[i.k])}">`;
     return `<div class="field">${lab}<div class="with-mic">${ctl}${vmic(id)}</div>${exHint(id,i.ph)}</div>`;
   }).join("");
-  const related = TASKS.filter(x=>x.cat===t.cat && x.id!==t.id && !x.hideOld);
+  const related = district?[]:TASKS.filter(x=>x.cat===t.cat && x.id!==t.id && !x.hideOld);
 
   const hasOut=!!OUTS[t.id],visual=VISUAL_TASKS.has(t.id);
   const aibarHTML=`        <div class="aibar">
@@ -4663,17 +4686,18 @@ function renderTask(t){
           </div>
           <p class="status" id="status" role="status" aria-live="polite">확인란에 체크하면 버튼이 켜져요.</p>
         </div>`;
-  app.innerHTML = `<div class="tpage fade cat-${t.cat}">
+  app.innerHTML = `<div class="tpage fade cat-${t.cat}${district?" gh-always-split":""}">
     <div class="fbar">
-      <button class="back b3d" type="button" data-catopen="${t.cat}">← ${CATS[t.cat].name}</button>
-      <h2>${TASK_EM[t.id]||""} ${esc(t.title)}</h2>
+      ${district?'<button class="back b3d" type="button" data-home>← 업무도우미</button>':'<button class="back b3d" type="button" data-catopen="'+t.cat+'">← '+CATS[t.cat].name+'</button>'}
+      <h2>${district?esc(CATS[district].name):((TASK_EM[t.id]||"")+" "+esc(t.title))}</h2>
       <button class="star b3d" type="button" id="fav-btn" aria-pressed="${isFav}">${isFav?"★ 담김":"☆ 자주 쓰는 업무"}</button>
     </div>
-    <p class="fstat">${esc(t.desc)}</p>
-    ${st.v._work?'<p class="gh-scenario-tip"><b>'+esc(st.v._work.program)+' · '+esc(st.v._work.what)+'</b><br>'+esc(st.v._work.check)+'</p>':""}
+    ${district?'<button type="button" class="btn gh-result-jump" data-gh-result-jump>원고·프롬프트 보기 ↓</button>':'<p class="fstat">'+esc(t.desc)+'</p>'}
+    ${!district&&st.v._work?'<p class="gh-scenario-tip"><b>'+esc(st.v._work.program)+' · '+esc(st.v._work.what)+'</b><br>'+esc(st.v._work.check)+'</p>':""}
     <div class="ftabs" role="tablist"><button type="button" role="tab" class="on" data-ttab="in">✍️ 고르기·채우기</button><button type="button" role="tab" data-ttab="out">${t.plan?"📋 계획서":t.cal?"📅 식단표":t.draft?"완성 원고":hasOut?"💬 완성 문구":visual?"이미지 제작 프롬프트":"✨ AI에게 맡기기"}</button></div>
     <div class="tsplit">
       <section class="tin" aria-label="고르기와 채우기">
+        ${district?ghDistrict(district)+'<h3 class="gh-work-title">'+esc(t.title)+'</h3>':""}
         ${t.plan?`<div class="plan-tpl"><b>우리 시설에서 쓰는 계획서 양식이 있나요?</b><span>양식을 올리면 아래 내용이 그 양식 칸에 그대로 들어가요.</span><label class="pill b3d main" for="plan-att">우리 시설 서식 올리기</label></div>`:""}
         ${chipsHTML}
         <div class="divider"></div>
@@ -4682,7 +4706,8 @@ function renderTask(t){
         ${t.draft?"":'<p class="hint">비워둔 칸은 [ ]로 남아요.</p>'}
         ${attachHTML(t,st)}
       </section>
-      <section class="tout" aria-label="결과">
+      <section class="tout" aria-label="결과" tabindex="-1">
+        ${district?'<p class="gh-scenario-tip"><strong>'+esc(st.v._work.program)+'</strong> · '+esc(st.v._work.what)+'</p>':""}
         ${t.cal?`<div class="plan-box"><div class="plan-head"><b>일주일 식단표 + 장보기 목록</b><span>있는 재료를 먼저 쓰도록 짜요</span></div>
           <div class="paper plan-paper menu-paper" id="menu-pv">${blocksHTML(menuBlocks(st.v))}</div>
           <div class="plan-btns"><button type="button" class="pill b3d main" id="menu-down">워드로 받기</button><button type="button" class="pill b3d" id="menu-copy">글로 복사</button></div>
@@ -4695,11 +4720,11 @@ function renderTask(t){
         ${hasOut?`<div id="outs" class="outs">${outsHTML(t)}</div><p class="status" id="out-status" role="status" aria-live="polite"></p>`:""}
         ${t.plan||t.cal||hasOut?"":aibarHTML}
         <p class="note"><b>${t.warn?"꼭 주의":"알아두면 좋아요"}</b> ${esc(t.tip)}</p>
-        <details class="more${t.plan||t.cal||hasOut?" plan-more":""}"><summary>${t.draft?"같은 분류의 다른 업무":t.plan||t.cal||hasOut?"더 활용하기 · AI에게 맡기기":"더 활용하기"}</summary><div class="inner">
+        ${district&&t.draft?"":`<details class="more${t.plan||t.cal||hasOut?" plan-more":""}"><summary>${t.draft?"같은 분류의 다른 업무":t.plan||t.cal||hasOut?"더 활용하기 · AI에게 맡기기":"더 활용하기"}</summary><div class="inner">
           ${!t.draft&&(t.plan||t.cal||hasOut)?aibarHTML:""}
           ${t.next.map((n,i)=>`<div class="next-item"><p>${esc(n)}</p><button type="button" class="b3d" data-copynext="${i}">복사</button></div>`).join("")}
           ${related.length?`<p class="sub-title">같은 분류의 다른 업무</p><div class="list">${related.map(r=>rowHTML(r)).join("")}</div>`:""}
-        </div></details>
+        </div></details>`}
       </section>
     </div>
   </div>`;
@@ -4800,7 +4825,8 @@ function goHome(){ if(REC.on)recStop(); options.home(); }
 
 app.addEventListener("click",e=>{
   const o = e.target.closest("[data-open]"); if(o){ go("t-"+o.dataset.open); return; }
-  const scenario=e.target.closest("[data-gh-scenario]"); if(scenario){const [c,i]=scenario.dataset.ghScenario.split(":");ghOpenScenario(c,Number(i));return;}
+  const jump=e.target.closest("[data-gh-result-jump]");if(jump){const out=app.querySelector(".gh-always-split .tout");out?.focus({preventScroll:true});out?.scrollIntoView({block:"start",behavior:"instant"});return;}
+  const scenario=e.target.closest("[data-gh-scenario]"); if(scenario){const key=scenario.dataset.ghScenario,[c,i]=key.split(":");ghOpenScenario(c,Number(i));if(c!=="life")app.querySelector('[data-gh-scenario="'+key+'"]')?.focus({preventScroll:true});return;}
   const c = e.target.closest("[data-catopen]"); if(c){ go("c-"+c.dataset.catopen); return; }
   if(e.target.closest("[data-fridge]")){ go("fridge"); return; }
   const gt = e.target.closest("[data-goto]"); if(gt){ go(gt.dataset.goto); return; }
