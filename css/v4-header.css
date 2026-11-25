@@ -99,36 +99,44 @@
 .gh-nav a.gh-wc{background:#FEF9C3;color:#713F12;border-color:#FDE047}
 .gh-nav a.gh-wc:hover,.gh-nav a.gh-wc[aria-current="page"]{background:#FEF08A;color:#713F12;border-color:#FACC15}
 
-/* 2026.11.25 상단 바 콤팩트 + 탭 흰색 한 색 통일
-   2026.11.25 서정님: "민트·하늘 배경 빼고 하얀색 + 연한 테두리로, 지금 보는 탭만 진하게"
-                  "로고·이름·전체 글자 크기 축소, 상단 바가 콤팩트하게"
-   → 탭은 흰 배경 + #E2E8F0 테두리, 활성 탭만 얇은 네이비 테두리 + 진한 글씨.
-     (워드클라우드 탭만 수강생이 바로 찾도록 연노랑 유지) */
-.gh-in{padding:10px 32px}
+/* 2026.11.25 상단 바 콤팩트 + 5탭 연한 파스텔 색 복원
+   2026.11.25 서정님: "탭 연한 파스텔 색 다시 살려줘", "로고·이름 1pt 더 축소"
+   → 위쪽 세 탭(강의 자료실·강사 소개·강의 분야) = 연하늘, AI 가이드 = 연민트,
+     워드클라우드 = 연노랑. 지금 보는 탭만 진한 테두리 + 굵은 글씨.
+     (lectures/ 자료실 카드·필터 탭은 흰 배경 + 3px 남색 윗테두리 그대로) */
+.gh-in{padding:9px 32px}
 .gh-nav{gap:7px;font-size:14.5px}
-.gh-logo{gap:9px}
-.gh-logo-mark{height:34px}
-.gh-logo b{font-size:18px}
-.gh-logo small{font-size:11.5px}
-.gh-nav a:not(.gh-cta),.gh-nav a.gh-ai,
-.gh-nav a[href="/lectures/"],.gh-nav a[href="/about/"],.gh-nav a[href="/program/"]{background:#FFFFFF;color:#3A4658;border:1px solid #E2E8F0;font-weight:500;box-shadow:none;border-radius:8px;padding:6px 12px}
-.gh-nav a:not(.gh-cta):hover,.gh-nav a.gh-ai:hover,
-.gh-nav a[href="/lectures/"]:hover,.gh-nav a[href="/about/"]:hover,.gh-nav a[href="/program/"]:hover{background:#F7F9FC;color:#17304F;border-color:#C9D6E4}
-.gh-nav a:not(.gh-cta)[aria-current="page"],.gh-nav a.gh-ai[aria-current="page"],
-.gh-nav a[href="/lectures/"][aria-current="page"],.gh-nav a[href="/about/"][aria-current="page"],.gh-nav a[href="/program/"][aria-current="page"]{background:#FFFFFF;color:#17304F;border-color:#17304F;font-weight:700}
-/* 워드클라우드 탭만 연노랑 유지 */
-.gh-nav a.gh-wc{background:#FFF3C4;color:#713F12;border-color:#FDE047;font-weight:700;padding:6px 12px}
-.gh-nav a.gh-wc:hover,.gh-nav a.gh-wc[aria-current="page"]{background:#FEF08A;color:#713F12;border-color:#FACC15}
-/* 모바일: 같은 3+2 배치 그대로, 크기만 한 톤 축소 */
+.gh-logo{gap:8px}
+.gh-logo-mark{height:26px}
+.gh-logo-tx{gap:0}
+.gh-logo b{font-size:16px}   /* 표시 15px — js/fs.js가 1px 축소 */
+.gh-logo small{font-size:10.5px} /* 표시 10px — fs.js 최소 10px */
+/* 위쪽 세 탭 — 연하늘 */
+.gh-nav a[href="/lectures/"],.gh-nav a[href="/about/"],.gh-nav a[href="/program/"],
+.gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc){background:#EEF6FF;color:#1E3A8A;border:1px solid #DCEBFF;font-weight:600;box-shadow:none;border-radius:8px;padding:6px 12px;min-height:0}
+.gh-nav a[href="/lectures/"]:hover,.gh-nav a[href="/about/"]:hover,.gh-nav a[href="/program/"]:hover,
+.gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc):hover{background:#E3F0FF;color:#17304F;border-color:#BFDBFE}
+.gh-nav a[href="/lectures/"][aria-current="page"],.gh-nav a[href="/about/"][aria-current="page"],.gh-nav a[href="/program/"][aria-current="page"],
+.gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc)[aria-current="page"]{background:#DCEBFF;color:#17304F;border-color:#2563EB;font-weight:700}
+/* AI 가이드 — 연민트 */
+.gh-nav a.gh-ai{background:#ECFDF5;color:#166534;border:1px solid #D1FAE5;font-weight:600;box-shadow:none;padding:6px 12px;min-height:0}
+.gh-nav a.gh-ai:hover{background:#DFF7EC;color:#14532D;border-color:#A7F3D0}
+.gh-nav a.gh-ai[aria-current="page"]{background:#D1FAE5;color:#14532D;border-color:#16A34A;font-weight:700}
+/* 워드클라우드 — 연노랑 유지 */
+.gh-nav a.gh-wc{background:#FFF3C4;color:#713F12;border:1px solid #FDE047;font-weight:700;box-shadow:none;padding:6px 12px;min-height:0}
+.gh-nav a.gh-wc:hover,.gh-nav a.gh-wc[aria-current="page"]{background:#FFE89A;color:#713F12;border-color:#D97706}
+/* 모바일: 같은 3+2 배치 그대로, 크기만 한 톤 더 축소 */
 @media (max-width:760px){
-  .gh-in{padding:10px 14px 8px;gap:8px}
-  .gh-logo-mark{height:32px}
-  .gh-logo b{font-size:17px}
-  .gh-logo small{font-size:11px}
-  .gh-nav{font-size:14px;gap:5px}
-  .gh-nav a:not(.gh-cta){min-height:38px;padding:5px 3px;border-radius:8px}
+  .gh-in{padding:8px 14px 7px;gap:7px}
+  .gh-logo-mark{height:24px}
+  .gh-logo b{font-size:15.5px}
+  .gh-logo small{font-size:10.5px}
+  .gh-nav{font-size:13.5px;gap:5px}
+  .gh-nav a:not(.gh-cta){min-height:36px;padding:5px 3px;border-radius:8px}
+  .gh-nav a.gh-ai,.gh-nav a.gh-wc{min-height:36px;padding:5px 3px}
 }
 @media (max-width:400px){
-  .gh-nav{font-size:13.5px;gap:4px}
-  .gh-nav a:not(.gh-cta){min-height:36px;padding:5px 2px}
+  .gh-nav{font-size:13px;gap:4px}
+  .gh-nav a:not(.gh-cta){min-height:35px;padding:5px 2px}
+  .gh-nav a.gh-ai,.gh-nav a.gh-wc{min-height:35px;padding:5px 2px}
 }
