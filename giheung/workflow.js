@@ -4355,6 +4355,91 @@ function promoMemo(raw){
  return {title:title?title.replace(/^[^:：]+[:：]\s*/,""):"",lines:a.filter(x=>x!==title)};
 }
 function promoLine(s){return /[:：]/.test(s)?s:sent(s);}
+const GH_BLOG_STYLE={
+ "따뜻하게":{
+  blog:n=>n+", 함께한 시간을 나눠요",web:n=>n+"에서 함께한 시간",
+  intro:n=>"오늘은 "+n+" 이야기를 전해 드려요.",webIntro:n=>n+"에서 어떤 활동을 했는지 전해 드립니다.",
+  headings:["오늘의 활동","준비하며","이렇게 진행했어요","기억에 남는 순간","참여자분들의 한마디"],
+  transition:["활동을 시작하기 전에는","활동에서는","함께한 시간 중 기억에 남는 장면도 있었어요."],
+  close:"함께해 주신 분들께 고맙습니다. 복지관에서 이어지는 이야기도 종종 전해 드릴게요."
+ },
+ "부드럽게":{
+  blog:n=>n+" 이야기를 들려드릴게요",web:n=>n+" 이야기",
+  intro:n=>n+"에서 있었던 일을 차근차근 들려드리려고 해요.",webIntro:n=>"오늘은 "+n+"에서 함께한 일을 소개합니다.",
+  headings:["어떤 활동이었나요?","시작하기 전","그날 한 일","마음에 남은 장면","함께한 분들의 이야기"],
+  transition:["무엇부터 준비했는지 살펴보면","활동이 시작된 뒤에는","그날을 떠올리면 이 장면이 먼저 생각나요."],
+  close:"다음에도 복지관에서 함께한 이야기를 들려드릴게요."
+ },
+ "밝고 경쾌하게":{
+  blog:n=>n+", 어떤 일이 있었을까요?",web:n=>n+" 현장 소식: 이렇게 함께했어요",
+  intro:n=>n+"에는 어떤 순서가 있었을까요? 복지관 소식, 지금부터 전해 드려요!",webIntro:n=>"복지관에서 함께한 "+n+" 소식을 전합니다. 어떤 활동을 했는지 살펴볼까요?",
+  headings:["오늘의 주인공은?","시작 전, 이렇게 준비!","현장에서는 뭘 했을까요?","다시 보고 싶은 한 장면","현장에서 들은 한마디"],
+  transition:["시작 전부터 하나씩 준비했어요.","이제 본격적으로 활동을 시작했어요.","여기서 기억해 둘 한 장면!"],
+  close:"함께해 주신 모든 분, 고맙습니다! 다음 복지관 소식에서 또 만나요."
+ },
+ "차분하게":{
+  blog:n=>n+"에서 있었던 일",web:n=>n+" 활동 기록",
+  intro:n=>n+"에서 있었던 일을 순서대로 정리했습니다.",webIntro:n=>n+" 활동의 진행 내용과 기록을 전합니다.",
+  headings:["활동 소개","준비 과정","어떻게 진행했나요?","기억에 남는 장면","참여 소감"],
+  transition:["활동 전에는","진행 과정에서는","활동 중에는 이런 장면이 있었습니다."],
+  close:"함께해 주신 분들께 감사드립니다. 이어지는 활동도 차근차근 전하겠습니다."
+ },
+ "쉽게":{
+  blog:n=>n+", 여기서 무얼 했을까요?",web:n=>n+"에서 한 일",
+  intro:n=>n+"에서 한 일을 쉽게 알려 드려요.",webIntro:n=>n+"에서 무엇을 했는지 알려 드려요.",
+  headings:["오늘 한 일","먼저 준비한 것","함께 해 본 것","이런 일이 있었어요","참여한 분이 들려준 말"],
+  transition:["시작 전에 준비했어요.","활동에서는 이렇게 했어요.","기억에 남은 일이 있어요."],
+  close:"함께해 주신 분들, 고마워요. 다음 활동 소식도 알려 드릴게요."
+ },
+ "공식적이고 정중하게":{
+  blog:n=>n+" 진행 소식",web:n=>n+" 진행 결과",
+  intro:n=>"이번 글에서는 "+n+" 진행 내용을 전합니다.",webIntro:n=>n+"의 진행 내용을 안내드립니다.",
+  headings:["활동 개요","사전 준비","주요 진행 내용","현장 기록","참여자 소감"],
+  transition:["진행에 앞서","주요 활동으로는","다음은 활동 중 기록한 장면입니다."],
+  close:"함께해 주신 참여자와 관계자분들께 감사드립니다."
+ }
+};
+function ghEditorial(v,d){
+ const mode=v.tone||"따뜻하게",tone=GH_BLOG_STYLE[mode]||GH_BLOG_STYLE["따뜻하게"],web=v.where==="복지관 홈페이지",formal=mode==="공식적이고 정중하게"||mode==="차분하게";
+ const join=a=>a.filter(Boolean).join("\n\n"),plain=s=>{
+  if(!s)return "";
+  if(formal)return s.replace(/했어요(?=[.!?。]|$)/gm,"했습니다").replace(/었어요(?=[.!?。]|$)/gm,"었습니다").replace(/았어요(?=[.!?。]|$)/gm,"았습니다").replace(/있어요(?=[.!?。]|$)/gm,"있습니다").replace(/없어요(?=[.!?。]|$)/gm,"없습니다");
+  return s.replace(/했습니다(?=[.!?。]|$)/gm,"했어요").replace(/었습니다(?=[.!?。]|$)/gm,"었어요").replace(/았습니다(?=[.!?。]|$)/gm,"았어요").replace(/있습니다(?=[.!?。]|$)/gm,"있어요").replace(/없습니다(?=[.!?。]|$)/gm,"없어요");
+ };
+ const [a,b,c,e,f]=tone.headings;
+ const para=(section,text)=>text?"■ "+section+"\n"+text:"";
+ const say=(prefix,s)=>{
+  if(!s)return "";
+  const connector=prefix.endsWith(".")||prefix.endsWith("!")?prefix+" ":prefix+" ";
+  return connector+plain(s).split("\n").filter(Boolean).join(" ");
+ };
+ const facts=[d.meta.when,d.meta.where].filter(Boolean),before=facts.length?facts.join(" · "):"";
+ const people=[d.meta.who&&"참여 대상: "+d.meta.who,d.meta.count&&"참여 인원: "+d.meta.count].filter(Boolean).join(" · ");
+ // Use earlier blank copy as a template only. Typed drafts do not fabricate a scene, reactions, or numbers.
+ const main=plain(d.main), prep=d.prep?say(tone.transition[0],d.prep):d.empty?"[활동 전에 준비한 내용]":"";
+ const steps=d.steps?say(tone.transition[1],d.steps):d.empty?"[실제로 진행한 내용]":"";
+ const scene=d.moment?say(tone.transition[2],d.moment):d.empty?"[기억에 남는 장면]":"";
+ const reaction=d.react||(d.empty?"[공개해도 되는 실제 반응]":"");
+ const img=d.photo?"[사진: "+d.photo+"]":d.empty?"[사진: 활동 모습]":"";
+ const blogHead=tone.blog(d.title),webHead=tone.web(d.title);
+ const intro=web?tone.webIntro(d.title):"안녕하세요, "+PROMO_ORG+"입니다. "+tone.intro(d.title);
+ const context=before+(people?(before?"\n":"")+people:"");
+ const next=d.next?para("다음에 전할 소식",plain(d.next)):"";
+ const thank=d.thanks?plain(d.thanks):tone.close;
+ if(web){
+  const story=join([main,prep,steps]);
+  return [
+   ["복지관 홈페이지 행사 후기",join([webHead,intro,context|| (d.empty?"[일시·장소·참여 대상]":""),
+    story,scene,reaction?para(f,reaction):"",img,next,thank])],
+   ["홈페이지 목록용 요약",join([webHead,main,plain(d.steps)||plain(d.moment)])]
+  ];
+ }
+ return [
+  ["네이버 블로그 원고",join([blogHead,intro,para(a,[context,main,img].filter(Boolean).join("\n")),
+   para(b,prep),para(c,steps),para(e,scene),para(f,reaction),next,thank,d.tags])],
+  ["블로그 소개글",join([blogHead,main,thank])]
+ ];
+}
 function promoPost(v){
  const raw=String(v.act||"").trim(),empty=!raw,P=v._work?.program||"",org=PROMO_ORG;
  const meta={}, blocks={work:[],prep:[],steps:[],moment:[],reaction:[],thanks:[],next:[],photo:[]};
@@ -4400,27 +4485,9 @@ function promoPost(v){
   ["카카오톡 채널 원고",join(["["+org+" 소식] "+title,context,tone[0],[main,moment||react||steps].filter(Boolean).join("\n"),thanks||tone[1]])],
   ["카카오톡 한눈에 보기",short]
  ];
- if(v.where==="복지관 홈페이지")return [
-  ["복지관 홈페이지 행사 후기",join(["["+org+" 소식] "+title,
-   facts?"■ 활동 개요\n"+facts:empty?"■ 활동 개요\n[일시·장소·참여 대상]":"",
-   "■ 진행 내용\n"+[main,prep,steps|| (empty?"[실제로 진행한 내용]":"")].filter(Boolean).join("\n"),
-   moment||react?"■ 활동 결과·참여자 반응\n"+[moment,react].filter(Boolean).join("\n"):empty?"■ 활동 결과\n[확인된 결과나 반응]":"",
-   photo?"[사진: "+photo+"]":empty?"[사진: 행사 현장]":"",
-   next?"■ 다음 소식\n"+next:"",thanks||tone[1]])],
-  ["홈페이지 목록용 요약",short]
- ];
- return [
-  ["네이버 블로그 원고",join([title+" | "+org,"안녕하세요, "+org+"입니다. "+tone[0],
-   "■ 오늘의 활동\n"+[context,main,photo?"[사진: "+photo+"]":empty?"[사진: 활동 모습]":""].filter(Boolean).join("\n"),
-   prep||empty?"■ 준비하며\n"+(prep||"[활동 전에 준비한 내용이 있다면 적어 주세요.]"):"",
-   steps||empty?"■ 이렇게 진행했어요\n"+(steps||"[활동 순서나 직접 해 본 일]"):"",
-   moment||empty?"■ 기억에 남는 순간\n"+(moment||"[기억에 남는 장면을 한두 줄 적어 주세요.]"):"",
-   react||empty?"■ 참여자분들의 한마디\n"+(react||"[공개해도 되는 실제 반응이 있다면 적어 주세요.]"):"",
-   thanks?"■ 함께해 주신 분들\n"+thanks:empty?"■ 함께해 주신 분들\n[감사를 전할 분이나 단체가 있다면 적어 주세요.]":"",
-   next?"■ 다음 소식\n"+next:"",tone[1],tags])],
-  ["블로그 소개글",short]
- ];
+ return ghEditorial(v,{title,main,empty,meta,prep,steps,moment,react,next,thanks,photo,tags});
 }
+
 function promoMonth(v){
  const d=promoMemo(v.events);if(!d.lines.length&&!d.title)d.lines=["[이번 달에 진행한 활동]","[다음에 알려 드릴 소식]"];if(!d.title&&v._work)d.title=v._work.program+" 소식";
  const lines={
