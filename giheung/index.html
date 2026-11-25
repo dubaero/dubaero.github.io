@@ -1000,6 +1000,14 @@ body>main.wrap{flex:1 0 auto}
 /* 기존 화면은 한 단계 더 작게(같은 결로) */
 #v-aiset,#v-song,#v-prompt,#v-gbiz,#v-form,#v-all,#v-meet,#v-rec,#v-multi,#v-simple,#v-drawer,#v-biz{zoom:.86!important}
 
+/* 가운데 6칸이 빈 공간 없이 고르게 채워지게 */
+@media(min-width:901px){
+ .cols3>.bx:nth-child(2){display:flex}
+ .cols3>.bx:nth-child(2) .qgrid{flex:1 1 auto;grid-auto-rows:minmax(0,1fr);align-content:stretch}
+ .cols3>.bx:nth-child(2) .qm{justify-content:center;padding:10px 12px}
+ .cols3>.bx:nth-child(2) .qm b{font-size:13px}
+}
+
 .in-mind>.vbar{display:none!important}
 
 </style>
