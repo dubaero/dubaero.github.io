@@ -250,45 +250,31 @@ const TASKS = [
  next:["이 중 AI에게 맡길 수 있는 일을 골라줘.","오늘 할 일만 3개로 줄여줘."]},
 
 /* 홍보·안내문 */
-{id:"newsletter",form:1,cat:"promo",title:"시설 소식지 글",situation:"이번 달 시설 소식을 정리해야 해요",
- desc:"한 달 동안 있었던 일을 읽기 좋은 소식지 글로 만들어요.",
- chips:[{k:"reader",label:"누가 읽나요?",opts:["후원자님","보호자님","지역 주민"]},
-        {k:"len",label:"분량은요?",opts:["짧게 3문단","한 장 분량"]}],
- inputs:[{k:"events",label:"이번 달 있었던 일",area:true,ph:"예: 추석 송편 만들기, 동네 공원 산책 모임 시작, 새 식탁 후원받음"}],
- build:v=>`그룹홈의 이번 달 소식지 글을 ${v.reader}이 읽기 좋게 ${v.len}으로 써줘.\n제목과 소제목도 붙여줘.\n\n있었던 일\n${F(v,"events","있었던 일")}`+
-   RULES(["이용자 이름 대신 '이용자분들'로 써줘.",NOFAKE,"사진을 넣으면 좋을 자리를 [사진: 설명]으로 표시해줘."]),
- tip:"사진에 이용자 얼굴이 보이면 본인과 보호자 동의를 받은 사진만 쓰세요.",
- next:["제목 후보를 5개 더 뽑아줘.","같은 내용을 SNS 글로 바꿔줘."]},
+{id:"newsletter",draft:1,cat:"promo",title:"복지관 소식지 원고",situation:"이달의 복지관 소식을 정리하고 싶어요",
+ desc:"받는 분을 고르고 있었던 일을 쓰면 오른쪽에 짧은 소식지 원고가 나와요.",
+ chips:[{k:"reader",label:"누가 읽나요?",opts:["보호자","참여자 가족","지역 주민","후원자","자원봉사자","협력기관","이용자"]},
+        {k:"tone",label:"어떤 말투로 쓸까요?",opts:["따뜻하게","부드럽게","밝고 경쾌하게","차분하게","쉽게"]}],
+ inputs:[{k:"events",label:"이번 달 복지관에서 있었던 일",area:true,ph:"예: 원예교실에서 봄꽃을 심었어요. 이번 달부터 지역 주민과 함께하는 산책 모임도 열었어요."}],
+ tip:"게시하거나 보내기 전에 날짜와 이름을 확인하고, 사진은 게시 동의 여부를 확인하세요.", next:[]},
 
-{id:"sns-post",cat:"promo",title:"SNS·블로그 홍보 글",situation:"시설 활동을 SNS에 올리고 싶어요",
- desc:"활동 하나를 올리기 좋은 짧은 글로 바꿔요.",
- chips:[{k:"where",label:"어디에 올리나요?",opts:["인스타그램","네이버 블로그","카카오톡 채널"]},
-        {k:"tone",label:"어떤 분위기로 쓸까요?",opts:["따뜻하게","밝고 경쾌하게","차분하게"]},
-        {k:"blen",label:"블로그 글 길이 (네이버 블로그일 때)",opts:["짧게 (약 500자)","보통 (약 1000자)","길게 (약 1500자)"],def:1}],
- inputs:[{k:"act",label:"올릴 활동",ph:"예: 이용자분들과 함께 만든 김장 김치를 이웃과 나눴어요"},
-         {k:"chars",label:"원하는 글자 수 (선택)",opt:true,ph:"예: 800 (적으면 위 길이 대신 이 글자 수에 맞춰요)"},
-         {k:"detail",label:"넣고 싶은 내용 (선택)",opt:true,area:true,ph:"예: 직접 배추에 속을 넣었어요, 이웃 어르신 10가구에 나눴어요"}],
- build:v=>`그룹홈 활동을 ${v.where}에 올릴 글로 ${v.tone} 써줘.\n활동: ${F(v,"act","활동 내용")}\n`+(v.where==="인스타그램"?"본문은 5줄 이내로 쓰고, 해시태그 5개를 붙여줘.":v.where==="네이버 블로그"?`제목, 도입, 활동 내용, 마무리 순서로 공백 포함 약 ${parseInt(v.chars)||parseInt((v.blen||"").replace(/\D/g,""))||1000}자로 써줘.`+O(v,"detail","\n넣을 내용: ",""):"3줄 이내로 쓰고, 끝에 한 줄 인사를 넣어줘.")+
-   RULES(["이용자 이름은 넣지 마.",NOFAKE,"장애를 불쌍하게 그리는 표현은 쓰지 마."]),
- tip:"이용자 얼굴이 나온 사진은 본인과 보호자 동의를 받은 뒤에 올리세요.",
- warn:true,
- next:["제목 후보를 3개 뽑아줘.","더 짧게 줄여줘."]},
+{id:"sns-post",draft:1,cat:"promo",title:"복지관 활동 후기·SNS 원고",situation:"복지관 활동을 SNS나 홈페이지에 올리고 싶어요",
+ desc:"게시 채널과 말투를 고르고, 실제 활동을 한 칸에 쓰거나 말해 보세요.",
+ chips:[{k:"where",label:"어디에 올리나요?",opts:["네이버 블로그","인스타그램","카카오톡 채널","복지관 홈페이지"]},
+        {k:"tone",label:"어떤 분위기로 쓸까요?",opts:["따뜻하게","부드럽게","밝고 경쾌하게","차분하게","쉽게","공식적이고 정중하게"]}],
+ inputs:[{k:"act",label:"올릴 활동",area:true,ph:"예: 제목: 우리 동네 원예교실\n11월 22일 복지관에서 원예교실을 열었어요. 참여자들이 꽃을 고르고 직접 화분에 심었어요. 완성한 화분은 1층에 전시했어요."}],
+ tip:"이용자 실명·진단명·개인 연락처는 쓰지 마세요. 사진은 게시 동의 여부를 확인하세요.",next:[]},
 
-{id:"notice",form:1,cat:"promo",title:"안내문·가정통신문",situation:"안내문을 한 장 만들어야 해요",
- desc:"제목부터 문의처까지 갖춘 안내문을 만들어요.",
- chips:[{k:"reader",label:"누가 읽나요?",opts:["보호자님","후원자님","이웃·지역 주민"]},
-        {k:"form",label:"어떤 모양으로 정리할까요?",opts:["제목+본문+문의처","핵심은 표로 정리"]}],
- inputs:[{k:"content",label:"안내할 내용",ph:"예: 연말 보호자 초청 간담회"},
-         {k:"date",label:"날짜·시간·장소",ph:"예: 12월 13일(토) 오후 2시, 시설 거실"},
-         {k:"etc",label:"그 밖에 알릴 것",opt:true,ph:"예: 주차 공간이 없어요, 12월 6일까지 참석 여부 회신"}],
- build:v=>`${v.reader}께 드릴 안내문을 "${v.form}" 모양으로 써줘.\n안내 내용: ${F(v,"content","안내 내용")}\n날짜·시간·장소: ${F(v,"date","날짜·시간·장소")}`+O(v,"etc","\n그 밖에: ","")+`\n시설명과 연락처는 [ ]로 비워줘.`+
-   RULES(["날짜, 시간, 장소는 내가 적은 그대로 써줘.",NOFAKE]),
- tip:"완성본을 한글·워드에 붙여 넣은 뒤 시설 로고와 연락처를 직접 넣으세요.",
- next:["어르신도 읽기 쉽게 글자 수를 줄여줘.","이 안내문을 문자용으로 3줄 요약해줘."]},
+{id:"notice",draft:1,cat:"promo",title:"복지관 안내문 원고",situation:"모집·이용·일정 변경 안내문을 만들어야 해요",
+ desc:"받는 분과 안내 종류를 고르면 복사할 안내문이 오른쪽에 나와요.",
+ chips:[{k:"reader",label:"누가 읽나요?",opts:["이용자·보호자","참여자 가족","지역 주민","후원자·봉사자","협력기관"]},
+        {k:"purpose",label:"어떤 안내인가요?",opts:["참여자 모집","이용·행사 안내","일정 변경·취소","안전·접근성 안내","설명회·간담회"]},
+        {k:"tone",label:"어떤 말투로 쓸까요?",opts:["공식적이고 정중하게","쉬운 말로","따뜻하게"]}],
+ inputs:[{k:"content",label:"안내할 내용",area:true,ph:"예: 제목: 원예교실 참여자 모집\n일시: 12월 5일 오후 2시\n장소: 복지관 2층\n대상: 성인 이용자 8명\n신청: 복지관 홈페이지"}],
+ tip:"보내기 전에 일시·대상·장소·신청 방법·공식 문의처를 확인하세요.",next:[]},
 
-{id:"image-prompt",refimg:1,cat:"promo",title:"홍보 이미지 요청문",situation:"포스터나 홍보 그림이 필요해요",
+{id:"image-prompt",refimg:1,cat:"promo",title:"홍보 이미지 요청문",situation:"SNS 카드 이미지나 소식지 삽화가 필요해요",
  desc:"몇 가지만 고르면 장면·빛·화풍·구도까지 담긴 섬세한 그림 요청문이 만들어져요.",
- chips:[{k:"kind",label:"어디에 쓰나요?",opts:["행사 포스터 배경","SNS 카드 이미지","소식지 삽화","초대장 배경"]},
+ chips:[{k:"kind",label:"어디에 쓰나요?",opts:["SNS 카드 이미지","소식지 삽화","행사 포스터 배경","초대장 배경"]},
         {k:"season",label:"어느 계절인가요?",opts:["봄","여름","가을","겨울"],def:seasonIdx},
         {k:"style",label:"어떤 화풍인가요?",opts:["따뜻한 수채화","깔끔한 일러스트","부드러운 파스텔","색연필 동화풍","3D 클레이"]},
         {k:"mood",label:"어떤 분위기인가요?",opts:["포근하고 따뜻하게","밝고 신나게","차분하고 평화롭게"]},
@@ -335,7 +321,7 @@ const TASKS = [
 {id:"infographic",cat:"promo",title:"인포그래픽 요청문",situation:"성과·안내를 한눈에 보이는 그림으로 만들고 싶어요",
  desc:"항목과 숫자를 적고 디자인을 고르면, 챗GPT·제미나이에서 바로 인포그래픽 이미지가 나오는 요청문이 만들어져요.",
  chips:[{k:"use",label:"어디에 쓰나요?",opts:["SNS 게시물(1:1)","인스타그램 세로(4:5)","소식지·게시판(A4 세로)","보고서 첨부(가로 16:9)"]},
-        {k:"topic",label:"어떤 내용인가요?",opts:["활동 성과 정리","행사·프로그램 안내","후원 감사·사용 내역","생활·안전 수칙","시설 소개"]},
+        {k:"topic",label:"어떤 내용인가요?",opts:["활동 성과 정리","행사·프로그램 안내","후원 감사·사용 내역","안전·접근성 안내","복지관 서비스 소개"]},
         {k:"layout",label:"어떻게 배치할까요?",opts:["숫자 강조 카드","위에서 아래 순서","시간 순서(타임라인)","두 가지 비교"]},
         {k:"style",label:"디자인 스타일은요?",opts:["깔끔한 플랫 아이콘","따뜻한 손그림","귀여운 3D 아이콘","단정한 공공기관 보고서풍"]},
         {k:"color",label:"색 조합은요?",opts:["초록·연두","주황·노랑","파랑·하늘","분홍·보라","흑백 + 포인트 한 색"]}],
@@ -375,7 +361,7 @@ const TASKS = [
  desc:"장마다 넣을 말을 적고 디자인을 고르면, 같은 디자인으로 여러 장을 차례로 만들어 주는 요청문이 나와요.",
  chips:[{k:"n",label:"몇 장으로 만들까요?",opts:["3장","5장","7장"],def:1},
         {k:"where",label:"어디에 올리나요?",opts:["인스타그램(4:5)","카카오톡 채널(1:1)","네이버 블로그(1:1)"]},
-        {k:"topic",label:"어떤 내용인가요?",opts:["활동 소식","행사 안내","후원 감사","생활 정보·안전 수칙","시설 소개"]},
+        {k:"topic",label:"어떤 내용인가요?",opts:["활동 후기","참여자 모집","이용·행사 안내","후원·봉사 감사","장애인식개선·권리교육","안전·접근성 안내","복지관 소개"]},
         {k:"style",label:"디자인 스타일은요?",opts:["깔끔한 플랫 아이콘","따뜻한 손그림","귀여운 3D 아이콘","사진 느낌 배경 + 글자 상자"]},
         {k:"color",label:"색 조합은요?",opts:["초록·연두","주황·노랑","파랑·하늘","분홍·보라"]},
         {k:"tone",label:"말투는요?",opts:["따뜻하게","밝고 경쾌하게","차분하게"]}],
@@ -403,6 +389,22 @@ const TASKS = [
  },
  tip:"한 번에 여러 장을 부탁하면 디자인이 흐트러져요. 1장씩 '다음'으로 이어 가세요. 제미나이는 '이미지 만들기'(나노바나나)를 고른 뒤 붙여 넣으세요. 실제 이용자 사진은 AI에 올리지 마세요.",
  next:["다음","방금 장에서 틀린 한글만 고쳐줘.","1장과 같은 디자인으로 다시 맞춰줘.","전체 글을 인스타그램 본문과 해시태그 5개로 써줘."]},
+
+{id:"poster",cat:"promo",title:"행사 포스터 제작 프롬프트",situation:"프로그램·행사 모집 포스터가 필요해요",
+ desc:"행사 정보와 디자인을 고르면 오른쪽에 한 장 포스터 제작 프롬프트가 나와요.",
+ chips:[{k:"topic",label:"포스터를 왜 만드나요?",opts:["참여자 모집","행사·교육 안내","장애인식개선 캠페인","자원봉사·후원 모집","접근성 안내"]},
+        {k:"ratio",label:"어디에 붙이나요?",opts:["A4 세로·게시판","세로 4:5·인스타그램","세로 3:4·포스터","가로 16:9·홈페이지 배너"]},
+        {k:"style",label:"어떤 디자인으로 만들까요?",opts:["단정한 공공기관형","따뜻한 수채화","선명한 플랫 일러스트","큰 글씨 쉬운 안내","현장 사진을 넣을 자리"]}],
+ inputs:[{k:"title",label:"프로그램·행사명",ph:"예: 우리 동네 무장애 산책"},
+         {k:"data",label:"포스터에 넣을 행사 정보 (한 칸에 줄마다)",area:true,ph:"예: 일시: 12월 5일 14:00 / 장소: 복지관 1층 / 대상: 지역 주민 / 신청: 홈페이지 / 접근성: 휠체어 이용 가능 출입구"},
+         {k:"scene",label:"대표 이미지에 담을 장면 (선택)",opt:true,ph:"예: 다양한 이동 방식으로 공원 길을 함께 살펴보는 주민들"}],
+ build:v=>`[제작 조건] ${v.topic} · ${v.ratio} · ${v.style}
+[제목] ${F(v,"title","프로그램·행사명")}
+[확인된 행사 정보] ${F(v,"data","일시·대상·장소·신청·문의 등 확인 필요")}
+[대표 장면] ${F(v,"scene","행사의 성격을 보여 주는 하나의 주요 장면")}
+[배치] 상단 제목 → 대표 시각 요소 → 일시·장소·대상 → 신청·문의 행동 안내 → 복지관 로고와 QR을 나중에 배치할 자리. 날짜·장소·신청을 멀리서도 읽게 강조해. 인쇄용은 가장자리 안전 여백을 유지해.`,
+ tip:"이용자 사진이나 기관 로고는 AI로 재현하지 말고, 사용 승인을 받은 자료를 편집 단계에서 넣으세요.",
+ next:["한글 문구를 따로 제공하고 포스터 배경만 만들어 줘."]},
 
 /* 프로그램·생활 */
 {id:"leisure-program",cat:"life",plan:1,title:"여가 프로그램 계획",situation:"이용자분들과 함께할 프로그램을 계획해요",
@@ -483,6 +485,27 @@ const TASKS = [
  tip:"계획서를 인쇄해 벽에 붙여두면 직원 간 공유가 쉬워요.",
  next:["보호자 초대 문자도 함께 써줘.","당일 진행 순서를 시간표로 만들어줘.","행사 사진 게시 동의서 문구를 써줘."]}
 ];
+const VISUAL_TASKS=new Set(["cardnews","poster","image-prompt","infographic"]);
+TASKS.filter(t=>VISUAL_TASKS.has(t.id)).forEach(t=>{
+ const source=t.build;
+ t.inputs.push({k:"context",label:"사업 분야·읽는 분·추가 정보 (선택)",area:true,opt:true,ph:"예: 지역연계·권익옹호 / 지역 주민 / 이동이 편한 길과 쉬어갈 장소를 알려 주세요."});
+ t.build=v=>visualPrompt(t,v,source(v));
+ t.warn=true;
+});
+function visualPrompt(t,v,detail){
+ const kinds={
+  cardnews:"카드뉴스: 표지(질문·한 줄 결론) → 활동 소개 → 핵심 정보 → 신청 방법 또는 실제 활동 과정 → 마지막 행동 안내·감사. 선택한 장수에 맞게 확장·압축하고 한 장에 메시지 하나만.",
+  poster:"포스터: 제목 → 대표 이미지 → 행사 핵심 정보 → 신청·문의 → 기관 로고·QR 자리. 한 장으로 만들고 제목·일정·신청 순서로 읽히게.",
+  "image-prompt":"홍보 이미지: 포스터 배경, SNS 카드 표지, 소식지 삽화, 초대장 중 선택한 용도에 맞게 중앙 장면·화풍·색·비율·제목 여백을 반영. 문구는 이미지에 굽지 말고 별도로 제안.",
+  infographic:"인포그래픽: 제목 → 검증된 수치 또는 단계 → 쉬운 아이콘·순서 → 요약·행동 안내. 입력된 분모와 기준을 확인하고, 비교 기준이 다르면 차트 대신 항목별 카드를 사용."
+ };
+ return '용인시기흥장애인복지관 홍보 기획자이자 접근성을 고려하는 시각 디자이너로 작업해 줘.\n\n[선택한 제작 조건과 자료]\n'+
+  O(v,"context","[사업·대상·추가 정보] ","\n\n")+detail.replace(/^(장애인복지관의.*?만들어줘\.\n먼저 1장만 만들고[^\n]*\n|다음 내용으로 인포그래픽 이미지[^\n]*\n)/,'')+
+  '\n\n[기획 순서]\n1. 위에서 입력한 사업·목적·대상·활동·확인된 사실을 요약하고, 결과를 바꿀 미확인 정보만 한 번에 물어봐.\n2. 아직 이미지를 만들지 말고, 방향이 다른 기획안 3개를 비교해. 안마다 한 줄 메시지·화면 배치·실제 삽입 문구·강조할 포인트를 보여 줘. '+kinds[t.id]+
+  '\n3. 사용자가 안과 스타일을 고르면, 정한 비율로 제작해. 카드뉴스는 표지부터 장마다 개별 이미지로 만들고 다음 장은 요청을 받은 뒤 이어가. 색·글꼴·여백을 통일하고 합본은 만들지 마.'+
+  '\n4. 한글이 깨지거나 길면 이미지에는 빈 공간을 두고 정확한 글자를 복사용으로 따로 줘. 날짜·장소·신청·문의·수치와 오탈자·잘림을 확인해. 추측으로 채우지 말고 [확인 필요]로 남겨.'+
+  '\n\n[복지관 홍보 기준]\n장애인을 동정의 대상으로 그리거나 영웅화하지 말고, 활동을 직접 고르고 참여하는 사람으로 표현해. 승인되지 않은 실제 얼굴·실명·기관 로고는 넣지 마. 글씨 대비와 크기를 충분히 확보하고 색만으로 뜻을 구분하지 마. 이해하기 쉬운 한국어와 대체 텍스트를 함께 제안해.';
+}
 const BY = Object.fromEntries(TASKS.map(t=>[t.id,t]));
 
 /* ---------- 이달의 추천 ---------- */
@@ -4039,7 +4062,7 @@ function renderCat(c){
   app.innerHTML = `<div class="fade cat-${c}" style="display:flex;flex-direction:column;gap:18px">
     <button class="back b3d" type="button" data-home>← 처음으로</button>
     <div class="page-head"><p class="label">${list.length}가지 업무</p><h2>${CAT_EM[c]} ${CATS[c].name}${MAN["cat-"+c]?` <button type="button" class="man-link" data-man="cat-${c}">📘 사용법</button>`:""}</h2><p>지금 상황과 가장 가까운 것을 눌러주세요.</p></div>
-    <div class="list">${list.map(t=>rowHTML(t)).join("")}${c==="promo"?`<button class="row b3d cat-promo" type="button" data-goto="photo"><span class="dot" aria-hidden="true"></span><span class="em" aria-hidden="true">📷</span><span class="tx"><span class="t">활동 사진을 홈페이지·블로그에 올리고 싶어요</span><span class="s">활동 사진 올리기</span></span><span class="go" aria-hidden="true">→</span></button>`:""}</div></div>`;
+    <div class="list">${list.map(t=>rowHTML(t)).join("")}${c==="promo"?`<button class="row b3d cat-promo" type="button" data-goto="photo"><span class="dot" aria-hidden="true"></span><span class="em" aria-hidden="true">📷</span><span class="tx"><span class="t">활동 사진을 정리해 내려받고 싶어요</span><span class="s">활동 사진 올리기</span></span><span class="go" aria-hidden="true">→</span></button>`:""}</div></div>`;
 }
 
 /* ---------- 업무 화면 ---------- */
@@ -4171,6 +4194,52 @@ function useSentence(items,polite){
   const parts=items.slice(0,3).map(one);
   return `보내주신 후원금은 ${parts.join(", ")}${items.length>3?` 등`:""} 소중히 사용했${E}.`;
 }
+const PROMO_ORG="용인시기흥장애인복지관";
+const PROMO_TONE={
+ "따뜻하게":["함께한 활동 이야기를 따뜻한 마음으로 전합니다.","함께해 주신 분들께 마음 깊이 감사드립니다."],
+ "부드럽게":["오늘은 복지관에서 있었던 일을 차분히 나눠 보려 해요.","읽어 주셔서 고마워요. 또 소식 전할게요."],
+ "밝고 경쾌하게":["복지관에서 어떤 활동을 했을까요? 함께 살펴봐요!","함께해 주신 모든 분, 고맙습니다!"],
+ "차분하게":["이번 활동에서 있었던 일을 정리했습니다.","참여해 주신 분들께 감사드립니다."],
+ "쉽게":["복지관에서 한 일을 쉽게 알려 드려요.","글을 읽어 주셔서 고마워요."],
+ "공식적이고 정중하게":["확인된 활동 내용을 아래와 같이 전해 드립니다.","참여해 주신 모든 분께 감사드립니다."]
+};
+function promoMemo(raw){
+ const a=String(raw||"").trim().split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+ const title=a.find(x=>/^(제목|프로그램명|행사명)\s*[:：]/.test(x));
+ return {title:title?title.replace(/^[^:：]+[:：]\s*/,""):"",lines:a.filter(x=>x!==title)};
+}
+function promoLine(s){return /[:：]/.test(s)?s:sent(s);}
+function promoPost(v){
+ const d=promoMemo(v.act);if(!d.lines.length&&!d.title)return [];
+ const tone=PROMO_TONE[v.tone]||PROMO_TONE["따뜻하게"],t=d.title||"복지관 활동 이야기";
+ const p=d.lines.map(promoLine),topic=d.title.replace(/[^가-힣a-zA-Z0-9]/g,"");
+ const hash="#용인시기흥장애인복지관 #복지관소식"+(topic?" #"+topic:"");
+ switch(v.where){
+  case "인스타그램":return [["인스타그램 원고",[`📌 ${t}`,tone[0],p.join("\n"),tone[1],hash].filter(Boolean).join("\n\n")]];
+  case "카카오톡 채널":return [["카카오톡 채널 원고",[`[기흥복지관 소식] ${t}`,tone[0],p.join("\n"),tone[1]].filter(Boolean).join("\n")]];
+  case "복지관 홈페이지":return [["복지관 홈페이지 행사 후기",[`[복지관 소식] ${d.title||"프로그램 진행 후기"}`,p.join("\n"),tone[0]+" "+tone[1],PROMO_ORG].filter(Boolean).join("\n\n")]];
+  default:return [["네이버 블로그 원고",[`${t} | 용인시기흥장애인복지관`,`안녕하세요, ${PROMO_ORG}입니다. ${tone[0]}`,p.length?"어떤 활동을 했나요?\n"+p.join("\n\n"):"",tone[1],hash].filter(Boolean).join("\n\n")]];
+ }
+}
+function promoMonth(v){
+ const d=promoMemo(v.events);if(!d.lines.length&&!d.title)return [];
+ const lines={
+  "보호자":["보호자님, 안녕하세요. 복지관에서 있었던 일을 전해 드립니다.","궁금한 점은 복지관에 문의해 주세요."],
+  "참여자 가족":["가족 여러분, 안녕하세요. 복지관의 이번 달 활동을 나눕니다.","이번 달 이야기를 읽어 주셔서 고맙습니다."],
+  "지역 주민":["이웃 여러분, 안녕하세요. 우리 동네 복지관 소식입니다.","앞으로도 동네에서 있었던 복지관 이야기를 전하겠습니다."],
+  "후원자":["후원자님, 늘 관심을 가져 주셔서 감사합니다. 이번 달 복지관 소식을 전합니다.","보내 주신 관심과 응원에 감사드립니다."],
+  "자원봉사자":["자원봉사자 여러분, 안녕하세요. 복지관의 이번 달 활동 소식을 알려 드립니다.","힘을 보태 주시는 모든 분께 감사드립니다."],
+  "협력기관":["협력기관 담당자님께 이번 달 복지관 소식을 공유드립니다.","다음 활동에서도 필요한 소통을 이어가겠습니다."],
+  "이용자":["여러분, 안녕하세요. 이번 달 복지관에서 있었던 일이에요.","더 알고 싶은 것은 복지관에 물어봐 주세요."]
+ }[v.reader];
+ const tone=PROMO_TONE[v.tone]||PROMO_TONE["따뜻하게"];
+ return [[v.reader+"용 소식지 원고",[`[${PROMO_ORG}] ${d.title||"이달의 소식"}`,lines[0],d.lines.map(x=>"• "+promoLine(x)).join("\n"),lines[1]+" "+tone[1]].filter(Boolean).join("\n\n")]];
+}
+function promoNotice(v){
+ const d=promoMemo(v.content);if(!d.lines.length&&!d.title)return [];
+ const lead=v.tone==="쉬운 말로"?"알아두면 좋은 내용을 아래에 정리했어요.":v.tone==="따뜻하게"?"참여하시기 편하도록 필요한 내용을 모았습니다.":"아래 내용을 확인해 주시기 바랍니다.";
+ return [["복지관 안내문 원고",[`[${v.purpose}]${d.title?" "+d.title:""}`,`${v.reader} 여러분, 안녕하세요. ${PROMO_ORG}입니다. ${lead}`,d.lines.map(promoLine).join("\n"),PROMO_ORG].filter(Boolean).join("\n\n")]];
+}
 const OUTS = {
  "donor-use": v=>{
    const polite = v.tone==="정중하게", E=polite?"습니다":"어요";
@@ -4272,72 +4341,13 @@ const OUTS = {
    const short=`[시설명] ${ttl}: ${w}.${r?` ${r} 부탁드립니다.`:""}`;
    return [["자세한 안내",v.tone==="친근하게"?fr:pol],["한 줄 요약",short]];
  },
- "newsletter": v=>{
-   const ev=(v.events||"").split(/\n|,/).map(s=>s.replace(/^[-•■○\s\d.]+/,"").trim()).filter(Boolean);
-   const rd=v.reader==="지역 주민"?"이웃 여러분":v.reader, mo=new Date().getMonth()+1;
-   const greet={"후원자님":`늘 따뜻한 마음으로 함께해 주시는 후원자님, ${GREET} 잘 지내고 계신가요?`,"보호자님":`보호자님, ${GREET} 평안하신지요? 이번 달 저희 집 이야기를 전해드려요.`,"지역 주민":`이웃 여러분, ${GREET} 안녕하세요. 우리 동네 작은 집 [시설명]의 소식을 전해요.`}[v.reader];
-   const thank={"후원자님":"후원자님의 관심과 나눔 덕분에 이용자분들의 하루가 더 풍성해지고 있어요. 진심으로 감사드립니다.","보호자님":"늘 믿고 함께해 주셔서 감사합니다. 궁금하신 점은 언제든 연락 주세요.","지역 주민":"앞으로도 좋은 이웃으로 함께 살아가겠습니다. 오가다 반갑게 인사 나눠 주세요."}[v.reader];
-   const story=e=>{ const w=e.replace(/\s+/g," ").replace(/[.]$/,""); if(/(요|다|니다)$/.test(w)) return storyFix(w,false);
-     const g=w.match(/^(.+?)\s*(을|를)?\s*후원\s*받(음|았음|았다)?$/);
-     if(g) return `${josa(g[1],"을","를")} 후원받았어요. 보내주신 분께 깊이 감사드려요. 이용자분들이 매일 더 편안하고 즐겁게 쓰고 있어요.`;
-     const go=/(나들이|소풍|여행|견학|캠프|산책|구경|등산|체험|방문)$/.test(w), party=/(파티|잔치|행사|축제|대회|송년회|생일|회)$/.test(w), share=/(나눔|봉사|기부)$/.test(w);
-     if(go) return `이용자분들과 함께 ${josa(w,"을","를")} 다녀왔어요. 계절을 함께 느끼며 서로 사진도 찍고, 웃음 가득한 하루를 보냈어요.`;
-     if(party) return `${josa(w,"을","를")} 열었어요. 모두 함께 축하하고 맛있는 음식을 나누며 즐거운 시간을 보냈어요.`;
-     if(share) return `이용자분들이 직접 ${josa(w,"을","를")} 했어요. 받기만 하는 이웃이 아니라 함께 나누는 이웃이 되는 뜻깊은 시간이었어요.`;
-     return `이용자분들과 함께 ${josa(w,"을","를")} 했어요. 서로 도우며 끝까지 즐겁게 참여했어요.`; };
-   const list=ev.length?ev:["[이번 달 있었던 일]"];
-   const longT=`[시설명] ${mo}월 소식\n\n${greet}\n\n${list.map((e,i)=>`■ ${e}\n${story(e)}\n[사진: ${e} 모습]`).join("\n\n")}\n\n${thank}\n\n[시설명] 드림`;
-   const shortT=`[시설명] ${mo}월 소식\n\n${greet}\n\n이번 달에는 이런 일들이 있었어요.\n${list.map(e=>`· ${story(e).split(". ")[0].replace(/\.?$/,".")}`).join("\n")}\n\n${thank}\n[시설명] 드림`;
-   const sms=`[시설명] ${mo}월 소식: ${list.join(", ")}. ${v.reader==="후원자님"?"함께해 주셔서 감사합니다.":"늘 감사드립니다."}`;
-   return [["소식지 원고",v.len==="짧게 3문단"?shortT:longT],["문자·SNS용 요약",sms]];
- },
- "sns-post": v=>{
-   const raw=(v.act||"").trim()||"[올릴 활동]";
-   const w=raw.replace(/\s+/g," ");
-   const done=/[.!?]$/.test(w)||/(요|다)$/.test(w);
-   const go=/(나들이|소풍|여행|견학|캠프|산책|구경|등산|체험|방문)$/.test(w), party=/(파티|잔치|행사|축제|대회|송년회|생일|회)$/.test(w);
-   const line= done ? sent(w) : `이용자분들과 함께 ${josa(w,"을","를")} ${go?"다녀왔어요":party?"열었어요":"했어요"}.`;
-   const tag=w.replace(/[^가-힣A-Za-z0-9]/g,"").slice(0,12);
-   const bright=v.tone==="밝고 경쾌하게", calm=v.tone==="차분하게";
-   const feel= bright?"모두 신나게 웃고 떠들며 즐거운 시간을 보냈답니다!":calm?"서로의 속도에 맞춰 천천히, 함께하는 시간을 보냈습니다.":"함께 웃고 이야기 나누며 마음까지 따뜻해지는 시간이었어요.";
-   const tags=`#장애인장애인복지관 #그룹홈 #함께사는동네${tag?" #"+tag:""}`;
-   if(v.where==="인스타그램") return [["인스타그램 글",`${line}\n${feel}\n\n우리 동네 작은 집의 소소한 일상,\n앞으로도 자주 전할게요${bright?" :)":"."}\n\n${tags}`],["짧은 버전",`${line} ${feel}\n${tags}`]];
-   if(v.where==="네이버 블로그"){
-     const target=Math.max(200,Math.min(3000,parseInt(v.chars)||parseInt((v.blen||"").replace(/\D/g,""))||1000));
-     const det=(v.detail||"").split(/\n|,/).map(x=>x.trim()).filter(Boolean).map(x=>sent(storyFix(x,false).replace(/\.$/,"")));
-     const head=`[제목] ${done?"[시설명] 활동 이야기":w} — [시설명] 이야기\n\n안녕하세요, [시설명]입니다.\n${GREET}, 오늘은 저희 집의 작은 소식을 전해드리려고 해요.`;
-     const pool=[
-       `■ 오늘의 활동\n${line}\n[사진: 활동 모습 1]`,
-       det.length?`■ 이런 일이 있었어요\n${det.join("\n")}`:"",
-       `■ 함께한 마음\n${feel}`,
-       `■ 준비하며\n며칠 전부터 무엇을 할지 이용자분들과 함께 이야기 나누고, 필요한 것을 하나씩 챙겼어요. 준비하는 시간부터 이미 즐거운 활동이 시작된 셈이었어요.\n[사진: 준비하는 모습]`,
-       `■ 기억에 남는 순간\n[이용자분들의 반응이나 기억에 남는 장면을 한두 줄 적어 주세요]\n[사진: 활동 모습 2]`,
-       `■ 함께 사는 동네\n저희는 지역 안에서 이웃과 함께 살아가는 작은 집이에요. 이런 활동 하나하나가 이용자분들에게는 자신감이 되고, 이웃에게는 서로를 알아가는 계기가 된다고 믿어요.`,
-       `■ 이렇게 진행했어요\n먼저 모두 모여 오늘 할 일을 함께 확인했어요. 이용자분들이 각자 하고 싶은 역할을 고르고, 서로 도우며 차근차근 진행했어요. 서두르지 않고 한 분 한 분의 속도에 맞추니 모두가 끝까지 즐겁게 참여할 수 있었어요.\n[사진: 진행하는 모습]`,
-       `■ 이용자분들의 한마디\n"[이용자분이 한 말을 적어 주세요]"\n짧은 한마디였지만, 그 안에 오늘의 즐거움이 고스란히 담겨 있었어요. 이런 말을 들을 때마다 저희도 큰 힘을 얻어요.`,
-       `■ 고마운 분들\n이번 활동은 늘 곁에서 마음을 보태 주시는 후원자님과 이웃분들 덕분에 가능했어요. 보내주신 관심과 응원이 이용자분들의 웃음으로 돌아왔다는 것을 꼭 전해드리고 싶어요. 진심으로 감사드립니다.`,
-       `■ 활동을 마치며\n돌아오는 길, 이용자분들은 오늘 있었던 일을 서로 이야기하며 한참을 웃었어요. 특별한 날이 아니어도, 함께하는 작은 경험 하나하나가 모여 이분들의 자신감과 즐거운 기억이 된다고 믿어요. 오늘도 그런 하루를 하나 더 쌓았습니다.`,
-       `■ [시설명]은 어떤 곳인가요\n[시설명]은 장애가 있는 이용자분들이 지역 안에서 가족처럼 함께 생활하는 장애인복지관이에요. 함께 밥을 짓고, 장을 보고, 계절마다 나들이를 다니며 평범하지만 소중한 일상을 만들어 가고 있어요.`,
-       `■ 함께하고 싶으시다면\n자원봉사나 후원으로 저희의 일상에 함께하고 싶으신 분은 언제든 연락 주세요. 작은 관심 하나가 이용자분들에게는 큰 힘이 됩니다.\n문의: [연락처]`,
-       `■ 다음 이야기\n다음에는 [다음 활동]으로 찾아올게요. 계절마다 새로운 경험을 함께 쌓아 가는 저희의 이야기를 앞으로도 따뜻하게 지켜봐 주세요.`];
-     const tailT=`앞으로도 지역 안에서 함께 살아가는 저희의 일상을 나누겠습니다.\n늘 응원해 주셔서 감사합니다.\n\n${tags}`;
-     let body=[]; for(const p of pool.filter(Boolean)){ const cand=[head,...body,p,tailT].join("\n\n"); if(body.length<2 || cand.length<=target*1.1) body.push(p); if([head,...body,tailT].join("\n\n").length>=target*0.9) break; }
-     const txt=[head,...body,tailT].join("\n\n");
-     return [[`블로그 원고 (공백 포함 약 ${txt.length}자 / 목표 ${target}자)`,txt],["짧은 소개글",`${line} ${feel} 자세한 이야기는 블로그에서 전해드려요.`]];
-   }
-   return [["카카오톡 채널 글",`[시설명] 소식\n${line}\n${feel}\n늘 응원해 주셔서 감사합니다.`],["더 짧게",`${line} 함께해 주셔서 감사합니다. - [시설명]`]];
- },
+ "newsletter": v=>promoMonth(v),
+ "sns-post": v=>promoPost(v),
  "easy-read": v=>{
    const short=v.len==="아주 짧게";
    return [["쉬운 말 안내문 (초안)", easyText(v.orig,short)],["한 줄 요약", easyText(v.orig,true).split("\n")[0].replace(/^1\.\s*/,"")]];
  },
- "notice": v=>{
-   const c=val(v,"content","[안내 내용]"), d=val(v,"date","[날짜·시간·장소]"), e=(v.etc||"").trim(), rd=v.reader==="이웃·지역 주민"?"이웃 여러분":v.reader;
-   const doc=`${c} 안내\n\n${rd}, 안녕하세요. [시설명]입니다.\n${c}에 대해 아래와 같이 안내드립니다.\n\n1. 일시·장소: ${d}${e?`\n2. 알려드릴 점: ${e}`:""}\n\n많은 관심 부탁드립니다.\n문의: [연락처]\n\n[시설명] 드림`;
-   const tbl=`[${c} 안내]\n\n항목 | 내용\n일시·장소 | ${d}\n${e?`알려드릴 점 | ${e}\n`:""}문의 | [연락처]\n\n${rd}의 많은 관심 부탁드립니다.\n[시설명]`;
-   const sms=`[시설명] ${c} 안내: ${d}.${e?" "+sent(e):""} 문의 [연락처]`;
-   return [[v.form==="핵심은 표로 정리"?"표로 정리한 안내문":"안내문",v.form==="핵심은 표로 정리"?tbl:doc],["문자용 요약",sms]];
- }
+ "notice": v=>promoNotice(v)
 };
 
 function fullPrompt(t,v){
@@ -4441,8 +4451,9 @@ function readRefImage(file){
 }
 function outsHTML(t){
   const list=OUTS[t.id](getVals(t).v).map(([l,x])=>[l,applyProf(x)]);
-  return list.map(([lab,x],i)=>`<div class="out-item"><div class="out-top"><b>추천 ${i+1} · ${esc(lab)}</b><button type="button" class="b3d" data-copyout="${i}">복사</button></div>
-    <textarea class="out-text" id="out-${i}" aria-label="추천 ${i+1} 문구" rows="${Math.min(12,x.split("\n").length+2)}">${esc(x)}</textarea></div>`).join("");
+  if(t.draft&&!list.length)return '<div class="out-item"><div class="out-top"><b>복사할 원고</b></div><p>왼쪽 한 칸에 내용을 쓰거나 마이크로 말하면 여기에 원고가 바로 나옵니다.</p></div>';
+  return list.map(([lab,x],i)=>`<div class="out-item"><div class="out-top"><b>${t.draft?esc(lab):'추천 '+(i+1)+' · '+esc(lab)}</b><button type="button" class="b3d" data-copyout="${i}">${t.draft?"원고 복사":"복사"}</button></div>
+    <textarea class="out-text" id="out-${i}" aria-label="${esc(lab)}" rows="${Math.max(t.draft?8:3,Math.min(18,x.split("\n").length+2))}">${esc(x)}</textarea></div>`).join("");
 }
 
 function renderTask(t){
@@ -4460,18 +4471,19 @@ function renderTask(t){
   }).join("");
   const related = TASKS.filter(x=>x.cat===t.cat && x.id!==t.id);
 
-  const hasOut=!!OUTS[t.id];
+  const hasOut=!!OUTS[t.id],visual=VISUAL_TASKS.has(t.id);
   const aibarHTML=`        <div class="aibar">
-          <div class="aibar-top"><b>✨ ${hasOut?"AI로 더 다듬기":"AI에게 맡기기"}</b>
+          <div class="aibar-top"><b>${visual?"이미지 제작 프롬프트":hasOut?"AI로 더 다듬기":"AI에게 맡기기"}</b>
             <label class="check-mini" for="safe-check"><input type="checkbox" id="safe-check"><span>실명·진단명·연락처 안 넣었어요</span></label></div>
           <div class="aibar-btns">
             <a class="ai-link b3d" id="open-gpt" href="https://chatgpt.com/" target="_blank" rel="noopener" aria-disabled="true"><b>챗GPT</b></a>
             <a class="ai-link b3d" id="open-gemini" href="https://gemini.google.com/app" target="_blank" rel="noopener" aria-disabled="true"><b>제미나이</b></a>
-            <button class="pill b3d" type="button" id="copy-btn" disabled>복사</button>
+            <button class="pill b3d" type="button" id="copy-btn" ${visual?"":"disabled"}>${visual?"프롬프트 복사":"복사"}</button>
+            ${visual?'<a class="ai-link b3d" id="open-claude" href="https://claude.ai/new" target="_blank" rel="noopener" aria-disabled="true"><b>클로드</b></a>':""}
             <button class="pill b3d" type="button" id="prompt-toggle" aria-expanded="${hasOut||t.plan||t.cal?"false":"true"}">요청문 ${hasOut||t.plan||t.cal?"보기":"접기"}</button>
           </div>
           <div id="prompt-wrap" ${hasOut||t.plan||t.cal?"hidden":""}>
-            <textarea id="prompt" spellcheck="false" aria-label="완성된 요청문 (직접 고쳐 써도 돼요)"></textarea>
+            <textarea id="prompt" ${visual?'rows="16"':""} spellcheck="false" aria-label="완성된 요청문 (직접 고쳐 써도 돼요)"></textarea>
             <p class="edited" id="edited-note" hidden>직접 고친 내용이 있어요. 왼쪽에서 다시 고르면 새로 만들어져요.</p>
             <button class="pill b3d" type="button" id="reset-btn">처음 상태로</button>
           </div>
@@ -4484,7 +4496,7 @@ function renderTask(t){
       <button class="star b3d" type="button" id="fav-btn" aria-pressed="${isFav}">${isFav?"★ 담김":"☆ 자주 쓰는 업무"}</button>
     </div>
     <p class="fstat">${esc(t.desc)}</p>
-    <div class="ftabs" role="tablist"><button type="button" role="tab" class="on" data-ttab="in">✍️ 고르기·채우기</button><button type="button" role="tab" data-ttab="out">${t.plan?"📋 계획서":t.cal?"📅 식단표":hasOut?"💬 완성 문구":"✨ AI에게 맡기기"}</button></div>
+    <div class="ftabs" role="tablist"><button type="button" role="tab" class="on" data-ttab="in">✍️ 고르기·채우기</button><button type="button" role="tab" data-ttab="out">${t.plan?"📋 계획서":t.cal?"📅 식단표":t.draft?"완성 원고":hasOut?"💬 완성 문구":visual?"이미지 제작 프롬프트":"✨ AI에게 맡기기"}</button></div>
     <div class="tsplit">
       <section class="tin" aria-label="고르기와 채우기">
         ${t.plan?`<div class="plan-tpl"><b>우리 시설에서 쓰는 계획서 양식이 있나요?</b><span>양식을 올리면 아래 내용이 그 양식 칸에 그대로 들어가요.</span><label class="pill b3d main" for="plan-att">우리 시설 서식 올리기</label></div>`:""}
@@ -4492,7 +4504,7 @@ function renderTask(t){
         <div class="divider"></div>
         ${inputsHTML}
         ${t.plan?planCustHTML(t)+`<div style="margin-top:14px">${signHTML(PFORM)}</div>`:""}
-        <p class="hint">비워둔 칸은 [ ]로 남아요.</p>
+        ${t.draft?"":'<p class="hint">비워둔 칸은 [ ]로 남아요.</p>'}
         ${attachHTML(t,st)}
       </section>
       <section class="tout" aria-label="결과">
@@ -4508,8 +4520,8 @@ function renderTask(t){
         ${hasOut?`<div id="outs" class="outs">${outsHTML(t)}</div><p class="status" id="out-status" role="status" aria-live="polite"></p>`:""}
         ${t.plan||t.cal||hasOut?"":aibarHTML}
         <p class="note"><b>${t.warn?"꼭 주의":"알아두면 좋아요"}</b> ${esc(t.tip)}</p>
-        <details class="more${t.plan||t.cal||hasOut?" plan-more":""}"><summary>${t.plan||t.cal||hasOut?"더 활용하기 · AI에게 맡기기":"더 활용하기"}</summary><div class="inner">
-          ${t.plan||t.cal||hasOut?aibarHTML:""}
+        <details class="more${t.plan||t.cal||hasOut?" plan-more":""}"><summary>${t.draft?"같은 분류의 다른 업무":t.plan||t.cal||hasOut?"더 활용하기 · AI에게 맡기기":"더 활용하기"}</summary><div class="inner">
+          ${!t.draft&&(t.plan||t.cal||hasOut)?aibarHTML:""}
           ${t.next.map((n,i)=>`<div class="next-item"><p>${esc(n)}</p><button type="button" class="b3d" data-copynext="${i}">복사</button></div>`).join("")}
           ${related.length?`<p class="sub-title">같은 분류의 다른 업무</p><div class="list">${related.map(r=>rowHTML(r)).join("")}</div>`:""}
         </div></details>
@@ -4518,25 +4530,25 @@ function renderTask(t){
   </div>`;
 
   const ta = document.getElementById("prompt");
-  ta.value = st.edited && st.text!=null ? st.text : fullPrompt(t,st.v);
+  if(ta)ta.value = st.edited && st.text!=null ? st.text : fullPrompt(t,st.v);
   syncAttach(t);
   setTimeout(updateLinks,0);
-  document.getElementById("edited-note").hidden = !st.edited;
+  const edited=document.getElementById("edited-note");if(edited)edited.hidden = !st.edited;
 }
 
 function updateLinks(){
   const ta=document.getElementById("prompt"), g=document.getElementById("open-gpt");
-  if(ta&&g) g.href="https://chatgpt.com/#disable_auto_send=1&q="+encodeURIComponent(ta.value.slice(0,1800));
+  if(ta&&g){const url="https://chatgpt.com/#disable_auto_send=1&q="+encodeURIComponent(ta.value);g.href=url.length<=12000?url:"https://chatgpt.com/";}
 }
 function rebuild(t){
   const st = getVals(t);
   st.edited = false; st.text = null;
-  document.getElementById("prompt").value = fullPrompt(t,st.v);
+  const prompt=document.getElementById("prompt"); if(prompt)prompt.value = fullPrompt(t,st.v);
   syncAttach(t);
   const oc=document.getElementById("outs"); if(oc&&OUTS[t.id]) oc.innerHTML=outsHTML(t);
   const pp=document.getElementById("plan-pv"); if(pp&&t.plan) pp.innerHTML=planHTML(t);
   const mp=document.getElementById("menu-pv"); if(mp&&t.cal) mp.innerHTML=blocksHTML(menuBlocks(getVals(t).v));
-  document.getElementById("edited-note").hidden = true;
+  const edited=document.getElementById("edited-note");if(edited)edited.hidden = true;
   updateLinks();
 }
 
@@ -4696,7 +4708,7 @@ app.addEventListener("click",e=>{
   }
   const co = e.target.closest("[data-copyout]");
   if(co){ const ta=document.getElementById("out-"+co.dataset.copyout), st=document.getElementById("out-status");
-    copyText(ta.value, ta, ()=>{st.textContent="복사했어요! 문자나 카카오톡에 붙여 넣어 보내세요."; st.classList.remove("warn"); co.textContent="복사됨"; setTimeout(()=>co.textContent="복사",1500);},
+    copyText(ta.value, ta, ()=>{st.textContent=current.draft?"원고를 복사했어요. 게시할 곳에 붙여 넣으세요.":"복사했어요! 문자나 카카오톡에 붙여 넣어 보내세요."; st.classList.remove("warn"); co.textContent="복사됨"; setTimeout(()=>co.textContent=current&&current.draft?"원고 복사":"복사",1500);},
       ()=>{st.textContent="자동 복사가 막혀 있어요. 선택된 문구를 직접 복사해주세요."; st.classList.add("warn");}); return; }
   const tt=e.target.closest("[data-ttab]"); if(tt){ app.querySelectorAll("[data-ttab]").forEach(b=>b.classList.toggle("on",b===tt)); app.querySelector(".tsplit").dataset.show=tt.dataset.ttab; return; }
   if(e.target.closest("#prompt-toggle")){ const w=document.getElementById("prompt-wrap"), b=e.target.closest("#prompt-toggle"); w.hidden=!w.hidden; b.textContent=w.hidden?"요청문 보기":"요청문 접기"; b.setAttribute("aria-expanded",String(!w.hidden)); return; }
@@ -4763,7 +4775,7 @@ app.addEventListener("change",e=>{
   const c = e.target.closest("[data-chip]");
   if(c){ getVals(current).v[c.dataset.chip] = c.value; rebuild(current); }
   if(e.target.id==="safe-check"){
-    document.getElementById("copy-btn").disabled = !e.target.checked;
+    document.getElementById("copy-btn").disabled = !e.target.checked&&!VISUAL_TASKS.has(current.id);
     app.querySelectorAll(".ai-link").forEach(a=>a.setAttribute("aria-disabled",String(!e.target.checked)));
     setStatus(e.target.checked ? "준비됐어요. 챗GPT·제미나이를 누르면 요청문이 복사되며 열려요." : "확인란에 체크하면 버튼이 켜져요.");
   }

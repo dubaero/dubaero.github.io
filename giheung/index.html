@@ -1622,7 +1622,7 @@ body:has(#v-groupref:not([hidden]))>main.wrap{width:100%;max-width:none;padding:
 body:has(#v-groupref:not([hidden]))>footer{display:none}
 #v-groupref{width:100%}
 </style>
-<script src="/giheung/workflow.js?v=1" defer></script>
+<script src="/giheung/workflow.js?v=2" defer></script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -7828,7 +7828,7 @@ window.go=function(k){
   if(k==='planmenu'){selectPlanDraft('manual');renderPlan();show('plan2');return}
   if(k==='plan2'){renderPlan();show('plan2');return}
   if(k==='img'){ST_PR.kind='홍보 이미지';renderPromo();show('promo2');return}
-  if(k==='promomenu'){renderPromoMenu();show('promomenu');return}
+  if(k==='promomenu'){groupView('group-promo');return}
   if(k==='promo2'){renderPromo();show('promo2');return}
   if(k==='donate'){renderDonate();show('donate');return}
   if(k==='month'){selectPlanDraft('manual');renderPlan();show('plan2');var n=$('#plan-month');if(n){n.open=true;n.scrollIntoView({block:'nearest'});}return}
