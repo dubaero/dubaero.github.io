@@ -6699,7 +6699,13 @@ function giGuide(k){
 }
 
 /* ---------- ② 프로그램·기획 (칩 → 계획서 표) ---------- */
-var ST_PLAN={group:'',program:'',mode:'',title:'',date:'',place:'',people:'',budget:'',recruit:'',apply:'',aim:'참여·경험',area:'낮활동·행동지원',tgt:'성인 장애인',when:'겨울',size:'8회기',idx:0};
+function newPlanDraft(){return {group:'',program:'',mode:'',title:'',date:'',place:'',people:'',budget:'',recruit:'',apply:'',aim:'참여·경험',area:'낮활동·행동지원',tgt:'성인 장애인',when:'겨울',size:'8회기',idx:0};}
+var PLAN_DRAFTS=Object.create(null),ST_PLAN=PLAN_DRAFTS.manual=newPlanDraft();
+// Keep each draft separate in this tab. Opening another question never inherits its logistics.
+function selectPlanDraft(key,seed){
+  if(!PLAN_DRAFTS[key])PLAN_DRAFTS[key]=Object.assign(newPlanDraft(),seed||{});
+  ST_PLAN=PLAN_DRAFTS[key];
+}
 var WON={'봄':'3~5월','여름':'6~8월','가을':'9~11월','겨울':'12~2월','연중':'1~12월'};
 var CNT={'1회 행사':1,'2회기':2,'4회기':4,'6회기':6,'8회기':8,'12회기':12,'연중 정기':12};
 function planData(){
@@ -6925,12 +6931,12 @@ function pqCurrent(g,i){
  var sector=GI_CATALOG[g],q=(PLAN_Q_FOCUS[g].concat(PLAN_Q_BASE))[i];
  return {group:sector,q:q,program:sector.items[PLAN_Q_ITEMS[g][i]||0],target:PLAN_Q_TGT[g]};
 }
-function pqApply(g,i,month){
- var x=pqCurrent(g,i);
- var v=ST_PLAN;
- v.group=x.group.label;v.program=x.program;v.area=x.group.area;v.tgt=x.target;v.title='';v.mode='';v.idx=0;v.question=x.q[0];v.focus=x.q[1];
- if(month)v.when=monthSeason(month);
- if((g===6&&i<4)||(g===4&&i===1)||(g===9&&i===1))v.size='1회 행사';
+function pqApply(g,i,month,season){
+ var x=pqCurrent(g,i),key=(month?'month:'+month:'question')+':'+g+':'+i;
+ var seed={group:x.group.label,program:x.program,area:x.group.area,tgt:x.target,question:x.q[0],focus:x.q[1]};
+ if(month)seed.when=season||monthSeason(month);
+ if((g===6&&i<4)||(g===4&&i===1)||(g===9&&i===1))seed.size='1회 행사';
+ selectPlanDraft(key,seed);
 }
 function renderPlanMenu(){
  var x=pqCurrent(PLAN_Q.g,PLAN_Q.i);
@@ -7029,7 +7035,7 @@ var MO_WORK=[
  [['방학 실내 여가·체험','plan',1,3],['생활체육 활동 계획','plan',2,2],['방학 일정 변경 알림','promo','일정 변경·취소']],
  [['명절 이웃 교류 준비','plan',6,4],['명절 인사·일정 문자','msg'],['후원품 접수와 활용 계획','plan',9,2]],
  [['가을 나들이 계획','plan',6,0],['문화공연 관람 준비','plan',6,2],['가을 활동 후기 쓰기','promo','활동 후기']],
- [['겨울 반찬·김장 지원 준비','plan',7,1],['내년 사업계획서 준비','doc'],['올해 활동·성과 정리','result']],
+ [['겨울 반찬·김장 지원 준비','plan',7,1,'겨울'],['내년 사업계획서 준비','doc'],['올해 활동·성과 정리','result']],
  [['송년 가족잔치 준비','plan',6,1],['한 해 활동 소식지 쓰기','promo','활동 후기'],['연말 후원 감사 준비','don']]
 ];
 var MO_TARGET={plan:'프로그램 기획',doc:'사업계획서 프로젝트',result:'결과보고서 프로젝트',promo:'홍보·안내',msg:'문자·소통',don:'후원 관리'};
@@ -7049,7 +7055,7 @@ function renderMonth(){
 }
 function openMonthWork(){
  var r=MO_WORK[ST_MO.m-1][ST_MO.i],route=r[1];
- if(route==='plan'){PLAN_Q.g=r[2];PLAN_Q.i=r[3];pqApply(r[2],r[3],ST_MO.m);go('plan2');}
+ if(route==='plan'){PLAN_Q.g=r[2];PLAN_Q.i=r[3];pqApply(r[2],r[3],ST_MO.m,r[4]);go('plan2');}
  else if(route==='doc'||route==='result')go(route==='doc'?'dw-plan':'dw-result');
  else if(route==='promo'){ST_PR.kind=r[2]==='활동 후기'?(r[0].includes('소식지')?'소식지':'홈페이지 행사후기 올리기'):'공지사항';ST_PR.purpose=r[2];go('promo2');}
  else if(route==='msg'){ST_MSG.mode='문자 보내기';ST_MSG.kind='일정 안내';go('msg');}
@@ -7157,7 +7163,7 @@ function boot(){
     }
     if(e.target.closest('#gh-org')){openOrg();return;}
     var donor=e.target.closest('[data-don-key]');if(donor){renderDonWork(donor.dataset.donKey);return;}
-    var mode=e.target.closest('[data-plan-mode]');if(mode){ST_PLAN.mode=mode.dataset.planMode;ST_PLAN.title='';ST_PLAN.size='1회 행사';ST_PLAN.area='지역사회중심지원(CBSS)';go('plan2');return;}
+    var mode=e.target.closest('[data-plan-mode]');if(mode){selectPlanDraft('mode:'+mode.dataset.planMode,{mode:mode.dataset.planMode,size:'1회 행사',area:'지역사회중심지원(CBSS)'});go('plan2');return;}
     var hgo=e.target.closest('[data-hhgo]');if(hgo){var k=hgo.dataset.hhgo;var box=document.getElementById('gh-hh');if(box)box.remove();if(k==='doc'||k==='result'){go(k==='result'?'dw-result':'dw-plan');}else{go(k==='pr'?'dw-all':k)}return}
     var hb=e.target.closest('[data-hh]');if(hb){showHelp(hb.dataset.hh);return}
     var ai=e.target.closest('[data-ai-to]');
@@ -7183,7 +7189,7 @@ function boot(){
       if(g==='doc'){go(dw?'dw-'+dw:'doc');return}
       if(g==='pr'){go('dw-all');return}
       if(g==='form'&&id){if(typeof openForm==='function')openForm(id);return}
-      if(g==='plan2'){ST_PLAN.mode='';ST_PLAN.question='';ST_PLAN.focus='';}
+      if(g==='plan2')selectPlanDraft('manual');
       go(g);return;
     }
     if(e.target.closest('[data-pr-example]')){prExample(ST_PR);renderPromo();return;}
