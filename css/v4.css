@@ -545,16 +545,16 @@ a.lg{text-decoration:none;text-align:center}
      이미지는 object-fit:cover + object-position:center 35% 로 좌우 여백 없이 채움(사람 머리·글자 잘림 최소화)
      아래 = 강의명 한 줄 + `날짜 · 기관` 한 줄, 넘치면 말줄임(...) */
 .lfx4 .lfx-item{display:flex;flex-direction:column;align-items:stretch;gap:0;width:224px;height:198px;padding:0;background:#fff;border:1px solid #E1E6EC;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(16,32,56,.05)}
-.lfx4 .lfx-item img{display:block;width:100%;height:auto;flex:0 0 154px;aspect-ratio:auto;object-fit:cover;object-position:center 35%;background:#F4F7FA;border:0;border-radius:0}
-.lfx4 .lfx-body{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;height:auto;flex:1 1 auto;padding:0 8px;background:#fff;border-top:1px solid #EDF1F5}
-.lfx4 .lfx-ttl{display:block;font-size:12px;line-height:1.25;font-weight:700;color:var(--navy);letter-spacing:-.02em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lfx4 .lfx-meta{display:block;font-size:9.5px;line-height:1.25;font-weight:500;color:#6C7C88;letter-spacing:-.02em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lfx4 .lfx-item img{display:block;width:100%;height:154px;min-height:0;flex:0 0 154px;aspect-ratio:auto;object-fit:cover;object-position:center 35%;background:#F4F7FA;border:0;border-radius:0}
+.lfx4 .lfx-body{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;min-height:0;height:auto;flex:1 1 auto;padding:0 8px;background:#fff;border-top:1px solid #EDF1F5}
+.lfx4 .lfx-ttl{display:block;font-size:13px;line-height:1.25;font-weight:700;color:var(--navy);letter-spacing:-.02em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lfx4 .lfx-meta{display:block;font-size:10.5px;line-height:1.25;font-weight:500;color:#6C7C88;letter-spacing:-.02em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:760px){
   .lfx4 .lfx-item{width:184px;height:166px;border-radius:9px}
-  .lfx4 .lfx-item img{flex:0 0 126px}
+  .lfx4 .lfx-item img{height:126px;min-height:0;flex:0 0 126px}
   .lfx4 .lfx-body{height:auto;flex:1 1 auto;gap:1px;padding:0 7px}
-  .lfx4 .lfx-ttl{font-size:11.5px;line-height:1.25}
-  .lfx4 .lfx-meta{font-size:9px;line-height:1.25}
+  .lfx4 .lfx-ttl{font-size:12.5px;line-height:1.25}
+  .lfx4 .lfx-meta{font-size:10px;line-height:1.25}
 }
 /* 모바일에서는 예전 규칙(#room-cards .room{border-top:navy!important})이 남아 있어 흰색으로 다시 못박기 */
 @media (max-width:760px){
