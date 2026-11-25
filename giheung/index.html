@@ -1092,7 +1092,14 @@ body{background:#fff;color:var(--group-ink);font-family:"Noto Sans KR","Pretenda
 .gh-steps{display:grid;gap:10px;margin:5px 0;padding-left:19px;color:var(--group-ink);font-size:14px}
 .gh-steps li::marker{color:var(--group-deep);font-weight:700}
 .gh-step-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px}
-.gh-project-shortcuts{margin:0 0 10px}#v-drawer .dw-step{scroll-margin-top:55px}.gh-step-actions a,.gh-steps .linkbtn{color:var(--group-deep);font-size:12px}
+.gh-project-shortcuts{margin:0 0 10px}
+.gh-ai-strip{padding:8px 10px;margin:0 0 10px;border:1px solid #cfdfd5;border-radius:10px;background:#f6fbf8}
+.gh-ai-strip > b{display:block;font-size:12px;color:#234e3e;margin-bottom:5px}
+.gh-ai-links{display:flex;flex-wrap:wrap;gap:5px}
+.gh-ai-links .btn{min-height:36px;padding:4px 9px;font-size:12px;font-weight:700;color:#244f3e;border:1px solid #abc9bb;background:#fff;border-radius:8px;white-space:nowrap}
+.gh-ai-links .btn:hover{background:#e1f1e7}.gh-ai-links .btn:focus-visible{outline:2px solid #286f54;outline-offset:2px}
+.gh-ai-strip small{display:block;margin-top:5px;color:#425c51;font-size:11.5px;line-height:1.45}
+@media(max-width:899px){.gh-ai-links .btn{min-height:44px}}#v-drawer .dw-step{scroll-margin-top:55px}.gh-step-actions a,.gh-steps .linkbtn{color:var(--group-deep);font-size:12px}
 .gh-sources{display:grid;gap:5px;margin:6px 0}.gh-sources label{display:flex;align-items:start;gap:7px;padding:6px 7px;background:#F8FBF9;border:1px solid #E2ECE7;border-radius:6px;font-size:12px}.gh-sources input{accent-color:var(--group-deep);margin-top:2px}
 :is(#v-msg,#v-plan2,#v-promo2,#v-drawer) button:focus-visible{outline:2px solid var(--group-green);outline-offset:2px}
 @media(max-width:760px){
@@ -6534,6 +6541,37 @@ function promptMarkup(t){
   }).join('\n');
 }
 window.giheungPromptMarkup=promptMarkup;
+var GH_AI={
+  gpt:['ChatGPT','https://chatgpt.com/'],
+  gem:['제미나이','https://gemini.google.com/app'],
+  claude:['클로드','https://claude.ai/new']
+};
+function aiStrip(key,title,compact){
+  return '<div class="gh-ai-strip" role="group" aria-label="'+E(title)+'">'+(compact?'':'<b>'+E(title)+'</b>')+
+    '<div class="gh-ai-links">'+Object.keys(GH_AI).map(function(id){
+      return '<button type="button" class="btn" data-ai-to="'+id+'" data-ai-text="'+E(key)+'">'+GH_AI[id][0]+'로 열기 <span aria-hidden="true">↗</span></button>';
+    }).join('')+'</div><small>버튼을 누르면 '+(key==='ins'?'지침이':'프롬프트가')+' 복사돼요. 새 탭에서 붙여 넣으세요.</small></div>';
+}
+function aiLaunch(id,t){
+  var dest=GH_AI[id];
+  if(!dest||!t)return;
+  function fallback(){
+    var a=document.createElement('textarea'),focus=document.activeElement,ok=false;
+    a.value=t;a.readOnly=true;a.style.cssText='position:fixed;left:0;top:0;opacity:0;pointer-events:none';
+    document.body.appendChild(a);a.select();a.setSelectionRange(0,t.length);
+    try{ok=!!document.execCommand('copy');}catch(e){}
+    a.remove();if(focus&&focus.focus)focus.focus({preventScroll:true});return ok;
+  }
+  var pending;
+  try{pending=navigator.clipboard&&navigator.clipboard.writeText(t);}catch(e){}
+  if(!pending)pending=Promise.resolve(fallback());
+  else pending=pending.then(function(){return true;},fallback);
+  // Open synchronously on the click. Never put the prompt in a URL or submit it.
+  var w=window.open(dest[1],'_blank');if(w)w.opener=null;
+  pending.then(function(ok){
+    toast(ok?(w?'복사했어요. '+dest[0]+' 입력창에 붙여 넣으세요.':'복사했어요. 새 탭이 차단됐어요. '+dest[0]+'을 직접 열어 붙여 넣으세요.'):'복사 권한이 없어요. 웹앱의 프롬프트를 직접 선택해 복사해 주세요.');
+  });
+}
 function outBlock(title,key,t){
   TXT[key]=t;
   return '<div class="out-h"><h3>'+E(title)+'</h3>'+cbtn('복사',key)+'</div><pre class="paper gh-text">'+promptMarkup(t)+'</pre>';
@@ -6543,7 +6581,7 @@ function msgRight(){
   var head='<div class="out-h"><h3>'+(call?'전화 대본 예시':'문자 예시 2종')+'</h3><span>'+E(to)+' · '+E(k)+'</span></div>';
   var ex=call?'① 인사 · '+recipient(to)+', 안녕하세요. 용인시기흥장애인복지관입니다. 지금 잠깐 통화 괜찮으세요?\n\n② 여쭤보기 · '+msgSub(CALL_TOPIC[k])+(m.trim()?'\n전할 내용: '+m.trim():'')+'\n\n③ 듣고 확인하기 · 말씀해 주셔서 감사합니다. 제가 확인할 것은 [확인할 사항]이 맞을까요?\n\n④ 마무리 · 확인 후 [연락드릴 시점]에 다시 연락드리겠습니다. 편한 하루 보내세요.':'';
   var prompt='너는 용인시기흥장애인복지관의 소통 담당자야.\n\n받는 분: '+to+'\n상황: '+k+'\n프로그램명: '+(v.program||'[확인 필요]')+'\n일시: '+(v.when||'[확인 필요]')+'\n장소: '+(v.where||'[확인 필요]')+'\n전할 내용: '+(m.trim()||'[필요한 내용 입력]')+'\n\n'+(call?'인사 → 통화 가능 여부 확인 → 상황별 질문 → 들은 내용 확인 → 마무리 순서로 짧은 전화 대본을 써 줘. 통화가 어렵다고 하면 편한 시간을 물어봐.':'기본 문자와 짧은 문자 두 가지로 써 줘. 일정 안내라면 일시·장소·신청 방법을 구분해 줘.')+'\n상대를 존중하는 쉬운 말로 쓰고, 없는 날짜·장소·사실은 [확인 필요]로 남겨. 실명·진단명·연락처를 넣지 마.';
-  return head+(call?msgHTML('call',ex,'안부 전화'):msgHTML('m1',msgBody(k,to,0,m),'기본형')+msgHTML('m2',msgBody(k,to,1,m),'짧은형'))+outBlock('AI에 넣을 전체 프롬프트','msg-prompt',prompt);
+  return aiStrip('msg-prompt','전체 프롬프트로 AI 열기')+head+(call?msgHTML('call',ex,'안부 전화'):msgHTML('m1',msgBody(k,to,0,m),'기본형')+msgHTML('m2',msgBody(k,to,1,m),'짧은형'))+outBlock('AI에 넣을 전체 프롬프트','msg-prompt',prompt);
 }
 function renderMsg(){
   var v=ST_MSG,call=v.mode==='안부 전화';
@@ -6636,7 +6674,7 @@ function planRight(){
    '<div class="ph3">모집 문구</div><p class="small">'+E(d.name)+'에 함께하실 분을 모집합니다. '+E(v.when+' ('+WON[v.when]+')')+', '+E(v.tgt)+' 대상, 모집 기간 '+E(v.recruit||'[확인 필요]')+' · 신청 방법 '+E(v.apply||'[확인 필요]')+'.</p></div>'+
    '<div class="gnote">숫자·인원은 <b>[확인 필요]</b>로 남겼어요. 예산·모집 인원은 우리 복지관 자료로 채우면 됩니다.</div>';
   var prompt=planPrompt();
-  return selectionSummary([['사업·프로그램',v.program||d.name],['목적',v.aim],['서비스 영역',v.area],['대상',v.tgt],['시기',v.when],['규모',v.size]])+giGuide(v.program)+right+outBlock('AI에 넣을 전체 프롬프트','plan-prompt',prompt);
+  return aiStrip('plan-prompt','계획서 프롬프트로 AI 열기')+selectionSummary([['사업·프로그램',v.program||d.name],['목적',v.aim],['서비스 영역',v.area],['대상',v.tgt],['시기',v.when],['규모',v.size]])+giGuide(v.program)+right+outBlock('AI에 넣을 전체 프롬프트','plan-prompt',prompt);
 }
 
 /* ---------- ③ 홍보·안내 ---------- */
@@ -6759,7 +6797,7 @@ function promoRight(){
   TXT.promo=prPractice(v)+d.body+'\n\n'+prDetails(v);
   if(articleData)preview=prTextCard(v,articleData);
   if(visual)preview+='<section class="gh-preview"><h4 class="gh-focus">이미지에 들어갈 정보</h4><dl class="gh-facts">'+prFacts(v,true).map(function(r){return '<div><dt>'+E(r[0])+'</dt><dd>'+E(r[1])+'</dd></div>';}).join('')+'</dl></section>';
-  return '<div class="out-h"><h3>예시와 원픽 프롬프트</h3>'+cbtn('원픽 프롬프트 복사','promo-prompt')+'</div>'+selectionSummary(cond)+giGuide(v.biz)+preview+outBlock('원픽 · 완성 제작 프롬프트','promo-prompt',prompt);
+  return '<div class="out-h"><h3>예시와 원픽 프롬프트</h3>'+cbtn('원픽 프롬프트 복사','promo-prompt')+'</div>'+aiStrip('promo-prompt','원픽 프롬프트로 AI 열기')+selectionSummary(cond)+giGuide(v.biz)+preview+outBlock('원픽 · 완성 제작 프롬프트','promo-prompt',prompt);
 }
 function renderPromo(){
   var v=ST_PR,visual=['카드뉴스','포스터','홍보 이미지'].includes(v.kind);
@@ -6838,7 +6876,7 @@ function donRight(){
   if(form){
     var f=DONFORMS[i],vals=f[1].map(function(k,j){return [k,st[j]||'[입력]'];});
     TXT.donform=f[0]+'\n'+vals.map(function(r){return r.join(': ');}).join('\n');
-    return '<div class="out-h"><h3>서식 미리보기 · 실습용</h3>'+cbtn('복사','donform')+'</div><div class="gi-doc"><h4>'+E(f[0])+'</h4><table class="ptab">'+vals.map(function(r){return '<tr><th scope="row">'+E(r[0])+'</th><td>'+E(r[1])+'</td></tr>';}).join('')+'</table></div>'+
+    return aiStrip('donform-ai','서식 프롬프트로 AI 열기')+'<div class="out-h"><h3>서식 미리보기 · 실습용</h3>'+cbtn('복사','donform')+'</div><div class="gi-doc"><h4>'+E(f[0])+'</h4><table class="ptab">'+vals.map(function(r){return '<tr><th scope="row">'+E(r[0])+'</th><td>'+E(r[1])+'</td></tr>';}).join('')+'</table></div>'+
       outBlock('서식에 맞춰 정리하는 프롬프트','donform-ai','너는 복지관 후원 실무 담당자야. 다음 기록을 첨부한 승인 서식의 항목과 순서에 맞게 정리해 줘. 값이 없으면 [확인 필요]로 남겨. 실습용 가상 자료야.\n\n'+TXT.donform);
   }
   var body=donorDraft(st,i);
@@ -6847,7 +6885,7 @@ function donRight(){
   var labeled='[보내기 전 확인]\n• 받는 분: '+st.who+'\n• 전할 일: '+DNMSG[i][0]+'\n• 후원·활동: '+(st.what||'[확인 필요]')+'\n• 전할 내용: '+(st.news||'[확인 필요]');
   var versions=st.channel==='짧은 문자'?[[short,'추천 1 · 짧은 문자'],[body,'추천 2 · 자세한 글']]:[[body,'추천 1 · '+st.channel],[short,'추천 2 · 짧은 글']];
   versions.push([labeled,'추천 3 · 내용 확인용']);
-  return versions.map(function(v,j){return msgHTML('donv'+j,v[0],v[1]);}).join('')+
+  return aiStrip('don-prompt','전체 프롬프트로 AI 열기')+versions.map(function(v,j){return msgHTML('donv'+j,v[0],v[1]);}).join('')+
     outBlock('AI에 넣을 전체 프롬프트','don-prompt','너는 용인시기흥장애인복지관 소통 담당자야. 아래 정보를 참고해서 '+st.who+'에게 전할 '+DNMSG[i][0]+'을 '+st.tone+', '+st.channel+' 형식으로 작성해 줘. 제공한 사실만 사용하고 개인정보나 확인되지 않은 결과를 만들지 마.\n\n'+body);
 }
 function renderDonWork(key){
@@ -6907,7 +6945,7 @@ function gmRight(){
    sample=lead+'\n\n'+step;
    req='너는 복지관 종사자가 잠깐 숨 돌리도록 돕는 동료야. 의료 진단이나 치료 조언은 하지 마.\n\n업무: '+g[2]+'\n상황: '+note+'\n지금 마음: '+v.mood+'\n원하는 답: '+v.want+'\n\n[답변]\n개인 이야기를 캐묻지 말고 지금 감정에 공감한 다음, 부담 없이 할 수 있는 작은 회복 행동이나 내일의 준비를 1~2개만 제안해 줘. 현실의 어려움을 가볍게 여기지 말아 줘.';
  }
- return selectionSummary([['업무 상황',v.group],['고른 상황',v.sit],['원하는 답',v.want]])+
+ return aiStrip('gm-prompt','전체 프롬프트로 AI 열기')+selectionSummary([['업무 상황',v.group],['고른 상황',v.sit],['원하는 답',v.want]])+
    outBlock(vent?'순화한 답장 예시':'지금 나를 위한 문장','gm-example',sample)+outBlock('AI에 넣을 전체 프롬프트','gm-prompt',req);
 }
 function renderGm(){
@@ -6964,6 +7002,11 @@ function boot(){
     g.items.forEach(function(name){if(Array.from(sel.options).some(function(o){return o.value===name;}))return;var o=document.createElement('option');o.value=name;o.textContent=name;og.appendChild(o);});
     if(og.children.length)sel.insertBefore(og,sel.querySelector('option[value=__]'));
   });}
+  [['aig-gpt','gpt'],['aig-gem','gem'],['aig-claude','claude']].forEach(function(link){
+    var btn=document.getElementById(link[0]);if(!btn)return;
+    btn.hidden=false;btn.textContent=GH_AI[link[1]][0]+'로 열기';
+    btn.onclick=function(){aiLaunch(link[1],exify(aiP(AMODE)));};
+  });
   document.body.classList.add('gh-mode');
   fitH();window.addEventListener('resize',fitH);
   /* 기존 첫 화면 코드가 없는 요소를 찾지 않게 */
@@ -6981,6 +7024,16 @@ function boot(){
     var mode=e.target.closest('[data-plan-mode]');if(mode){ST_PLAN.mode=mode.dataset.planMode;ST_PLAN.title='';ST_PLAN.size='1회 행사';ST_PLAN.area='지역사회중심지원(CBSS)';go('plan2');return;}
     var hgo=e.target.closest('[data-hhgo]');if(hgo){var k=hgo.dataset.hhgo;var box=document.getElementById('gh-hh');if(box)box.remove();if(k==='doc'||k==='result'){go(k==='result'?'dw-result':'dw-plan');}else{go(k==='pr'?'dw-all':k)}return}
     var hb=e.target.closest('[data-hh]');if(hb){showHelp(hb.dataset.hh);return}
+    var ai=e.target.closest('[data-ai-to]');
+    if(ai){
+      var key=ai.dataset.aiText,project=!!ai.closest('#v-drawer'),val=project?DWTXT[key]:TXT[key];
+      if(project){
+        var d=DW.find(function(x){return x.g===DWG&&x.id===DWT;});
+        if(d&&(key==='ins'||key==='first')){window.dwDrawer(d);val=DWTXT[key];}
+        else if(key==='drev'){window.dwRevDoc();val=DWTXT[key];}
+      }
+      aiLaunch(ai.dataset.aiTo,val);return;
+    }
     var jump=e.target.closest('[data-jump-first]');
     if(jump){var f=$('#dw-live-first');if(f){f.tabIndex=-1;f.focus({preventScroll:true});f.closest('.dw-step').scrollIntoView({block:'start'});}return;}
     var b=e.target.closest('[data-gh]');
@@ -7059,8 +7112,10 @@ function boot(){
 }
 /* 기흥 실습: 가족센터의 4단계 세팅 순서, 기흥 전용 지침·소스는 그대로. */
 var oldDWRender=window.dwRender,oldDWFirst=window.dwFirst;
+var oldDWRevDoc=window.dwRevDoc;
+window.dwRevDoc=function(){return aiStrip('drev','역프롬프트로 AI 열기')+oldDWRevDoc();};
 function dwPanel(title,key,t,copyLabel,id){
-  return '<section class="dw-step"><div class="out-h"><h3>'+E(title)+'</h3>'+cpBtn(key,copyLabel)+'</div><pre '+(id?'id="'+id+'" ':'')+'class="paper gh-text">'+promptMarkup(t)+'</pre></section>';
+  return '<section class="dw-step"><div class="out-h"><h3>'+E(title)+'</h3>'+cpBtn(key,copyLabel)+'</div>'+(key==='first'?aiStrip(key,'첫 프롬프트로 AI 열기',true):'')+'<pre '+(id?'id="'+id+'" ':'')+'class="paper gh-text">'+promptMarkup(t)+'</pre></section>';
 }
 window.dwDrawer=function(d){
   var proj=d.t+' 프로젝트',name=dwV()['사업'];
@@ -7070,7 +7125,7 @@ window.dwDrawer=function(d){
   dwFirst(d);
   var first=dwPanel('4. 첫 대화에 넣을 전체 프롬프트','first',DWTXT.first,'첫 프롬프트 복사','dw-live-first');
   var more=d.g==='pr'?'<section class="dw-step"><h3>기획안·시안 수정 요청문</h3>'+dwNext(d)+'</section>'+step(5,'최종 검토 프롬프트',dwRev(d),cpBtn('rev','검토용 복사')):'<p class="gnote">분석표와 추가 자료를 확인한 뒤 ‘작성해 줘’라고 입력하세요. 초안의 숫자와 출처를 확인한 다음 원하는 파일 형식으로 요청하세요.</p>';
-  return '<p class="dw-when"><b>'+E(d.t)+'</b> · '+E(d.when)+'</p><div class="gh-step-actions gh-project-shortcuts">'+cpBtn('ins','지침 복사')+cpBtn('first','첫 프롬프트 복사')+'<button type="button" class="btn mini" data-jump-first>첫 프롬프트로 이동 ↓</button></div>'+dwPanel('2. 프로젝트 지침 전문','ins',DWTXT.ins,'지침 복사')+first+more;
+  return '<p class="dw-when"><b>'+E(d.t)+'</b> · '+E(d.when)+'</p><div class="gh-step-actions gh-project-shortcuts">'+cpBtn('ins','지침 복사')+cpBtn('first','첫 프롬프트 복사')+'<button type="button" class="btn mini" data-jump-first>첫 프롬프트로 이동 ↓</button></div>'+aiStrip('ins','프로젝트 지침으로 AI 열기')+dwPanel('2. 프로젝트 지침 전문','ins',DWTXT.ins,'지침 복사')+first+more;
 };
 window.dwFirst=function(d){
   var prev=oldDWFirst(d);
