@@ -1464,12 +1464,14 @@ WORK.pr = {
   left: function (id) {
     var t = PR_TASKS.filter(function (x) { return x.id === id; })[0] || PR_TASKS[0];
     var h = '<section class="panel"><div class="panel-h">무엇을 올릴까요?</div>' + pickList(PR_TASKS, t.id) + '</section>';
+    h += '<section class="panel"><div class="panel-h">함께 쓸 홍보 이미지</div>' + chips('img', '그림 방향', ['따뜻한 실사 사진', '부드러운 수채화', '귀여운 그림책 일러스트', '깔끔한 도형·인포그래픽']) +
+      '<button type="button" class="b3d sm" data-go="work/img/" style="margin-top:2px">이미지 프롬프트까지 만들기 →</button></section>';
     h += '<section class="panel"><div class="panel-h">' + esc(t.t) + '</div>' + (t.inputs || []).map(function (i) { return input(i.k, i.l, i.ph, i.opt, i.area); }).join('') + '</section>';
     return h;
   },
   panes: function (id) {
     var t = PR_TASKS.filter(function (x) { return x.id === id; })[0] || PR_TASKS[0];
-    var p = t.prompt();
+    var p = t.prompt() + '\n\n[홍보 이미지]\n· 방향: ' + (WS.v.img || '따뜻한 실사 사진') + '\n· 사진 자리는 [사진: 설명]으로 표시하고, 얼굴은 게시 동의를 받은 것만.';
     return [
       { k: 'req', label: '요청문', copy: true, raw: p, html: paperH(t.t) + '<div class="prompt">' + esc(p) + '</div>' + guideFoot() },
       { k: 'tip', label: '주의·팁', copy: true, ai: false, raw: t.tip, html: paperH('꼭 지켜 주세요') + '<div class="prompt">' + esc(t.tip) + '\n\n· 이용자 실명·연락처·상담 사연은 넣지 마세요.\n· 얼굴 사진은 게시 동의를 받은 것만.\n· 숫자·날짜는 원자료와 대조하세요.\n· 홈페이지·블로그에는 기관명과 담당자 문의처를 남겨 주세요.</div>' }
