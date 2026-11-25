@@ -852,7 +852,8 @@ body.gh-mode main.wrap{flex:1;min-height:0;display:flex;flex-direction:column;pa
 .qm:hover{background:var(--g4-soft);border-color:#A9CDBB}
 .qm b{font-size:12.5px;font-weight:700;color:#1F3B31;display:flex;align-items:center;gap:5px}
 .qm small{font-size:10.5px;color:var(--g4-mut);font-weight:400;line-height:1.35}
-.qm .ic{width:14px;height:14px;color:var(--g4-mint);flex:none}
+.qm .ic{width:17px;height:17px;color:var(--g4-mint);flex:none;margin-bottom:3px}
+.plist li{padding:6px 0}
 .qm.hot{border-color:#EBC9B8;background:#FFF8F3}
 .bar2{display:flex;flex-direction:column;gap:5px;margin-top:auto;flex:none}
 .gprof,.grec{display:flex;align-items:center;gap:8px;border:1px solid #E3DCCF;background:var(--g4-warm);border-radius:8px;padding:7px 10px;cursor:pointer;text-align:left;font:inherit;font-size:11.5px;color:var(--g4-ink);width:100%}
@@ -6033,9 +6034,9 @@ function homeHTML(){
     '<div class="glbl">기존 서식 14종 <span style="color:#A9B5AD;font-weight:400">· 2026 사업안내·평가지표</span></div>'+
     '<div class="qchips">'+forms+'</div></div></section>';
 
-  var Q=[['msg','문자·소통','상황을 누르면 완성 문자 2종'],['promo2','홍보·안내','행사후기·공지·카드뉴스'],['donate','후원 관리','감사·사용 안내·모집'],['plan2','프로그램·기획','칩을 누르면 계획서 표'],['month','이달의 추천','월 바꾸고 질문 카드'],['mind','마음·사진','빡침·엽서·쉼터·사진관']];
+  var Q=[['msg','문자·소통','상황을 누르면 완성 문자 2종','msg'],['promo2','홍보·안내','행사후기·공지·카드뉴스','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['plan2','프로그램·기획','칩을 누르면 계획서 표','bulb'],['month','이달의 추천','월 바꾸고 질문 카드','cal'],['mind','마음·사진','빡침·엽서·쉼터·사진관','heart']];
   var mid='<section class="bx"><div class="bx-h"><h2>업무 바로가기</h2><span class="hint">누르면 바로 작성</span></div>'+
-    '<div class="qgrid">'+Q.map(function(x,i){return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'"><b>'+E(x[1])+'</b><small>'+E(x[2])+'</small></button>'}).join('')+'</div>'+
+    '<div class="qgrid">'+Q.map(function(x,i){return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+I(x[3])+'<b>'+E(x[1])+'</b><small>'+E(x[2])+'</small></button>'}).join('')+'</div>'+
     '<div class="bar2">'+
       '<button type="button" class="gprof" id="gh-org">'+I('home')+'<span><b>'+(o.set?E(o.name):'우리 복지관 정보 등록')+'</b><small>'+(o.set?(E(o.staff||'')||'모든 서식에 자동 입력 중'):'한 번 넣으면 모든 서식에 자동 입력')+'</small></span><em>'+(o.set?'바꾸기':'등록하기')+'</em></button>'+
       '<button type="button" class="grec" data-gh="rec">'+I('mic')+'<span><b>회의 녹음 서식 만들기</b><small>녹음 → 글 → 회의록·공문 초안</small></span><em>시작</em></button>'+
