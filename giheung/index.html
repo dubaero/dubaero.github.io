@@ -1101,6 +1101,112 @@ body{background:#fff;color:var(--group-ink);font-family:"Noto Sans KR","Pretenda
 }
 </style>
 
+<style id="giheung-reference-layout">
+/* Group-home desktop reference: bright canvas, a full hero, roomy controls and paper previews. */
+html:has(body.gh-mode,body.gi-work,#v-donate:not([hidden]),#v-planmenu:not([hidden]),#v-drawer:not([hidden])){zoom:1!important}
+body.gh-mode>main.wrap,#v-donate .gi-donate{max-width:1120px;margin-inline:auto}
+.gi-task .gi-doc .ph3,.gi-task .gi-doc .small,.gi-task .gi-doc .ulist{font-size:14px;line-height:1.6}
+
+body.gh-mode{height:auto;min-height:100vh;overflow:visible}
+body.gh-mode>footer{display:block!important}
+body.gh-mode main.wrap{overflow:visible;height:auto;min-height:0;display:block;padding:18px 18px 24px}
+body.gh-mode #v-home,.ghome{display:block}
+.ghome .hero3{height:auto;min-height:208px;grid-template-columns:minmax(0,1fr) minmax(0,38%);overflow:visible;border-radius:12px;position:relative;margin-bottom:16px}
+.ghome .hero3 .ht{position:relative;z-index:2;padding:22px 28px;gap:8px}
+.ghome .hero3 .badge{border:0;border-radius:0;background:none;padding:0;font-size:15px;font-weight:800;color:#22604C}
+.ghome .hero3 .badge svg{width:24px;height:24px}
+.ghome .hero3 h1{font-size:clamp(24px,2.1vw,30px);font-weight:800;line-height:1.27;word-break:keep-all}
+.ghome .hero3 .sub{font-size:14px;line-height:1.5}
+.ghome .hero3 .gsearch{margin:8px 0 0;max-width:100%;min-height:42px}
+.ghome .gsearch input{height:42px;font-size:14px}
+.ghome .gsearch input::placeholder{color:#52675D}
+.ghome .gsres{top:100%;z-index:25;max-height:min(56vh,340px)}
+.ghome .gsres button{padding:9px;min-height:40px;font-size:14px}
+.ghome .hero3 .hi{position:relative;min-height:214px;overflow:hidden;border-radius:0 12px 12px 0}
+.ghome .hero3 .hi::before{display:none}
+.ghome .hero3 .hi img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center}
+.ghome .cols3{gap:15px;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,1fr)}
+.ghome .bx{min-width:0;overflow:visible;padding:15px 16px;border-radius:10px}
+.ghome .bx-b{overflow:visible}
+.ghome .bx-h{border-bottom:1.5px solid #2E7D64;flex-wrap:wrap}
+.ghome .bx-h h2{font-size:17px;font-weight:800}
+.ghome .plist li{gap:7px;padding:8px 0}
+.ghome .plist .no,.ghome .plist .m,.ghome .qm small,.ghome .glinks span,.ghome .glbl{font-size:12px;line-height:1.45;color:#5A6B63}
+.ghome .plist .t,.ghome .qm b,.ghome .glinks b{font-size:14px;line-height:1.4;color:#1F2E28;white-space:normal}
+.ghome .plist .mini{opacity:1}.ghome .plist .b-how,.ghome .plist .b-go{font-size:12px;min-height:30px;border-radius:8px;line-height:1.15}
+.ghome .cols3>.bx:nth-child(2) .qgrid{flex:0 1 auto;grid-auto-rows:auto}
+.ghome .qm,.ghome .cols3>.bx:nth-child(2) .qm{padding:12px;min-height:84px;background:#F8FBF9;color:#1F2E28}
+.ghome .cols3>.bx:nth-child(2) .qm b{font-size:14px}
+.ghome .glinks a{flex-wrap:wrap}.ghome .glinks span{white-space:normal}
+.ghome .gprof b,.ghome .grec b{font-size:13px;white-space:normal}
+.ghome .gprof small,.ghome .grec small,.ghome .bd-all span{font-size:12px;white-space:normal}
+.ghome .bd-all{flex-wrap:wrap;font-size:13px}
+.ghome .bar2,.ghome .ghelp{margin-top:9px}
+.ghome .glinks .arw{font-family:system-ui,sans-serif}
+:is(#v-home,#v-drawer,#v-msg,#v-promo2,#v-plan2,#v-donate,#v-donwork,#v-planmenu){zoom:1!important}
+body.gi-work>main.wrap{max-width:none;width:100%;padding:0 16px 24px}
+.gi-task{color:#1F2E28;font-size:15px}
+.gi-task .fbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0}
+.gi-task .fbar h2{font-size:21px;line-height:1.3;font-weight:800;color:#1F2E28}
+.gi-task .vback{min-height:42px;padding:0 14px;border-radius:14px;background:#fff;font-size:14px;font-weight:800;color:#1F2E28}
+.gi-task .fstat{font-size:14px;color:#52675D;margin:0 0 12px}
+:is(#v-msg,#v-plan2,#v-promo2,#v-donwork) .gi-task .x2{grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:12px}
+.gi-task .x2>.col{padding:14px;border-radius:10px;border-color:#CFDED6}
+.gi-task .x2>.col.R{position:static;max-height:none;overflow:visible;background:#F8FBF9}
+.gi-task .gh-subtabs{gap:8px}
+.gi-task .gh-subtabs button,.gi-task .gi-action{min-height:42px;padding:7px 13px;font-size:14px;border-radius:8px;border:1px solid #CFDED6;color:#1F2E28;background:#fff;font-weight:700;cursor:pointer}
+.gi-task .gh-subtabs button.on,.gi-task .gi-action.strong{background:#2E7D64;color:white;border-color:#2E7D64}
+.gi-task .gh-pick{border:0;min-width:0;padding:0;margin:0 0 13px}
+.gi-task .gh-pick legend,.gi-task .ch-l b{font-size:15px;font-weight:800;color:#1F2E28;margin-bottom:6px}
+.gi-task .gh-pick .chips{gap:7px}
+.gi-task .gh-chip{position:relative;display:inline-block}
+.gi-task .gh-chip input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.gi-task .gh-chip span{display:flex;align-items:center;gap:8px;padding:6px 13px;min-height:42px;background:#fff;border:1px solid #CFDED6;border-radius:8px;color:#1F2E28;font-size:14px;font-weight:750;cursor:pointer;line-height:1.4}
+.gi-task .gh-chip span:before{content:"";display:grid;place-items:center;flex:none;width:20px;height:20px;border:2px solid #CFDED6;background:#fff;border-radius:50%;font-size:13px}
+.gi-task .gh-chip input:checked+span{background:#2E7D64;border-color:#2E7D64;color:#fff}
+.gi-task .gh-chip input:checked+span:before{content:"✓";color:#22604C;border-color:#fff}
+.gi-task .gh-chip input:focus-visible+span{outline:3px solid #22604C;outline-offset:2px}
+.gi-task .gi-field{display:block;margin:12px 0;color:#1F2E28;font-size:15px;font-weight:750}
+.gi-task :is(.gi-field input,.gi-field textarea,.memo){width:100%;min-height:44px;padding:9px 12px;border:1px solid #CFDED6;border-radius:8px;background:#fff;font:inherit;font-size:15px;font-weight:400;margin:4px 0 0}
+.gi-task .gi-field small{display:block;padding:5px 9px;margin-top:5px;background:#F9F0EE;border-left:3px solid #AB5148;color:#834137;font-size:13px;font-weight:400}
+.gi-task .gi-divider{border:0;border-top:2px dashed #DFE9E3;margin:14px 0}
+.gi-task .out-h{align-items:center;color:#38594D;border-bottom:0;font-size:13px}
+.gi-task .out-h h3{color:#22604C;font-size:16px}
+.gi-task :is(.out-h,.msg-h) .btn{font-size:14px;font-weight:700;min-height:40px;padding:6px 14px;border:1px solid #CFDED6;border-radius:10px;background:#fff;color:#1F2E28}
+.gi-task :is(.msg,.gh-text,.gi-doc){padding:16px;border:1px solid #CFDED6;border-radius:10px;background:#fff}
+.gi-task .msg-h b{background:#E2F2EA;color:#22604C;padding:3px 7px;border-radius:4px}
+.gi-task :is(.gh-text,.msg p,.hintl,.gnote){font-size:15px;line-height:1.65;color:#1F2E28}
+.gi-task .hintl,.gi-task .gnote{font-size:13px;color:#52675D}
+.gi-doc h4{margin:10px 0 14px;text-align:center;color:#1F2E28;font-size:21px}
+.gi-doc .ptab{font-size:14px;color:#1F2E28}
+.gi-doc .ptab :is(th,td){padding:8px;border-color:#A5AEA8;white-space:normal;overflow-wrap:anywhere}
+.gi-doc .ptab th{background:#EDF1E9;text-align:center}
+.gi-don-head{margin:12px 0 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 20px;background:linear-gradient(100deg,#E6F5EE,#D5EFE3);border-radius:12px}
+.gi-don-head h2{font-size:22px;color:#1F3B31}.gi-don-head p{font-size:14px;color:#4A675C}
+.gi-donate .qm b,.gi-donate .plist .t{font-size:15px}
+.dn-msgs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.dn-flow{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;counter-reset:dn}
+.dn-flow li{display:flex;gap:9px;align-items:baseline;padding:8px 10px;border-radius:8px;background:#F8FBF9;counter-increment:dn;font-size:14px}
+.dn-flow li:before{content:counter(dn);flex:none;width:22px;height:22px;border-radius:50%;background:#2E7D64;color:#fff;font-weight:800;display:grid;place-items:center}
+.dn-flow b{flex:none;min-width:4.3em;color:#22604C}
+.gi-menu{max-width:1055px;margin:auto}
+.gi-menu .gi-don-head{align-items:flex-start;flex-direction:column;gap:4px}
+.gi-menu .gi-list{display:grid;gap:8px}
+.gi-menu .gi-list button{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;padding:13px 17px;border:1px solid #CFDED6;background:white;border-radius:10px;min-height:54px;color:#1F2E28;font:inherit;font-weight:800;cursor:pointer}
+.gi-menu .gi-list button span{font-size:13px;font-weight:400;color:#5A6B63}
+.gi-menu .gi-list button:hover,.gi-task .gi-action:hover{background:#EEF8F3}
+#v-drawer .dw2 .dw-step .gh-text{font-size:15px}
+@media(max-width:900px){
+ .ghome .hero3{grid-template-columns:minmax(0,1fr)}
+ .ghome .hero3 .ht{padding:17px 16px}
+ .ghome .hero3 .hi{display:block;min-height:0;border-radius:0 0 12px 12px}
+ .ghome .hero3 .hi img{position:relative;max-height:220px}
+ .ghome .cols3{grid-template-columns:minmax(0,1fr)}
+ :is(#v-msg,#v-plan2,#v-promo2,#v-donwork) .gi-task .x2{grid-template-columns:minmax(0,1fr)}
+ .gi-task .gi-doc{padding:9px}
+}
+</style>
+
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -6033,7 +6139,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 /* 2026.11.20 넓은 화면에서 첫 화면·메뉴 화면이 스크롤 없이 한 화면에 들어오게 자동 맞춤 (휴대폰·태블릿은 그대로)
    1) 화면 비율을 조금 줄여 맞추고(원래 글자 크기 아래로는 줄이지 않음) 2) 그래도 넘치면 긴 프롬프트 칸만 칸 안에서 스크롤 */
 (function(){
-  var SKIP={'v-vent':1,'v-heart':1,'v-song':1,'v-drawer':1,'v-msg':1,'v-promo2':1,'v-plan2':1},T=null,busy=false;
+  var SKIP={'v-vent':1,'v-heart':1,'v-song':1,'v-drawer':1,'v-msg':1,'v-promo2':1,'v-plan2':1,'v-donwork':1,'v-donate':1,'v-planmenu':1},T=null,busy=false;
   function cur(){return [].slice.call(document.querySelectorAll('[id^="v-"]')).filter(function(v){return !v.hidden&&v.parentElement&&!v.parentElement.closest('[id^="v-"]');})[0];}
   function reset(){
     [].forEach.call(document.querySelectorAll('[id^="v-"]'),function(v){if(v.style.zoom)v.style.zoom='';});
@@ -6106,7 +6212,7 @@ function homeHTML(){
    ['doc','result','결과보고서 프로젝트','계획 대비 실적·달성률까지 표로','result'],
    ['pr','','홍보물 프로젝트','카드뉴스·포스터·보도자료·블로그','pr'],
    ['prompt','','사업별 맞춤형 프롬프트 생성기','식단·요리 포함 · 고르면 자동 세팅','prompt'],
-   ['plan2','','프로그램 기획 제안','영역·대상만 골라도 계획서 표','plan2'],
+   ['planmenu','','프로그램 기획 제안','영역·대상만 골라도 계획서 표','planmenu'],
    ['event','','행사·체험','운영계획·안전계획 한 번에','event'],
    ['promo2','','홍보·안내','행사후기·공지·카드뉴스·릴스','promo2'],
    ['img','','홍보 이미지 제안','카드뉴스·포스터 시안','img'],
@@ -6123,7 +6229,7 @@ function homeHTML(){
     '<div class="bx-b"><ul class="plist">'+L+'</ul></div>'+
     '<button type="button" class="bd-all" data-gh="all">기존 서식 14종 작성하기 <span>상담일지 · 사례관리 회의록 · 만족도 조사 …</span> ›</button></section>';
 
-  var Q=[['msg','문자·소통','문자와 안부 전화 예시','msg'],['promo2','홍보·안내','행사후기·공지·카드뉴스','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['plan2','프로그램·기획','칩을 누르면 계획서 표','bulb'],['month','이달의 추천','월 바꾸고 질문 카드','cal'],['mind','마음·사진','빡침·엽서·쉼터·사진관','heart']];
+  var Q=[['msg','문자·소통','문자와 안부 전화 예시','msg'],['promo2','홍보·안내','행사후기·공지·카드뉴스','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['planmenu','프로그램·기획','여가·나들이·행사 계획','bulb'],['month','이달의 추천','월 바꾸고 질문 카드','cal'],['mind','마음·사진','빡침·엽서·쉼터·사진관','heart']];
   var mid='<section class="bx"><div class="bx-h"><h2>업무 바로가기</h2><span class="hint">누르면 바로 작성</span></div>'+
     '<div class="qgrid">'+Q.map(function(x,i){return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+I(x[3])+'<b>'+E(x[1])+'</b><small>'+E(x[2])+'</small></button>'}).join('')+'</div>'+
     '<div class="bar2">'+
@@ -6142,9 +6248,9 @@ function homeHTML(){
 
   return '<div class="ghome">'+
    '<section class="hero3"><div class="ht"><span class="badge">'+I('sprout')+' 용인시기흥장애인복지관</span>'+
-     '<h1>공문부터 홍보까지, <em>업무도우미</em> 하나로</h1>'+
+     '<h1>혼자서도 든든한 업무파트너, <em>AI 업무도우미</em></h1>'+
      '<p class="sub">서식·사업은 지침과 요청문으로, 문자·안내는 누르면 바로 완성됩니다.</p>'+
-     '<label class="gsearch">'+I('help')+'<input id="q" type="search" autocomplete="off" placeholder="찾을 업무를 입력하세요 (예: 상담일지, 사업계획서, 카드뉴스)"><div class="gsres" id="gsr" hidden></div></label>'+
+     '<label class="gsearch">'+I('help')+'<input id="q" type="search" autocomplete="off" aria-label="기능 찾기" placeholder="업무 찾기 (예: 후원 문자)"><div class="gsres" id="gsr" hidden></div></label>'+
    '</div><div class="hi"><img src="/img/giheung/hero-sprout.webp" alt="복지관 종사자와 장애인 이용자가 함께 새싹 화분을 심는 모습" width="892" height="726"></div></section>'+
    '<div class="cols3">'+left+mid+right+'</div></div>';
 }
@@ -6156,7 +6262,7 @@ var HELP={
  result:['결과보고서 프로젝트','같은 업무 프로젝트에서 결과보고서 항목을 고르면 계획 대비 실적·달성률 표로 이어집니다.','① 사업명·기간·예산 입력','② 계획/실적 표를 붙이고 달성률 계산 요청','③ 미달성 원인과 개선 계획까지 함께 작성'],
  pr:['홍보물 프로젝트','기본정보 → 기획안 → 스타일 → 제작 순서로 카드뉴스·포스터·보도자료를 만듭니다.','① 사업·행사 정보 입력','② 구성안 3가지 중 하나 선택','③ 문구·디자인 규칙 적용해 제작'],
  prompt:['사업별 맞춤형 프롬프트 생성기','업무/일상을 고르고 항목을 누르면 프롬프트가 완성됩니다. 식단·요리(냉장고 파먹기, 당뇨 식단)도 들어 있어요.','① 업무 또는 일상 선택','② 상황·조건을 칩으로 고르기','③ 완성된 프롬프트를 복사해 AI에 붙여 넣기'],
- plan2:['프로그램 기획 제안','왼쪽에서 서비스 영역·대상·시기·규모를 누르면 오른쪽 프로그램 계획서 표가 실시간으로 채워집니다.','① 영역과 대상을 고르기','② 규모(1회·4회기·8회기·연중) 선택','③ 표를 복사해 계획서에 붙이기'],
+ planmenu:['프로그램 기획 제안','왼쪽에서 서비스 영역·대상·시기·규모를 누르면 오른쪽 프로그램 계획서 표가 실시간으로 채워집니다.','① 영역과 대상을 고르기','② 규모(1회·4회기·8회기·연중) 선택','③ 표를 복사해 계획서에 붙이기'],
  event:['행사·체험','행사 종류·시기·대상을 고르면 운영계획과 안전계획을 만듭니다.','① 행사 종류 선택','② 시기·대상·장소 조건 적기','③ 진행표·안전계획·안내문 받기'],
  promo2:['홍보·안내','무엇을 만들지(행사후기·공지·카드뉴스·릴스·블로그·보도자료)를 고르면 오른쪽 글이 바로 완성됩니다.','① 종류와 사업 고르기','② 행사 정보를 쉼표로 적기','③ 글을 복사해 홈페이지·블로그에 올리기'],
  img:['홍보 이미지 제안','카드뉴스·포스터 시안 방향을 고르면 이미지 프롬프트가 나옵니다.','① 만들 이미지 종류 선택','② 들어갈 문구·사진 방향 적기','③ 프롬프트를 복사해 이미지 AI에 붙여 넣기'],
@@ -6178,7 +6284,7 @@ var SEARCH=[];
 function searchIndex(){
   SEARCH=[];
   (typeof FORMS!=='undefined'?FORMS:[]).forEach(function(f){SEARCH.push({t:f.name,s:'서식',go:'form',id:f.id,k:f.name+' '+(f.sub||'')})});
-  [['사업계획서 프로젝트','사업','doc','plan'],['결과보고서 프로젝트','사업','doc','result'],['홍보물 프로젝트','홍보','pr',''],['프롬프트 생성기','AI','prompt',''],['프로그램 기획','기획','plan2',''],['행사·체험','기획','event',''],['홍보·안내','홍보','promo2',''],['문자·소통 / 안부 전화','문자','msg',''],['후원 관리','후원','donate',''],['이달의 추천','일정','month',''],['마음·사진','마음','mind',''],['AI 맞춤 설정 가이드','AI','aiset',''],['이용 매뉴얼','안내','manual',''],['회의 녹음','녹음','rec',''],['전체 서식 찾기','서식','all','']]
+  [['사업계획서 프로젝트','사업','doc','plan'],['결과보고서 프로젝트','사업','doc','result'],['홍보물 프로젝트','홍보','pr',''],['프롬프트 생성기','AI','prompt',''],['프로그램 기획','기획','planmenu',''],['행사·체험','기획','event',''],['홍보·안내','홍보','promo2',''],['문자·소통 / 안부 전화','문자','msg',''],['후원 관리','후원','donate',''],['이달의 추천','일정','month',''],['마음·사진','마음','mind',''],['AI 맞춤 설정 가이드','AI','aiset',''],['이용 매뉴얼','안내','manual',''],['회의 녹음','녹음','rec',''],['전체 서식 찾기','서식','all','']]
    .forEach(function(x){SEARCH.push({t:x[0],s:x[1],go:x[2],project:x[3],k:x[0]+' '+x[1]})});
 }
 function bindSearch(){
@@ -6204,9 +6310,11 @@ function msgHTML(tag,body,note){
   TXT[tag]=body;
   return '<div class="msg"><div class="msg-h"><b>'+E(note||'문자')+'</b><small>'+body.replace(/\s/g,'').length+'자</small>'+cbtn('복사',tag)+'</div><p>'+E(body)+'</p></div>';
 }
-function x2(title,tag,left,right,tabs){
-  return '<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>'+E(title)+'</h2>'+(tag?'<span class="tag">'+E(tag)+'</span>':'')+'</div>'+
-   (tabs||'')+'<div class="x2"><section aria-label="고르기와 사용법" class="col L">'+left+'</section><section aria-label="예시와 전체 프롬프트" class="col R">'+right+'</section></div>';
+
+function x2(title,tag,left,right,tabs,back){
+  return '<section class="gi-task"><div class="fbar"><button type="button" class="vback" '+(back?'data-gh="'+E(back)+'"':'data-home')+'>← '+(back==='donate'?'후원 관리':back==='planmenu'?'프로그램·기획':'업무도우미')+'</button><h2>'+E(title)+'</h2></div>'+
+   (tag?'<p class="fstat">'+E(tag)+'</p>':'')+(tabs||'')+
+   '<div class="x2"><section aria-label="고르기와 사용법" class="col L">'+left+'</section><section aria-label="예시와 전체 프롬프트" class="col R">'+right+'</section></div></section>';
 }
 
 /* ---------- ① 문자·소통 ---------- */
@@ -6262,8 +6370,8 @@ function msgRight(){
 function renderMsg(){
   var v=ST_MSG,call=v.mode==='안부 전화';
   var left='<p class="gh-guide">받는 분과 상황을 고르면 오른쪽 예시가 바로 바뀝니다.</p>'+
-   '<div class="ch-l"><b>1. 누구에게</b></div>'+choice('받는 분',['이용자','보호자','후원자','활동지원사·자원봉사자','협력 기관'],'data-mto',call?v.callTo:v.to)+
-   '<div class="ch-l"><b>2. 어떤 상황인가요?</b></div>'+choice('상황',call?Object.keys(CALL_TOPIC):MS,'data-mk',call?v.callKind:v.kind)+
+   radioPick('누구에게 보내나요?',['이용자','보호자','후원자','활동지원사·자원봉사자','협력 기관'],'mto',call?v.callTo:v.to)+
+   radioPick('어떤 상황인가요?',call?Object.keys(CALL_TOPIC):MS,'mk',call?v.callKind:v.kind)+'<hr class="gi-divider">'+
    '<label class="ch-l" for="m-memo"><b>3. 전할 내용</b><small>선택</small></label>'+
    '<textarea class="memo" id="m-memo" placeholder="예: 다음 주 나들이 준비물을 안내하고 싶어요">'+E(call?v.callMemo:v.memo)+'</textarea>'+
    '<p class="hintl">실명·진단명·연락처는 쓰지 마세요.</p>';
@@ -6271,12 +6379,12 @@ function renderMsg(){
   $('#m-memo').addEventListener('input',function(){ST_MSG[call?'callMemo':'memo']=this.value;updateOutput('#v-msg',msgRight);});
 }
 /* ---------- ② 프로그램·기획 (칩 → 계획서 표) ---------- */
-var ST_PLAN={area:'낮활동·행동지원',tgt:'성인 장애인',when:'겨울',size:'8회기',idx:0};
+var ST_PLAN={mode:'',title:'',date:'',place:'',people:'',budget:'',area:'낮활동·행동지원',tgt:'성인 장애인',when:'겨울',size:'8회기',idx:0};
 var WON={'봄':'3~5월','여름':'6~8월','가을':'9~11월','겨울':'12~2월','연중':'1~12월'};
 var CNT={'1회 행사':1,'4회기':4,'8회기':8,'연중 정기':12};
 function planData(){
   var v=ST_PLAN,ideas=(typeof IDEA!=='undefined'&&IDEA[v.area])||['우리 동네 산책단','함께 만드는 그림책','생활 요리 교실'];
-  var name=ideas[v.idx%ideas.length];
+  var name=v.title.trim()||v.mode||ideas[v.idx%ideas.length];
   var n=CNT[v.size]||8;
   var steps=['첫 만남 · 할 일 고르기','익히기 · 한 가지 방법 연습','스스로 해 보기','나누기 · 바꿀 점 고르기','익히기 · 다른 방법 연습','스스로 해 보기 · 작은 도전','함께 만들기','마무리 · 소감 나누기','발표·전시 준비','지역에서 적용하기','다시 해 보기','한 해 정리'];
   var firstActs={'개인별 지원계획':'좋아하는 활동을 그림카드로 고르고 개인 목표를 정해요.','중재·컨설팅':'활동 도구를 살펴보고 내게 편한 방법을 골라 써 봐요.','낮활동·행동지원':'두 가지 활동 중 하나를 고르고 시작·휴식 신호를 연습해요.','직업지원':'그림이 있는 직무 카드를 고르고 도구 정리·분류 중 한 가지를 직접 해 봐요.','가족(보호자) 지원':'가족과 이용자가 각각 하고 싶은 활동을 고르고 역할을 정해요.','사례관리·권익옹호':'생활 속 불편한 상황 그림을 고르고 도움을 요청하는 말을 연습해요.','지역사회중심지원(CBSS)':'이용해 보고 싶은 동네 공간을 지도에서 고르고 접근 방법을 찾아요.'};
@@ -6289,7 +6397,7 @@ function planData(){
 }
 function planText(){
   var d=planData(),v=ST_PLAN;
-  var s='[실습용 프로그램 계획서 예시]\n프로그램명: '+d.name+'\n서비스 영역: '+v.area+'\n대상: '+v.tgt+'\n시기: '+v.when+' ('+WON[v.when]+')\n횟수: '+v.size+' ('+d.n+'회)\n\n[회기별 계획]\n회기 | 주제 | 주요 활동 | 준비물\n'+d.rows.map(function(r){return r.join(' | ')}).join('\n')+
+  var s='[실습용 프로그램 계획서 예시]\n프로그램명: '+d.name+'\n서비스 영역: '+v.area+'\n대상: '+v.tgt+'\n시기: '+v.when+' ('+WON[v.when]+')\n횟수: '+v.size+' ('+d.n+'회)\n일시: '+(v.date||'[확인 필요]')+'\n장소: '+(v.place||'[확인 필요]')+'\n참여 인원: '+(v.people||'[확인 필요]')+'\n예산: '+(v.budget||'[확인 필요]')+'\n\n[회기별 계획]\n회기 | 주제 | 주요 활동 | 준비물\n'+d.rows.map(function(r){return r.join(' | ')}).join('\n')+
   '\n\n[성과지표]\n1) 참여율 = 참여 인원 ÷ 모집 인원 × 100 (목표 80% 이상, 출석부)\n2) 만족도 = 5점 척도 평균 (목표 4.0 이상, 만족도 조사지 E2)\n\n[안전·접근성] '+d.tip+'\n[모집] 복지관 홈페이지·문자 안내, 담당자 상담';
   TXT['plan']=s;return s;
 }
@@ -6300,24 +6408,30 @@ function planPrompt(){
 function renderPlan(){
   var v=ST_PLAN,d=planData();
   var groups=[['서비스 영역',(typeof AREAS!=='undefined'?AREAS:[]),'area'],['대상',['발달장애 아동','발달장애 청소년','성인 장애인','보호자·가족','지역 주민','종사자'],'tgt'],['시기',['봄','여름','가을','겨울','연중'],'when'],['규모',['1회 행사','4회기','8회기','연중 정기'],'size']];
-  var left=groups.map(function(g){
-    return '<div class="ch-l"><b>'+g[0]+'</b></div><div class="chips">'+g[1].map(function(x){return '<button type="button" data-pk="'+g[2]+'" data-pv="'+E(x)+'" class="'+(v[g[2]]===x?'on':'')+'">'+E(x)+'</button>'}).join('')+'</div>';
-  }).join('')+
-  '<div class="ch-l"><b>아이디어</b><small>바꿔 보기</small></div><div class="chips"><button type="button" data-pidea="1">다른 아이디어 보기 ↻</button><button type="button" data-plangpt="1">AI 요청문 복사</button></div>'+
-  '<p class="hintl">칩을 누를 때마다 오른쪽 <span class="k">프로그램 계획서 표</span>가 바로 채워집니다. 빈칸·숫자는 [확인 필요]로 두고 직접 확인하세요.</p>';
+  var left=groups.map(function(g){return radioPick(g[0],g[1],'plan-'+g[2],v[g[2]]);}).join('')+
+   '<div class="chips"><button type="button" class="gi-action" data-pidea="1">다른 예시 고르기 ↻</button></div>'+
+   '<hr class="gi-divider">'+
+   inputField('plan-title','프로그램 이름',v.title,'동네 직무 체험')+inputField('plan-date','날짜·시간',v.date,'12월 2일 오후 2시')+
+   inputField('plan-place','장소',v.place,'복지관 교육실')+inputField('plan-people','참여 인원',v.people,'이용자 6명, 지원 인력 2명')+
+   inputField('plan-budget','예산',v.budget,'재료비 20,000원')+
+   '<p class="hintl">선택하거나 적으면 오른쪽 서식이 바로 바뀝니다. 정해지지 않은 정보는 비워두세요.</p>';
+  $('#v-plan2').innerHTML=x2(v.mode||'프로그램 계획','하고 싶은 활동을 고르면 오른쪽에 계획서가 바로 나와요.',left,planRight(),null,'planmenu');
+}
+function planRight(){
+  var v=ST_PLAN,d=planData();
   var rows=d.rows.map(function(r){return '<tr><td>'+E(String(r[0]))+'</td><td>'+E(r[1])+'</td><td>'+E(r[2])+'</td><td>'+E(r[3])+'</td></tr>'}).join('');
   var right='<div class="out-h"><h3>프로그램 계획서 <small style="font-weight:400;color:#8C9A92;font-size:10.5px">실시간 채워짐</small></h3>'+cbtn('복사','plan')+'</div>'+
-   '<div class="paper"><table class="ptab"><caption>'+E(d.name)+'</caption>'+
-   '<tr><th>서비스 영역</th><td>'+E(v.area)+'</td></tr><tr><th>대상</th><td>'+E(v.tgt)+'</td></tr>'+
-   '<tr><th>시기</th><td>'+E(v.when+' ('+WON[v.when]+')')+'</td></tr><tr><th>횟수</th><td>'+E(v.size)+' · '+d.n+'회</td></tr>'+
-   '<tr><th>장소</th><td>[확인 필요]</td></tr><tr><th>인력</th><td>[확인 필요]</td></tr></table>'+
+   '<div class="gi-doc"><h4>프로그램 계획서</h4><table class="ptab"><tr><th>프로그램명</th><td>'+E(d.name)+'</td><th>일시</th><td>'+E(v.date||'[확인 필요]')+'</td></tr>'+
+   '<tr><th>서비스 영역</th><td>'+E(v.area)+'</td><th>대상</th><td>'+E(v.tgt)+'</td></tr>'+
+   '<tr><th>시기</th><td>'+E(v.when+' ('+WON[v.when]+')')+'</td><th>횟수</th><td>'+E(v.size)+' · '+d.n+'회</td></tr>'+
+   '<tr><th>장소</th><td>'+E(v.place||'[확인 필요]')+'</td><th>참여 인원</th><td>'+E(v.people||'[확인 필요]')+'</td></tr><tr><th>예산</th><td colspan="3">'+E(v.budget||'[확인 필요]')+'</td></tr></table>'+
    '<div class="ph3">회기별 계획</div><table class="ptab"><tr><th style="width:12%">회기</th><th style="width:26%">주제</th><th>주요 활동</th><th style="width:24%">준비물</th></tr>'+rows+'</table>'+
    '<div class="ph3">성과지표 <small>[제안값]</small></div><ul class="ulist"><li>참여율 = 참여 인원 ÷ 모집 인원 × 100 → 목표 80% 이상 (출석부)</li><li>만족도 = 5점 평균 → 목표 4.0 이상 (만족도 조사지 E2)</li></ul>'+
    '<div class="ph3">안전·접근성</div><p class="small">'+E(d.tip)+'</p>'+
    '<div class="ph3">모집 문구</div><p class="small">'+E(d.name)+'에 함께하실 분을 모집합니다. '+E(v.when+' ('+WON[v.when]+')')+', '+E(v.tgt)+' 대상, 신청 방법 [확인 필요].</p></div>'+
    '<div class="gnote">숫자·인원은 <b>[확인 필요]</b>로 남겼어요. 예산·모집 인원은 우리 복지관 자료로 채우면 됩니다.</div>';
   var prompt=planPrompt();
-  $('#v-plan2').innerHTML=x2('프로그램·기획','',left,right+outBlock('AI에 넣을 전체 프롬프트','plan-prompt',prompt));
+  return right+outBlock('AI에 넣을 전체 프롬프트','plan-prompt',prompt);
 }
 
 /* ---------- ③ 홍보·안내 ---------- */
@@ -6353,27 +6467,96 @@ function promoRight(){
 function renderPromo(){
   var v=ST_PR;
   var left='<p class="gh-guide">위에서 만들 것을 고른 뒤, 사업과 행사 정보를 넣으세요.</p>'+
-   '<div class="ch-l"><b>1. 사업</b></div>'+choice('사업',typeof SIMPLE!=='undefined'?SIMPLE.promo.f[0].o:[],'data-prbiz',v.biz)+
+   radioPick('어떤 사업인가요?',typeof SIMPLE!=='undefined'?SIMPLE.promo.f[0].o:[],'prbiz',v.biz)+'<hr class="gi-divider">'+
    '<label class="ch-l" for="pr-memo"><b>2. 행사 정보</b></label><textarea class="memo" id="pr-memo" placeholder="예: 개관기념행사, 12/2 10시, 복지관 1층">'+E(v.memo)+'</textarea>'+
    '<p class="hintl">오른쪽 예시를 확인하고 날짜·신청 방법·사진 게시 동의를 점검하세요.</p>';
   $('#v-promo2').innerHTML=x2('홍보·안내','',left,promoRight(),choice('무엇을 만들까요?',PRK,'data-prk',v.kind,'gh-subtabs'));
 }
 /* ---------- ④ 후원 관리 ---------- */
-var ST_DN={kind:'후원 감사 인사'};
-var DNK=['후원 감사 인사','후원금 사용 안내','후원·자원봉사 모집','영수증·서류 안내','후원자 관리 체크'];
+function radioPick(label,items,key,value){
+  return '<fieldset class="gh-pick"><legend>'+E(label)+'</legend><div class="chips">'+items.map(function(k){
+    return '<label class="gh-chip"><input type="radio" name="gh-'+E(key)+'" data-gh-radio="'+E(key)+'" value="'+E(k)+'"'+(value===k?' checked':'')+'><span>'+E(k)+'</span></label>';
+  }).join('')+'</div></fieldset>';
+}
+function inputField(key,label,value,hint){
+  return '<label class="gi-field">'+E(label)+'<input type="text" data-gi-field="'+E(key)+'" value="'+E(value||'')+'">'+(hint?'<small>예: '+E(hint)+'</small>':'')+'</label>';
+}
+function menuCard(label,des,attr,val){
+  return '<button type="button" '+attr+'="'+E(val)+'"><b>'+E(label)+'</b><span>'+E(des)+'　›</span></button>';
+}
+function renderPlanMenu(){
+  var html=menuCard('프로그램 계획','영역·대상을 고르고 계획서를 작성해요','data-gh','plan2')+
+    menuCard('나들이 계획','이동과 접근성까지 확인해요','data-plan-mode','나들이 계획')+
+    menuCard('행사·체험 계획','운영 순서와 안전 안내를 준비해요','data-gh','event')+
+    menuCard('쉬운 말 안내문','참여자가 읽기 쉽게 안내해요','data-gh','multi');
+  $('#v-planmenu').innerHTML='<section class="gi-menu gi-task"><div class="fbar"><button type="button" class="vback" data-home>← 처음으로</button></div><div class="gi-don-head"><h2>프로그램·기획</h2><p>지금 상황과 가장 가까운 일을 눌러주세요.</p></div><div class="gi-list">'+html+'</div></section>';
+}
+var DONFORMS=[
+ ['후원금·후원품 대장',['접수일','후원 종류','금액·수량','사용 목적','비고']],
+ ['후원물품 접수·사용 대장',['접수일','물품명과 수량','사용일','사용처','남은 수량']],
+ ['기부금 영수증 발급 대장',['접수번호(가상)','발급일','영수증 번호(가상)','금액','처리 상태']],
+ ['후원자 관리 카드',['후원처 구분','후원 분야','최근 안내일','다음 할 일']],
+ ['후원금 사용 결과 보고',['사업명','사용 기간','사용 목적','집행 내역','확인할 증빙']]
+];
+var DNMSG=[
+ ['후원 감사 문자','후원을 받았을 때'],
+ ['후원금 사용 안내 문자','어디에 썼는지 알릴 때'],
+ ['후원자 안부·소식 문자','오랜만에 안부를 전할 때'],
+ ['명절·연말 인사','명절이나 연말에'],
+ ['후원·자원봉사 모집','새 후원자·자원봉사자를 모실 때'],
+ ['SNS·블로그 홍보 글','복지관 활동을 알릴 때']
+];
+var DONSTATE={},donKey='';
 function renderDonate(){
-  var v=ST_DN,b='';
-  if(v.kind==='후원 감사 인사')b='[감사 문자]\n안녕하세요, 용인시기흥장애인복지관입니다.\n보내 주신 마음으로 [사업명]을 잘 진행했습니다.\n[대상]에게 [물품·후원금]이 잘 전달되었습니다.\n늘 감사드립니다. 담당 [이름] 드림\n\n[감사 카드 문구]\n"보내 주신 마음, 소중히 쓰겠습니다."\n\n※ 후원자 성함·금액은 카드에 적지 않거나, 동의받은 범위에서만 적습니다.';
-  else if(v.kind==='후원금 사용 안내')b='[사용 결과 안내]\n1. 모금 기간: [확인 필요]\n2. 사용 내역: [항목 · 금액]\n3. 도움받은 분: [대상 · 인원]\n4. 증빙: 집행 내역서·영수증 (요청 시 열람)\n\n[안내 문자]\n후원해 주신 금액은 [항목]에 사용했습니다. 사용 내역서는 복지관에서 확인하실 수 있습니다.\n\n※ 사용 결과 안내는 지침이 정한 시기·방법을 따르세요. (2026 사업안내 후원금 관리)';
-  else if(v.kind==='후원·자원봉사 모집')b='[모집 문자]\n용인시기흥장애인복지관에서 함께해 주실 후원자·자원봉사자를 찾습니다.\n· 무엇을: [활동 내용]\n· 언제: [확인 필요]\n· 어디서: [장소]\n· 문의: [전화]\n작은 관심이 큰 힘이 됩니다.\n\n[게시판·홈페이지용 3줄]\n· 필요한 것: [물품·활동]\n· 함께할 시간: [확인 필요]\n· 신청: 전화·방문';
-  else if(v.kind==='영수증·서류 안내')b='[서류 안내]\n· 기부금영수증: 연말정산용, 발급 기준·시기는 [확인 필요]\n· 제출 서류: 성명·주민번호·주소 (수령 즉시 파기)\n· 보관: 개인정보는 잠금 보관, 열람 기록 남김\n\n[안내 문자]\n기부금영수증 발급을 위해 [서류]를 [기한]까지 보내 주세요. 확인 후 바로 처리해 드리겠습니다.';
-  else b='[후원자 관리 체크]\n· [ ] 후원 접수 대장 기록 (날짜·성명·금액)\n· [ ] 감사 인사 발송 (3일 안)\n· [ ] 사용 결과 안내 (지침 시기)\n· [ ] 영수증 발급 서류 확인\n· [ ] 개인정보 잠금 보관·파기 확인';
-  TXT['don']=b;
-  var left='<div class="ch-l"><b>무엇을 보낼까요</b></div><div class="rlist">'+DNK.map(function(k){return '<button type="button" data-dnk="'+E(k)+'" class="'+(v.kind===k?'on':'')+'">'+E(k)+'</button>'}).join('')+'</div>'+
-   '<div class="ch-l"><b>기억할 것</b></div><ul class="ulist" style="font-size:11.5px"><li>금액·성함은 <span class="k">동의받은 범위</span>에서만</li><li>사용 결과는 지침이 정한 시기에 안내</li><li>개인정보는 잠금 보관, 다 쓰면 파기</li></ul>';
-  var right='<div class="out-h"><h3>'+E(v.kind)+'</h3>'+cbtn('복사','don')+'</div><div class="paper"><p class="small" style="white-space:pre-wrap">'+E(b)+'</p></div>'+
-   '<div class="gnote">후원금 관리 기준(모금·사용·공개)은 <b>2026년 장애인복지시설 사업안내</b>와 우리 복지관 규정을 먼저 확인하세요.</div>';
-  $('#v-donate').innerHTML=x2('후원 관리','감사·사용 안내·모집',left,right);
+  var forms=DONFORMS.map(function(f,i){return '<li><span class="no">'+(i+1)+'</span><button type="button" class="t" data-don-key="f'+i+'">'+E(f[0])+'</button><div class="mini"><button type="button" class="b-go" data-don-key="f'+i+'">작성</button></div></li>';}).join('');
+  var msgs=DNMSG.map(function(m,i){return '<button type="button" class="qm" data-don-key="m'+i+'">'+I(i>3?'meg':'msg')+'<b>'+E(m[0])+'</b><small>'+E(m[1])+'</small></button>';}).join('');
+  var flow=[['받은 날','감사 문자 보내기 · 대장에 기록'],['쓰기 전','지정 후원은 정해진 목적에 맞게 확인'],['쓴 뒤','사용 안내 · 증빙 서류 보관'],['분기·연말','사용 결과 보고 · 안부 문자'],['영수증 발급','공식 발급 절차 확인']];
+  $('#v-donate').innerHTML='<section class="ghome gi-donate gi-task"><div class="fbar"><button type="button" class="vback" data-home>← 처음으로</button></div><div class="gi-don-head"><h2>후원 관리</h2><p>후원을 받고 → 감사드리고 → 쓰고 → 알려드리는 흐름을 한곳에서 해요.</p></div><div class="cols3">'+
+   '<section class="bx"><div class="bx-h"><h2>후원 서식</h2></div><ul class="plist">'+forms+'</ul><p class="hintl">실습용 서식입니다. 제출할 때는 복지관의 승인 서식을 확인하세요.</p></section>'+
+   '<section class="bx"><div class="bx-h"><h2>후원 문자·글</h2></div><div class="dn-msgs">'+msgs+'</div></section>'+
+   '<section class="bx"><div class="bx-h"><h2>후원 감사의 흐름</h2></div><ol class="dn-flow">'+flow.map(function(x){return '<li><b>'+E(x[0])+'</b><span>'+E(x[1])+'</span></li>';}).join('')+'</ol><p class="hintl">공개 기준과 처리 절차는 복지관 지침을 확인하세요.</p></section></div></section>';
+}
+function donorDraft(st,i){
+  var hello=(st.who==='단체·기업'?'담당자님': '후원자님')+(st.tone==='정중하게'?', 안녕하십니까.':', 안녕하세요.')+' 용인시기흥장애인복지관입니다.';
+  var what=st.what||'[후원금·물품]',use=st.use||'[사용 목적]',news=st.news||'[전할 내용]';
+  var past=st.tense==='이미 사용했어요',as=st.tone==='정중하게'?(past?' 사용하였습니다.':' 사용할 예정입니다.'):(past?' 사용했어요.':' 사용할 예정이에요.');
+  return [hello+'\n\n보내주신 '+what+'을(를) 감사히 받았습니다. 소중한 후원은 '+use+'에'+as+'\n따뜻한 마음에 감사드립니다.',
+   hello+'\n\n보내주신 '+what+'은(는) '+use+'에'+as+'\n'+news+'\n함께해 주셔서 감사합니다.',
+   hello+'\n\n요즘 어떻게 지내세요? 복지관의 소식을 전해 드려요.\n'+news+'\n늘 함께해 주셔서 감사합니다.',
+   hello+'\n\n'+news+'\n복지관에 보내주신 관심과 응원에 감사드립니다. 건강하고 평안한 날들 보내세요.',
+   '[후원·자원봉사 모집]\n용인시기흥장애인복지관과 함께해 주실 분을 기다립니다.\n• 필요한 후원·활동: '+what+'\n• 활동 목적: '+use+'\n• 신청 방법·문의: '+news,
+   '[복지관 활동 소식]\n'+news+'\n함께 나누고 싶은 소식입니다.\n• 활동·지원 내역: '+what+'\n• 목적: '+use][i];
+}
+function donRight(){
+  var form=donKey[0]==='f',i=+donKey.slice(1),st=DONSTATE[donKey];
+  if(form){
+    var f=DONFORMS[i],vals=f[1].map(function(k,j){return [k,st[j]||'[입력]'];});
+    TXT.donform=f[0]+'\n'+vals.map(function(r){return r.join(': ');}).join('\n');
+    return '<div class="out-h"><h3>서식 미리보기 · 실습용</h3>'+cbtn('복사','donform')+'</div><div class="gi-doc"><h4>'+E(f[0])+'</h4><table class="ptab">'+vals.map(function(r){return '<tr><th scope="row">'+E(r[0])+'</th><td>'+E(r[1])+'</td></tr>';}).join('')+'</table></div>'+
+      outBlock('서식에 맞춰 정리하는 프롬프트','donform-ai','너는 복지관 후원 실무 담당자야. 다음 기록을 첨부한 승인 서식의 항목과 순서에 맞게 정리해 줘. 값이 없으면 [확인 필요]로 남겨. 실습용 가상 자료야.\n\n'+TXT.donform);
+  }
+  var body=donorDraft(st,i);
+  var short=body.split('\n').filter(Boolean).slice(0,2).join('\n')+'\n'+(st.news||'함께해 주셔서 감사합니다.');
+  var labeled='[보내기 전 확인]\n• 받는 분: '+st.who+'\n• 전할 일: '+DNMSG[i][0]+'\n• 후원·활동: '+(st.what||'[확인 필요]')+'\n• 전할 내용: '+(st.news||'[확인 필요]');
+  var versions=st.channel==='짧은 문자'?[[short,'추천 1 · 짧은 문자'],[body,'추천 2 · 자세한 글']]:[[body,'추천 1 · '+st.channel],[short,'추천 2 · 짧은 글']];
+  versions.push([labeled,'추천 3 · 내용 확인용']);
+  return versions.map(function(v,j){return msgHTML('donv'+j,v[0],v[1]);}).join('')+
+    outBlock('AI에 넣을 전체 프롬프트','don-prompt','너는 용인시기흥장애인복지관 소통 담당자야. 아래 정보를 참고해서 '+st.who+'에게 전할 '+DNMSG[i][0]+'을 '+st.tone+', '+st.channel+' 형식으로 작성해 줘. 제공한 사실만 사용하고 개인정보나 확인되지 않은 결과를 만들지 마.\n\n'+body);
+}
+function renderDonWork(key){
+  if(!/^[fm][0-5]$/.test(key)||key==='f5')return;
+  donKey=key;
+  var form=key[0]==='f',i=+key.slice(1),d=form?DONFORMS[i]:DNMSG[i],st=DONSTATE[key]||(DONSTATE[key]=form?{}:{who:'개인 후원자',tone:'따뜻하게',channel:'카카오톡·긴 문자',tense:'사용할 예정이에요'});
+  var left=form?'<p class="gh-guide">칸을 채우면 오른쪽 표에 바로 반영됩니다. 연습할 때는 가상 정보만 쓰세요.</p>'+d[1].map(function(k,j){return inputField('don-'+j,k,st[j],'실습용 자료 입력');}).join(''):
+    radioPick('누가 보내주셨나요?',['개인 후원자','단체·기업','정기 후원자'],'don-who',st.who)+
+    radioPick('어떤 분위기로 쓸까요?',['따뜻하게','정중하게'],'don-tone',st.tone)+
+    radioPick('어디로 보내나요?',['카카오톡·긴 문자','짧은 문자','감사 카드'],'don-channel',st.channel)+
+    radioPick('후원품이나 후원금을 이미 사용했나요?',['사용할 예정이에요','이미 사용했어요'],'don-tense',st.tense)+
+    '<hr class="gi-divider">'+inputField('don-what','무엇을 후원받았나요?',st.what,'방한용품 10세트')+
+    inputField('don-use','어디에 쓰나요?',st.use,'겨울나기 지원')+inputField('don-news','더 전할 내용',st.news,'활동 소식이나 신청 방법')+
+    '<p class="hintl">실명·연락처·계좌번호는 넣지 마세요. 이 화면에서 문자 발송이나 게시를 하지 않습니다.</p>';
+  $('#v-donwork').innerHTML=x2(d[0],form?'후원 자료를 준비해요':d[1],left,donRight(),null,'donate');
+  show('donwork');
 }
 
 /* ---------- ⑤ 이달의 추천 ---------- */
@@ -6417,7 +6600,7 @@ var ROUTE={};
 function ensure(id,html){var n=$('#v-'+id);if(!n){n=document.createElement('div');n.id='v-'+id;n.hidden=true;n.innerHTML=html;$('main.wrap').appendChild(n);if(typeof VIEWS!=='undefined'&&VIEWS.indexOf(id)<0)VIEWS.push(id);}return n}
 function boot(){
   /* 새 화면 틀 만들기 */
-  ensure('msg','');ensure('plan2','');ensure('promo2','');ensure('donate','');
+  ensure('msg','');ensure('plan2','');ensure('promo2','');ensure('donate','');ensure('donwork','');ensure('planmenu','');
   ensure('mind','<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음·사진</h2><span class="tag">빡침공감 · 응원엽서 · 마음쉼터 · 사진관</span></div><div class="mtabs" role="tablist">'+MIND.map(function(x){return '<button type="button" data-mt="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div><div id="mind-body"></div>');
   /* 홈 그리기 + 기존 홈 요소 정리 */
   var old=$('#main4');if(old)old.remove();
@@ -6428,10 +6611,11 @@ function boot(){
   fitH();window.addEventListener('resize',fitH);
   /* 기존 첫 화면 코드가 없는 요소를 찾지 않게 */
   if(typeof orgUI==='function'){try{orgUI()}catch(e){}}
-  var first=document.getElementById('org-open');
-  if(!first){var p=$('.bar2 .gprof');if(p){p.onclick=function(){if(typeof openOrg==='function')openOrg()}}}
   /* 이벤트 */
   document.addEventListener('click',function(e){
+    if(e.target.closest('#gh-org')){openOrg();return;}
+    var donor=e.target.closest('[data-don-key]');if(donor){renderDonWork(donor.dataset.donKey);return;}
+    var mode=e.target.closest('[data-plan-mode]');if(mode){ST_PLAN.mode=mode.dataset.planMode;ST_PLAN.title='';ST_PLAN.size='1회 행사';ST_PLAN.area='지역사회중심지원(CBSS)';go('plan2');return;}
     var hgo=e.target.closest('[data-hhgo]');if(hgo){var k=hgo.dataset.hhgo;var box=document.getElementById('gh-hh');if(box)box.remove();if(k==='doc'||k==='result'){go(k==='result'?'dw-result':'dw-plan');}else{go(k==='pr'?'dw-all':k)}return}
     var hb=e.target.closest('[data-hh]');if(hb){showHelp(hb.dataset.hh);return}
     var jump=e.target.closest('[data-jump-first]');
@@ -6442,25 +6626,32 @@ function boot(){
       if(g==='doc'){go(dw?'dw-'+dw:'doc');return}
       if(g==='pr'){go('dw-all');return}
       if(g==='form'&&id){if(typeof openForm==='function')openForm(id);return}
+      if(g==='plan2')ST_PLAN.mode='';
       go(g);return;
     }
     var mt=e.target.closest('[data-mt]');if(mt){openMind(mt.dataset.mt);return}
     var mmode=e.target.closest('[data-mmode]');if(mmode){ST_MSG.mode=mmode.dataset.mmode;rerenderChoice(mmode,'data-mmode',renderMsg);return}
-    var mo=e.target.closest('[data-mto]');if(mo){ST_MSG[ST_MSG.mode==='안부 전화'?'callTo':'to']=mo.dataset.mto;rerenderChoice(mo,'data-mto',renderMsg);return}
-    var mk=e.target.closest('[data-mk]');if(mk){ST_MSG[ST_MSG.mode==='안부 전화'?'callKind':'kind']=mk.dataset.mk;rerenderChoice(mk,'data-mk',renderMsg);return}
-    var pk=e.target.closest('[data-pk]');if(pk){ST_PLAN[pk.dataset.pk]=pk.dataset.pv;ST_PLAN.idx=0;rerenderChoice(pk,'data-pv',renderPlan);return}
-    var pi=e.target.closest('[data-pidea]');if(pi){ST_PLAN.idx++;rerenderChoice(pi,'data-pidea',renderPlan);return}
+    var pi=e.target.closest('[data-pidea]');if(pi){ST_PLAN.idx++;ST_PLAN.mode='';ST_PLAN.title='';var ptitle=$('[data-gi-field=plan-title]');if(ptitle)ptitle.value='';updateOutput('#v-plan2',planRight);return}
     var pg=e.target.closest('[data-plangpt]');if(pg){copy(planPrompt());return}
     var rk=e.target.closest('[data-prk]');if(rk){ST_PR.kind=rk.dataset.prk;rerenderChoice(rk,'data-prk',renderPromo);return}
-    var rb=e.target.closest('[data-prbiz]');if(rb){ST_PR.biz=rb.dataset.prbiz;rerenderChoice(rb,'data-prbiz',renderPromo);return}
-    var dk=e.target.closest('[data-dnk]');if(dk){ST_DN.kind=dk.dataset.dnk;renderDonate();return}
     var mm=e.target.closest('[data-mom]');if(mm){ST_MO.m=+mm.dataset.mom;renderMonth();return}
     var mq=e.target.closest('[data-moq]');if(mq){ST_MO.q=mq.dataset.moq;renderMonth();return}
     if(moplanCheck(e)){return}
     var cp=e.target.closest('[data-cp]');if(cp){var t=TXT[cp.dataset.cp];if(t&&typeof copy==='function')copy(t);return}
   });
   function moplanCheck(e){var x=e.target.closest('[data-moplan]');if(!x)return false;ST_PLAN.when=['봄','봄','봄','여름','여름','여름','가을','가을','가을','겨울','겨울','겨울'][ST_MO.m-1];go('plan2');return true}
+  document.addEventListener('change',function(e){
+    var radio=e.target,key=radio.dataset.ghRadio;if(!key||!radio.checked)return;
+    var v=radio.value,call=ST_MSG.mode==='안부 전화';
+    if(key==='mto'||key==='mk'){ST_MSG[key==='mto'?(call?'callTo':'to'):(call?'callKind':'kind')]=v;updateOutput('#v-msg',msgRight);}
+    if(key==='prbiz'){ST_PR.biz=v;updateOutput('#v-promo2',promoRight);}
+    if(key.startsWith('plan-')){ST_PLAN[key.slice(5)]=v;ST_PLAN.idx=0;updateOutput('#v-plan2',planRight);}
+    if(key.startsWith('don-')&&DONSTATE[donKey]){DONSTATE[donKey][key.slice(4)]=v;updateOutput('#v-donwork',donRight);}
+  });
   document.addEventListener('input',function(e){
+    var key=e.target.dataset.giField;
+    if(key&&key.startsWith('plan-')){ST_PLAN[key.slice(5)]=e.target.value;updateOutput('#v-plan2',planRight);}
+    if(key&&key.startsWith('don-')&&DONSTATE[donKey]){DONSTATE[donKey][key.slice(4)]=e.target.value;updateOutput('#v-donwork',donRight);}
     if(e.target.id==='pr-memo'){ST_PR.memo=e.target.value;updateOutput('#v-promo2',promoRight);}
   });
   /* 기관 정보 저장하면 홈 갱신 */
@@ -6521,6 +6712,7 @@ window.dwRender=function(){
 var _go=window.go;
 window.go=function(k){
   if(k==='msg'){renderMsg();show('msg');return}
+  if(k==='planmenu'){renderPlanMenu();show('planmenu');return}
   if(k==='plan2'){renderPlan();show('plan2');return}
   if(k==='promo2'){renderPromo();show('promo2');return}
   if(k==='donate'){renderDonate();show('donate');return}
@@ -6542,6 +6734,7 @@ var _show=window.show;
 window.show=function(v){
   var body=document.body;
   if(_show)_show(v);
+  body.classList.toggle('gi-work',['msg','plan2','promo2','donwork'].indexOf(v)!==-1);
   fitH();if(v==='home'){body.classList.add('gh-mode')}else{body.classList.remove('gh-mode')}
   if(v==='mind'){body.classList.remove('gh-mode')}
 };
