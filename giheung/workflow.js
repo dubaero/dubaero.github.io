@@ -3,7 +3,7 @@
 "use strict";
 global.mountGiheungWorkflow=function(host,options){
  const root=host.attachShadow({mode:"open"}),page=global.document;
- const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=6";
+ const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=7";
  const body=page.createElement("div");body.className="group-body";body.innerHTML='<div class="wrap"><main id="app"></main></div>';
  root.append(style,body);
  const document={
@@ -75,7 +75,7 @@ const CATS = {
 const TASKS = [
 {id:"gh-welfare-msg",draft:1,cat:"msg",title:"복지관 업무 문자",situation:"사업·프로그램에 맞는 문자를 쓰고 싶어요",hideOld:true,
  desc:"받는 분과 말투를 골라 확인된 내용을 적으면 바로 복사할 문자가 나옵니다.",
- chips:[{k:"reader",label:"누구에게 보낼까요?",opts:["이용자","보호자·가족","지역 주민","후원자·봉사자","협력기관","복지관 직원"]},{k:"tone",label:"어떤 말투로 쓸까요?",opts:["정중하게","따뜻하게","쉬운 말로"]}],
+ chips:[{k:"reader",label:"누구에게 보낼까요?",opts:["이용자","보호자·가족","지역 주민","후원자·봉사자","협력기관","복지관 직원"]},{k:"tone",label:"어떤 말투로 쓸까요?",opts:["따뜻하게","정중하게","쉬운 말로"]}],
  inputs:[{k:"body",label:"문자로 전할 내용 · 한 칸에 입력",area:true,ph:"예: 일시: 12월 5일 오후 2시 / 장소: 복지관 1층 / 확인: 참석 여부를 12월 3일까지 알려 주세요."}],
  tip:"실명·진단명·개인 연락처는 넣지 마세요. 날짜·장소·회신 기한은 발송 전에 확인하세요.",next:[]},
 
@@ -4446,7 +4446,7 @@ const SMS_LABELS={
  "변경":"newAt","변경일시":"newAt","변경시간":"newAt","변경된일시":"newAt","새일시":"newAt","기존":"oldAt","기존일시":"oldAt","원래일시":"oldAt",
  "장소":"where","만나는곳":"where","집결장소":"where","출입구":"access","이동지원":"access","접근성":"access","준비물":"items",
  "사유":"why","이유":"why","상황":"why","회신":"reply","답장":"reply","회신방법":"reply","참석여부":"reply",
- "회신기한":"due","답장기한":"due","기한":"due","마감":"due","안내시점":"due","문의":"contact","문의처":"contact",
+ "회신기한":"due","답장기한":"due","기한":"due","마감":"due","안내시점":"due","문의":"contact","문의처":"contact","전화":"contact","전화번호":"contact","담당자전화번호":"contact","연락처":"contact","담당":"staff","담당자":"staff","담당자명":"staff",
  "프로그램":"program","프로그램명":"program","행사명":"program","순번":"queue","대기순번":"queue","선정결과":"status",
  "건강이나안부":"text","활동":"text","활동내용":"text","후원내용":"text","감사한일":"text","전할내용":"text",
  "대안":"alt","대체일정":"alt","다음일정":"alt","신청":"how","신청방법":"how","참여방법":"how","방법":"how","부탁":"reply"
@@ -4484,7 +4484,7 @@ function ghWelfareMsg(v){
   return sentence(t);
  };
  const memo=[];
- raw.split(/\r?\n|\s+\/\s+|;\s*/).map(a=>a.trim()).filter(Boolean).forEach(line=>{
+ raw.split(/\r?\n|\s+\/\s+|\s*\/\s*(?=[가-힣· ]{1,20}[:：])|;\s*/).map(a=>a.trim()).filter(Boolean).forEach(line=>{
   const m=line.match(/^([^:：]{1,26})[:：]\s*(.+)$/), key=m&&SMS_LABELS[norm(m[1])];
   if(key){ if(key==="text")memo.push(m[2]);else f[key]=m[2]; }
   else if(!f.when&&/^\d{1,2}월\s*\d{1,2}일/.test(line)&&!/[다요][.!?]?$/.test(line))f.when=line;
@@ -4493,20 +4493,20 @@ function ghWelfareMsg(v){
  const friendly=v.tone==="따뜻하게"||v.tone==="부드럽게",easy=v.tone==="쉬운 말로", plain=friendly||easy;
  const reader={"이용자":"이용자님","보호자·가족":"보호자님","지역 주민":"주민 여러분","후원자·봉사자":"후원자·자원봉사자 여러분","협력기관":"담당자님","복지관 직원":"선생님"}[v.reader]||"이용자님";
  const org="용인시기흥장애인복지관",name=f.program||x.program||"[프로그램명]";
- const greeting=friendly?"안녕하세요, "+reader+". "+org+"입니다.":easy?"안녕하세요. "+org+"이에요.":reader+", 안녕하세요. "+org+"입니다.";
+ const greeting=friendly?reader+", 안녕하세요. "+org+"입니다.":easy?"안녕하세요. "+org+"이에요.":reader+", 안녕하세요. "+org+"입니다.";
  const memoText=memo.map(amend).join("\n"), label=(n,v)=>v?n+": "+v:"", infoTime=f.newAt||f.when, includesMemo=!!memoText;
  const ask=(request,deadline)=>{
   let a=(request||"").replace(/[.!?。]$/,"");
   if(a&&/주세요|바랍니다|부탁합니다|부탁드립니다|주십시오/.test(a))return sent(a)+(deadline?" (회신 기한: "+deadline+")":"");
   return (deadline?deadline+"까지 ":"")+(a?(a.endsWith("지")?a:josa(a,"을","를")):"참여 여부를")+(friendly?" 편하게 알려 주세요.":easy?" 답장해 주세요.":" 회신해 주시면 감사하겠습니다.");
  };
- let lead="",facts=[],action="",end="",tiny=[];
- const at=(need=false)=>[label("일시",infoTime||(need?"[날짜·시간]":"")),label("장소",f.where||(need?"[장소]":""))].filter(Boolean);
+ let lead="",facts=[],action="",end="",tiny=[],isCancelled=false;
+ const at=(need=false)=>[label("만나는 시간",infoTime||(need?"[날짜·시간]":"")),label("만나는 장소",f.where||(need?"[장소]":""))].filter(Boolean);
  switch(kind){
   case "change":{
-   const cancelled=/취소|휴강/.test(x.what||"")&&/취소|휴강/.test([raw,f.status].join(" "))&&!infoTime;
+   const cancelled=isCancelled=/취소|휴강/.test(x.what||"")&&/취소|휴강/.test([raw,f.status].join(" "))&&!infoTime;
    lead=cancelled?name+(plain?" 일정이 취소됐어요.":" 일정이 취소되어 안내드립니다."):name+(plain?" 일정이 달라져 알려 드려요.":" 일정 변경 사항을 안내드립니다.");
-   facts=[label("기존 일정",f.oldAt),label(cancelled?"변경 사항":"변경 일정",cancelled?(f.status||"취소"):infoTime||(includesMemo?"":"[바뀐 일시 또는 취소 여부]")),label("장소",f.where),label("변경 이유",f.why),label("대안",f.alt)];
+   facts=[label("기존 일정",f.oldAt),label(cancelled?"변경 사항":"변경 일정",cancelled?(f.status||"취소"):infoTime||(includesMemo?"":"[바뀐 날짜·시간]")),label("만나는 장소",f.where||(!cancelled?"[장소]":"")),label("변경 이유",f.why),label("대안",f.alt)];
    action=f.reply||f.due?ask(f.reply,f.due):friendly?"바뀐 일정이 어렵다면 편하게 알려 주세요.":"참여가 어려우신 경우 복지관에 알려 주시기 바랍니다.";
    end=easy?"일정이 바뀌어 죄송해요.":"일정에 불편을 드려 죄송합니다.";tiny=[label("변경",cancelled?"취소":infoTime),label("장소",f.where)];break;}
   case "wait":
@@ -4545,17 +4545,33 @@ function ghWelfareMsg(v){
    facts=[label("이동·접근 지원",f.access||(!raw?"[출입구·이동 경로·지원 방법]":"")),...at(false)];action="별도 지원이 필요하시면 방문 전 알려 주세요.";tiny=facts;break;
   case "visit":
    lead=name+(plain?" 일정이 괜찮으실지 확인하려고 연락드려요.":" 일정 확인을 위해 연락드립니다.");
-   facts=at(!raw);action=ask(f.reply||"제안드린 시간이 가능한지",f.due);tiny=facts;break;
+   facts=at(true);action=ask(f.reply||"제안드린 시간에 오실 수 있는지",f.due);tiny=facts;break;
   case "reply":
    lead=name+(plain?" 참여 준비를 위해 확인할 것이 있어요.":" 운영 준비를 위해 확인을 부탁드립니다.");
    facts=[label("회신 방법",f.how),...at(false)];action=ask(f.reply,f.due||(!raw?"[회신 기한]":""));tiny=facts;break;
   default:
    lead=name+(friendly?"에 참여하실 때 필요한 내용을 알려 드려요.":easy?" 참여 방법을 알려 드려요.":" 참여에 필요한 사항을 안내드립니다.");
-   facts=[...at(!raw),label("준비물",f.items),label("참여 방법",f.how)];action=f.reply||f.due?ask(f.reply,f.due):"참여 관련 문의나 필요한 지원이 있으면 알려 주세요.";tiny=facts;
+   facts=[...at(true),label("준비물",f.items),label("참여 방법",f.how)];action=f.reply||f.due?ask(f.reply,f.due):"참여 관련 문의나 필요한 지원이 있으면 알려 주세요.";tiny=facts;
  }
- const contact=label("문의",f.contact), head="["+name+" · "+(x.what||"참여 안내")+"]";
+ const contact=label("문의 전화",f.contact||"[공식 전화번호]"), staff=label("담당자",f.staff||"[담당자 이름]"), head="["+name+" · "+(x.what||"참여 안내")+"]";
  const join=(a,s)=>a.filter(Boolean).join(s);
- const full=join([greeting,lead,join(facts,"\n"),memoText,action,contact,end],"\n");
+ const help={
+  change:isCancelled?"안내를 받으신 뒤 궁금하신 점이나 다음 일정이 필요하시면 담당자에게 연락 주세요.":"오시기 전에 바뀐 시간과 장소를 한 번 더 살펴봐 주세요. 이동이나 참여에 도움이 필요하시면 담당자에게 미리 말씀해 주세요.",
+  meet:"출발하기 전에 만나는 시간과 장소를 확인해 주세요. 늦어지거나 다른 곳에서 만나야 한다면 담당자에게 미리 연락 주세요.",
+  notice:"오시기 전에 만나는 시간과 장소를 한 번 더 확인해 주세요. 늦어지거나 오시기 어려운 경우 담당자에게 미리 알려 주시면 준비에 도움이 됩니다.",
+  visit:"오시기 전에 약속 시간과 장소를 확인해 주세요. 시간을 바꾸고 싶으시면 담당자에게 미리 말씀해 주세요.",
+  prep:"준비물을 챙기기 어려우셔도 먼저 연락 주세요. 가져오실 수 있는 물건과 필요한 도움을 담당자와 함께 확인하실 수 있어요.",
+  access:"이동하거나 안내를 받는 데 필요한 도움이 있으시면 미리 알려 주세요. 어떤 방법이 편하신지 담당자가 확인하겠습니다.",
+  check:"바쁘시면 바로 답장하지 않으셔도 괜찮아요. 복지관 이용 중 마음에 걸린 일이나 도움이 필요한 일이 있다면 편하실 때 말씀해 주세요.",
+  wait:"대기 중 연락처가 바뀌거나 신청을 취소하시려면 담당자에게 알려 주세요. 순번이나 다음 안내 시점이 궁금하실 때도 문의하셔도 됩니다.",
+  receipt:"신청 내용에 변경이 있으면 담당자에게 알려 주세요. 신청을 받았다는 안내이며, 참여 확정 여부는 별도로 안내합니다.",
+  selected:"알려드린 결과를 확인해 주세요. 다음 절차나 결과에 대해 궁금한 점이 있으면 담당자에게 연락 주세요.",
+  thanks:"함께해 주신 일에 감사 인사를 꼭 전하고 싶었습니다. 전해 드린 소식에 궁금한 점이 있다면 편하게 연락 주세요.",
+  care:"문자로 답하시기 어렵다면 전화로 말씀해 주셔도 됩니다. 편하신 방법과 시간을 알려 주시면 이야기 나누겠습니다.",
+  reply:"회신이 늦어지거나 어떤 내용으로 답할지 궁금하시면 담당자에게 먼저 연락 주세요."
+ }[kind];
+ const close=end||(friendly?"읽어 주셔서 고마워요.":easy?"확인해 주셔서 고마워요.":"확인해 주셔서 감사합니다.");
+ const full=join([greeting,lead,join(facts,"\n"),memoText,help,action,close,staff,contact],"\n");
  const brief=join([head,kind==="check"||kind==="thanks"||kind==="care"?lead:"",join(tiny.slice(0,3)," / "),memoText,action,contact],"\n");
  return [["바로 보낼 문자",full],["짧은 문자",brief]];
 }
@@ -4785,7 +4801,7 @@ function renderTask(t){
   const inputsHTML = (t.inputs||[]).map(i=>{
     const id = `f-${t.id}-${i.k}`;
     const lab = `<label for="${id}">${esc(i.label)} ${i.opt?"<small>(선택)</small>":""}</label>`;
-    const hint=t.id==="gh-welfare-msg"?SMS_HINT[smsKind(st.v._work?.what)]:i.ph;
+    const hint=t.id==="gh-welfare-msg"?SMS_HINT[smsKind(st.v._work?.what)]+" / 담당자: [이름] / 전화번호: [공식 번호]":i.ph;
     const ctl = i.area ? `<textarea id="${id}" data-input="${i.k}" placeholder="${esc(phOf(id,hint))}">${esc(st.v[i.k])}</textarea>`
                        : `<input id="${id}" type="text" data-input="${i.k}" placeholder="${esc(phOf(id,i.ph))}" value="${esc(st.v[i.k])}">`;
     return `<div class="field">${lab}<div class="with-mic">${ctl}${vmic(id)}</div>${exHint(id,hint)}</div>`;
