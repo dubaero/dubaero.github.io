@@ -3,7 +3,7 @@
 "use strict";
 global.mountGiheungWorkflow=function(host,options){
  const root=host.attachShadow({mode:"open"}),page=global.document;
- const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=5";
+ const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=6";
  const body=page.createElement("div");body.className="group-body";body.innerHTML='<div class="wrap"><main id="app"></main></div>';
  root.append(style,body);
  const document={
@@ -75,7 +75,7 @@ const CATS = {
 const TASKS = [
 {id:"gh-welfare-msg",draft:1,cat:"msg",title:"복지관 업무 문자",situation:"사업·프로그램에 맞는 문자를 쓰고 싶어요",hideOld:true,
  desc:"받는 분과 말투를 골라 확인된 내용을 적으면 바로 복사할 문자가 나옵니다.",
- chips:[{k:"reader",label:"누구에게 보낼까요?",opts:["이용자","보호자·가족","지역 주민","후원자·봉사자","협력기관","복지관 직원"]},{k:"tone",label:"어떤 말투로 쓸까요?",opts:["정중하게","부드럽게","쉬운 말로"]}],
+ chips:[{k:"reader",label:"누구에게 보낼까요?",opts:["이용자","보호자·가족","지역 주민","후원자·봉사자","협력기관","복지관 직원"]},{k:"tone",label:"어떤 말투로 쓸까요?",opts:["정중하게","따뜻하게","쉬운 말로"]}],
  inputs:[{k:"body",label:"문자로 전할 내용 · 한 칸에 입력",area:true,ph:"예: 일시: 12월 5일 오후 2시 / 장소: 복지관 1층 / 확인: 참석 여부를 12월 3일까지 알려 주세요."}],
  tip:"실명·진단명·개인 연락처는 넣지 마세요. 날짜·장소·회신 기한은 발송 전에 확인하세요.",next:[]},
 
@@ -2678,7 +2678,7 @@ function startMic(btn,target,onText){
 }
 const vmic=id=>`<button type="button" class="mic b3d" data-vmic="${id}" aria-label="말로 입력">${ico("mic")}</button>`;
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-vmic]"); if(!b) return; const el=document.getElementById(b.dataset.vmic); if(!el) return;
-  startMic(b, el, t=>{ el.value=(el.value?el.value.replace(/\s+$/,"")+(el.id==="f-sns-post-act"?"\n":" "):"")+t; el.dispatchEvent(new Event("input",{bubbles:true})); }); });
+  startMic(b, el, t=>{ el.value=(el.value?el.value.replace(/\s+$/,"")+(["f-sns-post-act","f-gh-welfare-msg-body"].includes(el.id)?"\n":" "):"")+t; el.dispatchEvent(new Event("input",{bubbles:true})); }); });
 function alertMsg(m){ const s=document.getElementById("fstatus")||document.getElementById("ustatus"); if(s){ s.textContent=m; s.classList.add("warn"); } }
 
 
@@ -4116,7 +4116,7 @@ const GH_FIELD_WORK=[
 ];
 const GH_COMMON_WORK={
  promo:["참여자 모집 공지","홈페이지 행사 후기","인스타그램·블로그·카카오톡","일정 변경·휴강","이용·접근성 안내","월간 소식지","카드뉴스","행사 포스터","홍보 이미지·삽화","인포그래픽"],
- msg:["참여 안내","신청 접수 확인","선정·참여 확정","대기 안내","일정 변경·취소","참여 전 준비물","불참·안부 확인","다음 회차 안내","감사 문자"],
+ msg:["참여 안내","일정 변경·취소","대기 안내","신청 접수 확인","선정·참여 확정","참여 전 준비물","불참·안부 확인","감사 문자","상담 일정 확인","송영·인계 안내","접근 지원 안내","회신·참여 동의","어려운 이야기 전하기"],
  life:["프로그램 필요성과 대상","참여자 모집·선정","회기별 운영","인력과 역할 분담","예산·물품 준비","안전·접근성 점검","우천·불참 대안","성과 지표와 만족도","결과보고·다음 운영"]
 };
 const GH_PROGRAM_WORK=[
@@ -4135,18 +4135,38 @@ function ghServiceSource(g,p){
  if(p==="주간이용센터")return "https://www.a-sak.or.kr/services/programs3.php";
  return g.url;
 }
-const GH_SECTOR_STATE={promo:{g:0,p:0},msg:{g:0,p:0},life:{g:0,p:0}};
-function ghScenarios(c){
+const GH_SECTOR_STATE={promo:{g:0,p:0,channel:null},msg:{g:0,p:0},life:{g:0,p:0}};
+const GH_PROMO_CHANNELS=BY["sns-post"].chips.find(x=>x.k==="where").opts;
+const GH_PROMO_SNS="인스타그램·블로그·카카오톡";
+function ghPromoChannel(currentWhere){
+ const channel=GH_SECTOR_STATE.promo.channel||currentWhere||GH_PROMO_CHANNELS[0];
+ return '<fieldset class="gh-promo-channel"><legend>어디에 올리나요?</legend><div class="chips">'+GH_PROMO_CHANNELS.map(x=>'<button type="button" class="pill b3d'+(channel===x?' main':'')+'" data-gh-promo-channel="'+esc(x)+'" aria-pressed="'+(channel===x)+'">'+esc(x)+'</button>').join('')+'</div><p class="hint">채널을 고르면 해당 채널 원고가 열리고, 아래에서 원하는 홍보물 유형을 바꿀 수 있어요.</p></fieldset>';
+}
+function ghFieldScenarios(c){
  const i={promo:0,msg:1,life:2}[c],g=GH_SECTOR_STATE[c].g;
  const sector=options.catalog[g],program=sector.items[GH_SECTOR_STATE[c].p],specific=GH_PROGRAM_WORK.find(x=>x[0].test(program));
- return Array.from(new Set((specific?specific[i+1]:[]).concat(GH_FIELD_WORK[g]?.[i]||[],GH_COMMON_WORK[c])));
+ return (specific?specific[i+1]:[]).concat(GH_FIELD_WORK[g]?.[i]||[]);
+}
+function ghScenarios(c){
+ const common=GH_COMMON_WORK[c],fields=c==="msg"&&!GH_SECTOR_STATE[c].programOn?[]:ghFieldScenarios(c);
+ return Array.from(new Set(c==="msg"?common.concat(fields):fields.concat(common)));
+}
+function ghSmsDistrict(part){
+ const st=GH_SECTOR_STATE.msg,g=options.catalog[st.g];
+ const chips=(list)=>'<div class="gh-scenario-grid">'+list.map(x=>'<button class="b3d" type="button" data-gh-scenario="msg:'+ghScenarios("msg").indexOf(x)+'" aria-pressed="'+(st.picked===x)+'">'+esc(x)+'</button>').join('')+'</div>';
+ return part!=="program"?'<section class="gh-work-sector gh-sms-choices"><h3>어떤 문자를 보내나요?</h3>'+chips(GH_COMMON_WORK.msg)+'</section>':
+  '<details class="gh-sms-program"'+(st.programOn?' open':'')+'><summary>특정 사업·프로그램 문자'+(st.programOn?' · '+esc(g.items[st.p]):'')+'</summary>'+
+  '<div class="gh-sector-program"><label for="gh-sms-area">사업 분야</label><select id="gh-sms-area" data-gh-sector="msg">'+options.catalog.map((z,i)=>'<option value="'+i+'"'+(i===st.g?' selected':'')+'>'+esc(z.label)+'</option>').join('')+'</select>'+
+  '<label for="gh-sector-program">프로그램</label><select id="gh-sector-program" data-gh-program="msg"><option value="-1"'+(!st.programOn?' selected':'')+'>선택 안 함</option>'+g.items.map((p,i)=>'<option value="'+i+'"'+(st.programOn&&i===st.p?' selected':'')+'>'+esc(p)+'</option>').join('')+'</select></div>'+
+  (st.programOn?'<h3>이 사업에서 자주 보내는 문자</h3>'+chips(ghFieldScenarios("msg")):'')+'</details>';
 }
 function ghDefaultScenario(c){
  const list=ghScenarios(c),saved=GH_SECTOR_STATE[c].picked;
- const ix=list.indexOf(saved||({msg:"참여 안내",promo:"인스타그램·블로그·카카오톡"}[c]));
+ const ix=list.indexOf(saved||({msg:"참여 안내",promo:GH_PROMO_SNS}[c]));
  return ix<0?0:ix;
 }
 function ghDistrict(c){
+ if(c==="msg")return ghSmsDistrict();
  const s=GH_SECTOR_STATE[c],g=options.catalog[s.g],ps=g.items;
  return '<section class="gh-work-sector"><fieldset><legend>1. 복지관 사업 분야</legend><div class="chips">'+options.catalog.map((x,i)=>'<label class="chip"><input type="radio" name="gh-sector" data-gh-sector="'+c+'" value="'+i+'"'+(s.g===i?' checked':'')+'><span>'+esc(x.label)+'</span></label>').join('')+'</div></fieldset>'+
   '<div class="gh-sector-program"><label for="gh-sector-program">2. 실제 사업·프로그램</label><select id="gh-sector-program" data-gh-program="'+c+'">'+ps.map((x,i)=>'<option value="'+i+'"'+(s.p===i?' selected':'')+'>'+esc(x)+'</option>').join('')+'</select><a href="'+esc(ghServiceSource(g,ps[s.p]))+'" target="_blank" rel="noopener">공식 사업소개 ↗</a></div>'+
@@ -4154,7 +4174,7 @@ function ghDistrict(c){
   '<p class="hint">사업명은 복지관 공식 안내 기준입니다. 아래 선택지는 업무 예시이며 실제 모집 일정은 아닙니다.</p></section>';
 }
 function ghOpenScenario(c,i){
- const q=GH_SECTOR_STATE[c],g=options.catalog[q.g],program=g.items[q.p],what=ghScenarios(c)[i],ctx={program,what,group:g.label,check:g.check,area:g.area};
+ const q=GH_SECTOR_STATE[c],g=options.catalog[q.g],program=c==="msg"&&!q.programOn?"":g.items[q.p],what=ghScenarios(c)[i],ctx={program,what,group:g.label,check:g.check,area:g.area};
  if(!what)return;
  q.picked=what;
  if(c==="life"){options.plan(ctx);return;}
@@ -4163,7 +4183,7 @@ function ghOpenScenario(c,i){
  if(!ghScenarioDrafts[key]){
    const active=ghScenarioRoute,live=values[k];ghScenarioRoute=null;delete values[k];const fresh=getVals(t);ghScenarioRoute=active;if(live)values[k]=live;else delete values[k];
    fresh.v._work=ctx;
-   if(c==="msg")fresh.v.reader=(q.g===1||q.g===4)?"보호자·가족":q.g===9?"후원자·봉사자":"이용자";
+   if(c==="msg")fresh.v.reader=(q.programOn&&(q.g===1||q.g===4))?"보호자·가족":q.programOn&&q.g===9?"후원자·봉사자":"이용자";
    if(k==="notice")fresh.v.purpose=/변경|휴강|취소/.test(what)?"일정 변경·취소":/모집|신청/.test(what)?"참여자 모집":/접근|이동/.test(what)?"안전·접근성 안내":"이용·행사 안내";
    if(k==="sns-post"&&what.includes("홈페이지"))fresh.v.where="복지관 홈페이지";
    if(k==="poster"||k==="cardnews"||k==="infographic")fresh.v.title=program;
@@ -4171,7 +4191,10 @@ function ghOpenScenario(c,i){
    ghScenarioDrafts[key]=fresh;
  }
  const left=app.querySelector(".gh-always-split .tin"),y=left?.scrollTop||0;
- ghScenarioRoute={k,cat:c,state:ghScenarioDrafts[key]};current=t;
+ const draft=ghScenarioDrafts[key];
+ if(c==="promo"&&k==="sns-post"&&q.channel)draft.v.where=q.channel;
+ if(c==="msg"){if(q.tone)draft.v.tone=q.tone;if(q.reader)draft.v.reader=q.reader;}
+ ghScenarioRoute={k,cat:c,state:draft};current=t;
  renderTask(t);
  const shown=app.querySelector(".gh-always-split .tin");if(shown)shown.scrollTop=y;
 }
@@ -4418,23 +4441,123 @@ function promoNotice(v){
  const lead=v.tone==="쉬운 말로"?"알아두면 좋은 내용을 아래에 정리했어요.":v.tone==="따뜻하게"?"참여하시기 편하도록 필요한 내용을 모았습니다.":"아래 내용을 확인해 주시기 바랍니다.";
  return [["복지관 안내문 원고",[`[${v.purpose}]${d.title?" "+d.title:""}`,`${v.reader} 여러분, 안녕하세요. ${PROMO_ORG}입니다. ${lead}`,d.lines.map(promoLine).join("\n"),PROMO_ORG].filter(Boolean).join("\n\n")]];
 }
-function ghWelfareMsg(v){
- const x=v._work||{}, input=(v.body||"").trim();
- const examples=[
-  [/변경|휴강|취소|보강/,"[기존 일시]에서 [변경된 일시]로 바뀌었습니다.\n장소: [장소]\n문의: [공식 문의처]"],
-  [/대기/,"신청을 접수했습니다. 대기 상태이며, 참여 가능 여부는 [안내 시점]에 알려 드리겠습니다."],
-  [/준비물|실습 기기|준비 확인/,"일시: [날짜·시간]\n준비물: [확인한 준비물]\n준비하기 어려우면 [공식 문의처]로 알려 주세요."],
-  [/안부|불참/,"최근 잘 지내고 계신지 안부 전합니다. 참여 일정이나 필요한 지원을 편하게 알려 주세요."],
-  [/감사/,"[함께해 주신 내용]에 감사드립니다.\n[공유할 활동 소식 또는 다음 일정]"],
-  [/선정|확정/,"[선정 또는 참여 결과]를 알려 드립니다.\n일시: [날짜·시간] / 장소: [장소]\n회신: [방법·기한]"],
-  [/접수|회신/,"신청 내용을 확인했습니다.\n[추가로 확인할 내용] / 회신 기한: [기한]"],
-  [/송영|인계|탑승|전달/,"만나는 곳: [장소]\n만나는 시간: [시간]\n변경이 필요하다면 [공식 문의처]로 알려 주세요."]
+const SMS_LABELS={
+ "일시":"when","날짜":"when","시간":"when","행사일시":"when","바뀐전달일시":"newAt",
+ "변경":"newAt","변경일시":"newAt","변경시간":"newAt","변경된일시":"newAt","새일시":"newAt","기존":"oldAt","기존일시":"oldAt","원래일시":"oldAt",
+ "장소":"where","만나는곳":"where","집결장소":"where","출입구":"access","이동지원":"access","접근성":"access","준비물":"items",
+ "사유":"why","이유":"why","상황":"why","회신":"reply","답장":"reply","회신방법":"reply","참석여부":"reply",
+ "회신기한":"due","답장기한":"due","기한":"due","마감":"due","안내시점":"due","문의":"contact","문의처":"contact",
+ "프로그램":"program","프로그램명":"program","행사명":"program","순번":"queue","대기순번":"queue","선정결과":"status",
+ "건강이나안부":"text","활동":"text","활동내용":"text","후원내용":"text","감사한일":"text","전할내용":"text",
+ "대안":"alt","대체일정":"alt","다음일정":"alt","신청":"how","신청방법":"how","참여방법":"how","방법":"how","부탁":"reply"
+};
+function smsKind(w){
+ const map=[
+  [/취소|변경|보강|휴강/,"change"],[/안부|불참|근황|적응 확인/,"check"],[/감사|후원물품/,"thanks"],[/어려운|고충|불편/,"care"],
+  [/대기|순번|배정/,"wait"],[/준비물|기기·보조|과제 제출/,"prep"],[/탑승|송영|인계|집결|수령|전달/,"meet"],
+  [/신청 접수|접수 확인|자료 요청|사전 접수/,"receipt"],[/선정|참여 확정/,"selected"],[/접근|휠체어|이동 지원|수어/,"access"],
+  [/예약|조율|방문|상담/,"visit"],[/회신|동의/,"reply"]
  ];
- const example=examples.find(a=>a[0].test(x.what||""))?.[1]||"일시: [날짜·시간]\n장소: [장소]\n확인할 내용: [준비물·참여 방법·회신 기한]";
- const reader={"이용자":"이용자님","보호자·가족":"보호자님과 가족 여러분","지역 주민":"지역 주민 여러분","후원자·봉사자":"후원자님과 자원봉사자님","협력기관":"협력기관 담당자님","복지관 직원":"직원 여러분"}[v.reader];
- const intro=v.tone==="쉬운 말로"?"꼭 알아두실 내용을 알려 드려요.":v.tone==="부드럽게"?"확인하실 내용을 전해 드려요.":"아래와 같이 안내드립니다.";
- const sign=v.tone==="부드럽게"?"궁금한 점은 편하게 알려 주세요.":v.tone==="쉬운 말로"?"모르는 것이 있으면 복지관에 물어봐 주세요.":"감사합니다.";
- return [["보낼 문자",[`[${x.program||"용인시기흥장애인복지관"}${x.what?" · "+x.what:""}]`,`${reader}, 안녕하세요. ${intro}`,input||example,sign].join("\n")]];
+ return map.find(a=>a[0].test(w||""))?.[1]||"notice";
+}
+const SMS_HINT={
+ notice:"일시: 12월 5일 오후 2시 / 장소: 복지관 2층 / 회신기한: 12월 3일 / 회신: 참여 여부",
+ change:"기존: 목요일 오후 2시 / 변경: 금요일 오후 3시 / 사유: 교육실 점검 / 회신: 바뀐 시간에 참여 가능한지",
+ wait:"대기순번: 3번 / 안내시점: 12월 8일 / 문의: 담당 부서",
+ prep:"일시: 금요일 오후 2시 / 준비물: 편한 옷, 물병 / 문의: 담당 부서",
+ meet:"일시: 금요일 오후 2시 / 장소: 복지관 정문 / 회신: 이동 지원이 필요한지",
+ check:"전할 내용: 지난 회차에 못 뵀어요. / 다음 일정: 12월 5일 / 회신: 다음 회차가 편한지",
+ thanks:"감사한 일: 원예교실에 화분을 보내 주셨어요. / 다음 일정: 완성한 화분을 전시할 예정이에요.",
+ care:"상황: 변경 공지가 늦었어요. / 대안: 가능한 날짜를 개별 안내 / 회신: 편하신 시간",
+ receipt:"전할 내용: 신청서를 받았어요. / 안내시점: 12월 8일 / 문의: 담당 부서",
+ selected:"선정결과: 참여 확정 / 일시: 금요일 오후 2시 / 장소: 복지관 2층",
+ access:"장소: 복지관 1층 / 접근성: 정문 경사로, 엘리베이터 / 문의: 담당 부서",
+ visit:"일시: 금요일 오후 2시 / 장소: 복지관 상담실 / 회신: 시간이 괜찮은지",
+ reply:"회신: 참석 가능 여부 / 회신기한: 12월 3일 / 방법: 이 문자에 답장"
+};
+function ghWelfareMsg(v){
+ const x=v._work||{}, raw=(v.body||"").trim(), kind=smsKind(x.what), f={};
+ const norm=s=>s.replace(/[\s·]/g,"").trim(), sentence=s=>sent(s.replace(/^[-•]\s*/,""));
+ const amend=s=>{
+  let t=s;
+  if(v.tone==="정중하게")t=t.replace(/했어요(?=[.!?\s]|$)/g,"했습니다").replace(/있어요(?=[.!?\s]|$)/g,"있습니다").replace(/없어요(?=[.!?\s]|$)/g,"없습니다").replace(/(?:이에요|예요)(?=[.!?\s]|$)/g,"입니다");
+  return sentence(t);
+ };
+ const memo=[];
+ raw.split(/\r?\n|\s+\/\s+|;\s*/).map(a=>a.trim()).filter(Boolean).forEach(line=>{
+  const m=line.match(/^([^:：]{1,26})[:：]\s*(.+)$/), key=m&&SMS_LABELS[norm(m[1])];
+  if(key){ if(key==="text")memo.push(m[2]);else f[key]=m[2]; }
+  else if(!f.when&&/^\d{1,2}월\s*\d{1,2}일/.test(line)&&!/[다요][.!?]?$/.test(line))f.when=line;
+  else memo.push(line);
+ });
+ const friendly=v.tone==="따뜻하게"||v.tone==="부드럽게",easy=v.tone==="쉬운 말로", plain=friendly||easy;
+ const reader={"이용자":"이용자님","보호자·가족":"보호자님","지역 주민":"주민 여러분","후원자·봉사자":"후원자·자원봉사자 여러분","협력기관":"담당자님","복지관 직원":"선생님"}[v.reader]||"이용자님";
+ const org="용인시기흥장애인복지관",name=f.program||x.program||"[프로그램명]";
+ const greeting=friendly?"안녕하세요, "+reader+". "+org+"입니다.":easy?"안녕하세요. "+org+"이에요.":reader+", 안녕하세요. "+org+"입니다.";
+ const memoText=memo.map(amend).join("\n"), label=(n,v)=>v?n+": "+v:"", infoTime=f.newAt||f.when, includesMemo=!!memoText;
+ const ask=(request,deadline)=>{
+  let a=(request||"").replace(/[.!?。]$/,"");
+  if(a&&/주세요|바랍니다|부탁합니다|부탁드립니다|주십시오/.test(a))return sent(a)+(deadline?" (회신 기한: "+deadline+")":"");
+  return (deadline?deadline+"까지 ":"")+(a?(a.endsWith("지")?a:josa(a,"을","를")):"참여 여부를")+(friendly?" 편하게 알려 주세요.":easy?" 답장해 주세요.":" 회신해 주시면 감사하겠습니다.");
+ };
+ let lead="",facts=[],action="",end="",tiny=[];
+ const at=(need=false)=>[label("일시",infoTime||(need?"[날짜·시간]":"")),label("장소",f.where||(need?"[장소]":""))].filter(Boolean);
+ switch(kind){
+  case "change":{
+   const cancelled=/취소|휴강/.test(x.what||"")&&/취소|휴강/.test([raw,f.status].join(" "))&&!infoTime;
+   lead=cancelled?name+(plain?" 일정이 취소됐어요.":" 일정이 취소되어 안내드립니다."):name+(plain?" 일정이 달라져 알려 드려요.":" 일정 변경 사항을 안내드립니다.");
+   facts=[label("기존 일정",f.oldAt),label(cancelled?"변경 사항":"변경 일정",cancelled?(f.status||"취소"):infoTime||(includesMemo?"":"[바뀐 일시 또는 취소 여부]")),label("장소",f.where),label("변경 이유",f.why),label("대안",f.alt)];
+   action=f.reply||f.due?ask(f.reply,f.due):friendly?"바뀐 일정이 어렵다면 편하게 알려 주세요.":"참여가 어려우신 경우 복지관에 알려 주시기 바랍니다.";
+   end=easy?"일정이 바뀌어 죄송해요.":"일정에 불편을 드려 죄송합니다.";tiny=[label("변경",cancelled?"취소":infoTime),label("장소",f.where)];break;}
+  case "wait":
+   lead=name+(plain?" 신청을 받았어요. 지금은 대기 상태예요.":" 신청을 접수했으며 현재 대기 상태입니다.");
+   facts=[label("대기 순번",f.queue),label("다시 안내드릴 시점",f.due||(!raw?"[확인된 안내 시점]":""))];
+   action="참여가 확정되면 복지관에서 따로 연락드리겠습니다.";end=friendly?"기다려 주셔서 고맙습니다.":"기다려 주셔서 감사합니다.";tiny=facts;break;
+  case "receipt":
+   lead=name+(plain?" 신청서가 잘 도착했어요.":" 신청 내용을 확인했습니다.");
+   facts=[label("다음 안내",f.due||(!raw?"[안내 시점]":""))];
+   action=f.reply?ask(f.reply):"신청 접수와 참여 확정은 다릅니다. 결과는 별도로 안내드리겠습니다.";end="신청해 주셔서 감사합니다.";tiny=facts;break;
+  case "selected":
+   lead=name+(plain?" 신청 결과를 알려 드려요.":" 신청 결과를 안내드립니다.");
+   facts=[label("결과",f.status||(!raw?"[선정·참여 결과]":"")), ...at(!raw)];
+   action=f.reply||f.due?ask(f.reply,f.due):/미선정|탈락|불선정/.test(f.status||"")?"결과에 대해 궁금한 점은 복지관에 문의해 주세요.":"참여가 어려우시면 복지관에 알려 주세요.";end="신청해 주셔서 감사합니다.";tiny=facts;break;
+  case "prep":
+   lead=name+(plain?"에 오시기 전에 챙길 것을 알려 드려요.":" 참여 전 준비 사항을 안내드립니다.");
+   facts=[label("준비물",f.items||(includesMemo?"":"[확인된 준비물]")),...at(false)];
+   action="준비하기 어렵거나 대체 물품이 필요한 경우 편하게 알려 주세요.";tiny=facts;break;
+  case "meet":
+   lead=name+(plain?"에 오실 때 만나는 시간과 장소를 확인해 주세요.":"의 집결·인계 일정을 안내드립니다.");
+   facts=[label("만나는 시간",infoTime||(includesMemo?"":"[시간]")),label("만나는 장소",f.where||(includesMemo?"":"[장소]")),label("이동 지원",f.access)];
+   action=f.reply||f.due?ask(f.reply,f.due):"시간이나 장소를 조정해야 한다면 미리 알려 주세요.";tiny=facts;break;
+  case "check":
+   lead=friendly?"요즘 어떻게 지내세요? 안부가 궁금해 연락드렸어요.":easy?"잘 지내세요? 안부를 묻고 싶었어요.":"최근 잘 지내고 계신지 안부를 여쭙습니다.";
+   facts=[label("다음 활동",f.alt||infoTime)];
+   action=f.reply?ask(f.reply,f.due):"다음 참여나 필요한 지원이 있다면 편하실 때 알려 주세요.";tiny=facts;break;
+  case "thanks":
+   lead=friendly?"마음을 보태 주셔서 고맙습니다. 따뜻한 마음을 꼭 전하고 싶었어요.":easy?"함께해 주셔서 고마워요.":"함께해 주신 데 깊이 감사드립니다.";
+   facts=[label("다음 소식",f.alt)];action=!raw?"[감사드릴 일과 실제 확인한 소식]":"";tiny=facts;break;
+  case "care":
+   lead=plain?"말씀드리기 조심스럽지만, 함께 해결할 방법을 찾고 싶어 연락드려요.":"상황을 정확히 공유하고 함께 해결할 방법을 찾고자 연락드립니다.";
+   facts=[label("확인한 상황",f.why),label("제안드리는 방법",f.alt)];
+   action=f.reply||f.due?ask(f.reply,f.due):"사정이나 다른 의견이 있으시면 편하게 말씀해 주세요.";tiny=facts;break;
+  case "access":
+   lead=name+(plain?"에 참여하실 때 이용할 수 있는 길과 지원을 알려 드려요.":" 이용에 필요한 이동·접근 정보를 안내드립니다.");
+   facts=[label("이동·접근 지원",f.access||(!raw?"[출입구·이동 경로·지원 방법]":"")),...at(false)];action="별도 지원이 필요하시면 방문 전 알려 주세요.";tiny=facts;break;
+  case "visit":
+   lead=name+(plain?" 일정이 괜찮으실지 확인하려고 연락드려요.":" 일정 확인을 위해 연락드립니다.");
+   facts=at(!raw);action=ask(f.reply||"제안드린 시간이 가능한지",f.due);tiny=facts;break;
+  case "reply":
+   lead=name+(plain?" 참여 준비를 위해 확인할 것이 있어요.":" 운영 준비를 위해 확인을 부탁드립니다.");
+   facts=[label("회신 방법",f.how),...at(false)];action=ask(f.reply,f.due||(!raw?"[회신 기한]":""));tiny=facts;break;
+  default:
+   lead=name+(friendly?"에 참여하실 때 필요한 내용을 알려 드려요.":easy?" 참여 방법을 알려 드려요.":" 참여에 필요한 사항을 안내드립니다.");
+   facts=[...at(!raw),label("준비물",f.items),label("참여 방법",f.how)];action=f.reply||f.due?ask(f.reply,f.due):"참여 관련 문의나 필요한 지원이 있으면 알려 주세요.";tiny=facts;
+ }
+ const contact=label("문의",f.contact), head="["+name+" · "+(x.what||"참여 안내")+"]";
+ const join=(a,s)=>a.filter(Boolean).join(s);
+ const full=join([greeting,lead,join(facts,"\n"),memoText,action,contact,end],"\n");
+ const brief=join([head,kind==="check"||kind==="thanks"||kind==="care"?lead:"",join(tiny.slice(0,3)," / "),memoText,action,contact],"\n");
+ return [["바로 보낼 문자",full],["짧은 문자",brief]];
 }
 const OUTS = {
  "gh-welfare-msg":v=>ghWelfareMsg(v),
@@ -4656,15 +4779,16 @@ function outsHTML(t){
 function renderTask(t){
   const st = getVals(t),district=ghScenarioRoute?.k===t.id?ghScenarioRoute.cat:null;
   const isFav = favs.includes(t.id);
-  const chipsHTML = (t.chips||[]).map(c=>`<fieldset><legend>${esc(c.label)}</legend><div class="chips">${
+  const chipsHTML = (t.chips||[]).filter(c=>!(district==="promo"&&t.id==="sns-post"&&c.k==="where")).map(c=>`<fieldset><legend>${esc(c.label)}</legend><div class="chips">${
       c.opts.map((o,i)=>`<label class="chip"><input type="radio" name="c-${c.k}" id="c-${t.id}-${c.k}-${i}" value="${esc(o)}" data-chip="${c.k}" ${st.v[c.k]===o?"checked":""}><span>${esc(o)}</span></label>`).join("")
     }</div></fieldset>`).join("");
   const inputsHTML = (t.inputs||[]).map(i=>{
     const id = `f-${t.id}-${i.k}`;
     const lab = `<label for="${id}">${esc(i.label)} ${i.opt?"<small>(선택)</small>":""}</label>`;
-    const ctl = i.area ? `<textarea id="${id}" data-input="${i.k}" placeholder="${esc(phOf(id,i.ph))}">${esc(st.v[i.k])}</textarea>`
+    const hint=t.id==="gh-welfare-msg"?SMS_HINT[smsKind(st.v._work?.what)]:i.ph;
+    const ctl = i.area ? `<textarea id="${id}" data-input="${i.k}" placeholder="${esc(phOf(id,hint))}">${esc(st.v[i.k])}</textarea>`
                        : `<input id="${id}" type="text" data-input="${i.k}" placeholder="${esc(phOf(id,i.ph))}" value="${esc(st.v[i.k])}">`;
-    return `<div class="field">${lab}<div class="with-mic">${ctl}${vmic(id)}</div>${exHint(id,i.ph)}</div>`;
+    return `<div class="field">${lab}<div class="with-mic">${ctl}${vmic(id)}</div>${exHint(id,hint)}</div>`;
   }).join("");
   const related = district?[]:TASKS.filter(x=>x.cat===t.cat && x.id!==t.id && !x.hideOld);
 
@@ -4686,7 +4810,7 @@ function renderTask(t){
           </div>
           <p class="status" id="status" role="status" aria-live="polite">확인란에 체크하면 버튼이 켜져요.</p>
         </div>`;
-  app.innerHTML = `<div class="tpage fade cat-${t.cat}${district?" gh-always-split":""}">
+  app.innerHTML = `<div class="tpage fade cat-${t.cat}${district?" gh-always-split"+(district==="msg"?" gh-sms-direct":""):""}">
     <div class="fbar">
       ${district?'<button class="back b3d" type="button" data-home>← 업무도우미</button>':'<button class="back b3d" type="button" data-catopen="'+t.cat+'">← '+CATS[t.cat].name+'</button>'}
       <h2>${district?esc(CATS[district].name):((TASK_EM[t.id]||"")+" "+esc(t.title))}</h2>
@@ -4697,17 +4821,18 @@ function renderTask(t){
     <div class="ftabs" role="tablist"><button type="button" role="tab" class="on" data-ttab="in">✍️ 고르기·채우기</button><button type="button" role="tab" data-ttab="out">${t.plan?"📋 계획서":t.cal?"📅 식단표":t.draft?"완성 원고":hasOut?"💬 완성 문구":visual?"이미지 제작 프롬프트":"✨ AI에게 맡기기"}</button></div>
     <div class="tsplit">
       <section class="tin" aria-label="고르기와 채우기">
-        ${district?ghDistrict(district)+'<h3 class="gh-work-title">'+esc(t.title)+'</h3>':""}
+        ${district?(district==="promo"?ghPromoChannel(t.id==="sns-post"?st.v.where:null):"")+ghDistrict(district)+(district==="msg"?"":'<h3 class="gh-work-title">'+esc(t.title)+'</h3>'):""}
         ${t.plan?`<div class="plan-tpl"><b>우리 시설에서 쓰는 계획서 양식이 있나요?</b><span>양식을 올리면 아래 내용이 그 양식 칸에 그대로 들어가요.</span><label class="pill b3d main" for="plan-att">우리 시설 서식 올리기</label></div>`:""}
         ${chipsHTML}
         <div class="divider"></div>
         ${inputsHTML}
+        ${district==="msg"?ghSmsDistrict("program"):""}
         ${t.plan?planCustHTML(t)+`<div style="margin-top:14px">${signHTML(PFORM)}</div>`:""}
         ${t.draft?"":'<p class="hint">비워둔 칸은 [ ]로 남아요.</p>'}
         ${attachHTML(t,st)}
       </section>
       <section class="tout" aria-label="결과" tabindex="-1">
-        ${district?'<p class="gh-scenario-tip"><strong>'+esc(st.v._work.program)+'</strong> · '+esc(st.v._work.what)+'</p>':""}
+        ${district?'<p class="gh-scenario-tip"><strong>'+esc(st.v._work.program||st.v._work.what)+'</strong>'+(st.v._work.program?' · '+esc(st.v._work.what):'')+'</p>':""}
         ${t.cal?`<div class="plan-box"><div class="plan-head"><b>일주일 식단표 + 장보기 목록</b><span>있는 재료를 먼저 쓰도록 짜요</span></div>
           <div class="paper plan-paper menu-paper" id="menu-pv">${blocksHTML(menuBlocks(st.v))}</div>
           <div class="plan-btns"><button type="button" class="pill b3d main" id="menu-down">워드로 받기</button><button type="button" class="pill b3d" id="menu-copy">글로 복사</button></div>
@@ -4824,6 +4949,21 @@ function go(hash){ if(typeof REC!=="undefined" && REC.on && !String(hash).starts
 function goHome(){ if(REC.on)recStop(); options.home(); }
 
 app.addEventListener("click",e=>{
+ const ghChannel=e.target.closest("[data-gh-promo-channel]");
+ if(ghChannel){
+   const value=ghChannel.dataset.ghPromoChannel;
+   GH_SECTOR_STATE.promo.channel=value;
+   if(current?.id==="sns-post"&&ghScenarioRoute?.cat==="promo"){
+     getVals(current).v.where=value;rebuild(current);
+     app.querySelectorAll("[data-gh-promo-channel]").forEach(b=>{const on=b===ghChannel;b.classList.toggle("main",on);b.setAttribute("aria-pressed",String(on));});
+   }else{
+     const i=ghScenarios("promo").indexOf(GH_PROMO_SNS);
+     if(i>=0)ghOpenScenario("promo",i);
+     const chosen=app.querySelector("[data-gh-promo-channel][aria-pressed=true]");
+     if(chosen){const tin=chosen.closest(".tin");if(tin)tin.scrollTop=0;chosen.focus({preventScroll:true});}
+   }
+   return;
+ }
   const o = e.target.closest("[data-open]"); if(o){ go("t-"+o.dataset.open); return; }
   const jump=e.target.closest("[data-gh-result-jump]");if(jump){const out=app.querySelector(".gh-always-split .tout");out?.focus({preventScroll:true});out?.scrollIntoView({block:"start",behavior:"instant"});return;}
   const scenario=e.target.closest("[data-gh-scenario]"); if(scenario){const key=scenario.dataset.ghScenario,[c,i]=key.split(":");ghOpenScenario(c,Number(i));if(c!=="life")app.querySelector('[data-gh-scenario="'+key+'"]')?.focus({preventScroll:true});return;}
@@ -4940,8 +5080,10 @@ app.addEventListener("click",e=>{
 app.addEventListener("change",e=>{
  const sector=e.target.dataset.ghSector,program=e.target.dataset.ghProgram;
  if(sector||program){const k=sector||program,s=GH_SECTOR_STATE[k];
-   if(sector){s.g=Number(e.target.value);s.p=0;}else{s.p=Number(e.target.value);}
-   renderCat(k);const focus=app.querySelector(sector?"[data-gh-sector]:checked":"#gh-sector-program");focus?.focus({preventScroll:true});return;
+   if(sector){s.g=Number(e.target.value);s.p=0;if(k==="msg")s.programOn=true;}else{
+    const p=Number(e.target.value);if(k==="msg")s.programOn=p>=0;s.p=Math.max(0,p);
+   }
+   renderCat(k);const focus=app.querySelector(sector?(k==="msg"?"#gh-sms-area":"[data-gh-sector]:checked"):"#gh-sector-program");focus?.focus({preventScroll:true});return;
  }
 
   if(e.target.id==="form-file-input" && current && e.target.files[0]){
@@ -4982,7 +5124,7 @@ app.addEventListener("change",e=>{
   if(e.target.id==="fpantry"){ fr.pantry=e.target.checked; refreshFridge(); return; }
   if(!current) return;
   const c = e.target.closest("[data-chip]");
-  if(c){ getVals(current).v[c.dataset.chip] = c.value; rebuild(current); }
+  if(c){ getVals(current).v[c.dataset.chip] = c.value;if(current.id==="gh-welfare-msg"&&["tone","reader"].includes(c.dataset.chip))GH_SECTOR_STATE.msg[c.dataset.chip]=c.value;rebuild(current); }
   if(e.target.id==="safe-check"){
     document.getElementById("copy-btn").disabled = !e.target.checked&&!VISUAL_TASKS.has(current.id);
     app.querySelectorAll(".ai-link").forEach(a=>a.setAttribute("aria-disabled",String(!e.target.checked)));

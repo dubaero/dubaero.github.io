@@ -1077,3 +1077,11 @@ details.plan-more .aibar{border-style:dashed}
 .gh-always-split .gh-scenario-grid button[aria-pressed=true]{background:#e2f3eb;color:#124f3b;border-color:#70a891;font-weight:800}
 .gh-always-split .tout{scroll-margin-top:8px}
 @media(max-width:859px){.gh-always-split .tsplit .tin,.gh-always-split .tsplit .tout{display:flex!important}.gh-always-split .gh-result-jump{display:block;align-self:start;margin:3px 0;padding:5px 9px;border:1px solid #b8d3c6;background:#eef7f1;border-radius:6px}}
+
+.gh-sms-direct .tin .chips{gap:4px}.gh-sms-direct .tin .chip span{min-height:32px!important;padding:3px 8px;font-size:13px}
+.gh-sms-direct .tin .chip span::before{width:14px;height:14px}.gh-sms-direct .tin fieldset{margin:0}
+.gh-sms-direct .out-text{min-height:100px}.gh-sms-direct .tout .out-item{padding:7px 9px}
+.gh-sms-direct .tout .out-item:first-child textarea{min-height:120px}.gh-sms-program summary{cursor:pointer;font-size:13px;font-weight:800}
+.gh-sms-program h3{font-size:14px}.gh-sms-program .gh-sector-program label{font-size:12px}
+.gh-promo-channel{background:#eef7f2;border:1px solid #bad4c7;border-radius:8px;padding:6px 8px!important;margin:0}.gh-promo-channel legend{font-size:14px!important;font-weight:850}
+.gh-promo-channel .hint{font-size:12px;margin:2px 0 0}.gh-promo-channel button[aria-pressed=true]{background:#23674f;color:white;border-color:#23674f}
