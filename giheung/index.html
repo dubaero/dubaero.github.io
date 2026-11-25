@@ -1517,7 +1517,7 @@ html:has(#v-mind:not([hidden])),#v-mind{zoom:1!important}
  #v-promo2 .gh-entered-facts dl div{grid-template-columns:66px minmax(0,1fr)}
 }
 @media(max-width:380px){#v-promo2 .gh-entered-facts dl{grid-template-columns:minmax(0,1fr)}}
-#v-promo2 .gh-promo-picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin:0 0 6px}
+#v-promo2 .gh-promo-picks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin:0 0 6px}
 #v-promo2 .gh-promo-picks label{display:flex;flex-direction:column;gap:2px;font-size:11px;font-weight:750;color:#285343;min-width:0}
 #v-promo2 .gh-promo-picks select{width:100%;min-width:0;min-height:25px;border:1px solid #c1d4ca;border-radius:6px;background:#f4f8f5;color:#24352c;font-size:12px;padding:2px 4px}
 #v-promo2 .gh-promo-picks select:focus-visible{outline:2px solid #2e7d64;outline-offset:1px}
@@ -1554,6 +1554,9 @@ body:has(#v-promomenu:not([hidden]))>main.wrap{width:100%;max-width:1160px}
 .gh-style-options{margin:5px 0 7px;padding:6px 7px 0;background:#f6faf7;border:1px solid #d7e5dd;border-radius:7px}
 .gh-style-options .gh-pick{margin:0 0 5px}.gh-style-options .chips{gap:4px}.gh-style-options .gh-chip span{min-height:24px;padding:4px 6px}
  .gh-promo-drafts .gh-article{border-color:#ccded3}.gh-promo-drafts .gh-copy-read{max-height:clamp(140px,35vh,330px);overflow:auto;padding:6px 7px;border:1px solid #e6cca9;border-radius:7px;scrollbar-width:thin}.gh-char-count{color:#536a5e;white-space:nowrap;font-size:11px}
+#v-promo2 .gh-promo-sector .gh-chip span{min-height:24px;padding:3px 6px}.gh-opening-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:3px 0 7px}
+.gh-opening-grid button{text-align:left;background:#fffaf3;color:#613c25;border:1px solid #e5c4a0;border-radius:6px;padding:5px 6px;font-size:11px;line-height:1.35}
+.gh-opening-grid button[aria-pressed=true]{background:#f5eadc;border-color:#b07546}.gh-opening-grid button b{display:block;color:#5e3422}
 .gh-alt-draft{margin:4px 0;padding:4px 6px;border:1px solid #dce8df;border-radius:6px}.gh-alt-draft summary{cursor:pointer;font-weight:750;color:#295440}
 @media(max-width:620px){.gh-task-cards{grid-template-columns:minmax(0,1fr)}}
 </style>
@@ -7114,6 +7117,12 @@ function prDraft(v,ch,len){
 function prDraftText(v,d){
  return prPractice(v)+d.heading+'\n\n'+d.lead+'\n\n'+d.sections.map(function(x){return d.channel==='인스타그램'&&(x[0]==='해시태그'||x[0]==='짧은 소개'||x[0]==='주요 내용')?x[1]:'■ '+x[0]+'\n'+x[1];}).join('\n\n');
 }
+function prOpeningCards(v){
+ var variants=[['질문형','어떻게 함께할 수 있을까요?'],['이야기형','함께할 시간을 이야기로 풀어요'],['정보형','일정과 대상을 먼저 보여 줘요']];
+ return '<section aria-label="첫 문구를 고르는 예시"><h4 class="gh-story-anchor gh-focus">첫 문구 추천</h4><div class="gh-opening-grid">'+variants.map(function(x){
+  return '<button type="button" data-pr-variant="'+E(x[0])+'" aria-pressed="'+(v.opening===x[0])+'"><b>'+E(x[0])+'</b>'+E(x[1])+'</button>';
+ }).join('')+'</div></section>';
+}
 function prCopyBoard(v){
  var primary=prDraft(v,v.channel,v.length),short=prDraft(v,v.channel,'짧게');
  TXT.promo=prDraftText(v,primary);TXT['promo-ready']=TXT.promo;TXT['promo-short']=prDraftText(v,short);
@@ -7201,7 +7210,7 @@ function prSelect(label,key,values,selected){
 }
 function prPicker(v){
  var g=giGroup(v.group);
- return '<div class="gh-promo-picks">'+prSelect('1. 사업 분야','group',GI_CATALOG.map(function(x){return x.label;}).concat('직접 입력'),v.group)+
+ return '<div class="gh-promo-sector">'+radioPick('1. 사업 분야',GI_CATALOG.map(function(x){return x.label;}).concat('직접 입력'),'pr-group',v.group)+'</div><div class="gh-promo-picks">'+
   prSelect('2. 복지관 프로그램','biz',g?g.items:[''],v.biz)+prSelect('3. 홍보 목적','purpose',PR_PURPOSE,v.purpose)+'</div>';
 }
 function prExample(v){
@@ -7273,6 +7282,7 @@ function promoRight(){
   TXT.promo=prPractice(v)+d.body+'\n\n'+prDetails(v);
   var pair=prIsSocial(v.kind);
   if(pair)preview=prCopyBoard(v);
+  else if(visual)preview=prOpeningCards(v)+preview;
   else if(articleData)preview=prTextCard(v,articleData);
   return '<div class="out-h"><h3>예시와 원픽 프롬프트</h3>'+cbtn('원픽 프롬프트 복사','promo-prompt')+'</div>'+preview+aiStrip('promo-prompt','원픽 프롬프트로 AI 열기')+'<div class="gh-promo-prompt-box">'+outBlock('원픽 · 완성 제작 프롬프트','promo-prompt',prompt)+'</div>'+prFactSheet(v)+selectionSummary(cond)+giGuide(v.biz);
 }
@@ -7602,6 +7612,12 @@ function boot(){
       go(g);return;
     }
     var ag=e.target.closest('[data-ag-tab]');if(ag){AG_TAB=ag.dataset.agTab;rerenderChoice(ag,'data-ag-tab',renderAppGuide);return;}
+    var variant=e.target.closest('[data-pr-variant]');
+    if(variant){
+      ST_PR.opening=variant.dataset.prVariant;
+      var rb=$('#v-promo2 [data-gh-radio=pr-opening][value="'+ST_PR.opening+'"]');if(rb)rb.checked=true;
+      updateOutput('#v-promo2',promoRight);var vb=$('#v-promo2 [data-pr-variant][aria-pressed=true]');if(vb)vb.focus({preventScroll:true});return;
+    }
     var task=e.target.closest('[data-pr-task]');
     if(task){var cfg=PR_TASKS[+task.dataset.prTask];ST_PR.kind=cfg[2];ST_PR.purpose=cfg[3];ST_PR.channel=cfg[4];if(cfg[5])ST_PR.tone=cfg[5];ST_PR.purposePicked=false;go('promo2');return;}
     if(e.target.closest('[data-pr-example]')){prExample(ST_PR);ST_PR.sheetRaw=sheetText(PR_SHEET,Object.assign({memo:ST_PR.memo},ST_PR.fields));renderPromo();return;}
@@ -7674,6 +7690,10 @@ function boot(){
     }
     if(key==='prbiz'||key.startsWith('pr-')){
       ST_PR[key==='prbiz'?'biz':key.slice(3)]=v;
+      if(key==='pr-group'){
+        var g0=giGroup(v),sel=$('#v-promo2 [data-pr-select=biz]');ST_PR.biz=g0?g0.items[0]:'';
+        if(sel){sel.textContent='';(g0?g0.items:['']).forEach(function(x){var o=document.createElement('option');o.value=x;o.textContent=x||'직접 입력';sel.appendChild(o);});sel.value=ST_PR.biz;}
+      }
       if(key==='pr-channel')ST_PR.kind=v==='인스타그램'?'인스타그램':v==='네이버 블로그'?'블로그 초안':(ST_PR.purpose==='활동 후기'?'홈페이지 행사후기 올리기':'홈페이지 안내 글');
       if(key==='pr-channel')qa('#v-promo2 [data-prk]').forEach(function(b){var on=b.dataset.prk===ST_PR.kind;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});
       updateOutput('#v-promo2',promoRight);
