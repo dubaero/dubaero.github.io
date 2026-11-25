@@ -517,7 +517,7 @@ a.lg{text-decoration:none;text-align:center}
 /* 2026.11.25 강의 자료실 상단 카드: PC 한 줄 6칸 × 2줄(총 12개)
    2026.11.25 서정님: "민트·하늘 배경 빼고 깔끔한 하얀색 + 연한 테두리로 통일, 카드도 슬림하게" */
 #room-cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-flow:row;gap:11px}
-#room-cards .room,#room-cards .room:nth-child(3n),#room-cards .room:nth-last-child(-n+3){flex:0 0 auto;width:auto;min-width:0;border:1px solid #E2E8F0;border-top:1px solid #E2E8F0;border-radius:10px;background:#FFFFFF}
+#room-cards .room,#room-cards .room:nth-child(3n),#room-cards .room:nth-last-child(-n+3){flex:0 0 auto;width:auto;min-width:0;border:1px solid #E2E8F0;border-top:3px solid #17304F;border-radius:10px;background:#FFFFFF}
 #room-cards .room:hover{background:#FFFFFF;border-color:#B9C6D6;box-shadow:0 4px 12px rgba(16,32,56,.08);transform:translateY(-2px)}
 #room-cards .room-date{color:#64748B}
 #room-cards .room-info{padding:8px 10px 9px;row-gap:1px}
@@ -539,26 +539,26 @@ a.lg{text-decoration:none;text-align:center}
   #room-cards .room-org{font-size:14.5px}
   #room-cards .room-edu{font-size:12.5px}
 }
-/* 2026.11.25 아래 출강 후기 카드: 가로가 살짝 더 긴 직사각형 · 이미지가 좌우 꽉 참(회색 여백 0)
-   2026.11.25 서정님: "카드는 조금 길게 두고, 이미지는 좌우 빈 공간 없이 꽉 차게"
-   → PC 224x198 (이미지 224x154 + 아래 텍스트 44) / 모바일 184x166 (이미지 184x126 + 텍스트 40)
-     이미지는 object-fit:cover + object-position:center 35% 로 좌우 여백 없이 채움(사람 머리·글자 잘림 최소화)
-     아래 = 강의명 한 줄 + `날짜 · 기관` 한 줄, 넘치면 말줄임(...) */
-.lfx4 .lfx-item{display:flex;flex-direction:column;align-items:stretch;gap:0;width:224px;height:198px;padding:0;background:#fff;border:1px solid #E1E6EC;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(16,32,56,.05)}
-.lfx4 .lfx-item img{display:block;width:100%;height:154px;min-height:0;flex:0 0 154px;aspect-ratio:auto;object-fit:cover;object-position:center 35%;background:#F4F7FA;border:0;border-radius:0}
-.lfx4 .lfx-body{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;min-height:0;height:auto;flex:1 1 auto;padding:0 8px;background:#fff;border-top:1px solid #EDF1F5}
+/* 2026.11.25 아래 출강 후기 카드(v5): 썸네일은 1px도 안 자르고 원본 그대로(정사각 contain)
+   2026.11.25 서정님: "이미지 안 잘리게 contain, 회색 배경 빼고 흰색, 텍스트는 이미지 시작선에 딱 맞춰"
+   → PC 216x178 (이미지 높이 132 = 정사각 132x132, 좌우 여백 각 41px + 카드 테두리 1px = 42px)
+     모바일 176x148 (이미지 높이 108 = 108x108, 좌우 여백 각 33px + 테두리 1px = 34px)
+     아래 글은 이미지 왼쪽 시작선과 수직 정렬(padding-left 41px / 33px, 오른쪽 10px), 넘치면 말줄임(...) */
+.lfx4 .lfx-item{display:flex;flex-direction:column;align-items:stretch;gap:0;width:216px;height:178px;padding:0;background:#FFFFFF;border:1px solid #E1E6EC;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(16,32,56,.05)}
+.lfx4 .lfx-item img{display:block;width:100%;height:132px;min-height:0;flex:0 0 132px;aspect-ratio:auto;object-fit:contain;object-position:center center;background:#FFFFFF;border:0;border-radius:0}
+.lfx4 .lfx-body{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;min-height:0;height:auto;flex:1 1 auto;padding:0 10px 0 41px;background:#FFFFFF;border-top:0}
 .lfx4 .lfx-ttl{display:block;font-size:13px;line-height:1.25;font-weight:700;color:var(--navy);letter-spacing:-.02em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lfx4 .lfx-meta{display:block;font-size:10.5px;line-height:1.25;font-weight:500;color:#6C7C88;letter-spacing:-.02em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:760px){
-  .lfx4 .lfx-item{width:184px;height:166px;border-radius:9px}
-  .lfx4 .lfx-item img{height:126px;min-height:0;flex:0 0 126px}
-  .lfx4 .lfx-body{height:auto;flex:1 1 auto;gap:1px;padding:0 7px}
+  .lfx4 .lfx-item{width:176px;height:148px;border-radius:9px}
+  .lfx4 .lfx-item img{height:108px;min-height:0;flex:0 0 108px}
+  .lfx4 .lfx-body{height:auto;flex:1 1 auto;gap:1px;padding:0 10px 0 33px}
   .lfx4 .lfx-ttl{font-size:12.5px;line-height:1.25}
   .lfx4 .lfx-meta{font-size:10px;line-height:1.25}
 }
 /* 모바일에서는 예전 규칙(#room-cards .room{border-top:navy!important})이 남아 있어 흰색으로 다시 못박기 */
 @media (max-width:760px){
-  #room-cards .room{border:1px solid #E2E8F0!important;border-top:1px solid #E2E8F0!important;background:#FFFFFF}
+  #room-cards .room{border:1px solid #E2E8F0!important;border-top:3px solid #17304F!important;background:#FFFFFF}
   #room-cards .room:hover{background:#FFFFFF}
 }
 
