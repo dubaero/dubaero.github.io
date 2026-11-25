@@ -4442,9 +4442,9 @@ function promoNotice(v){
  return [["복지관 안내문 원고",[`[${v.purpose}]${d.title?" "+d.title:""}`,`${v.reader} 여러분, 안녕하세요. ${PROMO_ORG}입니다. ${lead}`,d.lines.map(promoLine).join("\n"),PROMO_ORG].filter(Boolean).join("\n\n")]];
 }
 const SMS_LABELS={
- "일시":"when","날짜":"when","시간":"when","행사일시":"when","바뀐전달일시":"newAt",
+ "일시":"when","날짜":"when","시간":"when","만나는시간":"when","행사일시":"when","바뀐전달일시":"newAt",
  "변경":"newAt","변경일시":"newAt","변경시간":"newAt","변경된일시":"newAt","새일시":"newAt","기존":"oldAt","기존일시":"oldAt","원래일시":"oldAt",
- "장소":"where","만나는곳":"where","집결장소":"where","출입구":"access","이동지원":"access","접근성":"access","준비물":"items",
+ "장소":"where","만나는곳":"where","만나는장소":"where","집결장소":"where","출입구":"access","이동지원":"access","접근성":"access","준비물":"items",
  "사유":"why","이유":"why","상황":"why","회신":"reply","답장":"reply","회신방법":"reply","참석여부":"reply",
  "회신기한":"due","답장기한":"due","기한":"due","마감":"due","안내시점":"due","문의":"contact","문의처":"contact","전화":"contact","전화번호":"contact","담당자전화번호":"contact","연락처":"contact","담당":"staff","담당자":"staff","담당자명":"staff",
  "프로그램":"program","프로그램명":"program","행사명":"program","순번":"queue","대기순번":"queue","선정결과":"status",
@@ -4461,7 +4461,7 @@ function smsKind(w){
  return map.find(a=>a[0].test(w||""))?.[1]||"notice";
 }
 const SMS_HINT={
- notice:"일시: 12월 5일 오후 2시 / 장소: 복지관 2층 / 회신기한: 12월 3일 / 회신: 참여 여부",
+ notice:"장소: 복지관 2층 / 시간: 12월 5일 오후 2시 / 준비물: 편한 옷, 물병",
  change:"기존: 목요일 오후 2시 / 변경: 금요일 오후 3시 / 사유: 교육실 점검 / 회신: 바뀐 시간에 참여 가능한지",
  wait:"대기순번: 3번 / 안내시점: 12월 8일 / 문의: 담당 부서",
  prep:"일시: 금요일 오후 2시 / 준비물: 편한 옷, 물병 / 문의: 담당 부서",
@@ -4493,7 +4493,7 @@ function ghWelfareMsg(v){
  const friendly=v.tone==="따뜻하게"||v.tone==="부드럽게",easy=v.tone==="쉬운 말로", plain=friendly||easy;
  const reader={"이용자":"이용자님","보호자·가족":"보호자님","지역 주민":"주민 여러분","후원자·봉사자":"후원자·자원봉사자 여러분","협력기관":"담당자님","복지관 직원":"선생님"}[v.reader]||"이용자님";
  const org="용인시기흥장애인복지관",name=f.program||x.program||"[프로그램명]";
- const greeting=friendly?reader+", 안녕하세요. "+org+"입니다.":easy?"안녕하세요. "+org+"이에요.":reader+", 안녕하세요. "+org+"입니다.";
+ const greeting=kind==="notice"&&!easy?"안녕하세요, "+reader+". "+org+"입니다.":friendly?reader+", 안녕하세요. "+org+"입니다.":easy?"안녕하세요. "+org+"이에요.":reader+", 안녕하세요. "+org+"입니다.";
  const memoText=memo.map(amend).join("\n"), label=(n,v)=>v?n+": "+v:"", infoTime=f.newAt||f.when, includesMemo=!!memoText;
  const ask=(request,deadline)=>{
   let a=(request||"").replace(/[.!?。]$/,"");
@@ -4550,15 +4550,17 @@ function ghWelfareMsg(v){
    lead=name+(plain?" 참여 준비를 위해 확인할 것이 있어요.":" 운영 준비를 위해 확인을 부탁드립니다.");
    facts=[label("회신 방법",f.how),...at(false)];action=ask(f.reply,f.due||(!raw?"[회신 기한]":""));tiny=facts;break;
   default:
-   lead=name+(friendly?"에 참여하실 때 필요한 내용을 알려 드려요.":easy?" 참여 방법을 알려 드려요.":" 참여에 필요한 사항을 안내드립니다.");
-   facts=[...at(true),label("준비물",f.items),label("참여 방법",f.how)];action=f.reply||f.due?ask(f.reply,f.due):"참여 관련 문의나 필요한 지원이 있으면 알려 주세요.";tiny=facts;
+   lead=name+(easy?"에 오실 때 알아두실 내용을 알려 드려요.":"에 참여하실 때 필요한 내용을 안내드립니다.");
+   facts=[label("장소",f.where||"[장소]"),label("시간",infoTime||"[날짜·시간]"),label("준비물",f.items||"[준비물]"),label("참여 방법",f.how)];
+   action=f.reply||f.due?ask(f.reply,f.due):"";
+   tiny=facts;
  }
- const contact=label("문의 전화",f.contact||"[공식 전화번호]"), staff=label("담당자",f.staff||"[담당자 이름]"), head="["+name+" · "+(x.what||"참여 안내")+"]";
+ const contact=label(kind==="notice"?"전화번호":"문의 전화",f.contact||"[공식 전화번호]"), staff=label("담당자",f.staff||"[담당자 이름]"), head="["+name+" · "+(x.what||"참여 안내")+"]";
  const join=(a,s)=>a.filter(Boolean).join(s);
  const help={
   change:isCancelled?"안내를 받으신 뒤 궁금하신 점이나 다음 일정이 필요하시면 담당자에게 연락 주세요.":"오시기 전에 바뀐 시간과 장소를 한 번 더 살펴봐 주세요. 이동이나 참여에 도움이 필요하시면 담당자에게 미리 말씀해 주세요.",
   meet:"출발하기 전에 만나는 시간과 장소를 확인해 주세요. 늦어지거나 다른 곳에서 만나야 한다면 담당자에게 미리 연락 주세요.",
-  notice:"오시기 전에 만나는 시간과 장소를 한 번 더 확인해 주세요. 늦어지거나 오시기 어려운 경우 담당자에게 미리 알려 주시면 준비에 도움이 됩니다.",
+  notice:/늦|못 오|오시기 어려/.test(f.reply||"")?"":easy?"늦거나 오기 어려우면 담당자에게 미리 연락해 주세요.":friendly?"늦어지거나 오시기 어려운 경우 담당자에게 미리 알려 주시면 감사하겠습니다.":"지각하거나 참석이 어려우신 경우 담당자에게 미리 알려 주시기 바랍니다.",
   visit:"오시기 전에 약속 시간과 장소를 확인해 주세요. 시간을 바꾸고 싶으시면 담당자에게 미리 말씀해 주세요.",
   prep:"준비물을 챙기기 어려우셔도 먼저 연락 주세요. 가져오실 수 있는 물건과 필요한 도움을 담당자와 함께 확인하실 수 있어요.",
   access:"이동하거나 안내를 받는 데 필요한 도움이 있으시면 미리 알려 주세요. 어떤 방법이 편하신지 담당자가 확인하겠습니다.",
@@ -4570,9 +4572,9 @@ function ghWelfareMsg(v){
   care:"문자로 답하시기 어렵다면 전화로 말씀해 주셔도 됩니다. 편하신 방법과 시간을 알려 주시면 이야기 나누겠습니다.",
   reply:"회신이 늦어지거나 어떤 내용으로 답할지 궁금하시면 담당자에게 먼저 연락 주세요."
  }[kind];
- const close=end||(friendly?"읽어 주셔서 고마워요.":easy?"확인해 주셔서 고마워요.":"확인해 주셔서 감사합니다.");
+ const close=kind==="notice"?(easy?"궁금한 점이 있거나 도움이 필요하면 먼저 연락해 주세요.":"참여에 관해 궁금한 점이 있거나 필요한 지원이 있으면 먼저 연락해 주세요."):(end||(friendly?"읽어 주셔서 고마워요.":easy?"확인해 주셔서 고마워요.":"확인해 주셔서 감사합니다."));
  const full=join([greeting,lead,join(facts,"\n"),memoText,help,action,close,staff,contact],"\n");
- const brief=join([head,kind==="check"||kind==="thanks"||kind==="care"?lead:"",join(tiny.slice(0,3)," / "),memoText,action,contact],"\n");
+ const brief=join([head,kind==="check"||kind==="thanks"||kind==="care"?lead:"",join(tiny.slice(0,3)," / "),memoText,kind==="notice"?help:"",action,kind==="notice"?staff:"",contact],"\n");
  return [["바로 보낼 문자",full],["짧은 문자",brief]];
 }
 const OUTS = {
