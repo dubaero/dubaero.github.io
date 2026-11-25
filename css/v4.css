@@ -538,20 +538,20 @@ a.lg{text-decoration:none;text-align:center}
   #room-cards .room-org{font-size:15px}
   #room-cards .room-edu{font-size:13px}
 }
-/* 2026.11.25 아래 출강 후기 카드: 진짜 가로 직사각형(PC 250×92 / 모바일 216×82, 예전 세로 카드의 1/3)
-   왼쪽 = 원본 비율 그대로 자르지 않은 정사각 썸네일(76×76 / 68×68, 흰 여백 없음)
-   오른쪽 = 강의명 + 날짜·기관 두 줄 */
-.lfx4 .lfx-item{display:flex;flex-direction:row;align-items:center;gap:10px;width:250px;height:92px;padding:8px;background:#fff;border:1px solid #E1E6EC;border-radius:10px;overflow:hidden}
-.lfx4 .lfx-item img{display:block;width:76px;height:76px;flex:0 0 76px;aspect-ratio:auto;object-fit:contain;object-position:center;background:#F4F7FA;border:0;border-radius:8px}
-.lfx4 .lfx-body{display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;flex:1 1 auto;padding:0}
-.lfx4 .lfx-ttl{font-size:12.5px;line-height:1.38;font-weight:700;color:var(--navy);letter-spacing:-.02em;word-break:keep-all;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.lfx4 .lfx-meta{font-size:10.5px;line-height:1.34;font-weight:500;color:#6C7C88;letter-spacing:-.02em;word-break:keep-all;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* 2026.11.25 아래 출강 후기 카드: 세로 카드(위 3/4 이미지 + 아래 1/4 두 줄 텍스트),
+   카드 전체는 정사각이 아니라 가로가 살짝 긴 직사각형 — PC 216×174 / 모바일 176×144.
+   위 3/4 = 블로그 썸네일 원본을 자르지 않고(object-fit:contain) 연한 여백 안에 중앙 정렬(사람 머리·글자 1px도 안 잘림)
+   아래 1/4 = 강의명 한 줄 + `날짜 · 기관` 한 줄, 넘치면 말줄임(…) */
+.lfx4 .lfx-item{display:flex;flex-direction:column;align-items:stretch;gap:0;width:216px;height:174px;padding:0;background:#fff;border:1px solid #E1E6EC;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(16,32,56,.05)}
+.lfx4 .lfx-item img{display:block;width:100%;height:75%;flex:0 0 75%;aspect-ratio:auto;object-fit:contain;object-position:center;background:#F4F7FA;border:0;border-radius:0}
+.lfx4 .lfx-body{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;height:25%;flex:0 0 25%;padding:0 9px;background:#fff;border-top:1px solid #EDF1F5}
+.lfx4 .lfx-ttl{display:block;font-size:12px;line-height:1.3;font-weight:700;color:var(--navy);letter-spacing:-.02em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lfx4 .lfx-meta{display:block;font-size:10px;line-height:1.3;font-weight:500;color:#6C7C88;letter-spacing:-.02em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:760px){
-  .lfx4 .lfx-item{width:216px;height:82px;gap:8px;padding:7px;border-radius:9px}
-  .lfx4 .lfx-item img{width:68px;height:68px;flex:0 0 68px;border-radius:7px}
-  .lfx4 .lfx-body{gap:2px}
-  .lfx4 .lfx-ttl{font-size:12px;line-height:1.36}
-  .lfx4 .lfx-meta{font-size:10px}
+  .lfx4 .lfx-item{width:176px;height:144px;border-radius:9px}
+  .lfx4 .lfx-body{gap:1px;padding:0 8px}
+  .lfx4 .lfx-ttl{font-size:11.5px;line-height:1.3}
+  .lfx4 .lfx-meta{font-size:10px;line-height:1.3}
 }
 /* 모바일에서는 예전 규칙(#room-cards .room{border-top:navy!important})이 남아 있어 민트로 다시 못박기 */
 @media (max-width:760px){
