@@ -84,19 +84,19 @@ body.is-home .foot{margin-top:12px;padding:11px 0 13px}
 body.is-home .foot-in{font-size:11.4px;line-height:1.6;align-items:center}
 
 .home{display:flex;flex-direction:column;gap:12px}
-.gvis{display:grid;grid-template-columns:minmax(0,1fr) clamp(210px,30%,380px);background:linear-gradient(100deg,#EDF8F2 0%,#E0F2E8 55%,#D2EBDD 100%);border:1px solid #D9EADF;border-radius:16px;overflow:hidden;color:#1F3B31}
-.gvis-txt{padding:17px 26px 16px;display:flex;flex-direction:column;gap:3px;justify-content:center;min-width:0}
+.gvis{display:grid;grid-template-columns:minmax(0,1fr) clamp(210px,30%,380px);background:linear-gradient(100deg,#EDF8F2 0%,#E0F2E8 55%,#D2EBDD 100%);border:1px solid #D9EADF;border-radius:16px;color:#1F3B31;position:relative;z-index:30}
+.gvis-txt{padding:18px 26px 17px;display:flex;flex-direction:column;gap:5px;justify-content:center;min-width:0}
 .gvis-brand{display:flex;align-items:center;gap:6px;font-size:11.8px;color:#2E7D64;letter-spacing:.01em}
 .gvis-brand svg{width:15px;height:15px}
 .gvis-kick{font-size:11.8px;color:#3C7A64}
-.gvis h1{font-size:28px;color:#1B352C;letter-spacing:-.035em;line-height:1.28;margin:1px 0 1px}
+.gvis h1{font-size:30px;color:#1B352C;letter-spacing:-.035em;line-height:1.26;margin:2px 0 2px}
 .gvis h1 span{color:#2E7D64}
 .gvis-sub{font-size:13px;color:#4A675C}
-.gsearch{margin-top:7px;display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #D7E4DC;border-radius:9px;padding:0 11px;max-width:560px;box-shadow:0 1px 2px rgba(31,92,66,.05);position:relative}
+.gsearch{margin-top:7px;display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #D7E4DC;border-radius:9px;padding:0 11px;max-width:560px;box-shadow:0 1px 2px rgba(31,92,66,.05);position:relative;z-index:80}
 .gsearch svg{width:15px;height:15px;stroke:#7C9A8A;fill:none;stroke-width:1.9;flex:none}
 .gsearch input{flex:1;min-width:0;border:0;outline:0;background:none;min-height:40px;font-size:13px;color:var(--ink)}
 .gsearch input::placeholder{color:#94A69B}
-.gvis-img{position:relative;min-height:120px}
+.gvis-img{position:relative;min-height:120px;border-radius:0 15px 15px 0;overflow:hidden}
 .gvis-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%;display:block}
 .gvis-img::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#E4F4EC 0%,rgba(228,244,236,0) 26%)}
 
@@ -159,9 +159,8 @@ body.is-home .foot-in{font-size:11.4px;line-height:1.6;align-items:center}
 .grec small{display:block;font-size:10.4px;color:#8E7A56;line-height:1.35}
 .grec em{flex:none;font-style:normal;border:1px solid #EBD9C6;background:#fff;color:#8A6A2E;border-radius:6px;padding:2px 8px;font-size:10.6px}
 .grec:hover{border-color:#E0C49E}
-.gmore{font-size:10.8px;color:#8A958E;line-height:1.7;margin-top:auto}
+.gmore{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 9px;font-size:10.8px;color:#8A958E;line-height:1.7;margin-top:auto}
 .gmore a{color:#7A867E;white-space:nowrap}
-.gmore a+a::before{content:"· ";color:#C3CCC6}
 .gmore a:hover{color:#1F5C42}
 .gmore a:hover{color:#1F5C42;border-bottom-color:#B9D9C6}
 
@@ -205,7 +204,7 @@ body.is-home .foot-in{font-size:11.4px;line-height:1.6;align-items:center}
 @media (min-width:901px) and (max-height:760px){
   body.is-home .wrap{padding-top:10px}
   .gvis-txt{padding:12px 22px}
-  .gvis h1{font-size:25px}
+  .gvis h1{font-size:26px}
   .gvis-sub{font-size:12.4px}
   .gsearch{margin-top:5px}
   .gsearch input{min-height:36px}
@@ -216,7 +215,7 @@ body.is-home .foot-in{font-size:11.4px;line-height:1.6;align-items:center}
   .gprof,.grec{padding:6px 9px}
 }
 @media (min-width:901px) and (max-height:700px){
-  .gvis-brand,.gvis-sub{display:none}
+  .gvis-kick,.gvis-sub{display:none}
   .gvis-img{min-height:96px}
   .bd-up{padding:5px 9px}
 }
@@ -234,7 +233,7 @@ body.is-home .foot-in{font-size:11.4px;line-height:1.6;align-items:center}
   .gcols{grid-template-columns:1fr}
   .gcols>.gbox:last-child{grid-column:auto}
   .gvis{grid-template-columns:1fr}
-  .gvis-img{order:-1;height:150px;min-height:0}
+  .gvis-img{order:-1;height:150px;min-height:0;border-radius:15px 15px 0 0}
   .gvis-img::before{background:linear-gradient(180deg,rgba(228,244,236,0) 55%,#E4F4EC 100%)}
   .gvis-txt{padding:15px 16px}
   .gvis h1{font-size:23px}
@@ -630,7 +629,6 @@ function renderHome() {
   /* 히어로 */
   h += '<section class="gvis"><div class="gvis-txt">' +
     '<p class="gvis-brand">' + gic('sprout') + '<span>용인시기흥장애인복지관</span></p>' +
-    '<p class="gvis-kick">2026.12.02 AI 실무 워크숍 · 종사자 업무 지원</p>' +
     '<h1>공문부터 홍보까지, <span>업무도우미</span> 하나로</h1>' +
     '<p class="gvis-sub">서식·사업·홍보물은 지침과 요청문으로, 문자·안내는 바로 완성으로.</p>' +
     '<div class="gsearch">' + gic('help') +
