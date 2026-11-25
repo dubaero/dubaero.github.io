@@ -182,8 +182,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   function renderCards(){if(!cards)return;cards.innerHTML='';if(rollT){clearInterval(rollT);rollT=null;}
     var all=LECTURES.filter(function(L){return L.card;}).concat(LECTURES.filter(function(L){return L.st!=='예정'&&!L.card;}));
     rollWide=window.innerWidth>1100;
-    if(!rollWide){all.slice(0,24).forEach(function(L){cards.appendChild(mkRoom(L));});return;}
-    /* 2026.11.25: 아래 두 줄은 사진 표지가 흐르는 #lec-fx가 대신함 */
+    /* 2026.11.25: 상단 하얀 카드는 6개를 3칸 × 2줄로 (모바일도 2줄 가로 스크롤). 나머지는 아래 출강 목록에서 */
     all.slice(0,6).forEach(function(L){cards.appendChild(mkRoom(L));});
   }
   renderCards();
@@ -305,41 +304,88 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
 })();
 ;(function(){var n=document.querySelector('.mnav'),c=n&&n.querySelector('[aria-current]');if(c)n.scrollLeft=c.offsetLeft-16;})();
 ;(function(){
-  /* 2026.11.25 강의 자료실 '출강 장표 표지' 2줄 배너 — 한 칸에 약 8초, 위 줄은 왼쪽·아래 줄은 오른쪽으로 천천히.
-     마우스를 올리거나 손가락으로 잠시 붙잡으면 멈추고, 움직임 줄이기 설정이면 흐르지 않고 옆으로 넘겨 봅니다. */
+  /* 2026.11.25 강의 자료실 출강 후기 썸네일 2줄 —
+     CSS 키프레임 대신 '진짜 가로 스크롤(overflow-x:auto)'을 requestAnimationFrame으로 아주 천천히 굴린다.
+     위 줄은 왼쪽으로, 아래 줄은 오른쪽으로 흐르고, 마우스를 올리거나 손가락·휠로 넘기면 흐름만 멈췄다가
+     손을 뗀 뒤 1.8초쯤 지나 다시 천천히 이어집니다. 끌어서 넘길 때는 카드 링크가 열리지 않고, 짧게 톡 누를 때만 열립니다. */
   var host=document.getElementById('lec-fx');if(!host)return;
   var rows=[].slice.call(host.querySelectorAll('.lfx-row'));
-  var box=host.querySelector('.lfx-rows');
   var reduce=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
-  function clean(track){[].slice.call(track.querySelectorAll('[data-clone]')).forEach(function(n){n.remove();});track.removeAttribute('data-built');}
+  var SPEED=24, RESUME=1800;
+  var st=rows.map(function(row,i){return {row:row,i:i,pos:0,period:0,paused:false,timer:null};});
+  var raf=null,last=0;
+
+  function strip(track){[].slice.call(track.querySelectorAll('[data-clone]')).forEach(function(n){n.remove();});}
+
   function build(){
-    rows.forEach(function(row,i){
-      var track=row.querySelector('.lfx-track');if(!track)return;
-      clean(track);
-      if(reduce.matches)return;
-      var setW=track.scrollWidth;if(!setW)return;
-      var need=Math.max(2,Math.ceil((row.clientWidth+setW)/setW)+1);
-      var base=[].slice.call(track.children);
-      for(var k=1;k<need;k++){
-        base.forEach(function(n){
-          var c=n.cloneNode(true);c.setAttribute('data-clone','1');c.setAttribute('aria-hidden','true');
-          [].slice.call(c.querySelectorAll('img')).forEach(function(im){im.setAttribute('loading','lazy');im.setAttribute('alt','');});
-          track.appendChild(c);
-        });
-      }
-      track.style.setProperty('--d',setW+'px');
-      track.style.animationDuration=Math.max(20,Math.round(setW/32))+'s';
-      track.setAttribute('data-built','1');
+    st.forEach(function(s){
+      var track=s.row.querySelector('.lfx-track');if(!track)return;
+      strip(track);
+      var base=[].slice.call(track.children);if(!base.length)return;
+      var first=base[0],setW=0;
+      base.forEach(function(n){setW+=n.getBoundingClientRect().width;});
+      setW+=8*(base.length-1);
+      if(!setW)return;
+      var need=Math.max(2,Math.ceil((s.row.clientWidth*2)/setW)+1);
+      for(var k=1;k<need;k++)base.forEach(function(n){
+        var c=n.cloneNode(true);
+        c.setAttribute('data-clone','1');c.setAttribute('aria-hidden','true');c.tabIndex=-1;
+        track.appendChild(c);
+      });
+      /* 한 세트가 되돌아오는 정확한 간격 = 복제본 첫 칸이 시작하는 자리 */
+      var clone0=track.children[base.length];
+      s.period=clone0?Math.round(clone0.getBoundingClientRect().left-first.getBoundingClientRect().left):Math.round(setW);
+      s.pos=(s.i===1?s.period:0);
+      s.row.scrollLeft=s.pos;
     });
+    if(!reduce.matches)start();
   }
+
+  function loop(ts){
+    var dt=last?Math.min(80,ts-last):16;last=ts;
+    st.forEach(function(s){
+      if(s.paused||!s.period)return;
+      var el=s.row;
+      if(el.scrollWidth<=el.clientWidth+2)return;
+      s.pos+=(s.i===0?1:-1)*SPEED*dt/1000;
+      if(s.pos>=s.period)s.pos-=s.period;
+      else if(s.pos<=0)s.pos+=s.period;
+      el.scrollLeft=s.pos;
+    });
+    raf=requestAnimationFrame(loop);
+  }
+  function start(){if(raf||reduce.matches)return;last=0;raf=requestAnimationFrame(loop);}
+  function stop(){if(raf){cancelAnimationFrame(raf);raf=null;}}
+
+  function pause(s){s.paused=true;clearTimeout(s.timer);}
+  function resume(s,ms){
+    clearTimeout(s.timer);
+    s.timer=setTimeout(function(){s.pos=s.row.scrollLeft;s.paused=false;},ms||RESUME);
+  }
+
   build();
   var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(build,300);});
-  var ht;
-  function pause(){if(box)box.classList.add('hold');clearTimeout(ht);}
-  function resume(ms){clearTimeout(ht);ht=setTimeout(function(){if(box)box.classList.remove('hold');},ms||0);}
-  host.addEventListener('pointerenter',function(){pause();});
-  host.addEventListener('pointerleave',function(){resume(400);});
-  host.addEventListener('touchstart',function(){pause();resume(2600);},{passive:true});
-  host.addEventListener('focusin',pause);
-  host.addEventListener('focusout',function(){resume(400);});
+
+  st.forEach(function(s){
+    var el=s.row;
+    el.addEventListener('pointerenter',function(){pause(s);});
+    el.addEventListener('pointerleave',function(){resume(s);});
+    el.addEventListener('pointerdown',function(){pause(s);});
+    el.addEventListener('pointerup',function(){resume(s);});
+    el.addEventListener('pointercancel',function(){resume(s);});
+    el.addEventListener('touchstart',function(){pause(s);},{passive:true});
+    el.addEventListener('touchend',function(){resume(s);},{passive:true});
+    el.addEventListener('wheel',function(){pause(s);resume(s);},{passive:true});
+    el.addEventListener('focusin',function(){pause(s);});
+    el.addEventListener('focusout',function(){resume(s);});
+  });
+
+  /* 끌어서 넘긴 뒤에는 링크가 열리지 않게: 누른 자리에서 8px 넘게 움직이면 클릭 취소 */
+  var dX=0,dY=0,down=false;
+  host.addEventListener('pointerdown',function(e){down=true;dX=e.clientX;dY=e.clientY;},{passive:true});
+  host.addEventListener('click',function(e){
+    if(down&&(Math.abs(e.clientX-dX)>8||Math.abs(e.clientY-dY)>8)){e.preventDefault();e.stopPropagation();}
+    down=false;
+  },true);
+  host.addEventListener('pointerup',function(){setTimeout(function(){down=false;},0);},{passive:true});
 })();

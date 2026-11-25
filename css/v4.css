@@ -136,45 +136,32 @@ button,input{font:inherit}
 .lpg.on{background:var(--navy);border-color:var(--navy);color:#fff}
 .lpg:disabled{opacity:.4;cursor:default}
 
-/* 2026.11.25 강의 자료실: 출강 장표 표지 배너 2줄 (위 고정 카드 아래)
-   천천히 끊김 없이 흐르고, 마우스·터치하면 잠시 멈춤. 움직임 줄이기 설정을 쓰는 기기는 흐르지 않고 옆으로 넘겨 봄 */
-.lfx4{margin:34px 0 6px}
-.lfx-h{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:6px 20px;margin-bottom:12px}
-.lfx-h h3{font-size:20px;font-weight:700;color:var(--navy);letter-spacing:-.02em;margin-top:4px}
-.lfx-h p{font-size:14.5px;color:var(--muted);line-height:1.5}
-.lfx-rows{position:relative;display:grid;gap:10px;background:#fff;border:1px solid #E1E6EC;border-radius:16px;padding:12px;overflow:hidden}
+/* 2026.11.25 강의 자료실: 출강 후기 썸네일 2줄 — 가로 직사각형(16:10) 순수 이미지 카드
+   썸네일 안에 날짜·기관·교육명이 다 들어 있어 아래 글씨는 두지 않음(서정님 지시).
+   CSS 애니메이션 대신 실제 가로 스크롤을 JS가 아주 천천히 굴리고, 마우스를 올리거나 손가락으로 쓸면 흐름만 멈춤 */
+.lfx4{margin:30px 0 6px}
+.lfx-rows{position:relative;display:grid;gap:8px;background:#fff;border:1px solid #E1E6EC;border-radius:14px;padding:10px;overflow:hidden}
 /* 양 끝은 흰색으로 부드럽게 사라져 잘린 느낌이 없게 */
-.lfx-rows::before,.lfx-rows::after{content:"";position:absolute;top:0;bottom:0;width:52px;pointer-events:none;z-index:2}
+.lfx-rows::before,.lfx-rows::after{content:"";position:absolute;top:0;bottom:0;width:34px;pointer-events:none;z-index:2}
 .lfx-rows::before{left:0;background:linear-gradient(90deg,#fff,rgba(255,255,255,0))}
 .lfx-rows::after{right:0;background:linear-gradient(270deg,#fff,rgba(255,255,255,0))}
-.lfx-row{overflow:hidden;min-width:0}
-.lfx-track{display:flex;gap:10px;width:max-content;will-change:transform;animation:lfxL linear infinite}
-.lfx-track.rev{animation-name:lfxR}
-.lfx-item{flex:0 0 auto;display:flex;flex-direction:column;width:clamp(198px,20.5vw,244px);margin:0;border-radius:14px;overflow:hidden;border:1px solid #E4E9EF;background:#fff;box-shadow:0 1px 2px rgba(16,32,56,.04)}
-.lfx-item img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#F2F5F8}
-.lfx-body{display:flex;flex-direction:column;padding:11px 13px 13px}
-.lfx-tag{display:block;font-size:10.8px;font-weight:600;color:#8794A1;letter-spacing:-.01em;line-height:1.45;word-break:keep-all}
-.lfx-ttl{display:block;font-size:13.8px;font-weight:700;color:#14263C;letter-spacing:-.025em;line-height:1.34;margin:7px 0 0;word-break:keep-all}
-.lfx-desc{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11.4px;font-weight:500;color:#6D7B89;letter-spacing:-.015em;line-height:1.42;margin-top:4px}
-.lfx-item:hover{border-color:#C9D6E2;box-shadow:0 6px 18px rgba(16,32,56,.09)}
-@keyframes lfxL{from{transform:translate3d(0,0,0)}to{transform:translate3d(calc(-1 * var(--d,0px)),0,0)}}
-@keyframes lfxR{from{transform:translate3d(calc(-1 * var(--d,0px)),0,0)}to{transform:translate3d(0,0,0)}}
-.lfx-rows:hover .lfx-track,.lfx-rows.hold .lfx-track{animation-play-state:paused}
+.lfx-row{overflow-x:auto;overflow-y:hidden;min-width:0;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.lfx-row::-webkit-scrollbar{display:none}
+.lfx-track{display:flex;gap:8px;width:max-content}
+.lfx-item{flex:0 0 auto;display:block;width:210px;margin:0;padding:0;border-radius:10px;overflow:hidden;border:1px solid #E4E9EF;background:#F2F5F8;box-shadow:0 1px 2px rgba(16,32,56,.05);cursor:pointer;text-decoration:none;-webkit-tap-highlight-color:transparent;touch-action:pan-x pan-y}
+.lfx-item img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;background:#F2F5F8}
+.lfx-item:hover{border-color:#C9D6E2;box-shadow:0 4px 12px rgba(16,32,56,.11)}
+.lfx-item:focus-visible{outline:2px solid #1F6FB2;outline-offset:2px}
 @media (prefers-reduced-motion:reduce){
-  .lfx-track{animation:none!important;transform:none!important}
-  .lfx-row{overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px}
+  .lfx-row{scroll-snap-type:x proximity}
   .lfx-item{scroll-snap-align:start}
 }
 @media (max-width:640px){
-  .lfx4{margin:26px 0 4px}
-  .lfx-h h3{font-size:18px}
-  .lfx-h p{font-size:13.5px}
-  .lfx-rows{padding:9px;gap:8px;border-radius:14px}
-  .lfx-rows::before,.lfx-rows::after{width:26px}
-  .lfx-track{gap:8px}
-  .lfx-item{width:clamp(190px,68vw,258px);border-radius:12px}
-  .lfx-body{padding:10px 11px 12px}
-  .lfx-ttl{font-size:13.2px}
+  .lfx4{margin:24px 0 4px}
+  .lfx-rows{padding:8px;gap:7px;border-radius:12px}
+  .lfx-rows::before,.lfx-rows::after{width:20px}
+  .lfx-track{gap:7px}
+  .lfx-item{width:176px;border-radius:8px}
 }
 
 /* ---------- 강의 후기 (블로그) ---------- */
@@ -524,4 +511,39 @@ a.lg{text-decoration:none;text-align:center}
   .hero4 .bn{align-self:start;margin-top:0!important}
   .hero4 .bn-stage{aspect-ratio:489/318;height:auto!important;min-height:0}
   .hero4 .h4-txt{gap:0;justify-content:space-between}
+}
+
+/* 2026.11.25 강의 자료실 상단 하얀 카드: 3칸 × 2줄 (모바일은 2줄 가로 스크롤) */
+#room-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-flow:row;gap:12px}
+#room-cards .room{flex:0 0 auto;width:auto;min-width:0;border:1px solid #CFD8E3;border-top:3px solid var(--navy);border-radius:10px;background:#fff}
+#room-cards .room:hover{border-color:var(--blue);background:#F3F7FC;transform:translateY(-2px)}
+#room-cards .room-info{padding:13px 18px 14px;row-gap:3px}
+#room-cards .room-date{font-size:13.5px}
+#room-cards .room-org{font-size:17.5px;margin-top:5px}
+#room-cards .room-edu{font-size:14.5px;-webkit-line-clamp:2}
+@media (max-width:760px){
+  #room-cards{display:grid;grid-template-columns:none;grid-template-rows:repeat(2,auto);grid-auto-flow:column;grid-auto-columns:58%;gap:10px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;margin-right:-18px;padding:0 18px 8px 0}
+  #room-cards::-webkit-scrollbar{display:none}
+  #room-cards .room{scroll-snap-align:start;border:1px solid #CFD8E3;border-top:3px solid var(--navy);border-radius:10px}
+  #room-cards .room-info{padding:10px 12px 11px;row-gap:2px}
+  #room-cards .room-date{font-size:12.5px}
+  #room-cards .room-org{font-size:15.5px;margin-top:3px;line-height:1.35}
+  #room-cards .room-edu{font-size:13px;-webkit-line-clamp:2;line-height:1.4}
+}
+/* 2026.11.25 아래 출강 표지 카드: 사진은 2/3로 줄이고(폭 200/168) 아래에 날짜·기관·과정명 복원 */
+.lfx4 .lfx-item{width:200px;background:#fff;border:1px solid #E1E6EC;border-radius:10px}
+.lfx4 .lfx-item img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+.lfx4 .lfx-body{display:grid;grid-auto-rows:min-content;gap:1px;min-height:96px;align-content:start;padding:9px 11px 10px}
+.lfx4 .lfx-date{font-size:12px;line-height:1.3;font-weight:600;color:#A8432B;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lfx4 .lfx-org{font-size:13.5px;line-height:1.35;font-weight:700;color:var(--navy);letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lfx4 .lfx-ttl{font-size:13px;line-height:1.42;color:#55636F;letter-spacing:-.02em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px}
+.lfx4 .lfx-desc{font-size:11.5px;line-height:1.4;color:#8B97A2;letter-spacing:-.02em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:3px}
+@media (max-width:760px){
+  .lfx4 .lfx-item{width:168px;border-radius:8px}
+  .lfx4 .lfx-body{min-height:92px;padding:8px 9px 9px}
+  .lfx4 .lfx-date{font-size:11px}
+  .lfx4 .lfx-org{font-size:12.5px}
+  .lfx4 .lfx-ttl{font-size:12.5px;line-height:1.4}
+  .lfx4 .lfx-desc{display:none}
+  .lfx4 .lfx-ttl{-webkit-line-clamp:3}
 }
