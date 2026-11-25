@@ -2678,7 +2678,7 @@ function startMic(btn,target,onText){
 }
 const vmic=id=>`<button type="button" class="mic b3d" data-vmic="${id}" aria-label="말로 입력">${ico("mic")}</button>`;
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-vmic]"); if(!b) return; const el=document.getElementById(b.dataset.vmic); if(!el) return;
-  startMic(b, el, t=>{ el.value=(el.value?el.value.replace(/\s+$/,"")+" ":"")+t; el.dispatchEvent(new Event("input",{bubbles:true})); }); });
+  startMic(b, el, t=>{ el.value=(el.value?el.value.replace(/\s+$/,"")+(el.id==="f-sns-post-act"?"\n":" "):"")+t; el.dispatchEvent(new Event("input",{bubbles:true})); }); });
 function alertMsg(m){ const s=document.getElementById("fstatus")||document.getElementById("ustatus"); if(s){ s.textContent=m; s.classList.add("warn"); } }
 
 
@@ -4322,16 +4322,70 @@ function promoMemo(raw){
 }
 function promoLine(s){return /[:：]/.test(s)?s:sent(s);}
 function promoPost(v){
- const d=promoMemo(v.act);if(!d.lines.length&&!d.title)return [];if(!d.title&&v._work)d.title=v._work.program;
- const tone=PROMO_TONE[v.tone]||PROMO_TONE["따뜻하게"],t=d.title||"복지관 활동 이야기";
- const p=d.lines.map(promoLine),topic=d.title.replace(/[^가-힣a-zA-Z0-9]/g,"");
- const hash="#용인시기흥장애인복지관 #복지관소식"+(topic?" #"+topic:"");
- switch(v.where){
-  case "인스타그램":return [["인스타그램 원고",[`📌 ${t}`,tone[0],p.join("\n"),tone[1],hash].filter(Boolean).join("\n\n")]];
-  case "카카오톡 채널":return [["카카오톡 채널 원고",[`[기흥복지관 소식] ${t}`,tone[0],p.join("\n"),tone[1]].filter(Boolean).join("\n")]];
-  case "복지관 홈페이지":return [["복지관 홈페이지 행사 후기",[`[복지관 소식] ${d.title||"프로그램 진행 후기"}`,p.join("\n"),tone[0]+" "+tone[1],PROMO_ORG].filter(Boolean).join("\n\n")]];
-  default:return [["네이버 블로그 원고",[`${t} | 용인시기흥장애인복지관`,`안녕하세요, ${PROMO_ORG}입니다. ${tone[0]}`,p.length?"어떤 활동을 했나요?\n"+p.join("\n\n"):"",tone[1],hash].filter(Boolean).join("\n\n")]];
- }
+ const raw=String(v.act||"").trim(),empty=!raw,P=v._work?.program||"",org=PROMO_ORG;
+ const meta={}, blocks={work:[],prep:[],steps:[],moment:[],reaction:[],thanks:[],next:[],photo:[]};
+ const keys={
+  "제목":"title","프로그램명":"title","행사명":"title","활동명":"title",
+  "일시":"when","행사일시":"when","날짜":"when","장소":"where","참여대상":"who","참여인원":"count",
+  "활동":"work","올릴활동":"work","활동내용":"work","준비":"prep","준비과정":"prep","진행":"steps","진행내용":"steps","과정":"steps",
+  "기억에남는장면":"moment","기억에남는순간":"moment","한장면":"moment",
+  "참여자반응":"reaction","참여자의반응":"reaction","반응":"reaction","참여자한마디":"reaction","소감":"reaction",
+  "감사":"thanks","다음활동":"next","다음일정":"next","사진":"photo","사진설명":"photo"
+ };
+ let active="work";
+ raw.split(/\r?\n/).map(x=>x.trim()).filter(Boolean).forEach(line=>{
+  const m=line.match(/^(?:[·•■-]\s*)?([^:：]{1,24})[:：]\s*(.*)$/),k=m&&keys[m[1].replace(/\s/g,"")];
+  if(k){if(blocks[k]){active=k;if(m[2])blocks[k].push(m[2]);}else{meta[k]=m[2];active="work";}}
+  else blocks[active].push(line);
+ });
+ const sentences=blocks.work.flatMap(x=>x.split(/(?<=[.!?。])\s+/));
+ const name=meta.title||P||"복지관 활동 이야기",title=empty&&!P?"[올릴 활동]":name;
+ const context=[meta.when,meta.where].filter(Boolean).join(" · ");
+ const natural=s=>{
+  if(/[.!?。…]$/.test(s)||/[:：]/.test(s))return s;
+  if(/(?:요|다|함|음|됨|임)$/.test(s))return sent(s);
+  if(s.length<25)return josa(s,"을","를")+" 진행했어요.";
+  return sent(s);
+ };
+ const main=sentences[0]?natural(sentences[0]):empty?"이용자분들과 함께 [올릴 활동]을 진행했어요.":(meta.title||P?josa(name,"을","를")+" 진행했어요.":"");
+ const prep=blocks.prep.map(sent).join("\n");
+ const steps=sentences.slice(1).map(sent).concat(blocks.steps.map(sent)).join("\n");
+ const moment=blocks.moment.map(sent).join("\n"),react=blocks.reaction.join("\n"),next=blocks.next.map(sent).join("\n"),thanks=blocks.thanks.map(sent).join("\n");
+ const photo=blocks.photo.join(" · ");
+ const tone=PROMO_TONE[v.tone]||PROMO_TONE["따뜻하게"];
+ const tag=(meta.title||P).replace(/[^가-힣a-zA-Z0-9]/g,"").slice(0,28);
+ const tags="#용인시기흥장애인복지관 #장애인복지관 #복지관소식"+(tag?" #"+tag:empty?" #올릴활동":"");
+ const join=x=>x.filter(Boolean).join("\n\n");
+ const facts=[meta.when&&"일시: "+meta.when,meta.where&&"장소: "+meta.where,meta.who&&"참여 대상: "+meta.who,meta.count&&"참여 인원: "+meta.count].filter(Boolean).join("\n");
+ const short=join([title,main,tone[1]]);
+ if(v.where==="인스타그램")return [
+  ["인스타그램 원고",join(["📌 "+title,context,tone[0],[main,steps,moment,react].filter(Boolean).join("\n"),thanks||tone[1],tags])],
+  ["인스타그램 짧은 원고",join([title,main,tags])]
+ ];
+ if(v.where==="카카오톡 채널")return [
+  ["카카오톡 채널 원고",join(["["+org+" 소식] "+title,context,tone[0],[main,moment||react||steps].filter(Boolean).join("\n"),thanks||tone[1]])],
+  ["카카오톡 한눈에 보기",short]
+ ];
+ if(v.where==="복지관 홈페이지")return [
+  ["복지관 홈페이지 행사 후기",join(["["+org+" 소식] "+title,
+   facts?"■ 활동 개요\n"+facts:empty?"■ 활동 개요\n[일시·장소·참여 대상]":"",
+   "■ 진행 내용\n"+[main,prep,steps|| (empty?"[실제로 진행한 내용]":"")].filter(Boolean).join("\n"),
+   moment||react?"■ 활동 결과·참여자 반응\n"+[moment,react].filter(Boolean).join("\n"):empty?"■ 활동 결과\n[확인된 결과나 반응]":"",
+   photo?"[사진: "+photo+"]":empty?"[사진: 행사 현장]":"",
+   next?"■ 다음 소식\n"+next:"",thanks||tone[1]])],
+  ["홈페이지 목록용 요약",short]
+ ];
+ return [
+  ["네이버 블로그 원고",join([title+" | "+org,"안녕하세요, "+org+"입니다. "+tone[0],
+   "■ 오늘의 활동\n"+[context,main,photo?"[사진: "+photo+"]":empty?"[사진: 활동 모습]":""].filter(Boolean).join("\n"),
+   prep||empty?"■ 준비하며\n"+(prep||"[활동 전에 준비한 내용이 있다면 적어 주세요.]"):"",
+   steps||empty?"■ 이렇게 진행했어요\n"+(steps||"[활동 순서나 직접 해 본 일]"):"",
+   moment||empty?"■ 기억에 남는 순간\n"+(moment||"[기억에 남는 장면을 한두 줄 적어 주세요.]"):"",
+   react||empty?"■ 참여자분들의 한마디\n"+(react||"[공개해도 되는 실제 반응이 있다면 적어 주세요.]"):"",
+   thanks?"■ 함께해 주신 분들\n"+thanks:empty?"■ 함께해 주신 분들\n[감사를 전할 분이나 단체가 있다면 적어 주세요.]":"",
+   next?"■ 다음 소식\n"+next:"",tone[1],tags])],
+  ["블로그 소개글",short]
+ ];
 }
 function promoMonth(v){
  const d=promoMemo(v.events);if(!d.lines.length&&!d.title)return [];if(!d.title&&v._work)d.title=v._work.program+" 소식";
