@@ -1622,7 +1622,7 @@ body:has(#v-groupref:not([hidden]))>main.wrap{width:100%;max-width:none;padding:
 body:has(#v-groupref:not([hidden]))>footer{display:none}
 #v-groupref{width:100%}
 </style>
-<script src="/giheung/workflow.js?v=2" defer></script>
+<script src="/giheung/workflow.js?v=3" defer></script>
 <style id="gh-clean-app-menu">
 #v-home [data-gh=mind] .flame{font-size:18px;line-height:1}#v-home [data-gh=heart] .ic{color:#E5568C;fill:#F7A6C4}
 @media(min-width:901px){#v-home .cols3>.bx:nth-child(2) .qgrid{grid-template-rows:repeat(3,minmax(0,1fr));align-content:stretch}#v-home .qgrid .qm{min-height:0;padding:5px 3px;gap:4px}#v-home .qgrid .qm .ic{width:20px;height:20px}}
@@ -5737,10 +5737,10 @@ window.GBIZ={view:function(){return '<section class="panel st"><div style="displ
 </style>
 <script id="fam-prompt-js">
 (function(){
-var state={page:'prompt',jx:{}};try{state.jx=JSON.parse(localStorage.getItem('fam-jx')||'{}')||{}}catch(e){}
+var state={page:'prompt',jx:{}};try{state.jx=JSON.parse(localStorage.getItem('giheung-design-choice')||'{}')||{}}catch(e){}
 var views={},init={};var decorateFeatures=function(){};var E=function(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
 function showToast(m){try{toast(m)}catch(e){}}
-function render(){var h=document.getElementById('fam-prompt-host');if(!h||!views.prompt)return;h.innerHTML=views.prompt();try{init.prompt&&init.prompt()}catch(e){}try{localStorage.setItem('fam-jx',JSON.stringify(state.jx))}catch(e){}}
+function render(){var h=document.getElementById('fam-prompt-host');if(!h||!views.prompt)return;h.innerHTML=views.prompt();try{init.prompt&&init.prompt()}catch(e){}try{localStorage.setItem('giheung-design-choice',JSON.stringify({p3:{k:P.k,categories:P.categories,sel:{},text:''}}))}catch(e){}}
 /* ===== 2026.11.12 v2 한 화면 도구 (일반 구직자용): 프롬프트 디자인실 · 토닥토닥 마음챙김 · 나만의 노래 만들기 · 빡침 번역기 ===== */
 (function(){
 if(typeof decorateFeatures!=='function')window.decorateFeatures=function(){document.querySelectorAll('.feature-bar .feature-card').forEach(function(c){c.classList.toggle('active',c.dataset.target===state.page)})};
@@ -5750,7 +5750,7 @@ function T(m){try{showToast(m)}catch(e){}}
 function cp(t,m){var ok=function(){T(m||'복사했어요. AI 창에 붙여 넣으세요.')};
  if(navigator.clipboard)navigator.clipboard.writeText(t).then(ok,fb);else fb();
  function fb(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){T('길게 눌러 직접 복사해 주세요.')}a.remove()}}
-function gpt(p){var w=window.open('https://chatgpt.com/?q='+encodeURIComponent(p),'_blank');if(w)w.opener=null}
+function gpt(p){var w=window.open('https://chatgpt.com/#disable_auto_send=1&q='+encodeURIComponent(p),'_blank');if(w)w.opener=null}
 function gem(p,m){cp(p,m||'프롬프트를 복사했어요. 제미나이 입력창에 붙여 넣으세요.');var w=window.open('https://gemini.google.com/app','_blank');if(w)w.opener=null}
 function rnd(a,not){var c=a.filter(function(x){return x!==not});return c[Math.floor(Math.random()*c.length)]||a[0]}
 function q(s){return document.querySelector('#fam-prompt-host '+s)}
@@ -6265,18 +6265,33 @@ var RULES='- 내가 말하지 않은 사실은 지어내지 말고 [확인 필�
 function pText(){var x=pParts();return '[역할]\n'+x.role+'\n\n[내가 고른 것]\n'+x.ctx+'\n\n[할 일]\n'+x.task+'\n\n[더 알려 줄 것]\n'+(x.mine||'(없음)')+'\n\n[답변 형식]\n'+x.fmt+'\n\n[지킬 것]\n'+RULES+(x.safe?'\n'+x.safe:'')}
 function pHtml(){var x=pParts();return '<span class="k">[역할]</span>\n<span class="g">'+E(x.role)+'</span>\n\n<span class="k">[내가 고른 것]</span>\n<span class="g">'+E(x.ctx)+'</span>\n\n<span class="k">[할 일]</span>\n'+E(x.task)+'\n\n<span class="k">[더 알려 줄 것]</span>\n<span class="o">'+E(x.mine||x.ph)+'</span>\n\n<span class="k">[답변 형식]</span>\n'+E(x.fmt)+'\n\n<span class="k">[지킬 것]</span>\n'+E(RULES+(x.safe?'\n'+x.safe:''))}
 function pGroups(){var t=TASKS[P.k],sv=pSel(P.k);return t.g.map(function(g){return '<span class="jx-l">'+E(g.l)+(g.m?' <small>여러 개 골라도 돼요</small>':'')+'</span><div class="jx-chips'+(g.m?' warm':'')+'">'+g.o.map(function(o,i){var on=g.m?sv[g.k].indexOf(i)>-1:sv[g.k]===i;return '<button type="button" data-pg="'+g.k+'" data-pi="'+i+'"'+(on?' class="on"':'')+'>'+E(o)+'</button>'}).join('')+'<input class="pg-x" data-px="'+g.k+'" value="'+E(sv['x'+g.k]||'')+'" placeholder="기타 (직접 입력)"></div>'}).join('')}
+var PCATEGORIES=[['문서·기획',[10,11,12]],['홍보·소통',[13,14,15,9]],['복지현장',[16,17,18]],['식단·건강',[0,2,3,6]],['일상·배움',[1,4,5,7,8]]];
+[
+ ['사업계획서','사업 필요성·목표·회기 운영과 지표를 구분한 사업계획서 초안을 작성해 줘.'],
+ ['결과보고서','계획과 실제 수행 내용을 구분하고 산출과 변화, 다음 개선안을 정리해 줘.'],
+ ['회의록·업무 인계','사실, 결정, 담당과 기한, 인계할 주의사항을 분리해 줘.'],
+ ['쉬운 안내문','일시·장소·대상·신청 순으로 쉬운 말과 짧은 문장으로 안내문을 작성해 줘.'],
+ ['활동 후기·소식지','확인된 활동만 활용해 선택된 대상·채널에 맞춰 게시용 초안을 작성해 줘.'],
+ ['홍보 이미지 기획','핵심 메시지와 시각적 강조, 한글 문구, 접근 가능한 배치를 제안해 줘.'],
+ ['개별 지원 계획','선호와 선택을 우선하고, 지원 조건과 관찰 지표를 구분해 줘.'],
+ ['프로그램 안전·접근성','이동, 감각, 의사소통 지원과 대체 활동을 확인표로 만들어 줘.'],
+ ['직업·생활 자립 활동','당사자가 선택하고 수행할 활동을 단계별로 설계해 줘.']
+].forEach(function(a){TASKS.push({t:a[0],s:'',role:'용인시기흥장애인복지관 업무 도우미',g:[{k:'reader',l:'대상',o:['이용자','보호자·가족','지역 주민','동료·협력기관','후원자']},{k:'tone',l:'작성 방식',o:['정중하고 명료하게','쉬운 말로','간결하게']}],task:a[1],ph:'사업명과 확인된 조건을 적어 주세요.',fmt:'제목 → 핵심 내용 → 확인할 사항',safe:'- 실명·진단명·개인 연락처를 넣지 마.'})});
+if(P.categories==null||!PCATEGORIES[P.categories]){P.categories=0;P.k=10;}
+if(!PCATEGORIES[P.categories][1].includes(P.k))P.k=PCATEGORIES[P.categories][1][0];
 function promptView(){
- var left='<span class="jx-l">무엇을 해 볼까요?</span><div class="jx-grid" id="jx-p-task">'+TASKS.map(function(t,i){return '<button type="button" data-pk="'+i+'"'+(P.k===i?' class="on"':'')+'><b>'+E(t.t)+'</b><span>'+E(t.s)+'</span></button>'}).join('')+'</div>'+
+ var cur=P.categories, left='<div class="jx-chips" role="group" aria-label="프롬프트 종류">'+PCATEGORIES.map(function(a,i){return '<button type="button" data-pkind="'+i+'" aria-pressed="'+(cur===i)+'" class="'+(cur===i?'on':'')+'">'+E(a[0])+'</button>'}).join('')+'</div><span class="jx-l">무엇을 해 볼까요?</span><div class="jx-grid" id="jx-p-task">'+PCATEGORIES[cur][1].map(function(i){var t=TASKS[i];return '<button type="button" data-pk="'+i+'"'+(P.k===i?' class="on"':'')+'><b>'+E(t.t)+'</b><span>'+E(t.s)+'</span></button>'}).join('')+'</div>'+
  '<div id="jx-p-g">'+pGroups()+'</div>'+
  (TASKS[P.k].fridge?'':'<span class="jx-l">더 알려 줄 것 <small>비워 둬도 돼요 · 개인정보는 빼 주세요</small></span><div class="jx-tools">'+micBtn('jx-p-in')+'<button type="button" class="jx-b mini" data-p="clr">지우기</button></div><textarea class="jx-ta" id="jx-p-in" placeholder="'+E(TASKS[P.k].ph)+'">'+E(P.text)+'</textarea>');
  var FR=!!TASKS[P.k].fridge;
  var right=FR?'<span class="jx-l" style="margin:0">추천 메뉴 <small>＋를 누르면 레시피가 나와요</small></span><div class="fr-list" id="jx-fr">'+fHtml()+'</div>':'<span class="jx-l" style="margin:0">완성된 프롬프트 <small>고른 대로 바로 바뀌어요</small></span><div class="jx-pv" id="jx-p-pv"></div>'+
  (FR?'':'<div class="jx-acts"><button type="button" class="jx-b fill" data-p="gpt">ChatGPT에서 열기</button><button type="button" class="jx-b" data-p="gem">제미나이에서 열기</button><button type="button" class="jx-b" data-p="cp">복사</button></div>');
- return shell('프롬프트 디자인실','일상에서 하고 싶은 것을 고르고 터치만 하면, 오른쪽에 AI가 찰떡같이 알아듣는 프롬프트가 완성돼요.','',left,right)}
+ return shell('프롬프트 디자인실','업무나 일상에서 필요한 종류를 고르면 오른쪽 프롬프트가 바뀝니다.','',left,right)}
 function promptBind(){var pv=q('#jx-p-pv'),ta=q('#jx-p-in'),el=q('.jx'),fl=q('#jx-fr');function up(){if(fl){fl.innerHTML=fHtml();return}if(pv)pv.innerHTML=pHtml()}up();
  if(ta)ta.addEventListener('input',function(){P.text=ta.value;up()});
  el.addEventListener('input',function(e){var x=e.target.closest('[data-px]');if(!x)return;pSel(P.k)['x'+x.dataset.px]=x.value;up()});
  el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.pkind!=null){P.categories=+b.dataset.pkind;P.k=PCATEGORIES[P.categories][1][0];render();var c=q('#jx-p-task');if(c)c.previousElementSibling?.previousElementSibling?.querySelector('[aria-pressed=true]')?.focus({preventScroll:true});return}
   if(b.dataset.pk!=null){P.k=+b.dataset.pk;render();return}
   if(b.dataset.fo!=null){P.fopen=P.fopen===b.dataset.fo?null:b.dataset.fo;up();return}
   if(b.dataset.fc!=null){var L=fList().list,x=L[+b.dataset.fc];if(x)cp(fText(x),'레시피를 복사했어요.');return}
@@ -6649,7 +6664,7 @@ function homeHTML(){
   var left='<section class="bx"><div class="bx-h"><h2>서식 자료실</h2><span class="hint"><button type="button" data-gh="all">전체 보기 ›</button></span></div>'+
     '<div class="bx-b"><ul class="plist">'+L+'</ul></div></section>';
 
-  var Q=[['group-msg','문자·소통','msg'],['group-promo','홍보·안내','meg'],['group-donate','후원 관리','hand'],['group-fridge','프롬프트 디자인실','pen'],['group-life','프로그램·생활','bulb'],['group-log','프로그램 일지','pen'],['mind','빡침 번역기','flame'],['heart','마음챙김','heart'],['appguide','AI 앱 설치','desktop']];
+  var Q=[['group-msg','문자·소통','msg'],['group-promo','홍보·안내','meg'],['group-donate','후원 관리','hand'],['prompt','프롬프트 디자인실','pen'],['group-life','프로그램·생활','bulb'],['group-log','프로그램 일지','pen'],['mind','빡침 번역기','flame'],['heart','마음챙김','heart'],['appguide','AI 앱 설치','desktop']];
   var mid='<section class="bx"><div class="bx-h"><h2>업무 바로가기</h2></div>'+
     '<div class="qgrid">'+Q.map(function(x,i){return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+(x[2]==='flame'?'<span class="flame" aria-hidden="true">🔥</span>':I(x[2]))+'<b>'+E(x[1])+'</b></button>'}).join('')+'</div>'+
     '<div class="bar2">'+
@@ -6824,7 +6839,7 @@ function paneTabs(){
   return '<div class="gi-pan-tabs" role="group" aria-label="작업 화면"><button type="button" data-gi-pane="in" aria-pressed="true">고르기·채우기</button><button type="button" data-gi-pane="out" aria-pressed="false">결과·프롬프트</button></div>';
 }
 function x2(title,tag,left,right,tabs,back,showBoth){
-  return '<section class="gi-task"><div class="fbar"><button type="button" class="vback" '+(back?'data-gh="'+E(back)+'"':'data-home')+'>← '+(back==='donate'?'후원 관리':back==='planmenu'?'프로그램·기획':back==='promomenu'?'홍보·안내문':'업무도우미')+'</button><h2>'+E(title)+'</h2></div>'+
+  return '<section class="gi-task"><div class="fbar"><button type="button" class="vback" '+(back?'data-gh="'+E(back)+'"':'data-home')+'>← '+(back==='donate'?'후원 관리':back==='planmenu'?'프로그램·기획':back==='group-life'?'프로그램·생활':back==='promomenu'?'홍보·안내문':'업무도우미')+'</button><h2>'+E(title)+'</h2></div>'+
    (tag?'<p class="fstat">'+E(tag)+'</p>':'')+(tabs||'')+(showBoth?'':paneTabs())+
    '<div class="x2" data-pane="'+(showBoth?'both':'in')+'"><section aria-label="고르기와 사용법" class="col L">'+left+'</section><section aria-label="예시와 전체 프롬프트" class="col R">'+right+'</section></div></section>';
 }
@@ -6956,14 +6971,14 @@ function renderMsg(){
 }
 /* 사업·프로그램명은 기흥복지관 공개 사업소개에서 확인. 내용은 실습 예시이며 모집 공고가 아님. */
 var GI_CATALOG=[
- {label:'스마트재활·치료',area:'중재·컨설팅',url:'https://www.a-sak.or.kr/services/smart.php',items:['스마트재활센터','로봇보행재활','디지털 순환재활','디지털 지역사회훈련','디지털 재활스포츠','디지털 인지치료','스마트짐','수중재활운동','언어치료'],task:'이용자가 방문 절차와 활동 선택, 쉬는 방법을 이해할 수 있게 안내해요.',check:'개별 참여 조건과 안전 사항은 치료 담당자 확인으로 남기고 효과를 보장하지 않아요.'},
- {label:'아동·청소년',area:'중재·컨설팅',url:'https://www.a-sak.or.kr/services/programs2.php',items:['우리두리','두드림','위드고','뮤직TOUCH','스피치업','I Be School 방과후교실','플레이아트','동화발레','꿈꾸는 동화 공작소'],task:'참여자가 활동과 표현 방법을 선택하고, 보호자는 준비물과 인계 절차를 확인해요.',check:'연령·지원 조건과 사진 공개 동의를 확인해요.'},
- {label:'평생교육·여가',area:'낮활동·행동지원',url:'https://www.a-sak.or.kr/services/programs3.php',items:['기흥행복한캠퍼스','Art Class (문화예술)','Digital Class (정보화)','Sports Class (스포츠)','Special Class (심화반)','Healthy Class (건강·보건)','이용고객 동아리','밝은누리밴드'],task:'참여자가 원하는 활동을 고르고, 재료나 기기 사용을 작은 단계로 연습해요.',check:'구체적 시간표, 기기 필요 여부, 좌석·이동 편의는 실제 안내를 확인해요.'},
+ {label:'스마트재활·치료',area:'중재·컨설팅',url:'https://www.a-sak.or.kr/services/smart.php',items:['스마트재활센터','로봇보행재활','디지털 순환재활','디지털 지역사회훈련','디지털 재활스포츠','디지털 인지치료','스마트짐','수중재활운동','언어치료','접수면접 및 사회진단','치료재활진단','운동치료','작업치료','인지학습치료','음악치료','미술치료'],task:'이용자가 방문 절차와 활동 선택, 쉬는 방법을 이해할 수 있게 안내해요.',check:'개별 참여 조건과 안전 사항은 치료 담당자 확인으로 남기고 효과를 보장하지 않아요.'},
+ {label:'아동·청소년',area:'중재·컨설팅',url:'https://www.a-sak.or.kr/services/programs2.php',items:['우리두리','두드림','위드고','뮤직TOUCH','스피치업','I Be School 방과후교실','플레이아트','동화발레','꿈꾸는 동화 공작소','P-Box','우리함께','토다김','아쿠아밸런스','D-Box','아쿠아스윔','개별 체육','디지털스포츠','요리','ADL','로봇코딩','디지털드로잉','드럼','피아노','기타','화가반','전환기교육'],task:'참여자가 활동과 표현 방법을 선택하고, 보호자는 준비물과 인계 절차를 확인해요.',check:'연령·지원 조건과 사진 공개 동의를 확인해요.'},
+ {label:'평생교육·여가',area:'낮활동·행동지원',url:'https://www.a-sak.or.kr/services/programs3.php',items:['기흥행복한캠퍼스','Art Class (문화예술)','Digital Class (정보화)','Sports Class (스포츠)','Special Class (심화반)','Healthy Class (건강·보건)','이용고객 동아리','밝은누리밴드','톡투게더','관절수중운동','아쿠아짐'],task:'참여자가 원하는 활동을 고르고, 재료나 기기 사용을 작은 단계로 연습해요.',check:'구체적 시간표, 기기 필요 여부, 좌석·이동 편의는 실제 안내를 확인해요.'},
  {label:'직업·취업지원',area:'직업지원',url:'https://www.a-sak.or.kr/services/programs3.php',items:['직업상담','스마트 청춘','취업 전 교육','취업알선','취업 후 적응지원','중증장애인 지원고용','장애인복지 일자리사업','훈련대학','직업대학'],task:'관심 직무를 고르고 과제를 경험한 뒤, 필요한 도움과 다음 목표를 본인이 정해요.',check:'취업이나 자격 취득을 보장하지 않고, 이력서·사업체 개인정보는 넣지 않아요.'},
  {label:'가족·보호자',area:'가족(보호자) 지원',url:'https://www.a-sak.or.kr/services/programs4.php',items:['가족사례관리','P.O.P 가족체험','마음ON 부모교육','마음ON 동아리'],task:'가족이 원하는 활동을 각각 선택하고, 참여 방식과 쉬어갈 시간을 정해요.',check:'가족 형태를 단정하지 않고, 사례관리 내용 대신 과정·공개된 지원 정보만 써요.'},
- {label:'권리·인식개선',area:'사례관리·권익옹호',url:'https://www.a-sak.or.kr/services/awareness.php',items:['포니야 놀자!','장애인식개선교육','장애인식개선캠페인','이용자권리교육','아삭공모전'],task:'도움이 필요한지 먼저 묻고, 서로 다른 의사소통 방식을 존중하는 장면을 연습해요.',check:'동정·영웅화·장애 흉내를 피하고, 공식 캐릭터·로고는 승인된 자료만 활용해요.'},
+ {label:'권리·인식개선',area:'사례관리·권익옹호',url:'https://www.a-sak.or.kr/services/awareness.php',items:['포니야 놀자!','장애인식개선교육','장애인식개선캠페인','이용자권리교육','아삭공모전','무료법률상담','기흥행복한놀이터'],task:'도움이 필요한지 먼저 묻고, 서로 다른 의사소통 방식을 존중하는 장면을 연습해요.',check:'동정·영웅화·장애 흉내를 피하고, 공식 캐릭터·로고는 승인된 자료만 활용해요.'},
  {label:'지역·문화행사',area:'지역사회중심지원(CBSS)',url:'https://www.a-sak.or.kr/services/programs5.php',items:['가족잔치','명절 및 기념행사','문화공연','문화데이트','길 따라 맛 따라','이용고객나들이','장애인만 참여하는 무료마켓'],task:'어떤 활동에 참여할지 고르고 이동, 쉬는 곳, 우천 시 대안을 함께 확인해요.',check:'휠체어 동선·화장실·조용히 쉴 공간과 참여하지 않을 선택을 안내해요.'},
- {label:'재가·사례관리',area:'사례관리·권익옹호',url:'https://www.a-sak.or.kr/services/programs5.php',items:['하이드림솔루션','방문 이·미용서비스','김장지원서비스','클린업서비스','반찬지원서비스','주거환경개선','문화기행서비스','오늘하루쉼표','기흥행복마을만들기'],task:'내부 계획에는 협력 역할·기한을 적고, 공개 안내에는 사업 목적과 신청 절차만 담아요.',check:'가구 식별 정보와 탈락·선정 사유는 공개하지 말고 자격·배정은 담당자가 확인해요.'},
+ {label:'재가·사례관리',area:'사례관리·권익옹호',url:'https://www.a-sak.or.kr/services/programs5.php',items:['하이드림솔루션','방문 이·미용서비스','김장지원서비스','클린업서비스','반찬지원서비스','주거환경개선','문화기행서비스','관내 이·미용서비스','행복신문','명절지원','찾아가는 생일잔치','반려견 간식','중증장애인 잔고장 수리','재가장애인나들이','오늘하루쉼표','기흥행복마을만들기'],task:'내부 계획에는 협력 역할·기한을 적고, 공개 안내에는 사업 목적과 신청 절차만 담아요.',check:'가구 식별 정보와 탈락·선정 사유는 공개하지 말고 자격·배정은 담당자가 확인해요.'},
  {label:'주간·활동지원',area:'낮활동·행동지원',url:'https://www.a-sak.or.kr/services/programs6.php',items:['주간이용센터','장애인활동지원사업','장애인맞춤형지원사업','발달장애인 주간활동지원서비스'],task:'이용자에게 활동 선택지와 휴식 방법을 보여 주고 스스로 선택한 것을 기록해요.',check:'서비스 자격·가능 시간·비용은 임의로 채우지 말고 최신 공지와 대조해요.'},
  {label:'후원·자원봉사',area:'지역사회중심지원(CBSS)',url:'https://www.a-sak.or.kr/',items:['기흥아너리더스클럽','자원봉사','후원안내','후원소식'],task:'필요한 지원, 참여 방법, 활동 뒤 확인할 것을 순서대로 정리해요.',check:'후원금액, 사용 실적, 이름은 확인·동의 없이 넣지 않아요.'}
 ];
@@ -7052,7 +7067,7 @@ function renderPlan(){
    '<p class="gh-sheet-tip">각 항목 뒤에 적으세요. 직접 입력을 골랐다면 대상·취지·기대 효과도 이 칸에 적으세요.</p>'+
    '<textarea class="gh-single-sheet" id="plan-sheet" rows="12" data-gi-field="plan-sheet">'+E(v.sheetRaw===undefined?sheetText(PLAN_SHEET,v):v.sheetRaw)+'</textarea>'+
    '<button type="button" class="gh-jump gh-promo-preview-mobile" data-gi-jump="plan-output">오른쪽 결과 보기 ↓</button>';
- $('#v-plan2').innerHTML=x2('프로그램 기획','사업·대상·취지·기대 효과를 고르면 오른쪽 기획 프롬프트가 바뀝니다.',left,planRight(),null,null,true);
+ $('#v-plan2').innerHTML=x2('프로그램 기획','사업·대상·취지·기대 효과를 고르면 오른쪽 기획 프롬프트가 바뀝니다.',left,planRight(),null,v.returnGroup?'group-life':null,true);
 }
 function planSelect(label,key,values,value){return '<label>'+E(label)+' <select data-plan-select="'+key+'">'+values.map(function(x){return '<option'+(x===value?' selected':'')+'>'+E(x)+'</option>';}).join('')+'</select></label>';}
 
@@ -7808,6 +7823,14 @@ var GROUP_PANELS={
  'group-life':['프로그램·생활','c-life'],
  'group-log':['프로그램 일지','form-program']
 };
+function openDistrictPlan(x){
+ var nodes=['스마트재활·치료','아동·청소년','평생교육·여가','직업·취업지원','가족·보호자','권리·인식개선','지역·문화행사','재가·사례관리','주간·활동지원','후원·자원봉사'];
+ var j=Math.max(0,nodes.indexOf(x.group));
+ var targets=['신체장애 성인','발달장애 청소년','성인 발달장애인','발달장애 청소년','보호자·가족','지역 주민','장애인·비장애인 함께','재가장애인','성인 발달장애인','자원봉사자'];
+ var aims=[0,4,2,3,5,7,6,8,1,6],effects=[2,0,0,3,5,6,4,1,1,4];
+ selectPlanDraft('사업활동:'+x.group+':'+x.program+':'+x.what,{group:x.group,area:x.area,program:x.program,question:x.what,focus:x.check,tgt:targets[j],aim:PLAN_AIM[aims[j]],effect:PLAN_EFFECT[effects[j]],returnGroup:true});
+ go('plan2');
+}
 var groupWorkflow=null;
 function groupHome(){
  if(location.hash.indexOf('#group-')===0)history.replaceState(history.state,'',location.pathname+location.search);
@@ -7819,7 +7842,7 @@ function groupView(key){
    if(!window.mountGiheungWorkflow){view.textContent='화면을 불러오지 못했어요. 새로고침해 주세요.';show('groupref');return;}
    view.textContent='';
    var mount=document.createElement('div');mount.id='gh-workflow';view.appendChild(mount);
-   groupWorkflow=window.mountGiheungWorkflow(mount,{home:groupHome,getOrg:O});
+   groupWorkflow=window.mountGiheungWorkflow(mount,{home:groupHome,getOrg:O,catalog:GI_CATALOG,plan:openDistrictPlan});
  }
  show('groupref');
  groupWorkflow.open(info[1]);
@@ -7827,6 +7850,7 @@ function groupView(key){
 }
 var _go=window.go;
 window.go=function(k){
+  if(k==='group-fridge')k='prompt';
   if(Object.hasOwn(GROUP_PANELS,k)){groupView(k);return;}
   if(k==='home'){if(location.hash.indexOf('#group-')===0)history.replaceState(history.state,'',location.pathname+location.search);show('home');return;}
   if(k==='appguide'){AG_TAB='install';renderAppGuide();show('appguide');return}

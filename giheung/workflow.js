@@ -3,7 +3,7 @@
 "use strict";
 global.mountGiheungWorkflow=function(host,options){
  const root=host.attachShadow({mode:"open"}),page=global.document;
- const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=1";
+ const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=3";
  const body=page.createElement("div");body.className="group-body";body.innerHTML='<div class="wrap"><main id="app"></main></div>';
  root.append(style,body);
  const document={
@@ -73,6 +73,12 @@ const CATS = {
 
 /* ---------- 업무 목록 ---------- */
 const TASKS = [
+{id:"gh-welfare-msg",draft:1,cat:"msg",title:"복지관 업무 문자",situation:"사업·프로그램에 맞는 문자를 쓰고 싶어요",hideOld:true,
+ desc:"받는 분과 말투를 골라 확인된 내용을 적으면 바로 복사할 문자가 나옵니다.",
+ chips:[{k:"reader",label:"누구에게 보낼까요?",opts:["이용자","보호자·가족","지역 주민","후원자·봉사자","협력기관","복지관 직원"]},{k:"tone",label:"어떤 말투로 쓸까요?",opts:["정중하게","부드럽게","쉬운 말로"]}],
+ inputs:[{k:"body",label:"문자로 전할 내용 · 한 칸에 입력",area:true,ph:"예: 일시: 12월 5일 오후 2시 / 장소: 복지관 1층 / 확인: 참석 여부를 12월 3일까지 알려 주세요."}],
+ tip:"실명·진단명·개인 연락처는 넣지 마세요. 날짜·장소·회신 기한은 발송 전에 확인하세요.",next:[]},
+
 /* 문자·소통 */
 {id:"donor-thanks",cat:"msg",title:"후원 감사 문자",situation:"후원 물품이나 후원금이 들어왔어요",
  desc:"고마운 마음을 담은 감사 인사를 세 가지 버전으로 받아요.",
@@ -3776,29 +3782,67 @@ DN_FORMS.forEach(d=>{ FBY[d.id]=makeFormObj(d); FBY[d.id].desc=d.kind==="ledger"
 let DNL=(()=>{ try{ return JSON.parse(localStorage.getItem("aibox-dnlist")||"{}"); }catch(e){ return {}; } })();
 const saveDNL=()=>{ try{ localStorage.setItem("aibox-dnlist",JSON.stringify(DNL)); }catch(e){} };
 function dnList(){ const hide=new Set(DNL.hide||[]); return [...DN_FORMS.filter(d=>!hide.has(d.id)).map(d=>FBY[d.id]),...(DNL.add||[]).map(id=>FBY[id]).filter(Boolean)]; }
+const ghDonModes=[
+ ["thanks","감사 인사","후원을 받았을 때",["gift","program","next"]],
+ ["checkin","안부 문자","후원자께 부담 없이 소식을 전할 때",["program","result","next"]],
+ ["funds","후원금·물품 사용 안내","무엇에 사용했는지 알릴 때",["period","gift","used","next"]],
+ ["result","활동·사업 성과 공유","확인된 활동과 결과를 전할 때",["period","program","result","next"]],
+ ["growth","아동 성장 소식","개인을 특정하지 않고 변화를 전할 때",["period","program","growth","next"]]
+];
+const ghDonFields={
+ recipient:["받는 분","예: 후원자님 / ○○기업 담당자님"],
+ gift:["후원 내용","예: 미술 재료 / 확인된 후원금액"],
+ period:["기간","예: 11월 활동 기간"],
+ program:["사업·활동","예: 아동 미술 프로그램"],
+ used:["실제 사용 내역","예: 수업에 사용한 미술 재료 구입"],
+ result:["확인된 결과","예: 참석 인원 또는 실제 진행한 활동"],
+ growth:["관찰한 변화","예: 재료를 직접 골라 작품을 완성하는 모습"],
+ next:["마무리 한마디","예: 앞으로도 활동 소식을 나누겠습니다."]
+};
+let ghDonType="thanks",ghDonDrafts=Object.create(null);
+function ghDonMessage(mode,v){
+ const val=k=>String(v[k]||"").trim(), donor=val("recipient")||"후원자님";
+ const body=[donor+", 안녕하세요. 용인시기흥장애인복지관입니다."];
+ const add=(label,k)=>{if(val(k))body.push(label+": "+val(k));};
+ if(mode==="thanks"){body.push("따뜻한 마음을 보내 주셔서 감사합니다.");add("후원 내용","gift");add("관련 활동","program");}
+ if(mode==="checkin"){body.push("그동안 잘 지내셨는지요? 복지관 소식을 전해 드립니다.");add("최근 활동","program");add("활동 소식","result");}
+ if(mode==="funds"){body.push("보내 주신 후원의 사용 내역을 안내드립니다.");add("사용 기간","period");add("후원 내용","gift");add("확인된 사용 내역","used");}
+ if(mode==="result"){body.push("후원과 관련한 복지관 활동 소식을 전해 드립니다.");add("활동 기간","period");add("사업·활동","program");add("확인된 결과","result");}
+ if(mode==="growth"){body.push("아동 프로그램의 활동 소식을 전해 드립니다.");add("활동 기간","period");add("프로그램","program");if(v.consent)add("활동 중 관찰한 변화","growth");}
+ body.push(val("next")||"함께해 주셔서 고맙습니다.");
+ return body.join("\n\n");
+}
 function renderDonate(){
-  const hidN=(DNL.hide||[]).length;
-  const fm=dnList().map(d=>`<li><button type="button" class="bd-t" data-form="${d.id}">${esc(d.name)}<small>${esc(d.desc)}</small></button><span class="bd-act"><button type="button" class="bd-btn pri" data-form="${d.id}">${ico("pen")}작성</button><button type="button" class="bd-btn dn-x" data-dnx="${d.id}" title="목록에서 빼기">빼기</button></span></li>`).join("");
-  const msgs=[["donor-thanks","후원 감사 문자","후원을 받았을 때"],["donor-use","후원금 사용 안내 문자","어디에 썼는지 알릴 때"],["donor-news","후원자 안부·소식 문자","오랜만에 안부 전할 때"],["holiday-greeting","명절·연말 인사","명절·연말에"],["donor-ask","후원 홍보·모집 문자","새 후원자님을 모실 때"],["sns-post","SNS·블로그 홍보 글","시설 활동을 알릴 때"]];
+  const mode=ghDonModes.find(m=>m[0]===ghDonType)||ghDonModes[0];
+  const d=ghDonDrafts[mode[0]]||(ghDonDrafts[mode[0]]=Object.create(null));
+  const req={funds:"used",result:"result",growth:"program"}[mode[0]];
   app.innerHTML=`<div class="ghome dn fade">
-    <div class="dn-head"><h2>후원 관리 <button type="button" class="man-link" data-man="donate">📘 사용법</button></h2><p>후원을 받고 → 감사드리고 → 쓰고 → 알려드리는 흐름을 한곳에서 해요.</p></div>
-    <div class="gcols">
-      <section class="gbox gboard"><div class="gbox-h"><h2>후원 서식</h2><span><button type="button" class="more-link mk-link" data-dnadd>+ 후원 서식 추가</button>${hidN?`<button type="button" class="more-link" data-dnrestore>뺀 서식 ${hidN}개 되돌리기</button>`:""}</span></div>
-        <ul class="bd">${fm}</ul>
-        <p class="dn-note">서식을 열면 칸·열을 더하거나 뺄 수 있어요. 시·군·구에 제출하는 정해진 양식이 있으면 그 양식을 서식 작성 화면의 <b>[내 서식 첨부]</b>로 올려 채우세요.</p></section>
-      <section class="gbox"><div class="gbox-h"><h2>후원 문자·글</h2></div>
-        <div class="dn-msgs">${msgs.map(([id,t,d])=>`<button type="button" class="qm" data-open="${id}">${ico(id==="donor-ask"||id==="sns-post"?"mega":"mail")}<b>${t}</b><span>${d}</span></button>`).join("")}</div></section>
-      <section class="gbox"><div class="gbox-h"><h2>후원 감사의 흐름</h2></div>
-        <ol class="dn-flow">
-          <li><b>받은 날</b><span>감사 문자 보내기 · 대장에 기록</span></li>
-          <li><b>쓰기 전</b><span>지정 후원이면 정해진 곳에만 쓰기</span></li>
-          <li><b>쓴 뒤</b><span>사용 안내 문자 · 영수증 보관</span></li>
-          <li><b>분기·연말</b><span>사용 결과 보고 · 안부 문자</span></li>
-          <li><b>연초</b><span>기부금 영수증 발급 · 발급 대장 정리</span></li>
-        </ol>
-        <p class="dn-note">후원금 관리·공개 기준은 시·군·구와 협회 안내를 꼭 확인하세요.</p>
-        <a class="dn-link" href="https://kawid.or.kr/bbs/board.php?bo_table=B41" target="_blank" rel="noopener">협회 자료실에서 관련 자료 찾기 ${ico("link","sm")}</a></section>
+    <div class="dn-head"><h2>후원자 소통·성과 공유</h2><p>상황을 골라 확인된 내용만 적으면 후원자에게 전할 문장이 완성됩니다.</p></div>
+    <nav class="dn-msgs" aria-label="후원 메시지 유형">${ghDonModes.map(([id,t,h])=>`<button class="qm" type="button" data-gh-donor-mode="${id}" aria-pressed="${id===mode[0]}" style="${id===mode[0]?'border-color:#287351;background:#eaf7ef':''}">${ico("mail")}<b>${esc(t)}</b><span>${esc(h)}</span></button>`).join("")}</nav>
+    <div class="gcols" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr))">
+      <section class="gbox dn-board"><div class="gbox-h"><h2>보낼 내용</h2></div>
+        ${["recipient",...mode[3]].map(k=>`<label class="field" style="display:block;margin:0 0 9px"><b>${esc(ghDonFields[k][0])}</b><input style="display:block;box-sizing:border-box;width:100%" type="text" data-gh-donor-field="${k}" placeholder="${esc(ghDonFields[k][1])}" value="${esc(d[k]||"")}"></label>`).join("")}
+        ${mode[0]==="growth"?`<p class="dn-note">이름·사진·학교·진단명 등 식별 정보는 적지 마세요. 당사자와 필요한 경우 보호자의 공유 동의 및 기관 기준이 확인되지 않으면 개별 변화는 보내지 않습니다.</p><label style="display:block;margin-top:5px"><input type="checkbox" id="gh-donor-consent"${d.consent?" checked":""}> 공유 범위를 확인했고, 개인을 특정할 수 없는 문장입니다.</label>`:`<p class="dn-note">금액·일정·인원은 확인된 사실만 입력하고, 개인정보는 빼 주세요.</p>`}
+      </section>
+      <section class="gbox dn-board"><div class="gbox-h"><h2>${esc(mode[1])} 예시</h2><button type="button" class="bd-btn pri" id="gh-donor-copy">복사</button></div>
+        <textarea class="paper" id="gh-donor-preview" aria-label="보낼 문장 미리보기" readonly rows="13" style="box-sizing:border-box;width:100%;resize:vertical;line-height:1.65"></textarea>
+        <p class="dn-note" id="gh-donor-status" role="status"></p>
+      </section>
     </div></div>`;
+  const area=document.getElementById("gh-donor-preview"), st=document.getElementById("gh-donor-status"), copy=document.getElementById("gh-donor-copy"), cond=document.getElementById("gh-donor-consent");
+  function paint(){
+    area.value=ghDonMessage(mode[0],d);
+    copy.disabled=!!(req&&!String(d[req]||"").trim());
+    st.textContent=copy.disabled?ghDonFields[req][0]+"을 먼저 적어 주세요.":mode[0]==="growth"&&!d.consent?"공유 범위가 확인되기 전에는 관찰한 변화가 문장에 들어가지 않습니다.":"내용을 확인하고 복사해 문자·메일 등에 붙여 넣으세요.";
+  }
+  app.querySelectorAll("[data-gh-donor-mode]").forEach(b=>b.addEventListener("click",()=>{
+    ghDonType=b.dataset.ghDonorMode;renderDonate();
+    app.querySelector('[data-gh-donor-mode="'+ghDonType+'"]').focus({preventScroll:true});
+  }));
+  app.querySelectorAll("[data-gh-donor-field]").forEach(a=>a.addEventListener("input",()=>{d[a.dataset.ghDonorField]=a.value;paint();}));
+  if(cond)cond.addEventListener("change",()=>{d.consent=cond.checked;paint();});
+  copy.addEventListener("click",()=>copyText(area.value,area,()=>{st.textContent="복사했어요."},()=>{st.textContent="자동 복사가 되지 않았어요. 선택된 문장을 직접 복사해 주세요."}));
+  paint();
 }
 
 
@@ -4057,16 +4101,84 @@ function renderHelp(){
   </div>`;
 }
 /* ---------- 분류 화면 ---------- */
+/* Official service names come from the institution catalog; scenario suggestions are not current notices. */
+const GH_FIELD_WORK=[
+ [["첫 이용·평가 절차","치료 대기·배정","스마트재활 체험 모집","재활 장비·접근 안내","재활 이용 과정 소개","수중재활 준비물"],["접수 면접 시간 확인","치료재활진단 준비","대기 순번·배정 연락","치료 시간 조율","수중활동 준비물 확인","로봇보행 첫 방문 안내"],["초기 평가·욕구 확인","개인별 재활 목표 설정","스마트 장비 체험 운영","수중·이동 안전점검","의사소통 지원 계획","재활 과정 점검"]],
+ [["방과후 교실 모집","방학 특강 안내","예술·체육 수업 소개","전환기 교육 소개","보호자 설명회","아동·청소년 활동 후기"],["신청·선정 결과","방과후 보호자 인계","수업 준비물 안내","방학특강 일정 확인","체험 참여 동의","보호자 상담 시간 조율"],["방과후 회기 설계","청소년 전환기 준비","아동 문화예술 체험","협동 놀이·사회성 활동","보호자 인계·출결 계획","감각·의사소통 지원"]],
+ [["평생교육 수강 안내","디지털 기초 강좌 모집","생활체육 참여 안내","동아리 신규 신청","작품 전시·공연 홍보","캠퍼스 활동 후기"],["수강 신청 확인","기기·재료 준비물","동아리 모임 확인","공연 리허설 안내","휴강·보강 공지","전시 공개 동의 확인"],["문화예술 회기","디지털 생활문해 수업","생활체육 안전 운영","이용자 동아리 지원","작품 전시·공연 운영","쉬운 교육 평가 설계"]],
+ [["직업상담 이용 안내","직업대학·훈련대학 안내","취업 전 교육 모집","직무 체험 소개","지역 업체 협력 안내","직업 훈련 활동 후기"],["직업상담 예약","직무 체험 출석 확인","면접 일정·준비물","현장실습 첫 출근","취업 후 적응 확인","협력 사업체 회신 요청"],["직무 선호·강점 탐색","현장 직무 체험","취업 전 교육 회기","면접·이력서 실습","사업체 협력 계획","취업 후 적응 지원"]],
+ [["P.O.P 가족체험 모집","마음ON 부모교육 소개","보호자 동아리 안내","가족지원 상담 이용","가족 휴식 활동 홍보","가족 활동 후기"],["가족체험 참여 확인","부모교육 준비 안내","상담 날짜 조율","보호자 모임 리마인드","참여 동의·회신 요청","불참 가족 안부"],["가족 욕구 확인","가족 체험 회기","부모교육·익명 질문","보호자 자조모임","가족 휴식 지원 계획","가족지원 자원 연계"]],
+ [["포니야 놀자! 교육 소개","장애인식개선교육 안내","이용자권리교육 홍보","지역 캠페인 참여 안내","아삭공모전 안내","쉬운 권리 안내문"],["교육 기관 일정 확인","캠페인 준비·집결","공모전 접수 확인","교육 참여 안내","쉬운 회신 요청","기관 협력 자료 요청"],["이용자권리·자기옹호 교육","포니야 놀자! 교육 운영","지역 주민 인식개선","쉬운 안내 당사자 검토","공모전 행사 운영","당사자 의견 수렴"]],
+ [["복지관 가족잔치 홍보","문화공연·문화데이트 안내","이용고객나들이 모집","무료마켓 이용 안내","주민 공동행사 홍보","문화행사 후기"],["탑승 시간·집결 확인","휠체어 동선 안내","무료마켓 안내문자","공연 좌석·입장","우천 시 대체 일정","행사 협력기관 감사"],["무장애 나들이 운영","가족잔치 인력·역할","문화공연 관람 지원","무료마켓 동선 설계","주민 교류 행사","우천·혼잡 대체 운영"]],
+ [["재가 서비스 이용 안내","찾아가는 방문 서비스 소개","반찬·명절지원 안내","지역자원 연계 소개","주거환경개선 안내","개인정보 없는 활동 후기"],["방문 시간 확인","이·미용 이용 예약","반찬 전달 일정 변경","명절지원 수령 확인","방문 후 안부","동의한 기관과 일정 조율"],["방문 전 동의·확인","반찬·김장 운영","주거환경 개선 협력","하이드림 위기지원 연계","사례회의 역할·기한","재가 문화활동 운영"]],
+ [["주간이용센터 안내","발달장애인 주간활동 안내","장애인활동지원 절차","맞춤형지원 소개","일상 자립 활동 소개","주간활동 후기"],["이용 신청·대기 연락","송영·인계 시간 확인","주간활동 준비물","활동지원 일정 변경","참여·쉬어가기 확인","지원팀 인수인계"],["주간활동 주제 설계","일상생활 자립 연습","지역시설 이용 연습","그림·쉬운 의사소통","개별 휴식·선택 지원","지원 인력 인수인계"]],
+ [["자원봉사 참여 안내","후원 안내·신청 경로","기부 물품 모집","활동 사진과 감사 소개","후원 결과 소식","기업·단체 협력 소개"],["첫 봉사 활동 안내","봉사 일정·장소 확인","후원물품 전달 감사","정기 후원자 안부","후원 사용 소식 전하기","활동 결과·협력 감사"],["자원봉사 오리엔테이션","후원 활동 목적·계획","물품 배분 기준 점검","기업 연계 활동","후원자 소식 전달 계획","감사와 성과 공유"]]
+];
+const GH_COMMON_WORK={
+ promo:["참여자 모집 공지","홈페이지 행사 후기","인스타그램·블로그·카카오톡","일정 변경·휴강","이용·접근성 안내","월간 소식지","카드뉴스","행사 포스터","홍보 이미지·삽화","인포그래픽"],
+ msg:["참여 안내","신청 접수 확인","선정·참여 확정","대기 안내","일정 변경·취소","참여 전 준비물","불참·안부 확인","다음 회차 안내","감사 문자"],
+ life:["프로그램 필요성과 대상","참여자 모집·선정","회기별 운영","인력과 역할 분담","예산·물품 준비","안전·접근성 점검","우천·불참 대안","성과 지표와 만족도","결과보고·다음 운영"]
+};
+const GH_PROGRAM_WORK=[
+ [/로봇보행|수중재활|아쿠아/,["장비·수중 이용 전 안내","탈의·이동 접근 경로 안내"],["장비 첫 이용 준비물","탈의실과 이동 지원 확인"],["장비 체험 중단·휴식 기준","탈의·이동 지원 절차"]],
+ [/로봇코딩|디지털드로잉|Digital Class|디지털스포츠/,["실습 기기와 재료 안내","디지털 작품·성과 후기"],["기기·보조 도구 준비 확인","과제 제출·다음 수업 안내"],["기기 접근성 설정","실습에 필요한 보조 도구"]],
+ [/직업대학|훈련대학|취업알선|지원고용/,["직무훈련·현장실습 소개","참여 업체 협력 안내"],["면접·출근 경로 확인","현장 지도 담당자 연락"],["직무 과제 수행 기준","사업체 지원·보완 계획"]],
+ [/반찬지원|김장지원|명절지원/,["물품 수령 방법 안내","나눔 활동 후기"],["수령 가능 시간 회신","보관·전달 방법 안내"],["식품 위생·보관 점검","수령 방식·대체 전달"]],
+ [/마음ON|P\.O\.P/,["보호자 의견·참여 방법 안내","자녀 동반 참여 안내"],["가족 참여 여부 회신","보호자 질문 사전 접수"],["돌봄·자녀 동반 참여 계획","익명 질문 시간 준비"]],
+ [/포니야 놀자|행복한놀이터|권리교육/,["기관별 교육 신청 안내","쉬운 글 교육자료 안내"],["참여 기관 사전 준비","수어·그림 지원 여부 확인"],["교육 콘텐츠 접근성 검토","교육 후 행동 관찰"]],
+ [/주간이용센터|주간활동지원/,["신청 절차와 하루 활동 흐름","희망 활동·휴식 선택 안내"],["송영 탑승·하차 장소 확인","당일 활동 변경 전달"],["하루 선택 활동과 쉬는 시간","지원팀 교대 기록"]]
+];
+function ghServiceSource(g,p){
+ if(/접수면접|치료재활진단|언어치료|운동치료|작업치료|인지학습치료|음악치료|미술치료|수중재활/.test(p))return "https://www.a-sak.or.kr/services/programs.php";
+ if(/무료법률상담|아삭공모전|이용자권리교육/.test(p))return "https://www.a-sak.or.kr/services/programs5.php";
+ if(p==="하이드림솔루션")return "https://www.a-sak.or.kr/services/hidream.php";
+ if(p==="주간이용센터")return "https://www.a-sak.or.kr/services/programs3.php";
+ return g.url;
+}
+const GH_SECTOR_STATE={promo:{g:0,p:0},msg:{g:0,p:0},life:{g:0,p:0}};
+function ghScenarios(c){
+ const i={promo:0,msg:1,life:2}[c],g=GH_SECTOR_STATE[c].g;
+ const sector=options.catalog[g],program=sector.items[GH_SECTOR_STATE[c].p],specific=GH_PROGRAM_WORK.find(x=>x[0].test(program));
+ return Array.from(new Set((specific?specific[i+1]:[]).concat(GH_FIELD_WORK[g]?.[i]||[],GH_COMMON_WORK[c])));
+}
+function ghDistrict(c){
+ const s=GH_SECTOR_STATE[c],g=options.catalog[s.g],ps=g.items;
+ return '<section class="gh-work-sector"><fieldset><legend>1. 복지관 사업 분야</legend><div class="chips">'+options.catalog.map((x,i)=>'<label class="chip"><input type="radio" name="gh-sector" data-gh-sector="'+c+'" value="'+i+'"'+(s.g===i?' checked':'')+'><span>'+esc(x.label)+'</span></label>').join('')+'</div></fieldset>'+
+  '<div class="gh-sector-program"><label for="gh-sector-program">2. 실제 사업·프로그램</label><select id="gh-sector-program" data-gh-program="'+c+'">'+ps.map((x,i)=>'<option value="'+i+'"'+(s.p===i?' selected':'')+'>'+esc(x)+'</option>').join('')+'</select><a href="'+esc(ghServiceSource(g,ps[s.p]))+'" target="_blank" rel="noopener">공식 사업소개 ↗</a></div>'+
+  '<h3>3. '+esc(ps[s.p])+'에서 어떤 일을 하나요?</h3><div class="gh-scenario-grid">'+ghScenarios(c).map((x,i)=>'<button class="b3d" type="button" data-gh-scenario="'+c+':'+i+'">'+esc(x)+'</button>').join('')+'</div>'+
+  '<p class="hint">사업명은 복지관 공식 안내 기준입니다. 아래 선택지는 업무 예시이며 실제 모집 일정은 아닙니다.</p></section>';
+}
+function ghOpenScenario(c,i){
+ const q=GH_SECTOR_STATE[c],g=options.catalog[q.g],program=g.items[q.p],what=ghScenarios(c)[i],ctx={program,what,group:g.label,check:g.check,area:g.area};
+ if(c==="life"){options.plan(ctx);return;}
+ const k=c==="msg"?"gh-welfare-msg":/카드뉴스/.test(what)?"cardnews":/포스터/.test(what)?"poster":/삽화/.test(what)?"image-prompt":/인포그래픽/.test(what)?"infographic":/소식지/.test(what)?"newsletter":/후기|인스타그램/.test(what)?"sns-post":"notice";
+ const t=BY[k],key=k+"|"+g.label+"|"+program+"|"+what;
+ if(!ghScenarioDrafts[key]){
+   const live=values[k];delete values[k];const fresh=getVals(t);if(live)values[k]=live;else delete values[k];
+   fresh.v._work=ctx;
+   if(c==="msg")fresh.v.reader=(q.g===1||q.g===4)?"보호자·가족":q.g===9?"후원자·봉사자":"이용자";
+   if(k==="notice")fresh.v.purpose=/변경|휴강|취소/.test(what)?"일정 변경·취소":/모집|신청/.test(what)?"참여자 모집":/접근|이동/.test(what)?"안전·접근성 안내":"이용·행사 안내";
+   if(k==="sns-post"&&what.includes("홈페이지"))fresh.v.where="복지관 홈페이지";
+   if(k==="poster"||k==="cardnews"||k==="infographic")fresh.v.title=program;
+   if(k==="image-prompt")fresh.v.scene=program+"의 "+what;
+   ghScenarioDrafts[key]=fresh;
+ }
+ ghScenarioRoute={k,state:ghScenarioDrafts[key]};go("t-"+k);
+}
+const ghScenarioDrafts=Object.create(null);let ghScenarioRoute=null;
+
 function renderCat(c){
-  const list = TASKS.filter(t=>t.cat===c);
+  const list = TASKS.filter(t=>t.cat===c&&!t.hideOld);
+  const district=!!GH_SECTOR_STATE[c]&&options.catalog&&options.catalog.length;
   app.innerHTML = `<div class="fade cat-${c}" style="display:flex;flex-direction:column;gap:18px">
     <button class="back b3d" type="button" data-home>← 처음으로</button>
-    <div class="page-head"><p class="label">${list.length}가지 업무</p><h2>${CAT_EM[c]} ${CATS[c].name}${MAN["cat-"+c]?` <button type="button" class="man-link" data-man="cat-${c}">📘 사용법</button>`:""}</h2><p>지금 상황과 가장 가까운 것을 눌러주세요.</p></div>
-    <div class="list">${list.map(t=>rowHTML(t)).join("")}${c==="promo"?`<button class="row b3d cat-promo" type="button" data-goto="photo"><span class="dot" aria-hidden="true"></span><span class="em" aria-hidden="true">📷</span><span class="tx"><span class="t">활동 사진을 정리해 내려받고 싶어요</span><span class="s">활동 사진 올리기</span></span><span class="go" aria-hidden="true">→</span></button>`:""}</div></div>`;
+    <div class="page-head"><p class="label">${district?"사업별 업무":list.length+"가지 업무"}</p><h2>${CAT_EM[c]} ${CATS[c].name}${MAN["cat-"+c]?` <button type="button" class="man-link" data-man="cat-${c}">📘 사용법</button>`:""}</h2><p>지금 상황과 가장 가까운 것을 눌러주세요.</p></div>
+    ${district?ghDistrict(c)+'<details class="gh-existing-work"><summary>기존 작업 메뉴</summary>':""}<div class="list">${list.map(t=>rowHTML(t)).join("")}${c==="promo"?`<button class="row b3d cat-promo" type="button" data-goto="photo"><span class="dot" aria-hidden="true"></span><span class="em" aria-hidden="true">📷</span><span class="tx"><span class="t">활동 사진을 정리해 내려받고 싶어요</span><span class="s">활동 사진 올리기</span></span><span class="go" aria-hidden="true">→</span></button>`:""}</div>${district?"</details>":""}</div>`;
 }
 
 /* ---------- 업무 화면 ---------- */
 function getVals(t){
+  if(ghScenarioRoute&&ghScenarioRoute.k===t.id)return ghScenarioRoute.state;
   if(!values[t.id]){
     const v = {};
     (t.chips||[]).forEach(c=>{v[c.k]=c.opts[c.def||0]});
@@ -4210,7 +4322,7 @@ function promoMemo(raw){
 }
 function promoLine(s){return /[:：]/.test(s)?s:sent(s);}
 function promoPost(v){
- const d=promoMemo(v.act);if(!d.lines.length&&!d.title)return [];
+ const d=promoMemo(v.act);if(!d.lines.length&&!d.title)return [];if(!d.title&&v._work)d.title=v._work.program;
  const tone=PROMO_TONE[v.tone]||PROMO_TONE["따뜻하게"],t=d.title||"복지관 활동 이야기";
  const p=d.lines.map(promoLine),topic=d.title.replace(/[^가-힣a-zA-Z0-9]/g,"");
  const hash="#용인시기흥장애인복지관 #복지관소식"+(topic?" #"+topic:"");
@@ -4222,7 +4334,7 @@ function promoPost(v){
  }
 }
 function promoMonth(v){
- const d=promoMemo(v.events);if(!d.lines.length&&!d.title)return [];
+ const d=promoMemo(v.events);if(!d.lines.length&&!d.title)return [];if(!d.title&&v._work)d.title=v._work.program+" 소식";
  const lines={
   "보호자":["보호자님, 안녕하세요. 복지관에서 있었던 일을 전해 드립니다.","궁금한 점은 복지관에 문의해 주세요."],
   "참여자 가족":["가족 여러분, 안녕하세요. 복지관의 이번 달 활동을 나눕니다.","이번 달 이야기를 읽어 주셔서 고맙습니다."],
@@ -4236,11 +4348,19 @@ function promoMonth(v){
  return [[v.reader+"용 소식지 원고",[`[${PROMO_ORG}] ${d.title||"이달의 소식"}`,lines[0],d.lines.map(x=>"• "+promoLine(x)).join("\n"),lines[1]+" "+tone[1]].filter(Boolean).join("\n\n")]];
 }
 function promoNotice(v){
- const d=promoMemo(v.content);if(!d.lines.length&&!d.title)return [];
+ const d=promoMemo(v.content);if(!d.lines.length&&!d.title)return [];if(!d.title&&v._work)d.title=v._work.program+" · "+v._work.what;
  const lead=v.tone==="쉬운 말로"?"알아두면 좋은 내용을 아래에 정리했어요.":v.tone==="따뜻하게"?"참여하시기 편하도록 필요한 내용을 모았습니다.":"아래 내용을 확인해 주시기 바랍니다.";
  return [["복지관 안내문 원고",[`[${v.purpose}]${d.title?" "+d.title:""}`,`${v.reader} 여러분, 안녕하세요. ${PROMO_ORG}입니다. ${lead}`,d.lines.map(promoLine).join("\n"),PROMO_ORG].filter(Boolean).join("\n\n")]];
 }
+function ghWelfareMsg(v){
+ const x=v._work||{}, input=(v.body||"").trim();if(!input)return [];
+ const reader={"이용자":"이용자님","보호자·가족":"보호자님과 가족 여러분","지역 주민":"지역 주민 여러분","후원자·봉사자":"후원자님과 자원봉사자님","협력기관":"협력기관 담당자님","복지관 직원":"직원 여러분"}[v.reader];
+ const intro=v.tone==="쉬운 말로"?"꼭 알아두실 내용을 알려 드려요.":v.tone==="부드럽게"?"확인하실 내용을 전해 드려요.":"아래와 같이 안내드립니다.";
+ const sign=v.tone==="부드럽게"?"궁금한 점은 편하게 알려 주세요.":v.tone==="쉬운 말로"?"모르는 것이 있으면 복지관에 물어봐 주세요.":"감사합니다.";
+ return [["보낼 문자",[`[${x.program||"용인시기흥장애인복지관"}${x.what?" · "+x.what:""}]`,`${reader}, 안녕하세요. ${intro}`,input,sign].join("\n")]];
+}
 const OUTS = {
+ "gh-welfare-msg":v=>ghWelfareMsg(v),
  "donor-use": v=>{
    const polite = v.tone==="정중하게", E=polite?"습니다":"어요";
    const call = v.who==="단체·기업" ? "후원해주신 관계자 여러분" : v.who==="정기 후원자님" ? "늘 한결같이 함께해주시는 후원자님" : "후원자님";
@@ -4358,7 +4478,7 @@ function fullPrompt(t,v){
     p+=`\n\n[참고 이미지] 함께 첨부한 참고 이미지에서 ${v._refWhat} 부분을 참고해서 그려줘. 단, 그림 속 인물이나 상표는 그대로 따라 그리지 마.`;
     if(v._refColors) p+=`\n참고 이미지의 주요 색: ${v._refColors}`;
   }
-  return p;
+  return (v._work?"[기흥 사업·프로그램] "+v._work.program+" / "+v._work.what+"\n[확인] "+v._work.check+"\n\n":"")+p;
 }
 function attachHTML(t,st){
   const chip=(k,opts)=>`<div class="chips">${opts.map((o,i)=>`<label class="chip"><input type="radio" name="c-${k}" id="c-${t.id}-${k}-${i}" value="${esc(o)}" data-chip="${k}" ${st.v[k]===o?"checked":""}><span>${esc(o)}</span></label>`).join("")}</div>`;
@@ -4469,7 +4589,7 @@ function renderTask(t){
                        : `<input id="${id}" type="text" data-input="${i.k}" placeholder="${esc(phOf(id,i.ph))}" value="${esc(st.v[i.k])}">`;
     return `<div class="field">${lab}<div class="with-mic">${ctl}${vmic(id)}</div>${exHint(id,i.ph)}</div>`;
   }).join("");
-  const related = TASKS.filter(x=>x.cat===t.cat && x.id!==t.id);
+  const related = TASKS.filter(x=>x.cat===t.cat && x.id!==t.id && !x.hideOld);
 
   const hasOut=!!OUTS[t.id],visual=VISUAL_TASKS.has(t.id);
   const aibarHTML=`        <div class="aibar">
@@ -4496,6 +4616,7 @@ function renderTask(t){
       <button class="star b3d" type="button" id="fav-btn" aria-pressed="${isFav}">${isFav?"★ 담김":"☆ 자주 쓰는 업무"}</button>
     </div>
     <p class="fstat">${esc(t.desc)}</p>
+    ${st.v._work?'<p class="gh-scenario-tip"><b>'+esc(st.v._work.program)+' · '+esc(st.v._work.what)+'</b><br>'+esc(st.v._work.check)+'</p>':""}
     <div class="ftabs" role="tablist"><button type="button" role="tab" class="on" data-ttab="in">✍️ 고르기·채우기</button><button type="button" role="tab" data-ttab="out">${t.plan?"📋 계획서":t.cal?"📅 식단표":t.draft?"완성 원고":hasOut?"💬 완성 문구":visual?"이미지 제작 프롬프트":"✨ AI에게 맡기기"}</button></div>
     <div class="tsplit">
       <section class="tin" aria-label="고르기와 채우기">
@@ -4581,6 +4702,7 @@ function route(){
   const gp=document.getElementById("gnb-prof"); if(gp){ gp.classList.toggle("set",!!PROF.name); gp.innerHTML=`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg>${PROF.name?esc(PROF.name):"우리 시설 정보 등록"}`; gp.title=PROF.name?"우리 시설 정보 바꾸기":"한 번 등록하면 모든 서식에 자동으로 들어가요"; }
   const h = (location.hash||"").replace("#","");
   current = null; curForm = null;
+  if(!h.startsWith("t-")||ghScenarioRoute?.k!==h.slice(2))ghScenarioRoute=null;
   const isHome = !(/^(t-|c-|form-)/.test(h) || ["fridge","forms","upload","month","help","make","rec"].includes(h) || h.startsWith("manual"));
   document.body.classList.toggle("home-mode", isHome);
   if(h.startsWith("t-") && BY[h.slice(2)]){ current = BY[h.slice(2)]; renderTask(current); }
@@ -4624,6 +4746,7 @@ function goHome(){ if(REC.on)recStop(); options.home(); }
 
 app.addEventListener("click",e=>{
   const o = e.target.closest("[data-open]"); if(o){ go("t-"+o.dataset.open); return; }
+  const scenario=e.target.closest("[data-gh-scenario]"); if(scenario){const [c,i]=scenario.dataset.ghScenario.split(":");ghOpenScenario(c,Number(i));return;}
   const c = e.target.closest("[data-catopen]"); if(c){ go("c-"+c.dataset.catopen); return; }
   if(e.target.closest("[data-fridge]")){ go("fridge"); return; }
   const gt = e.target.closest("[data-goto]"); if(gt){ go(gt.dataset.goto); return; }
@@ -4735,6 +4858,12 @@ app.addEventListener("click",e=>{
   }
 });
 app.addEventListener("change",e=>{
+ const sector=e.target.dataset.ghSector,program=e.target.dataset.ghProgram;
+ if(sector||program){const k=sector||program,s=GH_SECTOR_STATE[k];
+   if(sector){s.g=Number(e.target.value);s.p=0;}else{s.p=Number(e.target.value);}
+   renderCat(k);const focus=app.querySelector(sector?"[data-gh-sector]:checked":"#gh-sector-program");focus?.focus({preventScroll:true});return;
+ }
+
   if(e.target.id==="form-file-input" && current && e.target.files[0]){
     const f=e.target.files[0], msg=document.getElementById("form-file-msg"), t=current;
     msg.textContent="읽는 중이에요…";
