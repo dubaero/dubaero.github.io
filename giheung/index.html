@@ -1616,11 +1616,13 @@ body:has(#v-mind:not([hidden]))>main.wrap{width:100%;max-width:1240px}
 .gh-viz-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(146px,100%),1fr));align-content:start;gap:6px;padding:12px;flex:1}.gh-viz-item{padding:6px 8px;border-radius:7px;background:#fff}.gh-viz-item b{font-size:12px}.gh-viz-item b:empty{display:none}.gh-viz-item p{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45;margin:0;font-size:14px;font-weight:650}.gh-viz-card footer{background:var(--accent);color:var(--art);padding:8px 12px;font-weight:800;font-size:12px;overflow-wrap:anywhere}.gh-visual-more{margin-top:8px}.gh-visual-more summary{cursor:pointer;font-weight:750;padding:6px}
 @media(max-width:440px){.gh-month-list{grid-template-columns:1fr}.gh-viz-body{padding:8px}.gh-viz-card.wide,.gh-viz-card.sq{aspect-ratio:auto}}
 </style>
-<style id="gh-group-original-frame">
-html:has(#v-groupref:not([hidden])){zoom:1!important}#v-groupref{width:100%}.gh-ref-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:7px 3px}.gh-ref-bar h2{font-size:17px;margin:0;color:#204735}.gh-ref-bar a{margin-left:auto;font-size:12px;color:#285743;font-weight:750}.gh-ref-frame{display:block;width:100%;height:calc(100dvh - 105px);min-height:420px;background:#fff;border:1px solid #cbddd3;border-radius:10px}
-body:has(#v-groupref:not([hidden]))>main.wrap{width:100%;max-width:none;padding:0 10px}body:has(#v-groupref:not([hidden]))>footer{display:none}
-@media(max-width:560px){.gh-ref-bar{gap:7px}.gh-ref-bar h2{font-size:14px}.gh-ref-bar a{font-size:11px}.gh-ref-frame{height:calc(100dvh - 128px)}}
+<style id="gh-local-workflow">
+html:has(#v-groupref:not([hidden])){zoom:1!important}
+body:has(#v-groupref:not([hidden]))>main.wrap{width:100%;max-width:none;padding:0 12px 10px}
+body:has(#v-groupref:not([hidden]))>footer{display:none}
+#v-groupref{width:100%}
 </style>
+<script src="/giheung/workflow.js?v=1" defer></script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -7602,7 +7604,6 @@ function boot(){
         qa('[data-gi-pane]',bar).forEach(function(b){b.setAttribute('aria-pressed',String(b===pb));});
       }return;
     }
-    if(e.target.closest('[data-ref-back]')){var group=$('#v-groupref');if(group){group.replaceChildren();delete group.dataset.groupTab;}go('home');return;}
     if(e.target.closest('#gh-org')){openOrg();return;}
     var donor=e.target.closest('[data-don-key]');if(donor){renderDonWork(donor.dataset.donKey);return;}
     var mode=e.target.closest('[data-plan-mode]');if(mode){selectPlanDraft('mode:'+mode.dataset.planMode,{mode:mode.dataset.planMode,size:'1회 행사',area:'지역사회중심지원(CBSS)'});go('plan2');return;}
@@ -7801,17 +7802,22 @@ var GROUP_PANELS={
  'group-life':['프로그램·생활','c-life'],
  'group-log':['프로그램 일지','form-program']
 };
+var groupWorkflow=null;
+function groupHome(){
+ if(location.hash.indexOf('#group-')===0)history.replaceState(history.state,'',location.pathname+location.search);
+ show('home');
+}
 function groupView(key){
- var info=GROUP_PANELS[key],url='https://ai-biseo.github.io/#'+info[1],view=ensure('groupref','');
- var chosen=view.dataset.groupTab;
- if(chosen!==key||!view.firstChild){
-   view.dataset.groupTab=key;
-   view.innerHTML='<div class="gh-ref-bar"><button type="button" class="vback" data-ref-back>← 기흥 업무도우미</button><h2>'+E(info[0])+'</h2><a href="'+E(url)+'" target="_blank" rel="noopener noreferrer">원본 새 탭에서 열기 ↗</a></div>'+
-    '<iframe class="gh-ref-frame" title="'+E(info[0])+' · 공동생활가정 원본" allow="microphone; clipboard-write" referrerpolicy="no-referrer" src="'+E(url)+'"></iframe>';
+ var info=GROUP_PANELS[key],view=ensure('groupref','');
+ if(!groupWorkflow){
+   if(!window.mountGiheungWorkflow){view.textContent='화면을 불러오지 못했어요. 새로고침해 주세요.';show('groupref');return;}
+   view.textContent='';
+   var mount=document.createElement('div');mount.id='gh-workflow';view.appendChild(mount);
+   groupWorkflow=window.mountGiheungWorkflow(mount,{home:groupHome,getOrg:O});
  }
  show('groupref');
- var clean=location.pathname+location.search+'#'+key;
- if(location.hash!=='#'+key)history.replaceState(history.state,'',clean);
+ groupWorkflow.open(info[1]);
+ if(location.hash!=='#'+key)history.replaceState(history.state,'',location.pathname+location.search+'#'+key);
 }
 var _go=window.go;
 window.go=function(k){
