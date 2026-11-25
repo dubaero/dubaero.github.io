@@ -1009,6 +1009,55 @@ body>main.wrap{flex:1 0 auto}
  .cols3>.bx:nth-child(2) .qm b{font-size:13px}
 }
 
+/* ---------- 서식 자료실: 번호 목록 + 사용법/열기 ---------- */
+.plist li{grid-template-columns:18px minmax(0,1fr) auto;padding:7px 0}
+.plist .t{font-size:13px;font-weight:700}
+.plist .m{font-size:10.5px;margin-top:2px}
+.plist .mini{display:flex;gap:4px;opacity:.8;transition:opacity .12s}
+.plist li:hover .mini{opacity:1}
+.plist .b-how,.plist .b-go{font:inherit;font-size:10.5px;font-weight:500;border-radius:999px;padding:2px 8px;cursor:pointer;white-space:nowrap;line-height:1}
+.plist .b-how{border:1px solid #E3DCCF;background:#fff;color:#6D5B43}
+.plist .b-how:hover{background:#FBF3E6}
+.plist .b-go{border:1px solid #BFDCCF;background:#fff;color:#22604C}
+.plist .b-go:hover{background:#E8F5EE}
+.bd-all{margin-top:auto;flex:none;width:100%;display:flex;align-items:center;gap:6px;border:1px dashed #A9CDBB;background:#F3FAF6;color:#1F5C46;border-radius:8px;padding:7px 10px;font:inherit;font-size:11.5px;font-weight:700;cursor:pointer;text-align:left}
+.bd-all span{font-weight:400;color:#7A887F;font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.bd-all:hover{background:#E8F5EE}
+/* 사용법 도움말 */
+.ghh{position:fixed;inset:0;background:rgba(20,35,28,.42);display:grid;place-items:center;z-index:400;padding:16px}
+.ghh .box{background:#fff;border-radius:14px;width:min(460px,100%);padding:16px 20px 14px;box-shadow:0 24px 50px -24px rgba(20,35,28,.5)}
+.ghh h3{font-size:15px;font-weight:700;color:#1F3B31;margin-bottom:6px}
+.ghh h3 span{font-size:10.5px;font-weight:500;color:#7A887F;border:1px solid #DDE7E1;border-radius:999px;padding:1px 7px;margin-left:4px;vertical-align:2px}
+.ghh .acts{display:flex;gap:6px;margin-top:12px}
+.ghh .btn{flex:1;justify-content:center}
+/* ---------- 업무 프로젝트: 좌우 2단 ---------- */
+.dw2{grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr)}
+.dw2 .col.L{display:flex;flex-direction:column;gap:8px;position:sticky;top:52px}
+.dw2 .dw-in{flex-direction:column;align-items:stretch;gap:6px;background:#F7FBF9;border:1px solid #DDEBE3;border-radius:10px;padding:10px 12px}
+.dw2 .dw-in label{font-size:11.5px;font-weight:500;gap:3px}
+.dw2 .dw-in .f1{min-width:0;width:100%;font-size:12px;padding:5px 8px}
+.dw2 .dw-in p{font-size:10.5px!important;margin:0}
+.dw2 .dw-tabs{flex:none;flex-direction:column;gap:3px;overflow:visible;padding:0;margin:0}
+.dw2 .dw-tabs button{flex:none;white-space:nowrap;min-height:0}
+.dw2 .dw-tabs button{width:100%;text-align:left;border-radius:8px;font-size:12px;font-weight:500;padding:6px 10px}
+.dw2 .dw-tabs button.on{background:#1F3B31;color:#fff;border-color:#1F3B31;font-weight:700}
+.dw2>.col.R{max-height:calc(100vh - 96px);overflow:auto}
+.dw2 .dw-step{padding:12px 14px;margin-bottom:8px}
+.dw2 .dw-step>h3{font-size:13.5px}
+.dw2 .dw-step p.s{font-size:11.5px}
+.dw2 .ins{font-size:11.5px}
+.dw2 .ins .r{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+.dw2 .src{font-size:11px}
+.dw2 .src b{font-size:11px}.dw2 .src span{font-size:10.5px}
+.dw2 .dw-when{font-size:11.5px;margin-bottom:6px}
+.dw2 .btn.mini{font-size:10.5px;padding:3px 8px}
+
+.ins-scroll{max-height:250px;overflow:auto;border:1px solid #E3EDE7;border-radius:8px;background:#FBFDFC;padding:2px 4px}
+.ins-scroll .ins{border:0;background:none;padding:6px 8px;line-height:1.6}
+.ins-scroll .ins .note{font-size:10px}
+.ins-scroll::-webkit-scrollbar{width:6px}
+.ins-scroll::-webkit-scrollbar-thumb{background:#DCE6DF;border-radius:3px}
+
 .in-mind>.vbar{display:none!important}
 
 </style>
@@ -1372,15 +1421,15 @@ body>main.wrap{flex:1 0 auto}
 </div>
 <div id="v-drawer" hidden>
   <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2 id="dw-h">업무 프로젝트</h2><span class="tag" id="dw-tag">ChatGPT 프로젝트로 따라 만들기</span><span class="sp"></span><button type="button" class="btn mini" id="dw-swap">홍보물 프로젝트로 ›</button></div>
-  <div class="dw-tabs" id="dw-tabs" role="tablist"></div>
-  <div class="dw-in" id="dw-in">
+  <div class="x2 dw2"><div class="col L"><div class="dw-in" id="dw-in">
     <label>사업명<input class="f1" id="dw-biz" value="스마트재활센터"></label>
     <label>대상<input class="f1" id="dw-who" value="영유아·가족"></label>
     <label id="dw-seas-w">계절<select class="f1" id="dw-seas"><option>봄</option><option>여름</option><option>가을</option><option>겨울</option></select></label>
-    <p>바꾸면 아래 지침과 프롬프트가 모두 같이 바뀌어요.</p>
+    <p>바꾸면 오른쪽 지침과 요청문이 모두 같이 바뀌어요.</p>
   </div>
-  <div id="dw-body"></div>
-</div>
+  <div class="dw-tabs" id="dw-tabs" role="tablist"></div>
+  <p class="hintl">왼쪽에서 업무를 누르면 오른쪽 <span class="k">지침·첫 요청문</span>이 바로 바뀝니다.</p>
+  </div><div class="col R"><div id="dw-body"></div></div></div>
 
 <!-- ===== 다국어 안내 ===== -->
 <div id="v-multi" hidden>
@@ -3196,10 +3245,10 @@ function dwRev(d){var who=dwF(d.rv,d);
 function step(n,title,body,act){return '<section class="dw-step"><h3><span class="n">'+n+'</span>'+title+'<span class="sp"></span>'+(act||'')+'</h3>'+body+'</section>';}
 function dwDrawer(d){var proj=d.t+' 프로젝트';DWTXT.proj=proj;
   var h='<p class="dw-when"><b>'+esc(d.t)+' 프로젝트</b> · 언제 여나요? '+esc(d.when)+'</p>';
-  h+=step(1,'프로젝트 만들기','<div class="ins">'+row('프로젝트 이름: <b>'+esc(proj)+'</b>')+'</div><ol><li>ChatGPT 왼쪽 메뉴에서 <b>프로젝트 → 새 프로젝트</b>를 누르세요.</li><li>이름 칸에 붙여 넣고 만드세요. 사업별로 나누고 싶으면 뒤에 사업명을 붙여요. (예: '+esc(proj)+' - '+esc(dwV()['사업'])+')</li><li>메모리 선택이 보이면 <b>프로젝트 전용</b>을 고르세요. 다른 대화와 섞이지 않아요.</li></ol>',cpBtn('proj','이름 복사'));
-  h+=step(2,'지침 붙여 넣기','<p class="s">프로젝트 화면의 <b>지침</b> 칸에 붙여 넣으세요. 초록색이 이 지침의 핵심이에요.</p>'+dwInstr(d),cpBtn('ins','지침 복사'));
-  h+=step(3,'소스에 넣으면 좋은 자료','<p class="s">아래 자료는 <b>넣으면 더 좋아지는 것</b>이에요. 넣을지는 직접 고르세요.  무료 계정은 프로젝트당 파일 5개까지라 위에서부터 중요한 순서로 적었어요.</p><table class="src">'+d.src.map(function(s,i){return '<tr><td><input type="checkbox" data-chk="'+d.id+i+'"'+(DWCHK[d.id+i]?' checked':'')+' aria-label="'+esc(s[0])+' 넣음"></td><td><b>'+esc(s[0])+'</b><br><span>'+esc(s[1])+'</span></td></tr>';}).join('')+'</table><p class="dw-no">넣지 마세요: '+esc(d.no)+'</p>'+(d.g==='doc'?'<button type="button" class="linkbtn" data-go="all">우리 복지관 서식이 없으면: 2026년 장애인복지시설 사업안내 서식 105개에서 찾기 ›</button>':''));
-  h+=step(4,'첫 대화 시작','<p class="s">프로젝트 안에서 <b>새 채팅</b>을 열고 붙여 넣으세요. '+(d.g==='doc'?'AI가 꼭 필요한 것만 요약해서 묻고, 답하면 전체를 작성해요.':'자료가 부족하면 AI가 먼저 알려 주고, 항목 하나씩 같이 완성해요.')+'</p>'+dwFirst(d)+'<div class="ask">'+esc(d.ask)+'</div>',cpBtn('first','프롬프트 복사')+'<button type="button" class="btn mini" data-open="gpt">ChatGPT 열기</button>');
+  h+=step(1,'지침 붙여 넣기','<p class="s">프로젝트 화면의 <b>지침</b> 칸에 붙여 넣으세요. 초록색이 이 지침의 핵심이에요.</p>'+'<div class="ins-scroll">'+dwInstr(d)+'</div><p class="hintl" style="margin:4px 0 0">지침 전문은 위 칸에서 스크롤해 볼 수 있어요. 붙여 넣을 때는 지침 복사를 쓰세요.</p>',cpBtn('ins','지침 복사'));
+  h+=step(2,'첫 대화 시작','<p class="s">프로젝트 안에서 <b>새 채팅</b>을 열고 붙여 넣으세요. '+(d.g==='doc'?'AI가 꼭 필요한 것만 요약해서 묻고, 답하면 전체를 작성해요.':'자료가 부족하면 AI가 먼저 알려 주고, 항목 하나씩 같이 완성해요.')+'</p>'+dwFirst(d)+'<div class="ask">'+esc(d.ask)+'</div>',cpBtn('first','프롬프트 복사')+'<button type="button" class="btn mini" data-open="gpt">ChatGPT 열기</button>');
+  h+=step(3,'프로젝트 만들기','<div class="ins">'+row('프로젝트 이름: <b>'+esc(proj)+'</b>')+'</div><ol><li>ChatGPT 왼쪽 메뉴에서 <b>프로젝트 → 새 프로젝트</b>를 누르세요.</li><li>이름 칸에 붙여 넣고 만드세요. 사업별로 나누고 싶으면 뒤에 사업명을 붙여요. (예: '+esc(proj)+' - '+esc(dwV()['사업'])+')</li><li>메모리 선택이 보이면 <b>프로젝트 전용</b>을 고르세요. 다른 대화와 섞이지 않아요.</li></ol>',cpBtn('proj','이름 복사'));
+  h+=step(4,'소스에 넣으면 좋은 자료','<p class="s">아래 자료는 <b>넣으면 더 좋아지는 것</b>이에요. 넣을지는 직접 고르세요.  무료 계정은 프로젝트당 파일 5개까지라 위에서부터 중요한 순서로 적었어요.</p><table class="src">'+d.src.map(function(s,i){return '<tr><td><input type="checkbox" data-chk="'+d.id+i+'"'+(DWCHK[d.id+i]?' checked':'')+' aria-label="'+esc(s[0])+' 넣음"></td><td><b>'+esc(s[0])+'</b><br><span>'+esc(s[1])+'</span></td></tr>';}).join('')+'</table><p class="dw-no">넣지 마세요: '+esc(d.no)+'</p>'+(d.g==='doc'?'<button type="button" class="linkbtn" data-go="all">우리 복지관 서식이 없으면: 2026년 장애인복지시설 사업안내 서식 105개에서 찾기 ›</button>':''));
   if(d.g!=='doc'){h+=step(5,'이어 가기','<p class="s">AI 답을 보고 상황에 맞는 문장을 복사하세요. [ ] 칸은 내 상황으로 바꿔요.</p>'+dwNext(d));
   h+=step(6,'마무리 검토','<p class="s">다 썼으면 결정하는 사람 입장에서 한 번 더 보게 하세요.</p>'+dwRev(d),cpBtn('rev','프롬프트 복사'));}
   else h+='<div class="apply"><b>이후 진행</b> 더 필요한 자료가 있으면 「추가할까요, 다음으로 갈까요?」 → 확인할 내용을 한 번에 질문 → 답하면 서식대로 작성 → 검토 담당자로 점검·보완 → 한글(.hwpx) 파일 (안 되면 워드) 고칠 곳이 있으면 그냥 말로 요청하세요.</div>';
@@ -6011,28 +6060,27 @@ function I(k,cl){return '<svg class="ic'+(cl?' '+cl:'')+'" viewBox="0 0 24 24" f
 /* ---------- 홈 ---------- */
 function homeHTML(){
   var o=(typeof O==='function')?O():{};
-  var F=[
-   ['doc','plan','사업계획서','지침·지표 근거로 계획서 한 편 완성'],
-   ['doc','result','결과보고서','계획 대비 실적·달성률까지 표로'],
-   ['pr','','홍보물','카드뉴스·포스터·보도자료·블로그 지침'],
-   ['prompt','','사업별 맞춤형 프롬프트 생성기','식단·요리 포함 · 고르면 자동 세팅']
+  var R=[
+   ['doc','plan','사업계획서 프로젝트','지침·지표 근거로 계획서 한 편','doc'],
+   ['doc','result','결과보고서 프로젝트','계획 대비 실적·달성률까지 표로','result'],
+   ['pr','','홍보물 프로젝트','카드뉴스·포스터·보도자료·블로그','pr'],
+   ['prompt','','사업별 맞춤형 프롬프트 생성기','식단·요리 포함 · 고르면 자동 세팅','prompt'],
+   ['plan2','','프로그램 기획 제안','영역·대상만 골라도 계획서 표','plan2'],
+   ['event','','행사·체험','운영계획·안전계획 한 번에','event'],
+   ['promo2','','홍보·안내','행사후기·공지·카드뉴스·릴스','promo2'],
+   ['img','','홍보 이미지 제안','카드뉴스·포스터 시안','img'],
+   ['aiset','','AI 맞춤 설정 가이드','기록·학습·메모리 끄기','aiset']
   ];
-  var L='';
-  F.forEach(function(x,i){
-    L+='<li'+(i<2?' class="pri"':'')+'><span class="no">'+(i+1)+'</span>'+
-      '<button type="button" class="t" data-gh="'+x[0]+'"'+(x[1]?' data-dwt="'+x[1]+'"':'')+'>'+E(x[2])+' 프로젝트<span class="m">'+E(x[3])+'</span></button>'+
-      '<button type="button" class="go" data-gh="'+x[0]+'"'+(x[1]?' data-dwt="'+x[1]+'"':'')+' aria-label="열기">›</button></li>';
-  });
-  var G=[['plan2','프로그램 기획 제안','영역·대상만 골라도 계획서 표'],['event','행사·체험','운영계획·안전계획'],['promo2','홍보·안내','행사후기·공지·카드뉴스'],['img','홍보 이미지 제안','카드뉴스·포스터 시안'],['aiset','AI 맞춤 설정 가이드','기록·학습·메모리 끄기'],['manual','이용 매뉴얼','처음 쓰는 법·안전수칙']];
-  var g2='<div class="glbl">프로그램·행사·홍보</div><div class="qchips">'+
-    G.map(function(x){return '<button type="button" data-gh="'+x[0]+'" title="'+E(x[2])+'">'+E(x[1])+'</button>'}).join('')+'</div>';
-  var forms=(typeof FORMS!=='undefined'?FORMS:[]).map(function(f){
-    return '<button type="button" data-gh="form" data-id="'+f.id+'">'+E(f.name)+'</button>';
+  var L=R.map(function(x,i){
+    var at=' data-gh="'+x[0]+'"'+(x[1]?' data-dwt="'+x[1]+'"':'');
+    return '<li><span class="no">'+(i+1)+'</span>'+
+      '<button type="button" class="t"'+at+'>'+E(x[2])+'<span class="m">'+E(x[3])+'</span></button>'+
+      '<span class="mini"><button type="button" class="b-how" data-hh="'+x[4]+'">사용법</button>'+
+      '<button type="button" class="b-go"'+at+'>열기</button></span></li>';
   }).join('');
   var left='<section class="bx"><div class="bx-h"><h2>서식 자료실</h2><span class="hint"><button type="button" data-gh="all">전체 보기 ›</button></span></div>'+
-    '<div class="bx-b"><ul class="plist">'+L+'</ul>'+g2+
-    '<div class="glbl">기존 서식 14종 <span style="color:#A9B5AD;font-weight:400">· 2026 사업안내·평가지표</span></div>'+
-    '<div class="qchips">'+forms+'</div></div></section>';
+    '<div class="bx-b"><ul class="plist">'+L+'</ul></div>'+
+    '<button type="button" class="bd-all" data-gh="all">기존 서식 14종 작성하기 <span>상담일지 · 사례관리 회의록 · 만족도 조사 …</span> ›</button></section>';
 
   var Q=[['msg','문자·소통','상황을 누르면 완성 문자 2종','msg'],['promo2','홍보·안내','행사후기·공지·카드뉴스','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['plan2','프로그램·기획','칩을 누르면 계획서 표','bulb'],['month','이달의 추천','월 바꾸고 질문 카드','cal'],['mind','마음·사진','빡침·엽서·쉼터·사진관','heart']];
   var mid='<section class="bx"><div class="bx-h"><h2>업무 바로가기</h2><span class="hint">누르면 바로 작성</span></div>'+
@@ -6060,6 +6108,29 @@ function homeHTML(){
    '<div class="cols3">'+left+mid+right+'</div></div>';
 }
 function renderHome(){var h=$('#v-home');if(!h)return;h.innerHTML=homeHTML();bindSearch();}
+
+/* ---------- 사용법 도움말 ---------- */
+var HELP={
+ doc:['업무 프로젝트','프로젝트 하나에 ① 지침(규칙) ② 자료(서식·지난 문서) ③ 대화를 넣어 두고 매일 꺼내 씁니다.','① 지침 복사 → ChatGPT 프로젝트 지침 칸에 붙여 넣기','② 첫 요청문 복사 → 프로젝트 새 채팅에 붙여 넣기','③ AI가 묻는 것에 답하면 서식 순서대로 작성'],
+ result:['결과보고서 프로젝트','같은 업무 프로젝트에서 결과보고서 항목을 고르면 계획 대비 실적·달성률 표로 이어집니다.','① 사업명·기간·예산 입력','② 계획/실적 표를 붙이고 달성률 계산 요청','③ 미달성 원인과 개선 계획까지 함께 작성'],
+ pr:['홍보물 프로젝트','기본정보 → 기획안 → 스타일 → 제작 순서로 카드뉴스·포스터·보도자료를 만듭니다.','① 사업·행사 정보 입력','② 구성안 3가지 중 하나 선택','③ 문구·디자인 규칙 적용해 제작'],
+ prompt:['사업별 맞춤형 프롬프트 생성기','업무/일상을 고르고 항목을 누르면 프롬프트가 완성됩니다. 식단·요리(냉장고 파먹기, 당뇨 식단)도 들어 있어요.','① 업무 또는 일상 선택','② 상황·조건을 칩으로 고르기','③ 완성된 프롬프트를 복사해 AI에 붙여 넣기'],
+ plan2:['프로그램 기획 제안','왼쪽에서 서비스 영역·대상·시기·규모를 누르면 오른쪽 프로그램 계획서 표가 실시간으로 채워집니다.','① 영역과 대상을 고르기','② 규모(1회·4회기·8회기·연중) 선택','③ 표를 복사해 계획서에 붙이기'],
+ event:['행사·체험','행사 종류·시기·대상을 고르면 운영계획과 안전계획을 만듭니다.','① 행사 종류 선택','② 시기·대상·장소 조건 적기','③ 진행표·안전계획·안내문 받기'],
+ promo2:['홍보·안내','무엇을 만들지(행사후기·공지·카드뉴스·릴스·블로그·보도자료)를 고르면 오른쪽 글이 바로 완성됩니다.','① 종류와 사업 고르기','② 행사 정보를 쉼표로 적기','③ 글을 복사해 홈페이지·블로그에 올리기'],
+ img:['홍보 이미지 제안','카드뉴스·포스터 시안 방향을 고르면 이미지 프롬프트가 나옵니다.','① 만들 이미지 종류 선택','② 들어갈 문구·사진 방향 적기','③ 프롬프트를 복사해 이미지 AI에 붙여 넣기'],
+ aiset:['AI 맞춤 설정 가이드','기록 남기지 않기·학습 끄기·메모리·지침을 실제 화면 사진으로 따라 할 수 있어요.','① 제미나이/ChatGPT 선택','② 카드를 눌러 화면 사진 보기','③ 톱니바퀴 → 활동 순서로 설정'],
+ manual:['업무도우미 이용 매뉴얼','처음 쓰는 법·PC로 보내기·안전수칙·입력 금지선을 모았습니다.','① 입력 금지선 확인','② 우리 복지관 정보 등록','③ 만든 글은 반드시 직접 확인']
+};
+function showHelp(key){
+  var d=HELP[key]||HELP.manual,o=document.getElementById('gh-hh');
+  if(o)o.remove();
+  o=document.createElement('div');o.id='gh-hh';o.className='ghh';
+  o.innerHTML='<div class="box"><h3>'+E(d[0])+' <span>사용법</span></h3><ul class="ulist">'+d.slice(1).map(function(x){return '<li>'+E(x)+'</li>'}).join('')+'</ul>'+
+    '<div class="acts"><button type="button" class="btn fill" data-hhgo="'+key+'">열기</button><button type="button" class="btn" data-hhclose="1">닫기</button></div></div>';
+  o.addEventListener('click',function(e){if(e.target===o||e.target.closest('[data-hhclose]'))o.remove()});
+  document.body.appendChild(o);
+}
 
 /* 검색 */
 var SEARCH=[];
@@ -6291,6 +6362,8 @@ function boot(){
   if(!first){var p=$('.bar2 .gprof');if(p){p.onclick=function(){if(typeof openOrg==='function')openOrg()}}}
   /* 이벤트 */
   document.addEventListener('click',function(e){
+    var hgo=e.target.closest('[data-hhgo]');if(hgo){var k=hgo.dataset.hhgo;var box=document.getElementById('gh-hh');if(box)box.remove();if(k==='doc'||k==='result'){if(typeof openDW==='function'){go('doc');if(typeof DWT!=='undefined'){DWT=k==='result'?'result':'plan';if(typeof dwRender==='function')dwRender();}}}else{go(k)}return}
+    var hb=e.target.closest('[data-hh]');if(hb){showHelp(hb.dataset.hh);return}
     var b=e.target.closest('[data-gh]');
     if(b){
       var g=b.dataset.gh,id=b.dataset.id,dw=b.dataset.dwt;
