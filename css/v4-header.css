@@ -2,7 +2,7 @@
 .gh{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid #E6EAEF;font-family:"Noto Sans KR",system-ui,sans-serif;letter-spacing:-.01em}
 .gh-in{max-width:1200px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .gh-logo{display:flex;flex-direction:row;align-items:center;gap:10px;color:#17304F;text-decoration:none;line-height:1.25}
-.gh-logo-mark{display:block;height:40px;width:auto;flex-shrink:0}
+.gh-logo-mark{display:block;height:42px;width:auto;flex-shrink:0}
 .gh-logo-tx{display:flex;flex-direction:column;gap:1px;min-width:0}
 .gh-logo b{display:block;font-size:21px;line-height:1.25;font-weight:700;letter-spacing:-.02em}
 .gh-logo small{display:block;font-size:12.5px;line-height:1.25;font-weight:500;color:#5F6B78}
@@ -13,7 +13,7 @@
 .gh-nav a.gh-cta:hover{background:#1F6FB2;color:#fff}
 @media (max-width:760px){
   .gh-in{flex-wrap:wrap;padding:12px 18px 0;gap:6px}
-  .gh-logo-mark{height:38px}
+  .gh-logo-mark{height:40px}
   .gh-logo b{font-size:20px}
   .gh-logo small{font-size:11.5px}
   .gh-nav{width:100%;gap:0;justify-content:space-between;overflow-x:auto;font-size:16.5px;padding-bottom:2px}
@@ -87,13 +87,13 @@
   .gh-nav a:not(.gh-cta){min-height:42px;padding:7px 3px}
 }
 
-/* 2026.11.25 상단 5탭 파스텔 구분 — 하얀 배경·모바일에서도 한눈에 (진한 채움 없이 얇은 테두리 + 또렷한 글씨) */
-.gh-nav a[href="/lectures/"]{background:#EFF6FF;color:#1E3A8A;border-color:#BFDBFE;font-weight:700}
-.gh-nav a[href="/lectures/"]:hover,.gh-nav a[href="/lectures/"][aria-current="page"]{background:#DBEAFE;color:#1E3A8A;border-color:#93C5FD}
-.gh-nav a[href="/about/"]{background:#F5F3FF;color:#4C1D95;border-color:#DDD6FE;font-weight:700}
-.gh-nav a[href="/about/"]:hover,.gh-nav a[href="/about/"][aria-current="page"]{background:#EDE9FE;color:#4C1D95;border-color:#C4B5FD}
-.gh-nav a[href="/program/"]{background:#ECFEFF;color:#155E75;border-color:#A5F3FC;font-weight:700}
-.gh-nav a[href="/program/"]:hover,.gh-nav a[href="/program/"][aria-current="page"]{background:#CFFAFE;color:#155E75;border-color:#67E8F9}
+/* 2026.11.25 상단 5탭 파스텔 구분 — 하얀 배경·모바일에서도 한눈에 (진한 채움 없이 얇은 테두리 + 또렷한 글씨)
+   2026.11.25 서정님: "탭들은 각각 다른 탭 말고, 위에 탭 다른 색, 아래 탭 다른 색으로. 얼룩덜룩하게 하지 말고"
+   → 위쪽 세 탭(강의 자료실·강사 소개·강의 분야)은 한 가지 연한 스카이로 통일, 지금 보고 있는 페이지만 살짝 진하게.
+     AI 가이드(연민트)·워드클라우드(연노랑)는 수강생이 바로 찾도록 그대로 둡니다. */
+.gh-nav a[href="/lectures/"],.gh-nav a[href="/about/"],.gh-nav a[href="/program/"]{background:#EFF6FF;color:#1E3A8A;border-color:#BFDBFE;font-weight:700}
+.gh-nav a[href="/lectures/"]:hover,.gh-nav a[href="/about/"]:hover,.gh-nav a[href="/program/"]:hover{background:#E4EFFD;color:#1E3A8A;border-color:#A9CDF9}
+.gh-nav a[href="/lectures/"][aria-current="page"],.gh-nav a[href="/about/"][aria-current="page"],.gh-nav a[href="/program/"][aria-current="page"]{background:#DBEAFE;color:#1E3A8A;border-color:#93C5FD}
 .gh-nav a.gh-ai{background:#ECFDF5;color:#166534;border-color:#86EFAC}
 .gh-nav a.gh-ai:hover,.gh-nav a.gh-ai[aria-current="page"]{background:#DCFCE7;color:#14532D;border-color:#4ADE80}
 .gh-nav a.gh-wc{background:#FEF9C3;color:#713F12;border-color:#FDE047}

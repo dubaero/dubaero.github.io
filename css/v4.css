@@ -513,15 +513,12 @@ a.lg{text-decoration:none;text-align:center}
   .hero4 .h4-txt{gap:0;justify-content:space-between}
 }
 
-/* 2026.11.25 강의 자료실 상단 하얀 카드: PC 한 줄 6칸 × 2줄(총 12개), 파스텔 틴트 */
+/* 2026.11.25 강의 자료실 상단 카드: PC 한 줄 6칸 × 2줄(총 12개)
+   2026.11.25 서정님: "아래 탭은 한 가지 색으로" → 카드마다 무지개색으로 칠하지 않고 은은한 민트 한 톤으로 통일 */
 #room-cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-flow:row;gap:12px}
-#room-cards .room{flex:0 0 auto;width:auto;min-width:0;border:1px solid #CFD8E3;border-top:3px solid #1E3A8A;border-radius:10px;background:#F8FBFF}
-#room-cards .room:nth-child(6n+2){background:#FCFAFF;border-top-color:#4C1D95}
-#room-cards .room:nth-child(6n+3){background:#F5FEFF;border-top-color:#0E7490}
-#room-cards .room:nth-child(6n+4){background:#F6FDF9;border-top-color:#166534}
-#room-cards .room:nth-child(6n+5){background:#FFFDF5;border-top-color:#A16207}
-#room-cards .room:nth-child(6n+6){background:#FFF9FB;border-top-color:#9D174D}
-#room-cards .room:hover{background:#F1F6FD;border-color:var(--blue);transform:translateY(-2px)}
+#room-cards .room{flex:0 0 auto;width:auto;min-width:0;border:1px solid #CBEAE0;border-top:3px solid #8FD6C1;border-radius:10px;background:#F2FBF8}
+#room-cards .room:hover{background:#E7F7F1;border-color:#9FDCC9;transform:translateY(-2px)}
+#room-cards .room-date{color:#4C6E63}
 #room-cards .room-info{padding:9px 11px 10px;row-gap:2px}
 #room-cards .room-date{font-size:11.5px;letter-spacing:-.02em}
 #room-cards .room-org{font-size:14px;margin-top:3px;line-height:1.32;font-weight:700}
@@ -529,31 +526,37 @@ a.lg{text-decoration:none;text-align:center}
 #room-cards .room-logo{height:20px;max-width:36px;right:8px;top:7px}
 @media (max-width:1100px){
   #room-cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-  #room-cards .room{background:#F8FBFF}
   #room-cards .room-org{font-size:15.5px}
   #room-cards .room-edu{font-size:13.5px}
 }
 @media (max-width:760px){
   #room-cards{display:grid;grid-template-columns:none;grid-template-rows:repeat(2,auto);grid-auto-flow:column;grid-auto-columns:58%;gap:10px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;margin-right:-18px;padding:0 18px 8px 0}
   #room-cards::-webkit-scrollbar{display:none}
-  #room-cards .room{scroll-snap-align:start;border-radius:10px;background:#F8FBFF}
+  #room-cards .room{scroll-snap-align:start;border-radius:10px}
   #room-cards .room-info{padding:9px 11px 10px}
   #room-cards .room-date{font-size:11.5px}
   #room-cards .room-org{font-size:15px}
   #room-cards .room-edu{font-size:13px}
 }
-/* 2026.11.25 아래 출강 후기 카드: 원본 썸네일을 자르지 않고 통째로 축소(contain) + 2줄 글자 */
-.lfx4 .lfx-item{width:170px;background:#fff;border:1px solid #E1E6EC;border-radius:9px}
-.lfx4 .lfx-item img{display:block;width:100%;height:110px;object-fit:contain;object-position:center;background:#F8FAFC;border-bottom:1px solid #EDF1F5}
-.lfx4 .lfx-body{display:grid;grid-auto-rows:min-content;gap:2px;padding:8px 10px 9px}
-.lfx4 .lfx-ttl{font-size:13px;line-height:1.36;font-weight:700;color:var(--navy);letter-spacing:-.02em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.lfx4 .lfx-meta{font-size:11px;line-height:1.3;font-weight:500;color:#75838F;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 2026.11.25 아래 출강 후기 카드: 진짜 가로 직사각형(PC 250×92 / 모바일 216×82, 예전 세로 카드의 1/3)
+   왼쪽 = 원본 비율 그대로 자르지 않은 정사각 썸네일(76×76 / 68×68, 흰 여백 없음)
+   오른쪽 = 강의명 + 날짜·기관 두 줄 */
+.lfx4 .lfx-item{display:flex;flex-direction:row;align-items:center;gap:10px;width:250px;height:92px;padding:8px;background:#fff;border:1px solid #E1E6EC;border-radius:10px;overflow:hidden}
+.lfx4 .lfx-item img{display:block;width:76px;height:76px;flex:0 0 76px;aspect-ratio:auto;object-fit:contain;object-position:center;background:#F4F7FA;border:0;border-radius:8px}
+.lfx4 .lfx-body{display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;flex:1 1 auto;padding:0}
+.lfx4 .lfx-ttl{font-size:12.5px;line-height:1.38;font-weight:700;color:var(--navy);letter-spacing:-.02em;word-break:keep-all;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.lfx4 .lfx-meta{font-size:10.5px;line-height:1.34;font-weight:500;color:#6C7C88;letter-spacing:-.02em;word-break:keep-all;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 @media (max-width:760px){
-  .lfx4 .lfx-item{width:145px;border-radius:8px}
-  .lfx4 .lfx-item img{height:95px}
-  .lfx4 .lfx-body{padding:7px 8px 8px;gap:2px}
-  .lfx4 .lfx-ttl{font-size:12.5px;line-height:1.34}
-  .lfx4 .lfx-meta{font-size:10.5px}
+  .lfx4 .lfx-item{width:216px;height:82px;gap:8px;padding:7px;border-radius:9px}
+  .lfx4 .lfx-item img{width:68px;height:68px;flex:0 0 68px;border-radius:7px}
+  .lfx4 .lfx-body{gap:2px}
+  .lfx4 .lfx-ttl{font-size:12px;line-height:1.36}
+  .lfx4 .lfx-meta{font-size:10px}
+}
+/* 모바일에서는 예전 규칙(#room-cards .room{border-top:navy!important})이 남아 있어 민트로 다시 못박기 */
+@media (max-width:760px){
+  #room-cards .room{border:1px solid #CBEAE0!important;border-top:3px solid #8FD6C1!important;background:#F2FBF8}
+  #room-cards .room:hover{background:#E7F7F1}
 }
 
 /* 2026.11.25 홈 첫 화면 브랜드 슬로건 한 줄 */
@@ -561,51 +564,47 @@ a.lg{text-decoration:none;text-align:center}
 .h4-brand b{display:inline-block;margin-right:6px;font-weight:700;color:#1E3A8A;letter-spacing:.01em}
 .h4-brand span{display:block;margin-top:2px;font-size:14px;color:#8A959F}
 @media (max-width:900px){.h4-brand{font-size:14.5px}.h4-brand span{font-size:13.5px}}
-/* 2026.11.25 강사 소개: Digital & You 브랜드 스토리 · 4대 핵심 가치 (파스텔) */
-.dy4{background:#FBFCFE;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:64px 0 68px}
-.dy4 .sh{margin-bottom:22px}
-.dy-hero{background:#fff;border:1px solid #DDE5EE;border-radius:16px;padding:26px 28px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center}
-.dy-du{display:flex;align-items:center;gap:14px}
-.dy-d,.dy-u{text-align:center;padding:14px 18px;border-radius:14px;min-width:118px}
-.dy-d{background:#EFF6FF;border:1px solid #BFDBFE}
-.dy-u{background:#F5F3FF;border:1px solid #DDD6FE}
-.dy-d b,.dy-u b{display:block;font-size:34px;line-height:1;font-weight:700;letter-spacing:-.02em}
-.dy-d b{color:#1E3A8A}.dy-u b{color:#4C1D95}
-.dy-d em,.dy-u em{display:block;margin-top:6px;font-style:normal;font-size:13px;font-weight:700;letter-spacing:.04em}
-.dy-d em{color:#1D4ED8}.dy-u em{color:#6D28D9}
-.dy-d span,.dy-u span{display:block;margin-top:2px;font-size:12.5px;color:#5A6673;letter-spacing:-.01em}
-.dy-amp{font-size:22px;font-weight:500;color:#9AA7B4}
-.dy-tx p{margin:0;font-size:17px;line-height:1.75;color:#2B3540;letter-spacing:-.01em}
-.dy-slogan{margin-top:10px!important;font-size:19px!important;font-weight:700;color:#1E3A8A}
-.dy-vals{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.dy-vals li{border-radius:14px;padding:18px 20px;border:1px solid}
-.dy-vals li:nth-child(1){background:#EFF6FF;border-color:#BFDBFE}
-.dy-vals li:nth-child(2){background:#ECFDF5;border-color:#A7F3D0}
-.dy-vals li:nth-child(3){background:#F5F3FF;border-color:#DDD6FE}
-.dy-vals li:nth-child(4){background:#FFFBEB;border-color:#FDE68A}
-.dy-vals em{font-style:normal;font-size:12.5px;font-weight:700;color:#7A8794;letter-spacing:.06em}
-.dy-vals b{display:block;margin-top:4px;font-size:17.5px;font-weight:700;color:#17304F;letter-spacing:-.02em}
-.dy-vals p{margin:6px 0 0;font-size:14.5px;line-height:1.6;color:#4A5562;letter-spacing:-.01em}
+/* 2026.11.25 강사 소개: Digital & You 브랜드 스토리 · 4대 핵심 가치 (파스텔)
+   2026.11.25 서정님 추가: "브랜드 스토리가 위아래로 겹치고 중복이 너무 많다. 요약해서 스크롤 많이 안 내리고 딱 맞게"
+   → 아래 .st4(쉬운 말·실습 중심·기획을 아는 강사) 섹션은 4대 핵심 가치와 내용이 겹쳐 삭제,
+     여기는 D/U 박스 한 줄 + 스토리 한 줄 + 핵심 가치 작은 가로 카드 4개로 압축 */
+.dy4{background:#FBFCFE;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:36px 0 40px}
+.dy4 .sh{margin-bottom:14px}
+.dy4 .sh h2{font-size:25px;margin-top:2px}
+.dy4 .sh p{font-size:14.5px;margin-top:2px}
+.dy-hero{background:#fff;border:1px solid #DDE5EE;border-radius:14px;padding:14px 20px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:center}
+.dy-du{display:flex;align-items:center;gap:10px}
+.dy-d,.dy-u{display:flex;align-items:center;gap:9px;padding:9px 13px;border-radius:11px;min-width:0}
+.dy-d{background:#F2FBF8;border:1px solid #CBEAE0}
+.dy-u{background:#F2FBF8;border:1px solid #CBEAE0}
+.dy-d b,.dy-u b{display:block;font-size:26px;line-height:1;font-weight:700;letter-spacing:-.02em;color:#17304F}
+.dy-lab{display:flex;flex-direction:column;gap:1px}
+.dy-lab em{font-style:normal;font-size:12px;font-weight:700;letter-spacing:.03em;line-height:1.15;color:#2E9B7C}
+.dy-sub{font-size:11.5px;color:#5A6673;letter-spacing:-.01em;line-height:1.2;white-space:nowrap}
+.dy-amp{font-size:18px;font-weight:500;color:#9AA7B4}
+.dy-tx p{margin:0;font-size:15px;line-height:1.6;color:#2B3540;letter-spacing:-.01em}
+.dy-slogan{margin:0 0 2px!important;font-size:17.5px!important;font-weight:700;color:#1E3A8A}
+.dy-vals{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.dy-vals li{border-radius:12px;padding:12px 14px;border:1px solid #CBEAE0;background:#F2FBF8}
+.dy-vals em{font-style:normal;font-size:11px;font-weight:700;color:#7A8794;letter-spacing:.06em}
+.dy-vals b{display:inline-block;margin:2px 0 0 6px;font-size:15px;font-weight:700;color:#17304F;letter-spacing:-.02em}
+.dy-vals p{margin:4px 0 0;font-size:13px;line-height:1.55;color:#4A5562;letter-spacing:-.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 @media (max-width:900px){
-  .dy4{padding:44px 0 48px}
-  .dy-hero{grid-template-columns:1fr;gap:18px;padding:20px}
+  .dy4{padding:26px 0 30px}
+  .dy4 .sh h2{font-size:22px}
+  .dy-hero{grid-template-columns:1fr;gap:10px;padding:14px}
   .dy-du{justify-content:center}
-  .dy-tx p{font-size:15.5px;text-align:center}
-  .dy-slogan{font-size:17px!important}
-  .dy-vals{grid-template-columns:1fr 1fr;gap:10px}
-  .dy-vals li{padding:14px 15px}
-  .dy-vals b{font-size:16px}
-  .dy-vals p{font-size:13.5px}
+  .dy-sub{white-space:normal}
+  .dy-tx p{font-size:14px;text-align:center}
+  .dy-slogan{font-size:16px!important;text-align:center}
+  .dy-vals{grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+  .dy-vals li{padding:10px 12px}
+  .dy-vals b{font-size:14px}
+  .dy-vals p{font-size:12.5px;display:block;-webkit-line-clamp:unset;overflow:visible}
 }
-/* 2026.11.25 강사 소개 태그 4개: 연한 하늘·민트·라벤더·크림 */
-.ab4-tags li:nth-child(1){background:#EFF6FF;border-color:#BFDBFE;color:#1E3A8A}
-.ab4-tags li:nth-child(2){background:#ECFDF5;border-color:#A7F3D0;color:#166534}
-.ab4-tags li:nth-child(3){background:#F5F3FF;border-color:#DDD6FE;color:#4C1D95}
-.ab4-tags li:nth-child(4){background:#FFFBEB;border-color:#FDE68A;color:#92400E}
-.ab4-tags li{border:1px solid;font-weight:600}
-/* 2026.11.25 강의 자료실 필터 탭: 파스텔 구분 */
-.ltabs button{background:#F5F8FC;border-color:#CFDBE8;color:#3A4A5C}
-.ltabs button:nth-child(2){background:#ECFDF5;border-color:#A7F3D0;color:#166534}
-.ltabs button:nth-child(3){background:#FFFBEB;border-color:#FDE68A;color:#92400E}
-.ltabs button:nth-child(4){background:#EFF6FF;border-color:#BFDBFE;color:#1E3A8A}
-.ltabs button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+/* 2026.11.25 강사 소개 태그 4개: 무지개색 대신 페이지 안 카드와 같은 은은한 민트 한 가지 */
+.ab4-tags li{background:#F2FBF8;border:1px solid #CBEAE0;color:#2E6A58;font-weight:600}
+/* 2026.11.25 강의 자료실 필터 탭: 네 개 다 같은 민트, 고른 것(Active)만 진하게 */
+.ltabs button{background:#F2FBF8;border-color:#CBEAE0;color:#2E6A58}
+.ltabs button:hover{background:#E7F7F1;border-color:#9FDCC9}
+.ltabs button.on{background:#BFE8DA;border-color:#7FCDB5;color:#0E5B47;font-weight:700}
