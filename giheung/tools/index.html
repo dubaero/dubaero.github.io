@@ -4033,7 +4033,28 @@ var GAMAN=['그래도 더 나은 내가 참는다. 오늘의 나, 인내심 국�
 var CARE_TASTE={mild:'순한맛',spicy:'매운맛',burst:'뚜껑 열린맛'};
 TAIL.burst=[['뻥! 뚜껑이 들썩했어요. 이 답답함, 여기서만 다 털어놔요.','땡! 오늘의 참을성 마감입니다. 잠깐 쉬고 다시 갈게요.'],['내 인내심도 퇴근 시간이 있거든요! 오늘은 여기서 한 번 크게 한숨 쉬어요.','빵! 참다가 터지는 소리예요. 이번엔 나도 내 편을 들어 줄래요.'],['뚜껑이 하늘까지 날아갔어요! 이 화는 여기 두고, 전할 말만 챙겨요.','오늘의 억울함, 확성기로 말하고 싶네요! 그래도 보낼 문자는 차분하게 골라요.']];
 function samL(t){return '<p class="sam"><b>'+esc(t.charAt(0))+'</b>'+esc(t.slice(1))+'</p>';}
-function emp(fresh){var S=cur>=0?FLAT[cur]:null,key=FL+L;if(fresh||!said[key]||said.s!==cur){var pool=S?(SAM[S.n]||S.sam||SAMG):SAMG;said[key]={s:pick(pool,'s'),t:pick(TAIL[FL][L],'t'),g:pick(GAMAN,'g'),e:S?S.emp:(ecVent($('#v2-in').value)||pick(EMPG,'e'))};said.s=cur;}var x=said[key];
+var CARE_VERSES={
+ mild:[
+  ['토닥톡','토: 토닥토닥, 오늘 버티느라 애썼어요.','닥: 닥친 일을 오늘 다 해결하지는 않아도 돼요.','톡: 톡 하고 털어놓는 것부터 해요.'],
+  ['수고해','수: 수고했다고 제일 먼저 내게 말해 줘요.','고: 고민은 잠깐 내려놓아도 사라지지 않아요.','해: 해낸 것 하나만 기억해도 충분해요.']],
+ spicy:[
+  ['매콤해','매: 매번 조용히 넘기라고요? 이번엔 확인할 건 확인하죠!','콤: 콤콤하게 쌓인 답답함은 여기서 탈탈 털고!','해: 해야 할 말은 짧고 또렷하게 가져가요.'],
+  ['속시원','속: 속으로만 삼킨 말, 오늘은 한 줄 꺼내요.','시: 시원하게 털고 나면 기준이 좀 더 또렷해지죠.','원: 원칙은 전하되, 사람을 공격할 필요는 없어요.']],
+ burst:[
+  ['뚜껑펑','뚜: 뚜껑이 천장까지 날아갔습니다!','껑: 껑충 뛴 제 인내심은 오늘 조기 퇴근이래요.','펑: 펑! 여기서만 터뜨리고 전송 버튼은 쉬게 해요.'],
+  ['용암펑','용: 용암 경보! 내 머리에서 김이 폴폴!','암: 암만 생각해도 복사기도 저보다 덜 과열됐겠어요.','펑: 펑 하고 웃었으면, 이제 내 자리로 천천히 돌아와요.']]
+};
+var CARE_END={mild:'지금은 내 마음부터 챙겨도 괜찮아요.',spicy:'감정은 여기 두고, 꼭 전할 기준과 부탁만 챙겨요.',burst:'폭발은 여기까지. 실제로 보낼 문자는 아래에서 차분하게 골라요.'};
+function emp(fresh){
+  var S=cur>=0?FLAT[cur]:null,key=FL+L+':'+cur;
+  if(fresh||!said[key]){
+    var named=S&&S.n,lead=S?S.emp:(ecVent($('#v2-in').value)||pick(EMPG,'e'));
+    if(named&&FL==='spicy')lead='‘'+named+'’이라니, 속으로만 삼키기엔 꽤 답답했겠어요.';
+    if(named&&FL==='burst')lead='‘'+named+'’까지 겹쳤다고요? 인내심도 잠깐 쉬어야겠어요!';
+    if(!named&&FL==='mild')lead='하나하나 잘 넘기려다가 마음에 걸렸겠어요. 여기서는 잠깐 내려놓아요.';
+    said[key]={s:pick(CARE_VERSES[FL],'care-'+FL),t:pick(TAIL[FL][L],'tail-'+FL),g:CARE_END[FL],e:lead};
+  }
+  var x=said[key];
   window._ventSay2=x.s.slice(1).join(' ')+' '+x.t+' '+x.e+' '+x.g;
   $('#v2-emp').innerHTML='<h4>같이 빡쳐 주기 · '+LV3[L][1]+' '+LV3[L][0]+' · '+CARE_TASTE[FL]+' · 삼행시 <span class="samk">'+esc(x.s[0])+'</span></h4>'+x.s.slice(1).map(samL).join('')+'<p>'+esc(x.t+' '+x.e)+'</p><p class="v3">'+esc(x.g)+'</p><div class="va"><button type="button" class="btn mini" id="v2-again">다른 말</button><button type="button" class="btn mini" id="v2-say">소리로 듣기</button></div>';}
 var AP=[
@@ -4160,14 +4181,14 @@ var moods=[],seen={};
 function rnd(a,k){var c=a.filter(function(x){return x!==seen[k];});var r=c[Math.floor(Math.random()*c.length)]||a[0];seen[k]=r;return r;}
 function match(t){var best=-1,sc=0;C.forEach(function(c,i){var n=c.k.filter(function(w){return t.indexOf(w)>-1;}).length;if(n>sc){sc=n;best=i;}});return best;}
 var out=$('#h2-out'),inp=$('#h2-in');
-function show(){var t=inp.value.trim(),i=t?match(t):-1;var preview=!t&&!moods.length;
+function show(){var t=inp.value.trim(),i=t?match(t):-1;
   var cs=[];if(i>=0)cs.push(C[i]);moods.forEach(function(m){var c=C[MOOD[m]];if(c&&cs.indexOf(c)<0)cs.push(c)});cs=cs.slice(0,3);var L,c;
   if(cs.length>1){c={h:cs.map(function(x){return x.h}).join(' · ')};L=cs.map(function(x,n){return n===0?x.L[0]:rnd(x.L.slice(1),'m'+n)}).concat([rnd(END,'e'),rnd(REST,'r')]);}
   else{c=cs[0]||G;var two=[c.L[0]].concat([rnd(c.L.slice(1),'m')]);L=two.concat([rnd(c.L.slice(1).filter(function(x){return x!==two[1];}),'n'),rnd(END,'e'),rnd(REST,'r')]);}
   var ex=ecRead(t);if(ex){L=(ex.P&&!moods.length)?[ex.echo].concat(ex.P[2]).concat(L.slice(-2)):[ex.echo].concat(ex.P?[rnd(ex.P[2],'p')]:[]).concat(L);if(i<0&&!moods.length)c={h:ex.P?ex.P[1]+' 때문에 마음이 쓰인 날':(c.h||'오늘 하루를 버틴 나에게')};}
-  var RI=L.length-1;
-  out.innerHTML='<h4>'+(preview?'마음챙김 예시':'내 마음 지킴이 · '+esc(c.h))+'</h4>'+(preview?'<p class="care-example-note">왼쪽에서 기분이나 고민을 고르면 이 예시가 바로 바뀌어요.</p>':'')+L.map(function(x,j){return j===RI?'<div class="rest-row" id="h2-rest">'+restFig(x)+'<p class="rest"><b>말랑씨와 잠깐 쉬기</b><br>'+esc(x)+'</p><button type="button" class="btn mini rest-next" id="h2-rnext">다른 쉼 해 보기 ›</button></div>':'<p>'+esc(x)+'</p>';}).join('')+'<div class="va"><button type="button" class="btn mini" id="h2-again">다른 말 듣기</button><button type="button" class="btn mini" id="h2-copy">복사</button></div>';out.hidden=false;
-  $('#h2-again').onclick=show;$('#h2-rnext').onclick=function(){var r=rnd(REST,'r');L[RI]=r;var row=$('#h2-rest');row.querySelector('svg').outerHTML=restFig(r);row.querySelector('p').innerHTML='<b>말랑씨와 잠깐 쉬기</b><br>'+esc(r);};$('#h2-copy').onclick=function(){copy(L.join('\n'),'위로 글을 복사했어요.');};}
+  var comforting=L.filter(function(x){return x.indexOf('쉼 하나: ')!==0;});
+  out.innerHTML='<h4>'+esc(c.h)+'</h4>'+comforting.map(function(x){return '<p>'+esc(x)+'</p>';}).join('')+'<div class="va"><button type="button" class="btn mini" id="h2-again">다른 말 듣기</button><button type="button" class="btn mini" id="h2-copy">복사</button></div>';out.hidden=false;
+  $('#h2-again').onclick=show;$('#h2-copy').onclick=function(){copy(comforting.join('\n'),'위로 글을 복사했어요.');};}
 var tm;inp.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(show,500);});
 var mb=$('#h2-mood'),work=el('div','moods');work.id='h2-work-choices';work.setAttribute('role','group');work.setAttribute('aria-label','복지관에서 마음에 남은 일');var title=el('div','l','복지관에서 마음에 남은 일');title.id='h2-work-title';mb.after(title,work);Object.keys(MOOD).forEach(function(m){var b=el('button',null,esc(m));b.type='button';b.setAttribute('aria-pressed','false');b.onclick=function(){var ix=moods.indexOf(m);if(ix>-1)moods.splice(ix,1);else{if(moods.length>=3)moods.shift();moods.push(m);}[mb,work].forEach(function(g){g.querySelectorAll('button').forEach(function(x){var on=moods.indexOf(x.textContent)>-1;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on);});});show();};(WORK_MOODS.indexOf(m)!==-1?work:mb).appendChild(b);});
 function postP(){return postP2(inp.value.trim()||(moods.length?'오늘 내 마음: '+moods.join(', '):''));}
@@ -4196,7 +4217,7 @@ var BR=[
  {e:'🍃',n:'나뭇잎 날리기 숨',d:'손바닥 위 나뭇잎을 멀리 날려 보내듯 후~',p:[['들이쉬기',4,1.3],['멀리 후~',6,.8]]},
  {e:'🍜',n:'라면 식히기 숨',d:'뜨거운 라면 식히듯 후후~ 짧게 세 번',p:[['들이쉬기',3,1.3],['후!',1,.9],['후!',1,.9],['후~',2,.8]]}];
 var box=document.querySelector('#v2-tool .breath');if(!box)return;
-box.innerHTML='<b class="care-companion">말랑씨와 숨 고르기</b><div class="bx-ch" id="bx-ch"><span class="bx-e" id="bx-e"><svg class="bxf" id="bx-f" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="12" r="6"/><path d="M32 18 V40"/><circle class="bxb" cx="32" cy="31" r="4.5"/><path d="M32 40 L25 56 M32 40 L39 56"/><path class="bxdn" d="M32 24 L23 37 M32 24 L41 37"/><path class="bxup" d="M32 24 L15 11 M32 24 L49 11"/><path class="bxair" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/></svg></span><span class="bx-t" id="bx-t">준비</span></div><div class="bx-r"><b id="bx-n"></b><small id="bx-d"></small><div class="va"><button type="button" class="btn mini" id="bx-go">따라 하기 (3번)</button><button type="button" class="btn mini" id="bx-next">다른 숨 고르기 ›</button></div></div>';
+box.innerHTML='<b class="care-companion">숨 고르기</b><div class="bx-ch" id="bx-ch"><span class="bx-e" id="bx-e"><svg class="bxf" id="bx-f" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="12" r="6"/><path d="M32 18 V40"/><circle class="bxb" cx="32" cy="31" r="4.5"/><path d="M32 40 L25 56 M32 40 L39 56"/><path class="bxdn" d="M32 24 L23 37 M32 24 L41 37"/><path class="bxup" d="M32 24 L15 11 M32 24 L49 11"/><path class="bxair" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/></svg></span><span class="bx-t" id="bx-t">준비</span></div><div class="bx-r"><b id="bx-n"></b><small id="bx-d"></small><div class="va"><button type="button" class="btn mini" id="bx-go">따라 하기 (3번)</button><button type="button" class="btn mini" id="bx-next">다른 숨 고르기 ›</button></div></div>';
 var cur=0,run=0;
 function set(i){cur=i;var b=BR[i];$('#bx-n').textContent=b.e+' '+b.n;var F=$('#bx-f');F.setAttribute('data-ph','');F.setAttribute('data-st','');F.innerHTML=bxFig(b.n);$('#bx-d').textContent=b.d;$('#bx-t').textContent='준비';$('#bx-e').style.transform='scale(1)';}
 function stop(){run++;}
@@ -4327,12 +4348,15 @@ window.addEventListener('hashchange',function(){var k=location.hash.slice(1);if(
   var cols=document.createElement('div');cols.className='hcols';var L=document.createElement('div'),R=document.createElement('div');
   ['.mic-row','#h2-in','.hk-m','#h2-mood','#h2-work-title','#h2-work-choices','.warn'].forEach(function(s){var e=t.querySelector(':scope>'+s);if(e)L.appendChild(e)});
   var ph=document.createElement('div');ph.className='hph';ph.innerHTML='왼쪽에 오늘 있었던 일을 적거나<br>마음을 하나 고르면<br>여기에 나를 위한 위로가 떠요.';
-  var jump=document.createElement('button');jump.type='button';jump.className='btn mini care-jump';jump.dataset.careTarget='h2-out';jump.textContent='마음챙김 예시 보기 ↓';L.appendChild(jump);
+  var jump=document.createElement('button');jump.type='button';jump.className='btn mini care-jump';jump.dataset.careTarget='h2-out';jump.textContent='마음챙김으로 이동 ↓';L.appendChild(jump);
   var out=t.querySelector('#h2-out');R.appendChild(ph);if(out)R.appendChild(out);var help=t.querySelector(':scope>.help');if(help)R.appendChild(help);
   cols.appendChild(L);cols.appendChild(R);var post=t.querySelector(':scope>.post');t.insertBefore(cols,post);
   if(out){new MutationObserver(function(){ph.style.display=out.hidden?'':'none'}).observe(out,{attributes:true});ph.style.display=out.hidden?'':'none'}})();
- var IDS={vent:'#v2-tool',heart:'#h2-tool',song:'#v-song .tool.song'};
+ var IDS={vent:'#v2-tool',heart:'#h2-tool',song:'#v-song .tool.song'},lastFit='';
  function fit(){var on=null;Object.keys(IDS).forEach(function(k){var v=document.getElementById('v-'+k);if(v&&!v.hidden)on=k});
+  var sig=(on||'')+'/'+innerWidth+'/'+innerHeight;
+  if((on==='vent'||on==='heart')&&sig===lastFit)return;
+  lastFit=sig;
   document.body.classList.toggle('fitmode',!!on);
   Object.keys(IDS).forEach(function(k){var e=$q(IDS[k]);if(e){e.classList.remove('fitbox');e.style.height=''}});
   if(!on||window.innerWidth<900)return;var e=$q(IDS[on]);if(!e)return;e.classList.add('fitbox');
@@ -4491,58 +4515,25 @@ document.addEventListener('click',function(e){
 });
 </script>
 <style id="giheung-care-acts">
-.care-stage{border:1px solid #e7d8bf;border-radius:12px;background:#fffaf0;padding:9px 10px;margin:0 0 8px;color:#263c35}
-.care-stage header{display:flex;align-items:center;justify-content:space-between;gap:5px;flex-wrap:wrap;margin-bottom:5px}
-.care-stage h4{font-size:15px;line-height:1.35;margin:0;color:#214c3e}
-.care-stage header small{font-size:11px;color:#5b5d49}
-.care-choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin-bottom:6px}
-.care-stage button{cursor:pointer;color:#234e40;border:1px solid #c0d5cc;background:#fff;border-radius:6px;padding:4px 6px;line-height:1.25;font-size:11.5px;font-weight:700}
-.care-stage button[aria-pressed=true]{background:#225c49;color:white;border-color:#225c49}
+.care-stage{border:1px solid #e7d8bf;border-radius:12px;background:#fffaf0;padding:8px 9px;margin:0 0 8px;color:#263c35}
+.care-choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin-top:6px}
+.care-stage button{padding:4px 6px;border:1px solid #c0d5cc;background:#fff;border-radius:6px;color:#234e40;font-size:11.5px;line-height:1.25;font-weight:700}
+.care-stage button[aria-pressed=true],.care-acts [data-care-play]{background:#225c49;color:white;border-color:#225c49}
+.care-stage button:disabled{opacity:.5;cursor:default}
 .care-stage button:focus-visible{outline:2px solid #b75e3b;outline-offset:2px}
-.care-act-row{display:grid;grid-template-columns:118px minmax(0,1fr);gap:8px;align-items:center;background:#fff5e7;border:1px solid #efdfca;border-radius:8px;padding:6px}
-.care-act-row .care-avatar{width:100%;height:104px;display:block}
-.care-step{margin:3px 0;font-weight:750;font-size:13px;color:#284b3d;line-height:1.45}
-.care-step-status,.care-foot{font-size:11px;color:#4c6257;line-height:1.4}
+.care-act-row{display:grid;grid-template-columns:105px minmax(0,1fr);gap:8px;align-items:center;background:#fff5e7;border:1px solid #efdfca;border-radius:8px;padding:6px}
+.care-figure{width:100%;height:96px;display:grid;place-items:center;isolation:isolate;contain:layout paint}
+.care-figure svg.rf{width:92px;height:92px}
+.care-figure[data-phase="0"] svg.rf *{animation-play-state:paused}
+.care-step{min-height:3.4em;margin:2px 0;font-weight:750;font-size:13px;color:#284b3d;line-height:1.42}
+.care-step-status{min-height:1.5em;font-size:11px;color:#4c6257;line-height:1.4}
 .care-acts{display:flex;gap:5px;flex-wrap:wrap;margin:5px 0 0}
-.care-acts button:first-child{background:#225c49;color:#fff}
-.care-acts button:disabled{opacity:.48;cursor:default}
-.care-foot{margin:4px 0 0}
-.care-avatar .ca-body{transform-box:fill-box;transform-origin:center 80%;transition:transform .45s ease}
-.care-avatar .ca-eyes circle{fill:#233f35;transition:transform .4s ease}
-.care-avatar .ca-eyes{transform-box:fill-box;transform-origin:center;animation:care-blink 5s infinite}
-.care-avatar .ca-arm,.care-avatar .ca-finger,.care-avatar .ca-smile,.care-avatar .ca-round,.care-avatar .ca-closed,.care-avatar .ca-prop{transition:transform .42s ease,opacity .25s ease;transform-box:fill-box;transform-origin:center}
-.care-avatar .ca-arm{transform-origin:50% 18%}
-.care-avatar .ca-round,.care-avatar .ca-closed,.care-avatar .ca-prop,.care-avatar .ca-finger{opacity:0}
-.care-avatar[data-move=stare] .ca-window,.care-avatar[data-move=water] .ca-cup,.care-avatar[data-move=find] .ca-stars,.care-avatar[data-move=walk] .ca-track{opacity:1}
-.care-avatar[data-move=stare] .ca-eyes circle{transform:translateX(2px)}
-.care-avatar[data-move=find][data-phase="1"] .ca-eyes circle{transform:translateX(-2px)}
-.care-avatar[data-move=find][data-phase="2"] .ca-eyes circle{transform:translateX(2px)}
-.care-avatar:is([data-move=breath],[data-move=smile],[data-move=yawn],[data-move=hum])[data-phase="1"] .ca-round{opacity:1}
-.care-avatar:is([data-move=breath],[data-move=smile],[data-move=yawn],[data-move=hum])[data-phase="1"] .ca-smile{opacity:0}
-.care-avatar[data-move=breath][data-phase="1"] .ca-body{transform:scale(1.08,1.09)}
-.care-avatar[data-move=breath][data-phase="2"] .ca-body{transform:scale(.97,.95)}
-.care-avatar[data-move=fist][data-phase="1"] .ca-arm{transform:scale(1.17)}
-.care-avatar[data-move=fist][data-phase="2"] .ca-finger{opacity:1}
-.care-avatar:is([data-move=up],[data-move=yawn])[data-phase="1"] .ca-arm-left{transform:translate(-4px,-13px) rotate(-27deg)}
-.care-avatar:is([data-move=up],[data-move=yawn])[data-phase="1"] .ca-arm-right{transform:translate(4px,-13px) rotate(27deg)}
-.care-avatar[data-move=shoulder][data-phase="1"] .ca-body{transform:translateY(-7px) scale(1,.96)}
-.care-avatar[data-move=smile][data-phase="1"] .ca-eyes{opacity:0}
-.care-avatar[data-move=smile][data-phase="1"] .ca-closed{opacity:1}
-.care-avatar[data-move=hug][data-phase="1"] .ca-arm-left{transform:translate(22px,-1px) rotate(-17deg)}
-.care-avatar[data-move=hug][data-phase="1"] .ca-arm-right{transform:translate(-22px,-1px) rotate(17deg)}
-.care-avatar[data-move=hug][data-phase="2"] .ca-arm-left{transform:translate(18px,1px) rotate(16deg)}
-.care-avatar[data-move=hug][data-phase="2"] .ca-arm-right{transform:translate(-18px,1px) rotate(-16deg)}
-.care-avatar:is([data-move=shake],[data-move=walk])[data-phase="1"] .ca-body{animation:care-wiggle .55s alternate infinite ease-in-out}
-.care-avatar[data-move=hum][data-phase="1"] .ca-music{opacity:1;transform:translateY(-8px)}
-.care-avatar[data-move=water][data-phase="1"] .ca-cup{transform:translate(-23px,-14px) rotate(-12deg)}
-.care-avatar[data-move=praise][data-phase="1"] .ca-stars{opacity:1;transform:scale(1.12)}
-@keyframes care-blink{0%,88%,100%{transform:scaleY(1)}92%,96%{transform:scaleY(.12)}}
-@keyframes care-wiggle{from{transform:translateX(-3px) rotate(-4deg)}to{transform:translateX(3px) rotate(4deg)}}
-#v2-tool .breath .care-avatar{width:100%;height:70px;margin:-4px 0}
-#v2-tool .breath #bx-f{display:none}
-#v2-tool .breath .bx-ch{min-height:25px!important}
-@media(max-width:420px){.care-choices{grid-template-columns:repeat(3,minmax(0,1fr))}.care-act-row{grid-template-columns:88px minmax(0,1fr)}.care-act-row .care-avatar{height:86px}}
-@media(prefers-reduced-motion:reduce){.care-avatar,.care-avatar *{animation:none!important;transition:none!important}}
+#v2-tool .breath .bx-e{transform:none!important;transition:none!important;flex:none}
+#v2-tool .breath .bx-ch{display:flex;flex-direction:column;justify-content:flex-start;align-items:center;width:100%!important}
+#v2-tool .breath .bx-t{min-height:2.55em;line-height:1.2;width:100%;text-align:center;font-variant-numeric:tabular-nums}
+#v2-tool .breath #bx-f{display:block}
+@media(max-width:420px){.care-choices{grid-template-columns:repeat(3,minmax(0,1fr))}.care-act-row{grid-template-columns:81px minmax(0,1fr)}.care-figure{height:85px}.care-figure svg.rf{width:78px;height:78px}}
+@media(prefers-reduced-motion:reduce){.care-figure svg *{animation:none!important;transition:none!important}}
 </style>
 <script id="giheung-care-actions">
 (function(){
@@ -4562,46 +4553,32 @@ document.addEventListener('click',function(e){
  ['walk','발바닥 느끼기',[['앉아서도 좋아요. 발이 바닥에 닿은 느낌을 살펴봐요.',3],['편한 만큼 왼발·오른발에 번갈아 살짝 힘을 실어요.',4],['두 발을 내려놓고 단단하게 받쳐 주는 느낌을 알아차려요.',3]]],
  ['praise','나에게 한마디',[['지금까지 버틴 내 모습을 떠올려 봐요.',3],['나에게 “오늘도 한 가지는 해냈어”라고 말해요.',4],['좀 어색해서 웃음이 나도 괜찮아요. 그 웃음도 내 편이에요.',4]]]
  ];
- function avatar(){
-  return '<svg class="care-avatar" viewBox="0 0 140 112" aria-hidden="true"><ellipse cx="70" cy="102" rx="41" ry="5" fill="#e9dac4"/>'+
-  '<g class="ca-window ca-prop" fill="#fff" stroke="#95b6af" stroke-width="2"><rect x="101" y="8" width="30" height="32" rx="5"/><path d="M116 8v32m-15-16h30"/><circle cx="124" cy="16" r="4" fill="#ffc475" stroke="none"/></g>'+
-  '<path class="ca-track ca-prop" d="M24 96h92" stroke="#d4b48f" stroke-width="3" stroke-dasharray="5 5"/>'+
-  '<g class="ca-body" stroke="#366555" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M46 87q-5 10 4 12h10l4-10m13 0 4 10h10q8-2 3-12" fill="#f3c392"/><path d="M30 62c0-24 15-44 40-44s40 20 40 44c0 21-14 31-40 31S30 83 30 62Z" fill="#f7c991"/>'+
-  '<path d="M57 22q5-11 13-4 8-11 16-3" fill="none"/><circle cx="49" cy="65" r="5" fill="#eb9e90" stroke="none"/><circle cx="91" cy="65" r="5" fill="#eb9e90" stroke="none"/>'+
-  '<g class="ca-eyes" stroke="none"><circle cx="57" cy="55" r="3.7"/><circle cx="83" cy="55" r="3.7"/></g>'+
-  '<path class="ca-closed" d="m52 57 5-3 5 3m16 0 5-3 5 3" fill="none"/>'+
-  '<path class="ca-smile" d="M61 64q9 10 18 0" fill="none"/><ellipse class="ca-round" cx="70" cy="65" rx="5" ry="6" fill="#8d513d"/>'+
-  '<g class="ca-arm ca-arm-left"><path d="M35 67Q25 64 22 73q-2 7 8 7l10-5" fill="#f8d29e"/><path class="ca-finger" d="m22 70-4-5m8 4-2-7m7 7 1-6" fill="none"/></g>'+
-  '<g class="ca-arm ca-arm-right"><path d="M105 67q10-3 13 6 2 7-8 7l-10-5" fill="#f8d29e"/><path class="ca-finger" d="m118 70 4-5m-8 4 2-7m-7 7-1-6" fill="none"/></g></g>'+
-  '<g class="ca-cup ca-prop" stroke="#426e61" stroke-width="2" fill="#deeee6"><path d="M105 75h17l-2 14h-13z"/><path d="M122 77q8-2 6 4-1 4-7 4" fill="none"/></g>'+
-  '<path class="ca-stars ca-prop" d="m16 22 3 5 6 1-4 4 1 6-6-3-5 3 1-6-5-4 6-1zM120 43l2 3 4 1-3 2 1 4-4-2-3 2 1-4-3-2 4-1Z" fill="#da8261"/>'+
-  '<text class="ca-music ca-prop" x="108" y="30" font-size="21" fill="#4a7b72">♪</text></svg>';
+ var pose={stare:'window',fist:'fist',shoulder:'shoulder',smile:'smile',breath:'breath',hug:'hug',up:'stretch',yawn:'shout',shake:'shake',find:'window',water:'water',hum:'hum',walk:'walk',praise:'praise'};
+ function figure(move){
+  var item=RESTX.find(function(v){return v[0]===pose[move];})||RESTX[0];
+  return restFig('쉼 하나: '+item[1]);
  }
  var h=document.querySelector('#h2-tool .hcols > div:nth-child(2)'),jump=document.querySelector('[data-care-target=h2-out]');
  if(h){
   var box=document.createElement('section');box.className='care-stage';box.id='care-stage';
-  box.innerHTML='<header><h4>말랑씨랑 같이 해 봐요</h4><small>동작 14가지 · 앉아서 해도 좋아요</small></header><div class="care-choices" role="group" aria-label="따라 할 동작">'+moves.map(function(m,i){return '<button type="button" data-move-i="'+i+'" aria-pressed="'+(i===0)+'">'+m[1]+'</button>';}).join('')+'</div>'+
-   '<div class="care-act-row">'+avatar()+'<div><p class="care-step" role="status" aria-live="polite"></p><p class="care-step-status"></p><div class="care-acts"><button type="button" data-care-play>같이 따라 하기</button><button type="button" data-care-stop disabled>멈추기</button></div></div></div><p class="care-foot">보기만 해도 괜찮아요. 불편하면 멈추고 편한 동작으로 바꿔 보세요.</p>';
-  h.prepend(box);if(jump){jump.dataset.careTarget='care-stage';jump.textContent='말랑씨 동작·마음챙김 예시 보기 ↓';}
-  var i=0,step=0,timer=null,previewTimer=null,svg=box.querySelector('svg'),tip=box.querySelector('.care-step'),count=box.querySelector('.care-step-status'),play=box.querySelector('[data-care-play]'),stop=box.querySelector('[data-care-stop]');
+  box.setAttribute('aria-label','마음챙김 동작');
+  box.innerHTML='<div class="care-act-row"><div class="care-figure" aria-hidden="true"></div><div><p class="care-step" role="status" aria-live="polite"></p><p class="care-step-status"></p><div class="care-acts"><button type="button" data-care-play>따라 하기</button><button type="button" data-care-stop disabled>멈추기</button><button type="button" data-care-next>다른 동작</button></div></div></div>'+
+   '<div class="care-choices" role="group" aria-label="따라 할 동작">'+moves.map(function(m,i){return '<button type="button" data-move-i="'+i+'" aria-pressed="'+(i===0)+'">'+m[1]+'</button>';}).join('')+'</div>';
+  h.prepend(box);if(jump){jump.dataset.careTarget='care-stage';jump.textContent='따라 할 동작 보기 ↓';}
+  var i=0,step=0,timer=null,previewTimer=null,svg=box.querySelector('.care-figure'),tip=box.querySelector('.care-step'),count=box.querySelector('.care-step-status'),play=box.querySelector('[data-care-play]'),stop=box.querySelector('[data-care-stop]');
   function halt(){if(timer!==null)clearTimeout(timer);if(previewTimer!==null)clearTimeout(previewTimer);timer=previewTimer=null;stop.disabled=true;play.disabled=false;}
-  function draw(idx,n){var m=moves[idx];svg.dataset.move=m[0];svg.dataset.phase=String(n);tip.textContent=m[2][n][0];count.textContent=m[1]+' · '+(n+1)+' / '+m[2].length;}
+  function draw(idx,n){var m=moves[idx];if(svg.dataset.move!==m[0]){svg.dataset.move=m[0];svg.innerHTML=figure(m[0]);}svg.dataset.phase=String(n);tip.textContent=m[2][n][0];count.textContent=m[1]+' · '+(n+1)+' / '+m[2].length;}
   function select(n){halt();i=n;step=0;box.querySelectorAll('[data-move-i]').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.moveI===i));});draw(i,1);count.textContent=moves[i][1]+' · 동작 미리보기';if(!matchMedia('(prefers-reduced-motion: reduce)').matches)previewTimer=setTimeout(function(){svg.dataset.phase='2';previewTimer=null;},1700);}
   function next(){var m=moves[i];if(step>=m[2].length){halt();svg.dataset.phase='0';tip.textContent='여기까지. 지금 조금 쉬었으면 그걸로 충분해요.';count.textContent=m[1]+' · 완료';return;}
     draw(i,step);timer=setTimeout(function(){step++;next();},m[2][step][1]*1000);}
   box.addEventListener('click',function(e){var b=e.target.closest('[data-move-i]');if(b){select(+b.dataset.moveI);return;}
+    if(e.target.closest('[data-care-next]')){select((i+1)%moves.length);return;}
     if(e.target.closest('[data-care-play]')){halt();step=0;play.disabled=true;stop.disabled=false;next();}
     if(e.target.closest('[data-care-stop]')){halt();svg.dataset.phase='0';tip.textContent='여기서 멈춰도 괜찮아요. 편한 만큼만 해요.';count.textContent=moves[i][1]+' · 멈춤';}
   });
   select(0);
  }
- var breath=document.querySelector('#v2-tool .breath'),fig=document.querySelector('#bx-f');
- if(breath&&fig){
-   breath.querySelector('.care-companion').insertAdjacentHTML('afterend',avatar());
-   var a=breath.querySelector('.care-avatar');
-   function sync(){var state=fig.getAttribute('data-ph');a.dataset.move='breath';a.dataset.phase=state==='out'?'2':state==='in'||state==='hold'?'1':'0';}
-   new MutationObserver(sync).observe(fig,{attributes:true,attributeFilter:['data-ph']});sync();
- }
+
 })();
 </script>
 </body>
