@@ -1602,6 +1602,20 @@ body:has(#v-mind:not([hidden]))>main.wrap{width:100%;max-width:1240px}
 }
 @media(max-width:370px){#v-home .gh-care-tile button{font-size:11px}}
 </style>
+<style id="gh-nov-flow">
+#v-home .gh-care-tile [aria-hidden],#v-mind .mtabs button{font-variant-numeric:normal}#v-home .gh-care-tile button span{color:#b34253;font-size:15px}
+#v-home .gh-care-tile button:hover span{color:#fff}
+.gh-plan-compact{display:flex;gap:6px 12px;flex-wrap:wrap;margin:5px 0 7px;color:#253f34;font-weight:750;font-size:12px}.gh-plan-compact select{border:1px solid #b6cec0;border-radius:5px;background:#fff;color:#223a31;padding:2px 4px}
+#v-plan2 .col.R .gh-subtabs{margin:0 0 8px;gap:4px}
+#plan-month{background:#fff7eb;border-color:#eed4bc}.gh-month-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gh-blank-draft{background:#f5fbf8;border:1px solid #c1dccc;padding:18px;border-radius:12px;color:#234b3b}.gh-blank-draft span{font-size:12px;font-weight:800;color:#9c3c22}.gh-blank-draft h3{margin:4px 0 6px}.gh-blank-draft p{margin:0 0 8px}
+#v-promo2 .gh-promo-drafts .gh-copy-read{max-height:none;overflow:visible;background:white}.gh-promo-drafts .gh-article .out-h{position:sticky;top:0;background:white;z-index:1;padding:4px 0}.gh-promo-drafts .gh-copy-read>h4{font-size:18px;margin:2px 0 8px}
+.gh-visual-board{--art:#174d41;--page:#eff7ec;--accent:#f8d2a4;color:#203c33}.gh-visual-board[data-theme="1"],.gh-visual-board[data-theme="5"]{--art:#713b4e;--page:#fff5f4;--accent:#f5be98}.gh-visual-board[data-theme="2"]{--art:#26365c;--page:#faf8e9;--accent:#ffe285}.gh-visual-board[data-theme="3"]{--art:#27516b;--page:#f2f8ff;--accent:#c3e9ff}.gh-visual-board[data-theme="4"],.gh-visual-board[data-theme="6"]{--art:#493f74;--page:#f7f2ff;--accent:#ddd3ff}
+.gh-viz-card{max-width:440px;margin:8px auto;color:var(--art);border:1px solid #d3ded8;border-radius:14px;overflow:hidden;background:var(--page);min-height:330px;display:flex;flex-direction:column;box-shadow:0 6px 18px #23382f1a}.gh-viz-card.sq{aspect-ratio:1;min-height:0}.gh-viz-card.wide{aspect-ratio:16/9;min-height:0;max-width:none}.gh-viz-card.a4{max-width:390px;aspect-ratio:210/297}
+.gh-viz-card header{position:relative;background:var(--art);color:white;padding:16px 62px 16px 16px;overflow-wrap:anywhere}.gh-viz-card header h4{color:#fff;font-size:clamp(19px,2.1vw,29px);line-height:1.23;margin:6px 0}.gh-viz-card header p{font-size:13px;margin:0;line-height:1.35}.gh-viz-card header span{position:absolute;top:12px;right:13px;border-radius:50%;background:var(--accent);color:var(--art);font-weight:900;font-size:28px;display:grid;place-items:center;width:41px;height:41px}
+.gh-viz-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(146px,100%),1fr));align-content:start;gap:6px;padding:12px;flex:1}.gh-viz-item{padding:6px 8px;border-radius:7px;background:#fff}.gh-viz-item b{font-size:12px}.gh-viz-item b:empty{display:none}.gh-viz-item p{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45;margin:0;font-size:14px;font-weight:650}.gh-viz-card footer{background:var(--accent);color:var(--art);padding:8px 12px;font-weight:800;font-size:12px;overflow-wrap:anywhere}.gh-visual-more{margin-top:8px}.gh-visual-more summary{cursor:pointer;font-weight:750;padding:6px}
+@media(max-width:440px){.gh-month-list{grid-template-columns:1fr}.gh-viz-body{padding:8px}.gh-viz-card.wide,.gh-viz-card.sq{aspect-ratio:auto}}
+</style>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -2700,7 +2714,7 @@ function bindMics(root){root.querySelectorAll('.mic').forEach(function(btn){if(b
   var id=btn.dataset.for,ta=document.getElementById(id),st=document.getElementById('st-'+id);
   if(!SR){st.textContent='이 브라우저는 받아쓰기가 안 돼요. 휴대폰 키보드의 마이크 버튼을 써 주세요.';ta.focus();return;}
   if(rec&&recBtn===btn){rec.stop();return;}if(rec)rec.stop();
-  rec=new SR();rec.lang='ko-KR';rec.interimResults=true;rec.continuous=true;recBtn=btn;var base=ta.value?ta.value.replace(/\s*$/,' '):'';
+  rec=new SR();rec.lang='ko-KR';rec.interimResults=true;rec.continuous=true;recBtn=btn;var base=ta.value?ta.value.replace(/\s*$/,' '):'';if(id==='pr-sheet'){base=ta.value.trimEnd();if(!/(?:^|\n)활동·안내 내용:\s*$/.test(base))base+=(base?'\n':'')+'활동·안내 내용:';base+=' ';}
   rec.onresult=function(e){var t='';for(var i=0;i<e.results.length;i++)t+=e.results[i][0].transcript;ta.value=base+t;ta.dispatchEvent(new Event('input',{bubbles:true}));};
   rec.onstart=function(){btn.classList.add('rec');btn.querySelector('span').textContent='듣는 중… 다 말하면 누르기';st.textContent='';};
   rec.onerror=function(e){st.textContent=e.error==='not-allowed'?'마이크 권한을 허용해 주세요.':'잘 안 들렸어요. 다시 눌러 주세요.';};
@@ -6621,9 +6635,9 @@ function homeHTML(){
   var left='<section class="bx"><div class="bx-h"><h2>서식 자료실</h2><span class="hint"><button type="button" data-gh="all">전체 보기 ›</button></span></div>'+
     '<div class="bx-b"><ul class="plist">'+L+'</ul></div></section>';
 
-  var Q=[['msg','문자·소통','문자·안부 전화','msg'],['promomenu','홍보·안내','모집·SNS·소식지','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['planmenu','프로그램 기획','사업별 기획 질문','bulb'],['month','이달의 추천','월별 프로그램·할 일','cal'],['mind','빡침 번역기','마음챙김','heart']];
+  var Q=[['msg','문자·소통','문자·안부 전화','msg'],['promomenu','홍보·안내','모집·SNS·소식지','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['planmenu','프로그램 기획','사업별 기획 질문','bulb'],['mind','빡침 번역기','마음챙김','heart']];
   var mid='<section class="bx"><div class="bx-h"><h2>업무 바로가기</h2></div>'+
-    '<div class="qgrid">'+Q.map(function(x,i){if(x[0]==='mind')return '<div class="qm gh-care-tile">'+I('heart')+'<div><button type="button" data-gh="mind">빡침 번역기</button><button type="button" data-gh="heart">마음챙김</button></div></div>';return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+I(x[3])+'<b>'+E(x[1])+'</b><small>'+E(x[2])+'</small></button>'}).join('')+'</div>'+
+    '<div class="qgrid">'+Q.map(function(x,i){if(x[0]==='mind')return '<div class="qm gh-care-tile"><div><button type="button" data-gh="mind"><span aria-hidden="true">🌋</span> 빡침 번역기</button><button type="button" data-gh="heart"><span aria-hidden="true">♥</span> 마음챙김</button></div></div>';return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+I(x[3])+'<b>'+E(x[1])+'</b><small>'+E(x[2])+'</small></button>'}).join('')+'</div>'+
     '<div class="bar2">'+
       '<button type="button" class="gprof" id="gh-org">'+I('home')+'<span><b>'+(o.set?E(o.name):'우리 복지관 정보 등록')+'</b><small>'+(o.set?(E(o.staff||'')||'모든 서식에 자동 입력 중'):'한 번 넣으면 모든 서식에 자동 입력')+'</small></span><em>'+(o.set?'바꾸기':'등록하기')+'</em></button>'+
       '<button type="button" class="grec" data-gh="rec">'+I('mic')+'<span><b>회의 녹음 서식 만들기</b><small>녹음 → 글 → 회의록·공문 초안</small></span><em>시작</em></button>'+
@@ -6955,7 +6969,7 @@ function giGuide(k){
 }
 
 /* ---------- ② 프로그램·기획 (칩 → 계획서 표) ---------- */
-var PLAN_SHEET=[['title','프로그램명','문화예술 체험교실',['프로그램 이름']],['date','행사 일시','12월 5일 오후 2시',['날짜·시간','일시']],['place','장소','복지관 교육실'],['recruit','모집 기간','11월 28~30일'],['people','참여 인원','이용자 8명, 진행자 2명',['모집 인원','인원','대상과 인원']],['materials','재료·준비물','도화지, 색연필',['재료','준비물','재료 및 준비물']],['budget','예산','재료비 20,000원'],['apply','신청 방법','복지관 홈페이지 신청'],['memo','활동 내용','참여자가 직접 재료를 고르고 그림을 만들어요.',['메모','활동 메모']]];
+var PLAN_SHEET=[['customTarget','대상 직접 입력',''],['customAim','기획 취지 직접 입력',''],['customEffect','기대 효과 직접 입력',''],['title','프로그램명','문화예술 체험교실',['프로그램 이름']],['date','행사 일시','12월 5일 오후 2시',['날짜·시간','일시']],['place','장소','복지관 교육실'],['recruit','모집 기간','11월 28~30일'],['people','참여 인원','이용자 8명, 진행자 2명',['모집 인원','인원','대상과 인원']],['materials','재료·준비물','도화지, 색연필',['재료','준비물','재료 및 준비물']],['budget','예산','재료비 20,000원'],['apply','신청 방법','복지관 홈페이지 신청'],['memo','활동 내용','참여자가 직접 재료를 고르고 그림을 만들어요.',['메모','활동 메모']]];
 function sheetText(fields,obj){
  return fields.map(function(r){return r[1]+': '+(obj[r[0]]||'');}).join('\n');
 }
@@ -6968,15 +6982,15 @@ function sheetParse(text,fields){
    var row=line.trim().replace(/^(?:[-*•]\s+|\d+[.)]\s*)/,'');if(!row)return;
    var half=row.match(/^([^:：]+)[:：]\s*(.*)$/),k=half&&list.find(function(r){return r[1]===label(half[1]);}),part=half&&k?half[2]:null;
    if(!k){k=list.find(function(r){return row===r[0]||row.indexOf(r[0]+' ')===0||row.indexOf(r[0]+'\t')===0;});if(k)part=row.slice(k[0].length).trim();}
-   if(k){key=k[2];values[key]=part.trim();}
+   if(k){key=k[2];values[key]=(values[key]?values[key]+'\n':'')+part.trim();}
    else if(key){values[key]+=(values[key]?'\n':'')+row;}
    else notes.push(row);
  });
  if(notes.length&&Object.hasOwn(values,'memo'))values.memo=notes.concat(values.memo||[]).join('\n');
  return values;
 }
-function newPlanDraft(){return {group:'',program:'',mode:'',formMode:'전체 계획서',title:'',date:'',place:'',people:'',materials:'',memo:'',budget:'',recruit:'',apply:'',aim:'참여·경험',area:'낮활동·행동지원',tgt:'성인 장애인',when:'겨울',size:'8회기',idx:0};}
-var PLAN_FORMS=['전체 계획서','회기별 진행표','준비·안전 점검표','성과평가표'];
+function newPlanDraft(){return {group:'',program:'',mode:'',formMode:'기획 프롬프트',effect:'',title:'',date:'',place:'',people:'',materials:'',memo:'',budget:'',recruit:'',apply:'',aim:'',area:'',tgt:'',when:'가을',size:'1회 행사',idx:0};}
+var PLAN_FORMS=['기획 프롬프트','계획서 예시','회기별 진행표','준비·안전 점검표','성과평가표'];
 var PLAN_DRAFTS=Object.create(null),ST_PLAN=PLAN_DRAFTS.manual=newPlanDraft();
 // Keep each draft separate in this tab. Opening another question never inherits its logistics.
 function selectPlanDraft(key,seed){
@@ -6987,8 +7001,8 @@ var WON={'봄':'3~5월','여름':'6~8월','가을':'9~11월','겨울':'12~2월',
 var CNT={'1회 행사':1,'2회기':2,'4회기':4,'6회기':6,'8회기':8,'12회기':12,'연중 정기':12};
 function planData(){
   var v=ST_PLAN,ideas=(typeof IDEA!=='undefined'&&IDEA[v.area])||['우리 동네 산책단','함께 만드는 그림책','생활 요리 교실'];
-  var project=giProgram(v.program),name=v.title.trim()||v.program||v.mode||ideas[v.idx%ideas.length];
-  var n=CNT[v.size]||8;
+  var project=giProgram(v.program),name=v.title.trim()||v.program||v.mode||'[프로그램명]';
+  var n=CNT[v.size]||1;
   var steps=['첫 만남 · 할 일 고르기','익히기 · 한 가지 방법 연습','스스로 해 보기','나누기 · 바꿀 점 고르기','익히기 · 다른 방법 연습','스스로 해 보기 · 작은 도전','함께 만들기','마무리 · 소감 나누기','발표·전시 준비','지역에서 적용하기','다시 해 보기','한 해 정리'];
   var firstActs={'개인별 지원계획':'좋아하는 활동을 그림카드로 고르고 개인 목표를 정해요.','중재·컨설팅':'활동 도구를 살펴보고 내게 편한 방법을 골라 써 봐요.','낮활동·행동지원':'두 가지 활동 중 하나를 고르고 시작·휴식 신호를 연습해요.','직업지원':'그림이 있는 직무 카드를 고르고 도구 정리·분류 중 한 가지를 직접 해 봐요.','가족(보호자) 지원':'가족과 이용자가 각각 하고 싶은 활동을 고르고 역할을 정해요.','사례관리·권익옹호':'생활 속 불편한 상황 그림을 고르고 도움을 요청하는 말을 연습해요.','지역사회중심지원(CBSS)':'이용해 보고 싶은 동네 공간을 지도에서 고르고 접근 방법을 찾아요.'};
   var rows=[];
@@ -7000,25 +7014,36 @@ function planData(){
 }
 function planText(){
   var d=planData(),v=ST_PLAN;
-  var s='[실습용 프로그램 계획서 예시]\n프로그램명: '+d.name+'\n서비스 영역: '+v.area+'\n대상: '+v.tgt+'\n시기: '+v.when+' ('+WON[v.when]+')\n횟수: '+v.size+' ('+d.n+'회)\n일시: '+(v.date||'[확인 필요]')+'\n장소: '+(v.place||'[확인 필요]')+'\n참여 인원: '+(v.people||'[확인 필요]')+'\n재료·준비물: '+(v.materials||'[확인 필요]')+'\n활동 내용: '+(v.memo||'[확인 필요]')+'\n예산: '+(v.budget||'[확인 필요]')+'\n목적: '+v.aim+'\n모집 기간: '+(v.recruit||'[확인 필요]')+'\n신청 방법: '+(v.apply||'[확인 필요]')+'\n\n[회기별 계획]\n회기 | 주제 | 주요 활동 | 준비물\n'+d.rows.map(function(r){return r.join(' | ')}).join('\n')+
-  '\n\n[성과지표]\n1) 참여율 = 참여 인원 ÷ 모집 인원 × 100 (목표 80% 이상, 출석부)\n2) 만족도 = 5점 척도 평균 (목표 4.0 이상, 만족도 조사지 E2)\n\n[안전·접근성] '+d.tip+'\n[모집] 모집 기간 '+(v.recruit||'[확인 필요]')+' · 신청 '+(v.apply||'[확인 필요]');
+  var s='[실습용 프로그램 계획서 예시]\n프로그램명: '+d.name+'\n서비스 영역: '+v.area+'\n대상: '+planPicked(v,'tgt','customTarget')+'\n시기: '+v.when+' ('+WON[v.when]+')\n횟수: '+v.size+' ('+d.n+'회)\n일시: '+(v.date||'[확인 필요]')+'\n장소: '+(v.place||'[확인 필요]')+'\n참여 인원: '+(v.people||'[확인 필요]')+'\n재료·준비물: '+(v.materials||'[확인 필요]')+'\n활동 내용: '+(v.memo||'[확인 필요]')+'\n예산: '+(v.budget||'[확인 필요]')+'\n기획 취지: '+planPicked(v,'aim','customAim')+'\n기대 효과: '+planPicked(v,'effect','customEffect')+'\n모집 기간: '+(v.recruit||'[확인 필요]')+'\n신청 방법: '+(v.apply||'[확인 필요]')+'\n\n[회기별 계획]\n회기 | 주제 | 주요 활동 | 준비물\n'+d.rows.map(function(r){return r.join(' | ')}).join('\n')+
+  '\n\n[성과지표]\n1) '+planMeasure(planPicked(v,'effect','customEffect'))+'\n2) 참여자가 선택한 의견 또는 소감 (쉬운 글·그림·말, 목표 [확인 필요])\n\n[안전·접근성] '+d.tip+'\n[모집] 모집 기간 '+(v.recruit||'[확인 필요]')+' · 신청 '+(v.apply||'[확인 필요]');
   TXT['plan']=s;return s;
 }
+var PLAN_TARGET=['발달장애 아동','발달장애 청소년','성인 발달장애인','신체장애 성인','고령장애인','재가장애인','보호자·가족','지역 주민','장애인·비장애인 함께','자원봉사자','복지관 종사자','직접 입력'];
+var PLAN_AIM=['운동·재활 기회 넓히기','일상생활·가사 자립','문화·여가 참여','직무 탐색·취업 준비','의사소통·자기옹호','가족 휴식·돌봄 부담 완화','이웃 교류·지역사회 참여','장애인식개선·권리 존중','복지 사각지대 지원','직접 입력'];
+var PLAN_EFFECT=['선택·자기표현 늘리기','일상 과제 스스로 하기','활동·이동 참여 늘리기','직무에 대한 자신감 높이기','이웃과의 관계 넓히기','가족 부담 줄이기','접근성 개선하기','직접 입력'];
+function planPicked(v,k,c){return v[c]||(v[k]==='직접 입력'?'':v[k])||'';}
+function planMeasure(e){return ({'선택·자기표현 늘리기':'활동을 직접 고르거나 대안을 요청한 횟수 (선택 기록지, 목표 [확인 필요])','일상 과제 스스로 하기':'독립적으로 수행한 일상 과제 단계 (전후 관찰표, 목표 [확인 필요])','활동·이동 참여 늘리기':'당사자가 고른 활동과 참여 범위 (출석·활동 관찰표, 목표 [확인 필요])','직무에 대한 자신감 높이기':'직무를 설명하거나 직접 해 본 뒤의 자기평가 (쉬운 글 체크지, 목표 [확인 필요])','이웃과의 관계 넓히기':'새롭게 연결되거나 협력한 경험 (당사자 소감·관계 지도, 목표 [확인 필요])','가족 부담 줄이기':'가족이 느낀 휴식·부담 변화 (익명 전후 질문, 목표 [확인 필요])','접근성 개선하기':'확인하고 해소한 이동·정보·의사소통 장벽 (접근성 점검표, 목표 [확인 필요])'})[e]||'기대 효과에 맞는 관찰 항목과 도구 (목표 [확인 필요])';}
 function planPrompt(){
-  var v=ST_PLAN;
-  return '너는 장애인복지관 프로그램 기획자야. 아래 조건에 맞춰 서로 다른 아이디어 3가지를 먼저 제안하고, 선택한 아이디어를 우리 복지관 서식 순서대로 계획서 초안으로 정리해 줘.\n\n'+(v.question?'[기획 질문] '+v.question+'\n[집중할 점] '+v.focus+'\n\n':'')+planText()+'\n\n위 표는 실습용 예시야. 대상이 직접 선택하고 참여할 방법을 넣어. 횟수·인력·성과 목표는 기관 확인 전 확정하지 말고, 자료에 없는 수치는 [확인 필요]로 남겨.';
+ var v=ST_PLAN,d=planData(),g=giGroup(v.group);
+ return '너는 장애인복지관 프로그램 기획자야. 아래 조건에 맞춰 아이디어 3개를 표로 비교하고, 가장 실행 가능한 1개를 계획서로 구체화해 줘.\n\n[기획 조건]\n사업 분야: '+(v.group||v.area||'[사업 분야 선택]')+'\n프로그램: '+d.name+'\n대상: '+(planPicked(v,'tgt','customTarget')||'[대상 선택]')+'\n기획 취지: '+(planPicked(v,'aim','customAim')||'[취지 선택]')+'\n기대 효과: '+(planPicked(v,'effect','customEffect')||'[기대 효과 선택]')+'\n시기·횟수: '+v.when+' · '+v.size+'\n'+(v.question?'집중할 기획 질문: '+v.question+' / '+v.focus+'\n':'')+'\n[내가 입력한 사항]\n'+PLAN_SHEET.filter(function(f){return v[f[0]];}).map(function(f){return f[1]+': '+v[f[0]];}).join('\n')+'\n\n[작성 순서]\n1. 필요성·당사자 욕구·목표를 구분.\n2. 회기별 활동·준비물·지원 인력·예산 산출 근거, 참여자가 직접 선택하는 방법.\n3. 기대 효과를 확인할 방법: '+planMeasure(planPicked(v,'effect','customEffect'))+'\n4. 이동·감각·의사소통 접근성, 위험·대체 활동, 모집과 사후 평가.\n'+(g?'사업 특성 확인: '+g.check+'\n':'')+'\n기관 서식이 첨부되면 항목과 순서를 그대로 사용해. 없으면 초안이라고 표시하고 모르는 날짜·인원·예산·목표치는 [확인 필요]로 남겨.';
 }
 function renderPlan(){
-  var v=ST_PLAN,d=planData();
-  var groups=[['목적',['참여·경험','자립생활','취업 준비','정서·가족 소통','권리·인식개선','지역사회 참여'],'aim'],['서비스 영역',(typeof AREAS!=='undefined'?AREAS:[]),'area'],['대상',['유아','초등학생','발달장애 아동','발달장애 청소년','성인 장애인','재가장애인','보호자·가족','지역 주민','자원봉사자','종사자'],'tgt'],['시기',['봄','여름','가을','겨울','연중'],'when'],['규모',['1회 행사','2회기','4회기','6회기','8회기','12회기','연중 정기'],'size']];
-  var prior=$('#plan-extra'),shown=prior&&prior.open;
-  var left=(v.question?'<p class="gnote"><b class="gh-focus">기획 질문</b> '+E(v.question)+' · '+E(v.focus)+'</p>':'')+giPicker(v.group,v.program,'plcat')+
-   '<div class="gh-event-head"><label for="plan-sheet"><b>프로그램 정보</b></label><div class="gh-plan-examples"><button type="button" class="gi-action" data-plan-demo>가상 예시 넣기</button><button type="button" class="gi-action" data-pidea="1">다른 기획 예시</button></div></div>'+
-   '<p class="gh-sheet-tip">예: 참여 인원: 이용자 8명 / 재료·준비물: 도화지, 색연필. 아래 한 칸에서 항목 뒤에 그대로 적으세요.</p>'+
-   '<textarea class="gh-single-sheet" id="plan-sheet" rows="10" data-gi-field="plan-sheet">'+E(v.sheetRaw===undefined?sheetText(PLAN_SHEET,v):v.sheetRaw)+'</textarea>'+
-   '<details class="gh-plan-extra" id="plan-extra"'+(shown?' open':'')+'><summary>대상·시기·회기 등 조건 더 고르기</summary>'+groups.map(function(g){return radioPick(g[0],g[1],'plan-'+g[2],v[g[2]]);}).join('')+'</details>';
-  $('#v-plan2').innerHTML=x2(v.mode||'프로그램 계획','왼쪽 한 칸에 적으면 오른쪽 계획서와 프롬프트가 바로 바뀌어요.',left,planRight(),choice('서식 종류',PLAN_FORMS,'data-plan-form',v.formMode,'gh-subtabs'),'planmenu',true);
+ var v=ST_PLAN,g=giGroup(v.group);
+ var left=radioPick('1. 어떤 사업인가요?',GI_CATALOG.map(function(x){return x.label;}).concat('직접 입력'),'plcat-group',v.group)+
+   (g?radioPick('세부 프로그램',g.items,'plcat-program',v.program):'')+
+   radioPick('2. 누구를 위한 프로그램인가요?',PLAN_TARGET,'plan-tgt',v.tgt)+
+   radioPick('3. 어떤 취지로 하나요?',PLAN_AIM,'plan-aim',v.aim)+
+   radioPick('4. 어떤 변화를 기대하나요?',PLAN_EFFECT,'plan-effect',v.effect)+
+   '<div class="gh-plan-compact">'+planSelect('시기','when',Object.keys(WON),v.when)+planSelect('운영 횟수','size',Object.keys(CNT),v.size)+'</div>'+
+   (v.question?'<p class="gnote"><b>선택한 기획</b> '+E(v.question)+' · '+E(v.focus)+'</p>':'')+
+   monthlyPlanner()+'<div class="gh-event-head"><label for="plan-sheet"><b>프로그램 정보 · 한 칸에 작성</b></label><button type="button" class="gi-action" data-plan-demo>가상 예시 넣기</button></div>'+
+   '<p class="gh-sheet-tip">각 항목 뒤에 적으세요. 직접 입력을 골랐다면 대상·취지·기대 효과도 이 칸에 적으세요.</p>'+
+   '<textarea class="gh-single-sheet" id="plan-sheet" rows="12" data-gi-field="plan-sheet">'+E(v.sheetRaw===undefined?sheetText(PLAN_SHEET,v):v.sheetRaw)+'</textarea>'+
+   '<button type="button" class="gh-jump gh-promo-preview-mobile" data-gi-jump="plan-output">오른쪽 결과 보기 ↓</button>';
+ $('#v-plan2').innerHTML=x2('프로그램 기획','사업·대상·취지·기대 효과를 고르면 오른쪽 기획 프롬프트가 바뀝니다.',left,planRight(),null,null,true);
 }
+function planSelect(label,key,values,value){return '<label>'+E(label)+' <select data-plan-select="'+key+'">'+values.map(function(x){return '<option'+(x===value?' selected':'')+'>'+E(x)+'</option>';}).join('')+'</select></label>';}
+
 function planOther(v,d,rows){
  var mode=v.formMode,items=mode==='준비·안전 점검표'?[
  ['참여자·인력',v.people||'[확인 필요]'],['재료·준비물',v.materials||'[확인 필요]'],['현장 접근성',d.tip],['당일 확인','이동·화장실·휴식 공간과 비상 연락 담당 확인'],['대체 활동','참여자가 쉬거나 다른 활동을 고를 수 있도록 준비']]:[
@@ -7031,19 +7056,21 @@ function planOther(v,d,rows){
 function planRight(){
   var v=ST_PLAN,d=planData();
   var rows=d.rows.map(function(r){return '<tr><td>'+E(String(r[0]))+'</td><td>'+E(r[1])+'</td><td>'+E(r[2])+'</td><td>'+E(r[3])+'</td></tr>'}).join('');
-  var right='<div class="out-h"><h3>프로그램 계획서 <small style="font-weight:400;color:#8C9A92;font-size:10.5px">실시간 채워짐</small></h3>'+cbtn('복사','plan')+'</div>'+
+  var tabs=choice('오른쪽 결과',PLAN_FORMS,'data-plan-form',v.formMode,'gh-subtabs');
+  if(v.formMode==='기획 프롬프트')return '<div data-gi-scroll="plan-output" tabindex="-1">'+tabs+outBlock('기획 프롬프트','plan-prompt',planPrompt())+aiStrip('plan-prompt','기획 프롬프트로 AI 열기')+'</div>';
+  planText();
+  var right='<div class="out-h"><h3>프로그램 계획서 · 실습용 예시</h3>'+cbtn('예시 복사','plan')+'</div>'+
    '<div class="gi-doc"><h4>프로그램 계획서</h4><table class="ptab"><tr><th>프로그램명</th><td>'+E(d.name)+'</td><th>일시</th><td>'+E(v.date||'[확인 필요]')+'</td></tr>'+
-   '<tr><th>서비스 영역</th><td>'+E(v.area)+'</td><th>대상</th><td>'+E(v.tgt)+'</td></tr>'+
+   '<tr><th>서비스 영역</th><td>'+E(v.area)+'</td><th>대상</th><td>'+E(planPicked(v,'tgt','customTarget'))+'</td></tr>'+
    '<tr><th>시기</th><td>'+E(v.when+' ('+WON[v.when]+')')+'</td><th>횟수</th><td>'+E(v.size)+' · '+d.n+'회</td></tr>'+
    '<tr><th>장소</th><td>'+E(v.place||'[확인 필요]')+'</td><th>참여 인원</th><td>'+E(v.people||'[확인 필요]')+'</td></tr><tr><th>재료·준비물</th><td>'+E(v.materials||'[확인 필요]')+'</td><th>예산</th><td>'+E(v.budget||'[확인 필요]')+'</td></tr><tr><th>활동 내용</th><td colspan="3">'+E(v.memo||'[확인 필요]')+'</td></tr></table>'+
    '<div class="ph3">회기별 계획</div><table class="ptab"><tr><th style="width:12%">회기</th><th style="width:26%">주제</th><th>주요 활동</th><th style="width:24%">준비물</th></tr>'+rows+'</table>'+
-   '<div class="ph3">성과지표 <small>[제안값]</small></div><ul class="ulist"><li>참여율 = 참여 인원 ÷ 모집 인원 × 100 → 목표 80% 이상 (출석부)</li><li>만족도 = 5점 평균 → 목표 4.0 이상 (만족도 조사지 E2)</li></ul>'+
+   '<div class="ph3">기획 취지·기대 효과</div><p>'+E(planPicked(v,'aim','customAim'))+' · '+E(planPicked(v,'effect','customEffect'))+'</p><div class="ph3">성과 확인 방법</div><p>'+E(planMeasure(planPicked(v,'effect','customEffect')))+'</p>'+
    '<div class="ph3">안전·접근성</div><p class="small">'+E(d.tip)+'</p>'+
-   '<div class="ph3">모집 문구</div><p class="small">'+E(d.name)+'에 함께하실 분을 모집합니다. '+E(v.when+' ('+WON[v.when]+')')+', '+E(v.tgt)+' 대상, 모집 기간 '+E(v.recruit||'[확인 필요]')+' · 신청 방법 '+E(v.apply||'[확인 필요]')+'.</p></div>'+
+   '<div class="ph3">모집 문구</div><p class="small">'+E(d.name)+'에 함께하실 분을 모집합니다. '+E(v.when+' ('+WON[v.when]+')')+', '+E(planPicked(v,'tgt','customTarget'))+' 대상, 모집 기간 '+E(v.recruit||'[확인 필요]')+' · 신청 방법 '+E(v.apply||'[확인 필요]')+'.</p></div>'+
    '<div class="gnote">숫자·인원은 <b>[확인 필요]</b>로 남겼어요. 예산·모집 인원은 우리 복지관 자료로 채우면 됩니다.</div>';
-  if(v.formMode!=='전체 계획서')right=planOther(v,d,rows);
-  var prompt=planPrompt();
-  return aiStrip('plan-prompt','계획서 프롬프트로 AI 열기')+(v.question?'<p class="gnote"><b class="gh-focus">'+E(v.question)+'</b> · '+E(v.focus)+'</p>':'')+selectionSummary([['사업·프로그램',v.program||d.name],['목적',v.aim],['서비스 영역',v.area],['대상',v.tgt],['시기',v.when],['규모',v.size]])+giGuide(v.program)+right+outBlock('AI에 넣을 전체 프롬프트','plan-prompt',prompt);
+  if(v.formMode!=='계획서 예시')right=planOther(v,d,rows);
+  return '<div data-gi-scroll="plan-output" tabindex="-1">'+tabs+'<p class="gnote"><b>실습용 예시입니다.</b> 복지관이 승인한 제출 양식은 아닙니다. 제출할 때는 기관에서 받은 서식에 맞추세요.</p>'+right+'</div>';
 }
 
 /* ---------- ③ 홍보·안내 ---------- */
@@ -7075,7 +7102,43 @@ function renderPromoMenu(){
 function prIsVisual(k){return ['카드뉴스','포스터','홍보 이미지','인포그래픽'].includes(k);}
 function prIsSocial(k){return ['인스타그램','블로그 초안','홈페이지 행사후기 올리기','홈페이지 안내 글','공지사항','안내문','소식지','문자·SNS 짧은 글'].includes(k);}
 function prChannelFor(k){return k==='블로그 초안'?'네이버 블로그':(k==='인스타그램'||k==='문자·SNS 짧은 글')?'인스타그램':'복지관 홈페이지';}
+var PR_ANGLE=['현장 분위기','무엇을 했는지','참여자에게 생긴 변화','지역과 함께한 점','배운 점·다음 활동'];
+function prSentence(x,tail){
+ return String(x||'').trim().split(/\n+/).filter(Boolean).map(function(v){return /[.!?。！？…]$/.test(v)?v:v+(/[다요죠함음]$/.test(v)?'.':(tail||'.'));}).join(' ');
+}
+function prReview(v,ch,len){
+ var blog=ch==='네이버 블로그',inst=ch==='인스타그램',n=prName(v),f=v.fields,small=len==='짧게',long=len==='자세하게';
+ var angle=v.angle||PR_ANGLE[0],tone=v.tone==='채널 기본'?(blog?'따뜻하고 공감 있게':inst?'밝고 경쾌하게':'공식적이고 정중하게'):v.tone;
+ var time=[f.when,f.where].filter(Boolean).join(' · '), activity=prSentence(v.memo),detail=prSentence(f.detail);
+ var scene={'현장 분위기':'사진으로 돌아보는 현장','무엇을 했는지':'어떤 활동을 했나요?','참여자에게 생긴 변화':'활동에서 확인한 변화','지역과 함께한 점':'지역과 함께한 이야기','배운 점·다음 활동':'이번 활동에서 남은 이야기'}[angle];
+ var verbs={
+  '따뜻하고 공감 있게':['함께한 시간을 돌아봅니다.','함께해 주신 분들께 따뜻한 마음을 전합니다.'],
+  '밝고 경쾌하게':['어떤 활동을 했는지 같이 살펴볼까요?','함께해 주셔서 고맙습니다!'],
+  '차분하고 담백하게':['이번 활동 내용을 정리했습니다.','참여해 주신 모든 분께 감사드립니다.'],
+  '공식적이고 정중하게':['활동 결과를 소개합니다.','본 활동에 참여해 주신 분들께 감사드립니다.'],
+  '쉬운 말로':['복지관에서 어떤 일을 했는지 알려 드려요.','함께해 주셔서 고마워요.'],
+  '감사하는 마음으로':['함께해 주신 분들께 감사드리며 활동 소식을 전합니다.','한 사람 한 사람의 참여 덕분에 함께할 수 있었습니다.']
+ }[tone];
+ var group=f.target?('참여 대상은 '+f.target.replace(/[.。]$/,'')+'입니다. '):'';
+ var intro=blog?'안녕하세요. 용인시기흥장애인복지관입니다. '+(f.when?f.when+'에 진행한 ':'')+'「'+n+'」 이야기예요. '+verbs[0]:
+   inst?('「'+n+'」 현장 소식'+(time?'\n'+time:'')+'\n'+verbs[0]):
+   '용인시기흥장애인복지관은 '+(f.when?f.when+'에 ':'')+'「'+n+'」을 진행했습니다. '+group+verbs[0];
+ var heading=blog?(angle==='참여자에게 생긴 변화'?n+'에서 만난 변화':angle==='지역과 함께한 점'?n+', 지역과 함께한 이야기':n+' | '+scene):inst?n+' · '+scene:'[복지관 소식] '+n+(angle==='배운 점·다음 활동'?' 운영 이야기':' 진행 후기');
+ var facts=[f.when&&'일시: '+f.when,f.where&&'장소: '+f.where,f.target&&'참여 대상: '+f.target,f.countPeople&&'참여 인원: '+f.countPeople].filter(Boolean).join('\n');
+ var parts=[],needsDetail=angle===PR_ANGLE[2]||angle===PR_ANGLE[4];
+ if(!blog&&!inst&&facts&&long)parts.push(['활동 개요',facts]);
+ if(needsDetail&&detail)parts.push([scene,detail]);
+ if(activity)parts.push([needsDetail?'이렇게 진행했어요':scene,activity]);
+ if(!needsDetail&&detail&&!small)parts.push([blog?'기억에 남는 점':'성과·반응',detail]);
+ if(long&&f.picture)parts.push(['사진 설명',f.picture.trim()]);
+ if(facts&&!small&&(blog||inst||!long))parts.push([blog?'함께한 자리':'활동 정보',facts]);
+ parts.push(['마무리',verbs[1]]);
+ if(inst&&!small)parts.push(['해시태그','#용인시기흥장애인복지관 #복지관소식 #'+n.replace(/[^가-힣a-zA-Z0-9]/g,'')]);
+ return {title:blog?'네이버 블로그 후기 · 바로 복사':inst?'인스타그램 게시글 · 바로 복사':'홈페이지 행사 후기 · 바로 복사',heading:heading,lead:intro,sections:parts,channel:ch,review:true};
+}
 function prDraft(v,ch,len){
+ if(v.purpose==='활동 후기')return prReview(v,ch,len);
+
  var p=v.purpose,n=prName(v),m=v.memo.trim(),official=ch==='복지관 홈페이지',inst=ch==='인스타그램',blog=ch==='네이버 블로그';
  var tone=v.tone==='채널 기본'?(official?'공식적이고 정중하게':inst?'밝고 경쾌하게':'따뜻하고 공감 있게'):v.tone;
  var action={'참여자 모집':['참여자 모집','함께할 분을 모집합니다.','신청 방법과 기간을 확인해 주세요.'],'이용 안내':['이용 안내','이용에 필요한 정보를 알려드립니다.','방문 전에 이용 방법을 확인해 주세요.'],'활동 후기':['활동 소식','활동 소식을 전합니다.','함께해 주신 분들께 감사드립니다.'],'일정 변경·취소':['일정 변경·취소 안내','변경 사항을 알려드립니다.','이용 전에 변경된 내용을 확인해 주세요.'],'교육·캠페인':['교육·캠페인 안내','교육과 캠페인 내용을 안내합니다.','참여 내용을 확인해 주세요.'],'후원·봉사 모집':['후원·자원봉사 안내','함께할 후원자와 자원봉사자를 찾습니다.','참여 방법을 확인해 주세요.'],'안전·접근성 안내':['안전·접근성 안내','이동과 참여 전 확인할 내용을 안내합니다.','필요한 지원은 담당 부서에 문의해 주세요.']}[p];
@@ -7115,7 +7178,7 @@ function prDraft(v,ch,len){
  return {title:ch+' 문구',heading:title,lead:lead,sections:sections,channel:ch};
 }
 function prDraftText(v,d){
- return prPractice(v)+d.heading+'\n\n'+d.lead+'\n\n'+d.sections.map(function(x){return d.channel==='인스타그램'&&(x[0]==='해시태그'||x[0]==='짧은 소개'||x[0]==='주요 내용')?x[1]:'■ '+x[0]+'\n'+x[1];}).join('\n\n');
+ return prPractice(v)+d.heading+'\n\n'+d.lead+'\n\n'+d.sections.map(function(x){if(d.review)return d.channel==='네이버 블로그'&&!['마무리','해시태그'].includes(x[0])?x[0]+'\n'+x[1]:x[1];return d.channel==='인스타그램'&&(x[0]==='해시태그'||x[0]==='짧은 소개'||x[0]==='주요 내용')?x[1]:'■ '+x[0]+'\n'+x[1];}).join('\n\n');
 }
 function prOpeningCards(v){
  var variants=[['질문형','어떻게 함께할 수 있을까요?'],['이야기형','함께할 시간을 이야기로 풀어요'],['정보형','일정과 대상을 먼저 보여 줘요']];
@@ -7124,13 +7187,12 @@ function prOpeningCards(v){
  }).join('')+'</div></section>';
 }
 function prCopyBoard(v){
- var primary=prDraft(v,v.channel,v.length),short=prDraft(v,v.channel,'짧게');
- TXT.promo=prDraftText(v,primary);TXT['promo-ready']=TXT.promo;TXT['promo-short']=prDraftText(v,short);
- var head='<h4 class="gh-story-anchor gh-focus" data-gi-scroll="promo-live" tabindex="-1">복사해서 쓰는 글</h4>';
- var top=prTextCard(v,primary,'promo-ready','글 전체 복사');
- var brief=v.length==='짧게'?'':prTextCard(v,Object.assign({},short,{title:'짧은 소개글'}),'promo-short','짧은 글 복사');
- var rest=PR_CHANNEL.filter(function(x){return x!==v.channel;}).map(function(ch,i){var d=prDraft(v,ch,v.length),k='promo-alt'+i;return '<details class="gh-alt-draft"><summary>'+E(ch)+' 문구도 보기</summary>'+prTextCard(v,d,k,'글 복사')+'</details>';}).join('');
- return '<section class="gh-promo-drafts">'+head+top+brief+rest+'</section>';
+ if(!(v.memo.trim()||v.fields.detail||v.fields.title||v.fields.when)){
+   return '<section class="gh-blank-draft" data-gi-scroll="promo-live" tabindex="-1"><span>편집 없이 초안부터</span><h3>'+E(v.channel)+'에 올릴 글</h3><p>왼쪽 한 칸에 행사명과 실제로 한 일을 쓰거나 말하면, 여기에 복사할 글이 바로 나타납니다.</p><button type="button" class="btn mini" data-pr-example>가상 행사 후기 보기</button></section>';
+ }
+ var primary=prDraft(v,v.channel,v.length);
+ TXT.promo=prDraftText(v,primary);TXT['promo-ready']=TXT.promo;
+ return '<section class="gh-promo-drafts" data-gi-scroll="promo-live" tabindex="-1">'+prTextCard(v,primary,'promo-ready','본문 복사')+'</section>';
 }
 
 var PRK=['인스타그램','안내문','인포그래픽','홈페이지 행사후기 올리기','홈페이지 안내 글','블로그 초안','공지사항','카드뉴스','포스터','홍보 이미지','릴스·숏폼 대본','소식지','문자·SNS 짧은 글','보도자료'];
@@ -7269,6 +7331,7 @@ function selectionSummary(items){
 }
 function promoRight(){
   var v=ST_PR,d=prData(),visual=prIsVisual(v.kind),article=!visual&&v.kind!=='릴스·숏폼 대본';
+  if(prIsSocial(v.kind))return prCopyBoard(v);
   var cond=[['사업',v.biz||'직접 입력'],['목적',v.purpose],['보는 사람',v.audience]];
   if(visual)cond.push(['디자인',v.style],['이미지 비율',v.ratio],['첫 문구',v.opening]);
   if(v.kind==='카드뉴스')cond.push(['분량',v.count]);
@@ -7278,30 +7341,43 @@ function promoRight(){
   var prompt=prPractice(v)+'너는 용인시기흥장애인복지관 홍보 담당자이자 콘텐츠 제작자야.\n\n[제작 조건]\n만들 것: '+v.kind+'\n'+cond.map(function(r){return r.join(': ');}).join('\n')+'\n\n[입력한 행사 정보]\n'+prDetails(v)+'\n\n[말하거나 적은 상황]\n'+prLog(v)+'\n\n[구성 참고]\n'+base+'\n\n[바로 완성할 결과]\n'+
    (visual?'이미지 생성 기능을 사용할 수 있으면 고른 비율과 스타일로 '+(v.kind==='카드뉴스'?v.count+'을 한 장씩':'완성 시안 한 장을')+' 직접 만들어 줘. 만들 수 없으면 위치별 화면 구성과 위에 올릴 정확한 한글 문구를 먼저 줘. 주소·전화번호·QR은 추정하지 말고, 긴 정보나 미정 내용은 편집할 빈칸으로 남겨.':'제목 3안과 추천 제목 1개, 완성 본문, 마지막 행동 안내를 줘. 홈페이지는 정보가 빨리 보이는 공지형, 블로그는 공감되는 도입과 현장 중심 소제목을 써. 메모는 확인된 정보만 사용해.')+
    '\n\n[지킬 것]\n존중하는 쉬운 말로 써. 없는 일시, 장소, 자격, 인원, 참가비, 연락처를 만들지 말고 [확인 필요]로 표시해. 얼굴·실명·상담 사연을 공개하지 마.'+(rule?'\n'+rule.check:'');
-  var preview=d.slides?'<section class="gh-preview"><div class="out-h"><h3>'+E(d.title)+'</h3>'+cbtn('예시 복사','promo')+'</div><ol class="gh-tiles">'+d.slides.map(function(x,i){return '<li><span>'+(i+1)+'</span><div><b>'+E(x[0])+'</b><p>'+E(x[1])+'</p></div></li>';}).join('')+'</ol></section>':outBlock(d.title+' · 예시','promo',d.body);
+  var preview=visual?prVisual(v,d):outBlock(d.title+' · 예시','promo',d.body);
   TXT.promo=prPractice(v)+d.body+'\n\n'+prDetails(v);
-  var pair=prIsSocial(v.kind);
-  if(pair)preview=prCopyBoard(v);
-  else if(visual)preview=prOpeningCards(v)+preview;
-  else if(articleData)preview=prTextCard(v,articleData);
-  return '<div class="out-h"><h3>예시와 원픽 프롬프트</h3>'+cbtn('원픽 프롬프트 복사','promo-prompt')+'</div>'+preview+aiStrip('promo-prompt','원픽 프롬프트로 AI 열기')+'<div class="gh-promo-prompt-box">'+outBlock('원픽 · 완성 제작 프롬프트','promo-prompt',prompt)+'</div>'+prFactSheet(v)+selectionSummary(cond)+giGuide(v.biz);
+  return preview+'<details class="gh-visual-more"><summary>AI 이미지 제작용 프롬프트</summary>'+outBlock('이미지 제작 프롬프트','promo-prompt',prompt)+aiStrip('promo-prompt','이 프롬프트로 AI 열기')+'</details>';
 }
+function prVisual(v,d){
+ var card=v.kind==='카드뉴스',info=v.kind==='인포그래픽',f=v.fields,name=prName(v);
+ var theme=['깔끔한 공공기관형','따뜻한 일러스트','쉬운 글·큰 글씨','현장 사진 중심','웹툰','동화책','인포그래픽'].indexOf(v.style);
+ var art=info?'◫':card?'▤':'✦',ratio={'정사각형 1:1':'sq','가로 16:9':'wide','세로 A4':'a4'}[v.ratio]||'portrait';
+ function section(x,i){return '<div class="gh-viz-item"><b>'+E(x[0])+'</b><p>'+E(x[1])+'</p></div>';}
+ var poster='<article class="gh-viz-card '+ratio+'"><header><p>'+E(v.purpose)+'</p><span aria-hidden="true">'+art+'</span><h4>'+E(name)+'</h4><p>'+E(v.opening==='질문형'?'어떻게 함께할 수 있을까요?':v.opening==='이야기형'?'우리가 함께할 시간':'용인시기흥장애인복지관')+'</p></header>'+
+  '<div class="gh-viz-body">'+(v.memo?section(['활동 소개',v.memo]):'')+
+  (info?prFacts(v,false).filter(function(x){return x[0]!=='프로그램명';}).map(section).join(''):
+    [['일시',f.when],['장소',f.where],['참여 대상',f.target],['모집 인원',f.countPeople],['모집 기간',f.recruit],['참가비',f.price]].map(function(x){return x[1]?section(x):'';}).join(''))+
+  '</div><footer>'+E([f.method&&'신청: '+f.method,f.contact&&'문의: '+f.contact,f.access&&'접근성: '+f.access].filter(Boolean).join(' · ')||'용인시기흥장애인복지관')+'</footer></article>';
+ var idx=Math.max(0,Math.min(v.slide||0,d.slides.length-1));
+ var selected=card?d.slides[idx]:null;
+ var tabs=card?'<div class="gh-viz-pager gh-subtabs" role="group" aria-label="카드뉴스 장 선택">'+d.slides.map(function(x,i){return '<button type="button" data-pr-slide="'+i+'" class="'+(i===idx?'on':'')+'" aria-pressed="'+(i===idx)+'">'+(i+1)+'장</button>';}).join('')+'</div>':'';
+ var slides=card?'<article class="gh-viz-card '+ratio+'"><header><p>'+E(v.purpose)+' · '+(idx+1)+' / '+d.slides.length+'</p><span aria-hidden="true">'+(idx===0?'✦':art)+'</span><h4>'+E(idx===0?name:selected[0])+'</h4></header><div class="gh-viz-body">'+(idx===0?section(['',' '+selected[1].replace(name+' · ','')]):section(['',selected[1]]))+'</div><footer>용인시기흥장애인복지관</footer></article>':'';
+ return '<section class="gh-visual-board" data-gi-scroll="promo-visual" tabindex="-1" data-theme="'+theme+'"><div class="out-h"><h3>'+E(v.kind)+' · 디자인 미리보기</h3>'+cbtn('문구 복사','promo')+'</div>'+(v.demo?'<p class="gh-point">실습용 가상 정보</p>':'')+tabs+(card?slides:poster)+'<p class="hintl">왼쪽에 입력하면 시안이 바뀝니다. 빈 정보는 임의로 채우지 않아요.</p></section>'+prOpeningCards(v);
+}
+
 function renderPromo(){
   var v=ST_PR,visual=prIsVisual(v.kind);
   var prior=$('#pr-options'),shown=prior&&prior.open;
   var mainText=v.sheetRaw===undefined?sheetText(PR_SHEET,Object.assign({memo:v.memo},v.fields)):v.sheetRaw;
-  var opts=prIsSocial(v.kind)?'<div class="gh-style-options">'+radioPick('어디에 올리나요?',PR_CHANNEL,'pr-channel',v.channel)+radioPick('어떤 말투로 쓸까요?',PR_TONES,'pr-tone',v.tone)+radioPick('글 길이',PR_LENGTHS,'pr-length',v.length)+'</div>':visual?'<div class="gh-style-options">'+radioPick('첫 문구는 어떻게 쓸까요?',['질문형','이야기형','정보형'],'pr-opening',v.opening)+'</div>':'';
-  var left=prPicker(v)+opts+'<div class="gh-event-head"><label for="pr-sheet"><b>행사 정보 입력</b></label><div class="gh-event-example"><button type="button" class="gi-action" data-pr-example>가상 예시 넣기</button>'+(v.demo?'<button type="button" class="gi-action" data-pr-clear>가상 예시 빼기</button>':'')+'</div></div>'+
-   '<p class="gh-sheet-tip">예: 프로그램명: 문화예술 체험교실 · 행사 일시: 12월 5일 오후 2시. 같은 칸에서 아래 항목 뒤에 쭉 적으세요.</p>'+
+  var opts=prIsSocial(v.kind)?'<div class="gh-style-options">'+radioPick('어디에 올리나요?',PR_CHANNEL,'pr-channel',v.channel)+(v.purpose==='활동 후기'?radioPick('후기에서 무엇을 강조할까요?',PR_ANGLE,'pr-angle',v.angle||PR_ANGLE[0]):'')+radioPick('말투',PR_TONES,'pr-tone',v.tone)+radioPick('글 길이',PR_LENGTHS,'pr-length',v.length)+'</div>':visual?'<div class="gh-style-options">'+radioPick('첫 문구는 어떻게 쓸까요?',['질문형','이야기형','정보형'],'pr-opening',v.opening)+'</div>':'';
+  var left=prPicker(v)+opts+'<div class="gh-event-head"><label for="pr-sheet"><b>행사 정보·후기 · 한 칸에 작성</b></label><div class="gh-event-example"><button type="button" class="gi-action" data-pr-example>가상 예시 넣기</button>'+(v.demo?'<button type="button" class="gi-action" data-pr-clear>가상 예시 빼기</button>':'')+'</div></div>'+
+   '<p class="gh-sheet-tip">예: 프로그램명: 문화예술 체험교실. 항목 뒤에 적거나, 아래 칸을 비우고 실제로 한 일을 자유롭게 적어도 됩니다.</p>'+
    '<textarea class="gh-single-sheet" id="pr-sheet" rows="13" data-gi-field="promo-sheet" data-gi-scroll="promo-fields">'+E(mainText)+'</textarea>'+micRow('pr-sheet').outerHTML+
-   '<button type="button" class="gh-jump gh-promo-preview-mobile" data-gi-jump="'+(prIsSocial(v.kind)?'promo-live':'promo-facts')+'">오른쪽 결과 보기 ↓</button>'+
+   '<button type="button" class="gh-jump gh-promo-preview-mobile" data-gi-jump="'+(prIsSocial(v.kind)?'promo-live':visual?'promo-visual':'promo')+'">오른쪽 결과 보기 ↓</button>'+
    '<details class="gh-promo-options" id="pr-options"'+(shown?' open':'')+'><summary>보는 사람'+(visual?'·디자인':'')+' 더 고르기</summary>'+
    radioPick('누가 보나요?',['이용자·보호자','아동·청소년','발달장애인','지역 주민','종사자','후원자·협력기관','자원봉사자'],'pr-audience',v.audience)+
    (visual?radioPick('5. 그림 스타일',['깔끔한 공공기관형','따뜻한 일러스트','쉬운 글·큰 글씨','현장 사진 중심','웹툰','동화책','인포그래픽'],'pr-style',v.style)+radioPick('이미지 비율',['세로 4:5','정사각형 1:1','가로 16:9','세로 A4'],'pr-ratio',v.ratio):'')+
    (v.kind==='카드뉴스'?radioPick('카드뉴스 몇 장?',['3장','4장','6장','8장'],'pr-count',v.count):'')+'</details>'+
    '<p class="hintl">정해지지 않은 정보는 비워 두고 개인 정보는 쓰지 마세요.</p>';
   var kind=v.kind==='홍보 이미지'?'홍보 이미지 만들기':'홍보·안내';
-  $('#v-promo2').innerHTML=x2(kind,'왼쪽에 적으면 미리보기에 바로 반영돼요.',left,promoRight(),choice('무엇을 만들까요?',PRK,'data-prk',v.kind,'gh-subtabs'),'promomenu',true);
+  $('#v-promo2').innerHTML=x2(kind,visual?'왼쪽에 적으면 오른쪽 시안이 바뀝니다.':'행사를 고르거나 한 칸에 쓰고 말하면, 오른쪽에 복사할 본문이 만들어집니다.',left,promoRight(),choice('무엇을 만들까요?',['홈페이지 행사후기 올리기','블로그 초안','인스타그램','안내문','카드뉴스','포스터','홍보 이미지','인포그래픽'].concat(['공지사항','홈페이지 안내 글','소식지','릴스·숏폼 대본','문자·SNS 짧은 글','보도자료'].includes(v.kind)?[v.kind]:[]),'data-prk',v.kind,'gh-subtabs'),'promomenu',true);
   bindMics($('#v-promo2'));
 }
 
@@ -7316,47 +7392,6 @@ function inputField(key,label,value,hint){
 }
 function menuCard(label,des,attr,val){
   return '<button type="button" '+attr+'="'+E(val)+'"><b>'+E(label)+'</b><span>'+E(des)+'　›</span></button>';
-}
-var PLAN_Q_FOCUS=[
- [['재활 첫 방문','첫 방문 설명과 당사자가 고를 활동, 담당자 안전 확인'],['보행재활 준비','장비 체험 전 점검과 쉬거나 중단할 신호'],['디지털 운동 체험','기기 조작 난이도, 차례, 가능한 대체 활동'],['수중 활동 점검','이동·탈의실 접근성과 필수 안전 인력 확인'],['의사소통 연습','말·그림·보완대체의사소통으로 선택을 표현할 방법']],
- [['방과후 활동','학교에서 복지관으로 오는 동선과 보호자 인계'],['또래 협동 놀이','두 사람이 각자 선택할 역할과 갈등 중재'],['음악·미술 체험','소리·촉감의 대안과 결과를 공유할 선택권'],['방학 프로그램','하루 흐름, 휴식, 결석 시 대체 참여 방식'],['전환 준비','청소년이 다음 활동이나 학교생활 목표를 고를 방법']],
- [['문화예술 수업','재료를 고르고 작품을 표현·공유하는 방법'],['디지털 기초','기기 접근성 설정과 실제 생활 과제 한 가지'],['생활체육 활동','활동 강도별 선택지와 휴식 신호'],['이용자 동아리','주제·역할·운영 규칙을 회원이 정할 절차'],['작품 발표·전시','발표하지 않을 선택, 공개 동의와 전시장 접근성']],
- [['직무 탐색','관심 직무 카드와 직무 체험 뒤 자기평가'],['현장 직무 체험','사업체 역할, 작업 안전, 훈련 기록 기준'],['면접 연습','질문 난이도별 예시와 지원 인력의 피드백'],['일상 직업훈련','출퇴근 연습과 작업 지시를 확인할 도구'],['취업 후 적응','근로자 목표와 사업체의 지원을 구분해 추적']],
- [['부모교육 기획','보호자가 고른 고민 주제와 익명 질문 시간'],['가족 체험 활동','가족별 선택 활동과 이동·돌봄 부담 줄이기'],['보호자 모임','소규모 나눔 진행, 참여를 강요하지 않는 방식'],['가족 휴식 지원','당사자와 가족 각각의 휴식·참여 욕구 확인'],['가족 지원 연결','요청 확인, 동의, 확인된 기관 연결 순서']],
- [['장애인식개선 수업','동정이나 장애 흉내 없이 존중하는 행동을 연습'],['권리·자기옹호','원하지 않을 때 거절하고 도움을 요청하는 방법'],['쉬운 말 캠페인','당사자 검토를 거친 행동 메시지와 쉬운 문구'],['지역주민 역할극','도움이 필요한지 먼저 묻는 장면과 토론 질문'],['의견 듣기','그림·쉬운 글·말로 선택할 수 있는 의견 수렴']],
- [['나들이 동선','교통·휠체어 동선·화장실·우천 대안을 점검'],['복지관 가족잔치','시간대별 역할, 쉬는 곳, 참여를 쉴 선택지'],['문화공연 관람','공연장 좌석, 소음 민감도, 사전 장소 안내'],['지역 행사 부스','지역 파트너 역할과 현장 참여·대기 관리'],['이웃 교류 활동','지역주민과 이용자가 함께 결정할 역할 배치']],
- [['가정 방문 준비','당사자 확인, 방문 동의와 개인정보 없는 기록 기준'],['반찬·김장 지원','물품 준비, 위생·보관 안내와 인계 확인'],['주거환경 점검','생활 불편과 당사자 우선순위, 안전 담당자 연계'],['사례회의 준비','목표와 역할·기한, 자료 접근 범위를 구분'],['지역 자원 연계','연계 동의와 확인된 자원, 지원 공백 대안']],
- [['주간활동 계획','당사자가 고른 활동·휴식 일정과 교대 기록'],['동네 활동 체험','낯선 장소 적응, 지원 요청 신호와 복귀 방법'],['일상 자립 연습','스스로 하는 단계와 도움이 필요한 단계 구분'],['의사소통 지원','이용자별 선택·거절 신호, 지원자 공통 응답'],['활동 전환 준비','예고·그림 시간표·휴식, 참여하지 않을 대안']],
- [['봉사자 모집','역할·일정·필요한 교육과 개인정보 안내'],['봉사 첫날 운영','역할 시연, 당사자 동의, 담당자에게 묻는 방법'],['후원품 활용','필요·우선순위·기록·증빙과 동의 범위'],['후원 캠페인','모집 목표, 참여 절차, 결과를 확인할 근거'],['감사·성과 공유','실명과 사진 없이 후원으로 가능해진 활동을 전달']]
-];
-var PLAN_Q_BASE=[['프로그램 아이디어','다른 방식의 기획안 3개와 준비 난이도'],['회기별 활동','회기별 주제·준비물·지원 인력'],['참여자 모집','쉬운 글 모집문구와 공평한 참여 안내'],['접근성 점검','장소·이동·감각·의사소통 접근성'],['예산·준비물','항목·필요 이유·산출 근거'],['인력·역할','담당·지원·협력 역할과 연락 흐름'],['안전·대안','중단 기준·비상 연락·우천 또는 불참 대안'],['성과지표','관찰 가능한 지표와 측정 도구, 목표 근거'],['만족도·의견','쉬운 응답 선택지와 개선 질문'],['결과보고 준비','정량·정성 자료, 비식별 기록과 개선점']];
-var PLAN_Q_TGT=['성인 장애인','발달장애 청소년','성인 장애인','발달장애 청소년','보호자·가족','지역 주민','성인 장애인','재가장애인','성인 장애인','자원봉사자'];
-var PLAN_Q={g:0,i:0};
-var PLAN_Q_ITEMS=[[0,1,4,7,8],[5,0,3,6,2],[1,2,3,6,7],[0,7,2,8,4],[2,1,3,1,0],[0,3,2,1,3],[5,0,2,1,6],[0,4,5,0,8],[3,0,3,2,3],[1,1,2,0,3]];
-function pqCurrent(g,i){
- var sector=GI_CATALOG[g],q=(PLAN_Q_FOCUS[g].concat(PLAN_Q_BASE))[i];
- return {group:sector,q:q,program:sector.items[PLAN_Q_ITEMS[g][i]||0],target:PLAN_Q_TGT[g]};
-}
-function pqApply(g,i,month,season){
- var x=pqCurrent(g,i),key=(month?'month:'+month:'question')+':'+g+':'+i;
- var seed={group:x.group.label,program:x.program,area:x.group.area,tgt:x.target,question:x.q[0],focus:x.q[1]};
- if(month)seed.when=season||monthSeason(month);
- if((g===6&&i<4)||(g===4&&i===1)||(g===9&&i===1))seed.size='1회 행사';
- selectPlanDraft(key,seed);
-}
-function renderPlanMenu(){
- var x=pqCurrent(PLAN_Q.g,PLAN_Q.i);
- var left=radioPick('1. 복지관 사업 분야',GI_CATALOG.map(function(g){return g.label;}),'pq-sector',x.group.label)+
-  '<div class="ch-l"><b>2. 어떤 계획을 세울까요?</b><small>15개 질문</small></div><div class="gh-qgrid" role="group" aria-label="기획 질문">'+PLAN_Q_FOCUS[PLAN_Q.g].concat(PLAN_Q_BASE).map(function(q,i){
-    return '<button type="button" data-pq="'+i+'" aria-pressed="'+(i===PLAN_Q.i)+'">'+E(q[0])+'</button>';
-  }).join('')+'</div><div class="gh-quick-actions"><button type="button" class="btn mini" data-gh="plan2">직접 입력으로 시작</button><button type="button" class="btn mini" data-gh="event">행사·체험</button><button type="button" class="btn mini" data-gh="multi">쉬운 말 안내문</button></div>';
- $('#v-planmenu').innerHTML=x2('프로그램 기획','사업 분야와 질문을 고르면 기획 예시가 나와요.',left,pqRight());
-}
-function pqRight(){
- var x=pqCurrent(PLAN_Q.g,PLAN_Q.i),t='너는 용인시기흥장애인복지관 프로그램 기획자야.\n\n[사업 분야] '+x.group.label+'\n[기획 질문] '+x.q[0]+'은 어떻게 계획하면 좋을까?\n[참고 프로그램] '+x.program+' (사업 분야를 이해하기 위한 참고, 실제 운영·모집 공고가 아님)\n[대상 예시] '+x.target+'\n\n[계획에 넣을 것]\n① '+x.q[1]+'\n② '+x.group.task+'\n③ 접근성·안전·지원 인력·준비물을 표로 정리해 줘.\n④ 다음 확인 사항: '+x.group.check+'\n\n날짜·장소·예산·모집 인원은 지어내지 말고 [확인 필요]로 표시해 줘.';
- return '<div class="out-h"><h3>'+E(x.q[0])+'은 어떻게 계획할까요?</h3></div><p class="gnote"><b class="gh-focus">'+E(x.group.label)+'</b> · '+E(x.q[1])+'</p>'+
-  '<div class="gh-quick-actions"><button type="button" class="btn mini fill" data-pq-open>이 질문으로 계획서 열기 ›</button></div>'+
-  aiStrip('pq-prompt','기획 프롬프트로 AI 열기')+outBlock('전체 기획 프롬프트','pq-prompt',t);
 }
 var DONFORMS=[
  ['후원금·후원품 대장',['접수일','후원 종류','금액·수량','사용 목적','비고']],
@@ -7427,45 +7462,27 @@ function renderDonWork(key){
   show('donwork');
 }
 
-/* ---------- ⑤ 이달의 추천 ---------- */
-/* 공동생활가정의 월 넘기기 → 추천 상황 → 실제 업무로 이동 흐름. 아래는 기흥 실습 추천이며 운영·모집 일정이 아님. */
-var ST_MO={m:(typeof CURM!=='undefined'?CURM:new Date().getMonth()+1),i:0};
-var MO_WORK=[
- [['신년 평생교육 활동 준비','plan',2,3],['올해 사업계획서 시작','doc'],['새해 이용 일정 안내','promo','이용 안내']],
- [['봄 가족 체험 준비','plan',4,1],['직무 체험 기회 기획','plan',3,0],['봄 프로그램 참여 모집','promo','참여자 모집']],
- [['방과후 새 학기 준비','plan',1,0],['디지털 기초 교실 계획','plan',2,1],['새 학기 참여 확인 문자','msg']],
- [['장애인식개선 교육·캠페인','plan',5,0],['봄 나들이 동선 점검','plan',6,0],['인식개선 캠페인 안내','promo','교육·캠페인']],
- [['가정의 달 가족 체험','plan',4,1],['가족잔치 운영 계획','plan',6,1],['자원봉사자 모집','plan',9,0]],
- [['상반기 결과보고 정리','result'],['상반기 소식지 쓰기','promo','활동 후기'],['봉사 첫날 운영 준비','plan',9,1]],
- [['여름 실내 재활활동 계획','plan',0,2],['주간활동 여름 일정 구성','plan',8,0],['더운 날 안전·이동 안내','promo','안전·접근성 안내']],
- [['방학 실내 여가·체험','plan',1,3],['생활체육 활동 계획','plan',2,2],['방학 일정 변경 알림','promo','일정 변경·취소']],
- [['명절 이웃 교류 준비','plan',6,4],['명절 인사·일정 문자','msg'],['후원품 접수와 활용 계획','plan',9,2]],
- [['가을 나들이 계획','plan',6,0],['문화공연 관람 준비','plan',6,2],['가을 활동 후기 쓰기','promo','활동 후기']],
- [['겨울 반찬·김장 지원 준비','plan',7,1,'겨울'],['내년 사업계획서 준비','doc'],['올해 활동·성과 정리','result']],
- [['송년 가족잔치 준비','plan',6,1],['한 해 활동 소식지 쓰기','promo','활동 후기'],['연말 후원 감사 준비','don']]
+/* Seasonal practice suggestions: not the center’s official calendar. */
+var ST_MO={m:new Date().getMonth()+1};
+var MONTH_PROGRAMS=[
+ ['겨울 실내 이동·운동 교실',0,0,'신체장애 성인',0,2,'이동하기 편한 실내 동선과 각자 고르는 운동 강도'],
+ ['12분 우리집 정리 루틴',8,0,'성인 발달장애인',1,1,'물건 분류·정리 순서를 그림으로 익히고 필요한 도움 고르기'],
+ ['가을 작품 한 점, 동네 전시',2,0,'성인 발달장애인',2,0,'직접 고른 작품과 설명 문구를 함께 전시하기'],
+ ['우리 동네 직무 체험 한 바퀴',3,0,'발달장애 청소년',3,3,'관심 직무 카드 고르기와 안전한 실습'],
+ ['한 끼 반찬, 따뜻한 안부',7,4,'재가장애인',8,1,'식품 보관 안내와 제공받을 때 필요한 도움 확인'],
+ ['우리 동네 무장애 길 찾기',5,1,'지역 주민',7,6,'이용 당사자와 주민이 함께 이동·정보 접근 방해 요소 찾기'],
+ ['보호자와 함께하는 늦가을 쉼표',4,2,'보호자·가족',5,5,'가족별로 원하는 참여·휴식 방식을 고르는 시간']
 ];
-var MO_TARGET={plan:'프로그램 기획',doc:'사업계획서 프로젝트',result:'결과보고서 프로젝트',promo:'홍보·안내',msg:'문자·소통',don:'후원 관리'};
+var SMALL_SEASON={봄:['봄맞이 실내 스트레칭','새학기 정리 루틴','봄빛 손그림 전시','우리 동네 직무 탐색','봄철 반찬과 안부','나들이 길 접근성 점검','보호자 봄 쉼표'],여름:['더운 날 실내 운동','여름 생활정리 연습','실내 여름 작품 전시','방학 직무 체험','여름 반찬과 안부','시원한 쉼터 지도','보호자 여름 쉼표'],가을:['쌀쌀한 날 실내 운동','가을 우리집 정리 루틴','가을 작품 한 점, 동네 전시','우리 동네 직무 체험 한 바퀴','가을 반찬, 따뜻한 안부','우리 동네 무장애 길 찾기','보호자와 함께하는 늦가을 쉼표'],겨울:['겨울 실내 이동·운동 교실','연말 우리집 정리 루틴','겨울 작품 한 점, 동네 전시','겨울방학 직무 체험','한 끼 반찬, 따뜻한 안부','겨울 보행·출입 점검','보호자 겨울 쉼표']};
 function monthSeason(m){return ['겨울','겨울','봄','봄','봄','여름','여름','여름','가을','가을','가을','겨울'][m-1];}
-function moRight(){
- var m=ST_MO.m,r=MO_WORK[m-1][ST_MO.i],x=r[1]==='plan'?pqCurrent(r[2],r[3]):null;
- var n=x?x.q[1]:r[1]==='promo'?'읽는 분이 행동할 수 있도록 목적과 필요한 안내를 먼저 정리해요.':r[1]==='msg'?'받는 분과 상황을 고르면 문자 예시가 바뀝니다.':r[1]==='don'?'확인된 후원 내용과 감사 인사를 분리해 정리해요.':'오른쪽에서 프로젝트 지침과 첫 요청문을 복사해 활용해요.';
- return '<div class="out-h"><h3>'+m+'월 · '+E(r[0])+'</h3></div><p class="gnote"><b class="gh-focus">'+E(MO_TARGET[r[1]])+'</b> · '+E(n)+'</p><div class="gh-quick-actions"><button type="button" class="btn mini fill" data-mo-open>'+E(MO_TARGET[r[1]])+' 열기 ›</button></div><p class="hintl">복지관 공식 일정이나 모집 공고가 아닌 실습용 추천입니다.</p>';
+function monthlyPlanner(){
+ var m=ST_MO.m, names=m===11?MONTH_PROGRAMS.map(function(x){return x[0];}):SMALL_SEASON[monthSeason(m)];
+ return '<details id="plan-month" class="gh-plan-extra"'+(ST_MO.open?' open':'')+'><summary>월별 프로그램 아이디어 · '+m+'월 7개</summary><div class="gh-month-nav"><button type="button" data-mstep="-1" aria-label="이전 달">‹</button><strong>'+m+'월</strong><button type="button" data-mstep="1" aria-label="다음 달">›</button></div><p class="hintl">실습 아이디어입니다. 복지관의 실제 운영·모집 일정은 아닙니다. 하나를 고르면 사업·대상·취지·기대 효과가 채워집니다.</p><div class="gh-month-list">'+MONTH_PROGRAMS.map(function(x,i){return '<button type="button" data-nov-plan="'+i+'"><b>'+E(names[i])+'</b><small>'+E(x[3])+' · '+E(x[6])+'</small></button>';}).join('')+'</div></details>';
 }
-function renderMonth(){
- var m=ST_MO.m;
- var left='<div class="gh-month-nav"><button type="button" data-mstep="-1" aria-label="이전 달">‹</button><strong aria-live="polite">'+m+'월</strong><button type="button" data-mstep="1" aria-label="다음 달">›</button></div>'+
- '<div class="ch-l"><b>이달에 준비하면 좋은 일</b></div><div class="gh-month-list">'+MO_WORK[m-1].map(function(r,i){
-  return '<button type="button" data-mo-pick="'+i+'" aria-pressed="'+(i===ST_MO.i)+'">'+E(r[0])+'<small>'+E(MO_TARGET[r[1]])+'</small></button>';
- }).join('')+'</div>';
- $('#v-month').innerHTML=x2('이달의 추천','달을 바꾸고 추천 항목을 고르세요.',left,moRight());
-}
-function openMonthWork(){
- var r=MO_WORK[ST_MO.m-1][ST_MO.i],route=r[1];
- if(route==='plan'){PLAN_Q.g=r[2];PLAN_Q.i=r[3];pqApply(r[2],r[3],ST_MO.m,r[4]);go('plan2');}
- else if(route==='doc'||route==='result')go(route==='doc'?'dw-plan':'dw-result');
- else if(route==='promo'){ST_PR.kind=r[2]==='활동 후기'?(r[0].includes('소식지')?'소식지':'홈페이지 행사후기 올리기'):'공지사항';ST_PR.purpose=r[2];go('promo2');}
- else if(route==='msg'){ST_MSG.mode='문자 보내기';ST_MSG.kind='일정 안내';go('msg');}
- else if(route==='don'){go('donate');renderDonWork('m3');}
+function openMonthlyPlan(i){
+ var m=ST_MO.m,x=MONTH_PROGRAMS[i],g=GI_CATALOG[x[1]],n=m===11?x[0]:SMALL_SEASON[monthSeason(m)][i]; ST_MO.open=false;
+ selectPlanDraft('month-new:'+m+':'+i,{group:g.label,program:g.items[x[2]]||'',mode:n,area:g.area,tgt:x[3],aim:PLAN_AIM[x[4]],effect:PLAN_EFFECT[x[5]],when:monthSeason(m),title:n,focus:x[6],question:n,formMode:'기획 프롬프트'});
+ renderPlan();var view=$('#v-plan2 .col.L');if(view)view.scrollTop=0;
 }
 
 var GI_MIND=[
@@ -7509,7 +7526,7 @@ function renderGm(){
 }
 
 /* ---------- ⑥ 마음·사진 (4탭) ---------- */
-var MIND=[['vent','① 빡침공감 번역기'],['card','② 응원엽서'],['heart','③ 마음챙김'],['studio','④ 나만의 사진관']];
+var MIND=[['vent','🌋 빡침공감 번역기'],['heart','♥ 마음챙김'],['card','응원엽서'],['studio','나만의 사진관']];
 function openMind(tab){openMindLegacy(tab||'vent');}
 function openMindWork(tab){gmMode=tab;renderGm();show('mindwork');}
 function openMindLegacy(tab){
@@ -7527,7 +7544,7 @@ function openMindLegacy(tab){
       frame=document.createElement('iframe');frame.className='legacy-tool-frame';frame.id='mind-frame-'+tab;
       frame.title=tab==='vent'?'빡침공감 번역기':'마음 쉼터';
       frame.setAttribute('allow','microphone');
-      frame.src='/giheung/tools/?v=gh-care-5#'+tab;host.appendChild(frame);
+      frame.src='/giheung/tools/?v=gh-care-6#'+tab;host.appendChild(frame);
     }
     frame.hidden=false;show('mind');return;
   }
@@ -7612,6 +7629,7 @@ function boot(){
       go(g);return;
     }
     var ag=e.target.closest('[data-ag-tab]');if(ag){AG_TAB=ag.dataset.agTab;rerenderChoice(ag,'data-ag-tab',renderAppGuide);return;}
+    var slide=e.target.closest('[data-pr-slide]');if(slide){ST_PR.slide=+slide.dataset.prSlide;updateOutput('#v-promo2',promoRight);var bslide=$('#v-promo2 [data-pr-slide][aria-pressed=true]');if(bslide)bslide.focus({preventScroll:true});return;}
     var variant=e.target.closest('[data-pr-variant]');
     if(variant){
       ST_PR.opening=variant.dataset.prVariant;
@@ -7631,21 +7649,18 @@ function boot(){
     var mi=e.target.closest('[data-mind-entry]');if(mi){var m=MIND.find(function(x){return x[1]===mi.dataset.mindEntry;});if(m)openMind(m[0]);return;}
     var mt=e.target.closest('[data-mt]');if(mt){openMind(mt.dataset.mt);return}
     var mmode=e.target.closest('[data-mmode]');if(mmode){ST_MSG.mode=mmode.dataset.mmode;rerenderChoice(mmode,'data-mmode',renderMsg);return}
-    if(e.target.closest('[data-plan-demo]')){PLAN_SHEET.forEach(function(r){if(!ST_PLAN[r[0]])ST_PLAN[r[0]]=r[2];});ST_PLAN.sheetRaw=sheetText(PLAN_SHEET,ST_PLAN);renderPlan();return;}
-    var pf=e.target.closest('[data-plan-form]');if(pf){ST_PLAN.formMode=pf.dataset.planForm;qa('#v-plan2 [data-plan-form]').forEach(function(b){b.classList.toggle('on',b===pf);b.setAttribute('aria-pressed',String(b===pf));});updateOutput('#v-plan2',planRight);return;}
+    if(e.target.closest('[data-plan-demo]')){PLAN_SHEET.forEach(function(r){if(!ST_PLAN[r[0]]&&r[2])ST_PLAN[r[0]]=r[2];});ST_PLAN.sheetRaw=sheetText(PLAN_SHEET,ST_PLAN);renderPlan();return;}
+    var pf=e.target.closest('[data-plan-form]');if(pf){ST_PLAN.formMode=pf.dataset.planForm;qa('#v-plan2 [data-plan-form]').forEach(function(b){b.classList.toggle('on',b===pf);b.setAttribute('aria-pressed',String(b===pf));});updateOutput('#v-plan2',planRight);var focused=$('#v-plan2 [data-plan-form][aria-pressed=true]');if(focused)focused.focus({preventScroll:true});var pc=$('#v-plan2 .col.R');if(pc)pc.scrollTop=0;return;}
     var pi=e.target.closest('[data-pidea]');if(pi){ST_PLAN.idx++;ST_PLAN.mode='';ST_PLAN.question='';ST_PLAN.focus='';ST_PLAN.title='';ST_PLAN.program='';ST_PLAN.group='';ST_PLAN.sheetRaw=sheetText(PLAN_SHEET,ST_PLAN);rerenderChoice(pi,'data-pidea',renderPlan);return}
     var pg=e.target.closest('[data-plangpt]');if(pg){copy(planPrompt());return}
-    var rk=e.target.closest('[data-prk]');if(rk){ST_PR.kind=rk.dataset.prk;ST_PR.channel=prChannelFor(ST_PR.kind);if(!ST_PR.purposePicked){if(ST_PR.kind==='홈페이지 행사후기 올리기')ST_PR.purpose='활동 후기';if(ST_PR.kind==='홈페이지 안내 글'||ST_PR.kind==='공지사항')ST_PR.purpose='이용 안내';}rerenderChoice(rk,'data-prk',renderPromo);return}
-    var pq=e.target.closest('[data-pq]');if(pq){
-      PLAN_Q.i=+pq.dataset.pq;qa('#v-planmenu [data-pq]').forEach(function(b){b.setAttribute('aria-pressed',String(b===pq));});updateOutput('#v-planmenu',pqRight);return;
-    }
-    if(e.target.closest('[data-pq-open]')){pqApply(PLAN_Q.g,PLAN_Q.i);go('plan2');return;}
-    var mm=e.target.closest('#v-month [data-mstep]');if(mm){ST_MO.m=(ST_MO.m-1+Number(mm.dataset.mstep)+12)%12+1;ST_MO.i=0;rerenderChoice(mm,'data-mstep',renderMonth);return;}
-    var mq=e.target.closest('[data-mo-pick]');if(mq){ST_MO.i=+mq.dataset.moPick;qa('#v-month [data-mo-pick]').forEach(function(b){b.setAttribute('aria-pressed',String(b===mq));});updateOutput('#v-month',moRight);return;}
-    if(e.target.closest('[data-mo-open]')){openMonthWork();return;}
+    var rk=e.target.closest('[data-prk]');if(rk){ST_PR.kind=rk.dataset.prk;ST_PR.channel=prChannelFor(ST_PR.kind);if(ST_PR.kind==='홈페이지 행사후기 올리기')ST_PR.purpose='활동 후기';else if(!ST_PR.purposePicked){if(ST_PR.kind==='홈페이지 안내 글'||ST_PR.kind==='공지사항')ST_PR.purpose='이용 안내';}rerenderChoice(rk,'data-prk',renderPromo);return}
+    var monthly=e.target.closest('[data-nov-plan]');if(monthly){openMonthlyPlan(+monthly.dataset.novPlan);return}
+    var mm=e.target.closest('#plan-month [data-mstep]');if(mm){ST_MO.m=(ST_MO.m-1+Number(mm.dataset.mstep)+12)%12+1;ST_MO.open=true;$('#plan-month').outerHTML=monthlyPlanner();var focus=$('#plan-month [data-mstep="'+mm.dataset.mstep+'"]');if(focus)focus.focus({preventScroll:true});return;}
+
     var cp=e.target.closest('[data-cp]');if(cp){var k=cp.dataset.cp,t=TXT[k];if(t&&typeof copy==='function'){var done=/^promo-(ready|short|alt\d+)$/.test(k)?'복사했어요. 게시할 글쓰기 칸에 붙여 넣으세요.':k==='planform'||k==='plan'?'서식을 복사했어요. 작성 중인 문서에 붙여 넣으세요.':undefined;copy(t,done);}return}
   });
   document.addEventListener('change',function(e){
+    var pl=e.target.dataset.planSelect;if(pl){ST_PLAN[pl]=e.target.value;updateOutput('#v-plan2',planRight);return;}
     var pr=e.target.dataset.prSelect;
     if(pr){
       var value=e.target.value;ST_PR[pr]=value;
@@ -7654,21 +7669,18 @@ function boot(){
         var select=$('[data-pr-select=biz]');
         if(select){select.innerHTML='';(g0?g0.items:['']).forEach(function(x){var o=document.createElement('option');o.value=x;o.textContent=x||'직접 입력';select.appendChild(o);});select.value=ST_PR.biz;}
       }
-      if(pr==='purpose')ST_PR.purposePicked=true;
+      if(pr==='purpose'){ST_PR.purposePicked=true;renderPromo();var sp=$('#v-promo2 [data-pr-select=purpose]');if(sp)sp.focus({preventScroll:true});return;}
       updateOutput('#v-promo2',promoRight);return;
     }
     var radio=e.target,key=radio.dataset.ghRadio;if(!key||!radio.checked)return;
     var v=radio.value,call=ST_MSG.mode==='안부 전화';
-    if(key==='pq-sector'){
-      PLAN_Q.g=GI_CATALOG.findIndex(function(x){return x.label===v;});PLAN_Q.i=0;renderPlanMenu();
-      var active=$('#v-planmenu [data-gh-radio="pq-sector"]:checked');if(active)active.focus({preventScroll:true});return;
-    }
+    if(key==='pr-channel'){ST_PR.channel=v;ST_PR.kind=v==='인스타그램'?'인스타그램':v==='네이버 블로그'?'블로그 초안':(ST_PR.purpose==='활동 후기'?'홈페이지 행사후기 올리기':'홈페이지 안내 글');renderPromo();var channel=$('#v-promo2 [data-gh-radio=pr-channel]:checked');if(channel)channel.focus({preventScroll:true});return;}
     if(key==='mto'||key==='mk'){ST_MSG[key==='mto'?(call?'callTo':'to'):(call?'callKind':'kind')]=v;updateOutput('#v-msg',msgRight);}
     if(key.startsWith('prcat-')||key.startsWith('plcat-')){
       var plan=key.startsWith('plcat-'),state=plan?ST_PLAN:ST_PR,field=plan?'program':'biz';
       if(key.endsWith('-group')){
         state.group=v;var g=giGroup(v);state[field]=g?g.items[0]:'';
-        if(plan&&g){state.area=g.area;state.question='';state.focus='';}
+        if(plan){state.area=g?g.area:'';state.question='';state.focus='';}
         (plan?renderPlan:renderPromo)();
         var next=Array.from(document.querySelectorAll('[data-gh-radio="'+key+'"]')).find(function(x){return x.value===v;});if(next)next.focus({preventScroll:true});
       }else{
@@ -7694,8 +7706,6 @@ function boot(){
         var g0=giGroup(v),sel=$('#v-promo2 [data-pr-select=biz]');ST_PR.biz=g0?g0.items[0]:'';
         if(sel){sel.textContent='';(g0?g0.items:['']).forEach(function(x){var o=document.createElement('option');o.value=x;o.textContent=x||'직접 입력';sel.appendChild(o);});sel.value=ST_PR.biz;}
       }
-      if(key==='pr-channel')ST_PR.kind=v==='인스타그램'?'인스타그램':v==='네이버 블로그'?'블로그 초안':(ST_PR.purpose==='활동 후기'?'홈페이지 행사후기 올리기':'홈페이지 안내 글');
-      if(key==='pr-channel')qa('#v-promo2 [data-prk]').forEach(function(b){var on=b.dataset.prk===ST_PR.kind;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});
       updateOutput('#v-promo2',promoRight);
     }
     if(key.startsWith('plan-')){ST_PLAN[key.slice(5)]=v;ST_PLAN.idx=0;updateOutput('#v-plan2',planRight);}
@@ -7781,13 +7791,13 @@ var _go=window.go;
 window.go=function(k){
   if(k==='appguide'){renderAppGuide();show('appguide');return}
   if(k==='msg'){renderMsg();show('msg');return}
-  if(k==='planmenu'){renderPlanMenu();show('planmenu');return}
+  if(k==='planmenu'){selectPlanDraft('manual');renderPlan();show('plan2');return}
   if(k==='plan2'){renderPlan();show('plan2');return}
   if(k==='img'){ST_PR.kind='홍보 이미지';renderPromo();show('promo2');return}
   if(k==='promomenu'){renderPromoMenu();show('promomenu');return}
   if(k==='promo2'){renderPromo();show('promo2');return}
   if(k==='donate'){renderDonate();show('donate');return}
-  if(k==='month'){renderMonth();show('month');return}
+  if(k==='month'){selectPlanDraft('manual');renderPlan();show('plan2');var n=$('#plan-month');if(n){n.open=true;n.scrollIntoView({block:'nearest'});}return}
   if(k==='manual'){if(typeof openSimple==='function'){openSimple('base');}return}
   if(k==='mind'){openMind('vent');return}
   if(k==='vent'){openMind('vent');return}
