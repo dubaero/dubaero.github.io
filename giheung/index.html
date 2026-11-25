@@ -7420,7 +7420,7 @@ function openMindLegacy(tab){
       frame=document.createElement('iframe');frame.className='legacy-tool-frame';frame.id='mind-frame-'+tab;
       frame.title=tab==='vent'?'빡침공감 번역기':'마음 쉼터';
       frame.setAttribute('allow','microphone');
-      frame.src='/giheung/tools/?v=gh-care-4#'+tab;host.appendChild(frame);
+      frame.src='/giheung/tools/?v=gh-care-5#'+tab;host.appendChild(frame);
     }
     frame.hidden=false;show('mind');return;
   }
@@ -7445,7 +7445,7 @@ function ensure(id,html){var n=$('#v-'+id);if(!n){n=document.createElement('div'
 function boot(){
   /* 새 화면 틀 만들기 */
   ensure('appguide','');ensure('msg','');ensure('plan2','');ensure('promo2','');ensure('donate','');ensure('donwork','');ensure('planmenu','');ensure('mindwork','');
-  ensure('mind','<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음돌봄·사진관</h2><span class="tag">업무 감정 정리 · 응원엽서 · 잠깐 쉼 · 사진 실습</span></div><div class="mtabs" role="tablist">'+MIND.map(function(x){return '<button type="button" role="tab" aria-selected="false" data-mt="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div><button type="button" class="btn mini mind-work-alt" id="mind-work-alt" hidden>복지관 상황 예시 보기</button><div id="mind-body"></div>');
+  ensure('mind','<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음돌봄·사진관</h2><span class="tag">업무 감정 정리 · 응원엽서 · 잠깐 쉼 · 사진 실습</span></div><div class="mtabs" role="tablist">'+MIND.map(function(x){return '<button type="button" role="tab" aria-selected="false" data-mt="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div><button type="button" class="btn mini mind-work-alt" id="mind-work-alt" hidden>복지관 상황 보기</button><div id="mind-body"></div>');
   /* 홈 그리기 + 기존 홈 요소 정리 */
   var old=$('#main4');if(old)old.remove();
   if(typeof VIEWS!=='undefined'){['vent','heart','studio'].forEach(function(k){var i=VIEWS.indexOf(k);if(i>-1)VIEWS.splice(i,1)})}
