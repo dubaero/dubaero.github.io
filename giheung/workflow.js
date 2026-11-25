@@ -4572,7 +4572,7 @@ function ghWelfareMsg(v){
   care:"문자로 답하시기 어렵다면 전화로 말씀해 주셔도 됩니다. 편하신 방법과 시간을 알려 주시면 이야기 나누겠습니다.",
   reply:"회신이 늦어지거나 어떤 내용으로 답할지 궁금하시면 담당자에게 먼저 연락 주세요."
  }[kind];
- const close=kind==="notice"?(easy?"궁금한 점이 있거나 도움이 필요하면 먼저 연락해 주세요.":"참여에 관해 궁금한 점이 있거나 필요한 지원이 있으면 먼저 연락해 주세요."):(end||(friendly?"읽어 주셔서 고마워요.":easy?"확인해 주셔서 고마워요.":"확인해 주셔서 감사합니다."));
+ const close=kind==="notice"?(easy?"궁금한 점이 있거나 도움이 필요하면 먼저 연락해 주세요.":"참여에 관해 궁금한 점이 있거나 필요한 지원이 있으면 먼저 연락해 주세요."):end;
  const full=join([greeting,lead,join(facts,"\n"),memoText,help,action,close,staff,contact],"\n");
  const brief=join([head,kind==="check"||kind==="thanks"||kind==="care"?lead:"",join(tiny.slice(0,3)," / "),memoText,kind==="notice"?help:"",action,kind==="notice"?staff:"",contact],"\n");
  return [["바로 보낼 문자",full],["짧은 문자",brief]];
