@@ -4192,7 +4192,10 @@ function ghOpenScenario(c,i){
  }
  const left=app.querySelector(".gh-always-split .tin"),y=left?.scrollTop||0;
  const draft=ghScenarioDrafts[key];
- if(c==="promo"&&k==="sns-post"&&q.channel)draft.v.where=q.channel;
+ if(c==="promo"){
+  if(k==="sns-post"&&q.channel)draft.v.where=q.channel;
+  if(k==="notice"||k==="newsletter")draft.v._channel=q.channel||GH_PROMO_CHANNELS[0];
+ }
  if(c==="msg"){if(q.tone)draft.v.tone=q.tone;if(q.reader)draft.v.reader=q.reader;}
  ghScenarioRoute={k,cat:c,state:draft};current=t;
  renderTask(t);
@@ -4555,6 +4558,37 @@ function smsFixedHTML(v){
   return '<div class="gh-sms-fixed-row"><label for="'+id+'">'+esc(label)+'</label><input id="'+id+'" type="'+type+'" data-input="'+k+'" placeholder="'+esc(ph)+'" value="'+esc(v[k]||"")+'" autocomplete="off"></div>';
  }).join("")+'</fieldset>';
 }
+function publishContextDraft(v,kind,original){
+ const ch=v._channel;if(!ch)return original; // Other entry points keep their existing forms.
+ const month=kind==="newsletter",d=promoMemo(month?v.events:v.content),x=v._work||{};
+ const name=d.title||x.what||(month?"이달의 복지관 소식":"복지관 이용 안내");
+ const program=x.program&&!name.includes(x.program)?x.program:"";
+ const headline=program?name+" | "+program:name;
+ const lines=d.lines.length?d.lines.map(promoLine):
+  month?["[이번 달에 진행한 활동]","[다음에 알려 드릴 소식]"]:
+  v.purpose==="일정 변경·취소"?["기존 일정: [일시]","변경 일정: [일시 또는 취소 여부]","문의: [공식 문의처]"]:
+  ["일시: [날짜·시간]","장소: [장소]","참여 대상: [대상]","신청·문의: [방법과 공식 문의처]"];
+ const ending=month?"다음 복지관 소식도 이어서 전해 드릴게요.":"일정과 자세한 참여 방법이 궁금하시면 안내에 적힌 문의처로 연락해 주세요.";
+ const subject=program?program+"의 "+name:name;
+ const isBright=v.tone==="밝고 경쾌하게", easy=/쉽|쉬운/.test(v.tone||"");
+ const greeting="안녕하세요, "+PROMO_ORG+"입니다.";
+ const intro=month?(isBright?"이번 달 복지관에는 어떤 소식이 있었을까요?":"이번 달 복지관에서 있었던 일을 나눠요."):
+  easy?subject+"에 대해 쉽게 알려 드려요.":subject+"에 관심 있는 분들을 위해 필요한 내용을 정리했어요.";
+ const join=a=>a.filter(Boolean).join("\n\n");
+ const short=join([headline,lines.slice(0,2).join("\n")]);
+ if(ch==="네이버 블로그")return [
+  ["네이버 블로그 원고",join([headline,greeting+" "+intro,"■ "+(month?"이달에 함께한 일":v.purpose==="일정 변경·취소"?"달라진 내용을 확인해 주세요":"무엇을 알아두면 좋을까요?")+"\n"+lines.join("\n"),ending])],
+  ["블로그 소개글",short],...original
+ ];
+ if(ch==="복지관 홈페이지")return [
+  ["복지관 홈페이지 게시글",join([headline,month?intro:subject+"에 대해 안내드립니다.",lines.join("\n"),ending])],
+  ["홈페이지 목록용 요약",short],...original
+ ];
+ if(ch==="인스타그램")return [
+  ["인스타그램 원고",join(["📌 "+headline,intro,lines.join("\n"),"#용인시기흥장애인복지관 #복지관소식"])],...original
+ ];
+ return [["카카오톡 채널 원고",join(["[기흥복지관 소식] "+headline,intro,lines.join("\n")])],...original];
+}
 function ghWelfareMsg(v){
  const x=v._work||{}, raw=(v.body||"").trim(), kind=smsKind(x.what), f={};
  const norm=s=>s.replace(/[\s·]/g,"").trim(), sentence=s=>sent(s.replace(/^[-•]\s*/,""));
@@ -4766,13 +4800,13 @@ const OUTS = {
    const short=`[시설명] ${ttl}: ${w}.${r?` ${r} 부탁드립니다.`:""}`;
    return [["자세한 안내",v.tone==="친근하게"?fr:pol],["한 줄 요약",short]];
  },
- "newsletter": v=>promoMonth(v),
+ "newsletter": v=>publishContextDraft(v,"newsletter",promoMonth(v)),
  "sns-post": v=>promoPost(v),
  "easy-read": v=>{
    const short=v.len==="아주 짧게";
    return [["쉬운 말 안내문 (초안)", easyText(v.orig,short)],["한 줄 요약", easyText(v.orig,true).split("\n")[0].replace(/^1\.\s*/,"")]];
  },
- "notice": v=>promoNotice(v)
+ "notice": v=>publishContextDraft(v,"notice",promoNotice(v))
 };
 
 function fullPrompt(t,v){
@@ -5060,8 +5094,8 @@ app.addEventListener("click",e=>{
  if(ghChannel){
    const value=ghChannel.dataset.ghPromoChannel;
    GH_SECTOR_STATE.promo.channel=value;
-   if(current?.id==="sns-post"&&ghScenarioRoute?.cat==="promo"){
-     getVals(current).v.where=value;rebuild(current);
+   if(current?.draft&&ghScenarioRoute?.cat==="promo"){
+     getVals(current).v[current.id==="sns-post"?"where":"_channel"]=value;rebuild(current);
      app.querySelectorAll("[data-gh-promo-channel]").forEach(b=>{const on=b===ghChannel;b.classList.toggle("main",on);b.setAttribute("aria-pressed",String(on));});
    }else{
      const i=ghScenarios("promo").indexOf(GH_PROMO_SNS);
