@@ -1541,6 +1541,25 @@ html:has(#v-mind:not([hidden])),#v-mind{zoom:1!important}
 #v-appguide .ag-box pre{margin:6px 0;white-space:pre-wrap;overflow-wrap:anywhere}
 </style>
 
+<style id="giheung-care-home">
+#v-home .cols3>.bx:nth-child(2) .gh-care-tile{gap:3px}
+#v-home .gh-care-tile>div{width:100%;display:grid;gap:3px}
+#v-home .gh-care-tile button{width:100%;border:1px solid #bfd5c9;background:#fff;color:#1b5040;border-radius:5px;padding:2px 1px;font-size:12px;line-height:1.25;font-weight:800;min-height:22px}
+#v-home .gh-care-tile button:hover{color:#fff;background:#22604c}
+#v-home .gh-care-tile button:focus-visible{outline:2px solid #22604c;outline-offset:1px}
+body:has(#v-mind:not([hidden]))>main.wrap{width:100%;max-width:1240px}
+@media(min-width:900px) and (min-height:575px){
+ html:has(#v-mind:not([hidden])),body:has(#v-mind:not([hidden])){height:100dvh;min-height:0;overflow:hidden}
+ body:has(#v-mind:not([hidden]))>main.wrap{flex:1 1 0;min-height:0;display:flex;padding:0 12px 7px}
+ body:has(#v-mind:not([hidden]))>footer{display:none!important}
+ #v-mind:not([hidden]){display:flex;flex:1 1 0;flex-direction:column;min-height:0;min-width:0;position:relative}
+ #v-mind .vbar{margin:5px 0}.gh-care-tile{min-width:0}
+ #v-mind .mind-work-alt{position:absolute;right:0;top:43px;float:none;margin:0}
+ #mind-body{flex:1 1 0;min-height:0}
+ #v-mind .legacy-tool-frame{height:100%;min-height:0}
+}
+@media(max-width:370px){#v-home .gh-care-tile button{font-size:11px}}
+</style>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -6560,9 +6579,9 @@ function homeHTML(){
   var left='<section class="bx"><div class="bx-h"><h2>서식 자료실</h2><span class="hint"><button type="button" data-gh="all">전체 보기 ›</button></span></div>'+
     '<div class="bx-b"><ul class="plist">'+L+'</ul></div></section>';
 
-  var Q=[['msg','문자·소통','문자·안부 전화','msg'],['promo2','홍보·안내','공지·카드뉴스','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['planmenu','프로그램 기획','사업별 기획 질문','bulb'],['month','이달의 추천','월별 프로그램·할 일','cal'],['mind','빡침 번역기','공감·심호흡·마음쉼터','heart']];
+  var Q=[['msg','문자·소통','문자·안부 전화','msg'],['promo2','홍보·안내','공지·카드뉴스','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['planmenu','프로그램 기획','사업별 기획 질문','bulb'],['month','이달의 추천','월별 프로그램·할 일','cal'],['mind','빡침 번역기','마음챙김','heart']];
   var mid='<section class="bx"><div class="bx-h"><h2>업무 바로가기</h2></div>'+
-    '<div class="qgrid">'+Q.map(function(x,i){return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+I(x[3])+'<b>'+E(x[1])+'</b><small>'+E(x[2])+'</small></button>'}).join('')+'</div>'+
+    '<div class="qgrid">'+Q.map(function(x,i){if(x[0]==='mind')return '<div class="qm gh-care-tile">'+I('heart')+'<div><button type="button" data-gh="mind">빡침 번역기</button><button type="button" data-gh="heart">마음챙김</button></div></div>';return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+I(x[3])+'<b>'+E(x[1])+'</b><small>'+E(x[2])+'</small></button>'}).join('')+'</div>'+
     '<div class="bar2">'+
       '<button type="button" class="gprof" id="gh-org">'+I('home')+'<span><b>'+(o.set?E(o.name):'우리 복지관 정보 등록')+'</b><small>'+(o.set?(E(o.staff||'')||'모든 서식에 자동 입력 중'):'한 번 넣으면 모든 서식에 자동 입력')+'</small></span><em>'+(o.set?'바꾸기':'등록하기')+'</em></button>'+
       '<button type="button" class="grec" data-gh="rec">'+I('mic')+'<span><b>회의 녹음 서식 만들기</b><small>녹음 → 글 → 회의록·공문 초안</small></span><em>시작</em></button>'+
@@ -7319,7 +7338,7 @@ function renderGm(){
 }
 
 /* ---------- ⑥ 마음·사진 (4탭) ---------- */
-var MIND=[['vent','① 빡침공감 번역기'],['card','② 응원엽서'],['heart','③ 마음쉼터'],['studio','④ 나만의 사진관']];
+var MIND=[['vent','① 빡침공감 번역기'],['card','② 응원엽서'],['heart','③ 마음챙김'],['studio','④ 나만의 사진관']];
 function openMind(tab){openMindLegacy(tab||'vent');}
 function openMindWork(tab){gmMode=tab;renderGm();show('mindwork');}
 function openMindLegacy(tab){
@@ -7337,7 +7356,7 @@ function openMindLegacy(tab){
       frame=document.createElement('iframe');frame.className='legacy-tool-frame';frame.id='mind-frame-'+tab;
       frame.title=tab==='vent'?'빡침공감 번역기':'마음 쉼터';
       frame.setAttribute('allow','microphone');
-      frame.src='/giheung/tools/?v=gh-care-2#'+tab;host.appendChild(frame);
+      frame.src='/giheung/tools/?v=gh-care-4#'+tab;host.appendChild(frame);
     }
     frame.hidden=false;show('mind');return;
   }
