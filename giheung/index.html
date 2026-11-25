@@ -1545,6 +1545,17 @@ html:has(#v-mind:not([hidden])),#v-mind{zoom:1!important}
 #v-plan2 .gh-plan-extra summary{font-weight:750;color:#253f35;cursor:pointer;margin-bottom:3px;font-size:12px}
 #v-plan2 .gh-plan-examples{display:flex;gap:5px;flex-wrap:wrap}
 @media(max-width:899px){#v-promo2 .gh-single-sheet,#v-plan2 .gh-single-sheet{font-size:16px}}
+body:has(#v-promomenu:not([hidden]))>main.wrap{width:100%;max-width:1160px}
+#v-promomenu .gh-promo-menu{width:min(100%,1040px);margin:0 auto 20px}
+.gh-task-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.gh-task-card{display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;padding:7px 10px;background:white;border:1px solid #cbdad2;border-radius:8px;color:#203e32}
+.gh-task-card:hover,.gh-task-card:focus-visible{background:#eff7f2;border-color:#448269}
+.gh-task-card b,.gh-task-card small{display:block}.gh-task-card b{font-size:13px}.gh-task-card small{font-size:11px;color:#53665c}
+.gh-style-options{margin:5px 0 7px;padding:6px 7px 0;background:#f6faf7;border:1px solid #d7e5dd;border-radius:7px}
+.gh-style-options .gh-pick{margin:0 0 5px}.gh-style-options .chips{gap:4px}.gh-style-options .gh-chip span{min-height:24px;padding:4px 6px}
+ .gh-promo-drafts .gh-article{border-color:#ccded3}.gh-promo-drafts .gh-copy-read{max-height:clamp(140px,35vh,330px);overflow:auto;padding:6px 7px;border:1px solid #e6cca9;border-radius:7px;scrollbar-width:thin}.gh-char-count{color:#536a5e;white-space:nowrap;font-size:11px}
+.gh-alt-draft{margin:4px 0;padding:4px 6px;border:1px solid #dce8df;border-radius:6px}.gh-alt-draft summary{cursor:pointer;font-weight:750;color:#295440}
+@media(max-width:620px){.gh-task-cards{grid-template-columns:minmax(0,1fr)}}
 </style>
 
 <style id="giheung-ai-app-guide">
@@ -6607,7 +6618,7 @@ function homeHTML(){
   var left='<section class="bx"><div class="bx-h"><h2>서식 자료실</h2><span class="hint"><button type="button" data-gh="all">전체 보기 ›</button></span></div>'+
     '<div class="bx-b"><ul class="plist">'+L+'</ul></div></section>';
 
-  var Q=[['msg','문자·소통','문자·안부 전화','msg'],['promo2','홍보·안내','공지·카드뉴스','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['planmenu','프로그램 기획','사업별 기획 질문','bulb'],['month','이달의 추천','월별 프로그램·할 일','cal'],['mind','빡침 번역기','마음챙김','heart']];
+  var Q=[['msg','문자·소통','문자·안부 전화','msg'],['promomenu','홍보·안내','모집·SNS·소식지','meg'],['donate','후원 관리','감사·사용 안내·모집','hand'],['planmenu','프로그램 기획','사업별 기획 질문','bulb'],['month','이달의 추천','월별 프로그램·할 일','cal'],['mind','빡침 번역기','마음챙김','heart']];
   var mid='<section class="bx"><div class="bx-h"><h2>업무 바로가기</h2></div>'+
     '<div class="qgrid">'+Q.map(function(x,i){if(x[0]==='mind')return '<div class="qm gh-care-tile">'+I('heart')+'<div><button type="button" data-gh="mind">빡침 번역기</button><button type="button" data-gh="heart">마음챙김</button></div></div>';return '<button type="button" class="qm'+(i===0?' hot':'')+'" data-gh="'+x[0]+'">'+I(x[3])+'<b>'+E(x[1])+'</b><small>'+E(x[2])+'</small></button>'}).join('')+'</div>'+
     '<div class="bar2">'+
@@ -6784,7 +6795,7 @@ function paneTabs(){
   return '<div class="gi-pan-tabs" role="group" aria-label="작업 화면"><button type="button" data-gi-pane="in" aria-pressed="true">고르기·채우기</button><button type="button" data-gi-pane="out" aria-pressed="false">결과·프롬프트</button></div>';
 }
 function x2(title,tag,left,right,tabs,back,showBoth){
-  return '<section class="gi-task"><div class="fbar"><button type="button" class="vback" '+(back?'data-gh="'+E(back)+'"':'data-home')+'>← '+(back==='donate'?'후원 관리':back==='planmenu'?'프로그램·기획':'업무도우미')+'</button><h2>'+E(title)+'</h2></div>'+
+  return '<section class="gi-task"><div class="fbar"><button type="button" class="vback" '+(back?'data-gh="'+E(back)+'"':'data-home')+'>← '+(back==='donate'?'후원 관리':back==='planmenu'?'프로그램·기획':back==='promomenu'?'홍보·안내문':'업무도우미')+'</button><h2>'+E(title)+'</h2></div>'+
    (tag?'<p class="fstat">'+E(tag)+'</p>':'')+(tabs||'')+(showBoth?'':paneTabs())+
    '<div class="x2" data-pane="'+(showBoth?'both':'in')+'"><section aria-label="고르기와 사용법" class="col L">'+left+'</section><section aria-label="예시와 전체 프롬프트" class="col R">'+right+'</section></div></section>';
 }
@@ -6961,7 +6972,8 @@ function sheetParse(text,fields){
  if(notes.length&&Object.hasOwn(values,'memo'))values.memo=notes.concat(values.memo||[]).join('\n');
  return values;
 }
-function newPlanDraft(){return {group:'',program:'',mode:'',title:'',date:'',place:'',people:'',materials:'',memo:'',budget:'',recruit:'',apply:'',aim:'참여·경험',area:'낮활동·행동지원',tgt:'성인 장애인',when:'겨울',size:'8회기',idx:0};}
+function newPlanDraft(){return {group:'',program:'',mode:'',formMode:'전체 계획서',title:'',date:'',place:'',people:'',materials:'',memo:'',budget:'',recruit:'',apply:'',aim:'참여·경험',area:'낮활동·행동지원',tgt:'성인 장애인',when:'겨울',size:'8회기',idx:0};}
+var PLAN_FORMS=['전체 계획서','회기별 진행표','준비·안전 점검표','성과평가표'];
 var PLAN_DRAFTS=Object.create(null),ST_PLAN=PLAN_DRAFTS.manual=newPlanDraft();
 // Keep each draft separate in this tab. Opening another question never inherits its logistics.
 function selectPlanDraft(key,seed){
@@ -6978,7 +6990,7 @@ function planData(){
   var firstActs={'개인별 지원계획':'좋아하는 활동을 그림카드로 고르고 개인 목표를 정해요.','중재·컨설팅':'활동 도구를 살펴보고 내게 편한 방법을 골라 써 봐요.','낮활동·행동지원':'두 가지 활동 중 하나를 고르고 시작·휴식 신호를 연습해요.','직업지원':'그림이 있는 직무 카드를 고르고 도구 정리·분류 중 한 가지를 직접 해 봐요.','가족(보호자) 지원':'가족과 이용자가 각각 하고 싶은 활동을 고르고 역할을 정해요.','사례관리·권익옹호':'생활 속 불편한 상황 그림을 고르고 도움을 요청하는 말을 연습해요.','지역사회중심지원(CBSS)':'이용해 보고 싶은 동네 공간을 지도에서 고르고 접근 방법을 찾아요.'};
   var rows=[];
   for(var i=0;i<n;i++){
-    rows.push([i+1,steps[i%steps.length],i===0?((project&&project.task)||firstActs[v.area]||'오늘 할 활동을 고르고 직접 해 봐요.')+(n===1?' 마지막에는 쉬운 말이나 그림으로 소감을 나눠요.':''):i===n-1?'해 본 일을 공유하고 다음에 하고 싶은 것을 고릅니다.':'‘'+name+'’에서 이번 주제로 할 일을 선택하고, 필요한 지원을 받아 직접 해 봐요.',i%4===0?'이름표·그림카드':(i%4===1?'활동지·재료':(i%4===2?'현장 준비물':'만족도지'))]);
+    rows.push([i+1,steps[i%steps.length],i===0?((v.memo&&v.memo.trim())||(project&&project.task)||firstActs[v.area]||'오늘 할 활동을 고르고 직접 해 봐요.')+(n===1?' 마지막에는 쉬운 말이나 그림으로 소감을 나눠요.':''):i===n-1?'해 본 일을 공유하고 다음에 하고 싶은 것을 고릅니다.':'‘'+name+'’에서 이번 주제로 할 일을 선택하고, 필요한 지원을 받아 직접 해 봐요.',v.materials||(i%4===0?'이름표·그림카드':(i%4===1?'활동지·재료':(i%4===2?'현장 준비물':'만족도지')))]);
   }
   var tip=(project?project.check+' ':'')+((typeof TIP!=='undefined'&&TIP[v.tgt])||'이동·화장실 접근성을 먼저 확인하고 스스로 고르게 합니다.');
   return {name:name,rows:rows,n:n,tip:tip,area:v.area,tgt:v.tgt,when:v.when,size:v.size};
@@ -7002,7 +7014,16 @@ function renderPlan(){
    '<p class="gh-sheet-tip">예: 참여 인원: 이용자 8명 / 재료·준비물: 도화지, 색연필. 아래 한 칸에서 항목 뒤에 그대로 적으세요.</p>'+
    '<textarea class="gh-single-sheet" id="plan-sheet" rows="10" data-gi-field="plan-sheet">'+E(v.sheetRaw===undefined?sheetText(PLAN_SHEET,v):v.sheetRaw)+'</textarea>'+
    '<details class="gh-plan-extra" id="plan-extra"'+(shown?' open':'')+'><summary>대상·시기·회기 등 조건 더 고르기</summary>'+groups.map(function(g){return radioPick(g[0],g[1],'plan-'+g[2],v[g[2]]);}).join('')+'</details>';
-  $('#v-plan2').innerHTML=x2(v.mode||'프로그램 계획','왼쪽 한 칸에 적으면 오른쪽 계획서와 프롬프트가 바로 바뀌어요.',left,planRight(),null,'planmenu',true);
+  $('#v-plan2').innerHTML=x2(v.mode||'프로그램 계획','왼쪽 한 칸에 적으면 오른쪽 계획서와 프롬프트가 바로 바뀌어요.',left,planRight(),choice('서식 종류',PLAN_FORMS,'data-plan-form',v.formMode,'gh-subtabs'),'planmenu',true);
+}
+function planOther(v,d,rows){
+ var mode=v.formMode,items=mode==='준비·안전 점검표'?[
+ ['참여자·인력',v.people||'[확인 필요]'],['재료·준비물',v.materials||'[확인 필요]'],['현장 접근성',d.tip],['당일 확인','이동·화장실·휴식 공간과 비상 연락 담당 확인'],['대체 활동','참여자가 쉬거나 다른 활동을 고를 수 있도록 준비']]:[
+ ['참여',v.people||'[확인 필요]'],['활동 관찰',v.memo||'당사자가 활동을 선택하거나 수행했는지 관찰'],['확인 방법','출석 확인과 쉬운 글·그림 만족도 질문'],['목표·결과','정해진 목표와 실적을 입력한 뒤 차이를 기록'],['다음 운영','당사자 의견과 개선점 기록']];
+ if(mode==='회기별 진행표'){
+   TXT.planform=mode+' · '+d.name+'\n'+(v.date||'[일시 확인 필요]')+' · '+(v.place||'[장소 확인 필요]')+'\n회기 | 주제 | 활동 | 준비물\n'+d.rows.map(function(r){return r.join(' | ');}).join('\n');
+ }else TXT.planform=mode+' · '+d.name+'\n'+items.map(function(r){return r.join(': ');}).join('\n');
+ return '<section class="gi-doc"><div class="out-h"><h3>'+E(mode)+'</h3>'+cbtn('이 서식 복사','planform')+'</div><h4>'+E(d.name)+'</h4><table class="ptab">'+(mode==='회기별 진행표'?'<tr><th>회기</th><th>주제</th><th>활동</th><th>준비물</th></tr>'+rows:items.map(function(r){return '<tr><th scope="row">'+E(r[0])+'</th><td>'+E(r[1])+'</td></tr>';}).join(''))+'</table></section>';
 }
 function planRight(){
   var v=ST_PLAN,d=planData();
@@ -7017,14 +7038,93 @@ function planRight(){
    '<div class="ph3">안전·접근성</div><p class="small">'+E(d.tip)+'</p>'+
    '<div class="ph3">모집 문구</div><p class="small">'+E(d.name)+'에 함께하실 분을 모집합니다. '+E(v.when+' ('+WON[v.when]+')')+', '+E(v.tgt)+' 대상, 모집 기간 '+E(v.recruit||'[확인 필요]')+' · 신청 방법 '+E(v.apply||'[확인 필요]')+'.</p></div>'+
    '<div class="gnote">숫자·인원은 <b>[확인 필요]</b>로 남겼어요. 예산·모집 인원은 우리 복지관 자료로 채우면 됩니다.</div>';
+  if(v.formMode!=='전체 계획서')right=planOther(v,d,rows);
   var prompt=planPrompt();
   return aiStrip('plan-prompt','계획서 프롬프트로 AI 열기')+(v.question?'<p class="gnote"><b class="gh-focus">'+E(v.question)+'</b> · '+E(v.focus)+'</p>':'')+selectionSummary([['사업·프로그램',v.program||d.name],['목적',v.aim],['서비스 영역',v.area],['대상',v.tgt],['시기',v.when],['규모',v.size]])+giGuide(v.program)+right+outBlock('AI에 넣을 전체 프롬프트','plan-prompt',prompt);
 }
 
 /* ---------- ③ 홍보·안내 ---------- */
-var ST_PR={kind:'홈페이지 행사후기 올리기',group:'스마트재활·치료',biz:'스마트재활센터',memo:'',purpose:'활동 후기',audience:'이용자·보호자',style:'깔끔한 공공기관형',count:'4장',ratio:'세로 4:5',fields:{},demo:false,purposePicked:false};
+var ST_PR={kind:'홈페이지 행사후기 올리기',group:'스마트재활·치료',biz:'스마트재활센터',memo:'',purpose:'활동 후기',audience:'이용자·보호자',style:'깔끔한 공공기관형',count:'4장',ratio:'세로 4:5',fields:{},demo:false,purposePicked:false,channel:'복지관 홈페이지',tone:'채널 기본',length:'보통',opening:'정보형'};
 var PR_PURPOSE=['참여자 모집','이용 안내','활동 후기','일정 변경·취소','교육·캠페인','후원·봉사 모집','안전·접근성 안내'];
-var PRK=['홈페이지 행사후기 올리기','홈페이지 안내 글','블로그 초안','공지사항','카드뉴스','포스터','홍보 이미지','릴스·숏폼 대본','소식지','문자·SNS 짧은 글','보도자료'];
+var PR_CHANNEL=['인스타그램','네이버 블로그','복지관 홈페이지'];
+var PR_TONES=['채널 기본','따뜻하고 공감 있게','밝고 경쾌하게','차분하고 담백하게','공식적이고 정중하게','쉬운 말로','감사하는 마음으로'];
+var PR_LENGTHS=['짧게','보통','자세하게'];
+var PR_TASKS=[
+ ['이번 달 복지관 소식을 묶고 싶어요','월간 소식지','소식지','활동 후기','복지관 홈페이지'],
+ ['참여자를 새로 모집해야 해요','프로그램·교육 모집 안내','공지사항','참여자 모집','복지관 홈페이지'],
+ ['활동을 인스타그램에 올리고 싶어요','한눈에 읽히는 피드 문구','인스타그램','활동 후기','인스타그램'],
+ ['활동 사진과 이야기를 블로그에 쓰고 싶어요','네이버 블로그 후기','블로그 초안','활동 후기','네이버 블로그'],
+ ['복지관 홈페이지에 활동 후기를 올려야 해요','홈페이지 소식·행사 후기','홈페이지 행사후기 올리기','활동 후기','복지관 홈페이지'],
+ ['일정 변경이나 취소를 알려야 해요','변경 내용이 맨 앞에 오는 안내','공지사항','일정 변경·취소','복지관 홈페이지'],
+ ['이용 방법이나 접근성을 쉽게 알려야 해요','이동·편의·신청 안내','홈페이지 안내 글','안전·접근성 안내','복지관 홈페이지'],
+ ['보호자에게 안내문을 전해야 해요','쉬운 말 안내문','안내문','이용 안내','복지관 홈페이지','쉬운 말로'],
+ ['인식개선 캠페인을 알리고 싶어요','캠페인·교육 홍보','인스타그램','교육·캠페인','인스타그램'],
+ ['후원이나 자원봉사 참여를 부탁하고 싶어요','후원·봉사 모집','홈페이지 안내 글','후원·봉사 모집','복지관 홈페이지'],
+ ['포스터나 홍보 이미지가 필요해요','한 장 이미지 구성','포스터','참여자 모집','복지관 홈페이지'],
+ ['카드뉴스를 여러 장 만들고 싶어요','장마다 다른 핵심 문구','카드뉴스','참여자 모집','인스타그램'],
+ ['성과와 정보를 그림으로 정리하고 싶어요','인포그래픽 구성','인포그래픽','이용 안내','복지관 홈페이지'],
+ ['영상이나 보도자료를 준비해야 해요','릴스·숏폼부터 시작, 보도자료는 상단에서 전환','릴스·숏폼 대본','활동 후기','인스타그램']
+];
+function renderPromoMenu(){
+ var list=PR_TASKS.map(function(x,i){return '<button type="button" class="gh-task-card" data-pr-task="'+i+'"><span><b>'+E(x[0])+'</b><small>'+E(x[1])+'</small></span><span aria-hidden="true">→</span></button>';}).join('');
+ $('#v-promomenu').innerHTML='<section class="gi-task gh-promo-menu"><div class="fbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>홍보·안내문</h2></div><p class="fstat">지금 상황과 가장 가까운 일을 골라 주세요.</p><div class="gh-task-cards">'+list+'</div></section>';
+}
+function prIsVisual(k){return ['카드뉴스','포스터','홍보 이미지','인포그래픽'].includes(k);}
+function prIsSocial(k){return ['인스타그램','블로그 초안','홈페이지 행사후기 올리기','홈페이지 안내 글','공지사항','안내문','소식지','문자·SNS 짧은 글'].includes(k);}
+function prChannelFor(k){return k==='블로그 초안'?'네이버 블로그':(k==='인스타그램'||k==='문자·SNS 짧은 글')?'인스타그램':'복지관 홈페이지';}
+function prDraft(v,ch,len){
+ var p=v.purpose,n=prName(v),m=v.memo.trim(),official=ch==='복지관 홈페이지',inst=ch==='인스타그램',blog=ch==='네이버 블로그';
+ var tone=v.tone==='채널 기본'?(official?'공식적이고 정중하게':inst?'밝고 경쾌하게':'따뜻하고 공감 있게'):v.tone;
+ var action={'참여자 모집':['참여자 모집','함께할 분을 모집합니다.','신청 방법과 기간을 확인해 주세요.'],'이용 안내':['이용 안내','이용에 필요한 정보를 알려드립니다.','방문 전에 이용 방법을 확인해 주세요.'],'활동 후기':['활동 소식','활동 소식을 전합니다.','함께해 주신 분들께 감사드립니다.'],'일정 변경·취소':['일정 변경·취소 안내','변경 사항을 알려드립니다.','이용 전에 변경된 내용을 확인해 주세요.'],'교육·캠페인':['교육·캠페인 안내','교육과 캠페인 내용을 안내합니다.','참여 내용을 확인해 주세요.'],'후원·봉사 모집':['후원·자원봉사 안내','함께할 후원자와 자원봉사자를 찾습니다.','참여 방법을 확인해 주세요.'],'안전·접근성 안내':['안전·접근성 안내','이동과 참여 전 확인할 내용을 안내합니다.','필요한 지원은 담당 부서에 문의해 주세요.']}[p];
+ var toneText={
+ '따뜻하고 공감 있게':['처음이라 망설여지셨다면, 어떤 자리인지부터 천천히 살펴보세요.','각자의 속도로 함께해요.'],
+ '밝고 경쾌하게':['오늘의 복지관 소식, 같이 살펴볼까요?','필요한 분에게 이 소식을 전해 주세요!'],
+ '차분하고 담백하게':['확인된 내용부터 차례로 정리했습니다.','궁금한 점은 아래 문의처를 확인해 주세요.'],
+ '공식적이고 정중하게':['용인시기흥장애인복지관에서 안내드립니다.','아래 사항을 확인해 주시기 바랍니다.'],
+ '쉬운 말로':['복지관 소식이에요. 아래에서 필요한 정보를 볼 수 있어요.','모르는 것이 있으면 복지관에 물어보세요.'],
+ '감사하는 마음으로':['늘 복지관 소식에 관심을 가져 주셔서 감사합니다.','함께해 주시는 모든 분께 고맙습니다.']
+ }[tone]||['복지관 소식을 전합니다.','자세한 내용은 아래 안내를 참고해 주세요.'];
+ var important=['when','where','target','countPeople','recruit','method','contact','price'];
+ if(p==='안전·접근성 안내')important=['access'].concat(important);
+ var core=prLines(v,important,false),more=prLines(v,p==='안전·접근성 안내'?['documents','supplies']:['documents','supplies','access'],false);
+ var facts=core+(more?'\n'+more:'');
+ if(!facts)facts='[확인 필요: 일시·장소·대상 등 행사 정보]';
+ var particle=p==='참여자 모집'||p==='후원·봉사 모집'?'에 ':p==='일정 변경·취소'?'의 ':' ';
+ var purposeLine=n+particle+action[1],detail=v.fields.detail||'',picture=v.fields.picture||'';
+ var lead=official?purposeLine+' '+toneText[0]:blog?'안녕하세요. 용인시기흥장애인복지관입니다. '+toneText[0]+' '+purposeLine:toneText[0]+'\n'+purposeLine;
+ var title=official?'['+action[0]+'] '+n:blog?n+' | '+action[0]:(p==='일정 변경·취소'?'[꼭 확인] ':tone==='밝고 경쾌하게'?'📌 ':'')+n+' · '+action[0];
+ var note=m||'[확인 필요: 활동·안내 내용]',close=action[2]+' '+toneText[1],sections=[];
+ var extended={'참여자 모집':'신청할 때는 대상과 모집 기간을 먼저 확인해 주세요. 참여에 필요한 지원이 있다면 신청 전에 문의해 주세요.','이용 안내':'방문 전에 장소와 이용 방법을 함께 확인해 주세요.','활동 후기':'다음 소식도 확인된 내용부터 안내하겠습니다.','일정 변경·취소':'출발 전에 바뀐 일시와 장소를 다시 확인해 주세요. 기존 신청의 처리는 담당 부서 확인이 필요합니다.','교육·캠페인':'내용을 먼저 확인하고 나에게 편한 참여 방법을 골라 주세요.','후원·봉사 모집':'후원 내용과 봉사 활동 시간은 담당 부서에 확인해 주세요.','안전·접근성 안내':'의사소통 지원이 필요한 분은 방문 전에 담당 부서에 편한 방법으로 문의해 주세요.'}[p];
+ if(len==='짧게'){
+   if(official)lead=purposeLine;
+   sections.push([official?'핵심 안내':blog?'한눈에 보는 소식':'짧은 소개',note],['일정·참여 정보',facts],['다음에 할 일',close]);
+ }else{
+   var textBlock=[p==='일정 변경·취소'?'무엇이 달라졌나요?':blog?'어떤 시간을 함께했나요?':'주요 내용',note];
+   var factBlock=[p==='활동 후기'?'활동 정보':'일정·신청 정보',core||facts];
+   if(official&&p!=='일정 변경·취소')sections.push(factBlock,textBlock);else sections.push(textBlock,factBlock);
+   if(more&&core)sections.push(['준비물·편의 안내',more]);
+   if(detail)sections.push([blog?'기억하고 싶은 장면':'추가 내용',detail]);
+   if(picture&&len==='자세하게')sections.push(['사진 설명',picture]);
+   if(len==='자세하게')sections.push([official?'추가 안내':blog?'읽으시는 분께':'더 알아보기',extended]);
+   sections.push([official?'확인해 주세요':'함께해요',close]);
+ }
+ if(inst&&len!=='짧게')sections.push(['해시태그','#용인시기흥장애인복지관 #장애인복지 #'+action[0].replace(/[^가-힣\w]/g,'')]);
+ return {title:ch+' 문구',heading:title,lead:lead,sections:sections,channel:ch};
+}
+function prDraftText(v,d){
+ return prPractice(v)+d.heading+'\n\n'+d.lead+'\n\n'+d.sections.map(function(x){return d.channel==='인스타그램'&&(x[0]==='해시태그'||x[0]==='짧은 소개'||x[0]==='주요 내용')?x[1]:'■ '+x[0]+'\n'+x[1];}).join('\n\n');
+}
+function prCopyBoard(v){
+ var primary=prDraft(v,v.channel,v.length),short=prDraft(v,v.channel,'짧게');
+ TXT.promo=prDraftText(v,primary);TXT['promo-ready']=TXT.promo;TXT['promo-short']=prDraftText(v,short);
+ var head='<h4 class="gh-story-anchor gh-focus" data-gi-scroll="promo-live" tabindex="-1">복사해서 쓰는 글</h4>';
+ var top=prTextCard(v,primary,'promo-ready','글 전체 복사');
+ var brief=v.length==='짧게'?'':prTextCard(v,Object.assign({},short,{title:'짧은 소개글'}),'promo-short','짧은 글 복사');
+ var rest=PR_CHANNEL.filter(function(x){return x!==v.channel;}).map(function(ch,i){var d=prDraft(v,ch,v.length),k='promo-alt'+i;return '<details class="gh-alt-draft"><summary>'+E(ch)+' 문구도 보기</summary>'+prTextCard(v,d,k,'글 복사')+'</details>';}).join('');
+ return '<section class="gh-promo-drafts">'+head+top+brief+rest+'</section>';
+}
+
+var PRK=['인스타그램','안내문','인포그래픽','홈페이지 행사후기 올리기','홈페이지 안내 글','블로그 초안','공지사항','카드뉴스','포스터','홍보 이미지','릴스·숏폼 대본','소식지','문자·SNS 짧은 글','보도자료'];
 var GH_PROMO_FIELDS=[
  ['title','프로그램명','문화예술 체험교실',['프로그램 이름','행사명']],
  ['when','행사 일시','12월 5일 오후 2시~4시',['일시','날짜·시간']],
@@ -7037,7 +7137,7 @@ var GH_PROMO_FIELDS=[
  ['price','참가비','무료 또는 5,000원'],
  ['documents','접수물','신청서 1부'],
  ['supplies','준비물','편한 옷, 개인 물병'],
- ['access','접근성 안내','휠체어 이용 시 1층 출입구']
+ ['access','접근성 안내','휠체어 이용 시 1층 출입구'],['detail','성과·반응','참여자가 고른 작품 8점을 전시했어요.'],['picture','사진 설명','완성 작품을 탁자 위에 모아 놓은 사진']
 ];
 var PR_SHEET=GH_PROMO_FIELDS.concat([['memo','활동·안내 내용','참여자가 직접 만든 작품을 소개해요.',['소식','활동 내용','메모','홍보 내용']]]);
 function prName(v){return (v.fields.title||'').trim()||v.biz||'[프로그램명]';}
@@ -7090,20 +7190,11 @@ function promoPreviewText(v){
 }
 function prTextCard(v,d,key,copyLabel){
  key=key||'promo';
- var full=prPractice(v)+d.heading+'\n\n'+d.lead+'\n\n'+d.sections.map(function(x){return '■ '+x[0]+'\n'+x[1];}).join('\n\n');
+ var full=prDraftText(v,d);
  TXT[key]=full;
- return '<section class="gh-preview gh-article"><div class="out-h"><h3>'+E(d.title)+'</h3>'+cbtn(copyLabel||'글 복사',key)+'</div>'+
-  (v.demo?'<p class="gh-point">실습용 가상 예시 · 실제 모집 안내 아님</p>':'')+'<h4>'+E(d.heading)+'</h4><p>'+E(d.lead)+'</p>'+
-  d.sections.map(function(x){return '<section class="gh-article-part"><h5 class="gh-focus">'+E(x[0])+'</h5><p>'+E(x[1])+'</p></section>';}).join('')+'</section>';
-}
-function prStoryPair(v){
- var blogView=Object.assign({},v,{kind:'블로그 초안'}),homeView=Object.assign({},v,{kind:v.purpose==='활동 후기'?'홈페이지 행사후기 올리기':'홈페이지 안내 글'});
- var blog=promoPreviewText(blogView),home=promoPreviewText(homeView);
- if(!/^안녕하세요/.test(blog.lead))blog.lead='안녕하세요. 용인시기흥장애인복지관입니다. '+prName(v)+' 소식을 전해 드려요.';
- home.title='홈페이지 홍보글';
- var bc=prTextCard(v,blog,'promo-blog','블로그 글 복사'),hc=prTextCard(v,home,'promo-home','홈페이지 글 복사');
- TXT.promo=TXT[v.kind==='블로그 초안'?'promo-blog':'promo-home'];
- return '<section class="gh-promo-drafts"><h4 class="gh-story-anchor gh-focus" data-gi-scroll="promo-live" tabindex="-1">복사해서 쓸 수 있는 글 초안</h4><div class="gh-story-pair">'+bc+hc+'</div></section>';
+ return '<section class="gh-preview gh-article"><div class="out-h"><h3>'+E(d.title)+'</h3><small class="gh-char-count">'+full.length+'자</small>'+cbtn(copyLabel||'글 복사',key)+'</div>'+
+  '<div class="gh-copy-read" tabindex="0" aria-label="복사할 전체 내용">'+(v.demo?'<p class="gh-point">실습용 가상 예시 · 실제 모집 안내 아님</p>':'')+'<h4>'+E(d.heading)+'</h4><p>'+E(d.lead)+'</p>'+
+  d.sections.map(function(x){return '<section class="gh-article-part"><h5 class="gh-focus">'+E(x[0])+'</h5><p>'+E(x[1])+'</p></section>';}).join('')+'</div></section>';
 }
 function prSelect(label,key,values,selected){
  return '<label>'+E(label)+'<select data-pr-select="'+key+'">'+values.map(function(x){return '<option value="'+E(x)+'"'+(x===selected?' selected':'')+'>'+E(x||'직접 입력')+'</option>';}).join('')+'</select></label>';
@@ -7139,7 +7230,7 @@ function prData(){
     return {title:'공지사항 글',body:'[공지] '+b+'\n\n1. 대상: [확인 필요]\n2. 일시: [확인 필요]\n3. 장소: [확인 필요]\n4. 신청 방법: [확인 필요]\n5. 문의: [확인 필요]\n\n※ 일정 변경 시 홈페이지·문자로 다시 안내드립니다.\n※ 개인정보(이름·연락처)는 공지에 쓰지 않습니다.'+extra};
   }
   if(k==='카드뉴스'){
-    var cover=v.purpose==='활동 후기'?'함께한 순간':v.purpose==='이용 안내'?'이렇게 이용해요':'함께할 분을 찾습니다';
+    var cover=v.opening==='질문형'?(v.purpose==='활동 후기'?'어떤 활동을 했을까요?':'어떻게 함께할 수 있을까요?'):v.opening==='이야기형'?(v.purpose==='활동 후기'?'사진으로 돌아보는 하루':'우리가 함께할 시간'):(v.purpose==='활동 후기'?'활동 소식':v.purpose==='이용 안내'?'이용 안내':'참여 안내');
     var last=v.purpose==='활동 후기'?['마무리',signup||'참여해 주신 분께 감사 · 확인된 다음 소식만 안내']:v.purpose==='이용 안내'?['문의·이용 안내',joined]:['신청 안내',joined];
     var slides=[['표지',b+' · '+cover],['활동 소개',v.memo.trim()||'실제로 무엇을 하는지 쉬운 말로 소개'],['핵심 정보',basics],last];
     if(v.count==='3장')slides.splice(1,1);
@@ -7147,9 +7238,13 @@ function prData(){
     if(v.count==='8장')slides.splice(4,0,['활동에서 내가 고르는 것','활동 선택지와 쉬어가는 방법'],['자주 묻는 질문','문의 방법과 참여 전 확인 사항']);
     return {title:'카드뉴스 '+v.count+' 구성',slides:slides,body:'[카드뉴스 '+v.count+' · '+v.purpose+']\n'+slides.map(function(r,i){return (i+1)+'장 | '+r[0]+' | '+r[1];}).join('\n')+'\n\n그림 방향: '+v.style+'\n글자는 한 줄씩 짧고 선명하게. 얼굴 사진은 게시 동의가 확인된 경우만 사용.'+extra};
   }
+  if(k==='인포그래픽'){
+    var info=prLines(v,['when','where','target','countPeople','detail','method','contact','access'],false);
+    return {title:'인포그래픽 구성',slides:[['제목',b],['핵심 정보',info||'[확인 필요: 일정·참여 인원·성과]'],['마무리',v.fields.contact||'[확인 필요: 문의처]']],body:b+'\n'+info};
+  }
   if(k==='포스터'||k==='홍보 이미지'){
-    var mid=prLines(v,['when','where','target','countPeople'],true),foot=joined;
-    return {title:(k==='포스터'?'포스터':'홍보 이미지')+' 한 장 구성',slides:[['상단',b+' · '+v.purpose],['가운데',mid],['하단',foot]],body:'[포스터 한 장]\n제목: '+b+' · '+v.purpose+'\n'+mid+'\n\n'+foot+'\n\n그림 방향: '+v.style+extra};
+    var mid=prLines(v,['when','where','target','countPeople'],true),foot=joined,headline=v.opening==='질문형'?b+', 어떻게 참여하나요?':v.opening==='이야기형'?b+'에서 함께할 시간':b+' · '+v.purpose;
+    return {title:(k==='포스터'?'포스터':'홍보 이미지')+' 한 장 구성',slides:[['상단',headline],['가운데',mid],['하단',foot]],body:'[포스터 한 장]\n제목: '+headline+'\n'+mid+'\n\n'+foot+'\n\n그림 방향: '+v.style+extra};
   }
   if(k==='릴스·숏폼 대본'){
     return {title:'릴스 15초 대본',body:'[릴스 15초 · 3장면]\n0~3초 후킹: "'+b+', 이렇게 하고 있어요" (현장 손·작품 클로즈업)\n3~9초 본편: 활동 2장면 + 자막 "이용자가 직접 합니다"\n9~15초 마무리: 단체 장면 + 자막 "문의 [확인 필요]"\n\n자막 원칙: 한 화면 12자 이내 · 얼굴은 동의받은 분만 · 배경 음악은 저작권 없는 것\n해시태그: #'+b+' #장애인복지 #용인'+extra};
@@ -7164,37 +7259,39 @@ function selectionSummary(items){
   return '<div class="gh-selection"><b>선택한 조건</b><dl>'+items.map(function(v){return '<div><dt>'+E(v[0])+'</dt><dd>'+E(v[1])+'</dd></div>';}).join('')+'</dl></div>';
 }
 function promoRight(){
-  var v=ST_PR,d=prData(),visual=['카드뉴스','포스터','홍보 이미지'].includes(v.kind),article=!visual&&v.kind!=='릴스·숏폼 대본';
+  var v=ST_PR,d=prData(),visual=prIsVisual(v.kind),article=!visual&&v.kind!=='릴스·숏폼 대본';
   var cond=[['사업',v.biz||'직접 입력'],['목적',v.purpose],['보는 사람',v.audience]];
-  if(visual)cond.push(['디자인',v.style],['이미지 비율',v.ratio]);
+  if(visual)cond.push(['디자인',v.style],['이미지 비율',v.ratio],['첫 문구',v.opening]);
   if(v.kind==='카드뉴스')cond.push(['분량',v.count]);
-  var rule=giProgram(v.biz),articleData=article?promoPreviewText(v):null;
+  if(article)cond.push(['게시 채널',v.channel],['문체·분위기',v.tone],['글 길이',v.length]);
+  var rule=giProgram(v.biz),articleData=article?(prIsSocial(v.kind)?prDraft(v,v.channel,v.length):promoPreviewText(v)):null;
   var base=articleData?articleData.heading+'\n'+articleData.lead+'\n'+articleData.sections.map(function(r){return r.join('\n');}).join('\n\n'):d.body.replace(/\n\n\[우리 상황\][\s\S]*$/,'');
   var prompt=prPractice(v)+'너는 용인시기흥장애인복지관 홍보 담당자이자 콘텐츠 제작자야.\n\n[제작 조건]\n만들 것: '+v.kind+'\n'+cond.map(function(r){return r.join(': ');}).join('\n')+'\n\n[입력한 행사 정보]\n'+prDetails(v)+'\n\n[말하거나 적은 상황]\n'+prLog(v)+'\n\n[구성 참고]\n'+base+'\n\n[바로 완성할 결과]\n'+
    (visual?'이미지 생성 기능을 사용할 수 있으면 고른 비율과 스타일로 '+(v.kind==='카드뉴스'?v.count+'을 한 장씩':'완성 시안 한 장을')+' 직접 만들어 줘. 만들 수 없으면 위치별 화면 구성과 위에 올릴 정확한 한글 문구를 먼저 줘. 주소·전화번호·QR은 추정하지 말고, 긴 정보나 미정 내용은 편집할 빈칸으로 남겨.':'제목 3안과 추천 제목 1개, 완성 본문, 마지막 행동 안내를 줘. 홈페이지는 정보가 빨리 보이는 공지형, 블로그는 공감되는 도입과 현장 중심 소제목을 써. 메모는 확인된 정보만 사용해.')+
    '\n\n[지킬 것]\n존중하는 쉬운 말로 써. 없는 일시, 장소, 자격, 인원, 참가비, 연락처를 만들지 말고 [확인 필요]로 표시해. 얼굴·실명·상담 사연을 공개하지 마.'+(rule?'\n'+rule.check:'');
   var preview=d.slides?'<section class="gh-preview"><div class="out-h"><h3>'+E(d.title)+'</h3>'+cbtn('예시 복사','promo')+'</div><ol class="gh-tiles">'+d.slides.map(function(x,i){return '<li><span>'+(i+1)+'</span><div><b>'+E(x[0])+'</b><p>'+E(x[1])+'</p></div></li>';}).join('')+'</ol></section>':outBlock(d.title+' · 예시','promo',d.body);
   TXT.promo=prPractice(v)+d.body+'\n\n'+prDetails(v);
-  var pair=['블로그 초안','홈페이지 행사후기 올리기','홈페이지 안내 글','공지사항','소식지'].includes(v.kind);
-  if(pair)preview=prStoryPair(v);
+  var pair=prIsSocial(v.kind);
+  if(pair)preview=prCopyBoard(v);
   else if(articleData)preview=prTextCard(v,articleData);
-  return '<div class="out-h"><h3>예시와 원픽 프롬프트</h3>'+cbtn('원픽 프롬프트 복사','promo-prompt')+'</div>'+aiStrip('promo-prompt','원픽 프롬프트로 AI 열기')+preview+'<div class="gh-promo-prompt-box">'+outBlock('원픽 · 완성 제작 프롬프트','promo-prompt',prompt)+'</div>'+prFactSheet(v)+selectionSummary(cond)+giGuide(v.biz);
+  return '<div class="out-h"><h3>예시와 원픽 프롬프트</h3>'+cbtn('원픽 프롬프트 복사','promo-prompt')+'</div>'+preview+aiStrip('promo-prompt','원픽 프롬프트로 AI 열기')+'<div class="gh-promo-prompt-box">'+outBlock('원픽 · 완성 제작 프롬프트','promo-prompt',prompt)+'</div>'+prFactSheet(v)+selectionSummary(cond)+giGuide(v.biz);
 }
 function renderPromo(){
-  var v=ST_PR,visual=['카드뉴스','포스터','홍보 이미지'].includes(v.kind);
+  var v=ST_PR,visual=prIsVisual(v.kind);
   var prior=$('#pr-options'),shown=prior&&prior.open;
   var mainText=v.sheetRaw===undefined?sheetText(PR_SHEET,Object.assign({memo:v.memo},v.fields)):v.sheetRaw;
-  var left=prPicker(v)+'<div class="gh-event-head"><label for="pr-sheet"><b>행사 정보 입력</b></label><div class="gh-event-example"><button type="button" class="gi-action" data-pr-example>가상 예시 넣기</button>'+(v.demo?'<button type="button" class="gi-action" data-pr-clear>가상 예시 빼기</button>':'')+'</div></div>'+
+  var opts=prIsSocial(v.kind)?'<div class="gh-style-options">'+radioPick('어디에 올리나요?',PR_CHANNEL,'pr-channel',v.channel)+radioPick('어떤 말투로 쓸까요?',PR_TONES,'pr-tone',v.tone)+radioPick('글 길이',PR_LENGTHS,'pr-length',v.length)+'</div>':visual?'<div class="gh-style-options">'+radioPick('첫 문구는 어떻게 쓸까요?',['질문형','이야기형','정보형'],'pr-opening',v.opening)+'</div>':'';
+  var left=prPicker(v)+opts+'<div class="gh-event-head"><label for="pr-sheet"><b>행사 정보 입력</b></label><div class="gh-event-example"><button type="button" class="gi-action" data-pr-example>가상 예시 넣기</button>'+(v.demo?'<button type="button" class="gi-action" data-pr-clear>가상 예시 빼기</button>':'')+'</div></div>'+
    '<p class="gh-sheet-tip">예: 프로그램명: 문화예술 체험교실 · 행사 일시: 12월 5일 오후 2시. 같은 칸에서 아래 항목 뒤에 쭉 적으세요.</p>'+
-   '<textarea class="gh-single-sheet" id="pr-sheet" rows="14" data-gi-field="promo-sheet" data-gi-scroll="promo-fields">'+E(mainText)+'</textarea>'+micRow('pr-sheet').outerHTML+
-   '<button type="button" class="gh-jump gh-promo-preview-mobile" data-gi-jump="'+(['블로그 초안','홈페이지 행사후기 올리기','홈페이지 안내 글','공지사항','소식지'].includes(v.kind)?'promo-live':'promo-facts')+'">오른쪽 결과 보기 ↓</button>'+
+   '<textarea class="gh-single-sheet" id="pr-sheet" rows="13" data-gi-field="promo-sheet" data-gi-scroll="promo-fields">'+E(mainText)+'</textarea>'+micRow('pr-sheet').outerHTML+
+   '<button type="button" class="gh-jump gh-promo-preview-mobile" data-gi-jump="'+(prIsSocial(v.kind)?'promo-live':'promo-facts')+'">오른쪽 결과 보기 ↓</button>'+
    '<details class="gh-promo-options" id="pr-options"'+(shown?' open':'')+'><summary>보는 사람'+(visual?'·디자인':'')+' 더 고르기</summary>'+
    radioPick('누가 보나요?',['이용자·보호자','아동·청소년','발달장애인','지역 주민','종사자','후원자·협력기관','자원봉사자'],'pr-audience',v.audience)+
    (visual?radioPick('5. 그림 스타일',['깔끔한 공공기관형','따뜻한 일러스트','쉬운 글·큰 글씨','현장 사진 중심','웹툰','동화책','인포그래픽'],'pr-style',v.style)+radioPick('이미지 비율',['세로 4:5','정사각형 1:1','가로 16:9','세로 A4'],'pr-ratio',v.ratio):'')+
    (v.kind==='카드뉴스'?radioPick('카드뉴스 몇 장?',['3장','4장','6장','8장'],'pr-count',v.count):'')+'</details>'+
    '<p class="hintl">정해지지 않은 정보는 비워 두고 개인 정보는 쓰지 마세요.</p>';
   var kind=v.kind==='홍보 이미지'?'홍보 이미지 만들기':'홍보·안내';
-  $('#v-promo2').innerHTML=x2(kind,'왼쪽에 적으면 미리보기에 바로 반영돼요.',left,promoRight(),choice('무엇을 만들까요?',PRK,'data-prk',v.kind,'gh-subtabs'),null,true);
+  $('#v-promo2').innerHTML=x2(kind,'왼쪽에 적으면 미리보기에 바로 반영돼요.',left,promoRight(),choice('무엇을 만들까요?',PRK,'data-prk',v.kind,'gh-subtabs'),'promomenu',true);
   bindMics($('#v-promo2'));
 }
 
@@ -7444,7 +7541,7 @@ var ROUTE={};
 function ensure(id,html){var n=$('#v-'+id);if(!n){n=document.createElement('div');n.id='v-'+id;n.hidden=true;n.innerHTML=html;$('main.wrap').appendChild(n);if(typeof VIEWS!=='undefined'&&VIEWS.indexOf(id)<0)VIEWS.push(id);}return n}
 function boot(){
   /* 새 화면 틀 만들기 */
-  ensure('appguide','');ensure('msg','');ensure('plan2','');ensure('promo2','');ensure('donate','');ensure('donwork','');ensure('planmenu','');ensure('mindwork','');
+  ensure('appguide','');ensure('msg','');ensure('plan2','');ensure('promo2','');ensure('promomenu','');ensure('donate','');ensure('donwork','');ensure('planmenu','');ensure('mindwork','');
   ensure('mind','<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음돌봄·사진관</h2><span class="tag">업무 감정 정리 · 응원엽서 · 잠깐 쉼 · 사진 실습</span></div><div class="mtabs" role="tablist">'+MIND.map(function(x){return '<button type="button" role="tab" aria-selected="false" data-mt="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div><button type="button" class="btn mini mind-work-alt" id="mind-work-alt" hidden>복지관 상황 보기</button><div id="mind-body"></div>');
   /* 홈 그리기 + 기존 홈 요소 정리 */
   var old=$('#main4');if(old)old.remove();
@@ -7505,6 +7602,8 @@ function boot(){
       go(g);return;
     }
     var ag=e.target.closest('[data-ag-tab]');if(ag){AG_TAB=ag.dataset.agTab;rerenderChoice(ag,'data-ag-tab',renderAppGuide);return;}
+    var task=e.target.closest('[data-pr-task]');
+    if(task){var cfg=PR_TASKS[+task.dataset.prTask];ST_PR.kind=cfg[2];ST_PR.purpose=cfg[3];ST_PR.channel=cfg[4];if(cfg[5])ST_PR.tone=cfg[5];ST_PR.purposePicked=false;go('promo2');return;}
     if(e.target.closest('[data-pr-example]')){prExample(ST_PR);ST_PR.sheetRaw=sheetText(PR_SHEET,Object.assign({memo:ST_PR.memo},ST_PR.fields));renderPromo();return;}
     if(e.target.closest('[data-pr-clear]')){
       Object.keys(ST_PR.demoFields||{}).forEach(function(k){if(ST_PR.fields[k]===ST_PR.demoFields[k])delete ST_PR.fields[k];});
@@ -7517,9 +7616,10 @@ function boot(){
     var mt=e.target.closest('[data-mt]');if(mt){openMind(mt.dataset.mt);return}
     var mmode=e.target.closest('[data-mmode]');if(mmode){ST_MSG.mode=mmode.dataset.mmode;rerenderChoice(mmode,'data-mmode',renderMsg);return}
     if(e.target.closest('[data-plan-demo]')){PLAN_SHEET.forEach(function(r){if(!ST_PLAN[r[0]])ST_PLAN[r[0]]=r[2];});ST_PLAN.sheetRaw=sheetText(PLAN_SHEET,ST_PLAN);renderPlan();return;}
+    var pf=e.target.closest('[data-plan-form]');if(pf){ST_PLAN.formMode=pf.dataset.planForm;qa('#v-plan2 [data-plan-form]').forEach(function(b){b.classList.toggle('on',b===pf);b.setAttribute('aria-pressed',String(b===pf));});updateOutput('#v-plan2',planRight);return;}
     var pi=e.target.closest('[data-pidea]');if(pi){ST_PLAN.idx++;ST_PLAN.mode='';ST_PLAN.question='';ST_PLAN.focus='';ST_PLAN.title='';ST_PLAN.program='';ST_PLAN.group='';ST_PLAN.sheetRaw=sheetText(PLAN_SHEET,ST_PLAN);rerenderChoice(pi,'data-pidea',renderPlan);return}
     var pg=e.target.closest('[data-plangpt]');if(pg){copy(planPrompt());return}
-    var rk=e.target.closest('[data-prk]');if(rk){ST_PR.kind=rk.dataset.prk;if(!ST_PR.purposePicked){if(ST_PR.kind==='홈페이지 행사후기 올리기')ST_PR.purpose='활동 후기';if(ST_PR.kind==='홈페이지 안내 글'||ST_PR.kind==='공지사항')ST_PR.purpose='이용 안내';}rerenderChoice(rk,'data-prk',renderPromo);return}
+    var rk=e.target.closest('[data-prk]');if(rk){ST_PR.kind=rk.dataset.prk;ST_PR.channel=prChannelFor(ST_PR.kind);if(!ST_PR.purposePicked){if(ST_PR.kind==='홈페이지 행사후기 올리기')ST_PR.purpose='활동 후기';if(ST_PR.kind==='홈페이지 안내 글'||ST_PR.kind==='공지사항')ST_PR.purpose='이용 안내';}rerenderChoice(rk,'data-prk',renderPromo);return}
     var pq=e.target.closest('[data-pq]');if(pq){
       PLAN_Q.i=+pq.dataset.pq;qa('#v-planmenu [data-pq]').forEach(function(b){b.setAttribute('aria-pressed',String(b===pq));});updateOutput('#v-planmenu',pqRight);return;
     }
@@ -7572,7 +7672,12 @@ function boot(){
       }else updateOutput('#v-mindwork',gmRight);
       return;
     }
-    if(key==='prbiz'||key.startsWith('pr-')){ST_PR[key==='prbiz'?'biz':key.slice(3)]=v;updateOutput('#v-promo2',promoRight);}
+    if(key==='prbiz'||key.startsWith('pr-')){
+      ST_PR[key==='prbiz'?'biz':key.slice(3)]=v;
+      if(key==='pr-channel')ST_PR.kind=v==='인스타그램'?'인스타그램':v==='네이버 블로그'?'블로그 초안':(ST_PR.purpose==='활동 후기'?'홈페이지 행사후기 올리기':'홈페이지 안내 글');
+      if(key==='pr-channel')qa('#v-promo2 [data-prk]').forEach(function(b){var on=b.dataset.prk===ST_PR.kind;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});
+      updateOutput('#v-promo2',promoRight);
+    }
     if(key.startsWith('plan-')){ST_PLAN[key.slice(5)]=v;ST_PLAN.idx=0;updateOutput('#v-plan2',planRight);}
     if(key.startsWith('don-')&&DONSTATE[donKey]){DONSTATE[donKey][key.slice(4)]=v;updateOutput('#v-donwork',donRight);}
   });
@@ -7659,6 +7764,7 @@ window.go=function(k){
   if(k==='planmenu'){renderPlanMenu();show('planmenu');return}
   if(k==='plan2'){renderPlan();show('plan2');return}
   if(k==='img'){ST_PR.kind='홍보 이미지';renderPromo();show('promo2');return}
+  if(k==='promomenu'){renderPromoMenu();show('promomenu');return}
   if(k==='promo2'){renderPromo();show('promo2');return}
   if(k==='donate'){renderDonate();show('donate');return}
   if(k==='month'){renderMonth();show('month');return}
