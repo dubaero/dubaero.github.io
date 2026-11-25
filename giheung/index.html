@@ -7627,7 +7627,7 @@ function boot(){
     var mm=e.target.closest('#v-month [data-mstep]');if(mm){ST_MO.m=(ST_MO.m-1+Number(mm.dataset.mstep)+12)%12+1;ST_MO.i=0;rerenderChoice(mm,'data-mstep',renderMonth);return;}
     var mq=e.target.closest('[data-mo-pick]');if(mq){ST_MO.i=+mq.dataset.moPick;qa('#v-month [data-mo-pick]').forEach(function(b){b.setAttribute('aria-pressed',String(b===mq));});updateOutput('#v-month',moRight);return;}
     if(e.target.closest('[data-mo-open]')){openMonthWork();return;}
-    var cp=e.target.closest('[data-cp]');if(cp){var t=TXT[cp.dataset.cp];if(t&&typeof copy==='function')copy(t);return}
+    var cp=e.target.closest('[data-cp]');if(cp){var k=cp.dataset.cp,t=TXT[k];if(t&&typeof copy==='function'){var done=/^promo-(ready|short|alt\d+)$/.test(k)?'복사했어요. 게시할 글쓰기 칸에 붙여 넣으세요.':k==='planform'||k==='plan'?'서식을 복사했어요. 작성 중인 문서에 붙여 넣으세요.':undefined;copy(t,done);}return}
   });
   document.addEventListener('change',function(e){
     var pr=e.target.dataset.prSelect;
