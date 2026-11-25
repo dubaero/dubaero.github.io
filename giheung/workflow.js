@@ -4631,7 +4631,7 @@ const GH_BLOG_DEMOS={
   photo:"큰 글씨와 그림 표지를 붙인 재료 바구니", tag:"자원봉사"
  }
 };
-const GH_REVIEW_AUTO_CHANNELS=new Set(["네이버 블로그","인스타그램","카카오톡 채널"]);
+const GH_REVIEW_AUTO_CHANNELS=new Set(["네이버 블로그","인스타그램","카카오톡 채널","복지관 홈페이지"]);
 const GH_SHORT_REVIEW_CLOSE={
  "따뜻하게":["복지관에서 함께한 작은 순간들을 또 전할게요.","함께해 주신 분들께 감사드려요. 다음 복지관 소식도 전할게요."],
  "부드럽게":["복지관에서 만난 다음 이야기도 천천히 들려드릴게요.","그날의 이야기를 함께 나눌 수 있어 기쁩니다. 또 소식 전할게요."],
@@ -4642,35 +4642,58 @@ const GH_SHORT_REVIEW_CLOSE={
 };
 function ghReviewForm(s,tone){
  if(!s)return "";
+ const past=c=>(c.charCodeAt(0)-0xac00)%28===20;
  return /^(차분하게|공식적이고 정중하게)$/.test(tone)
-  ?s.replace(/했어요(?=[.!?。]|$)/gm,"했습니다").replace(/았어요(?=[.!?。]|$)/gm,"았습니다").replace(/었어요(?=[.!?。]|$)/gm,"었습니다").replace(/있어요(?=[.!?。]|$)/gm,"있습니다")
-  :s.replace(/했습니다(?=[.!?。]|$)/gm,"했어요").replace(/았습니다(?=[.!?。]|$)/gm,"았어요").replace(/었습니다(?=[.!?。]|$)/gm,"었어요").replace(/있습니다(?=[.!?。]|$)/gm,"있어요");
+  ?s.replace(/([가-힣])어요(?=[.!?。]|$)/gm,(m,c)=>past(c)?c+"습니다":m).replace(/있어요(?=[.!?。]|$)/gm,"있습니다").replace(/없어요(?=[.!?。]|$)/gm,"없습니다").replace(/해요(?=[.!?。]|$)/gm,"합니다")
+  :s.replace(/([가-힣])습니다(?=[.!?。]|$)/gm,(m,c)=>past(c)?c+"어요":m).replace(/있습니다(?=[.!?。]|$)/gm,"있어요").replace(/없습니다(?=[.!?。]|$)/gm,"없어요").replace(/합니다(?=[.!?。]|$)/gm,"해요");
 }
 function ghReviewLine(s){return String(s||"").split(/\n|(?<=[.!?。])\s+/)[0];}
 function ghReviewSocial(v,d){
  const tone=v.tone||"따뜻하게",close=GH_SHORT_REVIEW_CLOSE[tone]||GH_SHORT_REVIEW_CLOSE["따뜻하게"];
  const line=x=>ghReviewForm(ghReviewLine(x),tone);
- const lead=line(d.main||d.steps||d.moment||d.feeling||d.prep);
- const supporting=line([d.moment,d.feeling,d.steps,d.react].find(x=>x&&line(x)!==lead));
- const story=[lead,supporting].filter(Boolean).join("\n"),thanks=line(d.thanks);
- const where=[d.meta?.when,d.meta?.where].filter(Boolean).join(" · ");
+ const lead=line(d.main||d.steps||d.moment||d.feeling||d.prep),thanks=line(d.thanks);
  const join=a=>a.filter(Boolean).join("\n\n");
- if(v.where==="인스타그램")return [
-  ["인스타그램 후기 원고",join([story||d.title,thanks||close[0],d.tags])],
-  ["인스타그램 짧은 글",join([lead||d.title,d.tags])]
- ];
+ if(v.where==="인스타그램"){
+  const photoFirst=line(d.moment)||line(d.steps)||lead||d.title;
+  const context=[lead!==photoFirst?lead:"",line(d.feeling)].find(x=>x&&x!==photoFirst);
+  const opening=/^(차분하게|공식적이고 정중하게)$/.test(tone)?photoFirst:(tone==="밝고 경쾌하게"?"✨ ":"📷 ")+photoFirst;
+  return [
+   ["인스타그램 후기 원고",join([opening,context,thanks||close[0],d.tags])],
+   ["인스타그램 짧은 글",join([opening,d.tags])]
+  ];
+ }
+ const whenWhere=[d.meta?.when,d.meta?.where].filter(Boolean).join(" · ");
+ const next=line(d.next),link=String(d.meta?.link||"").trim();
+ const safeLink=/^https?:\/\/[^\s<>]+$/i.test(link)?link:"";
+ const info=next?"다음 소식: "+next:line(d.feeling);
+ const follow=safeLink?"자세히 보기: "+safeLink:"";
  return [
-  ["카카오톡 채널 후기 원고",["["+PROMO_ORG+" 소식] "+d.title,where,story,thanks||close[1]].filter(Boolean).join("\n")],
-  ["카카오톡 더 짧게",[lead||d.title,thanks||"복지관 소식은 다음에도 전해 드릴게요."].join(" ")]
+  ["카카오톡 채널 후기 원고",join([PROMO_ORG+" 소식"+(d.title!==lead?"\n"+d.title:""),[whenWhere,lead||d.title,info].filter(Boolean).join("\n"),follow,thanks||close[1]])],
+  ["카카오톡 더 짧게",join([PROMO_ORG+" 소식",lead||d.title,follow||next])]
  ];
+}
+function ghWebsiteReview(v,d){
+ const tone=v.tone||"따뜻하게",line=x=>ghReviewForm(x,tone==="쉽게"?"쉽게":"공식적이고 정중하게");
+ const join=x=>x.filter(Boolean).join("\n\n"),meta=d.meta||{},facts=[];
+ if(meta.when)facts.push("진행 일시: "+meta.when);
+ if(meta.where)facts.push("장소: "+meta.where);
+ if(meta.count)facts.push("참여 인원: "+meta.count);
+ const distinct=a=>Array.from(new Set(a.filter(Boolean)));
+ const first=line(d.main),details=distinct([line(d.prep),line(d.steps),line(d.moment)]).filter(x=>x!==first);
+ const context=d.feeling?line(d.feeling):"";
+ const finish=line(d.finish||d.thanks)||(tone==="쉽게"?"다음 복지관 소식도 전해 드릴게요.":"앞으로도 복지관에서 함께한 활동 소식을 전해 드리겠습니다.");
+ const text=join([d.title,facts.join("\n"),first,...details,context,d.react,line(d.next),finish]);
+ const summary=distinct([line(ghReviewLine(d.main))||line(ghReviewLine(d.steps||d.moment||d.feeling)),line(ghReviewLine(d.feeling||d.moment))]).join(" ");
+ return [["복지관 홈페이지 행사 후기",text],["홈페이지 목록용 요약",join([d.title,summary])]];
 }
 function ghReviewDemo(v){
  const group=v._work?.program?v._work.group:"";
  const x=GH_BLOG_DEMOS[group]||GH_BLOG_DEMOS.default, mode=v.tone||"따뜻하게";
  const tags="#용인시기흥장애인복지관 #복지관소식 #"+x.tag;
- if(v.where!=="네이버 블로그")return ghReviewSocial(v,{
-   title:x.title,main:x.activity,moment:x.moment,feeling:x.meaning,tags
- });
+ if(v.where!=="네이버 블로그"){
+  const d={title:x.title,main:x.activity,prep:x.prep,steps:x.steps,moment:x.moment,feeling:x.meaning,finish:x.close,tags};
+  return v.where==="복지관 홈페이지"?ghWebsiteReview(v,d):ghReviewSocial(v,d);
+ }
  const form=s=>ghReviewForm(s,mode);
  const style=GH_BLOG_STYLE[mode]||GH_BLOG_STYLE["따뜻하게"];
  const voice=REVIEW_VOICE[mode]||REVIEW_VOICE["따뜻하게"];
@@ -4692,6 +4715,7 @@ function ghReviewDemo(v){
 }
 function ghChannelReview(v,d){
  if(d.empty)return ghReviewDemo(v);
+ if(v.where==="복지관 홈페이지")return ghWebsiteReview(v,d);
  if(v.where!=="네이버 블로그")return ghReviewSocial(v,d);
  const tone=v.tone||"따뜻하게",voice=REVIEW_VOICE[tone]||REVIEW_VOICE["따뜻하게"],style=GH_BLOG_STYLE[tone]||GH_BLOG_STYLE["따뜻하게"];
  const join=parts=>parts.filter(Boolean).join("\n\n");
@@ -4720,7 +4744,7 @@ function promoPost(v){
  const meta={}, blocks={work:[],prep:[],steps:[],moment:[],reaction:[],thanks:[],next:[],photo:[],feeling:[],finish:[]};
  const keys={
   "제목":"title","프로그램명":"title","행사명":"title","활동명":"title",
-  "일시":"when","행사일시":"when","날짜":"when","장소":"where","참여대상":"who","참여인원":"count",
+  "일시":"when","행사일시":"when","진행일시":"when","날짜":"when","장소":"where","참여대상":"who","참여인원":"count","링크":"link","게시글링크":"link","자세히보기":"link",
   "활동":"work","올릴활동":"work","활동내용":"work","준비":"prep","준비과정":"prep","진행":"steps","진행내용":"steps","과정":"steps",
   "기억에남는장면":"moment","기억에남는순간":"moment","한장면":"moment",
   "참여자반응":"reaction","참여자의반응":"reaction","반응":"reaction","참여자한마디":"reaction","소감":"reaction",
