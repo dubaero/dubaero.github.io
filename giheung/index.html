@@ -1202,7 +1202,7 @@ return {html:html,bind:bind};})();
 
 <!-- ===== 다국어 안내 ===== -->
 <div id="v-multi" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>다국어 안내</h2></div>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>쉬운 글·다국어 안내</h2></div>
   <div class="tool">
     <p class="sub">이용자·보호자에게 보낼 일정·신청 안내를 쉬운 글과 여러 언어로 함께 만들어요. 상담 내용에는 쓰지 마세요.</p>
     <div class="row">
@@ -1211,7 +1211,7 @@ return {html:html,bind:bind};})();
     </div>
     <label class="l" for="m-in">안내할 내용</label>
     <div class="mic-row"><button type="button" class="mic" data-for="m-in"><svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>눌러서 말하기</span></button><span class="mic-st" id="st-m-in"></span></div>
-    <textarea class="f" id="m-in" placeholder="예) 11월 22일 토요일 오전 10시, 가족 놀이 프로그램. 장소는 센터 2층. 아이와 함께 오세요."></textarea>
+    <textarea class="f" id="m-in" placeholder="예) 11월 29일 토요일 오전 10시, 나들이 프로그램. 장소는 복지관 앞마당. 가족과 함께 오세요."></textarea>
     <div class="acts"><button type="button" class="btn fill" id="m-gpt">ChatGPT에서 만들기</button><button type="button" class="btn" id="m-copy">프롬프트 복사</button></div>
     <p class="warn" style="color:var(--muted)">번역 결과의 날짜·금액·장소는 통번역 담당자가 한 번 더 확인해요.</p>
   </div>
@@ -1628,7 +1628,11 @@ var SIMPLE={
   f:[{k:'to',l:'받는 사람',o:['이용자·보호자','활동지원사·자원봉사자','협력 기관']},{k:'kind',l:'상황',o:['일정 안내','불참 확인','준비물 안내','서류 요청','감사 인사','변경·취소 안내','후원·협력 감사']},
      {k:'memo',l:'전할 내용',ph:'예) 11/29(토) 10시 나들이, 복지관 앞 출발, 점심 도시락 지참'}],
   p:function(v){return '너는 장애인복지관 담당자야. '+v.to+'에게 보낼 문자를 써 줘.\n- 상황: '+v.kind+'\n- 따뜻하고 분명하게, 5줄 이내\n- 버전 2개: 기본 / 더 짧게\n- 발달장애인·보호자가 읽기 쉬운 쉬운 글로\n- '+NOFAKE+'\n\n[전할 내용]\n'+v.memo;}},
- promo:{t:'홍보·안내',s:'모집 문구, 카드뉴스 구성, 블로그 초안을 만들어요.',f:[],p:null},
+ promo:{t:'홍보·안내',s:'모집 문구, 카드뉴스 구성, 블로그 초안을 만들어요.',
+  f:[{k:'biz',l:'사업',o:['스마트재활센터','장애인식개선(포니야 놀자!)','주간이용센터(PCISP)','주간활동서비스','직업지원(훈련·직업대학)','장애인활동지원','재가복지·문화기행','후원·자원봉사','개관기념행사·가족잔치']},
+     {k:'out',l:'만들 것',o:['문자·카톡 모집 문구','카드뉴스 4장 구성','블로그 초안','세 가지 모두']},
+     {k:'memo',l:'행사 정보',ph:'예) 주말 나들이단, 12월 매주 토 10시, 성인 장애인 10명, 무료, 복지관 전화 신청'}],
+  p:null},
  meet:{t:'회의 녹음 → 회의록·공문',s:'클로바노트나 Gemini로 받아 적은 전사본을 붙여 넣으면 회의록과 후속 공문 초안을 만들어요.',
   f:[{k:'memo',l:'회의 전사본',ph:'녹음 전사본을 붙여 넣으세요 (이름은 직책으로 바꿔 주세요)'}],
   p:function(v){return '아래 [회의 전사본]으로 두 가지를 만들어 줘.\n1) 회의록: 첨부 1(우리 복지관 회의록 서식)의 항목 이름과 순서 그대로. 서식을 첨부하지 않았으면 쓰기 전에 먼저 서식을 첨부해 달라고 말해 줘.\n2) 결정 사항에 따른 공문 초안: 첨부 2(우리 복지관 공문·기안문 서식) 그대로. 결정 사항에 없는 내용은 넣지 마.\n- 발언하지 않은 내용은 넣지 말고, 전사가 불명확한 부분은 [불명확]으로 표시\n- 참석자는 이름 대신 직책으로\n- '+NOFAKE+'\n\n[회의 전사본]\n'+v.memo;}},
@@ -2674,7 +2678,7 @@ function sugFor(k,v){var t=TIP[v.tgt]||'';
   if(k==='idea'){var a=IDEA[v.area]||[];return a.map(function(x,i){return {h:(i+1)+'안 · '+x,d:v.tgt+' 대상 · '+v.when+' · '+v.size+(t?' → '+t:'')};});}
   if(k==='msg'){var a=MSGX[v.kind]||[];return a.map(function(x,i){return {h:(i+1)+'안',d:x};});}
   if(k==='promo'){var b=v.biz;if(v.out==='블로그 초안')return [{h:'예시 1 · 제목',d:'우리 동네 '+b+', 이렇게 함께해요'},{h:'예시 2 · 제목',d:'아이와 보내는 주말, '+b+'에서 찾았어요'},{h:'예시 3 · 제목',d:'참여 가족이 말하는 '+b+' 이야기'}];
-    if(v.out==='문자·카톡 모집 문구')return [{h:'1안',d:'['+b+'] 참여 가족을 모집해요!\n· 대상: [대상]\n· 일시: [날짜·시간]\n· 장소: [장소]\n· 신청: [방법] / 문의 [전화]'},{h:'2안 (쉬운 한국어)',d:b+'에 오세요.\n언제: [날짜]\n어디: [장소]\n신청: [전화]'},{h:'예시 3 · 마감 강조',d:'['+b+'] 선착순 [인원] 가족, [마감일]에 마감해요!\n· 일시: [날짜·시간] · 장소: [장소]\n· 신청: [방법]'}];
+    if(v.out==='문자·카톡 모집 문구')return [{h:'1안',d:'['+b+'] 참여자를 모집해요!\n· 대상: [대상]\n· 일시: [날짜·시간]\n· 장소: [장소]\n· 신청: [방법] / 문의 [전화]'},{h:'2안 (쉬운 글)',d:b+'에 오세요.\n언제: [날짜]\n어디: [장소]\n신청: [전화]'},{h:'예시 3 · 마감 강조',d:'['+b+'] 선착순 [인원] 가족, [마감일]에 마감해요!\n· 일시: [날짜·시간] · 장소: [장소]\n· 신청: [방법]'}];
     return [{h:'예시 1 · 질문형',d:'1장 “주말에 뭐 하지?” / 2장 '+b+'에서 함께 놀아요 / 3장 언제·어디서 / 4장 지금 신청하세요'},{h:'예시 2 · 이야기형',d:'1장 우리 가족의 작은 변화 / 2장 '+b+' 이런 활동 / 3장 일정 안내 / 4장 신청·문의'},{h:'예시 3 · 정보형',d:'1장 '+b+' 한눈에 보기 / 2장 이런 가족께 추천 / 3장 일정·장소·인원 / 4장 신청 방법 3단계'}];}
   if(k==='img'){
     var S=SEASON[v.season]||SEASON[SEASON_NOW];
