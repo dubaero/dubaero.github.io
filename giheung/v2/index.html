@@ -2399,6 +2399,21 @@ if(G&&G['ChatGPT|이미지 편집 화면'])G['ChatGPT|이미지 편집 화면'].
 if(typeof VIEW!=='undefined'&&VIEW==='apps'){if((S.fc??0)>=((APPS[S.app]||{}).cards||[]).length)S.fc=0;render()}
 })();
 </script>
+<script>/* 2026.11.26 ChatGPT 이미지로 확인하기 */
+(function(){
+if(typeof APPS==='undefined')return;
+const A=APPS.find(a=>a.n==='ChatGPT');if(!A)return;const N='이미지로 확인하기';
+if(!A.cards.some(c=>c.n===N)){const i=A.cards.findIndex(c=>c.n==='기능 한눈에');A.cards.splice(i+1,0,{n:N,f:1,what:''})}
+if(typeof FLX!=='undefined')FLX['ChatGPT|'+N]=[[],'기능 설명 그림 모아 보기',''];
+if(window.__ai)window.__ai.CIC[N]='img';
+const IM=[['edit','생성한 이미지, ChatGPT 안에서 바로 수정하기'],['canva','ChatGPT와 Canva 연결하고 이미지 편집하기'],['reserve2','예약 기능 — 원하는 시간에 알아서 실행'],['reserve1','예약 기능 — 업무 알림·정리·초안'],['space','ChatGPT 스페이스 — 자료를 모으고 함께 작업']];
+document.head.insertAdjacentHTML('beforeend','<style>.gal{display:grid;gap:14px;padding:12px}.gal figure{margin:0;background:#fff;border:1px solid #DDE8E0;border-radius:14px;overflow:hidden}.gal img{width:100%;display:block;cursor:zoom-in}.gal figcaption{padding:8px 12px;font-weight:800;color:#1E5442;border-top:1px solid #EEF2EF}</style>');
+const _apps=VIEWS.apps;
+VIEWS.apps=()=>{const h=_apps();const B=APPS[S.app??0]||APPS[0];const C=B.cards[S.fc??0];if(B!==A||!C||C.n!==N)return h;
+ window.RIGHT=()=>{const r=document.getElementById('R');if(r)r.innerHTML=`<div class="bar"><span class="t">ChatGPT · ${N}</span><span class="sub2">그림을 누르면 크게 보여요</span><button class="btn p" onclick="openAI('chatgpt','')">ChatGPT 열기</button></div><div class="gal">${IM.map(x=>`<figure><img src="/img/giheung/gpt/${x[0]}.webp" alt="${x[1]}" loading="lazy" onclick="zoomImg(this.src)"><figcaption>${x[1]}</figcaption></figure>`).join('')}</div>`};return h};
+if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
+})();
+</script>
 <style id="gh-home-theme">
 :root{--bg:#EEF6F0;--line:#D5E5DA}
 html,body{background:#EEF6F0!important}
