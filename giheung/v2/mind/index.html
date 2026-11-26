@@ -4263,7 +4263,20 @@ var RESTX=[
  ['stretch','의자에 앉은 채로 두 다리를 쭉 펴서 발끝을 몸 쪽으로 당기기, 5초씩 세 번.'],
  ['tongue','혀를 쭉 내밀고 "메롱~" 세 번. 얼굴 근육이 확 풀리고 웃음이 나요.'],
  ['exercise','제자리에서 팔 벌려 뛰기 10번! 앉아서라면 두 팔만 위아래로 쭉쭉.'],
- ['window','창밖 구름을 보며 1분 동안 아무 생각 없이 멍~ 때리기.']];
+ ['window','창밖 구름을 보며 1분 동안 아무 생각 없이 멍~ 때리기.'],
+ ['shoulder','[어깨 으쓱 툭!] 어깨를 귀까지 으쓱~ 올렸다가 툭! 떨어뜨리기, 세 번.'],
+ ['fist','[주먹 꽉! 손바닥 쫙!] 두 주먹을 5초 꽉 쥐었다가 쫙 펴기, 세 번. 손끝까지 시원해요.'],
+ ['toe','[발끝 까딱까딱] 앉은 채 다리를 쭉 펴고 발끝을 몸 쪽으로 당겼다 밀기, 열 번.'],
+ ['hug','[나비 포옹] 두 팔을 X자로 가슴에 얹고 토닥토닥 열 번. "괜찮아, 잘하고 있어."'],
+ ['eyes','[손바닥 눈 찜질] 손바닥을 싹싹 비벼 따뜻하게 만든 뒤 눈 위에 10초.'],
+ ['meditate','[1분 명상] 눈을 감고 숨소리만 들어 보기. 생각이 오면 구름처럼 흘려보내요.'],
+ ['twist','[허리 비비 꼬기] 앉은 채 허리를 오른쪽·왼쪽으로 살살 비틀기, 5초씩.'],
+ ['laugh','[가짜 웃음 진짜 웃음] "하하하!" 억지로 10초 웃기. 하다 보면 진짜 웃음이 나요.'],
+ ['neck','[목 빙글빙글 부엉이] 부엉이처럼 고개를 천천히 오른쪽·왼쪽으로 돌리기.'],
+ ['window','[창밖 멍때리기 챔피언] 창밖 구름을 보며 1분 동안 멍~. 아무 생각 안 해도 1등이에요.'],
+ ['tongue','[메롱 얼굴 체조] 혀를 쭉 내밀고 "메롱~" 세 번. 얼굴이 풀리고 웃음이 나요.'],
+ ['shake','[강아지 탈탈 털기] 물 털듯 온몸을 탈탈 10초.'],
+ ['praise','[나 칭찬 셀프 박수] "오늘도 버틴 나, 최고다!" 작게 소리 내어 칭찬하고 박수 짝짝.']];
 var RTYPE={};RESTX.forEach(function(r){RTYPE['쉼 하나: '+r[1]]=r[0];});
 function restFig(t){var f=RTYPE[t]||(/어깨/.test(t)?'shoulder':/물|차/.test(t)?'water':/창밖|보이는/.test(t)?'window':'breath');
  var H='<circle cx="32" cy="13" r="6"/>',B='<path d="M32 19 V40"/>',L='<path d="M32 40 L25 56 M32 40 L39 56"/>',A='<path d="M32 24 L23 37 M32 24 L41 37"/>';
@@ -6163,6 +6176,6 @@ footer{background:#2E3B37!important}
 var t=document.getElementById('tophome');if(t)t.textContent='← 업무도우미 홈으로 이동';
 ['v-prompt','v-studio','v-gbiz','v-song','v-heart','v-vent'].forEach(function(id){var b=document.querySelector('#'+id+' .vback');if(b)b.textContent='← 홈';});
 var h=document.querySelector('#v-song .vbar h2');if(h)h.textContent='AI 작곡실';})();</script>
-<script src="zz.js?v=4"></script>
+<script src="zz.js?v=6"></script>
 </body>
 </html>

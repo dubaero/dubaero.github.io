@@ -14,7 +14,14 @@ function zz(pose,mode){var u='z'+(++uid);
   up:limb('M60 62 L42 48 L28 28','')+limb('M60 62 L78 48 L92 28','')+hand(28,28)+hand(92,28),
   hips:limb('M60 62 L44 70 L50 84','')+limb('M60 62 L76 70 L70 84','')+hand(50,84)+hand(70,84),
   cup:limb('M60 62 L46 78 L42 92','')+limb('M60 62 L76 70 L70 52','')+hand(70,52)+'<rect x="66" y="40" width="11" height="13" rx="2.5" fill="#fff" stroke="#6C8A99" stroke-width="1.6"/><path d="M77 44 q5 0 5 4 t-5 4" fill="none" stroke="#6C8A99" stroke-width="1.6"/>',
+  fist:limb('M60 62 L44 70 L36 64','')+limb('M60 62 L76 70 L84 64','')+'<circle class="zz-fs" cx="36" cy="64" r="4.6" fill="#3A4148"/><circle class="zz-fs" cx="84" cy="64" r="4.6" fill="#3A4148"/>',
+  hug:limb('M60 62 L48 72 L70 70','')+limb('M60 62 L72 72 L50 70','')+hand(70,70)+hand(50,70),
+  eyes:limb('M60 62 L44 54 L52 32','')+limb('M60 62 L76 54 L68 32','')+'<ellipse cx="52" cy="31" rx="5" ry="4" fill="#3A4148"/><ellipse cx="68" cy="31" rx="5" ry="4" fill="#3A4148"/>',
+  laugh:limb('M60 62 L46 74 L56 86','')+limb('M60 62 L74 74 L64 86','')+hand(56,86)+hand(64,86),
+  pray:limb('M60 62 L50 74 L59 70','')+limb('M60 62 L70 74 L61 70','')+hand(60,69),
   wave:limb('M60 62 L46 78 L42 92','')+'<g class="zz-wv">'+limb('M60 62 L76 52 L82 34','')+hand(82,34)+'</g>'+hand(42,92)};
+ var legsToe=limb('M60 100 L52 118 L50 128','')+'<g class="zz-kick">'+limb('M60 100 L80 104 L98 104','')+'<path class="zz-toe" d="M98 104 l2 -7" stroke="#3A4148" stroke-width="4.6" stroke-linecap="round"/></g><ellipse cx="47" cy="129" rx="6" ry="3" fill="#3A4148"/>';
+ var legsSit=limb('M60 100 L40 108 L66 116','')+limb('M60 100 L80 108 L54 116','')+'<ellipse cx="60" cy="118" rx="24" ry="4" fill="#CFE7DA" opacity=".8"/>';
  var legs=limb('M60 100 L52 118 L50 128','zz-ll')+limb('M60 100 L68 118 L70 128','zz-lr')+'<ellipse cx="47" cy="129" rx="6" ry="3" fill="#3A4148"/><ellipse cx="73" cy="129" rx="6" ry="3" fill="#3A4148"/>';
  var body=limb('M60 53 L60 100','')+'<circle class="zz-belly" cx="60" cy="82" r="5" fill="url(#'+u+'b)" stroke="#3A4148" stroke-width="2"/>';
  var eyes='<g class="zz-eyes"><ellipse cx="52.5" cy="31" rx="3.6" ry="4.2" fill="#3A4148"/><ellipse cx="67.5" cy="31" rx="3.6" ry="4.2" fill="#3A4148"/><circle cx="53.8" cy="29.4" r="1.4" fill="#fff"/><circle cx="68.8" cy="29.4" r="1.4" fill="#fff"/><circle cx="51.4" cy="32.8" r=".6" fill="#fff"/><circle cx="66.4" cy="32.8" r=".6" fill="#fff"/></g>';
@@ -37,32 +44,46 @@ function zz(pose,mode){var u='z'+(++uid);
   stretch:{a:'up',f:'<g class="zz-eyes"><path d="M48.5 31 q4 3 8 0 M63.5 31 q4 3 8 0" fill="none" stroke="#3A4148" stroke-width="2.2" stroke-linecap="round"/></g>'+nose+'<ellipse class="zz-mo" cx="60" cy="42" rx="3.4" ry="3.8" fill="#3A4148"/>',x:'<text class="zz-tx" x="82" y="20">하~암</text>'},
   shake:{a:'down',f:daze+nose+mouthO,x:'<g stroke="#9AC7DE" stroke-width="2" stroke-linecap="round"><path d="M22 60 h-8 M24 72 h-10 M96 60 h8 M96 72 h10"/></g>'},
   shout:{a:'down',f:eyes+nose+'<ellipse class="zz-mo2" cx="60" cy="42" rx="4" ry="4" fill="#3A4148"/>',x:'<text class="zz-tx" x="84" y="22">아~~!</text>'},
-  water:{a:'cup',f:eyes+nose+mouthS,x:'<path class="zz-st" d="M70 34 q-3 -5 0 -10 M75 34 q-3 -5 0 -10" fill="none" stroke="#B7CBD4" stroke-width="1.6" stroke-linecap="round"/>'},
+  water:{a:'cup',top:1,f:eyes+nose+mouthS,x:'<path class="zz-st" d="M70 34 q-3 -5 0 -10 M75 34 q-3 -5 0 -10" fill="none" stroke="#B7CBD4" stroke-width="1.6" stroke-linecap="round"/>'},
   hum:{a:'belly',f:'<g class="zz-eyes"><path d="M48.5 31 q4 3 8 0 M63.5 31 q4 3 8 0" fill="none" stroke="#3A4148" stroke-width="2.2" stroke-linecap="round"/></g>'+nose+mouthO,x:'<g class="zz-note" fill="#2A9D8F"><path d="M88 22 V8 L100 5 V19" fill="none" stroke="#2A9D8F" stroke-width="2"/><circle cx="86" cy="22" r="3"/><circle cx="98" cy="19" r="3"/></g>'},
+  fist:{a:'fist',f:eyes+nose+mouthS,x:'<text class="zz-tx" x="84" y="22">꽉! 쫙!</text>'},
+  toe:{a:'hips',l:'toe',f:eyes+nose+mouthO,x:'<text class="zz-tx" x="80" y="86">당겨~</text>'},
+  hug:{a:'hug',f:'<g class="zz-eyes"><path d="M48.5 31 q4 3 8 0 M63.5 31 q4 3 8 0" fill="none" stroke="#3A4148" stroke-width="2.2" stroke-linecap="round"/></g>'+nose+mouthS,x:'<g class="zz-hrt" fill="#FF8FA3"><path d="M92 18 c0 -4 6 -4 6 0 c0 -4 6 -4 6 0 c0 4 -6 8 -6 8 c0 0 -6 -4 -6 -8z"/></g>'},
+  eyes:{a:'eyes',top:1,f:nose+mouthS,x:'<text class="zz-tx" x="84" y="20">따뜻~</text>'},
+  meditate:{a:'pray',l:'sit',f:'<g class="zz-eyes"><path d="M48.5 31 q4 3 8 0 M63.5 31 q4 3 8 0" fill="none" stroke="#3A4148" stroke-width="2.2" stroke-linecap="round"/></g>'+nose+mouthS,x:'<text class="zz-tx zz-om" x="82" y="30">음~</text><circle class="zz-aura" cx="60" cy="70" r="46" fill="none" stroke="#9ADCCB" stroke-width="2"/>'},
+  twist:{a:'hips',f:eyes+nose+mouthO,x:''},
+  laugh:{a:'laugh',f:'<g class="zz-eyes"><path d="M48.5 31 q4 -4.5 8 0" fill="none" stroke="#3A4148" stroke-width="2.2" stroke-linecap="round"/><path d="M63.5 31 q4 -4.5 8 0" fill="none" stroke="#3A4148" stroke-width="2.2" stroke-linecap="round"/></g>'+nose+'<path d="M54 40 q6 8 12 0z" fill="#E8697D" stroke="#3A4148" stroke-width="1.4"/>',x:'<text class="zz-tx" x="82" y="22">하하하!</text>'},
   praise:{a:'wave',f:eyes+nose+mouthS,x:'<path class="zz-star" d="M96 10 l3 6 6 1 -4.5 4 1 6 -5.5 -3 -5.5 3 1 -6 -4.5 -4 6 -1z" fill="#F7C873" stroke="#E0A43A"/>'}};
  var p=P[pose]||P.breath;
- return '<svg class="zz zz-'+pose+(mode?' zz-'+mode:'')+'" viewBox="0 0 120 136" aria-hidden="true">'+D+sh+p.x+'<g class="zz-body">'+legs+body+arms[p.a]+head(p.f)+'</g></svg>';}
+ return '<svg class="zz zz-'+pose+(mode?' zz-'+mode:'')+'" viewBox="0 0 120 136" aria-hidden="true">'+D+sh+p.x+'<g class="zz-body">'+(p.l==='toe'?legsToe:p.l==='sit'?legsSit:legs)+body+(p.top?head(p.f)+'<g class="zz-arms">'+arms[p.a]+'</g>':'<g class="zz-arms">'+arms[p.a]+'</g>'+head(p.f))+'</g></svg>';}
 window.zz=zz;
 
 /* 마음 지킴이 쉼 하나 그림 */
-var MAP={breath:'breath',shout:'shout',swear:'shout',write:'breath',shoulder:'shoulder',fist:'exercise',stretch:'stretch',neck:'neck',hug:'breath',palm:'breath',smile:'tongue',shake:'shake',hum:'hum',walk:'exercise',window:'window',water:'water',praise:'praise',tongue:'tongue',exercise:'exercise'};
+var MAP={breath:'breath',shout:'shout',swear:'shout',write:'breath',shoulder:'shoulder',fist:'fist',stretch:'stretch',neck:'neck',hug:'hug',palm:'eyes',smile:'tongue',shake:'shake',hum:'hum',walk:'exercise',window:'window',water:'water',praise:'praise',tongue:'tongue',exercise:'exercise',toe:'toe',hug2:'hug',eyes:'eyes',meditate:'meditate',twist:'twist',laugh:'laugh'};
 if(typeof restFig==='function'){restFig=function(t){var f=(typeof RTYPE!=='undefined'&&RTYPE[t])||(/어깨/.test(t)?'shoulder':/물|차/.test(t)?'water':/창밖|보이는|멍/.test(t)?'window':/메롱|혀/.test(t)?'tongue':/운동|뛰기/.test(t)?'exercise':/고개|목/.test(t)?'neck':'breath');return zz(MAP[f]||'breath','loop');};
  var r=document.getElementById('h2-rest');if(r){var s=r.querySelector('svg'),pp=r.querySelector('p');if(s&&pp)s.outerHTML=restFig(pp.textContent)}}
 
 /* 빡침 번역기: 쉼표 씨 숨 고르기 + 쉬는 동작 */
-var LIST=[
- {n:'기본 숨 고르기',f:'breath',d:'코로 4초 들이쉬면 코·배가 벌렁벌렁 커지고, 6초 내쉬면 쏙 작아져요',p:[['코로 들이쉬기',4,'in'],['멈추기',4,'hold'],['입으로 내쉬기',6,'out']]},
- {n:'풍선 불기 숨',f:'balloon',d:'코로 들이쉬고, 볼 빵빵하게 풍선 불듯 후~',p:[['코로 들이쉬기',4,'in'],['볼 빵빵 후~',6,'out']]},
- {n:'창밖 보고 멍때리기',f:'window',d:'창밖 구름을 1분 동안 멍~하니 바라보기. 아무 생각 안 해도 돼요',p:[['멍~',10,'act'],['더 멍~',10,'act'],['천천히 돌아오기',4,'hold']]},
- {n:'메롱 혀 내밀기',f:'tongue',d:'혀를 쭉 내밀고 "메롱~". 얼굴 근육이 풀리고 웃음이 나요',p:[['메롱~',3,'act'],['쉬기',2,'hold']]},
- {n:'목 천천히 돌리기',f:'neck',d:'고개를 오른쪽·왼쪽으로 천천히 크게 돌리기',p:[['오른쪽으로~',4,'act'],['왼쪽으로~',4,'act']]},
- {n:'제자리 팔 벌려 뛰기',f:'exercise',d:'팔 벌려 뛰기 10번! 앉아서는 팔만 위아래로',p:[['하나 둘! 하나 둘!',8,'act'],['숨 고르기',4,'hold']]},
- {n:'어깨 으쓱 툭',f:'shoulder',d:'어깨를 귀까지 으쓱 올렸다가 툭 떨어뜨리기',p:[['으쓱~ 툭!',6,'act']]},
- {n:'기지개 하품',f:'stretch',d:'두 팔을 하늘로 쭉 뻗고 하~암 하품 크게',p:[['쭈~욱',4,'act'],['툭 내려놓기',3,'hold']]},
- {n:'강아지 몸 털기',f:'shake',d:'강아지가 물 털듯 온몸을 탈탈 10초',p:[['탈탈탈탈',10,'act']]},
- {n:'소리 없이 "아~"',f:'shout',d:'먼 산 보고 소리 지르듯 입만 크게 "아~" (소리는 안 내요)',p:[['아~~!',3,'act'],['쉬기',2,'hold']]},
- {n:'따뜻한 차 한 모금',f:'water',d:'따뜻한 물이나 차를 천천히 한 모금씩',p:[['후~ 호록',8,'act']]},
- {n:'콧노래 흥얼',f:'hum',d:'좋아하는 노래 한 소절 콧노래로',p:[['음~ 음음~',8,'act']]}];
+var LIST=[{"n": "기본 숨 고르기", "f": "breath", "d": "코로 4초 들이쉬면 코·배가 빵빵, 6초 내쉬면 쏙~", "p": [["코로 들이쉬기", 4, "in"], ["멈추기", 4, "hold"], ["입으로 내쉬기", 6, "out"]]},
+ {"n": "풍선 빵빵 숨", "f": "balloon", "d": "볼을 풍선처럼 빵빵하게 부풀려 후~", "p": [["코로 들이쉬기", 4, "in"], ["볼 빵빵 후~", 6, "out"]]},
+ {"n": "어깨 으쓱 툭!", "f": "shoulder", "d": "어깨를 귀까지 으쓱~ 올렸다가 툭! 떨어뜨리기", "p": [["으쓱~", 3, "act"], ["툭!", 2, "act"]]},
+ {"n": "주먹 꽉! 손바닥 쫙!", "f": "fist", "d": "두 주먹을 5초 꽉 쥐었다가 쫙 펴기. 손끝까지 시원~", "p": [["꽉!", 5, "act"], ["쫙~", 3, "act"]]},
+ {"n": "발끝 까딱까딱", "f": "toe", "d": "앉은 채 다리를 쭉 펴고 발끝을 몸 쪽으로 당겼다 밀기", "p": [["당겨~", 3, "act"], ["밀어~", 3, "act"]]},
+ {"n": "창밖 멍때리기 챔피언", "f": "window", "d": "창밖 구름 보며 1분 동안 아무 생각 안 하기. 멍~", "p": [["멍~", 10, "act"], ["더 멍~", 10, "act"]]},
+ {"n": "메롱 메롱 얼굴 체조", "f": "tongue", "d": "혀 쭉 내밀고 \"메롱~\". 얼굴 근육이 풀려요", "p": [["메롱~", 3, "act"], ["쉬기", 2, "hold"]]},
+ {"n": "목 빙글빙글 부엉이", "f": "neck", "d": "부엉이처럼 고개를 천천히 오른쪽·왼쪽", "p": [["오른쪽~", 4, "act"], ["왼쪽~", 4, "act"]]},
+ {"n": "팔 벌려 뛰기 10번", "f": "exercise", "d": "하나 둘! 앉아서는 팔만 위아래로", "p": [["하나 둘! 하나 둘!", 8, "act"]]},
+ {"n": "기지개 하~암", "f": "stretch", "d": "두 팔 하늘로 쭉~ 하품 크게", "p": [["쭈~욱", 4, "act"], ["툭", 2, "hold"]]},
+ {"n": "강아지 탈탈 털기", "f": "shake", "d": "물 털듯 온몸을 탈탈탈", "p": [["탈탈탈탈", 8, "act"]]},
+ {"n": "나비 포옹 토닥토닥", "f": "hug", "d": "두 팔을 X자로 가슴에 얹고 토닥토닥 \"괜찮아, 잘하고 있어\"", "p": [["토닥토닥", 8, "act"]]},
+ {"n": "손바닥 눈 찜질", "f": "eyes", "d": "손바닥을 싹싹 비벼 따뜻하게, 눈 위에 10초", "p": [["싹싹싹", 3, "act"], ["따뜻~", 10, "act"]]},
+ {"n": "1분 명상 \"음~\"", "f": "meditate", "d": "눈 감고 숨소리만 듣기. 생각이 와도 그냥 보내기", "p": [["들이쉬고~", 4, "in"], ["내쉬고~", 6, "out"]]},
+ {"n": "허리 비비 꼬기", "f": "twist", "d": "앉은 채 허리를 오른쪽·왼쪽으로 살살 비틀기", "p": [["오른쪽~", 4, "act"], ["왼쪽~", 4, "act"]]},
+ {"n": "가짜 웃음 진짜 웃음", "f": "laugh", "d": "\"하하하!\" 억지로 10초 웃다 보면 진짜 웃음이 나요", "p": [["하하하!", 10, "act"]]},
+ {"n": "소리 없는 \"아~\" 함성", "f": "shout", "d": "먼 산 보고 입만 크게 \"아~\" (소리는 안 내요)", "p": [["아~~!", 3, "act"], ["쉬기", 2, "hold"]]},
+ {"n": "차 한 모금 호록", "f": "water", "d": "따뜻한 차를 향 맡으며 한 모금씩", "p": [["후~ 호록", 8, "act"]]},
+ {"n": "콧노래 흥얼흥얼", "f": "hum", "d": "좋아하는 노래 한 소절 콧노래로", "p": [["음~ 음음~", 8, "act"]]},
+ {"n": "나 칭찬 셀프 박수", "f": "praise", "d": "\"오늘도 버틴 나, 최고다!\" 소리 내어 칭찬", "p": [["최고다!", 5, "act"]]}];
 function vent(){var box=document.querySelector('#v2-tool .breath');if(!box||box.dataset.zz)return;box.dataset.zz=1;var cur=0,run=0;
  box.innerHTML='<div class="zzv"><div class="zzv-f" id="zzv-f"></div><span class="zzv-t" id="zzv-t">준비</span><b id="zzv-n"></b><small id="zzv-d"></small><div class="zzv-b"><button type="button" id="zzv-go">따라 하기 (3번)</button><button type="button" id="zzv-nx">다른 쉬기 ›</button></div></div>';
  function g(i){return document.getElementById(i)}
@@ -102,6 +123,13 @@ document.head.insertAdjacentHTML('beforeend','<style id="zz-css">'
 +'#v2-tool .sright{grid-template-columns:minmax(0,1fr) 210px!important}#v2-tool .breath{padding:8px!important;align-items:center!important}'
 +'.zzv{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;width:100%}.zzv-f{width:196px;height:206px;border-radius:50%;background:radial-gradient(circle at 50% 55%,#FFF4E6 0,#FFF4E6 62%,transparent 63%);display:grid;place-items:center}.zzv-f svg{width:190px;height:210px}'
 +'.zzv-t{background:#2a9d8f;color:#fff;border-radius:999px;padding:3px 12px;font-size:13.5px;font-weight:800}.zzv b{font-size:14.5px;color:#1E5442}.zzv small{font-size:12.5px;color:#4b5a55;line-height:1.45}.zzv-b{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}.zzv-b button{border:1px solid #D5E5DA;background:#fff;border-radius:8px;padding:5px 10px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}.zzv-b button:first-child{background:#2a9d8f;border-color:#2a9d8f;color:#fff}'
++'.zz-shoulder .zz-body{animation:none}.zz-shoulder .zz-arms{animation:zzSh2 2.4s ease-in-out infinite}.zz-shoulder .zz-head{animation:zzSh3 2.4s ease-in-out infinite}@keyframes zzSh2{0%,15%,100%{transform:translateY(0)}35%,60%{transform:translateY(-9px)}70%{transform:translateY(2px)}}@keyframes zzSh3{0%,15%,100%{transform:translateY(0)}35%,60%{transform:translateY(-3px)}}'
++'.zz-fist .zz-fs{animation:zzFs 2s ease-in-out infinite}@keyframes zzFs{0%,45%{transform:scale(1.25)}55%,100%{transform:scale(.6)}}.zz-fist .zz-tx{animation:zzFl 2s infinite}'
++'.zz-toe .zz-toe{transform-origin:98px 104px;transform-box:view-box;animation:zzTo 1.6s ease-in-out infinite alternate}@keyframes zzTo{from{transform:rotate(30deg)}to{transform:rotate(-30deg)}}.zz-toe .zz-kick{transform-origin:60px 100px;transform-box:view-box;animation:zzKk 3.2s ease-in-out infinite}@keyframes zzKk{0%,100%{transform:rotate(0)}50%{transform:rotate(-8deg)}}'
++'.zz-hug .zz-body{transform-origin:60px 128px;animation:zzWb 1.4s ease-in-out infinite alternate}.zz-hug .zz-hrt{animation:zzSt2 1.4s ease-in-out infinite}'
++'.zz-eyes .zz-tx{animation:zzFl 2s infinite}.zz-meditate .zz-aura{animation:zzAu 4s ease-in-out infinite}.zz-meditate .zz-om{animation:zzFl 4s infinite}.zz-meditate .zz-body{animation:zzFt 4s ease-in-out infinite}@keyframes zzAu{0%,100%{transform:scale(.85);opacity:.2}50%{transform:scale(1.05);opacity:.9}}@keyframes zzFt{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}'
++'.zz-twist .zz-body{transform-origin:60px 100px;animation:zzTw 3s ease-in-out infinite}@keyframes zzTw{0%,100%{transform:skewX(0) rotate(0)}25%{transform:skewX(-10deg) rotate(-6deg)}75%{transform:skewX(10deg) rotate(6deg)}}'
++'.zz-laugh .zz-body{transform-origin:60px 128px;animation:zzLg .35s ease-in-out infinite alternate}@keyframes zzLg{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-3px) rotate(2deg)}}.zz-laugh .zz-tx{animation:zzFl .7s infinite}'
 +'@media (prefers-reduced-motion:reduce){.zz *{animation:none!important}}'
 +'</style>');
 })();
