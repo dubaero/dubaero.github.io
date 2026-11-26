@@ -249,6 +249,7 @@ function ic(k,w){return '<svg viewBox="0 0 24 24" width="'+(w||18)+'" height="'+
 window.__ic=ic;
 var KW=[[/데스크톱/,'slide'],[/\[\+\]|^\+$|입력창 \[\+\]|\+ 누르기/,'plus'],[/설정/,'gear'],[/도구 더보기|도구/,'tools'],[/왼쪽 메뉴|사이드바/,'side'],[/라이브러리|이미지 보관/,'library'],[/폴더 추가|프로젝트/,'folder'],[/예약/,'clock'],[/플러그인|커넥터|앱\(|\[앱\]/,'plug'],[/웹 검색/,'globe'],[/심층 리서치|Deep Research|리서치/,'scope'],[/스케치/,'sketch'],[/이미지 생성|이미지 만들기/,'image'],[/음악/,'music'],[/동영상|영상/,'video'],[/가이드 학습|노트북/,'book'],[/태스크/,'check'],[/개인 인텔리전스/,'user'],[/Canvas|캔버스/,'doc'],[/Magic Layers|레이어/,'layers'],[/편집|붓/,'brush'],[/Design|디자인 시스템/,'pal'],[/Skill/,'rec'],[/아티팩트|결과물 창/,'grid'],[/Canva AI|내 dot/,'spark'],[/프레젠테이션|슬라이드/,'slide'],[/Live|말하/,'mic'],[/카메라/,'camera'],[/스페이스|페이지|문서/,'doc'],[/첨부|올리|업로드/,'upload'],[/내려받|저장|다운로드/,'down'],[/공유|링크/,'link'],[/채팅|요청|적어|말해|쓰기|입력/,'chat'],[/템플릿|검색창/,'temp']];
 function kic(t){for(var i=0;i<KW.length;i++)if(KW[i][0].test(t))return KW[i][1];return ''}
+window.__kic=function(t){return kic(t)};
 function pathHtml(where){var parts=String(where).split(/\s*→\s*/);return '<div class="sld-path"><span class="pl">메뉴 위치</span>'+parts.map(function(t,i){var k=kic(t);return (i?'<em>›</em>':'')+'<span class="sld-pc">'+(k?'<i>'+ic(k,16)+'</i>':'')+e(t.replace(/^\[([^\]]*)\]$/,'$1'))+'</span>'}).join('')+'</div>'}
 function li(a){return '<ul>'+a.map(function(x){return '<li>'+e(x)+'</li>'}).join('')+'</ul>'}
 function slide(app,name,x,free){

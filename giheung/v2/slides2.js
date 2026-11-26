@@ -85,6 +85,13 @@ function cvHtml(){return '<div class="man"><div class="man-hd">'+(window.__LOGO?
  '<p class="man-note">왕관 표시(Pro)는 유료 요금제 기능이에요. 교육용·비영리 계정은 무료로 쓸 수 있는 경우가 있어요.</p></div>'}
 
 function post(){if(typeof VIEW==='undefined'||VIEW!=='apps')return;var A=APPS[S.app||0];if(!A)return;var C=A.cards[S.fc||0];if(!C)return;
+ (function(){var t=document.querySelector('#app .ftb');if(!t||t.dataset.g)return;t.dataset.g=1;var cur=S.fc||0,TOP=['기능 한눈에','메뉴 사용설명서'];
+  var KI={'기능 한눈에':'grid','메뉴 사용설명서':'side'};function bt(c,i){var k=KI[c.n]||(window.__kic?window.__kic(c.n):'')||'spark';return '<button type="button" class="fg-b'+(i===cur?' on':'')+'" data-i="'+i+'">'+ic(k,16)+'<span>'+e(c.n)+'</span></button>'}
+  var top=[],fr=[],pd=[];A.cards.forEach(function(c,i){if(TOP.indexOf(c.n)>=0)top.push(bt(c,i));else if(c.f)fr.push(bt(c,i));else pd.push(bt(c,i))});
+  var h='<div class="fg">'+(top.length?'<div class="fg-top">'+top.join('')+'</div>':'')+'<table class="fg-t"><tr><th class="f">무료</th><td><div class="fg-g">'+fr.join('')+'</div></td></tr>'+(pd.length?'<tr><th class="p">유료</th><td><div class="fg-g">'+pd.join('')+'</div></td></tr>':'')+'</table></div>';
+  t.insertAdjacentHTML('beforebegin',h);t.style.display='none';
+  [].slice.call(document.querySelectorAll('#app .pane *')).forEach(function(n){if(n.childNodes.length===1&&n.firstChild.nodeType===3&&/줄을 누르면/.test(n.textContent))n.textContent=n.textContent.replace('줄을 누르면','기능을 누르면')});
+  document.querySelectorAll('#app .fg-b').forEach(function(b){b.onclick=function(){S.fc=+b.dataset.i;S.ao=0;S.ut=0;save();render()}})})();
  var htm=C.n==='메뉴 사용설명서'&&MAN[A.n]?manHtml(A.n):(C.n==='이미지 편집 사용설명서'?cvHtml():'');
  document.querySelectorAll('.ftb tr').forEach(function(tr){var b=tr.querySelector('td b'),d=tr.children[1];if(b&&d&&!d.textContent.trim()){var k=A.cards.find(function(c){return c.n===b.textContent.trim()});if(k&&k.d)d.textContent=k.d}});
  if(!htm)return;var R=document.getElementById('R');if(!R)return;var bar=R.querySelector('.bar');
@@ -108,6 +115,8 @@ document.head.insertAdjacentHTML('beforeend','<style id="gh-man">'
 +'.pro{margin-left:auto;font-size:11px;font-weight:800;background:#FFF1D6;color:#9A6700;border-radius:999px;padding:2px 7px}'
 +'.cv-g{display:grid;grid-template-columns:330px 1fr;gap:14px;align-items:start}.cv-img{margin:0;border:1px solid #D9DEDB;border-radius:14px;overflow:hidden;background:#fff}.cv-img img{width:100%;display:block;cursor:zoom-in}.cv-img figcaption{font-size:12.5px;color:#66746f;padding:8px 10px;border-top:1px solid #E3ECE6}'
 +'.man-note{margin:0;font-size:13px;color:#66746f}'
++'.fg{display:grid;gap:8px;margin-top:4px}.fg-top{display:grid;grid-template-columns:1fr 1fr;gap:6px}.fg-t{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #D5E5DA;border-radius:12px;overflow:hidden}.fg-t th{width:46px;font-size:13px;font-weight:800;writing-mode:horizontal-tb;vertical-align:middle;border-bottom:1px solid #D5E5DA}.fg-t th.f{background:#E8F5EE;color:#1E7A4F}.fg-t th.p{background:#FFF1E6;color:#B4541A}.fg-t td{padding:8px;border-bottom:1px solid #D5E5DA;border-left:1px solid #D5E5DA}.fg-t tr:last-child th,.fg-t tr:last-child td{border-bottom:0}'
++'.fg-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.fg-b{display:flex;align-items:center;gap:7px;border:1px solid #D5E5DA;background:#fff;border-radius:9px;padding:7px 9px;font-size:13.5px;font-weight:700;color:#263331;text-align:left;cursor:pointer;min-width:0}.fg-b span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fg-b svg{flex:none;color:#2F6B56}.fg-b:hover{border-color:#2a9d8f}.fg-b.on{background:#2F6B56;border-color:#2F6B56;color:#fff}.fg-b.on svg{color:#fff}.fg-top .fg-b{background:#F7FBF8}.fg-top .fg-b.on{background:#2F6B56}'
 +'@media(max-width:1000px){.man-gs,.cv-g{grid-template-columns:1fr}}'
 +'</style>');
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
