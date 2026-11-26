@@ -2317,6 +2317,42 @@ window.__igRes=r=>`<div class="res"><div class="rh">결과 예시</div><div clas
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
 </script>
+<script>/* 2026.11.26 앱별 "기능 한눈에" 강의안 장표 */
+(function(){
+if(typeof APPS==='undefined'||!window.__ig)return;
+const G=window.__ig,OV='기능 한눈에';
+const COL={ChatGPT:'#10a37f','제미나이':'#4285f4',Claude:'#d97757',Canva:'#7d2ae8'};
+APPS.filter(a=>COL[a.n]).forEach(a=>{if(!a.cards.some(c=>c.n===OV))a.cards.unshift({n:OV,f:1,what:''});if(typeof FLX!=='undefined')FLX[a.n+'|'+OV]=[[],'모든 기능을 표 한 장으로','']});
+if(window.__ai)window.__ai.CIC[OV]='mode';
+const SV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+const P={img:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="16" cy="9" r="2"/><path d="M3 18l6-6 4 4 3-3 5 5"/>',pen:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/>',gif:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/>',lib:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',doc:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',spark:'<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/>',zap:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',layers:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',music:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',film:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M17 9h4M3 15h4M17 15h4"/>',book:'<path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>',slide:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8"/>',pal:'<circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1.2"/><circle cx="12" cy="7" r="1.2"/><circle cx="16" cy="10" r="1.2"/>',mode:'<rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/>'};
+const ICK={'5가지 모드 한눈에':'mode','이미지 만들기':'img','이미지 편집 화면':'pen','움짤 GIF':'gif','라이브러리':'lib','캔버스':'doc','내 dot':'spark','스페이스':'doc','예약':'zap','플러그인':'layers','나노바나나 이미지':'img','음악 30초':'music','영상 만들기':'film','노트북':'book','Deep Research':'search','가이드 학습':'book','태스크':'zap','개인 인텔리전스':'spark','맞춤설정':'gear','디자인':'pal','슬라이드':'slide','모션그래픽':'film','한글 서식 스킬':'doc','깊은 조사':'search','AI 프레젠테이션':'slide','매직 레이어':'layers','원고 → PPT 흐름':'doc'};
+const ic=k=>SV+(P[ICK[k]]||P.spark)+'</svg>';
+function ov(A){const col=COL[A.n],cs=A.cards.map((c,i)=>[c,i]).filter(x=>x[0].n!==OV);
+ const cell=([c,i])=>{const g=G[A.n+'|'+c.n]||{};const where=(g.st||[]).slice(0,3).map(s=>s[1]).join(' → ')||'-';const use=(g.tips||g.rows||[]).slice(0,2).map(t=>t[1]).join(' · ')||'-';
+  const what=g.s||c.what||'';
+  return `<button class="ovc" onclick="S.fc=${i};S.ut=0;save();render()"><div class="ovh"><span class="ovi" style="background:${col}">${ic(c.n)}</span><b>${c.n}</b><span class="badge ${c.f?'free':'paid'}">${c.f?'무료':'유료'}</span></div>
+  <table><tr><th>무엇</th><td>${what}</td></tr><tr><th>어디서</th><td>${where}</td></tr><tr><th>이럴 때</th><td>${use}</td></tr></table></button>`};
+ return `<div class="ovs"><div class="ovt"><span style="color:${col}">${A.n}</span> 기능 <em>한눈에</em></div><div class="ovsub">칸을 누르면 자세한 사용법 장표로 넘어가요</div><div class="ovg">${cs.map(cell).join('')}</div></div>`;}
+document.head.insertAdjacentHTML('beforeend',`<style>
+.ovs{background:#FFFBF5;border:1px solid #EFE3D3;border-radius:16px;padding:16px 18px;display:grid;gap:10px}
+.ovt{text-align:center;font-size:28px;font-weight:900;color:#1E5442;letter-spacing:-1px}.ovt em{font-style:normal;color:#E0533D}
+.ovsub{justify-self:center;background:#DDF1E5;font-weight:800;font-size:15px;border-radius:999px;padding:5px 20px}
+.ovg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ovc{all:unset;box-sizing:border-box;cursor:pointer;background:#fff;border:1.5px solid #EADFCF;border-radius:14px;overflow:hidden;display:block}
+.ovc:hover{border-color:#E07A2E;box-shadow:0 4px 14px rgba(224,122,46,.15)}
+.ovh{display:flex;align-items:center;gap:8px;padding:9px 10px;background:#F3F9F5;border-bottom:1px solid #E4EEE7}
+.ovh b{font-size:16px;color:#1d2826;flex:1}.ovi{width:30px;height:30px;border-radius:9px;color:#fff;display:grid;place-items:center;flex:none}.ovi svg{width:18px;height:18px}
+.ovc table{width:100%;border-collapse:collapse;font-size:13.5px}.ovc th{width:54px;background:#FFF4EA;color:#B5541E;font-weight:800;text-align:center;padding:6px 4px;border-top:1px solid #F3E6D6;vertical-align:top}
+.ovc td{padding:6px 8px;border-top:1px solid #F3E6D6;line-height:1.45;color:#263331;vertical-align:top}
+@media(max-width:1100px){.ovg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>`);
+const _apps=VIEWS.apps;
+VIEWS.apps=()=>{const h=_apps();const A=APPS[S.app??0]||APPS[0];if(!COL[A.n])return h;const C=A.cards[S.fc??0];if(!C||C.n!==OV)return h;
+ window.RIGHT=()=>{const r=document.getElementById('R');if(r)r.innerHTML=`<div class="bar"><span class="t">${A.n} · 기능 한눈에</span><span class="sub2">칸을 누르면 자세히</span></div><div style="padding:12px">${ov(A)}</div>`};return h;};
+if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
+})();
+</script>
 <style id="gh-home-theme">
 :root{--bg:#EEF6F0;--line:#D5E5DA}
 html,body{background:#EEF6F0!important}
