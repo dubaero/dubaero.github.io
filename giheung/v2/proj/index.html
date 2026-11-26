@@ -5963,5 +5963,51 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   later(200);
 })();
 </script>
-<script>document.addEventListener('click',function(e){if(e.target.closest('[data-home],#tophome,[data-go="home"]')){e.preventDefault();e.stopImmediatePropagation();location.href='/giheung/v2/';}},true);</script></body>
+<script>document.addEventListener('click',function(e){if(e.target.closest('[data-home],#tophome,[data-go="home"]')){e.preventDefault();e.stopImmediatePropagation();location.href='/giheung/v2/';}},true);</script><!-- 2026.11.26 기흥: 프로젝트 4개만(사업계획서·결과보고서·성과보고서·홍보물), 안쪽 탭 없음, 왼쪽 선택 / 오른쪽 지침→첫 대화 -->
+<style id="gh-2col">
+#dw-tabs,#dw-swap{display:none!important}
+#v-drawer>#dw-in{display:none}
+#dw-body.gh-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:12px;align-items:start}
+#dw-body .gh-l,#dw-body .gh-r{display:grid;gap:10px;align-content:start;min-width:0}
+#dw-body .gh-l>*,#dw-body .gh-r>*{margin:0}
+#dw-body .gh-l #dw-in{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:0}
+#dw-body .gh-r .dw-step{border-color:#cfd8c8}
+@media(max-width:900px){#dw-body.gh-grid{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+ if(typeof DW_X==='undefined'||typeof DW==='undefined')return;
+ var KEEP=['plan','result','perf','all'];
+ DW_X.doc=['plan','result','perf'];DW_X.pr=['all'];
+ DW.forEach(function(d){if(d.id==='all')d.t='홍보물';if(d.id==='result')d.t='결과보고서';});
+ var NAME={plan:'사업계획서 프로젝트',result:'결과보고서 프로젝트',perf:'성과보고서 프로젝트',all:'홍보물 프로젝트'};
+ var _open=openDW;
+ openDW=function(key){
+  if(key==='doc')key='dw-plan';if(key==='pr')key='dw-all';
+  var id=String(key).indexOf('dw-')===0?String(key).slice(3):'';
+  if(KEEP.indexOf(id)<0)key=(id==='card'||id==='blog'||id==='info'||id==='flyer'||id==='toon'||id==='irev')?'dw-all':'dw-plan';
+  _open(key);
+ };
+ var drawer=document.getElementById('v-drawer'),din=document.getElementById('dw-in'),body=document.getElementById('dw-body');
+ var _render=dwRender;
+ dwRender=function(){
+  if(din&&body&&din.parentNode!==drawer)drawer.insertBefore(din,body);
+  body.classList.remove('gh-grid');
+  _render();
+  if(KEEP.indexOf(DWT)<0)return;
+  var h=document.getElementById('dw-h');if(h)h.textContent=NAME[DWT]||h.textContent;
+  var L=document.createElement('div'),R=document.createElement('div');L.className='gh-l';R.className='gh-r';
+  var kids=Array.prototype.slice.call(body.children),right=[];
+  kids.forEach(function(k){var t=(k.querySelector('h3')||{}).textContent||'';
+   if(/지침/.test(t)&&!/읽는 법/.test(t)||/첫 대화/.test(t))right.push(k);});
+  L.appendChild(din);
+  kids.forEach(function(k){if(right.indexOf(k)<0)L.appendChild(k);});
+  right.forEach(function(k){R.appendChild(k);});
+  body.appendChild(L);body.appendChild(R);body.classList.add('gh-grid');
+ };
+ var hh=location.hash.slice(1);
+ if(hh==='doc'||hh==='pr'||/^dw-/.test(hh)){try{go(hh);}catch(e){}}else if(drawer&&!drawer.hidden)try{dwRender();}catch(e){}
+})();
+</script>
+</body>
 </html>

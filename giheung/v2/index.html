@@ -662,7 +662,7 @@ const hash=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))|0;retur
 
 /* ================= 라우팅 ================= */
 const VIEWS={};let VIEW='home';
-function go(v){if(v==='project'){location.href='proj/#'+(['dw-plan','dw-result','pr'][S.doc||0]||'dw-plan');return}if(v==='mind'||v==='vent'){location.href='mind/#'+(v==='mind'?'heart':'vent');return}location.hash=v}
+function go(v){if(v==='project'){location.href='proj/#'+(['dw-plan','dw-result','dw-perf','pr'][S.doc||0]||'dw-plan');return}if(v==='mind'||v==='vent'){location.href='mind/#'+(v==='mind'?'heart':'vent');return}location.hash=v}
 window.addEventListener('hashchange',()=>{VIEW=location.hash.slice(1)||'home';if(VIEW==='mind'||VIEW==='vent'||VIEW==='project'){go(VIEW);return}render()});
 function render(){window.RIGHT=null;FL=[];document.querySelector('header').style.display=VIEW==='home'||!VIEWS[VIEW]?'none':'grid';const app=document.getElementById('app');const f=VIEWS[VIEW]||VIEWS.home;
  const ae=document.activeElement&&document.activeElement.id;app.innerHTML=f();if(window.RIGHT)RIGHT();
@@ -675,12 +675,10 @@ const sv=(n,w)=>`<svg viewBox="0 0 24 24" ${w?`width="${w}" height="${w}"`:''} f
 const HL=[
 ['사업계획서',"S.doc=0;go('project')",'프로젝트'],
 ['결과보고서',"S.doc=1;go('project')",'프로젝트'],
-['홍보물(포스터·카드뉴스)',"S.doc=2;go('project')",'프로젝트'],
+['성과보고서',"S.doc=2;go('project')",'프로젝트'],
+['홍보물(포스터·카드뉴스)',"S.doc=3;go('project')",'프로젝트'],
 ['프로그램 계획서',"S.pl=0;go('plan')",''],
 ['프로그램 일지',"S.pl=1;go('plan')",''],
-['회의록 (메모·녹음)',"S.mf=0;go('memo')",''],
-['공문 (메모·녹음)',"S.mf=1;go('memo')",''],
-['상담일지·사례회의록',"S.mf=4;go('memo')",''],
 ['블로그·인스타·홈페이지 글',"S.pr=1;go('promo')",''],
 ['맞춤형 프롬프트 생성',"go('gen')",'']];
 const HQ=[['msg','mail','문자·소통','보호자·이용자 문자'],['promo','mega','홍보·안내','소식·SNS·포스터'],['donor','heart','후원 관리','감사·사용 안내'],['plan','doc','계획·일지','프로그램 계획→일지'],['month','cal','이달의 추천','월별 프로그램 5'],['room','spark','프롬프트 디자인실','업무·일상 프롬프트'],['memo','mic','메모·녹음','회의록·서식 채우기'],['vent','fire','빡침 번역기','공감→순화 문구'],['mind','leaf','마음챙김','나를 위한 5줄']];
