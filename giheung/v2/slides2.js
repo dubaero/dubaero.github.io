@@ -287,3 +287,43 @@ document.head.insertAdjacentHTML('beforeend','<style id="gh-aw">.aw{grid-templat
 +'.mv{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;align-items:start}.mv-f{aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid #DADCE0;box-shadow:0 4px 14px rgba(0,0,0,.08)}.mv-f iframe{width:100%;height:100%;border:0;display:block}.mv-t p{margin:0 0 8px;font-size:14px;line-height:1.65}.cvw-l.one{grid-template-columns:1fr}@media(max-width:1100px){.mv{grid-template-columns:1fr}}</style>');
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
+/* 2026.11.26 실제 화면 캡처 넣기 (그린 화면 대신) */
+(function(){
+var P='/img/giheung/cap/';
+var C={
+'ChatGPT|라이브러리':[['gpt_library','왼쪽 메뉴 → 이미지: 만든 그림이 모두 모여 있어요']],
+'ChatGPT|스페이스':[['gpt_space','페이지·슬라이드·시트·이미지·사이트를 한곳에서 만들고 모아 봐요']],
+'ChatGPT|예약':[['gpt_sched','예약 화면: 새 작업 만들기, 진행 중·완료된 예약 목록']],
+'ChatGPT|플러그인':[['gpt_plugin','플러그인 화면: 설치된 앱(Canva·Gmail·Drive·Higgsfield 등)과 추가할 앱 목록']],
+'ChatGPT|프로젝트':[['gpt_project_new','프로젝트 만들기: 이름을 정하면 채팅·파일·지침이 한 자리에 모여요']],
+'ChatGPT|웹 검색':[['gpt_plus','입력창 [+] 메뉴 → 웹 검색']],
+'ChatGPT|심층 리서치':[['gpt_plus','입력창 [+] 메뉴 → 심층 리서치']],
+'ChatGPT|스케치':[['gpt_plus','입력창 [+] 메뉴 → 스케치']],
+'ChatGPT|파일 가져오기':[['gpt_plus','입력창 [+] 메뉴 → 라이브러리에서 가져오기 · Google Drive']],
+'제미나이|Deep Research':[['gem_deep','Deep Research를 켜면 "무엇을 조사하고 싶으신가요?"로 바뀌어요']],
+'제미나이|캔버스':[['gem_canvas_inline','Canvas를 켜고 요청하면 대화 안에 결과 창이 열려요 (코드·미리보기·내보내기·공유)'],['gem_canvas','크게 펼친 캔버스: 오른쪽 아래 창에서 계속 말로 고쳐요']],
+'제미나이|노트북':[['gem_notebook','왼쪽 출처 · 가운데 채팅 · 오른쪽 스튜디오']],
+'제미나이|예약':[['gem_side','왼쪽 메뉴 → 예약']],
+'제미나이|음악 30초':[['gem_plus','입력창 [+] → 음악 만들기']],
+'제미나이|영상 만들기':[['gem_plus','입력창 [+] → 동영상 만들기 (자물쇠 = 유료)']],
+'제미나이|가이드 학습':[['gem_tools','[+] → 도구 더보기 → 가이드 학습']],
+'제미나이|개인 인텔리전스':[['gem_tools','[+] → 도구 더보기 → 개인 인텔리전스 (Labs) 켜기']],
+'제미나이|태스크':[['gem_plus','입력창 위 [채팅 · 태스크] 중 태스크']],
+'Canva|AI 프레젠테이션':[['canva_ai','왼쪽 Canva AI → 만들 것 설명 · 아래에서 프레젠테이션 고르기']],
+'Canva|템플릿·디자인 만들기':[['canva_tpl','왼쪽 템플릿 → 검색하거나 종류 고르기']],
+'Canva|AI 앱과 연결':[['gpt_plugin','ChatGPT 플러그인 화면에 Canva가 설치된 모습']]};
+var M={'ChatGPT':['gpt_more','gpt_plus'],'제미나이':['gem_tools','gem_side2'],'Canva':['canva_home']};
+function fig(a){return '<figure class="rc"><img src="'+P+a[0]+'.webp" alt="'+a[1]+'" loading="lazy" onclick="typeof zoomImg===\'function\'&&zoomImg(this.src)"><figcaption>'+a[1]+'</figcaption></figure>'}
+function post(){if(typeof VIEW==='undefined'||VIEW!=='apps')return;var A=APPS[S.app||0];if(!A)return;var Cd=A.cards[S.fc||0];if(!Cd)return;var R=document.getElementById('R');if(!R||R.querySelector('.rc'))return;
+ if(Cd.n==='메뉴 사용설명서'&&M[A.n]){var gs=R.querySelectorAll('.man-mock');gs.forEach(function(g,i){var im=M[A.n][i];if(!im)return;var w=document.createElement('div');w.className='rc-g';g.parentNode.insertBefore(w,g);w.innerHTML=fig([im,'실제 화면']);w.appendChild(g);g.classList.add('rc-list')});R.querySelector('.man-gs')&&R.querySelector('.man-gs').classList.add('rc-one');return}
+ var L=C[A.n+'|'+Cd.n];if(!L)return;var h='<section class="rcs"><h4>실제 화면</h4><div class="rc-w'+(L.length>1?' two':'')+'">'+L.map(fig).join('')+'</div></section>';
+ var cv=R.querySelector('.cvw');if(A.n==='제미나이'&&Cd.n==='캔버스'&&cv){cv.outerHTML=h;return}
+ var at=R.querySelector('.nb-lead')||R.querySelector('.sld-path');if(at)at.insertAdjacentHTML('afterend',h)}
+var _r=render;render=function(){var r=_r.apply(this,arguments);try{post()}catch(er){console.error(er)}return r};
+document.head.insertAdjacentHTML('beforeend','<style id="gh-rc">.rcs{border:1px solid #D5E5DA;border-radius:12px;padding:12px 14px;display:grid;gap:10px;background:#fff}.rcs h4{margin:0;font-size:15px;font-weight:800;color:#1E5442;padding-bottom:6px;border-bottom:2px solid #E07A2E;justify-self:start}'
++'.rc-w{display:grid;grid-template-columns:minmax(0,560px);justify-content:center}.rc-w.two{grid-template-columns:1fr 1fr;justify-content:stretch}'
++'.rc{margin:0;border:1px solid #CFD6D2;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.08)}.rc img{width:100%;display:block;cursor:zoom-in}.rc figcaption{font-size:13px;padding:8px 10px;border-top:1px solid #E3ECE6;background:#F7FBF8;font-weight:600}'
++'.man-gs.rc-one{grid-template-columns:1fr!important}.rc-g{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px;align-items:start}.rc-g .rc figcaption{display:none}.rc-list{box-shadow:none!important;border-color:#E3ECE6!important}'
++'@media(max-width:1000px){.rc-g,.rc-w.two{grid-template-columns:1fr}}</style>');
+if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
+})();
