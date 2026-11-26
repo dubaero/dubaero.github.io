@@ -237,6 +237,10 @@ var D={
  out:['카드뉴스·썸네일','포스터·현수막','티셔츠·명찰·수료증 디자인','짧은 홍보 영상'],
  say:'Canva AI야, 장애인 인식개선 캠페인 인스타그램 카드뉴스를 밝은 초록 느낌으로 만들어 줘. 첫 장 제목은 "함께여서 빛나는 우리".',warn:'유료 표시(왕관)가 있는 요소는 무료 계정에서 저장할 때 비용이 생길 수 있어요.'}
 };
+D['Canva|AI 앱과 연결'].flow=[
+ ['ChatGPT',['처음 한 번: 왼쪽 메뉴 [앱] → Canva 찾기 → 연결·로그인','입력창 [+] → [더 보기] → Canva 고르기','또는 입력창에 @Canva 입력'],'@Canva 이 문구로 송년회 안내 포스터 시안 만들어 줘. 초록·주황, 큰 글씨.'],
+ ['Claude',['처음 한 번: 입력창 [+] → [커넥터] → Canva 켜기·로그인','채팅에서 "Canva로 ~ 만들어 줘"라고 요청','나온 시안 카드의 링크 → Canva에서 열기'],'Canva로 12월 송년회 인스타 카드뉴스 4장을 같은 디자인으로 만들어 줘. 일시·장소는 [ ]로.'],
+ ['제미나이',['처음 한 번: 설정 → [앱(확장 프로그램)] → Canva 켜기','입력창에 @Canva 입력','나온 디자인 링크 → Canva에서 열어 고치기'],'@Canva 장애인 인식개선 캠페인 포스터를 밝은 초록 느낌으로 만들어 줘.']];
 window.__SLD=D;
 function e(s){return String(s==null?'':s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
 function li(a){return '<ul>'+a.map(function(x){return '<li>'+e(x)+'</li>'}).join('')+'</ul>'}
@@ -246,6 +250,7 @@ function slide(app,name,x,free){
  +'<div class="sld-wh"><span>메뉴 위치</span>'+e(x.where)+'</div>'
  +'<div class="sld-g3"><section><h4>무엇인가요</h4><p>'+e(x.what)+'</p></section><section><h4>장점</h4>'+li(x.pros)+'</section><section><h4>언제 쓰나요</h4>'+li(x.when)+'</section></div>'
  +'<section class="sld-how"><h4>이렇게 써요</h4><ol>'+x.how.map(function(s){return '<li>'+e(s)+'</li>'}).join('')+'</ol></section>'
+ +(x.flow?'<section class="sld-flow"><h4>앱별로 Canva 불러오기</h4>'+x.flow.map(function(f){var L=(window.__LOGO||{})[f[0]]||'';return '<div class="fl-row"><div class="fl-app"><span class="fl-lg">'+L+'</span><b>'+e(f[0])+'</b></div><div class="fl-steps">'+f[1].map(function(t,i){return (i?'<em>→</em>':'')+'<span>'+e(t)+'</span>'}).join('')+'<em>→</em><span class="fl-cv"><i>'+((window.__LOGO||{})['Canva']||'')+'</i>Canva 편집 화면</span></div><div class="fl-say"><small>이렇게 입력</small><p>'+e(f[2])+'</p><button type="button" class="fl-cp" data-t="'+e(f[2]).replace(/"/g,'&quot;')+'">복사</button></div></div>'}).join('')+'<p class="fl-note">메뉴 이름은 앱 업데이트에 따라 조금 다를 수 있어요. 처음 한 번만 연결하면 다음부터는 바로 불러와요.</p></section>':'')
  +'<div class="sld-g2"><section><h4>이런 결과물이 나와요</h4>'+li(x.out)+'</section>'
  +(x.say?'<section class="sld-say"><h4>바로 쓰는 지시문</h4><p>'+e(x.say)+'</p><button type="button" class="sld-cp">복사</button></section>':'')+'</div>'
  +(x.warn?'<p class="sld-w"><b>꼭 확인</b> '+e(x.warn)+'</p>':'')+'</div>';
@@ -263,6 +268,7 @@ function post(){
  var sub=bar.querySelector('.sub2');if(sub)sub.textContent='강의 장표';
  bar.insertAdjacentHTML('afterend','<div class="sld-wrap">'+htm+'</div>');
  var w=R.querySelector('.sld-wrap');old.forEach(function(n){w.appendChild(n)});
+ R.querySelectorAll('.fl-cp').forEach(function(b){b.onclick=function(){try{navigator.clipboard.writeText(b.dataset.t)}catch(er){}b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}});
  var cp=R.querySelector('.sld-cp');if(cp)cp.onclick=function(){try{navigator.clipboard.writeText(x.say)}catch(er){}cp.textContent='복사됨';setTimeout(function(){cp.textContent='복사'},1200)};
 }
 var _r=render;render=function(){var r=_r.apply(this,arguments);try{post()}catch(er){console.error(er)}return r};
@@ -287,6 +293,12 @@ document.head.insertAdjacentHTML('beforeend','<style id="gh-sld">'
 +'.sld-say{position:relative}.sld-say p{background:#FFF8F1;border-left:4px solid #E07A2E;border-radius:8px;padding:10px 12px;font-weight:600}'
 +'.sld-cp{position:absolute;top:10px;right:12px;border:1px solid #D5E5DA;background:#fff;border-radius:8px;padding:3px 10px;font-size:12.5px;font-weight:700;color:#263331}'
 +'.sld-w{font-size:14px!important;color:#263331}.sld-w b{color:#C0392B;margin-right:8px;text-decoration:underline;text-decoration-color:#C0392B;text-underline-offset:4px}'
++'.sld-flow{border:1px solid #D5E5DA;border-radius:12px;padding:12px 14px;display:grid;gap:10px}.fl-row{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;align-items:start;border-top:1px dashed #D5E5DA;padding-top:10px}.fl-row:first-of-type{border-top:0;padding-top:0}'
++'.fl-app{display:flex;flex-direction:column;align-items:center;gap:4px;grid-row:1/3}.fl-lg svg{width:40px;height:40px}.fl-app b{font-size:14px}'
++'.fl-steps{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.fl-steps span{background:#F7FBF8;border:1px solid #D5E5DA;border-radius:8px;padding:6px 10px;font-size:13.5px;font-weight:600}.fl-steps em{font-style:normal;color:#E07A2E;font-weight:800}'
++'.fl-cv{display:inline-flex;align-items:center;gap:6px;background:#F3EEFF!important;border-color:#D9CCF7!important}.fl-cv i svg{width:18px;height:18px;display:block}'
++'.fl-say{position:relative;background:#FFF8F1;border-left:4px solid #E07A2E;border-radius:8px;padding:8px 70px 8px 12px}.fl-say small{display:block;font-size:12px;color:#C2652B;font-weight:800}.fl-say p{font-weight:600;font-size:14px}.fl-cp{position:absolute;right:10px;top:10px;border:1px solid #D5E5DA;background:#fff;border-radius:8px;padding:3px 10px;font-size:12.5px;font-weight:700}'
++'.fl-note{font-size:13px!important;color:#66746f}@media(max-width:900px){.fl-row{grid-template-columns:1fr}.fl-app{flex-direction:row;grid-row:auto}}'
 +'@media(max-width:900px){.sld-g3,.sld-g2{grid-template-columns:1fr}.sld{padding:16px}}'
 +'</style>');
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();

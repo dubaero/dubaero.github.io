@@ -2485,6 +2485,7 @@ window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(MIND
 /* 그리기 뒤: 앱 탭을 맨 위 줄로, 로고 넣기 */
 function post(){
  try{if(typeof tabsFix==='function')tabsFix()}catch(e){}
+ document.querySelectorAll('#hq .q').forEach(q=>{if(/빡침 번역기/.test(q.textContent)&&!q.querySelector('.fire')){const v=q.querySelector('svg');if(v)v.outerHTML='<span class="fire" style="font-size:18px;line-height:1;width:19px;text-align:center">🔥</span>'}});
  const GEAR='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';document.querySelectorAll('.hai button[data-k="AI 맞춤 설정 가이드"] .lg').forEach(l=>{if(!l.querySelector('svg')){l.innerHTML=GEAR;l.style.background='#2f6b56'}});
  document.querySelectorAll('.atabs .at').forEach(b=>{if(b.textContent.trim()==='AI 맞춤 설정 가이드'&&!b.querySelector('svg'))b.insertAdjacentHTML('afterbegin','<span class="ai-ic" style="background:#2f6b56">'+GEAR+'</span>')});
  document.querySelectorAll('.hai button[data-k] .lg').forEach(l=>{const k=l.closest('button').dataset.k;if(LOGO[k]&&!l.classList.contains('lgo')){l.classList.add('lgo');l.innerHTML=LOGO[k];l.style.background='transparent'}});
@@ -2505,7 +2506,7 @@ document.head.insertAdjacentHTML('beforeend',`<style id="gh-apptop">
 </style>`);
 if(typeof VIEW!=='undefined')render();
 })();</script>
-<script src="slides.js?v=1"></script>
+<script src="slides.js?v=2"></script>
 <style id="gh-home-theme">
 :root{--bg:#EEF6F0;--line:#D5E5DA}
 html,body{background:#EEF6F0!important}
