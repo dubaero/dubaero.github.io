@@ -122,3 +122,42 @@ document.head.insertAdjacentHTML('beforeend','<style id="gh-man">'
 +'</style>');
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
+/* 2026.11.26 플러그인 연결 지도 (앱 로고·연결 순서·바로 쓰는 요청) */
+(function(){
+function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+var B={
+drive:'<svg viewBox="0 0 24 24"><path d="M8.2 3h7.6l6.2 10.8h-7.6z" fill="#F4B400"/><path d="M8.2 3 2 13.8 5.8 20.4 12 9.6z" fill="#0F9D58"/><path d="M5.8 20.4h12.4l3.8-6.6H9.6z" fill="#4285F4"/></svg>',
+gmail:'<svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" fill="#fff" stroke="#D5D9DD"/><path d="M3 6.5 12 13l9-6.5" fill="none" stroke="#EA4335" stroke-width="2.4" stroke-linejoin="round"/><path d="M3 7v11M21 7v11" stroke="#4285F4" stroke-width="2.4"/></svg>',
+cal:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="#fff" stroke="#D5D9DD"/><path d="M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v2H3z" fill="#4285F4"/><text x="12" y="18" text-anchor="middle" font-size="9" font-weight="800" fill="#1A73E8" font-family="Arial">31</text></svg>',
+sheets:'<svg viewBox="0 0 24 24"><path d="M5 2h10l5 5v15H5z" fill="#0F9D58"/><rect x="8" y="10" width="9" height="8" fill="#fff"/><path d="M8 13h9M8 16h9M12 10v8" stroke="#0F9D58" stroke-width="1.2"/></svg>',
+canva:(window.__LOGO&&window.__LOGO.Canva)||'',
+higgs:'<svg viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#111"/><path d="M7 6v12M17 6v12M7 12h10" stroke="#D4FF3B" stroke-width="2.6" stroke-linecap="round"/></svg>',
+capcut:'<svg viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#000"/><path d="M5 8l7 4-7 4M19 8l-7 4 7 4" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg>',
+adobe:'<svg viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#EB1000"/><path d="M12 5 6 19h3l1.4-3.6h4l-1.2-3H11.4L12 11l3.4 8h2.6z" fill="#fff"/></svg>',
+chrome:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#DB4437"/><path d="M12 12 3.3 17A10 10 0 0 0 12 22z" fill="#0F9D58"/><path d="M12 12v10a10 10 0 0 0 8.7-15z" fill="#F4B400"/><path d="M12 12 3.3 17A10 10 0 0 1 3.3 7z" fill="#0F9D58"/><circle cx="12" cy="12" r="4.4" fill="#fff"/><circle cx="12" cy="12" r="3.4" fill="#4285F4"/></svg>',
+notion:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="#fff" stroke="#111" stroke-width="1.6"/><path d="M8 17V7l8 10V7" fill="none" stroke="#111" stroke-width="2"/></svg>'};
+var HUB={
+'ChatGPT|플러그인':{steps:[['왼쪽 메뉴 [앱(플러그인)]','plug'],['쓸 앱 찾기','tools'],['[연결] 누르기','link'],['로그인·허용','user'],['채팅에서 @앱이름','chat']],
+ apps:[['drive','구글 드라이브','내 문서 찾아 읽기·요약','@Google Drive 올해 사업계획서에서 예산 부분만 요약해 줘.'],['gmail','Gmail','메일 찾기·답장 초안','@Gmail 지난주 받은 공모 안내 메일을 찾아 마감일만 알려 줘.'],['cal','구글 캘린더','일정 확인·등록','@Google Calendar 다음 주 송년회 준비 일정을 넣어 줘.'],['canva','Canva','포스터·카드뉴스 바로 만들기','@Canva 이 문구로 송년회 포스터 시안 만들어 줘. 초록·주황, 큰 글씨.'],['higgs','Higgsfield','AI 영상 만들기','@Higgsfield 첨부한 캐릭터가 손 흔드는 5초 영상 만들어 줘.'],['capcut','CapCut','영상 편집·자막','@CapCut 이 영상에 큰 자막을 넣고 15초 쇼츠로 편집해 줘.'],['adobe','Adobe','PDF·이미지 편집','@Adobe 첨부한 PDF에서 3쪽만 뽑아 줘.']]},
+'Claude|플러그인':{steps:[['입력창 [+]','plus'],['[커넥터(플러그인)]','plug'],['쓸 앱 켜기','link'],['로그인·허용','user'],['채팅에서 앱 이름 넣어 요청','chat']],
+ apps:[['drive','구글 드라이브','문서 찾아 읽기·요약','구글 드라이브에서 올해 사업계획서를 찾아 성과지표만 표로 정리해 줘.'],['gmail','Gmail','메일 찾기·답장 초안','Gmail에서 후원 문의 메일을 찾아 답장 초안을 써 줘.'],['cal','구글 캘린더','일정 확인·등록','구글 캘린더에 다음 주 사례회의 일정을 넣어 줘.'],['sheets','구글 시트','표 읽고 계산·채우기','구글 시트 12월 참여자 명단에서 프로그램별 출석률을 계산해 줘.'],['canva','Canva','디자인 만들기·불러오기','Canva로 12월 송년회 카드뉴스 4장을 같은 디자인으로 만들어 줘.'],['chrome','Chrome','크롬에서 웹 작업 대신','Chrome에서 복지로 사이트의 올해 공모 공고를 찾아 정리해 줘.'],['notion','Notion','회의록·업무 페이지 정리','Notion 회의록 페이지에 오늘 회의 내용을 정리해 넣어 줘.']]}};
+function hub(k){var H=HUB[k],ic=window.__ic,lg=(window.__LOGO||{})[k.split('|')[0]]||'';
+ return '<section class="hub"><h4>이렇게 연결해요</h4><div class="hub-st">'+H.steps.map(function(s,i){return (i?'<em>›</em>':'')+'<span><i>'+(i+1)+'</i>'+(ic?ic(s[1],16):'')+e(s[0])+'</span>'}).join('')+'</div>'+
+ '<div class="hub-m"><div class="hub-c"><span class="hub-lg">'+lg+'</span><b>'+e(k.split('|')[0])+'</b><small>앱을 연결하면<br>채팅 한 번으로 일해요</small></div><div class="hub-g">'+H.apps.map(function(a){return '<div class="hub-a"><div class="hub-ah"><span class="hub-bi">'+B[a[0]]+'</span><span><b>'+e(a[1])+'</b><small>'+e(a[2])+'</small></span></div><p>'+e(a[3])+'</p><button type="button" class="hub-cp" data-t="'+e(a[3])+'">복사</button></div>'}).join('')+'</div></div>'+
+ '<p class="hub-n">앱 목록은 계정·요금제·지역에 따라 다를 수 있어요. 처음 한 번만 연결하면 다음부터는 바로 불러와요.</p></section>'}
+function post(){if(typeof VIEW==='undefined'||VIEW!=='apps')return;var A=APPS[S.app||0];if(!A)return;var C=A.cards[S.fc||0];if(!C)return;var k=A.n+'|'+C.n;if(!HUB[k])return;
+ var p=document.querySelector('#R .sld-path');if(!p||document.querySelector('#R .hub'))return;p.insertAdjacentHTML('afterend',hub(k));
+ document.querySelectorAll('#R .hub-cp').forEach(function(b){b.onclick=function(){try{navigator.clipboard.writeText(b.dataset.t)}catch(er){}b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}})}
+var _r=render;render=function(){var r=_r.apply(this,arguments);try{post()}catch(er){console.error(er)}return r};
+document.head.insertAdjacentHTML('beforeend','<style id="gh-hub">'
++'.hub{border:1px solid #D5E5DA;border-radius:12px;padding:12px 14px;display:grid;gap:12px;background:#fff}.hub h4{margin:0;font-size:15px;font-weight:800;color:#1E5442;padding-bottom:6px;border-bottom:2px solid #E07A2E;justify-self:start}'
++'.hub-st{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.hub-st span{display:inline-flex;align-items:center;gap:6px;background:#F7FBF8;border:1px solid #D5E5DA;border-radius:9px;padding:6px 10px;font-size:13.5px;font-weight:700}.hub-st i{font-style:normal;width:18px;height:18px;border-radius:50%;background:#E07A2E;color:#fff;font-size:11px;display:grid;place-items:center}.hub-st em{font-style:normal;color:#E07A2E;font-weight:800}'
++'.hub-m{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:stretch}.hub-c{background:#F1F8F3;border:2px solid #2F6B56;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:12px;position:relative}.hub-lg svg{width:54px;height:54px;display:block}.hub-c b{font-size:17px;color:#1E5442}.hub-c small{font-size:12.5px;color:#4b5a55;line-height:1.5}'
++'.hub-c::after{content:"";position:absolute;right:-14px;top:50%;width:14px;border-top:2px dashed #2F6B56}'
++'.hub-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;border:2px dashed #CFE3D6;border-radius:14px;padding:8px}'
++'.hub-a{position:relative;background:#fff;border:1px solid #E3ECE6;border-radius:12px;padding:9px 10px;display:grid;gap:6px;align-content:start}.hub-ah{display:flex;align-items:center;gap:8px}.hub-bi svg{width:30px;height:30px;display:block}.hub-ah b{display:block;font-size:14.5px;color:#111}.hub-ah small{display:block;font-size:12px;color:#66746f}'
++'.hub-a p{margin:0;background:#FFF8F1;border-radius:8px;padding:6px 8px;font-size:12.5px;line-height:1.5;font-weight:600;padding-right:44px}.hub-cp{position:absolute;right:16px;bottom:15px;border:1px solid #D5E5DA;background:#fff;border-radius:6px;padding:2px 6px;font-size:11.5px;font-weight:700}'
++'.hub-n{margin:0;font-size:12.5px;color:#66746f}@media(max-width:900px){.hub-m{grid-template-columns:1fr}.hub-c::after{display:none}}'
++'</style>');
+if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
+})();
