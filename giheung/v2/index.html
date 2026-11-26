@@ -2388,6 +2388,17 @@ VIEWS.apps=()=>{const h=_apps();const A=APPS[S.app??0]||APPS[0];if(!COL[A.n])ret
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
 </script>
+<script>/* 2026.11.26 기능 정리: ChatGPT 이미지 만들기·캔버스, 제미나이 나노바나나·맞춤설정 빼기, 움짤 위치 */
+(function(){
+if(typeof APPS==='undefined')return;
+const rm=(a,ns)=>{const A=APPS.find(x=>x.n===a);if(A)A.cards=A.cards.filter(c=>!ns.includes(c.n))};
+rm('ChatGPT',['이미지 만들기','캔버스']);rm('제미나이',['나노바나나 이미지','맞춤설정']);
+const G=window.__ig;if(G&&G['ChatGPT|움짤 GIF'])Object.assign(G['ChatGPT|움짤 GIF'],{s:'따로 메뉴가 없어요 — 일반 채팅에 사진을 넣고 "GIF로 움직이게 해 줘"라고 말해요',
+ st:[['plus','새 채팅'],['img','+ → 사진 첨부'],['msg','"3초 GIF로" 말하기'],['spark','결과 재생 확인'],['down','GIF 저장']]});
+if(G&&G['ChatGPT|이미지 편집 화면'])G['ChatGPT|이미지 편집 화면'].u='날짜·오타·배경만 고치기';
+if(typeof VIEW!=='undefined'&&VIEW==='apps'){if((S.fc??0)>=((APPS[S.app]||{}).cards||[]).length)S.fc=0;render()}
+})();
+</script>
 <style id="gh-home-theme">
 :root{--bg:#EEF6F0;--line:#D5E5DA}
 html,body{background:#EEF6F0!important}

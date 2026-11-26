@@ -4554,7 +4554,7 @@ img{filter:contrast(1.12) saturate(1.18)}
     var plan=list.map(function(e){var p=e.parentElement,fs=getComputedStyle(e).fontSize;
       if(p&&done.has(p)&&p.dataset.fsUp&&getComputedStyle(p).fontSize===fs&&!e.style.fontSize)return [e,0];return [e,parseFloat(fs)]});
     plan.forEach(function(x){var e=x[0],fs=x[1];done.add(e);if(!fs)return;
-      var n=MOB?(fs<15?Math.max(fs+1,14):0):fs+1;if(n){e.dataset.fsUp=1;e.style.setProperty('font-size',n+'px','important')}});
+      var n=MOB?(fs<15?Math.max(fs+1,14):0):0;if(n){e.dataset.fsUp=1;e.style.setProperty('font-size',n+'px','important')}});
   }
   window.__fsUp=run;
   var t;function later(){clearTimeout(t);t=setTimeout(run,60)}
@@ -6007,6 +6007,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   if(_y)window.scrollTo(0,_y);
   R.querySelectorAll('.dw-step').forEach(function(sec){var t=(sec.querySelector('h3')||{}).textContent||'';if(/첫 대화/.test(t))sec.classList.add('gh-first');else if(/지침/.test(t))sec.classList.add('gh-ins');});
   L.querySelectorAll('.dw-step').forEach(function(sec){var h=sec.querySelector('h3'),t=(h||{}).textContent||'';if(/이어 가기|마무리 검토/.test(t)){sec.classList.add('gh-fold');var m=document.createElement('span');m.className='gh-more';m.textContent='펼치기';h.insertBefore(m,h.querySelector('.sp'));h.style.cursor='pointer';h.addEventListener('click',function(e){if(e.target.closest('button'))return;sec.classList.toggle('open');m.textContent=sec.classList.contains('open')?'접기':'펼치기';});}});
+  body.querySelectorAll('.src tr').forEach(function(tr){var sp=tr.querySelector('td span'),bb=tr.querySelector('td b');if(!sp||!bb||tr.dataset.req)return;tr.dataset.req=1;if(/\(꼭 넣기\)/.test(sp.textContent)){sp.textContent=sp.textContent.replace(/\s*\(꼭 넣기\)/,'');tr.classList.add('req');bb.insertAdjacentHTML('afterbegin','<span class="reqck" aria-label="꼭 넣기">✓</span>');}});
   body.querySelectorAll('.gh-first .ask').forEach(function(k){var d=document.createElement('details');d.className='gh-ask';d.innerHTML='<summary>AI가 이렇게 되물어요 (예시) 보기</summary>';k.parentNode.insertBefore(d,k);d.appendChild(k);});
   body.querySelectorAll('.ins .r>div:first-child,.ask').forEach(function(d){d.innerHTML=d.innerHTML.replace(/\[(\d단계[^\]<]{0,14})\]/g,'<span class="stp">[$1]</span>');});
  };
@@ -6084,6 +6085,14 @@ main,.wrap>section,#v-drawer,#v-vent,#v-heart{background:transparent!important}
 #dw-body .src td:first-child:has(input[type=checkbox]){display:none!important}
 #dw-body .src td{padding:0!important;font-size:14px!important}
 #dw-body .src td b{font-size:14.5px}
+</style>
+<style id="gh-proj4">
+#dw-body .ins,#dw-body .ins .r div,#dw-body .ask{font-size:14px!important;line-height:1.6!important}
+#dw-body ol li{font-size:14px!important}#dw-body .dw-step h3{font-size:16px!important}#dw-body .dw-step p.s{font-size:13.5px!important}
+#dw-body .src td,#dw-body .src td b,#dw-body .src td span{font-size:13px!important;line-height:1.45!important}#dw-body .src td b{font-size:13.5px!important}
+#dw-body .src tr.req{border-left-color:#D93025!important;background:#FFF3F1!important}
+#dw-body .reqck{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:4px;background:#D93025;color:#fff;font-size:12px;font-weight:900;margin-right:6px;vertical-align:-3px}
+#dw-body .note,#dw-body .gh-l #dw-in p{font-size:12.5px!important}
 </style>
 </body>
 </html>
