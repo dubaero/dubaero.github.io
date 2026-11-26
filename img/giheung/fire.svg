@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 72">
+<defs>
+<radialGradient id="o" cx="50%" cy="80%" r="75%"><stop offset="0" stop-color="#FFD23F"/><stop offset=".45" stop-color="#FF6A00"/><stop offset=".8" stop-color="#E81E0E"/><stop offset="1" stop-color="#B30000"/></radialGradient>
+<radialGradient id="i" cx="50%" cy="85%" r="70%"><stop offset="0" stop-color="#FFFBD0"/><stop offset=".5" stop-color="#FFD84A"/><stop offset="1" stop-color="#FF8A00"/></radialGradient>
+</defs>
+<g>
+<path fill="url(#o)" d="M32 70C14 70 6 58 8 45C10 34 18 30 18 20C24 26 25 31 25 31C27 20 33 12 31 2C42 10 50 22 48 34C51 31 52 27 52 24C58 31 60 40 58 49C55 62 46 70 32 70Z">
+<animate attributeName="d" dur="0.7s" repeatCount="indefinite" values="M32 70C14 70 6 58 8 45C10 34 18 30 18 20C24 26 25 31 25 31C27 20 33 12 31 2C42 10 50 22 48 34C51 31 52 27 52 24C58 31 60 40 58 49C55 62 46 70 32 70Z;M32 70C13 70 5 57 8 44C11 33 16 29 15 18C23 25 25 30 25 30C28 18 36 11 35 0C44 10 49 23 47 33C51 30 54 26 55 21C59 30 61 40 58 49C55 62 46 70 32 70Z;M32 70C14 70 6 58 8 45C10 34 18 30 18 20C24 26 25 31 25 31C27 20 33 12 31 2C42 10 50 22 48 34C51 31 52 27 52 24C58 31 60 40 58 49C55 62 46 70 32 70Z"/>
+</path>
+<path fill="url(#i)" d="M32 68C22 68 17 61 18 53C19 46 24 43 25 36C29 40 30 44 30 44C32 37 36 32 35 26C42 33 46 41 45 49C44 60 40 68 32 68Z">
+<animate attributeName="d" dur="0.5s" repeatCount="indefinite" values="M32 68C22 68 17 61 18 53C19 46 24 43 25 36C29 40 30 44 30 44C32 37 36 32 35 26C42 33 46 41 45 49C44 60 40 68 32 68Z;M32 68C21 68 16 60 18 52C20 45 23 41 23 33C28 38 30 43 30 43C33 35 38 30 38 23C44 32 47 41 45 50C43 61 40 68 32 68Z;M32 68C22 68 17 61 18 53C19 46 24 43 25 36C29 40 30 44 30 44C32 37 36 32 35 26C42 33 46 41 45 49C44 60 40 68 32 68Z"/>
+</path>
+<circle cx="14" cy="14" r="2" fill="#FF6A00"><animate attributeName="cy" dur="1.2s" repeatCount="indefinite" values="22;4"/><animate attributeName="opacity" dur="1.2s" repeatCount="indefinite" values="1;0"/></circle>
+<circle cx="52" cy="10" r="1.6" fill="#FFB000"><animate attributeName="cy" dur="1s" begin=".4s" repeatCount="indefinite" values="20;2"/><animate attributeName="opacity" dur="1s" begin=".4s" repeatCount="indefinite" values="1;0"/></circle>
+</g></svg>

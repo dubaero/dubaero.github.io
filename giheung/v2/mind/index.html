@@ -919,7 +919,7 @@ return {html:html,bind:bind};})();
 
 <!-- ===== 빡침 순화기 ===== -->
 <div id="v-vent" hidden>
-  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2><img src="/img/giheung/fire.png" alt="" style="width:24px;height:auto;vertical-align:-4px;margin-right:6px">빡침 번역기</h2><span class="tag">같이 빡치고, 숨 고르고, 순화까지</span></div>
+  <div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2><img src="/img/giheung/fire.svg" alt="" style="width:30px;height:auto;vertical-align:-6px;margin-right:6px">빡침 번역기</h2><span class="tag">같이 빡치고, 숨 고르고, 순화까지</span></div>
   <div class="old-tool" style="display:none" aria-hidden="true">
   <div class="tool">
     <p class="sub">말로 하거나 글로 털어놓으면 같이 빡쳐 주고, 웃기게 위로하고, 숨 한번 고른 뒤 순화된 안내 문자로 바꿔 드려요. 감정은 여기 두고, 꼭 전할 말은 단단하게.</p>
@@ -995,7 +995,7 @@ return {html:html,bind:bind};})();
     <select class="f" id="h-want"><option>그냥 들어 주고 공감해 주기</option><option>지금 할 수 있는 작은 회복 방법</option><option>내일 업무를 가볍게 정리하기</option><option>오늘의 나에게 짧은 편지</option></select>
     <p class="warn">내담자 이름이나 사연은 빼고 "오늘 내 마음" 위주로 적어 주세요.</p>
     <div class="acts"><button type="button" class="btn fill" id="h-gpt">위로받기 (ChatGPT)</button><button type="button" class="btn" id="h-copy">프롬프트 복사</button></div>
-    <div class="help"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가거나 위험한 생각이 들면 사람에게 꼭 말해 주세요. 자살예방 상담전화 <a href="tel:109">109</a> · 정신건강 위기상담 <a href="tel:15770199">1577-0199</a></div>
+    <div class="help"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가거나 위험한 상황이 있다면 가까운 지인이나 옆 사람에게 꼭 말해 주세요. 정신건강 위기상담 <a href="tel:15770199">1577-0199</a></div>
   </div>
   </div>
   <div class="tool heart tab-a" id="h2-tool">
@@ -1021,7 +1021,7 @@ return {html:html,bind:bind};})();
       <p class="s5">평소 쓰던 계정으로 로그인한 채로 여세요. ChatGPT는 입력창에 프롬프트가 바로 들어가요. 맨 위 "이름·날짜" 두 줄만 채워 보내면 바로 엽서가 와요. 제미나이는 붙여 넣기만 하면 돼요. AI가 나를 기억할수록 더 나다운 엽서가 나와요.</p>
       <p class="s5">무료 계정은 하루에 만들 수 있는 그림 수가 적어서, 안 나오면 내일 다시 해 보세요.</p>
     </div>
-    <div class="help"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가거나 위험한 생각이 들면 사람에게 꼭 말해 주세요. 자살예방 상담전화 <a href="tel:109">109</a> · 정신건강 위기상담 <a href="tel:15770199">1577-0199</a></div>
+    <div class="help"><b>AI는 잠깐 숨 돌리는 곳이에요.</b> 힘든 마음이 오래가거나 위험한 상황이 있다면 가까운 지인이나 옆 사람에게 꼭 말해 주세요. 정신건강 위기상담 <a href="tel:15770199">1577-0199</a></div>
   </div>
 </div>
 
@@ -4260,7 +4260,10 @@ var RESTX=[
  ['water','따뜻한 물이나 차 한 잔을 천천히, 온도와 향을 느끼며 마시기.'],
  ['praise','작게 소리 내어 나를 칭찬하기: "나 오늘 진짜 고생했다. 최고다!"'],
  ['breath','한숨 크게 "휴우~" 세 번 쉬기. 한숨은 참지 말고 시원하게!'],
- ['stretch','의자에 앉은 채로 두 다리를 쭉 펴서 발끝을 몸 쪽으로 당기기, 5초씩 세 번.']];
+ ['stretch','의자에 앉은 채로 두 다리를 쭉 펴서 발끝을 몸 쪽으로 당기기, 5초씩 세 번.'],
+ ['tongue','혀를 쭉 내밀고 "메롱~" 세 번. 얼굴 근육이 확 풀리고 웃음이 나요.'],
+ ['exercise','제자리에서 팔 벌려 뛰기 10번! 앉아서라면 두 팔만 위아래로 쭉쭉.'],
+ ['window','창밖 구름을 보며 1분 동안 아무 생각 없이 멍~ 때리기.']];
 var RTYPE={};RESTX.forEach(function(r){RTYPE['쉼 하나: '+r[1]]=r[0];});
 function restFig(t){var f=RTYPE[t]||(/어깨/.test(t)?'shoulder':/물|차/.test(t)?'water':/창밖|보이는/.test(t)?'window':'breath');
  var H='<circle cx="32" cy="13" r="6"/>',B='<path d="M32 19 V40"/>',L='<path d="M32 40 L25 56 M32 40 L39 56"/>',A='<path d="M32 24 L23 37 M32 24 L41 37"/>';
@@ -6160,5 +6163,6 @@ footer{background:#2E3B37!important}
 var t=document.getElementById('tophome');if(t)t.textContent='← 업무도우미 홈으로 이동';
 ['v-prompt','v-studio','v-gbiz','v-song','v-heart','v-vent'].forEach(function(id){var b=document.querySelector('#'+id+' .vback');if(b)b.textContent='← 홈';});
 var h=document.querySelector('#v-song .vbar h2');if(h)h.textContent='AI 작곡실';})();</script>
+<script src="zz.js?v=2"></script>
 </body>
 </html>
