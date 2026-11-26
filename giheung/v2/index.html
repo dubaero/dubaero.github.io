@@ -8,7 +8,7 @@
 <script src="/js/room-gate.js?v=2"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-:root{--g:#2a9d8f;--g2:#1f7268;--gl:#e9f6f4;--gm:#c6e7e2;--ink:#263331;--sub:#66746f;--line:#e4ebe9;--bg:#f7f9f8;--red:#d93a2b;--or:#fff3e6;--orT:#b0601a}
+:root{--w:#e2865a;--w2:#b45a2c;--wl:#fdf1ea;--wm:#f5d6c3;--g:#2a9d8f;--g2:#1f7268;--gl:#e9f6f4;--gm:#c6e7e2;--ink:#263331;--sub:#66746f;--line:#e4ebe9;--bg:#f7f9f8;--red:#d93a2b;--or:#fff3e6;--orT:#b0601a}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.55;letter-spacing:-.2px}
@@ -38,7 +38,7 @@ main{flex:1;min-height:0}
 .tile.app{font-size:15px;justify-content:center}
 /* homepage-style home (그룹홈 비서함 틀) */
 .hp{height:100%;display:flex;flex-direction:column;gap:12px;padding:12px 0 8px;min-height:0}
-.hhero{flex:none;background:linear-gradient(90deg,#fdf6ee 0%,#f3faf8 100%);border:1px solid var(--line);border-radius:14px;display:grid;grid-template-columns:minmax(0,1fr) 34%;overflow:hidden;color:var(--ink);min-height:150px}
+.hhero{flex:none;background:linear-gradient(90deg,#fdf1e7 0%,#fbf6ef 50%,#eef8f6 100%);border:1px solid var(--line);border-radius:14px;display:grid;grid-template-columns:minmax(0,1fr) 34%;overflow:hidden;color:var(--ink);min-height:150px}
 .hhero .tx{padding:18px 24px;display:flex;flex-direction:column;justify-content:center;gap:5px;min-width:0}
 .hhero .bdg{font-size:13px;font-weight:800;color:var(--g2);display:flex;align-items:center;gap:6px}
 .hhero .kick{font-size:13px;font-weight:700;color:#b0601a}
@@ -50,26 +50,26 @@ main{flex:1;min-height:0}
 .hhero .ph{background:url(/img/giheung/hero-sprout.webp) center 45%/cover no-repeat}
 .cols{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 .col{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-height:0;min-width:0}
-.col h3{font-size:16px;font-weight:800;letter-spacing:-.5px;padding-bottom:7px;border-bottom:2px solid var(--g);display:flex;justify-content:space-between;align-items:center}
+.col h3{font-size:16px;font-weight:800;letter-spacing:-.5px;padding-bottom:7px;border-bottom:2px solid var(--w);display:flex;justify-content:space-between;align-items:center}
 .col h3 small{font-size:12px;color:var(--sub);font-weight:700}
 .ol{list-style:none;overflow:auto;min-height:0;flex:1;display:flex;flex-direction:column}
 .ol li{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14.5px;font-weight:700;letter-spacing:-.4px}
 .ol li .no{width:20px;color:var(--sub);font-weight:600;font-size:13px;text-align:center}
 .ol li .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
 .ol li .nm:hover{color:var(--g2);text-decoration:underline}
-.ol li .tg{font-size:11.5px;font-weight:800;color:var(--g2);background:var(--gl);border:1px solid var(--gm);border-radius:6px;padding:2px 7px}
+.ol li .tg{font-size:11.5px;font-weight:800;color:var(--w2);background:var(--wl);border:1px solid var(--wm);border-radius:6px;padding:2px 7px}
 .ob{border:0;background:var(--g);color:#fff;border-radius:6px;padding:4px 10px;font-size:12.5px;font-weight:800;display:inline-flex;align-items:center;gap:3px}
 .qg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .q{border:1px solid var(--line);border-radius:10px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:12px 4px;min-height:92px;color:var(--ink)}
-.q svg{width:24px;height:24px;color:var(--g)}
+.q svg{width:24px;height:24px;color:var(--g)}.q:nth-child(even) svg{color:var(--w)}
 .q b{font-size:14px;font-weight:800;letter-spacing:-.5px}
 .q span{font-size:11.5px;color:var(--sub);letter-spacing:-.4px;white-space:nowrap}
 .q:hover,.q.on{border-color:var(--g);background:var(--gl)}
-.aig{margin-top:auto;border:1px solid var(--gm);background:var(--gl);border-radius:10px;padding:8px 10px}
-.aig .t{font-size:13px;font-weight:800;color:var(--g2);margin-bottom:6px;display:flex;justify-content:space-between}
+.aig{margin-top:auto;border:1px solid var(--wm);background:var(--wl);border-radius:10px;padding:8px 10px}
+.aig .t{font-size:13px;font-weight:800;color:var(--w2);margin-bottom:6px;display:flex;justify-content:space-between}
 .aig .t small{font-weight:600;color:var(--sub)}
 .aig .r{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
-.aig button{border:1px solid var(--gm);background:#fff;border-radius:8px;padding:7px 2px;font-size:12.5px;font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aig button{border:1px solid var(--wm);background:#fff;border-radius:8px;padding:7px 2px;font-size:12.5px;font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .aig button:hover{border-color:var(--g);color:var(--g2)}
 .lk{list-style:none;overflow:auto;min-height:0;flex:1}
 .lk .sec{font-size:12.5px;font-weight:800;color:var(--sub);margin:6px 0 2px}
@@ -78,7 +78,7 @@ main{flex:1;min-height:0}
 .lk a span{font-size:12px;color:var(--sub);font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lk a:hover{color:var(--g2)}
 .ghelp{margin-top:auto;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px;color:var(--sub);letter-spacing:-.3px}
-.ghelp b{color:var(--g2)}
+.ghelp b{color:var(--w2)}
 .gfoot{flex:none;background:#2c3634;color:#dfe7e5;margin:0 -16px;padding:9px 24px;font-size:12.5px;display:flex;flex-direction:column;gap:3px;letter-spacing:-.3px}
 .gfoot .r{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
 .gfoot b{color:#fff}.gfoot a{color:#9fe0d6;text-decoration:none;font-weight:700}
@@ -97,7 +97,7 @@ main{flex:1;min-height:0}
 .back{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700;color:var(--sub)}
 .pane .bd{padding:4px 16px 14px;overflow:auto;min-height:0;flex:1}
 .pane .bd::-webkit-scrollbar{width:6px}.pane .bd::-webkit-scrollbar-thumb{background:#d6ddd9;border-radius:4px}
-.gl{font-size:12.5px;font-weight:800;color:var(--sub);margin:8px 0 4px;letter-spacing:-.3px}
+.gl{font-size:12.5px;font-weight:800;color:var(--w2);margin:8px 0 4px;letter-spacing:-.3px}
 .gl:first-child{margin-top:2px}
 .chips{display:flex;flex-wrap:wrap;gap:5px}
 .chip{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 9px;font-size:13.5px;font-weight:600;color:var(--ink);letter-spacing:-.4px}
@@ -106,7 +106,7 @@ main{flex:1;min-height:0}
 .chip.big{font-size:14.5px;padding:7px 12px;font-weight:700}
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
 .tab{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 14px;font-size:14.5px;font-weight:800;color:var(--sub)}
-.tab.on{background:var(--gl);border-color:var(--g);color:var(--g2)}
+.tab.on{background:var(--wl);border-color:var(--w);color:var(--w2)}
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:0 6px}
 .fl{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;margin-bottom:5px;background:#fff}
 .fl label{font-size:13px;font-weight:700;color:var(--g2);padding:0 0 0 10px;white-space:nowrap}
@@ -128,7 +128,7 @@ main{flex:1;min-height:0}
 .btn:hover{border-color:var(--g)}
 .out{padding:14px 18px;overflow:auto;flex:1;min-height:0;font-size:15px;line-height:1.75;white-space:pre-wrap;letter-spacing:-.3px}
 .out mark,.hl{background:linear-gradient(transparent 55%,#cdeee8 55%);color:var(--g2);font-weight:800;padding:0 1px}
-.out .h{font-weight:800;color:var(--g2)}
+.out .h{font-weight:800;color:var(--w2)}
 .grid4{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;padding:10px;flex:1;min-height:0}
 .box{border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;min-height:0}
 .box .bh{display:flex;align-items:center;gap:6px;padding:7px 10px;border-bottom:1px solid var(--line);font-weight:800;font-size:14px}
@@ -141,7 +141,7 @@ table.form td{padding:7px 10px;border:1px solid var(--gm);vertical-align:top;lin
 .ftitle{text-align:center;font-weight:900;font-size:19px;letter-spacing:4px;margin:2px 0 10px}
 .cards5{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:12px;white-space:normal}
 .c5{border:1px solid var(--line);border-radius:12px;padding:10px;font-size:13.5px;line-height:1.6;letter-spacing:-.3px}
-.c5 b{display:block;font-size:15px;color:var(--g2);margin-bottom:4px;letter-spacing:-.5px}
+.c5 b{display:block;font-size:15px;color:var(--w2);margin-bottom:4px;letter-spacing:-.5px}
 .c5 i{font-style:normal;font-weight:800;color:var(--sub);font-size:12px}
 .badge{font-size:11px;font-weight:800;border-radius:6px;padding:1px 6px;margin-left:5px}
 .free{background:#e3f3e5;color:#2d6b36}.paid{background:var(--or);color:var(--orT)}
@@ -150,7 +150,7 @@ table.form td{padding:7px 10px;border:1px solid var(--gm);vertical-align:top;lin
 .fc.on{border:2px solid var(--g);background:var(--gl);padding:7px 9px}
 .subtabs{display:flex;gap:4px;padding:8px 14px 0;flex:none}
 .stab{border:0;border-bottom:3px solid transparent;background:none;padding:6px 12px;font-weight:800;font-size:14.5px;color:var(--sub)}
-.stab.on{color:var(--g2);border-color:var(--g)}
+.stab.on{color:var(--w2);border-color:var(--w)}
 .red{color:var(--red);font-weight:900;font-size:19px}
 .cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;white-space:normal;margin-bottom:12px}
 .cmp>div{border:1px solid var(--line);border-radius:12px;padding:12px}
@@ -414,23 +414,46 @@ VIEWS.month=()=>{if(S.mm==null)S.mm=Math.min(11,new Date().getMonth()+1)%12;retu
 /* ================= ④ 문자·소통 ================= */
 const MSGS=['프로그램 참여 안내','일정 변경 안내','접수·대기 결과','보호자께 근황','보호자 상담 안내','치료·수업 결과 안내','어려운 이야기 전하기','자원봉사자 안내','협력기관 협조 요청','명절·절기 인사','기타'];
 const TONE=['따뜻하게','정중하게','쉬운 말로'];
-function greet(to){return ['이용자','보호자','자원봉사자','협력기관','후원자'][to]==='협력기관'?'안녕하십니까, '+ORG+'입니다.':'안녕하세요, '+ORG+'입니다.'}
-function msgText(){const s=S.ms??0,p=P(),to=S.to??1,tone=S.tn??0;const who=['이용자님','보호자님','봉사자님','담당자님','후원자님'][to];
- const soft=tone===2;const end=tone===1?'감사합니다.':'늘 함께해 주셔서 고맙습니다.';const g=greet(to);
- const info=`일시: ${F('date')}\n장소: ${F('place')}${V('prep')?'\n준비물: '+V('prep'):''}\n문의: ${F('staff')} ${F('tel')}`;
- const add=V('madd')?'\n'+V('madd'):'';
+const SEASON=['','새해 복 많이 받으세요.','아직 바람은 차지만 봄이 가까워지는 요즘,','새싹이 돋는 3월,','꽃 소식이 반가운 4월,','가정의 달 5월,','초여름 햇살이 따뜻한 요즘,','무더위가 시작된 7월,','한여름 더위가 이어지는 요즘,','선선한 바람이 반가운 9월,','단풍이 곱게 물드는 10월,','아침저녁으로 바람이 제법 차가워진 요즘,','한 해를 마무리하는 12월,'];
+const MO=new Date().getMonth()+1;
+const seasonLine=()=>MO===1?SEASON[1]+' 올해도 건강하고 웃음 가득한 한 해 되시길 바랍니다.':SEASON[MO]+' 건강히 잘 지내고 계신가요?';
+function greet(to){return to===3?'안녕하십니까. '+ORG+'입니다.':'안녕하세요. '+ORG+'입니다.'}
+function msgText(){const s=S.ms??0,p=P(),to=S.to??1,tone=S.tn??0;
+ const who=['이용자님','보호자님','봉사자님','담당자님','후원자님'][to];
+ const staff=V('staff')||'[담당자]',tel=V('tel')||'[전화번호]';
+ const hi=tone===1?`안녕하십니까, ${who}. ${ORG} ${staff}입니다.`:`안녕하세요, ${who}. ${ORG} ${staff}입니다.`;
+ const ssn=seasonLine();
+ const info=[V('date')&&'· 일시: '+V('date'),V('place')&&'· 장소: '+V('place'),V('prep')&&'· 준비물: '+V('prep')].filter(Boolean);
+ const infoB=(info.length?info:['· 일시: [일시]','· 장소: [장소]']).join('\n');
+ const add=V('madd');
+ const thanks=tone===1?'늘 함께해 주셔서 진심으로 감사드립니다.':'늘 함께해 주셔서 고맙습니다.';
+ const ask=`궁금하신 점은 언제든 편하게 연락 주세요. (${staff} ${tel})`;
+ const care=a=>'\n\n[함께 알아 두시면 좋아요]\n'+a.map(x=>'· '+x).join('\n');
+ if(tone===2){const E={
+  0:`${who}, 안녕하세요.\n${ORG}이에요.\n${p}에 같이 가요!\n\n${infoB}\n\n편한 옷을 입고 오세요.\n몸이 아프면 미리 전화 주세요.\n☎ ${tel}`,
+  1:`${who}, 안녕하세요.\n${p} 날짜가 바뀌었어요.\n\n${infoB}\n\n헷갈리면 전화 주세요.\n☎ ${tel}`,
+  2:`${who}, 안녕하세요.\n${p} 신청 결과를 알려 드려요.\n결과: [선정 / 대기]\n\n궁금하면 전화 주세요.\n☎ ${tel}`,
+  3:`보호자님, 안녕하세요.\n오늘 [이용자]님이 ${p}에서 즐겁게 지냈어요.\n${add||'[오늘 모습 한 줄]'}\n고맙습니다.`,
+  4:`보호자님, 안녕하세요.\n상담 날짜를 알려 드려요.\n\n${infoB}\n\n시간이 안 되면 전화 주세요.\n☎ ${tel}`,
+  5:`보호자님, 안녕하세요.\n이번 달 ${p} 소식이에요.\n잘한 점: [잘한 점]\n집에서도 칭찬해 주세요!`,
+  6:`${who}, 안녕하세요.\n전할 말이 있어요.\n편할 때 전화 주세요.\n☎ ${tel}`,
+  7:`봉사자님, 안녕하세요.\n${p} 봉사 날이에요.\n\n${infoB}\n\n편한 옷과 운동화를 신고 오세요.\n고맙습니다!`,
+  8:`안녕하세요. ${ORG}입니다.\n${p} 관련해 도움을 부탁드려요.\n${add||'[부탁할 내용]'}\n☎ ${tel}`,
+  9:`${who}, 즐거운 [명절] 보내세요!\n늘 고마워요.\n- ${ORG}`,
+  10:`${who}, 안녕하세요.\n${add||'[전할 말]'}\n☎ ${tel}`};
+  return [E[s],E[s].split('\n').slice(0,3).join(' ')]}
  const T={
- 0:[`${g}\n${who}, ${M(p)}에 함께해 주세요.${add}\n\n${info}\n\n${soft?'궁금한 것이 있으면 전화 주세요.':'참여가 어려우시면 미리 연락 부탁드립니다.'}\n${end}`,`[${p}] ${F('date')} ${F('place')} · 문의 ${F('tel')}`],
- 1:[`${g}\n${who}, ${M(p)} 일정이 바뀌어 알려드립니다.\n\n변경 전: [기존 일시]\n변경 후: ${F('date')}\n장소: ${F('place')}${add}\n\n불편을 드려 죄송합니다. 문의: ${F('staff')} ${F('tel')}\n${end}`,`[${p} 일정 변경] ${F('date')}로 바뀌었습니다 · ${F('tel')}`],
- 2:[`${g}\n${who}, 신청해 주신 ${M(p)} 접수 결과를 알려드립니다.\n\n결과: [선정 / 대기 ○번]\n시작: ${F('date')}${add}\n\n자세한 안내는 ${F('staff')}(${F('tel')})께서 다시 연락드리겠습니다.\n${end}`,`[${p}] 접수 결과: [선정/대기] · 문의 ${F('tel')}`],
- 3:[`${g}\n보호자님, ${M(p)}에서 [이용자 호칭]님의 요즘 모습을 전해드려요.${add||'\n[최근 활동·좋아진 점 한두 줄]'}\n\n오늘도 웃는 얼굴로 함께해 주셨어요. 궁금하신 점은 언제든 연락 주세요.\n${F('staff')} 드림`,`[이용자]님 오늘 ${p}에서 즐겁게 참여하셨어요 :)`],
- 4:[`${g}\n보호자님, ${M(p)} 관련 상담을 안내드립니다.\n\n${info}${add}\n\n편하신 시간이 다르면 알려 주세요. 맞춰 조정하겠습니다.\n${end}`,`[상담 안내] ${F('date')} ${F('place')} · ${F('tel')}`],
- 5:[`${g}\n보호자님, 이번 달 ${M(p)} 진행 내용을 안내드립니다.\n\n- 이번 달 목표: [목표]\n- 잘하신 점: [변화]\n- 가정에서 함께해 주세요: [가정 연계 활동]${add}\n\n문의: ${F('staff')} ${F('tel')}`,`[${p}] 이번 달 결과 안내드렸어요. 가정에서도 [활동] 함께해 주세요.`],
- 6:[`${g}\n${who}, 조심스럽게 말씀드릴 일이 있어 연락드립니다.\n${add||'[전해야 할 내용을 사실 위주로 한두 줄]'}\n\n저희도 같은 마음으로 방법을 찾고 있습니다. 편하실 때 통화 가능하실지 여쭙고 싶습니다.\n${F('staff')} 드림 (${F('tel')})`,`편하실 때 통화 가능하실까요? 말씀드릴 일이 있습니다. ${F('tel')}`],
- 7:[`${g}\n봉사자님, ${M(p)} 봉사 활동을 안내드립니다.\n\n${info}\n복장: 편한 옷${add}\n\n귀한 시간 내주셔서 감사합니다.`,`[${p} 봉사] ${F('date')} ${F('place')} · ${F('tel')}`],
- 8:[`안녕하십니까, ${ORG} ${F('staff')}입니다.\n${M(p)} 운영과 관련하여 협조를 요청드립니다.\n\n1. 내용: ${V('madd')||'[협조 요청 내용]'}\n2. 일시: ${F('date')}\n3. 장소: ${F('place')}\n\n검토 부탁드리며, 문의는 ${F('tel')}로 연락 주십시오.\n감사합니다.`,`[협조 요청] ${p} 관련 · ${F('date')} · ${F('tel')}`],
- 9:[`${g}\n${who}, 따뜻한 [명절/절기] 맞이하세요.\n올 한 해 ${M(p)}에 보내주신 관심 덕분에 이용자분들이 더 많이 웃을 수 있었습니다.${add}\n\n가족과 함께 행복한 시간 보내시길 바랍니다.\n${ORG} 드림`,`즐거운 [명절] 보내세요! 늘 고맙습니다 - ${ORG}`],
- 10:[`${g}\n${who}, ${V('madd')||'[전하고 싶은 내용]'}\n\n문의: ${F('staff')} ${F('tel')}\n${end}`,`${V('madd')||'[짧은 안내]'} · ${F('tel')}`]};
+ 0:[`${hi}\n${ssn}\n\n${who}께 반가운 소식을 전해 드리고 싶어 연락드렸어요. 이번에 ${M(p)} 시간을 정성껏 준비했는데, 꼭 함께하셨으면 하는 마음입니다.${add?'\n'+add:''}\n\n${infoB}${care(['편한 복장과 개인 물병을 챙겨 주세요.','당일 컨디션이 좋지 않으시면 부담 갖지 마시고 미리 연락 주세요.','이동이나 식사에 도움이 필요하시면 말씀해 주세요. 미리 준비해 두겠습니다.'])}\n\n함께할 날을 손꼽아 기다리겠습니다.\n${ask}\n${thanks}`,`[${ORG}] ${p}에 초대합니다. ${V('date')||'[일시]'} ${V('place')||'[장소]'} · 문의 ${tel}`],
+ 1:[`${hi}\n${ssn}\n\n먼저 일정이 바뀌게 되어 번거롭게 해 드린 점 너그러이 양해 부탁드립니다. ${M(p)} 일정이 아래와 같이 변경되었어요.\n\n· 변경 전: [기존 일시]\n${infoB.replace('· 일시','· 변경 후')}${care(['바뀐 일정이 어려우시면 편하게 말씀해 주세요. 다른 방법을 함께 찾아보겠습니다.','이미 준비하신 것이 있다면 그대로 가져오셔도 괜찮아요.'])}\n\n${ask}\n이해해 주셔서 감사합니다.`,`[${ORG}] ${p} 일정이 ${V('date')||'[변경 일시]'}로 바뀌었어요. 번거롭게 해 드려 죄송합니다. ${tel}`],
+ 2:[`${hi}\n${ssn}\n\n${M(p)}에 관심 가져 주시고 신청해 주셔서 정말 감사합니다. 기다리셨을 접수 결과를 알려 드려요.\n\n· 결과: [선정 / 대기 ○번]\n${V('date')?'· 시작: '+V('date'):'· 시작: [첫 일정]'}${care(['대기 중이시더라도 자리가 생기면 가장 먼저 연락드리겠습니다.','첫날 준비물과 이용 안내는 따로 한 번 더 보내 드릴게요.'])}\n\n${ask}\n${thanks}`,`[${ORG}] ${p} 접수 결과: [선정/대기]. 자세한 안내는 다시 연락드릴게요. ${tel}`],
+ 3:[`${hi}\n${ssn}\n\n요즘 [이용자 호칭]님이 ${M(p)}에서 지내시는 모습을 전해 드리고 싶어 연락드렸어요.\n\n${add||'처음에는 조금 낯설어하셨는데, 요즘은 먼저 웃으며 인사를 건네고 친구들 이름도 하나씩 불러 주세요. [최근 모습 한두 줄]'}\n\n이렇게 한 걸음씩 자라는 모습을 보며 저희도 큰 힘을 얻고 있어요. 가정에서 늘 마음 써 주시는 보호자님 덕분이라고 생각합니다.${care(['가정에서 달라진 점이 있으면 저희에게도 살짝 알려 주세요. 함께 응원하겠습니다.'])}\n\n${thanks}\n${staff} 드림`,`[이용자]님이 오늘 ${p}에서 밝게 웃으며 참여하셨어요. 늘 고맙습니다 :)`],
+ 4:[`${hi}\n${ssn}\n\n${M(p)}와 관련해 보호자님과 차분히 이야기 나누고 싶은 부분이 있어 상담 일정을 안내드립니다. 평소 궁금하셨던 점이나 고민도 편하게 나눠 주세요.\n\n${infoB}${care(['궁금하신 점을 미리 메모해 오시면 시간을 알차게 쓸 수 있어요.','시간이 어려우시면 전화 상담으로도 가능합니다. 편한 시간을 알려 주세요.'])}\n\n${ask}\n${thanks}`,`[${ORG}] ${p} 상담 안내: ${V('date')||'[일시]'} ${V('place')||'[장소]'}. 시간 조정 가능해요. ${tel}`],
+ 5:[`${hi}\n${ssn}\n\n이번 달 ${M(p)}에서 함께한 시간을 정리해 보내 드려요.\n\n· 이번 달 목표: [목표]\n· 이렇게 해냈어요: [잘한 점·변화]\n· 다음 달에는: [다음 목표]\n${add?'\n'+add+'\n':''}\n작은 변화처럼 보여도 꾸준히 쌓아 온 큰 성장이에요.${care(['가정에서도 [가정 연계 활동]을 함께해 주시면 더 큰 힘이 됩니다.','칭찬을 많이 해 주세요. 다음 시간에 더 즐겁게 참여하세요.'])}\n\n${ask}\n${thanks}`,`[${p}] 이번 달 결과를 보내 드렸어요. 가정에서도 많이 칭찬해 주세요!`],
+ 6:[`${hi}\n\n조심스러운 마음으로 연락드립니다. 직접 뵙고 말씀드리는 것이 도리이지만, 먼저 상황을 알려 드리는 것이 좋을 것 같아 글로 전합니다.\n\n${add||'[전해야 할 내용을 사실 위주로 한두 줄]'}\n\n많이 놀라셨을 수 있다는 것 잘 알고 있습니다. 저희도 같은 마음으로 가장 좋은 방법을 찾고 있으며, 보호자님과 함께 의논하고 싶습니다.\n편하실 때 잠시 통화 가능하실지 여쭙고 싶습니다.\n\n${staff} 드림 (${tel})`,`편하실 때 잠시 통화 가능하실까요? 말씀드릴 일이 있어 연락드렸습니다. ${tel}`],
+ 7:[`${hi}\n${ssn}\n\n${M(p)}에 귀한 시간을 내어 함께해 주셔서 진심으로 감사드립니다. 활동 일정을 안내해 드릴게요.\n\n${infoB}${care(['편한 복장과 운동화를 권해 드려요.','이용자분 사진은 동의 없이 촬영하거나 SNS에 올리지 말아 주세요.','도착하시면 1층 안내데스크에서 담당자를 찾아 주세요.'])}\n\n봉사자님 덕분에 이용자분들의 하루가 더 따뜻해집니다.\n${ask}`,`[${p} 봉사] ${V('date')||'[일시]'} ${V('place')||'[장소]'} · 편한 복장 · 문의 ${tel}`],
+ 8:[`안녕하십니까. ${ORG} ${staff}입니다.\n늘 장애인 복지 증진을 위해 애써 주시는 귀 기관에 깊이 감사드립니다.\n\n${M(p)} 운영과 관련하여 아래와 같이 협조를 요청드립니다.\n\n1. 요청 내용: ${add||'[협조 요청 내용]'}\n2. 일시: ${V('date')||'[일시]'}\n3. 장소: ${V('place')||'[장소]'}\n\n바쁘신 가운데 번거로운 부탁을 드려 죄송한 마음입니다. 검토해 주시면 감사하겠습니다.\n문의: ${staff} ${tel}`,`[협조 요청] ${p} 관련 · ${V('date')||'[일시]'} · ${tel}`],
+ 9:[`${hi}\n\n${SEASON[MO]} 어느덧 [명절]이 다가왔습니다.\n올 한 해 ${M(p)}에 보내 주신 따뜻한 관심 덕분에 이용자분들이 더 많이 웃을 수 있었어요.${add?'\n'+add:''}\n\n가족과 함께 넉넉하고 평안한 [명절] 보내시길 바랍니다.\n${thanks}\n${ORG} 드림`,`넉넉하고 평안한 [명절] 보내세요. 늘 고맙습니다. - ${ORG}`],
+ 10:[`${hi}\n${ssn}\n\n${add||'[전하고 싶은 내용]'}\n\n${ask}\n${thanks}`,`${add||'[짧은 안내]'} · ${tel}`]};
  return T[s]}
 VIEWS.msg=()=>{S.ms=S.ms??0;S.to=S.to??1;S.tn=S.tn??0;return view('문자·소통',
  `<div class="gl">상황</div>${chips('ms',MSGS)}${bizPick()}<div class="gl">받는 분</div>${chips('to',['이용자','보호자','자원봉사자','협력기관','후원자'])}<div class="gl">말투</div>${chips('tn',TONE)}
@@ -443,17 +466,18 @@ let CA='',CB='',CP='';function setC(a,b,p){CA=a;CB=b;CP=p;return ''}
 const PROMOS=['이달의 소식','활동 SNS·블로그','홈페이지 게시글','보도자료','안내문·가정통신문','쉬운 글 안내문','모집 공고','포스터·홍보 그림','인포그래픽','카드뉴스','핀터레스트 레퍼런스','기타'];
 const MOOD=['따뜻하게','밝고 경쾌하게','차분하게'];const LEN=['짧게','보통','길게'];
 const WITH=['이용자','보호자·가족','자원봉사자','지역 주민','후원자','협력기관'];
-function tags(){const p=P().replace(/[^가-힣A-Za-z0-9]/g,'');const a=(V('act')||'').replace(/[^가-힣0-9 ]/g,'').split(' ').filter(w=>w.length>1).slice(0,2).join('');return `#${ORG} #${BN().replace(/[^가-힣A-Za-z]/g,'')} #${p}${a?' #'+a:''} #함께하는기흥 #장애인복지관`}
 function withTxt(){const a=(S.wi||[0]).map(i=>WITH[i]);return a.join('·')}
-function blog(){const p=P(),act=V('act')||`${p} 활동을 함께했어요`,more=V('more'),w=withTxt(),L=S.ln??1,mood=S.md??0;
- const open=['따스한 마음을 담아 오늘의 이야기를 전해드려요.','신나는 소식 하나 들고 왔어요!','오늘 있었던 활동을 차분히 정리해 전해드립니다.'][mood];
- let t=`[제목] ${p} | ${act.slice(0,24)} — ${ORG} 이야기\n\n안녕하세요, ${ORG}입니다.\n${open}\n\n■ 오늘의 활동\n${M(act)}\n[사진: 활동 모습 1]\n\n■ 함께한 사람들\n${w} 모두 함께 ${p} 시간을 보냈어요.${more?'\n'+more:''}\n\n■ 이렇게 진행했어요\n먼저 오늘 할 일을 함께 확인하고, 각자 하고 싶은 역할을 골랐어요. 서두르지 않고 한 분 한 분의 속도에 맞추니 모두가 끝까지 즐겁게 참여했어요.\n[사진: 진행하는 모습]`;
- if(L>0)t+=`\n\n■ 기억에 남는 순간\n[이용자분의 반응이나 기억에 남는 장면 한두 줄]\n[사진: 활동 모습 2]\n\n■ 이용자분의 한마디\n"[이용자분이 한 말]"\n짧은 한마디에 오늘의 즐거움이 담겨 있었어요.`;
- if(L>1)t+=`\n\n■ ${BN()}은(는)\n${BN()}은(는) 장애인이 지역 안에서 스스로 선택하고 참여하는 삶을 응원하는 사업이에요. 이런 활동 하나하나가 자신감이 되고, 이웃에게는 서로를 알아가는 계기가 됩니다.\n\n■ 고마운 분들\n늘 마음을 보태 주시는 후원자님과 자원봉사자님, 지역 이웃분들께 감사드립니다.`;
- t+=`\n\n앞으로도 ${ORG}의 따뜻한 일상을 나누겠습니다.\n\n${tags()}`;return t}
-function insta(){const p=P(),act=V('act')||`${p} 활동`;const e=['🌿','✨','🙂'][S.md??0];return `${e} ${p} 이야기 ${e}\n\n${act}\n${withTxt()} 모두 함께여서 더 즐거웠던 시간!${V('more')?'\n'+V('more'):''}\n\n오늘도 한 걸음 함께 자랐어요.\n\n📍 ${ORG}\n${tags()}`}
-function kakao(){const p=P(),act=V('act')||`${p} 활동`;return `[${ORG} 소식]\n\n${p} 활동을 전해드려요.\n· ${act}\n· 함께한 분: ${withTxt()}${V('date')?'\n· 일시: '+V('date'):''}\n\n자세한 이야기와 사진은 블로그에서 확인해 주세요.\n[블로그 링크]\n\n문의 ${F('tel')}`}
-function home(){const p=P(),act=V('act')||`${p} 활동`;return `[제목] ${BN()} ${p} 운영 소식\n\n${ORG}은(는) ${V('date')||'[일시]'} ${V('place')||'[장소]'}에서 ${M(p)}을(를) 진행하였습니다.\n\n1. 대상: ${withTxt()}\n2. 내용: ${act}${V('more')?'\n3. 주요 활동: '+V('more'):''}\n\n이번 활동을 통해 참여자분들이 [기대 효과]를 경험하는 시간이 되었습니다.\n앞으로도 지역사회와 함께하는 프로그램을 운영하겠습니다.\n\n[사진 설명: 사진 속 활동을 한 줄로 설명]\n문의: ${F('staff')} ${F('tel')}`}
+function tags(){const p=P().replace(/[^가-힣A-Za-z0-9]/g,'');return `#용인시기흥장애인복지관 #${BN().replace(/[^가-힣A-Za-z]/g,'')} #${p} #함께여서빛나는 #장애인복지관 #용인`}
+function actLine(){const a=V('act');if(!a)return `${withTxt()}과 함께 ${P()} 시간을 보냈어요.`;return /[.!?요다]$/.test(a)?a:a+'.'}
+function feel(){return ['함께 웃고 이야기 나누며 마음까지 따뜻해지는 시간이었어요.','모두 신나게 웃고 박수 치며 즐거운 시간을 보냈답니다!','서로의 속도에 맞춰 천천히, 함께하는 시간을 보냈습니다.'][S.md??0]}
+function blog(){const p=P(),bn=BN(),more=V('more'),L=S.ln??1;
+ let t=`[제목] ${p} | ${(V('act')||p+' 이야기').slice(0,26)}\n\n안녕하세요, ${ORG}입니다.\n${SEASON[MO]} 오늘은 ${M(p)} 현장의 따뜻한 이야기를 전해 드리려고 해요.\n\n■ 오늘의 활동\n${actLine()}\n${feel()}\n[사진: 활동 모습 1]\n\n■ 준비하며\n며칠 전부터 무엇을 하고 싶은지 이용자분들과 함께 이야기 나누고, 필요한 것을 하나씩 챙겼어요. 준비하는 시간부터 이미 설레는 활동이 시작된 셈이었어요.\n[사진: 준비하는 모습]\n\n■ 이렇게 진행했어요\n먼저 모두 모여 오늘 할 일을 함께 확인했어요. 각자 하고 싶은 역할을 고르고, 서로 도우며 차근차근 진행했어요. 서두르지 않고 한 분 한 분의 속도에 맞추니 모두가 끝까지 즐겁게 참여할 수 있었어요.${more?'\n'+more:''}\n[사진: 진행하는 모습]`;
+ if(L>0)t+=`\n\n■ 기억에 남는 순간\n[이용자분들의 반응이나 기억에 남는 장면을 한두 줄 적어 주세요. 예: 처음엔 망설이던 ○○님이 마지막엔 먼저 손을 들고 발표했어요.]\n[사진: 활동 모습 2]\n\n■ 이용자분들의 한마디\n"[이용자분이 한 말을 적어 주세요]"\n짧은 한마디였지만, 그 안에 오늘의 즐거움이 고스란히 담겨 있었어요. 이런 말을 들을 때마다 저희도 큰 힘을 얻어요.`;
+ if(L>1)t+=`\n\n■ 활동을 마치며\n돌아오는 길, 이용자분들은 오늘 있었던 일을 서로 이야기하며 한참을 웃었어요. 특별한 날이 아니어도 함께하는 작은 경험 하나하나가 모여 자신감과 즐거운 기억이 된다고 믿어요.\n\n■ 고마운 분들\n이번 활동은 늘 곁에서 마음을 보태 주시는 ${withTxt()}, 그리고 후원자님과 자원봉사자님 덕분에 가능했어요. 보내 주신 관심이 이용자분들의 웃음으로 돌아왔다는 것을 꼭 전해 드리고 싶어요.`;
+ t+=`\n\n앞으로도 ${bn}의 따뜻한 일상을 자주 나누겠습니다.\n늘 응원해 주셔서 감사합니다.\n\n${tags()}`;return t}
+function insta(){const p=P();return `${['🌿','✨','🍀'][S.md??0]} ${p} 이야기\n\n${actLine()}\n${feel()}\n${V('more')?V('more')+'\n':''}\n처음엔 조금 쑥스러워하던 얼굴들이\n어느새 환한 웃음으로 바뀌었어요.\n오늘도 한 뼘 더 자란 하루 💛\n\n📍 ${ORG}\n${tags()}`}
+function kakao(){const p=P();return `[${ORG} 소식]\n\n${SEASON[MO]} ${p} 소식을 전해 드려요.\n\n${actLine()} ${feel()}\n${V('more')?V('more')+'\n':''}\n함께해 주신 ${withTxt()}께 감사드립니다.\n자세한 이야기와 사진은 블로그에서 만나 보세요 👉 [블로그 링크]\n\n문의 ${V('tel')||'[전화번호]'}`}
+function home(){const p=P();return `[제목] ${BN()} ${p} 활동 이야기\n\n${ORG}은 ${V('date')||'[일시]'} ${V('place')||'[장소]'}에서 ${withTxt()}과 함께 ${M(p)} 활동을 진행했습니다.\n\n${actLine()} ${feel()}${V('more')?' '+V('more'):''}\n\n활동을 준비하며 이용자분들이 직접 하고 싶은 것을 고르고 역할을 나누었고, 서로 도우며 끝까지 함께했습니다. 처음에는 낯설어하던 분들도 시간이 지날수록 먼저 이야기를 건네며 밝은 표정으로 참여해 주셨습니다.\n\n이번 활동이 참여자분들께 [자신감·즐거운 추억·새로운 경험]으로 남기를 바랍니다. 함께해 주신 모든 분께 감사드리며, 앞으로도 지역사회와 함께하는 프로그램으로 찾아뵙겠습니다.\n\n[사진 설명: 사진 속 활동 모습을 한 줄로]\n※ 사진은 본인·보호자 동의를 받아 게시합니다.\n문의: ${V('staff')||'[담당자]'} ${V('tel')||'[전화번호]'}`}
 function promoText(){const s=S.pr??0,p=P(),bn=BN();
  const info=`행사명: ${F('name')}\n일시: ${F('date')}\n장소: ${F('place')}\n대상·인원: ${F('people')}\n모집 기간: ${F('recruit')}\n신청 방법: ${F('apply')}\n문의: ${F('staff')} ${F('tel')}`;
  const img=(kind,extra)=>`너는 장애인복지관 ${M('홍보 디자인 전문가')}야.\n${M(bn)} · ${M(p)} ${M(kind)}을(를) 만들어 줘.\n${info}\n[필수]\n- 위 정보는 ${M('크고 또렷하게')}, 모르는 칸은 [확인 필요]\n- 큰 글씨·고대비·쉬운 말, 색은 2~3가지\n- 장애인을 도움받는 대상이 아니라 ${M('주인공')}으로\n- ${M('서로 다른 시안 2개')} 먼저 보여 주고 고른 것으로 완성${extra?'\n'+extra:''}`;
@@ -482,16 +506,17 @@ let W4=[];
 
 /* ================= ⑥ 후원 관리 ================= */
 const DONS=['후원 감사','후원금 사용 안내','후원자 안부','후원 모집','아너리더스클럽 소식','후원 행사 홍보','물품 후원 감사','연말 감사 인사','기타'];
-function donText(){const s=S.dn??0,nm=V('dname')||'[후원자님 성함]',it=V('ditem')||'[후원 내용]',use=V('duse')||'[사용처]',p=P();
- const T=[[`${nm}, 안녕하세요. ${ORG}입니다.\n보내주신 ${M(it)} 감사히 잘 받았습니다.\n${p}에 소중히 사용하겠습니다.\n이용자분들의 웃음으로 꼭 다시 전해드릴게요.\n고맙습니다.`,`${nm}, ${it} 감사히 받았습니다. 소중히 쓰겠습니다! - ${ORG}`],
- [`${nm}, 안녕하세요. ${ORG}입니다.\n지난번 보내주신 ${it}은(는) ${M(use)}에 사용되었습니다.\n덕분에 [이용자 변화·성과 한 줄]\n자세한 사용 내역은 홈페이지 후원금 사용 공개에서 보실 수 있습니다.\n늘 함께해 주셔서 감사합니다.`,`보내주신 후원금은 ${use}에 쓰였어요. 고맙습니다! - ${ORG}`],
- [`${nm}, 잘 지내고 계시지요?\n${ORG}입니다. 요즘 복지관에서는 ${M(p)} 활동이 한창이에요.\n[최근 소식 한 줄]\n늘 응원해 주셔서 감사합니다. 건강하세요.`,`${nm}, 늘 응원 감사드려요. 건강하세요! - ${ORG}`],
- [`안녕하세요, ${ORG}입니다.\n장애인이 지역 안에서 함께 살아가는 일상에 마음을 보태 주세요.\n\n· 후원 분야: ${M(p)}\n· 정기 후원: 월 [금액]부터\n· 문의: ${F('tel')}\n\n작은 나눔이 큰 변화가 됩니다.`,`월 [금액]으로 ${p}를 응원해 주세요 · ${F('tel')}`],
- [`[기흥아너리더스클럽 소식]\n${nm}께서 기흥아너리더스클럽에 함께해 주셨습니다.\n지역의 장애인 이웃을 위한 큰 나눔에 깊이 감사드립니다.\n보내주신 마음은 ${M(use)}에 소중히 쓰겠습니다.`,`기흥아너리더스클럽 ${nm}의 나눔에 감사드립니다.`],
- [`[후원 행사 안내]\n${ORG}에서 ${M(V('name')||'[행사명]')}을(를) 엽니다.\n일시: ${F('date')}\n장소: ${F('place')}\n수익금은 ${use}에 쓰입니다.\n많은 참여 부탁드립니다!`,`${V('name')||'[행사명]'} ${F('date')} ${F('place')} · 함께해요!`],
- [`${nm}, 보내주신 ${M(it)} 잘 받았습니다.\n${p}에서 이용자분들이 잘 사용하고 있어요.\n[사용 모습 한 줄]\n따뜻한 마음 감사합니다.`,`${it} 잘 받았어요. 고맙습니다! - ${ORG}`],
- [`${nm}, 올 한 해도 ${ORG}과(와) 함께해 주셔서 감사합니다.\n보내주신 나눔 덕분에 이용자분들이 더 많이 웃은 한 해였습니다.\n새해에도 건강과 행복이 가득하시길 바랍니다.`,`올해도 함께해 주셔서 감사합니다. 행복한 새해 되세요! - ${ORG}`],
- [`${nm}, ${V('dmore')||'[전하고 싶은 내용]'}\n${ORG} 드림`,`${V('dmore')||'[짧은 인사]'}`]];return T[s]}
+function donText(){const s=S.dn??0,nm=V('dname')||'[후원자님]',it=V('ditem')||'[후원 내용]',use=V('duse')||'[사용처]',p=P(),tel=V('tel')||'[전화번호]',more=V('dmore');
+ const hi=`안녕하세요, ${nm}. ${ORG}입니다.\n${seasonLine()}`;
+ const T=[[`${hi}\n\n보내 주신 ${M(it)} 감사한 마음으로 잘 받았습니다.\n${p}에서 이용자분들이 꼭 필요한 곳에 소중히 쓰겠습니다.${more?'\n'+more:''}\n\n${nm}의 따뜻한 마음은 이용자분들의 웃음으로 꼭 다시 전해 드릴게요.\n늘 곁에서 함께해 주셔서 진심으로 감사드립니다.\n\n${ORG} 드림`,`${nm}, 보내 주신 ${it} 감사히 받았습니다. 소중히 쓰겠습니다. - ${ORG}`],
+ [`${hi}\n\n지난번 보내 주신 ${it}이(가) 어떻게 쓰였는지 전해 드리고 싶어 연락드렸어요.\n\n· 사용처: ${M(use)}\n· 이렇게 달라졌어요: [이용자 변화·성과 한두 줄]\n${more?more+'\n':''}\n${nm}의 나눔 덕분에 이용자분들이 더 많은 경험을 할 수 있었습니다.\n자세한 사용 내역은 복지관 홈페이지 후원금 사용 공개에서 보실 수 있어요.\n\n늘 함께해 주셔서 감사합니다.`,`보내 주신 후원은 ${use}에 쓰였어요. 덕분에 [변화]. 감사합니다! - ${ORG}`],
+ [`${hi}\n\n오랜만에 안부를 여쭙니다. 요즘 복지관에서는 ${M(p)} 활동이 한창이에요.\n${more||'[최근 소식 한두 줄: 이용자분들이 ○○에 도전하며 즐겁게 지내고 있어요]'}\n\n${nm}께서 보내 주신 응원이 이런 하루하루를 만드는 힘이 되고 있습니다.\n환절기 건강 잘 챙기시고, 늘 평안하시길 바랍니다.\n\n${ORG} 드림`,`${nm}, 늘 응원해 주셔서 감사합니다. 건강하세요! - ${ORG}`],
+ [`안녕하세요. ${ORG}입니다.\n${seasonLine()}\n\n장애인이 지역 안에서 이웃과 함께 살아가는 평범한 하루에 마음을 보태 주세요.\n${M(p)}에서는 [후원이 필요한 이유 한두 줄]\n\n· 후원 분야: ${p}\n· 정기 후원: 월 [금액]부터\n· 문의: ${tel}\n${more?'\n'+more+'\n':''}\n작은 나눔 하나가 이용자분들에게는 큰 용기가 됩니다.\n따뜻한 관심 부탁드립니다.`,`월 [금액]으로 ${p}에 마음을 보태 주세요. 작은 나눔이 큰 용기가 됩니다. ${tel}`],
+ [`[기흥아너리더스클럽 소식]\n\n${nm}께서 기흥아너리더스클럽에 함께해 주셨습니다.\n지역의 장애인 이웃을 위해 큰 나눔을 결심해 주신 마음에 깊이 감사드립니다.\n\n보내 주신 마음은 ${M(use)}에 소중히 쓰겠습니다.${more?'\n'+more:''}\n앞으로도 함께 만들어 갈 변화를 기대하며, ${ORG}이 늘 감사한 마음으로 소식 전하겠습니다.`,`기흥아너리더스클럽 ${nm}의 따뜻한 나눔에 깊이 감사드립니다.`],
+ [`안녕하세요. ${ORG}입니다.\n${seasonLine()}\n\n이용자분들과 지역 이웃이 함께하는 ${M(V('name')||'[행사명]')}에 초대합니다.\n\n· 일시: ${V('date')||'[일시]'}\n· 장소: ${V('place')||'[장소]'}\n· 수익금 사용: ${use}\n${more?'\n'+more+'\n':''}\n함께 웃고 나누는 자리가 될 수 있도록 많은 참여 부탁드립니다.\n문의: ${tel}`,`${V('name')||'[행사명]'} ${V('date')||'[일시]'} ${V('place')||'[장소]'} · 함께해 주세요!`],
+ [`${hi}\n\n보내 주신 ${M(it)} 잘 받았습니다.\n${p}에서 이용자분들이 벌써 잘 쓰고 있어요.\n${more||'[사용하는 모습 한 줄: ○○를 처음 써 보며 환하게 웃으셨어요]'}\n\n마음까지 따뜻하게 전해 주셔서 정말 감사합니다.\n${ORG} 드림`,`${it} 잘 받았어요. 이용자분들이 잘 쓰고 있어요. 감사합니다! - ${ORG}`],
+ [`${nm}, 안녕하세요. ${ORG}입니다.\n\n한 해를 마무리하며 감사의 마음을 전합니다.\n올해도 ${nm}의 나눔 덕분에 이용자분들이 더 많이 웃고, 더 많은 것을 경험한 한 해였습니다.\n${more?more+'\n':''}\n새해에도 늘 건강하시고, 가정에 웃음과 평안이 가득하시길 바랍니다.\n진심으로 감사드립니다.\n\n${ORG} 직원 일동 드림`,`올 한 해 함께해 주셔서 감사합니다. 따뜻한 새해 되세요! - ${ORG}`],
+ [`${hi}\n\n${more||'[전하고 싶은 내용]'}\n\n늘 함께해 주셔서 감사합니다.\n${ORG} 드림`,`${more||'[짧은 인사]'} - ${ORG}`]];return T[s]}
 VIEWS.donor=()=>{S.dn=S.dn??0;return view('후원 관리',
  `<div class="gl">상황</div>${chips('dn',DONS)}${bizPick()}<div class="gl">입력</div>${field('dname','후원자 호칭','','홍길동 후원자님 / ○○기업')}${field('ditem','후원 내용')}${field('duse','사용처')}${S.dn===5?field('name','행사명')+field('date','일시')+field('place','장소'):''}${field('tel','전화번호')}${field('dmore','덧붙일 말',1)}
  <div class="note">후원금 사용 내역 공개 기준(3개월 게시 등)은 기관 규정을 따르세요</div>`,
