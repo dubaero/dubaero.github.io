@@ -4173,7 +4173,7 @@ var GAMAN=['그래도 더 나은 내가 참는다. 오늘의 나, 인내심 국�
 function samL(t){return '<p class="sam"><b>'+esc(t.charAt(0))+'</b>'+esc(t.slice(1))+'</p>';}
 function emp(fresh){var S=cur>=0?FLAT[cur]:null,key=FL+L;if(fresh||!said[key]||said.s!==cur){var pool=S&&SAM[S.n]?SAM[S.n]:SAMG;said[key]={s:pick(pool,'s'),t:pick(TAIL[FL][L],'t'),g:pick(GAMAN,'g'),e:S?S.emp:(ecVent($('#v2-in').value)||pick(EMPG,'e'))};said.s=cur;}var x=said[key];
   window._ventSay2=x.s.slice(1).join(' ')+' '+x.t+' '+x.e+' '+x.g;
-  $('#v2-emp').innerHTML='<h4>같이 빡쳐 주기 · '+LV3[L][1]+' '+LV3[L][0]+' · '+(FL==='spicy'?'매운맛':'순한 맛')+' · 삼행시 <span class="samk">'+esc(x.s[0])+'</span></h4>'+x.s.slice(1).map(samL).join('')+'<p>'+esc(x.t+' '+x.e)+'</p><p class="v3">'+esc(x.g)+'</p><div class="va"><button type="button" class="btn mini" id="v2-again">다른 말</button><button type="button" class="btn mini" id="v2-say">소리로 듣기</button></div>';}
+  $('#v2-emp').innerHTML='<h4>같이 빡쳐 주기 · '+LV3[L][1]+' '+LV3[L][0]+' · '+(FL==='spicy'?'매운맛':'순한 맛')+' · 삼행시 <span class="samk">'+esc(x.s[0])+'</span></h4>'+x.s.slice(1).map(samL).join('')+'<div class="vgap"></div><p class="vemp2">'+esc(x.t+' '+x.e)+'</p><p class="v3">'+esc(x.g)+'</p><div class="va"><button type="button" class="btn mini" id="v2-again">다른 말</button><button type="button" class="btn mini" id="v2-say">소리로 듣기</button></div>';}
 var AP=[
  ['사실·기준 안내',function(S,op,L){return [op,S.fact,S.rule,S.ask,L===2?S.firm:'',L===2?'협조 부탁드립니다.':'감사합니다.'];}],
  ['공감 먼저',function(S,op){return [op,'여러 사정이 있으셨을 거라 생각합니다.',S.fact,S.rule,S.ask,'감사합니다.'];}],
@@ -4340,9 +4340,9 @@ var BR=[
  {e:'🍃',n:'나뭇잎 날리기 숨',d:'손바닥 위 나뭇잎을 멀리 날려 보내듯 후~',p:[['들이쉬기',4,1.3],['멀리 후~',6,.8]]},
  {e:'🍜',n:'라면 식히기 숨',d:'뜨거운 라면 식히듯 후후~ 짧게 세 번',p:[['들이쉬기',3,1.3],['후!',1,.9],['후!',1,.9],['후~',2,.8]]}];
 var box=document.querySelector('#v2-tool .breath');if(!box)return;
-box.innerHTML='<div class="bx-ch" id="bx-ch"><span class="bx-e" id="bx-e"><svg class="bxf" id="bx-f" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="12" r="6"/><path d="M32 18 V40"/><circle class="bxb" cx="32" cy="31" r="4.5"/><path d="M32 40 L25 56 M32 40 L39 56"/><path class="bxdn" d="M32 24 L23 37 M32 24 L41 37"/><path class="bxup" d="M32 24 L15 11 M32 24 L49 11"/><path class="bxair" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/></svg></span><span class="bx-t" id="bx-t">준비</span></div><div class="bx-r"><b id="bx-n"></b><small id="bx-d"></small><div class="va"><button type="button" class="btn mini" id="bx-go">따라 하기 (3번)</button><button type="button" class="btn mini" id="bx-next">다른 숨 고르기 ›</button></div></div>';
+box.innerHTML='<div class="bx-ch" id="bx-ch"><span class="bx-e" id="bx-e"><svg class="bxf" id="bx-f" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="12" r="6"/><path d="M32 18 V40"/><circle class="bxb" cx="32" cy="31" r="4.5"/><path d="M32 40 L25 56 M32 40 L39 56"/><path class="bxdn" d="M32 24 L23 37 M32 24 L41 37"/><path class="bxup" d="M32 24 L15 11 M32 24 L49 11"/><path class="bxair" d="M40 10 q4 -3 8 0 M42 15 q4 -3 8 0"/></svg></span><span class="bx-t" id="bx-t">준비</span><span class="nmtag">쉼표 씨</span></div><div class="bx-r"><b id="bx-n"></b><small id="bx-d"></small><div class="va"><button type="button" class="btn mini" id="bx-go">따라 하기 (3번)</button><button type="button" class="btn mini" id="bx-next">다른 숨 고르기 ›</button></div></div>';
 var cur=0,run=0;
-function set(i){cur=i;var b=BR[i];$('#bx-n').textContent=b.e+' '+b.n;var F=$('#bx-f');F.setAttribute('data-ph','');F.setAttribute('data-st','');F.innerHTML=bxFig(b.n);$('#bx-d').textContent=b.d;$('#bx-t').textContent='준비';$('#bx-e').style.transform='scale(1)';}
+function set(i){cur=i;var b=BR[i];$('#bx-n').textContent='쉼표 씨와 '+b.n;var F=$('#bx-f');F.setAttribute('data-ph','');F.setAttribute('data-st','');F.innerHTML=bxFig(b.n);$('#bx-d').textContent=b.d;$('#bx-t').textContent='준비';$('#bx-e').style.transform='scale(1)';}
 function stop(){run++;}
 $('#bx-next').onclick=function(){stop();var n;do{n=Math.floor(Math.random()*BR.length);}while(n===cur&&BR.length>1);set(n);};
 $('#bx-go').onclick=function(){stop();var my=run,b=BR[cur],i=0,k=0,e=$('#bx-e'),t=$('#bx-t');
@@ -5974,5 +5974,13 @@ window.addEventListener('hashchange',function(){if(!location.hash)location.href=
 #jx-v-bfig .jx-fig *{stroke:#2a8a7d}#jx-v-bfig .jx-fig .eye,#jx-v-bfig .jx-fig .hand{fill:#2a8a7d}#jx-v-bfig .jx-fig .hd>circle{fill:#fff1dc}
 .nmtag{font-size:13px;font-weight:900;color:#fff;background:#2a8a7d;border-radius:999px;padding:2px 12px}
 @keyframes zjump{from{transform:translateY(0)}to{transform:translateY(-8px)}}@keyframes zbob{50%{transform:translateY(-4px)}}
+</style><style>
+#v2-emp .vgap{height:10px}
+#v2-emp p.vemp2{color:#1f5f99;font-weight:700;background:#eaf3fc;border-left:4px solid #4a90d9;border-radius:6px;padding:6px 10px;margin:0 0 4px}
+.bx-ch .bx-e{width:118px!important;height:118px!important;background:#fff4e2!important;animation:zbob 2.4s ease-in-out infinite}
+.bx-ch svg.bxf{width:100px!important;height:100px!important;stroke:#2a8a7d!important;stroke-width:3!important}
+.bx-ch .bxf circle{fill:#ffe9cf}.bx-ch .bxf .bxb{fill:#9fdccf!important}
+.nmtag{margin-top:4px;font-size:13px;font-weight:900;color:#fff;background:#2a8a7d;border-radius:999px;padding:2px 12px}
+@keyframes zbob{50%{transform:translateY(-4px)}}
 </style></body>
 </html>
