@@ -183,3 +183,36 @@ document.head.insertAdjacentHTML('beforeend','<style id="gh-fm">.fm-c{display:fl
 +'.fm-2{grid-template-columns:1.2fr 1fr!important}.sld-say{border:1px solid #E3ECE6;border-radius:12px;padding:12px 14px}.hub-c small{max-width:180px}</style>');
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
+/* 2026.11.26 노트북(NotebookLM) 스튜디오 8가지 */
+(function(){
+var D=window.__SLD;if(!D)return;
+function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+var x=D['제미나이|노트북'];if(x){
+ x.t='내가 넣은 자료(지침·안내서·보고서)만 읽고 답하고, 그 자료로 오디오·슬라이드·마인드맵·퀴즈까지 만들어 주는 자료 작업실';
+ x.where='notebooklm.google.com 또는 제미나이 왼쪽 메뉴 → [새 노트북] → 소스 추가';
+ x.what='사업안내·운영지침·작년 결과보고서 같은 자료(소스)를 넣으면, 그 자료 안에서만 찾아 답하고 몇 쪽인지 출처 번호를 달아 줘요. 오른쪽 "스튜디오"에서는 같은 자료로 오디오 해설, 발표 슬라이드, 마인드맵, 퀴즈, 인포그래픽을 버튼 하나로 만들어요.';
+ x.pros=['지어낸 답 없이 넣은 자료 근거로만 답해요','출처 번호를 누르면 원문 그 쪽이 바로 열려요','스튜디오 버튼 하나로 교육 자료 8가지를 만들어요','두꺼운 지침을 귀로 듣고, 그림으로 한눈에 봐요'];
+ x.when=['올해 사업안내에서 바뀐 점을 찾을 때','신규 직원에게 지침을 교육할 때','평가 준비로 지표별 근거를 모을 때'];
+ x.out=['바뀐 점 비교표 (쪽수 포함)','지침 오디오 해설·퀴즈','평가지표별 근거 목록'];
+ x.how=['새 노트북을 만들어요','지침·안내서·보고서 PDF를 소스로 넣어요','왼쪽 채팅에서 질문하고 출처 번호로 확인해요','오른쪽 스튜디오에서 만들 자료를 눌러요'];
+ x.say='올해 장애인복지관 사업안내에서 작년과 달라진 점을 표로 정리해 줘. 항목·바뀐 내용·쪽수 칸으로, 자료에 없는 건 "자료에 없음"으로.';}
+var ST=[['오디오 오버뷰','#3F51B5','<path d="M5 9v6M9 6v12M13 9v6"/><path d="M18 3l.9 2.1L21 6l-2.1.9L18 9l-.9-2.1L15 6l2.1-.9z"/>','자료를 두 사람이 대화하듯 풀어 주는 팟캐스트','출근길에 이어폰으로 올해 운영지침 핵심 15분 듣기'],
+ ['슬라이드 자료','#B0457E','<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14"/>','자료 내용으로 발표용 장표 만들기','신규 직원 오리엔테이션 10장'],
+ ['동영상 개요','#43A047','<rect x="3" y="6" width="13" height="12" rx="3"/><path d="m16 10 5-3v10l-5-3"/>','그림과 내레이션이 있는 해설 영상','직원 교육 시간에 지침 요약 영상 틀기'],
+ ['마인드맵','#6A5ACD','<rect x="2" y="10" width="5" height="4" rx="1"/><rect x="16" y="3" width="6" height="4" rx="1"/><rect x="16" y="10" width="6" height="4" rx="1"/><rect x="16" y="17" width="6" height="4" rx="1"/><path d="M7 12h4M11 5v14M11 5h5M11 12h5M11 19h5"/>','주제와 하위 내용을 가지 그림으로','사업안내 전체 구조를 한 장으로 보기'],
+ ['보고서','#B0457E','<rect x="4" y="7" width="13" height="14" rx="2"/><path d="M7 4h11a2 2 0 0 1 2 2v11"/><path d="M19 1.5l.7 1.6 1.6.7-1.6.7-.7 1.6-.7-1.6-1.6-.7 1.6-.7z"/>','브리핑 문서·요약 보고서·학습 가이드','팀장 보고용 "올해 바뀐 점" 1쪽 요약'],
+ ['플래시카드','#E0892E','<rect x="8" y="3" width="12" height="15" rx="2"/><path d="M5 7v12a2 2 0 0 0 2 2h9"/>','앞면 질문·뒷면 답 암기 카드','평가지표·법정 기준 외우기'],
+ ['퀴즈','#3D6E8F','<rect x="7" y="3" width="14" height="14" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h12"/><path d="M12 8a2 2 0 1 1 2.5 2c-.6.3-.5.8-.5 1.5M14 14h0"/>','이해했는지 확인하는 객관식 문제','신규 직원 지침 이해도 10문제'],
+ ['인포그래픽','#E0892E','<path d="M6 20V10M10 20v-6M14 20V8M18 20v-3"/><circle cx="6" cy="5" r="1.4"/><circle cx="14" cy="4" r="1.4"/>','핵심 숫자·흐름을 그림 한 장으로','보호자 안내용 서비스 이용 절차 한 장']];
+var BEST=[['지침·안내서','두꺼운 사업안내·운영지침 PDF','"주간이용센터 인력 기준 몇 쪽이야?"'],['작년 보고서','결과보고서·평가 자료','"작년 성과지표 실적만 표로"'],['교육 자료','법정 의무교육·매뉴얼','"신규 직원용 퀴즈 10문제"'],['회의·상담 기록','가명 처리한 회의록 여러 개','"반복해서 나온 건의사항 정리"']];
+function studio(){return '<section class="nb"><h4>스튜디오 — 넣은 자료로 버튼 하나에 만드는 8가지</h4><div class="nb-g">'+ST.map(function(t){return '<div class="nb-a"><span class="nb-i" style="color:'+t[1]+'"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+t[2]+'</svg></span><b>'+e(t[0])+'</b><small>'+e(t[3])+'</small><p><em>예시</em>'+e(t[4])+'</p></div>'}).join('')+'</div>'+
+ '<h4>이런 자료를 넣을 때 가장 좋아요</h4><div class="nb-b">'+BEST.map(function(b){return '<div><b>'+e(b[0])+'</b><small>'+e(b[1])+'</small><p>'+e(b[2])+'</p></div>'}).join('')+'</div><p class="hub-n">스튜디오 메뉴 이름·개수는 업데이트에 따라 달라질 수 있어요. 소스는 노트북 하나에 여러 개 넣을 수 있어요.</p></section>'}
+function post(){if(typeof VIEW==='undefined'||VIEW!=='apps')return;var A=APPS[S.app||0];if(!A||A.n!=='제미나이')return;var C=A.cards[S.fc||0];if(!C||C.n!=='노트북')return;
+ var h=document.querySelector('#R .sld .hub');if(!h||document.querySelector('#R .nb'))return;h.insertAdjacentHTML('afterend',studio())}
+var _r=render;render=function(){var r=_r.apply(this,arguments);try{post()}catch(er){console.error(er)}return r};
+document.head.insertAdjacentHTML('beforeend','<style id="gh-nb">.nb{border:1px solid #D5E5DA;border-radius:12px;padding:12px 14px;display:grid;gap:12px;background:#fff}.nb h4{margin:0;font-size:15px;font-weight:800;color:#1E5442;padding-bottom:6px;border-bottom:2px solid #E07A2E;justify-self:start}'
++'.nb-g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.nb-a{border:1px solid #E5E7EA;border-radius:16px;padding:10px 12px;display:grid;gap:4px;align-content:start;background:#fff}.nb-i{display:block}.nb-a b{font-size:15px;color:#111}.nb-a small{font-size:12.5px;color:#4b5a55;line-height:1.45}.nb-a p{margin:2px 0 0;background:#FFF8F1;border-radius:8px;padding:5px 8px;font-size:12.5px;line-height:1.45;font-weight:600}.nb-a p em{font-style:normal;color:#C2652B;font-weight:800;margin-right:5px}'
++'.nb-b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.nb-b>div{background:#F7FBF8;border:1px solid #D5E5DA;border-radius:12px;padding:9px 11px;display:grid;gap:3px}.nb-b b{color:#2F6B56;font-size:14px}.nb-b small{font-size:12.5px;color:#4b5a55}.nb-b p{margin:0;font-size:12.5px;font-weight:600}'
++'@media(max-width:1100px){.nb-g,.nb-b{grid-template-columns:repeat(2,minmax(0,1fr))}}</style>');
+if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
+})();
