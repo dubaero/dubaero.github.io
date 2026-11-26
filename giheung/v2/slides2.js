@@ -327,3 +327,14 @@ document.head.insertAdjacentHTML('beforeend','<style id="gh-rc">.rcs{border:1px 
 +'@media(max-width:1000px){.rc-g,.rc-w.two{grid-template-columns:1fr}}</style>');
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
+/* 2026.11.26 예시·포인트 칸: 주황 → 선명한 민트, 글자 더 잘 보이게 */
+document.head.insertAdjacentHTML('beforeend','<style id="gh-mint">'
++'.mc .ex,.nb-a p,.ac-c p,.hub-a p,.fl-say,.sld-say p,.nb-b>div{background:#E3F6F1!important;border:1px solid #9FDCCD!important;border-left:4px solid #13A58B!important;border-radius:8px!important;color:#14332C!important}'
++'.mc .ex,.nb-a p,.ac-c p,.hub-a p{font-size:13.5px!important;font-weight:600!important;line-height:1.5!important;padding:7px 9px!important}'
++'.mc .ex em,.nb-a p em,.ac-c p em,.fm-o em,.fl-say small{color:#0B7F6B!important;font-weight:800!important}'
++'.hub-ah small{color:#0B7F6B!important;font-size:12.5px!important;font-weight:800!important}'
++'.fm-o{background:#F1FAF7!important;border:1px solid #CFEDE5!important;font-size:13.5px!important;color:#14332C!important}'
++'.sld-say p{font-size:15px!important;padding:11px 13px!important}'
++'.nb-b b{color:#0B7F6B!important}.nb-b small,.nb-b p{color:#14332C!important}'
++'.hub-a,.mc,.nb-a,.ac-c{border-color:#CFE3D6!important}'
++'</style>');
