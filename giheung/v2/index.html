@@ -417,6 +417,16 @@ table.form.sm2 th,table.form.sm2 td{font-size:13px;padding:5px 7px}
 .box.ch2{border-color:#e6c800}.box.ch2 .bh{background:#fffbe0;border-bottom:2px solid #fee500}.box.ch2 .chn{background:#fee500;color:#3a1d1d!important}
 .box.ch3{border-color:#e2865a}.box.ch3 .bh{background:var(--wl);border-bottom:2px solid var(--w)}.box.ch3 .chn{background:var(--w)}
 .chn{color:#fff;font-weight:900;font-size:14px;border-radius:7px;padding:3px 12px}
+
+.dtool{padding:8px 14px;border-bottom:1px solid var(--line);display:grid;gap:6px;flex:none;background:#fbfcfc}.dt-r{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px}.dt-r b{font-size:12.5px;min-width:42px}
+.dchip{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700}.dchip.on{background:var(--w);border-color:var(--w);color:#fff}
+.dlab{display:flex;gap:4px}.dlab input{width:64px;border:1px solid var(--line);border-radius:6px;padding:3px 6px;font:inherit;font-size:12.5px;text-align:center}.dck{display:flex;align-items:center;gap:4px;font-weight:700}
+.dt-r select,#addrow{border:1px solid var(--line);border-radius:8px;padding:5px 8px;font:inherit;font-size:13px}#addrow{width:210px}
+.docv{background:#eef1f0}.dpaper{background:#fff;max-width:760px;margin:0 auto;padding:26px 30px;box-shadow:0 2px 10px rgba(0,0,0,.08);font-size:15px}
+.d-title{text-align:center;font-size:1.4em;font-weight:900;margin:0 0 .6em;letter-spacing:4px}
+.d-appr{margin:0 0 6px auto;border-collapse:collapse;font-size:.8em}.d-appr th,.d-appr td{border:1px solid #555;text-align:center;padding:2px 6px;min-width:4.4em}.d-appr th{background:#EEF2EA;font-weight:700}.d-appr td{height:3em}.d-appr .d-appr-h{min-width:1.6em;width:1.6em;padding:2px;line-height:1.3}
+.d-table{width:100%;border-collapse:collapse;margin:.4em 0;font-size:.95em}.d-table th,.d-table td{border:1px solid #666;padding:7px 9px;vertical-align:top;text-align:left;word-break:keep-all;line-height:1.6}.d-table th{background:#EEF2EA;text-align:center;vertical-align:middle;white-space:nowrap;width:1%}
+.d-sign{text-align:right;margin-top:8px;line-height:1.9}.d-sign p{margin:0;white-space:pre}.d-sign-n{display:inline-block;min-width:6em;border-bottom:1px solid #999;text-align:center}
 </style>
 </head>
 <body>
@@ -718,6 +728,116 @@ VIEWS.project=()=>{S.doc=S.doc??0;S.ps=S.ps??0;return view('업무 프로젝트'
  <div class="srch"><span class="clip">${CLIP}</span>프로젝트 파일(소스)에 첨부할 자료</div><div class="hwpn"><b>한글(HWP) 파일 주의</b> Claude·제미나이는 HWP를 못 읽어요 → <u>PDF로 저장</u>해 넣기 · 서식에 채워 받을 땐 <u>HWPX로 저장</u> (ChatGPT는 HWP도 읽어요)</div><div class="srcs">${SRC[S.doc].map((x,i)=>`<div class="src"><span class="fi">${(S.doc==2?['PNG','JPG','TXT','JPG']:['HWPX','PDF','PDF','XLS','XLS'])[i]||'PDF'}</span><span>${x}</span><em>첨부</em></div>`).join('')}</div>`,
  ()=>{const t=S.ps?first(S.doc):instr(S.doc);return `<div class="ptabs r"><button class="pt${S.ps?'':' on'}" onclick="S.ps=0;save();RIGHT()">① 프로젝트 지침</button><button class="pt${S.ps?' on':''}" onclick="S.ps=1;save();RIGHT()">② 첫 프롬프트</button></div>`+outBox(S.ps?'새 채팅 첫 대화에 붙여넣기':'프로젝트 지침 칸에 붙여넣기',t)})};
 
+const xe = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function wRun(text,{bold,size}={}){
+  const rpr=`<w:rPr><w:rFonts w:ascii="맑은 고딕" w:eastAsia="맑은 고딕" w:hAnsi="맑은 고딕"/>${bold?"<w:b/>":""}${size?`<w:sz w:val="${size}"/><w:szCs w:val="${size}"/>`:""}</w:rPr>`;
+  return String(text).split("\n").map((t,i)=>`${i?"<w:r><w:br/></w:r>":""}<w:r>${rpr}<w:t xml:space="preserve">${xe(t)}</w:t></w:r>`).join("");
+}
+function wP(text,{bold,size,align,indent,spacing,pad}={}){
+  return `<w:p><w:pPr>${pad?`<w:spacing w:before="${pad}" w:after="${pad}"/>`:spacing!==undefined?`<w:spacing w:after="${spacing}"/>`:""}${align?`<w:jc w:val="${align}"/>`:""}${indent?`<w:ind w:left="${indent*220}"/>`:""}</w:pPr>${wRun(text,{bold,size})}</w:p>`;
+}
+function blocksDocx(B){
+  return B.map(b=>{
+    if(b.t==="title") return wP(b.text,{bold:1,size:34,align:"center",spacing:200});
+    if(b.t==="approval") return apprDocx(b.labels);
+    if(b.t==="sign") return wP(b.date,{align:"right",spacing:60})+wP(`작성자  ${b.name||"            "}  (서명)`,{align:"right",spacing:0});
+    if(b.t==="center") return wP(b.text,{bold:b.bold,size:b.size||22,align:"center"});
+    if(b.t==="line") return `<w:p><w:pPr><w:pBdr><w:bottom w:val="single" w:sz="8" w:space="1" w:color="333333"/></w:pBdr></w:pPr></w:p>`;
+    if(b.t==="gap") return `<w:p/>`;
+    if(b.t==="p") return wP(b.text,{bold:b.bold,size:22,indent:b.indent});
+    if(b.t==="table"){
+      const cols=Math.max(...b.rows.map(r=>r.reduce((n,c)=>n+(c.span||1),0)));
+      const W=9000, cw=Math.floor(W/cols), WS=b.w&&b.w.length===cols?(()=>{ const t=b.w.reduce((a,x)=>a+x,0); return b.w.map(x=>Math.floor(W*x/t)); })():null;
+      const grid=`<w:tblGrid>${(WS||Array(cols).fill(cw)).map(x=>`<w:gridCol w:w="${x}"/>`).join("")}</w:tblGrid>`;
+      const bd=`<w:tblBorders>${["top","left","bottom","right","insideH","insideV"].map(s=>`<w:${s} w:val="single" w:sz="6" w:space="0" w:color="555555"/>`).join("")}</w:tblBorders>`;
+      return `<w:tbl><w:tblPr><w:tblW w:w="${W}" w:type="dxa"/>${bd}<w:tblLayout w:type="fixed"/></w:tblPr>${grid}${b.rows.map(r=>`<w:tr>${r.map((c,ci)=>`<w:tc><w:tcPr><w:tcW w:w="${WS&&!c.span?WS[ci]:cw*(c.span||1)}" w:type="dxa"/>${c.span?`<w:gridSpan w:val="${c.span}"/>`:""}${c.label?`<w:shd w:val="clear" w:color="auto" w:fill="EEF2EA"/><w:vAlign w:val="center"/>`:""}${c.q?`<w:shd w:val="clear" w:color="auto" w:fill="E6F4EE"/>`:""}${c.opt?`<w:vAlign w:val="center"/>`:""}</w:tcPr>${wP(c.text||"",{bold:c.label||c.q,size:c.q?26:c.opt?22:20,align:(c.label||c.opt)?"center":undefined,spacing:0,pad:c.q?100:c.opt?80:c.tall?110:0})}</w:tc>`).join("")}</w:tr>`).join("")}</w:tbl><w:p/>`;
+    }
+    return "";
+  }).join("");
+}
+function docxFiles(bodyXml){
+  const doc=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${bodyXml}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1418" w:right="1418" w:bottom="1418" w:left="1418" w:header="851" w:footer="992" w:gutter="0"/></w:sectPr></w:body></w:document>`;
+  return {
+    "[Content_Types].xml":`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>`,
+    "_rels/.rels":`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`,
+    "word/_rels/document.xml.rels":`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`,
+    "word/styles.xml":`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="맑은 고딕" w:eastAsia="맑은 고딕" w:hAnsi="맑은 고딕"/><w:sz w:val="22"/><w:lang w:eastAsia="ko-KR"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="80" w:line="300" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>`,
+    "word/document.xml":doc };
+}
+/* ---- ZIP 만들기 (압축 없이 저장) ---- */
+const CRC_T=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+const crc32=b=>{let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=CRC_T[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0;};
+function zipStore(entries){ /* entries: [[name, Uint8Array|string]] */
+  const enc=new TextEncoder(), parts=[], cen=[]; let off=0;
+  for(const [name,data0] of entries){
+    const data=typeof data0==="string"?enc.encode(data0):data0, nb=enc.encode(name), crc=crc32(data);
+    const lh=new DataView(new ArrayBuffer(30));
+    lh.setUint32(0,0x04034b50,true);lh.setUint16(4,20,true);lh.setUint16(6,0x0800,true);lh.setUint16(8,0,true);
+    lh.setUint32(14,crc,true);lh.setUint32(18,data.length,true);lh.setUint32(22,data.length,true);lh.setUint16(26,nb.length,true);
+    parts.push(new Uint8Array(lh.buffer),nb,data);
+    const ch=new DataView(new ArrayBuffer(46));
+    ch.setUint32(0,0x02014b50,true);ch.setUint16(4,20,true);ch.setUint16(6,20,true);ch.setUint16(8,0x0800,true);
+    ch.setUint32(16,crc,true);ch.setUint32(20,data.length,true);ch.setUint32(24,data.length,true);ch.setUint16(28,nb.length,true);ch.setUint32(42,off,true);
+    cen.push(new Uint8Array(ch.buffer),nb); off+=30+nb.length+data.length;
+  }
+  const cs=cen.reduce((n,a)=>n+a.length,0), end=new DataView(new ArrayBuffer(22));
+  end.setUint32(0,0x06054b50,true);end.setUint16(8,entries.length,true);end.setUint16(10,entries.length,true);end.setUint32(12,cs,true);end.setUint32(16,off,true);
+  return new Blob([...parts,...cen,new Uint8Array(end.buffer)]);
+}
+const MIME={docx:"application/vnd.openxmlformats-officedocument.wordprocessingml.document",hwpx:"application/hwp+zip"};
+async function saveFile(name,blob,statusEl){
+  const say=(m,w)=>{ if(statusEl){ statusEl.textContent=m; statusEl.classList.toggle("warn",!!w);} };
+  try{
+    const dl = window.claude && window.claude.use ? await window.claude.use("downloads") : null;
+    if(dl){ await dl.save({filename:name,data:blob}); say("내려받았어요. 다운로드 폴더를 확인해 보세요."); return; }
+  }catch(e){ if(e&&e.code==="declined"){ say("저장을 취소했어요."); return; } }
+  try{
+    const url=URL.createObjectURL(blob), a=document.createElement("a");
+    a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),4000);
+    say("내려받았어요. 다운로드 폴더를 확인해 보세요.");
+  }catch(e){ say("이 화면에서는 파일을 내려받을 수 없어요. '전체 복사'로 붙여 넣어 쓰세요.",true); }
+}
+
+function apprDocx(labels){
+  const hw=520, cw=1150, W=hw+cw*labels.length;
+  const bd=`<w:tblBorders>${["top","left","bottom","right","insideH","insideV"].map(s=>`<w:${s} w:val="single" w:sz="6" w:space="0" w:color="555555"/>`).join("")}</w:tblBorders>`;
+  const cell=(w,inner,extra="")=>`<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/>${extra}<w:vAlign w:val="center"/></w:tcPr>${inner}</w:tc>`;
+  const sh=`<w:shd w:val="clear" w:color="auto" w:fill="EEF2EA"/>`;
+  const r1=`<w:tr>${cell(hw,wP("결\n재",{bold:1,size:18,align:"center",spacing:0}),`<w:vMerge w:val="restart"/>${sh}`)}${labels.map(l=>cell(cw,wP(l,{bold:1,size:18,align:"center",spacing:0}),sh)).join("")}</w:tr>`;
+  const r2=`<w:tr><w:trPr><w:trHeight w:val="760" w:hRule="atLeast"/></w:trPr>${cell(hw,"<w:p/>",`<w:vMerge/>`)}${labels.map(()=>cell(cw,"<w:p/>")).join("")}</w:tr>`;
+  return `<w:tbl><w:tblPr><w:tblW w:w="${W}" w:type="dxa"/><w:jc w:val="right"/>${bd}<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${hw}"/>${labels.map(()=>`<w:gridCol w:w="${cw}"/>`).join("")}</w:tblGrid>${r1}${r2}</w:tbl><w:p/>`;
+}
+
+function blocksHTML(B){
+  return B.map(b=>{
+    if(b.t==="title") return `<h3 class="d-title">${esc(b.text)}</h3>`;
+    if(b.t==="approval") return `<table class="d-appr"><tr><th rowspan="2" class="d-appr-h">결<br>재</th>${b.labels.map(l=>`<th>${esc(l)}</th>`).join("")}</tr><tr>${b.labels.map(()=>"<td></td>").join("")}</tr></table>`;
+    if(b.t==="sign") return `<div class="d-sign"><p>${esc(b.date)}</p><p>작성자 <span class="d-sign-n">${esc(b.name||"")}</span> (서명)</p></div>`;
+    if(b.t==="center") return `<p class="d-center${b.bold?" b":""}" style="${b.size?`font-size:${b.size/20}em`:""}">${esc(b.text)}</p>`;
+    if(b.t==="line") return `<hr class="d-line">`;
+    if(b.t==="gap") return `<div class="d-gap"></div>`;
+    if(b.t==="p") return `<p class="d-p${b.bold?" b":""}" style="padding-left:${(b.indent||0)*0.9}em">${esc(b.text)}</p>`;
+    if(b.t==="table") return `<table class="d-table">${b.w?`<colgroup>${b.w.map(x=>`<col style="width:${(100*x/b.w.reduce((a,y)=>a+y,0)).toFixed(1)}%">`).join("")}</colgroup>`:""}${b.rows.map(r=>`<tr>${r.map(c=>`<${c.label?"th":"td"}${c.span?` colspan="${c.span}"`:""}${c.q?' class="d-q"':c.opt?' class="d-opt"':c.tall?' class="d-tall"':""}>${esc(c.text||"").replace(/\n/g,"<br>")}</${c.label?"th":"td"}>`).join("")}</tr>`).join("")}</table>`;
+    return "";
+  }).join("");
+}
+
+
+/* ---- 서식 미리보기·결재란·서명·항목 넣고 빼기 (그룹홈 방식) ---- */
+const SGD={0:[],2:['담당','관장'],3:['담당','팀장','관장'],4:['담당','팀장','부장','관장']};
+function sgc(){S.sg=S.sg||{n:3,labels:SGD[3].slice(),sign:true};return S.sg}
+function sgN(n){const c=sgc();c.n=n;c.labels=SGD[n].slice();save();RIGHT()}
+function sgL(i,v){sgc().labels[i]=v;save()}
+function rowsMod(key,rows){S.hid=S.hid||{};S.add=S.add||{};const hid=S.hid[key]||[],add=S.add[key]||[];return rows.filter(r=>!hid.includes(r[0])).concat(add.map(a=>[a,'[ ]']))}
+function hideRow(key,l){S.hid=S.hid||{};(S.hid[key]=S.hid[key]||[]).push(l);save();RIGHT()}
+function restoreRows(key){if(S.hid)S.hid[key]=[];if(S.add)S.add[key]=[];save();RIGHT()}
+function addRow(key){const el=document.getElementById('addrow');const v=(el&&el.value||'').trim();if(!v)return;S.add=S.add||{};v.split(',').map(x=>x.trim()).filter(Boolean).forEach(x=>(S.add[key]=S.add[key]||[]).push(x));save();RIGHT()}
+function docB(title,rows){const c=sgc(),B=[];if(c.n)B.push({t:'approval',labels:c.labels});B.push({t:'title',text:title});B.push({t:'table',w:[1,4],rows:rows.map(r=>[{text:r[0],label:1},{text:r[1]}])});if(c.sign){const d=new Date();B.push({t:'sign',date:`${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}.`,name:V('staff')||''})}return B}
+function docTools(key,rows){const c=sgc(),S0=(S.hid&&S.hid[key]||[]).length+(S.add&&S.add[key]||[]).length;
+ return `<div class="dtool"><div class="dt-r"><b>결재란</b>${[0,2,3,4].map(n=>`<button class="dchip${c.n==n?' on':''}" onclick="sgN(${n})">${n?n+'칸':'없음'}</button>`).join('')}${c.n?`<span class="dlab">${c.labels.map((l,i)=>`<input value="${esc(l)}" onchange="sgL(${i},this.value);RIGHT()">`).join('')}</span>`:''}<label class="dck"><input type="checkbox" ${c.sign?'checked':''} onchange="sgc().sign=this.checked;save();RIGHT()">서명란</label></div>
+ <div class="dt-r"><b>항목</b><select onchange="if(this.value)hideRow('${key}',this.value)"><option value="">− 뺄 항목 고르기</option>${rows.map(r=>`<option>${esc(r[0])}</option>`).join('')}</select><input id="addrow" placeholder="+ 추가할 항목 (쉼표로 여러 개)"><button class="dchip" onclick="addRow('${key}')">추가</button>${S0?`<button class="dchip" onclick="restoreRows('${key}')">처음 항목으로</button>`:''}<button class="btn p" style="margin-left:auto" onclick="dlDoc()">워드로 받기</button></div></div>`}
+let DOCB=[],DOCN='';function dlDoc(){saveFile(DOCN+'.docx',new Blob([zipStore(Object.entries(docxFiles(blocksDocx(DOCB))))],{type:MIME.docx}),null)}
+
 /* ================= ② 계획·일지 (선택 → 서술형) ================= */
 const KIND={
 '만들기':{goal:'손으로 직접 만들며 성취감을 느끼고, 서로의 작품을 소개하며 대화와 관계를 넓힌다',items:['재료(색지·풀·가위·꾸미기 재료)','앞치마·물티슈','작품 말릴 자리','사진 찍을 기기'],steps:[['도입',10,'인사를 나누고 오늘 만들 작품을 완성 사진과 그림 카드로 소개한다'],['시범',10,'만드는 순서를 3단계로 나누어 담당자가 천천히 시범을 보이고 참여자가 따라 해 보도록 한다'],['활동',40,'참여자가 색과 재료를 직접 고르고, 손 기능에 따라 담당자·봉사자가 필요한 부분만 도와 각자 작품을 완성한다'],['나눔',15,'완성한 작품을 한 사람씩 소개하고 서로 잘한 점을 칭찬하며 사진으로 남긴다']],safe:['가위·글루건은 담당자가 곁에서 함께 사용','작은 재료를 입에 넣지 않도록 관찰'],eff:'소근육 사용과 끝까지 완성하는 경험으로 자신감이 높아지고, 작품을 매개로 자연스러운 대화가 늘어날 것이다'},
@@ -750,12 +870,12 @@ VIEWS.plan=()=>{S.pl=S.pl??0;S.gg=S.gg??0;S.ss=S.ss??0;S.rc=S.rc??0;S.cg=S.cg||[
  ${bizPick()}<div class="gl">활동 종류 <small>고르면 진행 내용이 바뀌어요</small></div>${chips('kd',KN)}
  <div class="gl">목표</div>${chips('gg',b.g)}
  ${pl?`<div class="gl">참여 모습</div>${chips('rc',REACT)}<div class="gl">눈에 띈 변화 <small>여러 개</small></div>${mchips('cg',CHG)}<div class="gl">다음 회기</div>${chips('nx',NEXT)}`:`<div class="gl">운영 횟수</div>${chips('ss',['1회','4회기','8회기','12회기','연중'])}`}
- <div class="gl">입력</div>${field('date','일시')}${field('place','장소')}${field('people',pl?'참여 인원':'대상·인원')}${field('staff','담당자')}${pl?field('react','기억에 남는 모습'):''}`,
+ <div class="gl">추가 입력 정보 <small>말하기 버튼으로 말해도 돼요</small></div>${field('date','일시')}${field('place','장소')}${field('people',pl?'참여 인원':'대상·인원')}${field('staff','담당자')}${pl?field('react','기억에 남는 모습'):field('pbud','예산')}`,
  ()=>{const p=P(),bn=BN(),k=KN[S.kd],K=KIND[k],g=b.g[S.gg]||'',ss=['1회','4회기','8회기','12회기','연중'][S.ss];
  let rows;
  if(!pl){
   const tot=K.steps.reduce((a,s)=>a+s[1],0);
-  rows=[['프로그램명',`${p} (${k})`],['사업명',bn],['목적',`${p} 프로그램은 ${k} 활동을 통해 ${K.goal}. 특히 "${g}"에 중점을 두어 참여자가 직접 고르고 참여하는 경험을 넓힌다.`],['목표',`① ${g}: 참여자의 [ ]% 이상이 목표 행동을 보인다.\n② 참여자 만족도 [ ]% 이상 (그림형 만족도 조사)`],['대상·인원',F('people')],['일시·장소',F('date')+' / '+F('place')],['운영 횟수',`${ss}, 회당 약 ${tot||60}분`],['진행 내용',stepTxt(k)],['준비물',K.items.map(x=>'· '+x).join('\n')],['인력·역할',`· ${V('staff')||'[담당자]'}: 총괄 진행, 안전 관리\n· 보조 인력: 개별 지원이 필요한 참여자 곁에서 지원\n· 자원봉사자: 준비·정리 지원 [필요 여부 확인]`],['예산','· [항목] [수량] × [단가] × [횟수] = [금액]\n· 합계: [    ]원'],['기대 효과',K.eff+'.'],['평가 방법','· 회기별 출석부로 참여율 확인\n· 프로그램 일지에 참여 모습·변화 관찰 기록, 시작과 끝 비교\n· 활동 후 그림·표정 카드 만족도 조사'],['안전·접근성',[...K.safe,'이동 동선·감각 자극·의사소통 지원 방법 사전 확인','비상 연락망과 구급함 준비'].map(x=>'· '+x).join('\n')]];
+  rows=[['프로그램명',`${p} (${k})`],['사업명',bn],['목적',`${p} 프로그램은 ${k} 활동을 통해 ${K.goal}. 특히 "${g}"에 중점을 두어 참여자가 직접 고르고 참여하는 경험을 넓힌다.`],['목표',`① ${g}: 참여자의 [ ]% 이상이 목표 행동을 보인다.\n② 참여자 만족도 [ ]% 이상 (그림형 만족도 조사)`],['대상·인원',F('people')],['일시·장소',F('date')+' / '+F('place')],['운영 횟수',`${ss}, 회당 약 ${tot||60}분`],['진행 내용',stepTxt(k)],['준비물',K.items.map(x=>'· '+x).join('\n')],['인력·역할',`· ${V('staff')||'[담당자]'}: 총괄 진행, 안전 관리\n· 보조 인력: 개별 지원이 필요한 참여자 곁에서 지원\n· 자원봉사자: 준비·정리 지원 [필요 여부 확인]`],['예산',V('pbud')?'· '+V('pbud'):'· [항목] [수량] × [단가] × [횟수] = [금액]\n· 합계: [    ]원'],['기대 효과',K.eff+'.'],['평가 방법','· 회기별 출석부로 참여율 확인\n· 프로그램 일지에 참여 모습·변화 관찰 기록, 시작과 끝 비교\n· 활동 후 그림·표정 카드 만족도 조사'],['안전·접근성',[...K.safe,'이동 동선·감각 자극·의사소통 지원 방법 사전 확인','비상 연락망과 구급함 준비'].map(x=>'· '+x).join('\n')]];
  }else{
   const cg=(S.cg||[]).map(i=>CHG[i]).filter(Boolean),rv=V('react');
   const rTxt=['참여자들이 처음부터 끝까지 즐거운 표정으로 활동에 참여하였다.','참여자 대부분이 활동 흐름을 잘 따라오며 참여하였다.','일부 참여자는 활동 중 어려움을 보여 담당자가 곁에서 단계를 나누어 지원하였다.'][S.rc];
@@ -763,10 +883,11 @@ VIEWS.plan=()=>{S.pl=S.pl??0;S.gg=S.gg??0;S.ss=S.ss??0;S.rc=S.rc??0;S.cg=S.cg||[
   const nTxt={'같은 활동 한 번 더':`다음 회기에도 ${k} 활동을 한 번 더 진행해 익숙해지도록 한다.`,'난이도 한 단계 올리기':'다음 회기에는 단계를 하나 더 추가해 난이도를 한 단계 올린다.','시간을 짧게 조정':'집중 시간을 고려해 다음 회기는 활동 시간을 짧게 나누어 진행한다.','보호자와 결과 공유':'오늘 활동 사진과 변화 내용을 보호자에게 공유해 가정에서도 칭찬과 연습이 이어지도록 한다.'};
   rows=[['프로그램명',`${p} (${k})`],['일시',F('date')],['장소',F('place')],['참여자',F('people','참여 인원')],['담당자',F('staff')],['활동 목표',`${g} — ${K.goal}`],['진행 내용',stepTxt(k,1)],['참여 모습',`${rTxt} ${cg.map(c=>cTxt[c]).join(' ')}${rv?'\n특히 '+rv.replace(/[.。]$/,'')+'.':''}`],['평가',`${k} 활동은 "${g}" 목표에 맞게 진행되었으며, ${S.rc===2?'개별 지원 방법을 보완할 필요가 있다.':'참여자의 긍정적인 반응을 확인하였다.'}`],['특이사항','[건강·안전·정서 변화가 있으면 기록, 없으면 "특이사항 없음"]'],['다음 회기 계획',nTxt[NEXT[S.nx]]],['결재','담당 [   ]   팀장 [   ]   관장 [   ]']];
  }
- const txt=(pl?'프로그램 일지':'프로그램 계획서')+'\n'+rows.map(r=>'['+r[0]+']\n'+r[1]).join('\n\n');
- const pr=`너는 ${ORG} 사회복지사야. 첨부한 우리 복지관 ${pl?'프로그램 일지':'프로그램 계획서'} 서식의 칸 이름·순서·표 모양은 그대로 두고, 아래 초안 내용으로 칸을 채워 줘.\n[필수] 진행 내용은 서술형 문장 유지 · 자료에 없는 숫자는 [확인 필요] · 이용자는 가명(이용자A)\n[금지] 서식에 없는 항목 추가 · 실명·연락처\n같은 서식의 한글(.hwpx) 파일로 줘. 파일이 안 되면 "칸 이름 | 내용" 표로 줘.\n\n${txt}`;
+ rows=rowsMod('pl'+pl,rows);const ttl=pl?'프로그램 일지':'프로그램 계획서';DOCB=docB(ttl,rows);DOCN=ttl+'_'+p;
+ const txt=ttl+'\n'+rows.map(r=>'['+r[0]+']\n'+r[1]).join('\n\n');
+ const pr=`너는 ${ORG} 사회복지사야. 첨부한 우리 복지관 ${ttl} 서식의 칸 이름·순서·표 모양은 그대로 두고, 아래 초안 내용으로 칸을 채워 줘.\n[필수] 진행 내용은 서술형 문장 유지 · 자료에 없는 숫자는 [확인 필요] · 이용자는 가명(이용자A)\n[금지] 서식에 없는 항목 추가 · 실명·연락처\n같은 서식의 한글(.hwpx) 파일로 줘. 파일이 안 되면 "칸 이름 | 내용" 표로 줘.\n\n${txt}`;
  CUR=()=>pr;
- return aiBar(pl?'프로그램 일지 초안':'프로그램 계획서 초안',()=>pr)+`<div class="out" style="white-space:normal"><div class="ftitle">${pl?'프 로 그 램  일 지':'프 로 그 램  계 획 서'}</div><table class="form">${rows.map(r=>`<tr><th>${r[0]}</th><td>${fmtCell(r[1])}</td></tr>`).join('')}</table></div>`})};
+ return aiBar(ttl+' 서식',()=>pr)+docTools('pl'+pl,rows)+`<div class="out docv" style="white-space:normal"><div class="dpaper">${blocksHTML(DOCB)}</div></div>`})};
 function fmtCell(s){return esc(s).replace(/\n/g,'<br>').replace(/\[([^\]]*)\]/g,'<span style="color:#a85a00">[$1]</span>')}
 /* ================= 메모·녹음 → 서식 ================= */
 const MFORM=['회의록','공문','프로그램 계획서','프로그램 일지','상담일지','사례회의록','기타 서식'];
