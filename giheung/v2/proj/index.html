@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><script src="/js/room-gate.js?v=1"></script>
+<head><script>if(!location.hash||!/^#(doc|pr|dw-)/.test(location.hash))history.replaceState(null,"","#dw-plan");</script><script src="/js/room-gate.js?v=1"></script>
 <meta charset="utf-8">
 <title>용인시기흥장애인복지관 업무도우미 | 두배로</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -1344,7 +1344,7 @@ return {html:html,bind:bind};})();
 <footer><div class="wrap"><b>장애인복지관 업무도우미</b> · 입력한 내용은 이 기기 안에서만 쓰이고 저장·전송되지 않아요. AI가 만든 글은 초안이에요. 사실·날짜·숫자는 꼭 직접 확인하세요.<br>제작·운영 <b>두배로 · 생성형 AI 전문강사 이서정</b><span class="fsep" style="display:inline-block;width:1px;height:15px;background:rgba(255,255,255,.55);margin:0 16px;vertical-align:middle"></span><a href="https://dubaero.kr/">dubaero.kr</a><span class="fsep" style="display:inline-block;width:1px;height:15px;background:rgba(255,255,255,.55);margin:0 16px;vertical-align:middle"></span>이메일 <b>dltjwjd59@gmail.com</b> <button type="button" onclick="navigator.clipboard.writeText('dltjwjd59@gmail.com');this.textContent='복사됨'" style="font:inherit;font-size:12px;padding:1px 8px;border-radius:6px;border:1px solid #fff;background:transparent;color:#fff;cursor:pointer;vertical-align:middle">복사</button><span class="fsep" style="display:inline-block;width:1px;height:15px;background:rgba(255,255,255,.55);margin:0 16px;vertical-align:middle"></span>카카오톡 <b>li8093</b></div></footer>
 <div class="toast" id="toast"></div>
 
-<script>if(!location.hash||!/^#(doc|pr|dw-)/.test(location.hash))history.replaceState(null,"","#dw-plan");</script><script>
+<script>
 /* =================== 내용: 강의마다 이 부분만 바꿔요 =================== */
 var DEMO='가온시 장애인복지관';
 var YEAR=new Date().getFullYear();
@@ -1889,7 +1889,7 @@ $('#f-ai').onclick=function(){var p;
   else p='너는 장애인복지관 문서 도우미야. 아래 ['+CF.name+'] 초안을 '+CF.src+' 항목 순서 그대로 공공기관 문서체(개조식)로 다듬어 줘.\n- 항목 이름과 순서는 바꾸지 마. 빈칸 ( )은 [확인 필요]로 남겨.\n- '+(CF.cat==='상담'?'관찰 사실 / 당사자 진술 / 담당자 판단을 섞지 말고 구분해. 진단하거나 단정하지 마.\n- ':'')+NOFAKE+'\n- 이름·연락처가 보이면 가명(이용자A)으로 바꿔.\n- 끝에 내가 더 확인할 것 3가지를 적어 줘.\n\n'+docText();
   openGPT(p);};
 $('#f-word').onclick=function(){var css='body{font-family:"맑은 고딕",sans-serif;font-size:10.5pt}table{border-collapse:collapse;width:100%}th,td{border:1px solid #000;padding:5px 6px;vertical-align:top}th{background:#eee}h4{text-align:center;font-size:16pt;margin:6pt 0}.dhead{width:100%}.appr{width:auto;float:right;margin-bottom:6pt}.appr td{height:36pt;width:48pt}.sign{text-align:right}.gm{text-align:center;font-size:16pt;font-weight:bold;border-bottom:2px solid #000}.gsend{text-align:center;font-size:15pt;font-weight:bold;letter-spacing:6pt;margin:16pt 0}.gbody{white-space:pre-wrap;line-height:1.8}.dorg{font-size:9pt;color:#555}.sec th{background:#dde3ec;text-align:left}';
-  var html='<html><head><meta charset="utf-8"><style>'+css+'</style></head><body>'+$('#f-doc').innerHTML.replace(/■/g,'■').replace(/□/g,'□')+'<script>document.addEventListener('click',function(e){if(e.target.closest('[data-home],#tophome,[data-go="home"]')){e.preventDefault();e.stopImmediatePropagation();location.href='/giheung/v2/';}},true);</script></body></html>';
+  var html='<html><head><meta charset="utf-8"><style>'+css+'</style></head><body>'+$('#f-doc').innerHTML.replace(/■/g,'■').replace(/□/g,'□')+'</body></html>';
   var b=new Blob(['﻿'+html],{type:'application/msword'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(O().set?O().name+'_':'')+CF.name.replace(/[^\w가-힣]+/g,'_')+'.doc';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);toast('워드 파일을 받았어요. 기관 양식에 옮겨 쓰세요.');};
 
 /* 사업별 업무 */
@@ -5963,5 +5963,5 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   later(200);
 })();
 </script>
-</body>
+<script>document.addEventListener('click',function(e){if(e.target.closest('[data-home],#tophome,[data-go="home"]')){e.preventDefault();e.stopImmediatePropagation();location.href='/giheung/v2/';}},true);</script></body>
 </html>
