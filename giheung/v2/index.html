@@ -1858,12 +1858,18 @@ const GEN=[
   opt:[['길이',['8초','15초','30초','60초']],['용도',['인스타 릴스','유튜브 쇼츠','행사 오프닝','기관 소개']],['장면 수',['3장면','5장면','7장면']]],
   f:[['name','영상 제목'],['date','일시'],['place','장소']],
   q:['영상에서 꼭 보여 주고 싶은 장면은 무엇인가요?','실제 사진·영상을 쓰나요, AI로 새로 만드나요? (얼굴 노출 동의 확인)','자막·배경음악 분위기는 어떻게 할까요?','마지막 장면에 넣을 문구(기관명·신청 방법)는 무엇인가요?'],
-  steps:['질문 답을 받은 뒤 장면별 콘티를 표로 보여 줘: | 장면 | 초 | 화면 | 자막 | 소리 |','장면마다 영상 생성용 프롬프트(카메라 움직임·빛·분위기)를 따로 써 줘.','자막 오타와 영상 길이 합계를 다시 확인해 줘.']}
+  steps:['질문 답을 받은 뒤 장면별 콘티를 표로 보여 줘: | 장면 | 초 | 화면 | 자막 | 소리 |','장면마다 영상 생성용 프롬프트(카메라 움직임·빛·분위기)를 따로 써 줘.','자막 오타와 영상 길이 합계를 다시 확인해 줘.']},
+ {t:'레퍼런스 따라 만들기',role:'공공기관 홍보 디자인 전문가',size:1,sty:0,
+  desc:'<b>레퍼런스란?</b> 마음에 드는 남의 디자인(핀터레스트·인스타 등)을 <b>참고 자료</b>로 보여 주는 것이에요. AI에게 "이런 느낌으로"를 말 대신 그림으로 알려 줘서 원하는 결과가 훨씬 잘 나와요. 색감·배치·분위기만 참고하고, 그림·글자·로고를 베끼면 안 돼요.<br><b>따라 하기</b> ① 핀터레스트에서 "모집 포스터" 검색 ② 마음에 드는 이미지 저장 ③ ChatGPT·제미나이에 첨부 ④ 아래 프롬프트 붙여넣기',
+  opt:[['참고할 것',['색감','배치(레이아웃)','분위기·그림체','글자 크기 구성']],['만들 것',['모집 포스터','카드뉴스 표지','안내지','행사 초대장']]],multi:[0],
+  f:[['name','행사명'],['date','일시'],['place','장소'],['tel','전화번호']],
+  q:['첨부한 레퍼런스에서 특히 마음에 드는 부분은 어디인가요?','바꾸고 싶은 점(색·분위기)이 있나요?','꼭 들어가야 할 글자는 무엇인가요?'],
+  steps:['첨부한 이미지는 고른 "참고할 것"만 참고하고, 그림·글자·로고·인물은 새로 만들어. 베끼기 금지.','참고한 점과 새로 바꾼 점을 표로 먼저 보여 주고, 서로 다른 시안 2개를 만들어 줘.','고른 시안으로 완성하고 한글 오타·날짜·전화번호를 확인해 줘.']}
 ];
 function gopt(i,j,o,multi){const k='go'+i+'_'+j;return multi?mchips(k,o):chips(k,o)}
 VIEWS.gen=()=>{S.gt=S.gt??0;if(S.gt>=GEN.length)S.gt=0;const G=GEN[S.gt],i=S.gt;
  S.gp=S.gp??0;S.gr=S.gr??0;S.gs=S.gs??0;S.gn=S.gn??0;S.sy=S.sy??0;S.sz=S.sz??0;
- const left=QR('만들 것',chips('gt',GEN.map(x=>x.t)))+bizPick()
+ const left=QR('만들 것',chips('gt',GEN.map(x=>x.t)))+(G.desc?`<div class="gdesc">${G.desc}</div>`:'')+bizPick()
   +QR('목적',chips('gp',G_PURP))+QR('읽는 사람',chips('gr',G_READ))+QR('시기',chips('gs',G_SEA))
   +G.opt.map((o,j)=>QR(o[0]+((G.multi||[]).includes(j)?' <small>여러 개</small>':''),gopt(i,j,o[1],(G.multi||[]).includes(j)))).join('')
   +(G.sty?QR('그림 느낌',chips('sy',G_STY)):'')+(G.size?QR('크기',chips('sz',G_SIZE)):'')+QR('말투',chips('gn',G_TONE))
@@ -2458,6 +2464,11 @@ document.head.insertAdjacentHTML('beforeend',`<style id="apps-top">
 if(typeof VIEW!=='undefined'&&VIEW==='apps'){if((S.fc??0)>=((APPS[S.app]||{}).cards||[]).length)S.fc=0;render()}
 })();
 </script>
+<script>/* 2026.11.26 홍보·안내: 블로그 길게+오른쪽 3칸, 이미지류는 맞춤형 프롬프트로 */
+(function(){if(typeof VIEWS==='undefined'||!VIEWS.promo)return;const HIDE=['포스터·홍보 그림','인포그래픽','카드뉴스','핀터레스트 레퍼런스'];
+const _p=VIEWS.promo;VIEWS.promo=()=>{if([7,8,9,10].includes(S.pr))S.pr=1;let h=_p();HIDE.forEach(t=>{h=h.replace(new RegExp('<button[^>]*>'+t+'</button>','g'),'')});return h};
+document.head.insertAdjacentHTML('beforeend','<style>.grid4{grid-template-columns:1.2fr 1fr!important;grid-template-rows:auto auto auto!important;align-items:start}.grid4 .box.ch0{grid-column:1;grid-row:1/span 3;align-self:stretch}.grid4 .box.ch3{grid-column:2;grid-row:1}.grid4 .box.ch1{grid-column:2;grid-row:2}.grid4 .box.ch2{grid-column:2;grid-row:3}@media(max-width:900px){.grid4{grid-template-columns:1fr!important}.grid4 .box{grid-column:1!important;grid-row:auto!important}}.gdesc{background:#FFF7F0;border:1px solid #F3D2B6;border-radius:10px;padding:10px 12px;font-size:14px;line-height:1.6;margin:0 0 6px}</style>');
+if(typeof VIEW!=='undefined'&&VIEW==='promo')render();})();</script>
 <style id="gh-home-theme">
 :root{--bg:#EEF6F0;--line:#D5E5DA}
 html,body{background:#EEF6F0!important}

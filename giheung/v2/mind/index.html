@@ -4554,7 +4554,7 @@ img{filter:contrast(1.12) saturate(1.18)}
     var plan=list.map(function(e){var p=e.parentElement,fs=getComputedStyle(e).fontSize;
       if(p&&done.has(p)&&p.dataset.fsUp&&getComputedStyle(p).fontSize===fs&&!e.style.fontSize)return [e,0];return [e,parseFloat(fs)]});
     plan.forEach(function(x){var e=x[0],fs=x[1];done.add(e);if(!fs)return;
-      var n=MOB?(fs<15?Math.max(fs+1,14):0):fs+1;if(n){e.dataset.fsUp=1;e.style.setProperty('font-size',n+'px','important')}});
+      var n=MOB?(fs<15?Math.max(fs+1,14):0):0;if(n){e.dataset.fsUp=1;e.style.setProperty('font-size',n+'px','important')}});
   }
   window.__fsUp=run;
   var t;function later(){clearTimeout(t);t=setTimeout(run,60)}
@@ -6005,7 +6005,7 @@ header.top #tophome{display:inline-flex!important}
 #h2-tool .htabs button::after{display:none!important}
 #h2-tool .htabs button.on{background:#2F6B56!important;border-color:#2F6B56!important;color:#fff!important}
 #h2-tool .htabs button[data-ht="b"].on{background:#C2652B!important;border-color:#C2652B!important}
-#h2-tool .post.gh2{display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;align-items:start}
+#h2-tool.tab-b .post.gh2{display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;align-items:start}
 #h2-tool .post.gh2 .gh2-l,#h2-tool .post.gh2 .gh2-r{display:grid;gap:8px;min-width:0;align-content:start}
 #h2-tool .post.gh2 .acts{justify-content:flex-start!important;margin:0!important;flex-wrap:wrap}
 #pc-pv{background:#fff;border:1px solid #E2D8C6;border-radius:12px;padding:12px 14px;white-space:pre-wrap;font-size:15px;line-height:1.65;color:#263331;max-height:52vh;overflow:auto}
@@ -6061,6 +6061,15 @@ main,.wrap>section,#v-drawer,#v-vent,#v-heart{background:transparent!important}
 /* 마음 쉼터 */
 #h2-tool,#h2-tool .post,#h2-tool .pc,#h2-tool .help{background:#fff!important}
 #h2-tool .help{border-color:#D5E5DA!important}
+</style>
+<style id="gh-mind2">
+#h2-tool{height:auto!important;overflow:visible!important}
+#h2-tool .hcols>*,#h2-tool.tab-b .post,#pc-pv{overflow:visible!important;max-height:none!important}
+#h2-tool,#h2-tool *{}
+#h2-tool button,#h2-tool .chip,#h2-tool label,#h2-tool input,#h2-tool textarea,#h2-tool p,#h2-tool li,#h2-tool span{font-size:14px}
+#h2-tool h3,#h2-tool h4,#h2-tool .pc-g>b{font-size:15.5px!important}
+#h2-tool .htabs button{font-size:15.5px!important;padding:8px 10px!important}
+#pc-pv{font-size:14px!important}
 </style>
 </body>
 </html>
