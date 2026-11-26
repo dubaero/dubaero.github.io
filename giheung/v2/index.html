@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>용인시기흥장애인복지관 AI 업무도우미</title>
+<script src="/js/room-gate.js?v=2"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--g:#2e7d5b;--g2:#1f5c42;--gl:#e7f4ec;--gm:#cfe8da;--ink:#1d2421;--sub:#5d6964;--line:#e3e8e5;--bg:#f6f8f7;--red:#d93a2b;--or:#fff1e0;--orT:#a85a00}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.55;letter-spacing:-.2px}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:1440px;margin:0 auto;height:100vh;display:flex;flex-direction:column;padding:0 16px}
+header{height:54px;display:flex;align-items:center;justify-content:space-between;flex:none}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.5px}
+.brand .dot{width:26px;height:26px;border-radius:8px;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px}
+.brand small{font-weight:600;color:var(--sub);font-size:13px;margin-left:4px}
+.hbtn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 14px;font-weight:700;font-size:14px;color:var(--g2)}
+main{flex:1;min-height:0}
+footer{height:34px;flex:none;display:flex;align-items:center;justify-content:center;gap:14px;font-size:12px;color:var(--sub)}
+footer a{color:var(--g2);font-weight:700;text-decoration:none}
+/* home */
+.home{height:100%;display:flex;flex-direction:column;gap:10px;padding-bottom:6px}
+.hero{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.hero h1{font-size:22px;letter-spacing:-.8px}
+.hero h1 em{font-style:normal;color:var(--g)}
+.hero p{font-size:13px;color:var(--sub);letter-spacing:-.4px}
+.hero .tip{font-size:13px;background:var(--gl);color:var(--g2);border-radius:10px;padding:8px 12px;font-weight:600}
+.rows{flex:1;display:grid;grid-template-rows:repeat(5,1fr);gap:10px;min-height:0}
+.row{background:#fff;border:1px solid var(--line);border-radius:16px;display:grid;grid-template-columns:96px 1fr;align-items:stretch;overflow:hidden}
+.row .lab{display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--g2);background:var(--gl);font-size:15px}
+.row .tiles{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:10px;padding:10px}
+.tile{border:1px solid var(--line);border-radius:12px;background:#fff;display:flex;align-items:center;gap:10px;padding:0 16px;font-weight:800;font-size:17px;letter-spacing:-.5px;color:var(--ink);transition:.15s;text-align:left}
+.tile:hover{border-color:var(--g);background:var(--gl)}
+.tile .ic{width:34px;height:34px;border-radius:10px;background:var(--gl);color:var(--g);display:flex;align-items:center;justify-content:center;font-size:17px;flex:none}
+.tile.app{font-size:15px;justify-content:center}
+/* view */
+.view{height:100%;display:grid;grid-template-columns:minmax(330px,31%) 1fr;gap:12px;padding-bottom:6px}
+.pane{background:#fff;border:1px solid var(--line);border-radius:16px;min-height:0;display:flex;flex-direction:column}
+.pane .hd{padding:12px 16px 8px;display:flex;align-items:center;gap:8px;flex:none}
+.pane .hd h2{font-size:18px;letter-spacing:-.6px}
+.back{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700;color:var(--sub)}
+.pane .bd{padding:4px 16px 14px;overflow:auto;min-height:0;flex:1}
+.pane .bd::-webkit-scrollbar{width:6px}.pane .bd::-webkit-scrollbar-thumb{background:#d6ddd9;border-radius:4px}
+.gl{font-size:12.5px;font-weight:800;color:var(--sub);margin:10px 0 5px;letter-spacing:-.3px}
+.gl:first-child{margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 10px;font-size:13.5px;font-weight:600;color:var(--ink);letter-spacing:-.4px}
+.chip:hover{border-color:var(--g)}
+.chip.on{background:var(--g);border-color:var(--g);color:#fff}
+.chip.big{font-size:14.5px;padding:7px 12px;font-weight:700}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 14px;font-size:14.5px;font-weight:800;color:var(--sub)}
+.tab.on{background:var(--gl);border-color:var(--g);color:var(--g2)}
+.fl{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;margin-bottom:5px;background:#fff}
+.fl label{font-size:13px;font-weight:700;color:var(--g2);padding:0 0 0 10px;white-space:nowrap}
+.fl input,.fl textarea{border:0;outline:0;flex:1;padding:7px 8px;font:inherit;font-size:14px;background:transparent;min-width:0;resize:none}
+.fl:focus-within{border-color:var(--g);box-shadow:0 0 0 2px var(--gl)}
+.mic{border:0;background:var(--gl);color:var(--g2);border-radius:6px;margin:3px;padding:4px 8px;font-size:12px;font-weight:700}
+.mic.rec{background:var(--red);color:#fff}
+.ex{font-size:12px;color:#8a9590;margin:-2px 0 6px 2px;letter-spacing:-.3px}
+.steps{display:flex;flex-direction:column;gap:5px}
+.st{display:flex;gap:8px;align-items:flex-start;font-size:14px;letter-spacing:-.4px}
+.st b.n{flex:none;width:21px;height:21px;border-radius:50%;background:var(--g);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.note{font-size:12.5px;color:var(--orT);background:var(--or);border-radius:8px;padding:6px 10px;margin-top:8px;letter-spacing:-.3px}
+.list{font-size:13px;color:var(--sub);padding-left:16px;letter-spacing:-.3px}
+/* right */
+.bar{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);flex:none;flex-wrap:wrap}
+.bar .t{font-weight:800;font-size:16px;margin-right:auto;letter-spacing:-.5px}
+.btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 12px;font-size:13.5px;font-weight:800;color:var(--ink)}
+.btn.p{background:var(--g);border-color:var(--g);color:#fff}
+.btn:hover{border-color:var(--g)}
+.out{padding:14px 18px;overflow:auto;flex:1;min-height:0;font-size:15px;line-height:1.75;white-space:pre-wrap;letter-spacing:-.3px}
+.out mark,.hl{background:linear-gradient(transparent 55%,#c9ecd7 55%);color:var(--g2);font-weight:800;padding:0 1px}
+.out .h{font-weight:800;color:var(--g2)}
+.grid4{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;padding:10px;flex:1;min-height:0}
+.box{border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;min-height:0}
+.box .bh{display:flex;align-items:center;gap:6px;padding:7px 10px;border-bottom:1px solid var(--line);font-weight:800;font-size:14px}
+.box .bh .sp{margin-left:auto}
+.box .bb{padding:8px 12px;overflow:auto;white-space:pre-wrap;font-size:13.5px;line-height:1.7;flex:1;min-height:0;letter-spacing:-.3px}
+.sm{border:1px solid var(--line);background:#fff;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:700}
+table.form{width:100%;border-collapse:collapse;font-size:14px;white-space:normal}
+table.form th{background:var(--gl);color:var(--g2);font-weight:800;width:120px;text-align:left;padding:7px 10px;border:1px solid var(--gm);vertical-align:top;letter-spacing:-.4px}
+table.form td{padding:7px 10px;border:1px solid var(--gm);vertical-align:top;line-height:1.6}
+.ftitle{text-align:center;font-weight:900;font-size:19px;letter-spacing:4px;margin:2px 0 10px}
+.cards5{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:12px;white-space:normal}
+.c5{border:1px solid var(--line);border-radius:12px;padding:10px;font-size:13.5px;line-height:1.6;letter-spacing:-.3px}
+.c5 b{display:block;font-size:15px;color:var(--g2);margin-bottom:4px;letter-spacing:-.5px}
+.c5 i{font-style:normal;font-weight:800;color:var(--sub);font-size:12px}
+.badge{font-size:11px;font-weight:800;border-radius:6px;padding:1px 6px;margin-left:5px}
+.free{background:#dff3e6;color:#1f6b43}.paid{background:var(--or);color:var(--orT)}
+.fcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.fc{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;text-align:left;font-weight:800;font-size:14px;letter-spacing:-.4px}
+.fc.on{border:2px solid var(--g);background:var(--gl);padding:7px 9px}
+.subtabs{display:flex;gap:4px;padding:8px 14px 0;flex:none}
+.stab{border:0;border-bottom:3px solid transparent;background:none;padding:6px 12px;font-weight:800;font-size:14.5px;color:var(--sub)}
+.stab.on{color:var(--g2);border-color:var(--g)}
+.red{color:var(--red);font-weight:900;font-size:19px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;white-space:normal;margin-bottom:12px}
+.cmp>div{border:1px solid var(--line);border-radius:12px;padding:12px}
+.cmp h4{font-size:16px;margin-bottom:6px}
+.cmp ul{padding-left:18px;font-size:14px}
+.toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:#1d2421;color:#fff;padding:9px 16px;border-radius:10px;font-size:14px;font-weight:700;opacity:0;transition:.2s;pointer-events:none;z-index:9}
+.toast.on{opacity:1}
+@media (max-width:900px){
+ .wrap{height:auto;min-height:100vh}
+ .rows{grid-template-rows:none}.row{grid-template-columns:1fr}.row .lab{padding:6px}
+ .row .tiles{grid-auto-flow:row;grid-template-columns:1fr 1fr}.tile{padding:14px}
+ .view{grid-template-columns:1fr;height:auto}.pane .bd,.out{overflow:visible}
+ .grid4{grid-template-columns:1fr;grid-template-rows:none}.box .bb{max-height:300px}
+ .cards5{grid-template-columns:1fr 1fr}.hero{flex-direction:column;align-items:flex-start;gap:6px}
+ body{font-size:16px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div class="brand"><span class="dot">AI</span>용인시기흥장애인복지관 AI 업무도우미</div>
+ <button class="hbtn" onclick="go('home')">업무도우미 홈</button>
+</header>
+<main id="app"></main>
+<footer><span>AI 초안은 숫자·사실·개인정보를 꼭 확인하고 사용하세요</span><a href="https://www.a-sak.or.kr" target="_blank" rel="noopener">복지관 홈페이지</a><span>제작 두배로 · 이서정</span></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+/* ================= 공통 데이터 ================= */
+const ORG='용인시기흥장애인복지관';
+const BIZ=[
+{n:'주간이용센터',p:['Art Class','Digital Class','Sports Class','Special Class','Healthy Class','요리','ADL(일상생활)','전환기교육'],t:['성인 발달장애인','보호자'],g:['일상생활 자립','여가·문화 참여','지역사회 적응','의사소통 향상']},
+{n:'주간활동서비스',p:['지역사회 활동','여가 활동','자조모임','체육 활동'],t:['성인 발달장애인','보호자'],g:['지역사회 참여','자기결정','여가 확대']},
+{n:'직업지원',p:['직업상담','취업 전 교육','취업알선','취업 후 적응지원','지원고용','장애인 일자리','훈련대학','직업대학'],t:['구직 장애인','재직 장애인','사업체 담당자'],g:['직무 역량 향상','취업 연계','고용 유지']},
+{n:'스마트재활',p:['로봇보행재활','디지털 순환재활','디지털 인지치료','디지털 재활스포츠','스마트짐','수중재활운동'],t:['재활이 필요한 장애인','고령 장애인'],g:['신체 기능 향상','건강 유지','재활 동기 강화']},
+{n:'치료지원',p:['언어치료','운동치료','작업치료','인지학습치료','음악치료','미술치료'],t:['장애 아동','장애 청소년','성인 장애인','보호자'],g:['의사소통 향상','일상 기능 향상','정서 안정']},
+{n:'가족통합지원',p:['I Be School 방과후','플레이아트','동화발레','가족사례관리','P.O.P 가족체험','마음ON 부모교육','마음ON 동아리'],t:['장애 아동','부모·보호자','비장애 형제자매'],g:['돌봄 부담 완화','가족 관계 강화','양육 역량 향상']},
+{n:'장애인식개선',p:['포니야 놀자!','장애인식개선교육','장애인식개선캠페인','이용자권리교육','아삭공모전'],t:['지역 주민','어린이집·학교','기업·기관'],g:['장애 이해 확산','권리 존중','함께 사는 지역']},
+{n:'평생교육·동아리',p:['기흥행복한캠퍼스','기흥행복한놀이터','밝은누리밴드','톡투게더','이용고객 동아리'],t:['성인 장애인','장애 아동·청소년'],g:['배움 기회 확대','자기표현','관계 형성']},
+{n:'재가복지',p:['방문 이·미용','반찬지원','김장지원','클린업','주거환경개선','찾아가는 생일잔치','잔고장 수리','행복신문'],t:['재가 장애인','고령 장애인 가구'],g:['생활 안정','고립 예방','삶의 질 향상']},
+{n:'문화·행사',p:['가족잔치','명절 행사','문화공연','문화데이트','길 따라 맛 따라','이용고객 나들이'],t:['이용자','가족','지역 주민'],g:['문화 향유','가족 화합','지역 교류']},
+{n:'후원·자원봉사',p:['기흥아너리더스클럽','자원봉사','후원 소식','후원 물품'],t:['후원자','자원봉사자','지역 기업'],g:['나눔 확산','참여 확대','신뢰 형성']},
+{n:'기타',p:['직접 입력'],t:['이용자'],g:['직접 입력']}
+];
+const FIELDS={name:'행사명',place:'장소',date:'일시',recruit:'모집 기간',people:'대상·인원',prep:'준비물',apply:'신청 방법',staff:'담당자',tel:'전화번호'};
+let S={};try{S=JSON.parse(localStorage.getItem('gh2')||'{}')}catch(e){}
+S.b=S.b??0;S.p=S.p??0;
+function save(){try{localStorage.setItem('gh2',JSON.stringify(S))}catch(e){}}
+const B=()=>BIZ[S.b]||BIZ[0];
+const P=()=>{const b=B();return b.n==='기타'?(S.custom||'[사업·프로그램]'):(b.p[S.p]||b.p[0])};
+const BN=()=>B().n==='기타'?(S.custom||'[사업명]'):B().n;
+const V=k=>(S[k]||'').trim();
+const F=(k,d)=>V(k)||('['+(d||FIELDS[k]||k)+']');
+const M=s=>'⟦'+s+'⟧';
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=s=>esc(s).replace(/⟦(.*?)⟧/g,'<mark>$1</mark>');
+const plain=s=>String(s).replace(/[⟦⟧]/g,'');
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),1800)}
+async function copyTxt(t){t=plain(t);try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}toast('복사했어요')}
+function openAI(app,t){t=plain(t);const q=encodeURIComponent(t);
+ if(app==='gpt'){if(q.length<7000){window.open('https://chatgpt.com/?q='+q,'_blank');return}copyTxt(t);window.open('https://chatgpt.com/','_blank');toast('복사했어요 · 붙여넣기 하세요');return}
+ if(app==='claude'){if(q.length<7000){window.open('https://claude.ai/new?q='+q,'_blank');return}copyTxt(t);window.open('https://claude.ai/new','_blank');return}
+ copyTxt(t);window.open('https://gemini.google.com/app','_blank');toast('복사했어요 · 제미나이에 붙여넣기')}
+let CUR='';
+function aiBar(title,getter){CUR=getter;return `<div class="bar"><span class="t">${title}</span><button class="btn p" onclick="copyTxt(CUR())">복사</button><button class="btn" onclick="openAI('gpt',CUR())">ChatGPT</button><button class="btn" onclick="openAI('gemini',CUR())">제미나이</button><button class="btn" onclick="openAI('claude',CUR())">Claude</button></div>`}
+/* ---- UI helpers ---- */
+function chips(key,opts,big){return `<div class="chips">${opts.map((o,i)=>`<button class="chip${big?' big':''}${(S[key]??0)==i?' on':''}" onclick="setS('${key}',${i})">${esc(o)}</button>`).join('')}</div>`}
+function mchips(key,opts){const a=S[key]||[];return `<div class="chips">${opts.map((o,i)=>`<button class="chip${a.includes(i)?' on':''}" onclick="togS('${key}',${i})">${esc(o)}</button>`).join('')}</div>`}
+function setS(k,v){S[k]=v;if(k==='b'){S.p=0}save();render()}
+function togS(k,i){const a=S[k]||[];const j=a.indexOf(i);j<0?a.push(i):a.splice(j,1);S[k]=a;save();render()}
+function field(k,label,area,ex){const id='f_'+k;const v=esc(S[k]||'');const inp=area?`<textarea id="${id}" rows="2" oninput="inS('${k}',this.value)">${v}</textarea>`:`<input id="${id}" value="${v}" oninput="inS('${k}',this.value)">`;
+ return `<div class="fl"><label for="${id}">${label}:</label>${inp}${SR?`<button class="mic" onclick="mic('${k}',this)">말하기</button>`:''}</div>${ex?`<div class="ex">예) ${esc(ex)}</div>`:''}`}
+function inS(k,v){S[k]=v;save();if(window.RIGHT)RIGHT()}
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function mic(k,btn){if(!SR)return;const r=new SR();r.lang='ko-KR';r.interimResults=false;btn.classList.add('rec');btn.textContent='듣는 중';
+ r.onresult=e=>{const t=e.results[0][0].transcript;S[k]=((S[k]||'')+' '+t).trim();save();const el=document.getElementById('f_'+k);if(el)el.value=S[k];if(window.RIGHT)RIGHT()};
+ r.onend=()=>{btn.classList.remove('rec');btn.textContent='말하기'};r.start()}
+function bizPick(noProg){const b=B();return `<div class="gl">사업</div>${chips('b',BIZ.map(x=>x.n))}${noProg?'':`<div class="gl">프로그램</div>${b.n==='기타'?field('custom','사업·프로그램'):chips('p',b.p)}`}`}
+function steps(a){return `<div class="steps">${a.map((s,i)=>`<div class="st"><b class="n">${i+1}</b><span>${s}</span></div>`).join('')}</div>`}
+function pane(title,body){return `<section class="pane"><div class="hd"><button class="back" onclick="go('home')">← 홈</button><h2>${title}</h2></div><div class="bd">${body}</div></section>`}
+function rpane(inner){return `<section class="pane" id="R">${inner}</section>`}
+function outBox(title,txt){return aiBar(title,()=>txt)+`<div class="out">${fmt(txt)}</div>`}
+const pick=(a,seed)=>a[Math.abs(seed)%a.length];
+const hash=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))|0;return h};
+
+/* ================= 라우팅 ================= */
+const VIEWS={};let VIEW='home';
+function go(v){location.hash=v}
+window.addEventListener('hashchange',()=>{VIEW=location.hash.slice(1)||'home';render()});
+function render(){window.RIGHT=null;const app=document.getElementById('app');const f=VIEWS[VIEW]||VIEWS.home;
+ const ae=document.activeElement&&document.activeElement.id;app.innerHTML=f();if(window.RIGHT)RIGHT();
+ if(ae){const el=document.getElementById(ae);if(el&&el.tagName!=='BUTTON'){el.focus();const n=el.value.length;try{el.setSelectionRange(n,n)}catch(e){}}}}
+function view(title,leftBody,rightFn){window.RIGHT=()=>{const r=document.getElementById('R');if(r)r.innerHTML=rightFn()};return `<div class="view">${pane(title,leftBody)}${rpane('')}</div>`}
+
+/* ================= 홈 ================= */
+const MENU=[
+['업무',[['project','업무 프로젝트','📁'],['plan','계획·일지','📝'],['memo','메모·녹음 → 서식','🎙'],['month','이달의 추천','📅']]],
+['소통',[['msg','문자·소통','✉'],['promo','홍보·안내','📣'],['donor','후원 관리','💚']]],
+['만들기',[['gen','맞춤형 프롬프트 생성','✨'],['room','프롬프트 디자인실','🎨']]],
+['쉼',[['vent','빡침 번역기','🔥'],['mind','마음챙김','🌿']]],
+['배우기',[['apps:0','ChatGPT','G'],['apps:1','제미나이','◆'],['apps:2','Claude','C'],['apps:3','Canva','▣'],['apps:4','데스크톱 앱','💻']]]];
+VIEWS.home=()=>`<div class="home"><div class="hero"><div><h1>오늘 업무, <em>AI에게 지시</em>하세요</h1><p>고르고 → 적고 → 오른쪽 결과를 복사하거나 AI로 바로 보내면 끝</p></div><div class="tip">AI는 시키기 나름, 부탁이 아니라 지시</div></div>
+<div class="rows">${MENU.map(([lab,ts])=>`<div class="row"><div class="lab">${lab}</div><div class="tiles">${ts.map(([k,n,ic])=>`<button class="tile${lab==='배우기'?' app':''}" onclick="${k.startsWith('apps')?`S.app=${k.split(':')[1]};S.fc=0;S.sub=0;save();go('apps')`:`go('${k}')`}"><span class="ic">${ic}</span>${n}</button>`).join('')}</div></div>`).join('')}</div></div>`;
+
+/* ================= ① 업무 프로젝트 ================= */
+const DOCS=['사업계획서','결과보고서','홍보물'];
+const SRC={0:['우리 복지관 사업계획서 서식(빈 양식)','올해 사업안내(지침) 해당 부분','전년도 사업계획서·결과보고서','수요조사·만족도 결과'],1:['우리 복지관 결과보고서 서식','올해 사업계획서(승인본)','월별 실적·운영일지','만족도 집계·사진 목록','예산 집행 내역'],2:['기관 로고·색상','지난 홍보물 중 마음에 든 것','행사 정보(일시·장소·대상)','활동 사진(촬영 동의 받은 것)']};
+function instr(d){const b=BN(),p=P();
+ if(d===0)return `[역할] 너는 장애인복지관 사업계획서를 심사하는 ${M('지자체 사업 검토 전문가')}다.
+[목표] ${ORG} ${M(b)} · ${M(p)} 올해 사업계획서를 ${M('우리 서식 그대로')} 완성한다.
+[진행 순서]
+1. 첫 답변: 전년도 계획서·결과보고서 ↔ 올해 서식·지침 ${M('비교표 하나')}
+   | 항목 | 잘된 점 | 문제점 | 올해 추가·보완 | 근거(자료명·쪽) |
+2. 추가하면 좋은 자료 표 → "추가할 자료가 있나요?" 한 번만 묻기
+3. 진행 중 확인이 필요한 예산·수치는 제안값과 함께 한 번에 확인 후 진행
+4. 서식 항목·순서·표 그대로 초안 작성
+5. ${M('심사위원 입장')} 검토 → 보완 → 최종본 → 한글(.hwpx) 파일
+[필수] 근거 문장 끝 (자료명·쪽) · 예산 = 수량×단가×횟수 검산 · 개조식 공문체(~함)
+[금지] 자료에 없는 숫자·실적 지어내기 → ${M('[확인 필요]')} · 서식에 없는 항목 추가 · 실명·연락처`;
+ if(d===1)return `[역할] 너는 장애인복지관 결과보고서를 평가하는 ${M('사업평가 전문가')}다.
+[목표] ${ORG} ${M(b)} · ${M(p)} 결과보고서를 ${M('우리 서식 그대로')} 완성한다.
+[진행 순서]
+1. 첫 답변: 올해 계획서 ↔ 운영 기록 ${M('계획 대비 실적표')}
+   | 항목 | 목표 | 실적 | 달성률(계산식) | 근거 |
+2. 부족한 자료 표 → "추가할 자료가 있나요?" 한 번만 묻기
+3. 진행 중 확인이 필요한 수치는 한 번에 확인 후 진행
+4. 서식 그대로 초안: 추진 실적 → 성과·변화 → 미달 사유·개선 방안
+5. ${M('지자체 평가 담당자 입장')} 검토 → 보완 → 최종본 → 한글(.hwpx)
+[필수] 숫자는 자료 근거만 · 만족도·변화는 근거 자료명 표시 · 개조식 공문체
+[금지] 실적 부풀리기 · 자료에 없는 숫자 → ${M('[확인 필요]')} · 개인 식별 정보`;
+ return `[역할] 너는 장애인복지관 ${M('홍보 디자인 전문가')}다.
+[목표] ${ORG} ${M(b)} · ${M(p)} 홍보물(포스터·카드뉴스·인포그래픽)을 만든다.
+[진행 순서]
+1. 질문은 최대 2회: 홍보물 종류 · 꼭 넣을 정보만 확인
+2. ${M('서로 다른 시안 2개')}(분위기·배치 다르게) 먼저 제안 → 고른 것으로 제작
+3. 완성 후 오탈자·정보 누락 점검표 제시
+[필수] 행사명·일시·장소·대상·신청 방법·문의 전화 ${M('크고 또렷하게')} · 큰 글씨·고대비·쉬운 말 · 장애인을 ${M('주인공')}으로 표현
+[금지] 정보 지어내기 → [확인 필요] · 동정·시혜적 표현 · 실제 인물 얼굴 무단 사용`}
+function first(d){const b=BN(),p=P();
+ return d===2?`${M(b)} · ${M(p)} 홍보물을 만들 거야. 지침 순서대로 진행해 줘.
+[정보] 행사명: ${F('name')} / 일시: ${F('date')} / 장소: ${F('place')} / 대상: ${F('people')} / 신청: ${F('apply')} / 문의: ${F('tel')}`
+ :`${M(b)} · ${M(p)} ${DOCS[d]}를 작성할 거야. 지침 순서대로 진행해 줘.
+첫 답변에는 ${d===0?'비교표':'계획 대비 실적표'}와 추가하면 좋은 자료 표만 보여 줘.`}
+VIEWS.project=()=>{S.doc=S.doc??0;S.ps=S.ps??0;return view('업무 프로젝트',
+ `<div class="gl">문서</div>${chips('doc',DOCS,1)}${bizPick()}
+ <div class="gl">만드는 법</div>${steps(['ChatGPT 왼쪽 <b>프로젝트 → 새 프로젝트</b> (이름: '+esc(BN())+' '+DOCS[S.doc]+')','프로젝트 설정 → <b>지침</b>에 오른쪽 지침 붙여넣기','<b>소스</b>에 서식·자료 넣고 새 채팅 → 첫 프롬프트'])}
+ <div class="gl">소스에 넣으면 좋은 자료</div><ul class="list">${SRC[S.doc].map(x=>`<li>${x}</li>`).join('')}</ul>
+ <div class="note">실명·연락처·진단명은 넣지 마세요. 이용자는 가명(이용자A)</div>`,
+ ()=>{const t=S.ps?first(S.doc):instr(S.doc);return `<div class="subtabs"><button class="stab${S.ps?'':' on'}" onclick="S.ps=0;save();RIGHT()">프로젝트 지침</button><button class="stab${S.ps?' on':''}" onclick="S.ps=1;save();RIGHT()">첫 프롬프트</button></div>`+outBox(S.ps?'첫 대화에 붙여넣기':'프로젝트 지침에 붙여넣기',t)})};
+
+/* ================= ② 계획·일지 ================= */
+function acts(p){const m={
+'요리':['오늘의 요리 사진 카드로 소개','재료 손질·조리 단계별 역할 나누기','완성 음식 나눠 먹으며 소감 말하기'],
+'ADL(일상생활)':['오늘 연습할 생활 기술 시범 보기','단계별로 직접 해 보기(필요 시 보조)','스스로 한 단계 체크하고 칭찬 나누기']};
+ if(m[p])return m[p];
+ if(/치료/.test(p))return ['인사·컨디션 확인','개별 목표에 맞춘 '+p+' 활동','보호자와 오늘 변화 공유'];
+ if(/교육|대학|상담|알선|적응|고용|일자리/.test(p))return ['오늘 배울 내용 쉬운 말로 안내','실습·모의 활동('+p+')','배운 점 한 줄 정리·다음 계획'];
+ if(/캠페인|포니|인식|권리|공모/.test(p))return ['장애 이해 영상·그림으로 열기','참여형 활동('+p+')','함께 다짐 나누기'];
+ return ['인사·오늘 활동 그림 카드로 소개',p+' 본 활동(선택·참여 중심)','소감 나누기·다음 일정 안내']}
+VIEWS.plan=()=>{S.pl=S.pl??0;S.gg=S.gg??0;S.ss=S.ss??0;const b=B();return view('계획·일지',
+ `${bizPick()}<div class="gl">목표</div>${chips('gg',b.g)}<div class="gl">회기</div>${chips('ss',['1회','4회기','8회기','12회기','연중'])}
+ <div class="gl">입력</div>${field('date','일시')}${field('place','장소')}${field('people','대상·인원')}${field('staff','담당자')}
+ ${S.pl?field('react','참여 모습',1,'처음엔 망설였지만 직접 재료를 고르며 웃음'):''}
+ <div class="note">빈칸은 [ ]로 남아요. 기관 서식이 있으면 프롬프트로 서식에 맞춰 받으세요</div>`,
+ ()=>{const p=P(),bn=BN(),a=acts(p),g=b.g[S.gg]||'',ss=['1회','4회기','8회기','12회기','연중'][S.ss];
+ const rows=S.pl?[['프로그램명',p],['일시',F('date')],['장소',F('place')],['참여자',F('people','참여 인원')],['담당자',F('staff')],['활동 목표',g+' — 오늘의 목표 [확인 필요]'],['진행 내용','도입: '+a[0]+'\n전개: '+a[1]+'\n마무리: '+a[2]],['참여 모습',V('react')||'[참여자 반응·관찰 내용]'],['특이사항','[건강·안전·정서 변화]'],['다음 회기','[다음 활동·보완점]'],['결재','담당 [   ]   팀장 [   ]   관장 [   ]']]
+ :[['프로그램명',p],['사업명',bn],['목적',g+'을(를) 위해 '+p+' 활동으로 참여자의 선택과 참여를 넓힘'],['목표','① '+g+' 관련 목표 [확인 필요]\n② 참여자 만족도 [확인 필요]% 이상'],['대상',F('people')],['일시·장소',F('date')+' / '+F('place')],['운영 횟수',ss],['진행 내용','도입: '+a[0]+'\n전개: '+a[1]+'\n마무리: '+a[2]],['준비물','[재료·도구 목록]'],['인력',F('staff')+' 외 [보조 인력]'],['예산','[항목 × 단가 × 횟수 = 금액]'],['기대 효과',g+' · 자신감 향상 · 관계 형성'],['평가 방법','관찰 기록 · 만족도 조사(그림형 포함)'],['안전·접근성','이동 동선·감각 자극·의사소통 지원 확인']];
+ const txt=(S.pl?'프로그램 일지':'프로그램 계획서')+'\n'+rows.map(r=>r[0]+': '+r[1]).join('\n');
+ const pr=`첨부한 우리 복지관 ${S.pl?'프로그램 일지':'프로그램 계획서'} 서식의 칸 이름·순서는 그대로 두고 아래 내용으로 채워 줘.\n자료에 없는 숫자는 [확인 필요], 개조식 공문체, 이용자는 가명.\n\n`+txt;
+ CUR=()=>pr;
+ return `<div class="subtabs"><button class="stab${S.pl?'':' on'}" onclick="S.pl=0;save();render()">계획서</button><button class="stab${S.pl?' on':''}" onclick="S.pl=1;save();render()">일지</button></div>
+ <div class="bar"><span class="t">${S.pl?'일지':'계획서'} 초안</span><button class="btn p" onclick="copyTxt(TXT)">표 복사</button><button class="btn" onclick="openAI('gpt',CUR())">ChatGPT로 서식 채우기</button><button class="btn" onclick="openAI('claude',CUR())">Claude</button></div>
+ <div class="out" style="white-space:normal"><div class="ftitle">${S.pl?'프 로 그 램  일 지':'프 로 그 램  계 획 서'}</div><table class="form">${rows.map(r=>`<tr><th>${r[0]}</th><td>${fmtCell(r[1])}</td></tr>`).join('')}</table></div>${setTXT(txt)}`})};
+function fmtCell(s){return esc(s).replace(/\n/g,'<br>').replace(/\[([^\]]*)\]/g,'<span style="color:#a85a00">[$1]</span>')}
+let TXT='';function setTXT(t){TXT=t;return ''}
+
+/* ================= 메모·녹음 → 서식 ================= */
+const MFORM=['회의록','공문','프로그램 계획서','프로그램 일지','상담일지','사례회의록','기타 서식'];
+const MIN=['손글씨 메모 사진','화이트보드 사진','녹음 파일','받아쓴 글'];
+VIEWS.memo=()=>{S.mf=S.mf??0;S.mi=S.mi??0;return view('메모·녹음 → 서식',
+ `<div class="gl">만들 서식</div>${chips('mf',MFORM,1)}<div class="gl">넣을 것</div>${chips('mi',MIN)}
+ <div class="gl">추가 정보</div>${field('date','일시')}${field('mextra','참석자·덧붙일 말',1,'팀장, 담당자2 / 결정사항 꼭 표로')}
+ <div class="gl">따라 하기</div>${steps(S.mi===2?['녹음은 <b>클로바노트</b>로 글로 바꾸거나, ChatGPT·제미나이 <b>+</b>에 녹음 파일 첨부','우리 서식(한글은 <b>HWPX로 저장</b>)도 함께 첨부','오른쪽 프롬프트 붙여넣기 → 한글 파일로 받아 확인']:['메모·사진을 ChatGPT·제미나이 입력창 <b>+</b>로 첨부','우리 서식(한글은 <b>HWPX로 저장</b>)도 함께 첨부','오른쪽 프롬프트 붙여넣기 → 한글 파일로 받아 확인'])}
+ <div class="note">한글 파일로 안 나오면 "칸 이름 | 내용" 표로 받아 원본 서식에 붙여넣기 (워드 변환은 서식이 깨져요)</div>`,
+ ()=>{const f=MFORM[S.mf],i=MIN[S.mi];const t=`너는 ${ORG}의 ${M('문서 작성 실무 전문가')}야.
+첨부한 ${M(i)}의 내용을, 함께 첨부한 우리 복지관 ${M(f)} 서식에 맞춰 채워 줘.
+[규칙]
+- 서식의 ${M('칸 이름·순서·표 모양 그대로')}, 빈칸만 채우기
+- 결정사항·담당·기한은 표로 정리
+- 메모에 없는 날짜·숫자·이름은 ${M('[확인 필요]')}
+- 읽기 어려운 글자는 [판독 불가]로 표시하고 마지막에 목록으로
+- 사람 이름은 직책(팀장·담당자)으로, 이용자는 가명
+- 완성본은 같은 서식의 ${M('한글(.hwpx) 파일')}로. 안 되면 "칸 이름 | 내용" 표로
+[추가 정보] 일시: ${F('date')} / ${V('mextra')||'[참석자·덧붙일 말]'}`;return outBox(f+' 채우기 프롬프트',t)})};
+
+/* ================= ③ 이달의 추천 ================= */
+const MON=[0,
+[['새해 소원 카드 만들기','그림·글로 올해 소원 적고 전시','색지·스티커','자기표현·목표 세우기'],['겨울 실내 운동회','팀 나눠 공굴리기·풍선 배구','풍선·공','신체 활동·협동'],['따뜻한 차 만들기','유자차 담그고 나누기','유자·병','일상 기술·나눔'],['달력 꾸미기','내 일정 스스로 표시하기','달력·스티커','자기관리'],['설 준비 윷놀이','전통놀이 규칙 익히기','윷·말판','관계 형성']],
+[['설날 떡국 나눔','떡국 끓여 이웃과 나누기','떡·육수 재료','지역 교류'],['졸업·수료 축하 앨범','1년 사진으로 앨범 만들기','사진·앨범','성취감'],['전통 한복 체험','한복 입고 사진 찍기','한복 대여','문화 향유'],['겨울 간식 붕어빵','붕어빵 만들기 체험','반죽·팥','요리 기술'],['감사 편지 쓰기','가족·선생님께 편지','편지지','관계 강화']],
+[['봄맞이 화분 심기','씨앗·모종 심고 관찰일지','화분·흙','책임감·관찰'],['새 학기 자기소개 카드','사진·좋아하는 것 카드','카드지·사진','자기표현'],['봄 나들이 계획 회의','가고 싶은 곳 투표','지도·스티커','자기결정'],['손 씻기 위생 교육','노래와 함께 손 씻기','비누·노래','건강 습관'],['봄꽃 압화 액자','꽃 말려 액자 만들기','꽃·액자','소근육·미술']],
+[['장애인의 날 캠페인','4월 20일 거리 캠페인','피켓·홍보물','인식 개선'],['봄꽃 나들이','근처 공원 산책·사진','간식·카메라','지역사회 참여'],['도시락 만들기','김밥 싸서 소풍','김밥 재료','요리·나눔'],['내 권리 알기','쉬운 그림으로 권리 배우기','그림 카드','권리 의식'],['식목일 씨앗 폭탄','흙공 만들어 심기','흙·씨앗','환경·협동']],
+[['가정의 달 감사 카네이션','카네이션 만들어 선물','색지·리본','가족 관계'],['가족 운동회','가족과 함께 게임','공·줄다리기','가족 화합'],['어린이날 놀이마당','놀이 부스 체험','놀이 도구','즐거움·참여'],['스승의 날 롤링페이퍼','선생님께 감사 쪽지','큰 종이','감사 표현'],['가족 사진관','가족 사진 촬영·액자','카메라·액자','추억 만들기']],
+[['여름 과일 화채','수박화채 만들기','수박·그릇','요리 기술'],['초여름 물총놀이','안전 수칙 익히고 물총 놀이','물총·수건','신체 활동'],['감사의 마음 편지','호국보훈 의미 알기','편지지','시민 의식'],['부채 꾸미기','부채에 그림 그리기','부채·물감','미술 표현'],['건강 체크 데이','혈압·키·몸무게 기록','측정 도구','건강 관리']],
+[['여름 물놀이','수영장·계곡 체험','수영복·튜브','신체 활동'],['아이스크림 만들기','과일 셔벗 만들기','과일·틀','요리 기술'],['여름 영화관','함께 영화 보고 감상','영화·간식','여가'],['더위 이기기 교육','폭염 안전 수칙','그림 카드','안전 의식'],['여름 축제 부스','동아리 공연·부스','무대 소품','자기표현']],
+[['여름 캠프','1박 2일 캠프','숙소·차량','자립·관계'],['수박 파티','수박 나눠 먹기 게임','수박','즐거움'],['나만의 티셔츠','티셔츠 염색','티셔츠·염료','창작'],['물 마시기 챌린지','하루 물 마시기 기록','물병·표','건강 습관'],['여름 사진 전시','여름 활동 사진전','사진·게시판','성취감']],
+[['추석 송편 빚기','송편 만들어 나누기','쌀가루·소','전통·나눔'],['가을 운동회','팀 대항 운동회','운동 도구','협동'],['보름달 소원등','등 만들어 소원 적기','한지·LED','자기표현'],['가을 들꽃 산책','공원 산책·사진','카메라','지역사회 참여'],['추석 감사 인사','가족·후원자 감사 카드','카드지','관계 강화']],
+[['가을 소풍','근교 나들이','간식·차량','지역사회 참여'],['문화공연 관람','공연 보고 감상 나누기','관람권','문화 향유'],['낙엽 아트','낙엽으로 그림 만들기','낙엽·풀','미술 표현'],['핼러윈 가면','가면 만들고 사진','가면 재료','즐거움'],['고구마 수확','고구마 캐고 구워 먹기','장갑·호미','자연 체험']],
+[['김장 나눔','김장 담가 이웃과 나누기','배추·양념','지역 교류'],['감사 나무 만들기','감사한 일 잎에 적기','색지·나무판','감사 표현'],['겨울 준비 장갑 뜨기','쉬운 손뜨개','털실·바늘','소근육'],['따뜻한 붕어빵 데이','간식 만들어 나누기','붕어빵 재료','나눔'],['한 해 돌아보기 사진전','올해 활동 사진 모으기','사진·게시판','성취감']],
+[['성탄 카드 만들기','카드 만들어 선물','카드지·스티커','감사 표현'],['연말 감사 영상 편지','후원자·가족께 영상 인사','휴대폰','관계 강화'],['겨울 간식 만들기','호떡·코코아 만들기','재료·컵','요리 기술'],['송년 장기자랑','동아리 공연·시상','무대·상장','자기표현'],['연말 나눔 바자회','만든 작품 판매·기부','작품·가격표','나눔·참여']]];
+VIEWS.month=()=>{if(S.mm==null)S.mm=Math.min(11,new Date().getMonth()+1)%12;return view('이달의 추천',
+ `<div class="gl">월</div>${chips('mm',[1,2,3,4,5,6,7,8,9,10,11,12].map(m=>m+'월'))}${bizPick()}
+ <div class="note">사업과 프로그램에 맞게 5가지를 추천해요. 더 받고 싶으면 위 버튼으로 AI에게 요청하세요</div>`,
+ ()=>{const m=S.mm+1,list=MON[m],p=P(),bn=BN(),t=B().t[0];
+ const pr=`너는 ${ORG} 프로그램 기획 전문가야. ${M(m+'월')}에 ${M(bn)}(${M(p)})에서 ${M(t)} 대상으로 할 프로그램 5개를 제안해 줘.\n| 프로그램명 | 진행 방법 | 준비물 | 기대 효과 | 안전·접근성 |\n계절·절기를 살리고, 장애 특성(이동·감각·의사소통)을 고려해. 예산은 [확인 필요].`;
+ CUR=()=>pr;
+ return aiBar(m+'월 · '+esc(bn)+' 추천 5가지',()=>pr)+`<div class="cards5">${list.map(([n,how,need,eff])=>`<div class="c5"><b>${esc(n)}</b><i>진행</i> ${esc(how)} (${esc(p)}와 연계)<br><i>준비물</i> ${esc(need)}<br><i>기대 효과</i> ${esc(eff)}</div>`).join('')}</div>
+ <div class="out" style="flex:none;border-top:1px solid var(--line)"><span class="h">AI로 더 받기 프롬프트</span>\n${fmt(pr)}</div>`})};
+
+/* ================= ④ 문자·소통 ================= */
+const MSGS=['프로그램 참여 안내','일정 변경 안내','접수·대기 결과','보호자께 근황','보호자 상담 안내','치료·수업 결과 안내','어려운 이야기 전하기','자원봉사자 안내','협력기관 협조 요청','명절·절기 인사','기타'];
+const TONE=['따뜻하게','정중하게','쉬운 말로'];
+function greet(to){return ['이용자','보호자','자원봉사자','협력기관','후원자'][to]==='협력기관'?'안녕하십니까, '+ORG+'입니다.':'안녕하세요, '+ORG+'입니다.'}
+function msgText(){const s=S.ms??0,p=P(),to=S.to??1,tone=S.tn??0;const who=['이용자님','보호자님','봉사자님','담당자님','후원자님'][to];
+ const soft=tone===2;const end=tone===1?'감사합니다.':'늘 함께해 주셔서 고맙습니다.';const g=greet(to);
+ const info=`일시: ${F('date')}\n장소: ${F('place')}${V('prep')?'\n준비물: '+V('prep'):''}\n문의: ${F('staff')} ${F('tel')}`;
+ const add=V('madd')?'\n'+V('madd'):'';
+ const T={
+ 0:[`${g}\n${who}, ${M(p)}에 함께해 주세요.${add}\n\n${info}\n\n${soft?'궁금한 것이 있으면 전화 주세요.':'참여가 어려우시면 미리 연락 부탁드립니다.'}\n${end}`,`[${p}] ${F('date')} ${F('place')} · 문의 ${F('tel')}`],
+ 1:[`${g}\n${who}, ${M(p)} 일정이 바뀌어 알려드립니다.\n\n변경 전: [기존 일시]\n변경 후: ${F('date')}\n장소: ${F('place')}${add}\n\n불편을 드려 죄송합니다. 문의: ${F('staff')} ${F('tel')}\n${end}`,`[${p} 일정 변경] ${F('date')}로 바뀌었습니다 · ${F('tel')}`],
+ 2:[`${g}\n${who}, 신청해 주신 ${M(p)} 접수 결과를 알려드립니다.\n\n결과: [선정 / 대기 ○번]\n시작: ${F('date')}${add}\n\n자세한 안내는 ${F('staff')}(${F('tel')})께서 다시 연락드리겠습니다.\n${end}`,`[${p}] 접수 결과: [선정/대기] · 문의 ${F('tel')}`],
+ 3:[`${g}\n보호자님, ${M(p)}에서 [이용자 호칭]님의 요즘 모습을 전해드려요.${add||'\n[최근 활동·좋아진 점 한두 줄]'}\n\n오늘도 웃는 얼굴로 함께해 주셨어요. 궁금하신 점은 언제든 연락 주세요.\n${F('staff')} 드림`,`[이용자]님 오늘 ${p}에서 즐겁게 참여하셨어요 :)`],
+ 4:[`${g}\n보호자님, ${M(p)} 관련 상담을 안내드립니다.\n\n${info}${add}\n\n편하신 시간이 다르면 알려 주세요. 맞춰 조정하겠습니다.\n${end}`,`[상담 안내] ${F('date')} ${F('place')} · ${F('tel')}`],
+ 5:[`${g}\n보호자님, 이번 달 ${M(p)} 진행 내용을 안내드립니다.\n\n- 이번 달 목표: [목표]\n- 잘하신 점: [변화]\n- 가정에서 함께해 주세요: [가정 연계 활동]${add}\n\n문의: ${F('staff')} ${F('tel')}`,`[${p}] 이번 달 결과 안내드렸어요. 가정에서도 [활동] 함께해 주세요.`],
+ 6:[`${g}\n${who}, 조심스럽게 말씀드릴 일이 있어 연락드립니다.\n${add||'[전해야 할 내용을 사실 위주로 한두 줄]'}\n\n저희도 같은 마음으로 방법을 찾고 있습니다. 편하실 때 통화 가능하실지 여쭙고 싶습니다.\n${F('staff')} 드림 (${F('tel')})`,`편하실 때 통화 가능하실까요? 말씀드릴 일이 있습니다. ${F('tel')}`],
+ 7:[`${g}\n봉사자님, ${M(p)} 봉사 활동을 안내드립니다.\n\n${info}\n복장: 편한 옷${add}\n\n귀한 시간 내주셔서 감사합니다.`,`[${p} 봉사] ${F('date')} ${F('place')} · ${F('tel')}`],
+ 8:[`안녕하십니까, ${ORG} ${F('staff')}입니다.\n${M(p)} 운영과 관련하여 협조를 요청드립니다.\n\n1. 내용: ${V('madd')||'[협조 요청 내용]'}\n2. 일시: ${F('date')}\n3. 장소: ${F('place')}\n\n검토 부탁드리며, 문의는 ${F('tel')}로 연락 주십시오.\n감사합니다.`,`[협조 요청] ${p} 관련 · ${F('date')} · ${F('tel')}`],
+ 9:[`${g}\n${who}, 따뜻한 [명절/절기] 맞이하세요.\n올 한 해 ${M(p)}에 보내주신 관심 덕분에 이용자분들이 더 많이 웃을 수 있었습니다.${add}\n\n가족과 함께 행복한 시간 보내시길 바랍니다.\n${ORG} 드림`,`즐거운 [명절] 보내세요! 늘 고맙습니다 - ${ORG}`],
+ 10:[`${g}\n${who}, ${V('madd')||'[전하고 싶은 내용]'}\n\n문의: ${F('staff')} ${F('tel')}\n${end}`,`${V('madd')||'[짧은 안내]'} · ${F('tel')}`]};
+ return T[s]}
+VIEWS.msg=()=>{S.ms=S.ms??0;S.to=S.to??1;S.tn=S.tn??0;return view('문자·소통',
+ `<div class="gl">상황</div>${chips('ms',MSGS)}${bizPick()}<div class="gl">받는 분</div>${chips('to',['이용자','보호자','자원봉사자','협력기관','후원자'])}<div class="gl">말투</div>${chips('tn',TONE)}
+ <div class="gl">입력</div>${field('date','일시')}${field('place','장소')}${field('prep','준비물')}${field('staff','담당자')}${field('tel','전화번호')}${field('madd','덧붙일 말',1)}`,
+ ()=>{const [a,b]=msgText();const pr=`너는 ${ORG} 사회복지사야. 아래 문자를 ${M(TONE[S.tn])} 다듬어 줘. 받는 분: ${['이용자','보호자','자원봉사자','협력기관','후원자'][S.to]}. 90자 짧은 버전도 함께.\n\n${a}`;
+ return aiBar(MSGS[S.ms]+' 문자',()=>a)+`<div class="grid4" style="grid-template-rows:1.4fr 1fr"><div class="box" style="grid-column:1/3"><div class="bh">바로 보낼 문자<button class="sm sp" onclick="copyTxt(CA)">복사</button></div><div class="bb">${fmt(a)}</div></div><div class="box"><div class="bh">짧은 버전<button class="sm sp" onclick="copyTxt(CB)">복사</button></div><div class="bb">${fmt(b)}</div></div><div class="box"><div class="bh">AI로 더 다듬기<button class="sm sp" onclick="openAI('gpt',CP)">ChatGPT</button><button class="sm" onclick="openAI('gemini',CP)">제미나이</button></div><div class="bb">${fmt(pr)}</div></div></div>${setC(a,b,pr)}`})};
+let CA='',CB='',CP='';function setC(a,b,p){CA=a;CB=b;CP=p;return ''}
+
+/* ================= ⑤ 홍보·안내 ================= */
+const PROMOS=['이달의 소식','활동 SNS·블로그','홈페이지 게시글','보도자료','안내문·가정통신문','쉬운 글 안내문','모집 공고','포스터·홍보 그림','인포그래픽','카드뉴스','핀터레스트 레퍼런스','기타'];
+const MOOD=['따뜻하게','밝고 경쾌하게','차분하게'];const LEN=['짧게','보통','길게'];
+const WITH=['이용자','보호자·가족','자원봉사자','지역 주민','후원자','협력기관'];
+function tags(){const p=P().replace(/[^가-힣A-Za-z0-9]/g,'');const a=(V('act')||'').replace(/[^가-힣0-9 ]/g,'').split(' ').filter(w=>w.length>1).slice(0,2).join('');return `#${ORG} #${BN().replace(/[^가-힣A-Za-z]/g,'')} #${p}${a?' #'+a:''} #함께하는기흥 #장애인복지관`}
+function withTxt(){const a=(S.wi||[0]).map(i=>WITH[i]);return a.join('·')}
+function blog(){const p=P(),act=V('act')||`${p} 활동을 함께했어요`,more=V('more'),w=withTxt(),L=S.ln??1,mood=S.md??0;
+ const open=['따스한 마음을 담아 오늘의 이야기를 전해드려요.','신나는 소식 하나 들고 왔어요!','오늘 있었던 활동을 차분히 정리해 전해드립니다.'][mood];
+ let t=`[제목] ${p} | ${act.slice(0,24)} — ${ORG} 이야기\n\n안녕하세요, ${ORG}입니다.\n${open}\n\n■ 오늘의 활동\n${M(act)}\n[사진: 활동 모습 1]\n\n■ 함께한 사람들\n${w}과(와) 함께 ${p} 시간을 보냈어요.${more?'\n'+more:''}\n\n■ 이렇게 진행했어요\n먼저 오늘 할 일을 함께 확인하고, 각자 하고 싶은 역할을 골랐어요. 서두르지 않고 한 분 한 분의 속도에 맞추니 모두가 끝까지 즐겁게 참여했어요.\n[사진: 진행하는 모습]`;
+ if(L>0)t+=`\n\n■ 기억에 남는 순간\n[이용자분의 반응이나 기억에 남는 장면 한두 줄]\n[사진: 활동 모습 2]\n\n■ 이용자분의 한마디\n"[이용자분이 한 말]"\n짧은 한마디에 오늘의 즐거움이 담겨 있었어요.`;
+ if(L>1)t+=`\n\n■ ${BN()}은(는)\n${BN()}은(는) 장애인이 지역 안에서 스스로 선택하고 참여하는 삶을 응원하는 사업이에요. 이런 활동 하나하나가 자신감이 되고, 이웃에게는 서로를 알아가는 계기가 됩니다.\n\n■ 고마운 분들\n늘 마음을 보태 주시는 후원자님과 자원봉사자님, 지역 이웃분들께 감사드립니다.`;
+ t+=`\n\n앞으로도 ${ORG}의 따뜻한 일상을 나누겠습니다.\n\n${tags()}`;return t}
+function insta(){const p=P(),act=V('act')||`${p} 활동`;const e=['🌿','✨','🙂'][S.md??0];return `${e} ${p} 이야기 ${e}\n\n${act}\n${withTxt()}과(와) 함께여서 더 즐거웠던 시간!${V('more')?'\n'+V('more'):''}\n\n오늘도 한 걸음 함께 자랐어요.\n\n📍 ${ORG}\n${tags()}`}
+function kakao(){const p=P(),act=V('act')||`${p} 활동`;return `[${ORG} 소식]\n\n${p} 활동을 전해드려요.\n· ${act}\n· 함께한 분: ${withTxt()}${V('date')?'\n· 일시: '+V('date'):''}\n\n자세한 이야기와 사진은 블로그에서 확인해 주세요.\n[블로그 링크]\n\n문의 ${F('tel')}`}
+function home(){const p=P(),act=V('act')||`${p} 활동`;return `[제목] ${BN()} ${p} 운영 소식\n\n${ORG}은(는) ${V('date')||'[일시]'} ${V('place')||'[장소]'}에서 ${M(p)}을(를) 진행하였습니다.\n\n1. 대상: ${withTxt()}\n2. 내용: ${act}${V('more')?'\n3. 주요 활동: '+V('more'):''}\n\n이번 활동을 통해 참여자분들이 [기대 효과]를 경험하는 시간이 되었습니다.\n앞으로도 지역사회와 함께하는 프로그램을 운영하겠습니다.\n\n[사진 설명: 사진 속 활동을 한 줄로 설명]\n문의: ${F('staff')} ${F('tel')}`}
+function promoText(){const s=S.pr??0,p=P(),bn=BN();
+ const info=`행사명: ${F('name')}\n일시: ${F('date')}\n장소: ${F('place')}\n대상·인원: ${F('people')}\n모집 기간: ${F('recruit')}\n신청 방법: ${F('apply')}\n문의: ${F('staff')} ${F('tel')}`;
+ const img=(kind,extra)=>`너는 장애인복지관 ${M('홍보 디자인 전문가')}야.\n${M(bn)} · ${M(p)} ${M(kind)}을(를) 만들어 줘.\n${info}\n[필수]\n- 위 정보는 ${M('크고 또렷하게')}, 모르는 칸은 [확인 필요]\n- 큰 글씨·고대비·쉬운 말, 색은 2~3가지\n- 장애인을 도움받는 대상이 아니라 ${M('주인공')}으로\n- ${M('서로 다른 시안 2개')} 먼저 보여 주고 고른 것으로 완성${extra?'\n'+extra:''}`;
+ const M2={2:home(),3:`[보도자료] ${ORG}, ${M(p)} 운영\n\n${ORG}(관장 [관장명])은 ${V('date')||'[일시]'} ${V('place')||'[장소]'}에서 ${withTxt()} 등이 참여한 가운데 ${p}을(를) 진행했다고 밝혔다.\n\n이번 프로그램은 ${V('act')||'[활동 내용]'}으로 구성됐으며, 참여자들은 [참여 소감]을 전했다.\n\n복지관 관계자는 "[관계자 한마디]"라며 "앞으로도 지역사회와 함께하겠다"고 말했다.\n\n문의: ${F('staff')} ${F('tel')}\n※ 사진: 촬영 동의 받은 사진만 첨부`,
+ 4:`[${bn} 안내문]\n\n${greet(1)}\n${M(p)}을(를) 아래와 같이 안내드립니다.\n\n${info}\n\n${V('more')||'[참고 사항]'}\n\n${ORG}장`,
+ 5:`[쉬운 글 안내문]\n\n${p}에 와요.\n\n📅 언제: ${F('date')}\n📍 어디서: ${F('place')}\n🎒 가져와요: ${F('prep')}\n☎ 궁금하면: ${F('tel')}\n\n같이 해요!\n\n※ AI로 그림과 함께 만들기: "한 문장에 한 내용, 쉬운 낱말, 그림 함께, 큰 글씨"로 요청하세요`,
+ 6:`[모집] ${M(bn)} ${M(p)} 참여자를 모집합니다\n\n${info}\n\n${V('more')||'[프로그램 소개 한두 줄]'}\n\n많은 관심과 참여 부탁드립니다.\n${ORG}`};
+ if(s===0||s===1)return null;
+ if(s===7)return img('모집 포스터');
+ if(s===8)return img('인포그래픽 1장','- 숫자·성과는 내가 준 것만, 아이콘과 짧은 문장으로');
+ if(s===9)return img('카드뉴스 4장','- 1장 표지 → 2~3장 내용 → 4장 신청 방법, 장마다 한 문장');
+ if(s===10)return `[따라 하기] ① 핀터레스트에서 "모집 공고 포스터" 검색 ② 마음에 드는 이미지 저장 ③ 이 이미지를 ChatGPT·제미나이에 첨부하고 아래 붙여넣기\n\n첨부한 이미지는 ${M('분위기·색감·배치만')} 참고해서 ${M(bn)} ${M(p)} 모집 포스터를 새로 만들어 줘.\n그림·글자·로고를 ${M('그대로 베끼는 것은 금지')}.\n${info}\n큰 글씨·고대비, 시안 2개 먼저.`;
+ if(s===11)return `${ORG} ${bn} ${p} 관련 ${V('more')||'[만들고 싶은 글·홍보물]'}을(를) 만들어 줘.\n${info}`;
+ return M2[s]}
+VIEWS.promo=()=>{S.pr=S.pr??1;S.md=S.md??0;S.ln=S.ln??1;S.wi=S.wi||[0];const sns=S.pr<=1;return view('홍보·안내',
+ `<div class="gl">상황</div>${chips('pr',PROMOS)}${bizPick()}
+ ${sns?`<div class="gl">함께한 사람</div>${mchips('wi',WITH)}<div class="gl">분위기</div>${chips('md',MOOD)}<div class="gl">길이</div>${chips('ln',LEN)}<div class="gl">입력</div>${field('act','올릴 활동',1,'이용자분들과 김장 김치를 담가 이웃과 나눴어요')}${field('more','넣고 싶은 내용',1)}${field('date','일시')}${field('tel','전화번호')}`
+ :`<div class="gl">입력</div>${field('name','행사명')}${field('date','일시')}${field('place','장소')}${field('people','대상·인원')}${field('recruit','모집 기간')}${field('apply','신청 방법')}${field('prep','준비물')}${field('staff','담당자')}${field('tel','전화번호')}${S.pr<=3?field('act','활동 내용',1):''}${field('more','덧붙일 내용',1)}`}
+ <div class="note">이용자 얼굴 사진은 본인·보호자 동의를 받은 뒤 올리세요</div>`,
+ ()=>{if(S.pr<=1){const bl=blog(),ig=insta(),kk=kakao(),hm=home();const prm=`너는 ${ORG} 홍보 담당자야. 아래 블로그 초안을 ${M(MOOD[S.md])}, ${M(['약 500자','약 1000자','약 1500자'][S.ln])}로 자연스럽게 다듬어 줘. [ ] 칸은 그대로 두고 사진 자리 표시 유지.\n\n`+bl;
+ W4=[bl,ig,kk,hm];CUR=()=>prm;
+ return `<div class="bar"><span class="t">${PROMOS[S.pr]} · 채널별 원고</span><button class="btn" onclick="openAI('gpt',CUR())">블로그 AI로 다듬기</button><button class="btn" onclick="openAI('gemini',CUR())">제미나이</button></div>
+ <div class="grid4">${[['네이버 블로그',bl],['인스타그램',ig],['카카오톡 채널',kk],['홈페이지 게시글',hm]].map(([n,t],i)=>`<div class="box"><div class="bh">${n}<button class="sm sp" onclick="copyTxt(W4[${i}])">복사</button></div><div class="bb">${fmt(t)}</div></div>`).join('')}</div>`}
+ const t=promoText();return outBox(PROMOS[S.pr],t)})};
+let W4=[];
+
+/* ================= ⑥ 후원 관리 ================= */
+const DONS=['후원 감사','후원금 사용 안내','후원자 안부','후원 모집','아너리더스클럽 소식','후원 행사 홍보','물품 후원 감사','연말 감사 인사','기타'];
+function donText(){const s=S.dn??0,nm=V('dname')||'[후원자님 성함]',it=V('ditem')||'[후원 내용]',use=V('duse')||'[사용처]',p=P();
+ const T=[[`${nm}, 안녕하세요. ${ORG}입니다.\n보내주신 ${M(it)} 감사히 잘 받았습니다.\n${p}에 소중히 사용하겠습니다.\n이용자분들의 웃음으로 꼭 다시 전해드릴게요.\n고맙습니다.`,`${nm}, ${it} 감사히 받았습니다. 소중히 쓰겠습니다! - ${ORG}`],
+ [`${nm}, 안녕하세요. ${ORG}입니다.\n지난번 보내주신 ${it}은(는) ${M(use)}에 사용되었습니다.\n덕분에 [이용자 변화·성과 한 줄]\n자세한 사용 내역은 홈페이지 후원금 사용 공개에서 보실 수 있습니다.\n늘 함께해 주셔서 감사합니다.`,`보내주신 후원금은 ${use}에 쓰였어요. 고맙습니다! - ${ORG}`],
+ [`${nm}, 잘 지내고 계시지요?\n${ORG}입니다. 요즘 복지관에서는 ${M(p)} 활동이 한창이에요.\n[최근 소식 한 줄]\n늘 응원해 주셔서 감사합니다. 건강하세요.`,`${nm}, 늘 응원 감사드려요. 건강하세요! - ${ORG}`],
+ [`안녕하세요, ${ORG}입니다.\n장애인이 지역 안에서 함께 살아가는 일상에 마음을 보태 주세요.\n\n· 후원 분야: ${M(p)}\n· 정기 후원: 월 [금액]부터\n· 문의: ${F('tel')}\n\n작은 나눔이 큰 변화가 됩니다.`,`월 [금액]으로 ${p}를 응원해 주세요 · ${F('tel')}`],
+ [`[기흥아너리더스클럽 소식]\n${nm}께서 기흥아너리더스클럽에 함께해 주셨습니다.\n지역의 장애인 이웃을 위한 큰 나눔에 깊이 감사드립니다.\n보내주신 마음은 ${M(use)}에 소중히 쓰겠습니다.`,`기흥아너리더스클럽 ${nm}의 나눔에 감사드립니다.`],
+ [`[후원 행사 안내]\n${ORG}에서 ${M(V('name')||'[행사명]')}을(를) 엽니다.\n일시: ${F('date')}\n장소: ${F('place')}\n수익금은 ${use}에 쓰입니다.\n많은 참여 부탁드립니다!`,`${V('name')||'[행사명]'} ${F('date')} ${F('place')} · 함께해요!`],
+ [`${nm}, 보내주신 ${M(it)} 잘 받았습니다.\n${p}에서 이용자분들이 잘 사용하고 있어요.\n[사용 모습 한 줄]\n따뜻한 마음 감사합니다.`,`${it} 잘 받았어요. 고맙습니다! - ${ORG}`],
+ [`${nm}, 올 한 해도 ${ORG}과(와) 함께해 주셔서 감사합니다.\n보내주신 나눔 덕분에 이용자분들이 더 많이 웃은 한 해였습니다.\n새해에도 건강과 행복이 가득하시길 바랍니다.`,`올해도 함께해 주셔서 감사합니다. 행복한 새해 되세요! - ${ORG}`],
+ [`${nm}, ${V('dmore')||'[전하고 싶은 내용]'}\n${ORG} 드림`,`${V('dmore')||'[짧은 인사]'}`]];return T[s]}
+VIEWS.donor=()=>{S.dn=S.dn??0;return view('후원 관리',
+ `<div class="gl">상황</div>${chips('dn',DONS)}${bizPick()}<div class="gl">입력</div>${field('dname','후원자 호칭','','홍길동 후원자님 / ○○기업')}${field('ditem','후원 내용')}${field('duse','사용처')}${S.dn===5?field('name','행사명')+field('date','일시')+field('place','장소'):''}${field('tel','전화번호')}${field('dmore','덧붙일 말',1)}
+ <div class="note">후원금 사용 내역 공개 기준(3개월 게시 등)은 기관 규정을 따르세요</div>`,
+ ()=>{const [a,b]=donText();const pr=`너는 ${ORG} 후원 담당자야. 아래 글을 진심이 느껴지게 다듬고, 문자용(90자)·SNS용 버전도 함께 만들어 줘. 과장 금지.\n\n${a}`;
+ return aiBar(DONS[S.dn],()=>a)+`<div class="grid4" style="grid-template-rows:1.3fr 1fr"><div class="box" style="grid-column:1/3"><div class="bh">문자·편지<button class="sm sp" onclick="copyTxt(CA)">복사</button></div><div class="bb">${fmt(a)}</div></div><div class="box"><div class="bh">짧은 버전<button class="sm sp" onclick="copyTxt(CB)">복사</button></div><div class="bb">${fmt(b)}</div></div><div class="box"><div class="bh">AI로 더 다듬기<button class="sm sp" onclick="openAI('gpt',CP)">ChatGPT</button><button class="sm" onclick="openAI('gemini',CP)">제미나이</button></div><div class="bb">${fmt(pr)}</div></div></div>${setC(a,b,pr)}`})};
+
+/* ================= ⑦ 맞춤형 프롬프트 생성 ================= */
+const GT=['홍보 이미지','카드뉴스','포스터','모집 안내','인포그래픽','이모티콘','소식지','안내지','짧은 영상','글 원픽'];
+const STY=['따뜻한 수채화','귀여운 3D 캐릭터','깔끔한 안내형','동화책 그림','밝은 실사풍','감성 콜라주'];
+const SIZE=['정사각형(인스타)','세로 A4','가로(현수막·PPT)','세로 9:16(스토리)'];
+VIEWS.gen=()=>{S.gt=S.gt??0;S.sy=S.sy??0;S.sz=S.sz??0;S.ch=S.ch??0;const txt=S.gt===9;return view('맞춤형 프롬프트 생성',
+ `<div class="gl">만들 것</div>${chips('gt',GT,1)}${bizPick()}
+ ${txt?`<div class="gl">채널</div>${chips('ch',['네이버 블로그','인스타그램','홈페이지','카카오톡 채널'])}<div class="gl">함께한 사람</div>${mchips('wi',WITH)}<div class="gl">분위기</div>${chips('md',MOOD)}`:`<div class="gl">스타일</div>${chips('sy',STY)}<div class="gl">크기</div>${chips('sz',SIZE)}`}
+ <div class="gl">입력</div>${field('name','행사명')}${field('date','일시')}${field('place','장소')}${field('people','대상·인원')}${txt?field('act','한 일',1):field('apply','신청 방법')+field('tel','전화번호')}`,
+ ()=>{const g=GT[S.gt],bn=BN(),p=P();let t;
+ if(S.gt===9){const ch=['네이버 블로그','인스타그램','홈페이지','카카오톡 채널'][S.ch];t=`너는 ${ORG} 홍보 담당자야. ${M(ch)}에 올릴 글을 써 줘.\n[내용] 사업: ${M(bn)} / 프로그램: ${M(p)} / 함께한 사람: ${withTxt()} / 한 일: ${V('act')||'[한 일]'} / 일시: ${F('date')} / 장소: ${F('place')}\n[조건] 분위기 ${M(MOOD[S.md??0])}, ${ch==='네이버 블로그'?'소제목 4~6개·사진 자리 [사진] 표시·1000자':ch==='인스타그램'?'짧은 문단·해시태그 8개':ch==='홈페이지'?'공지문 형식(제목·개요·내용·문의)':'200자 안내 + 블로그 링크 자리'}\n[금지] 지어낸 숫자·이름, 동정·시혜적 표현`}
+ else if(S.gt===8)t=`${M(bn)} ${M(p)} 홍보용 8초 영상을 만들어 줘.\n- 장면: 이용자들이 즐겁게 참여하는 모습, ${M(STY[S.sy])} 느낌\n- 밝은 낮, 천천히 다가가는 카메라, 따뜻한 배경음\n- 실제 인물 얼굴 대신 일러스트 느낌\n- 마지막 장면에 "${V('name')||bn}" 글자`;
+ else if(S.gt===5)t=`${M(bn)} ${M(p)}를 상징하는 귀여운 캐릭터 이모티콘 6개 세트를 ${M(STY[S.sy])}로 만들어 줘.\n감정: 안녕·고마워·최고·화이팅·축하·사랑해\n흰 배경, 깔끔한 외곽선, 글자는 짧고 크게`;
+ else t=`너는 장애인복지관 ${M('홍보 디자인 전문가')}야.\n${M(bn)} · ${M(p)} ${M(g)}을(를) ${M(STY[S.sy])} 스타일, ${M(SIZE[S.sz])} 크기로 만들어 줘.\n[정보] 행사명: ${F('name')} / 일시: ${F('date')} / 장소: ${F('place')} / 대상: ${F('people')} / 신청: ${F('apply')} / 문의: ${F('tel')}\n[필수] 정보는 크고 또렷하게, 모르는 칸 [확인 필요] · 큰 글씨·고대비·쉬운 말 · 장애인을 ${M('주인공')}으로 · ${M('시안 2개')} 먼저${S.gt===1?'\n[구성] 4장: 표지 → 내용 2장 → 신청 방법':S.gt===4?'\n[구성] 숫자는 내가 준 것만, 아이콘+짧은 문장':S.gt===6?'\n[구성] A4 2쪽: 이달 활동 사진 자리 4개 + 짧은 소식 3개':''}`;
+ return outBox(g+' 원픽 프롬프트',t)})};
+
+/* ================= ⑧ 프롬프트 디자인실 ================= */
+const ROOMW=['회의록 요약','공문 초안','민원 답변','일정 정리','보고 메일','엑셀 수식'];
+const ROOML=['냉장고 파먹기','여행 계획','프로그램 계획 짜기','프로그램 제안 받기','건강 식단','주말 나들이'];
+const ING=['계란','두부','김치','감자','양파','당근','돼지고기','닭고기','애호박','버섯','밥','라면'];
+VIEWS.room=()=>{S.rm=S.rm??0;S.rw=S.rw??0;S.rl=S.rl??0;S.se=S.se??3;S.ig=S.ig||[0,2];return view('프롬프트 디자인실',
+ `<div class="tabs" style="margin-bottom:6px"><button class="tab${S.rm?'':' on'}" onclick="setS('rm',0)">업무 원픽</button><button class="tab${S.rm?' on':''}" onclick="setS('rm',1)">일상</button></div>
+ ${S.rm?`<div class="gl">무엇을</div>${chips('rl',ROOML,1)}${S.rl===0?`<div class="gl">냉장고 재료</div>${mchips('ig',ING)}`:''}<div class="gl">계절</div>${chips('se',['봄','여름','가을','겨울'])}${S.rl>=2&&S.rl<=3?bizPick():''}${field('rin','더 알려 줄 것',1)}`
+ :`<div class="gl">무엇을</div>${chips('rw',ROOMW,1)}${field('rin','내용 붙여넣기',1,'회의 메모나 민원 내용을 그대로')}`}`,
+ ()=>{const se=['봄','여름','가을','겨울'][S.se],x=V('rin');let t,n;
+ if(!S.rm){n=ROOMW[S.rw];t={0:`아래 회의 메모를 ${M('회의록')}으로 정리해 줘.\n| 안건 | 논의 | 결정사항 | 담당 | 기한 |\n없는 내용은 [확인 필요], 사람 이름은 직책으로.\n\n${x||'[회의 메모]'}`,1:`아래 내용으로 ${M('공문 초안')}을 써 줘. 형식: 1. 관련 2. 목적 3. 내용(일시·장소·대상·요청사항) 붙임. 개조식 공문체.\n\n${x||'[공문 내용]'}`,2:`너는 ${ORG} 민원 응대 담당자야. 아래 민원에 ${M('공감 → 사실 확인 → 해결 방법 → 감사')} 순서로 정중한 답변을 써 줘. 변명·책임 회피 금지.\n\n${x||'[민원 내용]'}`,3:`아래 할 일을 ${M('급한 일 / 중요한 일')}로 나눠 이번 주 요일별 표로 정리해 줘.\n\n${x||'[할 일 목록]'}`,4:`아래 내용으로 팀장님께 보낼 ${M('보고 메일')}을 써 줘. 제목, 요약 3줄, 상세, 요청사항 순서.\n\n${x||'[보고 내용]'}`,5:`엑셀에서 ${M('하고 싶은 계산')}을 수식으로 알려 줘. 어느 칸에 무엇을 넣는지 예시 표와 함께.\n\n${x||'[예: B열 출석 횟수 합계와 출석률]'}`}[S.rw]}
+ else{n=ROOML[S.rl];const ig=(S.ig||[]).map(i=>ING[i]).join(', ');t={0:`냉장고에 ${M(ig||'[재료]')}이(가) 있어. ${se}에 어울리는 쉬운 요리 3가지를 추천해 줘.\n| 요리 | 필요한 재료 | 시간 | 만드는 법 5단계 |\n없는 재료는 대체 재료도 알려 줘. ${x}`,1:`${M(se)}에 가기 좋은 국내 여행 계획을 짜 줘. ${x||'[지역·기간·함께 가는 사람]'}\n| 시간 | 장소 | 할 일 | 이동 | 비용 |\n이동이 편하고 쉬는 시간이 넉넉하게.`,2:`${M(se)}에 ${M(BN())} ${M(P())} 프로그램 계획을 짜 줘.\n목적·목표·대상·회기별 활동·준비물·예산([확인 필요])·안전·평가 순서로. 장애 특성(이동·감각·의사소통) 고려. ${x}`,3:`${M(se)}에 ${M(BN())}에서 해 볼 만한 새 프로그램 5개를 제안해 줘.\n| 이름 | 한 줄 소개 | 준비물 | 기대 효과 |\n비용이 적고 참여자가 직접 고를 수 있는 것 위주로. ${x}`,4:`${M(se)} 제철 재료로 일주일 건강 식단을 짜 줘. 하루 3끼, 장보기 목록 포함. ${x}`,5:`${M(se)} 주말에 가족과 가기 좋은 용인 근처 나들이 장소 5곳 추천해 줘. 장애인 편의시설·주차 정보 확인 필요 표시. ${x}`}[S.rl]}
+ return outBox(n,t)})};
+
+/* ================= ⑨ 빡침 번역기 ================= */
+const VT=['민원인','보호자','동료','상사','외부기관'];
+const TODAK=['토닥톡… 그 상황이면 누구라도 속이 부글부글하죠. 오늘 정말 애썼어요.','토닥톡… 참고 또 참은 거 다 알아요. 여기서는 마음껏 털어놔도 돼요.','토닥톡… 그 말 듣고도 웃으며 일한 당신, 진짜 대단해요.','토닥톡… 억울한 마음 충분히 이해해요. 숨 한 번 크게 쉬어요.'];
+const ANGRY=['아니 이게 말이 돼요? 미치고 팔짝 뛰겠네!','아니 진짜 왜 저래요?! 저 지금 정수리에서 김 나요!','이건 아니죠! 제 인내심도 오늘 퇴근했어요!','와… 진짜 기가 막혀서 코가 막히네!'];
+VIEWS.vent=()=>{S.vt=S.vt??0;S.vl=S.vl??1;return view('빡침 번역기',
+ `<div class="gl">누구 때문에</div>${chips('vt',VT)}<div class="gl">빡침 정도</div>${chips('vl',['살짝','꽤','폭발'])}<div class="gl">무슨 일이 있었나요</div>${field('vin','있었던 일',1,'같은 서류를 세 번째 다시 내라고 했어요')}
+ <div class="note">속풀이는 여기서 하고, 보낼 글은 아래 순화 문구로</div>`,
+ ()=>{const x=V('vin'),h=hash(x+S.vt+S.vl),who=VT[S.vt];
+ const soft=`안녕하세요, ${ORG} ${F('staff')}입니다.\n말씀하신 내용 충분히 이해했습니다.${x?'\n['+x.slice(0,30)+'] 관련하여':''} 다시 한번 확인해 보니 [현재 상황·사실]입니다.\n번거로우시겠지만 [요청 사항]을 부탁드려도 될까요?\n빠르게 처리될 수 있도록 저도 함께 챙기겠습니다. 감사합니다.`;
+ const pr=`나는 ${ORG} 사회복지사야. ${M(who)} 때문에 이런 일이 있었어: "${x||'[있었던 일]'}"\n1) 먼저 내 편에서 짧고 웃기게 공감해 줘 (욕은 순화된 표현으로)\n2) 복식호흡 30초 안내\n3) ${who}에게 보낼 ${M('정중하지만 단호한')} 문자를 써 줘. 사실 → 요청 → 감사 순서.`;
+ CUR=()=>pr;
+ return aiBar('빡침 번역',()=>pr)+`<div class="out"><span class="h">${pick(TODAK,h)}</span>${S.vl>=1?'\n\n<span class="red">'+esc(pick(ANGRY,h>>3))+'</span>':''}${S.vl===2?'\n<span class="red">'+esc(pick(ANGRY,h>>5))+'</span>':''}\n\n<span class="h">숨 고르기</span>\n코로 4초 들이마시고 → 4초 멈추고 → 입으로 6초 내쉬기, 세 번만.\n\n<span class="h">보낼 때는 이렇게 (순화 문구)</span>\n${fmt(soft)}\n\n<span class="h">AI에게 맡기기</span>\n${fmt(pr)}</div>`})};
+
+/* ================= ⑩ 마음챙김 ================= */
+const FEEL=['지쳤어요','속상해요','불안해요','억울해요','외로워요','자신감이 떨어졌어요','상담 뒤 마음이 무거워요','이용자 안전이 걱정돼요','민원에 지쳤어요','서류 마감이 겹쳐요','수고가 안 보여 서운해요','퇴근 후에도 현장이 떠올라요'];
+const MOVE=['어깨를 귀까지 올렸다가 툭 떨어뜨리기 3번','두 손을 비비고 따뜻해진 손으로 눈 감싸기','창밖에서 초록색 3개 찾기','물 한 모금 천천히 마시기','손목을 탈탈 털고 기지개 쭉','나비처럼 양팔로 나를 토닥토닥'];
+VIEWS.mind=()=>{S.fe=S.fe??0;return view('마음챙김',`<div class="gl">지금 내 마음</div>${chips('fe',FEEL)}${field('fin','조금 더 말해 줘요',1)}`,
+ ()=>{const f=FEEL[S.fe],h=hash(f+V('fin'));const lines=[`${f}… 그런 날이 있죠. 그 마음, 이상한 게 아니에요.`,'당신은 오늘도 누군가의 하루를 조금 더 편하게 만들었어요.','모든 걸 다 잘하지 않아도 괜찮아요. 오늘은 여기까지도 충분해요.','지금 이 순간만큼은 일 말고 나를 먼저 챙겨요.','당신이 있어서 이 복지관이 따뜻해요.'];
+ const pr=`나는 장애인복지관 사회복지사야. 지금 마음: "${f}" ${V('fin')}\n나만을 위한 5줄 위로를 따뜻하게 써 주고, 1분 안에 할 수 있는 몸 풀기 하나를 알려 줘. 충고나 해결책은 빼고.`;CUR=()=>pr;
+ return aiBar('나를 위한 5줄',()=>pr)+`<div class="out" style="font-size:16.5px">${lines.map(esc).join('\n')}\n\n<span class="h">따라 해요 (30초)</span>\n${esc(pick(MOVE,h))}\n\n<span class="h">나에게 한마디</span>\n"오늘도 애썼다, 나."</div>`})};
+
+/* ================= ⑪ AI 앱 활용법 ================= */
+const AB=['주간이용센터','직업지원','재활치료','장애인식개선','가족지원','재가복지','문화여가'];
+const APPS=[
+{n:'ChatGPT',url:'gpt',cards:[
+{n:'이미지 2.6',f:1,how:['입력창 <b>+</b> → <b>이미지 만들기</b> (또는 "그려 줘"라고 요청)','아래에서 <b>스타일</b> 고르기','프롬프트 붙여넣고 전송 → 이미지 위 <b>다운로드</b>','마음에 안 들면 "글자 더 크게"처럼 한 줄 더 요청'],use:['모집 포스터','후원 감사 카드','행사 초대장','SNS 정사각형 홍보'],ol:'스타일',o:['따뜻한 수채화','귀여운 3D 캐릭터','깔끔한 안내형','동화책 그림'],p:'너는 장애인복지관 홍보 디자이너야.\n{b} 모집 홍보 이미지를 {o} 스타일로 만들어 줘.\n- 행사명·일시·장소·문의 전화는 크고 또렷하게 (모르는 칸은 [확인 필요])\n- 큰 글씨, 고대비, 쉬운 말\n- 장애인을 주인공으로 표현\n- 서로 다른 시안 2개 먼저'},
+{n:'이미지 편집 화면',f:1,how:['만든 이미지를 <b>클릭</b> → 편집 화면 열기 (왼쪽 메뉴 <b>이미지</b>에서 예전 것도 가능)','<b>선택 도구</b>로 고칠 부분만 문지르기','"이 부분만 ○○로 바꿔 줘" 입력','나머지는 그대로 유지돼요 → 다운로드'],use:['날짜·오타만 고치기','배경 계절 바꾸기','옷 색 맞추기','로고 자리 비우기'],ol:'고칠 것',o:['날짜만 바꾸기','오타 한 글자','배경을 겨울로','배경 투명하게'],p:'선택한 부분만 고쳐 줘: {o}.\n{b} 포스터의 나머지 글자·색·인물·배치는 그대로 유지해.'},
+{n:'움짤 GIF',f:1,how:['입력창 <b>+</b> → 활동 사진이나 캐릭터 그림 첨부','<b>움직임</b> 고르고 프롬프트 붙여넣기 → 전송','완성된 GIF 아래 <b>다운로드</b>','"더 천천히", "배경은 그대로"로 다시 요청'],use:['아침 인사 움짤','캠페인 캐릭터 박수','후원 감사 인사','행사 초대 움짤'],ol:'움직임',o:['앞으로 걸어오기','하늘 쳐다보기','빙글 돌기','신나게 춤추기','손 흔들며 인사','박수 치기'],p:'첨부한 {b} 활동 사진(또는 캐릭터 그림)을 움직이는 GIF로 만들어 줘.\n- 움직임: 사람들이 {o}\n- 길이 3초, 처음과 끝이 자연스럽게 반복\n- 배경·카메라 고정, 얼굴 생김새는 바꾸지 마\n- 실제 얼굴 사진이면 따뜻한 일러스트로 바꿔서\n※ 촬영 동의 받은 사진만 사용'},
+{n:'라이브러리',f:1,how:['왼쪽 메뉴 <b>이미지</b>(라이브러리) 열기','예전에 만든 이미지 고르기','"이 스타일로 새로 만들어 줘" 요청','같은 그림체로 시리즈 완성'],use:['월별 소식지 같은 톤','카드뉴스 시리즈','행사 포스터 연작'],ol:'만들 것',o:['카드뉴스 4장','안내지 1장','인스타 정사각형','현수막 가로형'],p:'라이브러리에서 고른 이미지와 같은 색·그림체로 {b} {o}을 만들어 줘.\n글자는 크고 쉬운 말로, 모르는 정보는 [확인 필요].'},
+{n:'핀터레스트 레퍼런스',f:1,how:['<b>pinterest.com</b>에서 "모집 공고 포스터" 검색','마음에 드는 이미지 저장','ChatGPT <b>+</b>로 첨부 → 프롬프트 붙여넣기','시안 2개 중 고르기'],use:['모집 공고','행사 포스터','캠페인 홍보물'],ol:'만들 것',o:['모집 포스터','행사 포스터','카드뉴스 표지'],p:'첨부한 이미지는 분위기·색감·배치만 참고해서 {b} {o}를 새로 만들어 줘.\n그림·글자·로고를 그대로 베끼는 것은 금지.\n큰 글씨·고대비, 시안 2개 먼저.'},
+{n:'메모·녹음 → 서식',f:1,how:['입력창 <b>+</b> → 메모 사진·녹음 파일 첨부','우리 서식(HWPX)도 함께 첨부','프롬프트 붙여넣기 → 한글 파일 받기','안 되면 표로 받아 원본에 붙여넣기'],use:['회의록','프로그램 일지','상담일지','공문 초안'],ol:'서식',o:['회의록','프로그램 일지','상담일지','공문'],p:'첨부한 메모·녹음 내용을 함께 첨부한 우리 {b} {o} 서식에 맞춰 채워 줘.\n칸 이름·순서 그대로, 없는 내용은 [확인 필요], 같은 서식의 .hwpx로.'}]},
+{n:'제미나이',url:'gemini',cards:[
+{n:'나노바나나',f:1,how:['입력창 <b>도구</b> → <b>이미지 만들기</b>','종류 고르고 자료 붙여넣기','전송 → 이미지 다운로드','"글자만 다시"처럼 대화로 고치기'],use:['결과 인포그래픽','손글씨 메모 도표화','글자 많은 안내 포스터'],ol:'종류',o:['한 장 인포그래픽','손글씨 메모를 도표로','모집 포스터','결과 요약 카드'],p:'{b} 자료로 {o}을 만들어 줘.\n- 한글 글자는 정확하게, 큰 글씨\n- 숫자는 내가 준 것만, 없으면 [확인 필요]\n- 색은 2~3가지, 고대비'},
+{n:'음악 30초',f:1,how:['입력창 <b>도구</b> → <b>음악 만들기</b>','분위기 고르고 프롬프트 붙여넣기 (사진 첨부도 가능)','30초 노래 완성 → MP3·MP4 다운로드','"후렴 더 신나게"로 다시 요청'],use:['프로그램 주제가','행사 오프닝 음악','캠페인 노래','생일 축하 노래'],ol:'분위기',o:['밝고 신나는','잔잔하고 따뜻한','힘이 나는 응원가','동요처럼 쉬운'],p:'{b} 참여자들을 위한 {o} 30초 노래를 만들어 줘.\n- 가사는 쉬운 말, 후렴 2번 반복\n- 주제: 함께해서 즐거운 하루\n- 첨부한 활동 사진 분위기를 담아 줘'},
+{n:'영상',f:0,how:['입력창 <b>도구</b> → <b>동영상 만들기</b> (무료 계정은 Flow 무료 크레딧)','장면 고르고 프롬프트 붙여넣기 (사진 1장 첨부 가능)','1~2분 기다리기 → MP4 다운로드','"카메라 더 천천히"처럼 대화로 고치기'],use:['홍보 쇼츠','로비 TV 안내','행사 오프닝 영상'],ol:'장면',o:['함께 웃는 모임','작업장에서 일하는 모습','공원 나들이','무대 공연'],p:'{b} 홍보용 8초 영상을 만들어 줘.\n- 장면: {o}\n- 밝은 낮, 천천히 다가가는 카메라\n- 실제 인물 얼굴 대신 따뜻한 일러스트 느낌'},
+{n:'노트북',f:1,how:['제미나이 <b>노트북</b> 열기 → <b>소스 추가</b>','지침·서식 PDF 올리기','질문 → 답 옆 <b>출처 번호</b> 눌러 확인','중요한 숫자는 원문과 대조'],use:['사업안내 바뀐 점','평가지표 정리','지침 질문'],ol:'물어볼 것',o:['올해 바뀐 점','꼭 내야 할 서류','평가 때 보는 것','예산 기준'],p:'올린 {b} 자료에서 "{o}"만 표로 정리해 줘. 문장마다 출처 쪽수를 붙여.'},
+{n:'핀터레스트 레퍼런스',f:1,how:['핀터레스트에서 마음에 드는 홍보물 저장','제미나이에 첨부 → 프롬프트 붙여넣기','나노바나나로 시안 받기'],use:['모집 공고','행사 포스터'],ol:'만들 것',o:['모집 포스터','행사 포스터'],p:'첨부 이미지의 분위기·색감만 참고해 {b} {o}를 새로 만들어 줘. 그대로 베끼기 금지, 한글 크게.'}]},
+{n:'Claude',url:'claude',cards:[
+{n:'디자인',f:1,how:['새 대화에서 "디자인으로 만들어 줘" 요청','형식 고르고 프롬프트 붙여넣기','화면에서 바로 글자·색 고치기','PDF·이미지로 내려받기'],use:['안내지 A4','행사 순서지','포스터 시안'],ol:'형식',o:['안내지 A4','포스터','카드뉴스','행사 순서지'],p:'{b} {o} 시안 2개를 서로 다른 스타일로 만들어 줘.\n- 큰 글씨, 고대비, 쉬운 말\n- 행사명·일시·장소·문의 필수, 모르면 [확인 필요]'},
+{n:'슬라이드',f:1,how:['"슬라이드로 만들어 줘" 요청','용도 고르고 자료 첨부','장표 확인 후 수정 요청','PowerPoint로 내려받기'],use:['운영위원회 보고','결과 발표','후원자 감사'],ol:'용도',o:['운영위원회 보고','결과 발표','후원자 감사','신규 직원 교육'],p:'{b} {o}용 슬라이드 10장을 만들어 줘.\n- 장마다 핵심 한 줄 + 숫자 1개\n- 숫자는 내가 준 것만, 없으면 [확인 필요]'},
+{n:'모션그래픽',f:1,how:['"움직이는 안내 화면으로 만들어 줘" 요청','글자가 하나씩 나타나는 화면 확인','화면 녹화(윈도우 <b>Win+Alt+R</b>)로 영상 저장','로비 TV·SNS에 활용'],use:['모집 안내 영상','행사 카운트다운','후원 감사 화면'],ol:'만들 것',o:['모집 안내','행사 카운트다운','감사 인사'],p:'{b} {o}를 15초 움직이는 안내 화면(모션그래픽)으로 만들어 줘.\n- 글자가 하나씩 나타나고 아이콘이 부드럽게 움직이게\n- 큰 글씨, 기관 초록색, 마지막에 문의 전화'},
+{n:'한글 서식 스킬',f:1,how:['설정 → 기능 → <b>코드 실행</b> 켜기','사용자 정의 → <b>스킬</b> → 스킬 업로드(ZIP)','한글 서식은 <b>HWPX로 저장</b>해 첨부','"서식 칸 그대로 채워 hwpx로" 요청'],use:['사업계획서 서식 채우기','회의록 자동 채우기','일지 반복 작성'],ol:'서식',o:['사업계획서','프로그램 일지','결과보고서','회의록'],p:'첨부한 {b} {o} 서식의 표·칸 이름은 그대로 두고 빈칸만 채워 줘.\n자료에 없는 숫자는 [확인 필요]. 같은 서식의 .hwpx로 줘.\n※ 출처를 아는 스킬만 설치하세요'},
+{n:'깊은 조사',f:0,how:['입력창에서 <b>리서치</b> 켜기','주제 고르고 프롬프트 붙여넣기','출처 달린 보고서 받기'],use:['우수 사례 조사','정책 변화','공모사업 찾기'],ol:'주제',o:['다른 복지관 우수 사례','최신 정책 변화','공모사업 정보'],p:'{b} 관련 "{o}"를 조사해 표로 비교해 줘. 출처 링크 필수.'}]},
+{n:'Canva',url:'canva',cards:[
+{n:'AI 프레젠테이션',f:1,how:['Canva 왼쪽 위 <b>Canva AI</b> 선택','<b>디자인 → 프레젠테이션</b>','프롬프트 붙여넣고 대화로 다듬기','PPT·PDF로 다운로드'],use:['사업 설명회 PPT','결과 보고 발표','후원자 감사 PPT'],ol:'용도',o:['사업 소개','결과 보고','후원자 감사'],p:'{b} {o} 발표 자료 10장을 만들어 줘. 장마다 제목·핵심 한 줄·사진 자리, 큰 글씨, 초록 계열.'},
+{n:'매직 레이어',f:1,how:['ChatGPT·제미나이로 만든 이미지(PNG·JPG) 업로드','이미지 선택 → <b>수정</b> → <b>Magic Layers</b>','글자·그림이 따로 분리됨','틀린 글자만 고치고 다운로드'],use:['AI 포스터 오타 수정','날짜만 바꾸기','요소 위치 옮기기'],ol:'고칠 것',o:['글자 고치기','위치 옮기기','요소 지우기'],p:'(Canva에서 직접) AI로 만든 {b} 포스터를 올리고 Magic Layers로 {o}.\n※ 무료는 월 사용 횟수 제한'},
+{n:'원고 → PPT 흐름',f:1,how:['Claude·ChatGPT로 장표별 원고 만들기','Canva AI 프레젠테이션에 원고 붙여넣기','브랜드 색·글꼴 맞추기','발표 노트까지 완성'],use:['교육 자료','보고 자료'],ol:'자료',o:['10장 원고','발표 대본'],p:'{b} 발표용 {o}를 장표별로 써 줘. | 장 | 제목 | 핵심 문장 | 들어갈 사진 |'}]},
+{n:'데스크톱 앱',url:'',cards:[]}];
+VIEWS.apps=()=>{S.app=S.app??0;S.fc=S.fc??0;S.sub=S.sub??0;S.ao=S.ao??0;S.ab=S.ab??0;const A=APPS[S.app];
+ const appTabs=`<div class="tabs" style="margin-bottom:8px">${APPS.map((a,i)=>`<button class="tab${S.app==i?' on':''}" onclick="S.app=${i};S.fc=0;S.ao=0;S.sub=0;save();render()">${a.n}</button>`).join('')}</div>`;
+ if(!A.cards.length)return view('AI 앱 활용법',appTabs+`<div class="gl">데스크톱 앱이 좋은 이유</div>${steps(['<b>단축키</b>로 어디서든 바로 열기 (작업 중 창 전환 없이)','내 컴퓨터 <b>폴더·파일</b>을 바로 연결해 작업','<b>화면 공유</b>로 지금 보는 창을 보여 주고 질문'])}<div class="gl">설치</div>${steps(['ChatGPT: <b>chatgpt.com/download</b>','Claude: <b>claude.ai/download</b>','설치 후 같은 계정으로 로그인 → 대화·프로젝트 그대로'])}<div class="note">기관 PC는 설치 권한이 필요할 수 있어요 (전산 담당자 확인)</div>`,
+ ()=>`<div class="bar"><span class="t">웹 vs 데스크톱 앱</span></div><div class="out" style="white-space:normal"><div class="cmp"><div><h4>🌐 웹 (브라우저)</h4><ul><li>설치 없이 바로</li><li>탭 사이를 오가며 찾아야 함</li><li>파일은 매번 올리기</li><li>어느 PC에서나 접속</li></ul></div><div style="border-color:var(--g);background:var(--gl)"><h4>💻 데스크톱 앱</h4><ul><li><mark>단축키 한 번</mark>으로 열기</li><li>작업 창 위에 바로 띄우기</li><li><mark>내 폴더·파일</mark> 바로 연결</li><li><mark>화면 보여 주고</mark> 질문</li></ul></div></div><div class="cmp"><div><h4>이럴 땐 웹</h4><ul><li>공용 PC·잠깐 쓸 때</li><li>설치 권한이 없을 때</li></ul></div><div><h4>이럴 땐 데스크톱 앱</h4><ul><li>매일 서류 작업할 때</li><li>엑셀·한글 보면서 질문할 때</li></ul></div></div></div>`);
+ const C=A.cards[S.fc]||A.cards[0];
+ return view('AI 앱 활용법',appTabs+`<div class="gl">기능</div><div class="fcards">${A.cards.map((c,i)=>`<button class="fc${S.fc==i?' on':''}" onclick="S.fc=${i};S.ao=0;S.sub=0;save();render()">${c.n}<span class="badge ${c.f?'free':'paid'}">${c.f?'무료':'유료'}</span></button>`).join('')}</div>
+ <div class="gl">${C.ol}</div>${chips('ao',C.o)}<div class="gl">사업</div>${chips('ab',AB)}
+ <div class="note">무료·유료는 2026.11.26 확인 기준이며 바뀔 수 있어요</div>`,
+ ()=>{const pr=C.p.replace(/\{b\}/g,M(AB[S.ab])).replace(/\{o\}/g,M(C.o[S.ao]||''));const sub=S.sub;CUR=()=>pr;
+ const head=`<div class="subtabs">${['사용법','활용 예시','프롬프트'].map((n,i)=>`<button class="stab${sub==i?' on':''}" onclick="S.sub=${i};save();RIGHT()">${n}</button>`).join('')}</div>`;
+ const bar=`<div class="bar"><span class="t">${A.n} · ${C.n}<span class="badge ${C.f?'free':'paid'}">${C.f?'무료':'유료'}</span></span><button class="btn p" onclick="copyTxt(CUR())">프롬프트 복사</button>${A.url&&A.url!=='canva'?`<button class="btn" onclick="openAI('${A.url}',CUR())">${A.n} 열기</button>`:A.url==='canva'?`<button class="btn" onclick="window.open('https://www.canva.com','_blank')">Canva 열기</button>`:''}</div>`;
+ let body;if(sub===0)body=`<div class="out" style="white-space:normal">${steps(C.how)}</div>`;
+ else if(sub===1)body=`<div class="out" style="white-space:normal"><div class="cards5" style="grid-template-columns:repeat(2,1fr);padding:0">${C.use.map(u=>`<div class="c5"><b>${esc(u)}</b>${esc(AB[S.ab])}에서 "${esc(C.o[S.ao]||'')}"로 바로 만들어 보세요</div>`).join('')}</div></div>`;
+ else body=`<div class="out">${fmt(pr)}</div>`;
+ return head+bar+body})};
+
+/* ================= 시작 ================= */
+VIEW=location.hash.slice(1)||'home';render();
+</script>
+</body>
+</html>
