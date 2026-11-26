@@ -1794,5 +1794,131 @@ VIEWS.apps=()=>{S.app=S.app??0;S.fc=S.fc??0;S.ao=S.ao??0;S.ab=S.ab??0;const A=AP
 /* ================= 시작 ================= */
 VIEW=location.hash.slice(1)||'home';if(VIEW==='mind'||VIEW==='vent'||VIEW==='project')go(VIEW);else render();
 </script>
+<script>/* 2026.11.26 맞춤형 프롬프트 생성 개편: 종류별 선택 → 사용자 의도 질문 → 구성안 → 시안 2개 → 완성 */
+(function(){
+const QR=(label,html)=>`<div class="qrow"><div class="gl">${label}</div>${html}</div>`;
+const G_PURP=['참여자 모집','행사 안내','활동 후기','장애 인식개선','후원 요청','성과 알림'];
+const G_READ=['이용자','보호자·가족','지역 주민','후원자·기관','직원·봉사자'];
+const G_SEA=['상시','봄·새 학기','여름·방학','가을','겨울·연말','명절','장애인의 날(4.20)','연초 신규 모집'];
+const G_TONE=['따뜻하고 다정하게','밝고 신나게','차분하고 믿음직하게','쉽고 짧게(쉬운 글)'];
+const G_STY=['따뜻한 수채화','귀여운 3D 캐릭터','깔끔한 안내형','동화책 그림','밝은 실사풍','감성 콜라주'];
+const G_SIZE=['정사각형 1:1(인스타)','세로 4:5(인스타 피드)','세로 A4','가로 16:9(PPT·현수막)','세로 9:16(스토리·릴스)'];
+const GEN=[
+ {t:'홍보 이미지',role:'장애인복지관 홍보 디자인 전문가',size:1,sty:1,
+  opt:[['구도',['참여자 활동 장면','소품·도구 중심','복지관 공간 풍경','캐릭터 중심']],['글자',['제목 한 줄만','제목+일시','글자 없이 그림만']]],
+  f:[['name','행사명'],['date','일시'],['place','장소']],
+  q:['이미지를 어디에 올리나요? (인스타·홈페이지·문자 첨부·게시판)','꼭 들어가야 할 글자는 무엇인가요? 없으면 그림만 만들까요?','실제 사진을 참고로 줄 수 있나요? (얼굴 나오지 않은 사진)','피해야 할 색이나 분위기가 있나요?'],
+  steps:['질문 답을 받은 뒤 그림 설명(장면·색·배치) 2가지를 글로 먼저 보여 줘.','내가 하나를 고르면 그 설명대로 이미지 1장을 만들어 줘.','이미지 속 한글 글자는 한 글자씩 오타·깨짐을 확인하고, 틀리면 다시 만들어 줘.']},
+ {t:'카드뉴스',role:'장애인복지관 SNS 카드뉴스 기획·디자인 전문가',size:1,sty:1,
+  opt:[['장수',['4장','6장','8장','10장']],['표지',['질문형 제목','숫자형(3가지)','공감 한 줄','후기 사진형']],['마지막 장',['신청 방법','문의처','다음 일정','후원 안내']]],
+  f:[['name','행사명'],['date','일시'],['place','장소'],['people','대상·인원'],['apply','신청 방법'],['tel','전화번호']],
+  q:['카드뉴스를 올릴 채널은 어디인가요? (인스타·카카오 채널·블로그)','읽는 사람이 꼭 기억해야 할 한 가지는 무엇인가요?','장마다 사진을 넣을까요, 그림(일러스트)으로 할까요?','신청 링크나 QR, 해시태그가 필요한가요?','이번 사업·프로그램에서 자랑하고 싶은 점이나 참여자 반응이 있나요?'],
+  steps:['질문 답을 받은 뒤 장별 구성안을 표로 보여 줘: | 장 | 제목(15자 이내) | 본문(2줄) | 그림 설명 |','서로 다른 디자인 시안 2개(색·글꼴 느낌·배치)를 표지 1장씩으로 보여 줘.','내가 고른 시안으로 나머지 장을 같은 톤으로 한 장씩 만들어 줘.','장마다 한글 오타·깨짐, 날짜·전화번호를 내가 준 정보와 대조해 확인해 줘.']},
+ {t:'포스터',role:'공공기관 행사 포스터 디자인 전문가',size:1,sty:1,
+  opt:[['가장 크게',['행사명','일시·장소','참여 혜택','신청 마감']],['배치',['위 제목·아래 정보','가운데 큰 그림','좌우 나눔','사진 배경+글 상자']],['출력',['A4 게시','A3 게시판','현수막 가로','모바일 공유']]],
+  f:[['name','행사명'],['date','일시'],['place','장소'],['people','대상·인원'],['apply','신청 방법'],['tel','전화번호']],
+  q:['행사에서 참여자가 얻는 가장 큰 혜택·재미는 무엇인가요?','참가비·준비물·신청 마감이 있나요?','후원·협력 기관 로고나 이름을 넣어야 하나요?','멀리서 봐도 읽혀야 하나요, 가까이서 보는 안내용인가요?'],
+  steps:['질문 답을 받은 뒤 포스터에 들어갈 문구를 크기 순서(1순위 제목 → 2순위 일시·장소 → 3순위 세부)로 정리해 줘.','서로 다른 디자인 시안 2개를 만들어 비교하게 해 줘.','내가 고른 시안을 출력 크기에 맞게 완성하고, 글자 오타·날짜·전화번호를 다시 확인해 줘.']},
+ {t:'모집 안내',role:'복지관 프로그램 모집 홍보 전문가',size:1,sty:1,
+  opt:[['모집 방식',['선착순','신청 후 선정','상시 모집','추천 접수']],['꼭 넣을 것',['모집 기간','참여 자격','정원','참가비','준비물','선정 발표']],['받는 곳',['문자·카톡','홈페이지 공지','게시판 출력','SNS']]],multi:[1],
+  f:[['name','프로그램명'],['date','운영 기간'],['place','장소'],['people','모집 대상·인원'],['apply','신청 방법·기간'],['tel','전화번호']],
+  q:['참여 자격(나이·장애 유형·거주지 등) 조건이 있나요?','정원이 넘치면 어떻게 선정하나요?','신청할 때 필요한 서류나 준비물이 있나요?','보호자 동행이나 이동 지원이 필요한가요?'],
+  steps:['질문 답을 받은 뒤 모집 안내문을 "제목 → 한 줄 소개 → 모집 개요 표 → 신청 방법 → 문의" 순서로 써 줘.','같은 내용으로 문자용(200자) 짧은 버전도 만들어 줘.','이미지가 필요하면 시안 2개를 먼저 보여 주고 고르면 만들어 줘.']},
+ {t:'인포그래픽',role:'공공기관 데이터 인포그래픽 디자이너',size:1,sty:1,
+  opt:[['주제',['올해 사업 실적','이용 절차','프로그램 구성','전년 대비 성과','만족도 결과']],['형태',['숫자 카드','흐름도(1→2→3)','비교표','타임라인','지도·공간']]],
+  f:[['name','제목'],['people','대상']],
+  q:['넣을 숫자·자료를 붙여 주세요. 숫자는 내가 준 것만 써요.','가장 강조할 숫자 하나는 무엇인가요?','보고용(결재·평가)인가요, 홍보용(SNS)인가요?','기관 대표 색이 있나요?'],
+  steps:['질문 답을 받은 뒤 숫자·문구를 영역별로 배치한 구성안을 표로 먼저 보여 줘.','서로 다른 시안 2개를 만들어 비교하게 해 줘.','고른 시안으로 완성하고, 그림 속 숫자가 내가 준 자료와 같은지 한 줄씩 대조해 줘.']},
+ {t:'이모티콘',role:'귀여운 캐릭터 이모티콘 작가',size:0,sty:1,
+  opt:[['개수',['6개','8개','12개','16개']],['캐릭터',['곰돌이','토끼','새싹 친구','복지관 마스코트']],['쓰임',['직원 단톡방','이용자·보호자 소통','SNS 홍보','행사 기념품']]],
+  f:[['name','캐릭터 이름']],
+  q:['캐릭터 성격은 어떤가요? (씩씩함·느긋함·다정함 등)','꼭 넣고 싶은 말은 무엇인가요? (고마워요·최고·화이팅 등)','속상하거나 화난 표정도 넣을까요? (귀엽게)','배경은 투명·흰색 중 무엇이 좋은가요?'],
+  steps:['질문 답을 받은 뒤 이모티콘 목록을 표로 보여 줘: | 번호 | 표정·동작 | 글자 |','캐릭터 시안 2개를 먼저 그려 비교하게 해 줘.','고른 캐릭터로 한 장에 격자로 모두 그려 주고, 글자 오타를 확인해 줘.']},
+ {t:'소식지',role:'복지관 소식지 편집장',size:0,sty:1,
+  opt:[['분량',['A4 1쪽','A4 2쪽','A4 4쪽']],['꼭지',['이달의 활동','이용자 이야기','다음 달 일정','후원 감사','직원 소개','공지·안내']]],multi:[1],
+  f:[['name','소식지 이름·호수'],['date','발행 월']],
+  q:['이번 호에 꼭 실을 활동 2~3가지와 날짜를 알려 주세요.','이용자 이야기는 이름 대신 가명이나 이니셜로 쓸까요?','사진 자리는 몇 개 필요한가요?','받는 사람은 누구인가요? (보호자·후원자·지역 주민)'],
+  steps:['질문 답을 받은 뒤 쪽별 지면 구성(꼭지 제목·분량·사진 자리)을 표로 보여 줘.','꼭지별 글을 쉬운 말로 써 줘. 사진 자리는 [사진: 설명]으로 표시.','표지 디자인 시안 2개를 보여 주고, 고르면 같은 톤으로 완성해 줘.']},
+ {t:'안내지',role:'쉬운 글 안내문 전문가',size:0,sty:1,
+  opt:[['종류',['이용 안내','서비스 신청 절차','신규 프로그램 소개','안전 수칙','시설 이용 규칙']],['형태',['A4 1장','3단 접지','쉬운 글(그림+짧은 문장)','큰 글씨판']]],
+  f:[['name','안내 제목'],['place','장소'],['tel','전화번호']],
+  q:['안내지를 읽는 사람이 가장 헷갈려하는 점은 무엇인가요?','순서대로 해야 하는 절차가 있나요? 단계별로 알려 주세요.','꼭 지켜야 할 규칙·주의사항은 무엇인가요?','시각 자료(아이콘·그림)를 넣을까요?'],
+  steps:['질문 답을 받은 뒤 안내지 내용을 "한 문장 소개 → 단계 1·2·3 → 주의사항 → 문의" 순서로 써 줘. 한 문장은 15자 안팎으로.','디자인 시안 2개를 만들어 비교하게 해 줘.','고른 시안으로 완성하고, 어려운 낱말이 없는지 다시 확인해 줘.']},
+ {t:'짧은 영상',role:'복지관 홍보 숏폼 영상 감독',size:0,sty:1,
+  opt:[['길이',['8초','15초','30초','60초']],['용도',['인스타 릴스','유튜브 쇼츠','행사 오프닝','기관 소개']],['장면 수',['3장면','5장면','7장면']]],
+  f:[['name','영상 제목'],['date','일시'],['place','장소']],
+  q:['영상에서 꼭 보여 주고 싶은 장면은 무엇인가요?','실제 사진·영상을 쓰나요, AI로 새로 만드나요? (얼굴 노출 동의 확인)','자막·배경음악 분위기는 어떻게 할까요?','마지막 장면에 넣을 문구(기관명·신청 방법)는 무엇인가요?'],
+  steps:['질문 답을 받은 뒤 장면별 콘티를 표로 보여 줘: | 장면 | 초 | 화면 | 자막 | 소리 |','장면마다 영상 생성용 프롬프트(카메라 움직임·빛·분위기)를 따로 써 줘.','자막 오타와 영상 길이 합계를 다시 확인해 줘.']}
+];
+function gopt(i,j,o,multi){const k='go'+i+'_'+j;return multi?mchips(k,o):chips(k,o)}
+VIEWS.gen=()=>{S.gt=S.gt??0;if(S.gt>=GEN.length)S.gt=0;const G=GEN[S.gt],i=S.gt;
+ S.gp=S.gp??0;S.gr=S.gr??0;S.gs=S.gs??0;S.gn=S.gn??0;S.sy=S.sy??0;S.sz=S.sz??0;
+ const left=QR('만들 것',chips('gt',GEN.map(x=>x.t)))+bizPick()
+  +QR('목적',chips('gp',G_PURP))+QR('읽는 사람',chips('gr',G_READ))+QR('시기',chips('gs',G_SEA))
+  +G.opt.map((o,j)=>QR(o[0]+((G.multi||[]).includes(j)?' <small>여러 개</small>':''),gopt(i,j,o[1],(G.multi||[]).includes(j)))).join('')
+  +(G.sty?QR('그림 느낌',chips('sy',G_STY)):'')+(G.size?QR('크기',chips('sz',G_SIZE)):'')+QR('말투',chips('gn',G_TONE))
+  +`<div class="gl">내가 아는 정보 <small>모르면 비워 두세요</small></div>`+G.f.map(f=>field(f[0],f[1])).join('');
+ return view('맞춤형 프롬프트 생성',left,()=>{
+  const bn=BN(),p=P(),opts=G.opt.map((o,j)=>{const k='go'+i+'_'+j,mu=(G.multi||[]).includes(j);const v=mu?(S[k]||[]).map(x=>o[1][x]).filter(Boolean).join(', ')||'[AI가 제안]':o[1][S[k]??0];return '- '+o[0]+': '+M(v)});
+  if(G.sty)opts.push('- 그림 느낌: '+M(G_STY[S.sy]));if(G.size)opts.push('- 크기: '+M(G_SIZE[S.sz]));opts.push('- 말투: '+M(G_TONE[S.gn]));
+  const info=G.f.map(f=>f[1]+': '+F(f[0],f[1])).join(' / ');
+  const t=`너는 ${M(G.role)}야.
+[목표] ${ORG} ${M(bn)} · ${M(p)}의 ${M(G.t)}을(를) 만든다.
+- 목적: ${M(G_PURP[S.gp])} / 읽는 사람: ${M(G_READ[S.gr])} / 시기: ${M(G_SEA[S.gs])}
+[내가 고른 조건]
+${opts.join('\n')}
+[내가 아는 정보] ${info}
+
+[진행 순서]
+1단계. 바로 만들지 말고, 아래 질문을 번호를 붙여 한 번에 물어봐. 내가 이미 준 정보는 다시 묻지 마.
+${G.q.map((x,n)=>'  '+(n+1)+') '+x).join('\n')}
+${G.steps.map((x,n)=>(n+2)+'단계. '+x).join('\n')}
+
+[필수] 장애인을 도움받는 사람이 아니라 ${M('활동의 주인공')}으로 · 큰 글씨·고대비·쉬운 말 · 모르는 칸은 [확인 필요]로 표시 · 시기(${G_SEA[S.gs]})에 맞는 색·소재
+[금지] 지어낸 숫자·날짜·이름 · 동정·시혜적 표현 · 실제 이용자 얼굴·실명·연락처 · 다른 기관 로고·캐릭터 베끼기
+진행 중 확인이 필요한 수치·자료는 나에게 확인한 뒤 진행해.`;
+  return outBox(G.t+' 프롬프트',t)})};
+if(typeof VIEW!=='undefined'&&VIEW==='gen')render();
+})();
+</script>
+<style id="gh-home-theme">
+:root{--bg:#EEF6F0;--line:#D5E5DA}
+html,body{background:#EEF6F0!important}
+.hhero{background:linear-gradient(90deg,#DDEFE3 0%,#EAF5EE 55%,#F4FAF6 100%)!important;border-color:#CFE3D6!important}
+.hhero h1 em{color:#E07A2E!important}
+.hhero .ph{background-position:center 4%!important}
+.pane{border-color:#D5E5DA!important}
+/* 계획·일지 선택칸: 표처럼 항목별 색 */
+.qrow{grid-template-columns:78px 1fr!important;border:1px solid #DDE8E0;border-radius:10px;padding:5px 6px!important;margin:0 0 5px!important;background:#fff;align-items:center!important}
+.qrow>.gl{margin:0!important;color:#fff!important;border-radius:7px;padding:7px 4px;text-align:center;font-size:13px!important;align-self:stretch;display:flex;align-items:center;justify-content:center}
+.qrow[data-c="0"]>.gl{background:#2F6B56}.qrow[data-c="0"]{background:#F4FAF6}
+.qrow[data-c="1"]>.gl{background:#E07A2E}.qrow[data-c="1"]{background:#FFF7F0}
+.qrow[data-c="2"]>.gl{background:#3B82C4}.qrow[data-c="2"]{background:#F3F8FD}
+.qrow[data-c="3"]>.gl{background:#8A5CC2}.qrow[data-c="3"]{background:#F8F4FC}
+.qrow[data-c="4"]>.gl{background:#1F8A80}.qrow[data-c="4"]{background:#F1FAF9}
+.qrow[data-c="5"]>.gl{background:#B5651D}.qrow[data-c="5"]{background:#FCF6EF}
+.qrow[data-c="6"]>.gl{background:#C2417A}.qrow[data-c="6"]{background:#FDF3F7}
+.qrow[data-c="7"]>.gl{background:#4F6B2F}.qrow[data-c="7"]{background:#F6F9F0}
+.qrow .chip.on{box-shadow:0 0 0 2px rgba(0,0,0,.08)}
+.out mark,.pbox mark,mark{background:linear-gradient(transparent 60%,#FFD2AE 60%)!important;color:#1d2826!important;font-weight:700!important;border-radius:0!important}
+.stp{text-decoration:underline;text-decoration-color:#D93025;text-decoration-thickness:2px;text-underline-offset:3px;font-weight:700;color:#1d2826}
+</style>
+<script>
+(function(){
+ /* 선택칸 번호 매기기 */
+ function num(){document.querySelectorAll('.qrow').forEach(function(q,i){if(q.dataset.c!=String(i%8))q.dataset.c=i%8;});}
+ /* 글자 한 단계(1px) 줄이기 */
+ var done=new WeakSet(),SKIP='svg,svg *,canvas,script,style,noscript';
+ function own(e){for(var n=e.firstChild;n;n=n.nextSibling){if(n.nodeType===3&&n.textContent.trim())return true}return false}
+ function shrink(){var els=document.body.getElementsByTagName('*'),L=[];for(var i=0;i<els.length;i++){var e=els[i];if(!done.has(e)&&own(e)&&!e.matches(SKIP))L.push(e)}
+  var plan=L.map(function(e){var p=e.parentElement,fs=getComputedStyle(e).fontSize;if(p&&done.has(p)&&p.dataset.fsDn&&getComputedStyle(p).fontSize===fs&&!e.style.fontSize)return [e,0];return [e,parseFloat(fs)]});
+  plan.forEach(function(x){done.add(x[0]);if(!x[1]||x[1]<=12)return;x[0].dataset.fsDn=1;x[0].style.setProperty('font-size',(x[1]-1)+'px','important')});}
+ var t,busy=false;function stp(){document.querySelectorAll('.out:not([data-stp])').forEach(function(o){o.dataset.stp=1;o.innerHTML=o.innerHTML.replace(/(^|\n|<br>)(\s*\d단계\.)/g,'$1<span class="stp">$2</span>').replace(/\[(필수|금지|진행 순서|목표|내가 고른 조건|내가 아는 정보|구성|정보)\]/g,'<span class="stp">[$1]</span>');});}
+ function run(){if(busy)return;busy=true;try{num();stp();if(!matchMedia('(max-width:640px)').matches)shrink();}finally{setTimeout(function(){busy=false},0)}}
+ function later(){clearTimeout(t);t=setTimeout(run,40)}
+ new MutationObserver(later).observe(document.body,{childList:true,subtree:true});
+ later();
+})();
+</script>
 </body>
 </html>

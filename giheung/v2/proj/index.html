@@ -4554,7 +4554,7 @@ img{filter:contrast(1.12) saturate(1.18)}
     var plan=list.map(function(e){var p=e.parentElement,fs=getComputedStyle(e).fontSize;
       if(p&&done.has(p)&&p.dataset.fsUp&&getComputedStyle(p).fontSize===fs&&!e.style.fontSize)return [e,0];return [e,parseFloat(fs)]});
     plan.forEach(function(x){var e=x[0],fs=x[1];done.add(e);if(!fs)return;
-      var n=MOB?(fs<15?Math.max(fs+2,14):0):fs+2;if(n){e.dataset.fsUp=1;e.style.setProperty('font-size',n+'px','important')}});
+      var n=MOB?(fs<15?Math.max(fs+1,14):0):fs+1;if(n){e.dataset.fsUp=1;e.style.setProperty('font-size',n+'px','important')}});
   }
   window.__fsUp=run;
   var t;function later(){clearTimeout(t);t=setTimeout(run,60)}
@@ -6053,6 +6053,36 @@ header.top #tophome{display:inline-flex!important}
 #dw-body .gh-first .ask{max-height:none}#dw-body details.gh-ask{margin-top:6px}#dw-body .gh-fold:not(.open)>*:not(h3){display:none!important}#dw-body .gh-fold h3{margin:0!important}#dw-body .gh-more{margin-left:8px;font-size:12.5px;font-weight:700;color:#fff;background:#2F6B56;border-radius:999px;padding:2px 9px}#dw-body .gh-first .ins{max-height:calc(100vh - 640px);min-height:200px;overflow:auto}#dw-body .nx{display:grid!important;grid-template-columns:1fr 1fr;gap:6px!important}#dw-body .nx .it{padding:6px 8px!important;margin:0!important;display:block!important;position:relative}#dw-body .nx .it b{font-size:14px!important;display:block}#dw-body .nx .it p{font-size:13.5px!important;line-height:1.45!important;margin:2px 0 0!important;padding-right:44px}#dw-body .nx .it .btn{position:absolute;right:6px;top:6px;padding:3px 8px!important;font-size:12.5px!important}#dw-body details.gh-ask summary{cursor:pointer;font-size:14px;font-weight:700;color:#2F6B56}#dw-body .gh-ins .ins{max-height:calc(100vh - 500px)!important}
 #dw-body .gh-l #dw-in{padding:8px 12px!important}
 #dw-body .gh-l #dw-in p{margin:0!important;font-size:13.5px}
+</style>
+<style id="gh-theme">/* 2026.11.26 앱 배경 통일: 연한 초록 바탕 + 흰 카드, 포인트 주황, 밑줄 빨강 */
+html,body{background:#EEF6F0!important}
+header.top{background:#2F6B56!important;border-bottom:0!important}
+header.top .tag,header.top .badge,header.top .wrap>span:last-child{color:#fff!important;border-color:rgba(255,255,255,.6)!important;background:transparent!important}
+header.top #tophome{background:#fff!important;color:#2F6B56!important}
+main,.wrap>section,#v-drawer,#v-vent,#v-heart{background:transparent!important}
+.tool,.fitbox,#dw-body .dw-step,#dw-body .gh-l #dw-in,.vbar+.tool{background:#fff!important;border-color:#D5E5DA!important;box-shadow:0 1px 3px rgba(47,107,86,.06)!important}
+#dw-body .ins{background:#F7FBF8!important;border-color:#D5E5DA!important}
+#dw-body .note{background:#FFF4EA!important;border-color:#F3D2B6!important}
+#dw-body mark.hl{background:linear-gradient(transparent 62%,#FFD9B8 62%)!important}
+.vbar .tag,#dw-tag{color:#C2652B!important;border-color:#F0C9A8!important;background:#FFF6EE!important}
+.vbar h2,#dw-h{color:#1E5442!important}
+/* 빡침 번역기 상자 색 통일 */
+#v2-tool .sright>*:not(.flav),#v2-tool .aptabs,#v2-tool .sgrid>div>div[class]{background:#fff!important;border-color:#D5E5DA!important}
+#v2-tool .sright{background:transparent!important}
+#v2-tool .aptabs button.on,#v2-flav button.on{background:#E07A2E!important;border-color:#E07A2E!important;color:#fff!important}
+/* 마음 쉼터 */
+#h2-tool,#h2-tool .post,#h2-tool .pc,#h2-tool .help{background:#fff!important}
+#h2-tool .help{border-color:#D5E5DA!important}
+</style>
+<style id="gh-proj3">
+#dw-body .gh-ins .ins,#dw-body .gh-first .ins,#dw-body .gh-l table.src{max-height:none!important;min-height:0!important;overflow:visible!important}
+#dw-body .src tbody{display:grid!important;grid-template-columns:1fr!important;gap:6px!important}
+#dw-body .src tr{display:flex!important;align-items:baseline;gap:10px;border:1px solid #D5E5DA!important;border-left:5px solid #2F6B56!important;border-radius:8px;background:#F4FAF6;padding:6px 10px}
+#dw-body .src tr:nth-child(3n+2){border-left-color:#E07A2E!important;background:#FFF6EE}
+#dw-body .src tr:nth-child(3n+3){border-left-color:#3B82C4!important;background:#F2F7FD}
+#dw-body .src td:first-child:has(input[type=checkbox]){display:none!important}
+#dw-body .src td{padding:0!important;font-size:14px!important}
+#dw-body .src td b{font-size:14.5px}
 </style>
 </body>
 </html>

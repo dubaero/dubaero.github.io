@@ -4554,7 +4554,7 @@ img{filter:contrast(1.12) saturate(1.18)}
     var plan=list.map(function(e){var p=e.parentElement,fs=getComputedStyle(e).fontSize;
       if(p&&done.has(p)&&p.dataset.fsUp&&getComputedStyle(p).fontSize===fs&&!e.style.fontSize)return [e,0];return [e,parseFloat(fs)]});
     plan.forEach(function(x){var e=x[0],fs=x[1];done.add(e);if(!fs)return;
-      var n=MOB?(fs<15?Math.max(fs+2,14):0):fs+2;if(n){e.dataset.fsUp=1;e.style.setProperty('font-size',n+'px','important')}});
+      var n=MOB?(fs<15?Math.max(fs+1,14):0):fs+1;if(n){e.dataset.fsUp=1;e.style.setProperty('font-size',n+'px','important')}});
   }
   window.__fsUp=run;
   var t;function later(){clearTimeout(t);t=setTimeout(run,60)}
@@ -6042,5 +6042,25 @@ header.top .wrap{justify-content:flex-end}
  if(ap&&ta){var left=ta.parentElement;var warn=left.querySelector('p.warn');ap.classList.add('gh-ap');left.appendChild(ap);if(warn)left.appendChild(warn);}
 })();
 </script>
+<style id="gh-theme">/* 2026.11.26 앱 배경 통일: 연한 초록 바탕 + 흰 카드, 포인트 주황, 밑줄 빨강 */
+html,body{background:#EEF6F0!important}
+header.top{background:#2F6B56!important;border-bottom:0!important}
+header.top .tag,header.top .badge,header.top .wrap>span:last-child{color:#fff!important;border-color:rgba(255,255,255,.6)!important;background:transparent!important}
+header.top #tophome{background:#fff!important;color:#2F6B56!important}
+main,.wrap>section,#v-drawer,#v-vent,#v-heart{background:transparent!important}
+.tool,.fitbox,#dw-body .dw-step,#dw-body .gh-l #dw-in,.vbar+.tool{background:#fff!important;border-color:#D5E5DA!important;box-shadow:0 1px 3px rgba(47,107,86,.06)!important}
+#dw-body .ins{background:#F7FBF8!important;border-color:#D5E5DA!important}
+#dw-body .note{background:#FFF4EA!important;border-color:#F3D2B6!important}
+#dw-body mark.hl{background:linear-gradient(transparent 62%,#FFD9B8 62%)!important}
+.vbar .tag,#dw-tag{color:#C2652B!important;border-color:#F0C9A8!important;background:#FFF6EE!important}
+.vbar h2,#dw-h{color:#1E5442!important}
+/* 빡침 번역기 상자 색 통일 */
+#v2-tool .sright>*:not(.flav),#v2-tool .aptabs,#v2-tool .sgrid>div>div[class]{background:#fff!important;border-color:#D5E5DA!important}
+#v2-tool .sright{background:transparent!important}
+#v2-tool .aptabs button.on,#v2-flav button.on{background:#E07A2E!important;border-color:#E07A2E!important;color:#fff!important}
+/* 마음 쉼터 */
+#h2-tool,#h2-tool .post,#h2-tool .pc,#h2-tool .help{background:#fff!important}
+#h2-tool .help{border-color:#D5E5DA!important}
+</style>
 </body>
 </html>
