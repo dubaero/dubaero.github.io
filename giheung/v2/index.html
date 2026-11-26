@@ -8,7 +8,7 @@
 <script src="/js/room-gate.js?v=2"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-:root{--g:#2e7d5b;--g2:#1f5c42;--gl:#e7f4ec;--gm:#cfe8da;--ink:#1d2421;--sub:#5d6964;--line:#e3e8e5;--bg:#f6f8f7;--red:#d93a2b;--or:#fff1e0;--orT:#a85a00}
+:root{--g:#d9773a;--g2:#a4501c;--gl:#fdf1e6;--gm:#f5d5bb;--ink:#33281f;--sub:#7a6a5d;--line:#efe3d8;--bg:#fcf8f3;--red:#d93a2b;--or:#fff1e0;--orT:#a85a00}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.55;letter-spacing:-.2px}
@@ -21,8 +21,6 @@ header{gap:10px}.hbtn{flex:none;white-space:nowrap}
 .brand small{font-weight:600;color:var(--sub);font-size:13px;margin-left:4px}
 .hbtn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 14px;font-weight:700;font-size:14px;color:var(--g2)}
 main{flex:1;min-height:0}
-footer{height:34px;flex:none;display:flex;align-items:center;justify-content:center;gap:14px;font-size:12px;color:var(--sub)}
-footer a{color:var(--g2);font-weight:700;text-decoration:none}
 /* home */
 .home{height:100%;display:flex;flex-direction:column;gap:10px;padding-bottom:6px}
 .hero{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0}
@@ -38,37 +36,59 @@ footer a{color:var(--g2);font-weight:700;text-decoration:none}
 .tile:hover{border-color:var(--g);background:var(--gl)}
 .tile .ic{width:32px;height:32px;border-radius:10px;background:var(--gl);color:var(--g);display:flex;align-items:center;justify-content:center;font-size:17px;flex:none}
 .tile.app{font-size:15px;justify-content:center}
-/* homepage-style home */
-.hp{height:100%;display:flex;flex-direction:column;gap:10px;padding:12px 0 6px;min-height:0}
-.hhero{flex:none;background:linear-gradient(100deg,#eef7f1 0%,#f7fbf8 60%,#fff 100%);border:1px solid var(--line);border-radius:18px;display:grid;grid-template-columns:minmax(0,1fr) 300px;overflow:hidden;min-height:150px}
-.hhero .tx{padding:18px 24px;display:flex;flex-direction:column;justify-content:center;gap:6px;min-width:0}
-.hhero .bdg{align-self:flex-start;font-size:12px;font-weight:800;color:var(--g2);background:#fff;border:1px solid var(--gm);border-radius:20px;padding:3px 10px}
-.hhero h1{font-size:clamp(20px,2vw,27px);letter-spacing:-1px;line-height:1.25}
-.hhero h1 em{font-style:normal;color:var(--g)}
-.hhero p{font-size:13.5px;color:var(--sub)}
-.srch{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:0 12px;max-width:460px;margin-top:4px}
-.srch input{border:0;outline:0;flex:1;padding:9px 0;font:inherit;font-size:14px;min-width:0}
-.hhero .ph{background:url(/img/giheung/hero-sprout.webp) center/cover no-repeat}
-.cols{flex:1;min-height:0;display:grid;grid-template-columns:1.05fr 1.15fr .9fr;gap:10px}
-.col{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;min-height:0;min-width:0}
-.col h3{font-size:16px;letter-spacing:-.5px;padding-bottom:7px;border-bottom:2px solid var(--g);margin-bottom:6px}
-.ol{list-style:none;overflow:auto;min-height:0;flex:1}
-.ol{display:flex;flex-direction:column}.ol li{flex:1;max-height:56px;display:flex;align-items:center;gap:10px;padding:6px 2px;border-bottom:1px dashed var(--line);font-size:14.5px;font-weight:700;letter-spacing:-.4px}
+/* homepage-style home (그룹홈 비서함 틀) */
+.hp{height:100%;display:flex;flex-direction:column;gap:12px;padding:12px 0 8px;min-height:0}
+.hhero{flex:none;background:linear-gradient(90deg,#c9692f 0%,#df8a4f 55%,#ecac78 100%);border-radius:14px;display:grid;grid-template-columns:minmax(0,1fr) 34%;overflow:hidden;color:#fff;min-height:150px}
+.hhero .tx{padding:18px 24px;display:flex;flex-direction:column;justify-content:center;gap:5px;min-width:0}
+.hhero .bdg{font-size:13px;font-weight:800;color:#fff;display:flex;align-items:center;gap:6px}
+.hhero .kick{font-size:13px;font-weight:700;color:#ffe3cc}
+.hhero h1{font-size:clamp(20px,2vw,28px);letter-spacing:-1px;line-height:1.3;font-weight:800}
+.hhero h1 em{font-style:normal;color:#fff3c4}
+.hhero p.sub{font-size:13.5px;color:#fff1e4}
+.srch{display:flex;align-items:center;gap:8px;background:#fff;border-radius:8px;padding:0 12px;max-width:520px;margin-top:6px;color:#9a8a7e}
+.srch input{border:0;outline:0;flex:1;padding:10px 0;font:inherit;font-size:14px;min-width:0;color:var(--ink)}
+.hhero .ph{background:url(/img/giheung/hero-sprout.webp) center 45%/cover no-repeat}
+.cols{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.col{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-height:0;min-width:0}
+.col h3{font-size:16px;font-weight:800;letter-spacing:-.5px;padding-bottom:7px;border-bottom:2px solid var(--g);display:flex;justify-content:space-between;align-items:center}
+.col h3 small{font-size:12px;color:var(--sub);font-weight:700}
+.ol{list-style:none;overflow:auto;min-height:0;flex:1;display:flex;flex-direction:column}
+.ol li{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #f1e8df;font-size:14.5px;font-weight:700;letter-spacing:-.4px}
 .ol li .no{width:20px;color:var(--sub);font-weight:600;font-size:13px;text-align:center}
-.ol li .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ol li .tg{font-size:11.5px;font-weight:800;color:var(--orT);background:var(--or);border-radius:6px;padding:2px 7px}
-.ob{border:0;background:var(--g);color:#fff;border-radius:7px;padding:4px 11px;font-size:12.5px;font-weight:800}
-.qg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;flex:1;min-height:0;grid-auto-rows:1fr}
-.q{border:1px solid var(--line);border-radius:12px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-weight:800;font-size:14px;letter-spacing:-.5px;padding:6px;min-height:0}
+.ol li .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.ol li .nm:hover{color:var(--g2);text-decoration:underline}
+.ol li .tg{font-size:11.5px;font-weight:800;color:var(--g2);background:var(--gl);border:1px solid var(--gm);border-radius:6px;padding:2px 7px}
+.ob{border:0;background:var(--g);color:#fff;border-radius:6px;padding:4px 10px;font-size:12.5px;font-weight:800;display:inline-flex;align-items:center;gap:3px}
+.qg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.q{border:1px solid var(--line);border-radius:10px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px 4px;min-height:74px;color:var(--ink)}
+.q svg{width:24px;height:24px;color:var(--g)}
+.q b{font-size:14px;font-weight:800;letter-spacing:-.5px}
+.q span{font-size:11.5px;color:var(--sub);letter-spacing:-.4px;white-space:nowrap}
 .q:hover,.q.on{border-color:var(--g);background:var(--gl)}
-.q .ic{font-size:26px;line-height:1}.q{font-size:15px}
-.lk{overflow:auto;min-height:0}.lk a,.lk button{padding:7px 4px!important}
-.lk .sec{font-size:12.5px;font-weight:800;color:var(--g2);background:var(--gl);border-radius:6px;padding:4px 8px;margin:6px 0 3px}
+.aig{margin-top:auto;border:1px solid var(--gm);background:var(--gl);border-radius:10px;padding:8px 10px}
+.aig .t{font-size:13px;font-weight:800;color:var(--g2);margin-bottom:6px;display:flex;justify-content:space-between}
+.aig .t small{font-weight:600;color:var(--sub)}
+.aig .r{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+.aig button{border:1px solid var(--gm);background:#fff;border-radius:8px;padding:7px 2px;font-size:12.5px;font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aig button:hover{border-color:var(--g);color:var(--g2)}
+.lk{list-style:none;overflow:auto;min-height:0;flex:1}
+.lk .sec{font-size:12.5px;font-weight:800;color:var(--sub);margin:6px 0 2px}
 .lk .sec:first-child{margin-top:0}
-.lk a,.lk button{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;border-bottom:1px dashed var(--line);background:none;text-align:left;padding:5px 4px;font-size:14px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.4px}
-.lk a:hover,.lk button:hover{color:var(--g2)}
-.lk small{font-weight:600;color:var(--sub);font-size:12px}
-@media (max-width:900px){.hhero{grid-template-columns:1fr}.hhero .ph{display:none}.cols{grid-template-columns:1fr}.qg{grid-auto-rows:70px}}
+.lk a{display:flex;align-items:center;gap:8px;padding:7px 2px;border-bottom:1px solid #f1e8df;text-decoration:none;color:var(--ink);font-size:14px;font-weight:800;letter-spacing:-.4px}
+.lk a span{font-size:12px;color:var(--sub);font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lk a:hover{color:var(--g2)}
+.ghelp{margin-top:auto;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px;color:var(--sub);letter-spacing:-.3px}
+.ghelp b{color:var(--g2)}
+.gfoot{flex:none;background:#3a2e27;color:#e9ddd2;margin:0 -16px;padding:9px 24px;font-size:12.5px;display:flex;flex-direction:column;gap:3px;letter-spacing:-.3px}
+.gfoot .r{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
+.gfoot b{color:#fff}.gfoot a{color:#ffd9b8;text-decoration:none;font-weight:700}
+.gfoot .cp{border:1px solid #8a7666;background:none;color:#ffd9b8;border-radius:5px;padding:0 6px;font-size:11.5px}
+/* 하나로 입력 */
+.ibox{border:1px solid var(--line);border-radius:10px;background:#fffdfb;position:relative}
+.ibox:focus-within{border-color:var(--g);box-shadow:0 0 0 2px var(--gl)}
+.ibox textarea{width:100%;border:0;outline:0;background:transparent;resize:vertical;font:inherit;font-size:14px;line-height:1.9;padding:8px 12px 4px;min-height:120px;color:var(--ink)}
+.ibox .ft{display:flex;justify-content:space-between;align-items:center;padding:0 8px 6px 12px;font-size:12px;color:#9a8a7e}
+@media (max-width:900px){.hhero{grid-template-columns:1fr}.hhero .ph{display:none}.cols{grid-template-columns:1fr}.gfoot{margin:0}}
 /* view */
 .view{height:100%;display:grid;grid-template-columns:minmax(300px,32%) minmax(0,1fr);gap:12px;padding-bottom:6px}
 .pane{background:#fff;border:1px solid var(--line);border-radius:16px;min-height:0;display:flex;flex-direction:column}
@@ -107,7 +127,7 @@ footer a{color:var(--g2);font-weight:700;text-decoration:none}
 .btn.p{background:var(--g);border-color:var(--g);color:#fff}
 .btn:hover{border-color:var(--g)}
 .out{padding:14px 18px;overflow:auto;flex:1;min-height:0;font-size:15px;line-height:1.75;white-space:pre-wrap;letter-spacing:-.3px}
-.out mark,.hl{background:linear-gradient(transparent 55%,#c9ecd7 55%);color:var(--g2);font-weight:800;padding:0 1px}
+.out mark,.hl{background:linear-gradient(transparent 55%,#ffe0a8 55%);color:var(--g2);font-weight:800;padding:0 1px}
 .out .h{font-weight:800;color:var(--g2)}
 .grid4{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;padding:10px;flex:1;min-height:0}
 .box{border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;min-height:0}
@@ -124,7 +144,7 @@ table.form td{padding:7px 10px;border:1px solid var(--gm);vertical-align:top;lin
 .c5 b{display:block;font-size:15px;color:var(--g2);margin-bottom:4px;letter-spacing:-.5px}
 .c5 i{font-style:normal;font-weight:800;color:var(--sub);font-size:12px}
 .badge{font-size:11px;font-weight:800;border-radius:6px;padding:1px 6px;margin-left:5px}
-.free{background:#dff3e6;color:#1f6b43}.paid{background:var(--or);color:var(--orT)}
+.free{background:#e3f3e5;color:#2d6b36}.paid{background:var(--or);color:var(--orT)}
 .fcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
 .fc{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;text-align:left;font-weight:800;font-size:14px;letter-spacing:-.4px}
 .fc.on{border:2px solid var(--g);background:var(--gl);padding:7px 9px}
@@ -156,24 +176,28 @@ table.form td{padding:7px 10px;border:1px solid var(--gm);vertical-align:top;lin
  <button class="hbtn" onclick="go('home')">업무도우미 홈</button>
 </header>
 <main id="app"></main>
-<footer><span>AI 초안은 숫자·사실·개인정보를 꼭 확인하고 사용하세요</span><a href="https://www.a-sak.or.kr" target="_blank" rel="noopener">복지관 홈페이지</a><span>제작 두배로 · 이서정</span></footer>
+<div class="gfoot"><div class="r"><b>용인시기흥장애인복지관 AI 업무도우미</b><span>입력한 내용은 이 기기 브라우저에만 저장됩니다.</span><span>AI가 만든 글은 초안입니다. 사실·날짜·숫자는 반드시 직접 확인하세요.</span><a href="https://www.a-sak.or.kr/" target="_blank" rel="noopener">복지관 홈페이지</a></div><div class="r"><span>제작·운영 <b>두배로 · 생성형 AI 전문강사 이서정</b></span><a href="https://dubaero.kr/" target="_blank" rel="noopener">dubaero.kr</a><span>이메일 <a href="mailto:dltjwjd59@gmail.com">dltjwjd59@gmail.com</a> <button class="cp" onclick="copyTxt('dltjwjd59@gmail.com')">복사</button></span><span>블로그 <a href="https://blog.naver.com/ricewitch" target="_blank" rel="noopener">blog.naver.com/ricewitch</a></span><span>카카오톡 li8093</span></div></div>
 </div>
 <div class="toast" id="toast"></div>
 <script>
 /* ================= 공통 데이터 ================= */
 const ORG='용인시기흥장애인복지관';
 const BIZ=[
-{n:'주간이용센터',p:['Art Class','Digital Class','Sports Class','Special Class','Healthy Class','요리','ADL(일상생활)','전환기교육'],t:['성인 발달장애인','보호자'],g:['일상생활 자립','여가·문화 참여','지역사회 적응','의사소통 향상']},
-{n:'주간활동서비스',p:['지역사회 활동','여가 활동','자조모임','체육 활동'],t:['성인 발달장애인','보호자'],g:['지역사회 참여','자기결정','여가 확대']},
-{n:'직업지원',p:['직업상담','취업 전 교육','취업알선','취업 후 적응지원','지원고용','장애인 일자리','훈련대학','직업대학'],t:['구직 장애인','재직 장애인','사업체 담당자'],g:['직무 역량 향상','취업 연계','고용 유지']},
-{n:'스마트재활',p:['로봇보행재활','디지털 순환재활','디지털 인지치료','디지털 재활스포츠','스마트짐','수중재활운동'],t:['재활이 필요한 장애인','고령 장애인'],g:['신체 기능 향상','건강 유지','재활 동기 강화']},
-{n:'치료지원',p:['언어치료','운동치료','작업치료','인지학습치료','음악치료','미술치료'],t:['장애 아동','장애 청소년','성인 장애인','보호자'],g:['의사소통 향상','일상 기능 향상','정서 안정']},
-{n:'가족통합지원',p:['I Be School 방과후','플레이아트','동화발레','가족사례관리','P.O.P 가족체험','마음ON 부모교육','마음ON 동아리'],t:['장애 아동','부모·보호자','비장애 형제자매'],g:['돌봄 부담 완화','가족 관계 강화','양육 역량 향상']},
-{n:'장애인식개선',p:['포니야 놀자!','장애인식개선교육','장애인식개선캠페인','이용자권리교육','아삭공모전'],t:['지역 주민','어린이집·학교','기업·기관'],g:['장애 이해 확산','권리 존중','함께 사는 지역']},
-{n:'평생교육·동아리',p:['기흥행복한캠퍼스','기흥행복한놀이터','밝은누리밴드','톡투게더','이용고객 동아리'],t:['성인 장애인','장애 아동·청소년'],g:['배움 기회 확대','자기표현','관계 형성']},
-{n:'재가복지',p:['방문 이·미용','반찬지원','김장지원','클린업','주거환경개선','찾아가는 생일잔치','잔고장 수리','행복신문'],t:['재가 장애인','고령 장애인 가구'],g:['생활 안정','고립 예방','삶의 질 향상']},
-{n:'문화·행사',p:['가족잔치','명절 행사','문화공연','문화데이트','길 따라 맛 따라','이용고객 나들이'],t:['이용자','가족','지역 주민'],g:['문화 향유','가족 화합','지역 교류']},
-{n:'후원·자원봉사',p:['기흥아너리더스클럽','자원봉사','후원 소식','후원 물품'],t:['후원자','자원봉사자','지역 기업'],g:['나눔 확산','참여 확대','신뢰 형성']},
+{n:'주간이용센터',p:['요리활동(쿡앤조이)','지역사회적응훈련','스페셜원데이','나들이','치유농업','평생학습(D-GPT·I-CAN)','생일파티','GH공방','부모간담회'],t:['성인 발달장애인(18~55세)','보호자'],g:['일상생활 자립','지역사회 적응','여가·문화 참여','의사소통 향상']},
+{n:'주간활동서비스',p:['일상생활활동','괜찮은 쿠킹·베이킹','마실데이','지역사회활동','디지털순환재활','진검승부(검도)','아트치어링','스포츠스태킹','생활안전교육'],t:['성인 발달장애인','보호자'],g:['낮 시간 의미 있는 활동','지역사회 참여','자기결정','건강 증진']},
+{n:'직업지원',p:['직업상담','취업 전 교육','취업알선','취업 후 적응지원','중증장애인 지원고용','장애인 일자리','훈련대학','직업대학','용기FC 풋살'],t:['구직 장애인','재직 발달장애인','사업체 담당자'],g:['직무 역량 향상','취업 연계','고용 유지','여가·건강']},
+{n:'I Be School(아동·청소년)',p:['그룹치료(우리두리·두드림 등)','플레이아트','동화발레','디지털스포츠','꿈꾸는 동화 공작소','요리','ADL','로봇코딩','디지털드로잉','악기(드럼·피아노·기타)','화가반','가족교실 업그라운드'],t:['장애 아동(유·초)','장애 청소년(중·고)','부모'],g:['사회성 향상','자기표현','학교생활 적응','특기적성 개발']},
+{n:'전환기교육',p:['직업인식·직업교육','직종훈련','지역사회적응훈련','방학특강 놀면뭐하니?!'],t:['고등 특수교육대상자'],g:['직업의식 함양','직무 경험','지역사회 이용 자립']},
+{n:'치료서비스',p:['운동치료','작업치료','언어치료','인지학습치료','음악치료','미술치료','개별체육','수중재활운동','접수면접·치료재활진단'],t:['장애 아동','장애 청소년','성인 장애인','보호자'],g:['신체 기능 향상','의사소통 향상','일상 기능 향상','정서 안정']},
+{n:'스마트재활센터',p:['로봇보행재활','디지털 순환재활','디지털 지역사회훈련','디지털 재활스포츠','디지털 인지치료(코트라스)','스마트짐','게임형 피트니스'],t:['재활이 필요한 장애인','고령 장애인'],g:['보행·균형 향상','근력·체력 향상','재활 동기 강화']},
+{n:'기흥행복한캠퍼스(성인)',p:['Art Class(문화예술)','Digital Class(정보화)','Sports Class(스포츠)','Special Class(심화반)','Healthy Class(건강·보건)','이용고객 동아리','톡투게더','아쿠아짐·관절수중운동','밝은누리밴드','스마트 청춘'],t:['성인 장애인'],g:['평생학습','자기계발','건강 관리','관계 형성']},
+{n:'가족지원',p:['가족사례관리','P.O.P 가족체험','마음ON 부모교육','마음ON 동아리','가족교실 팸앤조이(엄마·아빠·형제랑)','부모 성교육'],t:['장애 아동 부모','비장애 형제자매','가족'],g:['돌봄 부담 완화','가족 관계 강화','양육 역량 향상']},
+{n:'장애인식개선·권리',p:['장애인식개선교육','장애인식개선캠페인','기흥행복한놀이터(유아)','이용자 권리교육(성·인권)','무료법률상담','숏폼 공모전','Equal F.I.L.M 영화제작'],t:['지역 주민','어린이집·학교','기업·기관','이용자'],g:['장애 이해 확산','권리 존중','함께 사는 지역']},
+{n:'문화·행사',p:['가족잔치','명절 행사·전통놀이','문화공연','문화데이트','길 따라 맛 따라','이용고객 나들이','무료마켓','개관 기념 행사','시크릿산타'],t:['이용자','가족','지역 주민','자원봉사자'],g:['문화 향유','가족 화합','지역 교류']},
+{n:'재가복지',p:['방문 이·미용','반찬지원','김장지원','명절지원','클린업(세탁)','찾아가는 생일잔치','잔고장 수리','주거환경개선','문화기행·나들이','오늘하루쉼표','행복신문'],t:['재가 장애인','중증장애인 가정','저소득 가구'],g:['생활 안정','고립 예방','삶의 질 향상']},
+{n:'하이드림솔루션',p:['통합사례회의','위기가정 지원','희망드림 지원금'],t:['위기 장애인 가정'],g:['위기 해소','자원 연계','사후관리']},
+{n:'장애인활동지원',p:['활동지원사 보수교육','수급자 소집교육','활동지원사 모임','운영위원회'],t:['활동지원사','수급자·보호자'],g:['서비스 질 향상','안전한 지원','소통 강화']},
+{n:'후원·자원봉사',p:['기흥아너리더스클럽','기업 후원 물품','후원 성금','자원봉사단 활동','후원 소식'],t:['후원자','자원봉사자','지역 기업·단체'],g:['나눔 확산','참여 확대','신뢰 형성']},
 {n:'기타',p:['직접 입력'],t:['이용자'],g:['직접 입력']}
 ];
 const FIELDS={name:'행사명',place:'장소',date:'일시',recruit:'모집 기간',people:'대상·인원',prep:'준비물',apply:'신청 방법',staff:'담당자',tel:'전화번호'};
@@ -202,15 +226,18 @@ function chips(key,opts,big){return `<div class="chips">${opts.map((o,i)=>`<butt
 function mchips(key,opts){const a=S[key]||[];return `<div class="chips">${opts.map((o,i)=>`<button class="chip${a.includes(i)?' on':''}" onclick="togS('${key}',${i})">${esc(o)}</button>`).join('')}</div>`}
 function setS(k,v){S[k]=v;if(k==='b'){S.p=0}save();render()}
 function togS(k,i){const a=S[k]||[];const j=a.indexOf(i);j<0?a.push(i):a.splice(j,1);S[k]=a;save();render()}
-function field(k,label,area,ex){const id='f_'+k;const v=esc(S[k]||'');const inp=area?`<textarea id="${id}" rows="2" oninput="inS('${k}',this.value)">${v}</textarea>`:`<input id="${id}" value="${v}" oninput="inS('${k}',this.value)">`;
- return `<div class="fl"><label for="${id}">${label}:</label>${inp}${SR?`<button class="mic" onclick="mic('${k}',this)">말하기</button>`:''}</div>${ex?`<div class="ex">예) ${esc(ex)}</div>`:''}`}
+let FL=[];
+function field(k,label,area,ex){if(!FL.find(f=>f[0]===k))FL.push([k,label,ex]);return FL.length===1&&!FL._t?(FL._t=1,'%%IBOX%%'):''}
+function ibText(){return FL.map(([k,l])=>l+': '+(S[k]||'')).join('\n')}
+function ibox(){const ex=FL.filter(f=>f[2]).map(f=>f[1]+' → '+f[2]);window._FL=FL.slice();return `<div class="ibox"><textarea id="ibox" rows="${Math.min(10,FL.length+1)}" oninput="ibIn(this.value)" aria-label="입력">${esc(ibText())}</textarea><div class="ft"><span>항목 이름 옆에 이어서 쓰세요 · 빈 항목은 [ ]로 남아요</span>${SR?'<button class="mic" onclick="mic(\'_ib\',this)">말하기</button>':''}</div></div>${ex.length?`<div class="ex" style="margin-top:4px">예) ${esc(ex.join(' / '))}</div>`:''}`}
+function ibIn(v){const F_=window._FL||[];let last=null;const seen={};v.split('\n').forEach(line=>{const m=line.match(/^\s*([^:：]{1,14})[:：]\s?(.*)$/);const f=m&&F_.find(x=>x[1]===m[1].trim());if(f){S[f[0]]=m[2];last=f[0];seen[f[0]]=1}else if(last&&line.trim()){S[last]=(S[last]?S[last]+' ':'')+line.trim()}});save();if(window.RIGHT)RIGHT()}
 function inS(k,v){S[k]=v;save();if(window.RIGHT)RIGHT()}
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 function mic(k,btn){if(!SR)return;const r=new SR();r.lang='ko-KR';r.interimResults=false;btn.classList.add('rec');btn.textContent='듣는 중';
- r.onresult=e=>{const t=e.results[0][0].transcript;S[k]=((S[k]||'')+' '+t).trim();save();const el=document.getElementById('f_'+k);if(el)el.value=S[k];if(window.RIGHT)RIGHT()};
+ r.onresult=e=>{const t=e.results[0][0].transcript;if(k==='_ib'){const ta=document.getElementById('ibox');ta.value=ta.value.replace(/\s*$/,'')+' '+t;ibIn(ta.value);return}S[k]=((S[k]||'')+' '+t).trim();save();const el=document.getElementById('f_'+k);if(el)el.value=S[k];if(window.RIGHT)RIGHT()};
  r.onend=()=>{btn.classList.remove('rec');btn.textContent='말하기'};r.start()}
 function bizPick(noProg){const b=B();return `<div class="gl">사업</div>${chips('b',BIZ.map(x=>x.n))}${noProg?'':`<div class="gl">프로그램</div>${b.n==='기타'?field('custom','사업·프로그램'):chips('p',b.p)}`}`}
-function f2(...a){return `<div class="f2">${a.join('')}</div>`}
+function f2(...a){return a.join('')}
 function steps(a){return `<div class="steps">${a.map((s,i)=>`<div class="st"><b class="n">${i+1}</b><span>${s}</span></div>`).join('')}</div>`}
 function pane(title,body){return `<section class="pane"><div class="hd"><button class="back" onclick="go('home')">← 홈</button><h2>${title}</h2></div><div class="bd">${body}</div></section>`}
 function rpane(inner){return `<section class="pane" id="R">${inner}</section>`}
@@ -222,41 +249,40 @@ const hash=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))|0;retur
 const VIEWS={};let VIEW='home';
 function go(v){location.hash=v}
 window.addEventListener('hashchange',()=>{VIEW=location.hash.slice(1)||'home';render()});
-function render(){window.RIGHT=null;document.querySelector('header').style.display=VIEW==='home'||!VIEWS[VIEW]?'none':'flex';const app=document.getElementById('app');const f=VIEWS[VIEW]||VIEWS.home;
+function render(){window.RIGHT=null;FL=[];document.querySelector('header').style.display=VIEW==='home'||!VIEWS[VIEW]?'none':'flex';const app=document.getElementById('app');const f=VIEWS[VIEW]||VIEWS.home;
  const ae=document.activeElement&&document.activeElement.id;app.innerHTML=f();if(window.RIGHT)RIGHT();
  if(ae){const el=document.getElementById(ae);if(el&&el.tagName!=='BUTTON'){el.focus();const n=el.value.length;try{el.setSelectionRange(n,n)}catch(e){}}}}
-function view(title,leftBody,rightFn){window.RIGHT=()=>{const r=document.getElementById('R');if(r)r.innerHTML=rightFn()};return `<div class="view">${pane(title,leftBody)}${rpane('')}</div>`}
+function view(title,leftBody,rightFn){leftBody=leftBody.replace('%%IBOX%%',ibox());window.RIGHT=()=>{const r=document.getElementById('R');if(r)r.innerHTML=rightFn()};return `<div class="view">${pane(title,leftBody)}${rpane('')}</div>`}
 
 /* ================= 홈 ================= */
+const SV={mail:'<path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/>',mega:'<path d="M3 11v2l13 5V6L3 11z"/><path d="M16 9a3 3 0 0 1 0 6"/><path d="M6 13v4h3"/>',heart:'<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/>',doc:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/>',mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',fire:'<path d="M12 21c4 0 6-3 6-6 0-4-3-6-4-9-1 3-3 4-3 4s-1-2-1-4c-3 2-4 6-4 9 0 3 2 6 6 6z"/>',leaf:'<path d="M5 19c0-8 6-14 15-14 0 9-6 15-14 15"/><path d="M5 19 13 11"/>',link:'<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v6H4V6h6"/>',pen:'<path d="M4 20h4L19 9l-4-4L4 16z"/>',sprout:'<path d="M12 21v-9"/><path d="M12 12c0-4 3-7 8-7 0 4-3 7-8 7z"/><path d="M12 14c0-3-2.5-5.5-7-5.5 0 3 2.5 5.5 7 5.5z"/>',search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>'};
+const sv=(n,w)=>`<svg viewBox="0 0 24 24" ${w?`width="${w}" height="${w}"`:''} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SV[n]}</svg>`;
 const HL=[
-['업무 프로젝트 · 사업계획서',"S.doc=0;go('project')",'프로젝트'],
-['업무 프로젝트 · 결과보고서',"S.doc=1;go('project')",'프로젝트'],
-['업무 프로젝트 · 홍보물',"S.doc=2;go('project')",'프로젝트'],
+['사업계획서',"S.doc=0;go('project')",'프로젝트'],
+['결과보고서',"S.doc=1;go('project')",'프로젝트'],
+['홍보물(포스터·카드뉴스)',"S.doc=2;go('project')",'프로젝트'],
 ['프로그램 계획서',"S.pl=0;go('plan')",''],
 ['프로그램 일지',"S.pl=1;go('plan')",''],
-['메모·녹음 → 회의록·서식',"go('memo')",''],
-['이달의 추천 프로그램',"go('month')",''],
-['맞춤형 프롬프트 생성',"go('gen')",'원픽'],
-['프롬프트 디자인실',"go('room')",'원픽']];
-const HQ=[['msg','문자·소통','✉'],['promo','홍보·안내','📣'],['donor','후원 관리','💚'],['plan','계획·일지','📝'],['memo','메모·녹음','🎙'],['month','이달의 추천','📅'],['gen','맞춤 프롬프트','✨'],['vent','빡침 번역기','🔥'],['mind','마음챙김','🌿']];
+['회의록 (메모·녹음)',"S.mf=0;go('memo')",''],
+['공문 (메모·녹음)',"S.mf=1;go('memo')",''],
+['상담일지·사례회의록',"S.mf=4;go('memo')",''],
+['블로그·인스타·홈페이지 글',"S.pr=1;go('promo')",'원픽'],
+['맞춤형 프롬프트 생성',"go('gen')",'원픽']];
+const HQ=[['msg','mail','문자·소통','보호자·이용자 문자'],['promo','mega','홍보·안내','소식·SNS·포스터'],['donor','heart','후원 관리','감사·사용 안내'],['plan','doc','계획·일지','프로그램 계획→일지'],['month','cal','이달의 추천','월별 프로그램 5'],['room','spark','프롬프트 디자인실','업무·일상 원픽'],['memo','mic','메모·녹음','회의록·서식 채우기'],['vent','fire','빡침 번역기','공감→순화 문구'],['mind','leaf','마음챙김','나를 위한 5줄']];
 const HA=['ChatGPT','제미나이','Claude','Canva','데스크톱 앱'];
+const HLK=[['복지관 홈페이지','https://www.a-sak.or.kr/','공지·사업소식'],['프로그램 안내','https://www.a-sak.or.kr/services/programs2.php','대상별 프로그램'],['스마트재활센터','https://www.a-sak.or.kr/services/smart.php','디지털 재활'],['사업소식','https://www.a-sak.or.kr/news/business.php','활동 사례 보기'],['홍보물','https://www.a-sak.or.kr/news/promotion.php','월별 기록']];
+const HLK2=[['장애인복지시설협회','https://kawid.or.kr/bbs/board.php?bo_table=B20&sca=%ED%98%91%ED%9A%8C%EA%B3%B5%EC%A7%80','공문·서식 안내'],['경기복지재단','https://ggwf.gg.go.kr/archives/category/busi002/evaluation_bbs','시설평가 자료']];
 VIEWS.home=()=>`<div class="hp">
-<div class="hhero"><div class="tx"><span class="bdg">종사자 실습용</span><h1>용인시기흥장애인복지관 <em>AI 업무도우미</em></h1><p>사업 문서 · 프로그램 계획·일지 · 문자와 홍보 · AI 앱 활용법을 한곳에서</p>
-<div class="srch">🔍<input id="hs" aria-label="업무 찾기" oninput="hsearch(this.value)"><span style="font-size:12px;color:#8a9590;white-space:nowrap">업무 찾기 (예: 후원, 일지)</span></div></div><div class="ph"></div></div>
+<section class="hhero"><div class="tx"><span class="bdg">${sv('sprout',18)}사회복지법인 양지바른 · 용인시기흥장애인복지관</span><span class="kick">종사자 AI 실무 교육 · 업무도우미</span><h1>함께여서 빛나는 업무, <em>AI 업무도우미</em></h1><p class="sub">사업 문서는 프로젝트로, 문자·홍보·일지는 고르고 적으면 바로 완성으로.</p>
+<div class="srch">${sv('search',18)}<input id="hs" aria-label="업무 찾기" oninput="hsearch(this.value)"><span style="font-size:12px;white-space:nowrap">찾을 업무 (예: 후원, 일지, 블로그)</span></div></div><div class="ph"></div></section>
 <div class="cols">
-<div class="col"><h3>업무 서식·프로젝트</h3><ul class="ol" id="hl">${HL.map((h,i)=>`<li data-k="${h[0]}"><span class="no">${i+1}</span><span class="nm">${h[0]}</span>${h[2]?`<span class="tg">${h[2]}</span>`:''}<button class="ob" onclick="${h[1]};save()">열기</button></li>`).join('')}</ul></div>
-<div class="col"><h3>업무 바로가기</h3><div class="qg" id="hq">${HQ.map(([k,n,ic])=>`<button class="q" data-k="${n}" onclick="go('${k}')"><span class="ic">${ic}</span>${n}</button>`).join('')}</div></div>
-<div class="col"><h3>바로가기</h3><div class="lk">
-<div class="sec">AI 앱 활용법</div>${HA.map((n,i)=>`<button data-k="${n}" onclick="S.app=${i};S.fc=0;S.sub=0;save();go('apps')">${n}<small>기능·사용법 ›</small></button>`).join('')}
-<div class="sec">기관·지침</div>
-<a data-k="복지관 홈페이지" href="https://www.a-sak.or.kr/" target="_blank" rel="noopener">복지관 홈페이지<small>↗</small></a>
-<a data-k="장애인복지시설협회 공지" href="https://kawid.or.kr/bbs/board.php?bo_table=B20&sca=%ED%98%91%ED%9A%8C%EA%B3%B5%EC%A7%80" target="_blank" rel="noopener">장애인복지시설협회 공지<small>↗</small></a>
-<a data-k="스마트재활센터" href="https://www.a-sak.or.kr/services/smart.php" target="_blank" rel="noopener">스마트재활센터 안내<small>↗</small></a>
-<a data-k="장애인식개선" href="https://www.a-sak.or.kr/services/awareness.php" target="_blank" rel="noopener">장애인식개선 사업 안내<small>↗</small></a>
-<a data-k="경기복지재단 시설평가" href="https://ggwf.gg.go.kr/archives/category/busi002/evaluation_bbs" target="_blank" rel="noopener">경기복지재단 시설평가<small>↗</small></a>
-</div></div>
+<section class="col"><h3>업무 서식·프로젝트<small>시연용</small></h3><ul class="ol" id="hl">${HL.map((h,i)=>`<li data-k="${h[0]}"><span class="no">${i+1}</span><span class="nm" onclick="${h[1]};save()">${h[0]}</span>${h[2]?`<span class="tg">${h[2]}</span>`:''}<button class="ob" onclick="${h[1]};save()">${sv('pen',13)}열기</button></li>`).join('')}</ul></section>
+<section class="col"><h3>업무 바로가기</h3><div class="qg" id="hq">${HQ.map(([k,ic,n,d])=>`<button class="q" data-k="${n} ${d}" onclick="go('${k}')">${sv(ic)}<b>${n}</b><span>${d}</span></button>`).join('')}</div>
+<div class="aig"><div class="t">AI 앱 활용법<small>기능·사용법·프롬프트</small></div><div class="r">${HA.map((n,i)=>`<button data-k="${n}" onclick="S.app=${i};S.fc=0;S.sub=0;save();go('apps')">${n}</button>`).join('')}</div></div></section>
+<section class="col"><h3>관련 기관 바로가기</h3><div class="lk"><div class="sec">용인시기흥장애인복지관</div>${HLK.map(([t,u,d])=>`<a data-k="${t}" href="${u}" target="_blank" rel="noopener">${t}<span>${d}</span>${sv('link',14)}</a>`).join('')}<div class="sec">지침·평가</div>${HLK2.map(([t,u,d])=>`<a data-k="${t}" href="${u}" target="_blank" rel="noopener">${t}<span>${d}</span>${sv('link',14)}</a>`).join('')}</div>
+<div class="ghelp"><b>꼭 지켜요</b> 실명 대신 이용자A · 주민번호·진단명·연락처 넣지 않기 · AI 초안은 직접 확인</div></section>
 </div></div>`;
-function hsearch(q){q=q.trim();document.querySelectorAll('#hl li,#hq .q,.lk [data-k]').forEach(e=>{const m=!q||e.dataset.k.includes(q);e.style.opacity=m?1:.25;e.classList.toggle('on',!!q&&m)})}
+function hsearch(q){q=q.trim();document.querySelectorAll('#hl li,#hq .q,.lk a,.aig button').forEach(e=>{const m=!q||e.dataset.k.includes(q);e.style.opacity=m?1:.3;e.classList.toggle('on',!!q&&m)})}
 
 /* ================= ① 업무 프로젝트 ================= */
 const DOCS=['사업계획서','결과보고서','홍보물'];
