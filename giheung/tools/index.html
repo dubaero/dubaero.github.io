@@ -4045,6 +4045,18 @@ var CARE_VERSES={
   ['용암펑','용: 용암 경보! 내 머리에서 김이 폴폴!','암: 암만 생각해도 복사기도 저보다 덜 과열됐겠어요.','펑: 펑 하고 웃었으면, 이제 내 자리로 천천히 돌아와요.']]
 };
 var CARE_END={mild:'지금은 내 마음부터 챙겨도 괜찮아요.',spicy:'감정은 여기 두고, 꼭 전할 기준과 부탁만 챙겨요.',burst:'폭발은 여기까지. 실제로 보낼 문자는 아래에서 차분하게 골라요.'};
+function todakReaction(s, value){
+  var t=s?s.n:value;
+  var poses=[
+    [/전화|콜|연락|민원|잔소리|소음|경적/, 'listen','귀 기울여 들어요', 'M66 87Q45 83 45 58 M86 87Q110 88 115 103','M25 49q-9 8 0 17 M17 43q-14 14 0 29'],
+    [/서식|마감|자료|기록|정리|서류|양식|보고|실적|인수인계/, 'paper','서류를 함께 펼쳐요','M66 89Q47 111 35 92 M86 89Q104 113 114 93','M22 68h24v27H22z M27 76h13 M27 81h13 M27 86h9'],
+    [/버스|시간|일정|송영|약속|동선|예약|취소|대기|외출|택배/, 'time','함께 시간을 확인해요','M66 90Q48 109 33 105 M86 91Q107 84 111 63','M121 52a12 12 0 1 1-24 0a12 12 0 0 1 24 0 M109 44v8l5 3'],
+    [/가족|집|저녁|식사|밥|서운|지쳐|속상|억울|상담/, 'pat','가만히 토닥여요','M64 88Q59 114 86 91 M88 88Q92 114 66 91','M114 67q0-8-7-5q-7-3-7 5q0 5 7 9q7-4 7-9Z']
+  ];
+  var r=poses.find(function(x){return x[0].test(t)})||[null,'open','두 손 펴고 같이 공감해요','M64 88Q46 102 34 85 M88 88Q108 102 120 85','M123 72l7-3 M122 66l3-7 M30 72l-7-3'];
+  var style=['calm','warm','bright'][L];
+  return '<figure class="todak" data-pose="'+r[1]+'" data-tone="'+style+'"><svg viewBox="0 0 152 149" aria-hidden="true" focusable="false"><ellipse cx="76" cy="74" rx="64" ry="60" class="td-back"/><ellipse cx="76" cy="134" rx="31" ry="5" class="td-shadow"/><path class="td-prop" d="'+r[4]+'"/><g class="td-person"><path class="td-limb" d="M75 104L63 132h-9M77 104l13 28h9"/><path class="td-shirt" d="M65 77q11-8 22 0l6 32H59z"/><path class="td-arms td-limb" d="'+r[3]+'"/><g class="td-head"><circle class="td-face" cx="76" cy="53" r="25"/><path class="td-limb td-hair" d="M76 29q-3-12 5-15m-5 15q5-9 12-8"/><path class="td-eye" d="M63 53q3-4 6 0m14 0q3-4 6 0"/><circle class="td-blush" cx="60" cy="60" r="4"/><circle class="td-blush" cx="92" cy="60" r="4"/><path class="td-mouth" d="'+(L===2?'M71 62q5-6 10 0q-5 7-10 0Z':'M71 60q5 6 10 0')+'"/></g></g></svg><figcaption><strong>토닥이</strong><small>'+r[2]+'</small></figcaption></figure>';
+}
 function emp(fresh){
   var S=cur>=0?FLAT[cur]:null,key=FL+L+':'+cur;
   if(fresh||!said[key]){
@@ -4056,7 +4068,7 @@ function emp(fresh){
   }
   var x=said[key];
   window._ventSay2=x.s.slice(1).join(' ')+' '+x.t+' '+x.e+' '+x.g;
-  $('#v2-emp').innerHTML='<h4>같이 빡쳐 주기 · '+LV3[L][1]+' '+LV3[L][0]+' · '+CARE_TASTE[FL]+' · 삼행시 <span class="samk">'+esc(x.s[0])+'</span></h4>'+x.s.slice(1).map(samL).join('')+'<p>'+esc(x.t+' '+x.e)+'</p><p class="v3">'+esc(x.g)+'</p><div class="va"><button type="button" class="btn mini" id="v2-again">다른 말</button><button type="button" class="btn mini" id="v2-say">소리로 듣기</button></div>';}
+  $('#v2-emp').innerHTML='<h4>같이 빡쳐 주기 · '+LV3[L][1]+' '+LV3[L][0]+' · '+CARE_TASTE[FL]+' · 삼행시 <span class="samk">'+esc(x.s[0])+'</span></h4><div class="td-content">'+todakReaction(S,$('#v2-in').value)+'<div class="td-copy"><div class="td-verse">'+x.s.slice(1).map(samL).join('')+'</div><div class="td-prose"><p class="td-empathy"><strong>토닥이의 공감</strong> '+esc(x.t+' '+x.e)+'</p><p class="td-kindness">'+esc(x.g)+'</p></div></div></div><div class="va"><button type="button" class="btn mini" id="v2-again">다른 말</button><button type="button" class="btn mini" id="v2-say">소리로 듣기</button></div>';}
 var AP=[
  ['사실·기준 안내',function(S,op,L){return [op,S.fact,S.rule,S.ask,L===2?S.firm:'',L===2?'협조 부탁드립니다.':'감사합니다.'];}],
  ['공감 먼저',function(S,op){return [op,'여러 사정이 있으셨을 거라 생각합니다.',S.fact,S.rule,S.ask,'감사합니다.'];}],
@@ -4599,6 +4611,44 @@ document.addEventListener('click',function(e){
  #v2-tool .sright>.breath{height:11rem;display:grid;grid-template-columns:72px minmax(0,1fr);align-items:start}
  #v2-tool .vemp h4{line-height:1.35}
 }
+</style>
+
+<style id="giheung-todak-vent">
+#v2-tool .td-content{display:grid;grid-template-columns:minmax(116px,34%) minmax(0,1fr);gap:12px;align-items:start}
+#v2-tool .todak{--td-ink:#263d37;--td-shirt:#57c7a7;--td-halo:#e3f5ec;--td-accent:#317862;min-width:0;margin:0;text-align:center}
+#v2-tool .todak[data-tone=warm]{--td-shirt:#ee906e;--td-halo:#fff0e4;--td-accent:#9b4727}
+#v2-tool .todak[data-tone=bright]{--td-shirt:#b7a3eb;--td-halo:#f0eafe;--td-accent:#61469f}
+#v2-tool .todak svg{display:block;width:100%;max-width:170px;height:auto;margin:0 auto}
+#v2-tool .todak figcaption{color:var(--td-ink);line-height:1.3}
+#v2-tool .todak figcaption strong{font-size:16px}
+#v2-tool .todak figcaption small{display:block;color:var(--td-accent);font-size:11px;font-weight:750}
+#v2-tool .td-back{fill:var(--td-halo)}#v2-tool .td-shadow{fill:var(--td-ink);opacity:.12}
+#v2-tool .td-prop{fill:none;stroke:var(--td-accent);stroke-width:3.5;stroke-linejoin:round;stroke-linecap:round;animation:todak-prop 900ms ease-in-out 2}
+#v2-tool .td-limb,#v2-tool .td-eye,#v2-tool .td-mouth{fill:none;stroke:var(--td-ink);stroke-linejoin:round;stroke-linecap:round;stroke-width:4.5px}
+#v2-tool .td-eye,#v2-tool .td-mouth,#v2-tool .td-hair{stroke-width:3px}
+#v2-tool .td-shirt,#v2-tool .td-face{stroke:var(--td-ink);stroke-width:3.5;stroke-linejoin:round}
+#v2-tool .td-face{fill:#ffe3be}#v2-tool .td-shirt{fill:var(--td-shirt)}#v2-tool .td-blush{fill:#f29497;opacity:.8}
+#v2-tool .td-head,#v2-tool .td-arms,#v2-tool .td-prop{transform-box:fill-box;transform-origin:center}
+#v2-tool .todak[data-pose=listen] .td-head{animation:todak-listen 1s ease-in-out 2}
+#v2-tool .todak[data-pose=paper] .td-arms{animation:todak-paper 950ms ease-in-out 2}
+#v2-tool .todak[data-pose=time] .td-head{animation:todak-check 950ms ease-in-out 2}
+#v2-tool .todak[data-pose=pat] .td-arms{animation:todak-pat 900ms ease-in-out 2}
+#v2-tool .todak[data-pose=open] .td-arms{animation:todak-open 900ms ease-in-out 2}
+@keyframes todak-prop{50%{transform:translateY(-3px)}}
+@keyframes todak-listen{50%{transform:rotate(-11deg) translateX(-4px)}}
+@keyframes todak-paper{50%{transform:translateY(-8px) rotate(-4deg)}}
+@keyframes todak-check{50%{transform:rotate(10deg) translate(4px,2px)}}
+@keyframes todak-pat{50%{transform:scaleX(.88) translateY(-3px)}}
+@keyframes todak-open{50%{transform:scaleX(1.12) translateY(-5px)}}
+#v2-tool .td-verse p{color:#282630;line-height:1.55;overflow-wrap:anywhere}
+#v2-tool .td-prose{margin-top:1.55em}
+#v2-tool .td-prose p{margin:0;color:#57365f;font-weight:650;line-height:1.55;overflow-wrap:anywhere}
+#v2-tool .td-prose .td-empathy{background:#f5edf8;border-left:3px solid #a479ab;padding:7px 8px;border-radius:0 7px 7px 0}
+#v2-tool .td-prose strong{display:block;color:#57365f}
+#v2-tool .td-prose .td-kindness{color:#245546;margin-top:5px}
+#v2-tool .td-copy,#v2-tool .td-copy *{transform:none!important;animation:none!important;transition:none!important}
+@media(max-width:450px){#v2-tool .td-content{grid-template-columns:92px minmax(0,1fr);gap:8px}#v2-tool .todak figcaption small{font-size:10px}}
+@media(prefers-reduced-motion:reduce){#v2-tool .todak svg *{animation:none!important;transition:none!important}}
 </style>
 </body>
 </html>

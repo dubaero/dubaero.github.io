@@ -1129,3 +1129,6 @@ details.plan-more .aibar{border-style:dashed}
 .gh-inline-row .mic{flex:none}
 .gh-inline-fields:has([data-input=act]) textarea,.gh-inline-fields:has([data-input=events]) textarea{min-height:100px}
 @media(max-width:859px){.gh-inline-row :is(input,textarea){font-size:16px;min-height:38px}.gh-inline-row{grid-template-columns:minmax(79px,26%) minmax(0,1fr);gap:5px}}
+
+/* Compact prompt panels; publish-ready messages and drafts retain their spacing. */
+#prompt,#ad-prompt{line-height:1.42;padding:8px 10px;min-height:170px}

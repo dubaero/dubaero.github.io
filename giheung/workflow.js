@@ -3,7 +3,7 @@
 "use strict";
 global.mountGiheungWorkflow=function(host,options){
  const root=host.attachShadow({mode:"open"}),page=global.document;
- const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=13";
+ const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=14";
  const body=page.createElement("div");body.className="group-body";body.innerHTML='<div class="wrap"><main id="app"></main></div>';
  root.append(style,body);
  const document={
@@ -1512,12 +1512,62 @@ function gwBuild(v){
   const nL=[...nx]; for(const l of nb){ if(nL.length>=Math.max(3,Math.min(5,T.length+2))) break; if(!nL.some(x=>x.slice(0,8)===l.slice(0,8))) nL.push(l); }
   return {fact, think:tL.map(x=>"○ "+x).join("\n"), support:reportFmt(v.support), next:nL.map(x=>"○ "+x).join("\n")};
 }
+
+function ghProgramSequence(program,area){
+ var exact={"동화발레": "동화 장면과 동작을 고르기|장면 그림으로 오늘 표현할 인물을 고르고, 앉아서 할지 서서 할지 정합니다.|음악에 맞춰 짧은 동작 연결|팔 모양과 발 움직임을 따로 시범 보인 뒤 두 동작을 연결합니다. 균형이 어렵다면 앉아서 팔 동작으로 바꿉니다.|장면 돌아보고 공유 선택|표현해 본 장면을 고르고 함께 보여 주기 또는 관람 중 원하는 방법을 선택합니다.|장면 카드·미끄럼 점검·음악", "행복신문": "받고 싶은 신문과 전달 방식 확인|정기 수신 의사와 주소 변경 여부를 안전하게 확인하고, 기존 목록과 비교합니다.|발송 목록 대조와 발송|신문 수량과 익명 식별번호를 대조해 발송하고 반송이나 중복 건을 따로 분류합니다.|수신 변경과 누락 확인|반송·수신 중지·재발송 요청을 나눠 다음 발송 목록에 반영합니다.|공개하지 않는 구독 명단·발송 점검표", "명절지원": "명절 물품과 수령 희망 확인|배부 대상 기준과 수령 방법을 확인하고 필요 없는 물품이나 방문이 어려운 가정을 확인합니다.|물품 포장과 안전한 전달|품목별 수량과 파손 여부를 확인하고 현장 수령·방문 중 합의한 방식으로 전달합니다.|미수령·잔여 수량 대조|전달, 재연락, 잔여 물품을 구분해 정리하고 필요한 경우에만 수령 방식을 다시 확인합니다.|품목·수량표·익명 전달 확인표", "오늘하루쉼표": "외출 장벽과 원하는 일정 듣기|당사자와 가족에게 각각 원하는 여가와 기다리거나 쉬어야 하는 지점을 확인합니다.|선택한 쉼·여가 동행|가정별로 선택한 장소나 체험을 진행하고, 혼잡·피로가 생기면 휴식 또는 짧은 대체 코스로 바꿉니다.|가정별 선택과 개선점 기록|당사자가 좋았던 활동과 다시 하지 않을 활동을 정하고 다음 외출에 필요한 지원을 기록합니다.|맞춤 여가 카드·접근성 지도·휴식 계획", "로봇보행재활": "휴식 신호 고르기와 치료계획 확인|담당 치료사가 기존 계획, 금기와 중단 기준을 확인하고 참여자에게 불편을 알리는 방법을 안내합니다.|동작 시범 및 승인된 기기 적용|치료사가 승인된 단계에서 기기를 맞추고 참여자가 신호를 보내면 즉시 쉬거나 중단합니다.|수행 단계와 불편 신호 확인|기기 단계, 실제 수행, 보조 수준과 중단 여부를 분리해서 기록합니다.|담당자 승인 기기·치료 기록지·휴식 신호 카드", "수중재활운동": "입수·이동 지원과 컨디션 확인|담당자가 입수 가능 여부, 미끄럼 위험, 이동·탈의 지원과 중단 신호를 확인합니다.|물속에서 승인 동작 체험|치료사가 승인한 범위에서 단순 동작을 보여 주고 안전요원과 담당자 배치 아래 진행합니다.|퇴수·휴식과 실제 수행 확인|퇴수 후 상태를 살피고 진행 시간, 불편, 중단과 보조 수준을 구분해 기록합니다.|미끄럼 방지 장비·입퇴수 체크표·휴식 장소", "운동치료": "치료 목표와 선호 동작 확인|담당 치료사가 현재 움직임과 계획을 대조하고 당사자에게 불편 표현 방법을 묻습니다.|승인 동작과 직접 수행 구분|승인 동작을 한 가지씩 진행하며 직접 움직인 부분과 필요한 도움을 분리합니다.|통증 신호와 다음 치료 조정|변화 단정 없이 관찰한 움직임과 불편 신호를 적고 담당자와 다음 활동을 조정합니다.|치료계획·승인 보조도구·관찰표", "스피치업": "읽을 글과 발표 방식 고르기|짧은 글 중 관심 주제를 택하고 혼자 읽기·함께 읽기·듣기 중 편한 방식을 선택합니다.|핵심 문장 찾고 자기 말로 설명|문장을 한 덩어리씩 살피며 핵심어 표시와 한 줄 설명을 진행하고 필요하면 질문 카드를 줍니다.|전달된 핵심 내용 확인|발음이 아니라 내용 전달을 기준으로 당사자에게 쉬웠던 질문과 어려웠던 문장을 확인합니다.|짧은 글·핵심어 카드·질문 카드", "로봇코딩": "완성 로봇과 움직임 선택|두 가지 모델을 비교하고 움직임 한 가지를 골라 블록 순서로 바꿉니다.|블록 조립·실행·수정|같은 부품을 맞춘 뒤 명령을 실행하고 예상과 다른 동작 한 곳을 한 단계씩 수정합니다.|다른 입력으로 재실행|명령 하나를 바꿔 동작이 달라지는지 확인하고 스스로 해결한 오류를 표시합니다.|로봇 키트·큰 글자 블록 도식", "디지털드로잉": "주제·브러시와 화면 설정|예시와 화면 밝기·확대 옵션을 확인한 후 그리고 싶은 소재와 도구를 선택합니다.|레이어·색을 나누어 그림 그리기|스케치와 채색을 분리하되 단계 수를 줄일 수 있도록 두 가지 작업 흐름을 제안합니다.|저장과 공유 방식 선택|파일 이름과 내보내기 형식을 정하고 전시·게시 여부는 당사자가 결정합니다.|연습용 태블릿·터치펜·저장 예시", "직업상담": "관심 직무 고르기|당사자가 해 본 일과 하고 싶은 일을 직무 카드에서 고릅니다.|선택한 과업 직접 시도와 필요 지원 확인|간단한 작업 경험을 확인하거나 모의 과제를 보고 원하는 근무 환경·도움·이동 조건을 구분합니다.|직무 자기평가와 연계 선택|기록한 선호 조건을 함께 읽고 구인 정보 탐색 또는 다음 상담을 당사자가 선택합니다.|직무 카드·선호 조건표·상담 기록지", "취업 전 교육": "채용 공고와 면접 역할 확인|희망 분야 공고에서 요구 과업과 준비 항목을 함께 표시합니다.|자기소개와 모의 면접|경험 한 가지를 자기소개에 연결하고 면접관 질문에 답하는 연습을 합니다.|피드백 한 가지와 다음 과제|당사자가 바꾸고 싶은 답을 정해 다시 말해 보고 서류·면접 준비를 체크합니다.|가상 채용 공고·이력서 예시·질문 카드", "취업 후 적응지원": "어려운 업무 상황 확인|당사자의 이야기를 먼저 듣고 일하는 환경, 지시 이해, 휴식 시간을 구분해 살핍니다.|지원 조정 및 의사표현 연습|요청 문장이나 작업 순서표 중 필요한 도구를 고르고 현장 공유 동의를 확인합니다.|조정 효과 확인 일정 합의|바꾼 지원과 아직 어려운 지점을 나누고 다음 확인 시점과 연락 방식을 합의합니다.|지원 요청 카드·익명 관찰표", "마음ON 부모교육": "익명 교육 주제 선택|양육 경험 공개를 요구하지 않고 보호자가 궁금한 주제를 카드로 고릅니다.|교육 사례 읽고 적용 문장 연습|전문가 설명 뒤 가정에서 써 볼 경청·휴식 요청 문장을 자기 상황에 맞게 연습합니다.|가정 적용 한 가지 정리|부담을 줄여 볼 행동 하나를 골라 자기 메모에 남기고 자료나 자원 연계는 선택으로 안내합니다.|익명 질문 카드·사례지·지원 정보", "반찬지원서비스": "품목·주의 대상과 수령 확인|반찬 품목과 보관 방법을 점검하고 수령 방식과 알레르기 안내가 필요한지 확인합니다.|보냉 포장과 전달|가정별 익명 식별번호와 포장 상태를 확인한 후 전달하고 대면 불가 시 합의된 방식만 사용합니다.|미전달·잔여·다음 요청 기록|전달 건과 재연락 건을 구분하고 다음 품목 또는 수령 방식 요청을 별도 기록합니다.|수량표·보냉 가방·전달 확인표", "클린업서비스": "세탁 희망 품목 접수|당사자와 수거 품목을 확인하고 고가품·오염·특수 소재는 별도 표시합니다.|수거·업체 전달·품목 검수|수거 목록과 인계 품목을 대조하고 업체 전달 후 반환 수량과 상태를 점검합니다.|돌려드리기와 누락 확인|수령 확인과 분실·재세탁 요청을 구분해 기록하고 필요 시 다음 수거일을 안내합니다.|익명 품목표·분리 가방·인계 확인표", "가족잔치": "참여 역할과 편한 동선 고르기|가족과 함께 무대 참여, 체험, 관람 중 희망 역할을 정하고 혼잡하지 않은 동선을 안내합니다.|가족 체험과 접근 가능한 행사 운영|여러 체험을 자기 속도로 이용할 수 있게 하고 무대·화장실·휴식 공간 안내를 유지합니다.|귀가와 원하는 방식으로 의견 받기|귀가와 참석 집계를 분리해 확인하고 한 줄·그림 소감 중 원하는 방법을 제시합니다.|시각 일정표·동선 표지·의견 카드"};
+ var e=exact[(program||"").trim()];if(e){var q=e.split("|");return {name:program,steps:[[q[0],q[1],q[6]],[q[2],q[3],q[6]],[q[4],q[5],"실제 수행·지원 기록표"]]};}
+
+ var G=[
+ [/로봇보행|스마트재활|재활|수중|아쿠아|운동치료|작업치료|스마트짐/, '재활', '시작 자세·휴식 신호 고르기|담당 치료사가 계획과 금기사항을 확인하고 참여자가 쉬는 신호를 정합니다.|동작 시범과 단계별 시도|승인된 동작·기구를 담당자가 한 단계씩 시범 보입니다. 참여자는 원하는 강도나 대체 방법을 고릅니다.|수행 단계·불편 신호 확인|직접 수행한 단계와 받은 지원을 나누어 기록하고 중단 신호가 있었는지 확인합니다.', '승인된 기구·휴식 신호 카드'],
+ [/언어|인지|스피치|두드림|우리두리|우리함께|뮤직TOUCH|톡투게더|위드고|P-Box|D-Box/, '의사소통', '응답 방법 선택|그림·말·버튼 중 편한 응답 방식을 고르고 과제 예시를 하나 살펴봅니다.|쉬운 문장·그림으로 응답|한 번에 하나씩 안내하고 응답 시간을 기다립니다. 요청이 있을 때만 시각 단서를 제공합니다.|편했던 단서 확인|참여자가 편했던 표현 방법을 표시하고 기록자는 실제 응답과 지원 수준을 나눕니다.', '그림카드·의사표현 도구'],
+ [/정보화|스마트 청춘|로봇코딩|디지털드로잉|키오스크|지역사회훈련/, '디지털', '기기와 접근 방식 고르기|글자 크기와 입력 방식을 설정하고 개인정보가 없는 연습 화면을 엽니다.|조작 순서 직접 따라 하기|담당자가 먼저 버튼을 보여 주고 참여자는 검색·그리기·저장 중 고른 과제를 한 단계씩 수행합니다.|새 화면에서 같은 기능 찾기|화면을 바꾸고 같은 기능을 찾은 단계와 도움이 필요한 단계를 확인합니다.', '연습용 기기·큰 글자 순서표'],
+ [/직업|취업|일자리|직종|직무|지원고용|훈련대학|전환기/, '직업', '관심 직무 고르기|직무 그림으로 해 보고 싶은 일을 고르고 작업 도구의 안전을 확인합니다.|선택한 과업 직접 시도|담당자 시범 뒤 참여자가 분류·검수·포장 중 선택한 과업을 수행합니다. 필요하면 그림 힌트를 제공합니다.|직무 자기평가·다음 선택|편했던 단계와 어려웠던 단계를 말이나 그림으로 표시하고 다음에 할 과업을 고릅니다.', '직무 카드·안전한 작업 도구·체크표'],
+ [/가족|마음ON|P\.O\.P|보호자/, '가족', '가족별 희망 역할 확인|당사자와 가족이 각자 원하는 활동을 고르고 지원이 필요한 부분을 합의합니다.|선택한 활동 함께 체험|당사자가 가능한 역할을 직접 맡고 가족은 요청받은 부분만 돕습니다. 원할 때 쉬거나 관찰로 바꿀 수 있습니다.|가족별 소감과 후속 연계|각자 다시 해 보고 싶은 활동을 선택하고 희망하는 경우에만 후속 자원을 안내합니다.', '역할 카드·체험 재료·쉬운 소감 카드'],
+ [/인식개선|포니야|권리|공모전|법률/, '권리·인식개선', '생활 속 상황 살펴보기|도움, 이동, 대화 상황을 그림으로 보고 무엇을 바꾸고 싶은지 고릅니다.|존중 행동을 역할극으로 연습|먼저 묻고, 대답을 기다리고, 원치 않는 지원을 멈추는 행동을 바꾸어 연습합니다.|일상에서 실천할 행동 정하기|참여자가 한 가지 행동을 말·글·그림 중 편한 방법으로 표현합니다.', '상황 그림·역할 카드·실천 카드'],
+ [/재가|하이드림|이·미용|반찬|김장|클린업|주거|사례관리|잔고장/, '재가·사례', '지원 희망과 접촉 방법 확인|당사자가 원하는 항목과 방문·연락 방식을 고르고 담당자가 제공 범위를 설명합니다.|제공한 지원과 당사자 선택 확인|배달·점검·지원 연계 중 맡은 일을 하고 당사자가 직접 할 부분은 요청에 따라 돕습니다.|미해결 사항과 후속 연락 정리|제공·보류 사항을 구분하고 동의받은 범위에서만 관련 자원을 안내합니다.', '지원 체크표·기록지'],
+ [/요리|ADL|가사|식단/, '요리·생활', '재료 및 맡을 역할 고르기|참여자가 역할을 고르고 담당자는 알레르기와 뜨거운 도구의 안전을 확인합니다.|그림 레시피로 직접 조리|한 단계씩 시범을 본 뒤 고른 역할을 직접 하고, 위험한 도구만 담당자가 보조합니다.|완성 확인·정리·다음 선택|참여자가 정리할 역할과 다음 활동을 고르고 직접 한 부분을 기록합니다.', '그림 레시피·손 씻기 안내·안전한 조리도구'],
+ [/나들이|문화공연|문화데이트|길 따라|마켓|명절|연말|행사|문화기행/, '지역 체험', '동선과 코스 선택|장소 사진을 보며 선호 코스를 고르고 이동·화장실·휴식 공간과 우천 대안을 점검합니다.|선택한 현장 코스 체험|참여자가 원하는 활동에 참여하고 요청이 있을 때 동행합니다. 혼잡하면 대체 코스로 전환합니다.|귀가 확인과 소감 수집|귀가 여부를 확인하고 좋았던 장소와 다음에 바꿀 점을 익명으로 받습니다.', '쉬운 지도·시각 일정표·귀가 확인표'],
+ [/수영|스포츠|풋살|발레|체육|운동/, '생활체육', '참여 강도와 장비 확인|장비·동선을 확인하고 참여자가 관람, 쉬운 동작, 일반 동작 중 하나를 고릅니다.|동작 연습과 쉬는 신호|쉬운 동작부터 한 단계씩 진행하고 중간마다 난이도 조절이나 휴식 여부를 확인합니다.|직접 한 동작과 다음 선택|해 본 동작을 그림으로 점검하고 다음에 도전할 한 가지를 고릅니다.', '동작 카드·안전 표시·휴식 의자'],
+ [/예술|미술|공작소|화가|드럼|피아노|밴드|음악|플레이아트|여가|캠퍼스|교실/, '문화·예술', '재료·표현 방법 선택|재료 견본을 보고 직접 쓰고 싶은 색·소리·도구를 고릅니다.|자기 방식으로 창작|공통 단계 한 번을 보여 주고 나머지는 참여자가 고른 방식으로 표현합니다.|작품 공유 여부 선택|참여자가 발표·전시 여부를 정하며 사진이나 온라인 게시에 대한 동의는 별도로 묻습니다.', '재료 견본·창작 도구·작품 표지'],
+ [/주간|활동지원|맞춤형|생활지원/, '주간·활동지원', '그림 일정과 참여 방법 선택|참여·관찰·휴식 중 원하는 방식과 오늘 필요한 지원을 확인합니다.|선택한 생활 과제 수행|참여자가 고른 과제를 시도하고 도움은 요청이 있을 때만 한 단계씩 제공합니다.|개별 반응과 다음 일정 확인|직접 한 일과 지원받은 일을 구분하고 다음 일정에서 하고 싶은 것을 확인합니다.', '그림 일정표·의사표현 도구·과제 재료']
+ ];
+ var a=G.find(function(x){return x[0].test(program||'');})||G.find(function(x){return x[0].test(area||'');});
+ var f=a?a[2]:'참여·휴식 방법 고르기|당사자가 하고 싶은 일과 쉬는 방법을 고릅니다.|선택한 과제 시도|한 단계씩 안내하고 스스로 하는 부분과 도움이 필요한 부분을 나눕니다.|소감과 다음 활동 정하기|관찰 사실과 의견을 구분하고 참여자가 다음 활동을 선택합니다.';
+ var z=f.split('|'),p=a?a[3]:'활동별 준비물 [확인 필요]';
+ var custom=program&&Object.hasOwn((options.activityTracks||{}),program)?(options.activityTracks||{})[program]:null;
+ if(custom)return {name:program,steps:[['사전 준비와 참여 방식 확인',custom[1],p],[custom[0],custom[2],p],[z[4],z[5],'실제 수행·지원 기록표']]};
+ return {name:a?a[1]:'직접 입력',steps:[[z[0],z[1],p],[z[2],z[3],p],[z[4],z[5],'관찰표·쉬운 말/그림 소감 카드']]};
+}
+
+const ghLogDrafts=new Map();
+function ghLogSuggestions(v){
+ const g=(options.catalog||[]).find(g=>g.items.includes(v._ghprogram)),q=ghProgramSequence(v._ghprogram||v.title,g&&g.area);
+ return '<section class="field"><b>'+esc(q.name)+' · 진행 기록 가이드</b><ol>'+q.steps.map(x=>'<li><strong>'+esc(x[0])+'</strong><br>'+esc(x[1])+'</li>').join('')+'</ol><small>위 내용은 예시입니다. 운영 일지에는 실제로 한 내용만 적어 주세요.</small></section>';
+}
+function ghLogSelect(v){
+ const o=(options.catalog||[]).map(g=>'<optgroup label="'+esc(g.label)+'">'+g.items.map(p=>'<option'+(p===v._ghprogram?' selected':'')+'>'+esc(p)+'</option>').join('')+'</optgroup>').join('');
+ return '<div class="field"><label for="gh-log-program">복지관 세부 프로그램</label><select id="gh-log-program"><option value="">직접 입력</option>'+o+'</select></div>';
+}
+document.addEventListener("change",e=>{
+ if(e.target.id!=="gh-log-program"||curForm?.id!=="program")return;
+ const v=getF(curForm),key=e.target.value;
+ ghLogDrafts.set(v._ghprogram||"",v);
+ if(!ghLogDrafts.has(key)){
+   delete fvals.program;const fresh=getF(curForm);
+   fresh._ghprogram=key;if(key)fresh.title=key;
+   ghLogDrafts.set(key,fresh);
+ }
+ clearTimeout(exTimer);fvals.program=ghLogDrafts.get(key);
+ renderForm(curForm);
+ document.getElementById("gh-log-program")?.focus({preventScroll:true});
+});
+document.addEventListener("input",e=>{
+ if(e.target.id!=="ff-program-title"||curForm?.id!=="program")return;
+ const h=document.getElementById("gh-log-right");if(h)h.innerHTML=ghLogSuggestions({...getF(curForm),title:e.target.value});
+});
 function pgBuild(v){
-  const o=v.obs||"", pos=POS.test(o), neg=NEG.test(o);
-  const ev=csFrags(logNorm(v.eval||"")).map(f=>toGaejo(f).replace(/^○\s*/,""));
-  const base=[...(pos?["참여자들이 즐겁게 참여하여 활동 목표에 맞게 진행된 것으로 보임"]:[]),...(neg?["일부 참여자가 어려움을 보여 활동 방법과 시간 조정이 필요함"]:[]),"참여자의 흥미와 수준에 맞는 활동으로 구성되어 집중도가 유지됨","스스로 해 보는 경험을 통해 자신감과 성취감을 느낄 수 있었던 것으로 보임","다음 회기에는 참여자의 반응을 반영하여 난이도와 진행 시간을 조정할 예정임"];
-  const L=[...ev]; for(const l of base){ if(L.length>=(o||ev.length?4:0)) break; if(!L.some(x=>x.slice(0,8)===l.slice(0,8))) L.push(l); }
-  return {content:reportFmt(v.content), obs:memoObs(o), eval:L.map(x=>"○ "+x).join("\n")};
+ // The form records actual facts; never turn suggested steps into attendance or results.
+ return {content:reportFmt(v.content||""),obs:memoObs(v.obs||""),eval:reportFmt(v.eval||"")};
 }
 /* ================= 바로 채우는 서식: 메모 → 서식 자동 완성 (회의록·고충·사고·개별지원·교육) ================= */
 const OL=a=>[...new Set(a.filter(Boolean))].map(x=>"○ "+x).join("\n");
@@ -2010,7 +2060,7 @@ const WIZ={
   apply(f,v,a){ v.title=a.title||v.title; if(+a.ppl) v.people=`이용자 ${+a.ppl}명`;
    const R={"즐겁게 끝까지 참여했어요":"모두 끝까지 즐겁게 참여함","대체로 잘 참여했어요":"대체로 잘 참여함","어려워하는 분이 있었어요":"일부 참여자가 활동을 어려워함"};
    v.obs=[a.memo||"",R[a.react]||""].filter(Boolean).join(", ");
-   if(a.title && FILLX.program && !v._wzEx){ const ex=FILLX.program(v); if(ex.goal) v.goal=ex.goal; if(ex.content) v.content=ex.content; }
+   
   }},
  hoeui:{steps:[
   {k:"type",q:"어떤 회의였나요?",type:"chips",opts:["직원회의","운영위원회","보호자 간담회","사례회의","고충처리 회의","인권·안전 간담회","직원 고충 회의"]},
@@ -2092,9 +2142,9 @@ function renderForm(f){
       </div>
     </div>
     <div class="ftabs" role="tablist"><button type="button" role="tab" class="on" data-ftab="in">✍️ 입력</button><button type="button" role="tab" data-ftab="pv">📄 ${MY?"내 서식 미리보기":"미리보기"}</button></div>
-    <p class="status fstat" id="fstatus" role="status" aria-live="polite">${MY?myfStatusText(f,MY):f.note?`꼭 지켜요 · ${esc(f.note)}`:(hasMic?"사업명(제목)을 적으면 예시가 노란 칸에 자동으로 들어가요. 마이크 버튼으로 말해도 돼요. 이름·진단명은 말하지 마세요.":"사업명(제목)을 적으면 예시가 노란 칸에 자동으로 들어가요. 이름·진단명은 말하지 마세요.")}</p>
+    <p class="status fstat" id="fstatus" role="status" aria-live="polite">${MY?myfStatusText(f,MY):f.id==="program"?"왼쪽에서 프로그램을 고르면 오른쪽 진행 예시가 바뀌어요. 일지에는 실제로 한 내용만 적으세요.":f.note?`꼭 지켜요 · ${esc(f.note)}`:(hasMic?"사업명(제목)을 적으면 예시가 노란 칸에 자동으로 들어가요. 마이크 버튼으로 말해도 돼요. 이름·진단명은 말하지 마세요.":"사업명(제목)을 적으면 예시가 노란 칸에 자동으로 들어가요. 이름·진단명은 말하지 마세요.")}</p>
     <div class="fsplit">
-      <section class="fin" id="fin" aria-label="입력">
+      <section class="fin" id="fin" aria-label="입력">${f.id==="program"?ghLogSelect(v):""}
         ${["hoeui","sangdam","gwanchal","program"].includes(f.id)?`<div class="fmemo-box"><div><b>📷 ${f.id==="hoeui"?"회의":f.id==="sangdam"?"상담":"기록"} 메모 사진으로 채우기</b><span>손글씨 메모·화이트보드 사진을 올리면, AI가 사진을 읽어 아래 칸을 채우도록 도와드려요.${(v._imgs||[]).length?` (지금 ${(v._imgs||[]).length}장 올림)`:""}</span></div><label class="pill b3d main" for="fmemo-top-img">메모 사진 올리기</label><input type="file" id="fmemo-top-img" class="sr-file" accept="image/*" multiple></div>`:""}
         ${wizHTML(f)}
         ${WIZ[f.id]?`<details class="wiz-more"><summary>칸을 하나씩 직접 보고 고치기</summary><div class="wiz-more-in">`:""}
@@ -2103,7 +2153,7 @@ function renderForm(f){
         ${WIZ[f.id]?`</div></details>`:""}
         ${MY?myfExtraHTML(f,MY):customHTML(f)+signHTML(f)}
       </section>
-      ${MY?`<section class="fpv" id="fpv" aria-label="내 서식 미리보기"><div class="myf-note"><b>📎 ${esc(MY.name)}</b><span>왼쪽 질문에 답하고 예시를 고르면, 연결된 칸에 자동으로 채워져요 (파란 글씨).</span></div><div class="paper myf-paper" id="myf-pv">${myfPreview(MY)}</div></section>`:`<section class="fpv" id="fpv" aria-label="미리보기">${attBoxHTML(f)}<div class="paper" id="fpreview">${blocksHTML(docBlocks(f,v))}</div></section>`}
+      ${MY?`<section class="fpv" id="fpv" aria-label="내 서식 미리보기"><div class="myf-note"><b>📎 ${esc(MY.name)}</b><span>왼쪽 질문에 답하고 예시를 고르면, 연결된 칸에 자동으로 채워져요 (파란 글씨).</span></div><div class="paper myf-paper" id="myf-pv">${myfPreview(MY)}</div></section>`:`<section class="fpv" id="fpv" aria-label="미리보기">${attBoxHTML(f)}${f.id==="program"?'<div id="gh-log-right">'+ghLogSuggestions(v)+'</div>':""}<div class="paper" id="fpreview">${blocksHTML(docBlocks(f,v))}</div></section>`}
     </div>
     <div class="modal" id="fai" hidden><div class="modal-box" role="dialog" aria-labelledby="fai-t">
       <div class="modal-head"><h3 id="fai-t">✨ AI로 보고서 문장 다듬기</h3><button type="button" class="pill b3d" id="fai-close">닫기</button></div>
@@ -3280,9 +3330,10 @@ const FILLX = {
   good:`[잘된 점]\n○ 이용자가 준비 과정부터 직접 참여하여 활동에 대한 관심이 높았음\n○ ${T.eff[0]}\n\n[아쉬운 점]\n○ ______ 부분에서 개별 지원이 더 필요했음\n○ 일정·날씨 등으로 ______이(가) 계획과 달라졌음`,
   budget:`○ 예산 ○○○,○○○원 중 ○○○,○○○원 집행 (집행률 ○%)\n${T.budget.map(x=>`  - ${x[0]}: ○○,○○○원`).join("\n")}`,
   next:b([T.nx,"만족도 조사에서 나온 의견을 다음 사업 계획에 반영함"])}; },
- program(v){ const c=exCore(v.title), T=exTopic(v.title), m=T.steps[2]||T.steps[0]; return {
-  goal:b([T.aim, T.goals[1]||T.goals[0]]),
-  content:`1. 도입 (○분): 인사, 컨디션 확인, 오늘 활동 소개\n2. 활동 (○분): ${m[1]}\n3. 마무리 (○분): 소감 나누기, 뒷정리, 다음 시간 안내`}; },
+ program(v){
+  const g=(options.catalog||[]).find(g=>g.items.includes(v._ghprogram)),q=ghProgramSequence(v._ghprogram||v.title,g&&g.area);
+  return {content:"[실습용 진행 예시 · 실제 기록으로 바꿔 주세요]\n"+q.steps.map(([label,x],i)=>(i+1)+". "+label+": "+x).join("\n")};
+ },
  gongmun(v){ const c=exCore(v.title), T=exTopic(v.title), t=(v.title||"").replace(/\s+/g,"");
   const kind=/제출|결과/.test(t)?"submit":/협조|요청|지원/.test(t)?"req":/안내|알림|개최/.test(t)?"notice":"req";
   const head = kind==="submit" ? `「${c}」 결과를 아래와 같이 제출합니다.` : kind==="notice" ? `우리 시설에서는 이용자의 ${T.area} 지원을 위하여 「${c}」을(를) 아래와 같이 실시하오니 참고하여 주시기 바랍니다.` : `우리 시설에서는 이용자의 ${T.area} 지원을 위하여 「${c}」을(를) 아래와 같이 추진하고자 하오니 협조하여 주시기 바랍니다.`;
@@ -5265,7 +5316,7 @@ function fullPrompt(t,v){
     p+=`\n\n[참고 이미지] 함께 첨부한 참고 이미지에서 ${v._refWhat} 부분을 참고해서 그려줘. 단, 그림 속 인물이나 상표는 그대로 따라 그리지 마.`;
     if(v._refColors) p+=`\n참고 이미지의 주요 색: ${v._refColors}`;
   }
-  return (v._work?"[기흥 사업·프로그램] "+v._work.program+" / "+v._work.what+"\n[확인] "+v._work.check+"\n\n":"")+p;
+  return ((v._work?"[기흥 사업·프로그램] "+v._work.program+" / "+v._work.what+"\n[확인] "+v._work.check+"\n":"")+p).replace(/\n[ \t]*\n(?:[ \t]*\n)*/g,"\n");
 }
 function attachHTML(t,st){
   const chip=(k,opts)=>`<div class="chips">${opts.map((o,i)=>`<label class="chip"><input type="radio" name="c-${k}" id="c-${t.id}-${k}-${i}" value="${esc(o)}" data-chip="${k}" ${st.v[k]===o?"checked":""}><span>${esc(o)}</span></label>`).join("")}</div>`;
@@ -5761,7 +5812,7 @@ app.addEventListener("input",e=>{
   if(curForm && e.target.matches("[data-fk]")){ if(!e.target.isConnected || (/^ff-/.test(e.target.id) && !e.target.id.startsWith(`ff-${curForm.id}-`))) return; const f=curForm, k=e.target.dataset.fk, v0=getF(f);
     if(k==="org" && f.fields.some(x=>x.k==="sender")){ const prevAuto=(v0.org||"").trim()?v0.org.trim()+"장":""; if(!(v0.sender||"").trim() || v0.sender===prevAuto){ v0.sender=e.target.value.trim()?e.target.value.trim()+"장":""; const se=document.getElementById(`ff-${f.id}-sender`); if(se) se.value=v0.sender; } }
     getF(f)[k]=e.target.value;
-    if(k==="title" && FILLX[f.id]){ clearTimeout(exTimer); exTimer=setTimeout(()=>{ if(curForm!==f) return; const n=applyExamples(f); if(n){ syncFields(f); exStatus(f,n); } markAuto(f); refreshPreview(f); },700); }
+    if(k==="title" && FILLX[f.id] && f.id!=="program"){ clearTimeout(exTimer); exTimer=setTimeout(()=>{ if(curForm!==f) return; const n=applyExamples(f); if(n){ syncFields(f); exStatus(f,n); } markAuto(f); refreshPreview(f); },700); }
     markAuto(f); if(k!=="_paste") refreshPreview(f); return; }
   if(up && e.target.matches("[data-uf]")){ up.fields[+e.target.dataset.uf].value=e.target.value; clearTimeout(window.__upT); window.__upT=setTimeout(()=>{ const el=document.getElementById("up-pv"); if(el&&up) el.innerHTML=myfPreview(up); },150); return; }
   if(up && e.target.id==="umemo"){ up.memo=e.target.value; updateUpLink(); return; }
