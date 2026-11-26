@@ -272,18 +272,18 @@ if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
 /* 2026.11.26 Claude 아티팩트 창 · 모션그래픽 실제 결과 */
 (function(){
-function art(){return '<section class="cvw"><h4>아티팩트 창은 이렇게 생겼어요</h4>'+
- '<div class="cvw-win aw"><div class="cvw-chat"><span class="cvw-tag"><i>1</i>채팅</span><div class="b u">송년회 안내문을 A4 문서로 만들어 줘. 큰 글씨로.</div><div class="b g">오른쪽에 안내문을 만들었어요. 대상이나 신청 기한을 바꿀까요?</div><div class="b u">대상에 자원봉사자도 넣어 줘</div><div class="cvw-in">답장…</div></div>'+
- '<div class="cvw-cv"><div class="cvw-bar"><span class="cvw-tag"><i>2</i>아티팩트 창</span><span class="cvw-tab"><b>미리보기</b><em>코드</em></span><span class="cvw-act"><i>3</i>복사 · 다운로드 · 공유</span></div>'+
- '<div class="aw-doc"><iframe src="/giheung/v2/demo/notice.html" title="아티팩트 결과 예시: 송년회 안내문" loading="lazy"></iframe></div>'+
- '<div class="cvw-mk"><span class="cvw-tag"><i>4</i>왼쪽 메뉴 [아티팩트]</span><em>송년회 안내문</em><em>12월 참여자 명단</em><em>운영위원회 보고 10장</em></div></div></div>'+
- '<ol class="cvw-l"><li><b>채팅</b> 왼쪽에서 말로 고칠 것을 요청</li><li><b>아티팩트 창</b> 오른쪽에 문서·표·슬라이드·웹페이지가 열림</li><li><b>복사·다운로드·공유</b> 워드·PDF로 받거나 링크로 공유</li><li><b>아티팩트 목록</b> 만든 결과물이 모여 다시 열고 고치기</li></ol></section>'}
+function art(){var T=[['문서','#3D6FD8','안내문·보고서·회의록','송년회 안내문 → 워드·PDF'],['슬라이드','#B4541A','발표 장표','운영위원회 보고 10장 → PPT'],['스프레드시트','#2E7D32','표·명단·계산 (베타)','12월 참여자 명단·출석률'],['디자인','#6A4FD8','포스터·안내지·카드뉴스','송년회 포스터 시안 2개'],['데이터','#B23A3A','차트·대시보드','월별 참여 인원 그래프'],['화이트보드','#A8457E','아이디어·흐름도 (베타)','행사 준비 흐름도']];
+ return '<section class="cvw"><h4>아티팩트 화면 (실제 화면)</h4><div class="ac-g"><figure class="cvw-s ac-img"><img src="/img/giheung/claude/artifacts.webp" alt="Claude 아티팩트 화면" onclick="typeof zoomImg===\'function\'&&zoomImg(this.src)"><figcaption>왼쪽 메뉴 [아티팩트]를 누르면 열리는 화면 · 누르면 크게 보여요</figcaption></figure>'+
+ '<div class="ac-r"><ol class="cvw-l one"><li><b>전체 · 내 항목 · 공유받음</b>내가 만든 것과 공유받은 결과물을 나눠 보기</li><li><b>검색 · 정렬 · 보기 · +</b>결과물 찾기, + 로 새로 만들기</li><li><b>새로운 무언가 만들기</b>아래 6가지 중 골라서 바로 시작</li><li><b>아래쪽 카드 목록</b>만든 결과물이 카드로 모여 다시 열고 고치기</li></ol></div></div>'+
+ '<div class="ac-t">'+T.map(function(t,i){return '<div class="ac-c"><span class="ac-n" style="background:'+t[1]+'">'+(i+1)+'</span><b style="color:'+t[1]+'">'+t[0]+'</b><small>'+t[2]+'</small><p><em>예시</em>'+t[3]+'</p></div>'}).join('')+'</div>'+
+ '<p class="hub-n">Claude Design·Slides로 만든 것도 이제 아티팩트로 저장돼요. 메뉴 이름은 업데이트에 따라 바뀔 수 있어요.</p></section>'}
 function mot(){return '<section class="cvw"><h4>이런 화면이 나와요 (실제 재생)</h4><div class="mv"><div class="mv-f"><iframe src="/giheung/v2/demo/motion.html" title="모션그래픽 결과 예시" loading="lazy"></iframe></div>'+
  '<div class="mv-t"><p><b>"모집 안내가 제목→일시→장소→문의 순서로 하나씩 나타나는 15초 화면 만들어 줘"</b>라고 하면 왼쪽처럼 글자가 차례로 나타나는 화면이 만들어져요.</p><ol class="cvw-l one"><li><b>재생 확인</b> 아티팩트 창에서 바로 재생</li><li><b>고치기</b> "더 천천히", "글자 더 크게"라고 말하기</li><li><b>전체 화면</b> 로비 TV에 띄우기</li><li><b>녹화</b> Win + Alt + R로 영상 파일 만들기</li></ol></div></div></section>'}
 function post(){if(typeof VIEW==='undefined'||VIEW!=='apps')return;var A=APPS[S.app||0];if(!A||A.n!=='Claude')return;var C=A.cards[S.fc||0];if(!C)return;
  var f=C.n==='아티팩트'?art:C.n==='모션그래픽'?mot:null;if(!f)return;var p=document.querySelector('#R .sld .sld-path');if(!p||document.querySelector('#R .cvw'))return;p.insertAdjacentHTML('afterend',f())}
 var _r=render;render=function(){var r=_r.apply(this,arguments);try{post()}catch(er){console.error(er)}return r};
 document.head.insertAdjacentHTML('beforeend','<style id="gh-aw">.aw{grid-template-columns:32% 68%!important}.aw-doc{margin:10px;border:1px solid #E8EAED;border-radius:10px;overflow:hidden;height:330px;background:#fff}.aw-doc iframe{width:100%;height:100%;border:0;display:block}'
++'.ac-g{display:grid;grid-template-columns:1.5fr 1fr;gap:12px;align-items:start}.ac-img img{width:100%}.ac-t{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.ac-c{border:1px solid #E3ECE6;border-radius:12px;padding:9px 11px;display:grid;gap:3px;align-content:start}.ac-n{width:20px;height:20px;border-radius:6px;color:#fff;font-size:11.5px;font-weight:800;display:grid;place-items:center}.ac-c b{font-size:15px}.ac-c small{font-size:12.5px;color:#4b5a55}.ac-c p{margin:2px 0 0;background:#FFF8F1;border-radius:8px;padding:5px 8px;font-size:12.5px;font-weight:600}.ac-c p em{font-style:normal;color:#C2652B;font-weight:800;margin-right:5px}.cvw-l.one b{display:block}@media(max-width:1100px){.ac-g{grid-template-columns:1fr}.ac-t{grid-template-columns:1fr 1fr}}'
 +'.mv{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;align-items:start}.mv-f{aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid #DADCE0;box-shadow:0 4px 14px rgba(0,0,0,.08)}.mv-f iframe{width:100%;height:100%;border:0;display:block}.mv-t p{margin:0 0 8px;font-size:14px;line-height:1.65}.cvw-l.one{grid-template-columns:1fr}@media(max-width:1100px){.mv{grid-template-columns:1fr}}</style>');
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
