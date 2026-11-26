@@ -2149,6 +2149,106 @@ document.head.insertAdjacentHTML('beforeend',`<style id="ai-apps3">.ap2 .exbig{w
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
 </script>
+<script>/* 2026.11.26 기능 설명 장표: 메뉴마다 한눈에 보는 그림 설명 */
+(function(){
+if(typeof APPS==='undefined')return;
+const SV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+const I={plus:'<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>',img:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="16" cy="9" r="2"/><path d="M3 18l6-6 4 4 3-3 5 5"/>',pal:'<path d="M12 3a9 9 0 1 0 0 18c1 0 1.5-.7 1.5-1.5 0-1.2-1-1.5-1-2.5s.8-1.5 1.8-1.5H17a4 4 0 0 0 4-4c0-4.7-4-8.5-9-8.5z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10" cy="7" r="1.2"/><circle cx="15" cy="7.5" r="1.2"/>',
+doc:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h10M7 14h6"/><path d="M15 15l4 4"/>',down:'<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',brush:'<path d="M18 3l3 3-9 9-3-3z"/><path d="M9 12c-3 0-4 2-4 4s-1 3-2 3c2 1 6 1 8-1 1.5-1.5 1-4-2-6z"/>',msg:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8 11h8M8 14h5"/>',
+gif:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/>',spark:'<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',lib:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+pen:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/>',cards:'<rect x="3" y="7" width="13" height="13" rx="2"/><path d="M8 4h11a2 2 0 0 1 2 2v11"/>',type:'<path d="M4 7V4h16v3M9 20h6M12 4v16"/>',tool:'<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/>',
+music:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',film:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M17 9h4M3 15h4M17 15h4"/>',book:'<path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/>',folder:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',slide:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8M7 8h6M7 11h10"/>',cam:'<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/>',
+gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>',zap:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',up:'<path d="M12 20V9M7 14l5-5 5 5M5 4h14"/>',layers:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',ppl:'<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20a6 6 0 0 1 12 0M10 20a6 6 0 0 1 12 0"/>',
+check:'<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12l3 3 5-6"/>',move:'<path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/>',trash:'<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',head:'<path d="M3 14v-2a9 9 0 0 1 18 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>',
+table:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v16"/>',chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.1"/>',warn:'<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.1"/>'};
+const i=k=>SV+(I[k]||I.spark)+'</svg>';
+const G={
+'ChatGPT|이미지 만들기':{a:'ChatGPT로',b:'홍보 이미지 만들기',s:'말로 장면을 설명하고, 결과를 확인해 완성해요',st:[['plus','+ 누르기'],['img','이미지 만들기'],['pal','스타일 선택'],['doc','지시문 붙여넣기'],['down','저장·수정']],
+ box:'실습 지시문',rows:[['user','역할','복지관 홍보 디자이너'],['target','목표','재활치료 참여자 모집 포스터'],['pal','스타일','따뜻한 수채화 · 세로형 4:5'],['ppl','장면','이용자가 활동의 주인공인 밝은 모습']],ex:'poster',w:'글자·날짜·연락처는 직접 확인하고 수정하기'},
+'ChatGPT|이미지 편집 화면':{a:'ChatGPT 이미지 편집:',b:'필요한 곳만 고치기',s:'전체를 다시 만들지 않고, 바꿀 부분을 선택해 지시해요',st:[['img','이미지 열기'],['brush','바꿀 부분 칠하기'],['msg','바꿀 내용 적기'],['down','결과 확인·저장']],
+ box:'실습 예시',tips:[['cal','날짜 수정','11월 20일 → 12월 18일'],['type','오타 수정','잘못된 한 글자만 교정'],['img','배경 변경','여름 풍경 → 겨울 풍경']],say:'선택한 날짜만 12월 18일로 바꿔 줘. 나머지 글자·인물·색·배치는 유지해 줘.',ex:'edit',w:'선택 밖도 달라질 수 있어요. 글자와 전체 그림을 다시 확인하세요.'},
+'ChatGPT|움짤 GIF':{a:'ChatGPT로',b:'3초 움짤 만들기',s:'사진이나 캐릭터 그림 1장을 3초 동안 움직이게 해요',st:[['plus','+ 사진 첨부'],['gif','움직임 말하기'],['spark','3초 반복 확인'],['down','GIF 저장']],
+ box:'실습 예시',tips:[['msg','아침 인사','손 흔드는 캐릭터'],['ppl','캠페인 응원','박수 치며 응원'],['spark','후원 감사','고개 숙여 감사 인사']],say:'인물이 손 흔들며 인사하는 3초 GIF로 만들어 줘. 배경은 그대로, 처음과 끝이 이어지게.',w:'촬영·게시 동의 받은 사진만, 얼굴은 일러스트 느낌으로 바꾸기'},
+'ChatGPT|라이브러리':{a:'ChatGPT 라이브러리로',b:'같은 그림체 시리즈',s:'예전에 만든 그림을 골라 같은 캐릭터로 이어 만들어요',st:[['lib','왼쪽 메뉴 이미지'],['img','이전 그림 고르기'],['pen','같은 그림체로 요청'],['cards','카드뉴스 완성']],
+ box:'카드뉴스 4장 구성',rows:[['cards','1장','표지: 큰 제목 + 손 흔드는 캐릭터'],['doc','2장','무엇을: 누가·무엇을·왜 3줄'],['cal','3장','언제·어디서: 일시·장소·대상 아이콘'],['msg','4장','신청·문의 전화 크게']],ex:'cards',w:'장마다 같은 캐릭터·색인지 확인하기'},
+'ChatGPT|캔버스':{a:'ChatGPT 캔버스로',b:'긴 글 같이 고치기',s:'글을 옆 창에 펼쳐 놓고 고칠 문단만 골라 고쳐요',st:[['plus','+ → 캔버스'],['doc','초안 붙여넣기'],['pen','고칠 문단 드래그'],['type','길이·말투 버튼'],['down','복사·다운로드']],
+ box:'실습 예시',tips:[['doc','안내문 다듬기','보호자 안내문을 쉽고 따뜻하게'],['table','보고서 문단','성과 문단을 공문체로'],['type','쉬운 글','이용자가 읽을 짧은 문장']],say:'이 문단만 보호자가 읽기 쉽게 고쳐 줘. 나머지는 그대로 둬.',w:'숫자·날짜는 원본과 다시 대조하기'},
+'제미나이|나노바나나 이미지':{a:'제미나이 나노바나나로',b:'이미지 만들고 고치기',s:'글로 새로 그리거나, 사진을 넣고 필요한 부분만 바꿔요',st:[['tool','도구'],['img','이미지 만들기'],['doc','설명·사진 넣기'],['down','다운로드']],
+ box:'실습 예시',tips:[['chart','결과 인포그래픽','실적 숫자를 한 장 그림으로'],['img','배경 바꾸기','활동 사진을 겨울 공원으로'],['doc','모집 포스터','한글이 정확한 포스터']],say:'이 사진의 배경만 눈 내리는 겨울 공원으로 바꿔 줘. 인물·옷·자세는 그대로.',ex:'info',w:'숫자는 내가 준 것만 · 그림 속 글자 다시 확인'},
+'제미나이|음악 30초':{a:'제미나이로',b:'30초 노래 만들기',s:'분위기와 주제를 말하면 가사가 있는 노래가 나와요',st:[['tool','도구'],['music','음악 만들기'],['doc','분위기·주제 쓰기'],['down','MP3 저장']],
+ box:'실습 예시',tips:[['music','프로그램 주제가','프로그램 이름이 들어간 노래'],['zap','행사 오프닝','입장할 때 틀 음악'],['spark','캠페인 노래','인식개선 캠페인']],say:'"함께해서 즐거운 하루" 주제로 밝고 신나는 30초 노래, 후렴은 두 번 반복해 줘.',ex:'music',w:'실제 가수 목소리·기존 노래 흉내는 금지'},
+'제미나이|영상 만들기':{a:'제미나이 Veo로',b:'8초 영상 만들기',s:'장면을 글로 설명하면 소리까지 들어간 영상이 나와요',st:[['tool','도구'],['film','동영상 만들기'],['doc','장면 설명'],['down','MP4 저장']],
+ box:'실습 예시',tips:[['film','홍보 쇼츠','SNS용 짧은 영상'],['slide','로비 TV','복지관 로비 안내 화면'],['zap','행사 오프닝','시작할 때 8초 영상']],say:'공원에서 이용자들이 웃으며 함께 걷는 장면, 천천히 다가가는 카메라, 따뜻한 색감으로 8초.',ex:'video',w:'유료(AI Plus 이상) · 무료는 Flow 크레딧으로'},
+'제미나이|노트북':{a:'제미나이 노트북으로',b:'지침 근거 찾기',s:'넣은 자료 안에서만 답하고, 몇 쪽인지 출처까지 보여 줘요',st:[['book','새 노트북'],['folder','자료 넣기(PDF)'],['msg','질문하기'],['search','출처 번호 확인']],
+ box:'실습 예시',tips:[['search','올해 바뀐 점','지침에서 달라진 부분'],['table','평가 준비','평가지표별 준비할 것'],['head','오디오 개요','지침을 팟캐스트처럼 듣기']],say:'올해 사업안내에서 주간이용센터 부분 바뀐 점을 표로 정리해 줘. 쪽수도 함께.',ex:'nb',w:'자료에 없는 내용은 "자료에 없음"으로 답하게 하기'},
+'제미나이|캔버스':{a:'제미나이 캔버스로',b:'웹페이지·퀴즈 만들기',s:'옆 화면에 바로 만들어 보고, 버튼 하나로 형태를 바꿔요',st:[['tool','도구 → 캔버스'],['doc','만들 것 쓰기'],['pen','드래그해서 수정'],['globe','공유 링크']],
+ box:'실습 예시',tips:[['globe','안내 웹페이지','링크로 보내는 행사 안내'],['chart','인포그래픽','지침 요약 한 장'],['quiz','교육 퀴즈','신규 직원 확인 문제']],say:'송년 음악회 안내 웹페이지를 휴대폰에서 잘 보이게 큰 글씨로 만들어 줘.',w:'일시·장소·연락처는 직접 확인하기'},
+'Claude|디자인':{a:'Claude로',b:'안내지·포스터 디자인',s:'요청하면 옆 화면에 디자인이 열리고, 글자를 바로 고쳐요',st:[['msg','요청 쓰기'],['slide','옆 화면 미리보기'],['pen','글자 직접 수정'],['down','PDF 저장']],
+ box:'실습 예시',tips:[['doc','안내지 A4','한 장짜리 안내지'],['slide','행사 순서지','송년회·발표회 순서지'],['img','시안 2개','비교해서 고르기']],say:'송년 음악회 안내지를 A4로, 큰 글씨·고대비로 시안 2개 만들어 줘.',ex:'a4',w:'인쇄 전 날짜·장소·문의처 확인'},
+'Claude|슬라이드':{a:'Claude로',b:'발표 슬라이드 만들기',s:'자료를 넣으면 장표를 만들고 PPT로 내려받아요',st:[['folder','자료 첨부'],['slide','슬라이드 요청'],['pen','장표 고치기'],['down','PPT 다운로드']],
+ box:'실습 예시',tips:[['table','운영위원회 보고','실적 보고 10장'],['chart','결과 발표','연말 결과 발표'],['spark','후원자 감사','후원금 사용 이야기']],say:'첨부한 결과보고서로 운영위원회 보고 슬라이드 10장 만들어 줘. 숫자는 자료에 있는 것만.',ex:'slide',w:'숫자는 첨부 자료와 다시 대조하기'},
+'Claude|모션그래픽':{a:'Claude로',b:'움직이는 안내 화면',s:'글자가 하나씩 나타나는 화면을 만들고 녹화해 영상으로 써요',st:[['msg','요청 쓰기'],['film','재생 확인'],['pen','속도·글자 수정'],['cam','화면 녹화']],
+ box:'실습 예시',tips:[['film','모집 안내','로비 TV 모집 안내'],['cal','카운트다운','행사 D-7'],['spark','감사 인사','후원 감사 화면']],say:'모집 안내가 제목→일시→장소→문의 순서로 하나씩 나타나는 15초 화면 만들어 줘.',ex:'motion',w:'녹화: 윈도우 Win + Alt + R'},
+'Claude|한글 서식 스킬':{a:'Claude 스킬로',b:'한글 서식 그대로 채우기',s:'우리 기관 한글 서식 칸은 그대로 두고 빈칸만 채워요',st:[['gear','코드 실행 켜기'],['up','스킬 ZIP 올리기'],['doc','HWPX 서식 첨부'],['down','한글 파일 받기']],
+ box:'실습 예시',tips:[['doc','사업계획서','서식 그대로 채우기'],['table','프로그램 일지','여러 장 한 번에'],['check','결과보고서','빈칸만 채우기']],say:'첨부한 사업계획서 서식의 칸 이름·순서는 그대로 두고, 메모 내용으로 빈칸만 채워 줘.',ex:'hwp',w:'HWP는 한글에서 HWPX로 저장해서 넣기'},
+'Claude|깊은 조사':{a:'Claude 리서치로',b:'출처 달린 조사 보고서',s:'여러 사이트를 찾아 읽고 출처가 달린 보고서를 만들어요',st:[['search','리서치 켜기'],['msg','주제 쓰기'],['zap','몇 분 조사'],['doc','출처 보고서']],
+ box:'실습 예시',tips:[['search','우수 사례','다른 복지관 사례'],['doc','공모사업','올해 지원 가능한 공모'],['chart','정책 변화','최신 장애인 정책']],say:'다른 장애인복지관의 디지털 재활 우수 사례 5곳을 출처 링크와 함께 표로 정리해 줘.',ex:'research',w:'유료 기능 · 출처 링크는 직접 열어 확인'},
+'Canva|AI 프레젠테이션':{a:'Canva AI로',b:'발표 자료 만들기',s:'주제를 말하면 디자인까지 된 발표 자료가 나와요',st:[['spark','Canva AI'],['slide','프레젠테이션'],['doc','내용 붙여넣기'],['down','PPT·PDF 저장']],
+ box:'실습 예시',tips:[['slide','사업 설명회','신규 사업 소개'],['chart','결과 보고','연말 결과 발표'],['spark','후원자 감사','후원금 사용 이야기']],say:'주간이용센터 사업 소개 발표 자료 10장, 큰 글씨·초록 계열로 만들어 줘.',ex:'cppt',w:'사진은 우리 기관 사진으로 바꾸기'},
+'Canva|매직 레이어':{a:'Canva 매직 레이어로',b:'그림을 요소별로 나누기',s:'통째 그림을 글자·인물·배경 레이어로 나눠 하나씩 고쳐요',st:[['up','이미지 업로드'],['layers','Magic Layers'],['type','글자 고치기'],['down','다운로드']],
+ box:'이렇게 고쳐요',tips:[['type','오타 고치기','"복지간" → "복지관"'],['move','위치 옮기기','제목·캐릭터 자리 바꾸기'],['trash','요소 지우기','필요 없는 소품 빼기']],ex:'layers',w:'사진처럼 사실적인 이미지는 덜 깔끔하게 나뉘어요'},
+'Canva|원고 → PPT 흐름':{a:'Claude 원고 + Canva 디자인',b:'PPT 완성',s:'내용은 AI가 정리하고, 디자인은 Canva가 입혀요',st:[['pen','Claude로 원고'],['spark','Canva AI 붙여넣기'],['pal','색·글꼴 맞추기'],['slide','발표 노트']],
+ box:'원고 표 구성',rows:[['slide','장','1장부터 10장까지'],['type','제목','장마다 한 줄'],['doc','핵심 문장','숫자 1개 포함'],['msg','발표 멘트','말할 내용']],ex:'cppt',w:'숫자는 내가 준 것만, 없으면 [확인 필요]'}};
+function ig(A,C){const g=G[A.n+'|'+C.n];if(!g)return '';
+ const steps=g.st.map((s,n)=>`${n?'<b class="ar">➜</b>':''}<div class="st ${n%2?'p':'m'}"><div class="h"><em>${n+1}</em><span>${s[1]}</span></div><div class="ic">${i(s[0])}</div></div>`).join('');
+ const box=g.rows?`<div class="rows">${g.rows.map((r,n)=>`<div class="r"><span class="ri">${i(r[0])}</span><span class="rl ${n%2?'p':'m'}">${r[1]}</span><span class="rt">${r[2]}</span></div>`).join('')}</div>`
+  :`<div class="igtips">${g.tips.map((t,n)=>`<div class="igtp ${n%2?'m':'p'}"><span class="ti">${i(t[0])}</span><div><b>${t[1]}</b><span>${t[2]}</span></div></div>`).join('')}</div>`;
+ const say=g.say?`<div class="say"><span class="sa">${i('msg')}</span><p>${g.say}</p></div>`:'';
+ const right=g.ex?`<div class="pic"><img src="/img/giheung/ex/${g.ex}.webp" alt="${C.n} 결과 예시" onclick="zoomImg(this.src)"></div>`:'';
+ return `<div class="ig"><div class="ig-t">${g.a} <em>${g.b}</em></div><div class="ig-s">${g.s}</div><div class="ig-st">${steps}</div>
+ <div class="ig-b${g.ex?'':' one'}"><div class="ig-l"><div class="bx-h">${i('check')}<b>${g.box}</b></div>${box}${say}</div>${right}</div>
+ <div class="ig-w">${i('warn')}<span>${g.w}</span></div></div>`;}
+document.head.insertAdjacentHTML('beforeend',`<style id="ig-css">
+.ig{background:#FFFBF5;border:1px solid #EFE3D3;border-radius:16px;padding:16px 18px;display:grid;gap:12px;font-family:Pretendard,'Malgun Gothic',sans-serif}
+.ig-t{text-align:center;font-size:28px;font-weight:900;color:#1E5442;letter-spacing:-1px;line-height:1.2}.ig-t em{font-style:normal;color:#E0533D}
+.ig-s{justify-self:center;background:#DDF1E5;color:#1d2826;font-weight:800;font-size:16px;border-radius:999px;padding:6px 22px}
+.ig-st{display:flex;align-items:stretch;gap:6px}
+.ig-st .st{flex:1;border-radius:14px;padding:10px 8px;display:grid;gap:6px;justify-items:center;min-width:0}
+.ig-st .st.m{background:#E3F3E9}.ig-st .st.p{background:#FDE6DF}
+.ig-st .h{display:flex;align-items:center;gap:6px;font-weight:900;font-size:15.5px;color:#1d2826;text-align:center;line-height:1.25}
+.ig-st .h em{font-style:normal;flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:14px}
+.ig-st .st.m .h em{background:#2F8A5E}.ig-st .st.p .h em{background:#E0533D}
+.ig-st .ic{width:54px;height:54px;border-radius:12px;background:#fff;display:grid;place-items:center;border:2px solid currentColor}
+.ig-st .st.m .ic{color:#2F8A5E}.ig-st .st.p .ic{color:#E0533D}.ig-st .ic svg{width:30px;height:30px}
+.ig-st .ar{align-self:center;color:#E9785C;font-size:20px}
+.ig-b{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start}.ig-b.one{grid-template-columns:1fr}
+.ig-l{display:grid;gap:8px;align-content:start}
+.bx-h{display:inline-flex;align-items:center;gap:8px;background:#2F6B56;color:#fff;border-radius:10px;padding:6px 14px;justify-self:start;font-size:16px}.bx-h svg{width:20px;height:20px}
+.ig .rows{display:grid;gap:6px;background:#fff;border:1px solid #EADFCF;border-radius:14px;padding:8px}
+.ig .r{display:grid;grid-template-columns:30px 70px 1fr;gap:8px;align-items:center;background:#FFF6EC;border-radius:10px;padding:6px 8px}
+.ig .ri{color:#2F6B56}.ig .ri svg{width:24px;height:24px}
+.ig .rl{border-radius:999px;text-align:center;font-weight:900;font-size:14px;padding:3px 0}.ig .rl.m{background:#D6EFDF;color:#1E6B4A}.ig .rl.p{background:#FBD3C8;color:#C2412B}
+.ig .rt{font-weight:800;font-size:15px;color:#1d2826}
+.ig .igtips{display:grid!important;grid-template-columns:1fr!important;gap:8px}.ig .ig-b.one .igtips{grid-template-columns:repeat(3,1fr)!important}.ig .ig-b.one .rows{grid-template-columns:1fr 1fr}
+.ig .igtp{display:flex;gap:10px;align-items:center;border-radius:12px;padding:9px 12px}.ig .igtp.p{background:#FDE6DF}.ig .igtp.m{background:#E3F3E9}
+.ig .ti{flex:none;width:40px;height:40px;border-radius:10px;background:#fff;display:grid;place-items:center}.ig .igtp.p .ti{color:#E0533D}.ig .igtp.m .ti{color:#2F8A5E}.ig .ti svg{width:24px;height:24px}
+.ig .igtp b{display:block;font-size:16px}.ig .igtp span{font-size:14px;color:#3d4745}
+.ig .say{display:flex;gap:8px;align-items:center}.ig .sa{flex:none;width:40px;height:40px;border-radius:10px;background:#7C4DDB;color:#fff;display:grid;place-items:center}.ig .sa svg{width:22px;height:22px}
+.ig .say p{margin:0;background:#F4EEFF;border:1.5px solid #B9A2EE;border-radius:12px;padding:8px 12px;font-weight:800;font-size:14.5px;color:#3A1F86;line-height:1.5}
+.ig .pic img{width:100%;max-height:360px;object-fit:contain;border-radius:14px;border:1px solid #EADFCF;background:#fff;cursor:zoom-in;display:block}
+.ig-w{justify-self:center;display:flex;align-items:center;gap:8px;background:#E8604A;color:#fff;font-weight:900;font-size:15.5px;border-radius:999px;padding:8px 22px}.ig-w svg{width:22px;height:22px}
+@media(max-width:900px){.ig-st{flex-wrap:wrap}.ig-st .ar{display:none}.ig-st .st{flex:1 1 40%}.ig-b{grid-template-columns:1fr}.ig-t{font-size:22px}}
+</style>`);
+const _apps=VIEWS.apps;
+VIEWS.apps=()=>{const h=_apps();const A=APPS[S.app??0]||APPS[0];if(A.desk||A.tips||A.aig)return h;const C=A.cards[S.fc??0]||A.cards[0];if(C.full||!G[A.n+'|'+C.n])return h;
+ window.RIGHT=()=>{const r=document.getElementById('R');if(!r)return;const open=A.url==='canva'?`<button class="btn p" onclick="window.open('https://www.canva.com','_blank')">Canva 열기</button>`:`<button class="btn p" onclick="openAI('${A.url}','')">${A.n} 열기</button>`;
+  r.innerHTML=`<div class="bar"><span class="t">${A.n} · ${esc(C.n)}<span class="badge ${C.f?'free':'paid'}">${C.f?'무료':'유료'}</span></span><span class="sub2">그림을 누르면 크게 보여요</span>${open}</div><div style="padding:12px">${ig(A,C)}${C.nbx&&window.__ai?`<div class="ap2" style="display:block;padding:12px 0 0">${window.__ai.nbHTML()}</div>`:''}</div>`};
+ return h;};
+if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
+})();
+</script>
 <style id="gh-home-theme">
 :root{--bg:#EEF6F0;--line:#D5E5DA}
 html,body{background:#EEF6F0!important}
