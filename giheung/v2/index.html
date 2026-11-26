@@ -2097,9 +2097,16 @@ html,body{background:#EEF6F0!important}
   plan.forEach(function(x){done.add(x[0]);if(!x[1]||x[1]<=12)return;x[0].dataset.fsDn=1;x[0].style.setProperty('font-size',(x[1]-1)+'px','important')});}
  var t,busy=false;function stp(){document.querySelectorAll('.out:not([data-stp])').forEach(function(o){o.dataset.stp=1;o.innerHTML=o.innerHTML.replace(/(^|\n|<br>)(\s*\d단계\.)/g,'$1<span class="stp">$2</span>').replace(/\[(필수|금지|진행 순서|목표|내가 고른 조건|내가 아는 정보|구성|정보)\]/g,'<span class="stp">[$1]</span>');});}
  function run(){if(busy)return;busy=true;try{num();stp();if(!matchMedia('(max-width:640px)').matches)shrink();}finally{setTimeout(function(){busy=false},0)}}
- function later(){clearTimeout(t);t=setTimeout(run,40)}
- new MutationObserver(later).observe(document.body,{childList:true,subtree:true});
- later();
+ /* 깜빡임 없이: 화면이 그려지기 전에 바로 적용 */
+ new MutationObserver(function(){run()}).observe(document.body,{childList:true,subtree:true});
+ run();
+ /* 선택해도 스크롤 위치 그대로 */
+ var SEL='.pane .bd,#R,#R .out,.out,.pbox,.c3c';
+ function grab(){var a=[];document.querySelectorAll(SEL).forEach(function(e){a.push(e.scrollTop)});return {a:a,y:window.scrollY}}
+ function put(st){var i=0;document.querySelectorAll(SEL).forEach(function(e){var v=st.a[i++];if(v)e.scrollTop=v});if(st.y)window.scrollTo(0,st.y)}
+ var LV=null;function wrapR(){var R0=window.RIGHT;if(!R0||R0._w)return;var W=function(){var r=document.getElementById('R'),o=r&&r.querySelector('.out,.pbox'),a=r?r.scrollTop:0,b=o?o.scrollTop:0;R0.apply(this,arguments);run();r=document.getElementById('R');o=r&&r.querySelector('.out,.pbox');if(r)r.scrollTop=a;if(o)o.scrollTop=b};W._w=1;window.RIGHT=W}
+ if(typeof render==='function'){var _r=render;render=function(){var st=grab(),v=typeof VIEW!=='undefined'?VIEW:'';_r.apply(this,arguments);run();wrapR();if(LV===v)put(st);LV=v}}
+ LV=typeof VIEW!=='undefined'?VIEW:null;wrapR();
 })();
 </script>
 </body>

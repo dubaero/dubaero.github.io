@@ -4535,7 +4535,7 @@ img{filter:contrast(1.12) saturate(1.18)}
   if(!on||window.innerWidth<900)return;var e=$q(IDS[on]);if(!e)return;e.classList.add('fitbox');
   var r=e.getBoundingClientRect(),sc=r.height/e.offsetHeight||1;var h=(window.innerHeight-r.top-8)/sc;e.style.height=Math.max(380,h)+'px';window.scrollTo(0,0)}
  window.dbrFit=fit;
- document.addEventListener('click',function(){setTimeout(fit,30)});window.addEventListener('resize',fit);window.addEventListener('hashchange',function(){setTimeout(fit,60)});
+ window.addEventListener('resize',fit);window.addEventListener('hashchange',function(){setTimeout(fit,60)});
  ['heart','vent','song'].forEach(function(k){var v=document.getElementById('v-'+k);if(v)new MutationObserver(function(){setTimeout(fit,20)}).observe(v,{attributes:true,attributeFilter:['hidden']})});
  setTimeout(fit,80);setTimeout(fit,400);
 })();
@@ -4559,7 +4559,7 @@ img{filter:contrast(1.12) saturate(1.18)}
   window.__fsUp=run;
   var t;function later(){clearTimeout(t);t=setTimeout(run,60)}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',later);else later();
-  new MutationObserver(later).observe(document.body,{childList:true,subtree:true});
+  new MutationObserver(function(){run()}).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
 <style id="pc-q-vis">
@@ -5919,7 +5919,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 /* 2026.11.20 넓은 화면에서 첫 화면·메뉴 화면이 스크롤 없이 한 화면에 들어오게 자동 맞춤 (휴대폰·태블릿은 그대로)
    1) 화면 비율을 조금 줄여 맞추고(원래 글자 크기 아래로는 줄이지 않음) 2) 그래도 넘치면 긴 프롬프트 칸만 칸 안에서 스크롤 */
 (function(){
-  var SKIP={'v-vent':1,'v-heart':1,'v-song':1},T=null,busy=false;
+  var SKIP={'v-vent':1,'v-heart':1,'v-song':1,'v-drawer':1},T=null,busy=false;
   function cur(){return [].slice.call(document.querySelectorAll('[id^="v-"]')).filter(function(v){return !v.hidden&&v.parentElement&&!v.parentElement.closest('[id^="v-"]');})[0];}
   function reset(){
     [].forEach.call(document.querySelectorAll('[id^="v-"]'),function(v){if(v.style.zoom)v.style.zoom='';});
@@ -5991,7 +5991,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  var drawer=document.getElementById('v-drawer'),din=document.getElementById('dw-in'),body=document.getElementById('dw-body');
  var _render=dwRender;
  dwRender=function(){
-  if(din&&body&&din.parentNode!==drawer)drawer.insertBefore(din,body);
+  var _y=window.scrollY;  if(din&&body&&din.parentNode!==drawer)drawer.insertBefore(din,body);
   body.classList.remove('gh-grid');
   _render();
   if(KEEP.indexOf(DWT)<0)return;
@@ -6004,6 +6004,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   kids.forEach(function(k){if(right.indexOf(k)<0)L.appendChild(k);});
   right.forEach(function(k){R.appendChild(k);});
   body.appendChild(L);body.appendChild(R);body.classList.add('gh-grid');
+  if(_y)window.scrollTo(0,_y);
   R.querySelectorAll('.dw-step').forEach(function(sec){var t=(sec.querySelector('h3')||{}).textContent||'';if(/첫 대화/.test(t))sec.classList.add('gh-first');else if(/지침/.test(t))sec.classList.add('gh-ins');});
   L.querySelectorAll('.dw-step').forEach(function(sec){var h=sec.querySelector('h3'),t=(h||{}).textContent||'';if(/이어 가기|마무리 검토/.test(t)){sec.classList.add('gh-fold');var m=document.createElement('span');m.className='gh-more';m.textContent='펼치기';h.insertBefore(m,h.querySelector('.sp'));h.style.cursor='pointer';h.addEventListener('click',function(e){if(e.target.closest('button'))return;sec.classList.toggle('open');m.textContent=sec.classList.contains('open')?'접기':'펼치기';});}});
   body.querySelectorAll('.gh-first .ask').forEach(function(k){var d=document.createElement('details');d.className='gh-ask';d.innerHTML='<summary>AI가 이렇게 되물어요 (예시) 보기</summary>';k.parentNode.insertBefore(d,k);d.appendChild(k);});

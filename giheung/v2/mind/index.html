@@ -4535,7 +4535,7 @@ img{filter:contrast(1.12) saturate(1.18)}
   if(!on||window.innerWidth<900)return;var e=$q(IDS[on]);if(!e)return;e.classList.add('fitbox');
   var r=e.getBoundingClientRect(),sc=r.height/e.offsetHeight||1;var h=(window.innerHeight-r.top-8)/sc;e.style.height=Math.max(380,h)+'px';window.scrollTo(0,0)}
  window.dbrFit=fit;
- document.addEventListener('click',function(){setTimeout(fit,30)});window.addEventListener('resize',fit);window.addEventListener('hashchange',function(){setTimeout(fit,60)});
+ window.addEventListener('resize',fit);window.addEventListener('hashchange',function(){setTimeout(fit,60)});
  ['heart','vent','song'].forEach(function(k){var v=document.getElementById('v-'+k);if(v)new MutationObserver(function(){setTimeout(fit,20)}).observe(v,{attributes:true,attributeFilter:['hidden']})});
  setTimeout(fit,80);setTimeout(fit,400);
 })();
@@ -4559,7 +4559,7 @@ img{filter:contrast(1.12) saturate(1.18)}
   window.__fsUp=run;
   var t;function later(){clearTimeout(t);t=setTimeout(run,60)}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',later);else later();
-  new MutationObserver(later).observe(document.body,{childList:true,subtree:true});
+  new MutationObserver(function(){run()}).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
 <style id="pc-q-vis">
@@ -5919,7 +5919,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 /* 2026.11.20 넓은 화면에서 첫 화면·메뉴 화면이 스크롤 없이 한 화면에 들어오게 자동 맞춤 (휴대폰·태블릿은 그대로)
    1) 화면 비율을 조금 줄여 맞추고(원래 글자 크기 아래로는 줄이지 않음) 2) 그래도 넘치면 긴 프롬프트 칸만 칸 안에서 스크롤 */
 (function(){
-  var SKIP={'v-vent':1,'v-heart':1,'v-song':1},T=null,busy=false;
+  var SKIP={'v-vent':1,'v-heart':1,'v-song':1,'v-drawer':1},T=null,busy=false;
   function cur(){return [].slice.call(document.querySelectorAll('[id^="v-"]')).filter(function(v){return !v.hidden&&v.parentElement&&!v.parentElement.closest('[id^="v-"]');})[0];}
   function reset(){
     [].forEach.call(document.querySelectorAll('[id^="v-"]'),function(v){if(v.style.zoom)v.style.zoom='';});
