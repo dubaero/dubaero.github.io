@@ -1804,6 +1804,16 @@ const G_TONE=['따뜻하고 다정하게','밝고 신나게','차분하고 믿�
 const G_STY=['따뜻한 수채화','귀여운 3D 캐릭터','깔끔한 안내형','동화책 그림','밝은 실사풍','감성 콜라주'];
 const G_SIZE=['정사각형 1:1(인스타)','세로 4:5(인스타 피드)','세로 A4','가로 16:9(PPT·현수막)','세로 9:16(스토리·릴스)'];
 const GEN=[
+ {t:'프로그램 아이디어',role:'장애인복지관 프로그램 기획 전문가',
+  opt:[['개수',['5가지','10가지']],['운영 형태',['1회 특강','4회기','8회기','연중']],['예산',['재료비 위주(소액)','외부 강사 포함','예산 없이']]],
+  f:[['people','대상·인원'],['place','장소'],['date','운영 시기']],
+  q:['참여자의 연령대와 장애 특성(이동·의사소통·감각)은 어떤가요?','작년에 반응이 좋았던 프로그램과 아쉬웠던 프로그램이 있나요?','꼭 피해야 할 활동(안전·시설 제약)이 있나요?','보호자·지역 연계가 필요한가요?'],
+  steps:['질문 답을 받은 뒤 아이디어를 표로 보여 줘: | 번호 | 프로그램명 | 한 줄 소개 | 회기 구성 | 준비물 | 기대 효과 | 난이도 |','내가 고른 2개는 회기별 진행안(도입·활동·나눔)과 안전 유의사항까지 써 줘.','고른 아이디어로 프로그램 계획서 초안을 만들 수 있게 항목(목적·목표·평가 방법)을 정리해 줘.']},
+ {t:'프로그램 제안서',role:'복지관 신규 사업 제안서 작성 전문가',
+  opt:[['제출처',['내부 결재','후원 기관 공모','지자체 협력']],['분량',['A4 1쪽 요약','A4 3쪽','PPT 10장']]],
+  f:[['name','프로그램명'],['people','대상·인원'],['date','운영 기간'],['pbud','예산']],
+  q:['이 프로그램이 필요한 이유(욕구 조사·민원·현장 관찰)는 무엇인가요?','비슷한 프로그램과 다른 점은 무엇인가요?','성과를 어떻게 측정할 계획인가요?','협력 기관이나 강사가 정해졌나요?'],
+  steps:['질문 답을 받은 뒤 제안서 목차를 먼저 보여 줘: 배경·필요성 → 목적·목표 → 대상·기간 → 세부 내용 → 예산 → 기대 효과 → 평가.','항목별로 초안을 쓰고, 숫자는 [확인 필요]로 비워 둬.','심사위원 입장에서 약한 부분 3가지를 짚고 보완안을 제시해 줘.']},
  {t:'홍보 이미지',role:'장애인복지관 홍보 디자인 전문가',size:1,sty:1,
   opt:[['구도',['참여자 활동 장면','소품·도구 중심','복지관 공간 풍경','캐릭터 중심']],['글자',['제목 한 줄만','제목+일시','글자 없이 그림만']]],
   f:[['name','행사명'],['date','일시'],['place','장소']],
@@ -2412,6 +2422,40 @@ const _apps=VIEWS.apps;
 VIEWS.apps=()=>{const h=_apps();const B=APPS[S.app??0]||APPS[0];const C=B.cards[S.fc??0];if(B!==A||!C||C.n!==N)return h;
  window.RIGHT=()=>{const r=document.getElementById('R');if(r)r.innerHTML=`<div class="bar"><span class="t">ChatGPT · ${N}</span><span class="sub2">그림을 누르면 크게 보여요</span><button class="btn p" onclick="openAI('chatgpt','')">ChatGPT 열기</button></div><div class="gal">${IM.map(x=>`<figure><img src="/img/giheung/gpt/${x[0]}.webp" alt="${x[1]}" loading="lazy" onclick="zoomImg(this.src)"><figcaption>${x[1]}</figcaption></figure>`).join('')}</div>`};return h};
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
+})();
+</script>
+<script>/* 2026.11.26 ChatGPT 정리 · AI 앱 가로 배치 · 움짤 프롬프트 */
+(function(){
+if(typeof APPS==='undefined')return;
+const g=APPS.find(a=>a.n==='ChatGPT');
+if(g)g.cards=g.cards.filter(c=>!['이미지로 확인하기','5가지 모드 한눈에'].includes(c.n));
+const _apps=VIEWS.apps;
+VIEWS.apps=()=>{const h=_apps();const A=APPS[S.app??0]||APPS[0];if(A!==g)return h;const C=A.cards[S.fc??0];if(!C)return h;
+ const bar=(t)=>`<div class="bar"><span class="t">ChatGPT · ${t}</span><span class="sub2"></span><button class="btn p" onclick="copyTxt(CUR())">프롬프트 복사</button><button class="btn" onclick="openAI('chatgpt',CUR())">ChatGPT 열기</button></div>`;
+ if(C.n==='이미지 편집 화면'){window.RIGHT=()=>{CUR=()=>'';const r=document.getElementById('R');if(r)r.innerHTML=`<div class="bar"><span class="t">ChatGPT · 이미지 편집</span><span class="sub2">그림을 누르면 크게 보여요</span><button class="btn p" onclick="openAI('chatgpt','')">ChatGPT 열기</button></div><div style="padding:12px"><img src="/img/giheung/gpt/edit.webp" alt="생성한 이미지를 ChatGPT 안에서 바로 수정하는 방법" style="width:100%;border-radius:12px;border:1px solid #DDE8E0;cursor:zoom-in" onclick="zoomImg(this.src)"></div>`};return h}
+ if(C.n==='움짤 GIF'){window.RIGHT=()=>{S.ao=S.ao??4;S.ab=S.ab??0;const o=C.o[S.ao]||C.o[0],b=AB[S.ab];const pr=C.p.replace(/\{b\}/g,M(b)).replace(/\{o\}/g,M(o));CUR=()=>pr;
+  const st=['새 채팅','+ → 사진 첨부','움직임 고르기','프롬프트 붙여넣기','GIF 저장'];
+  const r=document.getElementById('R');if(r)r.innerHTML=bar('움짤 GIF')+`<div class="gif2"><p class="gw">사진이나 캐릭터 그림 1장을 3초 동안 움직이게 해요. 따로 메뉴가 없어서 <b>새 채팅에 사진을 넣고 아래 프롬프트를 붙여 넣으면</b> 돼요.</p>
+  <div class="gst">${st.map((x,i)=>`<span><i>${i+1}</i>${x}</span>`).join('<em>→</em>')}</div>
+  <div class="qrow"><div class="gl">움직임</div>${chips('ao',C.o)}</div><div class="qrow"><div class="gl">사업</div>${chips('ab',AB)}</div>
+  <div class="out" style="white-space:pre-wrap">${fmt(tight(pr))}</div></div>`};return h}
+ return h};
+document.head.insertAdjacentHTML('beforeend',`<style id="apps-top">
+.view:has(.atabs){grid-template-columns:1fr!important}
+.view:has(.atabs) .pane{max-width:none}
+.view:has(.atabs) .ftb thead,.view:has(.atabs) .ftb td:nth-child(2){display:none}
+.view:has(.atabs) .ftb,.view:has(.atabs) .ftb tbody{display:block}
+.view:has(.atabs) .ftb tbody{display:flex;flex-wrap:wrap;gap:6px}
+.view:has(.atabs) .ftb tr{display:flex;align-items:center;gap:6px;border:1px solid #DDE8E0;border-radius:999px;background:#fff;padding:5px 10px;cursor:pointer;outline:0!important}
+.view:has(.atabs) .ftb tr.on{background:#2F6B56!important;border-color:#2F6B56}.view:has(.atabs) .ftb tr.on td,.view:has(.atabs) .ftb tr.on b{color:#fff}
+.view:has(.atabs) .ftb td{border:0!important;padding:0!important;background:transparent!important}
+.view:has(.atabs) .ftb .ai-ic{width:22px!important;height:22px!important;margin-right:4px!important}
+.view:has(.atabs) .atabs{display:flex;flex-wrap:wrap;gap:6px}
+.gif2{padding:12px;display:grid;gap:10px}.gif2 .gw{margin:0;line-height:1.6}
+.gst{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.gst span{display:inline-flex;align-items:center;gap:6px;background:#F1F8F3;border:1px solid #DDE8E0;border-radius:999px;padding:5px 12px;font-weight:700;font-size:14px}
+.gst i{font-style:normal;width:20px;height:20px;border-radius:50%;background:#E07A2E;color:#fff;display:grid;place-items:center;font-size:12px}.gst em{font-style:normal;color:#E07A2E}
+</style>`);
+if(typeof VIEW!=='undefined'&&VIEW==='apps'){if((S.fc??0)>=((APPS[S.app]||{}).cards||[]).length)S.fc=0;render()}
 })();
 </script>
 <style id="gh-home-theme">
