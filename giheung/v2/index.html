@@ -8,7 +8,7 @@
 <script src="/js/room-gate.js?v=2"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-:root{--g:#d9773a;--g2:#a4501c;--gl:#fdf1e6;--gm:#f5d5bb;--ink:#33281f;--sub:#7a6a5d;--line:#efe3d8;--bg:#fcf8f3;--red:#d93a2b;--or:#fff1e0;--orT:#a85a00}
+:root{--g:#2a9d8f;--g2:#1f7268;--gl:#e9f6f4;--gm:#c6e7e2;--ink:#263331;--sub:#66746f;--line:#e4ebe9;--bg:#f7f9f8;--red:#d93a2b;--or:#fff3e6;--orT:#b0601a}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.55;letter-spacing:-.2px}
@@ -38,14 +38,14 @@ main{flex:1;min-height:0}
 .tile.app{font-size:15px;justify-content:center}
 /* homepage-style home (그룹홈 비서함 틀) */
 .hp{height:100%;display:flex;flex-direction:column;gap:12px;padding:12px 0 8px;min-height:0}
-.hhero{flex:none;background:linear-gradient(90deg,#c9692f 0%,#df8a4f 55%,#ecac78 100%);border-radius:14px;display:grid;grid-template-columns:minmax(0,1fr) 34%;overflow:hidden;color:#fff;min-height:150px}
+.hhero{flex:none;background:linear-gradient(90deg,#fdf6ee 0%,#f3faf8 100%);border:1px solid var(--line);border-radius:14px;display:grid;grid-template-columns:minmax(0,1fr) 34%;overflow:hidden;color:var(--ink);min-height:150px}
 .hhero .tx{padding:18px 24px;display:flex;flex-direction:column;justify-content:center;gap:5px;min-width:0}
-.hhero .bdg{font-size:13px;font-weight:800;color:#fff;display:flex;align-items:center;gap:6px}
-.hhero .kick{font-size:13px;font-weight:700;color:#ffe3cc}
+.hhero .bdg{font-size:13px;font-weight:800;color:var(--g2);display:flex;align-items:center;gap:6px}
+.hhero .kick{font-size:13px;font-weight:700;color:#b0601a}
 .hhero h1{font-size:clamp(20px,2vw,28px);letter-spacing:-1px;line-height:1.3;font-weight:800}
-.hhero h1 em{font-style:normal;color:#fff3c4}
-.hhero p.sub{font-size:13.5px;color:#fff1e4}
-.srch{display:flex;align-items:center;gap:8px;background:#fff;border-radius:8px;padding:0 12px;max-width:520px;margin-top:6px;color:#9a8a7e}
+.hhero h1 em{font-style:normal;color:var(--g)}
+.hhero p.sub{font-size:13.5px;color:var(--sub)}
+.srch{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:0 12px;max-width:520px;margin-top:6px;color:#8a9692}
 .srch input{border:0;outline:0;flex:1;padding:10px 0;font:inherit;font-size:14px;min-width:0;color:var(--ink)}
 .hhero .ph{background:url(/img/giheung/hero-sprout.webp) center 45%/cover no-repeat}
 .cols{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
@@ -53,7 +53,7 @@ main{flex:1;min-height:0}
 .col h3{font-size:16px;font-weight:800;letter-spacing:-.5px;padding-bottom:7px;border-bottom:2px solid var(--g);display:flex;justify-content:space-between;align-items:center}
 .col h3 small{font-size:12px;color:var(--sub);font-weight:700}
 .ol{list-style:none;overflow:auto;min-height:0;flex:1;display:flex;flex-direction:column}
-.ol li{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #f1e8df;font-size:14.5px;font-weight:700;letter-spacing:-.4px}
+.ol li{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14.5px;font-weight:700;letter-spacing:-.4px}
 .ol li .no{width:20px;color:var(--sub);font-weight:600;font-size:13px;text-align:center}
 .ol li .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
 .ol li .nm:hover{color:var(--g2);text-decoration:underline}
@@ -74,20 +74,20 @@ main{flex:1;min-height:0}
 .lk{list-style:none;overflow:auto;min-height:0;flex:1}
 .lk .sec{font-size:12.5px;font-weight:800;color:var(--sub);margin:6px 0 2px}
 .lk .sec:first-child{margin-top:0}
-.lk a{display:flex;align-items:center;gap:8px;padding:7px 2px;border-bottom:1px solid #f1e8df;text-decoration:none;color:var(--ink);font-size:14px;font-weight:800;letter-spacing:-.4px}
+.lk a{display:flex;align-items:center;gap:8px;padding:7px 2px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font-size:14px;font-weight:800;letter-spacing:-.4px}
 .lk a span{font-size:12px;color:var(--sub);font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lk a:hover{color:var(--g2)}
 .ghelp{margin-top:auto;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px;color:var(--sub);letter-spacing:-.3px}
 .ghelp b{color:var(--g2)}
-.gfoot{flex:none;background:#3a2e27;color:#e9ddd2;margin:0 -16px;padding:9px 24px;font-size:12.5px;display:flex;flex-direction:column;gap:3px;letter-spacing:-.3px}
+.gfoot{flex:none;background:#2c3634;color:#dfe7e5;margin:0 -16px;padding:9px 24px;font-size:12.5px;display:flex;flex-direction:column;gap:3px;letter-spacing:-.3px}
 .gfoot .r{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
-.gfoot b{color:#fff}.gfoot a{color:#ffd9b8;text-decoration:none;font-weight:700}
-.gfoot .cp{border:1px solid #8a7666;background:none;color:#ffd9b8;border-radius:5px;padding:0 6px;font-size:11.5px}
+.gfoot b{color:#fff}.gfoot a{color:#9fe0d6;text-decoration:none;font-weight:700}
+.gfoot .cp{border:1px solid #66746f;background:none;color:#9fe0d6;border-radius:5px;padding:0 6px;font-size:11.5px}
 /* 하나로 입력 */
-.ibox{border:1px solid var(--line);border-radius:10px;background:#fffdfb;position:relative}
+.ibox{border:1px solid var(--line);border-radius:10px;background:#fff;position:relative}
 .ibox:focus-within{border-color:var(--g);box-shadow:0 0 0 2px var(--gl)}
 .ibox textarea{width:100%;border:0;outline:0;background:transparent;resize:vertical;font:inherit;font-size:14px;line-height:1.9;padding:8px 12px 4px;min-height:120px;color:var(--ink)}
-.ibox .ft{display:flex;justify-content:space-between;align-items:center;padding:0 8px 6px 12px;font-size:12px;color:#9a8a7e}
+.ibox .ft{display:flex;justify-content:space-between;align-items:center;padding:0 8px 6px 12px;font-size:12px;color:#8a9692}
 @media (max-width:900px){.hhero{grid-template-columns:1fr}.hhero .ph{display:none}.cols{grid-template-columns:1fr}.gfoot{margin:0}}
 /* view */
 .view{height:100%;display:grid;grid-template-columns:minmax(300px,32%) minmax(0,1fr);gap:12px;padding-bottom:6px}
@@ -127,7 +127,7 @@ main{flex:1;min-height:0}
 .btn.p{background:var(--g);border-color:var(--g);color:#fff}
 .btn:hover{border-color:var(--g)}
 .out{padding:14px 18px;overflow:auto;flex:1;min-height:0;font-size:15px;line-height:1.75;white-space:pre-wrap;letter-spacing:-.3px}
-.out mark,.hl{background:linear-gradient(transparent 55%,#ffe0a8 55%);color:var(--g2);font-weight:800;padding:0 1px}
+.out mark,.hl{background:linear-gradient(transparent 55%,#cdeee8 55%);color:var(--g2);font-weight:800;padding:0 1px}
 .out .h{font-weight:800;color:var(--g2)}
 .grid4{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;padding:10px;flex:1;min-height:0}
 .box{border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;min-height:0}
@@ -395,7 +395,7 @@ smart:[['로봇보행 {s} 챌린지','목표 걸음 수 기록 도전','기록�
 crisis:[['{e} 위기가정 집중 점검','위기 징후 체크리스트로 가정 점검','체크리스트','위기 조기 발견'],['통합사례회의','전문 위원과 사례별 지원 방안 논의','사례 요약지','전문적 개입'],['긴급 지원 연계','지원금·의료비 연계','신청 서류','위기 해소'],['사후 모니터링 방문','지원 후 변화 확인 방문','모니터링지','사후관리'],['자원 발굴 간담회','지역 기관과 자원 연계','간담회 자료','자원 확대'],['가족 심리 지원','전문의 상담 연계','상담 의뢰서','정서 회복']],
 care:[['활동지원사 보수교육','{s} 안전·인권 교육','교육 자료','서비스 질 향상'],['수급자 소집교육','이용 수칙·권리 안내','안내 자료','권리 이해'],['활동지원사 모임','{e} 맞이 소통·격려 모임','다과·감사장','소진 예방'],['주간활동 지역 탐방','{pl} 낮 활동','교통카드','지역사회 참여'],['괜찮은 쿠킹','{f} 만들기','{f} 재료','일상 기술'],['마실데이','동네 산책·카페 이용','용돈','자기결정']],
 donor:[['{e} 후원자 감사 카드','이용자가 직접 만든 감사 카드 전달','카드 재료','감사 표현'],['후원 성과 공유회','후원 사용 결과·변화 사진 공유','성과 자료','신뢰 형성'],['자원봉사 원데이','{s} 봉사 활동 하루 체험','봉사 안내문','참여 확대'],['아너리더스 파트너스데이','후원자 초청 간담회','초청장·다과','관계 강화'],['기업 사회공헌 연계','기업 봉사단과 함께하는 활동','협약 자료','자원 확대'],['연말 나눔 캠페인','온·오프라인 모금','홍보물','나눔 확산']]};
-function itype(bn,p){const s=bn+' '+p;
+function itype(bn,p){const s=bn+' '+p;if(/주간이용/.test(bn))return 'day';
  if(/후원|자원봉사|아너/.test(s))return 'donor';if(/하이드림|위기|사례회의|희망드림/.test(s))return 'crisis';if(/스마트재활|디지털 .*실|로봇|피트니스/.test(s))return 'smart';
  if(/활동지원|맞춤형|주간활동/.test(s))return 'care';if(/인식|권리|법률|공모|누니|바니|모니|귀니|놀이터/.test(s))return 'aware';if(/재가|이·미용|반찬|김장|명절지원|클린업|생일잔치|반려견|잔고장|주거|문화기행|쉼표|행복마을|행복신문/.test(s))return 'home';
  if(/가족잔치|명절 및|문화공연|문화데이트|길 따라|나들이|무료마켓/.test(s))return 'event';if(/가족|부모|P\.O\.P|마음ON/.test(s))return 'family';if(/직업|취업|고용|일자리|훈련대학|직업대학|직종/.test(s))return 'job';
