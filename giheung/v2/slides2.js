@@ -338,3 +338,31 @@ document.head.insertAdjacentHTML('beforeend','<style id="gh-mint">'
 +'.nb-b b{color:#0B7F6B!important}.nb-b small,.nb-b p{color:#14332C!important}'
 +'.hub-a,.mc,.nb-a,.ac-c{border-color:#CFE3D6!important}'
 +'</style>');
+/* 2026.11.26 민트 연하게 + 기능 한눈에 머리칸 민트 */
+document.head.insertAdjacentHTML('beforeend','<style id="gh-mint2">'
++'.mc .ex,.nb-a p,.ac-c p,.hub-a p,.fl-say,.sld-say p,.nb-b>div{background:#F3FBF8!important;border:1px solid #D6EFE7!important;border-left:3px solid #7FD0BC!important}'
++'.fm-o{background:#F7FCFA!important;border:1px solid #E1F2EC!important}'
++'.mc .ex em,.nb-a p em,.ac-c p em,.fm-o em,.fl-say small,.hub-ah small,.nb-b b{color:#1E8C77!important;text-decoration:underline;text-decoration-color:#9ADCCB;text-decoration-thickness:2px;text-underline-offset:3px}'
++'#R .ovc th{background:#EEF8F4!important;color:#1E7A66!important;border-top-color:#DCEFE7!important}#R .ovc td{border-top-color:#E6F1EC!important}#R .ovs{background:#FAFDFB!important;border-color:#DCEBE3!important}#R .ovc{border-color:#DCEBE3!important}'
++'</style>');
+/* 2026.11.26 Claude Design · 디자인 시스템 설명 */
+(function(){
+var ic=function(k,w){return window.__ic?window.__ic(k,w||18):''};
+function e(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+function steps(h,a){return '<section class="dsx"><h4>'+h+'</h4><div class="dsx-s">'+a.map(function(s,i){return (i?'<em>›</em>':'')+'<div><span class="dsx-n">'+(i+1)+'</span><span class="dsx-i">'+ic(s[0],20)+'</span><b>'+e(s[1])+'</b><small>'+e(s[2])+'</small></div>'}).join('')+'</div></section>'}
+function cards(h,a){return '<section class="dsx"><h4>'+h+'</h4><div class="dsx-c">'+a.map(function(s){return '<div><span class="dsx-i">'+ic(s[0],20)+'</span><b>'+e(s[1])+'</b><small>'+e(s[2])+'</small>'+(s[3]?'<p><em>예시</em>'+e(s[3])+'</p>':'')+'</div>'}).join('')+'</div></section>'}
+var DESIGN=steps('Claude Design으로 디자인하는 순서',[['side','Design 열기','왼쪽 메뉴 [Design] 또는 아티팩트 → 디자인'],['chat','만들 것 말하기','"송년회 포스터 A4, 큰 글씨"'],['pal','디자인 시스템 고르기','기관 색·글꼴이 자동 적용'],['grid','시안 비교','서로 다른 시안 2개 이상'],['brush','직접 고치기','글자·색·사진을 눌러서 수정'],['down','저장·보내기','PDF·이미지·PPT, Canva로 보내기']])
+ +cards('이런 걸 만들 수 있어요',[['doc','안내지·포스터','A4·인쇄용','송년회 안내지 시안 2개'],['slide','발표 자료','슬라이드 10장','운영위원회 보고'],['image','SNS 이미지','카드뉴스·썸네일','인스타 카드뉴스 4장'],['grid','웹·앱 화면','페이지 시안','행사 신청 페이지']]);
+var DS=cards('디자인 시스템이란?',[['pal','디자인 시스템','우리 기관의 색·글꼴·로고·말투를 저장한 "디자인 규칙 묶음"','초록+주황, 제목 굵게, 로고 오른쪽 위'],['check','왜 쓰나요','누가 만들어도 같은 기관 느낌, 매번 설명 안 해도 돼요','포스터·안내지·카드뉴스가 한 세트처럼'],['folder','어디서 보나요','[+] → 디자인 시스템, 또는 Design 화면 위쪽','디자인 요청할 때 골라 쓰기']])
+ +steps('새 디자인 시스템 만들기',[['plus','새 디자인 시스템','[+] → 디자인 시스템 → 새로 만들기'],['upload','자료 넣기','로고 파일·기존 홍보물·홈페이지 주소'],['pal','색·글꼴 확인','대표 색 2~3개, 제목·본문 글꼴'],['text','말투·규칙 적기','"쉬운 말, 큰 글씨, 존댓말"'],['check','저장','이름 붙여 저장 → 기본으로 지정']])
+ +cards('디자인 시스템 관리',[['brush','고치기','색·글꼴·로고를 바꾸면 다음 디자인부터 적용',''],['check','기본으로 지정','여러 개 중 자주 쓰는 것을 기본으로',''],['share','함께 쓰기','팀원과 공유해 같은 규칙으로 만들기',''],['eraser','삭제','안 쓰는 시스템 정리','']]);
+function post(){if(typeof VIEW==='undefined'||VIEW!=='apps')return;var A=APPS[S.app||0];if(!A||A.n!=='Claude')return;var C=A.cards[S.fc||0];if(!C)return;var h=C.n==='Design'?DESIGN:C.n==='디자인 시스템'?DS:'';if(!h)return;
+ var R=document.getElementById('R');if(!R||R.querySelector('.dsx'))return;var p=R.querySelector('.sld-path');if(p)p.insertAdjacentHTML('afterend',h+'<p class="hub-n" style="margin:0">메뉴 이름·위치는 업데이트에 따라 조금 다를 수 있어요. 실제 화면 캡처를 보내 주시면 바로 넣어요.</p>')}
+var _r=render;render=function(){var r=_r.apply(this,arguments);try{post()}catch(er){console.error(er)}return r};
+document.head.insertAdjacentHTML('beforeend','<style id="gh-dsx">.dsx{border:1px solid #D5E5DA;border-radius:12px;padding:12px 14px;display:grid;gap:10px;background:#fff}.dsx h4{margin:0;font-size:15px;font-weight:800;color:#1E5442;padding-bottom:6px;border-bottom:2px solid #E07A2E;justify-self:start}'
++'.dsx-s{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px}.dsx-s>div{flex:1 1 130px;position:relative;background:#F7FBF8;border:1px solid #D5E5DA;border-radius:10px;padding:10px 10px 10px;display:grid;gap:3px;align-content:start}.dsx-s em{font-style:normal;color:#E07A2E;font-weight:800;align-self:center}'
++'.dsx-n{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:#E07A2E;color:#fff;font-size:11.5px;font-weight:800;display:grid;place-items:center}'
++'.dsx-i{color:#2F6B56;display:block}.dsx b{font-size:14.5px;color:#111}.dsx small{font-size:12.5px;color:#4b5a55;line-height:1.45}'
++'.dsx-c{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}.dsx-c>div{border:1px solid #E3ECE6;border-radius:12px;padding:10px 12px;display:grid;gap:4px;align-content:start}.dsx-c p{margin:2px 0 0;background:#F3FBF8;border:1px solid #D6EFE7;border-left:3px solid #7FD0BC;border-radius:8px;padding:6px 8px;font-size:13px;font-weight:600}.dsx-c p em{font-style:normal;color:#1E8C77;font-weight:800;margin-right:5px}</style>');
+if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
+})();

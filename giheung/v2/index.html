@@ -2507,7 +2507,7 @@ document.head.insertAdjacentHTML('beforeend',`<style id="gh-apptop">
 if(typeof VIEW!=='undefined')render();
 })();</script>
 <script src="slides.js?v=8"></script>
-<script src="slides2.js?v=18"></script>
+<script src="slides2.js?v=19"></script>
 <script>/* 2026.11.26 결재란·서명란·항목 넣고 빼기: 미리보기에서 바로 보이게 */
 function flashPrev(k,v){setTimeout(()=>{const R=document.getElementById('R');if(!R)return;let el=null,msg='';
  if(k==='appr'){el=R.querySelector('.d-appr')||[...R.querySelectorAll('table')].find(t=>/결\s*재/.test((t.rows[0]&&t.rows[0].textContent)||''));msg=v?'결재란 '+v+'칸을 넣었어요':'결재란을 뺐어요'}
