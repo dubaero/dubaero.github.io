@@ -355,11 +355,11 @@ function tags(){const p=P().replace(/[^가-힣A-Za-z0-9]/g,'');const a=(V('act')
 function withTxt(){const a=(S.wi||[0]).map(i=>WITH[i]);return a.join('·')}
 function blog(){const p=P(),act=V('act')||`${p} 활동을 함께했어요`,more=V('more'),w=withTxt(),L=S.ln??1,mood=S.md??0;
  const open=['따스한 마음을 담아 오늘의 이야기를 전해드려요.','신나는 소식 하나 들고 왔어요!','오늘 있었던 활동을 차분히 정리해 전해드립니다.'][mood];
- let t=`[제목] ${p} | ${act.slice(0,24)} — ${ORG} 이야기\n\n안녕하세요, ${ORG}입니다.\n${open}\n\n■ 오늘의 활동\n${M(act)}\n[사진: 활동 모습 1]\n\n■ 함께한 사람들\n${w}과(와) 함께 ${p} 시간을 보냈어요.${more?'\n'+more:''}\n\n■ 이렇게 진행했어요\n먼저 오늘 할 일을 함께 확인하고, 각자 하고 싶은 역할을 골랐어요. 서두르지 않고 한 분 한 분의 속도에 맞추니 모두가 끝까지 즐겁게 참여했어요.\n[사진: 진행하는 모습]`;
+ let t=`[제목] ${p} | ${act.slice(0,24)} — ${ORG} 이야기\n\n안녕하세요, ${ORG}입니다.\n${open}\n\n■ 오늘의 활동\n${M(act)}\n[사진: 활동 모습 1]\n\n■ 함께한 사람들\n${w} 모두 함께 ${p} 시간을 보냈어요.${more?'\n'+more:''}\n\n■ 이렇게 진행했어요\n먼저 오늘 할 일을 함께 확인하고, 각자 하고 싶은 역할을 골랐어요. 서두르지 않고 한 분 한 분의 속도에 맞추니 모두가 끝까지 즐겁게 참여했어요.\n[사진: 진행하는 모습]`;
  if(L>0)t+=`\n\n■ 기억에 남는 순간\n[이용자분의 반응이나 기억에 남는 장면 한두 줄]\n[사진: 활동 모습 2]\n\n■ 이용자분의 한마디\n"[이용자분이 한 말]"\n짧은 한마디에 오늘의 즐거움이 담겨 있었어요.`;
  if(L>1)t+=`\n\n■ ${BN()}은(는)\n${BN()}은(는) 장애인이 지역 안에서 스스로 선택하고 참여하는 삶을 응원하는 사업이에요. 이런 활동 하나하나가 자신감이 되고, 이웃에게는 서로를 알아가는 계기가 됩니다.\n\n■ 고마운 분들\n늘 마음을 보태 주시는 후원자님과 자원봉사자님, 지역 이웃분들께 감사드립니다.`;
  t+=`\n\n앞으로도 ${ORG}의 따뜻한 일상을 나누겠습니다.\n\n${tags()}`;return t}
-function insta(){const p=P(),act=V('act')||`${p} 활동`;const e=['🌿','✨','🙂'][S.md??0];return `${e} ${p} 이야기 ${e}\n\n${act}\n${withTxt()}과(와) 함께여서 더 즐거웠던 시간!${V('more')?'\n'+V('more'):''}\n\n오늘도 한 걸음 함께 자랐어요.\n\n📍 ${ORG}\n${tags()}`}
+function insta(){const p=P(),act=V('act')||`${p} 활동`;const e=['🌿','✨','🙂'][S.md??0];return `${e} ${p} 이야기 ${e}\n\n${act}\n${withTxt()} 모두 함께여서 더 즐거웠던 시간!${V('more')?'\n'+V('more'):''}\n\n오늘도 한 걸음 함께 자랐어요.\n\n📍 ${ORG}\n${tags()}`}
 function kakao(){const p=P(),act=V('act')||`${p} 활동`;return `[${ORG} 소식]\n\n${p} 활동을 전해드려요.\n· ${act}\n· 함께한 분: ${withTxt()}${V('date')?'\n· 일시: '+V('date'):''}\n\n자세한 이야기와 사진은 블로그에서 확인해 주세요.\n[블로그 링크]\n\n문의 ${F('tel')}`}
 function home(){const p=P(),act=V('act')||`${p} 활동`;return `[제목] ${BN()} ${p} 운영 소식\n\n${ORG}은(는) ${V('date')||'[일시]'} ${V('place')||'[장소]'}에서 ${M(p)}을(를) 진행하였습니다.\n\n1. 대상: ${withTxt()}\n2. 내용: ${act}${V('more')?'\n3. 주요 활동: '+V('more'):''}\n\n이번 활동을 통해 참여자분들이 [기대 효과]를 경험하는 시간이 되었습니다.\n앞으로도 지역사회와 함께하는 프로그램을 운영하겠습니다.\n\n[사진 설명: 사진 속 활동을 한 줄로 설명]\n문의: ${F('staff')} ${F('tel')}`}
 function promoText(){const s=S.pr??0,p=P(),bn=BN();
