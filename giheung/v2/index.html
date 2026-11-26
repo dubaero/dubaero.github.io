@@ -2045,21 +2045,8 @@ function cardR(A,C){const o=(C.o||[])[S.ao??0]||'',b=AB[S.ab??0];const src=(C.pp
 /* ---- 데스크톱 앱 ---- */
 function deskView(){
  const tabs=`<div class="atabs">${APPS.map((a,i)=>`<button class="at${S.app==i?' on':''}" onclick="S.app=${i};S.fc=0;S.ao=0;save();render()">${a.n}</button>`).join('')}</div>`;
- const left=tabs+`<div class="gl">설치 <small>누르면 공식 다운로드 페이지</small></div><div class="dls"><a href="https://chatgpt.com/download/" target="_blank" rel="noopener" style="--c:#10a37f"><b>ChatGPT</b>chatgpt.com/download</a><a href="https://gemini.google/kr/desktop/" target="_blank" rel="noopener" style="--c:#4285f4"><b>제미나이</b>gemini.google/desktop</a><a href="https://claude.com/download" target="_blank" rel="noopener" style="--c:#d97757"><b>Claude</b>claude.com/download</a></div><div class="tipbox"><span class="tt">한 줄 정리</span>대화 내용·계정은 웹과 똑같아요. 데스크톱 앱은 <b>다른 프로그램을 쓰는 중에 단축키로 바로 부르고, 지금 보는 화면을 바로 보여 줄 수 있는 것</b>이 핵심이에요. 설치는 무료, 기관 PC는 설치 권한이 필요할 수 있어요.</div>`;
- return view('AI 앱 활용법',left,()=>`<div class="bar"><span class="t">웹(브라우저) vs 데스크톱 앱, 언제 무엇을 쓸까?</span></div><div class="dk">
- <table><thead><tr><th></th><th>웹 (크롬에서 접속)</th><th>데스크톱 앱 (설치)</th></tr></thead><tbody>
- <tr><td>${ic('key')}부르는 법</td><td>브라우저 열기 → 주소 입력 → 탭 찾기</td><td><b>Alt + Space</b> 한 번. 한글·엑셀 작업 화면 위에 작은 입력창이 바로 떠요</td></tr>
- <tr><td>${ic('cam')}지금 보는 화면</td><td>화면을 캡처해 저장 → 다시 첨부</td><td>입력창의 <b>스크린샷·화면 공유</b> 버튼으로 보고 있는 표·오류창을 그대로 보여 주고 질문</td></tr>
- <tr><td>${ic('mic')}말로 입력</td><td>마이크 버튼으로 가능</td><td>단축키로 바로 받아쓰기 (Claude·제미나이 Mac)</td></tr>
- <tr><td>${ic('folder')}내 컴퓨터 파일</td><td>파일을 하나씩 올리기</td><td>폴더를 연결해 여러 파일을 직접 읽고 정리 (Claude 데스크톱 확장·Cowork, 제미나이 Tasks — 유료 기능 위주)</td></tr>
- <tr><td>${ic('zap')}가벼움</td><td>탭이 많으면 느려져요</td><td>따로 실행돼서 탭을 찾을 필요가 없어요</td></tr></tbody></table>
- <h4 style="margin:2px 0 0;color:#1E5442">이럴 때 데스크톱 앱을 쓰세요</h4>
- <div class="dsc"><div>${ic('doc')}<b>한글로 계획서 쓰다가</b><span>문장을 블록 → Alt+Space → "공문체로 다듬어 줘". 창을 옮기지 않아요</span></div><div>${ic('table')}<b>엑셀 표를 보면서</b><span>스크린샷 버튼 → "이 표에서 합계가 틀린 곳 찾아 줘"</span></div><div>${ic('folder')}<b>폴더 속 파일 정리</b><span>Claude에 폴더 연결 → "프로그램 일지 20개를 월별 표로 정리해 줘" (유료)</span></div></div>
- <h4 style="margin:2px 0 0;color:#1E5442">앱별로 다른 점</h4>
- <div class="apps3"><div><h5>${ic('msg','background:#10a37f')}ChatGPT</h5><ul><li>Alt+Space 작은 창(컴패니언 창)</li><li>스크린샷 바로 첨부</li><li>Windows·Mac</li></ul></div>
- <div><h5>${ic('spark','background:#4285f4')}제미나이</h5><ul><li>Alt+Space(Mac은 Option+Space)</li><li>Mac은 창 공유로 화면 보여 주기</li><li>Windows 앱 2026년 9월 출시</li></ul></div>
- <div><h5>${ic('pen','background:#d97757')}Claude</h5><ul><li>빠른 입력·스크린샷·받아쓰기</li><li>데스크톱 확장으로 내 파일·폴더 연결</li><li>Cowork(유료)로 여러 단계 일 맡기기</li></ul></div></div>
- <p class="note2">ChatGPT와 제미나이는 단축키가 같아요(Alt+Space). 둘 다 설치하면 한쪽 설정에서 단축키를 바꿔 두세요. 기능은 계속 바뀌니 강의 전 한 번 더 확인하세요.</p></div>`);}
+ const left=tabs+`<div class="gl">다운로드 <small>누르면 공식 페이지</small></div><div class="dls"><a href="https://chatgpt.com/download/" target="_blank" rel="noopener" style="--c:#10a37f"><b>ChatGPT</b>chatgpt.com/download</a><a href="https://gemini.google/kr/desktop/" target="_blank" rel="noopener" style="--c:#4285f4"><b>제미나이</b>gemini.google/kr/desktop</a><a href="https://claude.com/download" target="_blank" rel="noopener" style="--c:#d97757"><b>Claude</b>claude.com/download</a></div>`;
+ return view('AI 앱 활용법',left,()=>`<div class="bar"><span class="t">데스크톱 앱 설치 방법</span><span class="sub2">누르면 크게 보여요</span></div><div class="out" style="white-space:normal;padding:12px"><img class="bigimg" src="/img/giheung/apps.webp" alt="ChatGPT, 제미나이, Claude 데스크톱 앱 다운로드 방법과 장점" onclick="zoomImg(this.src)" style="width:100%;cursor:zoom-in"></div>`);}
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();else tabsFix();
 })();
 </script>
@@ -2121,26 +2108,36 @@ VIEWS.apps=()=>{const A=APPS[S.app??0]||APPS[0];if(A.desk||A.tips||A.aig)return 
  const appTabs=`<div class="atabs">${APPS.map((a,i)=>`<button class="at${S.app==i?' on':''}" onclick="S.app=${i};S.fc=0;S.ao=0;S.ut=0;save();render()">${a.n}</button>`).join('')}</div>`;
  const ftbl=`<table class="ftb"><thead><tr><th>기능</th><th>무엇을 만드나</th><th></th></tr></thead><tbody>${A.cards.map((c,i)=>`<tr class="${S.fc==i?'on':''}" onclick="S.fc=${i};S.ao=0;S.ut=0;save();render()"><td><b>${c.n}</b></td><td>${esc((FLX[A.n+'|'+c.n]||[[],c.what?c.what.split(/[.,]/)[0]:''])[1]||'')}</td><td><span class="badge ${c.f?'free':'paid'}">${c.f?'무료':'유료'}</span></td></tr>`).join('')}</tbody></table>`;
  return view('AI 앱 활용법',appTabs+`<div class="gl">${A.n}로 할 수 있는 것 <small>줄을 누르면 오른쪽이 바뀌어요</small></div>${ftbl}`,()=>right(A,C));};
-function right(A,C){S.ut=S.ut??0;S.ao=S.ao??0;S.ab=S.ab??0;
- const U=mapUse(A,C);if(S.ut>=U.length)S.ut=0;const u=U[S.ut]||null;
- let src=C.p||'';if(C.pp){const pi=u&&typeof u[3]==='number'?u[3]:(S.ao||0);src=C.pp[pi]||src}
- if(PFIX[key(A,C)])src=PFIX[key(A,C)](src);
- const no=NOOPT.includes(key(A,C));if(no)src=src.replace(/\{o\}/g,'{u}');
- const ut=u?(typeof u[3]==='number'?u[1]:u[3]):'';
- const o=(C.o||[])[S.ao]||'',b=AB[S.ab];
- let pr=src.replace(/\{b\}/g,M(b)).replace(/\{o\}/g,M(o));
- if(pr.includes('{u}'))pr=pr.replace(/\{u\}/g,M(ut));else if(u&&!C.pp)pr='[이번에 만들 것] '+M(ut)+'\n'+pr;
- CUR=()=>pr;
+const EXM={'ChatGPT|이미지 만들기':'poster','ChatGPT|이미지 편집 화면':'edit','ChatGPT|라이브러리':'cards','제미나이|나노바나나 이미지':'info','제미나이|음악 30초':'music','제미나이|영상 만들기':'video','Claude|디자인':'a4','Claude|슬라이드':'slide','Claude|모션그래픽':'motion','Claude|한글 서식 스킬':'hwp','Claude|깊은 조사':'research','Canva|AI 프레젠테이션':'cppt','Canva|매직 레이어':'layers'};
+(function(){const H={'ChatGPT|캔버스':['ChatGPT 새 채팅에서 <b>+</b> → <b>캔버스</b> 고르기 (또는 "캔버스로 열어 줘")','초안이나 메모를 붙여 넣으면 <b>오른쪽 창</b>에 글이 펼쳐져요','고칠 문단을 <b>드래그</b> → "이 부분만 쉽게" 처럼 말하기','오른쪽 아래 <b>연필 버튼</b>: 길이 조절·읽기 수준·맞춤법','다 되면 <b>복사</b> 또는 <b>다운로드</b>(워드·PDF)'],
+'제미나이|캔버스':['제미나이 입력창 아래 <b>도구 → 캔버스</b> 고르기','만들고 싶은 것(안내 페이지·인포그래픽·퀴즈)을 쓰고 보내기','오른쪽 창에 바로 만들어져요 → 고칠 곳을 <b>드래그</b>해서 말로 수정','오른쪽 위 <b>만들기</b>: 웹페이지·인포그래픽·퀴즈·오디오 개요로 바꾸기','<b>공유</b>로 링크 보내기 또는 구글 문서로 내보내기']};
+ Object.keys(H).forEach(k=>{const[a,n]=k.split('|');const A=APPS.find(x=>x.n===a);const c=A&&A.cards.find(x=>x.n===n);if(c)c.how=H[k]});})();
+function right(A,C){S.ut=S.ut??0;
+ const U=mapUse(A,C);
  const fd=(typeof FD!=='undefined'&&FD[C.n])||['',''];const what=C.what||fd[0];const adv=(fd[1]||'').split(' · ').filter(Boolean);
- const open=A.url==='canva'?`<button class="btn" onclick="window.open('https://www.canva.com','_blank')">Canva 열기</button>`:`<button class="btn" onclick="openAI('${A.url}',CUR())">${A.n} 열기</button>`;
+ const open=A.url==='canva'?`<button class="btn p" onclick="window.open('https://www.canva.com','_blank')">Canva 열기</button>`:`<button class="btn p" onclick="openAI('${A.url}','')">${A.n} 열기</button>`;
  const col=(TAB[A.n]||['','#2f6b56'])[1];
- const optRow=(C.o&&C.o.length&&!C.pp&&!no)?`<div class="qrow"><div class="gl">${esc(C.ol||'선택')}</div>${chips('ao',C.o)}</div>`:'';
- return `<div class="bar"><span class="t">${A.n} · ${esc(C.n)}<span class="badge ${C.f?'free':'paid'}">${C.f?'무료':'유료'}</span></span><span class="sub2"></span><button class="btn p" onclick="copyTxt(CUR())">프롬프트 복사</button>${open}</div>
+ const fix=t=>String(t).replace(/오른쪽 프롬프트(를|에|로)?\s*/g,'만들고 싶은 내용을 ').replace(/프롬프트 붙여넣기/g,'만들고 싶은 내용 쓰기').replace(/프롬프트/g,'요청');
+ const how=(C.how||[]).map(fix);
+ const ex=EXM[key(A,C)];
+ return `<div class="bar"><span class="t">${A.n} · ${esc(C.n)}<span class="badge ${C.f?'free':'paid'}">${C.f?'무료':'유료'}</span></span><span class="sub2"></span>${open}</div>
  <div class="ap2"><section><div class="ai-hero">${ic(CIC[C.n]||'spark','background:'+col)}<div><h3>${esc(C.n)}</h3><p>${esc(what)}</p>${adv.length?`<div class="adv2">${adv.map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:''}</div></div>
- ${U.length?`<h4>이럴 때 써요 <small style="font-weight:400;color:#66746f">누르면 프롬프트에 들어가요</small></h4><div class="uses">${U.map((x,i)=>`<button type="button" class="use${i==S.ut?' on':''}" onclick="S.ut=${i};save();RIGHT()">${ic(x[0])}<b>${esc(x[1])}</b><span>${esc(x[2])}</span></button>`).join('')}</div>`:''}
- <div class="mid-sel">${optRow}<div class="qrow"><div class="gl">사업</div>${chips('ab',AB)}</div></div></section>
- <section><h4 style="margin-top:0">프롬프트 <small style="font-weight:400;color:#66746f">[ ] 칸만 채워서 붙여넣기</small></h4><div class="pbox2 out" style="padding:12px 14px">${fmt(tight(pr))}</div>${C.nbx?window.__ai.nbHTML():''}</section></div>`;}
-document.head.insertAdjacentHTML('beforeend',`<style id="ai-apps3">
+ ${U.length?`<h4>이럴 때 써요</h4><div class="uses">${U.map(x=>`<div class="use">${ic(x[0])}<b>${esc(x[1])}</b><span>${esc(x[2])}</span></div>`).join('')}</div>`:''}
+ ${ex?`<h4>이렇게 나와요 <small style="font-weight:400;color:#66746f">누르면 크게 보여요</small></h4><img class="exbig" src="/img/giheung/ex/${ex}.webp" alt="${esc(C.n)} 결과 예시" onclick="zoomImg(this.src)">`:''}${C.nbx?window.__ai.nbHTML():''}</section>
+ <section>${how.length?`<div class="howslide" style="--c:${col}"><div class="hs-h">${ic(CIC[C.n]||'spark','background:'+col)}<b>${esc(C.n)} 사용 방법</b><span>${A.n}</span></div><ol>${how.map((h,i)=>`<li><i>${i+1}</i><p>${h}</p></li>`).join('')}</ol></div>`:''}</section></div>`;}
+
+document.head.insertAdjacentHTML('beforeend',`<style id="ai-apps3">.ap2 .exbig{width:100%;max-height:340px;object-fit:contain;border-radius:12px;border:1px solid #DDE8E0;cursor:zoom-in;display:block;background:#fff}
+.howslide{background:#fff;border:1px solid #DDE8E0;border-radius:14px;overflow:hidden}
+.howslide .hs-h{display:flex;align-items:center;gap:10px;padding:12px 14px;background:linear-gradient(90deg,#F1F8F3,#fff);border-bottom:1px solid #DDE8E0}
+.howslide .hs-h .ai-ic{width:34px;height:34px;border-radius:10px;color:#fff;display:grid;place-items:center}.howslide .hs-h .ai-ic svg{width:20px;height:20px}
+.howslide .hs-h b{font-size:17px}.howslide .hs-h span{margin-left:auto;font-size:13px;color:#66746f}
+.howslide ol{list-style:none;margin:0;padding:12px 14px;display:grid;gap:10px;counter-reset:x}
+.howslide li{display:flex;gap:12px;align-items:flex-start;background:#F8FBF9;border:1px solid #E4EEE7;border-radius:12px;padding:12px}
+.howslide li i{font-style:normal;flex:none;width:30px;height:30px;border-radius:50%;background:#E07A2E;color:#fff;font-weight:800;display:grid;place-items:center;font-size:15px}
+.howslide li p{margin:0;line-height:1.6;font-size:15px}
+.howslide li b{background:#fff;border:1px solid #CFE3D6;border-radius:6px;padding:0 6px;color:#1E5442;white-space:nowrap}
+.ap2 .uses .use{cursor:default}
+
 .ap2 .uses .use{all:unset;box-sizing:border-box;cursor:pointer;background:#fff;border:1.5px solid #DDE8E0;border-radius:12px;padding:10px;text-align:center;display:block}
 .ap2 .uses .use:hover{border-color:#9CC7AE}
 .ap2 .uses .use.on{border-color:#E07A2E;background:#FFF7F0;box-shadow:0 0 0 2px rgba(224,122,46,.15)}
