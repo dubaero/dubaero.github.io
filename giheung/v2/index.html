@@ -53,7 +53,7 @@ footer a{color:var(--g2);font-weight:700;text-decoration:none}
 .col{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;min-height:0;min-width:0}
 .col h3{font-size:16px;letter-spacing:-.5px;padding-bottom:7px;border-bottom:2px solid var(--g);margin-bottom:6px}
 .ol{list-style:none;overflow:auto;min-height:0;flex:1}
-.ol li{display:flex;align-items:center;gap:10px;padding:6px 2px;border-bottom:1px dashed var(--line);font-size:14.5px;font-weight:700;letter-spacing:-.4px}
+.ol{display:flex;flex-direction:column}.ol li{flex:1;max-height:56px;display:flex;align-items:center;gap:10px;padding:6px 2px;border-bottom:1px dashed var(--line);font-size:14.5px;font-weight:700;letter-spacing:-.4px}
 .ol li .no{width:20px;color:var(--sub);font-weight:600;font-size:13px;text-align:center}
 .ol li .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ol li .tg{font-size:11.5px;font-weight:800;color:var(--orT);background:var(--or);border-radius:6px;padding:2px 7px}
@@ -61,8 +61,8 @@ footer a{color:var(--g2);font-weight:700;text-decoration:none}
 .qg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;flex:1;min-height:0;grid-auto-rows:1fr}
 .q{border:1px solid var(--line);border-radius:12px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-weight:800;font-size:14px;letter-spacing:-.5px;padding:6px;min-height:0}
 .q:hover,.q.on{border-color:var(--g);background:var(--gl)}
-.q .ic{font-size:20px;line-height:1}
-.lk{overflow:auto;min-height:0}
+.q .ic{font-size:26px;line-height:1}.q{font-size:15px}
+.lk{overflow:auto;min-height:0}.lk a,.lk button{padding:7px 4px!important}
 .lk .sec{font-size:12.5px;font-weight:800;color:var(--g2);background:var(--gl);border-radius:6px;padding:4px 8px;margin:6px 0 3px}
 .lk .sec:first-child{margin-top:0}
 .lk a,.lk button{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;border-bottom:1px dashed var(--line);background:none;text-align:left;padding:5px 4px;font-size:14px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.4px}
@@ -251,6 +251,8 @@ VIEWS.home=()=>`<div class="hp">
 <div class="sec">기관·지침</div>
 <a data-k="복지관 홈페이지" href="https://www.a-sak.or.kr/" target="_blank" rel="noopener">복지관 홈페이지<small>↗</small></a>
 <a data-k="장애인복지시설협회 공지" href="https://kawid.or.kr/bbs/board.php?bo_table=B20&sca=%ED%98%91%ED%9A%8C%EA%B3%B5%EC%A7%80" target="_blank" rel="noopener">장애인복지시설협회 공지<small>↗</small></a>
+<a data-k="스마트재활센터" href="https://www.a-sak.or.kr/services/smart.php" target="_blank" rel="noopener">스마트재활센터 안내<small>↗</small></a>
+<a data-k="장애인식개선" href="https://www.a-sak.or.kr/services/awareness.php" target="_blank" rel="noopener">장애인식개선 사업 안내<small>↗</small></a>
 <a data-k="경기복지재단 시설평가" href="https://ggwf.gg.go.kr/archives/category/busi002/evaluation_bbs" target="_blank" rel="noopener">경기복지재단 시설평가<small>↗</small></a>
 </div></div>
 </div></div>`;
