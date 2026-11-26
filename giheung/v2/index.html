@@ -14,12 +14,12 @@ html,body{height:100%}
 body{font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.55;letter-spacing:-.2px}
 button{font-family:inherit;cursor:pointer}
 .wrap{max-width:1440px;width:100%;margin:0 auto;height:100vh;display:flex;flex-direction:column;padding:0 16px;overflow:hidden}
-header{height:54px;display:flex;align-items:center;justify-content:space-between;flex:none}
+header{height:54px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;flex:none}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.5px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 header{gap:10px}.hbtn{flex:none;white-space:nowrap}
 .brand .dot{width:26px;height:26px;border-radius:8px;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px}
 .brand small{font-weight:600;color:var(--sub);font-size:13px;margin-left:4px}
-.hbtn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 14px;font-weight:700;font-size:14px;color:var(--g2)}
+.hbtn{border:0;background:var(--g);border-radius:999px;padding:8px 22px;font-weight:800;font-size:15px;color:#fff;box-shadow:0 2px 6px rgba(42,157,143,.25)}.hbtn:hover{background:var(--g2)}
 main{flex:1;min-height:0}
 /* home */
 .home{height:100%;display:flex;flex-direction:column;gap:10px;padding-bottom:6px}
@@ -81,8 +81,8 @@ main{flex:1;min-height:0}
 .ghelp b{color:var(--w2)}
 .gfoot{flex:none;background:#2c3634;color:#dfe7e5;margin:0 -16px;padding:9px 24px;font-size:12.5px;display:flex;flex-direction:column;gap:3px;letter-spacing:-.3px}
 .gfoot .r{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
-.gfoot b{color:#fff}.gfoot a{color:#9fe0d6;text-decoration:none;font-weight:700}
-.gfoot .cp{border:1px solid #66746f;background:none;color:#9fe0d6;border-radius:5px;padding:0 6px;font-size:11.5px}
+.gfoot b{color:#fff}.gfoot a{color:#fff;text-decoration:none;font-weight:700}
+.gfoot .cp{border:1px solid #66746f;background:none;color:#fff;border-radius:5px;padding:0 6px;font-size:11.5px}
 /* 하나로 입력 */
 .ibox{border:1px solid var(--line);border-radius:10px;background:#fff;position:relative}
 .ibox:focus-within{border-color:var(--g);box-shadow:0 0 0 2px var(--gl)}
@@ -167,13 +167,107 @@ table.form td{padding:7px 10px;border:1px solid var(--gm);vertical-align:top;lin
  .cards5{grid-template-columns:1fr 1fr}.hero{flex-direction:column;align-items:flex-start;gap:6px}
  body{font-size:16px}
 }
+/* ===== 졸라맨 v3: 상황별 동작 ===== */
+.jx-fig{flex:none;width:96px;height:104px;overflow:visible}
+.jx-fig.big{width:150px;height:162px}
+.jx-fig *{stroke:#26332d;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.jx-fig .face *{stroke-width:2.4}
+.jx-fig .eye{fill:#26332d;stroke:none}
+.jx-fig .hand{fill:#26332d;stroke:none;transform-box:fill-box;transform-origin:center}
+.jx-fig .cheek{fill:#f6b4a0;stroke:none;opacity:.85}
+.jx-fig .heart{fill:#e8603c;stroke:none;transform-box:fill-box;transform-origin:center;animation:fgFloat 2.2s ease-in-out infinite}
+.jx-fig .h2{animation-delay:1.1s}
+.jx-fig .spark{stroke:#f3b521;stroke-width:2.8;animation:fgBlink .8s ease-in-out infinite}
+.jx-fig .steam{stroke:#9aa7a1;stroke-width:2.4;transform-box:fill-box;transform-origin:bottom;animation:fgSteam 1s ease-out infinite}
+.jx-fig .s2{animation-delay:.35s}.jx-fig .s3{animation-delay:.18s}
+.jx-fig .lid{fill:#e8603c;stroke-width:2.4;transform-box:fill-box;transform-origin:center;animation:fgLid .9s ease-in-out infinite}
+.jx-fig .bl{fill:#E0D4C2;stroke:#2f6b56;stroke-width:2.2;transform-box:fill-box;transform-origin:center}
+.jx-fig .txt,.jx-fig .note,.jx-fig .zz{fill:#2f6b56;stroke:none;font:800 13px sans-serif}
+.jx-fig .zz{fill:#5d6f66}
+.jx-fig .drop{fill:#7fb4e0;stroke:none;animation:fgDrop 1.4s ease-in infinite}
+.jx-fig .cloud path{fill:#d7dde2;stroke:#8a97a0;stroke-width:2}
+.jx-fig .rain path{stroke:#7fb4e0;stroke-width:2.2;animation:fgRain .9s linear infinite}
+.jx-fig .cup{fill:#f3c94b;stroke-width:2.2}
+.jx-fig .stm path{stroke:#9aa7a1;stroke-width:2;animation:fgSteam 1.4s ease-out infinite}
+.jx-fig .win{stroke:#BAB0A1;stroke-width:2.2;fill:#F5F3EF}
+.jx-fig .warm path{stroke:#f3b521;stroke-width:2.2;animation:fgBlink 1.6s ease-in-out infinite}
+.jx-fig .who{transform-box:view-box;transform-origin:60px 118px}
+.jx-fig .hd{transform-box:view-box;transform-origin:60px 39px}
+.jx-fig .aL,.jx-fig .aR{transform-box:view-box;transform-origin:60px 46px}
+.jx-fig .lL,.jx-fig .lR{transform-box:view-box;transform-origin:60px 84px}
+/* 숨 고르기: 4초 들이쉬기(배·팔 올라감) → 4초 멈춤 → 6초 내쉬기(배 줄어듦·입김) = 14초 */
+.jx-fig.p-breath .bl{animation:fgBelly 14s ease-in-out infinite}
+.jx-fig.p-breath .aL{animation:fgArmL 14s ease-in-out infinite}
+.jx-fig.p-breath .aR{animation:fgArmR 14s ease-in-out infinite}
+.jx-fig.p-breath .air-in{animation:fgIn 14s linear infinite}
+.jx-fig.p-breath .air-out{animation:fgOut 14s linear infinite}
+.jx-fig.p-breath .m-c{animation:fgMc 14s linear infinite}
+.jx-fig.p-breath .m-o{animation:fgOut 14s linear infinite}
+.jx-fig.p-breath.go .bl,.jx-fig.p-breath.go .aL,.jx-fig.p-breath.go .aR,.jx-fig.p-breath.go .air-in,.jx-fig.p-breath.go .air-out,.jx-fig.p-breath.go .m-c,.jx-fig.p-breath.go .m-o{animation-iteration-count:3}
+.jx-fig .air-in path{stroke:#2f6b56;stroke-width:2.4}.jx-fig .air-out path,.jx-fig .air-out2 path{stroke:#7fb4e0;stroke-width:2.4}
+@keyframes fgBelly{0%{transform:scale(1)}28.6%{transform:scale(2.5)}57%{transform:scale(2.5)}100%{transform:scale(1)}}
+@keyframes fgArmL{0%{transform:rotate(0)}28.6%,57%{transform:rotate(32deg)}100%{transform:rotate(0)}}
+@keyframes fgArmR{0%{transform:rotate(0)}28.6%,57%{transform:rotate(-32deg)}100%{transform:rotate(0)}}
+@keyframes fgIn{0%,26%{opacity:1}29%,100%{opacity:0}}
+@keyframes fgOut{0%,56%{opacity:0}58%,98%{opacity:1}100%{opacity:0}}
+@keyframes fgMc{0%,56%{opacity:1}58%,98%{opacity:0}100%{opacity:1}}
+.jx-fig.p-sigh .bl{animation:fgSigh 3s ease-in-out infinite}.jx-fig.p-sigh .air-out2{animation:fgBlink 3s ease-in-out infinite}
+@keyframes fgSigh{0%,100%{transform:scale(2.2)}60%{transform:scale(.9)}}
+.jx-fig.p-hug .aL{animation:fgTapL 1s ease-in-out infinite}.jx-fig.p-hug .aR{animation:fgTapR 1s ease-in-out infinite}
+@keyframes fgTapL{0%,100%{transform:rotate(0)}50%{transform:rotate(-8deg)}}@keyframes fgTapR{0%,100%{transform:rotate(0)}50%{transform:rotate(8deg)}}
+.jx-fig.p-cheer .aL{transform:rotate(150deg)}.jx-fig.p-cheer .aR{transform:rotate(-150deg)}.jx-fig.p-cheer .who{animation:fgJump .8s ease-in-out infinite}
+.jx-fig.p-shrug .aL,.jx-fig.p-shrug .aR,.jx-fig.p-shrug .hd{animation:fgShrug 2s ease-in-out infinite}
+@keyframes fgShrug{0%,100%{transform:translateY(0)}35%,65%{transform:translateY(-8px)}}
+.jx-fig.p-fist .aL{transform:rotate(60deg)}.jx-fig.p-fist .aR{transform:rotate(-60deg)}.jx-fig.p-fist .hand{animation:fgFist 2s ease-in-out infinite}
+@keyframes fgFist{0%,45%{transform:scale(1.7)}55%,100%{transform:scale(.6)}}
+.jx-fig.p-stretch .aL{animation:fgStL 3s ease-in-out infinite}.jx-fig.p-stretch .aR{animation:fgStR 3s ease-in-out infinite}.jx-fig.p-stretch .who{animation:fgTall 3s ease-in-out infinite}
+@keyframes fgStL{0%,100%{transform:rotate(0)}40%,70%{transform:rotate(155deg)}}@keyframes fgStR{0%,100%{transform:rotate(0)}40%,70%{transform:rotate(-155deg)}}
+@keyframes fgTall{0%,100%{transform:translateY(0)}40%,70%{transform:translateY(-5px)}}
+.jx-fig.p-neck .hd{animation:fgNeck 4s ease-in-out infinite}
+@keyframes fgNeck{0%,100%{transform:rotate(0)}25%{transform:rotate(-22deg)}75%{transform:rotate(22deg)}}
+.jx-fig.p-scrunch .hd{animation:fgScr 1.6s ease-in-out infinite;transform-origin:60px 26px}
+@keyframes fgScr{0%,100%{transform:scale(1.08)}50%{transform:scale(.82)}}
+.jx-fig.p-shake .who{animation:fgShake .18s linear infinite}.jx-fig.p-shake .aL{animation:fgFlapL .3s linear infinite}.jx-fig.p-shake .aR{animation:fgFlapR .3s linear infinite}
+@keyframes fgFlapL{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(25deg)}}@keyframes fgFlapR{0%,100%{transform:rotate(15deg)}50%{transform:rotate(-25deg)}}
+.jx-fig.p-walk .lL,.jx-fig.p-walk .aR{animation:fgSwA 1s ease-in-out infinite}.jx-fig.p-walk .lR,.jx-fig.p-walk .aL{animation:fgSwB 1s ease-in-out infinite}.jx-fig.p-walk .who{animation:fgBob .5s ease-in-out infinite}
+@keyframes fgSwA{0%,100%{transform:rotate(18deg)}50%{transform:rotate(-18deg)}}@keyframes fgSwB{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(18deg)}}
+@keyframes fgBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.jx-fig.p-tea .aR{animation:fgSip 3s ease-in-out infinite}
+@keyframes fgSip{0%,100%{transform:rotate(0)}50%{transform:rotate(-6deg)}}
+.jx-fig.p-hum .who{animation:fgSway 2s ease-in-out infinite}.jx-fig .note{animation:fgFloat 2s ease-in-out infinite}.jx-fig .n2{animation-delay:.7s}.jx-fig .n3{animation-delay:1.3s}
+.jx-fig.p-look .hd{animation:fgLook 4s ease-in-out infinite}
+@keyframes fgLook{0%,100%{transform:rotate(0)}50%{transform:rotate(8deg)}}
+.jx-fig.p-tired .hd{transform:rotate(22deg)}.jx-fig.p-tired .who{animation:fgSway 4s ease-in-out infinite}.jx-fig .zz{animation:fgFloat 2.4s ease-in-out infinite}.jx-fig .z2{animation-delay:1.2s}
+.jx-fig.p-anx .who{animation:fgShake .3s linear infinite}
+.jx-fig.p-sad .hd{transform:rotate(-12deg)}.jx-fig.p-sad .who{animation:fgSway 4s ease-in-out infinite}
+.jx-fig.p-angry1 .who{animation:fgShake .25s linear infinite}.jx-fig.p-angry2 .who,.jx-fig.p-angry3 .who{animation:fgStomp .5s ease-in-out infinite}
+.jx-fig.p-calm .who{animation:fgSway 4s ease-in-out infinite}
+@keyframes fgFloat{0%{transform:translateY(4px);opacity:.4}50%{transform:translateY(-6px);opacity:1}100%{transform:translateY(4px);opacity:.4}}
+@keyframes fgJump{0%,100%{transform:translateY(0)}45%{transform:translateY(-10px)}}
+@keyframes fgBlink{0%,100%{opacity:.2}50%{opacity:1}}
+@keyframes fgSway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes fgShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+@keyframes fgStomp{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-8px) rotate(-4deg)}60%{transform:translateY(0) rotate(4deg)}}
+@keyframes fgSteam{0%{opacity:0;transform:translateY(4px) scaleY(.6)}40%{opacity:1}100%{opacity:0;transform:translateY(-8px) scaleY(1.1)}}
+@keyframes fgLid{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(-18deg)}}
+@keyframes fgDrop{0%{transform:translateY(0);opacity:1}100%{transform:translateY(10px);opacity:0}}
+@keyframes fgRain{0%{transform:translateY(0);opacity:1}100%{transform:translateY(8px);opacity:0}}
+@media (prefers-reduced-motion:reduce){.jx-fig *{animation-duration:0s!important}}
+
+.m2{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}.m2 .bb{font-size:15.5px;line-height:1.7}.bh small{font-weight:600;color:var(--sub);font-size:12px;margin-left:4px}
+.mnd{flex:1;min-height:0;display:grid;grid-template-rows:auto 1fr;gap:10px}
+.mbox{display:flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:#fff}
+.mbox.rest{background:var(--wl);border-color:var(--wm)}
+.mfig{flex:none;display:flex;flex-direction:column;align-items:center;gap:2px}.mfig b{font-size:13px;color:var(--w2)}
+.mtx{font-size:15.5px;line-height:1.75;color:var(--ink)}.mtx p{margin:4px 0 8px}.mtx .me{font-weight:800;color:var(--g2)}.mtx .h{font-weight:800;color:var(--w2)}
+.vfx .jx-fig{float:right;margin:0 0 6px 10px}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
  <div class="brand"><span class="dot">AI</span>용인시기흥장애인복지관 AI 업무도우미</div>
- <button class="hbtn" onclick="go('home')">업무도우미 홈</button>
+ <button class="hbtn" onclick="go('home')">← 업무도우미 홈으로 이동</button><span></span>
 </header>
 <main id="app"></main>
 <div class="gfoot"><div class="r"><b>용인시기흥장애인복지관 AI 업무도우미</b><span>입력한 내용은 이 기기 브라우저에만 저장됩니다.</span><span>AI가 만든 글은 초안입니다. 사실·날짜·숫자는 반드시 직접 확인하세요.</span><a href="https://www.a-sak.or.kr/" target="_blank" rel="noopener">복지관 홈페이지</a></div><div class="r"><span>제작·운영 <b>두배로 · 생성형 AI 전문강사 이서정</b></span><a href="https://dubaero.kr/" target="_blank" rel="noopener">dubaero.kr</a><span>이메일 <a href="mailto:dltjwjd59@gmail.com">dltjwjd59@gmail.com</a> <button class="cp" onclick="copyTxt('dltjwjd59@gmail.com')">복사</button></span><span>블로그 <a href="https://blog.naver.com/ricewitch" target="_blank" rel="noopener">blog.naver.com/ricewitch</a></span><span>카카오톡 li8093</span></div></div>
@@ -249,7 +343,7 @@ const hash=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))|0;retur
 const VIEWS={};let VIEW='home';
 function go(v){location.hash=v}
 window.addEventListener('hashchange',()=>{VIEW=location.hash.slice(1)||'home';render()});
-function render(){window.RIGHT=null;FL=[];document.querySelector('header').style.display=VIEW==='home'||!VIEWS[VIEW]?'none':'flex';const app=document.getElementById('app');const f=VIEWS[VIEW]||VIEWS.home;
+function render(){window.RIGHT=null;FL=[];document.querySelector('header').style.display=VIEW==='home'||!VIEWS[VIEW]?'none':'grid';const app=document.getElementById('app');const f=VIEWS[VIEW]||VIEWS.home;
  const ae=document.activeElement&&document.activeElement.id;app.innerHTML=f();if(window.RIGHT)RIGHT();
  if(ae){const el=document.getElementById(ae);if(el&&el.tagName!=='BUTTON'){el.focus();const n=el.value.length;try{el.setSelectionRange(n,n)}catch(e){}}}}
 function view(title,leftBody,rightFn){leftBody=leftBody.replace('%%IBOX%%',ibox());window.RIGHT=()=>{const r=document.getElementById('R');if(r)r.innerHTML=rightFn()};return `<div class="view">${pane(title,leftBody)}${rpane('')}</div>`}
@@ -270,8 +364,7 @@ const HL=[
 ['맞춤형 프롬프트 생성',"go('gen')",'']];
 const HQ=[['msg','mail','문자·소통','보호자·이용자 문자'],['promo','mega','홍보·안내','소식·SNS·포스터'],['donor','heart','후원 관리','감사·사용 안내'],['plan','doc','계획·일지','프로그램 계획→일지'],['month','cal','이달의 추천','월별 프로그램 5'],['room','spark','프롬프트 디자인실','업무·일상 프롬프트'],['memo','mic','메모·녹음','회의록·서식 채우기'],['vent','fire','빡침 번역기','공감→순화 문구'],['mind','leaf','마음챙김','나를 위한 5줄']];
 const HA=['ChatGPT','제미나이','Claude','Canva','데스크톱 앱'];
-const HLK=[['복지관 홈페이지','https://www.a-sak.or.kr/','공지·사업소식'],['프로그램 안내','https://www.a-sak.or.kr/services/programs2.php','대상별 프로그램'],['스마트재활센터','https://www.a-sak.or.kr/services/smart.php','디지털 재활'],['사업소식','https://www.a-sak.or.kr/news/business.php','활동 사례 보기'],['홍보물','https://www.a-sak.or.kr/news/promotion.php','월별 기록']];
-const HLK2=[['장애인복지시설협회','https://kawid.or.kr/bbs/board.php?bo_table=B20&sca=%ED%98%91%ED%9A%8C%EA%B3%B5%EC%A7%80','공문·서식 안내'],['경기복지재단','https://ggwf.gg.go.kr/archives/category/busi002/evaluation_bbs','시설평가 자료']];
+const HLK=[['사회복지법인 양지바른','http://www.yangjibr.or.kr/','법인 소식·공지'],['보건복지부 공지사항','https://www.mohw.go.kr/board.es?mid=a10501010100&bid=0003','지침·공고 확인'],['한국장애인복지관협회','https://www.hinet.or.kr/','협회 공지·교육'],['용인특례시','https://www.yongin.go.kr/index.do','시 공지·보조금']];
 VIEWS.home=()=>`<div class="hp">
 <section class="hhero"><div class="tx"><span class="bdg">${sv('sprout',18)}사회복지법인 양지바른 · 용인시기흥장애인복지관</span><span class="kick">종사자 AI 실무 교육 · 업무도우미</span><h1>함께여서 빛나는 업무, <em>AI 업무도우미</em></h1><p class="sub">사업 문서는 프로젝트로, 문자·홍보·일지는 고르고 적으면 바로 완성으로.</p>
 <div class="srch">${sv('search',18)}<input id="hs" aria-label="업무 찾기" oninput="hsearch(this.value)"><span style="font-size:12px;white-space:nowrap">찾을 업무 (예: 후원, 일지, 블로그)</span></div></div><div class="ph"></div></section>
@@ -279,7 +372,7 @@ VIEWS.home=()=>`<div class="hp">
 <section class="col"><h3>업무 서식·프로젝트<small>시연용</small></h3><ul class="ol" id="hl">${HL.map((h,i)=>`<li data-k="${h[0]}"><span class="no">${i+1}</span><span class="nm" onclick="${h[1]};save()">${h[0]}</span>${h[2]?`<span class="tg">${h[2]}</span>`:''}<button class="ob" onclick="${h[1]};save()">${sv('pen',13)}열기</button></li>`).join('')}</ul></section>
 <section class="col"><h3>업무 바로가기</h3><div class="qg" id="hq">${HQ.map(([k,ic,n,d])=>`<button class="q" data-k="${n} ${d}" onclick="go('${k}')">${sv(ic)}<b>${n}</b><span>${d}</span></button>`).join('')}</div>
 <div class="aig"><div class="t">AI 앱 활용법<small>기능·사용법·프롬프트</small></div><div class="r">${HA.map((n,i)=>`<button data-k="${n}" onclick="S.app=${i};S.fc=0;S.sub=0;save();go('apps')">${n}</button>`).join('')}</div></div></section>
-<section class="col"><h3>관련 기관 바로가기</h3><div class="lk"><div class="sec">용인시기흥장애인복지관</div>${HLK.map(([t,u,d])=>`<a data-k="${t}" href="${u}" target="_blank" rel="noopener">${t}<span>${d}</span>${sv('link',14)}</a>`).join('')}<div class="sec">지침·평가</div>${HLK2.map(([t,u,d])=>`<a data-k="${t}" href="${u}" target="_blank" rel="noopener">${t}<span>${d}</span>${sv('link',14)}</a>`).join('')}</div>
+<section class="col"><h3>관련 기관 바로가기</h3><div class="lk">${HLK.map(([t,u,d])=>`<a data-k="${t}" href="${u}" target="_blank" rel="noopener">${t}<span>${d}</span>${sv('link',14)}</a>`).join('')}</div>
 <div class="ghelp"><b>꼭 지켜요</b> 실명 대신 이용자A · 주민번호·진단명·연락처 넣지 않기 · AI 초안은 직접 확인</div></section>
 </div></div>`;
 function hsearch(q){q=q.trim();document.querySelectorAll('#hl li,#hq .q,.lk a,.aig button').forEach(e=>{const m=!q||e.dataset.k.includes(q);e.style.opacity=m?1:.3;e.classList.toggle('on',!!q&&m)})}
@@ -420,46 +513,46 @@ const seasonLine=()=>MO===1?SEASON[1]+' 올해도 건강하고 웃음 가득한 
 function greet(to){return to===3?'안녕하십니까. '+ORG+'입니다.':'안녕하세요. '+ORG+'입니다.'}
 function msgText(){const s=S.ms??0,p=P(),to=S.to??1,tone=S.tn??0;
  const who=['이용자님','보호자님','봉사자님','담당자님','후원자님'][to];
- const staff=V('staff')||'[담당자]',tel=V('tel')||'[전화번호]';
- const hi=tone===1?`안녕하십니까, ${who}. ${ORG} ${staff}입니다.`:`안녕하세요, ${who}. ${ORG} ${staff}입니다.`;
- const ssn=seasonLine();
- const info=[V('date')&&'· 일시: '+V('date'),V('place')&&'· 장소: '+V('place'),V('prep')&&'· 준비물: '+V('prep')].filter(Boolean);
- const infoB=(info.length?info:['· 일시: [일시]','· 장소: [장소]']).join('\n');
- const add=V('madd');
- const thanks=tone===1?'늘 함께해 주셔서 진심으로 감사드립니다.':'늘 함께해 주셔서 고맙습니다.';
- const ask=`궁금하신 점은 언제든 편하게 연락 주세요. (${staff} ${tel})`;
- const care=a=>'\n\n[함께 알아 두시면 좋아요]\n'+a.map(x=>'· '+x).join('\n');
- if(tone===2){const E={
-  0:`${who}, 안녕하세요.\n${ORG}이에요.\n${p}에 같이 가요!\n\n${infoB}\n\n편한 옷을 입고 오세요.\n몸이 아프면 미리 전화 주세요.\n☎ ${tel}`,
-  1:`${who}, 안녕하세요.\n${p} 날짜가 바뀌었어요.\n\n${infoB}\n\n헷갈리면 전화 주세요.\n☎ ${tel}`,
-  2:`${who}, 안녕하세요.\n${p} 신청 결과를 알려 드려요.\n결과: [선정 / 대기]\n\n궁금하면 전화 주세요.\n☎ ${tel}`,
-  3:`보호자님, 안녕하세요.\n오늘 [이용자]님이 ${p}에서 즐겁게 지냈어요.\n${add||'[오늘 모습 한 줄]'}\n고맙습니다.`,
-  4:`보호자님, 안녕하세요.\n상담 날짜를 알려 드려요.\n\n${infoB}\n\n시간이 안 되면 전화 주세요.\n☎ ${tel}`,
-  5:`보호자님, 안녕하세요.\n이번 달 ${p} 소식이에요.\n잘한 점: [잘한 점]\n집에서도 칭찬해 주세요!`,
-  6:`${who}, 안녕하세요.\n전할 말이 있어요.\n편할 때 전화 주세요.\n☎ ${tel}`,
-  7:`봉사자님, 안녕하세요.\n${p} 봉사 날이에요.\n\n${infoB}\n\n편한 옷과 운동화를 신고 오세요.\n고맙습니다!`,
-  8:`안녕하세요. ${ORG}입니다.\n${p} 관련해 도움을 부탁드려요.\n${add||'[부탁할 내용]'}\n☎ ${tel}`,
-  9:`${who}, 즐거운 [명절] 보내세요!\n늘 고마워요.\n- ${ORG}`,
-  10:`${who}, 안녕하세요.\n${add||'[전할 말]'}\n☎ ${tel}`};
-  return [E[s],E[s].split('\n').slice(0,3).join(' ')]}
+ const staff=V('staff')||'[담당자]',tel=V('tel')||'[전화번호]',add=V('madd');
+ const d=V('date')||'[일시]',pl=V('place')||'[장소]';
+ const PREP={0:'편한 복장, 개인 물병',7:'편한 복장, 운동화'};
+ const pr=V('prep')||PREP[s]||'';
+ const info=(o)=>['· 일시: '+d,'· 장소: '+pl,(o!==false&&pr)?'· 준비물: '+pr:''].filter(Boolean).join('\n');
+ const pol=tone===1,easy=tone===2;
+ const hi=pol?`안녕하십니까. ${ORG} ${staff}입니다.`:`안녕하세요. ${ORG} ${staff}입니다.`;
+ const ask=pol?`궁금하신 점은 언제든지 연락 주십시오.\n${staff} ${tel}`:`궁금하신 점은 언제든지 연락 주세요.\n${staff} ${tel}`;
+ const tag=`[${ORG}]`;
  const T={
- 0:[`${hi}\n${ssn}\n\n${who}께 반가운 소식을 전해 드리고 싶어 연락드렸어요. 이번에 ${M(p)} 시간을 정성껏 준비했는데, 꼭 함께하셨으면 하는 마음입니다.${add?'\n'+add:''}\n\n${infoB}${care(['편한 복장과 개인 물병을 챙겨 주세요.','당일 컨디션이 좋지 않으시면 부담 갖지 마시고 미리 연락 주세요.','이동이나 식사에 도움이 필요하시면 말씀해 주세요. 미리 준비해 두겠습니다.'])}\n\n함께할 날을 손꼽아 기다리겠습니다.\n${ask}\n${thanks}`,`[${ORG}] ${p}에 초대합니다. ${V('date')||'[일시]'} ${V('place')||'[장소]'} · 문의 ${tel}`],
- 1:[`${hi}\n${ssn}\n\n먼저 일정이 바뀌게 되어 번거롭게 해 드린 점 너그러이 양해 부탁드립니다. ${M(p)} 일정이 아래와 같이 변경되었어요.\n\n· 변경 전: [기존 일시]\n${infoB.replace('· 일시','· 변경 후')}${care(['바뀐 일정이 어려우시면 편하게 말씀해 주세요. 다른 방법을 함께 찾아보겠습니다.','이미 준비하신 것이 있다면 그대로 가져오셔도 괜찮아요.'])}\n\n${ask}\n이해해 주셔서 감사합니다.`,`[${ORG}] ${p} 일정이 ${V('date')||'[변경 일시]'}로 바뀌었어요. 번거롭게 해 드려 죄송합니다. ${tel}`],
- 2:[`${hi}\n${ssn}\n\n${M(p)}에 관심 가져 주시고 신청해 주셔서 정말 감사합니다. 기다리셨을 접수 결과를 알려 드려요.\n\n· 결과: [선정 / 대기 ○번]\n${V('date')?'· 시작: '+V('date'):'· 시작: [첫 일정]'}${care(['대기 중이시더라도 자리가 생기면 가장 먼저 연락드리겠습니다.','첫날 준비물과 이용 안내는 따로 한 번 더 보내 드릴게요.'])}\n\n${ask}\n${thanks}`,`[${ORG}] ${p} 접수 결과: [선정/대기]. 자세한 안내는 다시 연락드릴게요. ${tel}`],
- 3:[`${hi}\n${ssn}\n\n요즘 [이용자 호칭]님이 ${M(p)}에서 지내시는 모습을 전해 드리고 싶어 연락드렸어요.\n\n${add||'처음에는 조금 낯설어하셨는데, 요즘은 먼저 웃으며 인사를 건네고 친구들 이름도 하나씩 불러 주세요. [최근 모습 한두 줄]'}\n\n이렇게 한 걸음씩 자라는 모습을 보며 저희도 큰 힘을 얻고 있어요. 가정에서 늘 마음 써 주시는 보호자님 덕분이라고 생각합니다.${care(['가정에서 달라진 점이 있으면 저희에게도 살짝 알려 주세요. 함께 응원하겠습니다.'])}\n\n${thanks}\n${staff} 드림`,`[이용자]님이 오늘 ${p}에서 밝게 웃으며 참여하셨어요. 늘 고맙습니다 :)`],
- 4:[`${hi}\n${ssn}\n\n${M(p)}와 관련해 보호자님과 차분히 이야기 나누고 싶은 부분이 있어 상담 일정을 안내드립니다. 평소 궁금하셨던 점이나 고민도 편하게 나눠 주세요.\n\n${infoB}${care(['궁금하신 점을 미리 메모해 오시면 시간을 알차게 쓸 수 있어요.','시간이 어려우시면 전화 상담으로도 가능합니다. 편한 시간을 알려 주세요.'])}\n\n${ask}\n${thanks}`,`[${ORG}] ${p} 상담 안내: ${V('date')||'[일시]'} ${V('place')||'[장소]'}. 시간 조정 가능해요. ${tel}`],
- 5:[`${hi}\n${ssn}\n\n이번 달 ${M(p)}에서 함께한 시간을 정리해 보내 드려요.\n\n· 이번 달 목표: [목표]\n· 이렇게 해냈어요: [잘한 점·변화]\n· 다음 달에는: [다음 목표]\n${add?'\n'+add+'\n':''}\n작은 변화처럼 보여도 꾸준히 쌓아 온 큰 성장이에요.${care(['가정에서도 [가정 연계 활동]을 함께해 주시면 더 큰 힘이 됩니다.','칭찬을 많이 해 주세요. 다음 시간에 더 즐겁게 참여하세요.'])}\n\n${ask}\n${thanks}`,`[${p}] 이번 달 결과를 보내 드렸어요. 가정에서도 많이 칭찬해 주세요!`],
- 6:[`${hi}\n\n조심스러운 마음으로 연락드립니다. 직접 뵙고 말씀드리는 것이 도리이지만, 먼저 상황을 알려 드리는 것이 좋을 것 같아 글로 전합니다.\n\n${add||'[전해야 할 내용을 사실 위주로 한두 줄]'}\n\n많이 놀라셨을 수 있다는 것 잘 알고 있습니다. 저희도 같은 마음으로 가장 좋은 방법을 찾고 있으며, 보호자님과 함께 의논하고 싶습니다.\n편하실 때 잠시 통화 가능하실지 여쭙고 싶습니다.\n\n${staff} 드림 (${tel})`,`편하실 때 잠시 통화 가능하실까요? 말씀드릴 일이 있어 연락드렸습니다. ${tel}`],
- 7:[`${hi}\n${ssn}\n\n${M(p)}에 귀한 시간을 내어 함께해 주셔서 진심으로 감사드립니다. 활동 일정을 안내해 드릴게요.\n\n${infoB}${care(['편한 복장과 운동화를 권해 드려요.','이용자분 사진은 동의 없이 촬영하거나 SNS에 올리지 말아 주세요.','도착하시면 1층 안내데스크에서 담당자를 찾아 주세요.'])}\n\n봉사자님 덕분에 이용자분들의 하루가 더 따뜻해집니다.\n${ask}`,`[${p} 봉사] ${V('date')||'[일시]'} ${V('place')||'[장소]'} · 편한 복장 · 문의 ${tel}`],
- 8:[`안녕하십니까. ${ORG} ${staff}입니다.\n늘 장애인 복지 증진을 위해 애써 주시는 귀 기관에 깊이 감사드립니다.\n\n${M(p)} 운영과 관련하여 아래와 같이 협조를 요청드립니다.\n\n1. 요청 내용: ${add||'[협조 요청 내용]'}\n2. 일시: ${V('date')||'[일시]'}\n3. 장소: ${V('place')||'[장소]'}\n\n바쁘신 가운데 번거로운 부탁을 드려 죄송한 마음입니다. 검토해 주시면 감사하겠습니다.\n문의: ${staff} ${tel}`,`[협조 요청] ${p} 관련 · ${V('date')||'[일시]'} · ${tel}`],
- 9:[`${hi}\n\n${SEASON[MO]} 어느덧 [명절]이 다가왔습니다.\n올 한 해 ${M(p)}에 보내 주신 따뜻한 관심 덕분에 이용자분들이 더 많이 웃을 수 있었어요.${add?'\n'+add:''}\n\n가족과 함께 넉넉하고 평안한 [명절] 보내시길 바랍니다.\n${thanks}\n${ORG} 드림`,`넉넉하고 평안한 [명절] 보내세요. 늘 고맙습니다. - ${ORG}`],
- 10:[`${hi}\n${ssn}\n\n${add||'[전하고 싶은 내용]'}\n\n${ask}\n${thanks}`,`${add||'[짧은 안내]'} · ${tel}`]};
- return T[s]}
+ 0:[`${hi}\n${who}께 ${M(p)} 소식을 전해 드리려고 연락드렸어요.\n\n이번에 정성껏 준비했는데 꼭 함께하셨으면 하는 마음입니다.${add?'\n'+add:''}\n\n${info()}\n\n${ask}`,
+    `${tag}\n${who}, ${M(p)}에 함께해요!\n\n${info()}\n\n문의: ${staff} ${tel}`],
+ 1:[`${hi}\n${M(p)} 일정이 바뀌어 다시 연락드렸어요.\n\n번거롭게 해 드려 죄송합니다. 바뀐 일정은 아래와 같아요.${add?'\n'+add:''}\n\n· 변경 전: [기존 일시]\n· 변경 후: ${d}\n· 장소: ${pl}\n\n${ask}`,
+    `${tag}\n${p} 일정이 바뀌었어요.\n변경 후: ${d} / ${pl}\n\n문의: ${staff} ${tel}`],
+ 2:[`${hi}\n${M(p)}에 신청해 주셔서 감사합니다.\n\n기다리셨을 접수 결과를 알려 드려요.\n\n· 결과: [선정 / 대기 ○번]\n· 첫 일정: ${d}\n· 장소: ${pl}${add?'\n\n'+add:''}\n\n${ask}`,
+    `${tag}\n${p} 접수 결과: [선정 / 대기 ○번]\n첫 일정: ${d}\n\n문의: ${staff} ${tel}`],
+ 3:[`${hi}\n요즘 [이용자]님이 ${M(p)}에서 지내는 모습을 전해 드리려고 연락드렸어요.\n\n${add||'처음엔 조금 낯설어하셨는데, 요즘은 먼저 웃으며 인사를 건네세요.'}\n\n가정에서 늘 마음 써 주셔서 감사합니다.\n\n${ask}`,
+    `${tag}\n오늘 [이용자]님이 ${p}에서 ${add||'밝게 웃으며 즐겁게 참여했어요'}.\n집에서도 많이 칭찬해 주세요!\n${staff} ${tel}`],
+ 4:[`${hi}\n${M(p)}와 관련해 상담 일정을 안내드리려고 연락드렸어요.\n\n평소 궁금하셨던 점도 편하게 나눠 주세요.${add?'\n'+add:''}\n\n${info(false)}\n\n시간이 어려우시면 전화 상담도 가능해요.\n${ask}`,
+    `${tag}\n${p} 상담 안내\n${d} / ${pl}\n시간 조정 가능해요.\n\n문의: ${staff} ${tel}`],
+ 5:[`${hi}\n이번 달 ${M(p)} 결과를 알려 드리려고 연락드렸어요.\n\n· 잘한 점: [잘한 점]\n· 다음 목표: [다음 목표]${add?'\n'+add:''}\n\n가정에서도 칭찬 많이 해 주세요.\n\n${ask}`,
+    `${tag}\n이번 달 ${p} 결과\n잘한 점: [잘한 점]\n집에서도 칭찬해 주세요!\n${staff} ${tel}`],
+ 6:[`${hi}\n${who}께 꼭 말씀드려야 할 일이 있어 조심스럽게 연락드립니다.\n\n${add||'[전할 내용을 사실 위주로 한두 줄]'}\n\n자세한 내용은 통화로 말씀드리고 싶습니다.\n편하실 때 연락 주세요.\n${staff} ${tel}`,
+    `${tag}\n${who}, 말씀드릴 일이 있어 연락드렸어요.\n편하실 때 통화 가능하실까요?\n${staff} ${tel}`],
+ 7:[`${hi}\n${M(p)} 봉사 일정을 안내드리려고 연락드렸어요.\n\n귀한 시간 내어 함께해 주셔서 감사합니다.${add?'\n'+add:''}\n\n${info()}\n\n도착하시면 1층 안내데스크에서 담당자를 찾아 주세요.\n${ask}`,
+    `${tag}\n${p} 봉사 안내\n${d} / ${pl}\n준비물: ${pr}\n\n문의: ${staff} ${tel}`],
+ 8:[`안녕하십니까. ${ORG} ${staff}입니다.\n${M(p)} 운영과 관련해 협조를 부탁드리려고 연락드렸습니다.\n\n· 요청 내용: ${add||'[협조 요청 내용]'}\n· 일시: ${d}\n· 장소: ${pl}\n\n검토해 주시면 감사하겠습니다.\n문의: ${staff} ${tel}`,
+    `${tag}\n${p} 관련 협조 요청드립니다.\n${add||'[요청 내용]'} / ${d}\n문의: ${staff} ${tel}`],
+ 9:[`${hi}\n다가오는 [명절]을 맞아 인사드려요.\n\n늘 ${M(p)}에 보내 주시는 따뜻한 관심에 감사드립니다.${add?'\n'+add:''}\n가족과 함께 넉넉하고 평안한 [명절] 보내세요.\n\n${ORG} 드림`,
+    `${tag}\n넉넉하고 평안한 [명절] 보내세요.\n늘 고맙습니다.`],
+ 10:[`${hi}\n${who}께 안내드릴 내용이 있어 연락드렸어요.\n\n${add||'[전할 내용]'}\n\n${ask}`,
+    `${tag}\n${add||'[짧은 안내]'}\n문의: ${staff} ${tel}`]};
+ let r=T[s];
+ if(easy)r=r.map(t=>t.replace(/연락드렸어요\./g,'연락했어요.').replace(/드립니다/g,'드려요').replace(/주십시오/g,'주세요'));
+ return r}
 VIEWS.msg=()=>{S.ms=S.ms??0;S.to=S.to??1;S.tn=S.tn??0;return view('문자·소통',
  `<div class="gl">상황</div>${chips('ms',MSGS)}${bizPick()}<div class="gl">받는 분</div>${chips('to',['이용자','보호자','자원봉사자','협력기관','후원자'])}<div class="gl">말투</div>${chips('tn',TONE)}
  <div class="gl">입력</div>${f2(field('date','일시'),field('place','장소'))}${f2(field('prep','준비물'),field('staff','담당자'))}${field('tel','전화번호')}${field('madd','덧붙일 말',1)}`,
- ()=>{const [a,b]=msgText();const pr=`너는 ${ORG} 사회복지사야. 아래 문자를 ${M(TONE[S.tn])} 다듬어 줘. 받는 분: ${['이용자','보호자','자원봉사자','협력기관','후원자'][S.to]}. 90자 짧은 버전도 함께.\n\n${a}`;
- return aiBar(MSGS[S.ms]+' 문자',()=>a)+`<div class="grid4" style="grid-template-rows:1.4fr 1fr"><div class="box" style="grid-column:1/3"><div class="bh">바로 보낼 문자<button class="sm sp" onclick="copyTxt(CA)">복사</button></div><div class="bb">${fmt(a)}</div></div><div class="box"><div class="bh">짧은 버전<button class="sm sp" onclick="copyTxt(CB)">복사</button></div><div class="bb">${fmt(b)}</div></div><div class="box"><div class="bh">AI로 더 다듬기<button class="sm sp" onclick="openAI('gpt',CP)">ChatGPT</button><button class="sm" onclick="openAI('gemini',CP)">제미나이</button></div><div class="bb">${fmt(pr)}</div></div></div>${setC(a,b,pr)}`})};
+ ()=>{const [a,b]=msgText();
+ return `<div class="bar"><span class="t">${MSGS[S.ms]} 문자</span><button class="btn p" onclick="copyTxt(CA)">문자 1 복사</button><button class="btn p" onclick="copyTxt(CB)">문자 2 복사</button></div><div class="m2"><div class="box"><div class="bh">문자 1 시안 <small>자세히</small><button class="sm sp" onclick="copyTxt(CA)">복사</button></div><div class="bb">${fmt(a)}</div></div><div class="box"><div class="bh">문자 2 시안 <small>짧게</small><button class="sm sp" onclick="copyTxt(CB)">복사</button></div><div class="bb">${fmt(b)}</div></div></div>${setC(a,b,'')}`})};
 let CA='',CB='',CP='';function setC(a,b,p){CA=a;CB=b;CP=p;return ''}
 
 /* ================= ⑤ 홍보·안내 ================= */
@@ -562,16 +655,54 @@ VIEWS.vent=()=>{S.vt=S.vt??0;S.vl=S.vl??1;return view('빡침 번역기',
  const soft=`안녕하세요, ${ORG} ${F('staff')}입니다.\n말씀하신 내용 충분히 이해했습니다.${x?'\n['+x.slice(0,30)+'] 관련하여':''} 다시 한번 확인해 보니 [현재 상황·사실]입니다.\n번거로우시겠지만 [요청 사항]을 부탁드려도 될까요?\n빠르게 처리될 수 있도록 저도 함께 챙기겠습니다. 감사합니다.`;
  const pr=`나는 ${ORG} 사회복지사야. ${M(who)} 때문에 이런 일이 있었어: "${x||'[있었던 일]'}"\n1) 먼저 내 편에서 짧고 웃기게 공감해 줘 (욕은 순화된 표현으로)\n2) 복식호흡 30초 안내\n3) ${who}에게 보낼 ${M('정중하지만 단호한')} 문자를 써 줘. 사실 → 요청 → 감사 순서.`;
  CUR=()=>pr;
- return aiBar('빡침 번역',()=>pr)+`<div class="out"><span class="h">${pick(TODAK,h)}</span>${S.vl>=1?'\n\n<span class="red">'+esc(pick(ANGRY,h>>3))+'</span>':''}${S.vl===2?'\n<span class="red">'+esc(pick(ANGRY,h>>5))+'</span>':''}\n\n<span class="h">숨 고르기</span>\n코로 4초 들이마시고 → 4초 멈추고 → 입으로 6초 내쉬기, 세 번만.\n\n<span class="h">보낼 때는 이렇게 (순화 문구)</span>\n${fmt(soft)}\n\n<span class="h">AI에게 맡기기</span>\n${fmt(pr)}</div>`})};
+ return aiBar('빡침 번역',()=>pr)+`<div class="out vfx">${fig('angry',S.vl,1)}<span class="h">${pick(TODAK,h)}</span>${S.vl>=1?'\n\n<span class="red">'+esc(pick(ANGRY,h>>3))+'</span>':''}${S.vl===2?'\n<span class="red">'+esc(pick(ANGRY,h>>5))+'</span>':''}\n\n<span class="h">숨 고르기</span>\n코로 4초 들이마시고 → 4초 멈추고 → 입으로 6초 내쉬기, 세 번만.\n\n<span class="h">보낼 때는 이렇게 (순화 문구)</span>\n${fmt(soft)}\n\n<span class="h">AI에게 맡기기</span>\n${fmt(pr)}</div>`})};
 
 /* ================= ⑩ 마음챙김 ================= */
 const FEEL=['지쳤어요','속상해요','불안해요','억울해요','외로워요','자신감이 떨어졌어요','상담 뒤 마음이 무거워요','이용자 안전이 걱정돼요','민원에 지쳤어요','서류 마감이 겹쳐요','수고가 안 보여 서운해요','퇴근 후에도 현장이 떠올라요'];
 const MOVE=['어깨를 귀까지 올렸다가 툭 떨어뜨리기 3번','두 손을 비비고 따뜻해진 손으로 눈 감싸기','창밖에서 초록색 3개 찾기','물 한 모금 천천히 마시기','손목을 탈탈 털고 기지개 쭉','나비처럼 양팔로 나를 토닥토닥'];
+function fig(pose,lv,big){
+ var P=pose;if(P==='angry')P=lv>=2?'angry3':lv>=1?'angry2':'angry1';
+ var EY='<circle class="eye" cx="55" cy="24" r="1.9"/><circle class="eye" cx="65" cy="24" r="1.9"/>',EC='<path d="M52 24 h5 M63 24 h5"/>';
+ var M={smile:'<path d="M54.5 30 Q60 35 65.5 30"/>',sad:'<path d="M54.5 33 Q60 28.5 65.5 33"/>',flat:'<path d="M55 31.5 L65 31.5"/>',o:'<circle cx="60" cy="31.5" r="2.4"/>'};
+ var face=EY+M.smile,cheek=false;
+ var arms='<g class="aL"><path d="M60 46 L44 72"/><circle class="hand" cx="44" cy="72" r="2.6"/></g><g class="aR"><path d="M60 46 L76 72"/><circle class="hand" cx="76" cy="72" r="2.6"/></g>';
+ var ex='',belly='';
+ switch(P){
+ case 'breath':face=EY+'<g class="m-c">'+M.flat+'</g><g class="m-o">'+M.o+'</g>';belly='<circle class="bl" cx="60" cy="64" r="6"/>';ex='<g class="air-in"><path d="M86 20 L72 26"/><path d="M76 21 L72 26 L77 29"/><path d="M90 30 L76 30"/></g><g class="air-out"><path d="M66 33 q8 2 14 -1"/><path d="M66 36 q9 4 17 2"/><path d="M66 30 q7 -2 12 -6"/></g>';break;
+ case 'sigh':face=EC+M.o;belly='<circle class="bl" cx="60" cy="64" r="6"/>';ex='<g class="air-out2"><path d="M66 33 q8 2 14 -1"/><path d="M66 36 q9 4 17 2"/></g><text class="txt" x="84" y="22">휴~</text>';break;
+ case 'hug':cheek=true;arms='<g class="aL"><path d="M60 46 L46 58 L68 56"/></g><g class="aR"><path d="M60 46 L74 58 L52 56"/></g>';ex='<path class="heart" d="M92 26 C84 19 85 11 92 16 C99 11 100 19 92 26Z"/><path class="heart h2" d="M26 36 C21 32 22 26 26 29 C30 26 31 32 26 36Z"/>';break;
+ case 'cheer':cheek=true;ex='<path class="spark" d="M30 14 l-5 -5 M27 24 l-8 0 M90 14 l5 -5 M93 24 l8 0"/>';break;
+ case 'shrug':break;
+ case 'fist':break;
+ case 'stretch':face=EC+M.o;break;
+ case 'neck':face=EC+M.smile;break;
+ case 'eyes':face=EC+M.smile;arms='<g class="aL"><path d="M60 46 L46 42 L52 25"/><circle class="hand" cx="52" cy="25" r="3.4"/></g><g class="aR"><path d="M60 46 L74 42 L68 25"/><circle class="hand" cx="68" cy="25" r="3.4"/></g>';ex='<g class="warm"><path d="M44 16 l-4 -4 M76 16 l4 -4 M60 8 v-5"/></g>';break;
+ case 'scrunch':face='<path d="M52 22 l5 3 M68 22 l-5 3"/><path d="M54 31 Q60 34 66 31"/>';break;
+ case 'shake':face=EC+M.o;break;
+ case 'walk':break;
+ case 'tea':face=EC+M.smile;arms='<g class="aL"><path d="M60 46 L44 72"/><circle class="hand" cx="44" cy="72" r="2.6"/></g><g class="aR"><path d="M60 46 L78 56 L72 38"/></g>';ex='<rect class="cup" x="69" y="34" width="10" height="11" rx="2"/><g class="stm"><path d="M72 30 q-2 -4 0 -8"/><path d="M77 30 q2 -4 0 -8"/></g>';break;
+ case 'hum':face=EC+M.o;ex='<text class="note n1" x="80" y="24">♪</text><text class="note n2" x="90" y="38">♫</text><text class="note n3" x="26" y="30">♪</text>';break;
+ case 'look':face='<circle class="eye" cx="57" cy="24" r="1.9"/><circle class="eye" cx="67" cy="24" r="1.9"/>'+M.flat;ex='<rect class="win" x="88" y="14" width="24" height="28" rx="2"/><path class="win" d="M100 14 V42 M88 28 H112"/>';break;
+ case 'tired':face=EC+M.sad;ex='<text class="zz z1" x="78" y="16">z</text><text class="zz z2" x="86" y="8">Z</text>';break;
+ case 'anx':face=EY+'<path d="M54 32 q3 -2 6 0 q3 2 6 0"/>';ex='<path class="drop" d="M75 16 q4 6 0 9 q-4 -3 0 -9Z"/>';break;
+ case 'sad':face=EY+M.sad;ex='<g class="cloud"><path d="M42 6 q0 -7 8 -7 q3 -6 10 -3 q6 -4 11 2 q7 0 7 7 Z"/></g><g class="rain"><path d="M48 10 v5 M58 12 v5 M68 10 v5"/></g>';break;
+ case 'calm':face=EY+M.smile;belly='';break;
+ default:
+  if(P.indexOf('angry')===0){face=EY+M.flat+'<path d="M51 18 L57 21 M69 18 L63 21"/>';arms='<g class="aL"><path d="M60 46 L46 58 L54 68"/><circle class="hand" cx="54" cy="68" r="3"/></g><g class="aR"><path d="M60 46 L74 58 L66 68"/><circle class="hand" cx="66" cy="68" r="3"/></g>';ex='<path class="steam" d="M50 8 q-3 -4 0 -8"/><path class="steam s2" d="M70 8 q3 -4 0 -8"/>';if(P!=='angry1')ex+='<path class="steam s3" d="M60 5 q-3 -4 0 -8"/>';if(P==='angry3')ex+='<path class="lid" d="M47 17 Q60 5 73 17 Z"/>'}
+ }
+ if(cheek)face+='<circle class="cheek" cx="51" cy="29" r="2.4"/><circle class="cheek" cx="69" cy="29" r="2.4"/>';
+ return '<svg class="jx-fig p-'+P+(big?' big':'')+'" viewBox="0 0 120 130" aria-hidden="true"><g class="who"><g class="hd"><circle cx="60" cy="26" r="13"/><g class="face">'+face+'</g></g><path d="M60 39 V84"/>'+belly+arms+'<g class="lL"><path d="M60 84 L48 118"/></g><g class="lR"><path d="M60 84 L72 118"/></g></g>'+ex+'</svg>'}
+var MOODPOSE={'지쳤어요':'tired','속상해요':'sad','마음이 무거워요':'sad','불안해요':'anx','앞날이 막막해요':'look','자신감이 떨어졌어요':'sad','억울해요':'angry','허무해요':'tired','외로워요':'sad','자꾸 비교돼요':'look','화가 나요':'angry','서운해요':'sad','초조해요':'anx','우울해요':'sad','답답해요':'sigh','겁이 나요':'anx','가족에게 미안해요':'hug','혼란스러워요':'look','설레요':'cheer','그래도 해 보고 싶어요':'cheer'};
+function restPose(t){var R=[[/복식호흡/,'breath'],[/으쓱/,'shrug'],[/주먹/,'fist'],[/기지개/,'stretch'],[/고개|목 옆/,'neck'],[/나비/,'hug'],[/손바닥/,'eyes'],[/찡그/,'scrunch'],[/털기/,'shake'],[/콧노래/,'hum'],[/창밖|먼 곳|보이는 것/,'look'],[/물이나 차|차 한 잔/,'tea'],[/칭찬/,'cheer'],[/한숨/,'sigh'],[/걷기/,'walk']];for(var i=0;i<R.length;i++)if(R[i][0].test(t))return R[i][1];return 'calm'}
+var REST=['복식호흡: 배에 손을 얹고 코로 4초 들이마셔 배를 풍선처럼 부풀리고, 입으로 6초 후~ 내쉬기. 세 번.','어깨를 귀까지 으쓱 올렸다가 툭 떨어뜨리기, 세 번.','두 주먹을 5초 동안 꽉 쥐었다가 확 펴기. 손끝까지 힘이 빠지는 걸 느껴 보기, 세 번.','두 팔을 하늘로 쭉 뻗어 기지개 + 하품 크게 한 번.','고개를 오른쪽, 왼쪽으로 천천히 기울이며 목 옆을 쭉 늘이기, 각 5초.','두 팔을 X자로 가슴에 얹고 나비처럼 토닥토닥 열 번. "괜찮아, 잘하고 있어."','두 손바닥을 싹싹 비벼 따뜻하게 만든 뒤 눈 위에 10초 올려 두기.','얼굴을 쭈글쭈글 최대한 찡그렸다가 활짝 펴기, 세 번. 거울 보면 웃음 보장.','강아지가 물 털듯 온몸을 탈탈 털기, 10초. 손목·발목까지!','좋아하는 노래 한 소절 콧노래로 흥얼거리기.','창밖이나 먼 곳을 1분 동안 멍하니 바라보기. 눈도 마음도 쉬어요.','보이는 것 5개, 들리는 것 3개를 천천히 찾아보기.','따뜻한 물이나 차 한 잔을 천천히, 온도와 향을 느끼며 마시기.','작게 소리 내어 나를 칭찬하기: "나 오늘 진짜 고생했다. 최고다!"','한숨 크게 "휴우~" 세 번 쉬기. 한숨은 참지 말고 시원하게!','동네 한 바퀴 천천히 걷기. 발바닥 느낌에만 집중.'];
+Object.assign(MOODPOSE,{'상담 뒤 마음이 무거워요':'sad','이용자 안전이 걱정돼요':'anx','민원에 지쳤어요':'tired','서류 마감이 겹쳐요':'anx','수고가 안 보여 서운해요':'sad','퇴근 후에도 현장이 떠올라요':'look'});
+let RI=0;function nextRest(){RI++;RIGHT&&RIGHT()}
 VIEWS.mind=()=>{S.fe=S.fe??0;return view('마음챙김',`<div class="gl">지금 내 마음</div>${chips('fe',FEEL)}${field('fin','조금 더 말해 줘요',1)}`,
  ()=>{const f=FEEL[S.fe],h=hash(f+V('fin'));const lines=[`${f}… 그런 날이 있죠. 그 마음, 이상한 게 아니에요.`,'당신은 오늘도 누군가의 하루를 조금 더 편하게 만들었어요.','모든 걸 다 잘하지 않아도 괜찮아요. 오늘은 여기까지도 충분해요.','지금 이 순간만큼은 일 말고 나를 먼저 챙겨요.','당신이 있어서 이 복지관이 따뜻해요.'];
  const pr=`나는 장애인복지관 사회복지사야. 지금 마음: "${f}" ${V('fin')}\n나만을 위한 5줄 위로를 따뜻하게 써 주고, 1분 안에 할 수 있는 몸 풀기 하나를 알려 줘. 충고나 해결책은 빼고.`;CUR=()=>pr;
- return aiBar('나를 위한 5줄',()=>pr)+`<div class="out" style="font-size:16.5px">${lines.map(esc).join('\n')}\n\n<span class="h">따라 해요 (30초)</span>\n${esc(pick(MOVE,h))}\n\n<span class="h">나에게 한마디</span>\n"오늘도 애썼다, 나."</div>`})};
-
+ const rt=REST[(h+RI)%REST.length];
+ return aiBar('나를 위한 5줄',()=>pr)+`<div class="mnd"><div class="mbox"><div class="mfig">${fig(MOODPOSE[f]||'calm',1,1)}<b>${esc(f)}</b></div><div class="mtx">${lines.map(esc).join('<br>')}<p class="me">"오늘도 애썼다, 나."</p></div></div>
+ <div class="mbox rest"><div class="mfig">${fig(restPose(rt),0,1)}<b>졸라맨 따라 하기</b></div><div class="mtx"><span class="h">30초 쉼</span><p>${esc(rt)}</p><button class="btn" onclick="nextRest()">다른 동작</button></div></div></div>`})};
 /* ================= ⑪ AI 앱 활용법 ================= */
 const AB=['주간이용센터','직업지원','재활치료','장애인식개선','가족지원','재가복지','문화여가'];
 const APPS=[
