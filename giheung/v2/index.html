@@ -260,6 +260,7 @@ table.form td{padding:7px 10px;border:1px solid var(--gm);vertical-align:top;lin
 .mbox.rest{background:var(--wl);border-color:var(--wm)}
 .mfig{flex:none;display:flex;flex-direction:column;align-items:center;gap:2px}.mfig b{font-size:13px;color:var(--w2)}
 .mtx{font-size:15.5px;line-height:1.75;color:var(--ink)}.mtx p{margin:4px 0 8px}.mtx .me{font-weight:800;color:var(--g2)}.mtx .h{font-weight:800;color:var(--w2)}
+.mrest{display:flex;flex-direction:column;gap:8px;min-height:0;background:var(--wl);border:1px solid var(--wm);border-radius:12px;padding:12px 14px}.mrh{display:flex;justify-content:space-between;align-items:center}.mrh b{color:var(--w2);font-size:15px}.mr3{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.mc{position:relative;background:#fff;border-radius:10px;border:1px solid var(--wm);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center}.mc .jx-fig.big{width:150px;height:162px}.mc p{margin:6px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink)}.mc .no{position:absolute;top:8px;left:10px;width:22px;height:22px;border-radius:50%;background:var(--w);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
 .vfx .jx-fig{float:right;margin:0 0 6px 10px}
 </style>
 </head>
@@ -700,9 +701,9 @@ let RI=0;function nextRest(){RI++;RIGHT&&RIGHT()}
 VIEWS.mind=()=>{S.fe=S.fe??0;return view('마음챙김',`<div class="gl">지금 내 마음</div>${chips('fe',FEEL)}${field('fin','조금 더 말해 줘요',1)}`,
  ()=>{const f=FEEL[S.fe],h=hash(f+V('fin'));const lines=[`${f}… 그런 날이 있죠. 그 마음, 이상한 게 아니에요.`,'당신은 오늘도 누군가의 하루를 조금 더 편하게 만들었어요.','모든 걸 다 잘하지 않아도 괜찮아요. 오늘은 여기까지도 충분해요.','지금 이 순간만큼은 일 말고 나를 먼저 챙겨요.','당신이 있어서 이 복지관이 따뜻해요.'];
  const pr=`나는 장애인복지관 사회복지사야. 지금 마음: "${f}" ${V('fin')}\n나만을 위한 5줄 위로를 따뜻하게 써 주고, 1분 안에 할 수 있는 몸 풀기 하나를 알려 줘. 충고나 해결책은 빼고.`;CUR=()=>pr;
- const rt=REST[(h+RI)%REST.length];
+ const R3=[0,1,2].map(i=>REST[(h+RI*3+i*5)%REST.length]);
  return aiBar('나를 위한 5줄',()=>pr)+`<div class="mnd"><div class="mbox"><div class="mfig">${fig(MOODPOSE[f]||'calm',1,1)}<b>${esc(f)}</b></div><div class="mtx">${lines.map(esc).join('<br>')}<p class="me">"오늘도 애썼다, 나."</p></div></div>
- <div class="mbox rest"><div class="mfig">${fig(restPose(rt),0,1)}<b>졸라맨 따라 하기</b></div><div class="mtx"><span class="h">30초 쉼</span><p>${esc(rt)}</p><button class="btn" onclick="nextRest()">다른 동작</button></div></div></div>`})};
+ <div class="mrest"><div class="mrh"><b>졸라맨 따라 하기 · 30초 쉼 3가지</b><button class="btn" onclick="nextRest()">다른 동작 보기</button></div><div class="mr3">${R3.map((t,i)=>`<div class="mc"><span class="no">${i+1}</span>${fig(restPose(t),0,1)}<p>${esc(t)}</p></div>`).join('')}</div></div></div>`})};
 /* ================= ⑪ AI 앱 활용법 ================= */
 const AB=['주간이용센터','직업지원','재활치료','장애인식개선','가족지원','재가복지','문화여가'];
 const APPS=[
