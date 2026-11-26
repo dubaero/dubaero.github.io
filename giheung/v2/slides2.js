@@ -66,9 +66,9 @@ addCard('Canva',{n:'이미지 편집 사용설명서',d:'선택 · 도구 8가�
  ['ChatGPT','제미나이','Claude','Canva'].forEach(function(n){var k=n+'|메뉴 사용설명서';if(!G[k])G[k]={s:'어디를 누르면 무엇을 하는지 메뉴별 설명과 예시',st:[['','메뉴 그림'],['','번호별 설명'],['','자세히 보기']],tips:[['','처음 앱을 열었을 때'],['','메뉴 이름이 헷갈릴 때']],_new:1}});
  G['Canva|이미지 편집 사용설명서']=G['Canva|이미지 편집 사용설명서']||{s:'사진 편집 화면의 선택·도구 9가지 설명',st:[['','사진 클릭'],['','[편집]'],['','도구 고르기']],tips:[['','배경 제거·오타 수정'],['','흐린 사진 선명하게']],_new:1};})();
 function manHtml(an){var M=MAN[an];var n=0;
- return '<div class="man"><div class="man-hd">'+(window.__LOGO&&window.__LOGO[an]?'<span class="man-lg">'+window.__LOGO[an]+'</span>':'')+'<div><b>'+e(M.title)+'</b><span>메뉴를 누르면 자세한 사용법 장표로 넘어가요</span></div></div><div class="man-gs">'+
+ return '<div class="man"><div class="man-gs">'+
  M.groups.map(function(g){return '<div class="man-mock"><div class="mm-h">'+e(g.h)+'</div>'+g.items.map(function(it){n++;var go=it[4];return '<div class="mm-r'+(go?' go':'')+'"'+(go?' data-go="'+e(go)+'" role="button" tabindex="0"':'')+'><i class="mm-n">'+n+'</i><span class="mm-i">'+ic(it[0],22)+'</span><span class="mm-t"><b>'+e(it[1])+'</b><small>'+e(it[2])+'</small></span>'+(go?'<span class="mm-go">자세히 보기 ›</span>':'')+'</div>'}).join('')+'</div>'}).join('')+
- '</div><p class="man-note">메뉴 이름·위치는 앱 업데이트에 따라 조금 다를 수 있어요.</p></div>'}
+ '</div></div>'}
 
 var CVT=[['전체 · 요소 · 영역 지정','선택','고칠 범위 고르기: 그림 전체, 그림 속 물건 하나, 붓으로 칠한 영역','캐릭터 옷 색만 바꿀 땐 [요소]로 캐릭터만 선택',0],
  ['조정','adjust','밝기·대비·채도·색감 조절','어두운 행사 사진을 밝고 선명하게',0],
@@ -79,29 +79,30 @@ var CVT=[['전체 · 요소 · 영역 지정','선택','고칠 범위 고르기:
  ['Magic Eraser','eraser','필요 없는 물건·사람을 문질러 지우기','사진 뒤 지나가는 사람·쓰레기통 지우기',1],
  ['이미지로 동영상 생성','video','사진 한 장을 몇 초짜리 움직이는 영상으로','캐릭터가 손 흔드는 짧은 영상',0],
  ['배경 생성','image','인물은 그대로 두고 배경을 새로 만들기','실내 사진을 봄꽃 배경으로',1]];
-function cvHtml(){return '<div class="man"><div class="man-hd">'+(window.__LOGO?'<span class="man-lg">'+window.__LOGO.Canva+'</span>':'')+'<div><b>Canva 이미지 편집 사용설명서</b><span>사진을 누르고 위쪽 [편집]을 누르면 열리는 화면이에요</span></div></div>'+
+function cvHtml(){return '<div class="man">'+
  '<div class="cv-g"><figure class="cv-img"><img src="/img/giheung/canva/edit-panel.webp" alt="Canva 이미지 편집 화면" onclick="typeof zoomImg===\'function\'&&zoomImg(this.src)"><figcaption>순서: 사진 클릭 → 위쪽 [편집] → 선택 고르기 → 도구 고르기</figcaption></figure>'+
  '<div class="cv-list">'+CVT.map(function(t,i){return '<div class="mc"><div class="mc-t"><i>'+(i+1)+'</i><span class="mm-i">'+ic(t[1]==='선택'?'brush':t[1],18)+'</span><b>'+e(t[0])+'</b>'+(t[4]?'<span class="pro">Pro</span>':'')+'</div><p>'+e(t[2])+'</p><p class="ex"><em>예시</em>'+e(t[3])+'</p></div>'}).join('')+'</div></div>'+
  '<p class="man-note">왕관 표시(Pro)는 유료 요금제 기능이에요. 교육용·비영리 계정은 무료로 쓸 수 있는 경우가 있어요.</p></div>'}
 
-function post(){if(typeof VIEW==='undefined'||VIEW!=='apps')return;var A=APPS[S.app||0];if(!A)return;var C=A.cards[S.fc||0];if(!C)return;
+function post(){if(typeof VIEW==='undefined'||VIEW!=='apps')return;
+ document.querySelectorAll('#R .ovt,#R .ovsub').forEach(function(n){n.remove()});document.querySelectorAll('#R .ovc').forEach(function(c){var b=c.querySelector('b');if(b&&/메뉴 사용설명서/.test(b.textContent))c.remove()});document.querySelectorAll('#R .bar .sub2').forEach(function(n){n.remove()});var A=APPS[S.app||0];if(!A)return;var C=A.cards[S.fc||0];if(!C)return;
  (function(){var t=document.querySelector('#app .ftb');if(!t||t.dataset.g)return;t.dataset.g=1;var cur=S.fc||0,TOP=['기능 한눈에','메뉴 사용설명서'];
   var KI={'기능 한눈에':'grid','메뉴 사용설명서':'side'};function bt(c,i){var k=KI[c.n]||(window.__kic?window.__kic(c.n):'')||'spark';return '<button type="button" class="fg-b'+(i===cur?' on':'')+'" data-i="'+i+'">'+ic(k,16)+'<span>'+e(c.n)+'</span></button>'}
   var top=[],fr=[],pd=[];A.cards.forEach(function(c,i){if(TOP.indexOf(c.n)>=0)top.push(bt(c,i));else if(c.f)fr.push(bt(c,i));else pd.push(bt(c,i))});
   var h='<div class="fg">'+(top.length?'<div class="fg-top">'+top.join('')+'</div>':'')+'<table class="fg-t"><tr><th class="f">무료</th><td><div class="fg-g">'+fr.join('')+'</div></td></tr>'+(pd.length?'<tr><th class="p">유료</th><td><div class="fg-g">'+pd.join('')+'</div></td></tr>':'')+'</table></div>';
   t.insertAdjacentHTML('beforebegin',h);t.style.display='none';
-  [].slice.call(document.querySelectorAll('#app .pane *')).forEach(function(n){if(n.childNodes.length===1&&n.firstChild.nodeType===3&&/줄을 누르면/.test(n.textContent))n.textContent=n.textContent.replace('줄을 누르면','기능을 누르면')});
+  var gl=t.parentNode.querySelector('.fg').previousElementSibling;if(gl&&/할 수 있는 것|누르면/.test(gl.textContent))gl.style.display='none';
   document.querySelectorAll('#app .fg-b').forEach(function(b){b.onclick=function(){S.fc=+b.dataset.i;S.ao=0;S.ut=0;save();render()}})})();
  var htm=C.n==='메뉴 사용설명서'&&MAN[A.n]?manHtml(A.n):(C.n==='이미지 편집 사용설명서'?cvHtml():'');
  document.querySelectorAll('.ftb tr').forEach(function(tr){var b=tr.querySelector('td b'),d=tr.children[1];if(b&&d&&!d.textContent.trim()){var k=A.cards.find(function(c){return c.n===b.textContent.trim()});if(k&&k.d)d.textContent=k.d}});
  if(!htm)return;var R=document.getElementById('R');if(!R)return;var bar=R.querySelector('.bar');
  if(!bar){R.innerHTML='<div class="bar"><span class="t">'+e(A.n)+' · '+e(C.n)+'</span></div>';bar=R.querySelector('.bar')}
- [].slice.call(R.children).forEach(function(n){if(n!==bar)n.remove()});var sub=bar.querySelector('.sub2');if(sub)sub.textContent='사용설명서';
+ [].slice.call(R.children).forEach(function(n){if(n!==bar)n.remove()});var sub=bar.querySelector('.sub2');if(sub)sub.remove();
  bar.insertAdjacentHTML('afterend','<div class="sld-wrap">'+htm+'</div>');
  R.querySelectorAll('.mm-r.go').forEach(function(b){b.onclick=function(){var i=A.cards.findIndex(function(c){return c.n===b.dataset.go});if(i>=0){S.fc=i;save();render()}}})}
 var _r=render;render=function(){var r=_r.apply(this,arguments);try{post()}catch(er){console.error(er)}return r};
 document.head.insertAdjacentHTML('beforeend','<style id="gh-man">'
-+'.man{background:#fff;border:1px solid #D5E5DA;border-radius:14px;padding:20px 22px;display:grid;gap:16px;color:#263331}'
++'.man{background:#fff;border:1px solid #D5E5DA;border-radius:14px;padding:12px 14px;display:grid;gap:12px;color:#263331}'
 +'.man-hd{display:flex;align-items:center;gap:12px;border-bottom:2px solid #2F6B56;padding-bottom:10px}.man-lg svg{width:38px;height:38px;display:block}.man-hd b{display:block;font-size:20px;color:#1E5442}.man-hd span{font-size:14px;color:#66746f}'
 +'.man-gs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}'
 +'.man-mock{background:#fff;border:1px solid #D9DEDB;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.06);padding:8px}.mm-h{font-size:12.5px;font-weight:800;color:#66746f;padding:4px 8px 6px}'
@@ -114,9 +115,9 @@ document.head.insertAdjacentHTML('beforeend','<style id="gh-man">'
 +'.mc-go{justify-self:start;border:1px solid #D5E5DA;background:#F7FBF8;border-radius:8px;padding:4px 10px;font-size:12.5px;font-weight:700;color:#2F6B56}'
 +'.pro{margin-left:auto;font-size:11px;font-weight:800;background:#FFF1D6;color:#9A6700;border-radius:999px;padding:2px 7px}'
 +'.cv-g{display:grid;grid-template-columns:330px 1fr;gap:14px;align-items:start}.cv-img{margin:0;border:1px solid #D9DEDB;border-radius:14px;overflow:hidden;background:#fff}.cv-img img{width:100%;display:block;cursor:zoom-in}.cv-img figcaption{font-size:12.5px;color:#66746f;padding:8px 10px;border-top:1px solid #E3ECE6}'
-+'.man-note{margin:0;font-size:13px;color:#66746f}'
++'.man-note{margin:0;font-size:13px;color:#66746f}#R .ovs{padding:10px 12px!important;gap:8px!important}#app .pane .gl+.ftb{margin-top:0}'
 +'.fg{display:grid;gap:8px;margin-top:4px}.fg-top{display:grid;grid-template-columns:1fr 1fr;gap:6px}.fg-t{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #D5E5DA;border-radius:12px;overflow:hidden}.fg-t th{width:46px;font-size:13px;font-weight:800;writing-mode:horizontal-tb;vertical-align:middle;border-bottom:1px solid #D5E5DA}.fg-t th.f{background:#E8F5EE;color:#1E7A4F}.fg-t th.p{background:#FFF1E6;color:#B4541A}.fg-t td{padding:8px;border-bottom:1px solid #D5E5DA;border-left:1px solid #D5E5DA}.fg-t tr:last-child th,.fg-t tr:last-child td{border-bottom:0}'
-+'.fg-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.fg-b{display:flex;align-items:center;gap:7px;border:1px solid #D5E5DA;background:#fff;border-radius:9px;padding:7px 9px;font-size:13.5px;font-weight:700;color:#263331;text-align:left;cursor:pointer;min-width:0}.fg-b span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fg-b svg{flex:none;color:#2F6B56}.fg-b:hover{border-color:#2a9d8f}.fg-b.on{background:#2F6B56;border-color:#2F6B56;color:#fff}.fg-b.on svg{color:#fff}.fg-top .fg-b{background:#F7FBF8}.fg-top .fg-b.on{background:#2F6B56}'
++'.fg-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.fg-b{display:flex;align-items:center;gap:7px;border:1px solid #D5E5DA;background:#fff;border-radius:9px;padding:7px 9px;font-size:13.5px;font-weight:700;color:#263331;text-align:left;cursor:pointer;min-width:0}.fg-b span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fg-b svg{flex:none;color:#2F6B56}.fg-b:hover{border-color:#2a9d8f}.fg-b.on{background:#2F6B56;border-color:#2F6B56;color:#fff}.fg-b.on svg{color:#fff}.fg-top .fg-b{background:#FFF1E6;border:1.5px solid #F0B98C;color:#9A4A12;font-size:14px;padding:9px 10px;justify-content:center}.fg-top .fg-b svg{color:#E07A2E}.fg-top .fg-b:nth-child(2){background:#E8F3FF;border-color:#A9CBEF;color:#1D4F8A}.fg-top .fg-b:nth-child(2) svg{color:#2F6FB8}.fg-top .fg-b.on{background:#E07A2E;border-color:#E07A2E;color:#fff}.fg-top .fg-b:nth-child(2).on{background:#2F6FB8;border-color:#2F6FB8}.fg-top .fg-b.on svg{color:#fff}'
 +'@media(max-width:1000px){.man-gs,.cv-g{grid-template-columns:1fr}}'
 +'</style>');
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();

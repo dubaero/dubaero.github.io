@@ -253,8 +253,7 @@ window.__kic=function(t){return kic(t)};
 function pathHtml(where){var parts=String(where).split(/\s*→\s*/);return '<div class="sld-path"><span class="pl">메뉴 위치</span>'+parts.map(function(t,i){var k=kic(t);return (i?'<em>›</em>':'')+'<span class="sld-pc">'+(k?'<i>'+ic(k,16)+'</i>':'')+e(t.replace(/^\[([^\]]*)\]$/,'$1'))+'</span>'}).join('')+'</div>'}
 function li(a){return '<ul>'+a.map(function(x){return '<li>'+e(x)+'</li>'}).join('')+'</ul>'}
 function slide(app,name,x,free){
- return '<div class="sld"><div class="sld-hd"><span class="sld-ap">'+e(app)+'</span><b>'+e(name)+'</b>'+(free==null?'':'<span class="sld-fee '+(free?'f':'p')+'">'+(free?'무료':'유료')+'</span>')+'</div>'
- +'<h3 class="sld-t">'+e(x.t)+'</h3>'
+ return '<div class="sld">'
  +pathHtml(x.where)
  +'<div class="sld-g3"><section><h4>무엇인가요</h4><p>'+e(x.what)+'</p></section><section><h4>장점</h4>'+li(x.pros)+'</section><section><h4>언제 쓰나요</h4>'+li(x.when)+'</section></div>'
  +'<section class="sld-how"><h4>이렇게 써요</h4><ol>'+x.how.map(function(s){var k=kic(s);return '<li>'+(k?'<span class="si">'+ic(k,20)+'</span>':'')+e(s)+'</li>'}).join('')+'</ol></section>'
@@ -273,7 +272,7 @@ function post(){
  var htm=slide(A.n,C.n,x,C.f==null?null:!!C.f);
  if(!bar){R.innerHTML='<div class="bar"><span class="t">'+e(A.n)+' · '+e(C.n)+'</span></div>';bar=R.querySelector('.bar')}
  [].slice.call(R.children).forEach(function(n){if(n!==bar)n.remove()});
- var sub=bar.querySelector('.sub2');if(sub)sub.textContent='강의 장표';
+ var sub=bar.querySelector('.sub2');if(sub)sub.remove();
  bar.insertAdjacentHTML('afterend','<div class="sld-wrap">'+htm+'</div>');
  var w=R.querySelector('.sld-wrap');old.forEach(function(n){w.appendChild(n)});
  R.querySelectorAll('.fl-cp').forEach(function(b){b.onclick=function(){try{navigator.clipboard.writeText(b.dataset.t)}catch(er){}b.textContent='복사됨';setTimeout(function(){b.textContent='복사'},1200)}});
@@ -282,8 +281,8 @@ function post(){
 var _r=render;render=function(){var r=_r.apply(this,arguments);try{post()}catch(er){console.error(er)}return r};
 var _R=null;
 document.head.insertAdjacentHTML('beforeend','<style id="gh-sld">'
-+'.sld-wrap{padding:14px;display:grid;gap:14px}'
-+'.sld{background:#fff;border:1px solid #D5E5DA;border-radius:14px;padding:22px 26px;display:grid;gap:14px;color:#263331;font-family:Pretendard,sans-serif}'
++'.sld-wrap{padding:10px;display:grid;gap:10px}'
++'.sld{background:#fff;border:1px solid #D5E5DA;border-radius:14px;padding:14px 16px;display:grid;gap:12px;color:#263331;font-family:Pretendard,sans-serif}'
 +'.sld-hd{display:flex;align-items:center;gap:8px;border-bottom:2px solid #2F6B56;padding-bottom:10px}.sld-hd b{font-size:20px;font-weight:800;color:#1E5442}'
 +'.sld-ap{background:#2F6B56;color:#fff;border-radius:6px;padding:3px 10px;font-size:13px;font-weight:700}'
 +'.sld-fee{margin-left:auto;font-size:12.5px;font-weight:700;border-radius:999px;padding:3px 10px}.sld-fee.f{background:#E8F5EE;color:#1E7A4F}.sld-fee.p{background:#FFF1E6;color:#B4541A}'
