@@ -45,16 +45,17 @@ footer a{color:var(--g2);font-weight:700;text-decoration:none}
 .back{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700;color:var(--sub)}
 .pane .bd{padding:4px 16px 14px;overflow:auto;min-height:0;flex:1}
 .pane .bd::-webkit-scrollbar{width:6px}.pane .bd::-webkit-scrollbar-thumb{background:#d6ddd9;border-radius:4px}
-.gl{font-size:12.5px;font-weight:800;color:var(--sub);margin:10px 0 5px;letter-spacing:-.3px}
+.gl{font-size:12.5px;font-weight:800;color:var(--sub);margin:8px 0 4px;letter-spacing:-.3px}
 .gl:first-child{margin-top:2px}
 .chips{display:flex;flex-wrap:wrap;gap:5px}
-.chip{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 10px;font-size:13.5px;font-weight:600;color:var(--ink);letter-spacing:-.4px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 9px;font-size:13.5px;font-weight:600;color:var(--ink);letter-spacing:-.4px}
 .chip:hover{border-color:var(--g)}
 .chip.on{background:var(--g);border-color:var(--g);color:#fff}
 .chip.big{font-size:14.5px;padding:7px 12px;font-weight:700}
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
 .tab{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 14px;font-size:14.5px;font-weight:800;color:var(--sub)}
 .tab.on{background:var(--gl);border-color:var(--g);color:var(--g2)}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:0 6px}
 .fl{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;margin-bottom:5px;background:#fff}
 .fl label{font-size:13px;font-weight:700;color:var(--g2);padding:0 0 0 10px;white-space:nowrap}
 .fl input,.fl textarea{border:0;outline:0;flex:1;padding:7px 8px;font:inherit;font-size:14px;background:transparent;min-width:0;resize:none}
@@ -177,6 +178,7 @@ function mic(k,btn){if(!SR)return;const r=new SR();r.lang='ko-KR';r.interimResul
  r.onresult=e=>{const t=e.results[0][0].transcript;S[k]=((S[k]||'')+' '+t).trim();save();const el=document.getElementById('f_'+k);if(el)el.value=S[k];if(window.RIGHT)RIGHT()};
  r.onend=()=>{btn.classList.remove('rec');btn.textContent='말하기'};r.start()}
 function bizPick(noProg){const b=B();return `<div class="gl">사업</div>${chips('b',BIZ.map(x=>x.n))}${noProg?'':`<div class="gl">프로그램</div>${b.n==='기타'?field('custom','사업·프로그램'):chips('p',b.p)}`}`}
+function f2(...a){return `<div class="f2">${a.join('')}</div>`}
 function steps(a){return `<div class="steps">${a.map((s,i)=>`<div class="st"><b class="n">${i+1}</b><span>${s}</span></div>`).join('')}</div>`}
 function pane(title,body){return `<section class="pane"><div class="hd"><button class="back" onclick="go('home')">← 홈</button><h2>${title}</h2></div><div class="bd">${body}</div></section>`}
 function rpane(inner){return `<section class="pane" id="R">${inner}</section>`}
@@ -260,7 +262,7 @@ function acts(p){const m={
  return ['인사·오늘 활동 그림 카드로 소개',p+' 본 활동(선택·참여 중심)','소감 나누기·다음 일정 안내']}
 VIEWS.plan=()=>{S.pl=S.pl??0;S.gg=S.gg??0;S.ss=S.ss??0;const b=B();return view('계획·일지',
  `${bizPick()}<div class="gl">목표</div>${chips('gg',b.g)}<div class="gl">회기</div>${chips('ss',['1회','4회기','8회기','12회기','연중'])}
- <div class="gl">입력</div>${field('date','일시')}${field('place','장소')}${field('people','대상·인원')}${field('staff','담당자')}
+ <div class="gl">입력</div>${f2(field('date','일시'),field('place','장소'))}${f2(field('people','대상·인원'),field('staff','담당자'))}
  ${S.pl?field('react','참여 모습',1,'처음엔 망설였지만 직접 재료를 고르며 웃음'):''}
  <div class="note">빈칸은 [ ]로 남아요. 기관 서식이 있으면 프롬프트로 서식에 맞춰 받으세요</div>`,
  ()=>{const p=P(),bn=BN(),a=acts(p),g=b.g[S.gg]||'',ss=['1회','4회기','8회기','12회기','연중'][S.ss];
@@ -340,7 +342,7 @@ function msgText(){const s=S.ms??0,p=P(),to=S.to??1,tone=S.tn??0;const who=['이
  return T[s]}
 VIEWS.msg=()=>{S.ms=S.ms??0;S.to=S.to??1;S.tn=S.tn??0;return view('문자·소통',
  `<div class="gl">상황</div>${chips('ms',MSGS)}${bizPick()}<div class="gl">받는 분</div>${chips('to',['이용자','보호자','자원봉사자','협력기관','후원자'])}<div class="gl">말투</div>${chips('tn',TONE)}
- <div class="gl">입력</div>${field('date','일시')}${field('place','장소')}${field('prep','준비물')}${field('staff','담당자')}${field('tel','전화번호')}${field('madd','덧붙일 말',1)}`,
+ <div class="gl">입력</div>${f2(field('date','일시'),field('place','장소'))}${f2(field('prep','준비물'),field('staff','담당자'))}${field('tel','전화번호')}${field('madd','덧붙일 말',1)}`,
  ()=>{const [a,b]=msgText();const pr=`너는 ${ORG} 사회복지사야. 아래 문자를 ${M(TONE[S.tn])} 다듬어 줘. 받는 분: ${['이용자','보호자','자원봉사자','협력기관','후원자'][S.to]}. 90자 짧은 버전도 함께.\n\n${a}`;
  return aiBar(MSGS[S.ms]+' 문자',()=>a)+`<div class="grid4" style="grid-template-rows:1.4fr 1fr"><div class="box" style="grid-column:1/3"><div class="bh">바로 보낼 문자<button class="sm sp" onclick="copyTxt(CA)">복사</button></div><div class="bb">${fmt(a)}</div></div><div class="box"><div class="bh">짧은 버전<button class="sm sp" onclick="copyTxt(CB)">복사</button></div><div class="bb">${fmt(b)}</div></div><div class="box"><div class="bh">AI로 더 다듬기<button class="sm sp" onclick="openAI('gpt',CP)">ChatGPT</button><button class="sm" onclick="openAI('gemini',CP)">제미나이</button></div><div class="bb">${fmt(pr)}</div></div></div>${setC(a,b,pr)}`})};
 let CA='',CB='',CP='';function setC(a,b,p){CA=a;CB=b;CP=p;return ''}
@@ -376,8 +378,8 @@ function promoText(){const s=S.pr??0,p=P(),bn=BN();
  return M2[s]}
 VIEWS.promo=()=>{S.pr=S.pr??1;S.md=S.md??0;S.ln=S.ln??1;S.wi=S.wi||[0];const sns=S.pr<=1;return view('홍보·안내',
  `<div class="gl">상황</div>${chips('pr',PROMOS)}${bizPick()}
- ${sns?`<div class="gl">함께한 사람</div>${mchips('wi',WITH)}<div class="gl">분위기</div>${chips('md',MOOD)}<div class="gl">길이</div>${chips('ln',LEN)}<div class="gl">입력</div>${field('act','올릴 활동',1,'이용자분들과 김장 김치를 담가 이웃과 나눴어요')}${field('more','넣고 싶은 내용',1)}${field('date','일시')}${field('tel','전화번호')}`
- :`<div class="gl">입력</div>${field('name','행사명')}${field('date','일시')}${field('place','장소')}${field('people','대상·인원')}${field('recruit','모집 기간')}${field('apply','신청 방법')}${field('prep','준비물')}${field('staff','담당자')}${field('tel','전화번호')}${S.pr<=3?field('act','활동 내용',1):''}${field('more','덧붙일 내용',1)}`}
+ ${sns?`<div class="gl">함께한 사람</div>${mchips('wi',WITH)}<div class="gl">분위기</div>${chips('md',MOOD)}<div class="gl">길이</div>${chips('ln',LEN)}<div class="gl">입력</div>${field('act','올릴 활동',1,'이용자분들과 김장 김치를 담가 이웃과 나눴어요')}${field('more','넣고 싶은 내용',1)}${f2(field('date','일시'),field('tel','전화번호'))}`
+ :`<div class="gl">입력</div>${field('name','행사명')}${f2(field('date','일시'),field('place','장소'))}${f2(field('people','대상·인원'),field('recruit','모집 기간'))}${f2(field('apply','신청 방법'),field('prep','준비물'))}${f2(field('staff','담당자'),field('tel','전화번호'))}${S.pr<=3?field('act','활동 내용',1):''}${field('more','덧붙일 내용',1)}`}
  <div class="note">이용자 얼굴 사진은 본인·보호자 동의를 받은 뒤 올리세요</div>`,
  ()=>{if(S.pr<=1){const bl=blog(),ig=insta(),kk=kakao(),hm=home();const prm=`너는 ${ORG} 홍보 담당자야. 아래 블로그 초안을 ${M(MOOD[S.md])}, ${M(['약 500자','약 1000자','약 1500자'][S.ln])}로 자연스럽게 다듬어 줘. [ ] 칸은 그대로 두고 사진 자리 표시 유지.\n\n`+bl;
  W4=[bl,ig,kk,hm];CUR=()=>prm;
@@ -411,7 +413,7 @@ const SIZE=['정사각형(인스타)','세로 A4','가로(현수막·PPT)','세�
 VIEWS.gen=()=>{S.gt=S.gt??0;S.sy=S.sy??0;S.sz=S.sz??0;S.ch=S.ch??0;const txt=S.gt===9;return view('맞춤형 프롬프트 생성',
  `<div class="gl">만들 것</div>${chips('gt',GT,1)}${bizPick()}
  ${txt?`<div class="gl">채널</div>${chips('ch',['네이버 블로그','인스타그램','홈페이지','카카오톡 채널'])}<div class="gl">함께한 사람</div>${mchips('wi',WITH)}<div class="gl">분위기</div>${chips('md',MOOD)}`:`<div class="gl">스타일</div>${chips('sy',STY)}<div class="gl">크기</div>${chips('sz',SIZE)}`}
- <div class="gl">입력</div>${field('name','행사명')}${field('date','일시')}${field('place','장소')}${field('people','대상·인원')}${txt?field('act','한 일',1):field('apply','신청 방법')+field('tel','전화번호')}`,
+ <div class="gl">입력</div>${field('name','행사명')}${f2(field('date','일시'),field('place','장소'))}${txt?field('people','대상·인원')+field('act','한 일',1):f2(field('people','대상·인원'),field('apply','신청 방법'))+field('tel','전화번호')}`,
  ()=>{const g=GT[S.gt],bn=BN(),p=P();let t;
  if(S.gt===9){const ch=['네이버 블로그','인스타그램','홈페이지','카카오톡 채널'][S.ch];t=`너는 ${ORG} 홍보 담당자야. ${M(ch)}에 올릴 글을 써 줘.\n[내용] 사업: ${M(bn)} / 프로그램: ${M(p)} / 함께한 사람: ${withTxt()} / 한 일: ${V('act')||'[한 일]'} / 일시: ${F('date')} / 장소: ${F('place')}\n[조건] 분위기 ${M(MOOD[S.md??0])}, ${ch==='네이버 블로그'?'소제목 4~6개·사진 자리 [사진] 표시·1000자':ch==='인스타그램'?'짧은 문단·해시태그 8개':ch==='홈페이지'?'공지문 형식(제목·개요·내용·문의)':'200자 안내 + 블로그 링크 자리'}\n[금지] 지어낸 숫자·이름, 동정·시혜적 표현`}
  else if(S.gt===8)t=`${M(bn)} ${M(p)} 홍보용 8초 영상을 만들어 줘.\n- 장면: 이용자들이 즐겁게 참여하는 모습, ${M(STY[S.sy])} 느낌\n- 밝은 낮, 천천히 다가가는 카메라, 따뜻한 배경음\n- 실제 인물 얼굴 대신 일러스트 느낌\n- 마지막 장면에 "${V('name')||bn}" 글자`;
