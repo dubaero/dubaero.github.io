@@ -38,6 +38,37 @@ footer a{color:var(--g2);font-weight:700;text-decoration:none}
 .tile:hover{border-color:var(--g);background:var(--gl)}
 .tile .ic{width:32px;height:32px;border-radius:10px;background:var(--gl);color:var(--g);display:flex;align-items:center;justify-content:center;font-size:17px;flex:none}
 .tile.app{font-size:15px;justify-content:center}
+/* homepage-style home */
+.hp{height:100%;display:flex;flex-direction:column;gap:10px;padding:12px 0 6px;min-height:0}
+.hhero{flex:none;background:linear-gradient(100deg,#eef7f1 0%,#f7fbf8 60%,#fff 100%);border:1px solid var(--line);border-radius:18px;display:grid;grid-template-columns:minmax(0,1fr) 300px;overflow:hidden;min-height:150px}
+.hhero .tx{padding:18px 24px;display:flex;flex-direction:column;justify-content:center;gap:6px;min-width:0}
+.hhero .bdg{align-self:flex-start;font-size:12px;font-weight:800;color:var(--g2);background:#fff;border:1px solid var(--gm);border-radius:20px;padding:3px 10px}
+.hhero h1{font-size:clamp(20px,2vw,27px);letter-spacing:-1px;line-height:1.25}
+.hhero h1 em{font-style:normal;color:var(--g)}
+.hhero p{font-size:13.5px;color:var(--sub)}
+.srch{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:0 12px;max-width:460px;margin-top:4px}
+.srch input{border:0;outline:0;flex:1;padding:9px 0;font:inherit;font-size:14px;min-width:0}
+.hhero .ph{background:url(/img/giheung/hero-sprout.webp) center/cover no-repeat}
+.cols{flex:1;min-height:0;display:grid;grid-template-columns:1.05fr 1.15fr .9fr;gap:10px}
+.col{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;min-height:0;min-width:0}
+.col h3{font-size:16px;letter-spacing:-.5px;padding-bottom:7px;border-bottom:2px solid var(--g);margin-bottom:6px}
+.ol{list-style:none;overflow:auto;min-height:0;flex:1}
+.ol li{display:flex;align-items:center;gap:10px;padding:6px 2px;border-bottom:1px dashed var(--line);font-size:14.5px;font-weight:700;letter-spacing:-.4px}
+.ol li .no{width:20px;color:var(--sub);font-weight:600;font-size:13px;text-align:center}
+.ol li .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ol li .tg{font-size:11.5px;font-weight:800;color:var(--orT);background:var(--or);border-radius:6px;padding:2px 7px}
+.ob{border:0;background:var(--g);color:#fff;border-radius:7px;padding:4px 11px;font-size:12.5px;font-weight:800}
+.qg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;flex:1;min-height:0;grid-auto-rows:1fr}
+.q{border:1px solid var(--line);border-radius:12px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-weight:800;font-size:14px;letter-spacing:-.5px;padding:6px;min-height:0}
+.q:hover,.q.on{border-color:var(--g);background:var(--gl)}
+.q .ic{font-size:20px;line-height:1}
+.lk{overflow:auto;min-height:0}
+.lk .sec{font-size:12.5px;font-weight:800;color:var(--g2);background:var(--gl);border-radius:6px;padding:4px 8px;margin:6px 0 3px}
+.lk .sec:first-child{margin-top:0}
+.lk a,.lk button{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;border-bottom:1px dashed var(--line);background:none;text-align:left;padding:5px 4px;font-size:14px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.4px}
+.lk a:hover,.lk button:hover{color:var(--g2)}
+.lk small{font-weight:600;color:var(--sub);font-size:12px}
+@media (max-width:900px){.hhero{grid-template-columns:1fr}.hhero .ph{display:none}.cols{grid-template-columns:1fr}.qg{grid-auto-rows:70px}}
 /* view */
 .view{height:100%;display:grid;grid-template-columns:minmax(300px,32%) minmax(0,1fr);gap:12px;padding-bottom:6px}
 .pane{background:#fff;border:1px solid var(--line);border-radius:16px;min-height:0;display:flex;flex-direction:column}
@@ -191,20 +222,39 @@ const hash=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))|0;retur
 const VIEWS={};let VIEW='home';
 function go(v){location.hash=v}
 window.addEventListener('hashchange',()=>{VIEW=location.hash.slice(1)||'home';render()});
-function render(){window.RIGHT=null;const app=document.getElementById('app');const f=VIEWS[VIEW]||VIEWS.home;
+function render(){window.RIGHT=null;document.querySelector('header').style.display=VIEW==='home'||!VIEWS[VIEW]?'none':'flex';const app=document.getElementById('app');const f=VIEWS[VIEW]||VIEWS.home;
  const ae=document.activeElement&&document.activeElement.id;app.innerHTML=f();if(window.RIGHT)RIGHT();
  if(ae){const el=document.getElementById(ae);if(el&&el.tagName!=='BUTTON'){el.focus();const n=el.value.length;try{el.setSelectionRange(n,n)}catch(e){}}}}
 function view(title,leftBody,rightFn){window.RIGHT=()=>{const r=document.getElementById('R');if(r)r.innerHTML=rightFn()};return `<div class="view">${pane(title,leftBody)}${rpane('')}</div>`}
 
 /* ================= 홈 ================= */
-const MENU=[
-['업무',[['project','업무 프로젝트','📁'],['plan','계획·일지','📝'],['memo','메모·녹음→서식','🎙'],['month','이달의 추천','📅']]],
-['소통',[['msg','문자·소통','✉'],['promo','홍보·안내','📣'],['donor','후원 관리','💚']]],
-['만들기',[['gen','맞춤형 프롬프트 생성','✨'],['room','프롬프트 디자인실','🎨']]],
-['쉼',[['vent','빡침 번역기','🔥'],['mind','마음챙김','🌿']]],
-['배우기',[['apps:0','ChatGPT','G'],['apps:1','제미나이','◆'],['apps:2','Claude','C'],['apps:3','Canva','▣'],['apps:4','데스크톱 앱','💻']]]];
-VIEWS.home=()=>`<div class="home"><div class="hero"><div><h1>오늘 업무, <em>AI에게 지시</em>하세요</h1><p>고르고 → 적고 → 오른쪽 결과를 복사하거나 AI로 바로 보내면 끝</p></div><div class="tip">AI는 시키기 나름, 부탁이 아니라 지시</div></div>
-<div class="rows">${MENU.map(([lab,ts])=>`<div class="row"><div class="lab">${lab}</div><div class="tiles">${ts.map(([k,n,ic])=>`<button class="tile${lab==='배우기'?' app':''}" onclick="${k.startsWith('apps')?`S.app=${k.split(':')[1]};S.fc=0;S.sub=0;save();go('apps')`:`go('${k}')`}"><span class="ic">${ic}</span>${n}</button>`).join('')}</div></div>`).join('')}</div></div>`;
+const HL=[
+['업무 프로젝트 · 사업계획서',"S.doc=0;go('project')",'프로젝트'],
+['업무 프로젝트 · 결과보고서',"S.doc=1;go('project')",'프로젝트'],
+['업무 프로젝트 · 홍보물',"S.doc=2;go('project')",'프로젝트'],
+['프로그램 계획서',"S.pl=0;go('plan')",''],
+['프로그램 일지',"S.pl=1;go('plan')",''],
+['메모·녹음 → 회의록·서식',"go('memo')",''],
+['이달의 추천 프로그램',"go('month')",''],
+['맞춤형 프롬프트 생성',"go('gen')",'원픽'],
+['프롬프트 디자인실',"go('room')",'원픽']];
+const HQ=[['msg','문자·소통','✉'],['promo','홍보·안내','📣'],['donor','후원 관리','💚'],['plan','계획·일지','📝'],['memo','메모·녹음','🎙'],['month','이달의 추천','📅'],['gen','맞춤 프롬프트','✨'],['vent','빡침 번역기','🔥'],['mind','마음챙김','🌿']];
+const HA=['ChatGPT','제미나이','Claude','Canva','데스크톱 앱'];
+VIEWS.home=()=>`<div class="hp">
+<div class="hhero"><div class="tx"><span class="bdg">종사자 실습용</span><h1>용인시기흥장애인복지관 <em>AI 업무도우미</em></h1><p>사업 문서 · 프로그램 계획·일지 · 문자와 홍보 · AI 앱 활용법을 한곳에서</p>
+<div class="srch">🔍<input id="hs" aria-label="업무 찾기" oninput="hsearch(this.value)"><span style="font-size:12px;color:#8a9590;white-space:nowrap">업무 찾기 (예: 후원, 일지)</span></div></div><div class="ph"></div></div>
+<div class="cols">
+<div class="col"><h3>업무 서식·프로젝트</h3><ul class="ol" id="hl">${HL.map((h,i)=>`<li data-k="${h[0]}"><span class="no">${i+1}</span><span class="nm">${h[0]}</span>${h[2]?`<span class="tg">${h[2]}</span>`:''}<button class="ob" onclick="${h[1]};save()">열기</button></li>`).join('')}</ul></div>
+<div class="col"><h3>업무 바로가기</h3><div class="qg" id="hq">${HQ.map(([k,n,ic])=>`<button class="q" data-k="${n}" onclick="go('${k}')"><span class="ic">${ic}</span>${n}</button>`).join('')}</div></div>
+<div class="col"><h3>바로가기</h3><div class="lk">
+<div class="sec">AI 앱 활용법</div>${HA.map((n,i)=>`<button data-k="${n}" onclick="S.app=${i};S.fc=0;S.sub=0;save();go('apps')">${n}<small>기능·사용법 ›</small></button>`).join('')}
+<div class="sec">기관·지침</div>
+<a data-k="복지관 홈페이지" href="https://www.a-sak.or.kr/" target="_blank" rel="noopener">복지관 홈페이지<small>↗</small></a>
+<a data-k="장애인복지시설협회 공지" href="https://kawid.or.kr/bbs/board.php?bo_table=B20&sca=%ED%98%91%ED%9A%8C%EA%B3%B5%EC%A7%80" target="_blank" rel="noopener">장애인복지시설협회 공지<small>↗</small></a>
+<a data-k="경기복지재단 시설평가" href="https://ggwf.gg.go.kr/archives/category/busi002/evaluation_bbs" target="_blank" rel="noopener">경기복지재단 시설평가<small>↗</small></a>
+</div></div>
+</div></div>`;
+function hsearch(q){q=q.trim();document.querySelectorAll('#hl li,#hq .q,.lk [data-k]').forEach(e=>{const m=!q||e.dataset.k.includes(q);e.style.opacity=m?1:.25;e.classList.toggle('on',!!q&&m)})}
 
 /* ================= ① 업무 프로젝트 ================= */
 const DOCS=['사업계획서','결과보고서','홍보물'];
