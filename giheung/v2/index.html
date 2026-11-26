@@ -383,6 +383,34 @@ table.form.sm2 th,table.form.sm2 td{font-size:13px;padding:5px 7px}
 .bunny .ear{transform-box:fill-box;transform-origin:50% 100%;animation:bear2 var(--sp) ease-in-out infinite alternate}.bunny .ear.r{animation-direction:alternate-reverse}@keyframes bear2{from{transform:rotate(-10deg)}to{transform:rotate(10deg)}}
 .bunny .arm{transform-box:fill-box;transform-origin:center top;animation:barm calc(var(--sp)/2) ease-in-out infinite alternate}@keyframes barm{to{transform:rotate(-25deg)}}
 .bunny .steam{animation:brS .6s ease-in-out infinite alternate}
+.fr-list{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:6px;padding-right:2px}
+.fr-hint{margin:0 0 2px;font-size:13.5px;color:#111111}
+.fr-hint b{color:#c96a2b}
+.fr-empty{margin:auto;text-align:center;color:#111111;font-size:14.5px;line-height:1.7;padding:30px 10px;border:1.5px dashed #cbd5e1;border-radius:12px;width:100%}
+.fr-it{flex:none;border:1.5px solid #cbd5e1;border-radius:12px;background:#fff;overflow:hidden}
+.fr-it.open{border-color:#3e8967}
+.fr-h{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:100%;padding:7px 10px;cursor:pointer}
+.fr-e{font-size:21px}
+.fr-t{flex:1;display:flex;flex-direction:column}
+.fr-t b{font-size:15px;color:#1e3630}
+.fr-t small{font-size:12.5px;color:#111111}
+.fr-t em{font-style:normal;font-weight:700}
+.fr-ok{color:#2f6b56}
+.fr-miss{color:#c96a2b}
+.fr-plus{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#F5F3EF;color:#2f6b56;font-weight:800;font-size:18px}
+.fr-it.open .fr-plus{background:#c96a2b;color:#fff}
+.fr-b{padding:2px 14px 10px 46px;font-size:14px;line-height:1.6;color:#33463f}
+.fr-b p{margin:2px 0}
+.fr-b ol{margin:4px 0 8px;padding-left:18px}
+.pgx{width:100%;margin-top:5px;border:1px solid var(--line);border-radius:8px;padding:7px 10px;font:inherit;font-size:13.5px}.pgx:focus{outline:0;border-color:var(--w)}
+.pgta{width:100%;min-height:80px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;font-size:14px;resize:vertical}
+.jxpv .k{font-weight:900;color:var(--ink)}.jxpv .g{background:linear-gradient(transparent 60%,#fcc9a3 60%)}.jxpv .o{background:#fff2e6;border-radius:4px}
+.pch{display:flex;align-items:baseline;gap:6px;margin:10px 0 4px}.pch b{font-size:14.5px;display:flex;align-items:center;gap:6px}.pch i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--w);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px}.pch small{font-size:12px;color:var(--sub)}
+.ptabs.sm .pt{padding:5px 10px;font-size:13px}.pt .cn{font-style:normal;background:#fff;color:var(--w2);border-radius:999px;padding:0 6px;font-size:11px;margin-left:3px}
+.pcrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.pcrow label{font-size:12.5px;font-weight:800}
+.pcg{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;padding:12px 14px}.pcgh b{display:block;font-size:17px}.pcgh span{font-size:14px;color:var(--sub)}.s5{margin:0;font-size:13px;color:var(--sub);line-height:1.6}
+.mwrap{flex:1;min-height:0;overflow:auto;padding:10px 14px}.msum{border:1.5px solid var(--wm);background:#fffaf4;border-radius:10px;padding:8px 12px;display:flex;flex-direction:column}.msum b{font-size:16px}.msum span{font-size:13.5px;color:var(--sub)}
+.it{max-width:none}
 </style>
 </head>
 <body>
@@ -579,7 +607,7 @@ function aiBar(title,getter){CUR=getter;return `<div class="bar"><span class="t"
 /* ---- UI helpers ---- */
 function chips(key,opts,big){return `<div class="chips">${opts.map((o,i)=>`<button class="chip${big?' big':''}${(S[key]??0)==i?' on':''}" onclick="setS('${key}',${i})">${esc(o)}</button>`).join('')}</div>`}
 function mchips(key,opts){const a=S[key]||[];return `<div class="chips">${opts.map((o,i)=>`<button class="chip${a.includes(i)?' on':''}" onclick="togS('${key}',${i})">${esc(o)}</button>`).join('')}</div>`}
-function setS(k,v){S[k]=v;if(k==='b'){S.p=0;S.kd=null;S.mi2=0;S.mt=0;S.mtg=0}if(k==='p'){S.kd=null;S.mi2=0;BZO=false}if(k==='vg'){S.vs=0}if(k==='mm'){S.mi2=0}save();render()}
+function setS(k,v){S[k]=v;if(k==='mk'){S.mi2=0}if(k==='b'){S.p=0;S.kd=null;S.mi2=0;S.mt=0;S.mtg=0;S.mk=null}if(k==='p'){S.kd=null;S.mi2=0;S.mk=null;BZO=false}if(k==='vg'){S.vs=0}if(k==='mm'){S.mi2=0}save();render()}
 function togS(k,i){const a=S[k]||[];const j=a.indexOf(i);j<0?a.push(i):a.splice(j,1);S[k]=a;save();render()}
 let FL=[];
 function field(k,label,area,ex){if(!FL.find(f=>f[0]===k))FL.push([k,label,ex]);return FL.length===1&&!FL._t?(FL._t=1,'%%IBOX%%'):''}
@@ -787,23 +815,37 @@ const XSTEP={
 '찾아가는 인식개선교육':[['사전 협의',0,'방문 기관(학교·유치원)과 일시·대상 연령·인원을 정하고 교실 환경을 확인한다'],['캐릭터 소개',10,'누니·바니·모니·귀니 캐릭터 인형이 차례로 등장해 각자의 장애 특성과 좋아하는 것을 소개한다'],['이야기·퀴즈',15,'캐릭터의 하루 이야기를 듣고 "이럴 땐 어떻게 도와줄까?" OX 퀴즈로 배려 방법을 알아본다'],['체험·다짐',15,'점자 이름 쓰기·수어 인사 체험 후 캐릭터 스티커에 "함께 지킬 약속"을 적어 붙인다']],
 '숏폼 영상 공모전':[['공고',0,'"함께"를 주제로 30초 영상 공모 포스터와 참가 신청서를 만들어 SNS·학교에 배포한다'],['접수',0,'휴대폰으로 찍은 30초 영상을 이메일·구글폼으로 4주간 접수한다'],['심사',0,'주제 표현·장애 인식 메시지·창의성 기준으로 내부·외부 심사위원이 평가한다'],['시상·상영',60,'수상작을 복지관 로비 TV와 SNS에 상영하고 시상식을 연다']],
 '장애 체험 부스':[['부스 설치',30,'휠체어 코스·안대 체험·점자 체험 3개 코너를 설치하고 안전 요원을 배치한다'],['안내',5,'체험 전 장애 당사자 강사가 체험의 목적과 주의점을 안내한다'],['체험',20,'참여자가 코너를 돌며 직접 체험하고 느낀 점을 메모지에 남긴다'],['소감 나눔',10,'메모지를 게시판에 붙이고 당사자 강사와 질문·답변을 나눈다']]};
-function ideaFull(m,bn,p){const t=itype(bn,p),L=IDEAS[t],mi=MI[m],h=Math.abs(hash(p));const sub=x=>x.replace(/\{s\}/g,mi.s).replace(/\{e\}/g,mi.e).replace(/\{f\}/g,mi.f).replace(/\{pl\}/g,mi.pl).replace(/\{p\}/g,p);
- const used=new Set(),out=[];for(let i=0;out.length<5&&i<20;i++){const j=(m+h+i*((h%3)+1))%L.length;if(used.has(j))continue;used.add(j);const r=L[j].map(sub),k=kindOf(r[0]+' '+r[1]),K=KIND[k],key=Object.keys(XSTEP).find(x=>r[0].includes(x));
-  const steps=key?XSTEP[key]:K.steps.map((s,ix)=>ix===2?[s[0],s[1],`${r[1].replace(/ → /g,', ')} 순서로 진행하며, 참여자가 직접 고르고 해 볼 수 있도록 필요한 부분만 지원한다`]:s);
-  out.push({t:(r[0].includes(p)?r[0]:`${p} · ${r[0]}`),how:r[1],need:r[2],eff:r[3],kind:k,steps,items:[...new Set([...r[2].split('·').map(x=>x.trim()),...K.items])].slice(0,6),safe:K.safe})}
- return out}
-VIEWS.month=()=>{if(S.mm==null)S.mm=Math.min(11,new Date().getMonth()+1)%12;S.mi2=S.mi2??0;S.mt=S.mt??0;S.mtg=S.mtg??0;S.mpl=S.mpl??0;const b=B();
+const AIDEA={
+'만들기':[['{e} 카드 만들기','계절 그림 카드 보기 → 색종이·스티커로 꾸미기 → 고마운 사람에게 쓰기'],['{s} 무드등 만들기','한지 오려 붙이기 → LED 넣기 → 불 켜고 감상'],['{f} 모양 비누 만들기','틀 고르기 → 비누 베이스 녹여 붓기 → 포장해 선물'],['우리 동네 지도 꾸미기','{pl} 사진 붙이기 → 가 본 곳 스티커 → 함께 발표'],['나만의 에코백 꾸미기','도안 고르기 → 패브릭 마커로 그리기 → 들고 사진 찍기']],
+'요리·간식':[['{f} 만들기 데이','{f} 재료 소개 → 단계별 함께 만들기 → 나눠 먹기'],['{e} 간식 파티','간식 메뉴 투표 → 역할 나눠 만들기 → 파티'],['한 그릇 점심 만들기','장보기 목록 → 재료 손질 → 덮밥 완성'],['{s} 과일 꼬치','과일 고르기 → 꼬치 꽂기 → 색깔 맞추기 놀이'],['이웃 나눔 도시락','도시락 메뉴 정하기 → 함께 싸기 → 경비실·이웃에 전달']],
+'음악·노래':[['{e} 노래 교실','노래 고르기 → 가사판 보고 따라 부르기 → 율동'],['리듬 악기 합주','악기 고르기 → 박자 연습 → 합주 녹음'],['우리 반 주제가 만들기','AI로 가사 만들기 → 함께 부르기 → 녹음'],['{s} 음악 감상회','계절 노래 듣기 → 떠오르는 그림 그리기 → 소감'],['노래방 데이','신청곡 받기 → 순서대로 부르기 → 박수 칭찬']],
+'운동·산책':[['{pl} 걷기 챌린지','준비 운동 → 걷기 → 걸음 수 기록'],['실내 볼링 대회','팀 나누기 → 볼링 → 시상'],['{s} 스트레칭 교실','음악 맞춰 스트레칭 → 짝 체조 → 마무리'],['보치아 리그','규칙 배우기 → 리그전 → 우승팀 축하'],['풍선 배구','팀 나누기 → 풍선 배구 → 칭찬 나누기']],
+'원예·텃밭':[['{s} 화분 심기','흙·모종 만져 보기 → 심고 물 주기 → 이름표'],['허브 키우기','허브 향 맡기 → 심기 → 관찰 일지'],['미니 정원 만들기','유리병·이끼 → 꾸미기 → 집에 가져가기'],['텃밭 수확 데이','수확하기 → 씻고 맛보기 → 나눔'],['꽃꽂이 교실','꽃 고르기 → 꽃병 꽂기 → 사진 찍기']],
+'지역사회 나들이':[['{pl} 나들이','대중교통 이용 → 시설 둘러보기 → 소감 나누기'],['동네 카페 주문하기','메뉴 고르기 → 직접 주문·계산 → 이야기 나누기'],['도서관 이용하기','회원증 만들기 → 책 고르기 → 대출'],['전통시장 탐방','살 것 정하기 → 시장 구경·구입 → 함께 먹기'],['{e} 문화 공연 관람','공연 고르기 → 관람 예절 익히기 → 관람·소감']],
+'일상생활 기술':[['마트 장보기 훈련','목록 만들기 → 찾고 계산하기 → 정리'],['빨래 개기 챌린지','시범 → 단계별 따라 하기 → 기록'],['{s} 옷 고르기','날씨 확인 → 옷 고르기 → 스스로 입기'],['돈 계산 놀이','동전·지폐 알기 → 가게 놀이 → 거스름돈'],['나의 하루 일정표','그림 일정 만들기 → 순서 지키기 → 칭찬']],
+'그룹치료':[['{e} 그림 카드 대화','그림 카드로 이야기 → 차례 지키기 → 칭찬'],['감각 놀이 회기','{f} 재료로 촉감 탐색 → 표현하기'],['협동 블록 쌓기','짝 정하기 → 함께 쌓기 → 결과 나누기'],['감정 표정 놀이','표정 카드 → 따라 하기 → 내 감정 말하기'],['보호자 참관 회기','함께 활동 → 가정 연계 방법 안내']],
+'직업훈련·작업':[['{e} 모의 면접','질문 카드 → 1:1 면접 → 피드백'],['직무 체험 투어','{pl} 사업장 견학 → 직무 관찰 → 소감'],['포장 작업 훈련','순서 익히기 → 작업 → 품질 확인'],['이력서 사진 촬영','복장 연습 → 촬영 → 이력서 완성'],['출퇴근 대중교통 연습','경로 확인 → 직접 이동 → 시간 기록']],
+'디지털·스마트기기':[['스마트폰 사진 교실','{s} 풍경 찍기 → 편집 → 공유'],['키오스크 주문 연습','화면 익히기 → 직접 주문 → 결제'],['AI 그림 그리기','AI에 말로 설명 → 그림 받기 → 전시'],['영상통화 해 보기','앱 열기 → 가족과 통화 → 소감'],['디지털 순환재활 대회','게임형 운동 → 점수 기록 → 시상']],
+'장애인식개선 교육':[['찾아가는 인식개선교육','캐릭터 소개 → 이야기·퀴즈 → 체험·다짐'],['{e} 장애 체험 부스','휠체어·안대 체험 → 소감 나누기'],['권리 그림책 읽기','그림책 읽기 → 질문 나누기 → 약속'],['숏폼 영상 공모전','공고 → 접수 → 심사 → 상영'],['이웃 초청 인식개선 행사','공연 → 체험 → 다과']],
+'가족 교육·자조모임':[['부모 힐링 클래스','{s} 향초 만들기 → 근황 나누기'],['양육 고민 나눔방','주제 카드 → 경험 나누기 → 정보 공유'],['형제자매 데이','비장애 형제와 놀이 → 마음 나누기'],['아빠랑 요리','{f} 만들기 → 함께 먹기'],['전문가 초청 강의','{e} 주제 강의 → 질의응답']],
+'평생교육 수업':[['{e} 동아리 발표회','동아리 공연·전시 → 소감'],['한글·숫자 교실','쉬운 교재로 배우기 → 실습'],['캘리그라피 교실','붓펜 연습 → 계절 문구 쓰기'],['AI로 나만의 시집','AI와 시 쓰기 → 그림 넣기 → 책 만들기'],['영어 한마디 교실','생활 영어 → 역할극']],
+'방문 서비스':[['{e} 안부 방문','{f} 나눔 → 안부 확인 → 기록'],['찾아가는 생일잔치','케이크 → 노래 → 사진'],['{s} 주거 점검','방충망·전등 점검 → 간단 수리'],['말벗 봉사 매칭','봉사자 소개 → 말벗·산책'],['생필품 키트 전달','키트 구성 → 방문 전달']],
+'행사·캠페인':[['{e} 행사','테마 체험 → 공연 → 나눔'],['무료마켓','물품 정리 → 가격표 → 판매 체험'],['이용자 작품 전시회','작품 고르기 → 전시 → 초대'],['전통놀이 대회','윷놀이·제기차기 → 시상'],['후원자 감사의 날','감사 카드 → 초청 → 다과']]};
+function ideaFull(m,bn,p){const k=KN[S.mk]||'만들기',mi=MI[m],K=KIND[k],L=AIDEA[k]||AIDEA['만들기'];const sub=x=>x.replace(/\{s\}/g,mi.s).replace(/\{e\}/g,mi.e).replace(/\{f\}/g,mi.f).replace(/\{pl\}/g,mi.pl);
+ const off=Math.abs(hash(p))%L.length;
+ return [0,1,2,3,4].map(i=>{const r=L[(off+i)%L.length],t=sub(r[0]),how=sub(r[1]),key=Object.keys(XSTEP).find(x=>t.includes(x));
+  const steps=key?XSTEP[key]:K.steps.map((s,ix)=>ix===2?[s[0],s[1],`${how.replace(/ → /g,', ')} 순서로 진행하며, 참여자가 직접 고르고 해 볼 수 있도록 필요한 부분만 지원한다`]:s);
+  return {t:`${p} · ${t}`,how,kind:k,steps,items:K.items,safe:K.safe,eff:K.eff}})}
+VIEWS.month=()=>{if(S.mm==null)S.mm=Math.min(11,new Date().getMonth()+1)%12;S.mi2=S.mi2??0;S.mt=S.mt??0;S.mtg=S.mtg??0;S.mpt=S.mpt??0;const b=B();if(S.mk==null)S.mk=Math.max(0,KN.indexOf(KDEF[itype(BN(),P())]||'만들기'));
  return view('이달의 추천',
- `<div class="gl">월</div>${chips('mm',[1,2,3,4,5,6,7,8,9,10,11,12].map(m=>m+'월'))}${bizPick()}<div class="gl">대상</div>${chips('mt',b.t)}<div class="gl">목표</div>${chips('mtg',b.g)}${field('people','인원')}${field('place','장소')}`,
- ()=>{const m=S.mm+1,p=P(),bn=BN(),list=ideaFull(m,bn,p);if(!list[S.mi2])S.mi2=0;const I=list[S.mi2],tg=b.t[S.mt]||b.t[0],g=b.g[S.mtg]||b.g[0];
- const st=I.steps.map((s,i)=>`${i+1}. ${s[0]}${s[1]?'('+s[1]+'분)':''}: ${s[2]}.`);
- const plan=[['프로그램명',I.t],['대상',`${tg} ${F('people','인원')}`],['목적',`${I.kind} 활동을 통해 ${KIND[I.kind].goal}. "${g}"에 중점을 둔다.`],['일시·장소',`${m}월 [일시] / ${F('place')}`],['진행 내용',st.join('\n')],['준비물',I.items.join(', ')],['기대 효과',I.eff+'. '+KIND[I.kind].eff+'.'],['안전',I.safe.join(' · ')]];
- const log=[['프로그램명',I.t],['일시·장소',`${m}월 [일시] / ${F('place')}`],['참여자',`${tg} ${F('people','인원')}`],['진행 내용',I.steps.map((s,i)=>`${i+1}. ${s[0]}: ${toPast(s[2])}.`).join('\n')],['참여 모습','참여자들이 [즐겁게 끝까지 참여함]. [기억에 남는 모습 한 줄]'],['평가',`"${g}" 목표에 맞게 진행되었으며 [보완할 점]을 다음 회기에 반영한다.`]];
+ `<div class="gl">월</div>${chips('mm',[1,2,3,4,5,6,7,8,9,10,11,12].map(m=>m+'월'))}${bizPick()}<div class="gl">대상</div>${chips('mt',b.t)}<div class="gl">목표</div>${chips('mtg',b.g)}<div class="gl">활동 <small>고르면 추천 5가지가 바뀌어요</small></div>${chips('mk',KN)}${field('people','인원')}${field('place','장소')}`,
+ ()=>{const m=S.mm+1,p=P(),list=ideaFull(m,BN(),p);if(!list[S.mi2])S.mi2=0;const I=list[S.mi2],tg=b.t[S.mt]||b.t[0],g=b.g[S.mtg]||b.g[0];
+ const plan=[['프로그램명',I.t],['대상',`${tg} ${F('people','인원')}`],['목적',`${I.kind} 활동을 통해 ${KIND[I.kind].goal}. "${g}"에 중점을 둔다.`],['일시·장소',`${m}월 [일시] / ${F('place')}`],['진행 방법',I.how],['진행 순서',I.steps.map((s,i)=>`${i+1}. ${s[0]}${s[1]?'('+s[1]+'분)':''}: ${s[2]}.`).join('\n')],['준비물',I.items.join(', ')],['기대 효과',I.eff+'.'],['안전·접근성',I.safe.join(' · ')+' · 이동·감각·의사소통 지원 확인']];
+ const log=[['프로그램명',I.t],['일시·장소',`${m}월 [일시] / ${F('place')}`],['참여자',`${tg} ${F('people','인원')}`],['활동 목표',g],['진행 내용',I.steps.map((s,i)=>`${i+1}. ${s[0]}${s[1]?'('+s[1]+'분)':''}: ${toPast(s[2])}.`).join('\n')],['참여 모습','참여자들이 처음부터 끝까지 즐겁게 참여하였다. [기억에 남는 모습 한 줄]'],['평가',`"${g}" 목표에 맞게 진행되었으며, [보완할 점]을 다음 회기에 반영한다.`],['다음 회기','[다음 활동·보완점]']];
  const rows=S.mpt?log:plan;
- const pr=`너는 ${ORG} 프로그램 기획 전문가야. 아래 추천 프로그램으로 ${S.mpt?'프로그램 일지':'프로그램 계획서'}를 우리 서식에 맞춰 완성해 줘.\n[필수] 진행 내용은 서술형 · 자료에 없는 숫자는 [확인 필요] · 장애 특성(이동·감각·의사소통) 고려\n\n`+rows.map(r=>`[${r[0]}] ${r[1]}`).join('\n');CUR=()=>pr;
- return aiBar(`${m}월 추천 · ${esc(p)}`,()=>pr)+`<div class="itabs">${list.map((x,i)=>`<button class="it${S.mi2==i?' on':''}" onclick="S.mi2=${i};save();RIGHT()"><span>${i+1}</span>${esc(x.t)}</button>`).join('')}</div>
- <div class="mdet"><section class="c3c"><h4 class="c3h" style="--c:#e2865a">${esc(I.t)} <small>${esc(I.kind)}</small></h4><div class="mrow"><b>진행 방법</b><p>${esc(I.how)}</p></div><div class="mrow"><b>진행 순서</b><ol class="mst">${I.steps.map(s=>`<li><u>${esc(s[0])}${s[1]?' '+s[1]+'분':''}</u> ${esc(s[2])}</li>`).join('')}</ol></div><div class="mrow"><b>준비물</b><div class="mit">${I.items.map(x=>`<span>${esc(x)}</span>`).join('')}</div></div><div class="mrow"><b>기대 효과</b><p>${esc(I.eff)}</p></div></section>
- <section class="c3c"><div class="ptabs" style="margin:0"><button class="pt${S.mpt?'':' on'}" onclick="S.mpt=0;save();RIGHT()">프로그램 계획서</button><button class="pt${S.mpt?' on':''}" onclick="S.mpt=1;save();RIGHT()">프로그램 일지</button></div><table class="form sm2">${rows.map(r=>`<tr><th>${r[0]}</th><td>${fmtCell(r[1])}</td></tr>`).join('')}</table></section></div>`})};
+ const pr=`너는 ${ORG} 프로그램 기획 전문가야. 아래 추천 프로그램으로 ${S.mpt?'프로그램 일지':'프로그램 계획서'}를 첨부한 우리 서식에 맞춰 완성해 줘.\n[필수] 진행 내용은 서술형 · 자료에 없는 숫자는 [확인 필요] · 장애 특성(이동·감각·의사소통) 고려\n\n`+rows.map(r=>`[${r[0]}]\n${r[1]}`).join('\n');CUR=()=>pr;
+ return aiBar(`${m}월 추천 프로그램 5가지`,()=>pr)+`<div class="itabs">${list.map((x,i)=>`<button class="it${S.mi2==i?' on':''}" onclick="S.mi2=${i};save();RIGHT()"><span>${i+1}</span>${esc(x.t.replace(p+' · ',''))}</button>`).join('')}</div>
+ <div class="mwrap"><div class="msum"><b>${esc(I.t)}</b><span>${esc(I.how)}</span></div><div class="ptabs" style="margin:6px 0"><button class="pt${S.mpt?'':' on'}" onclick="S.mpt=0;save();RIGHT()">프로그램 계획서</button><button class="pt${S.mpt?' on':''}" onclick="S.mpt=1;save();RIGHT()">프로그램 일지</button></div><div class="ftitle" style="margin:4px 0">${S.mpt?'프 로 그 램  일 지':'프 로 그 램  계 획 서'}</div><table class="form">${rows.map(r=>`<tr><th>${r[0]}</th><td>${fmtCell(r[1])}</td></tr>`).join('')}</table></div>`})};
 /* ================= ④ 문자·소통 ================= */
 const MSGS=['프로그램 참여 안내','일정 변경 안내','접수·대기 결과','보호자께 근황','보호자 상담 안내','치료·수업 결과 안내','어려운 이야기 전하기','자원봉사자 안내','협력기관 협조 요청','명절·절기 인사','기타'];
 const TONE=['따뜻하게','정중하게','쉬운 말로'];
@@ -911,11 +953,9 @@ function donText(){const s=S.dn??0,nm=V('dname')||'[후원자님]',it=V('ditem')
  [`${nm}, 안녕하세요. ${ORG}입니다.\n\n한 해를 마무리하며 감사의 마음을 전합니다.\n올해도 ${nm}의 나눔 덕분에 이용자분들이 더 많이 웃고, 더 많은 것을 경험한 한 해였습니다.\n${more?more+'\n':''}\n새해에도 늘 건강하시고, 가정에 웃음과 평안이 가득하시길 바랍니다.\n진심으로 감사드립니다.\n\n${ORG} 직원 일동 드림`,`올 한 해 함께해 주셔서 감사합니다. 따뜻한 새해 되세요! - ${ORG}`],
  [`${hi}\n\n${more||'[전하고 싶은 내용]'}\n\n늘 함께해 주셔서 감사합니다.\n${ORG} 드림`,`${more||'[짧은 인사]'} - ${ORG}`]];return T[s]}
 VIEWS.donor=()=>{S.dn=S.dn??0;return view('후원 관리',
- `<div class="gl">상황</div>${chips('dn',DONS)}${bizPick()}<div class="gl">입력</div>${field('dname','후원자 호칭','','홍길동 후원자님 / ○○기업')}${field('ditem','후원 내용')}${field('duse','사용처')}${S.dn===5?field('name','행사명')+field('date','일시')+field('place','장소'):''}${field('tel','전화번호')}${field('dmore','덧붙일 말',1)}
- <div class="note">후원금 사용 내역 공개 기준(3개월 게시 등)은 기관 규정을 따르세요</div>`,
- ()=>{const [a,b]=donText();const pr=`너는 ${ORG} 후원 담당자야. 아래 글을 진심이 느껴지게 다듬고, 문자용(90자)·SNS용 버전도 함께 만들어 줘. 과장 금지.\n\n${a}`;
- return aiBar(DONS[S.dn],()=>a)+`<div class="grid4" style="grid-template-rows:1.3fr 1fr"><div class="box" style="grid-column:1/3"><div class="bh">문자·편지<button class="sm sp" onclick="copyTxt(CA)">복사</button></div><div class="bb">${fmt(a)}</div></div><div class="box"><div class="bh">짧은 버전<button class="sm sp" onclick="copyTxt(CB)">복사</button></div><div class="bb">${fmt(b)}</div></div><div class="box"><div class="bh">AI로 더 다듬기<button class="sm sp" onclick="openAI('gpt',CP)">ChatGPT</button><button class="sm" onclick="openAI('gemini',CP)">제미나이</button></div><div class="bb">${fmt(pr)}</div></div></div>${setC(a,b,pr)}`})};
-
+ `<div class="gl">상황</div>${chips('dn',DONS)}${bizPick()}<div class="gl">입력</div>${field('dname','후원자 호칭','','홍길동 후원자님 / ○○기업')}${field('ditem','후원 내용')}${field('duse','사용처')}${S.dn===5?field('name','행사명')+field('date','일시')+field('place','장소'):''}${field('tel','전화번호')}${field('dmore','덧붙일 말',1)}`,
+ ()=>{const [a,b0]=donText();const nm=V('dname')||'[후원자님]';const b=`${S.dn===3||S.dn===5?'안녕하세요. '+ORG+'입니다.':nm+', 안녕하세요.\n'+ORG+'입니다.'}\n\n${b0.replace(/\s*-\s*용인시기흥장애인복지관\s*$/,'')}\n\n${S.dn===7?'새해에도 늘 건강하세요.':'늘 따뜻한 마음 보내 주셔서 고맙습니다.'}\n${ORG} 드림`;
+ return `<div class="bar"><span class="t">${DONS[S.dn]}</span><button class="btn p" onclick="copyTxt(CA)">시안 1 복사</button><button class="btn p" onclick="copyTxt(CB)">시안 2 복사</button></div><div class="m2"><div class="box"><div class="bh">문자·편지 시안 1 <small>자세히</small><button class="sm sp" onclick="copyTxt(CA)">복사</button></div><div class="bb">${fmt(a)}</div></div><div class="box"><div class="bh">문자·편지 시안 2 <small>짧게</small><button class="sm sp" onclick="copyTxt(CB)">복사</button></div><div class="bb">${fmt(b)}</div></div></div>${setC(a,b,'')}`})};
 /* ================= ⑦ 맞춤형 프롬프트 생성 ================= */
 const GT=['홍보 이미지','카드뉴스','포스터','모집 안내','인포그래픽','이모티콘','소식지','안내지','짧은 영상','블로그·SNS 글'];
 const STY=['따뜻한 수채화','귀여운 3D 캐릭터','깔끔한 안내형','동화책 그림','밝은 실사풍','감성 콜라주'];
@@ -995,37 +1035,184 @@ const DTASKS=[
      {l:'말투',k:'c',o:['쉽고 친근하게','정중하고 단정하게','유쾌하게']}],
   task:'고른 상황에 맞는 글을 길이별로 써 줘.',
   fmt:'짧은 문자 1개 + 단톡방용 1개 + 조금 긴 버전 1개',ph:'예) 다음 주 토요일 6시 우리 집 집들이예요'}];
-/* ================= ⑧ 프롬프트 디자인실 (가족센터 일상 + 복지관 업무) ================= */
-const WTASKS=[
- {t:'회의록 정리',s:'메모 붙여넣으면 표로',role:'복지관 회의록을 깔끔하게 정리하는 행정 담당자',
-  g:[{l:'어떤 회의',k:'a',o:['팀 회의','사례회의','운영위원회','행사 준비 회의','외부 기관 회의']},{l:'꼭 넣을 것 (여러 개)',k:'b',m:1,o:['결정사항','담당자','기한','다음 회의 안건','예산','건의사항']},{l:'형식',k:'c',o:['표로','개조식','한 장 요약']}],
-  task:'아래 [더 알려 줄 것]에 붙여 넣은 회의 메모를 회의록으로 정리해 줘. 사람 이름은 직책으로 바꿔 줘.',fmt:'| 안건 | 논의 내용 | 결정사항 | 담당 | 기한 | 표 + 마지막에 확인할 점',ph:'예) 회의 메모를 그대로 붙여넣으세요'},
- {t:'공문 초안',s:'내용 고르면 공문 형식',role:'공문서 작성에 능숙한 복지관 행정 담당자',
-  g:[{l:'공문 종류',k:'a',o:['협조 요청','행사 안내','결과 보고','자료 제출','참석 요청']},{l:'받는 곳',k:'b',o:['용인시청','기흥구청','협력 기관','학교·유치원','후원 기업']},{l:'붙임',k:'c',o:['있음','없음']}],
-  task:'고른 조건으로 공문 초안을 써 줘. 1. 관련 2. 목적 3. 내용(일시·장소·대상·요청사항) 순서, 개조식 공문체.',fmt:'공문 본문 + 붙임 목록 + 확인 필요 칸 목록',ph:'예) 12월 23일 송년회에 구청 관계자 참석 요청'},
- {t:'민원 답변',s:'공감 → 사실 → 해결',role:'민원을 차분하고 정중하게 응대하는 복지관 담당자',
-  g:[{l:'민원 내용',k:'a',o:['프로그램 불만','송영 시간','대기 순서','직원 응대','시설 이용','비용 문의']},{l:'보낼 곳',k:'b',o:['전화로 말할 대본','문자','홈페이지 답글','공식 회신 문서']},{l:'말투',k:'c',o:['따뜻하게','정중하고 단호하게']}],
-  task:'공감 → 사실 확인 → 해결 방법 → 감사 순서로 답변을 써 줘. 변명·책임 회피 표현은 빼 줘.',fmt:'답변 본문 + 피해야 할 말 3가지',ph:'예) 대기가 너무 길다는 보호자 민원'},
- {t:'보고 메일',s:'상사에게 핵심만',role:'핵심만 짧게 보고하는 복지관 실무자',
-  g:[{l:'무슨 보고',k:'a',o:['진행 상황','문제 발생','결과 보고','결재 요청','일정 변경']},{l:'받는 사람',k:'b',o:['팀장','관장','법인','외부 담당자']},{l:'길이',k:'c',o:['3줄 요약','표 포함','첨부 설명까지']}],
-  task:'고른 조건으로 보고 메일을 써 줘. 첫 줄에 결론, 다음에 근거, 마지막에 요청사항.',fmt:'제목 + 본문 + 첨부 목록',ph:'예) 송년회 예산이 20만 원 초과될 것 같아요'},
- {t:'엑셀 수식',s:'하고 싶은 걸 말로',role:'엑셀을 쉽게 알려 주는 사무 선배',
-  g:[{l:'하고 싶은 것',k:'a',o:['출석률 계산','월별 합계','만족도 평균','중복 이름 찾기','날짜별 정리','조건별 개수 세기']},{l:'내 엑셀 수준',k:'b',o:['처음이에요','기본은 알아요']}],
-  task:'고른 작업을 하는 엑셀 수식을 알려 주고, 어느 칸에 어떻게 넣는지 따라 하기 순서로 설명해 줘.',fmt:'① 수식 ② 따라 하기 순서 ③ 자주 하는 실수',ph:'예) A열 이름, B~M열 1~12월 출석(O/X)'},
- {t:'일정·할 일 정리',s:'급한 것부터 순서대로',role:'업무 우선순위를 잘 잡아 주는 시간 관리 코치',
-  g:[{l:'정리 기간',k:'a',o:['오늘','이번 주','이번 달']},{l:'방식',k:'b',o:['급한 일·중요한 일 4칸','시간표','체크리스트']}],
-  task:'아래 할 일을 고른 방식으로 정리하고, 오늘 가장 먼저 할 일 1가지를 골라 줘.',fmt:'정리 표 + 오늘 할 일 1가지 + 미뤄도 되는 일',ph:'예) 결과보고서, 송년회 초대장, 후원 감사 문자, 차량 일지'}];
-const RRULES='- 내가 말하지 않은 사실은 지어내지 말고 [확인 필요]로 표시해.\n- 꼭 필요한 정보가 없으면 먼저 한두 가지만 물어봐.\n- 어려운 말 없이 쉬운 말로, 표로 한눈에 보이게.';
-VIEWS.room=()=>{S.rm=S.rm??0;S.rk=S.rk??0;const L=S.rm?DTASKS:WTASKS;if(!L[S.rk])S.rk=0;const T=L[S.rk];S.rsel=S.rsel||{};const key=(S.rm?'d':'w')+S.rk,sv=S.rsel[key]=S.rsel[key]||{};T.g.forEach(g=>{if(sv[g.k]==null)sv[g.k]=g.m?[]:0});
- window.RG=(k,i,m)=>{const v=S.rsel[key];if(m){const a=v[k],j=a.indexOf(i);j<0?a.push(i):a.splice(j,1)}else v[k]=i;save();render()};
+var FRG=(function(){
+const PANTRY = ["소금","간장","설탕","식용유","참기름","깨","고춧가루","다진 마늘","후추","된장","고추장","식초"];
+const COMMON = ["달걀","밥","김치","두부","감자","고구마","양파","대파","당근","애호박","콩나물","시금치","어묵","돼지고기","소고기","닭고기","참치캔","소시지","떡","김","우유","식빵","바나나","사과","밀가루","치즈","버섯","단호박","미역","냉동만두","토마토","양배추"];
+const SYN = {"계란":"달걀","파":"대파","쪽파":"대파","돼지":"돼지고기","삼겹살":"돼지고기","앞다리살":"돼지고기","쇠고기":"소고기","불고기감":"소고기","닭":"닭고기","닭다리":"닭고기","참치":"참치캔","햄":"소시지","비엔나":"소시지","떡볶이떡":"떡","떡국떡":"떡","가래떡":"떡","공기밥":"밥","쌀밥":"밥","식은밥":"밥","부침가루":"밀가루","튀김가루":"밀가루","팽이버섯":"버섯","표고버섯":"버섯","새송이":"버섯","느타리":"버섯","만두":"냉동만두","슬라이스치즈":"치즈","호박":"애호박","김밥김":"김","조미김":"김"};
+const norm = w => { w = w.replace(/\s+/g,""); return SYN[w] || w; };
+
+/* need: 꼭 필요한 재료, opt: 있으면 더 좋은 재료 (기본 양념은 따로 적지 않음) */
+const RECIPES = [
+/* 식사 */
+{n:"김치볶음밥",e:"🍳",t:"meal",need:["김치","밥"],opt:["달걀","대파","소시지","참치캔"],time:"15분",
+ s:["김치는 잘게 썰고, 대파는 송송 썰어요.","팬에 식용유를 두르고 대파를 볶아 향을 내요.","김치를 넣고 3분 정도 볶다가 설탕을 조금 넣어요.","밥을 넣고 고루 섞으며 볶고, 참기름을 둘러 마무리해요.","달걀 프라이를 올리면 완성이에요."]},
+{n:"달걀말이",e:"🥚",t:"meal",need:["달걀"],opt:["대파","당근","양파","치즈"],time:"15분",
+ s:["달걀을 풀고 소금을 조금 넣어요.","대파와 당근을 아주 잘게 다져 달걀물에 섞어요.","약한 불에 기름을 두르고 달걀물을 얇게 부어요.","반쯤 익으면 한쪽부터 돌돌 말고, 남은 달걀물을 부어 이어 말아요.","한 김 식힌 뒤 썰어요."]},
+{n:"감자조림",e:"🥔",t:"meal",need:["감자"],opt:["양파","당근"],time:"25분",
+ s:["감자는 깍둑 썰어 찬물에 잠깐 담가요.","팬에 기름을 두르고 감자를 2~3분 볶아요.","물 1컵, 간장 3큰술, 설탕 1큰술을 넣고 뚜껑을 덮어 졸여요.","감자가 부드러워지고 국물이 졸면 참기름과 깨를 뿌려요."]},
+{n:"두부조림",e:"🧈",t:"meal",need:["두부"],opt:["대파","양파"],time:"20분",
+ s:["두부는 도톰하게 썰어 물기를 빼요.","팬에 기름을 두르고 두부 앞뒤를 노릇하게 구워요.","간장 3큰술, 물 반 컵, 설탕 조금, 고춧가루 조금, 다진 마늘을 섞어 양념을 만들어요.","양념을 붓고 대파를 올려 국물이 자작해질 때까지 졸여요."]},
+{n:"된장찌개",e:"🍲",t:"meal",need:["두부","된장"],opt:["애호박","감자","양파","버섯","대파"],time:"25분",
+ s:["감자, 애호박, 양파, 두부를 한입 크기로 썰어요.","물 3컵에 된장 2큰술을 풀고 끓여요.","감자를 먼저 넣고, 끓어오르면 애호박·양파·버섯을 넣어요.","두부와 대파를 넣고 한소끔 더 끓여요."]},
+{n:"김치찌개",e:"🥘",t:"meal",need:["김치"],opt:["돼지고기","두부","대파","참치캔","양파"],time:"30분",
+ s:["돼지고기와 김치를 냄비에 넣고 기름을 조금 둘러 볶아요.","물 3컵을 붓고 고춧가루와 다진 마늘을 넣어 끓여요.","15분 정도 끓여 김치가 부드러워지면 두부와 대파를 넣어요.","간은 김치 국물이나 간장으로 맞춰요."]},
+{n:"소고기 미역국",e:"🍜",t:"meal",need:["미역"],opt:["소고기"],time:"30분",
+ s:["마른 미역을 물에 20분 불린 뒤 먹기 좋게 잘라요.","냄비에 참기름을 두르고 소고기와 미역을 볶아요.","물 5컵을 붓고 끓어오르면 중불로 15분 끓여요.","국간장과 다진 마늘로 간을 맞춰요."]},
+{n:"콩나물국",e:"🌱",t:"meal",need:["콩나물"],opt:["대파"],time:"15분",
+ s:["콩나물을 씻어 냄비에 넣고 물 5컵을 부어요.","뚜껑을 덮고 끓여요. 중간에 열면 비린내가 날 수 있어요.","끓으면 다진 마늘과 소금으로 간하고 대파를 넣어요."]},
+{n:"달걀국",e:"🥣",t:"meal",need:["달걀"],opt:["대파","양파"],time:"10분",
+ s:["물 4컵을 끓이고 국간장과 소금으로 간해요.","양파를 넣어 살짝 끓여요.","달걀을 풀어 둥글게 둘러 붓고 젓지 말고 30초 기다려요.","대파를 넣고 불을 꺼요."]},
+{n:"어묵볶음",e:"🍢",t:"meal",need:["어묵"],opt:["양파","당근"],time:"15분",
+ s:["어묵과 양파를 길게 썰어요.","팬에 기름을 두르고 양파를 먼저 볶아요.","어묵을 넣고 간장 2큰술, 설탕 1큰술, 물 조금을 넣어 볶아요.","참기름과 깨로 마무리해요."]},
+{n:"애호박볶음",e:"🥒",t:"meal",need:["애호박"],opt:["양파","당근"],time:"10분",
+ s:["애호박은 반달 모양으로 썰어요.","팬에 기름을 두르고 다진 마늘과 양파를 볶아요.","애호박을 넣고 소금으로 간하며 부드럽게 볶아요.","깨를 뿌려 마무리해요."]},
+{n:"제육볶음",e:"🐷",t:"meal",need:["돼지고기"],opt:["양파","대파","당근"],time:"25분",
+ s:["고추장 2큰술, 간장 1큰술, 설탕 1큰술, 다진 마늘, 고춧가루를 섞어 양념을 만들어요.","돼지고기에 양념을 버무려 10분 재워요.","팬에 고기를 볶다가 양파와 당근을 넣어요.","고기가 다 익으면 대파를 넣고 참기름을 둘러요."]},
+{n:"소고기 불고기",e:"🥩",t:"meal",need:["소고기"],opt:["양파","당근","대파","버섯"],time:"30분",
+ s:["간장 4큰술, 설탕 2큰술, 다진 마늘, 참기름, 후추를 섞어 양념을 만들어요.","소고기에 양념을 버무려 15분 재워요.","팬에 고기와 채소를 함께 볶아요.","국물이 자작해지면 완성이에요."]},
+{n:"카레라이스",e:"🍛",t:"meal",need:["감자","양파","밥"],opt:["당근","돼지고기","소고기","닭고기"],time:"35분",extra:["카레 가루"],
+ s:["감자, 당근, 양파, 고기를 한입 크기로 썰어요.","냄비에 기름을 두르고 고기와 채소를 볶아요.","물 4컵을 붓고 채소가 익을 때까지 15분 끓여요.","불을 줄이고 카레 가루를 풀어 저으며 걸쭉해질 때까지 끓여 밥에 얹어요."]},
+{n:"참치마요덮밥",e:"🐟",t:"meal",need:["참치캔","밥"],opt:["김","달걀","양파"],time:"15분",extra:["마요네즈"],
+ s:["참치는 기름을 빼고 마요네즈와 섞어요.","양파는 잘게 썰어 간장과 설탕 조금을 넣고 살짝 볶아요.","밥 위에 볶은 양파, 참치마요, 스크램블 달걀을 올려요.","김을 부숴 뿌리면 완성이에요."]},
+{n:"잡채",e:"🍝",t:"meal",need:["당면"],opt:["시금치","당근","양파","돼지고기","버섯","어묵"],time:"40분",
+ s:["당면을 물에 30분 불리고 끓는 물에 6분 삶아 건져요.","채소와 고기를 가늘게 썰어 각각 볶아요.","당면에 간장 4큰술, 설탕 2큰술, 참기름을 넣고 팬에서 살짝 볶아요.","볶은 재료를 모두 넣고 버무려 깨를 뿌려요."]},
+{n:"감자채볶음",e:"🍟",t:"meal",need:["감자"],opt:["양파","당근"],time:"15분",
+ s:["감자를 가늘게 채 썰어 찬물에 헹궈 전분을 빼요.","팬에 기름을 두르고 감자와 양파를 볶아요.","소금으로 간하고 감자가 투명해질 때까지 볶아요.","깨를 뿌려 마무리해요."]},
+{n:"시금치나물",e:"🥬",t:"meal",need:["시금치"],opt:[],time:"10분",
+ s:["끓는 물에 소금을 조금 넣고 시금치를 30초 데쳐요.","찬물에 헹궈 물기를 꼭 짜요.","간장 조금, 소금, 다진 마늘, 참기름, 깨를 넣고 조물조물 무쳐요."]},
+{n:"콩나물무침",e:"🌿",t:"meal",need:["콩나물"],opt:["대파"],time:"15분",
+ s:["콩나물에 물 반 컵을 붓고 뚜껑을 덮어 5분 쪄요.","찬물에 헹구지 말고 넓게 펼쳐 식혀요.","소금, 다진 마늘, 참기름, 깨, 대파를 넣고 무쳐요."]},
+{n:"떡국",e:"🍥",t:"meal",need:["떡"],opt:["달걀","대파","소고기","김"],time:"25분",
+ s:["떡을 물에 10분 정도 불려요.","냄비에 참기름을 두르고 소고기를 볶은 뒤 물 6컵을 부어 끓여요.","떡을 넣고 떡이 떠오를 때까지 끓여요.","국간장으로 간하고 달걀을 풀어 넣은 뒤 대파와 김을 올려요."]},
+{n:"오므라이스",e:"🍳",t:"meal",need:["달걀","밥"],opt:["양파","당근","소시지"],time:"25분",extra:["케첩"],
+ s:["양파, 당근, 소시지를 잘게 썰어 볶아요.","밥을 넣고 케첩 2큰술과 소금으로 간해 볶아요.","달걀을 풀어 팬에 얇게 부쳐요.","볶음밥을 달걀로 감싸 접시에 담고 케첩을 뿌려요."]},
+{n:"닭볶음탕",e:"🍗",t:"meal",need:["닭고기"],opt:["감자","당근","양파","대파"],time:"45분",
+ s:["닭고기는 끓는 물에 한 번 데쳐 헹궈요.","간장 4큰술, 고추장 1큰술, 고춧가루 2큰술, 설탕 1큰술, 다진 마늘로 양념을 만들어요.","냄비에 닭, 감자, 당근, 물 3컵, 양념을 넣고 끓여요.","25분 정도 졸이다가 양파와 대파를 넣고 5분 더 끓여요."]},
+{n:"소시지 채소볶음",e:"🌭",t:"meal",need:["소시지"],opt:["양파","당근","버섯"],time:"15분",extra:["케첩"],
+ s:["소시지에 칼집을 내고 채소를 한입 크기로 썰어요.","끓는 물에 소시지를 30초 데쳐요.","팬에 채소와 소시지를 볶아요.","케첩 2큰술, 설탕 조금, 간장 조금을 넣고 고루 볶아요."]},
+{n:"비빔밥",e:"🥗",t:"meal",need:["밥"],opt:["콩나물","시금치","당근","애호박","달걀","소고기"],time:"30분",
+ s:["나물과 채소를 각각 데치거나 볶아 소금으로 간해요.","밥 위에 재료를 둘러 담아요.","달걀 프라이를 올려요.","고추장 조금과 참기름을 곁들여 비벼 먹어요."]},
+{n:"버섯두부덮밥",e:"🍄",t:"meal",need:["두부","버섯","밥"],opt:["양파","대파"],time:"20분",
+ s:["두부는 깍둑 썰고 버섯과 양파는 먹기 좋게 썰어요.","팬에 양파와 버섯을 볶아요.","물 1컵, 간장 3큰술, 설탕 1큰술을 넣고 두부를 넣어 끓여요.","전분물이 있으면 넣어 걸쭉하게 만들고 밥 위에 얹어요."]},
+/* 간식 */
+{n:"고구마맛탕",e:"🍠",t:"snack",need:["고구마"],opt:[],time:"25분",
+ s:["고구마를 한입 크기로 썰어 물기를 닦아요.","기름을 넉넉히 두르고 고구마를 노릇하게 익혀요.","다른 팬에 설탕 3큰술과 식용유 1큰술을 넣고 약한 불로 녹여요.","고구마를 넣고 재빨리 버무린 뒤 깨를 뿌려요."]},
+{n:"찐감자",e:"🥔",t:"snack",need:["감자"],opt:["치즈"],time:"25분",
+ s:["감자를 깨끗이 씻어 반으로 잘라요.","찜기에 20분 정도 쪄요. 젓가락이 쑥 들어가면 다 익은 거예요.","소금이나 설탕을 살짝 곁들여요. 치즈를 올려도 좋아요."]},
+{n:"군고구마",e:"🍠",t:"snack",need:["고구마"],opt:[],time:"40분",
+ s:["고구마를 깨끗이 씻어 물기를 닦아요.","에어프라이어 200도에서 30~40분 구워요. 중간에 한 번 뒤집어요.","한 김 식혀 껍질을 벗겨 먹어요."]},
+{n:"떡볶이",e:"🌶️",t:"snack",need:["떡"],opt:["어묵","대파","달걀","양파"],time:"20분",
+ s:["떡은 물에 헹구고 어묵은 먹기 좋게 썰어요.","물 2컵에 고추장 2큰술, 설탕 1큰술, 간장 1큰술, 고춧가루를 풀어 끓여요.","떡과 어묵을 넣고 저어가며 졸여요.","국물이 걸쭉해지면 대파를 넣어요. 매운 것을 못 드시면 고추장을 줄이고 케첩을 섞어요."]},
+{n:"감자전",e:"🥞",t:"snack",need:["감자"],opt:["양파"],time:"25분",
+ s:["감자를 강판에 갈아 체에 받쳐 물기를 빼요.","가라앉은 녹말을 다시 섞고 소금으로 간해요.","팬에 기름을 두르고 얇게 펴서 앞뒤로 노릇하게 부쳐요."]},
+{n:"채소전",e:"🥬",t:"snack",need:["밀가루"],opt:["애호박","양파","당근","대파","김치"],time:"20분",
+ s:["채소를 가늘게 채 썰어요.","밀가루 1컵, 물 1컵, 소금 조금을 섞어 반죽을 만들어요.","채소를 반죽에 넣고 고루 섞어요.","기름 두른 팬에 얇게 펴서 앞뒤로 부쳐요."]},
+{n:"김치전",e:"🥟",t:"snack",need:["김치","밀가루"],opt:["양파","돼지고기","참치캔"],time:"20분",
+ s:["김치를 잘게 썰어요.","밀가루 1컵, 물 1컵, 김치 국물 조금을 섞어 반죽을 만들어요.","김치와 양파를 넣고 섞어요.","기름 두른 팬에 얇게 펴서 바삭하게 부쳐요."]},
+{n:"바나나우유",e:"🍌",t:"snack",need:["바나나","우유"],opt:[],time:"5분",
+ s:["바나나 2개를 잘라 믹서에 넣어요.","우유 2컵을 붓고 곱게 갈아요.","단맛이 부족하면 꿀이나 설탕을 조금 넣어요."]},
+{n:"과일 요거트컵",e:"🍓",t:"snack",need:["요거트"],opt:["바나나","사과"],time:"10분",
+ s:["과일을 작게 깍둑 썰어요.","컵에 요거트를 담아요.","과일을 올리고 꿀을 조금 뿌려요."]},
+{n:"프렌치토스트",e:"🍞",t:"snack",need:["식빵","달걀"],opt:["우유"],time:"15분",
+ s:["달걀 2개, 우유 반 컵, 설탕 조금을 섞어요.","식빵을 달걀물에 앞뒤로 적셔요.","버터나 기름을 두른 팬에 약한 불로 노릇하게 구워요.","설탕을 살짝 뿌려요."]},
+{n:"주먹밥",e:"🍙",t:"snack",need:["밥"],opt:["김","참치캔","김치","달걀"],time:"15분",
+ s:["밥에 참기름, 깨, 소금을 넣어 고루 섞어요.","참치마요나 볶은 김치를 속재료로 준비해요.","밥을 한 줌 쥐고 속을 넣어 동그랗게 뭉쳐요.","김가루를 묻히거나 김으로 감싸요."]},
+{n:"단호박찜",e:"🎃",t:"snack",need:["단호박"],opt:[],time:"25분",
+ s:["단호박을 전자레인지에 3분 돌려 썰기 쉽게 만들어요.","반으로 갈라 씨를 빼고 먹기 좋게 잘라요.","찜기에 15분 정도 쪄요."]},
+{n:"군만두",e:"🥟",t:"snack",need:["냉동만두"],opt:[],time:"15분",
+ s:["팬에 기름을 두르고 만두를 올려요.","중불에서 바닥이 노릇해지면 물 3큰술을 넣고 뚜껑을 덮어요.","물이 졸면 뚜껑을 열고 한 번 더 바삭하게 구워요."]},
+{n:"치즈 토스트",e:"🧀",t:"snack",need:["식빵","치즈"],opt:["달걀","소시지"],time:"10분",
+ s:["팬에 식빵을 올리고 약한 불로 구워요.","한쪽에 치즈를 올리고 원하면 달걀 프라이를 함께 올려요.","다른 식빵으로 덮어 치즈가 녹을 때까지 앞뒤로 구워요."]},
+{n:"사과 시나몬 구이",e:"🍎",t:"snack",need:["사과"],opt:[],time:"15분",
+ s:["사과를 얇게 썰어요.","팬에 버터나 기름을 조금 두르고 사과를 구워요.","설탕을 조금 뿌려 부드러워질 때까지 익혀요. 계피 가루가 있으면 살짝 뿌려요."]},
+/* 색다른 메뉴 */
+{n:"감자 뇨키",e:"🥟",t:"meal",sp:1,need:["감자","밀가루"],opt:["우유","치즈","버섯","양파"],time:"40분",
+ s:["감자를 쪄서 뜨거울 때 곱게 으깨요.","밀가루를 조금씩 넣으며 말랑한 반죽이 될 때까지 섞어요. 소금을 조금 넣어요.","반죽을 길게 밀어 엄지손톱 크기로 썰고 포크로 살짝 눌러 무늬를 내요.","끓는 물에 넣어 떠오르면 1분 뒤 건져요.","팬에 양파·버섯을 볶고 우유와 치즈를 넣어 소스를 만든 뒤 뇨키를 버무려요. 간장 버터에 볶아도 맛있어요."]},
+{n:"해시브라운",e:"🥔",t:"snack",sp:1,need:["감자"],opt:["양파","치즈"],time:"25분",
+ s:["감자를 가늘게 채 썰어 물에 헹군 뒤 물기를 꼭 짜요.","소금, 후추를 넣고 섞어요. 양파를 잘게 넣어도 좋아요.","기름을 넉넉히 두른 팬에 납작하게 펴서 꾹꾹 눌러요.","바닥이 노릇하고 바삭해지면 뒤집어 반대쪽도 구워요. 케첩을 곁들여요."]},
+{n:"감자 크로켓",e:"🧆",t:"snack",sp:1,need:["감자","밀가루","달걀"],opt:["양파","당근","치즈"],time:"40분",extra:["빵가루"],
+ s:["감자를 쪄서 으깨고, 잘게 썬 양파·당근을 볶아 섞어요. 소금 후추로 간해요.","한입 크기로 동글납작하게 빚어요. 가운데에 치즈를 넣으면 더 맛있어요.","밀가루 → 달걀물 → 빵가루 순서로 옷을 입혀요.","기름에 노릇하게 튀기거나, 에어프라이어 180도에서 12분 구워요."]},
+{n:"감자 그라탕",e:"🧀",t:"meal",sp:1,need:["감자","치즈"],opt:["우유","양파","소시지","버섯"],time:"35분",
+ s:["감자를 얇게 썰어 전자레인지에 4분 돌려 살짝 익혀요.","양파·소시지·버섯을 볶고 우유 1컵, 소금, 후추를 넣어 끓여요.","그릇에 감자와 볶은 재료를 켜켜이 담아요.","치즈를 듬뿍 올리고 에어프라이어 180도에서 10분, 치즈가 노릇해지면 완성이에요."]},
+{n:"감자채 피자",e:"🍕",t:"snack",sp:1,need:["감자","치즈"],opt:["소시지","양파","버섯"],time:"25분",extra:["케첩"],
+ s:["감자를 가늘게 채 썰어 물기를 빼고 소금을 조금 뿌려요.","기름 두른 팬에 동그랗게 펴서 바삭하게 구워 도우를 만들어요.","뒤집은 뒤 케첩을 바르고 소시지·양파를 올려요.","치즈를 뿌리고 뚜껑을 덮어 치즈가 녹을 때까지 약한 불로 익혀요."]},
+{n:"고구마 그라탕",e:"🍠",t:"snack",sp:1,need:["고구마","치즈"],opt:["우유","소시지"],time:"30분",
+ s:["고구마를 쪄서 으깨요. 우유를 조금 넣으면 부드러워요.","그릇에 으깬 고구마를 평평하게 담아요.","소시지를 잘게 썰어 올리고 치즈를 듬뿍 뿌려요.","에어프라이어 180도에서 8~10분 구워요."]},
+{n:"고구마 라떼",e:"🥤",t:"snack",sp:1,need:["고구마","우유"],opt:[],time:"10분",
+ s:["찐 고구마 1개의 껍질을 벗겨요.","우유 2컵과 함께 믹서에 곱게 갈아요.","냄비에 데워 따뜻하게 마시거나 차갑게 마셔요. 꿀을 조금 넣어도 좋아요."]},
+{n:"두부 스테이크",e:"🥩",t:"meal",sp:1,need:["두부","달걀"],opt:["양파","당근","대파","밀가루"],time:"30분",extra:["케첩"],
+ s:["두부를 면포나 키친타월로 물기를 꼭 짜고 으깨요.","잘게 다진 양파·당근, 달걀 1개, 밀가루 2큰술, 소금, 후추를 넣고 치대요.","손바닥 크기로 동글납작하게 빚어요.","약한 불에 앞뒤로 노릇하게 구워요.","케첩 2큰술, 간장 1큰술, 설탕 조금, 물 3큰술을 졸여 소스로 끼얹어요."]},
+{n:"두부 강정",e:"🍯",t:"snack",sp:1,need:["두부","밀가루"],opt:[],time:"25분",
+ s:["두부를 깍둑 썰어 물기를 빼고 소금을 살짝 뿌려요.","밀가루(전분이 있으면 더 바삭해요)를 고루 묻혀요.","기름에 노릇하게 구워요.","간장 1큰술, 고추장 1큰술, 설탕 2큰술, 물 3큰술을 끓여 두부를 버무리고 깨를 뿌려요."]},
+{n:"에그 인 헬(토마토 달걀 냄비)",e:"🍳",t:"meal",sp:1,need:["달걀","토마토"],opt:["양파","소시지","치즈","버섯"],time:"25분",
+ s:["토마토를 잘게 썰고 양파·소시지도 썰어요.","팬에 양파와 소시지를 볶다가 토마토를 넣고 으깨며 10분 끓여 소스를 만들어요. 소금, 설탕 조금으로 간해요.","소스에 홈을 내고 달걀을 하나씩 깨 넣어요.","뚜껑을 덮고 달걀이 익을 때까지 약한 불로 익혀요. 치즈를 뿌리고 빵이나 밥과 함께 먹어요."]},
+{n:"토마토 달걀 볶음",e:"🍅",t:"meal",sp:1,need:["달걀","토마토"],opt:["대파"],time:"10분",
+ s:["토마토는 한입 크기로, 대파는 송송 썰어요.","달걀을 풀어 기름 두른 팬에 반숙으로 스크램블해서 덜어요.","같은 팬에 대파와 토마토를 볶다가 설탕 조금, 소금으로 간해요.","달걀을 다시 넣고 살짝 섞어요. 밥 위에 얹으면 덮밥이 돼요."]},
+{n:"김치 치즈 리조또",e:"🍚",t:"meal",sp:1,need:["김치","밥","우유"],opt:["치즈","양파","소시지","버섯"],time:"20분",
+ s:["김치와 양파를 잘게 썰어 볶아요.","밥을 넣고 우유 1컵을 부어 저어가며 끓여요.","걸쭉해지면 치즈를 올려 녹여요.","후추를 살짝 뿌려 마무리해요."]},
+{n:"김치 피자전",e:"🍕",t:"snack",sp:1,need:["김치","밀가루","치즈"],opt:["양파","소시지"],time:"20분",
+ s:["김치를 잘게 썰어 밀가루 1컵, 물 1컵과 섞어 반죽을 만들어요.","팬에 얇게 펴서 한쪽 면을 구워요.","뒤집은 뒤 소시지와 양파를 올리고 치즈를 뿌려요.","뚜껑을 덮어 치즈가 녹으면 피자처럼 잘라요."]},
+{n:"떡꼬치",e:"🍡",t:"snack",sp:1,need:["떡"],opt:[],time:"20분",extra:["케첩"],
+ s:["떡을 끓는 물에 살짝 데쳐 말랑하게 해요.","꼬치에 4~5개씩 끼워요. 꼬치가 없으면 그냥 구워도 돼요.","기름 두른 팬에 노릇하게 구워요.","고추장 1큰술, 케첩 2큰술, 설탕 1큰술, 물 2큰술을 졸여 떡에 발라요."]},
+{n:"로제 떡볶이",e:"🌸",t:"snack",sp:1,need:["떡","우유"],opt:["어묵","소시지","치즈","양파"],time:"20분",
+ s:["물 1컵에 고추장 1큰술, 설탕 1큰술, 고춧가루 조금을 풀어 끓여요.","떡과 어묵, 양파를 넣고 끓여요.","우유 1컵을 넣고 약한 불로 저어가며 끓여요.","치즈를 올려 녹이면 완성이에요. 덜 맵고 부드러워요."]},
+{n:"양배추 오코노미야키",e:"🥞",t:"meal",sp:1,need:["양배추","밀가루","달걀"],opt:["소시지","어묵","대파","김"],time:"25분",extra:["마요네즈"],
+ s:["양배추를 가늘게 채 썰어요.","밀가루 1컵, 물 반 컵, 달걀 1개를 섞고 양배추·소시지·대파를 넣어요.","팬에 도톰하게 펴서 약한 불로 앞뒤 5분씩 익혀요.","돈가스 소스나 케첩을 바르고 마요네즈를 뿌린 뒤 김가루를 올려요."]},
+{n:"애호박 피자",e:"🥒",t:"snack",sp:1,need:["애호박","치즈"],opt:["소시지","양파"],time:"15분",extra:["케첩"],
+ s:["애호박을 1cm 두께로 동그랗게 썰어요.","팬에 살짝 구워 소금을 뿌려요.","케첩을 조금 바르고 소시지와 치즈를 올려요.","뚜껑을 덮어 치즈가 녹으면 완성이에요."]},
+{n:"바나나 팬케이크",e:"🥞",t:"snack",sp:1,need:["바나나","달걀"],opt:["밀가루","우유"],time:"15분",
+ s:["잘 익은 바나나 1개를 포크로 곱게 으깨요.","달걀 2개를 넣고 섞어요. 밀가루 2큰술을 넣으면 더 폭신해요.","약한 불에 기름을 살짝 두르고 작게 부어 앞뒤로 구워요.","꿀이나 과일을 올려요."]},
+{n:"식빵 러스크",e:"🍞",t:"snack",sp:1,need:["식빵"],opt:[],time:"20분",extra:["버터"],
+ s:["식빵을 길쭉하게 4등분해요.","녹인 버터에 설탕을 섞어 식빵에 발라요.","에어프라이어 160도에서 10분, 뒤집어 5분 더 바삭하게 구워요.","식으면 더 바삭해져요."]},
+{n:"김치 치즈 주먹밥 구이",e:"🍙",t:"snack",sp:1,need:["밥","김치","치즈"],opt:["참치캔"],time:"20분",
+ s:["김치를 잘게 썰어 볶아요.","밥에 볶은 김치와 참기름을 섞어요.","치즈를 가운데 넣고 동글납작하게 뭉쳐요.","기름 두른 팬에 앞뒤로 노릇하게 구워요."]},
+{n:"콩나물 불고기(콩불)",e:"🌱",t:"meal",sp:1,need:["콩나물","돼지고기"],opt:["양파","대파","당근"],time:"25분",
+ s:["고추장 2큰술, 간장 2큰술, 설탕 1큰술, 고춧가루, 다진 마늘로 양념을 만들어 고기에 버무려요.","넓은 팬 바닥에 콩나물을 깔고 그 위에 양념한 고기와 채소를 올려요.","뚜껑을 덮고 중불로 7분 익혀요.","뚜껑을 열고 고루 섞으며 볶아요. 남은 양념에 밥을 볶아 먹어도 좋아요."]},
+{n:"간장 닭구이 덮밥",e:"🍗",t:"meal",sp:1,need:["닭고기","밥"],opt:["양파","대파","달걀"],time:"25분",
+ s:["닭고기는 한입 크기로 썰어요.","껍질 쪽부터 팬에 노릇하게 구워요.","간장 3큰술, 설탕 1큰술, 물 3큰술, 다진 마늘을 넣고 양파와 함께 졸여요.","밥 위에 올리고 대파를 뿌려요. 달걀 반숙을 곁들이면 더 좋아요."]},
+{n:"시금치 달걀 프리타타",e:"🥧",t:"meal",sp:1,need:["달걀","시금치"],opt:["우유","양파","치즈","감자","소시지"],time:"25분",
+ s:["달걀 4개에 우유 3큰술, 소금, 후추를 넣고 풀어요.","팬에 양파와 시금치를 살짝 볶아요.","달걀물을 붓고 치즈를 뿌려요.","뚜껑을 덮고 약한 불로 10분, 가운데까지 익으면 피자처럼 잘라요."]},
+{n:"단호박 수프",e:"🎃",t:"meal",sp:1,need:["단호박","우유"],opt:["양파"],time:"30분",
+ s:["단호박을 쪄서 껍질과 씨를 빼요.","양파를 볶은 뒤 단호박과 우유 2컵을 넣고 곱게 갈아요.","냄비에 붓고 약한 불로 저어가며 데워요.","소금, 설탕으로 간해요. 식빵을 구워 곁들이면 좋아요."]},
+{n:"감자 수프",e:"🥣",t:"meal",sp:1,need:["감자","우유"],opt:["양파","버섯"],time:"30분",
+ s:["감자와 양파를 얇게 썰어 버터나 기름에 볶아요.","물 1컵을 넣고 감자가 푹 익을 때까지 끓여요.","우유 2컵을 넣고 곱게 갈아요.","다시 데우며 소금, 후추로 간해요."]},
+{n:"달걀빵 머핀",e:"🧁",t:"snack",need:["달걀","밀가루","우유"],opt:["치즈","소시지"],time:"25분",
+ s:["밀가루 1컵, 우유 반 컵, 달걀 1개, 설탕 2큰술을 섞어요.","종이컵이나 머핀틀에 반죽을 반쯤 채워요.","가운데에 달걀을 하나씩 깨 넣고 치즈를 올려요.","에어프라이어 170도에서 15분 정도 구워요."]}
+];
+
+
+
+return {PANTRY:PANTRY,COMMON:COMMON,norm:norm,RECIPES:RECIPES};})();
+/* ================= ⑧ 프롬프트 디자인실 (전북가족센터 그대로) ================= */
+const E=esc;
+if(!S.p3)S.p3={k:0,sel:{},text:''};
+function pSel(i){const P=S.p3;let o=P.sel[i],ok=!!o;if(ok)DTASKS[i].g.forEach(g=>{if(g.m?!Array.isArray(o[g.k]):typeof o[g.k]!=='number')ok=false});if(!ok){o={};DTASKS[i].g.forEach(g=>{o[g.k]=g.m?[]:0;o['x'+g.k]=''});P.sel[i]=o}return o}
+function pVal(g,v,x){x=(x||'').trim();if(g.m){const a=v.map(i=>g.o[i]);if(x)a.push(x);return a.length?a.join(', '):'(고르지 않음)'}return x?(g.o[v]+' / 기타: '+x):g.o[v]}
+const RULES='- 내가 말하지 않은 사실은 지어내지 말고 [확인 필요]로 표시해.\n- 꼭 필요한 정보가 없으면 먼저 한두 가지만 물어봐.\n- 어려운 말 없이 쉬운 말로, 표로 한눈에 보이게.';
+function pParts(){const P=S.p3,t=DTASKS[P.k],sv=pSel(P.k);return {role:'너는 '+t.role+'야.',ctx:t.g.map(g=>'- '+g.l.replace(/ \(.*\)$/,'').replace(/\?$/,'')+': '+pVal(g,sv[g.k],sv['x'+g.k])).join('\n'),task:t.task,mine:(P.text||'').trim(),ph:'['+t.ph+']',fmt:t.fmt,safe:t.safe||''}}
+function pText(){const x=pParts();return '[역할]\n'+x.role+'\n\n[내가 고른 것]\n'+x.ctx+'\n\n[할 일]\n'+x.task+'\n\n[더 알려 줄 것]\n'+(x.mine||'(없음)')+'\n\n[답변 형식]\n'+x.fmt+'\n\n[지킬 것]\n'+RULES+(x.safe?'\n'+x.safe:'')}
+function pHtml(){const x=pParts();return '<span class="k">[역할]</span>\n<span class="g">'+E(x.role)+'</span>\n\n<span class="k">[내가 고른 것]</span>\n<span class="g">'+E(x.ctx)+'</span>\n\n<span class="k">[할 일]</span>\n'+E(x.task)+'\n\n<span class="k">[더 알려 줄 것]</span>\n<span class="o">'+E(x.mine||x.ph)+'</span>\n\n<span class="k">[답변 형식]</span>\n'+E(x.fmt)+'\n\n<span class="k">[지킬 것]</span>\n'+E(RULES+(x.safe?'\n'+x.safe:''))}
+function fHas(set,item,pantry){if(set.has(item))return true;if(pantry&&FRG.PANTRY.indexOf(item)>-1)return true;let ok=false;set.forEach(h=>{if(h.length>1&&(h.indexOf(item)>-1||item.indexOf(h)>-1))ok=true});return ok}
+function fList(){const sv=pSel(S.p3.k),have=new Set(sv.b.map(i=>FRG.COMMON[i]));String(sv.xb||'').split(/[,，、\s]+/).map(x=>x.trim()).filter(Boolean).forEach(x=>have.add(FRG.norm(x)));const type=['meal','snack','all'][sv.a],pantry=sv.c!==1;
+ if(!have.size)return {have,list:[]};
+ const list=FRG.RECIPES.filter(r=>type==='all'||r.t===type).map(r=>{const nh=r.need.filter(i=>fHas(have,i,pantry)),oh=r.opt.filter(i=>fHas(have,i,pantry)),miss=r.need.filter(i=>!fHas(have,i,pantry)).concat(r.extra||[]);const used=nh.filter(i=>!(pantry&&FRG.PANTRY.indexOf(i)>-1)).length+oh.length;return {r,nh,oh,miss,score:miss.length*10-used-(r.sp?1.5:0)}}).filter(x=>x.nh.filter(i=>FRG.PANTRY.indexOf(i)<0).length>0||x.oh.length>0).sort((a,b)=>a.score-b.score);
+ return {have,list}}
+function fText(x){const r=x.r;return '['+r.n+'] 4~5인분 · 약 '+r.time+'\n재료: '+r.need.concat(r.opt,r.extra||[]).join(', ')+' (기본 양념 별도)\n'+(x.miss.length?'더 필요한 재료: '+x.miss.join(', ')+'\n':'')+'\n만드는 법\n'+r.s.map((t,i)=>(i+1)+'. '+t).join('\n')}
+function fHtml(){const R=fList();if(!R.have.size)return '<p class="fr-empty">왼쪽에서 냉장고에 있는 재료를 눌러 주세요.<br>재료를 고르면 바로 추천 메뉴가 나와요.</p>';
+ if(!R.list.length)return '<p class="fr-empty">고른 재료로 만들 메뉴를 찾지 못했어요.<br>재료를 더 고르거나 "식사·간식 모두"를 눌러 보세요.</p>';
+ const ready=R.list.filter(x=>!x.miss.length).length;window._fl=R.list;
+ return '<p class="fr-hint">'+R.list.length+'가지 메뉴'+(ready?' · 지금 바로 만들 수 있는 메뉴 <b>'+ready+'가지</b>':'')+'</p>'+R.list.slice(0,12).map((x,i)=>{const r=x.r,open=S.p3.fopen===r.n;
+  return '<div class="fr-it'+(open?' open':'')+'"><button type="button" class="fr-h" onclick="S.p3.fopen=S.p3.fopen===\''+E(r.n)+'\'?null:\''+E(r.n)+'\';save();RIGHT()"><span class="fr-e">'+r.e+'</span><span class="fr-t"><b>'+E(r.n)+'</b><small>'+(r.t==='meal'?'식사':'간식')+' · 약 '+r.time+' · '+(x.miss.length?'<em class="fr-miss">'+x.miss.length+'가지 더 필요</em>':'<em class="fr-ok">바로 가능</em>')+'</small></span><span class="fr-plus">'+(open?'−':'+')+'</span></button>'+
+  (open?'<div class="fr-b"><p><b>있는 재료</b> '+E(x.nh.concat(x.oh).filter(i=>FRG.PANTRY.indexOf(i)<0).join(', ')||'기본 양념')+'</p>'+(x.miss.length?'<p><b class="fr-miss">더 필요한 재료</b> '+E(x.miss.join(', '))+'</p>':'')+'<ol>'+r.s.map(t=>'<li>'+E(t)+'</li>').join('')+'</ol><button type="button" class="sm sp" onclick="copyTxt(fText(window._fl['+i+']))">레시피 복사</button></div>':'')+'</div>'}).join('')}
+function pPick(k,i){const t=DTASKS[S.p3.k],sv=pSel(S.p3.k),g=t.g.find(z=>z.k===k);if(g.m){const a=sv[k],j=a.indexOf(i);j>-1?a.splice(j,1):a.push(i)}else sv[k]=i;save();render()}
+function pX(k,v){pSel(S.p3.k)['x'+k]=v;save();RIGHT()}
+VIEWS.room=()=>{const P=S.p3;if(!DTASKS[P.k])P.k=0;const t=DTASKS[P.k],sv=pSel(P.k),FR=!!t.fridge;
  return view('프롬프트 디자인실',
- `<div class="ptabs"><button class="pt${S.rm?'':' on'}" onclick="S.rm=0;S.rk=0;save();render()">업무</button><button class="pt${S.rm?' on':''}" onclick="S.rm=1;S.rk=0;save();render()">일상</button></div>
- <div class="gl">무엇을 해 볼까요?</div><div class="rgrid">${L.map((t,i)=>`<button class="${S.rk==i?'on':''}" onclick="S.rk=${i};save();render()"><b>${esc(t.t)}</b><span>${esc(t.s)}</span></button>`).join('')}</div>
- ${T.g.map(g=>`<div class="gl">${esc(g.l)}${g.m?' <small>여러 개</small>':''}</div><div class="chips">${g.o.map((o,i)=>`<button class="chip${(g.m?sv[g.k].includes(i):sv[g.k]===i)?' on':''}" onclick="RG('${g.k}',${i},${g.m?1:0})">${esc(o)}</button>`).join('')}</div>`).join('')}
- <div class="gl">더 알려 줄 것 <small>비워 둬도 돼요</small></div>${field('rin','더 알려 줄 것',1,T.ph.replace(/^예\) /,''))}`,
- ()=>{const ctx=T.g.map(g=>{const v=sv[g.k];return '- '+g.l.replace(/ \(.*\)$/,'').replace(/\?$/,'')+': '+(g.m?(v.length?v.map(i=>g.o[i]).join(', '):'(고르지 않음)'):g.o[v])}).join('\n');
- const x=V('rin');const t=`[역할]\n너는 ${M(T.role)}야.\n\n[내가 고른 것]\n${ctx}\n\n[할 일]\n${T.task}\n\n[더 알려 줄 것]\n${x||'['+T.ph+']'}\n\n[답변 형식]\n${M(T.fmt)}\n\n[지킬 것]\n${RRULES}${T.safe?'\n'+T.safe:''}`;
- return outBox(T.t+' 프롬프트',t)})};
+ `<div class="gl">무엇을 해 볼까요?</div><div class="rgrid">${DTASKS.map((x,i)=>`<button class="${P.k==i?'on':''}" onclick="S.p3.k=${i};save();render()"><b>${E(x.t)}</b><span>${E(x.s)}</span></button>`).join('')}</div>
+ ${t.g.map(g=>`<div class="gl">${E(g.l)}${g.m?' <small>여러 개 골라도 돼요</small>':''}</div><div class="chips">${g.o.map((o,i)=>`<button class="chip${(g.m?sv[g.k].includes(i):sv[g.k]===i)?' on':''}" onclick="pPick('${g.k}',${i})">${E(o)}</button>`).join('')}</div><input class="pgx" value="${E(sv['x'+g.k]||'')}" placeholder="${FR&&g.k==='b'?'기타 재료 직접 입력 (예: 오징어, 부추, 스팸)':'기타 (직접 입력)'}" oninput="pX('${g.k}',this.value)">`).join('')}
+ ${FR?'':`<div class="gl">더 알려 줄 것 <small>비워 둬도 돼요 · 개인정보는 빼 주세요</small></div><textarea class="pgta" placeholder="${E(t.ph)}" oninput="S.p3.text=this.value;save();RIGHT()">${E(P.text||'')}</textarea>`}`,
+ ()=>{if(FR)return `<div class="bar"><span class="t">추천 메뉴</span><span class="sub2">＋를 누르면 레시피가 나와요 · 기타 재료도 반영돼요</span></div><div class="out" style="white-space:normal"><div class="fr-list">${fHtml()}</div></div>`;
+  const tx=pText();CUR=()=>tx;return aiBar(t.t+' 프롬프트',()=>tx)+`<div class="out jxpv">${pHtml()}</div>`})};
 /* ================= ⑨ 빡침 번역기 ================= */
 const VG=[
 ['민원인',[
@@ -1134,14 +1321,49 @@ const MTX={
 '퇴근 후에도 현장이 떠올라요':[['퇴근 후에도 생각나는 건 그만큼 마음을 다했다는 뜻이에요.','내일 할 일을 메모에 적고 "여기까지!"라고 말해 봐요.','지금 이 시간은 일하는 나 말고 쉬는 나의 시간이에요.','좋아하는 음악 한 곡으로 퇴근 스위치를 켜 볼까요?','잘 쉬는 것도 내일을 위한 중요한 일이에요.'],'"지금은 쉬어도 되는 시간이다."'],
 '몸이 아파요':[['아픈 몸으로 여기까지 온 것만으로도 대단해요.','오늘은 일보다 내 몸이 먼저예요.','무리하지 말고 필요하면 쉬겠다고 말해도 괜찮아요.','따뜻한 물과 충분한 잠, 오늘 꼭 챙겨요.','건강해야 좋아하는 일도 오래 할 수 있어요.'],'"오늘은 나를 돌보는 날이다."'],
 '그래도 뿌듯해요':[['와, 오늘 뿌듯한 일이 있었군요! 정말 잘했어요.','그 순간을 꼭 기억해 둬요. 힘든 날 꺼내 볼 수 있게요.','뿌듯함은 내가 이 일을 하는 이유를 알려 줘요.','함께한 동료에게도 "고마워요" 한마디 전해 볼까요?','오늘의 나에게 작은 상 하나 주기로 해요.'],'"이 맛에 이 일 한다!"']};
+var PC_HG=[["승진·커리어", ["승진해서 팀을 이끄는 나", "센터장·관리자가 된 나", "가족상담 전문가가 된 나", "자격증·학위를 딴 나", "후배들이 닮고 싶은 선배", "AI로 일 잘하는 업무 달인"]], ["성공·창업", ["내 상담소·센터를 연 나", "강사·컨설턴트로 활동하는 나", "책을 낸 작가", "가족 프로그램 기획 전문가로 이름난 나", "공모 사업을 척척 따내는 나", "새로운 분야에 도전한 나"]], ["돈·생활", ["경제적으로 여유로운 나", "내 집을 마련한 나", "빚 없이 차곡차곡 저축하는 나", "노후 준비가 든든한 나"]], ["가족·관계", ["가족과 웃음이 넘치는 집", "아이가 자랑스러워하는 엄마·아빠", "부모님께 효도하는 나", "좋은 사람들과 함께하는 나"]], ["나·건강", ["건강하고 활기찬 나", "마음이 단단하고 편안한 나", "꾸준히 운동하는 나", "하고 싶던 공부를 마친 나"]], ["여행·취미", ["가고 싶던 나라를 여행하는 나", "취미로 작품 전시를 연 나", "악기·그림·춤을 즐기는 나", "봉사하며 나누는 삶"]]];
+var PC_PR=["포기하지 않고 버텨 왔어요", "맡은 일을 책임감 있게 해냈어요", "이용자·가족들을 진심으로 챙겼어요", "늦은 밤까지 서류와 씨름했어요", "가족을 위해 늘 애써 왔어요", "새로운 걸 배우려 꾸준히 노력했어요", "힘든 민원에도 끝까지 친절했어요", "하루하루 성실하게 살아왔어요"];
+var PC_HARD=[];PC_HG.forEach(function(g){g[1].forEach(function(x){PC_HARD.push(x);});});
+var PC_STYLE=[['AI 추천','나를 아는 AI가 내 이야기에 가장 어울리는 그림 느낌으로'],['햇살 수채화 풍경','따뜻한 햇살, 꽃과 나무, 멀리 이어진 산책길이 있는 수채화 풍경'],['꽃잎 압화 빈티지','말린 꽃잎과 잎사귀를 눌러 붙인 듯한 빈티지 종이 엽서'],['동화 일러스트','작은 집과 귀여운 동물 친구들이 있는 아기자기한 동화책 그림'],['밤하늘 별빛','은은한 달빛과 반짝이는 별, 따뜻한 불빛이 켜진 작은 마을'],['창가의 따뜻한 차','창가에 놓인 따뜻한 차 한 잔과 책, 포근한 담요'],['바닷가 노을','잔잔한 바다와 분홍빛 노을, 모래 위 조개껍데기'],['계절 숲길 산책','계절 색이 가득한 숲길과 햇살이 비치는 오솔길']];
+function postP2(t){var PCS=S.pcs;var hard=PC_HARD.filter(function(x,i){return PCS.hard[i];}),mine=(PCS.hin||'').trim();if(mine)hard.push(mine);
+ var pr=PC_PR.filter(function(x,i){return PCS.pr[i];}),pm=(PCS.pin||'').trim();if(pm)pr.push(pm);
+ var st=PC_STYLE[PCS.style],nm=(PCS.to||'').trim().replace(/\s+/g,''),pdate=(PCS.date||'').trim();
+ if(/^[가-힣]{3}$/.test(nm))nm=nm.slice(1);else if(/^(남궁|황보|제갈|선우|독고|사공|서문)[가-힣]{2}$/.test(nm))nm=nm.slice(2);
+ var L=['엽서에 불러 줄 내 이름: '+nm,'우표 소인 날짜: '+pdate,'(위 두 줄만 채워서 보내 주세요)','','---','그동안 나와 나눈 대화를 기억하는 친구로서, 지금까지 열심히 살아온 나를 칭찬하고 인정하면서 10년 후 나의 꿈과 미래를 응원하는 선물 같은 엽서 그림을 만들어 줘. 10년 후의 내가 지금의 나에게 보내는 엽서처럼.','','[10년 후 내가 이루고 싶은 꿈·모습]'];
+ if(hard.length)hard.forEach(function(x){L.push('- '+x);});else L.push('- (고르지 않았어. 그동안 대화에서 내가 말한 꿈이나 바람을 떠올려 줘. 없으면 지금보다 더 행복하고 단단해진 나로)');
+ L.push('','[지금까지 잘 해 온 나]');
+ if(pr.length)pr.forEach(function(x){L.push('- '+x);});else L.push('- (고르지 않았어. 그동안 대화에서 내가 애써 온 모습을 떠올려 줘)');
+ if(t)L.push('','[오늘 내 마음]',t);
+ L.push('','[그림 느낌] '+st[0]+' — '+st[1],'',
+ '[이렇게 만들어 줘]',
+ '- 글이나 설명은 따로 보여 주지 말고, 질문도 하지 말고, 바로 엽서 그림 한 장만 만들어 줘. 선물처럼 열어 보는 순간 처음 보게.',
+ '- 지금까지 나와 나눈 대화와 기억해 둔 내용에서 내가 꾸준히 노력해 온 부분, 나의 강점, 내가 말한 꿈과 좋아하는 것을 떠올려서 담아 줘. 기억이 없으면 지어내지 말고 위에 고른 내용으로만.',
+ '- 앞면 제목: 10년 후 나의 꿈을 응원하는 한 줄(15자 이내).',
+ '- 뒷면 손편지 6줄, 한 줄에 한 문장, 25자 이내. 1~2줄은 지금까지 버티고 애써 온 나를 인정하고 칭찬하기. 3~4줄은 10년 후 꿈이 이루어진 모습을 미래에서 본 것처럼 그려 주기("10년 뒤 너는 ~하고 있어"). 5~6줄은 오늘의 나를 응원하기. 첫 줄 위에 내 이름을 성 빼고 다정하게("서정아,", "민수야,"). 이름 칸이 비어 있으면 "나에게,". 맨 아래에 "— 10년 후의 내가".',
+ '- 회사·기관 이름, 날짜, 숫자, 사람 이름 같은 구체적인 사실은 쓰지 말고, "늦은 밤까지 애쓴 시간"처럼 전체적인 노력과 마음으로 표현해. 건강·가족사 같은 민감한 이야기도 넣지 마.',
+ '- 앞면 배경: 10년 후 꿈이 이루어진 순간을 상징하는 가장 아름다운 장면. 예를 들어 꽃이 가득한 내 가게 앞, 햇살 드는 사무실 창가, 박수 받는 무대, 가족과 함께하는 바닷가처럼 고른 꿈에 맞게. 사람은 작은 뒷모습만, 꿈을 상징하는 소품을 한두 개.',
+ '- 구성: 가로 4:3 이미지 한 장에 가로로 긴 엽서 한 장. 엽서 왼쪽 절반은 그림(앞면 배경 위에 제목을 손글씨로), 오른쪽 절반은 크림색 종이에 손편지. 오른쪽 위에 그림과 어울리는 우표와 둥근 소인(날짜 칸이 비어 있으면 날짜 없이), 오른쪽 아래 "받는 사람: (내 이름)". 가운데에 얇은 세로선.',
+ '- 크기: 엽서는 이미지 가운데에 놓고 전체의 70% 정도만 차지하게 작게. 엽서 바깥 위·아래·양옆에 바탕이 넉넉히 보이게 해서, 둘레의 꽃과 리본이 잘리지 않고 또렷하게 보이게.',
+ '- 선물 같은 바탕: 엽서를 놓는 바탕과 둘레 소품은 정해 두지 말고, 엽서의 꿈·손편지 내용과 고른 그림 느낌에 가장 잘 어울리는 것으로 네가 골라 줘. 매번 같은 천·꽃·리본으로 하지 말고 다양하게(예: 나무 책상과 만년필, 꽃다발과 포장지, 별빛 담요와 작은 조명, 바닷가 모래와 조개, 계절 잎사귀 등). 어떤 바탕이든 열어 보는 순간 선물 받은 느낌이 들게, 위에서 내려다본 사진처럼.',
+ '- 한글은 틀리지 않게, 크고 또렷하게.');
+ return L.join('\n');}
+function pcT(k,i){const o=S.pcs[k];if(o[i])delete o[i];else o[i]=1;save();render()}
+function pcIn(k,v){S.pcs[k]=v;save();RIGHT()}
+function pcView(){S.pcs=S.pcs||{hard:{},pr:{},style:0,tab:0,hin:'',pin:'',to:'',date:''};const C=S.pcs;let k=0;
+ const tabs=PC_HG.map((g,gi)=>{let cnt=0;g[1].forEach(()=>{if(C.hard[k++])cnt++});return `<button class="pt${C.tab===gi?' on':''}" onclick="S.pcs.tab=${gi};save();render()">${esc(g[0])}${cnt?' <em class="cn">'+cnt+'</em>':''}</button>`}).join('');
+ let off=0;PC_HG.slice(0,C.tab).forEach(g=>off+=g[1].length);
+ const body=PC_HG[C.tab][1].map((x,j)=>`<button class="chip${C.hard[off+j]?' on':''}" onclick="pcT('hard',${off+j})">${esc(x)}</button>`).join('');
+ return `<div class="pch"><b><i>1</i>10년 후 나의 꿈·모습</b><small>여러 개 골라도, 직접 써도 돼요</small></div><div class="ptabs sm">${tabs}</div><div class="chips">${body}</div><input class="pgx" value="${esc(C.hin)}" placeholder="직접 쓰기 (예: 10년 후 장애인복지관 관장이 된 나)" oninput="pcIn('hin',this.value)">
+ <div class="pch"><b><i>2</i>지금까지 잘 해 온 나</b><small>칭찬받고 싶은 것을 골라요</small></div><div class="chips">${PC_PR.map((x,i)=>`<button class="chip${C.pr[i]?' on':''}" onclick="pcT('pr',${i})">${esc(x)}</button>`).join('')}</div><input class="pgx" value="${esc(C.pin)}" placeholder="직접 쓰기 (예: 힘든 민원에도 끝까지 웃었어요)" oninput="pcIn('pin',this.value)">
+ <div class="pch"><b><i>3</i>그림 느낌</b><small>제목·배경·손편지는 AI가 나를 기억해서 만들어요</small></div><div class="chips">${PC_STYLE.map((x,i)=>`<button class="chip${C.style===i?' on':''}" title="${esc(x[1])}" onclick="S.pcs.style=${i};save();render()">${esc(x[0])}</button>`).join('')}</div>
+ <div class="pcrow"><label>엽서에 부를 내 이름·애칭<input class="pgx" value="${esc(C.to)}" placeholder="예: 이서정 → 서정아" oninput="pcIn('to',this.value)"></label><label>우표 소인에 찍을 날짜<input class="pgx" value="${esc(C.date)}" placeholder="예: 2026.12.02" oninput="pcIn('date',this.value)"></label></div>`}
+
 const CARDW=['나에게','동료에게','후배에게','이용자분께'];
 const CARDM=['오늘도 정말 애썼어. 너는 충분히 잘하고 있어.','네가 있어서 이 복지관이 더 따뜻해.','힘든 날도 지나가. 내가 늘 응원할게.','작은 하루가 모여 큰 변화를 만들어. 고마워.','오늘 하루 수고 많았어. 맛있는 거 먹자!','당신의 웃음이 누군가의 하루를 밝혀요.'];
 const CARDP=['cheer','hug','wave','think'];
 VIEWS.mind=()=>{S.fe=S.fe??0;S.mtab=S.mtab??0;S.cw=S.cw??0;S.cm=S.cm??0;S.cp=S.cp??0;
  const tabs=`<div class="ptabs"><button class="pt${S.mtab?'':' on'}" onclick="S.mtab=0;save();render()">나를 위한 5줄</button><button class="pt${S.mtab?' on':''}" onclick="S.mtab=1;save();render()">응원 엽서</button></div>`;
- if(S.mtab)return view('마음챙김',tabs+`<div class="gl">누구에게</div>${chips('cw',CARDW)}<div class="gl">응원 문구</div>${chips('cm',CARDM)}<div class="gl">곰돌이 모습</div>${chips('cp',['만세','하트','손 인사','생각 중'])}<div class="gl">직접 쓰기</div>${field('cin','엽서에 쓸 말',1)}`,
-  ()=>{const msg=V('cin')||CARDM[S.cm],to=CARDW[S.cw];const pr=`따뜻한 응원 엽서 이미지를 만들어 줘.\n- 받는 사람: ${to}\n- 문구: "${msg}"\n- 귀여운 갈색 곰돌이 캐릭터가 ${['만세 하는','하트를 안은','손을 흔드는','고개를 갸웃하는'][S.cp]} 모습\n- 크림색 바탕, 연한 주황 포인트, 손글씨 느낌 한글, 엽서 비율 3:2\n- 한글 맞춤법 정확하게`;CUR=()=>pr;
-  window._card='['+to+'] '+msg;return aiBar('응원 엽서',()=>pr)+`<div class="pcw"><div class="pc"><div class="pcb">${bear(CARDP[S.cp],150)}</div><div class="pct"><span class="to">${esc(to)}</span><p>${esc(msg)}</p><span class="fr">— 용인시기흥장애인복지관에서</span></div></div><div class="pcn">문구를 복사해 카톡으로 보내거나, 위 <b>ChatGPT·제미나이</b> 버튼으로 엽서 이미지를 만들어 보세요.</div><button class="btn p" onclick="copyTxt(window._card)">엽서 문구 복사</button></div>`});
+ if(S.mtab)return view('마음챙김',tabs+pcView(),()=>{const pr=postP2('');CUR=()=>pr;return aiBar('나를 응원하는 엽서',()=>pr)+`<div class="pcg"><div class="pcgh"><b>나를 응원하는 엽서</b><span>10년 후 나의 꿈과 모습을 고르면, 지금까지 잘 버티고 애써 온 나를 칭찬하고 10년 후의 꿈을 응원하는 선물 엽서를 만들어 줘요.</span></div>${flow(['왼쪽에서 꿈·잘한 점·그림 느낌 고르기','위 ChatGPT 또는 제미나이 버튼','이름·날짜 두 줄만 채워 보내기','선물 엽서 그림 받기'])}<p class="s5">평소 쓰던 계정으로 로그인한 채로 여세요. ChatGPT는 입력창에 프롬프트가 바로 들어가요. 제미나이는 붙여 넣기만 하면 돼요. AI가 나를 기억할수록 더 나다운 엽서가 나와요.</p><p class="s5">무료 계정은 하루에 만들 수 있는 그림 수가 적어서, 안 나오면 내일 다시 해 보세요.</p><div class="out" style="flex:1">${esc(pr)}</div></div>`});
  return view('마음챙김',tabs+`<div class="gl">지금 내 마음</div>${chips('fe',FEEL)}${field('fin','조금 더 말해 줘요',1)}`,
  ()=>{const f=FEEL[S.fe],T=MTX[f]||MTX['지쳤어요'],h=Math.abs(hash(f+V('fin')));
  const pr=`나는 장애인복지관 사회복지사야. 지금 마음: "${f}" ${V('fin')}\n나만을 위한 5줄 위로를 따뜻하게 써 주고, 1분 안에 할 수 있는 몸 풀기 하나를 알려 줘. 충고나 해결책은 빼고.`;CUR=()=>pr;
