@@ -1922,7 +1922,7 @@ type:'<path d="M4 7V4h16v3M9 20h6M12 4v16"/>',
 globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>'};
 const ic=(k,s)=>`<span class="ai-ic"${s?` style="${s}"`:''}>${P_}${IC[k]||IC.spark}</svg></span>`;
 const TAB={ChatGPT:['msg','#10a37f'],'제미나이':['spark','#4285f4'],Claude:['pen','#d97757'],Canva:['pal','#7d2ae8'],'활용 꿀팁':['bulb','#e2865a'],'AI 설정 따라 하기':['gear','#2f6b56'],'데스크톱 앱':['pc','#b45a2c']};
-const CIC={'5가지 모드 한눈에':'mode','이미지 만들기':'img','이미지 편집 화면':'pen','움짤 GIF':'gif','라이브러리':'lib','핀터레스트 레퍼런스':'pin','메모·녹음 → 서식':'mic','나노바나나 이미지':'img','음악 30초':'music','영상 만들기':'film','노트북':'book','디자인':'pal','슬라이드':'slide','모션그래픽':'film','한글 서식 스킬':'doc','깊은 조사':'search','AI 프레젠테이션':'slide','매직 레이어':'layers','원고 → PPT 흐름':'doc'};
+const CIC={'5가지 모드 한눈에':'mode','이미지 만들기':'img','이미지 편집 화면':'pen','움짤 GIF':'gif','라이브러리':'lib','핀터레스트 레퍼런스':'pin','메모·녹음 → 서식':'mic','나노바나나 이미지':'img','음악 30초':'music','영상 만들기':'film','노트북':'book','디자인':'pal','슬라이드':'slide','모션그래픽':'film','한글 서식 스킬':'doc','깊은 조사':'search','AI 프레젠테이션':'slide','매직 레이어':'layers','원고 → PPT 흐름':'doc','Design':'pal','리서치':'search','프로젝트':'book','아티팩트':'lib','예약됨':'zap','폴더 추가':'doc','Skill 녹화':'film','디자인 시스템':'pal'};
 window.__ai={ic:(k,st)=>ic(k,st),TAB,CIC,nbHTML:()=>nbHTML()};const card=(a,n)=>{const A=APPS.find(x=>x.n===a);return A&&A.cards.find(c=>c.n===n)};
 /* ---- 내용 보완 ---- */
 const set=(a,n,o)=>{const c=card(a,n);if(c)Object.assign(c,o)};
@@ -2317,6 +2317,41 @@ window.__igRes=r=>`<div class="res"><div class="rh">결과 예시</div><div clas
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
 </script>
+<script>/* 2026.11.26 Claude 새 메뉴 설명 장표 */
+(function(){
+if(typeof APPS==='undefined'||!window.__ig)return;
+const A=APPS.find(a=>a.n==='Claude');if(!A)return;
+const add=[['프로젝트',1,'사업별 작업방(지침+자료)'],['아티팩트',1,'만든 결과물 모아 보기'],['예약됨',0,'정해진 시간 자동 실행'],['플러그인',1,'Canva·Gmail·드라이브 연결'],['폴더 추가',0,'내 컴퓨터 폴더 통째로'],['Skill 녹화',0,'내 작업 방식 가르치기'],['디자인 시스템',0,'기관 색·글꼴 고정']];
+add.forEach(a=>{if(!A.cards.some(c=>c.n===a[0]))A.cards.push({n:a[0],f:a[1],what:a[2]});if(typeof FLX!=='undefined')FLX['Claude|'+a[0]]=[[],a[2],'']});
+A.__order=['기능 한눈에','프로젝트','아티팩트','플러그인','폴더 추가','예약됨','리서치','Design','디자인 시스템','슬라이드','모션그래픽','한글 서식 스킬','Skill 녹화'];const d=A.cards.find(c=>c.n==='디자인');if(d)d.n='Design';const r=A.cards.find(c=>c.n==='깊은 조사');if(r)r.n='리서치';
+const G=window.__ig;if(G['Claude|디자인']){G['Claude|Design']=G['Claude|디자인'];G['Claude|Design'].a='Claude Design으로';G['Claude|Design'].st=[['pal','왼쪽 메뉴 Design'],['msg','만들 것 쓰기'],['slide','시안 2개 비교'],['pen','글자·색 직접 수정'],['down','PDF·이미지 저장']]}
+if(G['Claude|깊은 조사']){G['Claude|리서치']=G['Claude|깊은 조사'];G['Claude|리서치'].st=[['plus','+ 누르기'],['search','리서치'],['msg','주제 쓰기'],['zap','몇 분 조사'],['doc','출처 보고서']]}
+if(typeof FLX!=='undefined'){FLX['Claude|Design']=FLX['Claude|디자인']||[[],'안내지·포스터 디자인',''];FLX['Claude|리서치']=FLX['Claude|깊은 조사']||[[],'출처 달린 조사','']}
+A.cards.sort((x,y)=>{const o=A.__order,i=o.indexOf(x.n),j=o.indexOf(y.n);return (i<0?99:i)-(j<0?99:j)});if(window.__ai)Object.assign(window.__ai.CIC,{'프로젝트':'folder','아티팩트':'lib','예약됨':'zap','플러그인':'layers','폴더 추가':'folder','Skill 녹화':'film','디자인 시스템':'pal','Design':'pal','리서치':'search'});
+Object.assign(G,{
+'Claude|프로젝트':{u:'사업계획서·결과보고서 작업방',a:'Claude 프로젝트로',b:'사업별 작업방 만들기',s:'지침과 자료를 한 번 넣어 두면, 그 방의 모든 대화가 같은 기준으로 일해요',st:[['folder','왼쪽 메뉴 프로젝트'],['plus','새 프로젝트'],['doc','지침 쓰기'],['up','서식·자료 올리기'],['msg','방 안에서 대화']],
+ box:'이렇게 만들어요',rows:[['folder','이름','2027 주간이용센터 사업계획서'],['doc','지침','공문체 · 서식 순서대로 · 숫자는 자료에 있는 것만'],['up','파일','올해 서식 · 사업안내 · 작년 결과보고서'],['msg','대화','비교표 → 항목별 초안 → 평가위원 검토']],
+ res:{t:'프로젝트 화면',l:['지침: 기흥복지관 사업계획서 작성 규칙','파일 4개: 2027 서식.hwpx · 사업안내.pdf …','대화 1 비교표 · 대화 2 초안 · 대화 3 검토']},w:'이용자 실명·주민번호 같은 개인정보는 올리지 않기'},
+'Claude|아티팩트':{a:'Claude 아티팩트로',b:'만든 결과물 모아 보기',s:'문서·표·슬라이드·웹페이지 결과물이 따로 저장돼서 다시 열고 고쳐요',st:[['msg','만들 것 요청'],['slide','오른쪽 결과물 창'],['pen','직접 고치기'],['lib','왼쪽 메뉴 아티팩트'],['down','공유·내려받기']],
+ box:'이런 결과물이 쌓여요',tips:[['doc','문서','안내문·보고서 → 워드·PDF'],['table','표','참여자 명단 → 엑셀'],['slide','슬라이드','보고 자료 → PPT']],say:'송년회 안내문을 A4 문서로 만들어 줘. 큰 글씨, 문의 전화는 [ ]로 비워 둬.',
+ res:{t:'내 아티팩트',l:['송년회 안내문 (문서)','12월 프로그램 참여자 명단 (표)','운영위원회 보고 10장 (슬라이드)']},w:'공유 링크는 받는 사람을 확인한 뒤 보내기'},
+'Claude|예약됨':{a:'Claude 예약으로',b:'정해진 시간에 자동 실행',s:'매일·매주 할 일을 정해 두면 그 시간에 알아서 해요',st:[['cal','왼쪽 메뉴 예약됨'],['plus','새 예약'],['doc','할 일·시간 쓰기'],['check','결과 확인']],
+ box:'이럴 때 써요',tips:[['search','매주 공모 소식','월요일 아침 새 공모 정리'],['spark','이달의 행사 문구','매달 1일 홍보 초안'],['doc','주간 보고 초안','금요일 오후 한 주 정리']],say:'매주 월요일 오전 8시에 장애인복지 공모사업 새 소식을 찾아 표로 정리해 줘.',
+ res:{t:'월요일 오전 8:00 결과',h:['공모','지원 금액','마감'],r:[['[공모명]','[ ]만 원','[날짜]'],['[공모명]','[ ]만 원','[날짜]']],f:'출처 링크가 함께 나와요'},w:'결과는 꼭 열어서 확인 · 발송·결제는 맡기지 않기'},
+'Claude|플러그인':{u:'시트 출석률 계산 · 메일 초안',a:'Claude 플러그인으로',b:'자주 쓰는 앱 연결하기',s:'켜 둔 앱의 메일·문서·일정·표를 Claude가 바로 찾아 쓰고 채워요',st:[['plus','+ 누르기'],['layers','플러그인'],['check','쓸 앱 켜기'],['msg','채팅에서 바로 요청'],['gear','플러그인 관리']],
+ box:'켜 두면 이런 일을 해요',rows:[['pal','Canva','디자인 만들기·불러오기'],['msg','Gmail','메일 찾기·답장 초안'],['cal','캘린더','일정 확인·등록'],['folder','드라이브','문서 찾아 읽기'],['table','시트','표 읽고 채우기'],['globe','Chrome','크롬에서 웹 작업 대신']],say:'구글 시트의 12월 참여자 명단에서 프로그램별 출석률을 계산해 줘.',w:'필요한 앱만 켜기 · 메일 발송·일정 등록은 내가 확인 후'},
+'Claude|폴더 추가':{a:'Claude 폴더 추가로',b:'내 컴퓨터 폴더 통째로 맡기기',s:'파일을 하나씩 올리지 않고, 폴더를 연결해 여러 파일을 한 번에 읽고 정리해요',st:[['plus','+ 누르기'],['folder','폴더 추가'],['check','폴더 고르기·허용'],['msg','할 일 쓰기'],['down','결과 파일 확인']],
+ box:'이럴 때 써요',tips:[['table','일지 20개 정리','월별 참여 인원 표로'],['img','사진 이름 정리','날짜_행사명으로 바꾸기'],['doc','영수증 합계','항목별 금액 엑셀로']],say:'이 폴더의 프로그램 일지 20개를 월별 참여 인원 표로 정리해서 엑셀 파일로 만들어 줘.',
+ res:{t:'결과: 월별 참여 현황.xlsx',h:['월','회기','참여 인원'],r:[['9월','4회','[ ]명'],['10월','4회','[ ]명'],['11월','5회','[ ]명']],f:'같은 폴더에 새 파일로 저장돼요'},w:'데스크톱 앱 · 개인정보 폴더는 연결하지 않기 · 지우기는 확인 후'},
+'Claude|Skill 녹화':{a:'Claude Skill 녹화로',b:'내 작업 방식 가르치기',s:'내가 하는 작업 순서를 한 번 보여 주면 Skill로 저장해 다음부터 같은 방식으로 해요',st:[['plus','+ 누르기'],['film','Skill 녹화'],['msg','평소처럼 작업 보여 주기'],['check','끝내고 이름 붙이기'],['zap','다음엔 이름으로 부르기']],
+ box:'이런 걸 가르쳐 두면 좋아요',tips:[['table','매달 일지 정리','우리 팀 정리 순서 그대로'],['doc','공문 서식 채우기','칸 채우는 순서·말투'],['spark','홍보 문구','우리 기관 말투·이모지 규칙']],say:'방금 보여 준 순서를 "월간 일지 정리" Skill로 저장해 줘. 다음 달부터 이 순서대로 해 줘.',
+ res:{t:'내 Skill',l:['월간 일지 정리','공문 서식 채우기','기관 홍보 문구']},w:'녹화 중 화면에 개인정보가 보이지 않게'},
+'Claude|디자인 시스템':{u:'포스터·안내지 기관 느낌 통일',a:'Claude 디자인 시스템으로',b:'기관 색·글꼴 고정하기',s:'기관 색·로고·글꼴을 한 번 저장해 두면 모든 디자인에 똑같이 적용돼요',st:[['plus','+ 누르기'],['pal','디자인 시스템'],['check','기관 것 고르기·만들기'],['msg','디자인 요청']],
+ box:'이렇게 저장해요',rows:[['pal','색','기관 초록 + 주황 포인트'],['type','글꼴','제목 굵게 · 본문 큰 글씨'],['img','로고','오른쪽 위 · 공식 파일'],['msg','말투','따뜻하고 쉬운 말']],say:'우리 기관 디자인 시스템으로 12월 송년회 포스터 시안 2개 만들어 줘.',
+ res:{t:'적용 예',l:['포스터 · 안내지 · 카드뉴스가 모두 같은 색·글꼴로','새 직원이 만들어도 기관 느낌 그대로']},w:'로고는 기관 공식 파일만 쓰기'}});
+if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
+})();
+</script>
 <script>/* 2026.11.26 앱별 "기능 한눈에" 강의안 장표 */
 (function(){
 if(typeof APPS==='undefined'||!window.__ig)return;
@@ -2326,10 +2361,10 @@ APPS.filter(a=>COL[a.n]).forEach(a=>{if(!a.cards.some(c=>c.n===OV))a.cards.unshi
 if(window.__ai)window.__ai.CIC[OV]='mode';
 const SV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
 const P={img:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="16" cy="9" r="2"/><path d="M3 18l6-6 4 4 3-3 5 5"/>',pen:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/>',gif:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/>',lib:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',doc:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',spark:'<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/>',zap:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',layers:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',music:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',film:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M17 9h4M3 15h4M17 15h4"/>',book:'<path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>',slide:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8"/>',pal:'<circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1.2"/><circle cx="12" cy="7" r="1.2"/><circle cx="16" cy="10" r="1.2"/>',mode:'<rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/>'};
-const ICK={'5가지 모드 한눈에':'mode','이미지 만들기':'img','이미지 편집 화면':'pen','움짤 GIF':'gif','라이브러리':'lib','캔버스':'doc','내 dot':'spark','스페이스':'doc','예약':'zap','플러그인':'layers','나노바나나 이미지':'img','음악 30초':'music','영상 만들기':'film','노트북':'book','Deep Research':'search','가이드 학습':'book','태스크':'zap','개인 인텔리전스':'spark','맞춤설정':'gear','디자인':'pal','슬라이드':'slide','모션그래픽':'film','한글 서식 스킬':'doc','깊은 조사':'search','AI 프레젠테이션':'slide','매직 레이어':'layers','원고 → PPT 흐름':'doc'};
+const ICK={'Design':'pal','리서치':'search','프로젝트':'book','아티팩트':'lib','예약됨':'zap','폴더 추가':'doc','Skill 녹화':'film','디자인 시스템':'pal','5가지 모드 한눈에':'mode','이미지 만들기':'img','이미지 편집 화면':'pen','움짤 GIF':'gif','라이브러리':'lib','캔버스':'doc','내 dot':'spark','스페이스':'doc','예약':'zap','플러그인':'layers','나노바나나 이미지':'img','음악 30초':'music','영상 만들기':'film','노트북':'book','Deep Research':'search','가이드 학습':'book','태스크':'zap','개인 인텔리전스':'spark','맞춤설정':'gear','디자인':'pal','슬라이드':'slide','모션그래픽':'film','한글 서식 스킬':'doc','깊은 조사':'search','AI 프레젠테이션':'slide','매직 레이어':'layers','원고 → PPT 흐름':'doc'};
 const ic=k=>SV+(P[ICK[k]]||P.spark)+'</svg>';
 function ov(A){const col=COL[A.n],cs=A.cards.map((c,i)=>[c,i]).filter(x=>x[0].n!==OV);
- const cell=([c,i])=>{const g=G[A.n+'|'+c.n]||{};const where=(g.st||[]).slice(0,3).map(s=>s[1]).join(' → ')||'-';const use=(g.tips||g.rows||[]).slice(0,2).map(t=>t[1]).join(' · ')||'-';
+ const cell=([c,i])=>{const g=G[A.n+'|'+c.n]||{};const where=(g.st||[]).slice(0,3).map(s=>s[1]).join(' → ')||'-';const use=g.u||(g.tips||g.rows||[]).slice(0,2).map(t=>t[1]).join(' · ')||'-';
   const what=g.s||c.what||'';
   return `<button class="ovc" onclick="S.fc=${i};S.ut=0;save();render()"><div class="ovh"><span class="ovi" style="background:${col}">${ic(c.n)}</span><b>${c.n}</b><span class="badge ${c.f?'free':'paid'}">${c.f?'무료':'유료'}</span></div>
   <table><tr><th>무엇</th><td>${what}</td></tr><tr><th>어디서</th><td>${where}</td></tr><tr><th>이럴 때</th><td>${use}</td></tr></table></button>`};
