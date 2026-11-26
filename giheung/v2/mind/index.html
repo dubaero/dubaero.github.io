@@ -4276,7 +4276,12 @@ var RESTX=[
  ['window','[창밖 멍때리기 챔피언] 창밖 구름을 보며 1분 동안 멍~. 아무 생각 안 해도 1등이에요.'],
  ['tongue','[메롱 얼굴 체조] 혀를 쭉 내밀고 "메롱~" 세 번. 얼굴이 풀리고 웃음이 나요.'],
  ['shake','[강아지 탈탈 털기] 물 털듯 온몸을 탈탈 10초.'],
- ['praise','[나 칭찬 셀프 박수] "오늘도 버틴 나, 최고다!" 작게 소리 내어 칭찬하고 박수 짝짝.']];
+ ['praise','[나 칭찬 셀프 박수] "오늘도 버틴 나, 최고다!" 작게 소리 내어 칭찬하고 박수 짝짝.'],
+ ['swear','[소리 없이 입으로만 욕하기] 입만 크게 벌리고 소리 없이 시원하게 욕 세 번. 들키지 않게, 웃으면서.'],
+ ['glare','[미운 사람 그려서 째려보기] 이면지에 미운 사람 얼굴을 대충 그리고 10초 동안 째릿! 노려보기.'],
+ ['crumple','[구겨서 휴지통 골인] 그 종이를 꾸깃꾸깃 구겨서 휴지통에 슛~ 골인! 미운 마음도 같이 버려요.'],
+ ['punch','[쿠션 펀치 퍽퍽] 쿠션이나 베개를 퍽! 퍽! 다섯 번. 사람·벽은 안 돼요.'],
+ ['towel','[수건 빨래 짜기] 수건을 빨래 짜듯 있는 힘껏 비틀었다가 툭 풀기, 세 번.']];
 var RTYPE={};RESTX.forEach(function(r){RTYPE['쉼 하나: '+r[1]]=r[0];});
 function restFig(t){var f=RTYPE[t]||(/어깨/.test(t)?'shoulder':/물|차/.test(t)?'water':/창밖|보이는/.test(t)?'window':'breath');
  var H='<circle cx="32" cy="13" r="6"/>',B='<path d="M32 19 V40"/>',L='<path d="M32 40 L25 56 M32 40 L39 56"/>',A='<path d="M32 24 L23 37 M32 24 L41 37"/>';
@@ -6176,6 +6181,6 @@ footer{background:#2E3B37!important}
 var t=document.getElementById('tophome');if(t)t.textContent='← 업무도우미 홈으로 이동';
 ['v-prompt','v-studio','v-gbiz','v-song','v-heart','v-vent'].forEach(function(id){var b=document.querySelector('#'+id+' .vback');if(b)b.textContent='← 홈';});
 var h=document.querySelector('#v-song .vbar h2');if(h)h.textContent='AI 작곡실';})();</script>
-<script src="zz.js?v=6"></script>
+<script src="zz.js?v=8"></script>
 </body>
 </html>

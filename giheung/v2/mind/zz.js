@@ -19,6 +19,10 @@ function zz(pose,mode){var u='z'+(++uid);
   eyes:limb('M60 62 L44 54 L52 32','')+limb('M60 62 L76 54 L68 32','')+'<ellipse cx="52" cy="31" rx="5" ry="4" fill="#3A4148"/><ellipse cx="68" cy="31" rx="5" ry="4" fill="#3A4148"/>',
   laugh:limb('M60 62 L46 74 L56 86','')+limb('M60 62 L74 74 L64 86','')+hand(56,86)+hand(64,86),
   pray:limb('M60 62 L50 74 L59 70','')+limb('M60 62 L70 74 L61 70','')+hand(60,69),
+  paper:limb('M60 62 L76 72 L88 70','')+limb('M60 62 L44 74 L42 90','')+hand(88,70)+hand(42,90)+'<g class="zz-pp"><rect x="86" y="52" width="28" height="34" rx="2" fill="#fff" stroke="#9AA6AD" stroke-width="1.4"/><circle cx="100" cy="64" r="7" fill="none" stroke="#3A4148" stroke-width="1.4"/><path d="M97 62 h1 M102 62 h1 M97 68 q3 -3 6 0 M93 58 l3 2 M107 58 l-3 2" stroke="#3A4148" stroke-width="1.4" stroke-linecap="round"/><path d="M92 78 h16 M92 82 h10" stroke="#C9D3D9" stroke-width="1.4"/></g>',
+  throw:'<g class="zz-th">'+limb('M60 62 L80 58 L94 46','')+'<circle class="zz-ball" cx="97" cy="44" r="5" fill="#fff" stroke="#9AA6AD" stroke-width="1.4"/></g>'+limb('M60 62 L44 74 L42 90','')+hand(42,90),
+  punch:'<g class="zz-pu">'+limb('M60 62 L80 64 L94 62','')+'<circle cx="95" cy="62" r="4.6" fill="#3A4148"/></g>'+limb('M60 62 L46 70 L50 78','')+hand(50,78),
+  towel:limb('M60 62 L48 72 L52 80','')+limb('M60 62 L72 72 L68 80','')+'<path class="zz-tw" d="M44 80 q8 -6 16 0 t16 0" fill="none" stroke="#7FB8D8" stroke-width="6" stroke-linecap="round"/>'+hand(52,80)+hand(68,80),
   wave:limb('M60 62 L46 78 L42 92','')+'<g class="zz-wv">'+limb('M60 62 L76 52 L82 34','')+hand(82,34)+'</g>'+hand(42,92)};
  var legsToe=limb('M60 100 L52 118 L50 128','')+'<g class="zz-kick">'+limb('M60 100 L80 104 L98 104','')+'<path class="zz-toe" d="M98 104 l2 -7" stroke="#3A4148" stroke-width="4.6" stroke-linecap="round"/></g><ellipse cx="47" cy="129" rx="6" ry="3" fill="#3A4148"/>';
  var legsSit=limb('M60 100 L40 108 L66 116','')+limb('M60 100 L80 108 L54 116','')+'<ellipse cx="60" cy="118" rx="24" ry="4" fill="#CFE7DA" opacity=".8"/>';
@@ -53,13 +57,18 @@ function zz(pose,mode){var u='z'+(++uid);
   meditate:{a:'pray',l:'sit',f:'<g class="zz-eyes"><path d="M48.5 31 q4 3 8 0 M63.5 31 q4 3 8 0" fill="none" stroke="#3A4148" stroke-width="2.2" stroke-linecap="round"/></g>'+nose+mouthS,x:'<text class="zz-tx zz-om" x="82" y="30">음~</text><circle class="zz-aura" cx="60" cy="70" r="46" fill="none" stroke="#9ADCCB" stroke-width="2"/>'},
   twist:{a:'hips',f:eyes+nose+mouthO,x:''},
   laugh:{a:'laugh',f:'<g class="zz-eyes"><path d="M48.5 31 q4 -4.5 8 0" fill="none" stroke="#3A4148" stroke-width="2.2" stroke-linecap="round"/><path d="M63.5 31 q4 -4.5 8 0" fill="none" stroke="#3A4148" stroke-width="2.2" stroke-linecap="round"/></g>'+nose+'<path d="M54 40 q6 8 12 0z" fill="#E8697D" stroke="#3A4148" stroke-width="1.4"/>',x:'<text class="zz-tx" x="82" y="22">하하하!</text>'},
+  swear:{a:'hips',f:'<g class="zz-eyes"><path d="M47 26 l9 3 M73 26 l-9 3" stroke="#3A4148" stroke-width="2.4" stroke-linecap="round"/><circle cx="52.5" cy="32" r="2.8" fill="#3A4148"/><circle cx="67.5" cy="32" r="2.8" fill="#3A4148"/></g>'+nose+'<ellipse class="zz-mo2" cx="60" cy="43" rx="4" ry="4" fill="#3A4148"/>',x:'<g class="zz-bub"><rect x="80" y="4" width="36" height="18" rx="7" fill="#fff" stroke="#E07A2E" stroke-width="1.6"/><text x="98" y="17" text-anchor="middle" style="font:800 11px sans-serif;fill:#D9534A">#@%!</text></g><text x="84" y="34" style="font:700 8px sans-serif;fill:#8A949A">(소리 없이)</text>'},
+  glare:{a:'paper',f:'<g class="zz-eyes"><path d="M47 26 l9 3 M73 26 l-9 3" stroke="#3A4148" stroke-width="2.4" stroke-linecap="round"/><circle cx="52.5" cy="32" r="2.8" fill="#3A4148"/><circle cx="67.5" cy="32" r="2.8" fill="#3A4148"/></g>'+nose+'<path d="M55 43 q5 -3 10 0" fill="none" stroke="#3A4148" stroke-width="1.8" stroke-linecap="round"/>',x:'<text class="zz-tx" x="6" y="20">째릿!</text><path class="zz-zap" d="M78 30 l6 2 -4 2 6 2" fill="none" stroke="#E07A2E" stroke-width="1.8"/>'},
+  crumple:{a:'throw',f:'<g class="zz-eyes"><path d="M47 26 l9 3 M73 26 l-9 3" stroke="#3A4148" stroke-width="2.4" stroke-linecap="round"/><circle cx="52.5" cy="32" r="2.8" fill="#3A4148"/><circle cx="67.5" cy="32" r="2.8" fill="#3A4148"/></g>'+nose+mouthO,x:'<g><path d="M96 112 h18 l-3 18 h-12z" fill="#DCE6EA" stroke="#7A8F99" stroke-width="1.6"/><text class="zz-tx" x="86" y="104">골인!</text></g>'},
+  punch:{a:'punch',f:'<g class="zz-eyes"><path d="M47 26 l9 3 M73 26 l-9 3" stroke="#3A4148" stroke-width="2.4" stroke-linecap="round"/><circle cx="52.5" cy="32" r="2.8" fill="#3A4148"/><circle cx="67.5" cy="32" r="2.8" fill="#3A4148"/></g>'+nose+mouthO,x:'<g class="zz-cs"><rect x="98" y="48" width="18" height="26" rx="8" fill="#FFD9A8" stroke="#D99A5A" stroke-width="1.6"/></g><text class="zz-tx" x="92" y="40">퍽!</text>'},
+  towel:{a:'towel',f:'<g class="zz-eyes"><path d="M47 26 l9 3 M73 26 l-9 3" stroke="#3A4148" stroke-width="2.4" stroke-linecap="round"/><circle cx="52.5" cy="32" r="2.8" fill="#3A4148"/><circle cx="67.5" cy="32" r="2.8" fill="#3A4148"/></g>'+nose+'<path d="M55 42 h10" stroke="#3A4148" stroke-width="2" stroke-linecap="round"/>',x:'<text class="zz-tx" x="80" y="22">끄응~ 짜!</text>'},
   praise:{a:'wave',f:eyes+nose+mouthS,x:'<path class="zz-star" d="M96 10 l3 6 6 1 -4.5 4 1 6 -5.5 -3 -5.5 3 1 -6 -4.5 -4 6 -1z" fill="#F7C873" stroke="#E0A43A"/>'}};
  var p=P[pose]||P.breath;
  return '<svg class="zz zz-'+pose+(mode?' zz-'+mode:'')+'" viewBox="0 0 120 136" aria-hidden="true">'+D+sh+p.x+'<g class="zz-body">'+(p.l==='toe'?legsToe:p.l==='sit'?legsSit:legs)+body+(p.top?head(p.f)+'<g class="zz-arms">'+arms[p.a]+'</g>':'<g class="zz-arms">'+arms[p.a]+'</g>'+head(p.f))+'</g></svg>';}
 window.zz=zz;
 
 /* 마음 지킴이 쉼 하나 그림 */
-var MAP={breath:'breath',shout:'shout',swear:'shout',write:'breath',shoulder:'shoulder',fist:'fist',stretch:'stretch',neck:'neck',hug:'hug',palm:'eyes',smile:'tongue',shake:'shake',hum:'hum',walk:'exercise',window:'window',water:'water',praise:'praise',tongue:'tongue',exercise:'exercise',toe:'toe',hug2:'hug',eyes:'eyes',meditate:'meditate',twist:'twist',laugh:'laugh'};
+var MAP={breath:'breath',shout:'shout',swear:'swear',write:'glare',shoulder:'shoulder',fist:'fist',stretch:'stretch',neck:'neck',hug:'hug',palm:'eyes',smile:'tongue',shake:'shake',hum:'hum',walk:'exercise',window:'window',water:'water',praise:'praise',tongue:'tongue',exercise:'exercise',toe:'toe',glare:'glare',crumple:'crumple',punch:'punch',towel:'towel',hug2:'hug',eyes:'eyes',meditate:'meditate',twist:'twist',laugh:'laugh'};
 if(typeof restFig==='function'){restFig=function(t){var f=(typeof RTYPE!=='undefined'&&RTYPE[t])||(/어깨/.test(t)?'shoulder':/물|차/.test(t)?'water':/창밖|보이는|멍/.test(t)?'window':/메롱|혀/.test(t)?'tongue':/운동|뛰기/.test(t)?'exercise':/고개|목/.test(t)?'neck':'breath');return zz(MAP[f]||'breath','loop');};
  var r=document.getElementById('h2-rest');if(r){var s=r.querySelector('svg'),pp=r.querySelector('p');if(s&&pp)s.outerHTML=restFig(pp.textContent)}}
 
@@ -83,7 +92,12 @@ var LIST=[{"n": "기본 숨 고르기", "f": "breath", "d": "코로 4초 들이�
  {"n": "소리 없는 \"아~\" 함성", "f": "shout", "d": "먼 산 보고 입만 크게 \"아~\" (소리는 안 내요)", "p": [["아~~!", 3, "act"], ["쉬기", 2, "hold"]]},
  {"n": "차 한 모금 호록", "f": "water", "d": "따뜻한 차를 향 맡으며 한 모금씩", "p": [["후~ 호록", 8, "act"]]},
  {"n": "콧노래 흥얼흥얼", "f": "hum", "d": "좋아하는 노래 한 소절 콧노래로", "p": [["음~ 음음~", 8, "act"]]},
- {"n": "나 칭찬 셀프 박수", "f": "praise", "d": "\"오늘도 버틴 나, 최고다!\" 소리 내어 칭찬", "p": [["최고다!", 5, "act"]]}];
+ {"n": "나 칭찬 셀프 박수", "f": "praise", "d": "\"오늘도 버틴 나, 최고다!\" 소리 내어 칭찬", "p": [["최고다!", 5, "act"]]},
+ {"n": "소리 없이 입으로만 욕하기", "f": "swear", "d": "입만 크게 벌리고 소리 없이 시원~하게 욕 세 번. 들키지 않게, 웃으면서", "p": [["#@%!", 3, "act"], ["한 번 더!", 3, "act"], ["후련~", 2, "hold"]]},
+ {"n": "미운 사람 그려서 째려보기", "f": "glare", "d": "종이에 미운 사람 얼굴을 대충 그리고 10초 째릿! 노려보기", "p": [["슥슥 그리기", 5, "act"], ["째릿!", 10, "act"]]},
+ {"n": "구겨서 휴지통 골인", "f": "crumple", "d": "그린 종이·욕 쓴 종이를 꾸깃꾸깃 구겨서 휴지통에 슛~ 골인!", "p": [["꾸깃꾸깃", 4, "act"], ["슛! 골인!", 3, "act"]]},
+ {"n": "쿠션 펀치 퍽퍽", "f": "punch", "d": "쿠션이나 베개를 살살 퍽! 퍽! (사람·벽은 안 돼요)", "p": [["퍽! 퍽!", 6, "act"], ["후~", 3, "hold"]]},
+ {"n": "수건 빨래 짜기", "f": "towel", "d": "수건을 빨래 짜듯 있는 힘껏 비틀기. 미운 마음도 쭉~", "p": [["끄응~ 짜!", 6, "act"], ["툭 풀기", 3, "hold"]]}];
 function vent(){var box=document.querySelector('#v2-tool .breath');if(!box||box.dataset.zz)return;box.dataset.zz=1;var cur=0,run=0;
  box.innerHTML='<div class="zzv"><div class="zzv-f" id="zzv-f"></div><span class="zzv-t" id="zzv-t">준비</span><b id="zzv-n"></b><small id="zzv-d"></small><div class="zzv-b"><button type="button" id="zzv-go">따라 하기 (3번)</button><button type="button" id="zzv-nx">다른 쉬기 ›</button></div></div>';
  function g(i){return document.getElementById(i)}
@@ -130,6 +144,11 @@ document.head.insertAdjacentHTML('beforeend','<style id="zz-css">'
 +'.zz-eyes .zz-tx{animation:zzFl 2s infinite}.zz-meditate .zz-aura{animation:zzAu 4s ease-in-out infinite}.zz-meditate .zz-om{animation:zzFl 4s infinite}.zz-meditate .zz-body{animation:zzFt 4s ease-in-out infinite}@keyframes zzAu{0%,100%{transform:scale(.85);opacity:.2}50%{transform:scale(1.05);opacity:.9}}@keyframes zzFt{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}'
 +'.zz-twist .zz-body{transform-origin:60px 100px;animation:zzTw 3s ease-in-out infinite}@keyframes zzTw{0%,100%{transform:skewX(0) rotate(0)}25%{transform:skewX(-10deg) rotate(-6deg)}75%{transform:skewX(10deg) rotate(6deg)}}'
 +'.zz-laugh .zz-body{transform-origin:60px 128px;animation:zzLg .35s ease-in-out infinite alternate}@keyframes zzLg{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-3px) rotate(2deg)}}.zz-laugh .zz-tx{animation:zzFl .7s infinite}'
++'.zz-swear .zz-mo2{animation:zzSw .5s ease-in-out infinite alternate}@keyframes zzSw{from{transform:scale(.5,.4)}to{transform:scale(1.4,1.6)}}.zz-swear .zz-bub{animation:zzFl 1s infinite}.zz-swear .zz-body{transform-origin:60px 128px;animation:zzLg .25s infinite alternate}'
++'.zz-glare .zz-eyes{animation:zzGl 1.2s ease-in-out infinite}@keyframes zzGl{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.45)}}.zz-glare .zz-tx,.zz-glare .zz-zap{animation:zzFl .8s infinite}.zz-glare .zz-head{transform-origin:60px 54px;transform:rotate(10deg)}'
++'.zz-crumple .zz-th{transform-origin:60px 62px;transform-box:view-box;animation:zzTh 1.6s ease-in-out infinite}@keyframes zzTh{0%,30%{transform:rotate(30deg)}55%,100%{transform:rotate(-20deg)}}.zz-crumple .zz-ball{animation:zzBl 1.6s ease-in infinite}@keyframes zzBl{0%,50%{transform:translate(0,0);opacity:1}90%{transform:translate(18px,80px);opacity:1}100%{transform:translate(18px,80px);opacity:0}}'
++'.zz-punch .zz-pu{animation:zzPu .5s ease-in-out infinite alternate}@keyframes zzPu{from{transform:translateX(-8px)}to{transform:translateX(2px)}}.zz-punch .zz-cs{transform-origin:107px 61px;transform-box:view-box;animation:zzCs .5s ease-in-out infinite alternate}@keyframes zzCs{from{transform:scaleX(1)}to{transform:scaleX(.75) translateX(4px)}}.zz-punch .zz-tx{animation:zzFl .5s infinite}'
++'.zz-towel .zz-tw{animation:zzTw2 .6s ease-in-out infinite alternate}@keyframes zzTw2{from{transform:scaleY(1)}to{transform:scaleY(-1)}}.zz-towel .zz-body{transform-origin:60px 128px;animation:zzLg .3s infinite alternate}'
 +'@media (prefers-reduced-motion:reduce){.zz *{animation:none!important}}'
 +'</style>');
 })();
