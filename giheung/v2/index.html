@@ -662,8 +662,8 @@ const hash=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))|0;retur
 
 /* ================= 라우팅 ================= */
 const VIEWS={};let VIEW='home';
-function go(v){if(v==='mind'||v==='vent'){location.href='mind/#'+(v==='mind'?'heart':'vent');return}location.hash=v}
-window.addEventListener('hashchange',()=>{VIEW=location.hash.slice(1)||'home';if(VIEW==='mind'||VIEW==='vent'){go(VIEW);return}render()});
+function go(v){if(v==='project'){location.href='proj/#'+(['dw-plan','dw-result','pr'][S.doc||0]||'dw-plan');return}if(v==='mind'||v==='vent'){location.href='mind/#'+(v==='mind'?'heart':'vent');return}location.hash=v}
+window.addEventListener('hashchange',()=>{VIEW=location.hash.slice(1)||'home';if(VIEW==='mind'||VIEW==='vent'||VIEW==='project'){go(VIEW);return}render()});
 function render(){window.RIGHT=null;FL=[];document.querySelector('header').style.display=VIEW==='home'||!VIEWS[VIEW]?'none':'grid';const app=document.getElementById('app');const f=VIEWS[VIEW]||VIEWS.home;
  const ae=document.activeElement&&document.activeElement.id;app.innerHTML=f();if(window.RIGHT)RIGHT();
  if(ae){const el=document.getElementById(ae);if(el&&el.tagName!=='BUTTON'){el.focus();const n=el.value.length;try{el.setSelectionRange(n,n)}catch(e){}}}}
@@ -1717,7 +1717,7 @@ VIEWS.apps=()=>{S.app=S.app??0;S.fc=S.fc??0;S.ao=S.ao??0;S.ab=S.ab??0;const A=AP
   <div class="c2"><section class="c3c"><h4 class="c3h" style="--c:#e2865a">사용 방법</h4>${C.n==='움짤 GIF'?`<div class="gl2">이렇게 넣어 보세요 · 움짤 문구 6가지</div><ol class="gq">${GIFS.map(g=>`<li>${esc(g)}</li>`).join('')}</ol>`:''}${C.n==='노트북'?`<img class="exi" src="/img/giheung/ex/nb.webp" alt="노트북 사용 흐름: 소스 넣기, 질문하기, 출처 확인" onclick="zoomImg(this.src)"><div class="nbg"><div><b>이럴 때 좋아요</b><ul><li>200쪽 사업안내에서 우리 사업 부분만 찾을 때</li><li>평가지표별로 무엇을 준비할지 정리할 때</li><li>작년 보고서와 올해 지침을 비교할 때</li></ul></div><div><b>쓰는 순서</b><ol><li>노트북 → <u>새 노트북</u></li><li><u>소스 추가</u>: PDF·구글 문서·웹 주소 (최대 50개)</li><li>아래 질문을 복사해 물어보기</li><li>답 옆 <u>숫자</u>를 눌러 원문 쪽 확인</li></ol></div></div><div class="gl2">이렇게 물어보세요</div><ol class="gq">${NBQ.map(g=>`<li>${esc(g)}</li>`).join('')}</ol>`:''}<div class="gl2">따라 하기</div><div class="steps">${C.how.map((x,i)=>`<div class="st"><b class="n">${i+1}</b><span>${x}</span></div>`).join('')}</div><div class="gl2">이럴 때 써요</div><div class="exs">${C.ex.map(e=>`<div class="ex"><b>${esc(e[0])}</b><span>${esc(e[1])}</span></div>`).join('')}</div></section>
   <section class="c3c"><h4 class="c3h" style="--c:#7d5fb5">프롬프트 <small>[ ] 칸만 채워서 붙여넣기</small></h4><div class="pbox">${fmt(tight(pr))}</div></section></div>`})};
 /* ================= 시작 ================= */
-VIEW=location.hash.slice(1)||'home';if(VIEW==='mind'||VIEW==='vent')go(VIEW);else render();
+VIEW=location.hash.slice(1)||'home';if(VIEW==='mind'||VIEW==='vent'||VIEW==='project')go(VIEW);else render();
 </script>
 </body>
 </html>
