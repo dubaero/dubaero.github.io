@@ -66,10 +66,9 @@ addCard('Canva',{n:'이미지 편집 사용설명서',d:'선택 · 도구 8가�
  ['ChatGPT','제미나이','Claude','Canva'].forEach(function(n){var k=n+'|메뉴 사용설명서';if(!G[k])G[k]={s:'어디를 누르면 무엇을 하는지 메뉴별 설명과 예시',st:[['','메뉴 그림'],['','번호별 설명'],['','자세히 보기']],tips:[['','처음 앱을 열었을 때'],['','메뉴 이름이 헷갈릴 때']],_new:1}});
  G['Canva|이미지 편집 사용설명서']=G['Canva|이미지 편집 사용설명서']||{s:'사진 편집 화면의 선택·도구 9가지 설명',st:[['','사진 클릭'],['','[편집]'],['','도구 고르기']],tips:[['','배경 제거·오타 수정'],['','흐린 사진 선명하게']],_new:1};})();
 function manHtml(an){var M=MAN[an];var n=0;
- return '<div class="man"><div class="man-hd">'+(window.__LOGO&&window.__LOGO[an]?'<span class="man-lg">'+window.__LOGO[an]+'</span>':'')+'<div><b>'+e(M.title)+'</b><span>'+e(M.sub)+'</span></div></div>'+
- M.groups.map(function(g){return '<section class="man-g"><div class="man-mock"><div class="mm-h">'+e(g.h)+'</div>'+g.items.map(function(it){n++;return '<div class="mm-r"><i class="mm-n">'+n+'</i><span class="mm-i">'+ic(it[0],20)+'</span><b>'+e(it[1])+'</b><small>'+e(it[2])+'</small></div>'}).join('')+'</div>'+
-  '<div class="man-cards">'+g.items.map(function(it,i){var k=n-g.items.length+i+1;return '<div class="mc"><div class="mc-t"><i>'+k+'</i><span class="mm-i">'+ic(it[0],18)+'</span><b>'+e(it[1])+'</b></div><p>'+e(it[2])+'</p><p class="ex"><em>예시</em>'+e(it[3])+'</p>'+(it[4]?'<button type="button" class="mc-go" data-go="'+e(it[4])+'">자세히 보기 ›</button>':'')+'</div>'}).join('')+'</div></section>'}).join('')+
- '<p class="man-note">메뉴 이름·위치는 앱 업데이트에 따라 조금 다를 수 있어요.</p></div>'}
+ return '<div class="man"><div class="man-hd">'+(window.__LOGO&&window.__LOGO[an]?'<span class="man-lg">'+window.__LOGO[an]+'</span>':'')+'<div><b>'+e(M.title)+'</b><span>메뉴를 누르면 자세한 사용법 장표로 넘어가요</span></div></div><div class="man-gs">'+
+ M.groups.map(function(g){return '<div class="man-mock"><div class="mm-h">'+e(g.h)+'</div>'+g.items.map(function(it){n++;var go=it[4];return '<div class="mm-r'+(go?' go':'')+'"'+(go?' data-go="'+e(go)+'" role="button" tabindex="0"':'')+'><i class="mm-n">'+n+'</i><span class="mm-i">'+ic(it[0],22)+'</span><span class="mm-t"><b>'+e(it[1])+'</b><small>'+e(it[2])+'</small></span>'+(go?'<span class="mm-go">자세히 보기 ›</span>':'')+'</div>'}).join('')+'</div>'}).join('')+
+ '</div><p class="man-note">메뉴 이름·위치는 앱 업데이트에 따라 조금 다를 수 있어요.</p></div>'}
 
 var CVT=[['전체 · 요소 · 영역 지정','선택','고칠 범위 고르기: 그림 전체, 그림 속 물건 하나, 붓으로 칠한 영역','캐릭터 옷 색만 바꿀 땐 [요소]로 캐릭터만 선택',0],
  ['조정','adjust','밝기·대비·채도·색감 조절','어두운 행사 사진을 밝고 선명하게',0],
@@ -92,16 +91,16 @@ function post(){if(typeof VIEW==='undefined'||VIEW!=='apps')return;var A=APPS[S.
  if(!bar){R.innerHTML='<div class="bar"><span class="t">'+e(A.n)+' · '+e(C.n)+'</span></div>';bar=R.querySelector('.bar')}
  [].slice.call(R.children).forEach(function(n){if(n!==bar)n.remove()});var sub=bar.querySelector('.sub2');if(sub)sub.textContent='사용설명서';
  bar.insertAdjacentHTML('afterend','<div class="sld-wrap">'+htm+'</div>');
- R.querySelectorAll('.mc-go').forEach(function(b){b.onclick=function(){var i=A.cards.findIndex(function(c){return c.n===b.dataset.go});if(i>=0){S.fc=i;save();render()}}})}
+ R.querySelectorAll('.mm-r.go').forEach(function(b){b.onclick=function(){var i=A.cards.findIndex(function(c){return c.n===b.dataset.go});if(i>=0){S.fc=i;save();render()}}})}
 var _r=render;render=function(){var r=_r.apply(this,arguments);try{post()}catch(er){console.error(er)}return r};
 document.head.insertAdjacentHTML('beforeend','<style id="gh-man">'
 +'.man{background:#fff;border:1px solid #D5E5DA;border-radius:14px;padding:20px 22px;display:grid;gap:16px;color:#263331}'
 +'.man-hd{display:flex;align-items:center;gap:12px;border-bottom:2px solid #2F6B56;padding-bottom:10px}.man-lg svg{width:38px;height:38px;display:block}.man-hd b{display:block;font-size:20px;color:#1E5442}.man-hd span{font-size:14px;color:#66746f}'
-+'.man-g{display:grid;grid-template-columns:280px 1fr;gap:14px;align-items:start}'
++'.man-gs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}'
 +'.man-mock{background:#fff;border:1px solid #D9DEDB;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.06);padding:8px}.mm-h{font-size:12.5px;font-weight:800;color:#66746f;padding:4px 8px 6px}'
-+'.mm-r{display:grid;grid-template-columns:20px 28px 1fr;grid-template-rows:auto auto;column-gap:6px;align-items:center;padding:8px;border-radius:10px}.mm-r:hover{background:#F3F4F3}.mm-r b{font-size:14.5px;font-weight:700;color:#111}.mm-r small{grid-column:3;font-size:12px;color:#8a918e}'
-+'.mm-n,.mc-t i{font-style:normal;width:20px;height:20px;border-radius:50%;background:#E07A2E;color:#fff;font-size:11.5px;font-weight:800;display:grid;place-items:center;grid-row:1/3}'
-+'.mm-i{display:grid;place-items:center;color:#222;grid-row:1/3}'
++'.mm-r{display:grid;grid-template-columns:22px 30px 1fr auto;column-gap:8px;align-items:center;padding:10px;border-radius:10px;text-align:left}.mm-r.go{cursor:pointer}.mm-r.go:hover{background:#F1F8F3}.mm-t b{display:block;font-size:15.5px;font-weight:700;color:#111}.mm-t small{display:block;font-size:13px;color:#7a827e;margin-top:1px}.mm-go{font-size:12.5px;font-weight:800;color:#2F6B56;background:#F1F8F3;border:1px solid #D5E5DA;border-radius:999px;padding:5px 11px;white-space:nowrap}.mm-r.go:hover .mm-go{background:#2F6B56;color:#fff;border-color:#2F6B56}'
++'.mm-n,.mc-t i{font-style:normal;width:20px;height:20px;border-radius:50%;background:#E07A2E;color:#fff;font-size:11.5px;font-weight:800;display:grid;place-items:center}'
++'.mm-i{display:grid;place-items:center;color:#222}'
 +'.man-cards,.cv-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}'
 +'.mc{text-align:left;border:1px solid #E3ECE6;border-radius:12px;padding:10px 12px;display:grid;gap:5px;align-content:start;background:#fff}.mc-t{display:flex;align-items:center;gap:6px}.mc-t b{font-size:15px;color:#1E5442}.mc p{margin:0;font-size:13.5px;line-height:1.55}'
 +'.mc .ex{background:#FFF8F1;border-radius:8px;padding:6px 8px}.mc .ex em{font-style:normal;font-weight:800;color:#C2652B;margin-right:6px}'
@@ -109,7 +108,7 @@ document.head.insertAdjacentHTML('beforeend','<style id="gh-man">'
 +'.pro{margin-left:auto;font-size:11px;font-weight:800;background:#FFF1D6;color:#9A6700;border-radius:999px;padding:2px 7px}'
 +'.cv-g{display:grid;grid-template-columns:330px 1fr;gap:14px;align-items:start}.cv-img{margin:0;border:1px solid #D9DEDB;border-radius:14px;overflow:hidden;background:#fff}.cv-img img{width:100%;display:block;cursor:zoom-in}.cv-img figcaption{font-size:12.5px;color:#66746f;padding:8px 10px;border-top:1px solid #E3ECE6}'
 +'.man-note{margin:0;font-size:13px;color:#66746f}'
-+'@media(max-width:1000px){.man-g,.cv-g{grid-template-columns:1fr}}'
++'@media(max-width:1000px){.man-gs,.cv-g{grid-template-columns:1fr}}'
 +'</style>');
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
