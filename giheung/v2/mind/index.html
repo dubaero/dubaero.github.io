@@ -5994,5 +5994,53 @@ b,strong,th,h1,h2,h3,h4,.btn,button,.n{font-weight:700}
 #dw-body .note{font-size:14px;line-height:1.6;color:#4a5552}
 #dw-body mark.hl{background:linear-gradient(transparent 62%,#cfe9c2 62%);color:#1d2826;font-weight:500;padding:0 1px}
 </style>
+<!-- 2026.11.26 기흥: 마음 쉼터 탭 색·엽서 왼쪽 선택/오른쪽 프롬프트, 빡침 번역기 해결 방안 왼쪽, 상단 홈 버튼 가운데 -->
+<style id="gh-mind">
+header.top .tl a.back{display:none!important}
+header.top .wrap{position:relative}
+header.top .tl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+header.top #tophome{display:inline-flex!important}
+#h2-tool .htabs{gap:8px;border-bottom:0!important}
+#h2-tool .htabs button{background:#F1ECE2!important;border:1px solid #E2D8C6!important;border-radius:12px!important;color:#5b5247!important;font-weight:700!important;padding:10px 12px!important;box-shadow:none!important}
+#h2-tool .htabs button::after{display:none!important}
+#h2-tool .htabs button.on{background:#2F6B56!important;border-color:#2F6B56!important;color:#fff!important}
+#h2-tool .htabs button[data-ht="b"].on{background:#C2652B!important;border-color:#C2652B!important}
+#h2-tool .post.gh2{display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;align-items:start}
+#h2-tool .post.gh2 .gh2-l,#h2-tool .post.gh2 .gh2-r{display:grid;gap:8px;min-width:0;align-content:start}
+#h2-tool .post.gh2 .acts{justify-content:flex-start!important;margin:0!important;flex-wrap:wrap}
+#pc-pv{background:#fff;border:1px solid #E2D8C6;border-radius:12px;padding:12px 14px;white-space:pre-wrap;font-size:15px;line-height:1.65;color:#263331;max-height:52vh;overflow:auto}
+#pc-pv .h{font-weight:700;color:#1d2826;background:linear-gradient(transparent 62%,#f6d6bf 62%)}
+#pc-pv .fill{color:#C2652B;font-weight:700}
+#h2-tool .post.gh2 .s5{font-size:13.5px;margin:0}
+#v-vent .gh-ap{margin:10px 0 6px}
+header.top .wrap{justify-content:flex-end}
+#h2-tool .post.gh2 .gh2-l>div:first-child{display:none}#h2-tool .post.gh2 .acts .btn{padding:8px 12px!important;font-size:15px!important}#h2-tool #pc .pc-row{margin-top:4px!important}#h2-tool #pc .pc-row label{font-size:14px!important}
+#h2-tool #pc button{font-size:14.5px!important;padding:4px 10px!important}
+#h2-tool #pc .pc-g>b{padding:3px 10px!important;font-size:15px!important;margin-bottom:4px!important}#h2-tool #pc .pc-g>b .pcn{transform:scale(.85)}
+#h2-tool #pc .pc-g{margin:0 0 6px!important}
+#h2-tool #pc input.f1{padding:6px 10px!important;font-size:14.5px!important}
+</style>
+<script>
+(function(){
+ function $(s,r){return (r||document).querySelector(s)}
+ /* 엽서: 왼쪽 선택 / 오른쪽 프롬프트 */
+ var post=$('#h2-tool .post'),pc=$('#pc');
+ if(post&&pc&&!post.classList.contains('gh2')){
+  var desc=post.firstElementChild,acts=post.querySelector('.acts'),notes=post.querySelectorAll('.s5');
+  var L=document.createElement('div'),R=document.createElement('div');L.className='gh2-l';R.className='gh2-r';
+  var pv=document.createElement('div');pv.id='pc-pv';
+  L.appendChild(desc);L.appendChild(pc);R.appendChild(acts);R.appendChild(pv);notes.forEach(function(n){R.appendChild(n)});
+  post.appendChild(L);post.appendChild(R);post.classList.add('gh2');
+  function esc(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+  function upd(){var t='';try{var hi=document.getElementById('h2-in');t=typeof postP2==='function'?postP2(hi?hi.value.trim():''):''}catch(e){}
+   pv.innerHTML=esc(t||'').split('\n').map(function(l){if(/^\[.*\]/.test(l))return '<span class="h">'+l+'</span>';if(/^(엽서에 불러 줄 내 이름|우표 소인 날짜)/.test(l))return '<span class="fill">'+l+'</span>';return l}).join('\n');}
+  ['click','input','change'].forEach(function(ev){document.getElementById('h2-tool').addEventListener(ev,function(){setTimeout(upd,30)})});
+  upd();
+ }
+ /* 빡침 번역기: 해결 방안 10가지를 왼쪽으로, 개인정보 안내는 맨 아래 */
+ var ap=document.getElementById('v2-ap'),ta=document.getElementById('v2-in');
+ if(ap&&ta){var left=ta.parentElement;var warn=left.querySelector('p.warn');ap.classList.add('gh-ap');left.appendChild(ap);if(warn)left.appendChild(warn);}
+})();
+</script>
 </body>
 </html>
