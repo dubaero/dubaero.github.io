@@ -442,7 +442,7 @@ table.form.sm2 th,table.form.sm2 td{font-size:13px;padding:5px 7px}
 .mch{display:flex;align-items:center;gap:8px}.mch .no{width:24px;height:24px;border-radius:50%;background:var(--w);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:13px}.mch b{font-size:16px}.mch small{font-size:12px;color:var(--sub);border:1px solid var(--line);border-radius:999px;padding:1px 8px}
 .mcb{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0;font-size:13.5px}.mcb .lb{display:inline-block;font-size:11.5px;font-weight:900;background:#f1f3f2;border-radius:5px;padding:1px 6px;margin-right:6px}.mcb i{font-style:normal;display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:1px 8px;margin:2px 3px 0 0}
 .mct{display:flex;gap:6px;align-items:center;margin-top:6px}.mct .pt{padding:6px 12px;font-size:13.5px}.mform{margin-top:8px;background:#eef1f0;border-radius:10px;padding:10px}.mform .dpaper{padding:18px 20px;font-size:14px}
-</style>
+.dlb{display:inline-flex;gap:6px;margin-left:auto}.bar .dlb{margin-left:0}.xp{display:grid;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fbfcfc}.xp .dt-r b{min-width:48px}.xtab{margin:2px 0 6px}.qrow{display:grid;grid-template-columns:64px 1fr;gap:4px 6px;align-items:start;margin:2px 0}.qrow>.gl{margin:7px 0 0;line-height:1.25}.qrow>.gl small{display:block;font-weight:600}.qrow .chips{gap:4px}.qrow>.gl small{display:none}.view:has(.qrow){grid-template-columns:minmax(0,46%) minmax(0,1fr)}.view:has(.qrow) .sel2 select{padding:6px 34px 6px 10px}.view:has(.qrow) .ptabs .pt{padding:6px 14px}</style>
 </head>
 <body>
 <div class="wrap">
@@ -844,7 +844,60 @@ function addRow(key){const el=document.getElementById('addrow');const v=(el&&el.
 function docB(title,rows){const c=sgc(),B=[];if(c.n)B.push({t:'approval',labels:c.labels});B.push({t:'title',text:title});B.push({t:'table',w:[1,4],rows:rows.map(r=>[{text:r[0],label:1},{text:r[1]}])});if(c.sign){const d=new Date();B.push({t:'sign',date:`${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}.`,name:V('staff')||''})}return B}
 function docTools(key,rows){const c=sgc(),S0=(S.hid&&S.hid[key]||[]).length+(S.add&&S.add[key]||[]).length;
  return `<div class="dtool"><div class="dt-r"><b>결재란</b>${[0,2,3,4].map(n=>`<button class="dchip${c.n==n?' on':''}" onclick="sgN(${n})">${n?n+'칸':'없음'}</button>`).join('')}${c.n?`<span class="dlab">${c.labels.map((l,i)=>`<input value="${esc(l)}" onchange="sgL(${i},this.value);RIGHT()">`).join('')}</span>`:''}<label class="dck"><input type="checkbox" ${c.sign?'checked':''} onchange="sgc().sign=this.checked;save();RIGHT()">서명란</label></div>
- <div class="dt-r"><b>항목</b><select onchange="if(this.value)hideRow('${key}',this.value)"><option value="">− 뺄 항목 고르기</option>${rows.map(r=>`<option>${esc(r[0])}</option>`).join('')}</select><input id="addrow" placeholder="+ 추가할 항목 (쉼표로 여러 개)"><button class="dchip" onclick="addRow('${key}')">추가</button>${S0?`<button class="dchip" onclick="restoreRows('${key}')">처음 항목으로</button>`:''}<button class="btn p" style="margin-left:auto" onclick="dlDoc()">워드로 받기</button></div></div>`}
+ <div class="dt-r"><b>항목</b><select onchange="if(this.value)hideRow('${key}',this.value)"><option value="">− 뺄 항목 고르기</option>${rows.map(r=>`<option>${esc(r[0])}</option>`).join('')}</select><input id="addrow" placeholder="+ 추가할 항목 (쉼표로 여러 개)"><button class="dchip" onclick="addRow('${key}')">추가</button>${S0?`<button class="dchip" onclick="restoreRows('${key}')">처음 항목으로</button>`:''}<span style="margin-left:auto"></span>${dlBtns()}</div></div>`}
+/* ---- 2026.11.26 워드·한글(.hwpx)·PDF 받기 ---- */
+const HXNS='xmlns:ha="http://www.hancom.co.kr/hwpml/2011/app" xmlns:hp="http://www.hancom.co.kr/hwpml/2011/paragraph" xmlns:hs="http://www.hancom.co.kr/hwpml/2011/section" xmlns:hc="http://www.hancom.co.kr/hwpml/2011/core" xmlns:hh="http://www.hancom.co.kr/hwpml/2011/head"';
+function hxHeader(){
+ const L=['HANGUL','LATIN','HANJA','JAPANESE','OTHER','SYMBOL','USER'];
+ const ff=L.map(l=>`<hh:fontface lang="${l}" fontCnt="1"><hh:font id="0" face="맑은 고딕" type="TTF" isEmbedded="0"/></hh:fontface>`).join('');
+ const seven=(v)=>`hangul="${v}" latin="${v}" hanja="${v}" japanese="${v}" other="${v}" symbol="${v}" user="${v}"`;
+ const bd=(t,c)=>['left','right','top','bottom'].map(s=>`<hh:${s}Border type="${t}" width="0.12 mm" color="${c}"/>`).join('');
+ const bf=(id,t,fill)=>`<hh:borderFill id="${id}" threeD="0" shadow="0" centerLine="NONE" breakCellSeparateLine="0"><hh:slash type="NONE" Crooked="0" isCounter="0"/><hh:backSlash type="NONE" Crooked="0" isCounter="0"/>${bd(t,'#555555')}<hh:diagonal type="SOLID" width="0.1 mm" color="#000000"/>${fill?`<hc:fillBrush><hc:winBrush faceColor="${fill}" hatchColor="#999999" alpha="0"/></hc:fillBrush>`:''}</hh:borderFill>`;
+ const cp=(id,h,bold)=>`<hh:charPr id="${id}" height="${h}" textColor="#000000" shadeColor="none" useFontSpace="0" useKerning="0" symMark="NONE" borderFillIDRef="1"><hh:fontRef ${seven(0)}/><hh:ratio ${seven(100)}/><hh:spacing ${seven(0)}/><hh:relSz ${seven(100)}/><hh:offset ${seven(0)}/>${bold?'<hh:bold/>':''}<hh:underline type="NONE" shape="SOLID" color="#000000"/><hh:strikeout shape="NONE" color="#000000"/><hh:outline type="NONE"/><hh:shadow type="NONE" color="#B2B2B2" offsetX="10" offsetY="10"/></hh:charPr>`;
+ const pp=(id,al)=>`<hh:paraPr id="${id}" tabPrIDRef="0" condense="0" fontLineHeight="0" snapToGrid="1" suppressLineNumbers="0" checked="0"><hh:align horizontal="${al}" vertical="BASELINE"/><hh:heading type="NONE" idRef="0" level="0"/><hh:breakSetting breakLatinWord="KEEP_WORD" breakNonLatinWord="KEEP_WORD" widowOrphan="0" keepWithNext="0" keepLines="0" pageBreakBefore="0" lineWrap="BREAK"/><hh:autoSpacing eAsianEng="0" eAsianNum="0"/><hh:margin><hc:intent value="0" unit="HWPUNIT"/><hc:left value="0" unit="HWPUNIT"/><hc:right value="0" unit="HWPUNIT"/><hc:prev value="0" unit="HWPUNIT"/><hc:next value="0" unit="HWPUNIT"/></hh:margin><hh:lineSpacing type="PERCENT" value="160" unit="HWPUNIT"/><hh:border borderFillIDRef="1" offsetLeft="0" offsetRight="0" offsetTop="0" offsetBottom="0" connect="0" ignoreMargin="0"/></hh:paraPr>`;
+ return `<?xml version="1.0" encoding="UTF-8" standalone="yes" ?><hh:head ${HXNS} version="1.4" secCnt="1"><hh:beginNum page="1" footnote="1" endnote="1" pic="1" tbl="1" equation="1"/><hh:refList><hh:fontfaces itemCnt="7">${ff}</hh:fontfaces><hh:borderFills itemCnt="3">${bf(1,'NONE')}${bf(2,'SOLID')}${bf(3,'SOLID','#EEF2EA')}</hh:borderFills><hh:charProperties itemCnt="4">${cp(0,1000)}${cp(1,1000,1)}${cp(2,1700,1)}${cp(3,900,1)}</hh:charProperties><hh:tabProperties itemCnt="1"><hh:tabPr id="0" autoTabLeft="0" autoTabRight="0"/></hh:tabProperties><hh:paraProperties itemCnt="4">${pp(0,'JUSTIFY')}${pp(1,'CENTER')}${pp(2,'RIGHT')}${pp(3,'LEFT')}</hh:paraProperties><hh:styles itemCnt="1"><hh:style id="0" type="PARA" name="바탕글" engName="Normal" paraPrIDRef="0" charPrIDRef="0" nextStyleIDRef="0" langID="1042" lockForm="0"/></hh:styles></hh:refList><hh:compatibleDocument targetProgram="HWP201X"><hh:layoutCompatibility/></hh:compatibleDocument><hh:docOption><hh:linkinfo path="" pageInherit="0" footnoteInherit="0"/></hh:docOption></hh:head>`;
+}
+function hxSection(B){
+ let pid=1,tid=1;
+ const P=(text,{al=0,cp=0}={})=>String(text==null?'':text).split('\n').map(t=>`<hp:p id="${pid++}" paraPrIDRef="${al}" styleIDRef="0" pageBreak="0" columnBreak="0" merged="0"><hp:run charPrIDRef="${cp}">${t?`<hp:t>${xe(t)}</hp:t>`:'<hp:t/>'}</hp:run></hp:p>`).join('');
+ const TW=48190;
+ const tbl=(rows,ws,al)=>{ /* rows: [[{text,label,span,rs,skip}]] ws: 열 너비 */
+  const rc=rows.length,cc=ws.length,RH=1700;
+  const trs=rows.map((r,ri)=>{let ci=0;return '<hp:tr>'+r.map(c=>{while(c._at!=null&&ci<c._at)ci++;const sp=c.span||1,w=ws.slice(ci,ci+sp).reduce((a,x)=>a+x,0),rs=c.rs||1;
+   const x=`<hp:tc name="" header="0" hasMargin="0" protect="0" editable="0" dirty="0" borderFillIDRef="${c.label?3:2}"><hp:subList id="" textDirection="HORIZONTAL" lineWrap="BREAK" vertAlign="${c.label?'CENTER':'TOP'}" linkListIDRef="0" linkListNextIDRef="0" textWidth="0" textHeight="0" hasTextRef="0" hasNumRef="0">${P(c.text,{al:c.label||c.center?1:3,cp:c.label?(c.small?3:1):0})}</hp:subList><hp:cellAddr colAddr="${ci}" rowAddr="${ri}"/><hp:cellSpan colSpan="${sp}" rowSpan="${rs}"/><hp:cellSz width="${w}" height="${(c.h||RH)*rs}"/><hp:cellMargin left="510" right="510" top="141" bottom="141"/></hp:tc>`;ci+=sp;return x}).join('')+'</hp:tr>'}).join('');
+  const W=ws.reduce((a,x)=>a+x,0),H=rows.reduce((a,r)=>a+(r[0]&&r[0].h||RH),0);
+  return `<hp:p id="${pid++}" paraPrIDRef="${al||0}" styleIDRef="0" pageBreak="0" columnBreak="0" merged="0"><hp:run charPrIDRef="0"><hp:tbl id="${tid++}" zOrder="0" numberingType="TABLE" textWrap="TOP_AND_BOTTOM" textFlow="BOTH_SIDES" lock="0" dropcapstyle="None" pageBreak="CELL" repeatHeader="0" rowCnt="${rc}" colCnt="${cc}" cellSpacing="0" borderFillIDRef="2" noAdjust="0"><hp:sz width="${W}" widthRelTo="ABSOLUTE" height="${H}" heightRelTo="ABSOLUTE" protect="0"/><hp:pos treatAsChar="1" affectLSpacing="0" flowWithText="1" allowOverlap="0" holdAnchorAndSO="0" vertRelTo="PARA" horzRelTo="COLUMN" vertAlign="TOP" horzAlign="LEFT" vertOffset="0" horzOffset="0"/><hp:outMargin left="0" right="0" top="0" bottom="0"/><hp:inMargin left="510" right="510" top="141" bottom="141"/>${trs}</hp:tbl><hp:t/></hp:run></hp:p>`;
+ };
+ const body=B.map(b=>{
+  if(b.t==='title')return P('')+P(b.text,{al:1,cp:2})+P('');
+  if(b.t==='approval'){const n=b.labels.length,ws=[2000].concat(Array(n).fill(4800));
+   return tbl([[{text:'결\n재',label:1,small:1,rs:2,h:1300}].concat(b.labels.map(l=>({text:l,label:1,small:1,h:1300}))),b.labels.map((l,i)=>({text:'',_at:i+1,h:2600}))],ws,2)}
+  if(b.t==='sign')return P('')+P(b.date,{al:2})+P(`작성자  ${b.name||'            '}  (서명)`,{al:2});
+  if(b.t==='center')return P(b.text,{al:1,cp:b.bold?1:0});
+  if(b.t==='gap'||b.t==='line')return P('');
+  if(b.t==='p')return P(b.text,{cp:b.bold?1:0});
+  if(b.t==='table'){const cols=Math.max(...b.rows.map(r=>r.reduce((n,c)=>n+(c.span||1),0)));
+   const tw=b.w&&b.w.length===cols?b.w.reduce((a,x)=>a+x,0):cols;const ws=(b.w&&b.w.length===cols?b.w:Array(cols).fill(1)).map(x=>Math.floor(TW*x/tw));
+   return tbl(b.rows.map(r=>r.map(c=>({text:c.text,label:c.label||c.q,span:c.span,center:c.opt}))),ws,0)}
+  return '';}).join('');
+ const sec=`<hp:p id="0" paraPrIDRef="0" styleIDRef="0" pageBreak="0" columnBreak="0" merged="0"><hp:run charPrIDRef="0"><hp:secPr id="" textDirection="HORIZONTAL" spaceColumns="1134" tabStop="8000" tabStopVal="4000" tabStopUnit="HWPUNIT" outlineShapeIDRef="0" memoShapeIDRef="0" textVerticalWidthHead="0" masterPageCnt="0"><hp:grid lineGrid="0" charGrid="0" wonggojiFormat="0"/><hp:startNum pageStartsOn="BOTH" page="0" pic="0" tbl="0" equation="0"/><hp:visibility hideFirstHeader="0" hideFirstFooter="0" hideFirstMasterPage="0" border="SHOW_ALL" fill="SHOW_ALL" hideFirstPageNum="0" hideFirstEmptyLine="0" showLineNumber="0"/><hp:lineNumberShape restartType="0" countBy="0" distance="0" startNumber="0"/><hp:pagePr landscape="WIDELY" width="59528" height="84186" gutterType="LEFT_ONLY"><hp:margin header="4252" footer="4252" gutter="0" left="5669" right="5669" top="4252" bottom="4252"/></hp:pagePr><hp:pageBorderFill type="BOTH" borderFillIDRef="1" textBorder="PAPER" headerInside="0" footerInside="0" fillArea="PAPER"><hp:offset left="1417" right="1417" top="1417" bottom="1417"/></hp:pageBorderFill></hp:secPr><hp:t/></hp:run></hp:p>`;
+ return `<?xml version="1.0" encoding="UTF-8" standalone="yes" ?><hs:sec ${HXNS}>${sec}${body}</hs:sec>`;
+}
+function hwpxEntries(B){return [
+ ['mimetype','application/hwp+zip'],
+ ['version.xml','<?xml version="1.0" encoding="UTF-8" standalone="yes" ?><hv:HCFVersion xmlns:hv="http://www.hancom.co.kr/hwpml/2011/version" tagetApplication="WORDPROCESSOR" major="5" minor="1" micro="0" buildNumber="1" os="1" xmlVersion="1.4" application="Hancom Office Hangul" appVersion="11, 0, 0, 0"/>'],
+ ['META-INF/container.xml','<?xml version="1.0" encoding="UTF-8" standalone="yes" ?><ocf:container xmlns:ocf="urn:oasis:names:tc:opendocument:xmlns:container" xmlns:hpf="http://www.hancom.co.kr/schema/2011/hpf"><ocf:rootfiles><ocf:rootfile full-path="Contents/content.hpf" media-type="application/hwpml-package+xml"/></ocf:rootfiles></ocf:container>'],
+ ['META-INF/manifest.xml','<?xml version="1.0" encoding="UTF-8" standalone="yes" ?><odf:manifest xmlns:odf="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"/>'],
+ ['Contents/content.hpf','<?xml version="1.0" encoding="UTF-8" standalone="yes" ?><opf:package xmlns:opf="http://www.idpf.org/2007/opf/" xmlns:hpf="http://www.hancom.co.kr/schema/2011/hpf" version="" unique-identifier="" id=""><opf:metadata><opf:title>'+xe(DOCN||'문서')+'</opf:title><opf:language>ko</opf:language></opf:metadata><opf:manifest><opf:item id="header" href="Contents/header.xml" media-type="application/xml"/><opf:item id="section0" href="Contents/section0.xml" media-type="application/xml"/><opf:item id="settings" href="settings.xml" media-type="application/xml"/></opf:manifest><opf:spine><opf:itemref idref="header" linear="yes"/><opf:itemref idref="section0" linear="yes"/></opf:spine></opf:package>'],
+ ['Contents/header.xml',hxHeader()],
+ ['Contents/section0.xml',hxSection(B)],
+ ['settings.xml','<?xml version="1.0" encoding="UTF-8" standalone="yes" ?><ha:HWPApplicationSetting xmlns:ha="http://www.hancom.co.kr/hwpml/2011/app" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0"><ha:CaretPosition listIDRef="0" paraIDRef="0" pos="0"/></ha:HWPApplicationSetting>']]}
+function dlHwp(){saveFile(DOCN+'.hwpx',new Blob([zipStore(hwpxEntries(DOCB))],{type:MIME.hwpx}),null)}
+function dlPdf(){const w=window.open('','_blank');if(!w){toast('팝업이 막혔어요 · 팝업 허용 후 다시 눌러 주세요');return}
+ const css='body{font-family:Pretendard,"Malgun Gothic",sans-serif;color:#111;font-size:14px;margin:0}.d-title{text-align:center;font-size:1.5em;font-weight:900;margin:0 0 .6em;letter-spacing:4px}.d-table{width:100%;border-collapse:collapse;margin:.4em 0}.d-table th,.d-table td{border:1px solid #555;padding:7px 9px;vertical-align:top;text-align:left;word-break:keep-all;line-height:1.6}.d-table th{background:#EEF2EA;text-align:center;vertical-align:middle;white-space:nowrap;width:1%}.d-appr{margin:0 0 6px auto;border-collapse:collapse;font-size:.8em}.d-appr th,.d-appr td{border:1px solid #555;text-align:center;padding:2px 6px;min-width:4.4em}.d-appr th{background:#EEF2EA}.d-appr td{height:3em}.d-appr .d-appr-h{min-width:1.6em;width:1.6em}.d-sign{text-align:right;margin-top:8px;line-height:1.9}.d-sign p{margin:0;white-space:pre}.d-sign-n{display:inline-block;min-width:6em;border-bottom:1px solid #999}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{size:A4;margin:15mm}';
+ w.document.write(`<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${esc(DOCN)}</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"><style>${css}</style></head><body>${blocksHTML(DOCB)}<script>window.onload=function(){setTimeout(function(){window.print()},400)}<\/script></body></html>`);w.document.close();toast('인쇄 창에서 "PDF로 저장"을 고르세요')}
+function dlBtns(){return `<span class="dlb"><button class="btn p" onclick="dlDoc()">워드</button><button class="btn p" onclick="dlHwp()">한글</button><button class="btn p" onclick="dlPdf()">PDF</button></span>`}
+
 let DOCB=[],DOCN='';function dlDoc(){saveFile(DOCN+'.docx',new Blob([zipStore(Object.entries(docxFiles(blocksDocx(DOCB))))],{type:MIME.docx}),null)}
 
 /* ================= ② 계획·일지 (선택 → 서술형) ================= */
@@ -884,16 +937,40 @@ ITY.crisis=ITY.home;ITY.care=ITY.day;ITY.donor=ITY.event;
 function planSteps(k,bn,p){const K=KIND[k],I=(ITY[itype(bn,p)]||ITY.day).map(x=>x.replace('{p}',p));return K.steps.map((s,i)=>[s[0],s[1],i===0?I[0]+'. '+s[2]:i===2?s[2]+'. '+I[1]:i===3?s[2]+'. '+I[2]:s[2]])}
 const pastS=t=>t.split('. ').map(x=>toPast(x)).join('. ');
 function stepTxt(k,past,bn,p){return planSteps(k,bn||BN(),p||P()).map((s,i)=>`${i+1}. ${s[0]}${s[1]?'('+s[1]+'분)':''}: ${past?pastS(s[2]):s[2]}.`).join('\n')}
-VIEWS.plan=()=>{S.pl=S.pl??0;S.gg=S.gg??0;S.ss=S.ss??0;S.rc=S.rc??0;S.cg=S.cg||[0,2];S.nx=S.nx??0;const b=B();
+const GX=['사회성 향상','자기결정 경험','여가 활용 능력','지역사회 참여','자존감·성취감','정서 안정','보호자 연계 강화','건강 관리'];
+function GG(b){const a=(b.g||[]).slice();GX.forEach(x=>{if(!a.includes(x))a.push(x)});return a}
+const QT=['아동','청소년','성인','중장년','보호자·가족','지역 주민'];
+const QM=['개별','소그룹(3~5명)','집단(6명 이상)','가족 참여','지역 연계'];
+const QL=['복지관 프로그램실','야외','지역사회 시설','가정 방문','온라인'];
+const QH=['40분','60분','90분','120분'];
+const QE=['관찰 기록','만족도 조사','사전·사후 검사','사진·작품 기록','보호자 의견'];
+const PLAB=['프로그램명','사업명','목적','목표','대상·인원','일시·장소','운영 횟수','진행 내용','준비물','인력·역할','예산','기대 효과','평가 방법'];
+const JLAB=['프로그램명','일시','장소','참여자','담당자','활동 목표','진행 내용','참여 모습','평가','특이사항','다음 회기 계획','결재'];
+function ghAug(rows,pl){const qt=QT[S.qt||0],qm=QM[S.qm||0],ql=QL[S.ql||0],qh=QH[S.qh??1],qe=(S.qe&&S.qe.length?S.qe:[0,1]).map(i=>QE[i]).filter(Boolean);
+ return rows.map(r=>{const[l,t]=r;
+  if(l==='대상·인원')return[l,`${qt} · ${qm} / ${V('people')||'[인원]'}`];
+  if(l==='참여자')return[l,`${qt} · ${qm} / ${V('people')||'[참여 인원]'}`];
+  if(l==='일시·장소')return[l,`${V('date')||'[일시]'} / ${V('place')||ql}`];
+  if(l==='장소')return[l,V('place')||ql];
+  if(l==='운영 횟수')return[l,String(t).replace(/회당 약 \d+분/,'회당 '+qh)];
+  if(l==='평가 방법')return[l,qe.map(x=>'· '+x).join('\n')];
+  return r})}
+function apprPanel(){const c=sgc();return `<div class="xp"><div class="dt-r"><b>결재란</b>${[0,2,3,4].map(n=>`<button class="dchip${c.n==n?' on':''}" onclick="sgN(${n});render()">${n?n+'칸':'없음'}</button>`).join('')}</div>${c.n?`<div class="dt-r"><b>이름</b><span class="dlab">${c.labels.map((l,i)=>`<input value="${esc(l)}" onchange="sgL(${i},this.value);RIGHT()">`).join('')}</span></div>`:''}<div class="dt-r"><b>서명란</b><label class="dck"><input type="checkbox" ${c.sign?'checked':''} onchange="sgc().sign=this.checked;save();RIGHT()">문서 아래 작성일·서명란 넣기</label></div></div>`}
+function itemPanel(key,labs){const hid=(S.hid&&S.hid[key])||[],add=(S.add&&S.add[key])||[];return `<div class="xp"><div class="dt-r"><b>빼기</b><select onchange="if(this.value){hideRow('${key}',this.value);render()}"><option value="">뺄 항목 고르기</option>${labs.filter(l=>!hid.includes(l)).map(l=>`<option>${esc(l)}</option>`).join('')}</select></div><div class="dt-r"><b>추가</b><input id="addrow" placeholder="추가할 항목 (쉼표로 여러 개)"><button class="dchip" onclick="addRow('${key}');render()">추가</button></div>${hid.length||add.length?`<div class="dt-r"><b>바뀜</b><span style="font-size:13px">${hid.length?'뺀 항목: '+esc(hid.join(', ')):''}${hid.length&&add.length?' · ':''}${add.length?'추가: '+esc(add.join(', ')):''}</span><button class="dchip" onclick="restoreRows('${key}');render()">처음 항목으로</button></div>`:''}</div>`}
+VIEWS.plan=()=>{S.pl=S.pl??0;S.qh=S.qh??1;S.gg=S.gg??0;S.ss=S.ss??0;S.rc=S.rc??0;S.cg=S.cg||[0,2];S.nx=S.nx??0;const b=B();
  if(S.kd==null||!KIND[KN[S.kd]])S.kd=KN.indexOf(KDEF[itype(BN(),P())]||'만들기');
  const pl=S.pl;
  return view('계획·일지',
  `<div class="ptabs"><button class="pt${pl?'':' on'}" onclick="S.pl=0;save();render()">프로그램 계획서</button><button class="pt${pl?' on':''}" onclick="S.pl=1;save();render()">프로그램 일지</button></div>
- ${bizPick()}<div class="gl">활동 종류 <small>고르면 진행 내용이 바뀌어요</small></div>${chips('kd',KN)}
- <div class="gl">목표</div>${chips('gg',b.g)}
- ${pl?`<div class="gl">참여 모습</div>${chips('rc',REACT)}<div class="gl">눈에 띈 변화 <small>여러 개</small></div>${mchips('cg',CHG)}<div class="gl">다음 회기</div>${chips('nx',NEXT)}`:`<div class="gl">운영 횟수</div>${chips('ss',['1회','4회기','8회기','12회기','연중'])}`}
- <div class="gl">추가 입력 정보 <small>말하기 버튼으로 말해도 돼요</small></div>${field('date','일시')}${field('place','장소')}${field('people',pl?'참여 인원':'대상·인원')}${field('staff','담당자')}${pl?field('react','기억에 남는 모습'):field('pbud','예산')}`,
- ()=>{const p=P(),bn=BN(),k=KN[S.kd],K=KIND[k],g=b.g[S.gg]||'',ss=['1회','4회기','8회기','12회기','연중'][S.ss];
+ ${bizPick()}<div class="qrow"><div class="gl">활동 종류 <small>고르면 진행 내용이 바뀌어요</small></div>${chips('kd',KN)}</div>
+ <div class="qrow"><div class="gl">목표</div>${chips('gg',GG(b))}</div>
+ <div class="qrow"><div class="gl">대상</div>${chips('qt',QT)}</div>
+ <div class="qrow"><div class="gl">운영 방식</div>${chips('qm',QM)}</div>
+ <div class="qrow"><div class="gl">장소</div>${chips('ql',QL)}</div>
+ ${pl?`<div class="qrow"><div class="gl">참여 모습</div>${chips('rc',REACT)}</div><div class="qrow"><div class="gl">눈에 띈 변화 <small>여러 개</small></div>${mchips('cg',CHG)}</div><div class="qrow"><div class="gl">다음 회기</div>${chips('nx',NEXT)}</div>`:`<div class="qrow"><div class="gl">운영 횟수</div>${chips('ss',['1회','4회기','8회기','12회기','연중'])}</div><div class="qrow"><div class="gl">회당 시간</div>${chips('qh',QH)}</div><div class="qrow"><div class="gl">평가 방법 <small>여러 개</small></div>${mchips('qe',QE)}</div>`}
+ <div class="gl">추가 입력 정보</div><div class="ptabs sm xtab">${['입력','결재란·서명란','항목 빼기·추가'].map((t,i)=>`<button class="pt${(S.xt||0)==i?' on':''}" onclick="S.xt=${i};save();render()">${t}</button>`).join('')}</div>
+ ${(S.xt||0)==1?apprPanel():(S.xt||0)==2?itemPanel('pl'+pl,pl?JLAB:PLAB):field('date','일시')+field('place','장소')+field('people',pl?'참여 인원':'대상·인원')+field('staff','담당자')+(pl?field('react','기억에 남는 모습'):field('pbud','예산'))}`,
+ ()=>{const p=P(),bn=BN(),k=KN[S.kd],K=KIND[k],g=GG(b)[S.gg]||'',ss=['1회','4회기','8회기','12회기','연중'][S.ss];
  let rows;
  if(!pl){
   const tot=K.steps.reduce((a,s)=>a+s[1],0);
@@ -905,11 +982,11 @@ VIEWS.plan=()=>{S.pl=S.pl??0;S.gg=S.gg??0;S.ss=S.ss??0;S.rc=S.rc??0;S.cg=S.cg||[
   const nTxt={'같은 활동 한 번 더':`다음 회기에도 ${k} 활동을 한 번 더 진행해 익숙해지도록 한다.`,'난이도 한 단계 올리기':'다음 회기에는 단계를 하나 더 추가해 난이도를 한 단계 올린다.','시간을 짧게 조정':'집중 시간을 고려해 다음 회기는 활동 시간을 짧게 나누어 진행한다.','보호자와 결과 공유':'오늘 활동 사진과 변화 내용을 보호자에게 공유해 가정에서도 칭찬과 연습이 이어지도록 한다.'};
   rows=[['프로그램명',`${p} (${k})`],['일시',F('date')],['장소',F('place')],['참여자',F('people','참여 인원')],['담당자',F('staff')],['활동 목표',`${g} — ${K.goal}`],['진행 내용',stepTxt(k,1)],['참여 모습',`${rTxt} ${cg.map(c=>cTxt[c]).join(' ')}${rv?'\n특히 '+rv.replace(/[.。]$/,'')+'.':''}`],['평가',`${k} 활동은 "${g}" 목표에 맞게 진행되었으며, ${S.rc===2?'개별 지원 방법을 보완할 필요가 있다.':'참여자의 긍정적인 반응을 확인하였다.'}`],['특이사항','[건강·안전·정서 변화가 있으면 기록, 없으면 "특이사항 없음"]'],['다음 회기 계획',nTxt[NEXT[S.nx]]],['결재','담당 [   ]   팀장 [   ]   관장 [   ]']];
  }
- rows=rowsMod('pl'+pl,rows);const ttl=pl?'프로그램 일지':'프로그램 계획서';DOCB=docB(ttl,rows);DOCN=ttl+'_'+p;
+ rows=ghAug(rows,pl);rows=rowsMod('pl'+pl,rows);const ttl=pl?'프로그램 일지':'프로그램 계획서';DOCB=docB(ttl,rows);DOCN=ttl+'_'+p;
  const txt=ttl+'\n'+rows.map(r=>'['+r[0]+']\n'+r[1]).join('\n\n');
  const pr=`너는 ${ORG} 사회복지사야. 첨부한 우리 복지관 ${ttl} 서식의 칸 이름·순서·표 모양은 그대로 두고, 아래 초안 내용으로 칸을 채워 줘.\n[필수] 진행 내용은 서술형 문장 유지 · 자료에 없는 숫자는 [확인 필요] · 이용자는 가명(이용자A)\n[금지] 서식에 없는 항목 추가 · 실명·연락처\n같은 서식의 한글(.hwpx) 파일로 줘. 파일이 안 되면 "칸 이름 | 내용" 표로 줘.\n\n${txt}`;
  CUR=()=>pr;
- return aiBar(ttl+' 서식',()=>pr)+docTools('pl'+pl,rows)+`<div class="out docv" style="white-space:normal"><div class="dpaper">${blocksHTML(DOCB)}</div></div>`})};
+ return `<div class="bar"><span class="t">${ttl} 서식</span><button class="btn" onclick="copyTxt(CUR())">AI용 복사</button>${dlBtns()}</div><div class="out docv" style="white-space:normal"><div class="dpaper">${blocksHTML(DOCB)}</div></div>`})};
 function fmtCell(s){return esc(s).replace(/\n/g,'<br>').replace(/\[([^\]]*)\]/g,'<span style="color:#a85a00">[$1]</span>')}
 /* ================= 메모·녹음 → 서식 ================= */
 const MFORM=['회의록','공문','프로그램 계획서','프로그램 일지','상담일지','사례회의록','기타 서식'];
@@ -996,7 +1073,7 @@ VIEWS.month=()=>{if(S.mm==null)S.mm=Math.min(11,new Date().getMonth()+1)%12;S.mt
  return aiBar(`${m}월 추천 프로그램 5가지 · ${esc(p)}`,()=>pr)+`<div class="mcards">${list.map((I,i)=>`<section class="mcard${op===i?' open':''}"><div class="mch"><span class="no">${i+1}</span><b>${esc(I.t.replace(p+' · ',''))}</b><small>${esc(I.kind)}</small></div>
  <div class="mcb"><div><span class="lb">진행 방법</span>${esc(I.how)}</div><div><span class="lb">준비물</span>${I.items.map(x=>`<i>${esc(x)}</i>`).join('')}</div></div>
  <ol class="mst">${I.steps.map(s=>`<li><u>${esc(s[0])}${s[1]?' '+s[1]+'분':''}</u> ${esc(s[2])}</li>`).join('')}</ol>
- <div class="mct"><button class="pt${op===i&&!lg?' on':''}" onclick="S.mo=(S.mo===${i}&&!S.mlg)?-1:${i};S.mlg=0;save();RIGHT()">프로그램 계획서</button><button class="pt${op===i&&lg?' on':''}" onclick="S.mo=(S.mo===${i}&&S.mlg)?-1:${i};S.mlg=1;save();RIGHT()">프로그램 일지</button>${op===i?'<button class="btn p" style="margin-left:auto" onclick="dlDoc()">워드로 받기</button>':''}</div>
+ <div class="mct"><button class="pt${op===i&&!lg?' on':''}" onclick="S.mo=(S.mo===${i}&&!S.mlg)?-1:${i};S.mlg=0;save();RIGHT()">프로그램 계획서</button><button class="pt${op===i&&lg?' on':''}" onclick="S.mo=(S.mo===${i}&&S.mlg)?-1:${i};S.mlg=1;save();RIGHT()">프로그램 일지</button>${op===i?'<span style="margin-left:auto"></span>'+dlBtns():''}</div>
  ${op===i?`<div class="mform"><div class="dpaper">${blocksHTML(DOCB)}</div></div>`:''}</section>`).join('')}</div>`})};
 /* ================= ④ 문자·소통 ================= */
 const MSGS=['프로그램 참여 안내','일정 변경 안내','접수·대기 결과','보호자께 근황','보호자 상담 안내','치료·수업 결과 안내','어려운 이야기 전하기','자원봉사자 안내','협력기관 협조 요청','명절·절기 인사','기타'];

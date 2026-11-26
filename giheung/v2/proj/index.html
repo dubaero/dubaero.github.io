@@ -6009,5 +6009,16 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  if(hh==='doc'||hh==='pr'||/^dw-/.test(hh)){try{go(hh);}catch(e){}}else if(drawer&&!drawer.hidden)try{dwRender();}catch(e){}
 })();
 </script>
+<!-- 2026.11.26 글꼴 통일: 계획서 서식과 같은 Pretendard, 보통 굵기 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style id="gh-font">
+body,body *:not(svg):not(path){font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif!important}
+body{font-weight:400;color:#263331;letter-spacing:-.2px}
+p,li,td,dd,span,div,label,textarea,input,select,.ins,.ins .r div,.ask,.s,.note,.it p{font-weight:400}
+b,strong,th,h1,h2,h3,h4,.btn,button,.n{font-weight:700}
+#dw-body .ins,#dw-body .ins .r div,#dw-body .ask,#dw-body .it p,#dw-body ol li,#dw-body .src td{color:#263331;font-size:16px;line-height:1.75}
+#dw-body .note{font-size:14px;line-height:1.6;color:#4a5552}
+#dw-body mark.hl{background:linear-gradient(transparent 62%,#cfe9c2 62%);color:#1d2826;font-weight:500;padding:0 1px}
+</style>
 </body>
 </html>
