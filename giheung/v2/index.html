@@ -843,7 +843,7 @@ function restoreRows(key){if(S.hid)S.hid[key]=[];if(S.add)S.add[key]=[];save();R
 function addRow(key){const el=document.getElementById('addrow');const v=(el&&el.value||'').trim();if(!v)return;S.add=S.add||{};v.split(',').map(x=>x.trim()).filter(Boolean).forEach(x=>(S.add[key]=S.add[key]||[]).push(x));save();RIGHT()}
 function docB(title,rows){const c=sgc(),B=[];if(c.n)B.push({t:'approval',labels:c.labels});B.push({t:'title',text:title});B.push({t:'table',w:[1,4],rows:rows.map(r=>[{text:r[0],label:1},{text:r[1]}])});if(c.sign){const d=new Date();B.push({t:'sign',date:`${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}.`,name:V('staff')||''})}return B}
 function docTools(key,rows){const c=sgc(),S0=(S.hid&&S.hid[key]||[]).length+(S.add&&S.add[key]||[]).length;
- return `<div class="dtool"><div class="dt-r"><b>결재란</b>${[0,2,3,4].map(n=>`<button class="dchip${c.n==n?' on':''}" onclick="sgN(${n})">${n?n+'칸':'없음'}</button>`).join('')}${c.n?`<span class="dlab">${c.labels.map((l,i)=>`<input value="${esc(l)}" onchange="sgL(${i},this.value);RIGHT()">`).join('')}</span>`:''}<label class="dck"><input type="checkbox" ${c.sign?'checked':''} onchange="sgc().sign=this.checked;save();RIGHT()">서명란</label></div>
+ return `<div class="dtool"><div class="dt-r"><b>결재란</b>${[0,2,3,4].map(n=>`<button class="dchip${c.n==n?' on':''}" onclick="sgN(${n});flashPrev('appr',${n})">${n?n+'칸':'없음'}</button>`).join('')}${c.n?`<span class="dlab">${c.labels.map((l,i)=>`<input value="${esc(l)}" onchange="sgL(${i},this.value);RIGHT()">`).join('')}</span>`:''}<label class="dck"><input type="checkbox" ${c.sign?'checked':''} onchange="sgc().sign=this.checked;save();RIGHT();flashPrev('sign',this.checked)">서명란</label></div>
  <div class="dt-r"><b>항목</b><select onchange="if(this.value)hideRow('${key}',this.value)"><option value="">− 뺄 항목 고르기</option>${rows.map(r=>`<option>${esc(r[0])}</option>`).join('')}</select><input id="addrow" placeholder="+ 추가할 항목 (쉼표로 여러 개)"><button class="dchip" onclick="addRow('${key}')">추가</button>${S0?`<button class="dchip" onclick="restoreRows('${key}')">처음 항목으로</button>`:''}<span style="margin-left:auto"></span>${dlBtns()}</div></div>`}
 /* ---- 2026.11.26 워드·한글(.hwpx)·PDF 받기 ---- */
 const HXNS='xmlns:ha="http://www.hancom.co.kr/hwpml/2011/app" xmlns:hp="http://www.hancom.co.kr/hwpml/2011/paragraph" xmlns:hs="http://www.hancom.co.kr/hwpml/2011/section" xmlns:hc="http://www.hancom.co.kr/hwpml/2011/core" xmlns:hh="http://www.hancom.co.kr/hwpml/2011/head"';
@@ -955,21 +955,21 @@ function ghAug(rows,pl){const qt=QT[S.qt||0],qm=QM[S.qm||0],ql=QL[S.ql||0],qh=QH
   if(l==='운영 횟수')return[l,String(t).replace(/회당 약 \d+분/,'회당 '+qh)];
   if(l==='평가 방법')return[l,qe.map(x=>'· '+x).join('\n')];
   return r})}
-function apprPanel(){const c=sgc();return `<div class="xp"><div class="dt-r"><b>결재란</b>${[0,2,3,4].map(n=>`<button class="dchip${c.n==n?' on':''}" onclick="sgN(${n});render()">${n?n+'칸':'없음'}</button>`).join('')}</div>${c.n?`<div class="dt-r"><b>이름</b><span class="dlab">${c.labels.map((l,i)=>`<input value="${esc(l)}" onchange="sgL(${i},this.value);RIGHT()">`).join('')}</span></div>`:''}<div class="dt-r"><b>서명란</b><label class="dck"><input type="checkbox" ${c.sign?'checked':''} onchange="sgc().sign=this.checked;save();RIGHT()">문서 아래 작성일·서명란 넣기</label></div></div>`}
-function itemPanel(key,labs){const hid=(S.hid&&S.hid[key])||[],add=(S.add&&S.add[key])||[];return `<div class="xp"><div class="dt-r"><b>빼기</b><select onchange="if(this.value){hideRow('${key}',this.value);render()}"><option value="">뺄 항목 고르기</option>${labs.filter(l=>!hid.includes(l)).map(l=>`<option>${esc(l)}</option>`).join('')}</select></div><div class="dt-r"><b>추가</b><input id="addrow" placeholder="추가할 항목 (쉼표로 여러 개)"><button class="dchip" onclick="addRow('${key}');render()">추가</button></div>${hid.length||add.length?`<div class="dt-r"><b>바뀜</b><span style="font-size:13px">${hid.length?'뺀 항목: '+esc(hid.join(', ')):''}${hid.length&&add.length?' · ':''}${add.length?'추가: '+esc(add.join(', ')):''}</span><button class="dchip" onclick="restoreRows('${key}');render()">처음 항목으로</button></div>`:''}</div>`}
+function apprPanel(){const c=sgc();return `<div class="xp"><div class="dt-r"><b>결재란</b>${[0,2,3,4].map(n=>`<button class="dchip${c.n==n?' on':''}" onclick="sgN(${n});render();flashPrev('appr',${n})">${n?n+'칸':'없음'}</button>`).join('')}</div>${c.n?`<div class="dt-r"><b>이름</b><span class="dlab">${c.labels.map((l,i)=>`<input value="${esc(l)}" onchange="sgL(${i},this.value);RIGHT()">`).join('')}</span></div>`:''}<div class="dt-r"><b>서명란</b><label class="dck"><input type="checkbox" ${c.sign?'checked':''} onchange="sgc().sign=this.checked;save();RIGHT();flashPrev('sign',this.checked)">문서 아래 작성일·서명란 넣기</label></div></div>`}
+function itemPanel(key,labs){const hid=(S.hid&&S.hid[key])||[],add=(S.add&&S.add[key])||[];return `<div class="xp"><div class="dt-r"><b>빼기</b><select onchange="if(this.value){const v=this.value;hideRow('${key}',v);render();flashPrev('hide',v)}"><option value="">뺄 항목 고르기</option>${labs.filter(l=>!hid.includes(l)).map(l=>`<option>${esc(l)}</option>`).join('')}</select></div><div class="dt-r"><b>추가</b><input id="addrow" placeholder="추가할 항목 (쉼표로 여러 개)"><button class="dchip" onclick="addRow('${key}');render();flashPrev('add')">추가</button></div>${hid.length||add.length?`<div class="dt-r"><b>바뀜</b><span style="font-size:13px">${hid.length?'뺀 항목: '+esc(hid.join(', ')):''}${hid.length&&add.length?' · ':''}${add.length?'추가: '+esc(add.join(', ')):''}</span><button class="dchip" onclick="restoreRows('${key}');render()">처음 항목으로</button></div>`:''}</div>`}
 VIEWS.plan=()=>{S.pl=S.pl??0;S.qh=S.qh??1;S.gg=S.gg??0;S.ss=S.ss??0;S.rc=S.rc??0;S.cg=S.cg||[0,2];S.nx=S.nx??0;const b=B();
  if(S.kd==null||!KIND[KN[S.kd]])S.kd=KN.indexOf(KDEF[itype(BN(),P())]||'만들기');
  const pl=S.pl;
  return view('계획·일지',
  `<div class="ptabs"><button class="pt${pl?'':' on'}" onclick="S.pl=0;save();render()">프로그램 계획서</button><button class="pt${pl?' on':''}" onclick="S.pl=1;save();render()">프로그램 일지</button></div>
- ${bizPick()}<div class="qrow"><div class="gl">활동 종류 <small>고르면 진행 내용이 바뀌어요</small></div>${chips('kd',KN)}</div>
+ ${bizPick()}<div class="xbox"><div class="ptabs sm xtab">${['입력','결재란·서명란','항목 빼기·추가'].map((t,i)=>`<button class="pt${(S.xt||0)==i?' on':''}" onclick="S.xt=${i};save();render()">${t}</button>`).join('')}</div>
+ ${(S.xt||0)==1?apprPanel():(S.xt||0)==2?itemPanel('pl'+pl,pl?JLAB:PLAB):field('date','일시')+field('place','장소')+field('people',pl?'참여 인원':'대상·인원')+field('staff','담당자')+(pl?field('react','기억에 남는 모습'):field('pbud','예산'))}</div><div class="qrow"><div class="gl">활동 종류 <small>고르면 진행 내용이 바뀌어요</small></div>${chips('kd',KN)}</div>
  <div class="qrow"><div class="gl">목표</div>${chips('gg',GG(b))}</div>
  <div class="qrow"><div class="gl">대상</div>${chips('qt',QT)}</div>
  <div class="qrow"><div class="gl">운영 방식</div>${chips('qm',QM)}</div>
  <div class="qrow"><div class="gl">장소</div>${chips('ql',QL)}</div>
  ${pl?`<div class="qrow"><div class="gl">참여 모습</div>${chips('rc',REACT)}</div><div class="qrow"><div class="gl">눈에 띈 변화 <small>여러 개</small></div>${mchips('cg',CHG)}</div><div class="qrow"><div class="gl">다음 회기</div>${chips('nx',NEXT)}</div>`:`<div class="qrow"><div class="gl">운영 횟수</div>${chips('ss',['1회','4회기','8회기','12회기','연중'])}</div><div class="qrow"><div class="gl">회당 시간</div>${chips('qh',QH)}</div><div class="qrow"><div class="gl">평가 방법 <small>여러 개</small></div>${mchips('qe',QE)}</div>`}
- <div class="gl">추가 입력 정보</div><div class="ptabs sm xtab">${['입력','결재란·서명란','항목 빼기·추가'].map((t,i)=>`<button class="pt${(S.xt||0)==i?' on':''}" onclick="S.xt=${i};save();render()">${t}</button>`).join('')}</div>
- ${(S.xt||0)==1?apprPanel():(S.xt||0)==2?itemPanel('pl'+pl,pl?JLAB:PLAB):field('date','일시')+field('place','장소')+field('people',pl?'참여 인원':'대상·인원')+field('staff','담당자')+(pl?field('react','기억에 남는 모습'):field('pbud','예산'))}`,
+`,
  ()=>{const p=P(),bn=BN(),k=KN[S.kd],K=KIND[k],g=GG(b)[S.gg]||'',ss=['1회','4회기','8회기','12회기','연중'][S.ss];
  let rows;
  if(!pl){
@@ -2507,7 +2507,17 @@ document.head.insertAdjacentHTML('beforeend',`<style id="gh-apptop">
 if(typeof VIEW!=='undefined')render();
 })();</script>
 <script src="slides.js?v=7"></script>
-<script src="slides2.js?v=9"></script>
+<script src="slides2.js?v=10"></script>
+<script>/* 2026.11.26 결재란·서명란·항목 넣고 빼기: 미리보기에서 바로 보이게 */
+function flashPrev(k,v){setTimeout(()=>{const R=document.getElementById('R');if(!R)return;let el=null,msg='';
+ if(k==='appr'){el=R.querySelector('.d-appr')||[...R.querySelectorAll('table')].find(t=>/결\s*재/.test((t.rows[0]&&t.rows[0].textContent)||''));msg=v?'결재란 '+v+'칸을 넣었어요':'결재란을 뺐어요'}
+ else if(k==='sign'){el=R.querySelector('.d-sign')||[...R.querySelectorAll('p,div')].reverse().find(x=>/\(서명\)/.test(x.textContent)&&x.children.length<3);msg=v?'서명란을 넣었어요':'서명란을 뺐어요'}
+ else if(k==='hide'){msg='"'+v+'" 항목을 뺐어요'}
+ else if(k==='add'){const tb=[...R.querySelectorAll('table')].pop();el=tb&&tb.rows[tb.rows.length-1];msg='항목을 추가했어요'}
+ if(el){el.classList.add('xflash');el.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>el.classList.remove('xflash'),1800)}
+ let t=document.getElementById('xtoast');if(!t){t=document.createElement('div');t.id='xtoast';document.body.appendChild(t)}t.textContent=msg;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),1800)},60)}
+document.head.insertAdjacentHTML('beforeend','<style>.xbox{border:1.5px solid #F0B98C;background:#FFFBF6;border-radius:12px;padding:8px 10px;display:grid;gap:6px}.xbox .ptabs{margin:0}.xflash{outline:3px solid #E07A2E!important;outline-offset:3px;background:#FFF1E6!important;transition:background .3s}#xtoast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:#2F6B56;color:#fff;font-weight:700;font-size:15px;padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:.25s;z-index:9999}#xtoast.on{opacity:1;transform:translate(-50%,0)}</style>');
+</script>
 <style id="gh-home-theme">
 :root{--bg:#EEF6F0;--line:#D5E5DA}
 html,body{background:#EEF6F0!important}

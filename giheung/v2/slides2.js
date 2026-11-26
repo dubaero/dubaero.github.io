@@ -161,3 +161,25 @@ document.head.insertAdjacentHTML('beforeend','<style id="gh-hub">'
 +'</style>');
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
+/* 2026.11.26 모든 기능 장표를 플러그인 지도처럼: 순서 띠 + 가운데 기능 + 쓰임 카드 */
+(function(){
+var D=window.__SLD;
+function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+var SKIP={'ChatGPT|플러그인':1,'Claude|플러그인':1};
+function map(an,cn,x){var ic=window.__ic,kic=window.__kic||function(){return ''},lg=(window.__LOGO||{})[an]||'',fi=kic(cn)||kic(x.where.split('→').pop())||'spark';
+ var n=Math.max(x.when.length,x.out.length),cards=[];for(var i=0;i<n;i++){var w=x.when[i]||'',o=x.out[i]||'';var k=kic(o)||kic(w)||fi;
+  cards.push('<div class="hub-a"><div class="hub-ah"><span class="fm-i">'+ic(k,20)+'</span><span><small>이럴 때</small><b>'+e(w)+'</b></span></div>'+(o?'<p class="fm-o"><em>결과</em>'+e(o)+'</p>':'')+'</div>')}
+ return '<section class="hub"><h4>이렇게 써요</h4><div class="hub-st">'+x.how.map(function(s,i){var k=kic(s);return (i?'<em>›</em>':'')+'<span><i>'+(i+1)+'</i>'+(k?ic(k,16):'')+e(s)+'</span>'}).join('')+'</div>'+
+ '<div class="hub-m"><div class="hub-c"><span class="fm-c"><span class="hub-lg">'+lg+'</span><span class="fm-f">'+ic(fi,22)+'</span></span><b>'+e(cn)+'</b><small>'+e(x.t)+'</small></div><div class="hub-g">'+cards.join('')+'</div></div></section>'}
+function post(){if(typeof VIEW==='undefined'||VIEW!=='apps')return;var A=APPS[S.app||0];if(!A)return;var C=A.cards[S.fc||0];if(!C)return;var k=A.n+'|'+C.n,x=D[k];if(!x||SKIP[k])return;
+ var sld=document.querySelector('#R .sld');if(!sld||sld.dataset.m)return;sld.dataset.m=1;
+ var path=sld.querySelector('.sld-path'),say=sld.querySelector('.sld-say'),w=sld.querySelector('.sld-w');
+ var html=(path?path.outerHTML:'')+map(A.n,C.n,x)+'<div class="sld-g2 fm-2"><section><h4>무엇인가요</h4><p>'+e(x.what)+'</p></section><section><h4>장점</h4><ul>'+x.pros.map(function(p){return '<li>'+e(p)+'</li>'}).join('')+'</ul></section></div>'+(say?say.outerHTML:'')+(w?w.outerHTML:'');
+ sld.innerHTML=html;var cp=sld.querySelector('.sld-cp');if(cp)cp.onclick=function(){try{navigator.clipboard.writeText(x.say)}catch(er){}cp.textContent='복사됨';setTimeout(function(){cp.textContent='복사'},1200)}}
+var _r=render;render=function(){var r=_r.apply(this,arguments);try{post()}catch(er){console.error(er)}return r};
+document.head.insertAdjacentHTML('beforeend','<style id="gh-fm">.fm-c{display:flex;align-items:center;gap:6px}.fm-f{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#fff;border:1.5px solid #2F6B56;color:#2F6B56}.hub-c .hub-lg svg{width:44px;height:44px}'
++'.fm-i{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#F1F8F3;color:#2F6B56;flex:none}.hub-ah small{color:#C2652B!important;font-weight:800}.hub-ah b{font-size:14px!important;line-height:1.4}'
++'.fm-o{margin:0;background:#F7FBF8!important;border-radius:8px;padding:6px 8px!important;font-size:13px!important;font-weight:600}.fm-o em{font-style:normal;color:#2F6B56;font-weight:800;margin-right:6px}'
++'.fm-2{grid-template-columns:1.2fr 1fr!important}.sld-say{border:1px solid #E3ECE6;border-radius:12px;padding:12px 14px}.hub-c small{max-width:180px}</style>');
+if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
+})();
