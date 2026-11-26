@@ -216,3 +216,26 @@ document.head.insertAdjacentHTML('beforeend','<style id="gh-nb">.nb{border:1px s
 +'@media(max-width:1100px){.nb-g,.nb-b{grid-template-columns:repeat(2,minmax(0,1fr))}}</style>');
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
+/* 2026.11.26 AI 맞춤 설정 가이드: 자주 묻는 질문·비교표를 왼쪽에 표로 요약 */
+(function(){
+function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+var Q=[['대화가 기록에 안 남게','오른쪽 위 점선 연필 → 임시 채팅','오른쪽 위 말풍선 → 임시 채팅'],
+ ['AI 학습에 안 쓰이게','톱니바퀴 → 활동 → 활동 기록 보관 사용 중지','설정 → 데이터 관리 → 데이터 학습 허용 끄기'],
+ ['AI가 나를 기억 못 하게','톱니바퀴 → 개인 인텔리전스 → 메모리 끄기','설정 → 개인 맞춤 설정 → 메모리 끄기'],
+ ['매번 같은 설명 안 하게','개인 인텔리전스 → Gemini 요청 사항 → + 추가','개인 맞춤 설정 → 사용자 지정 지침'],
+ ['이미 남은 기록 지우기','톱니바퀴 → 활동 → 기록 삭제','대화 옆 ⋯ → 삭제 (설정 → 데이터 관리 → 모두 삭제)']];
+function sum(){var t=document.querySelector('#aig .aig-tbl table');
+ return '<div class="aigL"><h4>이럴 땐 이렇게</h4><table class="aigq"><thead><tr><th>하고 싶은 것</th><th>제미나이</th><th>ChatGPT</th></tr></thead><tbody>'+Q.map(function(r){return '<tr><th>'+e(r[0])+'</th><td>'+e(r[1])+'</td><td>'+e(r[2])+'</td></tr>'}).join('')+'</tbody></table>'+
+ (t?'<h4>설정별로 무엇이 남나요</h4>'+t.outerHTML.replace('<table','<table class="aigc"'):'')+'<p class="aigL-n">임시 채팅·기록 중지도 안전 확인을 위해 잠시(제미나이 72시간, ChatGPT 최대 30일) 보관돼요.</p></div>'}
+function put(){if(typeof VIEW==='undefined'||VIEW!=='apps')return;var A=APPS[S.app||0];if(!A||!A.aig)return;var bd=document.querySelector('#app .pane .bd');if(!bd||!document.getElementById('aig'))return;
+ var old=bd.querySelector('.aigL');var h=sum();if(old){if(old.outerHTML!==h)old.outerHTML=h}else bd.insertAdjacentHTML('beforeend',h);
+ var ag=document.getElementById('aig');if(ag&&!ag._o){ag._o=1;new MutationObserver(function(){clearTimeout(ag._t);ag._t=setTimeout(put,30)}).observe(ag,{childList:true,subtree:true})}}
+var _r=render;render=function(){var r=_r.apply(this,arguments);try{put()}catch(er){console.error(er)}return r};
+document.head.insertAdjacentHTML('beforeend','<style id="gh-aigL">#aig .aig-low,#aig .aig-tbl{display:none!important}'
++'.aigL{margin-top:12px;display:grid;gap:8px}.aigL h4{margin:4px 0 0;font-size:14.5px;font-weight:800;color:#1E5442;padding-bottom:4px;border-bottom:2px solid #E07A2E;justify-self:start}'
++'.aigL table{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.45;background:#fff}.aigL th,.aigL td{border:1px solid #D5E5DA;padding:6px 7px;vertical-align:top;text-align:left}'
++'.aigL thead th{background:#2F6B56;color:#fff;font-weight:700;text-align:center}.aigq tbody th{background:#FFF4EA;color:#9A4A12;font-weight:800;width:28%}.aigq td{font-weight:600}'
++'.aigc thead th,.aigc tr:first-child th,.aigc tr:first-child td{background:#2F6B56!important;color:#fff!important;text-align:center}.aigc td{text-align:center}.aigc tr>*:first-child{text-align:left;background:#F7FBF8;font-weight:700}'
++'.aigL-n{margin:0;font-size:12px;color:#66746f}</style>');
+if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
+})();
