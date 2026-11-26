@@ -1440,6 +1440,12 @@ body.gi-work .top .wrap{min-height:49px}
 }
 </style>
 
+<style id="extra-event-group">
+#dw-event-fields:not([hidden]){margin:8px 0}
+#v-event .gi-task .x2{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
+@media(min-width:900px) and (min-height:575px){body.gi-work #v-event .gi-task .x2>.col{min-height:0;max-height:none;overflow:auto;overscroll-behavior:contain;position:static}}
+@media(max-width:899px){#v-event .gi-task .x2{grid-template-columns:minmax(0,1fr)}#v-event .gi-pan-tabs{display:none}#v-event .gi-task .x2>.col{display:block;position:static;max-height:none;overflow:visible}}
+</style>
 <style id="giheung-brand">
 body{font-family:var(--ref-font)!important}
 button,input,textarea,select,pre{font-family:var(--ref-font)}
@@ -1632,7 +1638,7 @@ body:has(#v-groupref:not([hidden]))>main.wrap{width:100%;max-width:none;padding:
 body:has(#v-groupref:not([hidden]))>footer{display:none}
 #v-groupref{width:100%}
 </style>
-<script src="/giheung/workflow.js?v=19" defer></script>
+<script src="/giheung/workflow.js?v=20" defer></script>
 <style id="gh-clean-app-menu">
 #v-home [data-gh=mind] .flame{font-size:18px;line-height:1}#v-home [data-gh=heart] .ic{color:#E5568C;fill:#F7A6C4}
 @media(min-width:901px){#v-home .cols3>.bx:nth-child(2) .qgrid{grid-template-rows:repeat(3,minmax(0,1fr));align-content:stretch}#v-home .qgrid .qm{min-height:0;padding:5px 3px;gap:4px}#v-home .qgrid .qm .ic{width:20px;height:20px}}
@@ -7616,11 +7622,60 @@ function openMindLegacy(tab){
 }
 
 /* ---------- 라우팅 ---------- */
+var EVENT_DRAFT={};
+var EXTRA_EVENT_FIELDS=[
+ ['title','프로그램명','우리 동네 문화예술 체험'],
+ ['kind','행사 종류','나들이·체험 / 기념일 행사 / 캠프 / 지역 축제 부스'],
+ ['when','행사 일시','12월 5일 오후 2시~4시'],
+ ['where','장소','복지관 2층 프로그램실'],
+ ['recruit','모집 기간','11월 18일~11월 30일'],
+ ['target','참여 대상','복지관 이용자와 가족'],
+ ['people','모집 인원','15가족'],
+ ['method','신청 방법','복지관 홈페이지 신청 양식'],
+ ['contact','문의처','담당 부서 대표번호'],
+ ['price','참가비','무료'],
+ ['support','이동·안전 지원','휠체어 승차 가능 차량, 담당자 동행'],
+ ['memo','주요 활동·추가 안내','작품 만들기 · 우천 시 실내 진행']
+];
+function eventRows(prefix,v,fields){
+ return fields.map(function(f){return giInlineRow(prefix+f[0],f[1],v[f[0]],f[2],f[0]==='memo'?'area':'text');}).join('');
+}
+function eventRight(){
+ var v=EVENT_DRAFT,p='너는 장애인복지관 행사 담당자를 돕는 도우미야. 아래 확인된 정보로 행사 운영계획과 안전계획을 만들어 줘.\n\n[행사·프로그램 정보]\n'+EXTRA_EVENT_FIELDS.map(function(f){return f[1]+': '+((v[f[0]]||'').trim()||'[확인 필요]');}).join('\n')+'\n\n0. 서로 다른 운영 콘셉트 3개를 비교하고 추천안 1개를 고르기\n1. 시간대별 진행표: 시간·활동·준비물·담당자\n2. 접근성·안전: 이동과 보조, 응급 연락, 우천 대안 및 대피 동선\n3. 역할 분담과 행사 전·당일·종료 체크리스트\n4. 이용자·보호자에게 보낼 쉬운 안내문과 변경 안내 한 줄\n5. 행사 후 참여 의견과 개선 사항 확인 방법\n확인하지 않은 날짜·수치·연락처는 지어내지 말고 [확인 필요]로 남겨 줘.';
+ return aiStrip('event-prompt','행사·체험 프롬프트로 AI 열기')+outBlock('운영계획·안전계획 프롬프트','event-prompt',p);
+}
+function renderEvent(){
+ var left='<fieldset class="gi-inline-fields"><legend>행사·프로그램 정보</legend><p class="gh-sheet-tip">항목명 옆에 알고 있는 내용만 적으세요. 오른쪽 요청문이 바로 바뀌어요.</p>'+eventRows('event-',EVENT_DRAFT,EXTRA_EVENT_FIELDS)+'</fieldset>';
+ $('#v-event').innerHTML=x2('행사·체험','운영계획·안전계획 안내',left,eventRight(),null,null,true);
+}
+var PR_PROJECT_DRAFT={};
+function prProjectFields(){
+ return '<fieldset class="gi-inline-fields"><legend>행사·프로그램 정보</legend><p class="gh-sheet-tip">항목명 옆에 입력하면 오른쪽 첫 요청문에 반영돼요.</p>'+eventRows('dw-event-',PR_PROJECT_DRAFT,[['format','만들 홍보물','카드뉴스 / 포스터 / 블로그'],['purpose','홍보 목적','참여자 모집 / 행사 후기']].concat(EXTRA_EVENT_FIELDS.filter(function(f){return f[0]!=='kind';}),[['org','주최·주관','용인시기흥장애인복지관']]))+'</fieldset>';
+}
+function prProjectRequest(s){
+ const v=PR_PROJECT_DRAFT, val=k=>(v[k]||'').trim(), paired=(a,b)=>[val(a),val(b)].filter(Boolean).join(' · ');
+ const present=Object.keys(v).some(k=>val(k));if(!present)return s;
+ const mapped=[
+  ['만들 홍보물',val('format')],['프로그램명',val('title')],['홍보 목적',val('purpose')],['글 종류',val('purpose')],
+  ['참여 대상·인원',paired('target','people')],['행사 날짜·시간',val('when')],['장소',val('where')],
+  ['신청 방법·문의',paired('method','contact')],['신청 방법',val('method')],['모집 기간',val('recruit')],['문의 연락처',val('contact')],
+  ['참가비',val('price')],['주최·주관',val('org')],['주요 활동',val('memo')],['이동·안전',val('support')]
+ ];
+ const found=new Set();
+ const lines=s.split('\n').map(function(line){
+   const m=mapped.find(x=>x[1]&&line.indexOf(x[0])===0&&/[:：]/.test(line));
+   if(!m)return line;
+   found.add(m[0]);return line.replace(/([:：]).*$/,function(_,colon){return colon+' '+m[1];});
+ });
+ const extra=mapped.filter(x=>x[1]&&!found.has(x[0])&&!(x[0]==='글 종류'&&found.has('홍보 목적'))&&!(x[0]==='홍보 목적'&&found.has('글 종류'))&&!(x[0]==='신청 방법·문의'&&(found.has('신청 방법')||found.has('문의 연락처')))&&!(found.has('신청 방법·문의')&&['신청 방법','문의 연락처'].includes(x[0])));
+ if(extra.length)lines.push('','[그 밖에 확인된 행사 정보]',...extra.map(x=>x[0]+': '+x[1]));
+ return lines.join('\n');
+}
 var ROUTE={};
 function ensure(id,html){var n=$('#v-'+id);if(!n){n=document.createElement('div');n.id='v-'+id;n.hidden=true;n.innerHTML=html;$('main.wrap').appendChild(n);if(typeof VIEWS!=='undefined'&&VIEWS.indexOf(id)<0)VIEWS.push(id);}return n}
 function boot(){
   /* 새 화면 틀 만들기 */
-  ensure('appguide','');ensure('msg','');ensure('plan2','');ensure('promo2','');ensure('promomenu','');ensure('donate','');ensure('donwork','');ensure('planmenu','');ensure('mindwork','');
+  ensure('appguide','');ensure('event','');ensure('msg','');ensure('plan2','');ensure('promo2','');ensure('promomenu','');ensure('donate','');ensure('donwork','');ensure('planmenu','');ensure('mindwork','');
   ensure('mind','<div class="vbar"><button type="button" class="vback" data-home>← 업무도우미</button><h2>마음돌봄·사진관</h2><span class="tag">업무 감정 정리 · 응원엽서 · 잠깐 쉼 · 사진 실습</span></div><div class="mtabs" role="tablist">'+MIND.map(function(x){return '<button type="button" role="tab" aria-selected="false" data-mt="'+x[0]+'">'+x[1]+'</button>'+(x[0]==='heart'?'<button type="button" data-gh="appguide">AI 앱 설치</button>':'')}).join('')+'</div><button type="button" class="btn mini mind-work-alt" id="mind-work-alt" hidden>복지관 상황 보기</button><div id="mind-body"></div>');
   /* 홈 그리기 + 기존 홈 요소 정리 */
   var old=$('#main4');if(old)old.remove();
@@ -7770,6 +7825,12 @@ function boot(){
       ST_PR.sheetRaw=e.target.value;var p=sheetParse(ST_PR.sheetRaw,PR_SHEET);ST_PR.memo=p.memo;delete p.memo;ST_PR.fields=p;updateOutput('#v-promo2',promoRight);return;
     }
     if(e.target.id==='gm-input'){GM[gmMode].memo=e.target.value;updateOutput('#v-mindwork',gmRight);}
+    if(key&&key.startsWith('event-')){EVENT_DRAFT[key.slice(6)]=e.target.value;updateOutput('#v-event',eventRight);}
+    if(key&&key.startsWith('dw-event-')){
+      PR_PROJECT_DRAFT[key.slice(9)]=e.target.value;
+      var project=DW.find(function(x){return x.id===DWT&&x.g==='pr';}),first=$('#dw-live-first');
+      if(project&&first){window.dwFirst(project);first.innerHTML=promptMarkup(DWTXT.first);}
+    }
     if(key&&key.startsWith('plan-')){ST_PLAN[key.slice(5)]=e.target.value;updateOutput('#v-plan2',planRight);}
     if(key&&key.startsWith('don-')&&DONSTATE[donKey]){DONSTATE[donKey][key.slice(4)]=e.target.value;updateOutput('#v-donwork',donRight);}
     if(e.target.id==='pr-memo'){ST_PR.memo=e.target.value;updateOutput('#v-promo2',promoRight);}
@@ -7805,7 +7866,7 @@ window.dwFirst=function(d){
     if(biz!=='[사업명]'&&!lines.join('\n').includes(biz))lines.splice(2,0,'사업: '+biz);
     lines=lines.map(function(x){return /^기관명:\s*$/.test(x)?'기관명: 용인시기흥장애인복지관':x;});
   }
-  DWTXT.first=lines.join('\n');
+  DWTXT.first=d.g==='pr'?prProjectRequest(lines.join('\n')):lines.join('\n');
   if(chosen.length)DWTXT.first+='\n\n내가 소스에 넣은 자료: '+chosen.join(', ');
   return prev;
 };
@@ -7823,6 +7884,10 @@ window.dwRender=function(){
     $('#dw-tabs').after(guide);
   }
   var d=DW.find(function(z){return z.id===DWT&&z.g===DWG;});
+  var form=$('#dw-event-fields');
+  if(!form){form=document.createElement('div');form.id='dw-event-fields';$('#dw-tabs').after(form);}
+  form.hidden=DWG!=='pr';
+  if(!form.hidden&&!form.firstChild)form.innerHTML=prProjectFields();
   var tip=$('#dw-tabs').parentNode.querySelector(':scope > .hintl');
   if(tip)tip.hidden=!!d;
   if(!d){guide.innerHTML='<p class="hintl">위에서 업무를 고르면 오른쪽에 지침과 첫 프롬프트가 나옵니다.</p>';return;}
@@ -7877,6 +7942,7 @@ window.go=function(k){
   if(Object.hasOwn(GROUP_PANELS,k)){groupView(k);return;}
   if(k==='home'){if(location.hash.indexOf('#group-')===0)history.replaceState(history.state,'',location.pathname+location.search);show('home');return;}
   if(k==='appguide'){AG_TAB='install';renderAppGuide();show('appguide');return}
+  if(k==='event'){renderEvent();show('event');return}
   if(k==='msg'){renderMsg();show('msg');return}
   if(k==='planmenu'){selectPlanDraft('manual');renderPlan();show('plan2');return}
   if(k==='plan2'){renderPlan();show('plan2');return}
@@ -7902,7 +7968,7 @@ var _show=window.show;
 window.show=function(v){
   var body=document.body;
   if(_show)_show(v);
-  body.classList.toggle('gi-work',['msg','plan2','promo2','donwork','mindwork','planmenu','month'].indexOf(v)!==-1);
+  body.classList.toggle('gi-work',['event','msg','plan2','promo2','donwork','mindwork','planmenu','month'].indexOf(v)!==-1);
   fitH();if(v==='home'){body.classList.add('gh-mode')}else{body.classList.remove('gh-mode')}
   if(v==='mind'){body.classList.remove('gh-mode')}
 };
