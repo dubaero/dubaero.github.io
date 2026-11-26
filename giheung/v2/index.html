@@ -8,7 +8,7 @@
 <script src="/js/room-gate.js?v=2"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-:root{--w:#e2865a;--w2:#b45a2c;--wl:#fdf1ea;--wm:#f5d6c3;--g:#2a9d8f;--g2:#1f7268;--gl:#e9f6f4;--gm:#c6e7e2;--ink:#263331;--sub:#66746f;--line:#e4ebe9;--bg:#f7f9f8;--red:#d93a2b;--or:#fff3e6;--orT:#b0601a}
+:root{--w:#e2865a;--w2:#b45a2c;--wl:#fdf1ea;--wm:#f5d6c3;--g:#2a9d8f;--g2:#1f7268;--gl:#fdf0e6;--gm:#f6d2bb;--ink:#263331;--sub:#66746f;--line:#e4ebe9;--bg:#f7f9f8;--red:#d93a2b;--or:#fff3e6;--orT:#b0601a}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.55;letter-spacing:-.2px}
@@ -38,7 +38,7 @@ main{flex:1;min-height:0}
 .tile.app{font-size:15px;justify-content:center}
 /* homepage-style home (그룹홈 비서함 틀) */
 .hp{height:100%;display:flex;flex-direction:column;gap:12px;padding:12px 0 8px;min-height:0}
-.hhero{flex:none;background:linear-gradient(90deg,#fdf1e7 0%,#fbf6ef 50%,#eef8f6 100%);border:1px solid var(--line);border-radius:14px;display:grid;grid-template-columns:minmax(0,1fr) 34%;overflow:hidden;color:var(--ink);min-height:150px}
+.hhero{flex:none;background:linear-gradient(90deg,#fdeee2 0%,#fdf6ee 60%,#fbf3ea 100%);border:1px solid var(--line);border-radius:14px;display:grid;grid-template-columns:minmax(0,1fr) 34%;overflow:hidden;color:var(--ink);min-height:150px}
 .hhero .tx{padding:18px 24px;display:flex;flex-direction:column;justify-content:center;gap:5px;min-width:0}
 .hhero .bdg{font-size:13px;font-weight:800;color:var(--g2);display:flex;align-items:center;gap:6px}
 .hhero .kick{font-size:13px;font-weight:700;color:#b0601a}
@@ -301,6 +301,43 @@ table.form td{padding:7px 10px;border:1px solid var(--gm);vertical-align:top;lin
 .mk.info b{font-size:15px}.mk.info .nums{display:flex;gap:8px;margin:8px 0}.mk.info .nums span{flex:1;text-align:center;background:var(--wl);border-radius:8px;padding:6px;font-size:20px;font-weight:900;color:var(--w2)}.mk.info small{font-size:11px}.bars{display:grid;gap:4px}.bars i{height:8px;border-radius:4px;background:var(--g)}
 .mk.layers{height:130px}.ly{position:absolute;left:14%;right:14%;height:60px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12.5px;border:1px solid #0002}.l1{top:12px;background:#e7f2ef;transform:translateX(-14px)}.l2{top:36px;background:#fde4d6}.l3{top:60px;background:#fff;transform:translateX(14px)}.l3 b{color:var(--w2);margin-left:4px}
 .view .aig-cards{grid-template-columns:repeat(4,minmax(0,1fr))}.view .aig-card .aig-onoff,.view .aig-card .ex{display:none}.view .aig-steps2 figure{width:180px}.view .aig-steps2 img{max-height:260px}.view .aig-top{margin-bottom:8px}
+
+mark{background:#fde0c8;color:inherit;border-radius:3px;padding:0 2px}
+.sel2{display:grid;gap:6px;margin:4px 0}.sel2 label{display:flex;align-items:center;gap:8px}.sel2 span{flex:none;width:62px;font-size:13px;font-weight:800;color:var(--w2)}
+.sel2 select{flex:1;min-width:0;appearance:none;-webkit-appearance:none;border:1.5px solid var(--w);border-radius:10px;padding:9px 38px 9px 12px;font:inherit;font-size:15px;font-weight:700;color:var(--ink);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e2865a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;cursor:pointer}
+.sel2 select:focus{outline:0;box-shadow:0 0 0 3px var(--wl)}
+.qg{flex:1;grid-auto-rows:1fr}
+.hai{display:grid;gap:7px;flex:1;min-height:0;overflow:auto;align-content:start}
+.hai button{display:grid;grid-template-columns:38px 1fr auto;grid-template-rows:auto auto;align-items:center;column-gap:10px;text-align:left;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:10px;background:#fff;padding:8px 12px}
+.hai button:hover,.hai button.on{background:var(--wl)}
+.hai .lg{grid-row:1/3;width:38px;height:38px;border-radius:10px;background:var(--c);color:#fff;font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center}
+.hai b{font-size:15px;font-weight:800}.hai .d{grid-column:2;font-size:12px;color:var(--sub)}.hai .go{grid-row:1/3;grid-column:3;color:var(--c);font-size:20px;font-weight:900}
+.slide4{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:stretch;gap:6px;padding:14px 14px 6px}
+.sc{position:relative;border:2px solid var(--wm);background:var(--wl);border-radius:14px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px}
+.sc .no{position:absolute;top:-10px;left:-6px;width:26px;height:26px;border-radius:50%;background:var(--w);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center}
+.sic{width:60px;height:60px;border-radius:50%;background:#fff;color:var(--w);display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+.sc b{font-size:15px}.sc small{font-size:12.5px;color:var(--sub);line-height:1.5}.sc u{text-decoration-color:var(--w);text-decoration-thickness:2px;font-weight:800;color:var(--ink)}
+.sc.ai{border-color:var(--g);background:#fff}.sc.ai .sic{color:var(--g);background:#eef8f6}.sc.ai .no{background:var(--g)}
+.sc.ok{border-color:var(--w);background:#fff}
+.sar{align-self:center;font-size:26px;font-weight:900;color:var(--w)}
+.warnl{margin:4px 14px 6px;font-size:13px;font-weight:700;color:#a3400f;background:#fff4ec;border-radius:8px;padding:6px 10px}
+.ftb{width:100%;border-collapse:separate;border-spacing:0 5px;font-size:13.5px}.ftb th{text-align:left;font-size:12px;color:var(--sub);font-weight:700;padding:0 8px}
+.ftb td{background:#f6f8f7;padding:8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);cursor:pointer;color:var(--sub);letter-spacing:-.3px}.ftb td:first-child{border-left:1px solid var(--line);border-radius:8px 0 0 8px;color:var(--ink);white-space:nowrap}.ftb td:last-child{border-right:1px solid var(--line);border-radius:0 8px 8px 0;text-align:right}
+.ftb tr:hover td{background:var(--wl)}.ftb tr.on td{background:#fff;border-color:var(--c);color:var(--ink)}.ftb tr.on td:first-child{border-left:5px solid var(--c)}
+.hw{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);flex:none}.hl{flex:none;font-size:12.5px;font-weight:900;color:#fff;background:#2a9d8f;border-radius:6px;padding:3px 8px}
+.flw{display:flex;align-items:center;gap:5px;flex-wrap:wrap}.fs{display:inline-flex;align-items:center;gap:5px;background:var(--wl);border:1.5px solid var(--wm);border-radius:999px;padding:5px 12px 5px 5px;font-size:13.5px;font-weight:800}.fs b{width:20px;height:20px;border-radius:50%;background:var(--w);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center}.ar{color:var(--w);font-weight:900}
+.c2{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1.15fr;gap:10px;padding:10px 12px}
+.io{display:flex;flex-direction:column;align-items:stretch;gap:4px}.io .in{background:#f6f8f7;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:14px;font-weight:700}.io .lb{display:inline-block;font-size:11px;font-weight:900;color:#fff;background:var(--sub);border-radius:5px;padding:1px 6px;margin-right:6px}.io .ot .lb{background:var(--w);margin-bottom:4px}.io .arr{text-align:center;color:var(--w);font-weight:900}
+.dk h5{font-size:15px;margin:0 0 6px}.dk-row{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}.dk-vs{font-weight:900;color:var(--w);font-size:20px}
+.dk-c p{font-size:13.5px;margin:6px 0 0;line-height:1.55}
+.win{border:2px solid #2c3634;border-radius:10px;overflow:hidden;background:#fff}.tabs2{display:flex;gap:2px;background:#e6ebe9;padding:5px 5px 0}.tabs2 i{font-style:normal;font-size:11.5px;background:#d4dbd8;border-radius:6px 6px 0 0;padding:3px 8px}.tabs2 i.on{background:#fff;font-weight:800}
+.wbody{position:relative;height:120px;padding:12px}.ln{height:8px;border-radius:4px;background:#e6ebe9;margin-bottom:8px;width:85%}.ln.s{width:55%}
+.bounce{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:800;color:#a3400f;background:#fff4ec;border-radius:999px;padding:3px 10px;animation:bx 1.2s ease-in-out infinite alternate}@keyframes bx{from{transform:translateX(-70%)}to{transform:translateX(-30%)}}
+.float{position:absolute;right:10px;top:22px;width:52%;background:#fff;border:2px solid var(--g);border-radius:10px;box-shadow:0 6px 16px rgba(0,0,0,.15);padding:8px;font-size:11.5px}.float b{background:var(--g);color:#fff;border-radius:4px;padding:0 4px;margin-right:4px}.float span{display:block;margin-top:5px;background:var(--wl);border-radius:6px;padding:3px 6px}
+.key{position:absolute;left:12px;bottom:10px;font-size:12px;font-weight:900;background:#2c3634;color:#fff;border-radius:6px;padding:3px 8px;box-shadow:0 3px 0 #000}
+.dk-h{font-size:15px;margin:14px 0 6px;color:var(--w2)}
+.dk-3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.dk-3>div{border:1px solid var(--wm);background:var(--wl);border-radius:12px;padding:10px;font-size:13px;line-height:1.5;color:var(--sub)}.dk-3 b{display:block;font-size:14.5px;color:var(--ink);margin:4px 0 2px}.dk-3 .ic{display:inline-flex;width:38px;height:38px;border-radius:50%;background:#fff;color:var(--w);align-items:center;justify-content:center}
+.ex2>div{background:#fff}.mini{display:flex;gap:4px;height:46px}.mini .d{flex:2;border-radius:6px;background:#e6ebe9;font-size:11px;font-weight:800;color:var(--sub);display:flex;align-items:center;justify-content:center}.mini .d.x{background:#fde4d6;color:#a3400f}.mini .d.f{background:#eef3f1}.mini .p{flex:1;border-radius:6px;background:var(--g);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
@@ -485,7 +522,7 @@ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 function mic(k,btn){if(!SR)return;const r=new SR();r.lang='ko-KR';r.interimResults=false;btn.classList.add('rec');btn.textContent='듣는 중';
  r.onresult=e=>{const t=e.results[0][0].transcript;if(k==='_ib'){const ta=document.getElementById('ibox');ta.value=ta.value.replace(/\s*$/,'')+' '+t;ibIn(ta.value);return}S[k]=((S[k]||'')+' '+t).trim();save();const el=document.getElementById('f_'+k);if(el)el.value=S[k];if(window.RIGHT)RIGHT()};
  r.onend=()=>{btn.classList.remove('rec');btn.textContent='말하기'};r.start()}
-let BZO=false;function bizPick(noProg){const b=B();const head=`<button class="bzh${BZO?' open':''}" onclick="BZO=!BZO;render()"><span class="k">사업</span><b>${esc(BN())}</b>${noProg?'':`<span class="k">프로그램</span><b>${esc(P())}</b>`}<span class="arw">${BZO?'접기 ▲':'사업 바꾸기 ▼'}</span></button>`;if(!BZO)return head;return head+`<div class="bzb"><div class="gl">사업</div>${chips('b',BIZ.map(x=>x.n))}${noProg?'':`<div class="gl">프로그램 <small>고르면 접혀요</small></div>${b.n==='기타'?field('custom','사업·프로그램'):chips('p',b.p)}`}</div>`}
+let BZO=false;function bizPick(noProg){const b=B();return `<div class="sel2"><label><span>사업</span><select onchange="setS('b',+this.value)">${BIZ.map((x,i)=>`<option value="${i}"${(S.b??0)==i?' selected':''}>${esc(x.n)}</option>`).join('')}</select></label>${noProg?'':(b.n==='기타'?field('custom','사업·프로그램'):`<label><span>프로그램</span><select onchange="setS('p',+this.value)">${b.p.map((x,i)=>`<option value="${i}"${(S.p??0)==i?' selected':''}>${esc(x)}</option>`).join('')}</select></label>`)}</div>`}
 function f2(...a){return a.join('')}
 function steps(a){return `<div class="steps">${a.map((s,i)=>`<div class="st"><b class="n">${i+1}</b><span>${s}</span></div>`).join('')}</div>`}
 function pane(title,body){return `<section class="pane"><div class="hd"><button class="back" onclick="go('home')">← 홈</button><h2>${title}</h2></div><div class="bd">${body}</div></section>`}
@@ -518,7 +555,7 @@ const HL=[
 ['블로그·인스타·홈페이지 글',"S.pr=1;go('promo')",''],
 ['맞춤형 프롬프트 생성',"go('gen')",'']];
 const HQ=[['msg','mail','문자·소통','보호자·이용자 문자'],['promo','mega','홍보·안내','소식·SNS·포스터'],['donor','heart','후원 관리','감사·사용 안내'],['plan','doc','계획·일지','프로그램 계획→일지'],['month','cal','이달의 추천','월별 프로그램 5'],['room','spark','프롬프트 디자인실','업무·일상 프롬프트'],['memo','mic','메모·녹음','회의록·서식 채우기'],['vent','fire','빡침 번역기','공감→순화 문구'],['mind','leaf','마음챙김','나를 위한 5줄']];
-const HA=['ChatGPT','제미나이','Claude','Canva','데스크톱 앱'];
+const HA=[['ChatGPT','이미지·GIF·편집·메모→서식','#10a37f','G'],['제미나이','인포그래픽·음악·영상·노트북','#4285f4','G'],['Claude','디자인·슬라이드·한글 서식','#d97757','C'],['Canva','AI 발표 자료·매직 레이어','#7d2ae8','C'],['AI 설정 따라 하기','메모리·임시 채팅·학습 끄기','#2f6b56','설'],['데스크톱 앱','웹과 차이·설치·활용','#b45a2c','PC']];
 const HLK=[['사회복지법인 양지바른','http://www.yangjibr.or.kr/','법인 소식·공지'],['보건복지부 공지사항','https://www.mohw.go.kr/board.es?mid=a10501010100&bid=0003','지침·공고 확인'],['한국장애인복지관협회','https://www.hinet.or.kr/','협회 공지·교육'],['용인특례시','https://www.yongin.go.kr/index.do','시 공지·보조금']];
 VIEWS.home=()=>`<div class="hp">
 <section class="hhero"><div class="tx"><span class="bdg">${sv('sprout',18)}사회복지법인 양지바른 · 용인시기흥장애인복지관</span><span class="kick">종사자 AI 실무 교육 · 업무도우미</span><h1>함께여서 빛나는 업무, <em>AI 업무도우미</em></h1><p class="sub">사업 문서는 프로젝트로, 문자·홍보·일지는 고르고 적으면 바로 완성으로.</p>
@@ -526,11 +563,11 @@ VIEWS.home=()=>`<div class="hp">
 <div class="cols">
 <section class="col"><h3>업무 서식·프로젝트<small>시연용</small></h3><ul class="ol" id="hl">${HL.map((h,i)=>`<li data-k="${h[0]}"><span class="no">${i+1}</span><span class="nm" onclick="${h[1]};save()">${h[0]}</span>${h[2]?`<span class="tg">${h[2]}</span>`:''}<button class="ob" onclick="${h[1]};save()">${sv('pen',13)}열기</button></li>`).join('')}</ul></section>
 <section class="col"><h3>업무 바로가기</h3><div class="qg" id="hq">${HQ.map(([k,ic,n,d])=>`<button class="q" data-k="${n} ${d}" onclick="go('${k}')">${sv(ic)}<b>${n}</b><span>${d}</span></button>`).join('')}</div>
-<div class="aig"><div class="t">AI 앱 활용법<small>기능·사용법·프롬프트</small></div><div class="r">${HA.map((n,i)=>`<button data-k="${n}" onclick="S.app=${i};S.fc=0;S.sub=0;save();go('apps')">${n}</button>`).join('')}</div></div></section>
-<section class="col"><h3>관련 기관 바로가기</h3><div class="lk">${HLK.map(([t,u,d])=>`<a data-k="${t}" href="${u}" target="_blank" rel="noopener">${t}<span>${d}</span>${sv('link',14)}</a>`).join('')}</div>
+</section>
+<section class="col"><h3>AI 앱 활용법<small>기능 · 사용법 · 프롬프트</small></h3><div class="hai">${HA.map((h,i)=>`<button data-k="${h[0]}" style="--c:${h[2]}" onclick="S.app=${i};S.fc=0;save();go('apps')"><span class="lg">${h[3]}</span><b>${h[0]}</b><span class="d">${h[1]}</span><span class="go">›</span></button>`).join('')}</div>
 <div class="ghelp"><b>꼭 지켜요</b> 실명 대신 이용자A · 주민번호·진단명·연락처 넣지 않기 · AI 초안은 직접 확인</div></section>
 </div></div>`;
-function hsearch(q){q=q.trim();document.querySelectorAll('#hl li,#hq .q,.lk a,.aig button').forEach(e=>{const m=!q||e.dataset.k.includes(q);e.style.opacity=m?1:.3;e.classList.toggle('on',!!q&&m)})}
+function hsearch(q){q=q.trim();document.querySelectorAll('#hl li,#hq .q,.hai button').forEach(e=>{const m=!q||e.dataset.k.includes(q);e.style.opacity=m?1:.3;e.classList.toggle('on',!!q&&m)})}
 
 /* ================= ① 업무 프로젝트 ================= */
 const DOCS=['사업계획서','결과보고서','홍보물'];
@@ -633,9 +670,7 @@ const MFORM=['회의록','공문','프로그램 계획서','프로그램 일지'
 const MIN=['손글씨 메모 사진','화이트보드 사진','녹음 파일','받아쓴 글'];
 VIEWS.memo=()=>{S.mf=S.mf??0;S.mi=S.mi??0;return view('메모·녹음 → 서식',
  `<div class="gl">만들 서식</div>${chips('mf',MFORM,1)}<div class="gl">넣을 것</div>${chips('mi',MIN)}
- <div class="gl">추가 정보</div>${field('date','일시')}${field('mextra','참석자·덧붙일 말',1,'팀장, 담당자2 / 결정사항 꼭 표로')}
- <div class="gl">따라 하기</div>${steps(S.mi===2?['녹음은 <b>클로바노트</b>로 글로 바꾸거나, ChatGPT·제미나이 <b>+</b>에 녹음 파일 첨부','우리 서식(한글은 <b>HWPX로 저장</b>)도 함께 첨부','오른쪽 프롬프트 붙여넣기 → 한글 파일로 받아 확인']:['메모·사진을 ChatGPT·제미나이 입력창 <b>+</b>로 첨부','우리 서식(한글은 <b>HWPX로 저장</b>)도 함께 첨부','오른쪽 프롬프트 붙여넣기 → 한글 파일로 받아 확인'])}
- <div class="note">한글 파일로 안 나오면 "칸 이름 | 내용" 표로 받아 원본 서식에 붙여넣기 (워드 변환은 서식이 깨져요)</div>`,
+ <div class="gl">추가 정보</div>${field('date','일시')}${field('mextra','참석자·덧붙일 말',1,'팀장, 담당자2 / 결정사항 꼭 표로')}`,
  ()=>{const f=MFORM[S.mf],i=MIN[S.mi];const t=`너는 ${ORG}의 ${M('문서 작성 실무 전문가')}야.
 첨부한 ${M(i)}의 내용을, 함께 첨부한 우리 복지관 ${M(f)} 서식에 맞춰 채워 줘.
 [규칙]
@@ -645,8 +680,14 @@ VIEWS.memo=()=>{S.mf=S.mf??0;S.mi=S.mi??0;return view('메모·녹음 → 서식
 - 읽기 어려운 글자는 [판독 불가]로 표시하고 마지막에 목록으로
 - 사람 이름은 직책(팀장·담당자)으로, 이용자는 가명
 - 완성본은 같은 서식의 ${M('한글(.hwpx) 파일')}로. 안 되면 "칸 이름 | 내용" 표로
-[추가 정보] 일시: ${F('date')} / ${V('mextra')||'[참석자·덧붙일 말]'}`;return outBox(f+' 채우기 프롬프트',t)})};
-
+[추가 정보] 일시: ${F('date')} / ${V('mextra')||'[참석자·덧붙일 말]'}`;CUR=()=>t;
+ const rec=S.mi===2;
+ return aiBar(f+' 채우기 프롬프트',()=>t)+`<div class="slide4"><div class="sc"><span class="no">1</span><div class="sic">${sv(rec?'mic':'pen',34)}</div><b>${esc(i)}</b><small>${rec?'휴대폰 녹음 · 클로바노트':'휴대폰으로 찍기'}</small></div><span class="sar">+</span>
+ <div class="sc"><span class="no">2</span><div class="sic">${sv('doc',34)}</div><b>우리 ${esc(f)} 서식</b><small>한글 → 다른 이름으로 저장 → <u>HWPX</u></small></div><span class="sar">→</span>
+ <div class="sc ai"><span class="no">3</span><div class="sic">${sv('spark',34)}</div><b>ChatGPT · 제미나이</b><small><u>+</u> 로 두 파일 첨부 → 아래 프롬프트 붙여넣기</small></div><span class="sar">→</span>
+ <div class="sc ok"><span class="no">4</span><div class="sic">${sv('doc',34)}</div><b>완성 ${esc(f)}</b><small>한글 파일로 받기<br>안 되면 "칸 이름 | 내용" 표</small></div></div>
+ <div class="warnl">워드로 받아 한글에서 열면 서식이 깨져요 → 한글(HWPX) 파일 또는 표로 받아 원본에 붙여넣기</div>
+ <div class="out" style="flex:1">${fmt(t)}</div>`})};
 /* ================= ③ 이달의 추천 ================= */
 const MI=[0,
 {s:'겨울',e:'새해',f:'떡국',pl:'실내 체험관'},{s:'겨울',e:'설날·졸업',f:'붕어빵',pl:'박물관'},{s:'봄',e:'새 학기',f:'딸기',pl:'공원 산책로'},
@@ -1000,23 +1041,56 @@ info:`<div class="mk info"><b>${T} 결과</b><div class="nums"><span>120<small>�
 table:`<div class="mk doc"><div class="mk-t">조사 보고서</div><table><tr><th>사례</th><td>출처 링크</td></tr><tr><th>적용</th><td>우리 기관 아이디어</td></tr></table></div>`,
 layers:`<div class="mk layers"><div class="ly l1">배경</div><div class="ly l2">인물</div><div class="ly l3">글자 <b>수정 가능</b></div></div>`};return M[t]||''}
 let ZM=null;function zoomImg(u){const z=document.createElement('div');z.className='aig-zoom';z.innerHTML='<img src="'+u+'" alt="">';z.onclick=()=>z.remove();document.body.appendChild(z)}
+const FLX={
+'ChatGPT|이미지 만들기':[['+ 버튼','이미지 만들기','스타일 고르기','프롬프트 붙여넣기','다운로드'],'포스터·초대장·감사 카드','"요리교실 모집 포스터, 수채화"'],
+'ChatGPT|이미지 편집 화면':[['이미지 클릭','붓으로 문지르기','"이 부분만 바꿔 줘"','다운로드'],'날짜·오타·배경만 고치기','포스터 + "날짜만 12월 18일로"'],
+'ChatGPT|움짤 GIF':[['+ 사진 첨부','움직임 고르기','프롬프트 붙여넣기','GIF 다운로드'],'3초 움직이는 인사·캐릭터','활동 사진 1장 + "손 흔들기"'],
+'ChatGPT|라이브러리':[['왼쪽 메뉴 이미지','예전 이미지 고르기','"같은 그림체로"','시리즈 완성'],'같은 그림체 카드뉴스 시리즈','1월 소식지 표지 이미지'],
+'ChatGPT|핀터레스트 레퍼런스':[['핀터레스트 검색','이미지 저장','+ 첨부','시안 2개 고르기'],'참고 디자인을 닮은 새 포스터','마음에 드는 포스터 1장'],
+'ChatGPT|메모·녹음 → 서식':[['+ 메모·녹음','+ 서식(HWPX)','프롬프트 붙여넣기','한글 파일 받기'],'회의록·일지 서식 채우기','회의 메모 사진 + 회의록 서식'],
+'ChatGPT|5가지 모드 한눈에':[[],'Chat·Project·Work·Codex·Dot 비교',''],
+'제미나이|나노바나나 인포그래픽':[['도구','이미지 만들기','숫자 붙여넣기','다운로드'],'결과 한 장 인포그래픽·도표','참여 120명 · 만족도 94% · 12회'],
+'제미나이|음악 30초':[['도구','음악 만들기','분위기·주제 입력','MP3 다운로드'],'30초 주제가·행사 음악','"요리교실 즐거워, 밝고 신나게"'],
+'제미나이|영상 만들기':[['도구','동영상 만들기','장면 설명','MP4 다운로드'],'8초 홍보 영상','"공원 나들이 장면"'],
+'제미나이|노트북':[['노트북','소스 추가(PDF)','질문하기','출처 번호 확인'],'지침 근거 찾기·표 정리','사업안내 PDF + "올해 바뀐 점"'],
+'제미나이|핀터레스트 레퍼런스':[['이미지 저장','+ 첨부','이미지 만들기','시안 다듬기'],'한글이 정확한 새 포스터','마음에 드는 포스터 1장'],
+'Claude|디자인':[['프롬프트 붙여넣기','옆 화면에 디자인','글자 직접 수정','PDF 저장'],'안내지·포스터·순서지','"송년회 순서지 A4로"'],
+'Claude|슬라이드':[['자료 첨부','"슬라이드로 만들어 줘"','장표 수정','PPT 다운로드'],'보고·발표 PPT','결과보고서 + "10장으로"'],
+'Claude|모션그래픽':[['프롬프트 붙여넣기','움직이는 화면 재생','Win+Alt+R 녹화','MP4 저장'],'로비 TV 움직이는 안내','"모집 안내 15초로"'],
+'Claude|한글 서식 스킬':[['코드 실행 켜기','스킬 ZIP 올리기','HWPX 서식 첨부','한글 파일 받기'],'서식 그대로 한글 파일','사업계획서 서식 + 메모'],
+'Claude|깊은 조사':[['리서치 켜기','주제 입력','몇 분 조사','출처 보고서'],'출처 달린 조사 보고서','"다른 복지관 우수 사례"'],
+'Canva|AI 프레젠테이션':[['Canva AI','프레젠테이션','프롬프트 붙여넣기','PPT 다운로드'],'디자인까지 된 발표 자료','"사업 소개 10장"'],
+'Canva|매직 레이어':[['이미지 업로드','수정','Magic Layers','틀린 글자 고치기'],'AI 이미지 글자만 수정','오타 난 AI 포스터'],
+'Canva|원고 → PPT 흐름':[['Claude로 원고','Canva AI에 붙여넣기','색·글꼴 맞추기','발표 노트'],'원고로 만드는 PPT','장표 원고 10장']};
+const fx=(A,C)=>FLX[A.n+'|'+C.n]||[[],'',''];
+function flow(a){return `<div class="flw">${a.map((x,i)=>(i?'<span class="ar">→</span>':'')+`<span class="fs"><b>${i+1}</b>${x}</span>`).join('')}</div>`}
+const DESK=`<div class="dk">
+<div class="dk-row"><div class="dk-c"><h5>웹 (인터넷 창)</h5><div class="win"><div class="tabs2"><i>한글 문서</i><i>메일</i><i class="on">ChatGPT</i><i>엑셀</i></div><div class="wbody"><div class="ln"></div><div class="ln s"></div><div class="ln"></div><div class="bounce">탭을 왔다 갔다</div></div></div><p>인터넷 창 안의 <b>탭 하나</b>예요. 한글 쓰다가 물어보려면 창을 바꿔야 해요.</p></div>
+<div class="dk-vs">VS</div>
+<div class="dk-c"><h5>데스크톱 앱 (내 PC 프로그램)</h5><div class="win"><div class="tabs2"><i class="on">한글 · 2026 사업계획서</i></div><div class="wbody"><div class="ln"></div><div class="ln s"></div><div class="ln"></div><div class="float"><b>AI</b> 무엇을 도와드릴까요?<span>이 표 문장 다듬어 줘</span></div><div class="key">Alt + Space</div></div></div><p>한글·엑셀 <b>위에 바로 떠요</b>. 단축키 한 번이면 지금 보는 화면 그대로 물어봐요.</p></div></div>
+<h4 class="dk-h">왜 데스크톱 앱을 쓰나요?</h4>
+<div class="dk-3"><div><span class="ic">${sv('spark',22)}</span><b>단축키 한 번</b>Alt + Space로 어떤 화면에서든 바로 열기</div><div><span class="ic">${sv('search',22)}</span><b>화면 보며 질문</b>지금 보는 한글·엑셀 화면을 보여 주고 질문</div><div><span class="ic">${sv('doc',22)}</span><b>내 PC 파일로 작업</b>폴더 파일을 바로 넣고, Work·Cowork로 여러 단계 일 맡기기</div></div>
+<h4 class="dk-h">이렇게 써요</h4>
+<div class="dk-3 ex2"><div><div class="mini"><span class="d">한글</span><span class="p">AI</span></div><b>계획서 쓰다가 바로 질문</b>한글 화면 그대로 Alt+Space → "이 문단 공문체로"</div><div><div class="mini"><span class="d x">엑셀 #오류</span><span class="p">AI</span></div><b>오류 화면 보여 주기</b>엑셀 오류 창을 보여 주고 "왜 이래?"</div><div><div class="mini"><span class="d f">폴더 12개 파일</span><span class="p">AI</span></div><b>폴더째 맡기기</b>"이 폴더 일지 12개로 월 보고서 만들어 줘"</div></div>
+<button class="btn" style="margin-top:8px" onclick="zoomImg('/img/giheung/apps.webp')">설치 방법 장표 크게 보기 (ChatGPT · 제미나이 · Claude)</button></div>`;
 VIEWS.apps=()=>{S.app=S.app??0;S.fc=S.fc??0;S.ao=S.ao??0;S.ab=S.ab??0;const A=APPS[S.app]||APPS[0];
  const appTabs=`<div class="atabs">${APPS.map((a,i)=>`<button class="at${S.app==i?' on':''}" style="--c:${a.col}" onclick="S.app=${i};S.fc=0;S.ao=0;save();render()">${a.n}</button>`).join('')}</div>`;
  if(A.aig)return view('AI 앱 활용법',appTabs+`<div class="gl">이 화면에서 배우는 것</div>${steps(['<b>맞춤 설정·지침</b>: 매번 "나는 복지관 직원이야" 설명 안 하기','<b>메모리</b>: AI가 나를 기억하게 / 못 하게','<b>임시 채팅</b>: 기록에 안 남는 대화','<b>학습 끄기</b>: 내 대화가 AI 공부 재료로 안 쓰이게'])}<div class="tipbox"><span class="tt">따라 하는 법</span>오른쪽 위에서 <b>제미나이 / ChatGPT</b>를 고르고, 카드를 누르면 아래에 <b>실제 화면 사진</b>이 순서대로 나와요. 사진을 누르면 크게 보여요.</div>`,
   ()=>{setTimeout(()=>window.AIG&&AIG.bind(),0);return `<div class="out" style="white-space:normal">${AIG.html()}</div>`});
- if(A.desk)return view('AI 앱 활용법',appTabs+`<div class="gl">데스크톱 앱이 좋은 이유</div>${steps(['<b>단축키 한 번</b>(Alt+Space)으로 한글·엑셀 작업 중 바로 질문','작업 창 옆에 띄워 놓고 <b>화면·파일을 보면서</b> 대화','ChatGPT <b>Work·Codex</b>, Claude <b>Cowork</b>는 데스크톱 앱에서','같은 계정으로 로그인하면 웹 대화·프로젝트 그대로'])}<div class="gl">다운로드</div><div class="dls"><a href="https://chatgpt.com/download/" target="_blank" rel="noopener" style="--c:#10a37f"><b>ChatGPT</b>chatgpt.com/download</a><a href="https://gemini.google/kr/desktop/" target="_blank" rel="noopener" style="--c:#4285f4"><b>제미나이</b>gemini.google/kr/desktop</a><a href="https://claude.com/download" target="_blank" rel="noopener" style="--c:#d97757"><b>Claude</b>claude.com/download</a></div><div class="tipbox"><span class="tt">설치는 3단계</span>① 다운로드 페이지 접속 → ② "Windows용 다운로드" 클릭 → 설치 파일 실행 → ③ 내 계정으로 로그인. 기관 PC는 설치 권한이 필요할 수 있어요.</div>`,
-  ()=>`<div class="bar"><span class="t">PC에 AI 비서 들이기 — 데스크톱 앱 3종</span><span class="sub2">사진을 누르면 크게 보여요</span></div><div class="out" style="white-space:normal;padding:12px"><img class="bigimg" src="/img/giheung/apps.webp" alt="ChatGPT, 제미나이, Claude 데스크톱 앱 다운로드 화면과 설치 3단계" onclick="zoomImg(this.src)"><div class="cmp" style="margin-top:10px"><div><h4>웹 (브라우저)</h4><ul><li>설치 없이 어느 PC에서나</li><li>탭을 오가며 찾아야 함</li><li>파일은 매번 올리기</li></ul></div><div style="border-color:var(--g);background:var(--gl)"><h4>데스크톱 앱</h4><ul><li><mark>단축키 한 번</mark>으로 열기</li><li>작업 창 옆에 바로 띄우기</li><li><mark>화면·파일 보면서</mark> 질문</li></ul></div></div></div>`);
+ if(A.desk)return view('AI 앱 활용법',appTabs+`<div class="gl">다운로드 <small>누르면 공식 페이지</small></div><div class="dls"><a href="https://chatgpt.com/download/" target="_blank" rel="noopener" style="--c:#10a37f"><b>ChatGPT</b>chatgpt.com/download</a><a href="https://gemini.google/kr/desktop/" target="_blank" rel="noopener" style="--c:#4285f4"><b>제미나이</b>gemini.google/kr/desktop</a><a href="https://claude.com/download" target="_blank" rel="noopener" style="--c:#d97757"><b>Claude</b>claude.com/download</a></div><div class="gl">설치 3단계</div>${flow(['다운로드 페이지','Windows용 다운로드','설치 후 로그인'])}<div class="tipbox"><span class="tt">알아 두세요</span>설치는 모두 무료예요. 기관 PC는 설치 권한이 필요할 수 있어요. ChatGPT와 제미나이는 단축키가 같아서 한쪽 설정에서 바꿔 두세요.</div>`,
+  ()=>`<div class="bar"><span class="t">데스크톱 앱이 뭐예요?</span><span class="sub2">웹과 무엇이 다르고, 왜 쓰는지</span></div><div class="out" style="white-space:normal;padding:12px 16px">${DESK}</div>`);
  const C=A.cards[S.fc]||A.cards[0];
- const left=appTabs+`<div class="gl">기능 <small>눌러 보세요</small></div><div class="fcards">${A.cards.map((c,i)=>`<button class="fc${S.fc==i?' on':''}" style="--c:${A.col}" onclick="S.fc=${i};S.ao=0;save();render()">${c.n}<span class="badge ${c.f?'free':'paid'}">${c.f?'무료':'유료'}</span></button>`).join('')}</div>`
-  +(C.full?'':`<div class="gl">${C.ol}</div>${chips('ao',C.o)}<div class="gl">사업</div>${chips('ab',AB)}`)+`<div class="note">무료·유료는 2026.11.26 확인 기준이며 바뀔 수 있어요</div>`;
+ const ftbl=`<table class="ftb"><thead><tr><th>기능</th><th>무엇을 만드나</th><th></th></tr></thead><tbody>${A.cards.map((c,i)=>`<tr class="${S.fc==i?'on':''}" style="--c:${A.col}" onclick="S.fc=${i};S.ao=0;save();render()"><td><b>${c.n}</b></td><td>${esc(fx(A,c)[1])}</td><td><span class="badge ${c.f?'free':'paid'}">${c.f?'무료':'유료'}</span></td></tr>`).join('')}</tbody></table>`;
+ const left=appTabs+`<div class="gl">${A.n}로 할 수 있는 것 <small>줄을 누르면 오른쪽이 바뀌어요</small></div>${ftbl}`
+  +(C.full?'':`<div class="gl">${C.ol}</div>${chips('ao',C.o)}<div class="gl">사업</div>${chips('ab',AB)}`);
  return view('AI 앱 활용법',left,()=>{
-  if(C.full)return `<div class="bar"><span class="t">${A.n} · ${C.n}</span><span class="sub2">사진을 누르면 크게 보여요</span></div><div class="out" style="white-space:normal;padding:12px"><img class="bigimg" src="/img/giheung/${C.full}.webp" alt="${esc(C.n)}" onclick="zoomImg(this.src)"><div class="steps" style="margin-top:10px">${C.how.map((s,i)=>`<div class="st"><b class="n">${i+1}</b><span>${s}</span></div>`).join('')}</div></div>`;
-  const o=C.o[S.ao]||'',b=AB[S.ab];const pr=C.p.replace(/\{b\}/g,M(b)).replace(/\{o\}/g,M(o));CUR=()=>pr;
+  if(C.full)return `<div class="bar"><span class="t">${A.n} · ${C.n}</span><span class="sub2">사진을 누르면 크게 보여요</span></div><div class="out" style="white-space:normal;padding:12px"><img class="bigimg" src="/img/giheung/${C.full}.webp" alt="${esc(C.n)}" onclick="zoomImg(this.src)"></div>`;
+  const X=fx(A,C),o=C.o[S.ao]||'',b=AB[S.ab];const pr=C.p.replace(/\{b\}/g,M(b)).replace(/\{o\}/g,M(o));CUR=()=>pr;
   const open=A.url==='canva'?`<button class="btn" onclick="window.open('https://www.canva.com','_blank')">Canva 열기</button>`:`<button class="btn" onclick="openAI('${A.url}',CUR())">${A.n} 열기</button>`;
-  return `<div class="bar"><span class="t">${A.n} · ${C.n}<span class="badge ${C.f?'free':'paid'}">${C.f?'무료':'유료'}</span></span><span class="sub2">${esc(C.what)}</span><button class="btn p" onclick="copyTxt(CUR())">프롬프트 복사</button>${open}</div>
-  <div class="c3"><section class="c3c"><h4 class="c3h" style="--c:#2a9d8f">① 사용법</h4><div class="steps">${C.how.map((s,i)=>`<div class="st"><b class="n">${i+1}</b><span>${s}</span></div>`).join('')}</div><div class="resb"><b>결과는 이렇게 나와요</b>${esc(C.res)}</div></section>
-  <section class="c3c"><h4 class="c3h" style="--c:#e2865a">② 활용 예시</h4>${mock(C.mock,o,b)}<div class="exs">${C.ex.map(e=>`<div class="ex"><b>${esc(e[0])}</b><span>${esc(e[1])}</span></div>`).join('')}</div></section>
-  <section class="c3c"><h4 class="c3h" style="--c:#7d5fb5">③ 프롬프트 <small>[ ] 칸만 채워서 붙여넣기</small></h4><div class="pbox">${fmt(pr)}</div></section></div>`})};
+  return `<div class="bar"><span class="t">${A.n} · ${C.n}<span class="badge ${C.f?'free':'paid'}">${C.f?'무료':'유료'}</span></span><span class="sub2"></span><button class="btn p" onclick="copyTxt(CUR())">프롬프트 복사</button>${open}</div>
+  <div class="hw"><span class="hl">사용법</span>${flow(X[0])}</div>
+  <div class="c2"><section class="c3c"><h4 class="c3h" style="--c:#e2865a">이렇게 넣으면 → 이렇게 나와요</h4><div class="io"><div class="in"><span class="lb">넣는 것</span>${esc(X[2])}</div><div class="arr">▼</div><div class="ot"><span class="lb">나오는 것</span>${mock(C.mock,o,b)}</div></div><div class="exs">${C.ex.map(e=>`<div class="ex"><b>${esc(e[0])}</b><span>${esc(e[1])}</span></div>`).join('')}</div></section>
+  <section class="c3c"><h4 class="c3h" style="--c:#7d5fb5">프롬프트 <small>[ ] 칸만 채워서 붙여넣기</small></h4><div class="pbox">${fmt(pr)}</div></section></div>`})};
 /* ================= 시작 ================= */
 VIEW=location.hash.slice(1)||'home';render();
 </script>
