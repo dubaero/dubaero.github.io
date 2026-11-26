@@ -1541,6 +1541,16 @@ html:has(#v-mind:not([hidden])),#v-mind{zoom:1!important}
 #v-promo2 .gh-single-sheet,#v-plan2 .gh-single-sheet{display:block;width:100%;min-height:0;border:1px solid #aac8b9;border-radius:8px;padding:8px 10px;color:#233b31;background:#fff;line-height:1.55;font-size:13px;resize:vertical}
 .gh-single-sheet:focus-visible{outline:2px solid #286c50;outline-offset:1px}
 .gh-sheet-tip{font-size:11.5px;color:#485c51;margin:0 0 5px}
+/* Compact persistent labels shared by the planning and phone/SMS screens. */
+.gi-inline-fields{min-inline-size:0;margin:0 0 8px;padding:5px 9px 7px;border:1px solid #baccc3;border-radius:8px;background:#f7faf8;display:grid;gap:4px}
+.gi-inline-fields legend{padding:0 4px;font-size:14px;font-weight:800;color:#234539}
+.gi-inline-fields label{display:grid;grid-template-columns:minmax(86px,25%) minmax(0,1fr);align-items:center;gap:8px;min-width:0;font-size:13px;font-weight:750}
+.gi-inline-fields :is(input,textarea){width:100%;min-width:0;min-height:32px;padding:4px 7px;border:1px solid #aebfb6;border-radius:5px;background:#fff;color:#24392f;font:inherit;font-size:13px;font-weight:400}
+.gi-inline-fields :is(input,textarea)::placeholder{color:#5f7067}
+.gi-inline-fields textarea{min-height:50px;resize:vertical}
+.gi-inline-fields .gh-event-head{margin:0}
+#v-plan2 .gh-plan-special[hidden]{display:none}
+@media(max-width:899px){.gi-inline-fields :is(input,textarea){font-size:16px;min-height:38px}}
 #v-plan2 .gh-plan-extra{margin:6px 0;border:1px solid #d8e6de;border-radius:7px;padding:4px 7px}
 #v-plan2 .gh-plan-extra summary{font-weight:750;color:#253f35;cursor:pointer;margin-bottom:3px;font-size:12px}
 #v-plan2 .gh-plan-examples{display:flex;gap:5px;flex-wrap:wrap}
@@ -1622,7 +1632,7 @@ body:has(#v-groupref:not([hidden]))>main.wrap{width:100%;max-width:none;padding:
 body:has(#v-groupref:not([hidden]))>footer{display:none}
 #v-groupref{width:100%}
 </style>
-<script src="/giheung/workflow.js?v=18" defer></script>
+<script src="/giheung/workflow.js?v=19" defer></script>
 <style id="gh-clean-app-menu">
 #v-home [data-gh=mind] .flame{font-size:18px;line-height:1}#v-home [data-gh=heart] .ic{color:#E5568C;fill:#F7A6C4}
 @media(min-width:901px){#v-home .cols3>.bx:nth-child(2) .qgrid{grid-template-rows:repeat(3,minmax(0,1fr));align-content:stretch}#v-home .qgrid .qm{min-height:0;padding:5px 3px;gap:4px}#v-home .qgrid .qm .ic{width:20px;height:20px}}
@@ -6839,7 +6849,7 @@ function paneTabs(){
   return '<div class="gi-pan-tabs" role="group" aria-label="작업 화면"><button type="button" data-gi-pane="in" aria-pressed="true">고르기·채우기</button><button type="button" data-gi-pane="out" aria-pressed="false">결과·프롬프트</button></div>';
 }
 function x2(title,tag,left,right,tabs,back,showBoth){
-  return '<section class="gi-task"><div class="fbar"><button type="button" class="vback" '+(back?'data-gh="'+E(back)+'"':'data-home')+'>← '+(back==='donate'?'후원 관리':back==='planmenu'?'프로그램·기획':back==='group-life'?'프로그램·생활':back==='promomenu'?'홍보·안내문':'업무도우미')+'</button><h2>'+E(title)+'</h2></div>'+
+  return '<section class="gi-task"><div class="fbar"><button type="button" class="vback" '+(back?'data-gh="'+E(back)+'"':'data-home')+'>← '+(back==='donate'?'후원 관리':back==='planmenu'?'프로그램·기획':(back==='group-life'||back==='group-life-catalog')?'프로그램·생활':back==='promomenu'?'홍보·안내문':'업무도우미')+'</button><h2>'+E(title)+'</h2></div>'+
    (tag?'<p class="fstat">'+E(tag)+'</p>':'')+(tabs||'')+(showBoth?'':paneTabs())+
    '<div class="x2" data-pane="'+(showBoth?'both':'in')+'"><section aria-label="고르기와 사용법" class="col L">'+left+'</section><section aria-label="예시와 전체 프롬프트" class="col R">'+right+'</section></div></section>';
 }
@@ -6862,7 +6872,7 @@ var MS2={'일정 안내':['안녕하세요, 복지관입니다. [날짜·시간]
  '감사 인사':['오늘 함께해 주셔서 고맙습니다. 웃음 덕분에 복지관이 따뜻했어요.','[프로그램명]을 끝까지 함께해 주셔서 감사합니다. 다음에도 기다릴게요.'],
  '변경·취소 안내':['[날짜] [프로그램명]이 [사유]로 [새 날짜]로 바뀌었습니다. 불편을 드려 죄송합니다.','안전을 위해 [날짜] 야외 활동은 실내 [장소]에서 진행합니다. 양해 부탁드려요.'],
  '후원·협력 감사':['[기관명]의 도움으로 [사업명]을 잘 마쳤습니다. 깊이 감사드립니다.','보내 주신 [물품]은 [대상]에게 잘 전달했습니다. 고맙습니다.']};
-var ST_MSG={program:'',when:'',where:'',to:'보호자',kind:'일정 안내',memo:'',mode:'문자 보내기',callMemo:'',callTo:'보호자',callKind:'일상 안부'};
+var ST_MSG={program:'',when:'',where:'',items:'',staff:'',phone:'',to:'보호자',kind:'일정 안내',memo:'',mode:'문자 보내기',callMemo:'',callTo:'보호자',callKind:'일상 안부'};
 
 function choice(label,items,attr,value,kind){
   return '<div class="'+(kind||'chips')+'" role="group" aria-label="'+E(label)+'">'+items.map(function(k){
@@ -6880,11 +6890,20 @@ function updateOutput(id,make){
   if(n)n.innerHTML=make();
 }
 function recipient(to){return {'이용자':'이용자님','보호자':'보호자님','활동지원사·자원봉사자':'선생님','협력 기관':'담당자님','후원자':'후원자님'}[to]||'담당자님';}
+function msgFacts(v,body){
+ const rows=(body===undefined?[]:[['장소',v.where],['시간',v.when]]).concat([['준비물',v.items],['담당자',v.staff],['전화번호',v.phone]]);
+ return rows.filter(function(x){return x[1].trim()&&(!body||!body.includes(x[1].trim()));}).map(function(x){return x.join(': ');}).join('\n');
+}
+function giInlineRow(key,label,value,hint,type){
+ var attr=' data-gi-field="'+E(key)+'"'+(hint?' placeholder="예: '+E(hint)+'"':'');
+ return '<label><span>'+E(label)+'</span>'+(type==='area'?'<textarea'+attr+' rows="2">'+E(value||'')+'</textarea>':'<input'+attr+' type="'+(type==='tel'?'tel':'text')+'" value="'+E(value||'')+'">')+'</label>';
+}
 function msgBody(kind,to,which,memo){
   var t=MSG_MORE[kind]||(MS2[kind]||MS2['일정 안내'])[which]||'';
   var g=recipient(to);
   t=msgSub(t.replace(/^안녕하세요, 복지관입니다\. ?/,'').replace(/^이용자님,?\s*/,''));
-  return g+', 안녕하세요. 용인시기흥장애인복지관입니다.\n'+t+(memo.trim()?'\n\n추가로 전할 내용: '+memo.trim():'');
+  var facts=msgFacts(ST_MSG,t);
+  return g+', 안녕하세요. 용인시기흥장애인복지관입니다.\n'+t+(memo.trim()?'\n\n추가로 전할 내용: '+memo.trim():'')+(facts?'\n'+facts:'');
 }
 function msgSub(t){
  return t.replace(/\[프로그램명\]|\[사업명\]/g,function(m){return ST_MSG.program||m;}).replace(/\[날짜·시간\]|\[날짜\]|\[새 일정\]/g,function(m){return ST_MSG.when||m;}).replace(/\[장소\]/g,function(m){return ST_MSG.where||m;});
@@ -6953,21 +6972,21 @@ function outBlock(title,key,t){
 function msgRight(){
   var v=ST_MSG,call=v.mode==='안부 전화',to=call?v.callTo:v.to,k=call?v.callKind:v.kind,m=call?v.callMemo:v.memo;
   var head='<div class="out-h"><h3>'+(call?'전화 대본 예시':'문자 예시 2종')+'</h3><span>'+E(to)+' · '+E(k)+'</span></div>';
-  var ex=call?'① 인사 · '+recipient(to)+', 안녕하세요. 용인시기흥장애인복지관입니다. 지금 잠깐 통화 괜찮으세요?\n\n② 여쭤보기 · '+msgSub(CALL_TOPIC[k])+(m.trim()?'\n전할 내용: '+m.trim():'')+'\n\n③ 듣고 확인하기 · 말씀해 주셔서 감사합니다. 제가 확인할 것은 [확인할 사항]이 맞을까요?\n\n④ 마무리 · 확인 후 [연락드릴 시점]에 다시 연락드리겠습니다. 편한 하루 보내세요.':'';
-  var prompt='너는 용인시기흥장애인복지관의 소통 담당자야.\n\n받는 분: '+to+'\n상황: '+k+'\n프로그램명: '+(v.program||'[확인 필요]')+'\n일시: '+(v.when||'[확인 필요]')+'\n장소: '+(v.where||'[확인 필요]')+'\n전할 내용: '+(m.trim()||'[필요한 내용 입력]')+'\n\n'+(call?'인사 → 통화 가능 여부 확인 → 상황별 질문 → 들은 내용 확인 → 마무리 순서로 짧은 전화 대본을 써 줘. 통화가 어렵다고 하면 편한 시간을 물어봐.':'기본 문자와 짧은 문자 두 가지로 써 줘. 일정 안내라면 일시·장소·신청 방법을 구분해 줘.')+'\n상대를 존중하는 쉬운 말로 쓰고, 없는 날짜·장소·사실은 [확인 필요]로 남겨. 실명·진단명·연락처를 넣지 마.';
+  var ex=call?'① 인사 · '+recipient(to)+', 안녕하세요. 용인시기흥장애인복지관입니다. 지금 잠깐 통화 괜찮으세요?\n\n② 여쭤보기 · '+msgSub(CALL_TOPIC[k])+(m.trim()?'\n전할 내용: '+m.trim():'')+(msgFacts(v)?'\n'+msgFacts(v):'')+'\n\n③ 듣고 확인하기 · 말씀해 주셔서 감사합니다. 제가 확인할 것은 [확인할 사항]이 맞을까요?\n\n④ 마무리 · 확인 후 [연락드릴 시점]에 다시 연락드리겠습니다. 편한 하루 보내세요.':'';
+  var prompt='너는 용인시기흥장애인복지관의 소통 담당자야.\n\n받는 분: '+to+'\n상황: '+k+'\n프로그램명: '+(v.program||'[확인 필요]')+'\n일시: '+(v.when||'[확인 필요]')+'\n장소: '+(v.where||'[확인 필요]')+(msgFacts(v)?'\n'+msgFacts(v):'')+'\n전할 내용: '+(m.trim()||'[필요한 내용 입력]')+'\n\n'+(call?'인사 → 통화 가능 여부 확인 → 상황별 질문 → 들은 내용 확인 → 마무리 순서로 짧은 전화 대본을 써 줘. 통화가 어렵다고 하면 편한 시간을 물어봐.':'기본 문자와 짧은 문자 두 가지로 써 줘. 일정 안내라면 일시·장소·신청 방법을 구분해 줘.')+'\n상대를 존중하는 쉬운 말로 쓰고, 없는 날짜·장소·사실은 [확인 필요]로 남겨. 실명·진단명·연락처를 넣지 마.';
   return aiStrip('msg-prompt','전체 프롬프트로 AI 열기')+head+(call?msgHTML('call',ex,'안부 전화'):msgHTML('m1',msgBody(k,to,0,m),'기본형')+msgHTML('m2',msgBody(k,to,1,m),'짧은형'))+outBlock('AI에 넣을 전체 프롬프트','msg-prompt',prompt);
 }
 function renderMsg(){
   var v=ST_MSG,call=v.mode==='안부 전화';
-  var left='<p class="gh-guide">받는 분과 상황을 고르면 오른쪽 예시가 바로 바뀝니다.</p>'+
-   radioPick('누구에게 보내나요?',['이용자','보호자','후원자','활동지원사·자원봉사자','협력 기관'],'mto',call?v.callTo:v.to)+
-   radioPick('어떤 상황인가요?',call?Object.keys(CALL_TOPIC):MS,'mk',call?v.callKind:v.kind)+'<hr class="gi-divider">'+
-   inputField('msg-program','프로그램명',v.program,'기흥행복한캠퍼스')+inputField('msg-when','일시',v.when,'12월 2일 오후 2시')+inputField('msg-where','장소',v.where,'복지관 교육실')+
-   '<label class="ch-l" for="m-memo"><b>3. 전할 내용</b><small>선택</small></label>'+
-   '<textarea class="memo" id="m-memo" placeholder="예: 다음 주 나들이 준비물을 안내하고 싶어요">'+E(call?v.callMemo:v.memo)+'</textarea>'+
-   '<p class="hintl">실명·진단명·연락처는 쓰지 마세요.</p>';
-  $('#v-msg').innerHTML=x2('문자·소통','',left,msgRight(),choice('무엇을 할까요?',['문자 보내기','안부 전화'],'data-mmode',v.mode,'gh-subtabs'));
-  $('#m-memo').addEventListener('input',function(){ST_MSG[call?'callMemo':'memo']=this.value;updateOutput('#v-msg',msgRight);});
+  var left=radioPick('누구에게 보내나요?',['이용자','보호자','후원자','활동지원사·자원봉사자','협력 기관'],'mto',call?v.callTo:v.to)+
+   radioPick('어떤 상황인가요?',call?Object.keys(CALL_TOPIC):MS,'mk',call?v.callKind:v.kind)+
+   '<fieldset class="gi-inline-fields"><legend>'+(call?'통화에 들어갈 항목':'문자에 들어갈 항목')+'</legend>'+
+   giInlineRow('msg-program','프로그램명',v.program,'기흥행복한캠퍼스')+giInlineRow('msg-where','장소',v.where,'복지관 교육실')+
+   giInlineRow('msg-when','시간',v.when,'12월 2일 오후 2시')+giInlineRow('msg-items','준비물',v.items,'물병, 편한 옷')+
+   giInlineRow('msg-staff','담당자 이름',v.staff,'공개 안내용 담당자 또는 부서명')+giInlineRow('msg-phone','전화번호',v.phone,'부서 공식 전화번호','tel')+
+   giInlineRow(call?'msg-callMemo':'msg-memo','추가 내용',call?v.callMemo:v.memo,'일정이 어렵다면 미리 알려 주세요','area')+
+   '</fieldset><p class="hintl">이용자 실명·진단명·개인 연락처는 쓰지 마세요.</p>';
+  $('#v-msg').innerHTML=x2('문자·소통','',left,msgRight(),choice('무엇을 할까요?',['문자 보내기','안부 전화'],'data-mmode',v.mode,'gh-subtabs'),null,true);
 }
 /* 사업·프로그램명은 기흥복지관 공개 사업소개에서 확인. 내용은 실습 예시이며 모집 공고가 아님. */
 var GI_CATALOG=[
@@ -7048,26 +7067,32 @@ function planText(){
 var PLAN_TARGET=['발달장애 아동','발달장애 청소년','성인 발달장애인','신체장애 성인','고령장애인','재가장애인','보호자·가족','지역 주민','장애인·비장애인 함께','자원봉사자','복지관 종사자','직접 입력'];
 var PLAN_AIM=['운동·재활 기회 넓히기','일상생활·가사 자립','문화·여가 참여','직무 탐색·취업 준비','의사소통·자기옹호','가족 휴식·돌봄 부담 완화','이웃 교류·지역사회 참여','장애인식개선·권리 존중','복지 사각지대 지원','직접 입력'];
 var PLAN_EFFECT=['선택·자기표현 늘리기','일상 과제 스스로 하기','활동·이동 참여 늘리기','직무에 대한 자신감 높이기','이웃과의 관계 넓히기','가족 부담 줄이기','접근성 개선하기','직접 입력'];
-function planPicked(v,k,c){return v[c]||(v[k]==='직접 입력'?'':v[k])||'';}
+function planPicked(v,k,c){return (v[k]==='직접 입력'?v[c]:v[k])||'';}
 function planMeasure(e){return ({'선택·자기표현 늘리기':'활동을 직접 고르거나 대안을 요청한 횟수 (선택 기록지, 목표 [확인 필요])','일상 과제 스스로 하기':'독립적으로 수행한 일상 과제 단계 (전후 관찰표, 목표 [확인 필요])','활동·이동 참여 늘리기':'당사자가 고른 활동과 참여 범위 (출석·활동 관찰표, 목표 [확인 필요])','직무에 대한 자신감 높이기':'직무를 설명하거나 직접 해 본 뒤의 자기평가 (쉬운 글 체크지, 목표 [확인 필요])','이웃과의 관계 넓히기':'새롭게 연결되거나 협력한 경험 (당사자 소감·관계 지도, 목표 [확인 필요])','가족 부담 줄이기':'가족이 느낀 휴식·부담 변화 (익명 전후 질문, 목표 [확인 필요])','접근성 개선하기':'확인하고 해소한 이동·정보·의사소통 장벽 (접근성 점검표, 목표 [확인 필요])'})[e]||'기대 효과에 맞는 관찰 항목과 도구 (목표 [확인 필요])';}
 function planPrompt(){
  var v=ST_PLAN,d=planData(),g=giGroup(v.group);
  return '너는 장애인복지관 프로그램 기획자야. 아래 조건에 맞춰 아이디어 3개를 표로 비교하고, 가장 실행 가능한 1개를 계획서로 구체화해 줘.\n\n[기획 조건]\n사업 분야: '+(v.group||v.area||'[사업 분야 선택]')+'\n프로그램: '+d.name+'\n대상: '+(planPicked(v,'tgt','customTarget')||'[대상 선택]')+'\n기획 취지: '+(planPicked(v,'aim','customAim')||'[취지 선택]')+'\n기대 효과: '+(planPicked(v,'effect','customEffect')||'[기대 효과 선택]')+'\n시기·횟수: '+v.when+' · '+v.size+'\n'+(v.question?'집중할 기획 질문: '+v.question+' / '+v.focus+'\n':'')+'\n[내가 입력한 사항]\n'+PLAN_SHEET.filter(function(f){return v[f[0]];}).map(function(f){return f[1]+': '+v[f[0]];}).join('\n')+'\n\n[작성 순서]\n1. 필요성·당사자 욕구·목표를 구분.\n2. 회기별 활동·준비물·지원 인력·예산 산출 근거, 참여자가 직접 선택하는 방법.\n3. 기대 효과를 확인할 방법: '+planMeasure(planPicked(v,'effect','customEffect'))+'\n4. 이동·감각·의사소통 접근성, 위험·대체 활동, 모집과 사후 평가.\n'+(g?'사업 특성 확인: '+g.check+'\n':'')+'\n기관 서식이 첨부되면 항목과 순서를 그대로 사용해. 없으면 초안이라고 표시하고 모르는 날짜·인원·예산·목표치는 [확인 필요]로 남겨.';
 }
+function planInfo(v){
+ const direct={customTarget:"tgt",customAim:"aim",customEffect:"effect"};
+ const rows=PLAN_SHEET.filter(function(f){return !direct[f[0]];}).map(function(f){return giInlineRow("plan-"+f[0],f[1],v[f[0]],f[2],f[0]==="memo"?"area":"text");}).join('');
+ const extra=PLAN_SHEET.filter(function(f){return direct[f[0]];}).map(function(f){
+   return '<div class="gh-plan-special" data-plan-custom="'+direct[f[0]]+'"'+(v[direct[f[0]]]==='직접 입력'?'':' hidden')+'>'+giInlineRow("plan-"+f[0],f[1],v[f[0]],f[2])+'</div>';
+ }).join('');
+ return '<fieldset class="gi-inline-fields"><legend>프로그램 정보 입력</legend><div class="gh-event-head"><span class="gh-sheet-tip">항목명 옆에 적으면 오른쪽 결과가 바로 바뀝니다.</span><button type="button" class="gi-action" data-plan-demo>가상 예시 넣기</button></div>'+rows+extra+'</fieldset>';
+}
 function renderPlan(){
  var v=ST_PLAN,g=giGroup(v.group);
- var left=radioPick('1. 어떤 사업인가요?',GI_CATALOG.map(function(x){return x.label;}).concat('직접 입력'),'plcat-group',v.group)+
+ var left=planInfo(v)+radioPick('1. 어떤 사업인가요?',GI_CATALOG.map(function(x){return x.label;}).concat('직접 입력'),'plcat-group',v.group)+
    (g?radioPick('세부 프로그램',g.items,'plcat-program',v.program):'')+
    radioPick('2. 누구를 위한 프로그램인가요?',PLAN_TARGET,'plan-tgt',v.tgt)+
    radioPick('3. 어떤 취지로 하나요?',PLAN_AIM,'plan-aim',v.aim)+
    radioPick('4. 어떤 변화를 기대하나요?',PLAN_EFFECT,'plan-effect',v.effect)+
    '<div class="gh-plan-compact">'+planSelect('시기','when',Object.keys(WON),v.when)+planSelect('운영 횟수','size',Object.keys(CNT),v.size)+'</div>'+
    (v.question?'<p class="gnote"><b>선택한 기획</b> '+E(v.question)+' · '+E(v.focus)+'</p>':'')+
-   monthlyPlanner()+'<div class="gh-event-head"><label for="plan-sheet"><b>프로그램 정보 · 한 칸에 작성</b></label><button type="button" class="gi-action" data-plan-demo>가상 예시 넣기</button></div>'+
-   '<p class="gh-sheet-tip">각 항목 뒤에 적으세요. 직접 입력을 골랐다면 대상·취지·기대 효과도 이 칸에 적으세요.</p>'+
-   '<textarea class="gh-single-sheet" id="plan-sheet" rows="12" data-gi-field="plan-sheet">'+E(v.sheetRaw===undefined?sheetText(PLAN_SHEET,v):v.sheetRaw)+'</textarea>'+
+   monthlyPlanner()+'<button type="button" class="gi-action" data-gh="group-life-catalog">기존 프로그램·생활 업무 보기</button>'+
    '<button type="button" class="gh-jump gh-promo-preview-mobile" data-gi-jump="plan-output">오른쪽 결과 보기 ↓</button>';
- $('#v-plan2').innerHTML=x2('프로그램 기획','사업·대상·취지·기대 효과를 고르면 오른쪽 기획 프롬프트가 바뀝니다.',left,planRight(),null,v.returnGroup?'group-life':null,true);
+ $('#v-plan2').innerHTML=x2('프로그램 기획','사업·대상·취지·기대 효과를 고르면 오른쪽 기획 프롬프트가 바뀝니다.',left,planRight(),null,v.returnGroup?'group-life-catalog':null,true);
 }
 function planSelect(label,key,values,value){return '<label>'+E(label)+' <select data-plan-select="'+key+'">'+values.map(function(x){return '<option'+(x===value?' selected':'')+'>'+E(x)+'</option>';}).join('')+'</select></label>';}
 
@@ -7676,9 +7701,9 @@ function boot(){
     var mi=e.target.closest('[data-mind-entry]');if(mi){var m=MIND.find(function(x){return x[1]===mi.dataset.mindEntry;});if(m)openMind(m[0]);return;}
     var mt=e.target.closest('[data-mt]');if(mt){openMind(mt.dataset.mt);return}
     var mmode=e.target.closest('[data-mmode]');if(mmode){ST_MSG.mode=mmode.dataset.mmode;rerenderChoice(mmode,'data-mmode',renderMsg);return}
-    if(e.target.closest('[data-plan-demo]')){PLAN_SHEET.forEach(function(r){if(!ST_PLAN[r[0]]&&r[2])ST_PLAN[r[0]]=r[2];});ST_PLAN.sheetRaw=sheetText(PLAN_SHEET,ST_PLAN);renderPlan();return;}
+    if(e.target.closest('[data-plan-demo]')){PLAN_SHEET.forEach(function(r){if(!ST_PLAN[r[0]]&&r[2])ST_PLAN[r[0]]=r[2];});renderPlan();return;}
     var pf=e.target.closest('[data-plan-form]');if(pf){ST_PLAN.formMode=pf.dataset.planForm;qa('#v-plan2 [data-plan-form]').forEach(function(b){b.classList.toggle('on',b===pf);b.setAttribute('aria-pressed',String(b===pf));});updateOutput('#v-plan2',planRight);var focused=$('#v-plan2 [data-plan-form][aria-pressed=true]');if(focused)focused.focus({preventScroll:true});var pc=$('#v-plan2 .col.R');if(pc)pc.scrollTop=0;return;}
-    var pi=e.target.closest('[data-pidea]');if(pi){ST_PLAN.idx++;ST_PLAN.mode='';ST_PLAN.question='';ST_PLAN.focus='';ST_PLAN.title='';ST_PLAN.program='';ST_PLAN.group='';ST_PLAN.sheetRaw=sheetText(PLAN_SHEET,ST_PLAN);rerenderChoice(pi,'data-pidea',renderPlan);return}
+    var pi=e.target.closest('[data-pidea]');if(pi){ST_PLAN.idx++;ST_PLAN.mode='';ST_PLAN.question='';ST_PLAN.focus='';ST_PLAN.title='';ST_PLAN.program='';ST_PLAN.group='';rerenderChoice(pi,'data-pidea',renderPlan);return}
     var pg=e.target.closest('[data-plangpt]');if(pg){copy(planPrompt());return}
     var rk=e.target.closest('[data-prk]');if(rk){ST_PR.kind=rk.dataset.prk;ST_PR.channel=prChannelFor(ST_PR.kind);if(ST_PR.kind==='홈페이지 행사후기 올리기')ST_PR.purpose='활동 후기';else if(!ST_PR.purposePicked){if(ST_PR.kind==='홈페이지 안내 글'||ST_PR.kind==='공지사항')ST_PR.purpose='이용 안내';}rerenderChoice(rk,'data-prk',renderPromo);return}
     var monthly=e.target.closest('[data-nov-plan]');if(monthly){openMonthlyPlan(+monthly.dataset.novPlan);return}
@@ -7735,7 +7760,7 @@ function boot(){
       }
       updateOutput('#v-promo2',promoRight);
     }
-    if(key.startsWith('plan-')){ST_PLAN[key.slice(5)]=v;ST_PLAN.idx=0;updateOutput('#v-plan2',planRight);}
+    if(key.startsWith('plan-')){var pk=key.slice(5);ST_PLAN[pk]=v;ST_PLAN.idx=0;var special=$('#v-plan2 [data-plan-custom="'+CSS.escape(pk)+'"]');if(special)special.hidden=v!=='직접 입력';updateOutput('#v-plan2',planRight);}
     if(key.startsWith('don-')&&DONSTATE[donKey]){DONSTATE[donKey][key.slice(4)]=v;updateOutput('#v-donwork',donRight);}
   });
   document.addEventListener('input',function(e){
@@ -7743,9 +7768,6 @@ function boot(){
     if(key&&key.startsWith('msg-')){ST_MSG[key.slice(4)]=e.target.value;updateOutput('#v-msg',msgRight);}
     if(key==='promo-sheet'){
       ST_PR.sheetRaw=e.target.value;var p=sheetParse(ST_PR.sheetRaw,PR_SHEET);ST_PR.memo=p.memo;delete p.memo;ST_PR.fields=p;updateOutput('#v-promo2',promoRight);return;
-    }
-    if(key==='plan-sheet'){
-      ST_PLAN.sheetRaw=e.target.value;Object.assign(ST_PLAN,sheetParse(ST_PLAN.sheetRaw,PLAN_SHEET));updateOutput('#v-plan2',planRight);return;
     }
     if(e.target.id==='gm-input'){GM[gmMode].memo=e.target.value;updateOutput('#v-mindwork',gmRight);}
     if(key&&key.startsWith('plan-')){ST_PLAN[key.slice(5)]=e.target.value;updateOutput('#v-plan2',planRight);}
@@ -7820,7 +7842,7 @@ var GROUP_PANELS={
  'group-image':['홍보 이미지','t-image-prompt'],
  'group-donate':['후원 관리','donate'],
  'group-fridge':['프롬프트 디자인실','fridge'],
- 'group-life':['프로그램·생활','c-life'],
+ 'group-life-catalog':['프로그램·생활','c-life'],
  'group-log':['프로그램 일지','form-program']
 };
 function openDistrictPlan(x){
@@ -7851,6 +7873,7 @@ function groupView(key){
 var _go=window.go;
 window.go=function(k){
   if(k==='group-fridge')k='prompt';
+  if(k==='group-life'){selectPlanDraft('manual');renderPlan();show('plan2');if(location.hash!=='#group-life')history.replaceState(history.state,'',location.pathname+location.search+'#group-life');return;}
   if(Object.hasOwn(GROUP_PANELS,k)){groupView(k);return;}
   if(k==='home'){if(location.hash.indexOf('#group-')===0)history.replaceState(history.state,'',location.pathname+location.search);show('home');return;}
   if(k==='appguide'){AG_TAB='install';renderAppGuide();show('appguide');return}

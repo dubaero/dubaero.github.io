@@ -3,7 +3,7 @@
 "use strict";
 global.mountGiheungWorkflow=function(host,options){
  const root=host.attachShadow({mode:"open"}),page=global.document;
- const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=12";
+ const style=page.createElement("link"); style.rel="stylesheet";style.href="/giheung/workflow.css?v=13";
  const body=page.createElement("div");body.className="group-body";body.innerHTML='<div class="wrap"><main id="app"></main></div>';
  root.append(style,body);
  const document={
@@ -4229,7 +4229,7 @@ function ghOpenScenario(c,i){
  if(c==="msg"){if(q.tone)draft.v.tone=q.tone;if(q.reader)draft.v.reader=q.reader;}
  ghScenarioRoute={k,cat:c,state:draft};current=t;
  renderTask(t);
- const shown=app.querySelector(".gh-always-split .tin");if(shown)shown.scrollTop=y;
+ const shown=app.querySelector(".gh-always-split .tin");if(shown)shown.scrollTop=(c==="msg"||c==="promo")?0:y;
 }
 const ghScenarioDrafts=Object.create(null);let ghScenarioRoute=null;
 
@@ -4811,7 +4811,7 @@ function promoMonth(v){
  return [[v.reader+"용 소식지 원고",[`[${PROMO_ORG}] ${d.title||"이달의 소식"}`,lines[0],d.lines.map(x=>"• "+promoLine(x)).join("\n"),lines[1]+" "+tone[1]].filter(Boolean).join("\n\n")]];
 }
 function promoNotice(v){
- const d=promoMemo(v.content);
+ const d=ghNoticeMemo(v);
  if(!d.lines.length&&!d.title)d.lines=v.purpose==="일정 변경·취소"?["기존 일정: [일시]","변경 일정: [일시 또는 취소 여부]","문의: [공식 문의처]"]:["일시: [날짜·시간]","장소: [장소]","참여 대상: [대상]","신청·문의: [방법과 공식 문의처]"];if(!d.title&&v._work)d.title=[v._work.program,v._work.what].filter(Boolean).join(" · ");
  const lead=v.tone==="쉬운 말로"?"알아두면 좋은 내용을 아래에 정리했어요.":v.tone==="따뜻하게"?"참여하시기 편하도록 필요한 내용을 모았습니다.":"아래 내용을 확인해 주시기 바랍니다.";
  return [["복지관 안내문 원고",[`[${v.purpose}]${d.title?" "+d.title:""}`,`${v.reader} 여러분, 안녕하세요. ${PROMO_ORG}입니다. ${lead}`,d.lines.map(promoLine).join("\n"),PROMO_ORG].filter(Boolean).join("\n\n")]];
@@ -4857,15 +4857,37 @@ const SMS_FIXED=[
  ["smsStaff","담당자 이름","예: 프로그램 담당자 이름","staff","text"],
  ["smsPhone","전화번호","예: 부서 공식 전화번호","contact","tel"]
 ];
-function smsFixedHTML(v){
- return '<fieldset class="gh-sms-fixed"><legend>문자에 들어갈 항목</legend>'+SMS_FIXED.map(([k,label,ph,,type])=>{
-  const id="f-gh-welfare-msg-"+k;
-  return '<div class="gh-sms-fixed-row"><label for="'+id+'">'+esc(label)+'</label><input id="'+id+'" type="'+type+'" data-input="'+k+'" placeholder="'+esc(ph)+'" value="'+esc(v[k]||"")+'" autocomplete="off"></div>';
- }).join("")+'</fieldset>';
+const GH_EVENT_FIELDS=[
+ ["ghTitle","프로그램·행사명","예: 우리 동네 원예교실"],
+ ["ghWhen","행사 일시","예: 12월 5일 오후 2시"],
+ ["ghPlace","장소","예: 복지관 2층 프로그램실"],
+ ["ghRecruit","모집 기간","예: 11월 28~30일"],
+ ["ghAudience","참여 대상","예: 성인 이용자"],
+ ["ghCount","모집 인원","예: 8명"],
+ ["ghMethod","신청 방법","예: 복지관 홈페이지"],
+ ["ghFee","참가비","예: 무료"],
+ ["ghItems","준비물","예: 물병, 편한 옷"],
+ ["ghStaff","담당자 이름","예: 공개 안내용 담당자 또는 부서명"],
+ ["ghTel","문의 전화번호","예: 부서 공식 전화번호","","tel"]
+];
+const GH_EVENT_MATERIALS=new Set(["notice","poster","cardnews"]);
+function ghEventLines(v){
+ return GH_EVENT_FIELDS.filter(([k])=>k!=="ghTitle"&&String(v[k]||"").trim()).map(([k,label])=>label+": "+String(v[k]).trim());
+}
+function ghFieldsBox(title,rows){return '<fieldset class="gh-inline-fields"><legend>'+esc(title)+'</legend>'+rows+'</fieldset>';}
+function ghFixedRows(task,v,fields){
+ return fields.map(([k,label,ph,,type="text"])=>{
+  const id="f-"+task+"-"+k;
+  return '<div class="gh-inline-row"><label for="'+id+'">'+esc(label)+'</label><input id="'+id+'" type="'+type+'" data-input="'+k+'" placeholder="'+esc(ph)+'" value="'+esc(v[k]||"")+'" autocomplete="off"></div>';
+ }).join("");
+}
+function ghNoticeMemo(v){
+ const d=promoMemo(v.content);
+ return {title:String(v.ghTitle||"").trim()||d.title,lines:ghEventLines(v).concat(d.lines)};
 }
 function publishContextDraft(v,kind,original){
  const ch=v._channel;if(!ch)return original; // Other entry points keep their existing forms.
- const month=kind==="newsletter",d=promoMemo(month?v.events:v.content),x=v._work||{};
+ const month=kind==="newsletter",d=month?promoMemo(v.events):ghNoticeMemo(v),x=v._work||{};
  const name=d.title||x.what||(month?"이달의 복지관 소식":"복지관 이용 안내");
  const program=x.program&&!name.includes(x.program)?x.program:"";
  const headline=program?name+" | "+program:name;
@@ -5115,7 +5137,13 @@ const OUTS = {
 };
 
 function fullPrompt(t,v){
-  let p=applyProf(t.build(v));
+  let data=v;
+  if(t.id==="poster"||t.id==="cardnews"){
+    const event=ghEventLines(v).join("\n");
+    data={...v,...(v.ghTitle?{title:v.ghTitle}:{}),...(t.id==="poster"?{data:[event,v.data].filter(Boolean).join("\n")}:{})};
+  }
+  let p=applyProf(t.build(data));
+  if(t.id==="cardnews"&&ghEventLines(v).length)p+="\n\n[카드에 넣을 확인된 행사 정보]\n"+ghEventLines(v).join("\n");
   if(t.form && v._form!=="없어요" && (v._formText||"").trim())
     p+="\n\n[서식] 아래 서식의 항목 이름, 순서, 문체 그대로 작성해줘. 서식에 없는 항목은 새로 만들지 마.\n---\n"+v._formText.trim()+"\n---";
   if(t.refimg && v._ref==="있어요"){
@@ -5229,18 +5257,23 @@ function renderTask(t){
   const chipsHTML = (t.chips||[]).filter(c=>!(district==="promo"&&t.id==="sns-post"&&c.k==="where")).map(c=>`<fieldset><legend>${esc(c.label)}</legend><div class="chips">${
       c.opts.map((o,i)=>`<label class="chip"><input type="radio" name="c-${c.k}" id="c-${t.id}-${c.k}-${i}" value="${esc(o)}" data-chip="${c.k}" ${st.v[c.k]===o?"checked":""}><span>${esc(o)}</span></label>`).join("")
     }</div></fieldset>`).join("");
-  const inputsHTML = (t.inputs||[]).map(i=>{
+  const grouped=district==="msg"||district==="promo";
+  const eventFields=GH_EVENT_MATERIALS.has(t.id)?GH_EVENT_FIELDS.map(row=>row[0]==="ghTitle"&&t.id!=="notice"?["title",row[1],row[2]]:row):[];
+  const inputRows = (t.inputs||[]).filter(i=>!grouped||!eventFields.some(row=>row[0]===i.k)).map(i=>{
     const id = `f-${t.id}-${i.k}`;
     const gpk=district==="promo"&&t.id==="sns-post"?"story":"";
     const cue=st.v._work?.program&&REVIEW_CUES[st.v._work.group];
     const pm=gpk?["이미 진행한 활동","활동 이름, 그날 실제로 한 일, 기억에 남는 장면을 적거나 말해 보세요. 예: 제목: 우리 동네 원예교실\n참여자들이 꽃을 골라 화분에 심었어요. 완성한 화분을 1층에 전시했어요."+(cue?"\n이 사업에서는 "+cue+" 적어 보세요.":"")]:null;
-    const lab = `<label for="${id}">${esc(pm?.[0]||i.label)} ${i.opt?"<small>(선택)</small>":""}</label>`;
+    const shortLabel={body:"추가 내용",content:"추가 안내",data:"추가 안내",scene:"대표 장면",context:"추가 제작 조건",events:"이번 달 소식",points:"장별 내용"};
+    const lab = `<label for="${id}">${esc(pm?.[0]||(grouped&&shortLabel[i.k])||i.label)} ${i.opt?"<small>(선택)</small>":""}</label>`;
     const smsExtra={notice:"예: 늦거나 참석이 어려우시면 미리 알려 주세요.",change:"예: 기존 일시: 목요일 오후 2시 / 사유: 교육실 점검",wait:"예: 대기순번: 3번 / 안내시점: 12월 8일",prep:"예: 재료는 복지관에서 준비해 드려요.",meet:"예: 회신: 이동 지원이 필요한지",access:"예: 접근성: 정문 경사로와 엘리베이터",visit:"예: 회신: 시간이 괜찮으신지"};
     const hint=t.id==="gh-welfare-msg"?(smsExtra[smsKind(st.v._work?.what)]||("예: "+SMS_HINT[smsKind(st.v._work?.what)])):pm?.[1]||i.ph;
-    const ctl = i.area ? `<textarea id="${id}" data-input="${i.k}" placeholder="${esc(phOf(id,hint))}">${esc(st.v[i.k])}</textarea>`
+    const ctl = i.area ? `<textarea id="${id}" data-input="${i.k}" placeholder="${esc(grouped&&i.k==="content"?"예: 엘리베이터로 2층까지 오실 수 있어요.":phOf(id,hint))}">${esc(st.v[i.k])}</textarea>`
                        : `<input id="${id}" type="text" data-input="${i.k}" placeholder="${esc(phOf(id,i.ph))}" value="${esc(st.v[i.k])}">`;
-    return `<div class="field">${lab}<div class="with-mic">${ctl}${vmic(id)}</div>${exHint(id,hint)}</div>`;
+    return grouped?`<div class="gh-inline-row">${lab}<div class="with-mic">${ctl}${vmic(id)}</div></div>`:`<div class="field">${lab}<div class="with-mic">${ctl}${vmic(id)}</div>${exHint(id,hint)}</div>`;
   }).join("");
+  const inputsHTML=grouped?ghFieldsBox(district==="msg"?"문자에 들어갈 항목":eventFields.length?"행사·프로그램 정보":t.id==="sns-post"?"후기에 들어갈 활동":t.id==="newsletter"?"소식지에 들어갈 내용":"이미지에 담을 내용",
+    ghFixedRows(t.id,st.v,district==="msg"?SMS_FIXED:eventFields)+inputRows):inputRows;
   const related = district?[]:TASKS.filter(x=>x.cat===t.cat && x.id!==t.id && !x.hideOld);
 
   const hasOut=!!OUTS[t.id],visual=VISUAL_TASKS.has(t.id);
@@ -5275,10 +5308,9 @@ function renderTask(t){
         ${district==="promo"?ghPromoControls(visual?"visual":t.id==="sns-post"?"review":"notice"):district?ghDistrict(district):""}
         ${t.plan?`<div class="plan-tpl"><b>우리 시설에서 쓰는 계획서 양식이 있나요?</b><span>양식을 올리면 아래 내용이 그 양식 칸에 그대로 들어가요.</span><label class="pill b3d main" for="plan-att">우리 시설 서식 올리기</label></div>`:""}
         ${chipsHTML}
-        <div class="divider"></div>
-        ${inputsHTML}
-        ${t.id==="gh-welfare-msg"?smsFixedHTML(st.v):""}
         ${district==="msg"?ghSmsDistrict("program"):""}
+        ${grouped?"":'<div class="divider"></div>'}
+        ${inputsHTML}
         ${t.plan?planCustHTML(t)+`<div style="margin-top:14px">${signHTML(PFORM)}</div>`:""}
         ${t.draft?"":'<p class="hint">비워둔 칸은 [ ]로 남아요.</p>'}
         ${attachHTML(t,st)}
@@ -5525,7 +5557,7 @@ app.addEventListener("click",e=>{
   const co = e.target.closest("[data-copyout]");
   if(co){ const ta=document.getElementById("out-"+co.dataset.copyout), st=document.getElementById("out-status");
     const label=co.dataset.copyLabel||(current.draft?"원고 복사":"복사"),example=label==="예시 복사";
-    copyText(ta.value, ta, ()=>{st.textContent=example?"가상 후기 예시를 복사했어요. 게시 전 실제 내용으로 바꿔 주세요.":current.draft?"원고를 복사했어요. 게시할 곳에 붙여 넣으세요.":"복사했어요! 문자나 카카오톡에 붙여 넣어 보내세요."; st.classList.remove("warn"); co.textContent="복사됨"; setTimeout(()=>co.textContent=label,1500);},
+    copyText(example?"[실습용 가상 후기]\n\n"+ta.value:ta.value, ta, ()=>{st.textContent=example?"가상 후기 예시를 복사했어요. 게시 전 실제 내용으로 바꿔 주세요.":current.draft?"원고를 복사했어요. 게시할 곳에 붙여 넣으세요.":"복사했어요! 문자나 카카오톡에 붙여 넣어 보내세요."; st.classList.remove("warn"); co.textContent="복사됨"; setTimeout(()=>co.textContent=label,1500);},
       ()=>{st.textContent="자동 복사가 막혀 있어요. 선택된 문구를 직접 복사해주세요."; st.classList.add("warn");}); return; }
   const tt=e.target.closest("[data-ttab]"); if(tt){ app.querySelectorAll("[data-ttab]").forEach(b=>b.classList.toggle("on",b===tt)); app.querySelector(".tsplit").dataset.show=tt.dataset.ttab; return; }
   if(e.target.closest("#prompt-toggle")){ const w=document.getElementById("prompt-wrap"), b=e.target.closest("#prompt-toggle"); w.hidden=!w.hidden; b.textContent=w.hidden?"요청문 보기":"요청문 접기"; b.setAttribute("aria-expanded",String(!w.hidden)); return; }

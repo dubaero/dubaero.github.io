@@ -1113,3 +1113,19 @@ details.plan-more .aibar{border-style:dashed}
 .gh-review-choices h3:not(:first-child){margin-top:7px}
 
 .gh-review-choices [aria-label="후기를 쓸 프로그램"]{max-height:145px;overflow:auto;padding:2px}
+
+/* One compact input sheet with persistent, side-by-side field labels. */
+.gh-always-split .tin{gap:8px}
+.gh-always-split .tin legend{margin-bottom:3px}
+.gh-inline-fields{min-inline-size:0;margin:0;padding:5px 9px 7px;border:1px solid #baccc3;border-radius:8px;background:#f7faf8;display:grid;gap:4px}
+.gh-inline-fields legend{padding:0 4px;font-size:14px;font-weight:800;color:#234539}
+.gh-inline-row{display:grid;grid-template-columns:minmax(84px,25%) minmax(0,1fr);align-items:center;gap:8px;min-width:0}
+.gh-inline-row>label{font-size:13px;font-weight:750;line-height:1.25;overflow-wrap:anywhere}
+.gh-inline-row>label small{display:block;font-size:11px;font-weight:400}
+.gh-inline-row :is(input,textarea){display:block;width:100%;min-width:0;min-height:33px;padding:5px 7px;border:1px solid #aebfb6;border-radius:5px;background:#fff;color:#24392f;font:inherit;font-size:13px}
+.gh-inline-row :is(input,textarea)::placeholder{color:#5f7067;opacity:1}
+.gh-inline-row textarea{min-height:53px;resize:vertical}
+.gh-inline-row .with-mic{gap:4px;min-width:0}
+.gh-inline-row .mic{flex:none}
+.gh-inline-fields:has([data-input=act]) textarea,.gh-inline-fields:has([data-input=events]) textarea{min-height:100px}
+@media(max-width:859px){.gh-inline-row :is(input,textarea){font-size:16px;min-height:38px}.gh-inline-row{grid-template-columns:minmax(79px,26%) minmax(0,1fr);gap:5px}}
