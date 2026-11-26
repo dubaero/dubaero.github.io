@@ -1923,7 +1923,7 @@ globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12
 const ic=(k,s)=>`<span class="ai-ic"${s?` style="${s}"`:''}>${P_}${IC[k]||IC.spark}</svg></span>`;
 const TAB={ChatGPT:['msg','#10a37f'],'제미나이':['spark','#4285f4'],Claude:['pen','#d97757'],Canva:['pal','#7d2ae8'],'활용 꿀팁':['bulb','#e2865a'],'AI 설정 따라 하기':['gear','#2f6b56'],'데스크톱 앱':['pc','#b45a2c']};
 const CIC={'5가지 모드 한눈에':'mode','이미지 만들기':'img','이미지 편집 화면':'pen','움짤 GIF':'gif','라이브러리':'lib','핀터레스트 레퍼런스':'pin','메모·녹음 → 서식':'mic','나노바나나 이미지':'img','음악 30초':'music','영상 만들기':'film','노트북':'book','디자인':'pal','슬라이드':'slide','모션그래픽':'film','한글 서식 스킬':'doc','깊은 조사':'search','AI 프레젠테이션':'slide','매직 레이어':'layers','원고 → PPT 흐름':'doc'};
-const card=(a,n)=>{const A=APPS.find(x=>x.n===a);return A&&A.cards.find(c=>c.n===n)};
+window.__ai={ic:(k,st)=>ic(k,st),TAB,CIC,nbHTML:()=>nbHTML()};const card=(a,n)=>{const A=APPS.find(x=>x.n===a);return A&&A.cards.find(c=>c.n===n)};
 /* ---- 내용 보완 ---- */
 const set=(a,n,o)=>{const c=card(a,n);if(c)Object.assign(c,o)};
 set('ChatGPT','움짤 GIF',{what:'사진이나 캐릭터 그림 1장을 3초 동안 움직이는 짤(GIF)로 만들어 주는 기능이에요. 단톡방 인사, 행사 홍보 SNS에 바로 써요.',
@@ -2061,6 +2061,95 @@ function deskView(){
  <div><h5>${ic('pen','background:#d97757')}Claude</h5><ul><li>빠른 입력·스크린샷·받아쓰기</li><li>데스크톱 확장으로 내 파일·폴더 연결</li><li>Cowork(유료)로 여러 단계 일 맡기기</li></ul></div></div>
  <p class="note2">ChatGPT와 제미나이는 단축키가 같아요(Alt+Space). 둘 다 설치하면 한쪽 설정에서 단축키를 바꿔 두세요. 기능은 계속 바뀌니 강의 전 한 번 더 확인하세요.</p></div>`);}
 if(typeof VIEW!=='undefined'&&VIEW==='apps')render();else tabsFix();
+})();
+</script>
+<script>/* 2026.11.26 AI 앱 활용법 2: 핵심 기능만, "이럴 때 써요" 누르면 프롬프트 반영, 선택칸은 가운데 */
+(function(){
+if(typeof APPS==='undefined'||!window.__ai)return;
+const {ic,TAB,CIC}=window.__ai;
+const A_=n=>APPS.find(a=>a.n===n);
+const drop=(a,names)=>{const A=A_(a);if(A)A.cards=A.cards.filter(c=>!names.includes(c.n))};
+drop('ChatGPT',['메모·녹음 → 서식','핀터레스트 레퍼런스']);
+drop('제미나이',['핀터레스트 레퍼런스']);
+CIC['캔버스']='doc';if(typeof FLX!=='undefined'){FLX['ChatGPT|캔버스']=[[],'긴 글 옆 창에서 같이 고치기',''];FLX['제미나이|캔버스']=[[],'웹페이지·인포그래픽·퀴즈 만들기',''];}
+const g=A_('ChatGPT'),m=A_('제미나이');
+if(g&&!g.cards.some(c=>c.n==='캔버스'))g.cards.push({n:'캔버스',f:1,what:'긴 글을 옆 창에 펼쳐 놓고 문단을 골라 "이 부분만 고쳐 줘"처럼 함께 고치는 편집 화면이에요. 길이 줄이기·쉬운 말·맞춤법 버튼도 있어요.',ex:[],
+ ut:[['doc','안내문 다듬기','보호자 안내문을 쉽고 따뜻하게','보호자에게 보낼 안내문'],['table','보고서 문단 고치기','결과보고서 문단을 공문체로','결과보고서의 사업 성과 문단'],['type','쉬운 글로 바꾸기','이용자가 읽을 쉬운 글','이용자가 직접 읽을 쉬운 글 안내문']],
+ ol:'말투',o:['공문체(~함)','따뜻한 안내문','쉬운 글(짧은 문장)'],
+ p:`캔버스로 열어서 함께 고치자.
+[만들 것] {b} {u}
+[말투] {o}
+[내용] 아래 초안(또는 메모)을 붙여 넣을게: [초안 붙여넣기]
+[진행] ① 먼저 캔버스에 전체 초안을 펼쳐 줘 ② 문단마다 고칠 점을 한 줄씩 메모로 달아 줘 ③ 내가 고른 문단만 고쳐 줘
+[필수] 자료에 없는 숫자·날짜는 [확인 필요] · 이용자는 가명 · 한 문장 40자 안팎`});
+if(m&&!m.cards.some(c=>c.n==='캔버스'))m.cards.push({n:'캔버스',f:1,what:'글·웹페이지·인포그래픽·퀴즈를 옆 화면에 바로 만들어 보고 고치는 작업 공간이에요. 다 쓴 문서를 버튼 하나로 웹페이지·인포그래픽·퀴즈로 바꿀 수 있어요.',ex:[],
+ ut:[['globe','행사 안내 웹페이지','링크로 보내는 한 장 안내 페이지','행사 안내 웹페이지(한 장짜리)'],['chart','한 장 인포그래픽','지침 요약을 그림 한 장으로','사업 지침 요약 인포그래픽'],['quiz','직원 교육 퀴즈','신규 직원 교육 확인 퀴즈','신규 직원 교육용 퀴즈 10문제']],
+ ol:'분위기',o:['깔끔한 공공기관','따뜻하고 밝게','큰 글씨·쉬운 말'],
+ p:`캔버스에서 만들어 줘.
+[만들 것] {b} {u}
+[분위기] {o}
+[내용] 일시: [ ] / 장소: [ ] / 대상: [ ] / 신청: [ ] / 문의: [전화번호] (모르는 칸은 [확인 필요])
+[조건] 휴대폰에서도 잘 보이게 · 큰 글씨·고대비 · 장애인 이용자가 주인공인 표현
+[진행] 먼저 구성(제목·영역 순서)을 짧게 보여 주고, 내가 좋다고 하면 완성해 줘`});
+/* "이럴 때 써요" = 누르면 프롬프트에 반영 */
+const UT={
+'ChatGPT|이미지 만들기':[['img','모집 포스터','참여자 모집 공고','참여자 모집 포스터'],['spark','후원 감사 카드','후원자께 드리는 감사 카드','후원자 감사 카드'],['doc','행사 초대장','송년회·발표회 초대장','행사 초대장']],
+'ChatGPT|이미지 편집 화면':[['pen','날짜만 바꾸기','지난 포스터 재활용','날짜만 새 날짜로'],['img','배경 계절 바꾸기','봄 포스터를 겨울로','배경만 겨울 분위기로'],['type','오타 한 글자','틀린 글자만 고치기','틀린 글자 한 곳만']],
+'ChatGPT|움짤 GIF':[['msg','아침 인사','손 흔드는 캐릭터','손 흔들며 인사'],['zap','캠페인 박수','박수 치며 응원','박수 치기'],['spark','후원 감사','고개 숙여 인사','고개 숙여 감사 인사']],
+'ChatGPT|라이브러리':[['lib','참여자 모집','같은 캐릭터로 모집 안내','참여자 모집 안내'],['img','행사 후기','지난 행사 이야기','행사 후기'],['spark','인식개선','장애 인식개선 메시지','장애 인식개선']],
+'제미나이|나노바나나 이미지':[['chart','결과 인포그래픽','실적 숫자를 한 장 그림으로',0],['img','사진 배경 바꾸기','활동 사진 계절·배경 바꾸기',1],['doc','모집 포스터','한글이 정확한 포스터',2]],
+'제미나이|음악 30초':[['music','프로그램 주제가','프로그램 이름이 들어간 노래','프로그램 주제가'],['zap','행사 오프닝','입장할 때 틀 음악','행사 오프닝 음악'],['spark','캠페인 노래','인식개선 캠페인 노래','캠페인 노래']],
+'제미나이|영상 만들기':[['film','홍보 쇼츠','SNS용 짧은 영상','SNS 홍보 쇼츠'],['pc','로비 TV 안내','복지관 로비 화면용','로비 TV 안내 영상'],['zap','행사 오프닝','행사 시작 8초 영상','행사 오프닝 영상']],
+'제미나이|노트북':[['search','올해 바뀐 점','지침에서 달라진 부분','올해 바뀐 점'],['table','평가 준비','평가지표별 준비할 것','평가 때 보는 것'],['doc','예산 기준','집행 가능한 항목','예산 기준']],
+'Claude|디자인':[['doc','안내지 A4','한 장짜리 안내지','안내지 A4'],['slide','행사 순서지','송년회·발표회 순서지','행사 순서지'],['img','포스터 시안 2개','비교해서 고르기','포스터']],
+'Claude|슬라이드':[['table','운영위원회 보고','실적 보고 10장','운영위원회 보고'],['chart','결과 발표','연말 결과 발표','결과 발표'],['spark','후원자 감사','후원금 사용 이야기','후원자 감사']],
+'Claude|모션그래픽':[['film','모집 안내','로비 TV 모집 안내','모집 안내'],['zap','행사 카운트다운','D-7 카운트다운','행사 카운트다운'],['spark','감사 인사','후원 감사 화면','감사 인사']],
+'Claude|한글 서식 스킬':[['doc','사업계획서','서식 그대로 채우기','사업계획서'],['table','프로그램 일지','일지 여러 장 한 번에','프로그램 일지'],['doc','결과보고서','결과보고서 빈칸 채우기','결과보고서']],
+'Claude|깊은 조사':[['search','우수 사례','다른 복지관 사례','다른 복지관 우수 사례'],['doc','공모사업','올해 지원 가능한 공모','공모사업 정보'],['chart','정책 변화','최신 장애인 정책','최신 정책 변화']],
+'Canva|AI 프레젠테이션':[['slide','사업 설명회','신규 사업 소개','사업 소개'],['chart','결과 보고','연말 결과 발표','결과 보고'],['spark','후원자 감사','후원금 사용 이야기','후원자 감사']],
+'Canva|매직 레이어':[['type','오타 고치기','틀린 글자만 직접 수정','오타를 고치기 좋은 포스터'],['move','위치 옮기기','제목·캐릭터 자리 바꾸기','요소를 옮기기 좋은 포스터'],['trash','요소 지우기','필요 없는 소품 빼기','요소를 지우기 좋은 포스터']],
+'Canva|원고 → PPT 흐름':[['doc','교육 자료','신규 직원 교육 12장','신규 직원 교육 자료'],['table','보고 자료','운영위원회 보고','운영위원회 보고 자료'],['slide','사업 소개','사업 설명회 10장','사업 설명회 자료']]};
+const PFIX={'ChatGPT|이미지 만들기':s=>s.replace('참여자 모집 포스터 이미지 1장을','{u} 이미지 1장을').replace('- 제목: [프로그램명] 참여자 모집','- 제목: [제목]'),
+ 'ChatGPT|라이브러리':s=>s.replace('{b} {o} 카드뉴스','{b} {u} 카드뉴스'),'ChatGPT|움짤 GIF':s=>s.replace('인물이 {o}','인물이 {u}')};
+const key=(A,C)=>A.n+'|'+C.n;
+const NOOPT=['ChatGPT|움짤 GIF','ChatGPT|라이브러리','제미나이|노트북','Claude|디자인','Claude|슬라이드','Claude|모션그래픽','Claude|한글 서식 스킬','Claude|깊은 조사','Canva|AI 프레젠테이션','Canva|원고 → PPT 흐름','Canva|매직 레이어'];
+const mapUse=(A,C)=>C.ut||UT[key(A,C)]||(C.use||[]).map(u=>[u[0],u[1],u[2],u[1]]);
+/* 화면 */
+const _apps=VIEWS.apps;
+VIEWS.apps=()=>{const A=APPS[S.app??0]||APPS[0];if(A.desk||A.tips||A.aig)return _apps();
+ if((S.fc??0)>=A.cards.length)S.fc=0;const C=A.cards[S.fc]||A.cards[0];if(C.full)return _apps();
+ const appTabs=`<div class="atabs">${APPS.map((a,i)=>`<button class="at${S.app==i?' on':''}" onclick="S.app=${i};S.fc=0;S.ao=0;S.ut=0;save();render()">${a.n}</button>`).join('')}</div>`;
+ const ftbl=`<table class="ftb"><thead><tr><th>기능</th><th>무엇을 만드나</th><th></th></tr></thead><tbody>${A.cards.map((c,i)=>`<tr class="${S.fc==i?'on':''}" onclick="S.fc=${i};S.ao=0;S.ut=0;save();render()"><td><b>${c.n}</b></td><td>${esc((FLX[A.n+'|'+c.n]||[[],c.what?c.what.split(/[.,]/)[0]:''])[1]||'')}</td><td><span class="badge ${c.f?'free':'paid'}">${c.f?'무료':'유료'}</span></td></tr>`).join('')}</tbody></table>`;
+ return view('AI 앱 활용법',appTabs+`<div class="gl">${A.n}로 할 수 있는 것 <small>줄을 누르면 오른쪽이 바뀌어요</small></div>${ftbl}`,()=>right(A,C));};
+function right(A,C){S.ut=S.ut??0;S.ao=S.ao??0;S.ab=S.ab??0;
+ const U=mapUse(A,C);if(S.ut>=U.length)S.ut=0;const u=U[S.ut]||null;
+ let src=C.p||'';if(C.pp){const pi=u&&typeof u[3]==='number'?u[3]:(S.ao||0);src=C.pp[pi]||src}
+ if(PFIX[key(A,C)])src=PFIX[key(A,C)](src);
+ const no=NOOPT.includes(key(A,C));if(no)src=src.replace(/\{o\}/g,'{u}');
+ const ut=u?(typeof u[3]==='number'?u[1]:u[3]):'';
+ const o=(C.o||[])[S.ao]||'',b=AB[S.ab];
+ let pr=src.replace(/\{b\}/g,M(b)).replace(/\{o\}/g,M(o));
+ if(pr.includes('{u}'))pr=pr.replace(/\{u\}/g,M(ut));else if(u&&!C.pp)pr='[이번에 만들 것] '+M(ut)+'\n'+pr;
+ CUR=()=>pr;
+ const fd=(typeof FD!=='undefined'&&FD[C.n])||['',''];const what=C.what||fd[0];const adv=(fd[1]||'').split(' · ').filter(Boolean);
+ const open=A.url==='canva'?`<button class="btn" onclick="window.open('https://www.canva.com','_blank')">Canva 열기</button>`:`<button class="btn" onclick="openAI('${A.url}',CUR())">${A.n} 열기</button>`;
+ const col=(TAB[A.n]||['','#2f6b56'])[1];
+ const optRow=(C.o&&C.o.length&&!C.pp&&!no)?`<div class="qrow"><div class="gl">${esc(C.ol||'선택')}</div>${chips('ao',C.o)}</div>`:'';
+ return `<div class="bar"><span class="t">${A.n} · ${esc(C.n)}<span class="badge ${C.f?'free':'paid'}">${C.f?'무료':'유료'}</span></span><span class="sub2"></span><button class="btn p" onclick="copyTxt(CUR())">프롬프트 복사</button>${open}</div>
+ <div class="ap2"><section><div class="ai-hero">${ic(CIC[C.n]||'spark','background:'+col)}<div><h3>${esc(C.n)}</h3><p>${esc(what)}</p>${adv.length?`<div class="adv2">${adv.map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:''}</div></div>
+ ${U.length?`<h4>이럴 때 써요 <small style="font-weight:400;color:#66746f">누르면 프롬프트에 들어가요</small></h4><div class="uses">${U.map((x,i)=>`<button type="button" class="use${i==S.ut?' on':''}" onclick="S.ut=${i};save();RIGHT()">${ic(x[0])}<b>${esc(x[1])}</b><span>${esc(x[2])}</span></button>`).join('')}</div>`:''}
+ <div class="mid-sel">${optRow}<div class="qrow"><div class="gl">사업</div>${chips('ab',AB)}</div></div></section>
+ <section><h4 style="margin-top:0">프롬프트 <small style="font-weight:400;color:#66746f">[ ] 칸만 채워서 붙여넣기</small></h4><div class="pbox2 out" style="padding:12px 14px">${fmt(tight(pr))}</div>${C.nbx?window.__ai.nbHTML():''}</section></div>`;}
+document.head.insertAdjacentHTML('beforeend',`<style id="ai-apps3">
+.ap2 .uses .use{all:unset;box-sizing:border-box;cursor:pointer;background:#fff;border:1.5px solid #DDE8E0;border-radius:12px;padding:10px;text-align:center;display:block}
+.ap2 .uses .use:hover{border-color:#9CC7AE}
+.ap2 .uses .use.on{border-color:#E07A2E;background:#FFF7F0;box-shadow:0 0 0 2px rgba(224,122,46,.15)}
+.ap2 .uses .use b{display:block;font-size:14px}.ap2 .uses .use span{display:block;font-size:12.5px;color:#4a5552;line-height:1.4;margin-top:2px}
+.ap2 .uses .use .ai-ic{width:38px;height:38px;border-radius:11px;background:#EEF6F0;color:#2F6B56;display:grid;place-items:center;margin:0 auto 6px}.ap2 .uses .use .ai-ic svg{width:22px;height:22px}
+.ap2 .uses .use.on .ai-ic{background:#E07A2E;color:#fff}
+.ap2 .mid-sel{margin-top:12px;display:grid;gap:4px}
+</style>`);
+if(typeof VIEW!=='undefined'&&VIEW==='apps')render();
 })();
 </script>
 <style id="gh-home-theme">
