@@ -307,11 +307,11 @@ mark{background:linear-gradient(transparent 58%,#fcc9a3 58%);color:var(--ink);bo
 .sel2 select{flex:1;min-width:0;appearance:none;-webkit-appearance:none;border:1.5px solid var(--w);border-radius:10px;padding:9px 38px 9px 12px;font:inherit;font-size:15px;font-weight:700;color:var(--ink);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e2865a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;cursor:pointer}
 .sel2 select:focus{outline:0;box-shadow:0 0 0 3px var(--wl)}
 .qg{flex:1;grid-auto-rows:1fr}
-.hai{display:grid;gap:7px;flex:1;min-height:0;overflow:auto;align-content:start}
-.hai button{display:grid;grid-template-columns:38px 1fr auto;grid-template-rows:auto auto;align-items:center;column-gap:10px;text-align:left;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:10px;background:#fff;padding:8px 12px}
+.hai{display:grid;gap:4px;flex:1;min-height:0;overflow:hidden;align-content:start}
+.hai button{display:grid;grid-template-columns:30px 1fr auto;grid-template-rows:auto auto;align-items:center;column-gap:8px;text-align:left;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:9px;background:#fff;padding:4px 10px}
 .hai button:hover,.hai button.on{background:var(--wl)}
-.hai .lg{grid-row:1/3;width:38px;height:38px;border-radius:10px;background:var(--c);color:#fff;font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center}
-.hai b{font-size:15px;font-weight:800}.hai .d{grid-column:2;font-size:12px;color:var(--sub)}.hai .go{grid-row:1/3;grid-column:3;color:var(--c);font-size:20px;font-weight:900}
+.hai .lg{grid-row:1/3;width:30px;height:30px;font-size:12px!important;border-radius:10px;background:var(--c);color:#fff;font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center}
+.hai b{font-size:14px;font-weight:800;line-height:1.3}.hai .d{grid-column:2;font-size:11.5px;line-height:1.3;color:var(--sub)}.hai .go{grid-row:1/3;grid-column:3;color:var(--c);font-size:20px;font-weight:900}
 .slide4{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:stretch;gap:6px;padding:14px 14px 6px}
 .sc{position:relative;border:2px solid var(--wm);background:var(--wl);border-radius:14px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px}
 .sc .no{position:absolute;top:-10px;left:-6px;width:26px;height:26px;border-radius:50%;background:var(--w);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center}
@@ -338,6 +338,30 @@ mark{background:linear-gradient(transparent 58%,#fcc9a3 58%);color:var(--ink);bo
 .dk-h{font-size:15px;margin:14px 0 6px;color:var(--w2)}
 .dk-3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.dk-3>div{border:1px solid var(--wm);background:var(--wl);border-radius:12px;padding:10px;font-size:13px;line-height:1.5;color:var(--sub)}.dk-3 b{display:block;font-size:14.5px;color:var(--ink);margin:4px 0 2px}.dk-3 .ic{display:inline-flex;width:38px;height:38px;border-radius:50%;background:#fff;color:var(--w);align-items:center;justify-content:center}
 .ex2>div{background:#fff}.mini{display:flex;gap:4px;height:46px}.mini .d{flex:2;border-radius:6px;background:#e6ebe9;font-size:11px;font-weight:800;color:var(--sub);display:flex;align-items:center;justify-content:center}.mini .d.x{background:#fde4d6;color:#a3400f}.mini .d.f{background:#eef3f1}.mini .p{flex:1;border-radius:6px;background:var(--g);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center}
+
+.exi{width:100%;border-radius:10px;border:1px solid var(--line);cursor:zoom-in;display:block;background:#fff}.zm{display:block;text-align:right;font-size:11.5px;color:var(--sub);margin-top:2px}
+.gifbox{display:flex;flex-direction:column;gap:6px}.gb{display:flex;align-items:center;gap:10px;background:#fff8ef;border:1px solid var(--wm);border-radius:12px;padding:8px 14px}.gb span{font-size:20px;font-weight:900;animation:gbp 1.2s ease-in-out infinite alternate}@keyframes gbp{to{transform:scale(1.08)}}
+.gl2{font-size:13px;font-weight:800;color:var(--ink);margin-top:6px;border-bottom:2px solid var(--wm);padding-bottom:3px}.gq{padding-left:20px;font-size:13.5px;line-height:1.75}.gq li::marker{color:var(--w);font-weight:900}
+.tips{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px;flex:1;min-height:0;overflow:auto}.tp{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;display:flex;flex-direction:column;gap:8px}.tp h4{font-size:15px;display:flex;gap:8px;align-items:center;margin:0}.tp h4 span{width:24px;height:24px;border-radius:50%;background:var(--w);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex:none}
+.tp p{margin:0;font-size:13px;background:linear-gradient(transparent 60%,#fcc9a3 60%);display:inline;font-weight:700;align-self:flex-start}.tpt{width:100%;border-collapse:collapse;font-size:13px}.tpt th,.tpt td{border-bottom:1px solid var(--line);padding:5px 6px;text-align:left}.tpt th{width:70px}.tpt td:last-child{color:var(--sub)}
+.hwpn{margin:10px 0 0;font-size:12.5px;line-height:1.55;background:#fff8ef;border-left:4px solid var(--w);border-radius:6px;padding:7px 10px}.hwpn b{display:block;font-size:13px}.hwpn u{text-decoration:none;background:linear-gradient(transparent 60%,#fcc9a3 60%);font-weight:800}
+.bear .br-tear{animation:brT 1.6s ease-in infinite}.bear .t2{animation-delay:.8s}@keyframes brT{0%{transform:translateY(0);opacity:1}100%{transform:translateY(14px);opacity:0}}
+.bear .br-z{animation:brZ 2s ease-in-out infinite}.bear .z2{animation-delay:1s}@keyframes brZ{0%,100%{opacity:.2}50%{opacity:1}}
+.bear .br-sweat{animation:brT 1.8s ease-in infinite}.bear .br-steam{animation:brS 1s ease-in-out infinite alternate}@keyframes brS{to{transform:translateY(-4px);opacity:.4}}
+.bear .br-heart{transform-box:fill-box;transform-origin:center;animation:brH 1s ease-in-out infinite}@keyframes brH{50%{transform:scale(1.2)}}
+.bear .br-wave{transform-box:view-box;transform-origin:84px 84px;animation:brW .7s ease-in-out infinite alternate}@keyframes brW{from{transform:rotate(-12deg)}to{transform:rotate(22deg)}}
+.bear .br-spark{animation:brZ 1s infinite}.bear .br-dots circle{animation:brZ 1.5s infinite}.bear .br-dots circle:nth-child(2){animation-delay:.3s}.bear .br-dots circle:nth-child(3){animation-delay:.6s}
+
+.vt2{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 12px}.vc{min-height:0;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;display:flex;flex-direction:column;gap:8px}
+.vc .c3h{display:flex;align-items:center;gap:6px}.vhero{display:flex;gap:10px;align-items:center}.samk{display:inline-block;font-weight:900;background:linear-gradient(transparent 55%,#fcc9a3 55%);margin-bottom:4px}.sam{margin:2px 0;font-size:15px}.sam b{color:#d93a2b;font-size:18px;margin-right:2px}
+.vemp{font-size:14.5px;margin:0}.vred{margin:0;font-size:17px;font-weight:900;color:#d93a2b}.vgam{margin:0;font-size:14px;font-weight:700;background:#f6f8f7;border-radius:8px;padding:6px 10px}
+.vbr{display:flex;gap:10px;align-items:center;background:#fff8ef;border:1px solid var(--wm);border-radius:12px;padding:8px 10px;margin-top:auto}.vbr b{font-size:15px}.vbr p{margin:2px 0 0;font-size:13.5px;line-height:1.6}.vbr u{text-decoration:none;background:linear-gradient(transparent 55%,#fcc9a3 55%);font-weight:800}
+.vmsg{white-space:pre-wrap;font-size:15px;line-height:1.8;flex:1}.vtip{font-size:12.5px;color:var(--sub)}
+.itabs{display:flex;gap:6px;padding:10px 12px 0;flex-wrap:wrap;flex:none}.it{display:flex;align-items:center;gap:6px;border:1.5px solid var(--wm);background:var(--wl);border-radius:10px;padding:6px 10px;font-size:13.5px;font-weight:800;color:var(--ink);text-align:left;max-width:32%}.it span{flex:none;width:20px;height:20px;border-radius:50%;background:#fff;color:var(--w2);display:flex;align-items:center;justify-content:center;font-size:12px}.it.on{background:var(--w);border-color:var(--w);color:#fff}.it.on span{color:var(--w)}
+.mdet{flex:1;min-height:0;display:grid;grid-template-columns:1.05fr 1fr;gap:10px;padding:10px 12px}.mrow b{display:block;font-size:13px;margin-bottom:2px}.mrow p{margin:0;font-size:14px;line-height:1.6}.mst{padding-left:18px;font-size:13.5px;line-height:1.65}.mst u{text-decoration:none;background:linear-gradient(transparent 55%,#fcc9a3 55%);font-weight:800}
+.mit{display:flex;flex-wrap:wrap;gap:4px}.mit span{font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;background:#f6f8f7}
+table.form.sm2 th,table.form.sm2 td{font-size:13px;padding:5px 7px}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.rgrid button{border:1.5px solid var(--line);background:#f6f8f7;border-radius:10px;padding:7px 8px;text-align:left;display:flex;flex-direction:column}.rgrid b{font-size:14px}.rgrid span{font-size:11.5px;color:var(--sub)}.rgrid button.on{border-color:var(--w);background:var(--wl)}
 </style>
 </head>
 <body>
@@ -466,6 +490,30 @@ return {html:html,bind:bind};})();
 </script>
 
 <script>
+/* ===== 곰돌이 캐릭터 ===== */
+function bear(pose,size){const W=size||120;
+ const eyeO='<circle cx="48" cy="52" r="3.6" fill="#3a2a20"/><circle cx="72" cy="52" r="3.6" fill="#3a2a20"/><circle cx="49.3" cy="50.6" r="1.2" fill="#fff"/><circle cx="73.3" cy="50.6" r="1.2" fill="#fff"/>';
+ const eyeSmile='<path d="M43 53q5-6 10 0M67 53q5-6 10 0" stroke="#3a2a20" stroke-width="3" fill="none" stroke-linecap="round"/>';
+ const eyeSad='<path d="M43 50q5 5 10 1M67 51q5 4 10-1" stroke="#3a2a20" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M42 44l9 3M78 44l-9 3" stroke="#3a2a20" stroke-width="2.4" stroke-linecap="round"/>';
+ const eyeTired='<path d="M43 53h10M67 53h10" stroke="#3a2a20" stroke-width="3" stroke-linecap="round"/><path d="M43 50q5-3 10 0M67 50q5-3 10 0" stroke="#3a2a20" stroke-width="1.6" fill="none"/>';
+ const eyeAngry='<circle cx="48" cy="54" r="3.4" fill="#3a2a20"/><circle cx="72" cy="54" r="3.4" fill="#3a2a20"/><path d="M41 45l12 5M79 45l-12 5" stroke="#3a2a20" stroke-width="3" stroke-linecap="round"/>';
+ const eyeUp='<circle cx="49" cy="49" r="3.4" fill="#3a2a20"/><circle cx="73" cy="49" r="3.4" fill="#3a2a20"/>';
+ const M={smile:'<path d="M54 68q6 6 12 0" stroke="#3a2a20" stroke-width="2.6" fill="none" stroke-linecap="round"/>',open:'<path d="M53 67q7 9 14 0z" fill="#b84a3a"/>',sad:'<path d="M54 71q6-6 12 0" stroke="#3a2a20" stroke-width="2.6" fill="none" stroke-linecap="round"/>',flat:'<path d="M55 69h10" stroke="#3a2a20" stroke-width="2.6" stroke-linecap="round"/>',wave:'<path d="M53 70q2-3 4 0t4 0 4 0" stroke="#3a2a20" stroke-width="2.4" fill="none" stroke-linecap="round"/>',o:'<ellipse cx="60" cy="69" rx="3" ry="3.6" fill="#3a2a20"/>'};
+ let eyes=eyeO,mouth=M.smile,ex='',armL='<ellipse cx="34" cy="98" rx="9" ry="12" fill="#c98b5a"/>',armR='<ellipse cx="86" cy="98" rx="9" ry="12" fill="#c98b5a"/>',cheek=true,cls='';
+ switch(pose){
+ case 'sad':eyes=eyeSad;mouth=M.sad;cheek=false;ex='<path class="br-tear" d="M46 57q-3 6 0 9q3-3 0-9z" fill="#7fb4e0"/><path class="br-tear t2" d="M74 57q-3 6 0 9q3-3 0-9z" fill="#7fb4e0"/>';break;
+ case 'tired':eyes=eyeTired;mouth=M.o;cheek=false;ex='<text class="br-z" x="88" y="30" font-size="14" font-weight="800" fill="#7a8a84">z</text><text class="br-z z2" x="98" y="18" font-size="18" font-weight="800" fill="#7a8a84">Z</text>';break;
+ case 'anx':eyes=eyeO;mouth=M.wave;ex='<path class="br-sweat" d="M84 36q5 7 0 10q-5-3 0-10z" fill="#7fb4e0"/>';break;
+ case 'angry':eyes=eyeAngry;mouth=M.flat;ex='<path class="br-steam" d="M30 22q-4-5 0-10M90 22q4-5 0-10" stroke="#9aa7a1" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="42" cy="63" r="5" fill="#f08a7a" opacity=".7"/><circle cx="78" cy="63" r="5" fill="#f08a7a" opacity=".7"/>';cheek=false;break;
+ case 'think':eyes=eyeUp;mouth=M.flat;armR='<ellipse cx="66" cy="80" rx="8" ry="10" fill="#c98b5a" transform="rotate(-20 66 80)"/>';ex='<g class="br-dots"><circle cx="92" cy="30" r="3" fill="#b9c4bf"/><circle cx="101" cy="22" r="4" fill="#b9c4bf"/><circle cx="111" cy="12" r="5" fill="#b9c4bf"/></g>';break;
+ case 'sick':eyes=eyeTired;mouth=M.sad;cheek=false;ex='<rect x="46" y="22" width="28" height="11" rx="5" fill="#fff" stroke="#e8c9b0" stroke-width="1.5" transform="rotate(-12 60 27)"/><path d="M58 24v8M54 28h8" stroke="#e8603c" stroke-width="2.4" transform="rotate(-12 60 27)"/><rect x="62" y="70" width="22" height="4" rx="2" fill="#eef3f1" stroke="#9aa7a1" transform="rotate(18 62 72)"/><circle cx="83" cy="78" r="3" fill="#e8603c"/>';break;
+ case 'hug':eyes=eyeSmile;armL='<ellipse cx="48" cy="96" rx="9" ry="11" fill="#c98b5a" transform="rotate(40 48 96)"/>';armR='<ellipse cx="72" cy="96" rx="9" ry="11" fill="#c98b5a" transform="rotate(-40 72 96)"/>';ex='<path class="br-heart" d="M60 104c-9-7-9-14-3-14 2 0 3 1 3 3 0-2 1-3 3-3 6 0 6 7-3 14z" fill="#e8603c"/>';break;
+ case 'cheer':eyes=eyeSmile;mouth=M.open;armL='<ellipse class="br-up" cx="28" cy="78" rx="8" ry="12" fill="#c98b5a" transform="rotate(30 28 78)"/>';armR='<ellipse class="br-up r" cx="92" cy="78" rx="8" ry="12" fill="#c98b5a" transform="rotate(-30 92 78)"/>';ex='<path class="br-spark" d="M18 30l-6-4M14 42h-8M102 30l6-4M106 42h8" stroke="#f3b521" stroke-width="3" stroke-linecap="round"/>';break;
+ case 'wave':eyes=eyeSmile;mouth=M.open;armR='<g class="br-wave"><ellipse cx="92" cy="74" rx="8" ry="13" fill="#c98b5a" transform="rotate(-25 92 74)"/></g>';break;
+ }
+ return `<svg class="bear p-${pose}" viewBox="0 0 120 120" width="${W}" height="${W}" aria-hidden="true"><ellipse cx="60" cy="112" rx="30" ry="5" fill="#000" opacity=".07"/><ellipse cx="60" cy="100" rx="26" ry="18" fill="#c98b5a"/><ellipse cx="60" cy="102" rx="15" ry="11" fill="#f3dcc2"/>${armL}${armR}<circle cx="34" cy="28" r="12" fill="#c98b5a"/><circle cx="86" cy="28" r="12" fill="#c98b5a"/><circle cx="34" cy="28" r="6.5" fill="#e8b48f"/><circle cx="86" cy="28" r="6.5" fill="#e8b48f"/><circle cx="60" cy="56" r="32" fill="#c98b5a"/><ellipse cx="60" cy="66" rx="15" ry="11" fill="#f3dcc2"/><ellipse cx="60" cy="61" rx="5" ry="3.6" fill="#3a2a20"/>${eyes}${mouth}${cheek?'<circle cx="40" cy="64" r="4.5" fill="#f2a08c" opacity=".55"/><circle cx="80" cy="64" r="4.5" fill="#f2a08c" opacity=".55"/>':''}${ex}</svg>`}
+
+
 /* ================= 공통 데이터 ================= */
 const ORG='용인시기흥장애인복지관';
 const BIZ=[
@@ -510,7 +558,7 @@ function aiBar(title,getter){CUR=getter;return `<div class="bar"><span class="t"
 /* ---- UI helpers ---- */
 function chips(key,opts,big){return `<div class="chips">${opts.map((o,i)=>`<button class="chip${big?' big':''}${(S[key]??0)==i?' on':''}" onclick="setS('${key}',${i})">${esc(o)}</button>`).join('')}</div>`}
 function mchips(key,opts){const a=S[key]||[];return `<div class="chips">${opts.map((o,i)=>`<button class="chip${a.includes(i)?' on':''}" onclick="togS('${key}',${i})">${esc(o)}</button>`).join('')}</div>`}
-function setS(k,v){S[k]=v;if(k==='b'){S.p=0;S.kd=null}if(k==='p'){S.kd=null;BZO=false}save();render()}
+function setS(k,v){S[k]=v;if(k==='b'){S.p=0;S.kd=null;S.mi2=0;S.mt=0;S.mtg=0}if(k==='p'){S.kd=null;S.mi2=0;BZO=false}if(k==='vg'){S.vs=0}if(k==='mm'){S.mi2=0}save();render()}
 function togS(k,i){const a=S[k]||[];const j=a.indexOf(i);j<0?a.push(i):a.splice(j,1);S[k]=a;save();render()}
 let FL=[];
 function field(k,label,area,ex){if(!FL.find(f=>f[0]===k))FL.push([k,label,ex]);return FL.length===1&&!FL._t?(FL._t=1,'%%IBOX%%'):''}
@@ -555,7 +603,7 @@ const HL=[
 ['블로그·인스타·홈페이지 글',"S.pr=1;go('promo')",''],
 ['맞춤형 프롬프트 생성',"go('gen')",'']];
 const HQ=[['msg','mail','문자·소통','보호자·이용자 문자'],['promo','mega','홍보·안내','소식·SNS·포스터'],['donor','heart','후원 관리','감사·사용 안내'],['plan','doc','계획·일지','프로그램 계획→일지'],['month','cal','이달의 추천','월별 프로그램 5'],['room','spark','프롬프트 디자인실','업무·일상 프롬프트'],['memo','mic','메모·녹음','회의록·서식 채우기'],['vent','fire','빡침 번역기','공감→순화 문구'],['mind','leaf','마음챙김','나를 위한 5줄']];
-const HA=[['ChatGPT','이미지·GIF·편집·메모→서식','#10a37f','G'],['제미나이','인포그래픽·음악·영상·노트북','#4285f4','G'],['Claude','디자인·슬라이드·한글 서식','#d97757','C'],['Canva','AI 발표 자료·매직 레이어','#7d2ae8','C'],['AI 설정 따라 하기','메모리·임시 채팅·학습 끄기','#2f6b56','설'],['데스크톱 앱','웹과 차이·설치·활용','#b45a2c','PC']];
+const HA=[['ChatGPT','이미지·GIF·편집·메모→서식','#10a37f','G'],['제미나이','인포그래픽·음악·영상·노트북','#4285f4','G'],['Claude','디자인·슬라이드·한글 서식','#d97757','C'],['Canva','AI 발표 자료·매직 레이어','#7d2ae8','C'],['활용 꿀팁','한글 파일 넣기·서식 스킬','#e2865a','팁'],['AI 설정 따라 하기','메모리·임시 채팅·학습 끄기','#2f6b56','설'],['데스크톱 앱','웹과 차이·설치·활용','#b45a2c','PC']];
 const HLK=[['사회복지법인 양지바른','http://www.yangjibr.or.kr/','법인 소식·공지'],['보건복지부 공지사항','https://www.mohw.go.kr/board.es?mid=a10501010100&bid=0003','지침·공고 확인'],['한국장애인복지관협회','https://www.hinet.or.kr/','협회 공지·교육'],['용인특례시','https://www.yongin.go.kr/index.do','시 공지·보조금']];
 VIEWS.home=()=>`<div class="hp">
 <section class="hhero"><div class="tx"><span class="bdg">${sv('sprout',18)}사회복지법인 양지바른 · 용인시기흥장애인복지관</span><span class="kick">종사자 AI 실무 교육 · 업무도우미</span><h1>함께여서 빛나는 업무, <em>AI 업무도우미</em></h1><p class="sub">사업 문서는 프로젝트로, 문자·홍보·일지는 고르고 적으면 바로 완성으로.</p>
@@ -572,7 +620,7 @@ function hsearch(q){q=q.trim();document.querySelectorAll('#hl li,#hq .q,.hai but
 /* ================= ① 업무 프로젝트 ================= */
 const DOCS=['사업계획서','결과보고서','홍보물'];
 const CLIP='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 11.5l-8.5 8.5a5 5 0 0 1-7-7l9-9a3.3 3.3 0 0 1 4.7 4.7l-9 9a1.7 1.7 0 0 1-2.4-2.4l8.3-8.3"/></svg>';
-const SRC={0:['우리 복지관 사업계획서 서식(빈 양식)','올해 사업안내(지침) 해당 부분','전년도 사업계획서·결과보고서','수요조사·만족도 결과'],1:['우리 복지관 결과보고서 서식','올해 사업계획서(승인본)','월별 실적·운영일지','만족도 집계·사진 목록','예산 집행 내역'],2:['기관 로고·색상','지난 홍보물 중 마음에 든 것','행사 정보(일시·장소·대상)','활동 사진(촬영 동의 받은 것)']};
+const SRC={0:['우리 복지관 사업계획서 서식 (빈 양식)','올해 사업안내(지침) 해당 부분','전년도 사업계획서·결과보고서','수요조사·만족도 결과'],1:['우리 복지관 결과보고서 서식','올해 사업계획서(승인본)','월별 실적·운영일지','만족도 집계','예산 집행 내역'],2:['기관 로고·색상','지난 홍보물 중 마음에 든 것','행사 정보(일시·장소·대상)','활동 사진(촬영 동의 받은 것)']};
 function instr(d){const b=BN(),p=P();
  if(d===0)return `[역할] 너는 장애인복지관 사업계획서를 심사하는 ${M('지자체 사업 검토 전문가')}다.
 [목표] ${ORG} ${M(b)} · ${M(p)} 올해 사업계획서를 ${M('우리 서식 그대로')} 완성한다.
@@ -612,7 +660,7 @@ function first(d){const b=BN(),p=P();
 VIEWS.project=()=>{S.doc=S.doc??0;S.ps=S.ps??0;return view('업무 프로젝트',
  `<div class="ptabs">${DOCS.map((d,i)=>`<button class="pt${S.doc==i?' on':''}" onclick="setS('doc',${i})">${d}</button>`).join('')}</div>${bizPick()}
  <div class="gl">만드는 법 <small>3단계</small></div>${steps(['ChatGPT 왼쪽 <b>프로젝트 → 새 프로젝트</b> (이름: '+esc(BN())+' '+DOCS[S.doc]+')','프로젝트 <b>지침</b> 칸에 오른쪽 <b>①지침</b> 붙여넣기','<b>파일(소스)</b>에 아래 자료 올리고 새 채팅 → <b>②첫 프롬프트</b>'])}
- <div class="srch"><span class="clip">${CLIP}</span>프로젝트 파일(소스)에 첨부할 자료</div><div class="srcs">${SRC[S.doc].map((x,i)=>`<div class="src"><span class="fi">${['HWP','PDF','HWP','XLS','JPG'][i%5]}</span><span>${x}</span><em>첨부</em></div>`).join('')}</div>`,
+ <div class="srch"><span class="clip">${CLIP}</span>프로젝트 파일(소스)에 첨부할 자료</div><div class="hwpn"><b>한글(HWP) 파일 주의</b> Claude·제미나이는 HWP를 못 읽어요 → <u>PDF로 저장</u>해 넣기 · 서식에 채워 받을 땐 <u>HWPX로 저장</u> (ChatGPT는 HWP도 읽어요)</div><div class="srcs">${SRC[S.doc].map((x,i)=>`<div class="src"><span class="fi">${(S.doc==2?['PNG','JPG','TXT','JPG']:['HWPX','PDF','PDF','XLS','XLS'])[i]||'PDF'}</span><span>${x}</span><em>첨부</em></div>`).join('')}</div>`,
  ()=>{const t=S.ps?first(S.doc):instr(S.doc);return `<div class="ptabs r"><button class="pt${S.ps?'':' on'}" onclick="S.ps=0;save();RIGHT()">① 프로젝트 지침</button><button class="pt${S.ps?' on':''}" onclick="S.ps=1;save();RIGHT()">② 첫 프롬프트</button></div>`+outBox(S.ps?'새 채팅 첫 대화에 붙여넣기':'프로젝트 지침 칸에 붙여넣기',t)})};
 
 /* ================= ② 계획·일지 (선택 → 서술형) ================= */
@@ -713,17 +761,28 @@ function itype(bn,p){const s=bn+' '+p;if(/주간이용/.test(bn))return 'day';
  if(/활동지원|맞춤형|주간활동/.test(s))return 'care';if(/인식|권리|법률|공모|누니|바니|모니|귀니|놀이터/.test(s))return 'aware';if(/재가|이·미용|반찬|김장|명절지원|클린업|생일잔치|반려견|잔고장|주거|문화기행|쉼표|행복마을|행복신문/.test(s))return 'home';
  if(/가족잔치|명절 및|문화공연|문화데이트|길 따라|나들이|무료마켓/.test(s))return 'event';if(/가족|부모|P\.O\.P|마음ON/.test(s))return 'family';if(/직업|취업|고용|일자리|훈련대학|직업대학|직종/.test(s))return 'job';
  if(/주간이용/.test(s))return 'day';if(/치료|재활진단|접수면접|순환재활|수중재활/.test(s)&&!/그룹치료|아동/.test(bn))return 'therapy';if(/아동|청소년|I Be|전환기/.test(bn))return 'child';return 'adult'}
-function ideas5(m,bn,p){const t=itype(bn,p),L=IDEAS[t],mi=MI[m];const sub=x=>x.replace(/\{s\}/g,mi.s).replace(/\{e\}/g,mi.e).replace(/\{f\}/g,mi.f).replace(/\{pl\}/g,mi.pl).replace(/\{p\}/g,p);
- const out=[];for(let i=0;i<5;i++)out.push(L[(m+i)%L.length].map(sub));return out}
-VIEWS.month=()=>{if(S.mm==null)S.mm=Math.min(11,new Date().getMonth()+1)%12;return view('이달의 추천',
- `<div class="gl">월</div>${chips('mm',[1,2,3,4,5,6,7,8,9,10,11,12].map(m=>m+'월'))}${bizPick()}
- <div class="note">사업과 프로그램에 맞게 5가지를 추천해요. 더 받고 싶으면 위 버튼으로 AI에게 요청하세요</div>`,
- ()=>{const m=S.mm+1,p=P(),bn=BN(),t=B().t[0],list=ideas5(m,bn,p);
- const pr=`너는 ${ORG} 프로그램 기획 전문가야. ${M(m+'월')}에 ${M(bn)}(${M(p)})에서 ${M(t)} 대상으로 할 프로그램 5개를 제안해 줘.\n| 프로그램명 | 진행 방법 | 준비물 | 기대 효과 | 안전·접근성 |\n계절·절기를 살리고, 장애 특성(이동·감각·의사소통)을 고려해. 예산은 [확인 필요].`;
- CUR=()=>pr;
- return aiBar(m+'월 · '+esc(p)+' 추천 5가지',()=>pr)+`<div class="cards5">${list.map(([n,how,need,eff])=>`<div class="c5"><b>${esc(n)}</b><i>진행</i> ${esc(how)}<br><i>준비물</i> ${esc(need)}<br><i>기대 효과</i> ${esc(eff)}</div>`).join('')}</div>
- <div class="out" style="flex:none;border-top:1px solid var(--line)"><span class="h">AI로 더 받기 프롬프트</span>\n${fmt(pr)}</div>`})};
-
+function kindOf(t){const R=[[/요리|쿠킹|붕어빵|떡국|간식/,'요리·간식'],[/나들이|투어|탐방|기행|트래킹|데이트|탐험|맛 따라|마실/,'지역사회 나들이'],[/장보기|일상동작|생활|안전 교육/,'일상생활 기술'],[/인식개선교육|권리|그림책/,'장애인식개선 교육'],[/캠페인|부스|공모전|마켓|대회|축제|행사|파티|잔치|발표회|공유회|리그|골든벨/,'행사·캠페인'],[/로봇|디지털|스마트|코트라스|스마트폰|AI/,'디지털·스마트기기'],[/면접|직무|이력서|취업|직장|출퇴근/,'직업훈련·작업'],[/회기|카드 대화|수중|치료|감각/,'그룹치료'],[/악기|노래|합주|음악/,'음악·노래'],[/방문|안부|점검|키트|매칭/,'방문 서비스'],[/모임|나눔방|간담회|힐링|교육|클래스|교실|토크|사례회의/,'가족 교육·자조모임'],[/운동|걷기|챌린지|스포츠|짐/,'운동·산책'],[/만들기|카드|사진|동화|시집|촬영/,'만들기']];for(const [r,k] of R)if(r.test(t))return k;return '만들기'}
+const XSTEP={
+'찾아가는 인식개선교육':[['사전 협의',0,'방문 기관(학교·유치원)과 일시·대상 연령·인원을 정하고 교실 환경을 확인한다'],['캐릭터 소개',10,'누니·바니·모니·귀니 캐릭터 인형이 차례로 등장해 각자의 장애 특성과 좋아하는 것을 소개한다'],['이야기·퀴즈',15,'캐릭터의 하루 이야기를 듣고 "이럴 땐 어떻게 도와줄까?" OX 퀴즈로 배려 방법을 알아본다'],['체험·다짐',15,'점자 이름 쓰기·수어 인사 체험 후 캐릭터 스티커에 "함께 지킬 약속"을 적어 붙인다']],
+'숏폼 영상 공모전':[['공고',0,'"함께"를 주제로 30초 영상 공모 포스터와 참가 신청서를 만들어 SNS·학교에 배포한다'],['접수',0,'휴대폰으로 찍은 30초 영상을 이메일·구글폼으로 4주간 접수한다'],['심사',0,'주제 표현·장애 인식 메시지·창의성 기준으로 내부·외부 심사위원이 평가한다'],['시상·상영',60,'수상작을 복지관 로비 TV와 SNS에 상영하고 시상식을 연다']],
+'장애 체험 부스':[['부스 설치',30,'휠체어 코스·안대 체험·점자 체험 3개 코너를 설치하고 안전 요원을 배치한다'],['안내',5,'체험 전 장애 당사자 강사가 체험의 목적과 주의점을 안내한다'],['체험',20,'참여자가 코너를 돌며 직접 체험하고 느낀 점을 메모지에 남긴다'],['소감 나눔',10,'메모지를 게시판에 붙이고 당사자 강사와 질문·답변을 나눈다']]};
+function ideaFull(m,bn,p){const t=itype(bn,p),L=IDEAS[t],mi=MI[m],h=hash(p);const sub=x=>x.replace(/\{s\}/g,mi.s).replace(/\{e\}/g,mi.e).replace(/\{f\}/g,mi.f).replace(/\{pl\}/g,mi.pl).replace(/\{p\}/g,p);
+ const used=new Set(),out=[];for(let i=0;out.length<5&&i<20;i++){const j=(m+h+i*((h%3)+1))%L.length;if(used.has(j))continue;used.add(j);const r=L[j].map(sub),k=kindOf(r[0]+' '+r[1]),K=KIND[k],key=Object.keys(XSTEP).find(x=>r[0].includes(x));
+  const steps=key?XSTEP[key]:K.steps.map((s,ix)=>ix===2?[s[0],s[1],`${r[1].replace(/ → /g,', ')} 순서로 진행하며, 참여자가 직접 고르고 해 볼 수 있도록 필요한 부분만 지원한다`]:s);
+  out.push({t:(r[0].includes(p)?r[0]:`${p} · ${r[0]}`),how:r[1],need:r[2],eff:r[3],kind:k,steps,items:[...new Set([...r[2].split('·').map(x=>x.trim()),...K.items])].slice(0,6),safe:K.safe})}
+ return out}
+VIEWS.month=()=>{if(S.mm==null)S.mm=Math.min(11,new Date().getMonth()+1)%12;S.mi2=S.mi2??0;S.mt=S.mt??0;S.mtg=S.mtg??0;S.mpl=S.mpl??0;const b=B();
+ return view('이달의 추천',
+ `<div class="gl">월</div>${chips('mm',[1,2,3,4,5,6,7,8,9,10,11,12].map(m=>m+'월'))}${bizPick()}<div class="gl">대상</div>${chips('mt',b.t)}<div class="gl">목표</div>${chips('mtg',b.g)}${field('people','인원')}${field('place','장소')}`,
+ ()=>{const m=S.mm+1,p=P(),bn=BN(),list=ideaFull(m,bn,p);if(!list[S.mi2])S.mi2=0;const I=list[S.mi2],tg=b.t[S.mt]||b.t[0],g=b.g[S.mtg]||b.g[0];
+ const st=I.steps.map((s,i)=>`${i+1}. ${s[0]}${s[1]?'('+s[1]+'분)':''}: ${s[2]}.`);
+ const plan=[['프로그램명',I.t],['대상',`${tg} ${F('people','인원')}`],['목적',`${I.kind} 활동을 통해 ${KIND[I.kind].goal}. "${g}"에 중점을 둔다.`],['일시·장소',`${m}월 [일시] / ${F('place')}`],['진행 내용',st.join('\n')],['준비물',I.items.join(', ')],['기대 효과',I.eff+'. '+KIND[I.kind].eff+'.'],['안전',I.safe.join(' · ')]];
+ const log=[['프로그램명',I.t],['일시·장소',`${m}월 [일시] / ${F('place')}`],['참여자',`${tg} ${F('people','인원')}`],['진행 내용',I.steps.map((s,i)=>`${i+1}. ${s[0]}: ${toPast(s[2])}.`).join('\n')],['참여 모습','참여자들이 [즐겁게 끝까지 참여함]. [기억에 남는 모습 한 줄]'],['평가',`"${g}" 목표에 맞게 진행되었으며 [보완할 점]을 다음 회기에 반영한다.`]];
+ const rows=S.mpt?log:plan;
+ const pr=`너는 ${ORG} 프로그램 기획 전문가야. 아래 추천 프로그램으로 ${S.mpt?'프로그램 일지':'프로그램 계획서'}를 우리 서식에 맞춰 완성해 줘.\n[필수] 진행 내용은 서술형 · 자료에 없는 숫자는 [확인 필요] · 장애 특성(이동·감각·의사소통) 고려\n\n`+rows.map(r=>`[${r[0]}] ${r[1]}`).join('\n');CUR=()=>pr;
+ return aiBar(`${m}월 추천 · ${esc(p)}`,()=>pr)+`<div class="itabs">${list.map((x,i)=>`<button class="it${S.mi2==i?' on':''}" onclick="S.mi2=${i};save();RIGHT()"><span>${i+1}</span>${esc(x.t)}</button>`).join('')}</div>
+ <div class="mdet"><section class="c3c"><h4 class="c3h" style="--c:#e2865a">${esc(I.t)} <small>${esc(I.kind)}</small></h4><div class="mrow"><b>진행 방법</b><p>${esc(I.how)}</p></div><div class="mrow"><b>진행 순서</b><ol class="mst">${I.steps.map(s=>`<li><u>${esc(s[0])}${s[1]?' '+s[1]+'분':''}</u> ${esc(s[2])}</li>`).join('')}</ol></div><div class="mrow"><b>준비물</b><div class="mit">${I.items.map(x=>`<span>${esc(x)}</span>`).join('')}</div></div><div class="mrow"><b>기대 효과</b><p>${esc(I.eff)}</p></div></section>
+ <section class="c3c"><div class="ptabs" style="margin:0"><button class="pt${S.mpt?'':' on'}" onclick="S.mpt=0;save();RIGHT()">프로그램 계획서</button><button class="pt${S.mpt?' on':''}" onclick="S.mpt=1;save();RIGHT()">프로그램 일지</button></div><table class="form sm2">${rows.map(r=>`<tr><th>${r[0]}</th><td>${fmtCell(r[1])}</td></tr>`).join('')}</table></section></div>`})};
 /* ================= ④ 문자·소통 ================= */
 const MSGS=['프로그램 참여 안내','일정 변경 안내','접수·대기 결과','보호자께 근황','보호자 상담 안내','치료·수업 결과 안내','어려운 이야기 전하기','자원봉사자 안내','협력기관 협조 요청','명절·절기 인사','기타'];
 const TONE=['따뜻하게','정중하게','쉬운 말로'];
@@ -851,34 +910,155 @@ VIEWS.gen=()=>{S.gt=S.gt??0;S.sy=S.sy??0;S.sz=S.sz??0;S.ch=S.ch??0;const txt=S.g
  else t=`너는 장애인복지관 ${M('홍보 디자인 전문가')}야.\n${M(bn)} · ${M(p)} ${M(g)}을(를) ${M(STY[S.sy])} 스타일, ${M(SIZE[S.sz])} 크기로 만들어 줘.\n[정보] 행사명: ${F('name')} / 일시: ${F('date')} / 장소: ${F('place')} / 대상: ${F('people')} / 신청: ${F('apply')} / 문의: ${F('tel')}\n[필수] 정보는 크고 또렷하게, 모르는 칸 [확인 필요] · 큰 글씨·고대비·쉬운 말 · 장애인을 ${M('주인공')}으로 · ${M('시안 2개')} 먼저${S.gt===1?'\n[구성] 4장: 표지 → 내용 2장 → 신청 방법':S.gt===4?'\n[구성] 숫자는 내가 준 것만, 아이콘+짧은 문장':S.gt===6?'\n[구성] A4 2쪽: 이달 활동 사진 자리 4개 + 짧은 소식 3개':''}`;
  return outBox(g+' 프롬프트',t)})};
 
-/* ================= ⑧ 프롬프트 디자인실 ================= */
-const ROOMW=['회의록 요약','공문 초안','민원 답변','일정 정리','보고 메일','엑셀 수식'];
-const ROOML=['냉장고 파먹기','여행 계획','프로그램 계획 짜기','프로그램 제안 받기','건강 식단','주말 나들이'];
-const ING=['계란','두부','김치','감자','양파','당근','돼지고기','닭고기','애호박','버섯','밥','라면'];
-VIEWS.room=()=>{S.rm=S.rm??0;S.rw=S.rw??0;S.rl=S.rl??0;S.se=S.se??3;S.ig=S.ig||[0,2];return view('프롬프트 디자인실',
- `<div class="tabs" style="margin-bottom:6px"><button class="tab${S.rm?'':' on'}" onclick="setS('rm',0)">업무</button><button class="tab${S.rm?' on':''}" onclick="setS('rm',1)">일상</button></div>
- ${S.rm?`<div class="gl">무엇을</div>${chips('rl',ROOML,1)}${S.rl===0?`<div class="gl">냉장고 재료</div>${mchips('ig',ING)}`:''}<div class="gl">계절</div>${chips('se',['봄','여름','가을','겨울'])}${S.rl>=2&&S.rl<=3?bizPick():''}${field('rin','더 알려 줄 것',1)}`
- :`<div class="gl">무엇을</div>${chips('rw',ROOMW,1)}${field('rin','내용 붙여넣기',1,'회의 메모나 민원 내용을 그대로')}`}`,
- ()=>{const se=['봄','여름','가을','겨울'][S.se],x=V('rin');let t,n;
- if(!S.rm){n=ROOMW[S.rw];t={0:`아래 회의 메모를 ${M('회의록')}으로 정리해 줘.\n| 안건 | 논의 | 결정사항 | 담당 | 기한 |\n없는 내용은 [확인 필요], 사람 이름은 직책으로.\n\n${x||'[회의 메모]'}`,1:`아래 내용으로 ${M('공문 초안')}을 써 줘. 형식: 1. 관련 2. 목적 3. 내용(일시·장소·대상·요청사항) 붙임. 개조식 공문체.\n\n${x||'[공문 내용]'}`,2:`너는 ${ORG} 민원 응대 담당자야. 아래 민원에 ${M('공감 → 사실 확인 → 해결 방법 → 감사')} 순서로 정중한 답변을 써 줘. 변명·책임 회피 금지.\n\n${x||'[민원 내용]'}`,3:`아래 할 일을 ${M('급한 일 / 중요한 일')}로 나눠 이번 주 요일별 표로 정리해 줘.\n\n${x||'[할 일 목록]'}`,4:`아래 내용으로 팀장님께 보낼 ${M('보고 메일')}을 써 줘. 제목, 요약 3줄, 상세, 요청사항 순서.\n\n${x||'[보고 내용]'}`,5:`엑셀에서 ${M('하고 싶은 계산')}을 수식으로 알려 줘. 어느 칸에 무엇을 넣는지 예시 표와 함께.\n\n${x||'[예: B열 출석 횟수 합계와 출석률]'}`}[S.rw]}
- else{n=ROOML[S.rl];const ig=(S.ig||[]).map(i=>ING[i]).join(', ');t={0:`냉장고에 ${M(ig||'[재료]')}이(가) 있어. ${se}에 어울리는 쉬운 요리 3가지를 추천해 줘.\n| 요리 | 필요한 재료 | 시간 | 만드는 법 5단계 |\n없는 재료는 대체 재료도 알려 줘. ${x}`,1:`${M(se)}에 가기 좋은 국내 여행 계획을 짜 줘. ${x||'[지역·기간·함께 가는 사람]'}\n| 시간 | 장소 | 할 일 | 이동 | 비용 |\n이동이 편하고 쉬는 시간이 넉넉하게.`,2:`${M(se)}에 ${M(BN())} ${M(P())} 프로그램 계획을 짜 줘.\n목적·목표·대상·회기별 활동·준비물·예산([확인 필요])·안전·평가 순서로. 장애 특성(이동·감각·의사소통) 고려. ${x}`,3:`${M(se)}에 ${M(BN())}에서 해 볼 만한 새 프로그램 5개를 제안해 줘.\n| 이름 | 한 줄 소개 | 준비물 | 기대 효과 |\n비용이 적고 참여자가 직접 고를 수 있는 것 위주로. ${x}`,4:`${M(se)} 제철 재료로 일주일 건강 식단을 짜 줘. 하루 3끼, 장보기 목록 포함. ${x}`,5:`${M(se)} 주말에 가족과 가기 좋은 용인 근처 나들이 장소 5곳 추천해 줘. 장애인 편의시설·주차 정보 확인 필요 표시. ${x}`}[S.rl]}
- return outBox(n,t)})};
-
+const DTASKS=[
+ {t:'냉장고 파먹기',s:'재료 터치 → 메뉴·레시피',fridge:1,role:'집밥 요리 선생님',
+  g:[{l:'무엇을 만들까요?',k:'a',o:['식사','간식','식사·간식 모두']},
+     {l:'냉장고에 있는 재료 (터치)',k:'b',m:1,o:["달걀","밥","김치","두부","감자","고구마","양파","대파","당근","애호박","콩나물","시금치","어묵","돼지고기","소고기","닭고기","참치캔","소시지","떡","김","우유","식빵","바나나","사과","밀가루","치즈","버섯","단호박","미역","냉동만두","토마토","양배추"]},
+     {l:'기본 양념 (소금·간장·설탕·기름 등)',k:'c',o:['있어요','없어요']}],
+  task:'냉장고에 있는 재료로 만들 수 있는 메뉴 3가지를 추천하고, 가장 쉬운 것부터 레시피를 알려 줘. 없는 재료는 대체 재료도.',fmt:'① 메뉴 표(메뉴 | 쓰는 재료 | 없는 재료 | 시간) ② 1번 메뉴 레시피 5단계 ③ 남은 재료 보관 팁',ph:'예) 아이가 매운 걸 못 먹어요 / 20분 안에'},
+ {t:'여행 계획 짜기',s:'일정·동선·맛집 한 번에',role:'동선을 꼼꼼하게 짜 주는 여행 플래너',
+  g:[{l:'어디로 가나요?',k:'a',o:['가까운 근교','부산·경남','제주','서울·수도권','강원','전라도','일본','동남아','아직 못 정했어요']},
+     {l:'기간',k:'b',o:['당일치기','1박 2일','2박 3일','3박 이상']},
+     {l:'누구와',k:'c',o:['혼자','아이와 가족','부부·연인','친구','부모님 모시고']},
+     {l:'여행 스타일 (여러 개)',k:'d',m:1,o:['맛집','자연·산책','카페','역사·문화','아이 체험','휴식·온천','사진 명소','가성비']}],
+  task:'고른 조건에 맞는 여행 일정을 시간표로 짜 줘. 이동 동선이 꼬이지 않게, 쉬는 시간도 넣어 줘.',
+  fmt:'① 날짜별 시간표 표(시간 | 장소 | 할 일 | 이동 방법) ② 꼭 먹어 볼 음식 3가지 ③ 예상 경비 범위 ④ 챙길 준비물 체크리스트',ph:'예) 차 없이 대중교통으로 / 예산은 1인 20만 원 / 무릎이 안 좋아 많이 못 걸어요'},
+ {t:'당뇨 식단 짜기',s:'혈당 걱정 덜어 주는 집밥',role:'당뇨 식단을 쉽게 알려 주는 영양 상담 선생님',
+  g:[{l:'기간',k:'a',o:['하루','3일','일주일']},
+     {l:'끼니',k:'b',o:['아침·점심·저녁','세 끼 + 간식','저녁만']},
+     {l:'좋아하는 것 (여러 개)',k:'c',m:1,o:['한식','잡곡밥','생선','두부·콩','나물·채소','닭고기','국·찌개','면 요리']},
+     {l:'더 원하는 것 (여러 개)',k:'d',m:1,o:['싱겁게','장보기 목록','외식할 때 팁','간식 대신 먹을 것','혈당 덜 오르는 먹는 순서']}],
+  task:'고른 조건으로 집에서 쉽게 만들 수 있는 당뇨 관리 식단을 짜 줘. 재료는 동네 마트에서 살 수 있는 것으로.',
+  fmt:'① 식단표(날짜 | 아침 | 점심 | 저녁 | 간식) ② 피하면 좋은 음식·바꿔 먹을 음식 표 ③ 고른 추가 항목',ph:'예) 60대 어머니 식단이에요 / 밀가루를 좋아하세요',safe:'- 이 식단은 일반 정보야. 약을 먹거나 진료 중이면 담당 의사·영양사의 안내가 먼저라고 마지막에 꼭 알려 줘.'},
+ {t:'다이어트 식단',s:'무리 없이 가볍게',role:'굶지 않고 꾸준히 하는 다이어트를 돕는 식단 코치',
+  g:[{l:'목표',k:'a',o:['한 달 가볍게 2~3kg','붓기 빼고 가볍게','건강하게 습관 만들기']},
+     {l:'기간',k:'b',o:['3일','일주일','한 달 계획']},
+     {l:'식사 스타일 (여러 개)',k:'c',m:1,o:['한식 위주','도시락 싸기','편의점 활용','배달 줄이기','간식 바꾸기','가족 밥상과 같이']},
+     {l:'운동',k:'d',o:['운동 안 해요','걷기만','집에서 홈트','헬스장 다녀요']}],
+  task:'고른 조건에 맞춰 배고프지 않게 지킬 수 있는 다이어트 식단과 하루 습관을 짜 줘. 극단적인 굶기나 한 가지 음식만 먹는 방법은 빼 줘.',
+  fmt:'① 식단표(날짜 | 아침 | 점심 | 저녁 | 간식) ② 장보기 목록 ③ 하루 습관 체크리스트 5개',ph:'예) 저녁 약속이 잦아요 / 단 걸 좋아해요'},
+ {t:'자격증 준비',s:'무엇을 언제 어떻게',role:'자격증 시험 준비를 처음부터 끝까지 안내하는 학습 코치',
+  g:[{l:'따고 싶은 자격증',k:'a',o:['컴퓨터활용능력 2급','요양보호사','사회복지사 2급','보육교사','한식조리기능사','바리스타','전산회계','직업상담사 2급','공인중개사','정리수납전문가','GTQ 포토샵','아직 고민 중']},
+     {l:'하루 공부 시간',k:'b',o:['30분','1시간','2시간 이상']},
+     {l:'목표 기간',k:'c',o:['1개월','3개월','6개월']},
+     {l:'알고 싶은 것 (여러 개)',k:'d',m:1,o:['시험 일정·비용','자격 조건','공부 계획표','무료 강의·교재','합격 공부법','따고 나서 할 수 있는 일']}],
+  task:'고른 자격증을 준비하려면 무엇이 필요한지 쉽게 정리하고, 내 공부 시간에 맞는 계획표를 만들어 줘.',
+  fmt:'① 자격증 한눈에 보기 표(하는 일 | 자격 조건 | 시험 과목 | 비용 | 시험 시기) ② 주별 공부 계획표 ③ 고른 항목 정리 ④ 오늘 바로 할 일 1가지',ph:'예) 컴퓨터를 잘 못해요 / 아이 재우고 밤에만 공부해요',safe:'- 시험 일정·비용·자격 조건은 바뀔 수 있으니 공식 사이트(예: 큐넷)에서 확인하라고 [확인 필요]로 표시해.'},
+ {t:'장보기·가계부',s:'일주일 예산 안에서',role:'알뜰하게 살림을 꾸리는 생활 경제 코치',
+  g:[{l:'식구 수',k:'a',o:['1인','2인','3~4인','5인 이상']},
+     {l:'일주일 장보기 예산',k:'b',o:['5만 원','10만 원','15만 원','20만 원']},
+     {l:'원하는 것 (여러 개)',k:'c',m:1,o:['일주일 메뉴','장보기 목록','남는 재료 활용','가계부 표','고정비 줄이기','아이 간식']}],
+  task:'고른 예산 안에서 일주일을 버틸 수 있는 살림 계획을 세워 줘.',
+  fmt:'① 일주일 메뉴표 ② 마트별로 나눈 장보기 목록과 예상 금액 ③ 고른 항목 정리',ph:'예) 아이 둘 / 고기는 꼭 넣고 싶어요'},
+ {t:'건강 걷기·운동',s:'집에서 가볍게 시작',role:'운동 초보도 따라 할 수 있게 알려 주는 생활 체육 코치',
+  g:[{l:'장소',k:'a',o:['집','동네 공원','헬스장','계단·아파트']},
+     {l:'하루 시간',k:'b',o:['10분','20분','40분 이상']},
+     {l:'신경 쓰이는 곳 (여러 개)',k:'c',m:1,o:['무릎','허리','어깨·목','체력이 약해요','특별히 없어요']},
+     {l:'목표',k:'d',o:['몸 가볍게','체력 기르기','뱃살','자세 바르게']}],
+  task:'고른 조건으로 4주 동안 따라 할 수 있는 운동 계획을 짜 줘. 동작마다 쉽게 설명해 줘.',
+  fmt:'① 주별 계획표 ② 오늘 할 동작 5개(동작 | 횟수 | 주의할 점) ③ 꾸준히 하는 요령 3가지',ph:'예) 운동을 거의 안 해 봤어요',safe:'- 아프거나 진료 중인 곳이 있으면 의사와 먼저 상의하라고 마지막에 알려 줘.'},
+ {t:'아이와 주말 놀거리',s:'집·동네에서 신나게',role:'아이와 함께할 놀이를 척척 알려 주는 놀이 선생님',
+  g:[{l:'아이 나이',k:'a',o:['유아(3~5세)','초등 저학년','초등 고학년','중학생']},
+     {l:'어디서',k:'b',o:['집 안','동네·공원','가까운 나들이']},
+     {l:'원하는 놀이 (여러 개)',k:'c',m:1,o:['만들기','몸으로 놀기','요리 놀이','책·이야기','과학 실험','돈 안 드는 것']}],
+  task:'고른 조건으로 이번 주말에 바로 할 수 있는 놀이 5가지를 추천해 줘.',
+  fmt:'표(놀이 | 준비물 | 걸리는 시간 | 아이가 배우는 것) + 가장 추천하는 놀이 진행 순서',ph:'예) 형제가 둘이에요 / 비 오는 날이에요'},
+ {t:'집 정리·청소 계획',s:'하루 15분씩 깔끔하게',role:'정리수납 전문가',
+  g:[{l:'정리할 곳 (여러 개)',k:'a',m:1,o:['옷장','주방','냉장고','욕실','아이 방','베란다','서류·사진','현관']},
+     {l:'하루 쓸 수 있는 시간',k:'b',o:['15분','30분','주말에 몰아서']}],
+  task:'고른 곳을 무리 없이 정리할 수 있는 2주 계획을 짜 줘. 버릴 것·남길 것 고르는 기준도 알려 줘.',
+  fmt:'① 날짜별 정리 계획표 ② 버릴까 말까 기준 체크리스트 ③ 다시 어질러지지 않는 습관 3가지',ph:'예) 옷이 너무 많아요 / 수납장이 부족해요'},
+ {t:'모임 인사·초대 글',s:'문자·단톡 한 번에',role:'따뜻하고 센스 있는 글을 쓰는 글쓰기 코치',
+  g:[{l:'어떤 글인가요?',k:'a',o:['모임 초대','생일 축하','감사 인사','명절 인사','안부 문자','부탁·거절']},
+     {l:'누구에게',k:'b',o:['가족','친구','동네 이웃','모임 회원','선생님']},
+     {l:'말투',k:'c',o:['쉽고 친근하게','정중하고 단정하게','유쾌하게']}],
+  task:'고른 상황에 맞는 글을 길이별로 써 줘.',
+  fmt:'짧은 문자 1개 + 단톡방용 1개 + 조금 긴 버전 1개',ph:'예) 다음 주 토요일 6시 우리 집 집들이예요'}];
+/* ================= ⑧ 프롬프트 디자인실 (가족센터 일상 + 복지관 업무) ================= */
+const WTASKS=[
+ {t:'회의록 정리',s:'메모 붙여넣으면 표로',role:'복지관 회의록을 깔끔하게 정리하는 행정 담당자',
+  g:[{l:'어떤 회의',k:'a',o:['팀 회의','사례회의','운영위원회','행사 준비 회의','외부 기관 회의']},{l:'꼭 넣을 것 (여러 개)',k:'b',m:1,o:['결정사항','담당자','기한','다음 회의 안건','예산','건의사항']},{l:'형식',k:'c',o:['표로','개조식','한 장 요약']}],
+  task:'아래 [더 알려 줄 것]에 붙여 넣은 회의 메모를 회의록으로 정리해 줘. 사람 이름은 직책으로 바꿔 줘.',fmt:'| 안건 | 논의 내용 | 결정사항 | 담당 | 기한 | 표 + 마지막에 확인할 점',ph:'예) 회의 메모를 그대로 붙여넣으세요'},
+ {t:'공문 초안',s:'내용 고르면 공문 형식',role:'공문서 작성에 능숙한 복지관 행정 담당자',
+  g:[{l:'공문 종류',k:'a',o:['협조 요청','행사 안내','결과 보고','자료 제출','참석 요청']},{l:'받는 곳',k:'b',o:['용인시청','기흥구청','협력 기관','학교·유치원','후원 기업']},{l:'붙임',k:'c',o:['있음','없음']}],
+  task:'고른 조건으로 공문 초안을 써 줘. 1. 관련 2. 목적 3. 내용(일시·장소·대상·요청사항) 순서, 개조식 공문체.',fmt:'공문 본문 + 붙임 목록 + 확인 필요 칸 목록',ph:'예) 12월 23일 송년회에 구청 관계자 참석 요청'},
+ {t:'민원 답변',s:'공감 → 사실 → 해결',role:'민원을 차분하고 정중하게 응대하는 복지관 담당자',
+  g:[{l:'민원 내용',k:'a',o:['프로그램 불만','송영 시간','대기 순서','직원 응대','시설 이용','비용 문의']},{l:'보낼 곳',k:'b',o:['전화로 말할 대본','문자','홈페이지 답글','공식 회신 문서']},{l:'말투',k:'c',o:['따뜻하게','정중하고 단호하게']}],
+  task:'공감 → 사실 확인 → 해결 방법 → 감사 순서로 답변을 써 줘. 변명·책임 회피 표현은 빼 줘.',fmt:'답변 본문 + 피해야 할 말 3가지',ph:'예) 대기가 너무 길다는 보호자 민원'},
+ {t:'보고 메일',s:'상사에게 핵심만',role:'핵심만 짧게 보고하는 복지관 실무자',
+  g:[{l:'무슨 보고',k:'a',o:['진행 상황','문제 발생','결과 보고','결재 요청','일정 변경']},{l:'받는 사람',k:'b',o:['팀장','관장','법인','외부 담당자']},{l:'길이',k:'c',o:['3줄 요약','표 포함','첨부 설명까지']}],
+  task:'고른 조건으로 보고 메일을 써 줘. 첫 줄에 결론, 다음에 근거, 마지막에 요청사항.',fmt:'제목 + 본문 + 첨부 목록',ph:'예) 송년회 예산이 20만 원 초과될 것 같아요'},
+ {t:'엑셀 수식',s:'하고 싶은 걸 말로',role:'엑셀을 쉽게 알려 주는 사무 선배',
+  g:[{l:'하고 싶은 것',k:'a',o:['출석률 계산','월별 합계','만족도 평균','중복 이름 찾기','날짜별 정리','조건별 개수 세기']},{l:'내 엑셀 수준',k:'b',o:['처음이에요','기본은 알아요']}],
+  task:'고른 작업을 하는 엑셀 수식을 알려 주고, 어느 칸에 어떻게 넣는지 따라 하기 순서로 설명해 줘.',fmt:'① 수식 ② 따라 하기 순서 ③ 자주 하는 실수',ph:'예) A열 이름, B~M열 1~12월 출석(O/X)'},
+ {t:'일정·할 일 정리',s:'급한 것부터 순서대로',role:'업무 우선순위를 잘 잡아 주는 시간 관리 코치',
+  g:[{l:'정리 기간',k:'a',o:['오늘','이번 주','이번 달']},{l:'방식',k:'b',o:['급한 일·중요한 일 4칸','시간표','체크리스트']}],
+  task:'아래 할 일을 고른 방식으로 정리하고, 오늘 가장 먼저 할 일 1가지를 골라 줘.',fmt:'정리 표 + 오늘 할 일 1가지 + 미뤄도 되는 일',ph:'예) 결과보고서, 송년회 초대장, 후원 감사 문자, 차량 일지'}];
+const RRULES='- 내가 말하지 않은 사실은 지어내지 말고 [확인 필요]로 표시해.\n- 꼭 필요한 정보가 없으면 먼저 한두 가지만 물어봐.\n- 어려운 말 없이 쉬운 말로, 표로 한눈에 보이게.';
+VIEWS.room=()=>{S.rm=S.rm??0;S.rk=S.rk??0;const L=S.rm?DTASKS:WTASKS;if(!L[S.rk])S.rk=0;const T=L[S.rk];S.rsel=S.rsel||{};const key=(S.rm?'d':'w')+S.rk,sv=S.rsel[key]=S.rsel[key]||{};T.g.forEach(g=>{if(sv[g.k]==null)sv[g.k]=g.m?[]:0});
+ window.RG=(k,i,m)=>{const v=S.rsel[key];if(m){const a=v[k],j=a.indexOf(i);j<0?a.push(i):a.splice(j,1)}else v[k]=i;save();render()};
+ return view('프롬프트 디자인실',
+ `<div class="ptabs"><button class="pt${S.rm?'':' on'}" onclick="S.rm=0;S.rk=0;save();render()">업무</button><button class="pt${S.rm?' on':''}" onclick="S.rm=1;S.rk=0;save();render()">일상</button></div>
+ <div class="gl">무엇을 해 볼까요?</div><div class="rgrid">${L.map((t,i)=>`<button class="${S.rk==i?'on':''}" onclick="S.rk=${i};save();render()"><b>${esc(t.t)}</b><span>${esc(t.s)}</span></button>`).join('')}</div>
+ ${T.g.map(g=>`<div class="gl">${esc(g.l)}${g.m?' <small>여러 개</small>':''}</div><div class="chips">${g.o.map((o,i)=>`<button class="chip${(g.m?sv[g.k].includes(i):sv[g.k]===i)?' on':''}" onclick="RG('${g.k}',${i},${g.m?1:0})">${esc(o)}</button>`).join('')}</div>`).join('')}
+ <div class="gl">더 알려 줄 것 <small>비워 둬도 돼요</small></div>${field('rin','더 알려 줄 것',1,T.ph.replace(/^예\) /,''))}`,
+ ()=>{const ctx=T.g.map(g=>{const v=sv[g.k];return '- '+g.l.replace(/ \(.*\)$/,'').replace(/\?$/,'')+': '+(g.m?(v.length?v.map(i=>g.o[i]).join(', '):'(고르지 않음)'):g.o[v])}).join('\n');
+ const x=V('rin');const t=`[역할]\n너는 ${M(T.role)}야.\n\n[내가 고른 것]\n${ctx}\n\n[할 일]\n${T.task}\n\n[더 알려 줄 것]\n${x||'['+T.ph+']'}\n\n[답변 형식]\n${M(T.fmt)}\n\n[지킬 것]\n${RRULES}${T.safe?'\n'+T.safe:''}`;
+ return outBox(T.t+' 프롬프트',t)})};
 /* ================= ⑨ 빡침 번역기 ================= */
-const VT=['민원인','보호자','동료','상사','외부기관'];
-const TODAK=['토닥톡… 그 상황이면 누구라도 속이 부글부글하죠. 오늘 정말 애썼어요.','토닥톡… 참고 또 참은 거 다 알아요. 여기서는 마음껏 털어놔도 돼요.','토닥톡… 그 말 듣고도 웃으며 일한 당신, 진짜 대단해요.','토닥톡… 억울한 마음 충분히 이해해요. 숨 한 번 크게 쉬어요.'];
-const ANGRY=['아니 이게 말이 돼요? 미치고 팔짝 뛰겠네!','아니 진짜 왜 저래요?! 저 지금 정수리에서 김 나요!','이건 아니죠! 제 인내심도 오늘 퇴근했어요!','와… 진짜 기가 막혀서 코가 막히네!'];
-VIEWS.vent=()=>{S.vt=S.vt??0;S.vl=S.vl??1;return view('빡침 번역기',
- `<div class="gl">누구 때문에</div>${chips('vt',VT)}<div class="gl">빡침 정도</div>${chips('vl',['살짝','꽤','폭발'])}<div class="gl">무슨 일이 있었나요</div>${field('vin','있었던 일',1,'같은 서류를 세 번째 다시 내라고 했어요')}
- <div class="note">속풀이는 여기서 하고, 보낼 글은 아래 순화 문구로</div>`,
- ()=>{const x=V('vin'),h=hash(x+S.vt+S.vl),who=VT[S.vt];
- const soft=`안녕하세요, ${ORG} ${F('staff')}입니다.\n말씀하신 내용 충분히 이해했습니다.${x?'\n['+x.slice(0,30)+'] 관련하여':''} 다시 한번 확인해 보니 [현재 상황·사실]입니다.\n번거로우시겠지만 [요청 사항]을 부탁드려도 될까요?\n빠르게 처리될 수 있도록 저도 함께 챙기겠습니다. 감사합니다.`;
- const pr=`나는 ${ORG} 사회복지사야. ${M(who)} 때문에 이런 일이 있었어: "${x||'[있었던 일]'}"\n1) 먼저 내 편에서 짧고 웃기게 공감해 줘 (욕은 순화된 표현으로)\n2) 복식호흡 30초 안내\n3) ${who}에게 보낼 ${M('정중하지만 단호한')} 문자를 써 줘. 사실 → 요청 → 감사 순서.`;
- CUR=()=>pr;
- return aiBar('빡침 번역',()=>pr)+`<div class="out vfx">${fig('angry',S.vl,1)}<span class="h">${pick(TODAK,h)}</span>${S.vl>=1?'\n\n<span class="red">'+esc(pick(ANGRY,h>>3))+'</span>':''}${S.vl===2?'\n<span class="red">'+esc(pick(ANGRY,h>>5))+'</span>':''}\n\n<span class="h">숨 고르기</span>\n코로 4초 들이마시고 → 4초 멈추고 → 입으로 6초 내쉬기, 세 번만.\n\n<span class="h">보낼 때는 이렇게 (순화 문구)</span>\n${fmt(soft)}\n\n<span class="h">AI에게 맡기기</span>\n${fmt(pr)}</div>`})};
-
+const VG=[
+['민원인',[
+ {n:'큰소리로 항의',in:'민원인이 창구에서 큰소리로 화를 내며 담당자를 바꾸라고 해요.',emp:'귀가 멍할 만큼 소리 지르면 내 심장도 같이 쿵쾅거리죠.',fact:'오늘 [시간]에 말씀하신 [민원 내용] 잘 들었습니다.',rule:'정확한 답변을 드리려면 확인 시간이 필요합니다.',ask:'[날짜]까지 확인해서 다시 연락드리겠습니다.',firm:'계속 큰소리를 내시면 상담을 이어 가기 어렵습니다.',sam:['소리질러','소리는 제가 다 들어요, 볼륨 좀!','리모컨 있으면 음소거 누르고 싶다.','질러도 답은 확인하고 드립니다!']},
+ {n:'같은 민원 반복 전화',in:'같은 내용으로 하루에 다섯 번째 전화가 왔어요.',emp:'다섯 번째면 대본 외울 지경이죠. 지칠 만해요.',fact:'[민원 내용]은 [날짜]에 안내드린 대로 진행 중입니다.',rule:'진행 상황이 바뀌면 바로 연락드리겠습니다.',ask:'그 전까지는 [담당 부서]로 문의 부탁드립니다.',firm:'같은 내용 문의는 [정해진 시간]에 한 번에 안내드리겠습니다.',sam:['또전화','또 울리는 벨소리, 이제 환청 수준.','전화기도 쉬고 싶대요.','화내지 말자, 녹음 중이니까!']},
+ {n:'규정 밖 요구',in:'규정상 안 되는 서비스를 "다른 데는 해 준다"며 계속 요구해요.',emp:'안 되는 걸 안 된다고 하는데 나쁜 사람 되는 기분, 억울하죠.',fact:'요청하신 [서비스]는 [규정·지침]상 제공이 어렵습니다.',rule:'모든 이용자분께 같은 기준을 적용하고 있습니다.',ask:'대신 [가능한 대안]을 안내드릴 수 있습니다.',firm:'기준은 바뀌지 않는 점 양해 부탁드립니다.',sam:['다른데','다른 데 가서 해 달라고 하세요… 라고 속으로만.','른(는) 규정대로, 마음은 친절하게.','데리고 갈 수 있으면 모셔다 드리고 싶다!']},
+ {n:'게시판·SNS 악성 글',in:'확인도 안 된 내용으로 홈페이지에 비난 글이 올라왔어요.',emp:'열심히 한 일이 한 줄 글로 뭉개지면 속이 쓰리죠.',fact:'게시해 주신 [내용] 확인했습니다.',rule:'사실관계를 확인한 결과 [확인된 사실]입니다.',ask:'더 궁금하신 점은 [연락처]로 직접 문의해 주시면 자세히 안내드리겠습니다.',firm:'사실과 다른 내용은 관련 절차에 따라 조치될 수 있습니다.',sam:['악플러','악! 소리 나는 글, 손가락 좀 쉬세요.','플(풀)리지 않으면 전화 주세요, 직접.','러(너)무 하시는 거 아닙니까!']}]],
+['보호자',[
+ {n:'밤늦게 개인 연락',in:'보호자가 밤 11시에 개인 휴대폰으로 프로그램 문의를 해요.',emp:'퇴근해도 퇴근이 아닌 느낌, 쉬고 싶은 게 당연해요.',fact:'어젯밤 보내 주신 문의 확인했습니다.',rule:'업무 시간(평일 9시~18시)에 복지관 전화로 안내드리고 있습니다.',ask:'다음부터는 [복지관 번호]로 연락 부탁드립니다.',firm:'업무 시간 외 개인 연락은 답변이 늦어질 수 있습니다.',sam:['한밤중','한밤중 알림음, 심장이 철렁!','밤에는 저도 엄마·아빠·딸·아들이에요.','중요한 건 내일 아침 9시에 꼭!']},
+ {n:'결과를 담당자 탓',in:'아이 행동이 나아지지 않는다며 담당자 탓을 해요.',emp:'누구보다 마음 쓰는데 탓을 들으면 맥이 탁 풀리죠.',fact:'[이용자]님의 최근 모습을 함께 살펴보고 싶습니다.',rule:'변화에는 시간이 걸리고, 가정과 함께할 때 더 좋아집니다.',ask:'[날짜]에 상담 시간을 잡아 함께 방법을 찾았으면 합니다.',firm:'',sam:['내탓이냐','내가 마법사는 아니잖아요.','탓하기 전에 같이 방법 찾아요.','이(어)쩌면 우리 편이 같은 편일지도!']},
+ {n:'송영 시간 불만',in:'송영 차량이 5분 늦었다고 크게 항의하셨어요.',emp:'길 막히는 걸 제가 어쩌라고요… 진짜 답답하죠.',fact:'오늘 송영 차량이 [몇 분] 늦게 도착했습니다.',rule:'[교통 상황] 때문이었고, 안전 운행을 가장 먼저 지키고 있습니다.',ask:'늦어질 때는 미리 문자로 알려 드리겠습니다.',firm:'',sam:['오분늦음','오분이면 컵라면도 덜 익었는데!','분노 게이지는 내려 주세요.','늦어도 안전하게, 그게 우리 원칙!']},
+ {n:'당일 무단 결석',in:'준비 다 해 뒀는데 연락 없이 당일 불참했어요.',emp:'재료 다 사 두고 기다렸는데 노쇼면 허탈하죠.',fact:'오늘 [프로그램]에 [이용자]님이 참석하지 않으셨습니다.',rule:'인원에 맞춰 재료와 인력을 준비하고 있습니다.',ask:'참석이 어려우면 하루 전까지 알려 주세요.',firm:'연락 없는 결석이 반복되면 대기자에게 순서가 넘어갈 수 있습니다.',sam:['노쇼야','노크라도 하고 빠지시지.','쇼는 무대에서만 하는 걸로!','야(아), 재료 남은 건 내가 먹는다!']}]],
+['이용자',[
+ {n:'활동 거부·고집',in:'이용자가 오늘 활동은 절대 안 한다고 버텨요.',emp:'준비한 게 아까워서 속이 타죠. 그래도 당연한 마음이에요.',fact:'오늘은 [활동]이 하기 싫었구나.',rule:'싫은 건 말해도 괜찮아.',ask:'그럼 [다른 활동]이랑 [쉬기] 중에 골라 볼까?',firm:'',sam:['안할래','안 해도 돼, 대신 골라 보자.','할 마음 생기면 언제든 와.','래(내)일은 같이 해 볼까?']},
+ {n:'같은 질문 반복',in:'같은 질문을 30분째 계속 물어요.',emp:'열 번째 대답할 땐 목소리 톤 유지가 극기 훈련이죠.',fact:'지금은 [현재 활동] 시간이에요.',rule:'다음은 [다음 일정]이에요.',ask:'그림 일정표를 같이 보면서 확인해 볼까요?',firm:'',sam:['또물어','또 물어봐도 괜찮아, 일정표가 있잖아.','물어보는 건 불안해서래요.','어떻게든 그림으로 보여 주자!']},
+ {n:'이용자끼리 다툼',in:'두 이용자가 물건 때문에 다투다 소리를 질렀어요.',emp:'말리다 보면 내 혼도 쏙 빠지죠.',fact:'[물건] 때문에 둘 다 속상했구나.',rule:'소리 지르거나 밀면 다칠 수 있어요.',ask:'차례대로 쓰는 방법을 같이 정해 볼까요?',firm:'',sam:['내꺼야','내 거 네 거 말고 우리 차례!','꺼내 놓고 순서 정하자.','야단 대신 규칙 만들기!']}]],
+['동료·상사',[
+ {n:'업무 떠넘기기',in:'동료가 자기 업무를 "잠깐만" 하며 계속 넘겨요.',emp:'잠깐이 쌓이면 내 야근이 되죠. 화날 만해요.',fact:'요청하신 [업무] 확인했습니다.',rule:'지금 [내 업무] 마감이 [날짜]라 바로 맡기는 어렵습니다.',ask:'[날짜] 이후에 도울 수 있는 부분만 나눠서 하면 어떨까요?',firm:'제 업무에 지장이 생기면 팀장님과 함께 조정하고 싶습니다.',sam:['잠깐만','잠깐이 벌써 세 시간째!','깐깐하게 굴기 싫은데 이번엔 말할게.','만만한 사람 아니에요, 저!']},
+ {n:'마감 직전 수정 지시',in:'제출 1시간 전에 전체를 다시 고치라고 해요.',emp:'다 만든 탑을 무너뜨리라는 말, 손이 떨리죠.',fact:'[문서]를 [시간]까지 제출해야 합니다.',rule:'전체 수정은 시간상 어렵습니다.',ask:'꼭 바꿔야 할 부분 3가지만 알려 주시면 그것부터 고치겠습니다.',firm:'다음에는 [날짜]까지 의견을 주시면 반영하겠습니다.',sam:['다시해','다 해 놨는데 또 다시?','시간을 돌려줄 순 없잖아요.','해도 해도 끝이 없네, 정말!']},
+ {n:'공 가로채기',in:'내가 한 일을 회의에서 상사가 자기 성과처럼 말했어요.',emp:'밤새 한 일인데 이름이 빠지면 속상하죠.',fact:'이번 [업무]는 제가 [맡은 부분]을 진행했습니다.',rule:'진행 과정을 정리해 공유드리겠습니다.',ask:'다음 보고 때는 담당자도 함께 적어 주시면 좋겠습니다.',firm:'',sam:['내꺼임','내가 했는데요, 그거!','꺼진 불도 다시 보듯 제 이름도 다시 봐 주세요.','임(이)름 석 자, 꼭 넣어 주세요!']},
+ {n:'회의 때 말 끊기',in:'회의 때마다 내 말을 중간에 끊어요.',emp:'말할 기회를 뺏기면 나도 모르게 작아지죠.',fact:'회의 때 제 의견을 끝까지 말씀드리고 싶습니다.',rule:'중간에 끊기면 내용이 제대로 전달되지 않습니다.',ask:'의견을 다 들으신 다음 말씀해 주시면 감사하겠습니다.',firm:'',sam:['잠만요','잠만요, 아직 안 끝났어요!','만약에 끝까지 들으면 더 좋을 텐데.','요(오)늘은 제 차례입니다!']}]],
+['협력기관·강사',[
+ {n:'강사 당일 펑크',in:'외부 강사가 수업 1시간 전에 못 온다고 연락했어요.',emp:'이용자들 다 모였는데 강사가 없으면 등골이 서늘하죠.',fact:'오늘 [시간] 수업이 진행되지 못했습니다.',rule:'이용자분들이 미리 모여 기다리고 계셨습니다.',ask:'보강 일정을 [날짜]까지 알려 주시기 바랍니다.',firm:'같은 일이 반복되면 계약 내용을 다시 검토하겠습니다.',sam:['펑크남','펑! 하고 사라진 강사님.','크게 숨 쉬고 대체 활동 시작!','남은 건 우리의 순발력!']},
+ {n:'자료 회신 지연',in:'협력기관에 요청한 자료가 기한이 지나도 안 와요.',emp:'우리 마감은 다가오는데 답은 없고, 애가 타죠.',fact:'[날짜]에 요청드린 [자료]를 아직 받지 못했습니다.',rule:'[제출처] 마감이 [날짜]입니다.',ask:'[날짜]까지 회신 부탁드립니다.',firm:'어려우시면 오늘 중으로 가능 여부를 알려 주세요.',sam:['답장좀','답이 없으면 저 기다림 전문가 돼요.','장난 아니고 마감이 코앞이에요.','좀! 부탁드립니다!']},
+ {n:'약속과 다른 진행',in:'협약한 내용과 다르게 행사가 진행됐어요.',emp:'믿고 맡겼는데 딴판이면 황당하죠.',fact:'협약서에는 [약속 내용]으로 되어 있습니다.',rule:'오늘은 [실제 진행]으로 진행되었습니다.',ask:'다음 행사 전에 진행안을 함께 확인했으면 합니다.',firm:'',sam:['약속은','약속은 지키라고 있는 거죠.','속으로만 삭이지 않을게요.','은근슬쩍은 이제 그만!']}]],
+['지자체·행정',[
+ {n:'서류 보완 반복',in:'같은 서류를 세 번째 보완해서 다시 내래요.',emp:'고쳐 내면 또 다른 데 고치래고, 미로 같죠.',fact:'[서류]를 [날짜]에 보완 제출했습니다.',rule:'추가로 고칠 부분을 한 번에 알려 주시면 빠르게 반영하겠습니다.',ask:'보완 항목을 목록으로 보내 주실 수 있을까요?',firm:'',sam:['또보완','또야? 보완의 보완의 보완.','완벽은 한 번에 말해 주시면 돼요.','보고서랑 결혼할 기세!']},
+ {n:'갑작스런 실적 요청',in:'오늘 오후까지 1년 치 실적을 정리해 달래요.',emp:'갑자기 1년을 반나절에? 숨이 턱 막히죠.',fact:'[실적 자료] 요청 확인했습니다.',rule:'1년 치 정리는 오늘 오후까지 어렵습니다.',ask:'오늘은 [요약본], [날짜]까지 전체 자료를 드려도 될까요?',firm:'',sam:['오늘까지','오늘까지라니요, 1년을요?','늘(늘) 갑자기 오시네요.','까짓것 요약본부터 드립니다!']}]]];
+const VAP=[
+ ['사실·기준 안내',(s,op,l)=>[op,s.fact,s.rule,s.ask,l===2?s.firm:'',l===2?'협조 부탁드립니다.':'감사합니다.']],
+ ['공감 먼저',(s,op)=>[op,'여러 사정이 있으셨을 거라 생각합니다.',s.fact,s.rule,s.ask,'감사합니다.']],
+ ['감사 먼저',(s,op)=>[op,'바쁘신 와중에 읽어 주셔서 감사합니다.',s.fact,s.ask,'좋은 답 기다리겠습니다.']],
+ ['선택지 주기',(s,op)=>[op,s.fact,'아래 중 편하신 방법을 알려 주세요.','① [방법 A]','② [방법 B]','[날짜]까지 답 주시면 감사하겠습니다.']],
+ ['대안 제시',(s,op)=>[op,s.fact,s.rule,'대신 [가능한 대안]은 가능합니다.',s.ask,'감사합니다.']],
+ ['원칙과 다음 행동',(s,op)=>[op,s.fact,s.rule,s.ask,s.firm,'협조 부탁드립니다.']]];
+const VOP={'민원인':'안녕하세요. 용인시기흥장애인복지관 [담당자]입니다.','보호자':'안녕하세요, 보호자님. 용인시기흥장애인복지관 [담당자]입니다.','이용자':'(천천히, 눈을 맞추고 말해요)','동료·상사':'[이름]님, 잠깐 이야기 나눌 수 있을까요?','협력기관·강사':'안녕하십니까. 용인시기흥장애인복지관 [담당자]입니다.','지자체·행정':'안녕하십니까. 용인시기흥장애인복지관 [담당자]입니다.'};
+const VTAIL=[['아오, 얄미워!','어휴, 진짜 얄밉다.'],['아니 이게 말이 돼요? 미치고 팔짝 뛰겠네!','아오, 머리에서 김 나요!'],['와, 이건 진짜 선 넘었다!','뚜껑 열리는 소리 "뻥!" 들렸어요.']];
+const VGAM=['그래도 더 나은 내가 참는다. 오늘의 나, 인내심 국가대표!','화는 났지만 품격은 지킨다. 할 말은 문자로 한다.','참는 게 지는 게 아니다. 웃으며 선을 긋는다.','그래, 내가 어른이다. 저녁엔 맛있는 걸로 보상!'];
+let VRI=0;
+VIEWS.vent=()=>{S.vg=S.vg??0;S.vs=S.vs??0;S.vl=S.vl??1;S.vap=S.vap??0;S.vh=S.vh??0;const G=VG[S.vg]||VG[0];if(!G[1][S.vs])S.vs=0;
+ return view('빡침 번역기',
+ `<div class="gl">누구 때문에</div>${chips('vg',VG.map(g=>g[0]),1)}<div class="gl">어떤 상황? <small>누르면 바로 같이 빡쳐 줘요</small></div>${chips('vs',G[1].map(x=>x.n))}
+ <div class="gl">빡침 정도</div>${chips('vl',['살짝','꽤','폭발'])}<div class="gl">어떻게 보낼까</div>${chips('vh',['문자·카톡','메일','직접 말하기'])}
+ <div class="gl">순화 방법</div>${chips('vap',VAP.map(a=>a[0]))}<div class="gl">내 상황 더 적기</div>${field('vin','있었던 일',1)}`,
+ ()=>{const s=G[1][S.vs],h=hash(s.n+S.vl+VRI),tl=VTAIL[S.vl][h%2],gm=VGAM[(h>>2)%VGAM.length];
+ let msg=VAP[S.vap][1](s,VOP[G[0]],S.vl).filter(Boolean).join('\n');if(S.vh===1)msg='제목: [용건] 관련 확인 부탁드립니다\n\n'+msg;if(S.vh===2&&G[0]!=='이용자')msg='(천천히, 낮은 목소리로 말해요)\n'+msg;
+ const ev=V('vin')||s.in;
+ const pr=`너는 감정은 빼고 할 말은 분명하게 전하도록 돕는 복지관 대화 코치야.\n아래 상황에서 ${G[0]}에게 보낼 ${['문자','메일','말'][S.vh]}을 다듬어 줘.\n\n[있었던 일]\n${ev}\n\n[초안]\n${msg}\n\n[필수] 사실 → 기준 → 부탁 → 다음 행동·기한 순서 · 비난·비꼼 없이 정중하지만 단호하게 · 짧은 버전 1개 + 부드러운 버전 1개\n[금지] 실명·연락처(→ [ ] 칸)`;CUR=()=>pr;
+ window._vmsg=msg;
+ return aiBar('빡침 번역 · '+esc(s.n),()=>pr)+`<div class="vt2"><section class="vc"><h4 class="c3h" style="--c:#d93a2b">같이 빡쳐 주기</h4><div class="vhero">${fig('angry',S.vl,1)}<div><div class="samk">${esc(s.sam[0])} 삼행시</div>${s.sam.slice(1).map(l=>`<p class="sam"><b>${esc(l.charAt(0))}</b>${esc(l.slice(1))}</p>`).join('')}</div></div><p class="vemp">${esc(s.emp)}</p><p class="vred">${esc(tl)}</p><p class="vgam">${esc(gm)}</p><button class="btn" onclick="VRI++;RIGHT()">다른 말</button>
+ <div class="vbr">${fig(VRI%2?restPose(REST[(h)%REST.length]):'breath',0,1)}<div><b>${VRI%2?'다른 숨 고르기':'숨 고르고 보내기'}</b><p>${VRI%2?esc(REST[h%REST.length]):'코로 <u>4초</u> 들이쉬어 배를 부풀리고 · <u>4초</u> 멈추고 · 입으로 <u>6초</u> 후~ 내쉬기. 세 번.'}</p></div></div></section>
+ <section class="vc"><h4 class="c3h" style="--c:#2a9d8f">순한 문구 <small>${esc(VAP[S.vap][0])} · ${['문자·카톡','메일','직접 말하기'][S.vh]}</small><button class="sm sp" style="margin-left:auto" onclick="copyTxt(window._vmsg)">문구 복사</button></h4><div class="vmsg">${fmt(msg)}</div><div class="vtip">[ ] 칸은 내 상황으로 바꿔요 · 순화 방법을 바꾸면 문구가 달라져요</div></section></div>`})};
 /* ================= ⑩ 마음챙김 ================= */
-const FEEL=['지쳤어요','속상해요','불안해요','억울해요','외로워요','자신감이 떨어졌어요','상담 뒤 마음이 무거워요','이용자 안전이 걱정돼요','민원에 지쳤어요','서류 마감이 겹쳐요','수고가 안 보여 서운해요','퇴근 후에도 현장이 떠올라요'];
+const FEEL=['지쳤어요','속상해요','불안해요','억울해요','외로워요','자신감이 떨어졌어요','상담 뒤 마음이 무거워요','이용자 안전이 걱정돼요','민원에 지쳤어요','서류 마감이 겹쳐요','수고가 안 보여 서운해요','퇴근 후에도 현장이 떠올라요','몸이 아파요','그래도 뿌듯해요'];
 const MOVE=['어깨를 귀까지 올렸다가 툭 떨어뜨리기 3번','두 손을 비비고 따뜻해진 손으로 눈 감싸기','창밖에서 초록색 3개 찾기','물 한 모금 천천히 마시기','손목을 탈탈 털고 기지개 쭉','나비처럼 양팔로 나를 토닥토닥'];
 function fig(pose,lv,big){
  var P=pose;if(P==='angry')P=lv>=2?'angry3':lv>=1?'angry2':'angry1';
@@ -916,12 +1096,13 @@ var MOODPOSE={'지쳤어요':'tired','속상해요':'sad','마음이 무거워�
 function restPose(t){var R=[[/복식호흡/,'breath'],[/으쓱/,'shrug'],[/주먹/,'fist'],[/기지개/,'stretch'],[/고개|목 옆/,'neck'],[/나비/,'hug'],[/손바닥/,'eyes'],[/찡그/,'scrunch'],[/털기/,'shake'],[/콧노래/,'hum'],[/창밖|먼 곳|보이는 것/,'look'],[/물이나 차|차 한 잔/,'tea'],[/칭찬/,'cheer'],[/한숨/,'sigh'],[/걷기/,'walk']];for(var i=0;i<R.length;i++)if(R[i][0].test(t))return R[i][1];return 'calm'}
 var REST=['복식호흡: 배에 손을 얹고 코로 4초 들이마셔 배를 풍선처럼 부풀리고, 입으로 6초 후~ 내쉬기. 세 번.','어깨를 귀까지 으쓱 올렸다가 툭 떨어뜨리기, 세 번.','두 주먹을 5초 동안 꽉 쥐었다가 확 펴기. 손끝까지 힘이 빠지는 걸 느껴 보기, 세 번.','두 팔을 하늘로 쭉 뻗어 기지개 + 하품 크게 한 번.','고개를 오른쪽, 왼쪽으로 천천히 기울이며 목 옆을 쭉 늘이기, 각 5초.','두 팔을 X자로 가슴에 얹고 나비처럼 토닥토닥 열 번. "괜찮아, 잘하고 있어."','두 손바닥을 싹싹 비벼 따뜻하게 만든 뒤 눈 위에 10초 올려 두기.','얼굴을 쭈글쭈글 최대한 찡그렸다가 활짝 펴기, 세 번. 거울 보면 웃음 보장.','강아지가 물 털듯 온몸을 탈탈 털기, 10초. 손목·발목까지!','좋아하는 노래 한 소절 콧노래로 흥얼거리기.','창밖이나 먼 곳을 1분 동안 멍하니 바라보기. 눈도 마음도 쉬어요.','보이는 것 5개, 들리는 것 3개를 천천히 찾아보기.','따뜻한 물이나 차 한 잔을 천천히, 온도와 향을 느끼며 마시기.','작게 소리 내어 나를 칭찬하기: "나 오늘 진짜 고생했다. 최고다!"','한숨 크게 "휴우~" 세 번 쉬기. 한숨은 참지 말고 시원하게!','동네 한 바퀴 천천히 걷기. 발바닥 느낌에만 집중.'];
 Object.assign(MOODPOSE,{'상담 뒤 마음이 무거워요':'sad','이용자 안전이 걱정돼요':'anx','민원에 지쳤어요':'tired','서류 마감이 겹쳐요':'anx','수고가 안 보여 서운해요':'sad','퇴근 후에도 현장이 떠올라요':'look'});
+const BEARP={'지쳤어요':'tired','속상해요':'sad','불안해요':'anx','억울해요':'angry','외로워요':'hug','자신감이 떨어졌어요':'think','상담 뒤 마음이 무거워요':'sad','이용자 안전이 걱정돼요':'anx','민원에 지쳤어요':'tired','서류 마감이 겹쳐요':'think','수고가 안 보여 서운해요':'sad','퇴근 후에도 현장이 떠올라요':'think','몸이 아파요':'sick','그래도 뿌듯해요':'cheer'};
 let RI=0;function nextRest(){RI++;RIGHT&&RIGHT()}
 VIEWS.mind=()=>{S.fe=S.fe??0;return view('마음챙김',`<div class="gl">지금 내 마음</div>${chips('fe',FEEL)}${field('fin','조금 더 말해 줘요',1)}`,
  ()=>{const f=FEEL[S.fe],h=hash(f+V('fin'));const lines=[`${f}… 그런 날이 있죠. 그 마음, 이상한 게 아니에요.`,'당신은 오늘도 누군가의 하루를 조금 더 편하게 만들었어요.','모든 걸 다 잘하지 않아도 괜찮아요. 오늘은 여기까지도 충분해요.','지금 이 순간만큼은 일 말고 나를 먼저 챙겨요.','당신이 있어서 이 복지관이 따뜻해요.'];
  const pr=`나는 장애인복지관 사회복지사야. 지금 마음: "${f}" ${V('fin')}\n나만을 위한 5줄 위로를 따뜻하게 써 주고, 1분 안에 할 수 있는 몸 풀기 하나를 알려 줘. 충고나 해결책은 빼고.`;CUR=()=>pr;
  const R3=[0,1,2].map(i=>REST[(h+RI*3+i*5)%REST.length]);
- return aiBar('나를 위한 5줄',()=>pr)+`<div class="mnd"><div class="mbox"><div class="mfig">${fig(MOODPOSE[f]||'calm',1,1)}<b>${esc(f)}</b></div><div class="mtx">${lines.map(esc).join('<br>')}<p class="me">"오늘도 애썼다, 나."</p></div></div>
+ return aiBar('나를 위한 5줄',()=>pr)+`<div class="mnd"><div class="mbox"><div class="mfig">${bear(BEARP[f]||'sad',130)}<b>${esc(f)}</b></div><div class="mtx">${lines.map(esc).join('<br>')}<p class="me">"오늘도 애썼다, 나."</p></div></div>
  <div class="mrest"><div class="mrh"><b>졸라맨 따라 하기 · 30초 쉼 3가지</b><button class="btn" onclick="nextRest()">다른 동작 보기</button></div><div class="mr3">${R3.map((t,i)=>`<div class="mc"><span class="no">${i+1}</span>${fig(restPose(t),0,1)}<p>${esc(t)}</p></div>`).join('')}</div></div></div>`})};
 /* ================= ⑪ AI 앱 활용법 ================= */
 const AB=['주간이용센터','직업지원','재활치료','장애인식개선','가족지원','재가복지','평생교육','후원·행사'];
@@ -1026,6 +1207,7 @@ const APPS=[
 {n:'원고 → PPT 흐름',f:1,mock:'slide',what:'Claude·ChatGPT로 장표 원고를 쓰고 Canva에서 디자인을 입혀요.',how:['Claude·ChatGPT에 오른쪽 프롬프트로 장표별 원고 받기','Canva AI 프레젠테이션에 원고 붙여넣기','브랜드 색·글꼴 맞추기','발표 노트까지 넣어 완성'],res:'내용은 AI가 정리하고, 디자인은 Canva가 입힌 발표 자료가 나와요.',ex:[['교육 자료','신규 직원 교육 12장'],['보고 자료','운영위원회 보고']],ol:'자료',o:['10장 원고','발표 대본'],p:`{b} 발표용 {o}를 장표별로 써 줘.
 | 장 | 제목 | 핵심 문장 | 들어갈 사진 | 발표 멘트 |
 숫자는 내가 준 것만, 없으면 [확인 필요].`}]},
+{n:'활용 꿀팁',url:'',col:'#e2865a',cards:[],tips:1},
 {n:'AI 설정 따라 하기',url:'',col:'#2f6b56',cards:[],aig:1},
 {n:'데스크톱 앱',url:'',col:'#b45a2c',cards:[],desk:1}];
 function mock(t,o,b){const T=esc(b),O=esc(o||'');const M={
@@ -1041,6 +1223,16 @@ info:`<div class="mk info"><b>${T} 결과</b><div class="nums"><span>120<small>�
 table:`<div class="mk doc"><div class="mk-t">조사 보고서</div><table><tr><th>사례</th><td>출처 링크</td></tr><tr><th>적용</th><td>우리 기관 아이디어</td></tr></table></div>`,
 layers:`<div class="mk layers"><div class="ly l1">배경</div><div class="ly l2">인물</div><div class="ly l3">글자 <b>수정 가능</b></div></div>`};return M[t]||''}
 let ZM=null;function zoomImg(u){const z=document.createElement('div');z.className='aig-zoom';z.innerHTML='<img src="'+u+'" alt="">';z.onclick=()=>z.remove();document.body.appendChild(z)}
+const TIPS=[
+{t:'한글(HWP) 파일, AI에 어떻게 넣나요?',rows:[['ChatGPT','HWP·HWPX 바로 읽기 가능','2026년 4월부터 공식 지원'],['Claude','HWP는 못 읽어요','PDF로 저장해서 넣기'],['제미나이','HWP는 불안정해요','PDF로 저장해서 넣기']],note:'읽기만 할 땐 PDF, 서식에 채워 받을 땐 HWPX'},
+{t:'한글에서 PDF·HWPX로 저장하기',fl:['한글에서 서식 열기','파일 → 다른 이름으로 저장','파일 형식: PDF 또는 HWPX','저장 → AI에 첨부'],note:'HWPX = 한글의 새 형식. AI가 칸을 채워 돌려줄 수 있어요'},
+{t:'Claude 한글 서식 스킬 만들기',fl:['설정 → 기능 → 코드 실행 켜기','"한글 서식 채우기 스킬 만들어 줘"','완성된 스킬 ZIP 내려받기','사용자 정의 → 스킬 → 업로드'],note:'한 번 올려 두면 다음부터 "서식 채워 줘"만 하면 돼요'},
+{t:'ChatGPT 프로젝트에 서식 넣어 두기',fl:['왼쪽 프로젝트 → 새 프로젝트','지침 칸에 규칙 붙여넣기','파일: 서식(HWPX)·지침(PDF)','새 채팅에서 바로 작성'],note:'무료는 프로젝트 파일 5개까지'}];
+const TIPP=`첨부한 우리 복지관 [서식 이름] 서식(HWPX)의 표·칸 이름·순서는 그대로 두고, 아래 내용으로 빈칸만 채워 줘.
+[필수] 자료에 없는 숫자는 [확인 필요] · 개조식 공문체(~함)
+[결과] 같은 서식의 한글(.hwpx) 파일. 안 되면 "칸 이름 | 내용" 표로.
+[내용]
+`;
 const FLX={
 'ChatGPT|이미지 만들기':[['+ 버튼','이미지 만들기','스타일 고르기','프롬프트 붙여넣기','다운로드'],'포스터·초대장·감사 카드','"요리교실 모집 포스터, 수채화"'],
 'ChatGPT|이미지 편집 화면':[['이미지 클릭','붓으로 문지르기','"이 부분만 바꿔 줘"','다운로드'],'날짜·오타·배경만 고치기','포스터 + "날짜만 12월 18일로"'],
@@ -1062,7 +1254,10 @@ const FLX={
 'Canva|AI 프레젠테이션':[['Canva AI','프레젠테이션','프롬프트 붙여넣기','PPT 다운로드'],'디자인까지 된 발표 자료','"사업 소개 10장"'],
 'Canva|매직 레이어':[['이미지 업로드','수정','Magic Layers','틀린 글자 고치기'],'AI 이미지 글자만 수정','오타 난 AI 포스터'],
 'Canva|원고 → PPT 흐름':[['Claude로 원고','Canva AI에 붙여넣기','색·글꼴 맞추기','발표 노트'],'원고로 만드는 PPT','장표 원고 10장']};
+const EXI={"ChatGPT|이미지 만들기": "poster", "ChatGPT|이미지 편집 화면": "edit", "ChatGPT|라이브러리": "cards", "ChatGPT|핀터레스트 레퍼런스": "ref", "ChatGPT|메모·녹음 → 서식": "memo", "제미나이|나노바나나 인포그래픽": "info", "제미나이|음악 30초": "music", "제미나이|영상 만들기": "video", "제미나이|노트북": "nb", "제미나이|핀터레스트 레퍼런스": "ref", "Claude|디자인": "a4", "Claude|슬라이드": "slide", "Claude|모션그래픽": "motion", "Claude|한글 서식 스킬": "hwp", "Claude|깊은 조사": "research", "Canva|AI 프레젠테이션": "cppt", "Canva|매직 레이어": "layers", "Canva|원고 → PPT 흐름": "cppt"};
 const fx=(A,C)=>FLX[A.n+'|'+C.n]||[[],'',''];
+const GIFS=['주간이용센터 곰돌이가 손 흔들며 "좋은 아침이에요!"','누니·바니가 박수 치며 "함께라서 좋아요!"','이용자 일러스트가 고개 숙여 "후원해 주셔서 고맙습니다"','요리교실 곰돌이가 앞치마 입고 빙글 돌며 "오늘은 떡국 데이!"','나들이 친구들이 앞으로 걸어오며 "우리 동네 같이 걸어요"','산타 모자 곰돌이가 춤추며 "메리 크리스마스!"'];
+const NBQ=['올해 사업안내에서 작년과 달라진 점만 표로 정리해 줘. 줄마다 쪽수를 붙여.','우리 사업 평가지표별로 준비할 서류를 체크리스트로 만들어 줘.','이 지침에서 예산 집행할 때 하면 안 되는 것만 모아 줘.','작년 결과보고서에서 목표를 못 채운 항목과 이유를 찾아 줘.','넣은 자료로 신규 직원용 사업 설명 요약 1쪽을 만들어 줘.'];
 function flow(a){return `<div class="flw">${a.map((x,i)=>(i?'<span class="ar">→</span>':'')+`<span class="fs"><b>${i+1}</b>${x}</span>`).join('')}</div>`}
 const DESK=`<div class="dk">
 <div class="dk-row"><div class="dk-c"><h5>웹 (인터넷 창)</h5><div class="win"><div class="tabs2"><i>한글 문서</i><i>메일</i><i class="on">ChatGPT</i><i>엑셀</i></div><div class="wbody"><div class="ln"></div><div class="ln s"></div><div class="ln"></div><div class="bounce">탭을 왔다 갔다</div></div></div><p>인터넷 창 안의 <b>탭 하나</b>예요. 한글 쓰다가 물어보려면 창을 바꿔야 해요.</p></div>
@@ -1075,6 +1270,8 @@ const DESK=`<div class="dk">
 <button class="btn" style="margin-top:8px" onclick="zoomImg('/img/giheung/apps.webp')">설치 방법 장표 크게 보기 (ChatGPT · 제미나이 · Claude)</button></div>`;
 VIEWS.apps=()=>{S.app=S.app??0;S.fc=S.fc??0;S.ao=S.ao??0;S.ab=S.ab??0;const A=APPS[S.app]||APPS[0];
  const appTabs=`<div class="atabs">${APPS.map((a,i)=>`<button class="at${S.app==i?' on':''}" style="--c:${a.col}" onclick="S.app=${i};S.fc=0;S.ao=0;save();render()">${a.n}</button>`).join('')}</div>`;
+ if(A.tips)return view('AI 앱 활용법',appTabs+`<div class="gl">이런 걸 알려 드려요</div>${steps(['한글 파일을 AI가 읽게 넣는 법','PDF·HWPX로 저장하는 법','Claude 한글 서식 스킬 만드는 법','ChatGPT 프로젝트에 서식 넣기'])}<div class="tipbox"><span class="tt">기억할 한 줄</span>워드로 받아 한글에서 열면 서식이 깨져요. 한글(HWPX) 파일 또는 "칸 이름 | 내용" 표로 받으세요.</div>`,
+  ()=>{CUR=()=>TIPP;return aiBar('한글 서식 채우기 프롬프트',()=>TIPP)+`<div class="tips">${TIPS.map((t,i)=>`<section class="tp"><h4><span>${i+1}</span>${t.t}</h4>${t.rows?`<table class="tpt">${t.rows.map(r=>`<tr><th>${r[0]}</th><td><b>${r[1]}</b></td><td>${r[2]}</td></tr>`).join('')}</table>`:flow(t.fl)}<p>${t.note}</p></section>`).join('')}</div><div class="out" style="flex:none;max-height:150px">${fmt(TIPP)}</div>`});
  if(A.aig)return view('AI 앱 활용법',appTabs+`<div class="gl">이 화면에서 배우는 것</div>${steps(['<b>맞춤 설정·지침</b>: 매번 "나는 복지관 직원이야" 설명 안 하기','<b>메모리</b>: AI가 나를 기억하게 / 못 하게','<b>임시 채팅</b>: 기록에 안 남는 대화','<b>학습 끄기</b>: 내 대화가 AI 공부 재료로 안 쓰이게'])}<div class="tipbox"><span class="tt">따라 하는 법</span>오른쪽 위에서 <b>제미나이 / ChatGPT</b>를 고르고, 카드를 누르면 아래에 <b>실제 화면 사진</b>이 순서대로 나와요. 사진을 누르면 크게 보여요.</div>`,
   ()=>{setTimeout(()=>window.AIG&&AIG.bind(),0);return `<div class="out" style="white-space:normal">${AIG.html()}</div>`});
  if(A.desk)return view('AI 앱 활용법',appTabs+`<div class="gl">다운로드 <small>누르면 공식 페이지</small></div><div class="dls"><a href="https://chatgpt.com/download/" target="_blank" rel="noopener" style="--c:#10a37f"><b>ChatGPT</b>chatgpt.com/download</a><a href="https://gemini.google/kr/desktop/" target="_blank" rel="noopener" style="--c:#4285f4"><b>제미나이</b>gemini.google/kr/desktop</a><a href="https://claude.com/download" target="_blank" rel="noopener" style="--c:#d97757"><b>Claude</b>claude.com/download</a></div><div class="gl">설치 3단계</div>${flow(['다운로드 페이지','Windows용 다운로드','설치 후 로그인'])}<div class="tipbox"><span class="tt">알아 두세요</span>설치는 모두 무료예요. 기관 PC는 설치 권한이 필요할 수 있어요. ChatGPT와 제미나이는 단축키가 같아서 한쪽 설정에서 바꿔 두세요.</div>`,
@@ -1089,7 +1286,7 @@ VIEWS.apps=()=>{S.app=S.app??0;S.fc=S.fc??0;S.ao=S.ao??0;S.ab=S.ab??0;const A=AP
   const open=A.url==='canva'?`<button class="btn" onclick="window.open('https://www.canva.com','_blank')">Canva 열기</button>`:`<button class="btn" onclick="openAI('${A.url}',CUR())">${A.n} 열기</button>`;
   return `<div class="bar"><span class="t">${A.n} · ${C.n}<span class="badge ${C.f?'free':'paid'}">${C.f?'무료':'유료'}</span></span><span class="sub2"></span><button class="btn p" onclick="copyTxt(CUR())">프롬프트 복사</button>${open}</div>
   <div class="hw"><span class="hl">사용법</span>${flow(X[0])}</div>
-  <div class="c2"><section class="c3c"><h4 class="c3h" style="--c:#e2865a">이렇게 넣으면 → 이렇게 나와요</h4><div class="io"><div class="in"><span class="lb">넣는 것</span>${esc(X[2])}</div><div class="arr">▼</div><div class="ot"><span class="lb">나오는 것</span>${mock(C.mock,o,b)}</div></div><div class="exs">${C.ex.map(e=>`<div class="ex"><b>${esc(e[0])}</b><span>${esc(e[1])}</span></div>`).join('')}</div></section>
+  <div class="c2"><section class="c3c"><h4 class="c3h" style="--c:#e2865a">이렇게 넣으면 → 이렇게 나와요</h4>${C.n==='움짤 GIF'?`<div class="gifbox"><div class="gb">${bear('wave',120)}<span>좋은 아침이에요!</span></div><div class="gl2">이렇게 넣어 보세요 · 움짤 문구 6가지</div><ol class="gq">${GIFS.map(g=>`<li>${esc(g)}</li>`).join('')}</ol></div>`:`<div class="io"><div class="in"><span class="lb">넣는 것</span>${esc(X[2])}</div><div class="arr">▼</div><div class="ot"><span class="lb">완성 예시</span><img class="exi" src="/img/giheung/ex/${EXI[A.n+'|'+C.n]}.webp" alt="${esc(C.n)} 완성 예시" onclick="zoomImg(this.src)"><small class="zm">누르면 크게 보여요</small></div></div>`}${C.n==='노트북'?`<div class="gl2">이렇게 물어보세요</div><ol class="gq">${NBQ.map(g=>`<li>${esc(g)}</li>`).join('')}</ol>`:`<div class="exs">${C.ex.map(e=>`<div class="ex"><b>${esc(e[0])}</b><span>${esc(e[1])}</span></div>`).join('')}</div>`}</div></section>
   <section class="c3c"><h4 class="c3h" style="--c:#7d5fb5">프롬프트 <small>[ ] 칸만 채워서 붙여넣기</small></h4><div class="pbox">${fmt(pr)}</div></section></div>`})};
 /* ================= 시작 ================= */
 VIEW=location.hash.slice(1)||'home';render();
