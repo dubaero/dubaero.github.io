@@ -131,7 +131,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   var LECTURES=[
     {keep:true,card:true,date:'2026.12.12 신마산',st:'예정',org:'제일요양보호사교육원',edu:'AI 활용 업무역량강화교육 업무비서 웹앱 실습',link:''},
     {img:'/img/lec-giheung.jpg',keep:true,card:true,date:'2026.12.02',st:'예정',org:'용인시기흥장애인복지관',edu:'반복 업무의 빠른 길 안내, 친절한 AI 비서',link:'/giheung/',code:'f037893010a61f811555d791a220f2e0aa2b46125428c168b10d14b6abd27fca'},
-    {date:'2026.11.23 ~ 12.03',st:'예정',org:'마산여성인력개발센터',edu:'구직·경력단절 여성 NCS AI 기초 역량 강화 과정',link:''},
+    {date:'2026.11.23 ~ 12.03',st:'진행 중',org:'마산여성인력개발센터',edu:'구직·경력단절 여성 NCS AI 기초 역량 강화 과정',link:''},
     {img:'/img/lec-masan-1120.jpg',keep:true,date:'2026.11.20',st:'완료',org:'마산여성새로일하기센터',edu:'취업팡팡 집단상담 · AI 맞춤형 입사지원서 완성',link:'/masan/',code:'43cce5d2f89e9987210baf8b16ac6b75916c5d081c442d51637f7009cea2e8b5',card:true},
     {img:'/img/lec-jeonbuk-family.jpg',date:'2026.11.19',st:'완료',org:'전북특별자치도 가족센터',edu:'시군가족센터 종사자 AI 실무 워크숍',link:'/family/',code:'27782676119a0706a707ff64a30386cdf9bdea6ef1033726fbd8b36a5a55caff',card:true},
     {img:'/img/lec-masan-1117.jpg',date:'2026.11.17',st:'완료',org:'마산여성새로일하기센터',edu:'경력단절 여성 구직자 AI 리터러시',link:'/masan/',code:'58610cf8357f0868fdd4bee0a42894aadfa6b73a8a2aaac0e8a7459e9fdf3491',card:true},
@@ -177,13 +177,32 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     var info=el('div','room-info');info.appendChild(el('span','room-date',L.date.replace(/\s*·\s*/g,'·')));info.appendChild(el('span','room-org',L.org));info.appendChild(el('span','room-edu',L.edu));
     a.appendChild(info);
     return a;}
+  var LCOL={'마산여성새로일하기센터':'#1594A8','마산여성인력개발센터':'#1594A8','전북특별자치도 가족센터':'#D9731A','함양군사회복지사협회':'#00788A','근로복지공단 인재개발원':'#0B6E8A','근로복지공단':'#0B6E8A','지역아동센터부산지원단':'#2F8FD0','용인시기흥장애인복지관':'#A3197A','경북대학교 (대구테크노파크)':'#B5121B','한국장애인공동생활가정협회':'#7A5BA6','대한안마사협회':'#1D5B91','계명문화대학교':'#C8182F','오늘두AI 무료특강':'#24497F','한국환경공단':'#0088B9','현대로템 창원공장 기술교육원':'#00205B','현대로템 (국가인적자원개발컨소시엄)':'#00205B','사천시 여성정책아카데미':'#D2495E','궁능유적본부':'#1F4E8C','화곡6동 주민센터':'#2E8B57','서울시교육청':'#1E73BE','서울시교육청 교육연수원':'#1E73BE','밀양시 농어촌사업팀':'#2E8B57'};
+  var LIMG={'오늘두AI 무료특강':'/img/du-logo.png?v=3'};
+  function shortDate(d){return /[~·]/.test(d)?d.replace(/^\d{4}\./,'').replace(/\s*~\s*/,'~').replace(/\s*·\s*/,'·'):d.replace(/\s+\S*$/,function(m){return /\d/.test(m)?m:'';});}
+  function shortOrg(o){return o.replace(/\s*\((대구테크노파크|국가인적자원개발컨소시엄)\)/,function(m,a){return a==='대구테크노파크'?' 마이 AI랩':'';});}
+  function mkCard(L){
+    var col=LCOL[L.org]||'#24497F';
+    var a=el('button','rc'+(L.st==='진행 중'?' rc-now':''));a.type='button';a.setAttribute('aria-label',L.org+' 강의 자료실 열기');
+    a.style.borderTopColor=col;a.style.background=col+'0D';
+    a.addEventListener('click',function(){openGate(L);});
+    var r1=el('div','rc-r1'),lg=el('span','rc-lg');
+    var LG=LOGO[L.org],LGI=(window.LOGO_ORG&&window.LOGO_IMG&&LOGO_IMG[LOGO_ORG[L.org]])||LIMG[L.org];
+    if(LG||LGI){var im=document.createElement('img');im.src=LGI||('/img/logo/'+LG+'.png');im.alt='';lg.appendChild(im);}
+    else{var ini=el('i',null,L.org.indexOf('공동생활가정')>-1?'공':L.org.charAt(0));ini.style.background=col;lg.appendChild(ini);}
+    r1.appendChild(lg);r1.appendChild(el('span','rc-st'+(L.st==='진행 중'?' now':(L.st==='예정'?' plan':'')),L.st));a.appendChild(r1);
+    a.appendChild(el('b','rc-org',shortOrg(L.org)));a.appendChild(el('span','rc-edu',L.edu));
+    var r3=el('div','rc-r3');r3.appendChild(el('span','rc-date',shortDate(L.date)));r3.appendChild(el('span','rc-go','자료실 들어가기 →'));a.appendChild(r3);
+    return a;}
   /* 2026.11.20 강의 자료실 배너: 넓은 화면은 6개씩 — 첫 줄은 고정, 아래는 표지 배너 2줄(#lec-fx)이 흐름 */
   var rollT=null,rollWide=null;
   function renderCards(){if(!cards)return;cards.innerHTML='';if(rollT){clearInterval(rollT);rollT=null;}
     var all=LECTURES.filter(function(L){return L.card;}).concat(LECTURES.filter(function(L){return L.st!=='예정'&&!L.card;}));
     rollWide=window.innerWidth>1100;
     /* 2026.11.25: 상단 하얀 카드는 12개를 한 줄 6칸 × 2줄로 (모바일은 2줄 가로 스크롤). 나머지는 아래 출강 목록에서 */
-    all.slice(0,12).forEach(function(L){cards.appendChild(mkRoom(L));});
+    /* 2026.11.27: 5개씩 3줄(15개) 기관 카드 — 위쪽 굵은 선은 기관 로고 색, 바탕은 아주 연하게 */
+    LECTURES.slice(0,15).forEach(function(L){cards.appendChild(mkCard(L));});
+    Array.prototype.forEach.call(cards.querySelectorAll('.rc-org'),function(e){var z=parseFloat(getComputedStyle(e).fontSize);while(e.scrollWidth>e.clientWidth&&z>12.5){z-=.5;e.style.fontSize=z+'px';}});
   }
   renderCards();
   var rollRT=null;window.addEventListener('resize',function(){clearTimeout(rollRT);rollRT=setTimeout(function(){if(rollWide||window.innerWidth>1100)renderCards();},250);});

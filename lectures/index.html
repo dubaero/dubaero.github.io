@@ -18,14 +18,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/v4-header.css?v=13">
-<link rel="stylesheet" href="/css/v4.css?v=44">
+<link rel="stylesheet" href="/css/v4-header.css?v=14">
+<link rel="stylesheet" href="/css/v4.css?v=45">
 </head>
 <body><script src="/js/fs.js?v=1"></script>
 
 <header class="gh">
   <div class="gh-in">
-    <a class="gh-logo" href="/" aria-label="이서정 AI 강사 홈"><img class="gh-logo-mark" src="/img/du-logo.png?v=3" alt="" width="42" height="34" decoding="async"><span class="gh-logo-tx"><b>이서정</b><small>오늘두AI · 디지털이음연구소</small></span></a>
+    <a class="gh-logo" href="/" aria-label="이서정 AI 강사 홈"><img class="gh-logo-lock" src="/img/logo-lockup.png?v=1" alt="디지털이음연구소 DIGITAL &amp; YOU" width="615" height="96" decoding="async"><span class="gh-logo-sub">이서정 · 오늘두AI</span></a>
     <nav class="gh-nav" aria-label="주 메뉴">
       <a href="/lectures/" aria-current="page">강의 자료실</a>
       <a href="/about/">강사 소개</a>
@@ -40,9 +40,10 @@
 <main>
 <section class="rooms4 pgtop" id="rooms">
   <div class="w4">
-    <div class="sh"><div><span class="kick">LECTURE ROOM</span><h2>강의 자료실</h2><p>들으신 강의를 누르고, 강의 때 안내받은 비밀번호를 넣으면 자료와 업무 도구가 열립니다.</p></div></div>
-    <div class="room-grid" id="room-cards"></div>
+    <div class="rc-top"><h2>강의 자료실</h2><p>들으신 강의를 누르고, 안내받은 비밀번호를 넣어 주세요.</p><div class="rc-btns"><a class="rc-list" href="#all-lectures">전체 출강 목록 ↓</a><a class="rc-ask" href="https://qr.kakao.com/talk/189u6AiGTSywH7IBW5d3eTYSn0I-" target="_blank" rel="noopener">비밀번호 문의</a></div></div>
+    <div class="room-grid rc-grid" id="room-cards"></div>
 
+    <div class="rv-head"><h3>강의 후기</h3><a href="https://blog.naver.com/ricewitch" target="_blank" rel="noopener">블로그에서 전체 보기 →</a></div>
     <div class="lfx4" id="lec-fx" aria-label="최근 출강 강의 후기 카드">
       <div class="lfx-rows">
         <div class="lfx-row"><div class="lfx-track">
@@ -91,11 +92,12 @@
       <button type="submit" class="btn fill">들어가기</button>
     </form>
     <p class="gate-m" id="gate-msg" aria-live="polite"></p>
+    <div class="gate-help"><b>비밀번호를 모르시나요?</b><span>교육 담당자님이 보낸 안내 문자를 확인하시거나, 카카오톡으로 문의해 주세요.</span><a href="https://qr.kakao.com/talk/189u6AiGTSywH7IBW5d3eTYSn0I-" target="_blank" rel="noopener">카카오톡 문의</a></div>
   </div>
 </div>
 
 <div class="toast" id="toast" role="status"></div>
 <script src="/js/logos.js?v=2"></script>
-<script src="/js/site.js?v=27"></script>
+<script src="/js/site.js?v=28"></script>
 </body>
 </html>

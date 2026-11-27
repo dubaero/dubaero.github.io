@@ -611,3 +611,40 @@ a.lg{text-decoration:none;text-align:center}
 .ltabs button{background:#FFFFFF;border-color:#E2E8F0;color:#4A5562}
 .ltabs button:hover{background:#F7F9FC;border-color:#C9D6E4}
 .ltabs button.on{background:#FFFFFF;border-color:#17304F;color:#17304F;font-weight:700}
+
+/* 2026.11.27 강의 자료실 기관 카드: 5개씩 3줄, 위쪽 굵은 선 = 기관 로고 색 */
+.rc-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.rc-top h2{font-size:28px;font-weight:700;color:#17304F;margin:0}
+.rc-top p{margin:0;font-size:15.5px;color:#4A5562;flex:1;min-width:220px}
+.rc-btns{display:flex;gap:8px}
+.rc-btns a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;white-space:nowrap}
+.rc-list{border:2px solid #24497F;color:#24497F;background:#fff}
+.rc-ask{background:#FEE500;color:#3C1E1E}
+#room-cards.rc-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;overflow:visible;margin:0;padding:0}
+.rc{display:flex;flex-direction:column;text-align:left;font:inherit;color:#17304F;cursor:pointer;border:1px solid #DDE3EA;border-top:6px solid #24497F;border-radius:14px;padding:14px 14px 14px;background:#fff;transition:transform .15s,box-shadow .15s}
+.rc:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(16,32,56,.10)}
+.rc.rc-now{box-shadow:0 0 0 3px #F08C00}
+.rc-r1{display:flex;justify-content:space-between;align-items:center}
+.rc-lg{width:44px;height:44px;background:#fff;border:1px solid #E6EAF0;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.rc-lg img{max-width:34px;max-height:34px;object-fit:contain}
+.rc-lg i{font-style:normal;width:32px;height:32px;border-radius:50%;color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+.rc-st{font-size:12.5px;font-weight:700;padding:3px 9px;border-radius:6px;background:#EEF0F3;color:#5C6573}
+.rc-st.now{background:#FFE8CC;color:#D9480F}.rc-st.plan{background:#DCE8F7;color:#1F6FB2}
+.rc-org{display:block;font-size:16.5px;font-weight:700;margin-top:12px;white-space:nowrap;overflow:hidden}
+.rc-edu{display:block;font-size:13.5px;color:#4A5562;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc-r3{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:auto;padding-top:12px;font-size:12.5px;color:#5C6573;white-space:nowrap}
+.rc-go{background:#1F2F52;color:#fff;font-weight:700;font-size:12.5px;padding:7px 9px;border-radius:8px}
+.rv-head{display:flex;justify-content:space-between;align-items:center;margin:30px 0 10px}
+.rv-head h3{margin:0;font-size:19px;font-weight:700;color:#17304F;background:#E6EDF8;padding:6px 14px;border-radius:8px}
+.rv-head a{font-size:14px;font-weight:700;color:#24497F;text-decoration:none}
+.rv-head+.lfx4{margin-top:0}
+.gate-help{margin-top:14px;background:#F4F6FA;border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:#4A5562}
+.gate-help b{color:#17304F;font-size:15px}
+.gate-help a{align-self:flex-start;background:#FEE500;color:#3C1E1E;font-weight:700;border-radius:18px;padding:6px 14px;text-decoration:none}
+@media (max-width:1100px){#room-cards.rc-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){
+  .rc-top h2{font-size:23px}.rc-btns{width:100%}.rc-btns a{flex:1;justify-content:center}
+  #room-cards.rc-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:8px;margin-right:-18px;padding-right:18px}
+  #room-cards.rc-grid>.rc{flex:0 0 82%;scroll-snap-align:start}
+  .rc-org{font-size:18px}.rc-edu{font-size:14.5px}.rc-r3{font-size:14px}.rc-go{font-size:14px;padding:9px 12px}
+}
