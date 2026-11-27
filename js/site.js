@@ -181,7 +181,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   var LIMG={'오늘두AI 무료특강':'/img/du-logo.png?v=3'};
   function shortDate(d){return /[~·]/.test(d)?d.replace(/^\d{4}\./,'').replace(/\s*~\s*/,'~').replace(/\s*·\s*/,'·'):d.replace(/\s+\S*$/,function(m){return /\d/.test(m)?m:'';});}
   function shortOrg(o){return o.replace(/\s*\((대구테크노파크|국가인적자원개발컨소시엄)\)/,function(m,a){return a==='대구테크노파크'?' 마이 AI랩':'';});}
-  var RCOL=['#24497F','#F26B00','#00A88A'];
+  var RCOL=['#24497F','#24497F','#24497F'];
   function mkCard(L,i){
     var col=RCOL[Math.floor(i/5)%3];
     var a=el('button','rc');a.type='button';a.setAttribute('aria-label',L.org+' 강의 자료실 열기');

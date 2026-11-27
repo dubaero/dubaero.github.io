@@ -622,7 +622,7 @@ a.lg{text-decoration:none;text-align:center}
 .rc-list{border:1.5px solid #24497F;color:#24497F;background:#fff}
 .rc-ask{background:#FEE500;color:#3C1E1E}
 #room-cards.rc-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;overflow:visible;margin:0;padding:0}
-.rc{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;color:#17304F;cursor:pointer;background:#fff;border:1px solid #DDE3EA;border-top:5px solid #24497F;border-radius:10px;padding:10px 12px 11px;transition:box-shadow .15s}
+.rc{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;color:#17304F;cursor:pointer;background:#fff;border:1px solid #DDE3EA;border-top:3px solid #24497F;border-radius:10px;padding:9px 11px 10px;transition:box-shadow .15s}
 .rc:hover{box-shadow:0 4px 12px rgba(16,32,56,.10)}
 .rc.rc-now{box-shadow:0 0 0 2px #F08C00}
 .rc-r1{display:flex;align-items:flex-start;gap:7px;min-width:0}
@@ -630,13 +630,13 @@ a.lg{text-decoration:none;text-align:center}
 .rc-lg img{max-width:30px;max-height:20px;object-fit:contain}
 .rc-lg i{font-style:normal;width:19px;height:19px;font-size:10px!important;border-radius:50%;color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
 .rc-tx{min-width:0;flex:1;display:flex;flex-direction:column}
-.rc-org{display:block;font-size:14.5px;font-weight:700;line-height:1.3;white-space:nowrap;overflow:hidden}
-.rc-edu{display:block;font-size:12px;color:#5C6573;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc-org{display:block;font-size:13.5px;font-weight:700;line-height:1.3;white-space:nowrap;overflow:hidden}
+.rc-edu{display:block;font-size:11.5px;color:#5C6573;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rc-r3{display:flex;justify-content:space-between;align-items:center;gap:4px;margin-top:12px;white-space:nowrap}
-.rc-date{font-size:12px;color:#5C6573}
+.rc-date{font-size:11.5px;color:#5C6573}
 .rc-st{font-style:normal;font-size:10px;font-weight:700;padding:1px 4px;border-radius:4px}
 .rc-st.now{background:#FFE8CC;color:#D9480F}.rc-st.plan{background:#DCE8F7;color:#1F6FB2}
-.rc-go{background:#fff;border:1.5px solid #1F2F52;color:#1F2F52;font-weight:700;font-size:12px;line-height:1.4;padding:1px 6px;border-radius:6px;white-space:nowrap}.rc:hover .rc-go{background:#EEF2F8}
+.rc-go{background:#fff;border:1px solid #1F2F52;color:#1F2F52;font-weight:700;font-size:11.5px;line-height:1.35;padding:1px 6px;border-radius:6px;white-space:nowrap}.rc:hover .rc-go{background:#EEF2F8}
 .rv-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 8px}
 .rv-head h3{margin:0;font-size:16px;font-weight:700;color:#17304F;background:#E6EDF8;padding:4px 12px;border-radius:7px}
 .rv-head a{font-size:13px;font-weight:700;color:#24497F;text-decoration:none}
@@ -652,3 +652,20 @@ a.lg{text-decoration:none;text-align:center}
   #room-cards.rc-grid>.rc{flex:0 0 78%;scroll-snap-align:start}
   .rc-org{font-size:16px}.rc-edu{font-size:13.5px}.rc-date{font-size:13.5px}.rc-go{font-size:13.5px;padding:2px 7px}
 }
+
+/* 2026.11.27 전체 출강 목록 압축 (강의 자료실 페이지) */
+#rooms .lec-head{margin:26px 0 10px;gap:8px 12px}
+#rooms .lec-head h3{font-size:17px}
+#rooms .ltabs button{font-size:12.5px;padding:3px 10px}
+#rooms .lcount{font-size:13px}
+#rooms .lsearch{min-height:38px;padding:0 12px;gap:8px;border-width:1.5px;border-radius:9px}
+#rooms .lsearch svg{width:17px;height:17px}
+#rooms .lsearch input{font-size:14px}
+#rooms .lrow{padding:6px 16px;gap:12px;font-size:13.5px;grid-template-columns:150px 56px minmax(0,1fr) minmax(0,1.4fr) 100px}
+#rooms .lrow.lhd{font-size:12.5px;padding-block:7px}
+#rooms .ls{font-size:12px;padding:2px 0}
+#rooms .lg{font-size:12.5px;padding:3px 9px}
+#rooms .lpages{margin-top:12px}
+#rooms .lpg{min-width:34px;min-height:34px;font-size:13.5px}
+@media (max-width:1100px){#rooms .lrow{grid-template-columns:140px 56px minmax(0,1fr) 100px}#rooms .lrow .le{display:none}}
+@media (max-width:760px){#rooms .lrow{grid-template-columns:1fr auto;font-size:14.5px;padding:9px 14px}#rooms .ls{padding:2px 8px}#rooms .lrow .lo{font-size:15.5px}#rooms .lsearch input{font-size:16px}}
