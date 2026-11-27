@@ -691,5 +691,7 @@ a.lg{text-decoration:none;text-align:center}
 #rooms .rv-head{margin:30px 0 8px}
 
 /* 2026.11.27 전체 출강 목록·비밀번호 문의 = 워드클라우드 탭과 같은 노랑 */
-.rc-btns a.rc-list,.rc-btns button.rc-ask{background:#FEF9C3;color:#713F12;border:1.5px solid #E6C200;font-weight:700}
-.rc-btns a.rc-list:hover,.rc-btns button.rc-ask:hover{background:#FDF0A0;border-color:#CCAA00}
+.rc-btns button.rc-ask{background:#FEF9C3;color:#713F12;border:1.5px solid #E6C200;font-weight:700}
+.rc-btns button.rc-ask:hover{background:#FDF0A0;border-color:#CCAA00}
+.rc-btns a.rc-list{background:#EEF6FF;color:#1E3A8A;border:1.5px solid #9DB8DE;font-weight:700}
+.rc-btns a.rc-list:hover{background:#E3F0FF;border-color:#7FA3D3}
