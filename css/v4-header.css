@@ -147,3 +147,11 @@
 @media (max-width:1100px){.gh-logo-lock{height:27px}.gh-logo-sub{font-size:11.5px}}
 @media (max-width:760px){.gh-logo-lock{height:22px}.gh-logo-sub{font-size:11px;padding-left:7px}}
 @media (max-width:400px){.gh-logo-lock{height:20px}.gh-logo-sub{font-size:10.5px;padding-left:6px}}
+
+/* 2026.11.27 메뉴 탭 테두리 진하게 + 강의 문의 탭 + 워드클라우드 노랑 통일 */
+.gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc){border:1.5px solid #9DB8DE}
+.gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc)[aria-current="page"]{border-color:#2563EB}
+.gh-nav a.gh-ai{border:1.5px solid #4ADE80}
+.gh-nav a.gh-wc{background:#FEF9C3;color:#713F12;border:1.5px solid #E6C200}
+.gh-nav a.gh-wc:hover,.gh-nav a.gh-wc[aria-current="page"]{background:#FDF0A0;border-color:#CCAA00}
+@media (max-width:760px){.gh-nav a:nth-of-type(4),.gh-nav a:nth-of-type(5){grid-column:span 2}}

@@ -689,3 +689,7 @@ a.lg{text-decoration:none;text-align:center}
 @media (max-width:420px){.pwq-in{flex-direction:column}.pwq-btns{width:100%}}
 @media (max-width:760px){.rc-btns button.rc-ask{flex:1;justify-content:center;min-height:40px}}
 #rooms .rv-head{margin:30px 0 8px}
+
+/* 2026.11.27 전체 출강 목록·비밀번호 문의 = 워드클라우드 탭과 같은 노랑 */
+.rc-btns a.rc-list,.rc-btns button.rc-ask{background:#FEF9C3;color:#713F12;border:1.5px solid #E6C200;font-weight:700}
+.rc-btns a.rc-list:hover,.rc-btns button.rc-ask:hover{background:#FDF0A0;border-color:#CCAA00}
