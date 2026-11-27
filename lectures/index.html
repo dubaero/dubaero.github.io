@@ -41,7 +41,7 @@
 <main>
 <section class="rooms4 pgtop" id="rooms">
   <div class="w4">
-    <div class="rc-top"><h2>강의 자료실</h2><p>들으신 강의를 누르고, 안내받은 비밀번호를 넣어 주세요.</p><div class="rc-btns"><a class="rc-list" href="#all-lectures">전체 출강 목록 ↓</a><button type="button" class="rc-ask" data-pw-ask>비밀번호 문의</button></div></div>
+    <div class="rc-top"><h2>강의 자료실</h2><p>들으신 강의를 누르고, 안내받은 비밀번호를 넣어 주세요.</p><div class="rc-btns"><a class="rc-list" href="#all-lectures" data-find>내 강의 자료 찾기</a><button type="button" class="rc-ask" data-pw-ask>비밀번호 문의</button></div></div>
     <div class="room-grid rc-grid" id="room-cards"></div>
 
     <div class="rv-head"><h3>강의 후기</h3><a href="https://blog.naver.com/ricewitch" target="_blank" rel="noopener">블로그에서 전체 보기 →</a></div>
@@ -117,7 +117,8 @@
 document.addEventListener('click',function(e){var t=e.target.closest('[data-pw-ask]');if(t){e.preventDefault();m.hidden=false;return;}
 if(e.target===m||e.target.closest('[data-pwq-x]')){m.hidden=true;return;}
 var c=e.target.closest('.pwq-c');if(c){var v=c.getAttribute('data-copy');(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(function(){c.textContent='복사됐어요';setTimeout(function(){c.textContent=v+' 복사';},1500);},function(){});}});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')m.hidden=true;});})();
+document.addEventListener('keydown',function(e){if(e.key==='Escape')m.hidden=true;});
+document.addEventListener('click',function(e){var f=e.target.closest('[data-find]');if(!f)return;e.preventDefault();var h=document.getElementById('all-lectures'),q=document.getElementById('lec-q');if(h)h.scrollIntoView({behavior:'smooth',block:'start'});if(q)setTimeout(function(){q.focus({preventScroll:true});},450);});})();
 </script>
 <script src="/js/logos.js?v=2"></script>
 <script src="/js/site.js?v=36"></script>
