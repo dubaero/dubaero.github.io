@@ -709,3 +709,7 @@ a.lg{text-decoration:none;text-align:center}
 /* 2026.11.27 내 강의 자료 찾기·비밀번호 문의 = 원래 연노랑 */
 .rc-btns a.rc-list,.rc-btns button.rc-ask{background:#FEF9C3;color:#713F12;border:1.5px solid #E6C200}
 .rc-btns a.rc-list:hover,.rc-btns button.rc-ask:hover{background:#FDF0A0;border-color:#CCAA00}
+/* 2026.11.27 기관명 진하게·굵게, 자료실 들어가기는 연한 글씨+연한 테두리 */
+.rc-org{color:#0B1A33;font-weight:800}
+.rc-go{color:#9B4A4A!important;font-weight:600!important;border:1px solid #E8CFCF!important;border-radius:6px!important;padding:1px 6px!important;background:#fff!important}
+.rc:hover .rc-go{background:#FBF3F3!important;text-decoration:none}
