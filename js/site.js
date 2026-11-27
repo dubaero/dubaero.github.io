@@ -191,11 +191,11 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     var LG=LOGO[L.org],LGI=(window.LOGO_ORG&&window.LOGO_IMG&&LOGO_IMG[LOGO_ORG[L.org]])||LIMG[L.org];
     if(LG||LGI){var im=document.createElement('img');im.src=LGI||('/img/logo/'+LG+'.png');im.alt='';lg.appendChild(im);}
     else{var ini=el('i',null,L.org.indexOf('공동생활가정')>-1?'공':L.org.charAt(0));ini.style.background=col;lg.appendChild(ini);}
-    var tx=el('span','rc-tx');tx.appendChild(el('b','rc-org',shortOrg(L.org)));tx.appendChild(el('span','rc-edu',L.edu));
+    var tx=el('span','rc-tx'),hd=el('span','rc-hd');hd.appendChild(el('b','rc-org',shortOrg(L.org)));hd.appendChild(lg);tx.appendChild(hd);tx.appendChild(el('span','rc-edu',L.edu));
     var r3=el('span','rc-r3'),go=el('span','rc-go','자료실 들어가기 →');
     go.style.color=col;go.style.background=col+'14';go.style.borderColor=col+'55';
     r3.appendChild(el('span','rc-date',shortDate(L.date)));r3.appendChild(go);tx.appendChild(r3);
-    r1.appendChild(lg);r1.appendChild(tx);a.appendChild(r1);
+    r1.appendChild(tx);a.appendChild(r1);
     return a;}
   /* 2026.11.20 강의 자료실 배너: 넓은 화면은 6개씩 — 첫 줄은 고정, 아래는 표지 배너 2줄(#lec-fx)이 흐름 */
   var rollT=null,rollWide=null;
