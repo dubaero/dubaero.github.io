@@ -636,7 +636,7 @@ a.lg{text-decoration:none;text-align:center}
 .rc-date{font-size:11.5px;color:#5C6573}
 .rc-st{font-style:normal;font-size:10px;font-weight:700;padding:1px 4px;border-radius:4px}
 .rc-st.now{background:#FFE8CC;color:#D9480F}.rc-st.plan{background:#DCE8F7;color:#1F6FB2}
-.rc-go{background:none;border:0;color:#14213D;font-weight:800;font-size:11.5px;letter-spacing:-.02em;line-height:1.35;padding:0;border-radius:6px;white-space:nowrap}.rc:hover .rc-go{text-decoration:underline}
+.rc-go{background:none;border:0;color:#B23C0A;font-weight:800;font-size:11.5px;letter-spacing:-.02em;line-height:1.35;padding:0;border-radius:6px;white-space:nowrap}.rc:hover .rc-go{text-decoration:underline}
 .rv-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 8px}
 .rv-head h3{margin:0;font-size:16px;font-weight:700;color:#17304F;background:#E6EDF8;padding:4px 12px;border-radius:7px}
 .rv-head a{font-size:13px;font-weight:700;color:#24497F;text-decoration:none}
