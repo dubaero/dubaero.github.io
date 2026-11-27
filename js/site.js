@@ -181,10 +181,10 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   var LIMG={'오늘두AI 무료특강':'/img/du-logo.png?v=3'};
   function shortDate(d){return /[~·]/.test(d)?d.replace(/^\d{4}\./,'').replace(/\s*~\s*/,'~').replace(/\s*·\s*/,'·'):d.replace(/\s+\S*$/,function(m){return /\d/.test(m)?m:'';});}
   function shortOrg(o){return o.replace(/\s*\((대구테크노파크|국가인적자원개발컨소시엄)\)/,function(m,a){return a==='대구테크노파크'?' 마이 AI랩':'';});}
-  var RCOL=['#24497F','#D9731A','#6B4FA0'];
+  var RCOL=['#24497F','#D9731A','#12977A'];
   function mkCard(L,i){
     var col=RCOL[Math.floor(i/5)%3];
-    var a=el('button','rc'+(L.st==='진행 중'?' rc-now':''));a.type='button';a.setAttribute('aria-label',L.org+' 강의 자료실 열기');
+    var a=el('button','rc');a.type='button';a.setAttribute('aria-label',L.org+' 강의 자료실 열기');
     a.style.borderTopColor=col;
     a.addEventListener('click',function(){openGate(L);});
     var r1=el('div','rc-r1'),lg=el('span','rc-lg');
@@ -192,9 +192,9 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     if(LG||LGI){var im=document.createElement('img');im.src=LGI||('/img/logo/'+LG+'.png');im.alt='';lg.appendChild(im);}
     else{var ini=el('i',null,L.org.indexOf('공동생활가정')>-1?'공':L.org.charAt(0));ini.style.background=col;lg.appendChild(ini);}
     var tx=el('span','rc-tx');tx.appendChild(el('b','rc-org',shortOrg(L.org)));tx.appendChild(el('span','rc-edu',L.edu));
-    var dt=el('span','rc-date',shortDate(L.date));
-    if(L.st!=='완료')dt.appendChild(el('em','rc-st'+(L.st==='진행 중'?' now':' plan'),L.st));
-    tx.appendChild(dt);tx.appendChild(el('span','rc-go','자료실 들어가기 →'));
+    var r3=el('span','rc-r3'),go=el('span','rc-go','자료실 들어가기 →');
+    go.style.color=col;go.style.background=col+'14';go.style.borderColor=col+'55';
+    r3.appendChild(el('span','rc-date',shortDate(L.date)));r3.appendChild(go);tx.appendChild(r3);
     r1.appendChild(lg);r1.appendChild(tx);a.appendChild(r1);
     return a;}
   /* 2026.11.20 강의 자료실 배너: 넓은 화면은 6개씩 — 첫 줄은 고정, 아래는 표지 배너 2줄(#lec-fx)이 흐름 */
