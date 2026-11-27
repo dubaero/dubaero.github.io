@@ -163,3 +163,7 @@
 .gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc),.gh-nav a.gh-ai,.gh-nav a.gh-wc{background:#FFF6EC;color:#7A3E0C;border:1.5px solid #F2C79B;font-weight:600}
 .gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc):hover,.gh-nav a.gh-ai:hover,.gh-nav a.gh-wc:hover{background:#FFEBD6;color:#6A3408;border-color:#E9A867}
 .gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc)[aria-current="page"],.gh-nav a.gh-ai[aria-current="page"],.gh-nav a.gh-wc[aria-current="page"]{background:#FFE3C7;color:#6A3408;border-color:#E58A3A;font-weight:700}
+/* 2026.11.27 상단 탭 = 로고 DU 아래 민트(#81DBC3)를 연하게 */
+.gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc),.gh-nav a.gh-ai,.gh-nav a.gh-wc{background:#EDFAF6;color:#145C4D;border:1.5px solid #9EDFCC;font-weight:600}
+.gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc):hover,.gh-nav a.gh-ai:hover,.gh-nav a.gh-wc:hover{background:#DDF5EE;color:#0F4D40;border-color:#6FCDB2}
+.gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc)[aria-current="page"],.gh-nav a.gh-ai[aria-current="page"],.gh-nav a.gh-wc[aria-current="page"]{background:#CFF1E7;color:#0F4D40;border-color:#3FB394;font-weight:700}
