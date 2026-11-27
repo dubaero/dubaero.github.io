@@ -205,7 +205,7 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     /* 2026.11.25: 상단 하얀 카드는 12개를 한 줄 6칸 × 2줄로 (모바일은 2줄 가로 스크롤). 나머지는 아래 출강 목록에서 */
     /* 2026.11.27: 5개씩 3줄(15개) 기관 카드 — 위쪽 굵은 선은 기관 로고 색, 바탕은 아주 연하게 */
     LECTURES.slice(0,20).forEach(function(L,i){cards.appendChild(mkCard(L,i));});
-    Array.prototype.forEach.call(cards.querySelectorAll('.rc-org'),function(e){var z=parseFloat(getComputedStyle(e).fontSize);while(e.scrollWidth>e.clientWidth&&z>11){z-=.5;e.style.fontSize=z+'px';}});
+    var fitOrg=function(){Array.prototype.forEach.call(cards.querySelectorAll('.rc-org'),function(e){e.style.removeProperty('font-size');var z=parseFloat(getComputedStyle(e).fontSize);while(e.scrollWidth>e.clientWidth&&z>11){z-=.5;e.style.setProperty('font-size',z+'px','important');}});};fitOrg();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitOrg);window.addEventListener('load',fitOrg);
   }
   renderCards();
   var rollRT=null;window.addEventListener('resize',function(){clearTimeout(rollRT);rollRT=setTimeout(function(){if(rollWide||window.innerWidth>1100)renderCards();},250);});
