@@ -159,3 +159,7 @@
 .gh-nav{gap:6px;font-size:13px}
 .gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc),.gh-nav a.gh-ai,.gh-nav a.gh-wc{padding:4px 10px;border-radius:7px;min-height:0}
 @media (max-width:760px){.gh-nav{font-size:13px;gap:5px}.gh-nav a:not(.gh-cta){min-height:32px;padding:4px 3px}}
+/* 2026.11.27 상단 탭 전부 아주 연한 주황으로 통일 */
+.gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc),.gh-nav a.gh-ai,.gh-nav a.gh-wc{background:#FFF6EC;color:#7A3E0C;border:1.5px solid #F2C79B;font-weight:600}
+.gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc):hover,.gh-nav a.gh-ai:hover,.gh-nav a.gh-wc:hover{background:#FFEBD6;color:#6A3408;border-color:#E9A867}
+.gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc)[aria-current="page"],.gh-nav a.gh-ai[aria-current="page"],.gh-nav a.gh-wc[aria-current="page"]{background:#FFE3C7;color:#6A3408;border-color:#E58A3A;font-weight:700}
