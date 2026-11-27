@@ -622,7 +622,7 @@ a.lg{text-decoration:none;text-align:center}
 .rc-list{border:1.5px solid #24497F;color:#24497F;background:#fff}
 .rc-ask{background:#FEE500;color:#3C1E1E}
 #room-cards.rc-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;overflow:visible;margin:0;padding:0}
-.rc{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;color:#17304F;cursor:pointer;background:#fff;border:1px solid #DDE3EA;border-top:4px solid #24497F;border-radius:10px;padding:10px 12px 11px;transition:box-shadow .15s}
+.rc{display:flex;flex-direction:column;gap:8px;text-align:left;font:inherit;color:#17304F;cursor:pointer;background:#fff;border:1px solid #DDE3EA;border-top:5px solid #24497F;border-radius:10px;padding:10px 12px 11px;transition:box-shadow .15s}
 .rc:hover{box-shadow:0 4px 12px rgba(16,32,56,.10)}
 .rc.rc-now{box-shadow:0 0 0 2px #F08C00}
 .rc-r1{display:flex;align-items:flex-start;gap:7px;min-width:0}
@@ -636,7 +636,7 @@ a.lg{text-decoration:none;text-align:center}
 .rc-date{font-size:12px;color:#5C6573}
 .rc-st{font-style:normal;font-size:10px;font-weight:700;padding:1px 4px;border-radius:4px}
 .rc-st.now{background:#FFE8CC;color:#D9480F}.rc-st.plan{background:#DCE8F7;color:#1F6FB2}
-.rc-go{border:1px solid;color:#1F2A37;font-weight:600;font-size:12px;line-height:1.4;padding:1px 7px;border-radius:6px;white-space:nowrap}.rc:hover .rc-go{filter:brightness(.96)}
+.rc-go{background:#fff;border:1.5px solid #1F2F52;color:#1F2F52;font-weight:700;font-size:12px;line-height:1.4;padding:1px 6px;border-radius:6px;white-space:nowrap}.rc:hover .rc-go{background:#EEF2F8}
 .rv-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 8px}
 .rv-head h3{margin:0;font-size:16px;font-weight:700;color:#17304F;background:#E6EDF8;padding:4px 12px;border-radius:7px}
 .rv-head a{font-size:13px;font-weight:700;color:#24497F;text-decoration:none}
@@ -650,5 +650,5 @@ a.lg{text-decoration:none;text-align:center}
   .rc-top h2{font-size:21px}.rc-btns{width:100%}.rc-btns a{flex:1;justify-content:center;min-height:40px}
   #room-cards.rc-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding-bottom:6px;margin-right:-18px;padding-right:18px}
   #room-cards.rc-grid>.rc{flex:0 0 78%;scroll-snap-align:start}
-  .rc-org{font-size:16px}.rc-edu{font-size:13.5px}.rc-date{font-size:13.5px}.rc-go{font-size:13.5px;padding:2px 8px}
+  .rc-org{font-size:16px}.rc-edu{font-size:13.5px}.rc-date{font-size:13.5px}.rc-go{font-size:13.5px;padding:2px 7px}
 }
