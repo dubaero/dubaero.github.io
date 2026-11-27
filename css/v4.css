@@ -698,3 +698,8 @@ a.lg{text-decoration:none;text-align:center}
 /* 2026.11.27 전체 출강 목록·비밀번호 문의 버튼 축소 */
 .rc-btns a.rc-list,.rc-btns button.rc-ask{min-height:30px;padding:0 11px;font-size:12.5px;border-radius:7px}
 @media (max-width:760px){.rc-btns a.rc-list,.rc-btns button.rc-ask{min-height:36px;font-size:13.5px}}
+/* 2026.11.27 모바일: 카드 4줄이 한 번에 보이고, 옆으로 넘기면 4개씩 함께 넘어감 */
+@media (max-width:760px){
+  #room-cards.rc-grid{display:grid;grid-template-rows:repeat(4,auto);grid-auto-flow:column;grid-auto-columns:80%;grid-template-columns:none;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;margin-right:-18px;padding-right:18px}
+  #room-cards.rc-grid>.rc{flex:none;scroll-snap-align:start}
+}
