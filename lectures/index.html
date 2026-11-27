@@ -119,7 +119,10 @@ if(e.target===m||e.target.closest('[data-pwq-x]')){m.hidden=true;return;}
 var c=e.target.closest('.pwq-c');if(c){var v=c.getAttribute('data-copy');(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(function(){c.textContent='복사됐어요';setTimeout(function(){c.textContent=v+' 복사';},1500);},function(){});}});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')m.hidden=true;});
 function goFind(){var h=document.getElementById('all-lectures'),q=document.getElementById('lec-q');if(h)h.scrollIntoView({behavior:'smooth',block:'start'});if(q)setTimeout(function(){q.focus({preventScroll:true});},450);}
-if(location.hash==='#find')window.addEventListener('load',function(){setTimeout(goFind,200);});
+if(location.hash==='#find'){try{history.scrollRestoration='manual';}catch(e){}
+  var jump=function(){var h=document.getElementById('all-lectures'),q=document.getElementById('lec-q');if(!h)return;var y=h.getBoundingClientRect().top+window.pageYOffset-70;window.scrollTo({top:y,behavior:'instant'});if(q)q.focus({preventScroll:true});};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(jump,0);});else setTimeout(jump,0);
+  window.addEventListener('load',jump);}
 document.addEventListener('click',function(e){var f=e.target.closest('[data-find]');if(!f)return;e.preventDefault();var h=document.getElementById('all-lectures'),q=document.getElementById('lec-q');if(h)h.scrollIntoView({behavior:'smooth',block:'start'});if(q)setTimeout(function(){q.focus({preventScroll:true});},450);});})();
 </script>
 <script src="/js/logos.js?v=2"></script>
