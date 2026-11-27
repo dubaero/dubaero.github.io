@@ -636,7 +636,7 @@ a.lg{text-decoration:none;text-align:center}
 .rc-date{font-size:11.5px;color:#5C6573}
 .rc-st{font-style:normal;font-size:10px;font-weight:700;padding:1px 4px;border-radius:4px}
 .rc-st.now{background:#FFE8CC;color:#D9480F}.rc-st.plan{background:#DCE8F7;color:#1F6FB2}
-.rc-go{background:#fff;border:1px solid #1F2F52;color:#1F2F52;font-weight:700;font-size:11.5px;line-height:1.35;padding:1px 6px;border-radius:6px;white-space:nowrap}.rc:hover .rc-go{background:#EEF2F8}
+.rc-go{background:#FFEBD6;border:1px solid #F5C08A;color:#1F2F52;font-weight:700;font-size:11px;letter-spacing:-.02em;line-height:1.35;padding:1px 5px;border-radius:6px;white-space:nowrap}.rc:hover .rc-go{background:#FFDDBA}
 .rv-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 8px}
 .rv-head h3{margin:0;font-size:16px;font-weight:700;color:#17304F;background:#E6EDF8;padding:4px 12px;border-radius:7px}
 .rv-head a{font-size:13px;font-weight:700;color:#24497F;text-decoration:none}
@@ -669,3 +669,22 @@ a.lg{text-decoration:none;text-align:center}
 #rooms .lpg{min-width:34px;min-height:34px;font-size:13.5px}
 @media (max-width:1100px){#rooms .lrow{grid-template-columns:140px 56px minmax(0,1fr) 100px}#rooms .lrow .le{display:none}}
 @media (max-width:760px){#rooms .lrow{grid-template-columns:1fr auto;font-size:14.5px;padding:9px 14px}#rooms .ls{padding:2px 8px}#rooms .lrow .lo{font-size:15.5px}#rooms .lsearch input{font-size:16px}}
+
+/* 2026.11.27 비밀번호 문의 창 */
+.rc-btns button.rc-ask{display:inline-flex;align-items:center;min-height:36px;padding:0 13px;border-radius:9px;border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px;white-space:nowrap}
+.gate-help button{align-self:flex-start;background:#FEE500;color:#3C1E1E;font-weight:700;border:0;border-radius:18px;padding:6px 14px;cursor:pointer;font:inherit;font-weight:700}
+.pwq{position:fixed;inset:0;z-index:1200;background:rgba(15,25,45,.5);display:flex;align-items:center;justify-content:center;padding:16px}
+.pwq[hidden]{display:none}
+.pwq-box{position:relative;background:#fff;border-radius:16px;padding:22px 22px 20px;width:100%;max-width:400px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.pwq-box h3{margin:0 0 4px;font-size:19px;color:#17304F}
+.pwq-box p{margin:0 0 14px;font-size:13.5px;color:#4A5562}
+.pwq-x{position:absolute;right:12px;top:8px;border:0;background:none;font-size:26px;color:#5C6573;cursor:pointer}
+.pwq-in{display:flex;gap:14px;align-items:center}
+.pwq-in img{width:120px;height:120px;border:1px solid #E1E6EC;border-radius:10px;flex:none}
+.pwq-btns{display:flex;flex-direction:column;gap:7px;flex:1;min-width:0}
+.pwq-btns a,.pwq-btns button{display:block;text-align:center;border-radius:9px;padding:8px 10px;font-size:13.5px;font-weight:700;text-decoration:none;cursor:pointer;font-family:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pwq-k{background:#FEE500;color:#3C1E1E}
+.pwq-m{background:#24497F;color:#fff}
+.pwq-c{background:#fff;border:1px solid #C9D3DD;color:#24497F}
+@media (max-width:420px){.pwq-in{flex-direction:column}.pwq-btns{width:100%}}
+@media (max-width:760px){.rc-btns button.rc-ask{flex:1;justify-content:center;min-height:40px}}

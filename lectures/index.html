@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/v4-header.css?v=14">
-<link rel="stylesheet" href="/css/v4.css?v=52">
+<link rel="stylesheet" href="/css/v4.css?v=53">
 </head>
 <body><script src="/js/fs.js?v=1"></script>
 
@@ -40,7 +40,7 @@
 <main>
 <section class="rooms4 pgtop" id="rooms">
   <div class="w4">
-    <div class="rc-top"><h2>강의 자료실</h2><p>들으신 강의를 누르고, 안내받은 비밀번호를 넣어 주세요.</p><div class="rc-btns"><a class="rc-list" href="#all-lectures">전체 출강 목록 ↓</a><a class="rc-ask" href="https://qr.kakao.com/talk/189u6AiGTSywH7IBW5d3eTYSn0I-" target="_blank" rel="noopener">비밀번호 문의</a></div></div>
+    <div class="rc-top"><h2>강의 자료실</h2><p>들으신 강의를 누르고, 안내받은 비밀번호를 넣어 주세요.</p><div class="rc-btns"><a class="rc-list" href="#all-lectures">전체 출강 목록 ↓</a><button type="button" class="rc-ask" data-pw-ask>비밀번호 문의</button></div></div>
     <div class="room-grid rc-grid" id="room-cards"></div>
 
     <div class="lec-head" id="all-lectures"><h3>전체 출강 목록</h3><div class="ltabs" id="lec-tabs" role="tablist"><button type="button" class="on" data-f="all">전체</button><button type="button" data-f="예정">예정</button><button type="button" data-f="진행 중">진행 중</button><button type="button" data-f="완료">완료</button></div><span class="lcount" id="lec-count"></span><label class="lsearch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="lec-q" placeholder="기관명을 입력하세요 (예: 가족센터)" aria-label="기관명 또는 교육명으로 강의 찾기" autocomplete="off"></label></div>
@@ -91,12 +91,34 @@
       <button type="submit" class="btn fill">들어가기</button>
     </form>
     <p class="gate-m" id="gate-msg" aria-live="polite"></p>
-    <div class="gate-help"><b>비밀번호를 모르시나요?</b><span>교육 담당자님이 보낸 안내 문자를 확인하시거나, 카카오톡으로 문의해 주세요.</span><a href="https://qr.kakao.com/talk/189u6AiGTSywH7IBW5d3eTYSn0I-" target="_blank" rel="noopener">카카오톡 문의</a></div>
+    <div class="gate-help"><b>비밀번호를 모르시나요?</b><span>교육 담당자님이 보낸 안내 문자를 확인하시거나, 카카오톡·메일로 문의해 주세요.</span><button type="button" data-pw-ask>카카오톡·메일 문의</button></div>
   </div>
 </div>
 
 <div class="toast" id="toast" role="status"></div>
+<div class="pwq" id="pwq" hidden>
+  <div class="pwq-box" role="dialog" aria-modal="true" aria-labelledby="pwq-t">
+    <button type="button" class="pwq-x" data-pwq-x aria-label="닫기">×</button>
+    <h3 id="pwq-t">비밀번호 문의</h3>
+    <p>기관명 · 강의 날짜 · 성함을 함께 남겨 주시면 빠르게 알려 드려요.</p>
+    <div class="pwq-in">
+      <img src="/img/kakao-qr.png" alt="카카오톡 문의 QR 코드" width="132" height="132" loading="lazy">
+      <div class="pwq-btns">
+        <a class="pwq-k" href="https://qr.kakao.com/talk/189u6AiGTSywH7IBW5d3eTYSn0I-" target="_blank" rel="noopener">카카오톡으로 문의</a>
+        <a class="pwq-m" href="mailto:dltjwjd59@gmail.com?subject=%5B%EA%B0%95%EC%9D%98%20%EC%9E%90%EB%A3%8C%EC%8B%A4%5D%20%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8%20%EB%AC%B8%EC%9D%98">메일 보내기</a>
+        <button type="button" class="pwq-c" data-copy="dltjwjd59@gmail.com">dltjwjd59@gmail.com 복사</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){var m=document.getElementById('pwq');if(!m)return;
+document.addEventListener('click',function(e){var t=e.target.closest('[data-pw-ask]');if(t){e.preventDefault();m.hidden=false;return;}
+if(e.target===m||e.target.closest('[data-pwq-x]')){m.hidden=true;return;}
+var c=e.target.closest('.pwq-c');if(c){var v=c.getAttribute('data-copy');(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(function(){c.textContent='복사됐어요';setTimeout(function(){c.textContent=v+' 복사';},1500);},function(){});}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')m.hidden=true;});})();
+</script>
 <script src="/js/logos.js?v=2"></script>
-<script src="/js/site.js?v=35"></script>
+<script src="/js/site.js?v=36"></script>
 </body>
 </html>
