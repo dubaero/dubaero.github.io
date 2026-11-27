@@ -155,3 +155,7 @@
 .gh-nav a.gh-wc{background:#FEF9C3;color:#713F12;border:1.5px solid #E6C200}
 .gh-nav a.gh-wc:hover,.gh-nav a.gh-wc[aria-current="page"]{background:#FDF0A0;border-color:#CCAA00}
 @media (max-width:760px){.gh-nav a:nth-of-type(4),.gh-nav a:nth-of-type(5){grid-column:span 2}}
+/* 2026.11.27 메뉴 탭 크기 축소 */
+.gh-nav{gap:6px;font-size:13px}
+.gh-nav a:not(.gh-cta):not(.gh-ai):not(.gh-wc),.gh-nav a.gh-ai,.gh-nav a.gh-wc{padding:4px 10px;border-radius:7px;min-height:0}
+@media (max-width:760px){.gh-nav{font-size:13px;gap:5px}.gh-nav a:not(.gh-cta){min-height:32px;padding:4px 3px}}
