@@ -181,18 +181,21 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
   var LIMG={'오늘두AI 무료특강':'/img/du-logo.png?v=3'};
   function shortDate(d){return /[~·]/.test(d)?d.replace(/^\d{4}\./,'').replace(/\s*~\s*/,'~').replace(/\s*·\s*/,'·'):d.replace(/\s+\S*$/,function(m){return /\d/.test(m)?m:'';});}
   function shortOrg(o){return o.replace(/\s*\((대구테크노파크|국가인적자원개발컨소시엄)\)/,function(m,a){return a==='대구테크노파크'?' 마이 AI랩':'';});}
-  function mkCard(L){
-    var col=LCOL[L.org]||'#24497F';
+  var RCOL=['#24497F','#D9731A','#6B4FA0'];
+  function mkCard(L,i){
+    var col=RCOL[Math.floor(i/5)%3];
     var a=el('button','rc'+(L.st==='진행 중'?' rc-now':''));a.type='button';a.setAttribute('aria-label',L.org+' 강의 자료실 열기');
-    a.style.borderTopColor=col;a.style.background=col+'0D';
+    a.style.borderTopColor=col;
     a.addEventListener('click',function(){openGate(L);});
     var r1=el('div','rc-r1'),lg=el('span','rc-lg');
     var LG=LOGO[L.org],LGI=(window.LOGO_ORG&&window.LOGO_IMG&&LOGO_IMG[LOGO_ORG[L.org]])||LIMG[L.org];
     if(LG||LGI){var im=document.createElement('img');im.src=LGI||('/img/logo/'+LG+'.png');im.alt='';lg.appendChild(im);}
     else{var ini=el('i',null,L.org.indexOf('공동생활가정')>-1?'공':L.org.charAt(0));ini.style.background=col;lg.appendChild(ini);}
-    r1.appendChild(lg);r1.appendChild(el('span','rc-st'+(L.st==='진행 중'?' now':(L.st==='예정'?' plan':'')),L.st));a.appendChild(r1);
-    a.appendChild(el('b','rc-org',shortOrg(L.org)));a.appendChild(el('span','rc-edu',L.edu));
-    var r3=el('div','rc-r3');r3.appendChild(el('span','rc-date',shortDate(L.date)));r3.appendChild(el('span','rc-go','자료실 들어가기 →'));a.appendChild(r3);
+    var tx=el('span','rc-tx');tx.appendChild(el('b','rc-org',shortOrg(L.org)));tx.appendChild(el('span','rc-edu',L.edu));
+    r1.appendChild(lg);r1.appendChild(tx);a.appendChild(r1);
+    var sd=shortDate(L.date);if(L.st==='진행 중'&&sd.indexOf('~')>-1)sd='~'+sd.split('~')[1];var r3=el('div','rc-r3'),dt=el('span','rc-date',sd);
+    if(L.st!=='완료')dt.appendChild(el('em','rc-st'+(L.st==='진행 중'?' now':' plan'),L.st));
+    r3.appendChild(dt);r3.appendChild(el('span','rc-go','자료실 들어가기 →'));a.appendChild(r3);
     return a;}
   /* 2026.11.20 강의 자료실 배너: 넓은 화면은 6개씩 — 첫 줄은 고정, 아래는 표지 배너 2줄(#lec-fx)이 흐름 */
   var rollT=null,rollWide=null;
@@ -201,8 +204,8 @@ document.querySelectorAll('[data-copy]').forEach(function(el){
     rollWide=window.innerWidth>1100;
     /* 2026.11.25: 상단 하얀 카드는 12개를 한 줄 6칸 × 2줄로 (모바일은 2줄 가로 스크롤). 나머지는 아래 출강 목록에서 */
     /* 2026.11.27: 5개씩 3줄(15개) 기관 카드 — 위쪽 굵은 선은 기관 로고 색, 바탕은 아주 연하게 */
-    LECTURES.slice(0,15).forEach(function(L){cards.appendChild(mkCard(L));});
-    Array.prototype.forEach.call(cards.querySelectorAll('.rc-org'),function(e){var z=parseFloat(getComputedStyle(e).fontSize);while(e.scrollWidth>e.clientWidth&&z>12.5){z-=.5;e.style.fontSize=z+'px';}});
+    LECTURES.slice(0,15).forEach(function(L,i){cards.appendChild(mkCard(L,i));});
+    Array.prototype.forEach.call(cards.querySelectorAll('.rc-org'),function(e){var z=parseFloat(getComputedStyle(e).fontSize);while(e.scrollWidth>e.clientWidth&&z>11){z-=.5;e.style.fontSize=z+'px';}});
   }
   renderCards();
   var rollRT=null;window.addEventListener('resize',function(){clearTimeout(rollRT);rollRT=setTimeout(function(){if(rollWide||window.innerWidth>1100)renderCards();},250);});
