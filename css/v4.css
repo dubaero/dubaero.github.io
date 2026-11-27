@@ -688,3 +688,4 @@ a.lg{text-decoration:none;text-align:center}
 .pwq-c{background:#fff;border:1px solid #C9D3DD;color:#24497F}
 @media (max-width:420px){.pwq-in{flex-direction:column}.pwq-btns{width:100%}}
 @media (max-width:760px){.rc-btns button.rc-ask{flex:1;justify-content:center;min-height:40px}}
+#rooms .rv-head{margin:30px 0 8px}
